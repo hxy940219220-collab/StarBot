@@ -1,0 +1,145 @@
+.agent-chat-empty.starbot-chat-welcome {
+  box-sizing: border-box;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 28px 20px;
+  container-type: inline-size;
+}
+
+.starbot-welcome-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 480px;
+  width: 100%;
+  padding: 30px 28px 26px;
+  border: 1px solid color-mix(in srgb, var(--openbot-accent) 16%, var(--openbot-border));
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--openbot-accent) 10%, transparent) 0%, transparent 65%),
+    color-mix(in srgb, var(--openbot-bg-surface) 88%, var(--openbot-bg-canvas));
+  box-shadow: 0 14px 36px rgba(42, 30, 84, 0.06);
+  text-align: center;
+}
+
+.starbot-welcome-avatar-halo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--openbot-accent) 18%, transparent) 0%, transparent 72%);
+}
+
+.starbot-welcome-avatar-halo .agent-chat-empty-avatar.agent-avatar {
+  width: 88px;
+  height: 88px;
+  margin: 0;
+  filter: drop-shadow(0 10px 16px rgba(72, 48, 138, 0.16));
+}
+
+.starbot-welcome-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.starbot-welcome-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--openbot-text-muted) 10%, transparent);
+  color: var(--openbot-text-secondary);
+  font-size: 11.5px;
+  font-weight: var(--openbot-weight-medium);
+}
+
+.starbot-welcome-pill.is-zodiac {
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-welcome-title {
+  margin: 2px 0 0;
+  font-size: 22px;
+  font-weight: var(--openbot-weight-bold);
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: var(--openbot-text-primary);
+}
+
+.starbot-welcome-subtitle {
+  margin: 0;
+  max-width: 390px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--openbot-text-secondary);
+  text-wrap: balance;
+}
+
+.starbot-welcome-tips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.starbot-welcome-tips > span {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 11px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 999px;
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-text-muted);
+  font-size: 11.5px;
+}
+
+.starbot-welcome-persona-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 14px;
+  border: 1px dashed color-mix(in srgb, var(--openbot-accent) 28%, var(--openbot-border-strong));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--openbot-accent) 4%, var(--openbot-bg-surface));
+}
+
+.starbot-welcome-persona-tag {
+  font-size: 10.5px;
+  font-weight: var(--openbot-weight-bold);
+  color: var(--openbot-accent-text);
+}
+
+.starbot-welcome-persona-note p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--openbot-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@container (max-width: 520px) {
+  .starbot-welcome-card {
+    padding: 22px 18px;
+  }
+  .starbot-welcome-title {
+    font-size: 19px;
+  }
+}

@@ -1,0 +1,26 @@
+import type { PartialTranslation } from "../../../message";
+import type { messages as source } from "../../en/error/attachment";
+
+export const messages = {
+  "error.attachment.notFound": "添付ファイルが見つかりませんでした。",
+  "error.attachment.fileTooLarge": "100 MB の上限を超えるファイルがあります。",
+  "error.attachment.namedFileTooLarge": "{name} は 100 MB の上限を超えています。",
+  "error.attachment.emptyFile":
+    "{name} は空か、OpenBot が読み取れません。ファイルを保存し直してから、もう一度添付してください。",
+  "error.attachment.totalTooLarge": "添付ファイルの合計が 250 MB の上限を超えています。",
+  "error.attachment.unavailable": "このファイルはもう利用できません。",
+  "error.attachment.noApp":
+    "このコンピューターのアプリでこのファイルを開けませんでした。ダウンロードしてから、ファイルマネージャーで開いてください。",
+  "error.attachment.tooMany": "選択できるファイルは {limit} 個までです。",
+  "error.attachment.mediaUnsupported":
+    "このサーバーは MP3 または MOV の添付ファイルに対応していません。ホストの OpenBot をアップデートしてから、もう一度お試しください。",
+  "error.attachment.emlUnsupported":
+    "このサーバーは EML の添付ファイルに対応していません。ホストの OpenBot をアップデートしてから、もう一度お試しください。",
+  "error.attachment.zipUnsupported":
+    "このサーバーは ZIP の添付ファイルに対応していません。ホストの OpenBot をアップデートしてから、もう一度お試しください。",
+  "error.attachment.mp4Unsupported":
+    "このサーバーは MP4 の添付ファイルに対応していません。ホストの OpenBot をアップデートしてから、もう一度お試しください。",
+  "error.attachment.svgUnsupported":
+    "このサーバーは SVG の添付ファイルに対応していません。ホストの OpenBot をアップデートしてから、もう一度お試しください。",
+  "error.attachment.previewTooLarge": "ファイルが 100 MB の上限を超えています。",
+} as const satisfies PartialTranslation<typeof source>;

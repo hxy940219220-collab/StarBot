@@ -1,0 +1,275 @@
+.mcp-connect-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--openbot-radius-lg);
+  background: var(--openbot-bg-grouped);
+}
+
+.mcp-connect-row {
+  position: relative;
+  margin: 0;
+  padding: var(--openbot-space-3);
+}
+
+.mcp-connect-row + .mcp-connect-row {
+  border-top: 1px solid var(--openbot-border-grouped);
+}
+
+.mcp-local-heading {
+  margin: 0;
+  padding-inline-end: var(--openbot-space-6);
+  color: var(--openbot-text-primary);
+  font-size: var(--openbot-text-sm);
+  font-weight: var(--openbot-weight-semibold);
+  line-height: var(--openbot-leading-sm);
+}
+
+.mcp-local-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--openbot-space-2);
+  margin: var(--openbot-space-2) 0 0;
+  padding-inline-start: var(--openbot-space-4);
+  list-style: decimal;
+  color: var(--openbot-text-primary);
+  font-size: var(--openbot-text-sm);
+  line-height: var(--openbot-leading-sm);
+}
+
+.mcp-local-steps > li::marker {
+  color: var(--openbot-text-muted);
+}
+
+.mcp-local-address {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--openbot-space-3);
+  font-size: var(--openbot-text-sm);
+  line-height: var(--openbot-leading-sm);
+}
+
+.mcp-local-address > code {
+  overflow-wrap: anywhere;
+  color: var(--openbot-text-primary);
+  font-family: var(--openbot-font-mono);
+}
+
+.mcp-connect-docs {
+  position: absolute;
+  top: var(--openbot-space-3);
+  inset-inline-end: var(--openbot-space-3);
+  gap: var(--openbot-space-1-5);
+  color: var(--openbot-text-muted);
+  font-size: var(--openbot-text-sm);
+  line-height: var(--openbot-leading-sm);
+}
+
+.mcp-connect-docs > svg {
+  width: var(--openbot-icon-sm);
+  height: var(--openbot-icon-sm);
+  flex: 0 0 auto;
+  stroke-width: var(--openbot-icon-stroke);
+}
+
+.mcp-connect-privacy {
+  display: flex;
+  align-items: center;
+  gap: var(--openbot-space-2);
+  font-size: var(--openbot-text-sm);
+  line-height: var(--openbot-leading-sm);
+}
+
+.mcp-connect-privacy svg {
+  flex: none;
+  width: var(--openbot-icon-sm);
+  height: var(--openbot-icon-sm);
+  color: var(--openbot-text-muted);
+}
+
+.mcp-sign-in-page {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--openbot-border);
+  border-radius: var(--openbot-radius-lg);
+  background: var(--openbot-bg-surface);
+}
+
+.mcp-sign-in-page-note {
+  min-width: 0;
+  margin: 0;
+}
+
+.mcp-sign-in-relay-open {
+  display: flex;
+  gap: var(--openbot-space-2);
+  margin-top: var(--openbot-space-4);
+}
+
+.provider-code-login-body > .mcp-sign-in-relay-open > :first-child {
+  flex: 1;
+}
+
+.mcp-sign-in-relay-form {
+  margin-top: var(--openbot-space-4);
+}
+
+:is(.integration-wizard-body, .provider-code-login-body) > :is(.mcp-sign-in-relay-open, .mcp-sign-in-relay-form) {
+  margin-top: 0;
+}
+
+.integration-wizard-body > :is(.mcp-sign-in-relay-open, .mcp-sign-in-copy) {
+  justify-self: start;
+}
+
+.mcp-sign-in-relay-row {
+  display: flex;
+  gap: var(--openbot-space-2);
+}
+
+.mcp-sign-in-relay-row > .ui-input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* StarBot Clean Account Authorization Card inside McpLocalDialog */
+.starbot-auth-flow-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid color-mix(in srgb, var(--openbot-accent) 16%, var(--openbot-border));
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--openbot-accent) 5%, var(--openbot-bg-surface)) 0%,
+    color-mix(in srgb, var(--openbot-bg-grouped) 65%, var(--openbot-bg-surface)) 100%
+  );
+  overflow: hidden;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.starbot-auth-flow-card[data-busy] {
+  border-color: color-mix(in srgb, var(--openbot-accent) 42%, var(--openbot-border));
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--openbot-accent) 10%, transparent);
+}
+
+.starbot-auth-flow-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--openbot-border) 75%, transparent);
+}
+
+.starbot-auth-flow-label {
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+  letter-spacing: 0.02em;
+  color: var(--openbot-text-muted);
+}
+
+.starbot-auth-flow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--openbot-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 140ms ease, background-color 140ms ease;
+}
+
+.starbot-auth-flow-link:hover {
+  background: var(--openbot-hover);
+  color: var(--openbot-accent);
+}
+
+.starbot-auth-flow-link > svg {
+  width: 12px;
+  height: 12px;
+}
+
+.starbot-auth-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 10px 12px 12px;
+  list-style: none;
+}
+
+.starbot-auth-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  transition: background-color 150ms ease;
+}
+
+.starbot-auth-step-item[data-active] {
+  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface));
+}
+
+.starbot-auth-step-badge {
+  display: inline-grid;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--openbot-border-strong);
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-text-muted);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  transition: all 160ms ease;
+}
+
+.starbot-auth-step-item[data-active] .starbot-auth-step-badge {
+  border-color: var(--openbot-accent);
+  background: var(--openbot-accent);
+  color: var(--openbot-text-on-accent);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--openbot-accent) 32%, transparent);
+}
+
+.starbot-auth-step-item[data-done] .starbot-auth-step-badge {
+  border-color: var(--openbot-success);
+  background: color-mix(in srgb, var(--openbot-success) 14%, var(--openbot-bg-surface));
+  color: var(--openbot-success);
+}
+
+.starbot-auth-step-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.starbot-auth-step-copy > strong {
+  font-size: 13.5px;
+  font-weight: var(--openbot-weight-semibold);
+  line-height: 1.38;
+  color: var(--openbot-text-primary);
+}
+
+.starbot-auth-step-copy > span {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--openbot-text-muted);
+}
+
+.starbot-auth-flow-card[data-busy] .starbot-auth-step-item[data-active] .starbot-auth-step-copy > span {
+  color: var(--openbot-accent);
+  font-weight: var(--openbot-weight-medium);
+}
+
+.mcp-auth-submit-btn {
+  padding-inline: 18px;
+}

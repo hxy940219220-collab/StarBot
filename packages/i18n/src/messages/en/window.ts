@@ -1,0 +1,10 @@
+import { defineMessages } from "../../message";
+
+export const messages = defineMessages("window", {
+  "window.localHostTitle": "StarBot Local Host",
+  "window.localClientTitle": "StarBot Local Client",
+  "window.computerUsePermissionTitle": "Turn on Computer Use",
+  "window.rendererStoppedTitle": "StarBot stopped working",
+  "window.rendererStoppedBody": "The window stopped several times. Your chats are saved, and your agents keep working.",
+  "window.rendererStoppedReload": "Reload",
+});

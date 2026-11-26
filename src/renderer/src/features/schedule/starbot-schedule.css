@@ -1,0 +1,651 @@
+/* StarBot (星友) — Full-Screen Interactive Big Month Calendar & Modal */
+
+.starbot-schedule-page {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  background: var(--openbot-bg-canvas);
+  color: var(--openbot-text-primary);
+  pointer-events: auto;
+}
+
+.starbot-schedule-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  min-height: 54px;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--openbot-border);
+  background: color-mix(in srgb, var(--openbot-bg-surface) 80%, var(--openbot-bg-canvas));
+  padding: 8px 20px;
+  pointer-events: auto;
+  -webkit-app-region: drag;
+}
+
+.app-frame-edge.app-frame-platform-darwin .starbot-schedule-header {
+  padding-inline-start: 88px;
+}
+
+.app-frame-edge.app-frame-platform-darwin.app-frame-with-server-rail .starbot-schedule-header {
+  padding-inline-start: 44px;
+}
+
+.starbot-schedule-title-wrap,
+.starbot-schedule-actions,
+.starbot-schedule-nav,
+.starbot-schedule-board,
+.starbot-schedule-grid,
+.starbot-cal-cell,
+.starbot-cal-modal-backdrop,
+.starbot-cal-modal {
+  pointer-events: auto;
+  -webkit-app-region: no-drag;
+}
+
+.starbot-schedule-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.starbot-schedule-month-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  margin-inline-start: -8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.starbot-schedule-month-picker:hover {
+  background: var(--openbot-hover);
+}
+
+.starbot-schedule-month-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.starbot-schedule-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--openbot-weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--openbot-text-primary);
+}
+
+.starbot-schedule-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px;
+  border: 1px solid var(--openbot-border);
+  border-radius: var(--openbot-radius-pill);
+  background: var(--openbot-bg-surface);
+}
+
+.starbot-schedule-icon-btn {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--openbot-text-secondary);
+  cursor: pointer;
+}
+
+.starbot-schedule-icon-btn:hover {
+  background: var(--openbot-hover);
+  color: var(--openbot-text-primary);
+}
+
+.starbot-schedule-today-btn {
+  height: 26px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--openbot-radius-pill);
+  background: transparent;
+  color: var(--openbot-text-secondary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-medium);
+  cursor: pointer;
+}
+
+.starbot-schedule-today-btn:hover:not(:disabled) {
+  background: var(--openbot-hover);
+  color: var(--openbot-text-primary);
+}
+
+.starbot-schedule-today-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.starbot-schedule-hint {
+  color: var(--openbot-text-muted);
+  font-size: 12px;
+}
+
+.starbot-schedule-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.starbot-schedule-tz {
+  color: var(--openbot-text-muted);
+  font-size: 11.5px;
+}
+
+/* Calendar Board — Continuous Multi-Month Smooth Vertical Scroll */
+.starbot-schedule-board {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  padding: 10px 10px 0 16px;
+}
+
+.starbot-schedule-weekdays {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  padding: 0 14px 8px 4px;
+}
+
+.starbot-schedule-weekday {
+  padding: 0 8px;
+  color: var(--openbot-text-muted);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-schedule-scroll {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 2px 10px 28px 0;
+  pointer-events: auto;
+  -webkit-app-region: no-drag;
+}
+
+.starbot-schedule-scroll::-webkit-scrollbar {
+  width: 9px;
+}
+
+.starbot-schedule-scroll::-webkit-scrollbar-track {
+  margin-block: 6px 20px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--openbot-border) 45%, transparent);
+}
+
+.starbot-schedule-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+  background-color: color-mix(in srgb, var(--openbot-accent) 42%, var(--openbot-border-strong));
+}
+
+.starbot-schedule-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--openbot-accent);
+}
+
+.starbot-month-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.starbot-month-sticky-banner {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 4px 2px;
+  pointer-events: none;
+}
+
+.starbot-month-sticky-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 11px;
+  border: 1px solid color-mix(in srgb, var(--openbot-accent) 22%, var(--openbot-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--openbot-bg-surface) 92%, var(--openbot-accent-soft));
+  backdrop-filter: blur(8px);
+  color: var(--openbot-accent-text);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-bold);
+  box-shadow: 0 2px 8px rgba(48, 36, 92, 0.06);
+}
+
+.starbot-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(var(--starbot-cal-rows, 5), minmax(104px, auto));
+  overflow: hidden;
+  border: 1px solid var(--openbot-border);
+  border-radius: 18px;
+  background: var(--openbot-bg-surface);
+  box-shadow: 0 4px 18px rgba(48, 36, 92, 0.05);
+}
+
+.starbot-cal-cell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  gap: 6px;
+  border-right: 1px solid var(--openbot-border);
+  border-bottom: 1px solid var(--openbot-border);
+  padding: 8px 8px 6px;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.starbot-cal-cell:nth-child(7n) {
+  border-right: 0;
+}
+
+.starbot-cal-cell:hover {
+  background: color-mix(in srgb, var(--openbot-accent) 4%, var(--openbot-bg-surface));
+}
+
+.starbot-cal-cell.is-outside {
+  background: color-mix(in srgb, var(--openbot-bg-canvas) 55%, var(--openbot-bg-surface));
+}
+
+.starbot-cal-cell.is-outside .starbot-cal-day-num {
+  opacity: 0.48;
+}
+
+.starbot-cal-cell.is-today {
+  background: color-mix(in srgb, var(--openbot-accent) 6%, var(--openbot-bg-surface));
+}
+
+.starbot-cal-cell-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 22px;
+}
+
+.starbot-cal-day-num {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: var(--openbot-radius-pill);
+  color: var(--openbot-text-secondary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-cal-cell.is-today .starbot-cal-day-num {
+  background: var(--openbot-accent);
+  color: #ffffff;
+}
+
+.starbot-cal-cell-add {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.starbot-cal-cell:hover .starbot-cal-cell-add,
+.starbot-cal-cell:focus-within .starbot-cal-cell-add {
+  opacity: 1;
+}
+
+.starbot-cal-cell-add:hover {
+  transform: scale(1.08);
+}
+
+.starbot-cal-pills {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.starbot-cal-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+  height: 25px;
+  flex: 0 0 25px;
+  border: 1px solid color-mix(in srgb, var(--openbot-accent) 20%, var(--openbot-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--openbot-accent) 8%, var(--openbot-bg-surface));
+  padding: 0 6px 0 4px;
+  color: var(--openbot-text-primary);
+  font-size: 11.5px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.starbot-cal-pill:hover {
+  border-color: var(--openbot-accent);
+  background: var(--openbot-accent-soft);
+  transform: translateY(-1px);
+}
+
+.starbot-cal-pill.is-paused {
+  opacity: 0.56;
+  border-style: dashed;
+}
+
+.starbot-cal-pill-avatar {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.starbot-cal-pill-time {
+  flex: 0 0 auto;
+  color: var(--openbot-accent-text);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-cal-pill-title {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: var(--openbot-weight-medium);
+}
+
+.starbot-cal-more-btn {
+  align-self: flex-start;
+  border: 0;
+  background: transparent;
+  padding: 1px 4px;
+  color: var(--openbot-accent-text);
+  font-size: 11px;
+  font-weight: var(--openbot-weight-semibold);
+  cursor: pointer;
+}
+
+.starbot-cal-more-btn:hover {
+  text-decoration: underline;
+}
+
+/* Task Detail / Edit / Create Modal */
+.starbot-cal-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: grid;
+  place-items: center;
+  background: rgba(24, 18, 46, 0.44);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.starbot-cal-modal {
+  display: flex;
+  flex-direction: column;
+  width: min(500px, 100%);
+  max-height: calc(100dvh - 48px);
+  overflow: hidden;
+  border: 1px solid var(--openbot-border-strong);
+  border-radius: 22px;
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-text-primary);
+  box-shadow: 0 24px 60px rgba(24, 18, 46, 0.28);
+  animation: starbot-cal-modal-pop 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes starbot-cal-modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.starbot-cal-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--openbot-border);
+  padding: 16px 20px;
+}
+
+.starbot-cal-modal-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-cal-modal-agent-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.starbot-cal-modal-agent-head small {
+  display: block;
+  color: var(--openbot-text-muted);
+  font-size: 11.5px;
+}
+
+.starbot-cal-modal-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.starbot-cal-modal-head-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.starbot-cal-modal-close {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--openbot-text-muted);
+  cursor: pointer;
+}
+
+.starbot-cal-modal-close:hover {
+  background: var(--openbot-hover);
+  color: var(--openbot-text-primary);
+}
+
+.starbot-cal-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  padding: 18px 20px;
+}
+
+.starbot-cal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.starbot-cal-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.starbot-cal-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--openbot-text-secondary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-cal-agent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.starbot-cal-agent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 11px 0 6px;
+  border: 1.5px solid var(--openbot-border);
+  border-radius: var(--openbot-radius-pill);
+  background: var(--openbot-bg-control);
+  color: var(--openbot-text-primary);
+  font-size: 12.5px;
+  font-weight: var(--openbot-weight-medium);
+  cursor: pointer;
+}
+
+.starbot-cal-agent-chip.is-selected {
+  border-color: var(--openbot-accent);
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-cal-chip-avatar {
+  width: 24px;
+  height: 24px;
+}
+
+.starbot-cal-repeat-pills,
+.starbot-cal-weekday-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.starbot-cal-repeat-pill {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 10px;
+  background: var(--openbot-bg-control);
+  color: var(--openbot-text-secondary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-medium);
+  cursor: pointer;
+}
+
+.starbot-cal-repeat-pill.is-active {
+  border-color: var(--openbot-accent);
+  background: var(--openbot-accent);
+  color: #ffffff;
+}
+
+.starbot-cal-time-input,
+.starbot-cal-date-input {
+  height: 32px;
+  border: 1px solid var(--openbot-border-strong);
+  border-radius: 10px;
+  background: var(--openbot-bg-surface);
+  padding: 0 10px;
+  color: var(--openbot-text-primary);
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.starbot-cal-day-modal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.starbot-cal-modal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--openbot-border);
+  padding: 14px 20px;
+}
+
+.starbot-cal-modal-foot-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.starbot-cal-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--openbot-danger) 32%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--openbot-danger) 8%, transparent);
+  color: var(--openbot-danger);
+  font-size: 12.5px;
+  font-weight: var(--openbot-weight-semibold);
+  cursor: pointer;
+}
+
+.starbot-cal-delete-btn.is-confirm {
+  background: var(--openbot-danger);
+  color: #ffffff;
+}

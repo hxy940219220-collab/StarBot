@@ -1,0 +1,8 @@
+[install]
+exact = true
+linker = "hoisted"
+minimumReleaseAge = 259200
+minimumReleaseAgeExcludes = [
+  "@norbert_bodziony/bloub",
+  "effect",
+]

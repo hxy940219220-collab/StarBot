@@ -1,0 +1,353 @@
+.app-loading {
+  --app-loading-at: 0s;
+  --app-loading-exit-delay: 120ms;
+  position: absolute;
+  z-index: var(--openbot-layer-dialog);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #1c1338;
+  -webkit-app-region: drag;
+}
+
+.starbot-splash-starry-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 68% 64% at 50% 46%, rgba(165, 126, 250, 0.34) 0%, rgba(92, 62, 178, 0.22) 48%, transparent 80%),
+    linear-gradient(155deg, #17112b 0%, #2c1f5c 52%, #4b338c 100%);
+  pointer-events: none;
+}
+
+.starbot-splash-video-frame {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  pointer-events: none;
+}
+
+.starbot-splash-video {
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  max-width: 1920px;
+  max-height: 1080px;
+  object-fit: contain;
+  image-rendering: high-quality;
+  mask-image: radial-gradient(ellipse 94% 92% at 50% 50%, #000 80%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 94% 92% at 50% 50%, #000 80%, transparent 100%);
+}
+
+.starbot-splash-skip-btn {
+  position: fixed;
+  top: 22px;
+  right: 26px;
+  z-index: 12;
+  height: 34px;
+  padding: 0 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(20, 14, 42, 0.56);
+  backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.starbot-splash-skip-btn:hover {
+  background: rgba(124, 92, 255, 0.48);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.starbot-splash-static-badge {
+  width: 164px;
+  height: 164px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 34px rgba(18, 10, 44, 0.45));
+}
+
+.starbot-splash-brand.is-light .starbot-splash-title {
+  color: #ffffff;
+}
+
+.starbot-splash-brand.is-light .starbot-splash-subtitle {
+  color: rgba(235, 226, 255, 0.78);
+}
+
+.app-loading-stage.starbot-splash-stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.starbot-splash-arena {
+  position: relative;
+  display: grid;
+  width: clamp(360px, 56vmin, 460px);
+  height: clamp(360px, 56vmin, 460px);
+  place-items: center;
+}
+
+.starbot-splash-orbit-ring {
+  position: absolute;
+  width: 78%;
+  height: 78%;
+  border: 2px dashed color-mix(in srgb, var(--openbot-accent) 30%, transparent);
+  border-radius: 50%;
+  animation: starbot-ring-spin 26s linear infinite;
+}
+
+.starbot-splash-orbit {
+  position: absolute;
+  inset: 0;
+  animation: starbot-ring-spin 20s linear infinite;
+}
+
+.starbot-splash-zodiac {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(46px, 7.6vmin, 62px);
+  height: clamp(46px, 7.6vmin, 62px);
+  margin: calc(clamp(46px, 7.6vmin, 62px) / -2) 0 0 calc(clamp(46px, 7.6vmin, 62px) / -2);
+  transform: rotate(var(--starbot-angle)) translateY(calc(clamp(360px, 56vmin, 460px) * -0.39))
+    rotate(calc(-1 * var(--starbot-angle)));
+  animation: starbot-zodiac-pop 640ms cubic-bezier(0.22, 1.4, 0.36, 1) var(--starbot-delay) both;
+}
+
+.starbot-splash-zodiac img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(72, 48, 138, 0.22));
+  animation: starbot-counter-spin 20s linear infinite;
+}
+
+.starbot-splash-badge-wrap {
+  position: relative;
+  display: grid;
+  width: clamp(146px, 24vmin, 190px);
+  height: clamp(146px, 24vmin, 190px);
+  place-items: center;
+  animation: starbot-badge-pop 760ms cubic-bezier(0.22, 1.45, 0.36, 1) both;
+}
+
+.starbot-splash-halo {
+  position: absolute;
+  inset: -26px;
+  border-radius: 56px;
+  background: radial-gradient(circle, rgba(139, 110, 255, 0.42) 0%, transparent 72%);
+  animation: starbot-halo-pulse 2.4s ease-in-out infinite;
+}
+
+.starbot-splash-badge {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 34px rgba(96, 66, 206, 0.38));
+  animation: starbot-badge-float 2.8s ease-in-out 720ms infinite;
+}
+
+.starbot-splash-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  animation: starbot-brand-in 580ms var(--openbot-ease-out) 260ms both;
+}
+
+.starbot-splash-title {
+  margin: 0;
+  color: var(--openbot-text-primary);
+  font-size: clamp(26px, 3.6vmin, 34px);
+  font-weight: var(--openbot-weight-bold);
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.starbot-splash-subtitle {
+  margin: 0;
+  color: var(--openbot-text-muted);
+  font-size: clamp(14px, 1.9vmin, 16px);
+  font-weight: var(--openbot-weight-medium);
+  line-height: 1.4;
+}
+
+.app-loading:not([data-phase="loading"]) {
+  pointer-events: none;
+  -webkit-app-region: no-drag;
+}
+
+.app-loading:is([data-phase="fade"], [data-phase="exit"]) {
+  animation: app-loading-exit 420ms var(--openbot-ease-in-out) forwards;
+}
+
+@keyframes starbot-badge-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.55) translateY(20px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.07) translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes starbot-badge-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+@keyframes starbot-halo-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes starbot-zodiac-pop {
+  from {
+    opacity: 0;
+    scale: 0.35;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes starbot-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes starbot-counter-spin {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes starbot-brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes app-loading-exit {
+  to {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starbot-splash-orbit,
+  .starbot-splash-orbit-ring,
+  .starbot-splash-zodiac,
+  .starbot-splash-zodiac img,
+  .starbot-splash-badge-wrap,
+  .starbot-splash-badge,
+  .starbot-splash-halo,
+  .starbot-splash-brand {
+    animation: none;
+  }
+}
+
+/* Keep existing connection notices & toast styles intact */
+.server-connection-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--openbot-space-3);
+  padding: var(--openbot-space-3);
+  background: var(--openbot-bg-canvas);
+  border-bottom: 1px solid var(--openbot-border);
+}
+.server-connection-notice p {
+  margin: 0;
+}
+.server-connection-detail {
+  color: var(--openbot-text-muted);
+  font-variant-numeric: tabular-nums;
+  text-wrap: pretty;
+}
+.server-connection-actions {
+  display: flex;
+  gap: var(--openbot-space-2);
+  -webkit-app-region: no-drag;
+}
+
+.server-connection-toast-host {
+  width: var(--width);
+}
+.server-connection-toast {
+  position: relative;
+  display: grid;
+  gap: var(--openbot-space-2);
+  padding: var(--openbot-space-4) var(--openbot-space-4) var(--openbot-space-2);
+  border-radius: var(--openbot-radius-card);
+  background: var(--openbot-bg-surface-raised);
+  box-shadow: 0 0 0 1px var(--openbot-border);
+  color: var(--openbot-text-primary);
+  font-family: var(--openbot-font-sans);
+  font-size: var(--openbot-text-md);
+  line-height: var(--openbot-leading-md);
+}
+.server-connection-toast-title {
+  padding-right: var(--openbot-space-1);
+  font-weight: var(--openbot-weight-semibold);
+  text-wrap: balance;
+}
+.server-connection-toast-body {
+  margin: 0;
+  color: var(--openbot-text-secondary);
+  font-size: var(--openbot-text-sm);
+  line-height: var(--openbot-leading-sm);
+  font-variant-numeric: tabular-nums;
+  text-wrap: pretty;
+}
+.server-connection-toast-actions {
+  margin-top: var(--openbot-space-1);
+}
+.server-connection-content {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.server-connection-content[hidden] {
+  display: none;
+}

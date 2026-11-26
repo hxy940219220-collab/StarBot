@@ -1,0 +1,616 @@
+/* StarBot Rebuilt Compute & Token Usage Dashboard */
+
+.starbot-usage-root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 4px 0 28px;
+}
+
+.starbot-usage-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.starbot-usage-agent-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.starbot-usage-agent-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px 0 10px;
+  border: 1.5px solid var(--openbot-border);
+  border-radius: 999px;
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-text-secondary);
+  font-size: 12.5px;
+  font-weight: var(--openbot-weight-medium);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.starbot-usage-agent-pill:hover {
+  border-color: var(--openbot-accent);
+  color: var(--openbot-text-primary);
+}
+
+.starbot-usage-agent-pill.is-active {
+  border-color: var(--openbot-accent);
+  background: var(--openbot-accent);
+  color: #ffffff;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--openbot-accent) 28%, transparent);
+}
+
+.starbot-usage-pill-avatar {
+  width: 22px;
+  height: 22px;
+}
+
+.starbot-usage-period-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 12px;
+  background: var(--openbot-bg-surface);
+}
+
+.starbot-usage-period-btn {
+  height: 28px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--openbot-text-secondary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-medium);
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.starbot-usage-period-btn.is-active {
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+  font-weight: var(--openbot-weight-semibold);
+}
+
+/* Single Agent Spotlight Card */
+.starbot-usage-spotlight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 20px;
+  border: 1px solid color-mix(in srgb, var(--openbot-accent) 24%, var(--openbot-border));
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--openbot-accent) 10%, var(--openbot-bg-surface)) 0%,
+    var(--openbot-bg-surface) 100%
+  );
+}
+
+.starbot-usage-spotlight-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.starbot-usage-spotlight-avatar {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+}
+
+.starbot-usage-spotlight-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.starbot-usage-spotlight-title-row h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: var(--openbot-weight-bold);
+}
+
+.starbot-usage-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-usage-spotlight-left p {
+  margin: 4px 0 0;
+  color: var(--openbot-text-secondary);
+  font-size: 12.5px;
+}
+
+.starbot-usage-back-all {
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--openbot-border-strong);
+  border-radius: 999px;
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-text-primary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-medium);
+  cursor: pointer;
+}
+
+.starbot-usage-back-all:hover {
+  border-color: var(--openbot-accent);
+  color: var(--openbot-accent-text);
+}
+
+/* KPI Grid */
+.starbot-usage-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .starbot-usage-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.starbot-usage-kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 18px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 18px;
+  background: var(--openbot-bg-surface);
+  box-shadow: 0 4px 14px rgba(48, 36, 92, 0.04);
+}
+
+.starbot-usage-kpi-card.is-primary {
+  border-color: color-mix(in srgb, var(--openbot-accent) 30%, var(--openbot-border));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--openbot-accent) 9%, var(--openbot-bg-surface)) 0%,
+    var(--openbot-bg-surface) 100%
+  );
+}
+
+.starbot-usage-kpi-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--openbot-text-secondary);
+  font-size: 12px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-usage-kpi-head svg {
+  color: var(--openbot-accent-text);
+  opacity: 0.85;
+}
+
+.starbot-usage-kpi-value {
+  font-size: 24px;
+  font-weight: var(--openbot-weight-bold);
+  letter-spacing: -0.02em;
+  color: var(--openbot-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.starbot-usage-kpi-sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--openbot-text-muted);
+  font-size: 11.5px;
+}
+
+.starbot-usage-kpi-bar {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--openbot-accent) 12%, var(--openbot-bg-canvas));
+}
+
+.starbot-usage-kpi-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--openbot-accent);
+  transition: width 240ms ease;
+}
+
+/* Visual Grid */
+.starbot-usage-visual-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 920px) {
+  .starbot-usage-visual-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.starbot-usage-panel-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 20px;
+  background: var(--openbot-bg-surface);
+  box-shadow: 0 4px 16px rgba(48, 36, 92, 0.04);
+}
+
+.starbot-usage-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.starbot-usage-card-head h3 {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: var(--openbot-weight-bold);
+  color: var(--openbot-text-primary);
+}
+
+.starbot-usage-card-head p {
+  margin: 3px 0 0;
+  color: var(--openbot-text-muted);
+  font-size: 12px;
+}
+
+.starbot-usage-card-head p strong {
+  color: var(--openbot-accent-text);
+}
+
+.starbot-usage-chart-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 10px;
+  background: var(--openbot-bg-canvas);
+}
+
+.starbot-usage-chart-switch button {
+  height: 25px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--openbot-text-secondary);
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.starbot-usage-chart-switch button.is-active {
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-accent-text);
+  font-weight: var(--openbot-weight-semibold);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.starbot-usage-bars-wrap {
+  padding-top: 6px;
+}
+
+.starbot-usage-bars {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(8px, 1fr);
+  align-items: end;
+  gap: 5px;
+  height: 184px;
+  overflow: visible;
+  padding-inline: 6px;
+  padding-bottom: 6px;
+}
+
+.starbot-usage-bar-col {
+  position: relative;
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+
+.starbot-usage-bar-track {
+  display: flex;
+  width: 100%;
+  max-width: 22px;
+  flex: 1;
+  align-items: flex-end;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--openbot-bg-canvas) 75%, transparent);
+  padding: 2px;
+}
+
+.starbot-usage-bar-fill {
+  width: 100%;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #9d82ff 0%, var(--openbot-accent) 100%);
+  transition: height 220ms cubic-bezier(0.22, 1, 0.36, 1), filter 140ms ease;
+}
+
+.starbot-usage-bar-fill.is-zero {
+  background: color-mix(in srgb, var(--openbot-border-strong) 45%, transparent);
+}
+
+.starbot-usage-bar-col.is-hovered .starbot-usage-bar-fill:not(.is-zero) {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--openbot-accent) 32%, transparent);
+}
+
+.starbot-usage-bar-date {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--openbot-text-muted);
+  font-size: 11px;
+  line-height: 14px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.starbot-usage-bar-date.is-visible {
+  opacity: 1;
+}
+
+.starbot-usage-bar-col:first-child .starbot-usage-bar-date {
+  left: 0;
+  transform: none;
+}
+
+.starbot-usage-bar-col:last-child .starbot-usage-bar-date {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* Model List */
+.starbot-usage-model-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.starbot-usage-model-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--openbot-bg-canvas) 55%, var(--openbot-bg-surface));
+}
+
+.starbot-usage-model-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.starbot-usage-model-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.starbot-usage-model-provider {
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+  font-size: 11px;
+  font-weight: var(--openbot-weight-semibold);
+}
+
+.starbot-usage-model-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+}
+
+.starbot-usage-model-nums {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.starbot-usage-model-nums span {
+  color: var(--openbot-text-muted);
+  font-size: 11px;
+}
+
+.starbot-usage-model-progress {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--openbot-accent) 12%, var(--openbot-bg-canvas));
+}
+
+.starbot-usage-model-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--openbot-accent);
+}
+
+.starbot-usage-model-meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--openbot-text-muted);
+  font-size: 11px;
+}
+
+/* Per-StarBot Breakdown Table */
+.starbot-usage-agent-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.starbot-usage-agent-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.4fr) minmax(120px, 1fr) minmax(110px, 0.8fr) minmax(96px, 0.7fr);
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--openbot-border);
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--openbot-bg-canvas) 45%, var(--openbot-bg-surface));
+  text-align: left;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.starbot-usage-agent-row:hover {
+  border-color: var(--openbot-accent);
+  background: color-mix(in srgb, var(--openbot-accent) 5%, var(--openbot-bg-surface));
+  transform: translateY(-1px);
+}
+
+.starbot-usage-agent-cell-main {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+
+.starbot-usage-row-avatar {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+}
+
+.starbot-usage-fallback-avatar {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--openbot-accent-soft);
+  color: var(--openbot-accent-text);
+}
+
+.starbot-usage-agent-meta {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.starbot-usage-agent-meta strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--openbot-text-primary);
+  font-size: 13.5px;
+}
+
+.starbot-usage-agent-meta span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--openbot-text-muted);
+  font-size: 11.5px;
+}
+
+.starbot-usage-agent-cell-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--openbot-text-muted);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.starbot-usage-agent-share-track {
+  flex: 1;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--openbot-accent) 12%, var(--openbot-bg-canvas));
+}
+
+.starbot-usage-agent-share-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--openbot-accent);
+}
+
+.starbot-usage-agent-cell-stat,
+.starbot-usage-agent-cell-cost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.starbot-usage-agent-cell-stat strong,
+.starbot-usage-agent-cell-cost strong {
+  color: var(--openbot-text-primary);
+  font-size: 13.5px;
+}
+
+.starbot-usage-agent-cell-stat span {
+  color: var(--openbot-text-muted);
+  font-size: 11px;
+}
+
+.starbot-usage-agent-cell-cost span {
+  color: var(--openbot-accent-text);
+  font-size: 11px;
+  font-weight: var(--openbot-weight-medium);
+}
+
+.starbot-usage-empty-hint {
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  color: var(--openbot-text-muted);
+  font-size: 12.5px;
+}
