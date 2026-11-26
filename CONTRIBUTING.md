@@ -25,7 +25,7 @@ These need an issue with the `approved` label before you write code:
 - Large refactors, new dependencies, and changes to migrations, IPC contracts, the Team API,
   security boundaries, or CI.
 
-To propose one, open a [feature request](https://github.com/hxy940219220-collab/StarBot-Desktop/issues/new?template=feature_request.yml)
+To propose one, open a [feature request](https://github.com/hxy940219220-collab/StarBot/issues/new?template=feature_request.yml)
 and wait. A maintainer adds `approved` when the change fits StarBot. Then link the issue in your
 pull request with `Closes #<number>`.
 
@@ -54,7 +54,7 @@ A maintainer who reopens a closed pull request starts a new 7-day period.
 ## Development setup
 
 ```bash
-git clone https://github.com/hxy940219220-collab/StarBot-Desktop.git
+git clone https://github.com/hxy940219220-collab/StarBot.git
 cd openbot
 bun install --frozen-lockfile
 bun run check

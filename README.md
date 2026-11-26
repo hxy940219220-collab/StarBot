@@ -1,6 +1,6 @@
 # StarBot
 
-[![CI](https://github.com/hxy940219220-collab/StarBot-Desktop/actions/workflows/ci.yml/badge.svg)](https://github.com/hxy940219220-collab/StarBot-Desktop/actions/workflows/ci.yml)
+[![CI](https://github.com/hxy940219220-collab/StarBot/actions/workflows/ci.yml/badge.svg)](https://github.com/hxy940219220-collab/StarBot/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-PolyForm_Noncommercial_1.0.0-blue.svg)](LICENSE)
 
 StarBot is a local-first desktop workspace for persistent AI teammates. It supports the local
@@ -83,17 +83,17 @@ or arm64 Linux as an AppImage.
 
 ### macOS
 
-1. Download the latest `StarBot-*-arm64.dmg` (or `StarBot-*-x64.dmg` on an Intel Mac) from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot-Desktop/releases).
+1. Download the latest `StarBot-*-arm64.dmg` (or `StarBot-*-x64.dmg` on an Intel Mac) from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot/releases).
 2. Drag StarBot to Applications and open it.
 
 ### Windows
 
-1. Download the latest `StarBot-*-x64.exe` from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot-Desktop/releases).
+1. Download the latest `StarBot-*-x64.exe` from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot/releases).
 2. Run the installer and open StarBot.
 
 ### Linux
 
-1. Download the latest `StarBot-*-x86_64.AppImage` (or `StarBot-*-arm64.AppImage` on arm64) from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot-Desktop/releases).
+1. Download the latest `StarBot-*-x86_64.AppImage` (or `StarBot-*-arm64.AppImage` on arm64) from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot/releases).
 2. Make it executable with `chmod +x StarBot-*.AppImage`, then run it.
 
 The AppImage does not need libfuse2, so it also runs on Arch Linux and Omarchy. It mounts itself
@@ -164,7 +164,7 @@ To run StarBot as an always-on server of your account on a VPS or home server (U
 26.04 with systemd), install it from a terminal and sign in with an email code:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/scripts/install-server.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/hxy940219220-collab/StarBot/main/scripts/install-server.sh | sudo bash
 sudo openbot login
 ```
 
@@ -177,11 +177,11 @@ The same server runs as a container (`linux/amd64` and `linux/arm64`). The secco
 Electron sandbox stay on:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/docker/seccomp.json
+curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot/main/docker/seccomp.json
 docker run -d --name openbot --restart unless-stopped \
   --security-opt seccomp=seccomp.json --security-opt no-new-privileges:true \
   --shm-size 1g --stop-timeout 60 -v openbot-data:/data \
-  ghcr.io/hxy940219220-collab/StarBot-Desktop:latest
+  ghcr.io/hxy940219220-collab/StarBot:latest
 docker exec -it openbot openbot login
 ```
 
@@ -193,8 +193,8 @@ see [AWS ECS](docs/aws-ecs.md). For an Umbrel home server, see [Umbrel](docs/umb
 The flake installs the desktop app from the latest release on x64 or arm64 Linux and on Apple silicon:
 
 ```bash
-nix run github:hxy940219220-collab/StarBot-Desktop
-nix profile install github:hxy940219220-collab/StarBot-Desktop
+nix run github:hxy940219220-collab/StarBot
+nix profile install github:hxy940219220-collab/StarBot
 ```
 
 `overlays.default` adds `pkgs.openbot`. StarBot is not free software, so your nixpkgs must allow it,
@@ -352,7 +352,7 @@ iex "& {$(irm https://bun.com/install.ps1)} -Version 1.4.2"
 ```
 
 ```bash
-git clone https://github.com/hxy940219220-collab/StarBot-Desktop.git
+git clone https://github.com/hxy940219220-collab/StarBot.git
 cd openbot
 bun install --frozen-lockfile
 bun run codex:doctor
@@ -746,7 +746,7 @@ Releases are tag-driven. `bun run release:patch`, `release:minor`, or `release:m
 version and changelog. After review, commit, preflight, and tag the release; pushing the tag builds a
 signed and notarized macOS ARM64 and x64 release, a signed Windows x64 release, and unsigned Linux x64
 and arm64 AppImages in GitHub Actions. After the release is published, the workflow pushes the Docker
-image to `ghcr.io/hxy940219220-collab/StarBot-Desktop`.
+image to `ghcr.io/hxy940219220-collab/StarBot`.
 Installed builds check GitHub Releases for updates and expose download/restart controls in the account
 popover. Release signing secrets and the complete procedure are documented in
 [docs/RELEASING.md](docs/RELEASING.md).
