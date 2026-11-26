@@ -211,7 +211,7 @@ function storageProductId(plan: BillingPlanId): string {
 async function ensureStorageProduct(stripe: StripeAdmin, plan: BillingPlanId): Promise<void> {
   const id = storageProductId(plan);
   const body = new URLSearchParams({
-    name: `OpenBot ${PLAN_NAME[plan]} storage`,
+    name: `StarBot ${PLAN_NAME[plan]} storage`,
     active: "true",
     "metadata[openbot_kind]": "storage",
     "metadata[openbot_plan]": plan,
@@ -276,7 +276,7 @@ async function ensureStoragePrice(
 async function ensureProduct(stripe: StripeAdmin, plan: BillingPlanId): Promise<void> {
   const id = productId(plan);
   const body = new URLSearchParams({
-    name: `OpenBot ${PLAN_NAME[plan]}`,
+    name: `StarBot ${PLAN_NAME[plan]}`,
     active: "true",
     "metadata[openbot_plan]": plan,
   });
@@ -355,7 +355,7 @@ async function ensurePrice(
 
 async function ensureCreditProduct(stripe: StripeAdmin): Promise<void> {
   const body = new URLSearchParams({
-    name: "OpenBot credits",
+    name: "StarBot credits",
     active: "true",
     [`metadata[${CREDIT_METADATA.kind}]`]: CREDIT_METADATA_KIND,
   });
@@ -420,7 +420,7 @@ function licensePriceSignature(prices: Readonly<Record<string, LicensePrice>>, i
 
 async function ensureLicenseProduct(stripe: StripeAdmin): Promise<void> {
   const body = new URLSearchParams({
-    name: "OpenBot commercial license",
+    name: "StarBot commercial license",
     active: "true",
     [`metadata[${LICENSE_METADATA.kind}]`]: LICENSE_METADATA_KIND,
   });
@@ -546,14 +546,14 @@ async function defaultPortalConfiguration(stripe: StripeAdmin): Promise<string> 
   const customer = await stripe.request(
     "POST",
     "/v1/customers",
-    new URLSearchParams({ description: "OpenBot bootstrap: creates the default Customer Portal configuration" }),
+    new URLSearchParams({ description: "StarBot bootstrap: creates the default Customer Portal configuration" }),
     z.object({ id: z.string() }),
   );
   try {
     await stripe.request(
       "POST",
       "/v1/billing_portal/sessions",
-      new URLSearchParams({ customer: customer.id, return_url: "https://openbot.run" }),
+      new URLSearchParams({ customer: customer.id, return_url: "https://starbot.app" }),
       z.object({ id: z.string() }),
     );
   } finally {
@@ -588,7 +588,7 @@ async function ensureWebhookEndpoint(stripe: StripeAdmin, url: string, replace: 
   if (parsed.protocol !== "https:" || !parsed.pathname.endsWith("/v1/stripe/webhook")) {
     throw new Error("--webhook-url must be an https URL that ends with /v1/stripe/webhook.");
   }
-  const body = new URLSearchParams({ url: parsed.href, description: "OpenBot account server" });
+  const body = new URLSearchParams({ url: parsed.href, description: "StarBot account server" });
   for (const event of BILLING_WEBHOOK_EVENTS) body.append("enabled_events[]", event);
   let current: { id: string } | null = null;
   let startingAfter: string | null = null;

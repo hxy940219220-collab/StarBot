@@ -94,7 +94,7 @@ const GENERATED_DIRECTORY_PATTERN =
 const SHOWCASE_IMAGE_PATH = resolve(process.cwd(), "src", "renderer", "src", "assets", "openbot-logo-dev.png");
 
 function previewPdf(): string {
-  const stream = "BT /F1 18 Tf 24 150 Td (OpenBot file preview) Tj ET";
+  const stream = "BT /F1 18 Tf 24 150 Td (StarBot file preview) Tj ET";
   const objects = [
     "<< /Type /Catalog /Pages 2 0 R >>",
     "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
@@ -245,7 +245,7 @@ export async function seedDevelopmentState(options: DevelopmentSeedOptions = {})
   );
   assertSafeAppDataRoot(appDataRoot);
   const targetProfile = resolve(appDataRoot, developmentUserDataName("app", options.instanceId ?? null));
-  if (dirname(targetProfile) !== appDataRoot) throw new Error(`Unsafe OpenBot dev profile path: ${targetProfile}`);
+  if (dirname(targetProfile) !== appDataRoot) throw new Error(`Unsafe StarBot dev profile path: ${targetProfile}`);
 
   const profileActive = await isDevelopmentProfileActive(targetProfile);
   const agentModel = options.agentModel ?? (await seededAgentModel(appDataRoot));
@@ -265,7 +265,7 @@ export async function seedDevelopmentState(options: DevelopmentSeedOptions = {})
   if (options.dryRun) return summary;
   if (options.ifMissing && (await pathExists(targetProfile))) return summary;
   if (profileActive) {
-    throw new Error("Quit the OpenBot dev app before you seed its local state.");
+    throw new Error("Quit the StarBot dev app before you seed its local state.");
   }
 
   await mkdir(appDataRoot, { recursive: true, mode: 0o700 });
@@ -274,7 +274,7 @@ export async function seedDevelopmentState(options: DevelopmentSeedOptions = {})
   try {
     await buildSeedProfile(stagingProfile, homeDirectory, newTransferDirectories, agentModel, scale);
     if (await isDevelopmentProfileActive(targetProfile)) {
-      throw new Error("Quit the OpenBot dev app before you seed its local state.");
+      throw new Error("Quit the StarBot dev app before you seed its local state.");
     }
     if (options.ifMissing && (await pathExists(targetProfile))) {
       await cleanupStagedSeed(stagingProfile, homeDirectory, newTransferDirectories);
@@ -389,7 +389,7 @@ function seedMemories(agentStore: AgentStore): void {
     },
     {
       agentId: "chief",
-      text: "The current priority is a traceable OpenBot launch plan.",
+      text: "The current priority is a traceable StarBot launch plan.",
       origin: "automatic" as const,
       sourceTurnId: "dev-seed-turn-chief-plan",
     },
@@ -857,7 +857,7 @@ async function seedConversations(
             `| Evidence | ${mention("research")} | In review |`,
             `| Release | ${mention("launch")} | Ready |`,
             "",
-            "Next: review the [OpenBot documentation](https://openbot.run/docs), then run:",
+            "Next: review the [StarBot documentation](https://starbot.app/docs), then run:",
             "",
             "```bash",
             "bun run check",
@@ -884,7 +884,7 @@ async function seedConversations(
         itemType: "image_generation",
         attachments: [attachments.image],
         imageGeneration: {
-          prompt: "A calm OpenBot launch command center at blue hour",
+          prompt: "A calm StarBot launch command center at blue hour",
           resolution: "1024 × 1024",
           aspectRatio: "square",
         },
@@ -984,7 +984,7 @@ async function seedConversations(
           '<div style="display:grid;gap:8px;max-width:420px;padding:16px;border-radius:12px;background:#f4f1fb">',
           '  <strong style="font-size:18px">Launch status</strong>',
           '  <span style="color:#3d7a3d">QA ready · Evidence in review · Release ready</span>',
-          '  <a href="https://openbot.run/docs">Release checklist</a>',
+          '  <a href="https://starbot.app/docs">Release checklist</a>',
           "</div>",
           "```",
         ].join("\n"),
@@ -1152,7 +1152,7 @@ async function seedLaunchRoom(
     {
       ...store.create(channelId, {
         name: "Launch room",
-        title: "Ship OpenBot 1.0",
+        title: "Ship StarBot 1.0",
         instructions:
           "Keep every decision traceable. Name the owner and the evidence in each result, and leave an unverified claim out.",
         members: [{ agentId: "chief" }, { agentId: "research" }, { agentId: "builder" }, { agentId: "launch" }],
@@ -1171,7 +1171,7 @@ async function seedLaunchRoom(
       mimeType: "text/markdown",
       bytes: bytes(
         [
-          "# OpenBot 1.0 release note (draft)",
+          "# StarBot 1.0 release note (draft)",
           "",
           "## What is new",
           "- Channels: several agents share one chat and one task list.",
@@ -1225,7 +1225,7 @@ async function seedLaunchRoom(
   const taskStandup = "channel-launch-task-standup";
   const taskRollback = "channel-launch-task-rollback";
   const releaseNoteText =
-    "Draft the release note for OpenBot 1.0. Keep the evidence with every claim and name an owner for each section.";
+    "Draft the release note for StarBot 1.0. Keep the evidence with every claim and name an owner for each section.";
   const evidenceText = "Verify the two performance claims in the draft and name a primary source for each.";
   const rollbackText = `Add the rollback owner to the release note. ${mentionAgent(agents, "builder")} should confirm the steps.`;
   const message = (input: SeedChannelMessage): ChannelMessage => channelMessage(channelId, clock, input);
@@ -1512,7 +1512,7 @@ async function seedTeam(profilePath: string, agentStore: AgentStore, clock: Seed
     name: "Dev Owner",
     avatarUrl: null,
   };
-  const teamIdentity = await runCauseEffect(team.configureWithAccount("OpenBot Dev Team", owner));
+  const teamIdentity = await runCauseEffect(team.configureWithAccount("StarBot Dev Team", owner));
   const joined = [];
   for (const member of [
     { id: "openbot-dev-alice", email: "alice@example.com", name: "Alice Chen", role: "admin" as const },
@@ -1600,7 +1600,7 @@ async function readSeedTransferDirectories(profilePath: string): Promise<string[
 }
 
 async function removeTransferDirectories(homeDirectory: string, directories: string[]): Promise<string[]> {
-  const root = resolve(homeDirectory, "OpenBot", "Shared", "Transfers");
+  const root = resolve(homeDirectory, "StarBot", "Shared", "Transfers");
   const generatedRoot = resolve(root, "generated");
   const removed: string[] = [];
   for (const relativePath of directories) {
@@ -1712,7 +1712,7 @@ async function main(): Promise<void> {
     scale: parsed.values.scale === undefined ? undefined : parseSeedScale(parsed.values.scale),
     instanceId: readDevelopmentInstanceId(process.env.OPENBOT_DEV_INSTANCE_ID),
   });
-  logger.info(dryRun ? "OpenBot development seed dry run:" : "OpenBot development state seeded:");
+  logger.info(dryRun ? "StarBot development seed dry run:" : "StarBot development state seeded:");
   logger.info(`- profile: ${summary.targetProfile}`);
   logger.info(`- profile active: ${summary.profileActive ? "yes" : "no"}`);
   logger.info(`- agent model: ${summary.agentModel}`);

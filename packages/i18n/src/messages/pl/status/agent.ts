@@ -28,7 +28,8 @@ export const messages = {
   "status.agent.screenCaptureChannel":
     "Obraz pojawi się na kanale {channel} i każdy członek tego serwera, który czyta kanał, może go zobaczyć.",
   "status.agent.screenCapturePermissionNext":
-    "Potem macOS może poprosić cię o zezwolenie OpenBot na nagrywanie ekranu.",
+    "Potem macOS może poprosić cię o zezwolenie StarBot na nagrywanie ekranu.",
+
   "status.agent.screenCaptureDisplay": "Przechwyć wyświetlacz {name} i wyślij obraz do modelu agenta.",
   "status.agent.screenCaptureWindow": "Przechwyć okno {name} i wyślij obraz do modelu agenta.",
   "status.agent.screenCaptureRegion":
@@ -40,26 +41,31 @@ export const messages = {
   "status.agent.sendIdea": "To będzie publiczne zgłoszenie na GitHubie. Twoje imię nie będzie widoczne.",
   "status.agent.feedbackRecentErrors": "Ostatnie błędy w czacie:",
   "status.agent.feedbackSameAs": "Dodaje do zgłoszenia #{issue}",
-  "status.agent.feedbackSent": "Wysłano do zespołu OpenBot: {title}",
+  "status.agent.feedbackSent": "Wysłano do zespołu StarBot: {title}",
+
   "status.agent.feedbackWithdrawn": "Usunięto z GitHuba: {title}",
   "status.agent.feedbackWithdrawCommand": "Usuń zgłoszenie #{issue} z GitHuba",
   "status.agent.feedbackWithdrawReason":
     "Nikt już nie zobaczy tego zgłoszenia na GitHubie. Tego nie można cofnąć. Aby je poprawić, agent może wysłać poprawione zgłoszenie.",
   "status.agent.feedbackWithdrawing": "Usuwanie zgłoszenia z GitHuba…",
   "status.agent.serverInstallCommand":
-    "Utwórz jednorazowe polecenie, które instaluje OpenBot na innym komputerze jako serwer {name} i loguje go do Twojego konta. Agent uruchamia je tam.",
+    "Utwórz jednorazowe polecenie, które instaluje StarBot na innym komputerze jako serwer {name} i loguje go do Twojego konta. Agent uruchamia je tam.",
+
   "status.agent.serverInstallCard": "Polecenie instalacji dla serwera {name}",
   "status.agent.browserProfileNamed":
     "Przenieś {agents} do profilu przeglądarki {profile}. Otrzymają jego logowania i pliki cookie. Ich otwarte karty zostaną zamknięte.",
-  "status.agent.commitCoAuthorOff": "Przestań dodawać OpenBot jako współautora commitów wszystkich agentów.",
-  "status.agent.commitCoAuthorOn": "Znowu dodawaj OpenBot jako współautora commitów wszystkich agentów.",
+  "status.agent.commitCoAuthorOff": "Przestań dodawać StarBot jako współautora commitów wszystkich agentów.",
+
+  "status.agent.commitCoAuthorOn": "Znowu dodawaj StarBot jako współautora commitów wszystkich agentów.",
+
   "status.agent.browserProfileNew":
     "Utwórz nowy profil przeglądarki {profile} i przenieś do niego {agents}. Nie ma w nim logowań. Ich otwarte karty zostaną zamknięte.",
   "status.agent.browserProfileShared":
     "Przenieś {agents} do wspólnego profilu przeglądarki. Otrzymają jego logowania i pliki cookie. Ich otwarte karty zostaną zamknięte.",
   "status.agent.browserProfileOwn":
     "Daj każdemu z {agents} własny profil przeglądarki. Ich otwarte karty zostaną zamknięte.",
-  "status.agent.feedbackSending": "Wysyłanie opinii do zespołu OpenBot…",
+  "status.agent.feedbackSending": "Wysyłanie opinii do zespołu StarBot…",
+
   "status.agent.workflowDelete":
     "Usuń przepływ pracy {title} razem z jego uruchomieniami i wersjami. Jego otwarte kroki zostaną zatrzymane.",
   "status.agent.deleteAgents": "Usuń {agents} razem z ich czatami i plikami. Tej operacji nie można cofnąć.",

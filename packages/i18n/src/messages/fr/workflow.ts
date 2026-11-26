@@ -295,7 +295,8 @@ export const messages = {
 
   "workflow.output.title": "Sortie",
   "workflow.output.name": "sortie",
-  "workflow.output.channel.openbot": "OpenBot",
+  "workflow.output.channel.openbot": "StarBot",
+
   "workflow.output.channel.search": "Rechercher des canaux",
   "workflow.output.postsAs": "Publie comme",
   "workflow.output.postsAsNote": "Une note ; aucune tâche ne démarre",
@@ -314,7 +315,8 @@ export const messages = {
   "workflow.discord.server": "Serveur",
   "workflow.discord.chooseServer": "Choisir un serveur",
   "workflow.discord.event": "Événement",
-  "workflow.discord.event.mention": "OpenBot mentionné",
+  "workflow.discord.event.mention": "StarBot mentionné",
+
   "workflow.discord.anyChannel": "Tout salon",
   "workflow.discord.roles": "A le rôle",
   "workflow.discord.anyRole": "Tout rôle",
@@ -340,7 +342,8 @@ export const messages = {
   "workflow.telegram.anyChat": "Toute discussion liée",
   "workflow.telegram.sameChat": "Comme le déclencheur",
   "workflow.telegram.event": "Événement",
-  "workflow.telegram.event.mention": "OpenBot mentionné",
+  "workflow.telegram.event.mention": "StarBot mentionné",
+
   "workflow.telegram.text": "Le texte contient",
   "workflow.telegram.anyText": "Tout texte",
   "workflow.telegram.on": "Sur",
@@ -393,8 +396,10 @@ export const messages = {
   "workflow.github.filter.branch": "Branche de base",
   "workflow.github.filter.titleValue": "Titre contient « {text} »",
   "workflow.github.filter.branchValue": "Branche de base : {branch}",
-  "workflow.github.alert.missing": "OpenBot ne voit pas {repository} sur GitHub.",
-  "workflow.github.alert.readOnly": "OpenBot ne peut pas modifier les issues et pull requests de {repository}.",
+  "workflow.github.alert.missing": "StarBot ne voit pas {repository} sur GitHub.",
+
+  "workflow.github.alert.readOnly": "StarBot ne peut pas modifier les issues et pull requests de {repository}.",
+
   "workflow.github.alert.eventsOff": "GitHub n’envoie pas encore d’événements de {repository}.",
   "workflow.github.alert.noEvent":
     "Le déclencheur n’est pas un événement GitHub. Choisissez un dépôt et prenez le numéro dans l’entrée.",
@@ -402,7 +407,8 @@ export const messages = {
     "{action} ne fonctionne que sur les pull requests. Le déclencheur démarre sur des issues.",
   "workflow.github.history.name": "Événements",
   "workflow.github.history.none": "Aucun",
-  "workflow.github.history.offline": "OpenBot était hors ligne",
+  "workflow.github.history.offline": "StarBot était hors ligne",
+
   "workflow.github.history.waitingGroup": "En attente",
   "workflow.github.history.startedGroup": "Exécutions lancées",
   "workflow.github.history.skippedGroup": "Ignorés",
@@ -625,10 +631,13 @@ export const messages = {
   "workflow.file.import.files": "Fichiers à envoyer : {count}",
   "workflow.file.import.noUpload": "Ce serveur ne peut pas garder de fichiers. Les fichiers ne sont pas importés.",
   "workflow.file.import.confirm": "Importer",
-  "workflow.file.import.notFile": "Ce fichier n’est pas un workflow OpenBot.",
+  "workflow.file.import.notFile": "Ce fichier n’est pas un workflow StarBot.",
+
   "workflow.file.import.invalid": "Ce fichier de workflow est endommagé.",
-  "workflow.file.import.newer": "Ce workflow nécessite OpenBot {version} ou plus récent.",
-  "workflow.file.import.newerUnknown": "Ce workflow nécessite une version plus récente d’OpenBot.",
+  "workflow.file.import.newer": "Ce workflow nécessite StarBot {version} ou plus récent.",
+
+  "workflow.file.import.newerUnknown": "Ce workflow nécessite une version plus récente d’StarBot.",
+
   "workflow.file.import.newerSteps": "Étapes que cette version ne connaît pas : {steps}.",
   "workflow.file.import.failed": "Impossible d’importer le workflow.",
   "workflow.file.export.secret": "Retirez les secrets avant l’export. Trouvés dans : {fields}",
@@ -668,8 +677,10 @@ export const messages = {
   "workflow.canvas.none.trigger": "Un déclencheur lance le workflow.",
   "workflow.canvas.none.handoff": "Chaque étape transmet son résultat à la suivante.",
   "workflow.canvas.none.open": "Ouvrir {name}",
-  "workflow.page.failed": "OpenBot n’a pas pu effectuer cette action. Réessayez.",
+  "workflow.page.failed": "StarBot n’a pas pu effectuer cette action. Réessayez.",
+
   "workflow.page.needsNewerApp":
-    "Ce workflow contient des étapes d’une version plus récente d’OpenBot. Mettez OpenBot à jour pour le modifier.",
+    "Ce workflow contient des étapes d’une version plus récente d’StarBot. Mettez StarBot à jour pour le modifier.",
+
   "workflow.page.manageOnly": "Pour modifier ce workflow, il vous faut l’accès Gérer sur chacun de ses agents.",
 } as const satisfies PartialTranslation<typeof source>;

@@ -840,7 +840,7 @@ export class TurnLifecycle {
     const timer = setTimeout(() => {
       this.#compactionDeadlines.delete(threadId);
       if (this.#observedCompactions.get(threadId) !== turnId || !this.#runningTurns.has(turnId)) return;
-      logger.warn("A provider compaction did not end; OpenBot stops its turn.", { provider: client.provider, runMs });
+      logger.warn("A provider compaction did not end; StarBot stops its turn.", { provider: client.provider, runMs });
       this.#holdCompactionFailure(
         turnId,
         {
@@ -862,7 +862,7 @@ export class TurnLifecycle {
   #stopCompactionLoop(agentId: string, threadId: string, turnId: string, client: AgentClient): void {
     this.#clearCompactionDeadline(threadId);
     if (this.#compactionFailures.get(turnId)?.loop) return;
-    logger.warn("A provider compacted again and again; OpenBot stops its turn.", { provider: client.provider });
+    logger.warn("A provider compacted again and again; StarBot stops its turn.", { provider: client.provider });
     this.#holdCompactionFailure(
       turnId,
       {
@@ -1955,10 +1955,10 @@ export class TurnLifecycle {
       this.#quietStops.add(turnId);
       logger.info(
         repeated
-          ? "A quiet turn called the no-update tool again; OpenBot ends it."
+          ? "A quiet turn called the no-update tool again; StarBot ends it."
           : silentFor < quietFor
-            ? "A quiet turn did not end in time after its no-update call; OpenBot ends it."
-            : "A quiet turn sent nothing after its no-update call; OpenBot ends it.",
+            ? "A quiet turn did not end in time after its no-update call; StarBot ends it."
+            : "A quiet turn sent nothing after its no-update call; StarBot ends it.",
         { agentId, turnId, provider: client.provider },
       );
       Effect.runFork(client.request("turn/interrupt", { threadId, turnId }, decodeRecordResponse).pipe(Effect.ignore));
@@ -2815,7 +2815,7 @@ export class TurnLifecycle {
     threadId: string,
     provider: AgentClient["provider"],
   ) {
-    logger.warn("A provider session failed turns in a row; OpenBot opens a new one.", {
+    logger.warn("A provider session failed turns in a row; StarBot opens a new one.", {
       provider,
       failures: SESSION_FAILURE_LIMIT,
     });
@@ -3620,7 +3620,7 @@ function noResultNote(
         : "Check what is done, then finish the rest yourself or send the teammate a narrower request.";
   return [
     "Status: blocked",
-    "Result: OpenBot note, not written by this teammate: the teammate's turn ended with no written result and no error. The requested work can be unfinished.",
+    "Result: StarBot note, not written by this teammate: the teammate's turn ended with no written result and no error. The requested work can be unfinished.",
     `Evidence: ${evidence.length > 0 ? evidence.join(" ") : "none"}`,
     `Unblock: ${unblock}`,
   ].join("\n");
@@ -3731,7 +3731,7 @@ const ENDED_TASK_REPORT_REASON_LIMIT = 2_000;
 function endedTaskReportNote(reason: string | null, fallback: string): string {
   return [
     "Status: blocked",
-    `Result: OpenBot note, not written by this teammate: the task for this request ended, but the teammate's turn that read its result ended before the teammate answered. ${(reason ?? fallback).slice(0, ENDED_TASK_REPORT_REASON_LIMIT)}`,
+    `Result: StarBot note, not written by this teammate: the task for this request ended, but the teammate's turn that read its result ended before the teammate answered. ${(reason ?? fallback).slice(0, ENDED_TASK_REPORT_REASON_LIMIT)}`,
     "Evidence: none",
     "Unblock: The teammate's chat has the task result. Send the request again if you still need the answer.",
   ].join("\n");

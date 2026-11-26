@@ -6,7 +6,7 @@ Current remote connections use Team API protocol v9 over three ordered WebRTC Da
 `events`, and `files`. A sandboxed hidden Chromium page owns each `RTCPeerConnection`. Electron main
 uses a `MessagePort` and transfers binary data as `ArrayBuffer`. Signal carries SDP and ICE only,
 except the Slack requests of an agent's Slack app (see [Messaging connections](channels-and-messaging.md#messaging-connections)).
-OpenBot Mobile uses the same ticket, authentication transcript, framing, RPC codec, and event stream.
+StarBot Mobile uses the same ticket, authentication transcript, framing, RPC codec, and event stream.
 In Expo Go, an Expo DOM component owns the browser `RTCPeerConnection` inside a hidden WebView and
 passes only serializable, validated commands and events to the native React UI; no native WebRTC
 module or development build is required.
@@ -191,7 +191,7 @@ sheet moves its files into the app cache, the user chooses an agent, and that ch
 text and files, which follow the attachment rules above. The phone reads the response headers of a
 shared link; a link to an image of at most 10 MB is downloaded and comes as a file instead of the link. Permanent invitation metadata comes from the shared Team client; revocation stops
 new joins without removing existing members.
-iOS associates `https://openbot.run/join` and `https://openbot.run/agents/*` with `run.openbot.mobile`. Changes to associated
+iOS associates `https://starbot.app/join` and `https://starbot.app/agents/*` with `run.openbot.mobile`. Changes to associated
 domains require a new native app build and deployment of the website association file. Android
 continues to open HTTPS invitations in the browser, whose button opens `openbot://join`. Enabling
 verified Android App Links requires the release app-signing certificate's SHA-256 fingerprint,
@@ -289,7 +289,7 @@ Tunnel transport is retired. The old public endpoints return `host_update_requir
 
 The desktop client starts each remote connection with `GET /v1/compatibility`. The response contains the host application version, the minimum and maximum Team API protocol versions, and host capabilities. The client selects the highest protocol in the shared range. Application SemVer does not select or reject a protocol.
 
-The first released Team API protocol is `1`. All later HTTP requests include `OpenBot-Protocol-Version` and `OpenBot-App-Version`. The event socket uses the `openbot-team-v1` WebSocket subprotocol. A host without the compatibility endpoint is treated as an old host and is blocked. A request without the required protocol headers is treated as an old client and is blocked.
+The first released Team API protocol is `1`. All later HTTP requests include `StarBot-Protocol-Version` and `StarBot-App-Version`. The event socket uses the `openbot-team-v1` WebSocket subprotocol. A host without the compatibility endpoint is treated as an old host and is blocked. A request without the required protocol headers is treated as an old client and is blocked.
 
 Each protocol has a frozen codec and adapter in `packages/contracts/src/team-protocol`. The v1 HTTP codec owns the fixed route registry and validates JSON requests and responses before the adapter converts current values. Uploads, downloads, and other binary routes use the same negotiated headers and error envelope. The host does not write current service or IPC values directly to the network. Breaking or semantic changes add a new protocol directory and registry entry. A released adapter keeps its original meaning.
 
@@ -310,7 +310,7 @@ Protocol 10 is the protocol 9 wire with two capability lists (`v10.ts`). The pro
 and protocol 10 does not send it again: it is the frozen baseline. A protocol 10 peer sends
 `capabilities`, with the names after protocol 9 and the markers, and `absent`, with the baseline
 names that it does not serve. The full set is `(baseline - absent) + capabilities`. Over HTTP the
-lists are the `OpenBot-Capabilities` and `OpenBot-Absent-Capabilities` headers; over WebRTC they are
+lists are the `StarBot-Capabilities` and `StarBot-Absent-Capabilities` headers; over WebRTC they are
 the `capabilities` and `absent` keys of `http.request`, and the marker `capability-baseline-v1` says
 that a request has the two lists. `capabilities` also keeps `long-capability-lists-v1`, so a host of
 protocol 9 reads a protocol 10 request as protocol 9. A host ignores an unknown name in `absent`

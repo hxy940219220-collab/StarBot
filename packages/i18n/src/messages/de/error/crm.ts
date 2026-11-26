@@ -3,7 +3,8 @@ import type { messages as source } from "../../en/error/crm";
 
 export const messages = {
   "error.crm.serverTooOld":
-    "Dieser Server unterstützt das CRM nicht. Aktualisiere OpenBot auf dem Computer, auf dem er läuft.",
+    "Dieser Server unterstützt das CRM nicht. Aktualisiere StarBot auf dem Computer, auf dem er läuft.",
+
   "error.crm.tooLargeToSend": "Diese CRM-Seite ist zu groß, um sie an diesen Client zu senden.",
   "error.crm.customerMissing": "Diesen Kunden gibt es nicht mehr.",
   "error.crm.planMissing": "Diesen Tarif gibt es nicht mehr.",
@@ -41,11 +42,15 @@ export const messages = {
   "error.crm.sourcePermission":
     "Dieser Schlüssel kann keine Kunden, Rechnungen, Abonnements, Ereignisse und Produkte lesen. Gib ihm Lesezugriff darauf.",
   "error.crm.sourceRateLimited": "Stripe hat zu viele Anfragen erhalten. Versuche es in einer Minute noch einmal.",
-  "error.crm.sourceNetwork": "OpenBot kann keine Verbindung zu Stripe herstellen. Prüfe die Internetverbindung.",
+  "error.crm.sourceNetwork": "StarBot kann keine Verbindung zu Stripe herstellen. Prüfe die Internetverbindung.",
+
   "error.crm.sourceFailed":
-    "Stripe hat eine Antwort gesendet, die OpenBot nicht lesen kann. Versuche es später noch einmal.",
-  "error.crm.sourceKeySaveFailed": "OpenBot kann den Stripe-Schlüssel nicht auf diesem Computer speichern.",
+    "Stripe hat eine Antwort gesendet, die StarBot nicht lesen kann. Versuche es später noch einmal.",
+
+  "error.crm.sourceKeySaveFailed": "StarBot kann den Stripe-Schlüssel nicht auf diesem Computer speichern.",
+
   "error.crm.off":
     "Das CRM ist aus. Ein Eigentümer oder Admin kann es unter Servereinstellungen > Experimentell einschalten.",
-  "error.crm.settingsSaveFailed": "OpenBot kann die CRM-Einstellung auf diesem Server nicht speichern.",
+  "error.crm.settingsSaveFailed": "StarBot kann die CRM-Einstellung auf diesem Server nicht speichern.",
+
 } as const satisfies PartialTranslation<typeof source>;

@@ -16,7 +16,7 @@ const BOAT_API_URL = "https://boat.dev/api/v1";
 const BOAT_EVENTS = ["sandbox.ready", "sandbox.error", "sandbox.archived", "sandbox.hydrated"];
 const GITHUB_ENVIRONMENT = "cloudflare-production";
 const TARGETS = {
-  production: { api: "https://api.openbot.run" },
+  production: { api: "https://api.starbot.app" },
   test: { api: "https://openbot-auth-api-test.internal9671.workers.dev" },
 } as const;
 

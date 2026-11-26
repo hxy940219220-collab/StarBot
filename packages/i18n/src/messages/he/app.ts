@@ -2,7 +2,8 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/app";
 
 export const messages = {
-  "app.loading": "OpenBot נטען",
+  "app.loading": "StarBot נטען",
+
   "app.leftPanel.resize": "שינוי גודל סרגל הצד השמאלי",
   "app.host.thisMac": "ה-Mac הזה",
   "app.host.thisComputer": "המחשב הזה",
@@ -28,16 +29,20 @@ export const messages = {
   "app.provider.codeExpired": "הקוד של {name} פג תוקף",
   "app.provider.codeExpiredDescription": "אף אחד לא הזין אותו בזמן. הקוד הזה כבר לא תקף.",
   "app.provider.connectFailed": "לא ניתן להתחבר אל {name}",
-  "app.provider.connectFailedRetry": "OpenBot לא הצליח להתחבר אל {name}. יש לנסות שוב.",
+  "app.provider.connectFailedRetry": "StarBot לא הצליח להתחבר אל {name}. יש לנסות שוב.",
+
   "app.provider.restartFailed": "לא ניתן להפעיל מחדש את {name}",
-  "app.provider.included": "{name} כלול ב-OpenBot.",
+  "app.provider.included": "{name} כלול ב-StarBot.",
+
   "app.clipboard.copyFailed": "לא ניתן להעתיק את הטקסט.",
   "app.voice.tooLong": "הקלטות קוליות מוגבלות ל-10 דקות.",
   "app.avatar.type": "יש לבחור תמונת PNG, JPEG, GIF או WebP.",
   "app.avatar.size": "יש לבחור תמונה קטנה מ-10 MB.",
   "app.avatar.processingUnavailable": "עיבוד תמונות אינו זמין.",
-  "app.avatar.tooLarge": "OpenBot לא הצליח להקטין את התמונה מספיק. יש לבחור תמונה פשוטה יותר.",
-  "app.avatar.processFailed": "OpenBot לא הצליח לעבד את התמונה הזו.",
+  "app.avatar.tooLarge": "StarBot לא הצליח להקטין את התמונה מספיק. יש לבחור תמונה פשוטה יותר.",
+
+  "app.avatar.processFailed": "StarBot לא הצליח לעבד את התמונה הזו.",
+
   "app.chart.total": "סך הכול",
   "app.modelVariant.default": "ברירת מחדל",
   "app.qrCode.label": "קוד QR",
@@ -48,7 +53,8 @@ export const messages = {
   "app.standingApproval.title": "לאפשר תמיד ל-{name}?",
   "app.standingApproval.titleUnnamed": "לאפשר תמיד לסוכן הזה?",
   "app.rail.label": "דפים",
-  "app.rail.website": "אתר OpenBot",
+  "app.rail.website": "אתר StarBot",
+
   "app.rail.agents": "סוכנים",
   "app.rail.schedule": "לוח זמנים",
   "app.rail.tasks": "משימות",
@@ -69,31 +75,40 @@ export const messages = {
   "app.help.guides": "מדריכים",
   "app.help.discord": "הצטרפות ל-Discord",
   "app.help.reportProblem": "דיווח על בעיה",
-  "app.githubStar.title": "נהנים מ-OpenBot עד כה?",
-  "app.githubStar.description": "כוכב ב-GitHub עוזר ליותר אנשים למצוא את OpenBot.",
+  "app.githubStar.title": "נהנים מ-StarBot עד כה?",
+
+  "app.githubStar.description": "כוכב ב-GitHub עוזר ליותר אנשים למצוא את StarBot.",
+
   "app.githubStar.star": "הוספת כוכב ב-GitHub",
   "app.githubStar.notNow": "לא עכשיו",
   "app.githubStar.thanksTitle": "תודה!",
   "app.githubStar.thanksBody": "שימחת אותנו מאוד.",
-  "app.socialFollow.title": "נהנים מ-OpenBot?",
+  "app.socialFollow.title": "נהנים מ-StarBot?",
+
   "app.socialFollow.description": "אפשר לספר לחבר בפוסט אחד. זה עוזר לנו יותר מכל מודעה.",
-  "app.socialFollow.networks": "פרסום פוסט על OpenBot ב",
+  "app.socialFollow.networks": "פרסום פוסט על StarBot ב",
+
   "app.socialFollow.post": "פרסום ב-{name}",
   "app.socialFollow.postCopy": "העתקת פוסט ופתיחת {name}",
   "app.socialFollow.postCommunity": "פרסום ב-{name}",
   "app.socialFollow.thanksTitle": "תודה!",
   "app.socialFollow.openedText": "{name} פתוח עם פוסט ראשון. אפשר להתאים אותו אליך.",
-  "app.socialFollow.openedLink": "{name} פתוח עם הקישור ל-OpenBot.",
+  "app.socialFollow.openedLink": "{name} פתוח עם הקישור ל-StarBot.",
+
   "app.socialFollow.copied": "העתקנו עבורך פוסט. אפשר להדביק אותו ב-{name}.",
-  "app.socialFollow.opened": "{name} פתוח. אפשר לכתוב כמה מילים על OpenBot.",
+  "app.socialFollow.opened": "{name} פתוח. אפשר לכתוב כמה מילים על StarBot.",
+
   "app.socialFollow.follow": "מעקב אחר {handle}",
-  "app.socialFollow.followOn": "מעקב אחר OpenBot ב-{name}",
+  "app.socialFollow.followOn": "מעקב אחר StarBot ב-{name}",
+
   "app.socialFollow.join": "הצטרפות אל {handle}",
   "app.socialFollow.followedTitle": "נתראה ב-{name}!",
   "app.socialFollow.followedBody": "שם תקבלו את החדשות שלנו ראשונים.",
   "app.socialFollow.draftPost":
-    "סוכני ה-AI שלי עובדים עכשיו במחשב שלי עם OpenBot. הצ'אטים והקבצים שלי נשארים אצלי. אפשר לנסות: {site}",
-  "app.socialFollow.redditTitle": "איך אני משתמש ב-OpenBot",
+    "סוכני ה-AI שלי עובדים עכשיו במחשב שלי עם StarBot. הצ'אטים והקבצים שלי נשארים אצלי. אפשר לנסות: {site}",
+
+  "app.socialFollow.redditTitle": "איך אני משתמש ב-StarBot",
+
   "app.rail.usageRings": "שימוש ב-{name}: {windows}. פתיחת השימוש",
   "app.rail.usageUnavailable": "השימוש ב-{name} לא זמין. פתיחת השימוש",
   "app.rail.customAgentUsage": "שימוש ב-{name}. פתיחת השימוש",

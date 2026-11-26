@@ -85,8 +85,8 @@ export class RequiredUpdate {
     this.#required = minimumVersion;
     this.#options.log(
       minimumVersion
-        ? `OpenBot ${this.#options.currentVersion} is below the minimum version ${minimumVersion}.`
-        : "OpenBot is at or above the minimum version.",
+        ? `StarBot ${this.#options.currentVersion} is below the minimum version ${minimumVersion}.`
+        : "StarBot is at or above the minimum version.",
     );
     this.#options.updater.setRequiredVersion(minimumVersion);
     this.#options.setRequired(minimumVersion !== null);

@@ -11,9 +11,12 @@ export const messages = {
   "menu.closeDeveloperTools": "Закрыть инструменты разработчика",
   "menu.copyLink": "Скопировать ссылку",
   "menu.copyImage": "Скопировать изображение",
-  "menu.quit": "Выйти из OpenBot",
-  "menu.quitConfirmTitle": "Выйти из OpenBot?",
-  "menu.quitConfirmBody": "Агенты и автозадачи остановятся, пока вы снова не откроете OpenBot.",
+  "menu.quit": "Выйти из StarBot",
+
+  "menu.quitConfirmTitle": "Выйти из StarBot?",
+
+  "menu.quitConfirmBody": "Агенты и автозадачи остановятся, пока вы снова не откроете StarBot.",
+
   "menu.quitConfirm": "Выйти",
   "menu.quitHint": "Удерживайте ⌘Q или нажмите дважды, чтобы выйти",
   "menu.closeWorkingTitle": {
@@ -23,11 +26,15 @@ export const messages = {
     other: "{count} агента ещё работают",
   },
   "menu.closeWorkingBody":
-    "Если выйти из OpenBot, агенты остановятся. Оставьте OpenBot работать, чтобы они закончили. Чтобы снова показать окно, откройте OpenBot.",
+    "Если выйти из StarBot, агенты остановятся. Оставьте StarBot работать, чтобы они закончили. Чтобы снова показать окно, откройте StarBot.",
+
   "menu.closeKeepRunning": "Не выходить",
-  "menu.trayOpen": "Открыть OpenBot",
-  "menu.trayQuit": "Выйти из OpenBot",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "Открыть StarBot",
+
+  "menu.trayQuit": "Выйти из StarBot",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Скрыть Dynamic Island",
   "menu.undo": "Отменить",
   "menu.redo": "Повторить",

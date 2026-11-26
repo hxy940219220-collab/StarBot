@@ -3,7 +3,8 @@ import type { messages as source } from "../en/settings";
 
 export const messages = {
   "settings.language.title": "Sprache",
-  "settings.language.description": "OpenBot zeigt Menüs, Schaltflächen und Nachrichten in dieser Sprache an.",
+  "settings.language.description": "StarBot zeigt Menüs, Schaltflächen und Nachrichten in dieser Sprache an.",
+
   "settings.language.system": "Systemstandard",
   "settings.appearance.title": "Darstellung",
   "settings.appearance.theme.title": "Design",
@@ -15,7 +16,8 @@ export const messages = {
   "settings.appearance.transparentWindow.description":
     "Zeigt den unscharfen Schreibtisch hinter dem Fenster. Websites und Menüs nutzen dann das App-Design.",
   "settings.interfaceSize.title": "Größe der Oberfläche",
-  "settings.interfaceSize.description": "Die Größe von Text und Bedienelementen in OpenBot.",
+  "settings.interfaceSize.description": "Die Größe von Text und Bedienelementen in StarBot.",
+
   "settings.interfaceFont.title": "Schrift der Oberfläche",
   "settings.interfaceFont.description": "Die Schrift von Menüs, Chats und Einstellungen.",
   "settings.interfaceFont.default": "Standard (Inter)",
@@ -31,7 +33,8 @@ export const messages = {
   "settings.movingFaces.description":
     "Agentengesichter blinzeln und bewegen sich. Auf einem Computer ohne GPU sind sie anfangs still.",
   "settings.startupAnimation.title": "Startanimation",
-  "settings.startupAnimation.description": "Zeigt die Agentenanimation, während OpenBot startet.",
+  "settings.startupAnimation.description": "Zeigt die Agentenanimation, während StarBot startet.",
+
   "settings.logoColor.title": "Logofarbe",
   "settings.logoColor.description": "Im Dock, in der Taskleiste und in Dynamic Island.",
   "settings.logoColor.buildNote":
@@ -95,12 +98,16 @@ export const messages = {
   "settings.bubbleStyle.classic": "Klassisch",
   "settings.appBehavior.title": "App-Verhalten",
   "settings.conversations.title": "Unterhaltungen",
-  "settings.launchAtLogin.title": "OpenBot bei der Anmeldung starten",
+  "settings.launchAtLogin.title": "StarBot bei der Anmeldung starten",
+
   "settings.launchAtLogin.description": "Die App öffnen, wenn du dich an diesem Computer anmeldest.",
-  "settings.keepRunning.title": "OpenBot im Hintergrund weiter ausführen",
+  "settings.keepRunning.title": "StarBot im Hintergrund weiter ausführen",
+
   "settings.keepRunning.description": "Aktive Aufgaben nach dem Schließen des Fensters weiter ausführen.",
-  "settings.menuBar.title": "OpenBot in der Menüleiste zeigen",
-  "settings.menuBar.description": "OpenBot über ein Symbol in der Menüleiste öffnen oder beenden.",
+  "settings.menuBar.title": "StarBot in der Menüleiste zeigen",
+
+  "settings.menuBar.description": "StarBot über ein Symbol in der Menüleiste öffnen oder beenden.",
+
   "settings.keepAwake.title": "Computer wach halten",
   "settings.keepAwake.description":
     "Routinen laufen pünktlich, solange der Computer am Strom hängt. Der Bildschirm kann sich trotzdem ausschalten.",
@@ -111,14 +118,16 @@ export const messages = {
   "settings.restoreWorkspace.description": "Den Arbeitsbereich und die Aufgaben der letzten Sitzung öffnen.",
   "settings.quitGuard.title": "⌘Q zum Beenden halten",
   "settings.quitGuard.description":
-    "Halte ⌘Q gedrückt oder drücke zweimal, um zu beenden. Mit „Nie“ beendet ein einziges ⌘Q OpenBot und stoppt die Agenten.",
+    "Halte ⌘Q gedrückt oder drücke zweimal, um zu beenden. Mit „Nie“ beendet ein einziges ⌘Q StarBot und stoppt die Agenten.",
+
   "settings.quitGuard.working": "Wenn Agenten arbeiten",
   "settings.quitGuard.always": "Immer",
   "settings.quitGuard.never": "Nie",
   "settings.externalLinks.title": "Externe Links öffnen in",
   "settings.externalLinks.description": "Links in Chats, Anmeldeseiten und Abrechnungsseiten öffnen sich hier.",
   "settings.externalLinks.defaultBrowser": "Standardbrowser",
-  "settings.externalLinks.openbot": "OpenBot",
+  "settings.externalLinks.openbot": "StarBot",
+
   "settings.externalLinks.defaultBrowserNamed": "Standardbrowser ({name})",
   "settings.externalLinks.otherApp": "Andere App…",
   "settings.externalLinks.command": "Befehl…",
@@ -160,9 +169,11 @@ export const messages = {
   "settings.agentDefaults.agentLabel": "{setting} für {agent}",
   "settings.agentDefaults.loadFailed": "Die Agenten konnten nicht gelesen werden.",
   "settings.commitCoAuthor.sectionTitle": "Git-Commits",
-  "settings.commitCoAuthor.title": "OpenBot in Commits nennen",
+  "settings.commitCoAuthor.title": "StarBot in Commits nennen",
+
   "settings.commitCoAuthor.description":
-    "Agenten tragen OpenBot als Mitautor in ihre Commits ein. Du bleibst der Autor.",
+    "Agenten tragen StarBot als Mitautor in ihre Commits ein. Du bleibst der Autor.",
+
   "settings.planStart.title": "Arbeit starten",
   "settings.planStart.wait": "Wenn ich auf Start drücke",
   "settings.planStart.after": "Nach {time}",
@@ -187,7 +198,8 @@ export const messages = {
     "So viele Nachrichten und Routineläufe können lokale Skripte jedem Agenten pro Stunde höchstens senden.",
   "settings.backgroundProcesses.title": "Hintergrundprozesse",
   "settings.backgroundProcesses.description":
-    "Programme, die Agenten gestartet und laufen gelassen haben, etwa Dev-Server. Sie laufen weiter, wenn der Chat endet und wenn du OpenBot beendest.",
+    "Programme, die Agenten gestartet und laufen gelassen haben, etwa Dev-Server. Sie laufen weiter, wenn der Chat endet und wenn du StarBot beendest.",
+
   "settings.backgroundProcesses.empty": "Keine Programme von Agenten laufen.",
   "settings.backgroundProcesses.loadFailed": "Die Hintergrundprozesse konnten nicht gelesen werden.",
   "settings.backgroundProcesses.noAgent": "Kein Agent",
@@ -198,7 +210,8 @@ export const messages = {
   "settings.backgroundProcesses.stopFailed": "Der Prozess konnte nicht gestoppt werden.",
   "settings.keepRemoteSessions.title": "Schnelle Verbindung zu Servern",
   "settings.keepRemoteSessions.description":
-    "Die Verbindung zu deinen beigetretenen Servern zwischen Starts beibehalten. OpenBot startet etwa eine Sekunde schneller. Wenn du OpenBot beendest, schließt der OpenBot-Dienst die Verbindung nicht.",
+    "Die Verbindung zu deinen beigetretenen Servern zwischen Starts beibehalten. StarBot startet etwa eine Sekunde schneller. Wenn du StarBot beendest, schließt der StarBot-Dienst die Verbindung nicht.",
+
   "settings.permissions.title": "Berechtigungen",
   "settings.notifications.whatYouHear": "Worüber du informiert wirst",
   "settings.notifications.allDevices": "Alle meine Geräte",
@@ -215,7 +228,8 @@ export const messages = {
   "settings.notificationMatrix.offline": "Offline",
   "settings.notificationMatrix.thisComputerOnly": "Nur dieser Computer",
   "settings.notificationMatrix.thisBrowserOnly": "Nur dieser Browser",
-  "settings.notificationMatrix.updateServer": "Aktualisiere OpenBot auf diesem Server, um Agenten zu wählen",
+  "settings.notificationMatrix.updateServer": "Aktualisiere StarBot auf diesem Server, um Agenten zu wählen",
+
   "settings.notificationMatrix.loading": "Agenten werden geladen…",
   "settings.notificationMatrix.loadFailed": "Die Agenten dieses Servers konnten nicht geladen werden.",
   "settings.desktopNotifications.title": "Desktop-Benachrichtigungen",
@@ -226,7 +240,8 @@ export const messages = {
     "Zeigt in Benachrichtigungen den Anfang der Antwort oder Frage des Agenten.",
   "settings.testNotification.title": "Testbenachrichtigung",
   "settings.testNotification.description":
-    "Jetzt eine anzeigen. Falls sie nicht erscheint, erlaube OpenBot-Benachrichtigungen in den Systemeinstellungen.",
+    "Jetzt eine anzeigen. Falls sie nicht erscheint, erlaube StarBot-Benachrichtigungen in den Systemeinstellungen.",
+
   "settings.testNotification.action": "Test senden",
   "settings.testNotification.failed": "Eine Benachrichtigung konnte nicht angezeigt werden.",
   "settings.testNotification.openSettings": "Systemeinstellungen öffnen",
@@ -250,12 +265,14 @@ export const messages = {
     "Agentenaktivität und Elemente, die Aufmerksamkeit benötigen, am oberen Rand jedes Displays anzeigen.",
   "settings.notch.xwayland.title": "Neustart nötig",
   "settings.notch.xwayland.description":
-    "Unter Wayland muss OpenBot XWayland verwenden, um die Dynamic Island über anderen Apps zu zeigen. Bis dahin erscheint die Island nicht.",
+    "Unter Wayland muss StarBot XWayland verwenden, um die Dynamic Island über anderen Apps zu zeigen. Bis dahin erscheint die Island nicht.",
+
   "settings.notch.xwayland.unsupported":
     "Unter Wayland ohne XWayland kann die Dynamic Island nicht über anderen Apps erscheinen.",
   "settings.notch.xwayland.restart": "Neu starten",
   "settings.notch.idle.title": "Insel im Ruhezustand anzeigen",
-  "settings.notch.idle.description": "OpenBot-Logo und Begrüßung anzeigen, wenn kein Status aktiv ist.",
+  "settings.notch.idle.description": "StarBot-Logo und Begrüßung anzeigen, wenn kein Status aktiv ist.",
+
   "settings.notch.displays.title": "Auf weiteren Displays anzeigen",
   "settings.notch.displays.description": "Dynamic Island auf angeschlossenen externen Displays anzeigen.",
   "settings.notch.haptics.title": "Haptisches Feedback",
@@ -275,19 +292,25 @@ export const messages = {
   "settings.agentDock.show.description": "Zeigt deine Agenten am Bildschirmrand, bereit für einen kurzen Chat.",
   "settings.agentDock.placement.title": "Position",
   "settings.agentDock.placement.description":
-    "„Über anderen Apps“ lässt das Dock sichtbar, wenn OpenBot im Hintergrund ist.",
+    "„Über anderen Apps“ lässt das Dock sichtbar, wenn StarBot im Hintergrund ist.",
+
   "settings.agentDock.placement.screen": "Über anderen Apps",
-  "settings.agentDock.placement.window": "Im OpenBot-Fenster",
+  "settings.agentDock.placement.window": "Im StarBot-Fenster",
+
   "settings.agentDock.xwayland.title": "Neustart nötig",
   "settings.agentDock.xwayland.description":
-    "Unter Wayland muss OpenBot XWayland verwenden, um das Dock über anderen Apps zu zeigen. Bis dahin erscheint das Dock im OpenBot-Fenster.",
+    "Unter Wayland muss StarBot XWayland verwenden, um das Dock über anderen Apps zu zeigen. Bis dahin erscheint das Dock im StarBot-Fenster.",
+
   "settings.agentDock.xwayland.unsupported":
-    "Unter Wayland ohne XWayland kann das Dock nicht über anderen Apps erscheinen. Es erscheint im OpenBot-Fenster.",
+    "Unter Wayland ohne XWayland kann das Dock nicht über anderen Apps erscheinen. Es erscheint im StarBot-Fenster.",
+
   "settings.agentDock.xwayland.restart": "Neu starten",
   "settings.agentDock.display.title": "Display",
   "settings.agentDock.display.description":
-    "Ist dieses Display nicht verbunden, wechselt das Dock auf das Display des OpenBot-Fensters.",
-  "settings.agentDock.display.window": "Mit dem OpenBot-Fenster",
+    "Ist dieses Display nicht verbunden, wechselt das Dock auf das Display des StarBot-Fensters.",
+
+  "settings.agentDock.display.window": "Mit dem StarBot-Fenster",
+
   "settings.agentDock.display.primary": "Hauptdisplay",
   "settings.agentDock.display.all": "Alle Displays",
   "settings.agentDock.display.unnamed": "Display {number}",
@@ -315,24 +338,30 @@ export const messages = {
   "settings.agentDock.agents.empty": "Dieser Server hat noch keine Agenten.",
   "settings.analytics.title": "Analysedaten mit meinem Konto verknüpfen",
   "settings.analytics.description":
-    "An: Nutzungs- und Zuverlässigkeitsmetadaten gehen mit deiner Konto-ID und E-Mail-Adresse an das von OpenBot selbst betriebene Analysesystem, mit den Websites, die du und deine Agenten besuchen, der Tool-Nutzung und einer täglichen Übersicht deiner Einrichtung. Aus: Nur die grundlegende Nutzung, etwa Durchläufe und Token-Zahlen, geht mit einer zufälligen Installations-ID. Chats, Dateien und Prompts werden nie gesendet.",
+    "An: Nutzungs- und Zuverlässigkeitsmetadaten gehen mit deiner Konto-ID und E-Mail-Adresse an das von StarBot selbst betriebene Analysesystem, mit den Websites, die du und deine Agenten besuchen, der Tool-Nutzung und einer täglichen Übersicht deiner Einrichtung. Aus: Nur die grundlegende Nutzung, etwa Durchläufe und Token-Zahlen, geht mit einer zufälligen Installations-ID. Chats, Dateien und Prompts werden nie gesendet.",
+
   "settings.analytics.webDescription":
-    "An: Nutzungs- und Zuverlässigkeitsmetadaten gehen mit deiner Konto-ID und E-Mail-Adresse an das von OpenBot selbst betriebene Analysesystem. Aus: Dieselben Metadaten gehen nur mit einer zufälligen Installations-ID. Chats, Dateien und Prompts werden nie gesendet. Diese Einstellung gilt für diesen Browser.",
+    "An: Nutzungs- und Zuverlässigkeitsmetadaten gehen mit deiner Konto-ID und E-Mail-Adresse an das von StarBot selbst betriebene Analysesystem. Aus: Dieselben Metadaten gehen nur mit einer zufälligen Installations-ID. Chats, Dateien und Prompts werden nie gesendet. Diese Einstellung gilt für diesen Browser.",
+
   "settings.tab.general.title": "Allgemein",
-  "settings.tab.general.description": "Lege fest, wie Chats funktionieren und was OpenBot teilt.",
+  "settings.tab.general.description": "Lege fest, wie Chats funktionieren und was StarBot teilt.",
+
   "settings.tab.agents.title": "Agenten",
   "settings.tab.agents.description":
     "Lege fest, was die Agenten auf diesem Computer tun dürfen, wenn du es nicht für einen Agenten festlegst.",
   "settings.tab.notifications.title": "Mitteilungen",
-  "settings.tab.notifications.description": "Lege fest, wie OpenBot dich benachrichtigt.",
+  "settings.tab.notifications.description": "Lege fest, wie StarBot dich benachrichtigt.",
+
   "settings.tab.voice.title": "Diktat",
   "settings.tab.voice.description":
     "Diktat im Nachrichtenfeld. Lokale Modelle laufen auf diesem Computer, ElevenLabs und Groq laufen in der Cloud.",
   "settings.tab.computerUse.title": "PC-Steuerung",
   "settings.tab.computerUse.description":
-    "Agenten im OpenBot dieses Computers dürfen seine Apps sehen und bedienen. Agenten auf einem anderen Server nutzen dessen Computer.",
+    "Agenten im StarBot dieses Computers dürfen seine Apps sehen und bedienen. Agenten auf einem anderen Server nutzen dessen Computer.",
+
   "settings.tab.profile.title": "Profil",
-  "settings.tab.profile.description": "Verwalte, wie du in OpenBot angezeigt wirst.",
+  "settings.tab.profile.description": "Verwalte, wie du in StarBot angezeigt wirst.",
+
   "settings.tab.mobileConnect.title": "Mobilverbindung",
   "settings.tab.mobileConnect.description": "Melde dich sicher auf deinem Telefon an.",
   "settings.tab.dynamicIsland.title": "Dynamic Island",
@@ -340,13 +369,16 @@ export const messages = {
   "settings.tab.agentDock.title": "Agenten-Dock",
   "settings.tab.agentDock.description": "Wähle, wo das Dock erscheint und welche Agenten darin sind.",
   "settings.tab.updates.title": "Updates",
-  "settings.tab.updates.description": "Halte OpenBot auf diesem Computer aktuell.",
+  "settings.tab.updates.description": "Halte StarBot auf diesem Computer aktuell.",
+
   "settings.tab.billing.title": "Abrechnung",
   "settings.tab.billing.description": "Lizenz, Servertarife, Zahlungsmethode und Rechnungen.",
   "settings.tab.hostedServers.title": "Gehostete Server",
-  "settings.tab.hostedServers.description": "Erstelle OpenBot-Server, die auch bei ausgeschaltetem Computer laufen.",
+  "settings.tab.hostedServers.description": "Erstelle StarBot-Server, die auch bei ausgeschaltetem Computer laufen.",
+
   "settings.tab.appearance.description": "Wähle Design, Farben, Sprache und Schriften.",
-  "settings.tab.appBehavior.description": "Lege fest, wie OpenBot auf diesem Computer startet und läuft.",
+  "settings.tab.appBehavior.description": "Lege fest, wie StarBot auf diesem Computer startet und läuft.",
+
   "settings.appearance.colorsTitle": "Farben",
   "settings.appearance.textTitle": "Sprache und Text",
   "settings.appBehavior.startTitle": "Starten und Beenden",
@@ -363,28 +395,33 @@ export const messages = {
   "settings.disconnect.action": "Trennen",
   "settings.disconnect.pending": "Wird getrennt…",
   "settings.mobileConnect.phones.title": "Deine Telefone",
-  "settings.mobileConnect.phones.description": "Telefone, die OpenBot mit diesem Konto nutzen.",
+  "settings.mobileConnect.phones.description": "Telefone, die StarBot mit diesem Konto nutzen.",
+
   "settings.mobileConnect.phones.add": "Telefon hinzufügen",
   "settings.mobileConnect.phones.empty.title": "Noch keine Telefone",
   "settings.mobileConnect.phones.empty.description":
     "Chatte mit deinen Agenten und verfolge ihre Arbeit auf deinem Telefon.",
   "settings.mobileConnect.devices.lastActive": "Zuletzt aktiv: {time}",
   "settings.mobileConnect.add.title": "Telefon hinzufügen",
-  "settings.mobileConnect.add.question": "Ist OpenBot auf dem Telefon installiert?",
+  "settings.mobileConnect.add.question": "Ist StarBot auf dem Telefon installiert?",
+
   "settings.mobileConnect.add.signIn.title": "Ja, anmelden",
   "settings.mobileConnect.add.signIn.hint": "Einmalcode anzeigen",
   "settings.mobileConnect.add.install.title": "Nein, App laden",
   "settings.mobileConnect.add.install.hint": "iPhone oder Android",
   "settings.mobileConnect.add.install.heading": "App laden",
   "settings.mobileConnect.add.install.note":
-    "Richte die Kamera des Telefons auf den Code, installiere OpenBot und fahre dann fort.",
+    "Richte die Kamera des Telefons auf den Code, installiere StarBot und fahre dann fort.",
+
   "settings.mobileConnect.add.continue": "Weiter zur Anmeldung",
   "settings.mobileConnect.qr.appStore": "Öffnet den App Store",
   "settings.mobileConnect.qr.playStore": "Öffnet Google Play",
-  "settings.mobileConnect.qr.signIn": "In der OpenBot-App scannen",
+  "settings.mobileConnect.qr.signIn": "In der StarBot-App scannen",
+
   "settings.mobileConnect.qr.permanent": "Dauerhafter Code",
   "settings.mobileConnect.qr.connected": "{name} verbunden",
-  "settings.mobileConnect.step.open": "Öffne OpenBot auf deinem Telefon.",
+  "settings.mobileConnect.step.open": "Öffne StarBot auf deinem Telefon.",
+
   "settings.mobileConnect.step.scan": "Tippe auf QR-Code scannen.",
   "settings.mobileConnect.step.point": "Richte die Kamera auf diesen Bildschirm.",
   "settings.mobileConnect.code.expired": "Code abgelaufen",
@@ -433,14 +470,16 @@ export const messages = {
   "settings.mobileConnect.route.description":
     "Für Telefone, andere Computer und Teammitglieder, die sich mit diesem Computer verbinden.",
   "settings.mobileConnect.route.chipLabel": "Wie Geräte sich verbinden: {route}",
-  "settings.mobileConnect.route.openbot.title": "Über OpenBot",
+  "settings.mobileConnect.route.openbot.title": "Über StarBot",
+
   "settings.mobileConnect.route.openbot.badge": "Empfohlen",
   "settings.mobileConnect.route.openbot.description":
     "Funktioniert in jedem Netzwerk. Chats und Dateien sind zwischen deinen Geräten verschlüsselt.",
   "settings.mobileConnect.route.private.title": "Privates Netzwerk",
   "settings.mobileConnect.route.private.tailscale": "Tailscale gefunden",
   "settings.mobileConnect.route.private.description":
-    "Tailscale oder dieses WLAN. Geräte melden sich weiter mit OpenBot an. Chats und Dateien gehen nie über OpenBot-Server, und Geräte verbinden sich nur in diesem Netzwerk.",
+    "Tailscale oder dieses WLAN. Geräte melden sich weiter mit StarBot an. Chats und Dateien gehen nie über StarBot-Server, und Geräte verbinden sich nur in diesem Netzwerk.",
+
   "settings.mobileConnect.route.error.load": "Verbindungsart konnte nicht geladen werden.",
   "settings.mobileConnect.route.error.save": "Verbindungsart konnte nicht geändert werden.",
   "settings.mobileConnect.disconnectInfo.description":
@@ -476,14 +515,16 @@ export const messages = {
   "settings.profile.edit.title": "Profil bearbeiten",
   "settings.profile.share.action": "Teilen",
   "settings.profile.share.title": "Deine Aktivität teilen",
-  "settings.profile.share.imageAlt": "Deine OpenBot-Aktivität der letzten sechs Monate",
+  "settings.profile.share.imageAlt": "Deine StarBot-Aktivität der letzten sechs Monate",
+
   "settings.profile.share.copy": "Bild kopieren",
   "settings.profile.share.save": "Bild speichern",
   "settings.profile.share.copied": "Bild kopiert",
   "settings.profile.share.copyFailed": "Das Bild konnte nicht kopiert werden.",
   "settings.profile.share.createFailed": "Das Bild konnte nicht erstellt werden.",
   "settings.profile.share.fileName": "openbot-activity.png",
-  "settings.profile.share.caption": "Meine letzten sechs Monate mit OpenBot",
+  "settings.profile.share.caption": "Meine letzten sechs Monate mit StarBot",
+
   "settings.profile.activity.title": "Aktivität auf diesem Computer",
   "settings.profile.activity.activeDays": {
     one: "{count} aktiver Tag im letzten Jahr",
@@ -521,7 +562,8 @@ export const messages = {
   "settings.profile.models.title": "Modellnutzung",
   "settings.profile.account.title": "Konto",
   "settings.profile.email.title": "E-Mail",
-  "settings.profile.email.description": "Wird zur Anmeldung bei OpenBot verwendet.",
+  "settings.profile.email.description": "Wird zur Anmeldung bei StarBot verwendet.",
+
   "settings.profile.sessions.title": "Kontositzungen",
   "settings.profile.sessions.description":
     "Sitzungen bleiben angemeldet, bis du dich abmeldest oder sie trennst. Das Trennen beendet auch die aktiven Remote-Verbindungen dieses Kontos.",
@@ -540,9 +582,11 @@ export const messages = {
   "settings.profile.sessions.disconnectConfirm.title": "Diese Sitzung trennen?",
   "settings.profile.sessions.disconnectConfirm.description":
     "Dieses Gerät wird von deinem Konto abgemeldet. Es muss sich erneut anmelden, um sich zu verbinden.",
-  "settings.updates.title": "OpenBot-Updates",
+  "settings.updates.title": "StarBot-Updates",
+
   "settings.updates.track.title": "Update-Kanal",
-  "settings.updates.track.description": "Der stabile Kanal erhält getestete OpenBot-Versionen.",
+  "settings.updates.track.description": "Der stabile Kanal erhält getestete StarBot-Versionen.",
+
   "settings.updates.track.stable": "Stabil",
   "settings.updates.version": "Version {version}",
   "settings.updates.versionUnknown": "Unbekannt",
@@ -552,9 +596,12 @@ export const messages = {
   "settings.updates.autoDownload.description": "Neue Versionen herunterladen, sobald sie verfügbar sind.",
   "settings.updates.managed.title": "Von Host Manager verwaltet",
   "settings.updates.managed.description":
-    "OpenBot Host Manager verwaltet Updates für diesen Mac automatisch. Alle Nutzer teilen dieselbe OpenBot-App und werden gemeinsam aktualisiert, wenn die registrierten Nutzer inaktiv sind.",
-  "settings.updates.target.latest": "Das neueste OpenBot-Update",
-  "settings.updates.host.upToDate": "Aktuell. OpenBot Host Manager hält diesen Mac auf dem neuesten Stand.",
+    "StarBot Host Manager verwaltet Updates für diesen Mac automatisch. Alle Nutzer teilen dieselbe StarBot-App und werden gemeinsam aktualisiert, wenn die registrierten Nutzer inaktiv sind.",
+
+  "settings.updates.target.latest": "Das neueste StarBot-Update",
+
+  "settings.updates.host.upToDate": "Aktuell. StarBot Host Manager hält diesen Mac auf dem neuesten Stand.",
+
   "settings.updates.host.ready":
     "{target} wurde heruntergeladen. Es wird gewartet, bis die anderen Nutzer dieses Macs inaktiv sind.",
   "settings.updates.host.installing": "{target} wird installiert…",
@@ -567,19 +614,26 @@ export const messages = {
   "settings.updates.status.downloadingProgress": "{target} wird heruntergeladen · {progress}",
   "settings.updates.status.ready": "{target} ist bereit. Zum Anwenden neu starten.",
   "settings.updates.status.installing": "Neustart zum Anwenden von {target}…",
-  "settings.updates.status.upToDate": "OpenBot ist im stabilen Kanal auf dem neuesten Stand.",
+  "settings.updates.status.upToDate": "StarBot ist im stabilen Kanal auf dem neuesten Stand.",
+
   "settings.updates.status.staged": "{target} wird schrittweise verteilt. Suche nach Updates, um es jetzt zu erhalten.",
-  "settings.updates.status.checkFailed": "OpenBot konnte nicht nach Updates suchen. Versuche es erneut.",
+  "settings.updates.status.checkFailed": "StarBot konnte nicht nach Updates suchen. Versuche es erneut.",
+
   "settings.updates.status.unsupported": "Updates sind in dieser Version nicht verfügbar.",
-  "settings.updates.actionFailed": "OpenBot konnte nicht aktualisiert werden.",
+  "settings.updates.actionFailed": "StarBot konnte nicht aktualisiert werden.",
+
   "settings.updates.autoInstall.title": "Updates automatisch installieren",
   "settings.updates.autoInstall.description":
-    "OpenBot startet mit einem heruntergeladenen Update neu, wenn die Agenten inaktiv sind. Die Verbindungen der Servermitglieder werden kurz getrennt.",
-  "settings.updates.idleRestart.title": "OpenBot neu starten",
+    "StarBot startet mit einem heruntergeladenen Update neu, wenn die Agenten inaktiv sind. Die Verbindungen der Servermitglieder werden kurz getrennt.",
+
+  "settings.updates.idleRestart.title": "StarBot neu starten",
+
   "settings.updates.idleRestart.relaunchDescription":
-    "OpenBot startet neu, wenn kein Agent arbeitet. Neue Ausführungen von Routinen warten bis dahin.",
+    "StarBot startet neu, wenn kein Agent arbeitet. Neue Ausführungen von Routinen warten bis dahin.",
+
   "settings.updates.idleRestart.updateDescription":
-    "OpenBot installiert {target}, wenn kein Agent arbeitet. Neue Ausführungen von Routinen warten bis dahin.",
+    "StarBot installiert {target}, wenn kein Agent arbeitet. Neue Ausführungen von Routinen warten bis dahin.",
+
   "settings.updates.idleRestart.relaunch": "Im Leerlauf neu starten",
   "settings.updates.idleRestart.update": "Im Leerlauf installieren",
   "settings.updates.allowRemote.title": "Updates durch Servermitglieder erlauben",
@@ -709,7 +763,8 @@ export const messages = {
   "settings.voice.language.automatic": "Automatisch",
   "settings.voice.pause.title": "Pause vor dem Senden",
   "settings.voice.pause.description":
-    "In einem Sprachgespräch sendet OpenBot deine Worte, wenn du so lange nicht sprichst. Wähle eine längere Pause, wenn du langsam sprichst oder zum Nachdenken innehältst. Codex-Live-Sprache erkennt das Ende selbst.",
+    "In einem Sprachgespräch sendet StarBot deine Worte, wenn du so lange nicht sprichst. Wähle eine längere Pause, wenn du langsam sprichst oder zum Nachdenken innehältst. Codex-Live-Sprache erkennt das Ende selbst.",
+
   "settings.voice.pause.seconds": "{seconds} s",
   "settings.voice.loadFailed": "Die Sprachmodelle konnten nicht gelesen werden.",
   "settings.voice.saveFailed": "Die Spracheinstellung konnte nicht gespeichert werden. Versuche es erneut.",
@@ -851,8 +906,10 @@ export const messages = {
   "settings.transfer.upload.etaHours": "Noch etwa {hours} Std. {minutes} Min.",
   "settings.transfer.import.openFailed": "Die Datei konnte nicht geöffnet werden",
   "settings.transfer.import.contains": "Diese Datei enthält",
-  "settings.transfer.import.source": "OpenBot {version} · exportiert am {date}",
-  "settings.transfer.import.sourceNoDate": "OpenBot {version}",
+  "settings.transfer.import.source": "StarBot {version} · exportiert am {date}",
+
+  "settings.transfer.import.sourceNoDate": "StarBot {version}",
+
   "settings.transfer.import.warnings": "Vor dem Import",
   "settings.transfer.import.agentsLabel": "Agenten in der Datei",
   "settings.transfer.import.nameExists": "Name schon vergeben",

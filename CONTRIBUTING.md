@@ -1,13 +1,13 @@
-# Contributing to OpenBot
+# Contributing to StarBot
 
-Thanks for helping improve OpenBot. Pull requests with clear verification are the easiest to
+Thanks for helping improve StarBot. Pull requests with clear verification are the easiest to
 review.
 
 ## What you can send
 
 These rules apply to people outside the `nightly-labs` organization. Organization members and
 users with write access to this repository skip them. So do their agents, which act as
-`openbotgit[bot]` through the OpenBot GitHub App.
+`openbotgit[bot]` through the StarBot GitHub App.
 
 You can open a pull request without an issue for:
 
@@ -25,8 +25,8 @@ These need an issue with the `approved` label before you write code:
 - Large refactors, new dependencies, and changes to migrations, IPC contracts, the Team API,
   security boundaries, or CI.
 
-To propose one, open a [feature request](https://github.com/nightly-labs/openbot/issues/new?template=feature_request.yml)
-and wait. A maintainer adds `approved` when the change fits OpenBot. Then link the issue in your
+To propose one, open a [feature request](https://github.com/hxy940219220-collab/StarBot-Desktop/issues/new?template=feature_request.yml)
+and wait. A maintainer adds `approved` when the change fits StarBot. Then link the issue in your
 pull request with `Closes #<number>`.
 
 The `Contribution policy` workflow applies these labels:
@@ -48,13 +48,13 @@ A maintainer who reopens a closed pull request starts a new 7-day period.
 - Use Discussions for questions and for ideas that are not yet a specific request.
 - Use the security process in `SECURITY.md` for vulnerabilities.
 - Remove credentials, private file paths, conversation contents, and personal data from diagnostics.
-- For a bug, give the platform, the OpenBot version, the operating system, the provider and its CLI
+- For a bug, give the platform, the StarBot version, the operating system, the provider and its CLI
   version, the exact steps, and the expected and actual results. The bug form asks for each one.
 
 ## Development setup
 
 ```bash
-git clone https://github.com/nightly-labs/openbot.git
+git clone https://github.com/hxy940219220-collab/StarBot-Desktop.git
 cd openbot
 bun install --frozen-lockfile
 bun run check
@@ -99,7 +99,7 @@ Public guides live in `apps/auth-api/src/content/guides/`. To add one:
 3. Run `bun run api:images` and commit the generated files in `apps/auth-api/content-art`.
 4. Open the guide in a local preview and check the guide index, article page, feed and social card.
 
-Write for someone who has OpenBot open and is trying to complete a task. Use short paragraphs, plain English and the
+Write for someone who has StarBot open and is trying to complete a task. Use short paragraphs, plain English and the
 exact names of buttons, settings and files. Keep product claims tied to the current app. Use `ArticleImage` only
 when the picture adds information that the text does not.
 
@@ -182,16 +182,16 @@ reason in the pull request. `bun pm untrusted` shows the blocked scripts.
 ## Licensing
 
 Each author of a pull request must sign the
-[OpenBot Contributor License Agreement](CLA.md). You keep the copyright in your contributions and
+[StarBot Contributor License Agreement](CLA.md). You keep the copyright in your contributions and
 give Synthetify Labs sp. z o.o. a copyright and patent license to use them. Organization members,
 users with write access to this repository and bots do not sign.
 
-To sign, download the agreement as a PDF from [openbot.run/cla](https://openbot.run/cla). Fill it
-in, sign it, and send it to licenses@openbot.run with your GitHub login and the link to your pull
+To sign, download the agreement as a PDF from [starbot.app/cla](https://starbot.app/cla). Fill it
+in, sign it, and send it to licenses@starbot.app with your GitHub login and the link to your pull
 request. A coding agent never signs or sends the agreement for you. You sign one time. When you
 must sign, the `CLA` workflow adds a comment to your pull request and sets the `CLA` status to
 failed. A maintainer records your signature with `bun scripts/cla.ts record <login> <pull request>`,
-which adds it to the `cla-signatures` branch and sets the status again. If you signed the OpenBot
+which adds it to the `cla-signatures` branch and sets the status again. If you signed the StarBot
 Contributor Assignment Agreement 1.0, you do not sign again. The rules are in `scripts/cla.ts`. Each
 commit author email must be linked to a GitHub account, so that the workflow can find who must sign.
 

@@ -11,18 +11,25 @@ export const messages = {
   "menu.closeDeveloperTools": "Geliştirici araçlarını kapat",
   "menu.copyLink": "Bağlantıyı Kopyala",
   "menu.copyImage": "Görüntüyü Kopyala",
-  "menu.quit": "OpenBot'tan çık",
-  "menu.quitConfirmTitle": "OpenBot'tan çıkılsın mı?",
-  "menu.quitConfirmBody": "OpenBot'u yeniden açana kadar ajanlar ve rutinler durur.",
+  "menu.quit": "StarBot'tan çık",
+
+  "menu.quitConfirmTitle": "StarBot'tan çıkılsın mı?",
+
+  "menu.quitConfirmBody": "StarBot'u yeniden açana kadar ajanlar ve rutinler durur.",
+
   "menu.quitConfirm": "Çık",
   "menu.quitHint": "Çıkmak için ⌘Q'yu basılı tutun veya iki kez basın",
   "menu.closeWorkingTitle": { one: "{count} ajan hâlâ çalışıyor", other: "{count} ajan hâlâ çalışıyor" },
   "menu.closeWorkingBody":
-    "OpenBot'tan çıkarsanız ajanlar durur. Bitirmeleri için çalışır bırakın. Pencereyi yeniden göstermek için OpenBot'u açın.",
+    "StarBot'tan çıkarsanız ajanlar durur. Bitirmeleri için çalışır bırakın. Pencereyi yeniden göstermek için StarBot'u açın.",
+
   "menu.closeKeepRunning": "Çalışsın",
-  "menu.trayOpen": "OpenBot'u aç",
-  "menu.trayQuit": "OpenBot'tan çık",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "StarBot'u aç",
+
+  "menu.trayQuit": "StarBot'tan çık",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Dynamic Island'ı gizle",
   "menu.undo": "Geri al",
   "menu.redo": "Yinele",

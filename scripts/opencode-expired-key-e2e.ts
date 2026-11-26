@@ -101,7 +101,7 @@ try {
   assert.equal((await runTurn(third, ownThread)).error, null, "The turn on the user's own key succeeds.");
   const own = await readJsonl<LogEntry>(log);
   const spawn = own.find((entry) => entry.event === "spawn");
-  assert.equal(spawn?.configKey, null, "With no stored key, OpenBot sends no key in the config.");
+  assert.equal(spawn?.configKey, null, "With no stored key, StarBot sends no key in the config.");
   const ownPrompt = own.find((entry) => entry.event === "prompt");
   assert.equal(ownPrompt?.key, "own", "The user's own key is used.");
   report.noStoredKey = { configKey: spawn?.configKey ?? null, key: ownPrompt?.key ?? null };

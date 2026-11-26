@@ -322,7 +322,8 @@ export const messages = {
 
   "workflow.output.title": "Вывод",
   "workflow.output.name": "вывод",
-  "workflow.output.channel.openbot": "OpenBot",
+  "workflow.output.channel.openbot": "StarBot",
+
   "workflow.output.channel.search": "Поиск каналов",
   "workflow.output.postsAs": "Публикуется как",
   "workflow.output.postsAsNote": "Заметка; задача не начинается",
@@ -341,7 +342,8 @@ export const messages = {
   "workflow.discord.server": "Сервер",
   "workflow.discord.chooseServer": "Выбрать сервер",
   "workflow.discord.event": "Событие",
-  "workflow.discord.event.mention": "Упоминание OpenBot",
+  "workflow.discord.event.mention": "Упоминание StarBot",
+
   "workflow.discord.anyChannel": "Любой канал",
   "workflow.discord.roles": "Есть роль",
   "workflow.discord.anyRole": "Любая роль",
@@ -367,7 +369,8 @@ export const messages = {
   "workflow.telegram.anyChat": "Любой связанный чат",
   "workflow.telegram.sameChat": "Как у триггера",
   "workflow.telegram.event": "Событие",
-  "workflow.telegram.event.mention": "Упоминание OpenBot",
+  "workflow.telegram.event.mention": "Упоминание StarBot",
+
   "workflow.telegram.text": "Текст содержит",
   "workflow.telegram.anyText": "Любой текст",
   "workflow.telegram.on": "Где",
@@ -425,15 +428,18 @@ export const messages = {
   "workflow.github.filter.branch": "Базовая ветка",
   "workflow.github.filter.titleValue": "Заголовок содержит «{text}»",
   "workflow.github.filter.branchValue": "Базовая ветка: {branch}",
-  "workflow.github.alert.missing": "OpenBot не видит {repository} на GitHub.",
-  "workflow.github.alert.readOnly": "OpenBot не может изменять задачи и пул-реквесты в {repository}.",
+  "workflow.github.alert.missing": "StarBot не видит {repository} на GitHub.",
+
+  "workflow.github.alert.readOnly": "StarBot не может изменять задачи и пул-реквесты в {repository}.",
+
   "workflow.github.alert.eventsOff": "GitHub пока не присылает события из {repository}.",
   "workflow.github.alert.noEvent": "Триггер не является событием GitHub. Выберите репозиторий и берите номер из входа.",
   "workflow.github.alert.pullRequestOnly":
     "«{action}» работает только с пул-реквестами. Триггер запускается на задачах.",
   "workflow.github.history.name": "События",
   "workflow.github.history.none": "Нет",
-  "workflow.github.history.offline": "OpenBot был офлайн",
+  "workflow.github.history.offline": "StarBot был офлайн",
+
   "workflow.github.history.waitingGroup": "Ожидающие",
   "workflow.github.history.startedGroup": "Запущенные",
   "workflow.github.history.skippedGroup": "Пропущенные",
@@ -682,10 +688,13 @@ export const messages = {
   "workflow.file.import.files": "Файлов для загрузки: {count}",
   "workflow.file.import.noUpload": "Этот сервер не может хранить файлы. Файлы не импортируются.",
   "workflow.file.import.confirm": "Импортировать",
-  "workflow.file.import.notFile": "Этот файл не является рабочим процессом OpenBot.",
+  "workflow.file.import.notFile": "Этот файл не является рабочим процессом StarBot.",
+
   "workflow.file.import.invalid": "Этот файл рабочего процесса повреждён.",
-  "workflow.file.import.newer": "Для этого рабочего процесса нужен OpenBot {version} или новее.",
-  "workflow.file.import.newerUnknown": "Для этого рабочего процесса нужна более новая версия OpenBot.",
+  "workflow.file.import.newer": "Для этого рабочего процесса нужен StarBot {version} или новее.",
+
+  "workflow.file.import.newerUnknown": "Для этого рабочего процесса нужна более новая версия StarBot.",
+
   "workflow.file.import.newerSteps": "Шаги, которые эта версия не знает: {steps}.",
   "workflow.file.import.failed": "Не удалось импортировать рабочий процесс.",
   "workflow.file.export.secret": "Удалите секреты перед экспортом. Найдены в: {fields}",
@@ -725,8 +734,10 @@ export const messages = {
   "workflow.canvas.none.trigger": "Триггер запускает рабочий процесс.",
   "workflow.canvas.none.handoff": "Каждый шаг передаёт результат следующему.",
   "workflow.canvas.none.open": "Открыть {name}",
-  "workflow.page.failed": "OpenBot не смог это сделать. Повторите попытку.",
+  "workflow.page.failed": "StarBot не смог это сделать. Повторите попытку.",
+
   "workflow.page.needsNewerApp":
-    "В этом рабочем процессе есть шаги из более новой версии OpenBot. Обновите OpenBot, чтобы изменить его.",
+    "В этом рабочем процессе есть шаги из более новой версии StarBot. Обновите StarBot, чтобы изменить его.",
+
   "workflow.page.manageOnly": "Чтобы изменить этот рабочий процесс, нужен доступ на управление каждым из его агентов.",
 } as const satisfies PartialTranslation<typeof source>;

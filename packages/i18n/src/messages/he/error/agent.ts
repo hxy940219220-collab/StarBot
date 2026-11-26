@@ -20,7 +20,8 @@ export const messages = {
   "error.agent.toolCallUnknownToolSuggest":
     "הכלי לא רץ. tool_call לא מצא כלי בשם הזה. ייתכן שהשם המלא הוא {name}. אם כן, יש לשלוח את הקריאה שוב עם השם הזה.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe לא מצא כלי OpenBot בשם {names}. הוא מתאר רק את כלי OpenBot והדפדפן ש-openbot.tool_search מציג, ולא כלי MCP.",
+    "tool_describe לא מצא כלי StarBot בשם {names}. הוא מתאר רק את כלי StarBot והדפדפן ש-openbot.tool_search מציג, ולא כלי MCP.",
+
   "error.agent.toolDescribeDiscoveryNames": "קרא ל-{names} ישירות. tool_describe לא מתאר את כלי החיפוש.",
   "error.agent.routineScheduleArgumentsInvalid":
     "לוח הזמנים של השגרה אינו תקין: {detail} יש לתקן את לוח הזמנים ולנסות שוב. openbot.tool_describe מחזיר את הסכמה.",
@@ -39,7 +40,8 @@ export const messages = {
   "error.agent.gone": "הסוכן הזה כבר לא קיים.",
   "error.agent.instructionsTooLarge": "קובץ ההנחיות גדול מדי לפתיחה כאן. יש לקצר אותו בעורך טקסט.",
   "error.agent.instructionsOutside":
-    "קובץ ההנחיות מקשר למקום מחוץ לסביבת העבודה של הסוכן, ולכן OpenBot אינו פותח אותו.",
+    "קובץ ההנחיות מקשר למקום מחוץ לסביבת העבודה של הסוכן, ולכן StarBot אינו פותח אותו.",
+
   "error.agent.instructionsReadFailed": "לא ניתן לקרוא את קובץ ההנחיות.",
   "error.agent.instructionsSaveFailed": "לא ניתן לשמור את קובץ ההנחיות.",
   "error.agent.profileGenerationBusy": "יצירת הפרופיל עמוסה. יש לנסות שוב בעוד רגע.",
@@ -87,23 +89,30 @@ export const messages = {
   "error.agent.hostLimit": "במארח יכולים להיות עד {limit} סוכנים.",
   "error.agent.changedWhileDuplicating": "הסוכן השתנה בזמן השכפול. יש לנסות שוב.",
   "error.agent.duplicatedAgentGone": "הסוכן המשוכפל כבר לא קיים.",
-  "error.agent.stateCorrupt": "מצב הסוכנים פגום או מגרסה חדשה יותר של OpenBot; OpenBot מסרב לדרוס אותו.",
-  "error.agent.oldRoleField": "פרופילי הסוכנים השמורים משתמשים בשדה role הישן; יש לעדכן את הנתונים לפני הפעלת OpenBot.",
-  "error.agent.duplicateIds": "מצב הסוכנים מכיל מזהי סוכן כפולים; OpenBot מסרב לדרוס אותו.",
-  "error.agent.copyNameFailed": "OpenBot לא הצליח ליצור שם ייחודי להעתק הסוכן.",
+  "error.agent.stateCorrupt": "מצב הסוכנים פגום או מגרסה חדשה יותר של StarBot; StarBot מסרב לדרוס אותו.",
+
+  "error.agent.oldRoleField": "פרופילי הסוכנים השמורים משתמשים בשדה role הישן; יש לעדכן את הנתונים לפני הפעלת StarBot.",
+
+  "error.agent.duplicateIds": "מצב הסוכנים מכיל מזהי סוכן כפולים; StarBot מסרב לדרוס אותו.",
+
+  "error.agent.copyNameFailed": "StarBot לא הצליח ליצור שם ייחודי להעתק הסוכן.",
+
   "error.agent.endpointRemoved": "נקודת הקצה שהסוכן הזה השתמש בה הוסרה. יש לבחור עבורו מודל אחר.",
   "error.agent.turnStalled":
-    "{provider} הפסיק להגיב, ולכן OpenBot סיים את התור הזה. יש לשלוח את ההודעה שוב, או לבחור מודל אחר.",
+    "{provider} הפסיק להגיב, ולכן StarBot סיים את התור הזה. יש לשלוח את ההודעה שוב, או לבחור מודל אחר.",
+
   "error.agent.promptCancelled": "{provider} ביטל את ההודעה הזו לפני שהתחילה. יש לשלוח את ההודעה שוב.",
   "error.agent.toolLoopStopped":
-    "{provider} חזר על שלב שנכשל פעמים רבות, ולכן OpenBot עצר את התור הזה. שלחו את ההודעה שוב, או בחרו מודל אחר.",
+    "{provider} חזר על שלב שנכשל פעמים רבות, ולכן StarBot עצר את התור הזה. שלחו את ההודעה שוב, או בחרו מודל אחר.",
+
   "error.agent.answerCutOff": "הסוכן נעצר לפני שסיים את התשובה שלו, ולכן התשובה אינה מלאה. שלחו את ההודעה שוב.",
   "error.agent.compactionConnectionLost":
     "החיבור נפסק בזמן שהסוכן כיווץ את ההקשר שלו, ולכן המשימה נעצרה. יש לבדוק את חיבור האינטרנט ולשלוח הודעה כדי להמשיך.",
   "error.agent.compactionConnectionLostAddress":
     "החיבור נפסק בזמן שהסוכן כיווץ את ההקשר שלו, ולכן המשימה נעצרה. יש לבדוק את חיבור האינטרנט. יש לוודא גם ש-{variable} תחת משתנים בהגדרות של {provider} הוא כתובת ה-API של שירות המודלים שלך, ולרוב היא מסתיימת ב-/v1. לאחר מכן יש לשלוח הודעה.",
   "error.agent.compactionLoopStopped":
-    "{provider} דחס את ההקשר שוב ושוב, ובכל פעם הוא נשאר מלא מדי כדי להמשיך, ולכן OpenBot עצר את התור הזה. כבה את שרתי ה-MCP או את השימוש במחשב שהסוכן הזה לא צריך, ואז שלח הודעה. אם אתה או הסוכן שיניתם מתי {provider} דוחס, בטל את השינוי.",
+    "{provider} דחס את ההקשר שוב ושוב, ובכל פעם הוא נשאר מלא מדי כדי להמשיך, ולכן StarBot עצר את התור הזה. כבה את שרתי ה-MCP או את השימוש במחשב שהסוכן הזה לא צריך, ואז שלח הודעה. אם אתה או הסוכן שיניתם מתי {provider} דוחס, בטל את השינוי.",
+
   "error.agent.selectedGone": "הסוכן שנבחר כבר לא קיים.",
   "error.agent.profileEndpointsChanged": "נקודות הקצה המותאמות השתנו בזמן היצירה. יש לנסות שוב.",
   "error.agent.profileInvalid": "הספק החזיר פרופיל לא תקין. יש לנסות לשנות את ההנחיה.",
@@ -118,11 +127,13 @@ export const messages = {
   "error.agent.stopBeforeDelete": "יש לעצור את הסוכן ולבטל את ההודעות שלו בתור לפני המחיקה.",
   "error.agent.deleteIncomplete": "לא ניתן היה להסיר את נתוני הסוכן לגמרי. יש לנסות למחוק את הסוכן שוב.",
   "error.agent.deleteFolderInUse":
-    "עבודה של סוכן אחר עדיין משתמשת בתיקייה של הסוכן הזה. יש למחוק את הסוכן שוב כשהעבודה הזו מסתיימת, או אחרי הפעלה מחדש של OpenBot.",
+    "עבודה של סוכן אחר עדיין משתמשת בתיקייה של הסוכן הזה. יש למחוק את הסוכן שוב כשהעבודה הזו מסתיימת, או אחרי הפעלה מחדש של StarBot.",
+
   "error.agent.deleteFolderLocked":
     "תוכנה אחרת עדיין משתמשת בתיקייה של הסוכן הזה, למשל תוכנה שהסוכן הפעיל. יש לסגור את התוכנה הזו או להפעיל מחדש את המחשב שהסוכן הזה פועל בו, ואז למחוק את הסוכן שוב.",
   "error.agent.deleteWhenFolderFree":
-    "עבודה של סוכן אחר עדיין משתמשת בתיקייה של הסוכן הזה. OpenBot ימחק את הסוכן הזה כשהעבודה הזו תסתיים.",
+    "עבודה של סוכן אחר עדיין משתמשת בתיקייה של הסוכן הזה. StarBot ימחק את הסוכן הזה כשהעבודה הזו תסתיים.",
+
   "error.agent.duplicationBusy": "הסוכן הזה כבר משוכפל.",
   "error.agent.waitBeforeDuplicate": "יש להמתין שהסוכן יסיים ולרוקן את התור שלו לפני השכפול.",
   "error.agent.saveOtherAgent": "השמירה הזו שייכת לסוכן אחר.",
@@ -159,7 +170,8 @@ export const messages = {
     "בשרת הזה חסר זיכרון. ההודעה שלך ממתינה בתור ותתחיל כשיתפנה זיכרון. תוכנית גדולה יותר נותנת לשרת יותר זיכרון.",
   "error.agent.lowMemoryServer": "בשרת הזה חסר זיכרון. ההודעה שלך ממתינה בתור ותתחיל כשיתפנה זיכרון.",
   "error.agent.workspaceOnlyToolMissing":
-    "מצב סביבת עבודה בלבד דורש את {tool}, ש-OpenBot לא מצא. יש להתקין אותו, או לבחור גישה מלאה בהגדרות הסוכן.",
+    "מצב סביבת עבודה בלבד דורש את {tool}, ש-StarBot לא מצא. יש להתקין אותו, או לבחור גישה מלאה בהגדרות הסוכן.",
+
   "error.agent.codexSandboxUnavailable":
     "מצב סביבת עבודה בלבד דורש את ארגז החול של Codex, ש-Codex לא מצליח להפעיל במחשב הזה, ולכן הפקודות של הסוכן נכשלות. יש לבחור לשאול קודם או גישה מלאה בהגדרות הסוכן.",
   "error.agent.claudeSandboxUnavailable":
@@ -181,9 +193,11 @@ export const messages = {
   "error.agent.mcpServerHeadersNeedHttp":
     "שרת ה-MCP {name} מריץ פקודה מקומית, ולכן אינו מקבל כותרות. בקש מהמשתמש להזין את המפתחות שלו בחנות, אפליקציות, {name}.",
   "error.agent.mcpServerHeadersNeedPerson":
-    "רק המשתמש של OpenBot זה, בצ'אט איתך, יכול לתת את המפתחות של שרת ה-MCP {name}. בקש מהמשתמש להזין אותם בחנות, אפליקציות, {name}.",
+    "רק המשתמש של StarBot זה, בצ'אט איתך, יכול לתת את המפתחות של שרת ה-MCP {name}. בקש מהמשתמש להזין אותם בחנות, אפליקציות, {name}.",
+
   "error.agent.mcpServerBuiltIn":
-    "{name} הוא חלק מ-OpenBot, ולכן כלי ה-MCP לא יכולים לבדוק, להפעיל, לכבות או להסיר אותו. המשתמש שולט בו במחשב שמריץ את OpenBot: חיבור GitHub בחנות, אפליקציות, GitHub, ושליטה במחשב בהגדרות, שליטה במחשב.",
+    "{name} הוא חלק מ-StarBot, ולכן כלי ה-MCP לא יכולים לבדוק, להפעיל, לכבות או להסיר אותו. המשתמש שולט בו במחשב שמריץ את StarBot: חיבור GitHub בחנות, אפליקציות, GitHub, ושליטה במחשב בהגדרות, שליטה במחשב.",
+
   "error.agent.mcpServerUnknown": "אין שרת MCP בשם {name}. אפשר לקרוא ל-list_mcp_servers כדי לראות את השמות.",
   "error.agent.screenCaptureWindowMissing":
     "החלון הזה אינו פתוח כעת. יש לקרוא ל-list_capture_sources כדי לקבל את מזהי החלונות הנוכחיים.",
@@ -192,9 +206,11 @@ export const messages = {
   "error.agent.screenCaptureRegionOutside":
     "האזור אינו בתוך תצוגה אחת. יש להשתמש בנקודות שולחן עבודה בתוך גבולות תצוגה אחת מתוך list_capture_sources.",
   "error.agent.screenCapturePermissionMissing":
-    "ל-OpenBot אין הרשאת Screen Recording. יש לבקש מהמשתמש לפתוח את System Settings > Privacy & Security > Screen & System Audio Recording, להפעיל את OpenBot, ואז לצאת מ-OpenBot ולפתוח אותו שוב.",
+    "ל-StarBot אין הרשאת Screen Recording. יש לבקש מהמשתמש לפתוח את System Settings > Privacy & Security > Screen & System Audio Recording, להפעיל את StarBot, ואז לצאת מ-StarBot ולפתוח אותו שוב.",
+
   "error.agent.screenCaptureListPermission":
-    "ל-OpenBot עדיין אין הרשאת Screen Recording, ולכן הוא לא יכול להציג את רשימת החלונות. כדי לצלם תצוגה, יש לקרוא ל-capture_screen עם target screen. המשתמש מאשר קודם את הצילום, ואז macOS עשוי לבקש מהמשתמש את ההרשאה.",
+    "ל-StarBot עדיין אין הרשאת Screen Recording, ולכן הוא לא יכול להציג את רשימת החלונות. כדי לצלם תצוגה, יש לקרוא ל-capture_screen עם target screen. המשתמש מאשר קודם את הצילום, ואז macOS עשוי לבקש מהמשתמש את ההרשאה.",
+
   "error.agent.screenCaptureEmptyWindows":
     "Windows החזירה תמונה ריקה. יש לבקש מהמשתמש לבטל את נעילת המחשב ולסגור תוכן מוגן. גם מדיניות של הארגון יכולה לחסום צילום מסך.",
   "error.agent.screenCaptureFailed": "צילום המסך נכשל. יש לנסות שוב.",

@@ -12,10 +12,10 @@ export interface SocialNetwork {
 
 export const SOCIAL_NETWORKS: Record<SocialNetworkId, SocialNetwork> = {
   x: { id: "x", name: "X", handle: "@OpenBot_", kind: "profile", compose: "text" },
-  threads: { id: "threads", name: "Threads", handle: "@openbot.run", kind: "profile", compose: "text" },
-  linkedin: { id: "linkedin", name: "LinkedIn", handle: "OpenBot", kind: "profile", compose: "link" },
+  threads: { id: "threads", name: "Threads", handle: "@starbot.app", kind: "profile", compose: "text" },
+  linkedin: { id: "linkedin", name: "LinkedIn", handle: "StarBot", kind: "profile", compose: "link" },
   reddit: { id: "reddit", name: "Reddit", handle: "r/OpenBot_", kind: "community", compose: "text" },
-  instagram: { id: "instagram", name: "Instagram", handle: "@openbot.run", kind: "profile", compose: "copy" },
-  tiktok: { id: "tiktok", name: "TikTok", handle: "@openbot.run", kind: "profile", compose: "copy" },
-  facebook: { id: "facebook", name: "Facebook", handle: "OpenBot", kind: "profile", compose: "link" },
+  instagram: { id: "instagram", name: "Instagram", handle: "@starbot.app", kind: "profile", compose: "copy" },
+  tiktok: { id: "tiktok", name: "TikTok", handle: "@starbot.app", kind: "profile", compose: "copy" },
+  facebook: { id: "facebook", name: "Facebook", handle: "StarBot", kind: "profile", compose: "link" },
 };

@@ -25,7 +25,7 @@ import {
 import { useServers } from "./servers-context";
 import { serverAdminPort, serversPort } from "./servers-port";
 
-const FALLBACK_SERVER_NAME = "OpenBot";
+const FALLBACK_SERVER_NAME = "StarBot";
 
 function generatedServerName(user: CentralAuthUser | null): string {
   const person = (user?.name?.trim() || user?.email.split("@")[0] || "").split(/\s+/u)[0] ?? "";

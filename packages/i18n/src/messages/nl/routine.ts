@@ -9,7 +9,8 @@ export const messages = {
   "routine.kind.monthly": "Maandelijks",
   "routine.kind.yearly": "Jaarlijks",
   "routine.kind.custom": "Aangepast",
-  "routine.feed.calendarName": "OpenBot-routines",
+  "routine.feed.calendarName": "StarBot-routines",
+
   "routine.feed.eventAgent": "Agent: {name}",
   "routine.feed.eventChannel": "Kanaal: {name}",
   "routine.feed.eventTimezone": "Tijdzone: {timezone}",
@@ -130,7 +131,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "de verbinding staat uit of is verwijderd",
   "routine.delivery.reason.refused": "kan hier niet plaatsen",
   "routine.delivery.reason.sendFailed": "het platform heeft het niet geaccepteerd",
-  "routine.delivery.reason.restart": "OpenBot stopte tijdens het versturen",
+  "routine.delivery.reason.restart": "StarBot stopte tijdens het versturen",
+
   "routine.delivery.reason.stopped": "versturen naar deze plek is uitgezet",
   "routine.delivery.resend": "Opnieuw versturen",
   "routine.delivery.resending": "Versturen…",
@@ -319,12 +321,14 @@ export const messages = {
   "routine.webhook.saveForUrl": "Opslaan en endpoint krijgen",
   "routine.webhook.stepSecret": "Voeg het ondertekeningsgeheim toe aan de afzender",
   "routine.webhook.stepSecretHint":
-    "De afzender ondertekent elk verzoek met dit geheim. OpenBot weigert een verzoek zonder geldige handtekening.",
+    "De afzender ondertekent elk verzoek met dit geheim. StarBot weigert een verzoek zonder geldige handtekening.",
+
   "routine.webhook.howToSign": "Een verzoek ondertekenen",
   "routine.webhook.howToSignHint": "Bewaar het geheim in OPENBOT_WEBHOOK_SECRET bij de afzender. Zet het niet in code.",
   "routine.webhook.stepTest": "Stuur een testevent",
   "routine.webhook.stepTestHint":
-    "OpenBot ondertekent een event dat bij deze routine past en ontvangt het als echt verzoek. De routine draait één keer.",
+    "StarBot ondertekent een event dat bij deze routine past en ontvangt het als echt verzoek. De routine draait één keer.",
+
   "routine.webhook.sendTest": "Testevent versturen",
   "routine.webhook.sendingTest": "Versturen…",
   "routine.webhook.testStarted": "Het testevent {eventType} heeft een run gestart. Die staat in de rungeschiedenis.",
@@ -341,9 +345,11 @@ export const messages = {
   "routine.settings.limitPolicy": "Als het account de limiet heeft bereikt",
   "routine.settings.limitPolicy.wait": "Wachten en na de reset uitvoeren",
   "routine.settings.limitPolicy.skip": "Deze run overslaan",
-  "routine.settings.missedPolicy": "Als OpenBot gesloten was op het geplande tijdstip",
+  "routine.settings.missedPolicy": "Als StarBot gesloten was op het geplande tijdstip",
+
   "routine.settings.missedPolicy.skip": "Deze run overslaan",
-  "routine.settings.missedPolicy.runOnce": "Eén keer uitvoeren als OpenBot opent",
+  "routine.settings.missedPolicy.runOnce": "Eén keer uitvoeren als StarBot opent",
+
   "routine.settings.runInThread": "Uitvoeren in een aparte thread",
   "routine.settings.runInSaveFailed":
     "De routine is opgeslagen, maar de instelling voor een aparte thread niet. Probeer het opnieuw.",

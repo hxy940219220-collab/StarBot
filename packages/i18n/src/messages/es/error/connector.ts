@@ -2,51 +2,63 @@ import type { PartialTranslation } from "../../../message";
 import type { messages as source } from "../../en/error/connector";
 
 export const messages = {
-  "error.connector.githubUnavailable": "Esta versión de OpenBot no tiene una GitHub App.",
+  "error.connector.githubUnavailable": "Esta versión de StarBot no tiene una GitHub App.",
+
   "error.connector.githubDenied": "Se rechazó el inicio de sesión de GitHub.",
   "error.connector.githubCodeExpired": "El código de GitHub caducó. Conecta GitHub de nuevo.",
   "error.connector.githubDeviceFlowDisabled": "La GitHub App no permite iniciar sesión desde un dispositivo.",
   "error.connector.githubClientUnknown": "GitHub no reconoce el Client ID de esta GitHub App.",
   "error.connector.githubUnexpected": "GitHub envió una respuesta inesperada: {detail}",
-  "error.connector.githubUnreachable": "OpenBot no puede acceder a GitHub: {detail}",
+  "error.connector.githubUnreachable": "StarBot no puede acceder a GitHub: {detail}",
+
   "error.connector.githubOffline":
-    "OpenBot no puede acceder a GitHub. Comprueba la conexión a internet y la configuración DNS del ordenador o servidor donde se ejecuta OpenBot y vuelve a intentarlo.",
+    "StarBot no puede acceder a GitHub. Comprueba la conexión a internet y la configuración DNS del ordenador o servidor donde se ejecuta StarBot y vuelve a intentarlo.",
+
   "error.connector.githubExpired": "La conexión con GitHub caducó. Conecta GitHub de nuevo.",
   "error.connector.githubFileUnreadable": "El archivo de conexión de GitHub no se puede leer.",
   "error.connector.githubFileTooLarge": "El archivo de conexión de GitHub es demasiado grande.",
   "error.connector.onePasswordCliMissing":
-    "OpenBot no encuentra la CLI de 1Password. Instálala y activa su integración en la aplicación 1Password, o usa un token de cuenta de servicio.",
+    "StarBot no encuentra la CLI de 1Password. Instálala y activa su integración en la aplicación 1Password, o usa un token de cuenta de servicio.",
+
   "error.connector.onePasswordCliInstallFailed":
-    "OpenBot no pudo instalar la CLI de 1Password. Comprueba la conexión a Internet e inténtalo de nuevo.",
+    "StarBot no pudo instalar la CLI de 1Password. Comprueba la conexión a Internet e inténtalo de nuevo.",
+
   "error.connector.onePasswordCliSignedOut":
     "La CLI de 1Password no tiene una sesión iniciada. Activa su integración en la aplicación 1Password y vuelve a conectar.",
   "error.connector.onePasswordAppUnreachable":
-    "OpenBot no puede comunicarse con la aplicación de 1Password. Abre 1Password y desbloquéalo. En Ajustes > Desarrollador, comprueba que «Integrar con la CLI de 1Password» está activado. Luego vuelve a intentarlo.",
+    "StarBot no puede comunicarse con la aplicación de 1Password. Abre 1Password y desbloquéalo. En Ajustes > Desarrollador, comprueba que «Integrar con la CLI de 1Password» está activado. Luego vuelve a intentarlo.",
+
   "error.connector.onePasswordCliFailed": "La CLI de 1Password falló: {detail}",
   "error.connector.onePasswordCliForbidden":
     "Tu cuenta de 1Password no te permite crear la bóveda compartida ni una cuenta de servicio. Pide este permiso a un propietario o administrador de la cuenta, o pídele un token de cuenta de servicio y haz clic en «Usar token».",
   "error.connector.onePasswordUnexpected": "1Password envió una respuesta inesperada: {detail}",
   "error.connector.onePasswordTokenRejected": "1Password no aceptó el token de cuenta de servicio.",
   "error.connector.onePasswordUnreachable":
-    "OpenBot no pudo conectarse a 1Password. Comprueba la conexión a Internet e inténtalo de nuevo.",
+    "StarBot no pudo conectarse a 1Password. Comprueba la conexión a Internet e inténtalo de nuevo.",
+
   "error.connector.onePasswordRateLimited":
     "1Password recibió demasiadas solicitudes. Espera unos minutos e inténtalo de nuevo.",
   "error.connector.onePasswordNoVault":
     "La cuenta de servicio no puede leer ninguna bóveda. Dale acceso a una bóveda e inténtalo de nuevo.",
   "error.connector.onePasswordReadFailed":
-    "OpenBot no puede leer tus inicios de sesión de 1Password. Desconecta 1Password y vuelve a conectarlo.",
+    "StarBot no puede leer tus inicios de sesión de 1Password. Desconecta 1Password y vuelve a conectarlo.",
+
   "error.connector.onePasswordFileUnreadable": "El archivo de conexión de 1Password no se puede leer.",
   "error.connector.onePasswordFileTooLarge": "El archivo de conexión de 1Password es demasiado grande.",
   "error.connector.bitwardenFailed":
-    "No se pudo leer Bitwarden. Instala la CLI bw, inicia sesión, desbloquéala y crea una carpeta llamada Shared with OpenBot. Conecta con una nueva clave de sesión.",
+    "No se pudo leer Bitwarden. Instala la CLI bw, inicia sesión, desbloquéala y crea una carpeta llamada Shared with StarBot. Conecta con una nueva clave de sesión.",
+
   "error.connector.bitwardenCliMissing":
-    "OpenBot no encuentra la CLI de Bitwarden. Instala bw, comprueba que funciona en una terminal nueva y vuelve a conectar.",
+    "StarBot no encuentra la CLI de Bitwarden. Instala bw, comprueba que funciona en una terminal nueva y vuelve a conectar.",
+
   "error.connector.bitwardenFolderMissing":
-    "Bitwarden debe tener exactamente una carpeta llamada Shared with OpenBot. Créala o elimina la carpeta adicional y vuelve a conectar.",
+    "Bitwarden debe tener exactamente una carpeta llamada Shared with StarBot. Créala o elimina la carpeta adicional y vuelve a conectar.",
+
   "error.connector.bitwardenHostInput":
     "Introduce una dirección de servidor HTTPS, el client_id y el client_secret de la clave de API y la contraseña maestra.",
   "error.connector.bitwardenHostFailed":
-    "No se pudo abrir Bitwarden en este servidor. Comprueba la dirección del servidor, la clave de API y la contraseña maestra, y asegúrate de que una carpeta se llama Shared with OpenBot. Después, conecta de nuevo.",
+    "No se pudo abrir Bitwarden en este servidor. Comprueba la dirección del servidor, la clave de API y la contraseña maestra, y asegúrate de que una carpeta se llama Shared with StarBot. Después, conecta de nuevo.",
+
   "error.connector.bitwardenHostSignInFailed":
     "No se pudo iniciar sesión en Bitwarden en este servidor. Comprueba la dirección del servidor y la clave de API, y conecta de nuevo.",
   "error.connector.bitwardenHostUnlockFailed":
@@ -54,7 +66,8 @@ export const messages = {
   "error.connector.bitwardenCliInstallFailed":
     "No se pudo instalar la CLI de Bitwarden en este servidor. Comprueba su conexión de red y conecta de nuevo.",
   "error.connector.bitwardenFileUnreadable": "El archivo de conexión de Bitwarden no se puede leer.",
-  "error.connector.passwordManagerUnknown": "OpenBot no conoce este gestor de contraseñas.",
+  "error.connector.passwordManagerUnknown": "StarBot no conoce este gestor de contraseñas.",
+
   "error.connector.passwordManagerMethod": "Este gestor de contraseñas no se puede conectar de esta forma.",
   "error.connector.passwordManagerNoSignIn": "No hay ninguna página de inicio de sesión abierta. Vuelve a conectar.",
   "error.connector.protonPassFailed": "No se pudo conectar Proton Pass. Vuelve a conectar.",
@@ -71,5 +84,6 @@ export const messages = {
   "error.connector.protonPassFileUnreadable": "El archivo de conexión de Proton Pass no se puede leer.",
   "error.connector.protonPassSignInTimeout": "El inicio de sesión de Proton tardó demasiado. Vuelve a conectar.",
   "error.connector.protonPassSetupFailed":
-    "No se pudo crear la bóveda Shared with OpenBot ni su clave de acceso en Proton Pass. Vuelve a conectar.",
+    "No se pudo crear la bóveda Shared with StarBot ni su clave de acceso en Proton Pass. Vuelve a conectar.",
+
 } as const satisfies PartialTranslation<typeof source>;

@@ -2,9 +2,9 @@ import type { AgentProviderId } from "./agent-providers";
 import type { ConversationMessage } from "./ipc-conversation-messages";
 import { isDynamicRecord, isOneOf, isString } from "./runtime-values";
 
-const ISSUE_FORM = "https://github.com/nightly-labs/openbot/issues/new?template=";
+const ISSUE_FORM = "https://github.com/hxy940219220-collab/StarBot-Desktop/issues/new?template=";
 
-export const FEEDBACK_REPOSITORY = "nightly-labs/openbot";
+export const FEEDBACK_REPOSITORY = "hxy940219220-collab/StarBot-Desktop";
 
 export const FEEDBACK_KINDS = ["bug", "idea"] as const;
 export type FeedbackKind = (typeof FEEDBACK_KINDS)[number];
@@ -274,7 +274,7 @@ function factSections(feedback: Feedback): Section[] {
   return [
     ["Platform", feedback.platform, true],
     ["Installation source", feedback.installSource, true],
-    ["OpenBot version", feedback.version, true],
+    ["StarBot version", feedback.version, true],
     ["Operating system and hardware", feedback.os, true],
     ["Agent runs on", feedback.host, false],
     ["Seen in", feedback.surface, false],
@@ -330,7 +330,7 @@ function sectionsMarkdown(sections: readonly Section[], feedback: Feedback): str
 
 function feedbackFooter(feedback: Feedback) {
   return feedback.foundBy === "agent"
-    ? "Sent from the OpenBot app. The agent found this problem while it worked, and wrote this text. The user approved it before it was sent."
+    ? "Sent from the StarBot app. The agent found this problem while it worked, and wrote this text. The user approved it before it was sent."
     : "Sent from the OpenBot app. An agent wrote this text, and the user approved it before it was sent.";
 }
 

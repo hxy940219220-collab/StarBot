@@ -3,7 +3,8 @@ import type { messages as source } from "../en/settings";
 
 export const messages = {
   "settings.language.title": "Язык",
-  "settings.language.description": "OpenBot показывает меню, кнопки и сообщения на этом языке.",
+  "settings.language.description": "StarBot показывает меню, кнопки и сообщения на этом языке.",
+
   "settings.language.system": "Как в системе",
   "settings.appearance.title": "Оформление",
   "settings.appearance.theme.title": "Тема",
@@ -15,7 +16,8 @@ export const messages = {
   "settings.appearance.transparentWindow.description":
     "Показывать размытый рабочий стол за окном. Сайты и меню тогда используют тему приложения.",
   "settings.interfaceSize.title": "Размер интерфейса",
-  "settings.interfaceSize.description": "Размер текста и элементов управления в OpenBot.",
+  "settings.interfaceSize.description": "Размер текста и элементов управления в StarBot.",
+
   "settings.interfaceFont.title": "Шрифт интерфейса",
   "settings.interfaceFont.description": "Шрифт меню, чатов и настроек.",
   "settings.interfaceFont.default": "По умолчанию (Inter)",
@@ -29,7 +31,8 @@ export const messages = {
   "settings.movingFaces.title": "Подвижные лица агентов",
   "settings.movingFaces.description": "Лица агентов моргают и двигаются. На компьютере без GPU сначала неподвижны.",
   "settings.startupAnimation.title": "Анимация запуска",
-  "settings.startupAnimation.description": "Показывать анимацию агентов, пока OpenBot открывается.",
+  "settings.startupAnimation.description": "Показывать анимацию агентов, пока StarBot открывается.",
+
   "settings.logoColor.title": "Цвет логотипа",
   "settings.logoColor.description": "Отображается в Dock, на панели задач и в Dynamic Island.",
   "settings.logoColor.buildNote":
@@ -91,12 +94,16 @@ export const messages = {
   "settings.bubbleStyle.classic": "Классика",
   "settings.appBehavior.title": "Поведение приложения",
   "settings.conversations.title": "Диалоги",
-  "settings.launchAtLogin.title": "Запускать OpenBot при входе",
+  "settings.launchAtLogin.title": "Запускать StarBot при входе",
+
   "settings.launchAtLogin.description": "Открывать приложение, когда вы входите в систему на этом компьютере.",
-  "settings.keepRunning.title": "Оставлять OpenBot работать в фоне",
+  "settings.keepRunning.title": "Оставлять StarBot работать в фоне",
+
   "settings.keepRunning.description": "Активные задачи продолжат выполняться после закрытия окна.",
-  "settings.menuBar.title": "Показывать OpenBot в строке меню",
-  "settings.menuBar.description": "Открывать и закрывать OpenBot из значка в строке меню.",
+  "settings.menuBar.title": "Показывать StarBot в строке меню",
+
+  "settings.menuBar.description": "Открывать и закрывать StarBot из значка в строке меню.",
+
   "settings.keepAwake.title": "Не переводить компьютер в сон",
   "settings.keepAwake.description":
     "Регулярные задачи запускаются вовремя, пока компьютер подключён к сети. Экран всё равно может выключаться.",
@@ -114,7 +121,8 @@ export const messages = {
   "settings.externalLinks.title": "Открывать внешние ссылки в",
   "settings.externalLinks.description": "Здесь открываются ссылки из чатов, страниц входа и оплаты.",
   "settings.externalLinks.defaultBrowser": "Основной браузер",
-  "settings.externalLinks.openbot": "OpenBot",
+  "settings.externalLinks.openbot": "StarBot",
+
   "settings.externalLinks.defaultBrowserNamed": "Основной браузер ({name})",
   "settings.externalLinks.otherApp": "Другое приложение…",
   "settings.externalLinks.command": "Команда…",
@@ -157,8 +165,10 @@ export const messages = {
   "settings.agentDefaults.agentLabel": "{setting}: {agent}",
   "settings.agentDefaults.loadFailed": "Не удалось загрузить агентов.",
   "settings.commitCoAuthor.sectionTitle": "Коммиты Git",
-  "settings.commitCoAuthor.title": "Указывать OpenBot в коммитах",
-  "settings.commitCoAuthor.description": "Агенты добавляют OpenBot соавтором своих коммитов. Автором остаётесь вы.",
+  "settings.commitCoAuthor.title": "Указывать StarBot в коммитах",
+
+  "settings.commitCoAuthor.description": "Агенты добавляют StarBot соавтором своих коммитов. Автором остаётесь вы.",
+
   "settings.planStart.title": "Начало работы",
   "settings.planStart.wait": "Когда я нажму «Начать»",
   "settings.planStart.after": "Через {time}",
@@ -183,7 +193,8 @@ export const messages = {
     "Наибольшее число сообщений и запусков регулярных задач, которые локальные скрипты могут отправить каждому агенту за час.",
   "settings.backgroundProcesses.title": "Фоновые процессы",
   "settings.backgroundProcesses.description":
-    "Программы, которые агенты запустили и оставили работать, например dev-серверы. Они работают и после конца чата, и после выхода из OpenBot.",
+    "Программы, которые агенты запустили и оставили работать, например dev-серверы. Они работают и после конца чата, и после выхода из StarBot.",
+
   "settings.backgroundProcesses.empty": "Программы агентов не запущены.",
   "settings.backgroundProcesses.loadFailed": "Не удалось прочитать фоновые процессы.",
   "settings.backgroundProcesses.noAgent": "Без агента",
@@ -199,7 +210,8 @@ export const messages = {
   "settings.backgroundProcesses.stopFailed": "Не удалось остановить процесс.",
   "settings.keepRemoteSessions.title": "Быстрое подключение к серверам",
   "settings.keepRemoteSessions.description":
-    "Сохранять подключение к серверам между запусками. OpenBot запускается примерно на секунду быстрее. При выходе из OpenBot сервис OpenBot не закрывает подключение.",
+    "Сохранять подключение к серверам между запусками. StarBot запускается примерно на секунду быстрее. При выходе из StarBot сервис StarBot не закрывает подключение.",
+
   "settings.permissions.title": "Разрешения",
   "settings.notifications.whatYouHear": "О чём вы получаете уведомления",
   "settings.notifications.allDevices": "Все мои устройства",
@@ -216,7 +228,8 @@ export const messages = {
   "settings.notificationMatrix.offline": "Не в сети",
   "settings.notificationMatrix.thisComputerOnly": "Только этот компьютер",
   "settings.notificationMatrix.thisBrowserOnly": "Только этот браузер",
-  "settings.notificationMatrix.updateServer": "Обновите OpenBot на этом сервере, чтобы выбирать агентов",
+  "settings.notificationMatrix.updateServer": "Обновите StarBot на этом сервере, чтобы выбирать агентов",
+
   "settings.notificationMatrix.loading": "Загрузка агентов…",
   "settings.notificationMatrix.loadFailed": "Не удалось загрузить агентов этого сервера.",
   "settings.desktopNotifications.title": "Уведомления на рабочем столе",
@@ -225,7 +238,8 @@ export const messages = {
   "settings.notificationPreview.description": "Показывать в уведомлениях начало ответа или вопроса агента.",
   "settings.testNotification.title": "Тестовое уведомление",
   "settings.testNotification.description":
-    "Показать его сейчас. Если оно не появилось, разрешите уведомления OpenBot в системных настройках.",
+    "Показать его сейчас. Если оно не появилось, разрешите уведомления StarBot в системных настройках.",
+
   "settings.testNotification.action": "Отправить тест",
   "settings.testNotification.failed": "Не удалось показать уведомление.",
   "settings.testNotification.openSettings": "Открыть системные настройки",
@@ -248,12 +262,14 @@ export const messages = {
     "Показывать активность агентов и всё, что требует внимания, в верхней части каждого дисплея.",
   "settings.notch.xwayland.title": "Нужен перезапуск",
   "settings.notch.xwayland.description":
-    "В Wayland OpenBot должен использовать XWayland, чтобы показать Dynamic Island поверх других приложений. До этого остров не показан.",
+    "В Wayland StarBot должен использовать XWayland, чтобы показать Dynamic Island поверх других приложений. До этого остров не показан.",
+
   "settings.notch.xwayland.unsupported":
     "В Wayland без XWayland Dynamic Island не может быть поверх других приложений.",
   "settings.notch.xwayland.restart": "Перезапустить",
   "settings.notch.idle.title": "Показывать панель в режиме ожидания",
-  "settings.notch.idle.description": "Показывать логотип OpenBot и приветствие, когда нет активного статуса.",
+  "settings.notch.idle.description": "Показывать логотип StarBot и приветствие, когда нет активного статуса.",
+
   "settings.notch.displays.title": "Показывать на дополнительных дисплеях",
   "settings.notch.displays.description": "Показывать Dynamic Island на подключённых внешних дисплеях.",
   "settings.notch.haptics.title": "Тактильный отклик",
@@ -273,18 +289,24 @@ export const messages = {
   "settings.agentDock.show.description": "Показывает ваших агентов у края экрана, чтобы быстро начать чат.",
   "settings.agentDock.placement.title": "Положение",
   "settings.agentDock.placement.description":
-    "«Поверх других приложений» оставляет док на экране, когда OpenBot в фоне.",
+    "«Поверх других приложений» оставляет док на экране, когда StarBot в фоне.",
+
   "settings.agentDock.placement.screen": "Поверх других приложений",
-  "settings.agentDock.placement.window": "В окне OpenBot",
+  "settings.agentDock.placement.window": "В окне StarBot",
+
   "settings.agentDock.xwayland.title": "Нужен перезапуск",
   "settings.agentDock.xwayland.description":
-    "В Wayland OpenBot должен использовать XWayland, чтобы показать док поверх других приложений. До этого док показан в окне OpenBot.",
+    "В Wayland StarBot должен использовать XWayland, чтобы показать док поверх других приложений. До этого док показан в окне StarBot.",
+
   "settings.agentDock.xwayland.unsupported":
-    "В Wayland без XWayland док не может быть поверх других приложений. Он показан в окне OpenBot.",
+    "В Wayland без XWayland док не может быть поверх других приложений. Он показан в окне StarBot.",
+
   "settings.agentDock.xwayland.restart": "Перезапустить",
   "settings.agentDock.display.title": "Дисплей",
-  "settings.agentDock.display.description": "Если этот дисплей не подключён, док переходит на дисплей окна OpenBot.",
-  "settings.agentDock.display.window": "Вместе с окном OpenBot",
+  "settings.agentDock.display.description": "Если этот дисплей не подключён, док переходит на дисплей окна StarBot.",
+
+  "settings.agentDock.display.window": "Вместе с окном StarBot",
+
   "settings.agentDock.display.primary": "Основной дисплей",
   "settings.agentDock.display.all": "Все дисплеи",
   "settings.agentDock.display.unnamed": "Дисплей {number}",
@@ -311,24 +333,30 @@ export const messages = {
   "settings.agentDock.agents.empty": "На этом сервере пока нет агентов.",
   "settings.analytics.title": "Связывать аналитику с моим аккаунтом",
   "settings.analytics.description":
-    "Вкл.: метаданные об использовании и надёжности отправляются в собственную аналитику OpenBot вместе с ID аккаунта и почтой, а также сайты, которые посещаете вы и ваши агенты, использование инструментов и ежедневная сводка настройки. Выкл.: отправляется только базовое использование, например ходы и число токенов, со случайным ID установки. Чаты, файлы и промпты никогда не отправляются.",
+    "Вкл.: метаданные об использовании и надёжности отправляются в собственную аналитику StarBot вместе с ID аккаунта и почтой, а также сайты, которые посещаете вы и ваши агенты, использование инструментов и ежедневная сводка настройки. Выкл.: отправляется только базовое использование, например ходы и число токенов, со случайным ID установки. Чаты, файлы и промпты никогда не отправляются.",
+
   "settings.analytics.webDescription":
-    "Вкл.: метаданные об использовании и надёжности отправляются в собственную аналитику OpenBot вместе с ID аккаунта и почтой. Выкл.: те же метаданные отправляются только со случайным ID установки. Чаты, файлы и промпты никогда не отправляются. Настройка действует для этого браузера.",
+    "Вкл.: метаданные об использовании и надёжности отправляются в собственную аналитику StarBot вместе с ID аккаунта и почтой. Выкл.: те же метаданные отправляются только со случайным ID установки. Чаты, файлы и промпты никогда не отправляются. Настройка действует для этого браузера.",
+
   "settings.tab.general.title": "Основные",
-  "settings.tab.general.description": "Как работают чаты и чем делится OpenBot.",
+  "settings.tab.general.description": "Как работают чаты и чем делится StarBot.",
+
   "settings.tab.agents.title": "Агенты",
   "settings.tab.agents.description":
     "Выберите, что могут делать агенты на этом компьютере, если вы не задали это для агента.",
   "settings.tab.notifications.title": "Уведомления",
-  "settings.tab.notifications.description": "Выберите, как OpenBot сообщает вам о событиях.",
+  "settings.tab.notifications.description": "Выберите, как StarBot сообщает вам о событиях.",
+
   "settings.tab.voice.title": "Голос",
   "settings.tab.voice.description":
     "Диктовка в поле сообщения. Локальные модели работают на этом компьютере, ElevenLabs и Groq — в облаке.",
   "settings.tab.computerUse.title": "Управление ПК",
   "settings.tab.computerUse.description":
-    "Разрешите агентам OpenBot на этом компьютере видеть его приложения и работать с ними. Агенты на другом сервере используют компьютер этого сервера.",
+    "Разрешите агентам StarBot на этом компьютере видеть его приложения и работать с ними. Агенты на другом сервере используют компьютер этого сервера.",
+
   "settings.tab.profile.title": "Профиль",
-  "settings.tab.profile.description": "Как вы выглядите в OpenBot.",
+  "settings.tab.profile.description": "Как вы выглядите в StarBot.",
+
   "settings.tab.mobileConnect.title": "Mobile Connect",
   "settings.tab.mobileConnect.description": "Безопасный вход на телефоне.",
   "settings.tab.dynamicIsland.title": "Dynamic Island",
@@ -336,13 +364,16 @@ export const messages = {
   "settings.tab.agentDock.title": "Док агентов",
   "settings.tab.agentDock.description": "Выберите, где показывается док и какие агенты в нём.",
   "settings.tab.updates.title": "Обновления",
-  "settings.tab.updates.description": "Поддерживайте OpenBot на этом компьютере в актуальном состоянии.",
+  "settings.tab.updates.description": "Поддерживайте StarBot на этом компьютере в актуальном состоянии.",
+
   "settings.tab.billing.title": "Оплата",
   "settings.tab.billing.description": "Лицензия, тарифы серверов, способ оплаты и счета.",
   "settings.tab.hostedServers.title": "Облачные серверы",
-  "settings.tab.hostedServers.description": "Серверы OpenBot, которые работают, даже когда этот компьютер выключен.",
+  "settings.tab.hostedServers.description": "Серверы StarBot, которые работают, даже когда этот компьютер выключен.",
+
   "settings.tab.appearance.description": "Тема, цвета, язык и шрифты.",
-  "settings.tab.appBehavior.description": "Как OpenBot запускается и работает на этом компьютере.",
+  "settings.tab.appBehavior.description": "Как StarBot запускается и работает на этом компьютере.",
+
   "settings.appearance.colorsTitle": "Цвета",
   "settings.appearance.textTitle": "Язык и текст",
   "settings.appBehavior.startTitle": "Запуск и выход",
@@ -359,26 +390,31 @@ export const messages = {
   "settings.disconnect.action": "Отключить",
   "settings.disconnect.pending": "Отключение…",
   "settings.mobileConnect.phones.title": "Ваши телефоны",
-  "settings.mobileConnect.phones.description": "Телефоны, на которых OpenBot используется с этим аккаунтом.",
+  "settings.mobileConnect.phones.description": "Телефоны, на которых StarBot используется с этим аккаунтом.",
+
   "settings.mobileConnect.phones.add": "Добавить телефон",
   "settings.mobileConnect.phones.empty.title": "Телефонов пока нет",
   "settings.mobileConnect.phones.empty.description": "Общайтесь с агентами и следите за их работой с телефона.",
   "settings.mobileConnect.devices.lastActive": "Последняя активность: {time}",
   "settings.mobileConnect.add.title": "Добавление телефона",
-  "settings.mobileConnect.add.question": "OpenBot установлен на телефоне?",
+  "settings.mobileConnect.add.question": "StarBot установлен на телефоне?",
+
   "settings.mobileConnect.add.signIn.title": "Да, войти",
   "settings.mobileConnect.add.signIn.hint": "Показать одноразовый код",
   "settings.mobileConnect.add.install.title": "Нет, скачать приложение",
   "settings.mobileConnect.add.install.hint": "iPhone или Android",
   "settings.mobileConnect.add.install.heading": "Скачайте приложение",
-  "settings.mobileConnect.add.install.note": "Наведите камеру телефона на код, установите OpenBot и продолжите.",
+  "settings.mobileConnect.add.install.note": "Наведите камеру телефона на код, установите StarBot и продолжите.",
+
   "settings.mobileConnect.add.continue": "Перейти ко входу",
   "settings.mobileConnect.qr.appStore": "Открывает App Store",
   "settings.mobileConnect.qr.playStore": "Открывает Google Play",
-  "settings.mobileConnect.qr.signIn": "Сканируйте в приложении OpenBot",
+  "settings.mobileConnect.qr.signIn": "Сканируйте в приложении StarBot",
+
   "settings.mobileConnect.qr.permanent": "Постоянный код",
   "settings.mobileConnect.qr.connected": "Подключено: {name}",
-  "settings.mobileConnect.step.open": "Откройте OpenBot на телефоне.",
+  "settings.mobileConnect.step.open": "Откройте StarBot на телефоне.",
+
   "settings.mobileConnect.step.scan": "Нажмите «Сканировать QR-код».",
   "settings.mobileConnect.step.point": "Наведите камеру на этот экран.",
   "settings.mobileConnect.code.expired": "Код истёк",
@@ -432,14 +468,16 @@ export const messages = {
   "settings.mobileConnect.route.description":
     "Для телефонов, других компьютеров и участников команды, которые подключаются к этому компьютеру.",
   "settings.mobileConnect.route.chipLabel": "Как подключаются устройства: {route}",
-  "settings.mobileConnect.route.openbot.title": "Через OpenBot",
+  "settings.mobileConnect.route.openbot.title": "Через StarBot",
+
   "settings.mobileConnect.route.openbot.badge": "Рекомендуется",
   "settings.mobileConnect.route.openbot.description":
     "Работает в любой сети. Чаты и файлы шифруются между вашими устройствами.",
   "settings.mobileConnect.route.private.title": "Частная сеть",
   "settings.mobileConnect.route.private.tailscale": "Найден Tailscale",
   "settings.mobileConnect.route.private.description":
-    "Tailscale или эта сеть Wi-Fi. Устройства по-прежнему входят через OpenBot. Чаты и файлы никогда не проходят через серверы OpenBot, а устройства подключаются только в этой сети.",
+    "Tailscale или эта сеть Wi-Fi. Устройства по-прежнему входят через StarBot. Чаты и файлы никогда не проходят через серверы StarBot, а устройства подключаются только в этой сети.",
+
   "settings.mobileConnect.route.error.load": "Не удалось загрузить способ подключения устройств.",
   "settings.mobileConnect.route.error.save": "Не удалось изменить способ подключения устройств.",
   "settings.mobileConnect.disconnectInfo.description":
@@ -475,14 +513,16 @@ export const messages = {
   "settings.profile.edit.title": "Изменить профиль",
   "settings.profile.share.action": "Поделиться",
   "settings.profile.share.title": "Поделиться активностью",
-  "settings.profile.share.imageAlt": "Ваша активность в OpenBot за последние полгода",
+  "settings.profile.share.imageAlt": "Ваша активность в StarBot за последние полгода",
+
   "settings.profile.share.copy": "Копировать",
   "settings.profile.share.save": "Сохранить",
   "settings.profile.share.copied": "Изображение скопировано",
   "settings.profile.share.copyFailed": "Не удалось скопировать изображение.",
   "settings.profile.share.createFailed": "Не удалось создать изображение.",
   "settings.profile.share.fileName": "openbot-activity.png",
-  "settings.profile.share.caption": "Мои последние полгода с OpenBot",
+  "settings.profile.share.caption": "Мои последние полгода с StarBot",
+
   "settings.profile.activity.title": "Активность на этом компьютере",
   "settings.profile.activity.activeDays": {
     one: "{count} активный день за последний год",
@@ -526,7 +566,8 @@ export const messages = {
   "settings.profile.models.title": "Использование моделей",
   "settings.profile.account.title": "Аккаунт",
   "settings.profile.email.title": "Почта",
-  "settings.profile.email.description": "Используется для входа в OpenBot.",
+  "settings.profile.email.description": "Используется для входа в StarBot.",
+
   "settings.profile.sessions.title": "Сеансы аккаунта",
   "settings.profile.sessions.description":
     "Сеансы остаются активными, пока вы не выйдете или не отключите их. Отключение также завершает активные удалённые подключения этого аккаунта.",
@@ -545,9 +586,11 @@ export const messages = {
   "settings.profile.sessions.disconnectConfirm.title": "Отключить этот сеанс?",
   "settings.profile.sessions.disconnectConfirm.description":
     "Это устройство выйдет из аккаунта. Чтобы подключиться, ему нужно снова войти.",
-  "settings.updates.title": "Обновления OpenBot",
+  "settings.updates.title": "Обновления StarBot",
+
   "settings.updates.track.title": "Канал обновлений",
-  "settings.updates.track.description": "Stable получает проверенные релизы OpenBot.",
+  "settings.updates.track.description": "Stable получает проверенные релизы StarBot.",
+
   "settings.updates.track.stable": "Stable",
   "settings.updates.version": "Версия {version}",
   "settings.updates.versionUnknown": "Неизвестно",
@@ -557,10 +600,13 @@ export const messages = {
   "settings.updates.autoDownload.description": "Скачивать новые версии, как только они появятся.",
   "settings.updates.managed.title": "Управляется Host Manager",
   "settings.updates.managed.description":
-    "Обновления этого Mac управляются автоматически через OpenBot Host Manager. Все пользователи используют одно приложение OpenBot и обновляются вместе, когда зарегистрированные пользователи не заняты.",
-  "settings.updates.target.latest": "Последнее обновление OpenBot",
+    "Обновления этого Mac управляются автоматически через StarBot Host Manager. Все пользователи используют одно приложение StarBot и обновляются вместе, когда зарегистрированные пользователи не заняты.",
+
+  "settings.updates.target.latest": "Последнее обновление StarBot",
+
   "settings.updates.host.upToDate":
-    "Актуальная версия. OpenBot Host Manager поддерживает этот Mac в актуальном состоянии.",
+    "Актуальная версия. StarBot Host Manager поддерживает этот Mac в актуальном состоянии.",
+
   "settings.updates.host.ready": "{target} скачано. Ожидаем, пока остальные пользователи этого Mac освободятся.",
   "settings.updates.host.installing": "Установка {target}…",
   "settings.updates.host.failed": "Не удалось выполнить управляемое обновление. Обратитесь к администратору этого Mac.",
@@ -571,24 +617,32 @@ export const messages = {
   "settings.updates.status.downloadingProgress": "Скачивание {target} · {progress}",
   "settings.updates.status.ready": "{target} готово. Перезапустите, чтобы применить.",
   "settings.updates.status.installing": "Перезапуск для применения {target}…",
-  "settings.updates.status.upToDate": "OpenBot обновлён до последней версии канала Stable.",
+  "settings.updates.status.upToDate": "StarBot обновлён до последней версии канала Stable.",
+
   "settings.updates.status.staged": "{target} выпускается поэтапно. Проверьте обновления, чтобы получить его сейчас.",
-  "settings.updates.status.checkFailed": "OpenBot не удалось проверить обновления. Повторите попытку.",
+  "settings.updates.status.checkFailed": "StarBot не удалось проверить обновления. Повторите попытку.",
+
   "settings.updates.status.unsupported": "В этой сборке обновления недоступны.",
-  "settings.updates.actionFailed": "Не удалось обновить OpenBot.",
+  "settings.updates.actionFailed": "Не удалось обновить StarBot.",
+
   "settings.updates.autoInstall.title": "Устанавливать обновления автоматически",
   "settings.updates.autoInstall.description":
-    "OpenBot перезапустится со скачанным обновлением, когда агенты простаивают. Участники ваших серверов ненадолго отключатся.",
-  "settings.updates.idleRestart.title": "Перезапустить OpenBot",
+    "StarBot перезапустится со скачанным обновлением, когда агенты простаивают. Участники ваших серверов ненадолго отключатся.",
+
+  "settings.updates.idleRestart.title": "Перезапустить StarBot",
+
   "settings.updates.idleRestart.relaunchDescription":
-    "OpenBot перезапустится, когда ни один агент не работает. Новые запуски регулярных задач до этого ждут.",
+    "StarBot перезапустится, когда ни один агент не работает. Новые запуски регулярных задач до этого ждут.",
+
   "settings.updates.idleRestart.updateDescription":
-    "OpenBot установит {target}, когда ни один агент не работает. Новые запуски регулярных задач до этого ждут.",
+    "StarBot установит {target}, когда ни один агент не работает. Новые запуски регулярных задач до этого ждут.",
+
   "settings.updates.idleRestart.relaunch": "Перезапустить при простое",
   "settings.updates.idleRestart.update": "Установить при простое",
   "settings.updates.allowRemote.title": "Разрешить обновления от участников сервера",
   "settings.updates.allowRemote.description":
-    "Все вошедшие участники сервера могут запросить обновление, когда этот компьютер простаивает. Владельцы и администраторы могут также принудительно перезапустить OpenBot.",
+    "Все вошедшие участники сервера могут запросить обновление, когда этот компьютер простаивает. Владельцы и администраторы могут также принудительно перезапустить StarBot.",
+
   "settings.hostedSites.title": "Опубликованные сайты",
   "settings.hostedSites.unavailable": "Размещение сайтов недоступно.",
   "settings.hostedSites.usage": {
@@ -717,7 +771,8 @@ export const messages = {
   "settings.voice.language.automatic": "Автоматически",
   "settings.voice.pause.title": "Пауза перед отправкой",
   "settings.voice.pause.description":
-    "В голосовом разговоре OpenBot отправляет ваши слова, когда вы молчите столько времени. Выберите паузу длиннее, если говорите медленно или останавливаетесь подумать. Живой голос Codex сам находит конец.",
+    "В голосовом разговоре StarBot отправляет ваши слова, когда вы молчите столько времени. Выберите паузу длиннее, если говорите медленно или останавливаетесь подумать. Живой голос Codex сам находит конец.",
+
   "settings.voice.pause.seconds": "{seconds} с",
   "settings.voice.loadFailed": "Не удалось прочитать голосовые модели.",
   "settings.voice.saveFailed": "Не удалось сохранить настройку голоса. Повторите попытку.",
@@ -858,8 +913,10 @@ export const messages = {
   "settings.transfer.upload.etaHours": "Осталось около {hours} ч {minutes} мин",
   "settings.transfer.import.openFailed": "Не удалось открыть файл",
   "settings.transfer.import.contains": "Содержимое файла",
-  "settings.transfer.import.source": "OpenBot {version} · экспорт {date}",
-  "settings.transfer.import.sourceNoDate": "OpenBot {version}",
+  "settings.transfer.import.source": "StarBot {version} · экспорт {date}",
+
+  "settings.transfer.import.sourceNoDate": "StarBot {version}",
+
   "settings.transfer.import.warnings": "Перед началом импорта",
   "settings.transfer.import.agentsLabel": "Агенты в файле",
   "settings.transfer.import.nameExists": "Имя уже занято",

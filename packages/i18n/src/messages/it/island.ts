@@ -2,16 +2,25 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/island";
 
 export const messages = {
-  "island.surface.label": "Notch di OpenBot sul MacBook",
-  "island.surface.labelIsland": "Dynamic Island di OpenBot",
+  "island.surface.label": "Notch di StarBot sul MacBook",
+
+  "island.surface.labelIsland": "Dynamic Island di StarBot",
+
   "island.surface.interactionArea": "Area di interazione della Dynamic Island",
-  "island.label.idle": "Apri OpenBot",
-  "island.label.working": "Stato di lavoro di OpenBot",
-  "island.label.message": "Novità della chat di OpenBot",
-  "island.label.question": "Domanda dell'IA in OpenBot",
-  "island.label.approval": "Richiesta di approvazione di OpenBot",
-  "island.label.takeover": "Intervento nel browser di OpenBot",
-  "island.label.failed": "Attività di OpenBot non riuscita",
+  "island.label.idle": "Apri StarBot",
+
+  "island.label.working": "Stato di lavoro di StarBot",
+
+  "island.label.message": "Novità della chat di StarBot",
+
+  "island.label.question": "Domanda dell'IA in StarBot",
+
+  "island.label.approval": "Richiesta di approvazione di StarBot",
+
+  "island.label.takeover": "Intervento nel browser di StarBot",
+
+  "island.label.failed": "Attività di StarBot non riuscita",
+
   "island.label.externalDisplay": "{label} su display esterno",
   "island.badge.working": "In corso",
   "island.badge.message": "Messaggio",
@@ -29,12 +38,14 @@ export const messages = {
   "island.action.openChat": "Apri la chat",
   "island.action.openDetails": "Apri i dettagli",
   "island.action.takeOver": "Intervieni",
-  "island.action.reviewInOpenBot": "Controlla in OpenBot",
+  "island.action.reviewInOpenBot": "Controlla in StarBot",
+
   "island.action.decline": "Rifiuta",
   "island.action.approve": "Approva",
   "island.action.later": "Più tardi",
   "island.action.dismiss": "Ignora",
-  "island.action.answerInOpenBot": "Rispondi in OpenBot",
+  "island.action.answerInOpenBot": "Rispondi in StarBot",
+
   "island.action.stopAgent": "Ferma {name}",
   "island.action.failed": "Non ha funzionato. Riprova.",
   "island.action.expand": "Espandi {label}",
@@ -66,7 +77,8 @@ export const messages = {
   "island.question.suggestedAnswers": "Risposte suggerite",
   "island.question.option": "{label}. {description}",
   "island.question.defaultHeader": "Domanda del tuo agente",
-  "island.question.defaultText": "Apri OpenBot per rispondere a questa domanda.",
+  "island.question.defaultText": "Apri StarBot per rispondere a questa domanda.",
+
   "island.question.optionFallback": "Opzione {number}",
   "island.task.working": "Sto lavorando alla tua richiesta",
   "island.error.openRemoteTitle": "Impossibile aprire questo elemento remoto",

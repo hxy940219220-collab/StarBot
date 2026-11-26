@@ -2,7 +2,8 @@ import type { PartialTranslation } from "../../../message";
 import type { messages as source } from "../../en/mobile/auth";
 
 export const messages = {
-  "mobile.auth.logo.animate": "OpenBot 로고 애니메이션",
+  "mobile.auth.logo.animate": "StarBot 로고 애니메이션",
+
   "mobile.auth.logo.animateHint": "로고가 윙크해요",
   "mobile.auth.scanQrCode": "QR 코드 스캔",
   "mobile.auth.closeScanner": "스캐너 닫기",
@@ -71,7 +72,8 @@ export const messages = {
   "mobile.auth.email.error.verifyFailed": "OpenBot이 코드를 확인할 수 없어요. 다시 시도해 주세요.",
   "mobile.auth.error.sessionEnded": "세션이 종료되었어요. 다시 로그인해 주세요.",
   "mobile.auth.error.connectionInProgress": "다른 연결이 진행 중이에요. 끝날 때까지 기다려 주세요.",
-  "mobile.auth.error.invalidCode": "올바른 OpenBot 모바일 연결 코드가 아니에요.",
+  "mobile.auth.error.invalidCode": "올바른 StarBot 모바일 연결 코드가 아니에요.",
+
   "mobile.auth.error.codeOutdated": "업데이트된 데스크톱 앱에서 새 모바일 연결 코드를 생성해 주세요.",
   "mobile.auth.error.alreadySignedIn": "이미 로그인되어 있어요. 다른 계정을 연결하려면 먼저 로그아웃해 주세요.",
   "mobile.auth.error.desktopUnreachable":

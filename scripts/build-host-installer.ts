@@ -48,14 +48,14 @@ async function build(): Promise<void> {
     await command("/usr/libexec/PlistBuddy", [
       "-c",
       "Print CFBundleShortVersionString",
-      "dist/mac-arm64/OpenBot.app/Contents/Info.plist",
+      "dist/mac-arm64/StarBot.app/Contents/Info.plist",
     ])
   ).trim();
-  if (appVersion !== version) throw new Error("OpenBot.app and Host package versions differ.");
+  if (appVersion !== version) throw new Error("StarBot.app and Host package versions differ.");
   const temp = await mkdtemp(join(tmpdir(), "openbot-host-build-"));
   const payload = join(temp, "payload");
   const installerScripts = join(temp, "scripts");
-  const destination = resolve(`dist/OpenBot-Host-${version}-arm64.pkg`);
+  const destination = resolve(`dist/StarBot-Host-${version}-arm64.pkg`);
   try {
     await mkdir(join(payload, HOST_MANAGER_DIRECTORY), { recursive: true });
     for (const name of ["host-manager", "openbot-host"]) {

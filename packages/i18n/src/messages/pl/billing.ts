@@ -81,7 +81,8 @@ export const messages = {
   "billing.license.description": "Do pracy w firmie. Nie obejmuje serwera.",
   "billing.license.loadFailed": "Nie udało się wczytać licencji.",
   "billing.license.actionFailed": "Nie udało się zmienić licencji.",
-  "billing.license.contactSales": "Więcej informacji uzyskasz pod adresem licenses@openbot.run.",
+  "billing.license.contactSales": "Więcej informacji uzyskasz pod adresem licenses@starbot.app.",
+
   "billing.license.saving": "Zapisywanie…",
   "billing.license.personal.title": "Użytek osobisty",
   "billing.license.personal.description": "Bezpłatnie do użytku niekomercyjnego.",
@@ -91,7 +92,8 @@ export const messages = {
   "billing.license.buy": "Kup licencję",
   "billing.license.offer.title": "Licencja komercyjna",
   "billing.license.offer.description": "Starter dla 1 użytkownika lub Team dla {count} i więcej użytkowników.",
-  "billing.license.buy.description": "Ile osób używa OpenBot w pracy? Agenci AI nie są użytkownikami.",
+  "billing.license.buy.description": "Ile osób używa StarBot w pracy? Agenci AI nie są użytkownikami.",
+
   "billing.license.buy.confirm": "Przejdź do płatności",
   "billing.license.trial.until": "Bezpłatnie do {date}",
   "billing.license.trial.confirm": "Rozpocznij okres próbny",
@@ -161,9 +163,11 @@ export const messages = {
   "billing.order.yearly": "Rocznie",
   "billing.order.yearlySaving": "−{percent}% rocznie",
   "billing.order.server.title": "Hostowany serwer",
-  "billing.order.server.summary": "Uruchamiamy OpenBot dla twojego zespołu.",
+  "billing.order.server.summary": "Uruchamiamy StarBot dla twojego zespołu.",
+
   "billing.order.server.none": "Bez serwera",
-  "billing.order.server.noneDetail": "Uruchamiaj OpenBot na własnym komputerze",
+  "billing.order.server.noneDetail": "Uruchamiaj StarBot na własnym komputerze",
+
   "billing.order.server.thisComputer": "Twój komputer",
   "billing.order.server.bestValue": "Najlepsza oferta",
   "billing.order.server.bestFor.starter": "Najlepszy dla jednej osoby",
@@ -172,7 +176,8 @@ export const messages = {
   "billing.order.server.storage": "{size} GB miejsca",
   "billing.order.server.speed": "Szybkość {speed}×",
   "billing.order.license.title": "Licencja",
-  "billing.order.license.summary": "Do korzystania z OpenBot w pracy.",
+  "billing.order.license.summary": "Do korzystania z StarBot w pracy.",
+
   "billing.order.license.none": "Bez licencji",
   "billing.order.license.noneDetail": "Użytek osobisty i niekomercyjny",
   "billing.order.license.starter": "Licencja Starter",

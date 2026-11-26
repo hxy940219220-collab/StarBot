@@ -3,7 +3,8 @@ import type { messages as source } from "../../en/error/import";
 
 export const messages = {
   "error.import.manifestNotJson": "{manifest}이(가) 올바른 JSON이 아니에요.",
-  "error.import.notAgentExport": "{manifest}은(는) OpenBot 에이전트 내보내기 파일이 아니에요.",
+  "error.import.notAgentExport": "{manifest}은(는) StarBot 에이전트 내보내기 파일이 아니에요.",
+
   "error.import.newerExportSkill":
     "더 최신 내보내기 스킬로 만든 파일이에요. OpenBot을 업데이트한 후 다시 시도해 주세요.",
   "error.import.noAgents": "내보내기 파일에 에이전트가 없어요.",
@@ -63,7 +64,8 @@ export const messages = {
     "{name}: 이 프로필에서 만든 에이전트를 OpenBot이 저장하지 못해서, 다음 가져오기에서는 새 에이전트로 추가돼요.",
   "error.import.transferRemoteTooLarge":
     "참여 중인 서버용 이전 파일은 100 MB 이하여야 해요. 워크스페이스 파일을 끄거나 에이전트를 더 적게 내보내 주세요.",
-  "error.import.transferNotFile": "이 파일은 OpenBot 이전 파일이 아니에요.",
+  "error.import.transferNotFile": "이 파일은 StarBot 이전 파일이 아니에요.",
+
   "error.import.transferNewer":
     "더 최신 버전의 OpenBot으로 만든 파일이에요. OpenBot을 업데이트한 후 다시 시도해 주세요.",
   "error.import.transferEmpty": "파일에 에이전트도 설정도 없어요.",

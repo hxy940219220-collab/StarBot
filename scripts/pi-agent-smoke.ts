@@ -48,8 +48,8 @@ const TURNS: Turn[] = [
   {
     step: "search-only-tool",
     prompt:
-      "Use your OpenBot tool_search tool to find the OpenBot tool that suggests a marketplace app. Then run that " +
-      "tool through the OpenBot tool_call tool, for the app `github`, with a short reason. Reply with one line: done.",
+      "Use your StarBot tool_search tool to find the StarBot tool that suggests a marketplace app. Then run that " +
+      "tool through the StarBot tool_call tool, for the app `github`, with a short reason. Reply with one line: done.",
     tools: [],
     hostTools: ["tool_search", "suggest_marketplace_app"],
   },
@@ -76,7 +76,7 @@ export default function (pi) {
 
 const quote = (value: string) => `'${value.replaceAll("'", `'\\''`)}'`;
 const git = (cwd: string, ...args: string[]) =>
-  execFileSync("git", ["-c", "user.name=OpenBot", "-c", "user.email=e2e@openbot.invalid", ...args], {
+  execFileSync("git", ["-c", "user.name=StarBot", "-c", "user.email=e2e@openbot.invalid", ...args], {
     cwd,
     encoding: "utf8",
   });

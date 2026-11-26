@@ -56,7 +56,7 @@ function openPage(id) {
   const first = (process.env.PATH || "").split(path.delimiter)[0] || "";
   const program = path.join(first, process.platform === "darwin" ? "open" : "xdg-open");
   if (!path.basename(first).startsWith("openbot-sign-in-") || !fs.existsSync(program)) {
-    write({ id, error: { code: -32603, message: "OpenBot's open command is not first on PATH." } });
+    write({ id, error: { code: -32603, message: "StarBot's open command is not first on PATH." } });
     return false;
   }
   require("node:child_process").execFileSync(program, ["${GOOGLE_PAGE}"]);
@@ -329,7 +329,7 @@ function startedIn(entry: LogEntry, home: string): boolean {
     geminiDir !== undefined &&
     geminiDir === home &&
     entry.argv.includes("--app-data-dir=antigravity-acp") &&
-    entry.wsl === "OpenBot"
+    entry.wsl === "StarBot"
   );
 }
 

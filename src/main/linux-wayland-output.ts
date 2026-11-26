@@ -195,7 +195,7 @@ export const setAboveAppsXWayland = Effect.fn("setAboveAppsXWayland")(function* 
     try: () => writeFile(file, ""),
     catch: (cause) => new AboveAppsXWaylandFailure({ cause }),
   });
-  logger.info(`The ${feature} shows above other apps, so OpenBot starts again on XWayland.`);
+  logger.info(`The ${feature} shows above other apps, so StarBot starts again on XWayland.`);
   relaunchApp(app, process.argv.slice(1));
   app.quit();
 });
@@ -210,7 +210,7 @@ export const restartOnXWaylandForAboveApps = Effect.fn("restartOnXWaylandForAbov
     Effect.as(true),
     Effect.catch((error) =>
       Effect.sync(() => {
-        logger.warn("Could not start OpenBot on XWayland for the windows above other apps:", toLogValue(error.cause));
+        logger.warn("Could not start StarBot on XWayland for the windows above other apps:", toLogValue(error.cause));
         return false;
       }),
     ),
@@ -227,7 +227,7 @@ export const restartOnXWaylandForSoftwareRendering = Effect.fn("restartOnXWaylan
     Effect.as(true),
     Effect.catch((error) =>
       Effect.sync(() => {
-        logger.warn("Could not start OpenBot on XWayland for software rendering:", toLogValue(error.cause));
+        logger.warn("Could not start StarBot on XWayland for software rendering:", toLogValue(error.cause));
         return false;
       }),
     ),
@@ -251,14 +251,14 @@ export const restartOnXWaylandWithoutMonitor = Effect.fn("restartOnXWaylandWitho
   );
   if (Option.isNone(globals) || globals.value.has("wl_output")) return false;
   if (!environment.DISPLAY) {
-    logger.warn("The Wayland session has no monitor and no XWayland. OpenBot starts when a monitor is on.");
+    logger.warn("The Wayland session has no monitor and no XWayland. StarBot starts when a monitor is on.");
     return false;
   }
   return yield* startOnX11(environment, "monitor").pipe(
     Effect.as(true),
     Effect.catch((error) =>
       Effect.sync(() => {
-        logger.warn("Could not start OpenBot on XWayland:", toLogValue(error.cause));
+        logger.warn("Could not start StarBot on XWayland:", toLogValue(error.cause));
         return false;
       }),
     ),

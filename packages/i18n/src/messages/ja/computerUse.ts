@@ -3,14 +3,19 @@ import type { messages as source } from "../en/computerUse";
 
 export const messages = {
   "computerUse.permission.screenRecording.title": "画面収録",
-  "computerUse.permission.screenRecording.description": "OpenBot がアプリのウィンドウを見られるようにします。",
+  "computerUse.permission.screenRecording.description": "StarBot がアプリのウィンドウを見られるようにします。",
+
   "computerUse.permission.screenRecording.pane": "画面収録とシステムオーディオ録音",
   "computerUse.permission.accessibility.title": "アクセシビリティ",
-  "computerUse.permission.accessibility.description": "OpenBot がクリックや入力をできるようにします。",
+  "computerUse.permission.accessibility.description": "StarBot がクリックや入力をできるようにします。",
+
   "computerUse.permission.accessibility.pane": "アクセシビリティ",
-  "computerUse.error.check": "OpenBot は Computer Use を確認できませんでした。",
-  "computerUse.error.openSettings": "OpenBot はシステム設定を開けませんでした。",
-  "computerUse.error.startDriver": "OpenBot は Computer Use ドライバーを起動できませんでした。",
+  "computerUse.error.check": "StarBot は Computer Use を確認できませんでした。",
+
+  "computerUse.error.openSettings": "StarBot はシステム設定を開けませんでした。",
+
+  "computerUse.error.startDriver": "StarBot は Computer Use ドライバーを起動できませんでした。",
+
   "computerUse.checkAgain": "もう一度確認",
   "computerUse.checking": "Computer Use を確認しています",
   "computerUse.unavailable.title": "Computer Use はまだ利用できません",
@@ -18,15 +23,19 @@ export const messages = {
   "computerUse.permissions.description": "権限は macOS が管理します。",
   "computerUse.ready.title": "Computer Use の準備ができました",
   "computerUse.ready.description":
-    "OpenBot はこのコンピューターのアプリを見て操作できます。このシステムでは追加の権限は必要ありません。",
+    "StarBot はこのコンピューターのアプリを見て操作できます。このシステムでは追加の権限は必要ありません。",
+
   "computerUse.limited.title": "このデスクトップでは Computer Use が制限されています",
   "computerUse.openSettingsFailed.title": "システム設定を開けませんでした",
   "computerUse.restartRequired.title": "再起動が必要です",
   "computerUse.restartRequired.description":
-    "macOS がクリックと入力をまだブロックしています。再起動後も続く場合は、「アクセシビリティ」から OpenBot を削除して、もう一度追加してください。",
-  "computerUse.restartRequired.action": "OpenBot を再起動",
+    "macOS がクリックと入力をまだブロックしています。再起動後も続く場合は、「アクセシビリティ」から StarBot を削除して、もう一度追加してください。",
+
+  "computerUse.restartRequired.action": "StarBot を再起動",
+
   "computerUse.compact.title": "Computer Use を有効にする",
-  "computerUse.compact.description": "OpenBot がこのコンピューターのアプリを見て操作できるようにします。",
+  "computerUse.compact.description": "StarBot がこのコンピューターのアプリを見て操作できるようにします。",
+
   "computerUse.granted": "許可済み",
   "computerUse.opening": "開いています…",
   "computerUse.manage": "管理",
@@ -43,5 +52,6 @@ export const messages = {
   "computerUse.help.showInFinder": "Finder に表示",
   "computerUse.help.revealFailed": "アプリケーションを Finder に表示できませんでした。",
   "computerUse.help.dragFailed": "アプリケーションをドラッグできませんでした。",
-  "computerUse.highlight.working": "OpenBot が {title} で作業しています",
+  "computerUse.highlight.working": "StarBot が {title} で作業しています",
+
 } as const satisfies PartialTranslation<typeof source>;

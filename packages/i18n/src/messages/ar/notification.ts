@@ -37,7 +37,8 @@ export const messages = {
   "notification.machineAlert.cpu": "{server}: المعالج مشغول بنسبة {percent}",
   "notification.machineAlert.body": "تجاوز مستوى التنبيه البالغ {level}. راجع إعدادات الخادم > التخزين.",
   "notification.test": "الإشعارات تعمل.",
-  "notification.welcome": "سيخبرك OpenBot هنا عندما يحتاج إليك وكيل.",
+  "notification.welcome": "سيخبرك StarBot هنا عندما يحتاج إليك وكيل.",
+
   "notification.toast.region": "الإشعارات",
   "notification.toast.close": "إغلاق الإشعار",
 } as const satisfies PartialTranslation<typeof source>;

@@ -11,7 +11,7 @@ import { McpOAuth, type McpOAuthRecord, mcpOAuthRecordSchema } from "../src/back
 import { testMcpServer } from "../src/backend/mcp-probe";
 
 const out = resolve(import.meta.dirname, "../.openbot-build/mcp-sign-in-client-metadata-document-e2e");
-const CLIENT_METADATA_URL = "https://openbot.run/oauth/mcp-client.json";
+const CLIENT_METADATA_URL = "https://starbot.app/oauth/mcp-client.json";
 const REDIRECT_URL = "http://127.0.0.1:28417/mcp-auth";
 const OTHER_REDIRECT_URL = "http://127.0.0.1:28418/mcp-auth";
 const ACCESS_TOKEN = "e2e-access-token";
@@ -388,7 +388,7 @@ async function main(): Promise<void> {
     const noDocument = await runCase("registration-refused-no-document", true, "access", false);
     check(
       noDocument,
-      noDocument.attempts[0]?.error?.startsWith("The sign-in server does not accept OpenBot as an app yet.") ?? false,
+      noDocument.attempts[0]?.error?.startsWith("The sign-in server does not accept StarBot as an app yet.") ?? false,
       `the sign-in said: ${noDocument.attempts[0]?.error}`,
     );
     check(noDocument, noDocument.pageClientIds.length === 0, `the pages named ${noDocument.pageClientIds.join()}`);
@@ -409,7 +409,7 @@ async function main(): Promise<void> {
       );
       check(
         redirect,
-        redirect.attempts[0]?.error?.startsWith("The sign-in server does not accept OpenBot as an app yet.") ?? false,
+        redirect.attempts[0]?.error?.startsWith("The sign-in server does not accept StarBot as an app yet.") ?? false,
         `the sign-in said: ${redirect.attempts[0]?.error}`,
       );
       check(redirect, redirect.pageClientIds.length === 0, `the pages named ${redirect.pageClientIds.join()}`);
@@ -421,7 +421,7 @@ async function main(): Promise<void> {
     const stored = await runCase("redirect-refused-stored-document", true, "redirect", true, true);
     check(
       stored,
-      stored.attempts[0]?.error?.startsWith("The sign-in server does not accept OpenBot as an app yet.") ?? false,
+      stored.attempts[0]?.error?.startsWith("The sign-in server does not accept StarBot as an app yet.") ?? false,
       `the sign-in said: ${stored.attempts[0]?.error}`,
     );
     check(stored, stored.pageClientIds.length === 0, `the pages named ${stored.pageClientIds.join()}`);

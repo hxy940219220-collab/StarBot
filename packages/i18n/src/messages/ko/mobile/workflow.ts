@@ -98,7 +98,8 @@ export const messages = {
   "mobile.workflow.webhook.secretFailed": "시크릿을 만들 수 없어요",
   "mobile.workflow.output.notify": "알림",
   "mobile.workflow.output.channel": "메시지 채널",
-  "mobile.workflow.output.chatChannel": "OpenBot 채널",
+  "mobile.workflow.output.chatChannel": "StarBot 채널",
+
   "mobile.workflow.output.file": "파일",
   "mobile.workflow.status.running": "실행 중",
   "mobile.workflow.status.waiting": "대기 중",
@@ -377,7 +378,8 @@ export const messages = {
   "mobile.workflow.discord.outputSummary": "Discord · {action}",
   "mobile.workflow.discord.server": "서버",
   "mobile.workflow.discord.event": "이벤트",
-  "mobile.workflow.discord.event.mention": "OpenBot 멘션",
+  "mobile.workflow.discord.event.mention": "StarBot 멘션",
+
   "mobile.workflow.discord.channel": "채널",
   "mobile.workflow.discord.anyChannel": "모든 채널",
   "mobile.workflow.discord.oneChannel": "채널 1개",
@@ -408,7 +410,8 @@ export const messages = {
   "mobile.workflow.telegram.chooseChat": "채팅 선택",
   "mobile.workflow.telegram.sameChat": "트리거와 같음",
   "mobile.workflow.telegram.event": "이벤트",
-  "mobile.workflow.telegram.event.mention": "OpenBot 멘션",
+  "mobile.workflow.telegram.event.mention": "StarBot 멘션",
+
   "mobile.workflow.telegram.text": "텍스트 포함",
   "mobile.workflow.telegram.anyText": "모든 텍스트",
   "mobile.workflow.telegram.on": "대상",

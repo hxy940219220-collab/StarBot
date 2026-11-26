@@ -10,10 +10,12 @@ export const messages = {
   "mcp.connect.useKey": "Использовать ключ API",
   "mcp.connect.useSignIn": "Войти через аккаунт",
   "mcp.connect.keyDescription":
-    "Вставьте учётные данные из аккаунта {name}. OpenBot подключится с ними и сохранит их на {host}.",
+    "Вставьте учётные данные из аккаунта {name}. StarBot подключится с ними и сохранит их на {host}.",
+
   "mcp.connect.thisComputer": "этом компьютере",
   "mcp.connect.noCredentialDescription":
-    "{name} не запрашивает учётные данные. OpenBot подключится один раз, чтобы увидеть доступные инструменты.",
+    "{name} не запрашивает учётные данные. StarBot подключится один раз, чтобы увидеть доступные инструменты.",
+
   "mcp.connect.connect": "Подключить",
   "mcp.connect.required": "Обязательное поле.",
   "mcp.connect.keptOn": "Хранится на {host}.",
@@ -24,7 +26,8 @@ export const messages = {
   "mcp.local.address": "Адрес",
   "mcp.local.docs": "Руководство по настройке",
   "mcp.signIn.description":
-    "Войдите в аккаунт {name}. OpenBot получит инструменты, доступные этому аккаунту, но не пароль.",
+    "Войдите в аккаунт {name}. StarBot получит инструменты, доступные этому аккаунту, но не пароль.",
+
   "mcp.signIn.waiting": "Ожидание браузера…",
   "mcp.signIn.continue": "Перейти к {name}",
   "mcp.signIn.pageDescription": "Эта страница открыта в браузере на {host}. Войдите здесь.",
@@ -63,7 +66,8 @@ export const messages = {
   "mcp.panel.editTitle": "Изменить сервер MCP",
   "mcp.panel.enable": "Включить {name}",
   "mcp.panel.detailsTitle": "Сведения",
-  "mcp.panel.detailsDescription": "Назовите этот сервер и выберите, как OpenBot к нему подключается.",
+  "mcp.panel.detailsDescription": "Назовите этот сервер и выберите, как StarBot к нему подключается.",
+
   "mcp.panel.transport": "Транспорт",
   "mcp.panel.name": "Название",
   "mcp.panel.namePlaceholder": "Название сервера MCP",
@@ -121,7 +125,8 @@ export const messages = {
   },
   "mcp.panel.appTitle": "Приложение входа",
   "mcp.panel.appDescription":
-    "Используйте OAuth-приложение, которое вы зарегистрировали у провайдера сервера. OpenBot использует его, когда сервер не может сам зарегистрировать OpenBot. Оставьте поле пустым, чтобы OpenBot зарегистрировался сам.",
+    "Используйте OAuth-приложение, которое вы зарегистрировали у провайдера сервера. StarBot использует его, когда сервер не может сам зарегистрировать StarBot. Оставьте поле пустым, чтобы StarBot зарегистрировался сам.",
+
   "mcp.panel.appSaveFirst": "Сначала сохраните этот сервер. Затем можно добавить приложение входа.",
   "mcp.panel.appUrlChanged": "Сначала сохраните новый URL сервера. Приложение входа относится к сохранённому URL.",
   "mcp.panel.appLoadFailed": "Не удалось прочитать приложение входа.",
@@ -143,17 +148,22 @@ export const messages = {
   "mcp.panel.removeApp": "Удалить приложение",
   "mcp.panel.appSaved": "Приложение сохранено. Войдите, чтобы использовать его.",
   "mcp.panel.appRemoved": "Приложение удалено.",
-  "mcp.signIn.relayDescription": "Войдите на {page} в браузере. Когда вы закончите, OpenBot отправит вход на {host}.",
+  "mcp.signIn.relayDescription": "Войдите на {page} в браузере. Когда вы закончите, StarBot отправит вход на {host}.",
+
   "mcp.signIn.relayOpenDescription":
-    "Войдите на {page} в браузере. Когда закончите, вставьте сюда показанный адрес. Затем OpenBot отправит вход на {host}.",
+    "Войдите на {page} в браузере. Когда закончите, вставьте сюда показанный адрес. Затем StarBot отправит вход на {host}.",
+
   "mcp.signIn.relayDeviceDescription": "Войдите на {page} в браузере и завершите вход там. {host} сам обнаружит вход.",
   "mcp.signIn.relayOpen": "Открыть страницу входа",
   "mcp.signIn.relayCopy": "Копировать ссылку",
-  "mcp.signIn.relayPasteHint": "Если браузер не вернулся в OpenBot, скопируйте показанный адрес и вставьте его сюда.",
+  "mcp.signIn.relayPasteHint": "Если браузер не вернулся в StarBot, скопируйте показанный адрес и вставьте его сюда.",
+
   "mcp.signIn.relayPasteRequired":
-    "OpenBot не может сам получить вход из браузера. Когда закончите, скопируйте показанный адрес и вставьте его сюда.",
+    "StarBot не может сам получить вход из браузера. Когда закончите, скопируйте показанный адрес и вставьте его сюда.",
+
   "mcp.signIn.relayAddress": "Адрес в браузере",
   "mcp.signIn.relaySend": "Отправить",
   "mcp.panel.callbackUrlRelayed":
-    "Страница входа открывается в вашем браузере, а OpenBot на вашем компьютере отправляет вход на {host}. Добавьте именно этот URL в разрешённые URL перенаправления приложения.",
+    "Страница входа открывается в вашем браузере, а StarBot на вашем компьютере отправляет вход на {host}. Добавьте именно этот URL в разрешённые URL перенаправления приложения.",
+
 } as const satisfies PartialTranslation<typeof source>;

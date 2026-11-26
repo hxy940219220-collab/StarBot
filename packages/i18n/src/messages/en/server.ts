@@ -313,7 +313,8 @@ export const messages = defineMessages("server", {
   "server.settings.storageTitle": "Storage",
   "server.settings.storageDescription": "See what StarBot keeps on this server’s disk, and free space.",
   "server.settings.hostedSitesTitle": "Sites",
-  "server.settings.hostedSitesDescription": "The static sites that agents on this server published to openbot.site.",
+  "server.settings.hostedSitesDescription": "The static sites that agents on this server published to starbot.site.",
+
   "server.settings.importTitle": "Import",
   "server.settings.importDescription": "Move your agents from Grok Bot or Hermes Agent to this server.",
   "server.settings.transferTitle": "Transfer",
@@ -738,7 +739,8 @@ export const messages = defineMessages("server", {
   "server.update.path.container":
     "On the Docker host, pull the new StarBot image and create the container again with the same data volumes. Wait for active work to finish first. Keep the existing volumes to preserve your data.",
   "server.update.path.manual":
-    "This installation cannot replace itself. Ask the host administrator to install the compatible release from github.com/nightly-labs/openbot/releases. Keep the existing StarBot data.",
+    "This installation cannot replace itself. Ask the host administrator to install the compatible release from github.com/hxy940219220-collab/StarBot-Desktop/releases. Keep the existing StarBot data.",
+
   "server.update.path.unavailable":
     "This is a development build. Use an installed StarBot release to check for updates.",
   "server.update.check": "Check for updates",

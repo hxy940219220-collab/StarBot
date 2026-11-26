@@ -2,33 +2,45 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/onboarding";
 
 export const messages = {
-  "onboarding.readFailed.title": "OpenBot non è riuscito a leggere la tua configurazione.",
+  "onboarding.readFailed.title": "StarBot non è riuscito a leggere la tua configurazione.",
+
   "onboarding.readFailed.description":
-    "I tuoi dati locali non sono cambiati. Riprova. Se il problema continua, configura di nuovo OpenBot.",
+    "I tuoi dati locali non sono cambiati. Riprova. Se il problema continua, configura di nuovo StarBot.",
+
   "onboarding.readFailed.setUpAgain": "Configura di nuovo",
-  "onboarding.setup.saveFailed": "OpenBot non è riuscito a salvare la tua configurazione locale.",
-  "onboarding.setup.verifyFailed": "OpenBot non è riuscito a verificare questo invito.",
-  "onboarding.setup.connectFailed": "OpenBot non è riuscito a connettersi a questo host.",
+  "onboarding.setup.saveFailed": "StarBot non è riuscito a salvare la tua configurazione locale.",
+
+  "onboarding.setup.verifyFailed": "StarBot non è riuscito a verificare questo invito.",
+
+  "onboarding.setup.connectFailed": "StarBot non è riuscito a connettersi a questo host.",
+
   "onboarding.setup.localTitle": "Configura questo computer",
   "onboarding.setup.remoteTitle": "Connettiti a un host",
-  "onboarding.setup.title": "Dove vuoi far girare OpenBot?",
+  "onboarding.setup.title": "Dove vuoi far girare StarBot?",
+
   "onboarding.setup.localDescription": "Agenti, conversazioni e file restano su questo computer.",
-  "onboarding.setup.remoteDescription": "Usa l'invito di chi gestisce il tuo host OpenBot.",
-  "onboarding.setup.description": "Usa questo computer, oppure connettiti a un host OpenBot che gira altrove.",
+  "onboarding.setup.remoteDescription": "Usa l'invito di chi gestisce il tuo host StarBot.",
+
+  "onboarding.setup.description": "Usa questo computer, oppure connettiti a un host StarBot che gira altrove.",
+
   "onboarding.setup.back": "Torna alla scelta della connessione",
   "onboarding.setup.signOut": "Esci",
-  "onboarding.setup.eyebrow": "Configurazione di OpenBot",
+  "onboarding.setup.eyebrow": "Configurazione di StarBot",
+
   "onboarding.setup.connectionType": "Tipo di connessione",
   "onboarding.setup.localIcon": "Computer locale",
   "onboarding.setup.localRoute": "Usa questo computer",
-  "onboarding.setup.localRouteDetail": "Esegui {providers} in locale. Tutti i dati di OpenBot restano qui.",
+  "onboarding.setup.localRouteDetail": "Esegui {providers} in locale. Tutti i dati di StarBot restano qui.",
+
   "onboarding.setup.remoteIcon": "Host remoto",
-  "onboarding.setup.remoteRouteDetail": "Usa agenti e conversazioni di un host OpenBot esistente.",
+  "onboarding.setup.remoteRouteDetail": "Usa agenti e conversazioni di un host StarBot esistente.",
+
   "onboarding.setup.defaultProvider": "Provider predefinito",
   "onboarding.setup.defaultProviderHint":
     "Usato per i nuovi agenti locali. Potrai cambiarlo per ogni agente più tardi.",
   "onboarding.setup.invitation": "Invito all'host",
-  "onboarding.setup.invitationPlaceholder": "Incolla un link di invito https://openbot.run/join",
+  "onboarding.setup.invitationPlaceholder": "Incolla un link di invito https://starbot.app/join",
+
   "onboarding.setup.otherInvitation": "Usa un altro invito",
   "onboarding.setup.joinNote":
     "Ti unirai come {email}. Gli inviti via email funzionano solo con l'indirizzo che li ha ricevuti.",
@@ -69,50 +81,66 @@ export const messages = {
   "onboarding.next.notDownloaded": "Scarica {provider} per continuare.",
   "onboarding.next.connecting": "{provider} si sta connettendo.",
   "onboarding.next.connect": "Connetti {provider} per continuare.",
-  "onboarding.error.installGuide": "OpenBot non è riuscito ad aprire la guida all'installazione di {provider}.",
-  "onboarding.error.signInGuide": "OpenBot non è riuscito ad aprire la guida all'accesso di {provider}.",
-  "onboarding.error.connect": "OpenBot non è riuscito a connettere {provider}. Riprova.",
-  "onboarding.error.download": "OpenBot non è riuscito a scaricare {provider}. Riprova.",
-  "onboarding.error.cancelDownload": "OpenBot non è riuscito ad annullare il download di {provider}. Riprova.",
-  "onboarding.error.refresh": "OpenBot non è riuscito ad aggiornare i tuoi provider di IA locali. Riprova.",
-  "onboarding.error.finish": "OpenBot non è riuscito a completare la configurazione.",
+  "onboarding.error.installGuide": "StarBot non è riuscito ad aprire la guida all'installazione di {provider}.",
+
+  "onboarding.error.signInGuide": "StarBot non è riuscito ad aprire la guida all'accesso di {provider}.",
+
+  "onboarding.error.connect": "StarBot non è riuscito a connettere {provider}. Riprova.",
+
+  "onboarding.error.download": "StarBot non è riuscito a scaricare {provider}. Riprova.",
+
+  "onboarding.error.cancelDownload": "StarBot non è riuscito ad annullare il download di {provider}. Riprova.",
+
+  "onboarding.error.refresh": "StarBot non è riuscito ad aggiornare i tuoi provider di IA locali. Riprova.",
+
+  "onboarding.error.finish": "StarBot non è riuscito a completare la configurazione.",
+
   "onboarding.toast.connecting":
     "Connessione a {provider} in corso. Completa l'accesso se si apre una finestra del browser.",
   "onboarding.progress": "Passaggio {step} di {total} della configurazione",
   "onboarding.choice.title": "Costruisci il tuo team di IA.",
-  "onboarding.choice.description": "OpenBot è gratuito per uso personale. Scegli l’IA dei tuoi agenti.",
+  "onboarding.choice.description": "StarBot è gratuito per uso personale. Scegli l’IA dei tuoi agenti.",
+
   "onboarding.choice.startFree": "Usa modelli gratuiti",
   "onboarding.choice.freeDetail": "Nessun abbonamento IA necessario.",
   "onboarding.choice.subscription": "Usa il mio abbonamento IA",
   "onboarding.choice.subscriptionDetail": "ChatGPT, Claude o Grok",
   "onboarding.choice.startFreeInstead": "Oppure usa modelli gratuiti",
   "onboarding.existing.title": "Bentornato.",
-  "onboarding.existing.description": "Il tuo account usa già OpenBot. Apri un server per continuare qui.",
+  "onboarding.existing.description": "Il tuo account usa già StarBot. Apri un server per continuare qui.",
+
   "onboarding.existing.open": "Apri {name}",
   "onboarding.existing.openDetail": "Apre qui i suoi agenti e le sue chat.",
   "onboarding.existing.offlineDetail": "Offline ora. Si apre quando è acceso.",
   "onboarding.existing.startNew": "Ricomincia su questo computer",
   "onboarding.existing.startNewDetail": "Crea qui un nuovo team. I tuoi server mantengono agenti e chat.",
-  "onboarding.existing.openFailed": "OpenBot non è riuscito ad aprire {name}.",
+  "onboarding.existing.openFailed": "StarBot non è riuscito ad aprire {name}.",
+
   "onboarding.consent.notice": "Continuando, accetti i {terms} e prendi atto dell’{privacy}.",
-  "onboarding.consent.analyticsTitle": "Aiutaci a migliorare OpenBot",
+  "onboarding.consent.analyticsTitle": "Aiutaci a migliorare StarBot",
+
   "onboarding.consent.analyticsDetail": "Condividi l'uso con il tuo account. Mai chat o file.",
   "onboarding.consent.thanksTitle": "Grazie! Il team ti deve un favore.",
-  "onboarding.consent.thanksToast": "Grazie per aiutarci a migliorare OpenBot 💜",
+  "onboarding.consent.thanksToast": "Grazie per aiutarci a migliorare StarBot 💜",
+
   "onboarding.consent.thanksToastDetail": "Puoi cambiarlo in qualsiasi momento nelle Impostazioni.",
   "onboarding.consent.termsLink": "Termini di servizio",
   "onboarding.consent.privacyLink": "Informativa privacy",
   "onboarding.plan.title": "Connetti il tuo piano",
   "onboarding.plan.description": "Accedi una volta sola. I tuoi agenti usano il tuo piano.",
-  "onboarding.computer.title": "OpenBot potrebbe controllare il tuo computer",
-  "onboarding.opening": "Apertura di OpenBot…",
+  "onboarding.computer.title": "StarBot potrebbe controllare il tuo computer",
+
+  "onboarding.opening": "Apertura di StarBot…",
+
   "onboarding.launch.downloading": "Download dei modelli gratuiti…",
   "onboarding.action.connect": "Connetti",
-  "onboarding.action.open": "Apri OpenBot",
+  "onboarding.action.open": "Apri StarBot",
+
   "onboarding.action.next": "Avanti",
   "onboarding.server.title": "Benvenuto in {server}",
   "onboarding.server.description":
-    "OpenBot non include un abbonamento a un'IA. Connetti il tuo provider a questo server prima di creare un agente.",
+    "StarBot non include un abbonamento a un'IA. Connetti il tuo provider a questo server prima di creare un agente.",
+
   "onboarding.server.label": "Scegli il provider di IA di questo server",
   "onboarding.server.hint": "L'accesso resta sul server. Potrai cambiare il provider di ogni agente più tardi.",
   "onboarding.server.continue": "Continua",

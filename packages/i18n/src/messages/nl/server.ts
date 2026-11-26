@@ -9,7 +9,8 @@ export const messages = {
   "server.connection.waking": "{name} starten",
   "server.connection.startProgress": "{step} · {time}",
   "server.connection.providerLimit":
-    "De cloudaanbieder beperkt nu nieuwe starts. OpenBot probeert het binnenkort opnieuw.",
+    "De cloudaanbieder beperkt nu nieuwe starts. StarBot probeert het binnenkort opnieuw.",
+
   "server.connection.updating": "{name} bijwerken",
   "server.connection.loading": "{name} laden",
   "server.connection.connecting": "Verbinden met {name}",
@@ -22,7 +23,8 @@ export const messages = {
   "server.connection.cachedHint":
     "Geladen inhoud en concepten blijven bewaard. Serveracties gaan verder zodra de verbinding terug is.",
   "server.connection.computerOffline":
-    "{name} is offline. Controleer of de computer aan staat, OpenBot open is en Publiceer deze server aan staat in Serverinstellingen > Leden.",
+    "{name} is offline. Controleer of de computer aan staat, StarBot open is en Publiceer deze server aan staat in Serverinstellingen > Leden.",
+
   "server.connection.conversationFailed": "Het gesprek kon niet laden. Probeer het opnieuw.",
   "server.connection.panelsFailed": "Sommige panelen van de werkruimte konden niet laden. Probeer het opnieuw.",
   "server.connection.retry": "Opnieuw",
@@ -31,14 +33,18 @@ export const messages = {
   "server.connection.details": "Details",
 
   "server.status.steps": "Verbindingsstappen",
-  "server.status.updateCause": "{name} start opnieuw om OpenBot {version} te installeren.",
-  "server.status.updateCauseNoVersion": "{name} start opnieuw om een OpenBot-update te installeren.",
-  "server.status.wakeCause": "{name} was gestopt. OpenBot start hem weer.",
+  "server.status.updateCause": "{name} start opnieuw om StarBot {version} te installeren.",
+
+  "server.status.updateCauseNoVersion": "{name} start opnieuw om een StarBot-update te installeren.",
+
+  "server.status.wakeCause": "{name} was gestopt. StarBot start hem weer.",
+
   "server.status.connectCause": "Deze app verbindt met {name}.",
   "server.status.connectionCause":
     "Deze app heeft de verbinding met {name} verloren. Hij verbindt automatisch opnieuw.",
   "server.status.stepUpdate": "Installeer de update",
-  "server.status.stepUpdateDetail": "OpenBot stopt, installeert de update en start weer.",
+  "server.status.stepUpdateDetail": "StarBot stopt, installeert de update en start weer.",
+
   "server.status.stepWake": "Start de server",
   "server.status.stepWakeDetail": "Dit kan een paar minuten duren.",
   "server.status.stepConnect": "Verbinden",
@@ -47,8 +53,10 @@ export const messages = {
   "server.status.stepLoadDetail": "Agents en chats laden vanaf de server.",
   "server.status.elapsed": "Verstreken: {time}",
 
-  "server.compatibility.updateClientTitle": "Werk deze OpenBot-app bij",
-  "server.compatibility.updateHostTitle": "Werk OpenBot bij op {name}",
+  "server.compatibility.updateClientTitle": "Werk deze StarBot-app bij",
+
+  "server.compatibility.updateHostTitle": "Werk StarBot bij op {name}",
+
   "server.compatibility.unsafeDataTitle": "De host gaf onveilige gegevens terug",
   "server.compatibility.cannotConnectTitle": "Kan niet verbinden met {name}",
   "server.compatibility.safeModeTitle": "{name} start niet",
@@ -57,7 +65,8 @@ export const messages = {
   "server.compatibility.updateHostDescription":
     "De host ondersteunt alleen oudere protocollen dan deze app. Werk de host bij en probeer het opnieuw.",
   "server.compatibility.unsafeDataDescription":
-    "OpenBot heeft deze verbinding gestopt omdat een bekende payload ongeldig was. De gegevens van je huidige werkruimte zijn niet gewijzigd.",
+    "StarBot heeft deze verbinding gestopt omdat een bekende payload ongeldig was. De gegevens van je huidige werkruimte zijn niet gewijzigd.",
+
   "server.compatibility.clientVersion": "Clientversie",
   "server.compatibility.hostVersion": "Hostversie",
   "server.compatibility.negotiatedProtocol": "Overeengekomen protocol",
@@ -84,9 +93,11 @@ export const messages = {
   "server.join.account": "Account",
   "server.join.emailBound": "Deze uitnodiging werkt alleen voor de ontvanger van de e-mail.",
   "server.join.unknownDate": "Onbekend",
-  "server.add.title": "Draai OpenBot 24/7 op een externe server",
+  "server.add.title": "Draai StarBot 24/7 op een externe server",
+
   "server.add.description":
-    "OpenBot-servers houden je agents en routines draaiende, ook als je computer uit staat. Wij regelen de infrastructuur en het onderhoud, dus je server is klaar voor gebruik zonder technische installatie.",
+    "StarBot-servers houden je agents en routines draaiende, ook als je computer uit staat. Wij regelen de infrastructuur en het onderhoud, dus je server is klaar voor gebruik zonder technische installatie.",
+
   "server.add.billing.label": "Factuurperiode",
   "server.add.currency.label": "Valuta",
   "server.add.billing.monthly": "Maandelijks",
@@ -110,19 +121,23 @@ export const messages = {
   "server.local.creating": "Server maken…",
   "server.local.createFailed": "Kan de server niet maken.",
   "server.local.createFailedRetry":
-    "Er ging iets mis. Probeer het opnieuw. Lukt het weer niet, start OpenBot dan opnieuw.",
+    "Er ging iets mis. Probeer het opnieuw. Lukt het weer niet, start StarBot dan opnieuw.",
+
   "server.local.limitReached":
     "Je kunt maximaal {limit} servers op deze computer hebben. Wis er een om een nieuwe te maken.",
   "server.local.deleteConfirmTitle": "{name} wissen?",
   "server.local.deleteConfirmDescription":
-    "OpenBot stopt de server en verplaatst de agents, chats en bestanden ervan naar de prullenbak.",
+    "StarBot stopt de server en verplaatst de agents, chats en bestanden ervan naar de prullenbak.",
+
   "server.local.deleting": "Server wissen…",
   "server.local.deletedTitle": "{name} gewist",
   "server.install.title": "Nieuwe server op een andere computer",
   "server.install.description":
-    "Voer deze opdracht uit op een Linux-computer of VPS van jezelf. De opdracht installeert OpenBot en voegt de server toe aan dit account.",
+    "Voer deze opdracht uit op een Linux-computer of VPS van jezelf. De opdracht installeert StarBot en voegt de server toe aan dit account.",
+
   "server.install.making": "Opdracht voor dit account maken…",
-  "server.install.failed": "OpenBot kon geen opdracht maken. Controleer de internetverbinding.",
+  "server.install.failed": "StarBot kon geen opdracht maken. Controleer de internetverbinding.",
+
   "server.install.copyForAgent": "Kopiëren voor een AI-agent",
   "server.install.expiresIn": "Werkt één keer. Verloopt over {time}.",
   "server.install.newCommand": "Nieuwe opdracht",
@@ -135,7 +150,8 @@ export const messages = {
     'Installeer OpenBot op deze Linux-server en meld hem aan bij mijn OpenBot-account.\nVoer deze opdracht uit als root. Hij stelt geen vragen en duurt een paar minuten:\n\n{command}\n\nHij eindigt met de regel "OpenBot is connected to your account." en exitcode 0.\nDe opdracht werkt één keer, 15 minuten lang. Sla hem nergens op.',
   "server.install.setUpWithAgent": "Instellen met een agent",
   "server.install.sshAgentPrompt":
-    "Maak via SSH verbinding met mijn Linux-server en installeer OpenBot daarop als server.\n\nSSH-adres (user@host):",
+    "Maak via SSH verbinding met mijn Linux-server en installeer StarBot daarop als server.\n\nSSH-adres (user@host):",
+
   "server.add.limit.title": "Dit account heeft het maximale aantal servers",
   "server.add.limit.description": {
     one: "Een account kan {count} betaalde server hebben. Verwijder eerst een server om er een toe te voegen.",
@@ -144,9 +160,11 @@ export const messages = {
   "server.add.limit.manage": "Beheer servers",
   "server.upsell.modal.title": "Routines stoppen als je computer slaapt",
   "server.upsell.modal.description":
-    "{name} draait alleen zolang je computer aan staat. Een OpenBot-server houdt hem 24/7 draaiende.",
+    "{name} draait alleen zolang je computer aan staat. Een StarBot-server houdt hem 24/7 draaiende.",
+
   "server.upsell.modal.computer": "Je computer",
-  "server.upsell.modal.server": "OpenBot-server",
+  "server.upsell.modal.server": "StarBot-server",
+
   "server.upsell.modal.running": "Actief",
   "server.upsell.modal.stopped": "Gestopt",
   "server.upsell.notice.title.local": {
@@ -157,8 +175,10 @@ export const messages = {
     one: "{count} routine heeft {server} aan nodig",
     other: "{count} routines hebben {server} aan nodig",
   },
-  "server.upsell.notice.description": "Een OpenBot-server voert ze 24/7 uit.",
-  "server.upsell.offline": "Een OpenBot-server blijft 24/7 aan, dus routines blijven draaien.",
+  "server.upsell.notice.description": "Een StarBot-server voert ze 24/7 uit.",
+
+  "server.upsell.offline": "Een StarBot-server blijft 24/7 aan, dus routines blijven draaien.",
+
   "server.upsell.seePlans": "Bekijk abonnementen",
   "server.upsell.notNow": "Niet nu",
   "server.upgrade.title": "Je agents hebben bijna geen ruimte meer",
@@ -174,15 +194,19 @@ export const messages = {
   "server.hosted.defaultName": "Cloudserver",
   "server.hosted.defaultNameNumbered": "Cloudserver {number}",
   "server.hosted.step.create": "Maak de machine",
-  "server.hosted.step.start": "Start OpenBot",
+  "server.hosted.step.start": "Start StarBot",
+
   "server.hosted.step.connect": "Verbind met je account",
   "server.hosted.detail.create.reserve": "Privémachine reserveren",
-  "server.hosted.detail.create.copy": "OpenBot naar de machine kopiëren",
+  "server.hosted.detail.create.copy": "StarBot naar de machine kopiëren",
+
   "server.hosted.detail.create.key": "Eenmalige inlogsleutel toevoegen",
   "server.hosted.detail.start.boot": "Machine aanzetten",
   "server.hosted.detail.start.restore": "Gegevens herstellen",
-  "server.hosted.detail.start.app": "OpenBot starten",
-  "server.hosted.detail.start.wait": "Wachten tot OpenBot antwoordt",
+  "server.hosted.detail.start.app": "StarBot starten",
+
+  "server.hosted.detail.start.wait": "Wachten tot StarBot antwoordt",
+
   "server.hosted.detail.connect.signIn": "Inloggen als jou",
   "server.hosted.detail.connect.publish": "Server aan je account toevoegen",
   "server.hosted.detail.connect.check": "Verbinding controleren",
@@ -247,7 +271,8 @@ export const messages = {
   "server.plan.deletedOn": "Verwijderd op {date}",
   "server.plan.dialogTitle": "Laat je agents niet gaan",
   "server.plan.dialogDescription":
-    "{name} is gestopt omdat het abonnement is beëindigd. Op {date} verwijdert OpenBot de agents, met al hun chats en bestanden.",
+    "{name} is gestopt omdat het abonnement is beëindigd. Op {date} verwijdert StarBot de agents, met al hun chats en bestanden.",
+
   "server.plan.dialogDaysLeft": {
     one: "Nog {count} dag",
     other: "Nog {count} dagen",
@@ -284,13 +309,16 @@ export const messages = {
   "server.settings.identityLocalOnly":
     "De naam en het logo van deze server kunnen alleen wijzigen op de computer waarop hij draait.",
   "server.settings.publicationLocalOnly": "Alleen de lokale server kan de publicatie wijzigen.",
-  "server.compatibility.versionMismatchTitle": "Verschillende OpenBot-versies op {name}",
+  "server.compatibility.versionMismatchTitle": "Verschillende StarBot-versies op {name}",
+
   "server.compatibility.versionMismatchDescription":
     "De verbinding gebruikt protocol {protocol}. Sommige nieuwere functies zijn mogelijk niet beschikbaar. Client {clientVersion}; host {hostVersion}.",
   "server.compatibility.versionMismatchUpdateHostDescription":
-    "Werk OpenBot bij op {name} om alle functies te gebruiken. De verbinding gebruikt protocol {protocol}. Client {clientVersion}; host {hostVersion}.",
+    "Werk StarBot bij op {name} om alle functies te gebruiken. De verbinding gebruikt protocol {protocol}. Client {clientVersion}; host {hostVersion}.",
+
   "server.compatibility.versionMismatchUpdateClientDescription":
-    "Werk deze OpenBot-app bij om alle functies te gebruiken. De verbinding gebruikt protocol {protocol}. Client {clientVersion}; host {hostVersion}.",
+    "Werk deze StarBot-app bij om alle functies te gebruiken. De verbinding gebruikt protocol {protocol}. Client {clientVersion}; host {hostVersion}.",
+
   "server.connection.failedTitle": "De verbinding is mislukt",
   "server.connection.failedDescription":
     "Kan niet verbinden met deze server. Controleer of de host online is en probeer het opnieuw.",
@@ -311,10 +339,12 @@ export const messages = {
   "server.settings.desktopTitle": "Extern bureaublad",
   "server.settings.desktopDescription": "Stel het bureaublad van deze server in of maak er verbinding mee.",
   "server.settings.storageTitle": "Opslag",
-  "server.settings.storageDescription": "Bekijk wat OpenBot op de schijf van deze server bewaart, en maak ruimte vrij.",
+  "server.settings.storageDescription": "Bekijk wat StarBot op de schijf van deze server bewaart, en maak ruimte vrij.",
+
   "server.settings.hostedSitesTitle": "Sites",
   "server.settings.hostedSitesDescription":
-    "De statische sites die agents op deze server op openbot.site hebben gepubliceerd.",
+    "De statische sites die agents op deze server op starbot.site hebben gepubliceerd.",
+
   "server.settings.importTitle": "Importeren",
   "server.settings.importDescription": "Verplaats je agents van Grok Bot of Hermes Agent naar deze server.",
   "server.settings.transferTitle": "Overdracht",
@@ -349,9 +379,11 @@ export const messages = {
   "server.settings.nameTooLong": "Gebruik niet meer dan {limit} tekens.",
   "server.settings.actionFailedTitle": "Serveractie mislukt",
   "server.settings.actionFailed": "De serveractie is mislukt.",
-  "server.settings.imageReadFailed": "OpenBot kan deze afbeelding niet lezen.",
+  "server.settings.imageReadFailed": "StarBot kan deze afbeelding niet lezen.",
+
   "server.settings.copyFailedTitle": "Kopiëren mislukt",
-  "server.settings.copyFailed": "OpenBot kan deze waarde niet kopiëren.",
+  "server.settings.copyFailed": "StarBot kan deze waarde niet kopiëren.",
+
   "server.settings.unavailableTitle": "Serverinstellingen niet beschikbaar",
   "server.settings.reset": "Herstellen",
   "server.settings.unsavedChanges": "Niet-opgeslagen wijzigingen",
@@ -391,7 +423,8 @@ export const messages = {
   "server.settings.appearanceColorOption": "Serverkleur {color}",
   "server.settings.appearanceReset": "Vorm en kleur herstellen",
   "server.settings.access": "Toegang",
-  "server.companySignIn.desktopOnly": "Stel single sign-on in via de desktop-app van OpenBot.",
+  "server.companySignIn.desktopOnly": "Stel single sign-on in via de desktop-app van StarBot.",
+
   "server.settings.publish": "Publiceer deze server",
   "server.settings.published": "Server is gepubliceerd",
   "server.settings.setUpDesktopTitle": "Stel extern bureaublad in",
@@ -507,7 +540,8 @@ export const messages = {
   "server.settings.restartTitle": "Herstarten",
   "server.settings.restarting": "Herstarten…",
   "server.settings.restartedTitle": "{name} wordt herstart",
-  "server.settings.restartHiddenDescription": "OpenBot verbindt automatisch opnieuw als de server terug is.",
+  "server.settings.restartHiddenDescription": "StarBot verbindt automatisch opnieuw als de server terug is.",
+
   "server.settings.restartHide": "Verbergen",
   "server.settings.restartProgressTitle": "{name} herstarten",
   "server.settings.restartProgressDescription": "{time} · meestal ongeveer een minuut. Je kunt dit venster verbergen.",
@@ -613,7 +647,8 @@ export const messages = {
     other: "Deze server heeft het maximum van {count} leden. Verwijder een lid om een nieuwe persoon uit te nodigen.",
   },
   "server.invite.qrLabel": "QR-code van uitnodiging",
-  "server.invite.qrDescription": "Scan deze code in OpenBot Mobile om lid te worden van deze server.",
+  "server.invite.qrDescription": "Scan deze code in StarBot Mobile om lid te worden van deze server.",
+
   "server.invite.accepted": "Uitnodiging geaccepteerd",
   "server.invite.expired": "Uitnodiging verlopen",
   "server.invite.sent": "Uitnodiging verstuurd",
@@ -621,7 +656,8 @@ export const messages = {
   "server.invite.acceptedDescription":
     "Het lid is bij deze server gekomen. Maak een nieuwe link om iemand anders uit te nodigen.",
   "server.invite.expiredDescription": "Maak een nieuwe link om iemand uit te nodigen.",
-  "server.invite.linkReadyDescription": "Deel de link of scan de QR-code in OpenBot Mobile.",
+  "server.invite.linkReadyDescription": "Deel de link of scan de QR-code in StarBot Mobile.",
+
   "server.invite.pendingTitle": "Openstaande uitnodigingen",
   "server.invite.pendingCount": "{total} openstaand",
   "server.invite.noPending": "Geen openstaande uitnodigingen.",
@@ -649,7 +685,8 @@ export const messages = {
   "server.desktop.connectionUnavailable": "Verbinding niet beschikbaar",
   "server.desktop.hostOffline": "Host is offline",
   "server.desktop.hostOfflineDescription": "Verbind opnieuw met de host voordat je het bureaublad ervan opent.",
-  "server.desktop.hostUpdateDescription": "Werk OpenBot bij op de host om bediening op afstand te gebruiken.",
+  "server.desktop.hostUpdateDescription": "Werk StarBot bij op de host om bediening op afstand te gebruiken.",
+
   "server.desktop.serviceAvailable": "Service beschikbaar",
   "server.desktop.serviceNotReady": "Service niet klaar",
   "server.desktop.serviceNotReadyDescription":
@@ -664,7 +701,8 @@ export const messages = {
   "server.desktop.accessMembers": "Alle leden",
   "server.desktop.askLabel": "Vragen op deze computer",
   "server.desktop.askDescription":
-    "Elke sessie wacht tot iemand bij deze computer hem toestaat. Zonder antwoord binnen 30 seconden weigert OpenBot hem.",
+    "Elke sessie wacht tot iemand bij deze computer hem toestaat. Zonder antwoord binnen 30 seconden weigert StarBot hem.",
+
   "server.desktop.activeTitle": "Actieve sessies van extern bureaublad: {active}",
   "server.desktop.activeDescription": "Beëindigt elke sessie direct. Leden kunnen het opnieuw vragen.",
   "server.desktop.stopAll": "Alle bediening op afstand stoppen",
@@ -676,9 +714,12 @@ export const messages = {
   "server.settings.providersSwitchNote": "Wissel naar {name} om de AI-aanbieders ervan te beheren.",
   "server.settings.providersSwitch": "Wissel naar deze server",
   "server.settings.updatesTitle": "Updates",
-  "server.settings.updatesDescription": "Werk OpenBot bij op de computer waarop deze server draait.",
-  "server.update.hostTitle": "OpenBot op {name}",
-  "server.update.version": "OpenBot {version}",
+  "server.settings.updatesDescription": "Werk StarBot bij op de computer waarop deze server draait.",
+
+  "server.update.hostTitle": "StarBot op {name}",
+
+  "server.update.version": "StarBot {version}",
+
   "server.update.status.idle": "Zoek naar updates om de nieuwste release te vinden.",
   "server.update.status.checking": "Controleren op updates…",
   "server.update.status.available": "{version} is beschikbaar.",
@@ -686,28 +727,35 @@ export const messages = {
   "server.update.status.downloadingUnknown": "{version} downloaden…",
   "server.update.status.ready": "{version} is gedownload.",
   "server.update.status.installing": "{name} start opnieuw om de update te installeren.",
-  "server.update.status.upToDate": "OpenBot is up-to-date op {name}.",
+  "server.update.status.upToDate": "StarBot is up-to-date op {name}.",
+
   "server.update.status.checkFailed": "{name} kan niet controleren op updates. Probeer het opnieuw.",
   "server.update.status.downloadFailed": "{name} kan de update niet downloaden. Probeer het opnieuw.",
   "server.update.status.installFailed":
-    "{name} kan de update niet installeren. Zorg dat geen andere gebruiker van die computer OpenBot draait en probeer het opnieuw.",
+    "{name} kan de update niet installeren. Zorg dat geen andere gebruiker van die computer StarBot draait en probeer het opnieuw.",
+
   "server.update.releaseCheckFailed":
     "{name} kan de releasefeed niet lezen. Controleer de netwerkverbinding van de host en probeer het opnieuw.",
   "server.update.releaseUnavailable":
     "Releasecontroles zijn niet beschikbaar voor deze build. Vraag de beheerder van de host om naar een compatibele release te zoeken.",
   "server.update.externalTitle": "De host regelt de installatie",
   "server.update.path.hostManager":
-    "OpenBot Host Manager installeert updates wanneer alle gebruikers inactief zijn. Vraag de beheerder van de host om de status van Host Manager te controleren als een update niet start.",
+    "StarBot Host Manager installeert updates wanneer alle gebruikers inactief zijn. Vraag de beheerder van de host om de status van Host Manager te controleren als een update niet start.",
+
   "server.update.path.hosted":
     "De hostingdienst downloadt updates op de achtergrond. Een gedownloade update start de volgende keer dat de server start. Wacht tot actief werk klaar is voordat je de server stopt en hervat. Blijft hij op een oude versie, neem dan contact op met de beheerder van de host.",
   "server.update.path.system":
-    "Voer op de host sudo openbot update uit om de nieuwste release te installeren. Deze opdracht stopt OpenBot. Wacht eerst tot actief werk klaar is. Automatische downloads worden bij de volgende opstart geïnstalleerd.",
+    "Voer op de host sudo openbot update uit om de nieuwste release te installeren. Deze opdracht stopt StarBot. Wacht eerst tot actief werk klaar is. Automatische downloads worden bij de volgende opstart geïnstalleerd.",
+
   "server.update.path.container":
-    "Haal op de Docker-host de nieuwe OpenBot-image op en maak de container opnieuw met dezelfde datavolumes. Wacht eerst tot actief werk klaar is. Behoud de bestaande volumes om je gegevens te bewaren.",
+    "Haal op de Docker-host de nieuwe StarBot-image op en maak de container opnieuw met dezelfde datavolumes. Wacht eerst tot actief werk klaar is. Behoud de bestaande volumes om je gegevens te bewaren.",
+
   "server.update.path.manual":
-    "Deze installatie kan zichzelf niet vervangen. Vraag de beheerder van de host om de compatibele release te installeren vanaf github.com/nightly-labs/openbot/releases. Behoud de bestaande OpenBot-gegevens.",
+    "Deze installatie kan zichzelf niet vervangen. Vraag de beheerder van de host om de compatibele release te installeren vanaf github.com/hxy940219220-collab/StarBot-Desktop/releases. Behoud de bestaande StarBot-gegevens.",
+
   "server.update.path.unavailable":
-    "Dit is een ontwikkelbuild. Gebruik een geïnstalleerde OpenBot-release om naar updates te zoeken.",
+    "Dit is een ontwikkelbuild. Gebruik een geïnstalleerde StarBot-release om naar updates te zoeken.",
+
   "server.update.check": "Zoek naar updates",
   "server.update.start": "Bijwerken bij inactiviteit",
   "server.update.restartNow": "Nu herstarten",
@@ -717,37 +765,47 @@ export const messages = {
   "server.update.requestedBy": "{member} heeft om deze update gevraagd.",
   "server.update.automatic": "{name} installeert updates automatisch.",
   "server.update.autoDownloadTitle": "Download updates automatisch",
-  "server.update.autoDownloadDescription": "{name} downloadt elke nieuwe versie van OpenBot zodra die uitkomt.",
+  "server.update.autoDownloadDescription": "{name} downloadt elke nieuwe versie van StarBot zodra die uitkomt.",
+
   "server.update.autoInstallTitle": "Installeer updates automatisch",
   "server.update.autoInstallDescription":
     "{name} start opnieuw met een gedownloade update wanneer de agents ervan inactief zijn. Leden worden kort losgekoppeld en verbinden automatisch opnieuw.",
   "server.update.waitingFor": "Wacht op {reasons}.",
   "server.update.disabledTitle": "Updates op afstand staan uit",
   "server.update.disabledDescription":
-    "De gebruiker van {name} heeft updates van serverleden uitgezet. Vraag diegene om OpenBot bij te werken, of om op die computer Instellingen > Updates te openen en “Sta updates van serverleden toe” aan te zetten.",
+    "De gebruiker van {name} heeft updates van serverleden uitgezet. Vraag diegene om StarBot bij te werken, of om op die computer Instellingen > Updates te openen en “Sta updates van serverleden toe” aan te zetten.",
+
   "server.update.managedTitle": "Een Host Manager regelt updates",
   "server.update.managedDescription":
-    "OpenBot Host Manager werkt {name} bij. Neem contact op met de beheerder van de host.",
+    "StarBot Host Manager werkt {name} bij. Neem contact op met de beheerder van de host.",
+
   "server.update.unsupportedTitle": "{name} kan zichzelf niet bijwerken",
   "server.update.unsupportedDescription":
-    "Deze OpenBot-build heeft geen updater. Installeer een nieuwe versie op {name}.",
+    "Deze StarBot-build heeft geen updater. Installeer een nieuwe versie op {name}.",
+
   "server.update.restarting": "Herstarten…",
   "server.update.loadFailed": "De updatestatus van {name} is niet geladen.",
   "server.update.hostAction": "Host bijwerken",
-  "server.update.dialog.offerTitle": "Werk {name} bij naar OpenBot {version}",
+  "server.update.dialog.offerTitle": "Werk {name} bij naar StarBot {version}",
+
   "server.update.dialog.offerDescription":
-    "{name} gebruikt OpenBot {current}. Hij downloadt eerst de update en start dan opnieuw.",
+    "{name} gebruikt StarBot {current}. Hij downloadt eerst de update en start dan opnieuw.",
+
   "server.update.dialog.offerReadyDescription":
-    "{name} gebruikt OpenBot {current}. De update is gedownload. {name} start opnieuw om hem te installeren.",
+    "{name} gebruikt StarBot {current}. De update is gedownload. {name} start opnieuw om hem te installeren.",
+
   "server.update.dialog.progressTitle": "{name} bijwerken",
   "server.update.dialog.progressDescription": "{time} · Je kunt dit venster verbergen.",
-  "server.update.dialog.doneTitle": "{name} draait OpenBot {version}",
+  "server.update.dialog.doneTitle": "{name} draait StarBot {version}",
+
   "server.update.dialog.doneDescription": "De update duurde {time}.",
   "server.update.dialog.failedTitle": "{name} is niet bijgewerkt",
   "server.update.dialog.restartFailed": "{name} is niet weer online. Controleer de host en probeer het opnieuw.",
-  "server.update.dialog.notInstalled": "{name} is herstart met OpenBot {current}. Probeer de update opnieuw.",
+  "server.update.dialog.notInstalled": "{name} is herstart met StarBot {current}. Probeer de update opnieuw.",
+
   "server.update.dialog.steps": "Updatestappen",
-  "server.update.dialog.downloadStep": "Download OpenBot {version}",
+  "server.update.dialog.downloadStep": "Download StarBot {version}",
+
   "server.update.dialog.downloadPending": "Agents blijven werken tijdens het downloaden.",
   "server.update.dialog.downloadPreparing": "Download voorbereiden…",
   "server.update.dialog.downloadRunning": "{progress} · Agents blijven werken.",
@@ -756,10 +814,12 @@ export const messages = {
   "server.update.dialog.restartPending": "Leden verliezen de verbinding ongeveer een minuut.",
   "server.update.dialog.restartWaiting": "Wacht tot {reasons} klaar is.",
   "server.update.dialog.restartSoon": "Het herstarten begint zo.",
-  "server.update.dialog.restartRunning": "OpenBot {version} starten…",
+  "server.update.dialog.restartRunning": "StarBot {version} starten…",
+
   "server.update.dialog.onlineStep": "Weer online",
   "server.update.dialog.onlinePending": "Leden verbinden automatisch opnieuw.",
-  "server.update.dialog.onlineDone": "Op OpenBot {version} na {time}.",
+  "server.update.dialog.onlineDone": "Op StarBot {version} na {time}.",
+
   "server.update.dialog.waitIdle": "Wacht tot agents inactief zijn",
   "server.update.dialog.waitIdleDescription": "Het herstarten wacht tot beurten van agents en routineruns klaar zijn.",
   "server.update.dialog.updateNow": "Nu bijwerken",
@@ -784,14 +844,18 @@ export const messages = {
   "server.update.reason.fileTransfer": "een bestandsoverdracht",
   "server.update.reason.browserControl": "browserbesturing door een agent",
   "server.update.reason.updateOperation": "een andere updatestap",
-  "server.update.reason.initialization": "het starten van OpenBot",
+  "server.update.reason.initialization": "het starten van StarBot",
+
   "server.update.reason.other": "ander werk",
   "server.restartNotice.waitingTitle": "{name} herstart om een update te installeren",
-  "server.restartNotice.waitingVersionTitle": "{name} herstart om OpenBot {version} te installeren",
+  "server.restartNotice.waitingVersionTitle": "{name} herstart om StarBot {version} te installeren",
+
   "server.restartNotice.waitingDescription":
-    "Het herstarten wacht tot de agents ervan inactief zijn. Je wordt kort losgekoppeld, daarna verbindt OpenBot automatisch opnieuw.",
+    "Het herstarten wacht tot de agents ervan inactief zijn. Je wordt kort losgekoppeld, daarna verbindt StarBot automatisch opnieuw.",
+
   "server.restartNotice.restartingTitle": "{name} herstart om een update te installeren",
-  "server.restartNotice.restartingDescription": "OpenBot verbindt automatisch opnieuw als {name} terug is.",
+  "server.restartNotice.restartingDescription": "StarBot verbindt automatisch opnieuw als {name} terug is.",
+
   "server.restartNotice.backTitle": "{name} is weer online",
   "server.settings.personalityTitle": "Persoonlijkheid",
   "server.settings.personalityDescription": "Kies hoe de agents op deze server met je praten.",
@@ -828,7 +892,8 @@ export const messages = {
   "server.ownerTransfer.incomingStays":
     "Aanmeldingen bij aanbieders, opgeslagen sleutels, Vault-logins, browseraanmeldingen en gekoppelde apps op de server blijven daar, en je kunt ze gebruiken.",
   "server.ownerTransfer.incomingMachine":
-    "Iedereen die nog kan inloggen op de computer waarop de server draait, kan je OpenBot-account gebruiken. Wijzig de wachtwoorden en SSH-sleutels ervan.",
+    "Iedereen die nog kan inloggen op de computer waarop de server draait, kan je StarBot-account gebruiken. Wijzig de wachtwoorden en SSH-sleutels ervan.",
+
   "server.ownerTransfer.later": "Later",
   "server.ownerTransfer.decline": "Weigeren",
   "server.ownerTransfer.accept": "Accepteren",

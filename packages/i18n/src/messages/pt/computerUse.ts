@@ -3,14 +3,19 @@ import type { messages as source } from "../en/computerUse";
 
 export const messages = {
   "computerUse.permission.screenRecording.title": "Gravação de Tela",
-  "computerUse.permission.screenRecording.description": "Permite que o OpenBot veja as janelas dos aplicativos.",
+  "computerUse.permission.screenRecording.description": "Permite que o StarBot veja as janelas dos aplicativos.",
+
   "computerUse.permission.screenRecording.pane": "Gravação de Tela e Áudio do Sistema",
   "computerUse.permission.accessibility.title": "Acessibilidade",
-  "computerUse.permission.accessibility.description": "Permite que o OpenBot clique e digite.",
+  "computerUse.permission.accessibility.description": "Permite que o StarBot clique e digite.",
+
   "computerUse.permission.accessibility.pane": "Acessibilidade",
-  "computerUse.error.check": "O OpenBot não conseguiu verificar o Uso do computador.",
-  "computerUse.error.openSettings": "O OpenBot não conseguiu abrir os Ajustes do Sistema.",
-  "computerUse.error.startDriver": "O OpenBot não conseguiu iniciar o driver de Uso do computador.",
+  "computerUse.error.check": "O StarBot não conseguiu verificar o Uso do computador.",
+
+  "computerUse.error.openSettings": "O StarBot não conseguiu abrir os Ajustes do Sistema.",
+
+  "computerUse.error.startDriver": "O StarBot não conseguiu iniciar o driver de Uso do computador.",
+
   "computerUse.checkAgain": "Verificar de novo",
   "computerUse.checking": "Verificando o Uso do computador",
   "computerUse.unavailable.title": "O Uso do computador ainda não está disponível",
@@ -18,15 +23,19 @@ export const messages = {
   "computerUse.permissions.description": "As permissões são gerenciadas pelo macOS.",
   "computerUse.ready.title": "O Uso do computador está pronto",
   "computerUse.ready.description":
-    "O OpenBot pode ver e interagir com aplicativos neste computador. Este sistema não pede nenhuma permissão adicional.",
+    "O StarBot pode ver e interagir com aplicativos neste computador. Este sistema não pede nenhuma permissão adicional.",
+
   "computerUse.limited.title": "O Uso do computador está limitado nesta área de trabalho",
   "computerUse.openSettingsFailed.title": "Não foi possível abrir os Ajustes do Sistema",
   "computerUse.restartRequired.title": "Reinicialização necessária",
   "computerUse.restartRequired.description":
-    "O macOS ainda bloqueia cliques e digitação. Se isso voltar após reiniciar, remova o OpenBot de Acessibilidade e adicione-o de novo.",
-  "computerUse.restartRequired.action": "Reiniciar o OpenBot",
+    "O macOS ainda bloqueia cliques e digitação. Se isso voltar após reiniciar, remova o StarBot de Acessibilidade e adicione-o de novo.",
+
+  "computerUse.restartRequired.action": "Reiniciar o StarBot",
+
   "computerUse.compact.title": "Ativar Uso do computador",
-  "computerUse.compact.description": "Permitir que o OpenBot veja e interaja com aplicativos neste computador.",
+  "computerUse.compact.description": "Permitir que o StarBot veja e interaja com aplicativos neste computador.",
+
   "computerUse.granted": "Concedida",
   "computerUse.opening": "Abrindo…",
   "computerUse.manage": "Gerenciar",
@@ -43,5 +52,6 @@ export const messages = {
   "computerUse.help.showInFinder": "Mostrar no Finder",
   "computerUse.help.revealFailed": "Não foi possível mostrar o aplicativo no Finder.",
   "computerUse.help.dragFailed": "Não foi possível arrastar o aplicativo.",
-  "computerUse.highlight.working": "O OpenBot está trabalhando em {title}",
+  "computerUse.highlight.working": "O StarBot está trabalhando em {title}",
+
 } as const satisfies PartialTranslation<typeof source>;

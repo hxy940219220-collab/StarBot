@@ -1,9 +1,9 @@
-# OpenBot
+# StarBot
 
-[![CI](https://github.com/nightly-labs/openbot/actions/workflows/ci.yml/badge.svg)](https://github.com/nightly-labs/openbot/actions/workflows/ci.yml)
+[![CI](https://github.com/hxy940219220-collab/StarBot-Desktop/actions/workflows/ci.yml/badge.svg)](https://github.com/hxy940219220-collab/StarBot-Desktop/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-PolyForm_Noncommercial_1.0.0-blue.svg)](LICENSE)
 
-OpenBot is a local-first desktop workspace for persistent AI teammates. It supports the local
+StarBot is a local-first desktop workspace for persistent AI teammates. It supports the local
 [Codex App Server](https://learn.chatgpt.com/docs/app-server) and
 [Claude Code](https://code.claude.com/docs/en/overview), plus [Grok CLI](https://docs.x.ai/build/overview),
 OpenCode, Gemini, [Cursor CLI](https://cursor.com/cli), [Cline CLI](https://cline.bot/cli), [Kimi Code CLI](https://github.com/MoonshotAI/kimi-cli),
@@ -11,7 +11,7 @@ OpenCode, Gemini, [Cursor CLI](https://cursor.com/cli), [Cline CLI](https://clin
 conversation, and provides local queues, file transfers, an embedded browser, and agent-to-agent
 messaging in one desktop app.
 
-OpenBot is ready for production use. A new release ships almost every day.
+StarBot is ready for production use. A new release ships almost every day.
 
 > [!WARNING]
 > Agents run with `danger-full-access` and `approvalPolicy: never`. They can read and modify files,
@@ -29,41 +29,41 @@ OpenBot is ready for production use. A new release ships almost every day.
 - Agent-to-agent messages, replies, reactions, images, and managed file transfers.
 - Shared desktop channel chats with one task owner, explicit delegation, shared history, and Stop, Resume, Reassign, Archive, and Restore controls.
 - A persistent embedded browser that agents can open, inspect, and control.
-- Optional Computer Use on macOS, Windows and Linux through the `cua-driver` binary in the release, which OpenBot starts as its own child process and gives to every provider.
+- Optional Computer Use on macOS, Windows and Linux through the `cua-driver` binary in the release, which StarBot starts as its own child process and gives to every provider.
 - Per-agent model, reasoning, profile, notification, browser, and panel state.
 - Local data and privacy-safe diagnostics exports from the account menu.
-- Optional OpenBot accounts through one-time email codes. The account API runs on Cloudflare Workers and D1.
+- Optional StarBot accounts through one-time email codes. The account API runs on Cloudflare Workers and D1.
 
-OpenBot is local-first, not offline-only. Codex connects to OpenAI, Claude connects to Anthropic,
+StarBot is local-first, not offline-only. Codex connects to OpenAI, Claude connects to Anthropic,
 Grok connects to xAI, Gemini connects to Google, Cursor connects to Cursor, Cline connects to Cline,
 Kimi connects to Moonshot AI, Devin connects to Cognition, GitHub Copilot connects to GitHub, Mistral connects to Mistral AI, Hermes connects to Nous Portal and to the providers you set up in Hermes,
 visited pages use the network, and installed plugins may connect to their own services.
 
 ## Install
 
-OpenBot supports macOS 13 or newer on Apple silicon or Intel, Windows 10 or newer on x64 systems, and x64
+StarBot supports macOS 13 or newer on Apple silicon or Intel, Windows 10 or newer on x64 systems, and x64
 or arm64 Linux as an AppImage.
 
 ### macOS
 
-1. Download the latest `OpenBot-*-arm64.dmg` (or `OpenBot-*-x64.dmg` on an Intel Mac) from [GitHub Releases](https://github.com/nightly-labs/openbot/releases).
-2. Drag OpenBot to Applications and open it.
+1. Download the latest `StarBot-*-arm64.dmg` (or `StarBot-*-x64.dmg` on an Intel Mac) from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot-Desktop/releases).
+2. Drag StarBot to Applications and open it.
 
 ### Windows
 
-1. Download the latest `OpenBot-*-x64.exe` from [GitHub Releases](https://github.com/nightly-labs/openbot/releases).
-2. Run the installer and open OpenBot.
+1. Download the latest `StarBot-*-x64.exe` from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot-Desktop/releases).
+2. Run the installer and open StarBot.
 
 ### Linux
 
-1. Download the latest `OpenBot-*-x86_64.AppImage` (or `OpenBot-*-arm64.AppImage` on arm64) from [GitHub Releases](https://github.com/nightly-labs/openbot/releases).
-2. Make it executable with `chmod +x OpenBot-*.AppImage`, then run it.
+1. Download the latest `StarBot-*-x86_64.AppImage` (or `StarBot-*-arm64.AppImage` on arm64) from [GitHub Releases](https://github.com/hxy940219220-collab/StarBot-Desktop/releases).
+2. Make it executable with `chmod +x StarBot-*.AppImage`, then run it.
 
 The AppImage does not need libfuse2, so it also runs on Arch Linux and Omarchy. It mounts itself
 with `fusermount3` from the `fuse3` package.
 
 On Ubuntu 23.10 or newer and on Debian 13, unprivileged user namespaces are restricted by AppArmor
-and OpenBot exits during launch until you install an AppArmor profile:
+and StarBot exits during launch until you install an AppArmor profile:
 
 ```bash
 sudo install -m 0644 build/linux/openbot.apparmor /etc/apparmor.d/openbot
@@ -71,19 +71,19 @@ sudo systemctl reload apparmor
 ```
 
 The same file ships inside the AppImage at `resources/linux/openbot.apparmor`. Edit the attachment
-path in the profile if you keep the AppImage outside the usual locations. Do not start OpenBot with
+path in the profile if you keep the AppImage outside the usual locations. Do not start StarBot with
 `--no-sandbox`: that removes the boundary between a renderer and the rest of the computer.
 
-On the first start from an AppImage, OpenBot writes `~/.local/share/applications/openbot.desktop`
+On the first start from an AppImage, StarBot writes `~/.local/share/applications/openbot.desktop`
 and `~/.local/share/icons/openbot.png`, which is what lets an `openbot://` link - an invitation, or
 a plugin listing - open the app and gives the launcher an icon that stays after the app exits. Delete the two files to undo it.
 
 #### Theme palette files
 
-OpenBot reads each `<name>.json` file in the `themes` folder of its data folder
-(`~/.config/OpenBot/themes/` on Linux) and lists it under Settings > Appearance > Theme. Another
-program, such as an Omarchy theme script, can write the file. OpenBot follows each change to the
-file with no restart. Replace the file with a rename, so that OpenBot never reads half of it:
+StarBot reads each `<name>.json` file in the `themes` folder of its data folder
+(`~/.config/StarBot/themes/` on Linux) and lists it under Settings > Appearance > Theme. Another
+program, such as an Omarchy theme script, can write the file. StarBot follows each change to the
+file with no restart. Replace the file with a rename, so that StarBot never reads half of it:
 
 ```json
 {
@@ -110,8 +110,8 @@ The file name is the palette id: lowercase letters, digits and `-`. `appearance`
 `dark`, and selects the base that the colors go over. In a dark palette, `surface` colors cards and
 controls. A light palette makes them lighter than `canvas`, as the light base does, because a light
 theme's `surface` is usually darker than its background. Each color is `#rrggbb` or `#rrggbbaa`.
-OpenBot ignores a file with a missing or different color, and then shows the saved light, dark or
-system choice. While no theme choice is saved, OpenBot shows the first palette.
+StarBot ignores a file with a missing or different color, and then shows the saved light, dark or
+system choice. While no theme choice is saved, StarBot shows the first palette.
 
 Remote desktop works on Linux x64 in an X11 session,
 such as Xorg or Xvfb. It does not work under Wayland, and the arm64 AppImage does not include it.
@@ -123,15 +123,15 @@ desktop session on the same host or VM. Google sends the callback to that host t
 
 #### Linux server with no screen
 
-To run OpenBot as an always-on server of your account on a VPS or home server (Ubuntu 24.04 or
+To run StarBot as an always-on server of your account on a VPS or home server (Ubuntu 24.04 or
 26.04 with systemd), install it from a terminal and sign in with an email code:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/install-server.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/scripts/install-server.sh | sudo bash
 sudo openbot login
 ```
 
-Then use it from the desktop app, the iPhone app or `openbot.run/app`. See
+Then use it from the desktop app, the iPhone app or `starbot.app/app`. See
 [self-hosted servers](docs/self-hosted-server.md) for the options and the `openbot` commands.
 
 #### Docker
@@ -140,11 +140,11 @@ The same server runs as a container (`linux/amd64` and `linux/arm64`). The secco
 Electron sandbox stay on:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/seccomp.json
+curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/docker/seccomp.json
 docker run -d --name openbot --restart unless-stopped \
   --security-opt seccomp=seccomp.json --security-opt no-new-privileges:true \
   --shm-size 1g --stop-timeout 60 -v openbot-data:/data \
-  ghcr.io/nightly-labs/openbot:latest
+  ghcr.io/hxy940219220-collab/StarBot-Desktop:latest
 docker exec -it openbot openbot login
 ```
 
@@ -156,13 +156,13 @@ see [AWS ECS](docs/aws-ecs.md). For an Umbrel home server, see [Umbrel](docs/umb
 The flake installs the desktop app from the latest release on x64 or arm64 Linux and on Apple silicon:
 
 ```bash
-nix run github:nightly-labs/openbot
-nix profile install github:nightly-labs/openbot
+nix run github:hxy940219220-collab/StarBot-Desktop
+nix profile install github:hxy940219220-collab/StarBot-Desktop
 ```
 
-`overlays.default` adds `pkgs.openbot`. OpenBot is not free software, so your nixpkgs must allow it,
+`overlays.default` adds `pkgs.openbot`. StarBot is not free software, so your nixpkgs must allow it,
 for example with `nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "openbot";`.
-Nix installs OpenBot updates. OpenBot does not update itself from the Nix store. On Linux, the Nix
+Nix installs StarBot updates. StarBot does not update itself from the Nix store. On Linux, the Nix
 package does not include the remote desktop runtime, because nixpkgs does not have a library that it
 needs.
 
@@ -173,9 +173,9 @@ needs.
 
 ### Agent setup
 
-OpenBot can download a supported provider runtime when you select `Download` in onboarding,
-Settings, agent setup, or the model picker. OpenBot prefers its managed CLI. Explicit `OPENBOT_*_PATH` overrides take precedence; a compatible
-system CLI is used when no managed copy is available. OpenBot checks for a newer provider CLI
+StarBot can download a supported provider runtime when you select `Download` in onboarding,
+Settings, agent setup, or the model picker. StarBot prefers its managed CLI. Explicit `OPENBOT_*_PATH` overrides take precedence; a compatible
+system CLI is used when no managed copy is available. StarBot checks for a newer provider CLI
 release at startup and every hour, and `Check for updates` in a provider's actions menu checks at
 once. Updates install the latest upstream release without changing the user’s system CLI; the
 version in `native-runtime.lock.json` is only the first-install fallback.
@@ -195,87 +195,87 @@ curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 Install Grok CLI following the [Grok Build documentation](https://docs.x.ai/build/overview), then
-authenticate with `grok login` or set `XAI_API_KEY` in the environment used to launch OpenBot.
+authenticate with `grok login` or set `XAI_API_KEY` in the environment used to launch StarBot.
 
-OpenBot downloads and pins the OpenCode CLI, like Codex, Claude, and Grok. OpenCode's free models
-need no account and no sign-in: select OpenCode, click Connect, and OpenBot reads the models that
+StarBot downloads and pins the OpenCode CLI, like Codex, Claude, and Grok. OpenCode's free models
+need no account and no sign-in: select OpenCode, click Connect, and StarBot reads the models that
 the CLI advertises. To use the paid OpenCode Go models, click Sign in on the OpenCode row and
-paste a Go key from [opencode.ai/auth](https://opencode.ai/auth). OpenBot encrypts the key on this
-computer and gives it only to the local CLI. OpenBot supports OpenCode Go only: the Zen models a
+paste a Go key from [opencode.ai/auth](https://opencode.ai/auth). StarBot encrypts the key on this
+computer and gives it only to the local CLI. StarBot supports OpenCode Go only: the Zen models a
 Go key does not buy stay out of the picker. Models with the Free label in the model picker need no
 sign-in. Other models need a sign-in with their provider: a Go key for the `opencode-go/` models, or
 `opencode auth login` in a terminal for OpenCode Zen and third-party providers. Without it, the turn
-fails with an error that names the provider. If you installed OpenCode yourself, OpenBot
+fails with an error that names the provider. If you installed OpenCode yourself, StarBot
 keeps that install and offers no download. Set `OPENBOT_OPENCODE_PATH` to select an executable
 outside your shell's search path. Remote OpenCode agents require Team API v4; older clients do not
 show these agents.
 
-Gemini uses a Google AI Pro or Ultra plan. OpenBot downloads Google's Antigravity CLI on this
-computer when you select Download on the Gemini row, because Google's license does not let OpenBot
-include it. Sign in opens Google's sign-in page in your browser. OpenBot never uses an
+Gemini uses a Google AI Pro or Ultra plan. StarBot downloads Google's Antigravity CLI on this
+computer when you select Download on the Gemini row, because Google's license does not let StarBot
+include it. Sign in opens Google's sign-in page in your browser. StarBot never uses an
 `antigravity` command on your search path, because the Antigravity editor installs a command with
 that name. Set `OPENBOT_ANTIGRAVITY_PATH` to select an Antigravity CLI 1.5.3 or later executable
-yourself. OpenBot reads its version with `--version`. When that path is set, OpenBot uses only
+yourself. StarBot reads its version with `--version`. When that path is set, StarBot uses only
 it. Connect remains available in the host's local Server settings > Providers screen. Remote
 settings cannot perform Google sign-in; use a browser on the host. See
 [Gemini setup and download recovery](docs/architecture/providers.md#gemini) for the required
 layout, the reported IPv6 download failure, and checks that do not change host networking.
 
-Cursor uses a Cursor plan or a Cursor API key. OpenBot downloads and pins the Cursor CLI
+Cursor uses a Cursor plan or a Cursor API key. StarBot downloads and pins the Cursor CLI
 (`cursor-agent`) when you select Download on the Cursor row in More providers, and starts it with
 `cursor-agent acp`. Sign in opens Cursor's sign-in page in your browser. You can also set
-`CURSOR_API_KEY` in the environment used to launch OpenBot. If you installed `cursor-agent`
-yourself, OpenBot uses it until a download exists. OpenBot never uses the `cursor` command, which
+`CURSOR_API_KEY` in the environment used to launch StarBot. If you installed `cursor-agent`
+yourself, StarBot uses it until a download exists. StarBot never uses the `cursor` command, which
 starts the Cursor editor. Set `OPENBOT_CURSOR_PATH` to select an executable yourself. Cursor
 agents stay on this computer: team members do not see them.
 
 Cline uses a Cline account, which has free models with limits for each model. The provider of a
 free model can use your prompts to train models. With a ClinePass subscription, select a model with
-"(ClinePass)" in its name: it runs on the subscription, and other paid models use Cline Credits. OpenBot downloads and pins the Cline CLI (`cline`) when you
+"(ClinePass)" in its name: it runs on the subscription, and other paid models use Cline Credits. StarBot downloads and pins the Cline CLI (`cline`) when you
 select Download on the Cline row in More providers, and starts it with `cline --acp`. Sign in opens
 Cline's sign-in page in your browser. You can also set `CLINE_API_KEY` in the environment used to
-launch OpenBot. If you installed `cline` 3.0.68 or newer yourself, OpenBot uses it until a download
+launch StarBot. If you installed `cline` 3.0.68 or newer yourself, StarBot uses it until a download
 exists. Set `OPENBOT_CLINE_PATH` to select an executable yourself. Cline agents stay on this
 computer: team members do not see them.
 
-Kimi uses a Kimi Code account. OpenBot downloads and pins the Kimi Code CLI (`kimi`) when you select
+Kimi uses a Kimi Code account. StarBot downloads and pins the Kimi Code CLI (`kimi`) when you select
 Download on the Kimi row in More providers, and starts it with `kimi acp`. Sign in runs `kimi login`,
 which opens Kimi's sign-in page in your browser. If you installed `kimi` 1.52.0 or newer yourself,
-OpenBot uses it until a download exists. Set `OPENBOT_KIMI_PATH` to select an executable yourself.
+StarBot uses it until a download exists. Set `OPENBOT_KIMI_PATH` to select an executable yourself.
 When a Full access Kimi agent changes its model, the CLI saves that model as its default in
 `~/.kimi/config.toml`, so a Kimi session that you start in a terminal also uses it. Kimi agents run
 on this computer. Team members see them when their app supports Kimi.
 
-Devin uses a Devin account. OpenBot downloads and pins the Devin CLI (`devin`) when you select
+Devin uses a Devin account. StarBot downloads and pins the Devin CLI (`devin`) when you select
 Download on the Devin row in More providers, and starts it with `devin acp`. Sign in opens Devin's
-sign-in page in your browser. If you installed `devin` yourself, OpenBot uses it until a download
+sign-in page in your browser. If you installed `devin` yourself, StarBot uses it until a download
 exists. Set `OPENBOT_DEVIN_PATH` to select an executable yourself. Devin agents run on this computer.
 Team members see them when their app supports Devin.
 
-GitHub Copilot uses a GitHub account with a Copilot plan. OpenBot downloads and pins the GitHub
+GitHub Copilot uses a GitHub account with a Copilot plan. StarBot downloads and pins the GitHub
 Copilot CLI (`copilot`) when you select Download on the GitHub Copilot row in More providers, and
 starts it with `copilot --acp`. Sign in opens GitHub's sign-in page in your browser. The CLI keeps
 the sign-in in the system keychain. If `COPILOT_GITHUB_TOKEN`, `GH_TOKEN` or `GITHUB_TOKEN` is set
-for OpenBot, the CLI uses that token instead, and Disconnect cannot remove it. If you installed
-`copilot` yourself, OpenBot uses it until a download exists. Set `OPENBOT_COPILOT_PATH` to select
+for StarBot, the CLI uses that token instead, and Disconnect cannot remove it. If you installed
+`copilot` yourself, StarBot uses it until a download exists. Set `OPENBOT_COPILOT_PATH` to select
 an executable yourself. Copilot agents run on this computer. Team members see them when their app
 supports GitHub Copilot.
 
-Mistral uses a Mistral account or a Mistral API key. OpenBot downloads and pins Mistral Vibe's ACP
+Mistral uses a Mistral account or a Mistral API key. StarBot downloads and pins Mistral Vibe's ACP
 server (`vibe-acp`) when you select Download on the Mistral row in More providers. Sign in opens
 Mistral's sign-in page in your browser. Vibe saves an API key in the system keychain, or in
-`~/.vibe/.env` when there is no keychain. If `MISTRAL_API_KEY` is set for OpenBot, Vibe uses that key,
-and Disconnect cannot remove it. OpenBot turns off Vibe's telemetry, and turns on Vibe's model
+`~/.vibe/.env` when there is no keychain. If `MISTRAL_API_KEY` is set for StarBot, Vibe uses that key,
+and Disconnect cannot remove it. StarBot turns off Vibe's telemetry, and turns on Vibe's model
 catalogue, so the model picker shows the models of your Mistral account, not only Mistral Medium 3.5. If you installed `vibe-acp`
-yourself, OpenBot uses it until a download exists. Set `OPENBOT_MISTRAL_PATH` to select an executable
+yourself, StarBot uses it until a download exists. Set `OPENBOT_MISTRAL_PATH` to select an executable
 yourself. When a Full access Mistral agent changes its model or thinking level, Vibe saves it as its
 default in `~/.vibe/config.toml`. Mistral agents run on this computer. Team members see them when
 their app supports Mistral.
 
 Hermes uses the Hermes Agent (`hermes`) that you install yourself, with your own `~/.hermes` (or
-`$HERMES_HOME`): its memories, skills, sign-ins and `SOUL.md` apply to OpenBot agents too. OpenBot
+`$HERMES_HOME`): its memories, skills, sign-ins and `SOUL.md` apply to StarBot agents too. StarBot
 does not update Hermes. When it is missing on macOS, Linux or a server, Download on the Hermes row runs
-the official Hermes installer; on Windows, the row opens the installation guide. OpenBot
+the official Hermes installer; on Windows, the row opens the installation guide. StarBot
 starts it with `hermes acp`. Sign in runs `hermes auth add nous` for a Nous Portal plan, or run
 `hermes setup` in a terminal for other providers. The model menu lists the models of each provider
 that Hermes is signed in to. Hermes reads `AGENTS.md` only in a workspace with no `.hermes.md`, and
@@ -283,18 +283,18 @@ that Hermes is signed in to. Hermes reads `AGENTS.md` only in a workspace with n
 Team members see the host's Hermes agents when their app uses Team API protocol 8 or newer.
 
 On Windows, install the native CLI and make sure `codex`, `claude`, or `grok` is available in PowerShell.
-Claude Code also requires Git for Windows. Then authenticate the installed CLI and restart OpenBot.
+Claude Code also requires Git for Windows. Then authenticate the installed CLI and restart StarBot.
 
 Bun and Node.js are not required when using an installed release. Optional Computer Use works on
 macOS, Windows and Linux, and the release carries the driver, so there is nothing to install. Only
 macOS asks for a permission for it: Screen Recording and Accessibility.
 
-OpenBot uses the existing local CLI login. It does not copy provider credentials. Grok's
+StarBot uses the existing local CLI login. It does not copy provider credentials. Grok's
 `XAI_API_KEY` and per-session MCP bearer tokens are never persisted or logged. Each provider's terms
 apply to your sign-in. See [provider terms](docs/provider-terms.md) for Claude subscriptions.
 
 For setup problems, data reset, and uninstall instructions, see
-[Troubleshooting](docs/TROUBLESHOOTING.md). OpenBot's data and network behavior is documented in
+[Troubleshooting](docs/TROUBLESHOOTING.md). StarBot's data and network behavior is documented in
 [Privacy](PRIVACY.md).
 
 ## Development
@@ -315,7 +315,7 @@ iex "& {$(irm https://bun.com/install.ps1)} -Version 1.4.2"
 ```
 
 ```bash
-git clone https://github.com/nightly-labs/openbot.git
+git clone https://github.com/hxy940219220-collab/StarBot-Desktop.git
 cd openbot
 bun install --frozen-lockfile
 bun run codex:doctor
@@ -330,7 +330,7 @@ lists from the main checkout when they are missing, installs dependencies, migra
 and seeds the isolated profile. Set it as the worktree setup command of your agent harness.
 
 On macOS, a worktree's `node_modules` uses almost no new disk space. Bun clones packages from its
-cache, and the root `postinstall` clones Electron from `~/Library/Caches/OpenBot/electron-dist`.
+cache, and the root `postinstall` clones Electron from `~/Library/Caches/StarBot/electron-dist`.
 `du` still shows the full size of each clone.
 The first install of an Electron version extracts it once and saves it there. Delete the directory
 to clear the cache; an entry that nobody used for 30 days is removed by the next save.
@@ -340,11 +340,11 @@ To reset only the local development state, quit the dev app and test client, the
 The command deletes the app and test-client development profiles plus the legacy host profile,
 including `openbot.db` and its WAL files. It prints each profile before it deletes it, and it
 deletes nothing while a dev app has one of them open. It does not change the production profile,
-the worktree profiles that `bun run dev` opens (`OpenBot Dev wt-<hash>`), agent workspaces,
+the worktree profiles that `bun run dev` opens (`StarBot Dev wt-<hash>`), agent workspaces,
 `~/.codex`, or `~/.claude`.
 
 `bun run dev` seeds a development profile it creates, so a first start already shows this data.
-`bun run dev:seed` replaces the shared `OpenBot Dev` profile. To use it, quit the dev app, then run:
+`bun run dev:seed` replaces the shared `StarBot Dev` profile. To use it, quit the dev app, then run:
 
 ```bash
 bun run dev:seed
@@ -367,7 +367,7 @@ Use `bun run dev:seed --dry-run` to inspect the target and fixture counts withou
 
 ### Marketplace launch catalog
 
-Seed the approved OpenBot team catalog locally with `bun run marketplace:seed:local`, then start or reuse `bun run dev`. Search **OpenBot** in Marketplace to review its Skills and Agents. This seed adds catalog records without resetting app data.
+Seed the approved StarBot team catalog locally with `bun run marketplace:seed:local`, then start or reuse `bun run dev`. Search **StarBot** in Marketplace to review its Skills and Agents. This seed adds catalog records without resetting app data.
 
 `bun run marketplace:build` creates the launch bundles. `bun run marketplace:publish:production` is a dry run; production writes require explicit flags and admin credentials. See the [catalog and publication guide](marketplace/production-catalog/README.md).
 
@@ -389,9 +389,9 @@ Optional scripts, references, and assets follow the Codex skill folder structure
 
 ## Import agents from Grok Bot
 
-Open **Server settings → Import** on this computer, or on a joined server in the desktop app or the browser client. Every member of a server can import, not only an owner or admin. Add the [OpenBot export agent](https://x.ai/bot/pOUBH2kQK8CKvM7nW8stG) to Grok Bot and say "Export my agents for OpenBot". It saves one `.zip` file to Downloads. Choose that file in OpenBot, select the agents, and import them.
+Open **Server settings → Import** on this computer, or on a joined server in the desktop app or the browser client. Every member of a server can import, not only an owner or admin. Add the [StarBot export agent](https://x.ai/bot/pOUBH2kQK8CKvM7nW8stG) to Grok Bot and say "Export my agents for StarBot". It saves one `.zip` file to Downloads. Choose that file in StarBot, select the agents, and import them.
 
-The import adds each agent's name, instructions, avatar, skills, routines, and memories. Workspace files are copied to `imported/` in the agent's workspace if you included them. Chat history is not copied: the export agent keeps the important facts as memories. For this computer, the file is read here and is not uploaded, and it has no size limit: OpenBot reads it from disk one file at a time and skips an agent whose files do not fit in the free disk space. For a joined server, the file goes to the computer that runs that server through the encrypted host connection, in parts, so it has no size limit either; the server must have free disk space for it. A server on an older version of OpenBot takes a file of at most 100 MB. A member's import uses a skill that the server already has instead of changing it. The export skill and its format are in [`resources/agent-import/grok-bot/SKILL.md`](resources/agent-import/grok-bot/SKILL.md).
+The import adds each agent's name, instructions, avatar, skills, routines, and memories. Workspace files are copied to `imported/` in the agent's workspace if you included them. Chat history is not copied: the export agent keeps the important facts as memories. For this computer, the file is read here and is not uploaded, and it has no size limit: StarBot reads it from disk one file at a time and skips an agent whose files do not fit in the free disk space. For a joined server, the file goes to the computer that runs that server through the encrypted host connection, in parts, so it has no size limit either; the server must have free disk space for it. A server on an older version of StarBot takes a file of at most 100 MB. A member's import uses a skill that the server already has instead of changing it. The export skill and its format are in [`resources/agent-import/grok-bot/SKILL.md`](resources/agent-import/grok-bot/SKILL.md).
 
 ## Commands
 
@@ -403,7 +403,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 
 | Command | Purpose |
 | --- | --- |
-| `bun run dev` | Start the local Auth API, Signal service, and Electron client with renderer HMR on its app profile. Ports are allocated through the dev registry, so a sibling worktree never takes one this stack won. It refuses a second stack in the same worktree unless you pass `--force`. Each worktree opens a profile of its own, keyed to its path; `--shared` opens the shared `OpenBot Dev` profile instead. `--isolated` is still accepted and changes nothing. A profile that you used before stays on disk unchanged. `--hosting=test` signs the app in to the `test` account Worker, on a profile that all worktrees share, so that a hosted server is a real VM; see [docs/hosted-servers.md](docs/hosted-servers.md#real-servers-from-a-development-build). A profile that does not exist yet is seeded with the showcase data of `bun run dev:seed` before the client starts, so a first start never opens an empty app; an existing profile is left as it is. An isolated profile still shares the computer's provider CLI store, so it does not download the pinned CLIs again. Before it starts, it runs `bun install --frozen-lockfile` and `bun run api:migrate:local` only when `bun.lock`, a workspace `package.json`, a patch, or a migration changed since their last successful run. The stamps are in `node_modules` and `apps/auth-api/.wrangler/state/v3/d1`, and each `bun install` writes the install stamp too; delete one to run its step again. |
+| `bun run dev` | Start the local Auth API, Signal service, and Electron client with renderer HMR on its app profile. Ports are allocated through the dev registry, so a sibling worktree never takes one this stack won. It refuses a second stack in the same worktree unless you pass `--force`. Each worktree opens a profile of its own, keyed to its path; `--shared` opens the shared `StarBot Dev` profile instead. `--isolated` is still accepted and changes nothing. A profile that you used before stays on disk unchanged. `--hosting=test` signs the app in to the `test` account Worker, on a profile that all worktrees share, so that a hosted server is a real VM; see [docs/hosted-servers.md](docs/hosted-servers.md#real-servers-from-a-development-build). A profile that does not exist yet is seeded with the showcase data of `bun run dev:seed` before the client starts, so a first start never opens an empty app; an existing profile is left as it is. An isolated profile still shares the computer's provider CLI store, so it does not download the pinned CLIs again. Before it starts, it runs `bun install --frozen-lockfile` and `bun run api:migrate:local` only when `bun.lock`, a workspace `package.json`, a patch, or a migration changed since their last successful run. The stamps are in `node_modules` and `apps/auth-api/.wrangler/state/v3/d1`, and each `bun install` writes the install stamp too; delete one to run its step again. |
 | `bun run preview` | Preview the built Electron client with the green preview icon. |
 | `bun run mobile:go` | Start the mobile app in Expo Go and clear the Metro cache. When the branch name ends in `-<number>`, such as `mobile-triage-12555`, Expo Go shows the server as `Issue #12555`. Set `OPENBOT_EXPO_SESSION_NAME` to use a different name. |
 | `bun mobile:ios` | Build and launch the iOS simulator app without RocketSim. |
@@ -411,7 +411,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run mobile:ios:build:local` | Build a production iOS `.ipa` locally for upload with Transporter. See [TestFlight setup](apps/mobile/README.md#local-testflight-build). |
 | `bun run mobile:ios:release:testflight` | Start the GitHub Actions iOS build from `main` and upload to TestFlight. Requires authenticated GitHub CLI. See [iOS release setup](apps/mobile/README.md#github-actions-testflight-release). |
 | `bun mobile:ios:rocketsim` | Start RocketSim and build and launch the iOS simulator app with RocketSim Connect. See [mobile setup](apps/mobile/README.md#development). |
-| `bun run mobile:go:tunnel` | Start the mobile app in Expo Go through a Metro tunnel and clear the cache. The OpenBot API and Signal still need their own reachable addresses. |
+| `bun run mobile:go:tunnel` | Start the mobile app in Expo Go through a Metro tunnel and clear the cache. The StarBot API and Signal still need their own reachable addresses. |
 | `bun run dev:api` | Start the TanStack Start API and its local D1 database on `127.0.0.1:3100`. |
 | `bun run dev:apns-key -- <AuthKey_ID.p8> [KEY_ID]` | Save an Apple Push Notification service key in ignored development state, so the local Auth API sends iPhone Live Activity updates. The local server forwards them to Apple over HTTP/2. Restart `bun run dev` after it. |
 | `bun run api:start` | Build and preview the Cloudflare Worker locally. |
@@ -422,7 +422,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run api:stripe:bootstrap` | Create or update the Stripe plan catalog and the Customer Portal settings from `STRIPE_SECRET_KEY` in the encrypted `apps/auth-api/.env.dev` (shell values replace it). It refuses a live key unless you add `--live`. For local webhooks, run `stripe listen --forward-to localhost:<API port>/v1/stripe/webhook` and set the signing secret in `STRIPE_WEBHOOK_SECRET`. See [Billing](docs/architecture/servers.md#billing). |
 | `bun run hosting:setup --target=production\|test` | Set up the Stripe catalog, the Customer Portal, and the Stripe and boat webhooks of one account server, and store the webhook signing secrets: production in the `cloudflare-production` GitHub Environment, test in the encrypted `apps/auth-api/.env.dev`. See [hosted servers](docs/hosted-servers.md#production). |
 | `bun run hosting:template` | Build the boat named snapshot that new hosted servers start from. Needs `BOAT_TEMPLATE_API_KEY` and `--version`, `--appimage-url`, `--appimage-sha256` and `--auth-api-url`. See [hosted servers](docs/hosted-servers.md). |
-| `bun run status:build` | Build the public status page in `apps/status/dist`. The `status-page` workflow adds `status.json` and `feed.xml` and publishes it to GitHub Pages at `status.openbot.run`. |
+| `bun run status:build` | Build the public status page in `apps/status/dist`. The `status-page` workflow adds `status.json` and `feed.xml` and publishes it to GitHub Pages at `status.starbot.app`. |
 | `bun run status:smoke` | Run the status page smoke test: update runs against a local fake service, the status webhooks against a local receiver, one read-only run against the live checks, and the built page in Chrome. It writes `.openbot-build/status-page/report.json`. |
 | `bun run remote:up` | Build and start the self-hosted Signal, coturn, and ACME stack. |
 | `bun run remote:check` | Check the Remote API and both Docker Compose configurations. |
@@ -433,7 +433,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run dev:test-client` | Start the Auth API, Signal service, local instance, and an isolated second client for team testing. |
 | `bun run dev:seed` | Replace only the app development profile with durable showcase data. `--if-missing` keeps an existing profile, which is how `bun run dev` seeds a first start. `--scale=agents:N,messages:M,channels:C,channelMessages:K,attachments:A` adds generated agents, chat history, channel history and large images to the showcase data, for memory and CPU measurements. |
 | `bun run dev:reset` | Delete the local app, test-client, and legacy host development state. It refuses while a dev app has one of these profiles open. |
-| `bun run dev:status` | Print, as JSON, every dev stack and dev app instance live on this machine: services, ports, pids, which of them belong to this worktree, and which are orphaned - a supervisor that is gone with its children still holding the ports. Each recorded process carries the state a stop command acts on: `live`, `gone` with `groupLive` for a survivor of a dead leader, and `unverified` for a pid this machine cannot date. `registryDirectory` is the directory it read: `~/Library/Caches/OpenBot/dev` on macOS, `$XDG_RUNTIME_DIR/openbot-dev` (else `~/.cache/openbot/dev`) on Linux, `%LOCALAPPDATA%\OpenBot\openbot-dev-instances` on Windows, or `OPENBOT_DEV_REGISTRY_DIR` when set. It does not depend on `TMPDIR`. |
+| `bun run dev:status` | Print, as JSON, every dev stack and dev app instance live on this machine: services, ports, pids, which of them belong to this worktree, and which are orphaned - a supervisor that is gone with its children still holding the ports. Each recorded process carries the state a stop command acts on: `live`, `gone` with `groupLive` for a survivor of a dead leader, and `unverified` for a pid this machine cannot date. `registryDirectory` is the directory it read: `~/Library/Caches/StarBot/dev` on macOS, `$XDG_RUNTIME_DIR/openbot-dev` (else `~/.cache/openbot/dev`) on Linux, `%LOCALAPPDATA%\StarBot\openbot-dev-instances` on Windows, or `OPENBOT_DEV_REGISTRY_DIR` when set. It does not depend on `TMPDIR`. |
 | `bun run dev:verify` | Print a stable JSON verification plan for this worktree: `ready`/`reasons` for safe checks, setup state, changed files and affected surfaces, nearby tests, runtime state, `qa.required`/`qa.ready`/`qa.reasons`, the renderer QA loop, safe `runnableCommands`, and all suggested `commands`. Add `--run` to execute only the safe non-mutating checks in the plan. Renderer QA follows `snapshot → action with --wait-for → snapshot → screenshot` when appearance matters. |
 | `bun run dev:restart-client` | Restart only the test client of this worktree's `dev:test-client` stack. The host and the other services stay live. The supervisor stops its own test-client child by PID and starts it again. Not on Windows. |
 | `bun run dev:stop` | Stop this worktree's dev stack, children included, using the pids in the registry rather than a process-name pattern. It signals only a pid whose start time still matches the record, so a recycled pid is never sent SIGTERM; anything it cannot confirm is reported, left running and kept in the registry, and the command exits non-zero. `--pid=<supervisor pid>` stops one other stack, `--all` stops every stack on the machine. |
@@ -463,7 +463,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run test:browser` | Run the complete local embedded-browser smoke test, including cross-process persistence. Use `--scenario=controls`, `--scenario=tool-boundary`, `--scenario=evaluation`, `--scenario=wait-deadlines`, or `--scenario=popups` for one isolated scenario. |
 | `bun run test:codex` | Probe the real CLI handshake and account without starting a paid turn. |
 | `bun run test:durations` | Re-record how long each desktop test file takes. CI splits its shards by this table, so run it when the two shards stop finishing together. |
-| `bun run cua-driver:doctor` | Print, as JSON, which `cua-driver` binary OpenBot would use for Computer Use, and the driver's own `doctor` report. Read-only, and it starts no daemon. `OPENBOT_CUA_DRIVER_PATH` selects a different binary in a checkout; an installed application runs only the driver it was released with. |
+| `bun run cua-driver:doctor` | Print, as JSON, which `cua-driver` binary StarBot would use for Computer Use, and the driver's own `doctor` report. Read-only, and it starts no daemon. `OPENBOT_CUA_DRIVER_PATH` selects a different binary in a checkout; an installed application runs only the driver it was released with. |
 | `bun run prepare:cua-driver` | Write the pinned Computer Use driver to `build/cua-driver/<platform>/<arch>`, verifying every SHA-256 in `native-runtime.lock.json`. Name another target with `bun scripts/install-cua-driver.ts <platform> <arch>`. Every packaging command runs this first. |
 | `bun run pin:cua-driver <version>` | Print a new `cuaDriver` block for `native-runtime.lock.json` from a published `cua-driver` release. Downloads the release assets of all five targets and hashes each shipped file. |
 | `bun run package` | Build an unpacked local application for the architecture of this Mac. |
@@ -473,7 +473,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run package:linux` | Build an unpacked local Linux x64 application on Linux. |
 | `bun run package:linux:arm64` | Build an unpacked local Linux arm64 application on arm64 Linux. |
 | `bun run package:linux:verify` | Build and verify the Linux x64 application on Linux. Run it under `xvfb-run -a` without a display. |
-| `bun scripts/create-github-app.ts [--org <org>]` | Create the OpenBot GitHub App from `scripts/github-app/manifest.json` with the manifest flow. Prints the Client ID for `src/main/github-connector-config.ts` and writes the app secrets to `~/.config/openbot/github-app-<slug>.json` (mode 0600). Enable Device Flow in the app settings after the run. |
+| `bun scripts/create-github-app.ts [--org <org>]` | Create the StarBot GitHub App from `scripts/github-app/manifest.json` with the manifest flow. Prints the Client ID for `src/main/github-connector-config.ts` and writes the app secrets to `~/.config/openbot/github-app-<slug>.json` (mode 0600). Enable Device Flow in the app settings after the run. |
 | `bun run release:preflight` | Verify version, Git state, and GitHub release secrets before tagging. |
 | `bun run dist:mac` | Build unsigned local DMG and ZIP update artifacts for this Mac. |
 | `bun run dist:win` | Build an unsigned Windows x64 NSIS installer on Windows. |
@@ -497,7 +497,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run test:provider-detection` | Run local detection, Load models and endpoint Edit against fake OpenAI-compatible servers on this computer: no key in a scan, no redirect, the stored key only to its own origin. Offline; writes `.openbot-build/provider-detection-e2e/report.json`. |
 | `bun run test:storage-live` | **Online/manual:** verify isolated Codex and Claude turns in a temporary SQLite database. |
 
-Publishing never creates a second OpenBot instance. The host keeps its Team API on loopback. A hidden,
+Publishing never creates a second StarBot instance. The host keeps its Team API on loopback. A hidden,
 sandboxed Electron page connects it to invited clients through WebRTC. Signal carries only connection
 setup messages. Team data uses direct DataChannels when possible and the project coturn service when
 direct ICE fails. Cloudflare stores accounts, configuration, memberships, invitations, logical session
@@ -508,7 +508,7 @@ LAN interface. Restart the runner after changing networks so newly generated QR 
 current address.
 
 Production mobile analytics setup and required OpenPanel credentials are documented in
-[OpenBot Mobile](apps/mobile/README.md#openpanel-product-analytics).
+[StarBot Mobile](apps/mobile/README.md#openpanel-product-analytics).
 
 `mobile:go:tunnel` exposes only the Expo development server. It does not expose the local account
 API, Signal, or TURN. A phone on 5G cannot use the default LAN addresses. For a test across networks,
@@ -526,9 +526,9 @@ only the credential in secure storage for revocation retries at startup, on retu
 and on the next connection attempt. Remote revocation completes when the account API is reachable.
 
 For manual team testing, `bun run dev:test-client` starts a complete two-client harness. The second
-client uses the `OpenBot Dev Test Client wt-<hash>` profile of this worktree (`OpenBot Dev Test Client`
+client uses the `StarBot Dev Test Client wt-<hash>` profile of this worktree (`StarBot Dev Test Client`
 with `--shared`) and renderer port 5174. `dev:reset` removes the shared one and the legacy
-`OpenBot Dev Host` profile. It does not remove the downloaded
+`StarBot Dev Host` profile. It does not remove the downloaded
 provider CLIs, which the whole computer shares. Press `Ctrl+C` in the runner terminal
 to stop only the processes started by that runner, or run `bun run dev:stop` from the worktree once
 that terminal is gone. Never stop a dev stack with `pkill -f electron` or `pkill -f bun`: on a
@@ -547,8 +547,8 @@ The normal `check` command is offline and uses a fake App Server. Manual smoke s
 signed-in subscription and must not run in CI.
 
 Local agents run with the providers' unrestricted execution modes. Each agent starts in its own
-persistent `~/OpenBot/Agents/<agent-id>` workspace and also receives `~/OpenBot/Shared`; routine command
-and filesystem work in both locations runs without OpenBot adding another permission boundary.
+persistent `~/StarBot/Agents/<agent-id>` workspace and also receives `~/StarBot/Shared`; routine command
+and filesystem work in both locations runs without StarBot adding another permission boundary.
 Because these modes are intentionally unrestricted, they also permit host access outside those
 directories when the provider and operating system allow it.
 
@@ -564,7 +564,7 @@ After you publish a server on a Mac, an optional **Set up remote desktop** promp
 Use the permission buttons to open **System Settings → Privacy & Security** on the host. If Sunshine is
 missing from a list, select **Show Sunshine in Finder** and add the bundled `Sunshine.app` with the **+** button.
 macOS can attribute access to the application that starts Sunshine; enable the application named by the
-system prompt. Return to OpenBot to check again. If a restart is required, end remote sessions first.
+system prompt. Return to StarBot to check again. If a restart is required, end remote sessions first.
 A check never restarts an active session.
 
 Select **Test on this Mac** for a local test. If native checks are unavailable, it tests video only and disables viewer input. After the checks pass, it can test mouse and keyboard too. Select **Test remote desktop** from another computer for a remote test.
@@ -600,7 +600,7 @@ Cloudflare Workers
 - `src/preload` exposes only the typed `window.openbot` API.
 - `src/renderer` contains the SolidJS interface.
 - `apps/auth-api` contains the TanStack Start account API, one-time email codes, rate limits, and D1 migrations. It also serves the public site: the landing page, `/news`, `/guides`, and the Marketplace pages at `/marketplace` (Agents, Skills, and Apps), `/marketplace/agents/<id>`, `/marketplace/skills/<slug>`, and `/plugins/<slug>`. `/plugins` redirects to `/marketplace/apps`.
-- `apps/status` contains the public status page at `status.openbot.run`, the script that the `status-page` workflow runs to check the services, and the script that sends the [status webhooks](docs/status-webhooks.md) of the team. GitHub hosts it, so it stays up when Cloudflare does not.
+- `apps/status` contains the public status page at `status.starbot.app`, the script that the `status-page` workflow runs to check the services, and the script that sends the [status webhooks](docs/status-webhooks.md) of the team. GitHub hosts it, so it stays up when Cloudflare does not.
 - `packages/contracts` contains process-boundary contracts, shared limits, and pure validation.
 - `packages/i18n` contains the interface text in English and 14 other languages, Arabic and Hebrew with a right-to-left layout, for desktop, web and mobile. See [docs/i18n.md](docs/i18n.md) to add text or a language.
 
@@ -610,7 +610,7 @@ rules for new modules.
 ## Chat attachments
 
 Attach MP3 audio and MOV video through the file picker or drag and drop. The limits are 100 MB per
-file, 250 MB per message, and 10 files per message. OpenBot gives the agent the original file; it does
+file, 250 MB per message, and 10 files per message. StarBot gives the agent the original file; it does
 not play, decode, transcribe, or validate the recording during import. Damaged recordings can be
 attached for inspection. Analysis depends on the tools available to the agent. Other audio or video
 formats attach as files of other types do (see below). Remote hosts must advertise the
@@ -619,7 +619,7 @@ formats attach as files of other types do (see below). Remote hosts must adverti
 MP4 video uses the same limits and rules as MOV. Remote hosts must also advertise the
 `mp4-attachments` capability.
 
-ZIP archives use the same limits. OpenBot does not extract or inspect an archive: the agent gets the
+ZIP archives use the same limits. StarBot does not extract or inspect an archive: the agent gets the
 original file and extracts it with its own tools. An agent sends a ZIP archive back with
 `openbot.attach_files_to_response`, and the user downloads it from the chat. Open shows a ZIP
 archive in the file manager instead of opening it. Remote hosts must advertise the `zip-attachments`
@@ -630,25 +630,25 @@ not as an image: providers take only raster images, so the agent reads the SVG t
 in the file manager. Remote hosts must advertise the `svg-attachments` capability.
 
 Files of all other types use the same limits, for example VPN profiles, certificates, and
-infrastructure configuration. OpenBot stores the file unchanged, with no preview, and the agent gets
+infrastructure configuration. StarBot stores the file unchanged, with no preview, and the agent gets
 its path and reads it with its own tools. Open shows the file in the file manager. Remote hosts must
 advertise the `any-file-attachments` capability. An older host takes only the types above and its
 list of documents, text, data, and source files.
 
 ## Local data and network boundaries
 
-- `~/OpenBot/Agents/<agent-id>` — one working directory per agent. A profile written before the
-  bot-to-agent rename holds them under `~/OpenBot/Bots`; the app moves them on first launch, and a
+- `~/StarBot/Agents/<agent-id>` — one working directory per agent. A profile written before the
+  bot-to-agent rename holds them under `~/StarBot/Bots`; the app moves them on first launch, and a
   workspace whose move could not run stays readable where it is.
-- `~/OpenBot/Shared` — files intentionally shared between agents.
-- `~/OpenBot/Shared/Transfers` — managed message snapshots and generated files. Each transfer has
+- `~/StarBot/Shared` — files intentionally shared between agents.
+- `~/StarBot/Shared/Transfers` — managed message snapshots and generated files. Each transfer has
   an `.openbot-transfer.json` manifest with ownership, recipients, size, and SHA-256 metadata.
-- `~/OpenBot/Downloads` — embedded-browser downloads.
-- Electron `userData/openbot.db` — the canonical OpenBot event log and projections for agents,
+- `~/StarBot/Downloads` — embedded-browser downloads.
+- Electron `userData/openbot.db` — the canonical StarBot event log and projections for agents,
   conversations, provider session bindings, queues, reactions, and attachment indexes.
 - Electron `userData/legacy-backup-v1` — unchanged copies of imported `bots.json` and
   `mailbox.json` files, when these files existed before the SQLite migration.
-- `~/Library/Application Support/OpenBot/provider-runtimes` — the provider CLIs OpenBot downloads
+- `~/Library/Application Support/StarBot/provider-runtimes` — the provider CLIs StarBot downloads
   and pins. One store for the whole computer, outside any one profile, so every development profile
   and the packaged app read the same download. `--user-data-dir` keeps the store in that directory
   instead, so an explicitly named profile stays self-contained.
@@ -666,24 +666,24 @@ list of documents, text, data, and source files.
 - `~/.copilot` (or `$COPILOT_HOME`) — settings and session history managed exclusively by the GitHub
   Copilot CLI. Its sign-in is in the system keychain.
 - `~/.vibe` (or `$VIBE_HOME`) — settings, logs and session history managed exclusively by Mistral
-  Vibe. OpenBot makes an empty `trusted_folders.toml` there when it is missing. The sign-in is in the
+  Vibe. StarBot makes an empty `trusted_folders.toml` there when it is missing. The sign-in is in the
   system keychain, or in `.env`.
 - `~/.hermes` (or `$HERMES_HOME`) — your own Hermes Agent settings, memories, skills, sign-ins and
-  session history. OpenBot reads only the change time of `auth.json`, `.env` and `config.yaml`, to
+  session history. StarBot reads only the change time of `auth.json`, `.env` and `config.yaml`, to
   see a sign-in.
 
 Deleting an agent removes its workspace, owned generated attachments, and deliveries addressed only
 to that agent. A transfer remains when another agent still uses the same message.
 
-OpenBot keeps one stable local conversation when an agent changes between Codex, Grok, and Claude. Native
+StarBot keeps one stable local conversation when an agent changes between Codex, Grok, and Claude. Native
 provider session identifiers stay private and are used only to resume provider runtime state.
 
 The Electron renderer is never exposed as a public website. It communicates with local CLI processes
-over stdio. When the owner publishes OpenBot, its authenticated Team API stays on localhost. WebRTC
+over stdio. When the owner publishes StarBot, its authenticated Team API stays on localhost. WebRTC
 protocol v3 carries RPC, events, and binary files to desktop and mobile clients. Expo Go hosts the
 mobile `RTCPeerConnection` in a hidden Expo DOM component, so mobile uses the same encrypted transport
 without a custom native development build. The account flow connects to
-the configured HTTPS Cloudflare API. The client stores only an encrypted OpenBot session token. One-time codes expire after
+the configured HTTPS Cloudflare API. The client stores only an encrypted StarBot session token. One-time codes expire after
 10 minutes and are stored only as hashes. A daily maintenance task removes expired or consumed
 authentication records from D1. The embedded browser uses a separate sandboxed Electron session and
 cannot access `window.openbot` or managed local attachments.
@@ -709,7 +709,7 @@ Releases are tag-driven. `bun run release:patch`, `release:minor`, or `release:m
 version and changelog. After review, commit, preflight, and tag the release; pushing the tag builds a
 signed and notarized macOS ARM64 and x64 release, a signed Windows x64 release, and unsigned Linux x64
 and arm64 AppImages in GitHub Actions. After the release is published, the workflow pushes the Docker
-image to `ghcr.io/nightly-labs/openbot`.
+image to `ghcr.io/hxy940219220-collab/StarBot-Desktop`.
 Installed builds check GitHub Releases for updates and expose download/restart controls in the account
 popover. Release signing secrets and the complete procedure are documented in
 [docs/RELEASING.md](docs/RELEASING.md).
@@ -728,18 +728,18 @@ Copyright 2026 Synthetify Labs spółka z ograniczoną odpowiedzialnością.
 Licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). You may use, modify, and
 distribute the code for permitted noncommercial purposes. Commercial use requires a separate license
 from the copyright owner. Buy a commercial license in Settings → Billing (Starter for 1 user, or
-Team for 2 to 10 users), or contact [licenses@openbot.run](mailto:licenses@openbot.run). Versions up to and including 0.1.11 remain
+Team for 2 to 10 users), or contact [licenses@starbot.app](mailto:licenses@starbot.app). Versions up to and including 0.1.11 remain
 available under Apache-2.0.
 See [NOTICE](NOTICE) for attribution and third-party notices.
 
-OpenBot is an independent source-available project and is not affiliated with, endorsed by, or
+StarBot is an independent source-available project and is not affiliated with, endorsed by, or
 sponsored by OpenAI. OpenAI, ChatGPT, and Codex are used only to describe compatibility with their
 respective products and services.
 
 ### Shared macOS hosts
 
-For one native Standard user per tenant, install the normal OpenBot DMG and the optional
-`OpenBot-Host-<VERSION>-arm64.pkg` from the same release. The Host package provides
+For one native Standard user per tenant, install the normal StarBot DMG and the optional
+`StarBot-Host-<VERSION>-arm64.pkg` from the same release. The Host package provides
 `sudo openbot-host setup --create-user client-acme --create-user client-bravo` and
 `sudo openbot-host verify`. `sudo openbot-host status [--json]` and `sudo openbot-host watch`
 show the update phase, the staged version, and each tenant's work state. No Git checkout, Bun,

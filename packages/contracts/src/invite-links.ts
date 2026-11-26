@@ -1,8 +1,8 @@
 import { isOpenBotTeamApiHostname } from "./validation";
 
-export const OPENBOT_INVITE_ORIGIN = "https://openbot.run";
+export const OPENBOT_INVITE_ORIGIN = "https://starbot.app";
 export const OPENBOT_INVITE_PATH = "/join";
-export const OPENBOT_CONTROL_PLANE_ORIGIN = "https://api.openbot.run";
+export const OPENBOT_CONTROL_PLANE_ORIGIN = "https://api.starbot.app";
 
 export const PERMANENT_INVITE_EXPIRES_AT_MS = 8_640_000_000_000_000;
 
@@ -107,7 +107,7 @@ export function parseInviteUrl(value: string, options: InviteLinkOptions = {}): 
   try {
     url = new URL(value);
   } catch {
-    throw new Error("Enter a valid OpenBot invitation link.");
+    throw new Error("Enter a valid StarBot invitation link.");
   }
 
   const canonical =
@@ -122,7 +122,7 @@ export function parseInviteUrl(value: string, options: InviteLinkOptions = {}): 
     url.hash !== "" ||
     !hasOnlyInviteFields(url.searchParams)
   ) {
-    throw new Error("The OpenBot invitation link is invalid.");
+    throw new Error("The StarBot invitation link is invalid.");
   }
 
   const payload: InviteLinkPayload = {
@@ -173,7 +173,7 @@ function validatePayload(payload: InviteLinkPayload, options: InviteLinkOptions)
     !BASE64URL_SECRET_PATTERN.test(payload.fingerprint) ||
     !BASE64URL_SECRET_PATTERN.test(payload.token)
   ) {
-    throw new Error("The OpenBot invitation link is invalid.");
+    throw new Error("The StarBot invitation link is invalid.");
   }
 }
 

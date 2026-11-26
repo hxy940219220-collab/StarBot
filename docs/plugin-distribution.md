@@ -24,7 +24,7 @@ Two things are not decided:
 - what a shared plugin link opens.
 
 `Copy link` also copies `https://openbot.app/plugins/<slug>`. That host does not exist. The
-canonical site is `https://openbot.run` (`packages/contracts/src/invite-links.ts`).
+canonical site is `https://starbot.app` (`packages/contracts/src/invite-links.ts`).
 
 This document answers three questions:
 
@@ -36,7 +36,7 @@ This document answers three questions:
 
 | Decision | Value |
 | --- | --- |
-| Catalog source | A static catalog on `openbot.run`. The app gets it and keeps a copy. |
+| Catalog source | A static catalog on `starbot.app`. The app gets it and keeps a copy. |
 | Not used | The Worker and D1 route that the skills and agents marketplaces use. |
 | Submissions | Out of scope in this round. A plugin is added in the repository. |
 | Install target | The app (the MCP server) is host-global. The skills go to the agent whose chat is open, else to the first agent. |
@@ -78,16 +78,16 @@ The Account Worker (`apps/auth-api`) serves the catalog from its own bundle. The
 
 | URL | Content | Cache-Control |
 | --- | --- | --- |
-| `https://openbot.run/plugins/catalog.json` | The index: one summary for each plugin, with `detailSha256` | `public, max-age=300, stale-while-revalidate=3600, stale-if-error=86400`, and a strong `ETag` |
-| `https://openbot.run/plugins/<slug>/<version>.json` | One detail: prompts, apps, skills, links | `public, max-age=31536000, immutable` |
-| `https://openbot.run/plugins/assets/<name>.<sha8>.<ext>` | Icons and avatars | `public, max-age=31536000, immutable` |
+| `https://starbot.app/plugins/catalog.json` | The index: one summary for each plugin, with `detailSha256` | `public, max-age=300, stale-while-revalidate=3600, stale-if-error=86400`, and a strong `ETag` |
+| `https://starbot.app/plugins/<slug>/<version>.json` | One detail: prompts, apps, skills, links | `public, max-age=31536000, immutable` |
+| `https://starbot.app/plugins/assets/<name>.<sha8>.<ext>` | Icons and avatars | `public, max-age=31536000, immutable` |
 
 The version is in the detail path and the content hash is in the asset name. Thus `immutable` is
 correct: a change to the content gives a different URL.
 
 Each file has a `schemaVersion`. The index also has a `catalogVersion`, which always increases.
 If the `schemaVersion` is higher than the app knows, the app ignores the whole file and shows
-"Update OpenBot to see the newest plugins." The app must not read a part of a file it does not know.
+"Update StarBot to see the newest plugins." The app must not read a part of a file it does not know.
 
 ### 2.3 The detail shape
 
@@ -180,14 +180,14 @@ Worker. The build script tests that each pinned skill version exists.
 
 Two controls protect the catalog:
 
-- HTTPS to `openbot.run`, which is a Cloudflare custom domain;
+- HTTPS to `starbot.app`, which is a Cloudflare custom domain;
 - `detailSha256` in the index. The main process compares the hash after each detail download. This
   is the control that `src/main/skill-marketplace-service.ts` already uses for a skill bundle
   (`sha256(bundle) === detail.bundleSha256`).
 
 There is **no signature**. The party that holds a signing key would also be the party that deploys
 the Worker that serves the file. Thus a signature would protect against nothing new. Add a signature
-only if the catalog moves to a host that OpenBot does not control.
+only if the catalog moves to a host that StarBot does not control.
 
 ### 2.6 Fetch and cache in the app
 
@@ -207,8 +207,8 @@ in.
 
 The renderer shows three failure states:
 
-- stale: "Showing the catalog from <time>. OpenBot could not reach openbot.run.";
-- cold and offline: "Plugins need a connection to openbot.run the first time.";
+- stale: "Showing the catalog from <time>. StarBot could not reach starbot.app.";
+- cold and offline: "Plugins need a connection to starbot.app the first time.";
 - wrong hash: "This plugin listing did not match its checksum. Try again later."
 
 ### 2.7 Contracts and IPC
@@ -328,12 +328,12 @@ there. Add one when you add a listing. Each statement in it needs a vendor page 
 listing with no guide still gets the generated "How to connect" section, but no uses, questions or
 sources, and nothing warns about it.
 
-The page has one main button, `Open in OpenBot`, and a second button, `Download OpenBot`.
+The page has one main button, `Open in StarBot`, and a second button, `Download StarBot`.
 
 ### 4.2 The link shapes
 
 ```
-https://openbot.run/plugins/<slug>    the link a person shares and the app copies
+https://starbot.app/plugins/<slug>    the link a person shares and the app copies
 openbot://plugins/<slug>              the link the page button opens
 ```
 
@@ -348,7 +348,7 @@ identifier, so a path segment is sufficient. A query form would invite growth, s
 The parser accepts a URL only when:
 
 - the protocol is `openbot:` with the host `plugins`, or the origin is exactly
-  `https://openbot.run` with the path prefix `/plugins/`;
+  `https://starbot.app` with the path prefix `/plugins/`;
 - there is exactly one path segment after the prefix;
 - the search, the hash, the port, the user name and the password are empty;
 - the slug matches `^[a-z0-9][a-z0-9-]{0,62}$`. Thus a slug cannot contain a dot, and cannot hide
@@ -390,15 +390,15 @@ the install button and choose an agent.
 When the slug is not in the copy of the catalog, the main process reads it. The renderer does not
 fetch, so the `connect-src` policy does not change. Two states follow:
 
-- `missing`: "This plugin is not in the OpenBot catalog." This is final, and gives a button back to
+- `missing`: "This plugin is not in the StarBot catalog." This is final, and gives a button back to
   the plugin list;
-- `offline`: "OpenBot cannot reach openbot.run. Check your connection." This gives "Try again".
+- `offline`: "StarBot cannot reach starbot.app. Check your connection." This gives "Try again".
 
 ### 4.5 Copy link
 
 `shareUrl` leaves the plugin type. The app builds the link from the slug with
 `createPluginShareUrl(slug)`. Thus catalog data cannot put a foreign URL behind a button that the
-user trusts. The clipboard gets exactly `https://openbot.run/plugins/<slug>`, with no query and no
+user trusts. The clipboard gets exactly `https://starbot.app/plugins/<slug>`, with no query and no
 tracking field.
 
 The button becomes the existing `CopyButton` in `packages/ui/src/button.tsx`, which
@@ -417,7 +417,7 @@ never opens a window. This design adds nothing to the navigation policy.
 | A link installs a plugin without agreement | The link opens the listing only. The install is a separate press with an agent choice. A test enforces this. |
 | A path attack, such as `openbot://plugins/../join?…` | One path segment, and the slug pattern. The invite parser owns `join`. |
 | Extra fields in the link, such as `?install=1` | The search and the hash must be empty. |
-| A similar host, such as `openbot.app` or `openbot.run.example.com` | The origin is compared as a whole string. No `endsWith` and no expression on the host name. |
+| A similar host, such as `openbot.app` or `starbot.app.example.com` | The origin is compared as a whole string. No `endsWith` and no expression on the host name. |
 | A `javascript:` or `file:` URL in catalog data | `safeBrowserUrl` accepts `http:` and `https:` only, and the share URL is built and not read. |
 | The slug used as a file path | The slug is checked at the IPC boundary, and it never builds a path. |
 | Many links raise the window | One pending link is kept. A second link replaces the first. |
@@ -428,8 +428,8 @@ Degraded conditions:
 
 | Condition | Result |
 | --- | --- |
-| `openbot.run` is not available, and the plugin is in the cache | The listing opens from the cache. There is no request. |
-| `openbot.run` is not available, and the plugin is not in the cache | The `offline` state, with "Try again". |
+| `starbot.app` is not available, and the plugin is in the cache | The listing opens from the cache. There is no request. |
+| `starbot.app` is not available, and the plugin is not in the cache | The `offline` state, with "Try again". |
 | The plugin is no longer in the catalog | The `missing` state. |
 | The reader has no app | The page stays readable, and offers the download. |
 | The app is older than the link kind | The URL is dropped without a message, as today. |
@@ -465,7 +465,7 @@ Ordered by cost.
 
 ## 8. Order of work
 
-1. ~~Correct the fixture host to `openbot.run`, and build the share URL from the slug.~~ Done:
+1. ~~Correct the fixture host to `starbot.app`, and build the share URL from the slug.~~ Done:
    `createPluginShareUrl` in `packages/contracts/src/plugin-links.ts`.
 2. ~~`marketplace/plugin-catalog/` and `scripts/build-plugin-catalog.ts`, with fixtures and `--check`.~~ Done:
    the source holds 17 listings (no-auth, header key, stdio env key, and OAuth
@@ -490,6 +490,6 @@ Ordered by cost.
    remove one piece at a time, for a user who wants only one of them.
 8. ~~The deep-link router and the share link.~~ Done. `src/main/deep-link-router.ts` decides which
    kind an `openbot://` link is, `openbot://plugins/<slug>` opens that app's page in the Apps tab
-   and installs nothing, and `openbot.run/plugins/<slug>` now answers, so the detail page offers
+   and installs nothing, and `starbot.app/plugins/<slug>` now answers, so the detail page offers
    `Copy link` again. The public pages read the same catalog source as the tab, through the generated
    `apps/auth-api/src/lib/plugin-catalog.generated.ts`.

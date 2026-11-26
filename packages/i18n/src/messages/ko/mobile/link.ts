@@ -10,10 +10,12 @@ export const messages = {
   "mobile.link.pairing.title": "이 휴대폰 연결",
   "mobile.link.pairing.alreadySignedIn": "이미 로그인되어 있어요. 다른 계정을 연결하려면 설정에서 로그아웃하세요.",
   "mobile.link.pairing.description": "데스크톱에서 이 모바일 연결 링크를 요청한 경우에만 계속하세요.",
-  "mobile.link.pairing.accountService": "이 링크는 OpenBot 계정 서비스가 아니라 {origin}의 계정 서비스에 연결돼요.",
+  "mobile.link.pairing.accountService": "이 링크는 StarBot 계정 서비스가 아니라 {origin}의 계정 서비스에 연결돼요.",
+
   "mobile.link.pairing.connect": "연결",
   "mobile.link.plugin.title": "플러그인 페이지 열기",
-  "mobile.link.plugin.description": "OpenBot 웹사이트에서 이 플러그인을 확인하세요.",
+  "mobile.link.plugin.description": "StarBot 웹사이트에서 이 플러그인을 확인하세요.",
+
   "mobile.link.plugin.openFailed": "플러그인 페이지를 열지 못했어요.",
   "mobile.link.plugin.view": "플러그인 보기",
   "mobile.link.unavailable.title": "사용할 수 없는 링크",

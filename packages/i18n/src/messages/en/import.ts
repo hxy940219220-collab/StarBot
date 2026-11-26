@@ -105,7 +105,8 @@ export const messages = defineMessages("import", {
     "If Hermes uses another folder, for example one that HERMES_HOME sets, choose that folder.",
   "import.hermes.notFoundServer": "No Hermes profiles on this server",
   "import.hermes.notFoundServerNote":
-    "OpenBot reads the Hermes folder of the server. To import Hermes from this computer, export a .zip file from Hermes.",
+    "StarBot reads the Hermes folder of the server. To import Hermes from this computer, export a .zip file from Hermes.",
+
   "import.hermes.chooseFolder": "Choose the Hermes folder",
   "import.hermes.chooseAnother": "Choose another folder",
   "import.hermes.title": "Agents from Hermes Agent",

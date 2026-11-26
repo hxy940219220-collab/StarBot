@@ -10,7 +10,8 @@ export const messages = {
   "routine.kind.yearly": "매년",
   "routine.kind.custom": "사용자 지정",
 
-  "routine.feed.calendarName": "OpenBot 루틴",
+  "routine.feed.calendarName": "StarBot 루틴",
+
   "routine.feed.eventAgent": "에이전트: {name}",
   "routine.feed.eventChannel": "채널: {name}",
   "routine.feed.eventTimezone": "시간대: {timezone}",

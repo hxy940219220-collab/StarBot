@@ -29,7 +29,8 @@ export const messages = {
   "notification.machineAlert.cpu": "{server}: CPU {percent} bezet",
   "notification.machineAlert.body": "Het alarmniveau van {level} is overschreden. Zie Serverinstellingen > Opslag.",
   "notification.test": "Meldingen werken.",
-  "notification.welcome": "OpenBot laat je hier weten wanneer een agent je nodig heeft.",
+  "notification.welcome": "StarBot laat je hier weten wanneer een agent je nodig heeft.",
+
   "notification.toast.region": "Meldingen",
   "notification.toast.close": "Melding sluiten",
 } as const satisfies PartialTranslation<typeof source>;

@@ -7,7 +7,7 @@ import type { OpenBotMigration } from "./migration";
 // what a CHECK change costs (migrations 17, 22 and 23). The code only accepts the platforms it has
 // a driver for.
 //
-// A connection is one workspace of a platform, such as a Slack workspace that installed the OpenBot
+// A connection is one workspace of a platform, such as a Slack workspace that installed the StarBot
 // app. Its orchestrator agent receives each new conversation and asks its teammates. No token is
 // stored here. The tokens of a connection live in the main process's
 // encrypted credential file, keyed by `connection_id`.

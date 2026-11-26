@@ -31,26 +31,36 @@ export const messages = {
   "update.provider.startFailed": "Não foi possível iniciar a atualização. Tente novamente.",
   "update.provider.showDetails": "Mostrar detalhes",
   "update.provider.hideDetails": "Ocultar detalhes",
-  "update.scheduled.title": "{name} agendou uma atualização do OpenBot",
-  "update.scheduled.automaticTitle": "O OpenBot instala uma atualização",
-  "update.scheduled.whenIdle": "O OpenBot reinicia quando os agentes estão ociosos.",
-  "update.scheduled.now": "O OpenBot reinicia quando a atualização é baixada.",
+  "update.scheduled.title": "{name} agendou uma atualização do StarBot",
+
+  "update.scheduled.automaticTitle": "O StarBot instala uma atualização",
+
+  "update.scheduled.whenIdle": "O StarBot reinicia quando os agentes estão ociosos.",
+
+  "update.scheduled.now": "O StarBot reinicia quando a atualização é baixada.",
+
   "update.scheduled.cancel": "Cancelar atualização",
   "update.scheduled.cancelFailed": "Não foi possível cancelar a atualização.",
-  "update.idleRestart.relaunchTitle": "O OpenBot reinicia quando os agentes estiverem ociosos",
-  "update.idleRestart.updateTitle": "O OpenBot instala a atualização quando os agentes estiverem ociosos",
+  "update.idleRestart.relaunchTitle": "O StarBot reinicia quando os agentes estiverem ociosos",
+
+  "update.idleRestart.updateTitle": "O StarBot instala a atualização quando os agentes estiverem ociosos",
+
   "update.idleRestart.description": "Novas execuções de rotina aguardam até a reinicialização.",
   "update.idleRestart.waitingFor": "Aguardando {reasons}.",
   "update.idleRestart.cancel": "Não reiniciar",
   "update.idleRestart.restartNow": "Reiniciar agora",
-  "update.idleRestart.restartNowTitle": "Reiniciar o OpenBot agora?",
+  "update.idleRestart.restartNowTitle": "Reiniciar o StarBot agora?",
+
   "update.idleRestart.restartNowDescription": "Turnos de agente e execuções de rotina não concluídos param agora.",
   "update.idleRestart.keepWaiting": "Continuar aguardando",
   "update.idleRestart.cancelFailed": "Não foi possível cancelar a reinicialização.",
   "update.idleRestart.requestFailed": "Não foi possível agendar a reinicialização.",
-  "update.idleRestart.failedTitle": "O OpenBot não reiniciou",
-  "update.whatsNew.title": "Novidades do OpenBot",
-  "update.whatsNew.description": "Os novos recursos e as alterações nesta versão do OpenBot.",
+  "update.idleRestart.failedTitle": "O StarBot não reiniciou",
+
+  "update.whatsNew.title": "Novidades do StarBot",
+
+  "update.whatsNew.description": "Os novos recursos e as alterações nesta versão do StarBot.",
+
   "update.whatsNew.version": "Versão {version}",
   "update.whatsNew.updatedFrom": "Atualizado de {from} para {to}",
   "update.whatsNew.group.added": "Novidades",
@@ -67,12 +77,15 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Esta versão não tem notas para mostrar aqui. O histórico completo mostra todas as alterações.",
   "update.whatsNew.changelog": "Todas as alterações",
-  "update.whatsNew.changelogFailed": "O OpenBot não conseguiu abrir o registro de alterações.",
+  "update.whatsNew.changelogFailed": "O StarBot não conseguiu abrir o registro de alterações.",
+
   "update.whatsNew.done": "Entendi",
   "update.required.title": "Atualização necessária",
   "update.required.description":
-    "O OpenBot {version} não é mais compatível. Atualize para a versão {minimum} ou mais recente para continuar.",
-  "update.required.download": "Baixar o OpenBot",
+    "O StarBot {version} não é mais compatível. Atualize para a versão {minimum} ou mais recente para continuar.",
+
+  "update.required.download": "Baixar o StarBot",
+
   "update.required.continue": "Continuar sem atualizar",
   "update.required.failed": "A atualização não terminou.",
 } as const satisfies PartialTranslation<typeof source>;

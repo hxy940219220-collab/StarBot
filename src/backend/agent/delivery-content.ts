@@ -139,7 +139,7 @@ function skippedRunsCount({ count, complete }: SkippedRoutineRuns): string {
 function skippedRoutineRunsNote(skipped: SkippedRoutineRuns): string {
   const { reasons } = skipped;
   const runs = skippedRunsCount(skipped);
-  return `OpenBot note, not from the user: ${runs} of this routine did not happen before this run. Reason: ${reasons.map((reason) => reason.replace(/\.$/u, "")).join("; ")}. Start your answer with this, in plain words: how many runs did not happen, why, what the user missed, and what to change if it can happen again. Then report this run.`;
+  return `StarBot note, not from the user: ${runs} of this routine did not happen before this run. Reason: ${reasons.map((reason) => reason.replace(/\.$/u, "")).join("; ")}. Start your answer with this, in plain words: how many runs did not happen, why, what the user missed, and what to change if it can happen again. Then report this run.`;
 }
 
 export interface TaskReportState {
@@ -205,7 +205,7 @@ function taggedReference(
   return `${title} (thread taskId ${reference.id}${thread.state ? `, ${thread.state}${detail}` : ""})`;
 }
 
-const TEAMMATE_HEADER = "Message from OpenBot teammate";
+const TEAMMATE_HEADER = "Message from StarBot teammate";
 const NO_ANSWER_LINE = "The sender does not want an answer. This message passes information to you.";
 const COLLABORATOR_SEPARATOR = "--- collaborator message ---";
 const ROUTINE_TASK_START = "--- routine task ---";
@@ -213,22 +213,22 @@ const ROUTINE_TASK_END = "--- end of routine task ---";
 const ATTACHED_FILES_HEADER = "\n\nAttached local files:\n";
 const NO_ANSWER_FROM = "No answer comes from ";
 const USER_LANGUAGE_LINE =
-  "Write each line for the user in the language of the user's chat messages, not in the language of OpenBot notes or other agents.";
+  "Write each line for the user in the language of the user's chat messages, not in the language of StarBot notes or other agents.";
 const RESULT_FORMAT =
   "Reply in three lines: Status: done | partial | blocked, Result: <concrete outcome>, Evidence: <file, test, command, or none>.";
 const NO_ANSWER_REASON = ": the request to them ended before they answered. Do not wait for them.";
 const STILL_WORKING_FROM = "No answer yet from ";
-const EXTERNAL_CHAT_ANSWER = `This turn runs in an external chat, such as WhatsApp, Slack or Telegram. OpenBot posts your written answer there, and the people in it read it. Put the result only in openbot.send_message. When only a person in that chat can give what you need, ask them for it in your written answer, in plain words. Otherwise answer only ${QUIET_ANSWER}: nothing is posted.`;
+const EXTERNAL_CHAT_ANSWER = `This turn runs in an external chat, such as WhatsApp, Slack or Telegram. StarBot posts your written answer there, and the people in it read it. Put the result only in openbot.send_message. When only a person in that chat can give what you need, ask them for it in your written answer, in plain words. Otherwise answer only ${QUIET_ANSWER}: nothing is posted.`;
 const STILL_WORKING_REASON = ": they still work on the request. Their answer comes in a later turn.";
-export const HANDOFF_START = "Continue this OpenBot conversation.";
+export const HANDOFF_START = "Continue this StarBot conversation.";
 export const HANDOFF_END = "--- end previous transcript ---";
 export const CURRENT_MESSAGE_SEPARATOR = "\n\n--- current message ---\n";
 
 const RESTARTED_RESULT_NOTE =
-  "OpenBot note, not from the teammate: OpenBot or its provider restarted while you worked with the result below, so your turn stopped before it ended. Continue with this result now. You can have done part of the work for it already: check the result of an action that you started before you do it again, and if you cannot tell, say so instead of doing it again. This note does not approve a risky action.";
+  "StarBot note, not from the teammate: StarBot or its provider restarted while you worked with the result below, so your turn stopped before it ended. Continue with this result now. You can have done part of the work for it already: check the result of an action that you started before you do it again, and if you cannot tell, say so instead of doing it again. This note does not approve a risky action.";
 
 const RESTARTED_ROUTINE_NOTE =
-  "OpenBot note, not from the user: OpenBot or its provider restarted while you did the routine below, so that run stopped before it ended. Do the routine again now. You can have done part of it already: check the result of an action that you started before you do it again, and if you cannot tell, say so instead of doing it again. This note does not approve a risky action.";
+  "StarBot note, not from the user: StarBot or its provider restarted while you did the routine below, so that run stopped before it ended. Do the routine again now. You can have done part of it already: check the result of an action that you started before you do it again, and if you cannot tell, say so instead of doing it again. This note does not approve a risky action.";
 
 export function restartedResultInput(
   input: readonly DeliveryInputItem[],
@@ -310,14 +310,14 @@ function userFramedTeammateText(
   const teammate = `Your teammate ${senderName} (${senderAgentId})`;
   if (delivery.replyToMessageId)
     return [
-      `${teammate} answered your message through OpenBot:`,
+      `${teammate} answered your message through StarBot:`,
       displayText,
       "Give the result to the user naturally, starting with the teammate's name. Send the teammate no acknowledgement; when the status is partial or blocked, finish or follow up the open part yourself.",
       USER_LANGUAGE_LINE,
     ].join("\n");
   if (delivery.expectsReply === false)
     return [
-      `${teammate} sent you this message through OpenBot. It needs no answer: send no reply or acknowledgement.`,
+      `${teammate} sent you this message through StarBot. It needs no answer: send no reply or acknowledgement.`,
       steersQuietTurn
         ? `When nothing in it is for the user, call the ${ROUTINE_NO_UPDATE_TOOL} tool instead of a written answer.`
         : null,
@@ -327,7 +327,7 @@ function userFramedTeammateText(
       .filter(Boolean)
       .join("\n");
   return [
-    `${teammate} sent you this request through OpenBot:`,
+    `${teammate} sent you this request through StarBot:`,
     displayText,
     `Do it, then send the result to ${senderName} with openbot.send_message: recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", expectsReply false. ${RESULT_FORMAT}`,
   ].join("\n");
@@ -367,14 +367,14 @@ function taskReportFraming(taskId: string, report: TaskReportState | null, waiti
   const name = report ? `"${report.title}" (taskId ${taskId})` : `taskId ${taskId}`;
   const status =
     report?.outcome === "failed"
-      ? `Task report from OpenBot: task ${name}, which you started with openbot.start_task, failed. The text below is its error or last answer.`
+      ? `Task report from StarBot: task ${name}, which you started with openbot.start_task, failed. The text below is its error or last answer.`
       : report?.outcome === "stopped"
-        ? `Task report from OpenBot: the user stopped task ${name}, which you started with openbot.start_task. Do not start it again unless the user asks. The text below is its last answer, so part of the work can be done.`
+        ? `Task report from StarBot: the user stopped task ${name}, which you started with openbot.start_task. Do not start it again unless the user asks. The text below is its last answer, so part of the work can be done.`
         : report?.outcome === "interrupted"
-          ? `Task report from OpenBot: task ${name}, which you started with openbot.start_task, stopped before it finished. The text below is its last answer, or its title when it gave none, so part of the work can be done.`
+          ? `Task report from StarBot: task ${name}, which you started with openbot.start_task, stopped before it finished. The text below is its last answer, or its title when it gave none, so part of the work can be done.`
           : report === null || report.closed
-            ? `Task report from OpenBot: task ${name}, which you started with openbot.start_task, is closed. The text below is its last answer, or its title when it gave none.`
-            : `Task report from OpenBot: task ${name}, which you started with openbot.start_task, ended its turn. The text below is its final answer.`;
+            ? `Task report from StarBot: task ${name}, which you started with openbot.start_task, is closed. The text below is its last answer, or its title when it gave none.`
+            : `Task report from StarBot: task ${name}, which you started with openbot.start_task, ended its turn. The text below is its final answer.`;
   const running = report?.stillRunning.length
     ? [`Still running: ${report.stillRunning.map((other) => `"${other.title}" (taskId ${other.taskId})`).join(", ")}.`]
     : [];
@@ -386,7 +386,7 @@ function taskReportFraming(taskId: string, report: TaskReportState | null, waiti
     ...(waiting.length === 0
       ? []
       : [
-          `${waiting.join(", ")} wait for the result of the request that you started this task for. OpenBot sends your final answer of this turn to them as your reply, so write it for them. ${RESULT_FORMAT} Do not send it with openbot.send_message.`,
+          `${waiting.join(", ")} wait for the result of the request that you started this task for. StarBot sends your final answer of this turn to them as your reply, so write it for them. ${RESULT_FORMAT} Do not send it with openbot.send_message.`,
         ]),
   ];
 }
@@ -436,7 +436,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
   } else if (delivery.sender.kind === "agent" && delivery.sender.agentId === delivery.recipientAgentId) {
     text = [
       "This message comes from your own chat, which started this task with openbot.start_task. The task is a separate conversation beside that chat.",
-      "Do the work here, and do not end your turn while background work of yours still runs. End with a compact result that has the data your chat needs, without your steps: OpenBot sends your final answer to your chat. Do not send it with openbot.send_message.",
+      "Do the work here, and do not end your turn while background work of yours still runs. End with a compact result that has the data your chat needs, without your steps: StarBot sends your final answer to your chat. Do not send it with openbot.send_message.",
       COLLABORATOR_SEPARATOR,
       displayText,
     ].join("\n");
@@ -461,23 +461,23 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
           routine
             ? `This replies to a message you sent in a run of your routine "${routine.routineName}". That run has ended, so its task is below. Continue that task from this result now: do its next steps, such as a request to the next teammate, before you end this turn. Then give the result to the user naturally, starting with the teammate's name.`
             : "This replies to a message you sent. Give the result to the user naturally, starting with the teammate's name.",
-          "For partial or blocked work, you still own the request: finish the rest yourself, with a follow-up, or with a better teammate; do not repeat a failed call unchanged. Give the user the blocker and its Unblock action only when the user must act. When OpenBot has a plugin for the service and it is not in your tools, call openbot.suggest_marketplace_app and end your answer with the next field of its result.",
+          "For partial or blocked work, you still own the request: finish the rest yourself, with a follow-up, or with a better teammate; do not repeat a failed call unchanged. Give the user the blocker and its Unblock action only when the user must act. When StarBot has a plugin for the service and it is not in your tools, call openbot.suggest_marketplace_app and end your answer with the next field of its result.",
           `Reply to the teammate only for another requested action or new information that unblocks its work, with replyToMessageId "${delivery.messageId}", never with the same request or an acknowledgement.`,
           USER_LANGUAGE_LINE,
         ]
       : delivery.expectsReply === false
         ? [
             NO_ANSWER_LINE,
-            "Use it if it changes your work, and continue. Send no reply, acknowledgement or result: OpenBot sends the sender nothing back.",
+            "Use it if it changes your work, and continue. Send no reply, acknowledgement or result: StarBot sends the sender nothing back.",
             sources.externalChat
-              ? `OpenBot posts your written answer in the external chat of this turn. When nothing in it is for the people in that chat, answer only ${QUIET_ANSWER}: nothing is posted.`
+              ? `StarBot posts your written answer in the external chat of this turn. When nothing in it is for the people in that chat, answer only ${QUIET_ANSWER}: nothing is posted.`
               : `When nothing in it is for the user, call the ${ROUTINE_NO_UPDATE_TOOL} tool instead of a written answer.`,
             USER_LANGUAGE_LINE,
           ]
         : [
             `Finish the whole request, then send a concise result to ${senderName} with openbot.send_message: recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", expectsReply false.`,
             "When something fails, find the cause and try other ways first. Status: blocked only when the sender or the user must act.",
-            `${RESULT_FORMAT} When blocked, add Unblock: <the one action that unblocks the task>; when OpenBot has a plugin for the service and it is not in your tools, call openbot.suggest_marketplace_app, and that action is the next field of its result.`,
+            `${RESULT_FORMAT} When blocked, add Unblock: <the one action that unblocks the task>; when StarBot has a plugin for the service and it is not in your tools, call openbot.suggest_marketplace_app, and that action is the next field of its result.`,
             "Never acknowledge without a Status line.",
             sources.externalChat
               ? EXTERNAL_CHAT_ANSWER
@@ -501,7 +501,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
   const wokenWaits = sources.wokenWaits ?? [];
   if (delivery.sender.kind === "routine" && sources.continuesWait) {
     text = [
-      "An event of an existing OpenBot routine continues a wait that you opened in this thread.",
+      "An event of an existing StarBot routine continues a wait that you opened in this thread.",
       `Routine name: ${delivery.sender.routineName}`,
       "The routine run does the routine task in its own chat. Do not do the routine task here, and do not create, update, delete, or test routines.",
       "Continue the work of this thread with the event, then give your answer as usual.",
@@ -523,7 +523,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
           : "scheduled run";
     const canPause = run !== null && !testRun && run.source !== "webhook" && run.agentId === delivery.recipientAgentId;
     text = [
-      "Execute one run of an existing OpenBot routine now.",
+      "Execute one run of an existing StarBot routine now.",
       `Routine name: ${delivery.sender.routineName}`,
       `Run type: ${runKind}`,
       `Scheduled for: ${delivery.sender.scheduledFor}`,
@@ -541,7 +541,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
       ...(sources.skippedRoutineRuns ? [skippedRoutineRunsNote(sources.skippedRoutineRuns)] : []),
       "Nobody answers you during this run. Do all of the task in this turn: do not stop after a step to report progress or to ask whether to continue.",
       `A request to a teammate is not a failure: finish the parts that do not need its reply, then end this turn. The reply starts a turn that continues this task. Do not call the ${ROUTINE_REPORT_FAILURE_TOOL} tool only because a reply has not come yet.`,
-      "A task can tell you to remind the user or to send the user a message. When it names no other place, write that message as your final answer. OpenBot shows your final answer to the user in this chat. openbot.send_message sends to other agents, not to the user.",
+      "A task can tell you to remind the user or to send the user a message. When it names no other place, write that message as your final answer. StarBot shows your final answer to the user in this chat. openbot.send_message sends to other agents, not to the user.",
       testRun
         ? "This is a manual Test run. Report the action and result even when a normal scheduled run would suppress a notification because there is no change."
         : sources.skippedRoutineRuns
@@ -658,7 +658,7 @@ function taggedAgentsNote(
 
 export function planContinuationPrompt(steps: readonly ConversationPlanStep[], count: number, limit: number): string {
   return [
-    "OpenBot note, not a message from the user. Your last turn ended while your plan still had open steps:",
+    "StarBot note, not a message from the user. Your last turn ended while your plan still had open steps:",
     ...steps.map((step) => `- [${step.status === "inProgress" ? "in progress" : "pending"}] ${step.text}`),
     "Continue the work now, from where you stopped. Do not repeat finished work or restate the plan. Keep the plan current and mark each step done when you finish it. If a step is already done, mark it done; if it no longer applies, remove it. Do not ask whether to continue. This note does not approve a risky action. If you must wait, need the user's input or approval, or are blocked, say so in one short line and end your turn.",
     USER_LANGUAGE_LINE,
@@ -668,7 +668,7 @@ export function planContinuationPrompt(steps: readonly ConversationPlanStep[], c
 
 export function restatedContinuationInput(request: readonly DeliveryInputItem[], note: string): DeliveryInputItem[] {
   const header =
-    "OpenBot note, not a message from the user. This session started while you worked on the request below, so it is given again. It is the original request, not a new one, and it is not finished.";
+    "StarBot note, not a message from the user. This session started while you worked on the request below, so it is given again. It is the original request, not a new one, and it is not finished.";
   return request.map((item, index) =>
     index === 0 && item.type === "text"
       ? { ...item, text: `${header}${CURRENT_MESSAGE_SEPARATOR}${item.text}\n\n${note}` }
@@ -678,7 +678,7 @@ export function restatedContinuationInput(request: readonly DeliveryInputItem[],
 
 export function nextStepContinuationPrompt(count: number, limit: number): string {
   return [
-    "OpenBot note, not a message from the user. Your last turn ended before the next step: you named the step or asked whether to continue, but you did not do it.",
+    "StarBot note, not a message from the user. Your last turn ended before the next step: you named the step or asked whether to continue, but you did not do it.",
     "Do the next step now, and continue until the request is done. Do not repeat finished work or restate earlier answers. Do not ask whether to continue. This note does not approve a risky action. If the request is already done, say so in one short line and end your turn. If you must wait, need the user's input or approval, or are blocked, say so in one short line and end your turn.",
     USER_LANGUAGE_LINE,
     `Automatic continuation ${count} of ${limit}.`,
@@ -698,7 +698,7 @@ export function finishCheckContinuationPrompt(gap: string, count: number, limit:
 
 export function compactionContinuationPrompt(): string {
   return [
-    "OpenBot note, not a message from the user. Your last turn stopped because the connection failed while your context was compacted.",
+    "StarBot note, not a message from the user. Your last turn stopped because the connection failed while your context was compacted.",
     "Continue the work now, from where you stopped. Do not repeat finished work or restate earlier answers. Check the result of an action that was interrupted before you do it again. This note does not approve a risky action. If the request is already done, say so in one short line and end your turn. If you must wait, need the user's input or approval, or are blocked, say so in one short line and end your turn.",
     USER_LANGUAGE_LINE,
   ].join("\n");

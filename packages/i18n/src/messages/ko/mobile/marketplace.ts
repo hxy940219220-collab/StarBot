@@ -65,7 +65,8 @@ export const messages = {
   "mobile.marketplace.facts.accessMac": "Mac 전용",
   "mobile.marketplace.permission.admin": "마켓플레이스에서는 소유자와 관리자만 설치할 수 있어요.",
   "mobile.marketplace.permission.unavailable":
-    "이 서버가 오프라인이거나 서버의 OpenBot 버전이 너무 오래되었어요. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트해 주세요.",
+    "이 서버가 오프라인이거나 서버의 StarBot 버전이 너무 오래되었어요. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트해 주세요.",
+
   "mobile.marketplace.error.agentUnsupported":
     "마켓플레이스에서 에이전트를 추가하려면 서버의 OpenBot을 업데이트해 주세요.",
   "mobile.marketplace.error.agentUpdateUnsupported":

@@ -91,7 +91,7 @@ function servers(
   const options: LocalServersOptions = {
     registryPath: join(root, LOCAL_SERVERS_FILE),
     userDataRoot: join(root, "local-servers"),
-    agentRoot: join(root, "OpenBot", "Servers"),
+    agentRoot: join(root, "StarBot", "Servers"),
     runtimeRoot: join(root, "provider-runtimes"),
     cipher: {
       encrypt: (value) => Buffer.from(`sealed:${value}`).reverse(),
@@ -109,11 +109,11 @@ function servers(
       credential: () => MACHINE_TOKEN,
       listMembers: () => Effect.succeed([]),
       remove: () => Effect.void,
-      apiOrigin: "https://api.openbot.run",
+      apiOrigin: "https://api.starbot.app",
       requestAuthorized: () => Effect.succeed(null),
       downloadAuthorized: () => Effect.succeed(new Uint8Array()),
     },
-    command: { executable: "/Applications/OpenBot.app/Contents/MacOS/OpenBot", args: [] },
+    command: { executable: "/Applications/StarBot.app/Contents/MacOS/StarBot", args: [] },
     trash: () => Promise.resolve(),
     log: {
       info: (message) => logger.info(message),

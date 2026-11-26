@@ -39,7 +39,7 @@ card:
 - the Bitcoin price from CoinGecko;
 - the subject of the newest email in Gmail. This task runs only when
   `~/.config/openbot/test-google-account.storage.json` exists. The test sets that session of the
-  team's test Google account in the OpenBot browser first. On a Mac where the Mail app is set up, an
+  team's test Google account in the StarBot browser first. On a Mac where the Mail app is set up, an
   agent can also read the developer's own mail, and the report then holds it.
 
 Each task writes `.openbot-build/provider-live-bench/<provider>-<task>.json` with the steps of the

@@ -40,7 +40,7 @@ interface HostReleaseOptions {
 
 export const readInstallationMode = Effect.fn("HostRelease.readInstallationMode")(function* () {
   return yield* Effect.tryPromise({
-    try: (signal) => readFile("/opt/OpenBot/hosted/mode", { encoding: "utf8", signal }),
+    try: (signal) => readFile("/opt/StarBot/hosted/mode", { encoding: "utf8", signal }),
     catch: () => new ReleaseCheckFailed(),
   }).pipe(
     Effect.map((value) => value.trim()),

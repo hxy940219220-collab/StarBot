@@ -7,56 +7,80 @@ export const messages = {
     "Bağlantınızı kontrol edin ve sayfayı yeniden yükleyin. Yine de yüklenmezse ana sayfaya dönün.",
   "sitePage.error.reload": "Sayfayı yenile",
   "sitePage.error.home": "Ana sayfaya dön",
-  "sitePage.join.title": "Bir OpenBot sunucusuna katıl",
-  "sitePage.join.description": "Özel bir sunucu davetini OpenBot'ta açın.",
+  "sitePage.join.title": "Bir StarBot sunucusuna katıl",
+
+  "sitePage.join.description": "Özel bir sunucu davetini StarBot'ta açın.",
+
   "sitePage.join.eyebrow": "Özel davet",
   "sitePage.join.intro":
-    "Bu daveti OpenBot'ta açın. Uygulama sunucuyu kontrol eder ve bağlanmadan önce onayınızı ister.",
+    "Bu daveti StarBot'ta açın. Uygulama sunucuyu kontrol eder ve bağlanmadan önce onayınızı ister.",
+
   "sitePage.join.invalid": "Bu davet bağlantısı geçerli değil veya eksik. Sunucu sahibinden yeni bir davet isteyin.",
-  "sitePage.join.open": "OpenBot'u aç",
+  "sitePage.join.open": "StarBot'u aç",
+
   "sitePage.join.browser": "Tarayıcıda aç",
   "sitePage.join.noApp": "Uygulama yok mu? {browser} veya {download}.",
   "sitePage.join.noAppMobile": "Uygulama yok mu? {browser}.",
   "sitePage.join.browserLink": "Bu tarayıcıda katılın",
-  "sitePage.join.downloadLink": "OpenBot'u indirin",
+  "sitePage.join.downloadLink": "StarBot'u indirin",
+
   "sitePage.join.notOpened":
-    "OpenBot bu bilgisayardaysa başlatın, ardından {open} öğesine yeniden basın. Değilse önce indirin.",
+    "StarBot bu bilgisayardaysa başlatın, ardından {open} öğesine yeniden basın. Değilse önce indirin.",
+
   "sitePage.join.mobile":
-    "OpenBot yüklüyse {open} öğesine dokunun. Bu bağlantıyı uygulamadaki Sunucu ekle bölümüne de yapıştırabilirsiniz.",
-  "sitePage.join.email": "Davet e-postayla geldiyse OpenBot'ta o e-posta adresiyle oturum açın.",
-  "sitePage.connect.title": "OpenBot'a dön",
+    "StarBot yüklüyse {open} öğesine dokunun. Bu bağlantıyı uygulamadaki Sunucu ekle bölümüne de yapıştırabilirsiniz.",
+
+  "sitePage.join.email": "Davet e-postayla geldiyse StarBot'ta o e-posta adresiyle oturum açın.",
+
+  "sitePage.connect.title": "StarBot'a dön",
+
   "sitePage.connect.failedTitle": "Bağlantı tamamlanmadı",
-  "sitePage.connect.openApp": "OpenBot'u aç",
-  "sitePage.connect.tryAgainApp": "OpenBot'ta tekrar dene",
+  "sitePage.connect.openApp": "StarBot'u aç",
+
+  "sitePage.connect.tryAgainApp": "StarBot'ta tekrar dene",
+
   "sitePage.connect.tryAgainBrowser": "Tarayıcıda tekrar dene",
-  "sitePage.connect.doneInWebClient": "OpenBot sekmeniz {name} bağlantısını tamamlar. Bu sekmeyi kapatabilirsiniz.",
-  "sitePage.connect.doneInApp": "OpenBot, {name} bağlantısını bilgisayarınızda tamamlar.",
+  "sitePage.connect.doneInWebClient": "StarBot sekmeniz {name} bağlantısını tamamlar. Bu sekmeyi kapatabilirsiniz.",
+
+  "sitePage.connect.doneInApp": "StarBot, {name} bağlantısını bilgisayarınızda tamamlar.",
+
   "sitePage.connect.failure.cancelled": "{name} bağlantısı iptal edildi. Hiçbir şey değişmedi.",
   "sitePage.connect.failure.expired": "{name} oturum açma süresi doldu. Bağlantıyı yeniden başlatın.",
   "sitePage.connect.failure.exchange": "{name} bağlantıyı onaylamadı. Tekrar deneyin.",
   "sitePage.connect.failure.enterprise": "Tüm kuruluşu değil, tek bir Slack çalışma alanını bağlayın.",
   "sitePage.connect.failure.takenSlack":
-    "Başka bir OpenBot sunucusu bu Slack çalışma alanında zaten yanıt veriyor. O sunucuda bağlantısını kesin, sonra tekrar deneyin.",
+    "Başka bir StarBot sunucusu bu Slack çalışma alanında zaten yanıt veriyor. O sunucuda bağlantısını kesin, sonra tekrar deneyin.",
+
   "sitePage.connect.failure.takenDiscord":
-    "Başka bir OpenBot sunucusu bu Discord sunucusunda zaten yanıt veriyor. O sunucuda bağlantısını kesin, sonra tekrar deneyin.",
-  "sitePage.connect.failure.unavailable": "OpenBot şu anda {name} ile bağlantı kuramıyor. Daha sonra tekrar deneyin.",
+    "Başka bir StarBot sunucusu bu Discord sunucusunda zaten yanıt veriyor. O sunucuda bağlantısını kesin, sonra tekrar deneyin.",
+
+  "sitePage.connect.failure.unavailable": "StarBot şu anda {name} ile bağlantı kuramıyor. Daha sonra tekrar deneyin.",
+
   "sitePage.connect.failure.tabClosed":
-    "{name} bağlantısını başlatan OpenBot sekmesi yanıt vermedi. OpenBot'u tarayıcınızda açın ve {name} bağlantısını yeniden kurun.",
+    "{name} bağlantısını başlatan StarBot sekmesi yanıt vermedi. StarBot'u tarayıcınızda açın ve {name} bağlantısını yeniden kurun.",
+
   "sitePage.connect.failure.failed": "{name} bağlantıyı tamamlamadı. Tekrar deneyin.",
   "sitePage.connect.restartHint":
-    "OpenBot'ta {marketplace}, ardından {apps}, ardından {name} bölümünü açın ve {connect} seçeneğini seçin.",
+    "StarBot'ta {marketplace}, ardından {apps}, ardından {name} bölümünü açın ve {connect} seçeneğini seçin.",
+
   "sitePage.connect.notOpened":
-    "OpenBot'u başlatın, sonra tekrar deneyin. OpenBot bu bilgisayarda yoksa indirin ve {name} bağlantısını uygulamadan kurun.",
+    "StarBot'u başlatın, sonra tekrar deneyin. StarBot bu bilgisayarda yoksa indirin ve {name} bağlantısını uygulamadan kurun.",
+
   "sitePage.openApp.title": "Hiçbir şey açılmadı mı?",
   "sitePage.openApp.dismiss": "Şimdi değil",
-  "sitePage.billing.pageTitle": "OpenBot faturalandırma",
+  "sitePage.billing.pageTitle": "StarBot faturalandırma",
+
   "sitePage.billing.updatedTitle": "Faturalandırma güncellendi",
-  "sitePage.billing.updatedBody": "OpenBot'a dönün. Bu sayfayı kapatabilirsiniz.",
+  "sitePage.billing.updatedBody": "StarBot'a dönün. Bu sayfayı kapatabilirsiniz.",
+
   "sitePage.billing.cancelledTitle": "Ödeme iptal edildi",
-  "sitePage.billing.cancelledBody": "Hiçbir ücret alınmadı. OpenBot'a dönün.",
-  "sitePage.report.pageTitle": "Barındırılan siteyi bildir — OpenBot",
+  "sitePage.billing.cancelledBody": "Hiçbir ücret alınmadı. StarBot'a dönün.",
+
+  "sitePage.report.pageTitle": "Barındırılan siteyi bildir — StarBot",
+
   "sitePage.report.title": "Barındırılan siteyi bildir",
-  "sitePage.report.intro": "Bir openbot.site adresindeki zararlı veya yasa dışı içerik hakkında bildirim gönderin.",
+  "sitePage.report.intro": "Bir starbot.site adresindeki zararlı veya yasa dışı içerik hakkında bildirim gönderin.",
+
   "sitePage.report.hostnameLabel": "Site adresi",
   "sitePage.report.hostnameMissing": "Site adresini girin",
   "sitePage.report.reasonLabel": "Neden",
@@ -76,10 +100,13 @@ export const messages = {
   "sitePage.report.sentTitle": "Bildirim gönderildi",
   "sitePage.report.sentBody": "Teşekkürler. Bildiriminizi aldık.",
   "sitePage.report.home": "Ana sayfaya git",
-  "sitePage.pricing.title": "OpenBot fiyatlandırması",
+  "sitePage.pricing.title": "StarBot fiyatlandırması",
+
   "sitePage.pricing.description":
-    "Barındırılan sunucular ve ekipler için lisans. OpenBot, kendi bilgisayarınızda kişisel kullanım için ücretsizdir.",
-  "sitePage.pricing.imageAlt": "Küçük ekip. Parlak fikirler. Cam bir fanusun altında üç OpenBot ajanı",
+    "Barındırılan sunucular ve ekipler için lisans. StarBot, kendi bilgisayarınızda kişisel kullanım için ücretsizdir.",
+
+  "sitePage.pricing.imageAlt": "Küçük ekip. Parlak fikirler. Cam bir fanusun altında üç StarBot ajanı",
+
   "sitePage.pricing.heading": "Fiyatlandırma",
   "sitePage.pricing.personal.title": "Kişisel kullanım ücretsizdir",
   "sitePage.pricing.personal.body":
@@ -93,10 +120,13 @@ export const messages = {
   "sitePage.pricing.consent.terms": "koşulları ve cayma hakkını",
   "sitePage.pricing.consent.earlyStart":
     "Barındırma hizmetinin 14 günlük cayma süresi bitmeden başlamasını talep ediyorum. Hizmet tamamen ifa edilmeden sözleşmeden cayarsam, cayma anına kadar sağlanan hizmetlerin bedelini ödemem gerektiğini ve hizmet tamamen ifa edildikten sonra cayma hakkımı kaybedeceğimi kabul ediyorum.",
-  "sitePage.teams.title": "Ekipler için OpenBot",
+  "sitePage.teams.title": "Ekipler için StarBot",
+
   "sitePage.teams.description":
-    "OpenBot'u yönetilen altyapıda çalıştırın ya da ekibinize, iş akışlarınıza ve mevcut sistemlerinize göre özel bir kurulumu birlikte tasarlayalım.",
-  "sitePage.teams.imageAlt": "Büyük planlar. Birlikte daha iyi. Kâğıt bir köprüyle bağlanan iki OpenBot ajanı",
+    "StarBot'u yönetilen altyapıda çalıştırın ya da ekibinize, iş akışlarınıza ve mevcut sistemlerinize göre özel bir kurulumu birlikte tasarlayalım.",
+
+  "sitePage.teams.imageAlt": "Büyük planlar. Birlikte daha iyi. Kâğıt bir köprüyle bağlanan iki StarBot ajanı",
+
   "sitePage.teams.hero.heading": "Şirketinize yapay zekâ iş arkadaşlarından oluşan bir ekip {team} katın",
   "sitePage.teams.setups.heading": "Ekibinize uyan kurulumu seçin",
   "sitePage.teams.setups.question": "Hangi kurulumun size uygun olduğundan emin değil misiniz?",
@@ -104,18 +134,21 @@ export const messages = {
   "sitePage.teams.setups.local.label": "Yerel",
   "sitePage.teams.setups.local.title": "Yerelde çalıştırın",
   "sitePage.teams.setups.local.description":
-    "OpenBot'u doğrudan kendi altyapısında çalıştırmak isteyen bireysel kullanıcılar için en iyisi.",
+    "StarBot'u doğrudan kendi altyapısında çalıştırmak isteyen bireysel kullanıcılar için en iyisi.",
+
   "sitePage.teams.setups.managed.label": "Yönetilen sunucu",
   "sitePage.teams.setups.managed.title": "Yönetilen sunucu kullanın",
   "sitePage.teams.setups.managed.description":
-    "OpenBot'u kişisel bir bilgisayara bağlı kalmadan erişilebilir tutun. Sunucuyu biz sağlar ve bakımını yaparız; siz de ajanlarınıza ve iş akışlarınıza odaklanırsınız.",
+    "StarBot'u kişisel bir bilgisayara bağlı kalmadan erişilebilir tutun. Sunucuyu biz sağlar ve bakımını yaparız; siz de ajanlarınıza ve iş akışlarınıza odaklanırsınız.",
+
   "sitePage.teams.setups.custom.label": "Özel kurulum",
   "sitePage.teams.setups.custom.title": "Şirket çapında bir kurulum oluşturun",
   "sitePage.teams.setups.custom.description":
     "Ortamlarınızı, ajanlarınızı, izinlerinizi ve entegrasyonlarınızı kuruluşunuzun mevcut çalışma biçimine göre yapılandırmanıza yardım ederiz.",
   "sitePage.teams.benefits.alwaysOn.title": "Ajanlarınız 7/24 çalışır",
   "sitePage.teams.benefits.alwaysOn.description":
-    "OpenBot'u yönetilen altyapıda çalıştırın ve ekibinize insanların, ajanların ve otomasyonların birlikte çalıştığı ortak bir ortam sunun.",
+    "StarBot'u yönetilen altyapıda çalıştırın ve ekibinize insanların, ajanların ve otomasyonların birlikte çalıştığı ortak bir ortam sunun.",
+
   "sitePage.teams.benefits.automations.title": "Hiç durmayan otomasyonlar",
   "sitePage.teams.benefits.automations.description":
     "Zamanlanmış rutinleri ve yinelenen iş akışlarını 7/24 çalıştırın – gece, hafta sonu ya da ekibiniz çevrimdışıyken bile.",
@@ -124,10 +157,13 @@ export const messages = {
     "İnsanları ve yapay zekâ iş arkadaşlarını tek bir ortak sunucuda buluşturun. Ekip üyeleri ajanlarla çalışabilir, görevleri koordine edebilir ve aynı ortamda iş birliği yapabilir.",
   "sitePage.teams.benefits.anywhere.title": "Her yerden erişim",
   "sitePage.teams.benefits.anywhere.description":
-    "OpenBot ortamınıza uzaktan bağlanın ve desteklenen masaüstü ya da mobil cihazlardan çalışmaya devam edin.",
-  "sitePage.teams.custom.heading": "İşinize uyarlanmış OpenBot",
+    "StarBot ortamınıza uzaktan bağlanın ve desteklenen masaüstü ya da mobil cihazlardan çalışmaya devam edin.",
+
+  "sitePage.teams.custom.heading": "İşinize uyarlanmış StarBot",
+
   "sitePage.teams.custom.intro":
-    "Bir sunucu edinmek yalnızca başlangıç. Şirketinizin eksiksiz bir çözüme ihtiyacı varsa OpenBot'u gerçek süreçlerinize göre tasarlayıp uygulamanıza yardım edebiliriz.",
+    "Bir sunucu edinmek yalnızca başlangıç. Şirketinizin eksiksiz bir çözüme ihtiyacı varsa StarBot'u gerçek süreçlerinize göre tasarlayıp uygulamanıza yardım edebiliriz.",
+
   "sitePage.teams.custom.infrastructure": "Altyapı kurulumu ve yapılandırması",
   "sitePage.teams.custom.agents": "İlk ajan yapılandırması",
   "sitePage.teams.custom.integrations": "Mevcut araçlar ve iç sistemlerle entegrasyon",
@@ -142,12 +178,16 @@ export const messages = {
   "sitePage.teams.closing.heading": "Bize {accent} neler başarmasını istediğinizi anlatın",
   "sitePage.teams.closing.accent": "yapay zekâ iş arkadaşlarınızın",
   "sitePage.teams.closing.action": "Kurulumunuzu konuşalım",
-  "sitePage.contact.title": "OpenBot ekibiyle iletişime geçin",
+  "sitePage.contact.title": "StarBot ekibiyle iletişime geçin",
+
   "sitePage.contact.description":
-    "Özel kurulum, iş ortaklığı veya basın konusunda OpenBot ekibine mesaj gönderin. Her mesajı bir insan okur.",
-  "sitePage.contact.imageAlt": "Küçük ekip. Hep işinin başında. Kâğıt bir gezegenin etrafında OpenBot ajanları",
+    "Özel kurulum, iş ortaklığı veya basın konusunda StarBot ekibine mesaj gönderin. Her mesajı bir insan okur.",
+
+  "sitePage.contact.imageAlt": "Küçük ekip. Hep işinin başında. Kâğıt bir gezegenin etrafında StarBot ajanları",
+
   "sitePage.contact.heading": "Ekiple konuşun",
-  "sitePage.contact.intro": "Neye ihtiyacınız olduğunu anlatın. Her mesajı OpenBot ekibinden bir kişi okur.",
+  "sitePage.contact.intro": "Neye ihtiyacınız olduğunu anlatın. Her mesajı StarBot ekibinden bir kişi okur.",
+
   "sitePage.contact.channel.discord": "Topluluk ve yardım",
   "sitePage.contact.channel.github": "Hatalar ve kaynak kod",
   "sitePage.contact.channel.x": "Haberler",
@@ -173,18 +213,28 @@ export const messages = {
   "sitePage.contact.sentTitle": "Mesaj gönderildi",
   "sitePage.contact.sentBody": "{email} adresinden yanıt vereceğiz.",
   "sitePage.contact.sendAnother": "Başka bir mesaj gönder",
-  "sitePage.marketplace.agents.title": "Ajanlar — OpenBot Pazaryeri",
+  "sitePage.marketplace.agents.title": "Ajanlar — StarBot Pazaryeri",
+
   "sitePage.marketplace.agents.description":
-    "Başkalarının OpenBot'ta yaptığı ajanlar. Birini becerileri ve rutinleriyle birlikte OpenBot'a ekle.",
-  "sitePage.marketplace.skills.title": "Beceriler — OpenBot Pazaryeri",
-  "sitePage.marketplace.skills.description": "Bir OpenBot ajanının kullanabileceği beceriler. Birini OpenBot'a ekle.",
-  "sitePage.marketplace.apps.title": "Uygulamalar — OpenBot Pazaryeri",
+    "Başkalarının StarBot'ta yaptığı ajanlar. Birini becerileri ve rutinleriyle birlikte StarBot'a ekle.",
+
+  "sitePage.marketplace.skills.title": "Beceriler — StarBot Pazaryeri",
+
+  "sitePage.marketplace.skills.description": "Bir StarBot ajanının kullanabileceği beceriler. Birini StarBot'a ekle.",
+
+  "sitePage.marketplace.apps.title": "Uygulamalar — StarBot Pazaryeri",
+
   "sitePage.marketplace.apps.description":
-    "Bir OpenBot ajanının kullanabileceği uygulamalar ve araçlar. Bir uygulamayı OpenBot'ta aç ve neye bağlanacağına orada karar ver.",
-  "sitePage.marketplace.agentTitle": "{name} — OpenBot ajanı",
-  "sitePage.marketplace.skillTitle": "{name} — OpenBot becerisi",
-  "sitePage.marketplace.agentImageAlt": "{name}, {creator} tarafından yapılan bir OpenBot ajanı",
-  "sitePage.marketplace.skillImageAlt": "{name}, {creator} tarafından yapılan bir OpenBot becerisi",
+    "Bir StarBot ajanının kullanabileceği uygulamalar ve araçlar. Bir uygulamayı StarBot'ta aç ve neye bağlanacağına orada karar ver.",
+
+  "sitePage.marketplace.agentTitle": "{name} — StarBot ajanı",
+
+  "sitePage.marketplace.skillTitle": "{name} — StarBot becerisi",
+
+  "sitePage.marketplace.agentImageAlt": "{name}, {creator} tarafından yapılan bir StarBot ajanı",
+
+  "sitePage.marketplace.skillImageAlt": "{name}, {creator} tarafından yapılan bir StarBot becerisi",
+
   "sitePage.marketplace.categories": "Kategoriler",
   "sitePage.marketplace.allCategories": "Tümü",
   "sitePage.marketplace.searchAgents": "Ajan ara",
@@ -195,7 +245,8 @@ export const messages = {
   "sitePage.marketplace.seeAll": "Tümünü gör",
   "sitePage.marketplace.add": "Ekle",
   "sitePage.marketplace.by": "yapan: {name}",
-  "sitePage.marketplace.verifiedName": ", OpenBot tarafından doğrulandı",
+  "sitePage.marketplace.verifiedName": ", StarBot tarafından doğrulandı",
+
   "sitePage.marketplace.shownAgents": "Gösterilen ajanlar: {shown} / {total}",
   "sitePage.marketplace.shownSkills": "Gösterilen beceriler: {shown} / {total}",
   "sitePage.marketplace.shownApps": "Gösterilen uygulamalar: {shown} / {total}",
@@ -205,20 +256,27 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "“{query}” ile eşleşen beceri yok.",
   "sitePage.marketplace.emptyApps": "Eşleşen uygulama yok.",
   "sitePage.marketplace.breadcrumb": "İçerik haritası",
-  "sitePage.marketplace.addToOpenBot": "OpenBot'a ekle",
+  "sitePage.marketplace.addToOpenBot": "StarBot'a ekle",
+
   "sitePage.marketplace.addFromApp":
-    "{name} OpenBot'un içinden eklenir. Uygulamayı indir, sonra bu bağlantıyı yeniden aç.",
+    "{name} StarBot'un içinden eklenir. Uygulamayı indir, sonra bu bağlantıyı yeniden aç.",
+
   "sitePage.marketplace.downloadFor": "{platform} için indir",
   "sitePage.marketplace.copyLink": "Bağlantıyı kopyala",
   "sitePage.marketplace.copied": "Kopyalandı",
   "sitePage.marketplace.trust.agentReviewed":
-    "Başka bir OpenBot kullanıcısı yaptı. OpenBot yayınlanmadan önce inceledi. Eklendiğinde senin adına işlem yapabilir.",
+    "Başka bir StarBot kullanıcısı yaptı. StarBot yayınlanmadan önce inceledi. Eklendiğinde senin adına işlem yapabilir.",
+
   "sitePage.marketplace.trust.agentPending":
-    "Yapan kişi, OpenBot incelemeden önce paylaştı. Eklendiğinde senin adına işlem yapabilir.",
+    "Yapan kişi, StarBot incelemeden önce paylaştı. Eklendiğinde senin adına işlem yapabilir.",
+
   "sitePage.marketplace.trust.skillReviewed":
-    "Başka bir OpenBot kullanıcısı yaptı. OpenBot yayınlanmadan önce inceledi.",
-  "sitePage.marketplace.source.verified": "OpenBot tarafından doğrulandı",
-  "sitePage.marketplace.source.reviewed": "OpenBot tarafından incelendi",
+    "Başka bir StarBot kullanıcısı yaptı. StarBot yayınlanmadan önce inceledi.",
+
+  "sitePage.marketplace.source.verified": "StarBot tarafından doğrulandı",
+
+  "sitePage.marketplace.source.reviewed": "StarBot tarafından incelendi",
+
   "sitePage.marketplace.source.pending": "Henüz incelenmedi",
   "sitePage.marketplace.information": "Bilgiler",
   "sitePage.marketplace.fact.creator": "Yapan",
@@ -229,9 +287,11 @@ export const messages = {
   "sitePage.marketplace.skillVersion": "Sürüm {version}",
   "sitePage.marketplace.routineOff": "Kapalı başlar",
   "sitePage.marketplace.missing.title": "Pazaryerinde yok",
-  "sitePage.marketplace.missing.body": "Yapan kişi kaldırdı, OpenBot onaylamadı ya da bağlantı yanlış.",
+  "sitePage.marketplace.missing.body": "Yapan kişi kaldırdı, StarBot onaylamadı ya da bağlantı yanlış.",
+
   "sitePage.marketplace.missing.open": "Pazaryerini aç",
-  "sitePage.landing.title": "OpenBot: Bilgisayarınızda bir yapay zekâ ajan ekibi çalıştırın",
+  "sitePage.landing.title": "StarBot: Bilgisayarınızda bir yapay zekâ ajan ekibi çalıştırın",
+
   "sitePage.landing.description":
     "Yapay zekâ ajanlarını kendi bilgisayarınızda bir ekip olarak çalıştıran ücretsiz bir masaüstü uygulaması. Zaten ödediğiniz ChatGPT, Claude, Gemini veya Grok planıyla ya da kendi modelinizle.",
   "sitePage.landing.hero.new": "YENİ",
@@ -243,8 +303,10 @@ export const messages = {
   "sitePage.landing.hero.choosePlatform": "İndirme platformunu seçin",
   "sitePage.landing.hero.platforms": "İndirme platformları",
   "sitePage.landing.hero.phoneApps": "Telefon uygulamaları",
-  "sitePage.landing.preview.title": "Etkileşimli OpenBot uygulama önizlemesi",
-  "sitePage.landing.preview.loading": "OpenBot önizlemesi yükleniyor",
+  "sitePage.landing.preview.title": "Etkileşimli StarBot uygulama önizlemesi",
+
+  "sitePage.landing.preview.loading": "StarBot önizlemesi yükleniyor",
+
   "sitePage.landing.network.title": "Ajanlarınız birlikte çalışır.",
   "sitePage.landing.network.description":
     "Her ajanın kendi rolü, talimatları ve çalışma alanı vardır. Birbirlerine mesaj atar, görevleri devreder, dosya paylaşır ve sonuçları incelerler.",
@@ -265,7 +327,8 @@ export const messages = {
     "Hallediyorum.\nAnladım. Hemen başlıyorum.\nTestler bende geçiyor.\nİncelemeyi ben alabilirim.\nBir düzeltme push'ladım.\nSafari görevi kimde?\nBitti. Sıra sende.\nBir dosyaya daha ihtiyacım var.\nBirleştirildi.\nBuild yeşil.\nHatayı buldum.\nBranch'imi inceleyen olur mu?\nYayınla gitsin.\nBana beş dakika ver.\nSürüm notlarını yazdım.",
   "sitePage.landing.network.eggs.hover":
     "Sadece meşgul görünüyorum.\nBana Safari görevini sor.\nTüm depoyu okudum. İki kez.\nBağlam penceremde sana yer var.\nLütfen bu sekmeyi kapatma.\nBir hatayı düzelttim, üç tane buldum.\nBulutta değil, senin bilgisayarında çalışıyorum.",
-  "sitePage.landing.features.title": "OpenBot ne yapar",
+  "sitePage.landing.features.title": "StarBot ne yapar",
+
   "sitePage.landing.features.description":
     "Bir sunucuda ya da bilgisayarınızda çalışan yapay zekâ ajan ekibi için tek uygulama. Zaten sahip olduğunuz abonelikle çalışır.",
   "sitePage.landing.features.team.title": "Ajanlar ekip olarak çalışır",
@@ -278,10 +341,12 @@ export const messages = {
   "sitePage.landing.features.providers.localLink": "Ollama ya da LM Studio",
   "sitePage.landing.features.local.title": "Bilgisayarınızda saklanır",
   "sitePage.landing.features.local.description":
-    "Çalışma alanları, konuşmalar, dosyalar ve tarayıcı verileri bizim sunucularımızda değil, OpenBot'u çalıştıran bilgisayarda kalır.",
+    "Çalışma alanları, konuşmalar, dosyalar ve tarayıcı verileri bizim sunucularımızda değil, StarBot'u çalıştıran bilgisayarda kalır.",
+
   "sitePage.landing.features.multiplayer.title": "Çok oyunculu mod",
   "sitePage.landing.features.multiplayer.description":
-    "Ekip arkadaşlarınızı OpenBot'a davet edin. İnsanlar ve yapay zekâ ajanları ortak kanallarda birlikte çalışır ve aynı projeler üzerinde ilerler.",
+    "Ekip arkadaşlarınızı StarBot'a davet edin. İnsanlar ve yapay zekâ ajanları ortak kanallarda birlikte çalışır ve aynı projeler üzerinde ilerler.",
+
   "sitePage.landing.features.workflows.title": "İş akışları",
   "sitePage.landing.features.workflows.description":
     "Ajanları, modelleri ve onay adımlarını net, çok adımlı iş akışlarında birleştirin. Süreci yeniden kullanın ve işiniz değiştikçe güncelleyin.",
@@ -324,10 +389,12 @@ export const messages = {
   "sitePage.landing.pricing.yourPlans": "Zaten ödediğiniz yapay zekâ planlarını kullanır",
   "sitePage.landing.pricing.download": "İndir",
   "sitePage.landing.pricing.license": "İş için lisans",
-  "sitePage.landing.teams.title": "Ekipler için OpenBot",
+  "sitePage.landing.teams.title": "Ekipler için StarBot",
+
   "sitePage.landing.teams.statement": "Tüm şirketiniz için yapay zekâ iş arkadaşları.",
   "sitePage.landing.teams.description":
-    "OpenBot'u yönetilen sunucularda çalıştırır, ekibinize ve araçlarınıza göre kurarız.",
+    "StarBot'u yönetilen sunucularda çalıştırır, ekibinize ve araçlarınıza göre kurarız.",
+
   "sitePage.landing.teams.contact": "Bize ulaşın",
   "sitePage.landing.teams.learn": "Ekipler hakkında bilgi alın",
   "sitePage.landing.teams.servers.label": "Yönetilen sunucular",
@@ -341,24 +408,30 @@ export const messages = {
   "sitePage.landing.teams.integrations.label": "Özel entegrasyonlar",
   "sitePage.landing.teams.integrations.title": "Sizin araçlarınız",
   "sitePage.landing.teams.integrations.description":
-    "OpenBot'u sistemlerinize, API'lerinize ve iş akışlarınıza bağlarız.",
+    "StarBot'u sistemlerinize, API'lerinize ve iş akışlarınıza bağlarız.",
+
   "sitePage.landing.teams.support.label": "Uygulama ve destek",
   "sitePage.landing.teams.support.title": "Sizinle birlikte başlatırız",
   "sitePage.landing.teams.support.description": "Kurulum, test, ekibe alıştırma ve sürekli destek.",
   "sitePage.landing.faq.title": "Sorular",
   "sitePage.landing.faq.description": "Fiyat, kurulum, sağlayıcılar ve verileriniz hakkında kısa yanıtlar.",
   "sitePage.landing.faq.contact": "Başka bir şey sorun",
-  "sitePage.landing.faq.free.question": "OpenBot ücretsiz mi?",
+  "sitePage.landing.faq.free.question": "StarBot ücretsiz mi?",
+
   "sitePage.landing.faq.free.answer":
-    "Evet, kişisel ve diğer ticari olmayan kullanımlar için. OpenBot 0 $'dır ve kilitli özellik yoktur. Yalnızca yapay zekâ sağlayıcınıza, zaten sahip olduğunuz plan veya API anahtarı üzerinden ödeme yaparsınız. Ticari kullanım için lisans gerekir.",
-  "sitePage.landing.faq.source.question": "OpenBot'un kaynak kodu açık mı?",
+    "Evet, kişisel ve diğer ticari olmayan kullanımlar için. StarBot 0 $'dır ve kilitli özellik yoktur. Yalnızca yapay zekâ sağlayıcınıza, zaten sahip olduğunuz plan veya API anahtarı üzerinden ödeme yaparsınız. Ticari kullanım için lisans gerekir.",
+
+  "sitePage.landing.faq.source.question": "StarBot'un kaynak kodu açık mı?",
+
   "sitePage.landing.faq.source.answer":
-    "Evet. Kaynak kodun tamamı GitHub'da açıktır, böylece OpenBot'un ne yaptığını kontrol edebilirsiniz. Kişisel projeler, eğitim veya araştırma gibi ticari olmayan kullanımlar için ücretsiz olarak değiştirip çalıştırabilirsiniz. Ticari kullanım için ayrı bir lisans gerekir. Lisans PolyForm Noncommercial 1.0.0'dır.",
+    "Evet. Kaynak kodun tamamı GitHub'da açıktır, böylece StarBot'un ne yaptığını kontrol edebilirsiniz. Kişisel projeler, eğitim veya araştırma gibi ticari olmayan kullanımlar için ücretsiz olarak değiştirip çalıştırabilirsiniz. Ticari kullanım için ayrı bir lisans gerekir. Lisans PolyForm Noncommercial 1.0.0'dır.",
+
   "sitePage.landing.faq.source.link": "Kaynak kodu GitHub'da görün",
   "sitePage.landing.faq.plans.question": "ChatGPT veya Claude planımı kullanabilir miyim?",
   "sitePage.landing.faq.plans.answer":
     "Evet. Codex, ChatGPT planınızla; Claude Code ise Claude planınızla oturum açar. Gemini, Google AI Pro veya Ultra planı kullanır. OpenCode'da hesap gerektirmeyen ücretsiz modeller vardır.",
-  "sitePage.landing.faq.models.question": "OpenBot hangi yapay zekâ modellerini kullanabilir?",
+  "sitePage.landing.faq.models.question": "StarBot hangi yapay zekâ modellerini kullanabilir?",
+
   "sitePage.landing.faq.models.answer":
     "Codex, Claude Code, Gemini, Grok, OpenCode, Cursor, Cline, Muse Code ve Pi ile Inception'ın Mercury modelleri. Ayrıca Goose veya Qwen Code gibi Agent Client Protocol destekleyen her ajanı çalıştırabilir, OpenAI uyumlu her uç noktayı bağlayabilir ve Ollama ya da LM Studio'daki yerel modelleri kullanabilirsiniz.",
   "sitePage.landing.faq.limit.question": "Planım sınırına ulaşınca ne olur?",
@@ -366,18 +439,23 @@ export const messages = {
     "Planı sınırına ulaştığında ya da sağlayıcısı aşırı yüklendiğinde veya çöktüğünde ajan, başka bir sağlayıcıdaki yedek modele geçebilir. Sohbetini ve çalışma alanını korur; sohbetteki bir not da geçişi gösterir.",
   "sitePage.landing.faq.start.question": "Nasıl başlarım?",
   "sitePage.landing.faq.start.answer":
-    "OpenBot'u indirin ve bir sağlayıcı bağlayın. Ardından istediğiniz ajanı tek bir istemle tarif edin, talimatlarını kontrol edin ve kaydedin. Ona hemen iş gönderebilirsiniz: mesajlar, ajan boşalana kadar kuyrukta bekler.",
+    "StarBot'u indirin ve bir sağlayıcı bağlayın. Ardından istediğiniz ajanı tek bir istemle tarif edin, talimatlarını kontrol edin ve kaydedin. Ona hemen iş gönderebilirsiniz: mesajlar, ajan boşalana kadar kuyrukta bekler.",
+
   "sitePage.landing.faq.data.question": "Verilerim nereye gidiyor?",
   "sitePage.landing.faq.data.answer":
-    "Çalışma alanları, konuşmalar, ekler ve tarayıcı verileri OpenBot'u çalıştıran bilgisayarda kalır. Seçtiğiniz yapay zekâ sağlayıcısı, ajanlarınızın ona gönderdiği istemleri alır; ajanların açtığı sayfalar da ağı kullanır.",
-  "sitePage.landing.faq.computers.question": "OpenBot hangi bilgisayarlarda çalışır?",
+    "Çalışma alanları, konuşmalar, ekler ve tarayıcı verileri StarBot'u çalıştıran bilgisayarda kalır. Seçtiğiniz yapay zekâ sağlayıcısı, ajanlarınızın ona gönderdiği istemleri alır; ajanların açtığı sayfalar da ağı kullanır.",
+
+  "sitePage.landing.faq.computers.question": "StarBot hangi bilgisayarlarda çalışır?",
+
   "sitePage.landing.faq.computers.answer":
     "Apple silicon veya Intel üzerinde macOS 13 ya da üstü, x64 üzerinde Windows 10 ya da üstü ve x64 veya arm64 üzerinde AppImage olarak Linux.",
   "sitePage.landing.faq.safety.question": "Ajanların bilgisayarımda çalışmasına izin vermek güvenli mi?",
   "sitePage.landing.faq.safety.answer":
     "Ajanlar her seferinde sormadan dosyaları okuyup değiştirebilir, komut çalıştırabilir, ağı kullanabilir ve yerleşik tarayıcıyı kontrol edebilir. Onlara yalnızca güvendiğiniz görevleri verin ve yedek alın.",
-  "sitePage.landing.faq.compare": "OpenBot'u karşılaştırın",
-  "sitePage.landing.download.title": "OpenBot'u indirin",
+  "sitePage.landing.faq.compare": "StarBot'u karşılaştırın",
+
+  "sitePage.landing.download.title": "StarBot'u indirin",
+
   "sitePage.landing.download.description":
     "Platformunuzu seçin. Codex, Claude, Gemini, Grok, OpenCode, Muse Code, Pi veya kendi modelinizi tek bir masaüstü uygulamasından çalıştırın ve ajanlarınızla telefonunuzdan konuşun.",
   "sitePage.landing.download.available": "Mevcut",
@@ -386,8 +464,10 @@ export const messages = {
   "sitePage.landing.download.googlePlay": "Google Play'den alın",
   "sitePage.landing.download.pages": "Sistem gereksinimleri ve kurulum adımları:",
   "sitePage.landing.download.apk": "APK'yı indirin",
-  "sitePage.referral.invitedBy": "{name} sizi OpenBot'a davet etti",
-  "sitePage.referral.invited": "OpenBot'a davetiniz var",
+  "sitePage.referral.invitedBy": "{name} sizi StarBot'a davet etti",
+
+  "sitePage.referral.invited": "StarBot'a davetiniz var",
+
   "sitePage.referral.offer": "{percent} indirim",
   "sitePage.referral.offerDetail": "ilk ödemenizde",
   "sitePage.referral.lead":
@@ -417,7 +497,8 @@ export const messages = {
   "sitePage.site.language": "Dil",
   "sitePage.site.language.current": "Dil: {language}",
   "sitePage.site.latest": "En yeni",
-  "sitePage.site.home": "OpenBot ana sayfa",
+  "sitePage.site.home": "StarBot ana sayfa",
+
   "sitePage.site.logo.menu": "Logo",
   "sitePage.site.logo.copyIcon": "Logoyu SVG olarak kopyala",
   "sitePage.site.logo.copyLockup": "Logoyu adıyla birlikte SVG olarak kopyala",
@@ -427,16 +508,19 @@ export const messages = {
   "sitePage.site.news.summary": "Neler yayınlandı ve neden önemli.",
   "sitePage.site.news.index": "Tüm haberler",
   "sitePage.site.guides": "Rehberler",
-  "sitePage.site.guides.summary": "OpenBot'u adım adım öğrenin.",
+  "sitePage.site.guides.summary": "StarBot'u adım adım öğrenin.",
+
   "sitePage.site.guides.index": "Tüm rehberler",
   "sitePage.site.compare": "Karşılaştır",
-  "sitePage.site.compare.summary": "OpenBot'un diğer ajan uygulamalarından farkı.",
+  "sitePage.site.compare.summary": "StarBot'un diğer ajan uygulamalarından farkı.",
+
   "sitePage.site.compare.index": "Tüm karşılaştırmalar",
   "sitePage.site.plugins": "Eklentiler",
   "sitePage.site.plugins.summary": "Bir ajanın kullanabileceği uygulamalar ve beceriler.",
   "sitePage.site.plugins.index": "Eklentilere göz at",
   "sitePage.site.resources": "Kaynaklar",
-  "sitePage.site.resources.summary": "OpenBot'un kaynak kodu açıktır.",
+  "sitePage.site.resources.summary": "StarBot'un kaynak kodu açıktır.",
+
   "sitePage.site.sourceCode": "Kaynak kod",
   "sitePage.site.download.description": "macOS, Windows ve Linux",
   "sitePage.site.changelog": "Değişiklik günlüğü",
@@ -444,7 +528,8 @@ export const messages = {
   "sitePage.site.community": "Topluluk",
   "sitePage.site.community.description": "Discord'da bizimle konuşun",
   "sitePage.site.documentation": "Belgeler",
-  "sitePage.site.documentation.description": "OpenBot'u kurun ve kullanın",
+  "sitePage.site.documentation.description": "StarBot'u kurun ve kullanın",
+
   "sitePage.site.brand": "Marka",
   "sitePage.site.brand.description": "SVG ve PNG olarak logo",
   "sitePage.site.status": "Durum",
@@ -454,7 +539,8 @@ export const messages = {
   "sitePage.site.cta.title": "İlk ekip arkadaşınızla tanışın",
   "sitePage.site.cta.description":
     "Codex, Claude, Gemini, Grok veya kendi modelinizi zaten ödediğiniz planlarla çalıştırın; her birinin kendi çalışma alanı ve bağlamı olsun. İşiniz bilgisayarınızda kalır.",
-  "sitePage.site.downloadOpenBot": "OpenBot'u indir",
+  "sitePage.site.downloadOpenBot": "StarBot'u indir",
+
   "sitePage.site.contact": "İletişim",
   "sitePage.site.footer.description":
     "Kendi bilgisayarınızda kalıcı yapay zekâ ekip arkadaşları. Codex, Claude, Gemini, Grok, Muse Code, Pi veya kendi modelinizi zaten ödediğiniz planlarla çalıştırın.",

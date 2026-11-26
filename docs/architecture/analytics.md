@@ -24,7 +24,7 @@ semantics and native verification steps are in [the mobile README](../../apps/mo
 ## Website analytics
 
 Public website tracking lives in `apps/auth-api/src/lib/analytics.ts`. It runs only on the
-production `openbot.run` hostname. Landing and invitation events carry a bounded
+production `starbot.app` hostname. Landing and invitation events carry a bounded
 `source_platform`, the existing `acquisition_source` category, and a domain-only referrer.
 
 A recognized `utm_source` tag takes precedence over the referring domain. Exact domain and
@@ -88,16 +88,16 @@ Database time comes from `AgentDatabaseSupervisor`, from the send of a statement
 the end of the host. The supervisor sends a statement only after the host reports ready, so the
 start of the host process is not counted. Renderer and child process exits other than a
 clean exit are written to the trace as `crash` spans at once, and counted at the next sample. A
-utility process with the reason `killed` is neither: OpenBot stops these processes itself. An exit in
+utility process with the reason `killed` is neither: StarBot stops these processes itself. An exit in
 the last minute before a quit is not counted: a stop signal can end the child processes before the
 main process starts its teardown. The trace still has it, after the `exit` span of that quit.
 
-`index.ts` writes one `exit` span and one line in `logs/main/main.log` when OpenBot starts to quit.
+`index.ts` writes one `exit` span and one line in `logs/main/main.log` when StarBot starts to quit.
 The name is the first reason: `main_window_closed` (Windows and Linux, where closing the main
 window quits), `signal`, `session_end` or `quit` (the menu, the tray, an update or a restart). The
 main log holds every line of the `main` logger, redacted, in two files of 1 MB. `crashReporter`
 keeps local crash dumps in `app.getPath("crashDumps")` and never uploads them. A process that ends
-with no `exit` span and no dump was stopped from outside OpenBot (#2675).
+with no `exit` span and no dump was stopped from outside StarBot (#2675).
 
 `run-marker.ts` keeps `openbot-run-marker-v1.json` in the user data folder of the process that holds
 the single-instance lock. It writes `running` at the start, the time of the last sign of life once a
@@ -238,4 +238,4 @@ is stored by the account service or Signal service.
 
 The desktop chart adapts Zaidan's chart and interactive area composition. The pinned
 `solid-recharts` dependency has a Solid 2 compatibility patch and uses the application's single
-Solid runtime. Chart colors use OpenBot tokens. Daily tables provide exact accessible values.
+Solid runtime. Chart colors use StarBot tokens. Daily tables provide exact accessible values.

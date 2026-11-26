@@ -31,7 +31,8 @@ export const messages = {
   "update.provider.startFailed": "업데이트를 시작하지 못했어요. 다시 시도해 주세요.",
   "update.provider.showDetails": "자세히 보기",
   "update.provider.hideDetails": "자세히 숨기기",
-  "update.scheduled.title": "{name} 님이 OpenBot 업데이트를 예약했어요",
+  "update.scheduled.title": "{name} 님이 StarBot 업데이트를 예약했어요",
+
   "update.scheduled.automaticTitle": "OpenBot이 업데이트를 설치해요",
   "update.scheduled.whenIdle": "에이전트가 대기 상태가 되면 OpenBot이 다시 시작돼요.",
   "update.scheduled.now": "업데이트 다운로드가 끝나면 OpenBot이 다시 시작돼요.",
@@ -49,8 +50,10 @@ export const messages = {
   "update.idleRestart.cancelFailed": "다시 시작을 취소하지 못했어요.",
   "update.idleRestart.requestFailed": "다시 시작을 예약하지 못했어요.",
   "update.idleRestart.failedTitle": "OpenBot이 다시 시작되지 않았어요",
-  "update.whatsNew.title": "OpenBot 새로운 기능",
-  "update.whatsNew.description": "이 OpenBot 버전의 새로운 기능과 변경 사항이에요.",
+  "update.whatsNew.title": "StarBot 새로운 기능",
+
+  "update.whatsNew.description": "이 StarBot 버전의 새로운 기능과 변경 사항이에요.",
+
   "update.whatsNew.version": "버전 {version}",
   "update.whatsNew.updatedFrom": "{from}에서 {to}(으)로 업데이트됨",
   "update.whatsNew.group.added": "새 기능",
@@ -71,8 +74,10 @@ export const messages = {
   "update.whatsNew.done": "확인",
   "update.required.title": "업데이트 필요",
   "update.required.description":
-    "OpenBot {version}은(는) 더 이상 지원되지 않습니다. 계속하려면 {minimum} 이상으로 업데이트하세요.",
-  "update.required.download": "OpenBot 다운로드",
+    "StarBot {version}은(는) 더 이상 지원되지 않습니다. 계속하려면 {minimum} 이상으로 업데이트하세요.",
+
+  "update.required.download": "StarBot 다운로드",
+
   "update.required.continue": "업데이트 없이 계속",
   "update.required.failed": "업데이트를 완료하지 못했습니다.",
 } as const satisfies PartialTranslation<typeof source>;

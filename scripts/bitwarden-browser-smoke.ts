@@ -35,7 +35,7 @@ export async function runBitwardenBrowserSmoke(browser: BrowserHost): Promise<vo
       if (args[1] === "folders")
         return JSON.stringify([
           { id: null, name: "No Folder" },
-          { id: "shared", name: "Shared with OpenBot" },
+          { id: "shared", name: "Shared with StarBot" },
         ]);
       if (args[1] === "totp") return CODE;
       const item = {
@@ -63,7 +63,7 @@ export async function runBitwardenBrowserSmoke(browser: BrowserHost): Promise<vo
     { prefix: "bitwarden:", name: "Bitwarden", vault: connector },
     {
       prefix: "openbot:",
-      name: "the OpenBot Vault",
+      name: "the StarBot Vault",
       vault: {
         connected: () => true,
         loginsFor: () => Effect.succeed(vaultLogins),
@@ -126,7 +126,7 @@ export async function runBitwardenBrowserSmoke(browser: BrowserHost): Promise<vo
     if (!Result.isFailure(failed) || failed.failure.sources?.join() !== "Bitwarden")
       throw new Error("The failed login list did not name Bitwarden.");
     if (failed.failure.logins?.map(({ id }) => id).join() !== "openbot:vault-login")
-      throw new Error("A Bitwarden failure hid the OpenBot Vault login.");
+      throw new Error("A Bitwarden failure hid the StarBot Vault login.");
     if (!failedStatus.connected || !failedStatus.error)
       throw new Error("The Bitwarden status did not show the failed read.");
     checks.push("a Bitwarden read failure names Bitwarden, keeps the other logins, and shows the error in its status");

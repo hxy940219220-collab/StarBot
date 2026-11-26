@@ -81,7 +81,7 @@ interface FixtureIssue {
 }
 
 const issue = (fields: FixtureIssue) => ({
-  html_url: `https://github.com/nightly-labs/openbot/issues/${fields.number}`,
+  html_url: `https://github.com/hxy940219220-collab/StarBot-Desktop/issues/${fields.number}`,
   state: "open",
   state_reason: null,
   user: MEMBER,
@@ -413,7 +413,7 @@ interface IncidentFixture {
   resolvedAt?: string | null;
 }
 const incident = (fields: IncidentFixture) => ({
-  url: `https://github.com/nightly-labs/openbot/issues/${fields.id}`,
+  url: `https://github.com/hxy940219220-collab/StarBot-Desktop/issues/${fields.id}`,
   kind: "incident",
   impact: "partial",
   resolvedAt: null,
@@ -594,7 +594,7 @@ for (const item of got.filter((entry) => entry.subscription === "team" || entry.
   const body = JSON.parse(item.body);
   assert.equal(body.version, 1);
   assert.equal(body.type, item.headers["x-openbot-event"]);
-  assert.equal(body.page, "https://status.openbot.run");
+  assert.equal(body.page, "https://status.starbot.app");
   assert.match(item.headers["x-openbot-delivery-id"] ?? "", /^[0-9a-f]{32}$/);
 }
 const created = JSON.parse(

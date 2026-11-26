@@ -10,7 +10,8 @@ export const messages = {
   "routine.kind.yearly": "Co roku",
   "routine.kind.custom": "Własny",
 
-  "routine.feed.calendarName": "Rutyny OpenBot",
+  "routine.feed.calendarName": "Rutyny StarBot",
+
   "routine.feed.eventAgent": "Agent: {name}",
   "routine.feed.eventChannel": "Kanał: {name}",
   "routine.feed.eventTimezone": "Strefa czasowa: {timezone}",
@@ -168,7 +169,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "połączenie jest wyłączone lub usunięte",
   "routine.delivery.reason.refused": "nie może publikować w tym miejscu",
   "routine.delivery.reason.sendFailed": "platforma tego nie przyjęła",
-  "routine.delivery.reason.restart": "OpenBot zatrzymał się podczas wysyłania",
+  "routine.delivery.reason.restart": "StarBot zatrzymał się podczas wysyłania",
+
   "routine.delivery.reason.stopped": "wysyłanie do tego miejsca zostało wyłączone",
   "routine.delivery.resend": "Wyślij ponownie",
   "routine.delivery.resending": "Wysyłanie…",
@@ -382,9 +384,11 @@ export const messages = {
   "routine.settings.limitPolicy": "Gdy konto osiągnie limit",
   "routine.settings.limitPolicy.wait": "Zaczekaj i uruchom po resecie",
   "routine.settings.limitPolicy.skip": "Pomiń to uruchomienie",
-  "routine.settings.missedPolicy": "Gdy OpenBot był zamknięty w zaplanowanym czasie",
+  "routine.settings.missedPolicy": "Gdy StarBot był zamknięty w zaplanowanym czasie",
+
   "routine.settings.missedPolicy.skip": "Pomiń to uruchomienie",
-  "routine.settings.missedPolicy.runOnce": "Uruchom raz po otwarciu OpenBot",
+  "routine.settings.missedPolicy.runOnce": "Uruchom raz po otwarciu StarBot",
+
   "routine.settings.runInThread": "Uruchamiaj w osobnym wątku",
   "routine.settings.runInSaveFailed": "Rutyna jest zapisana, ale jej ustawienie osobnego wątku nie. Spróbuj ponownie.",
   "routine.settings.resultDestination": "Wysyłaj odpowiedzi do",

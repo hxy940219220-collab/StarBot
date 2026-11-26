@@ -7,57 +7,81 @@ export const messages = {
     "Controleer je verbinding en laad de pagina opnieuw. Laadt hij nog steeds niet, ga dan terug naar de startpagina.",
   "sitePage.error.reload": "Pagina opnieuw laden",
   "sitePage.error.home": "Terug naar start",
-  "sitePage.join.title": "Word lid van een OpenBot-server",
-  "sitePage.join.description": "Open een privé-uitnodiging voor een server in OpenBot.",
+  "sitePage.join.title": "Word lid van een StarBot-server",
+
+  "sitePage.join.description": "Open een privé-uitnodiging voor een server in StarBot.",
+
   "sitePage.join.eyebrow": "Privé-uitnodiging",
   "sitePage.join.intro":
-    "Open deze uitnodiging in OpenBot. De app controleert de server en vraagt je om te bevestigen voordat er verbinding wordt gemaakt.",
+    "Open deze uitnodiging in StarBot. De app controleert de server en vraagt je om te bevestigen voordat er verbinding wordt gemaakt.",
+
   "sitePage.join.invalid":
     "Deze uitnodigingslink is ongeldig of onvolledig. Vraag de eigenaar van de server om een nieuwe uitnodiging.",
-  "sitePage.join.open": "OpenBot openen",
+  "sitePage.join.open": "StarBot openen",
+
   "sitePage.join.browser": "Openen in browser",
   "sitePage.join.noApp": "Geen app? {browser} of {download}.",
   "sitePage.join.noAppMobile": "Geen app? {browser}.",
   "sitePage.join.browserLink": "Word lid via deze browser",
-  "sitePage.join.downloadLink": "download OpenBot",
+  "sitePage.join.downloadLink": "download StarBot",
+
   "sitePage.join.notOpened":
-    "Staat OpenBot op deze computer? Start het en klik dan opnieuw op {open}. Zo niet, download het dan eerst.",
+    "Staat StarBot op deze computer? Start het en klik dan opnieuw op {open}. Zo niet, download het dan eerst.",
+
   "sitePage.join.mobile":
-    "Is OpenBot geïnstalleerd? Tik dan op {open}. Je kunt deze link ook plakken bij Server toevoegen in de app.",
-  "sitePage.join.email": "Kwam de uitnodiging per e-mail? Log dan in bij OpenBot met dat e-mailadres.",
-  "sitePage.connect.title": "Terug naar OpenBot",
+    "Is StarBot geïnstalleerd? Tik dan op {open}. Je kunt deze link ook plakken bij Server toevoegen in de app.",
+
+  "sitePage.join.email": "Kwam de uitnodiging per e-mail? Log dan in bij StarBot met dat e-mailadres.",
+
+  "sitePage.connect.title": "Terug naar StarBot",
+
   "sitePage.connect.failedTitle": "De verbinding is niet voltooid",
-  "sitePage.connect.openApp": "OpenBot openen",
-  "sitePage.connect.tryAgainApp": "Opnieuw proberen in OpenBot",
+  "sitePage.connect.openApp": "StarBot openen",
+
+  "sitePage.connect.tryAgainApp": "Opnieuw proberen in StarBot",
+
   "sitePage.connect.tryAgainBrowser": "Opnieuw proberen in browser",
   "sitePage.connect.doneInWebClient":
-    "Je OpenBot-tabblad rondt de verbinding met {name} af. Je kunt dit tabblad sluiten.",
-  "sitePage.connect.doneInApp": "OpenBot rondt de verbinding met {name} af op je computer.",
+    "Je StarBot-tabblad rondt de verbinding met {name} af. Je kunt dit tabblad sluiten.",
+
+  "sitePage.connect.doneInApp": "StarBot rondt de verbinding met {name} af op je computer.",
+
   "sitePage.connect.failure.cancelled": "De verbinding met {name} is geannuleerd. Er is niets gewijzigd.",
   "sitePage.connect.failure.expired": "Het inloggen bij {name} is verlopen. Begin de verbinding opnieuw.",
   "sitePage.connect.failure.exchange": "{name} heeft de verbinding niet bevestigd. Probeer het opnieuw.",
   "sitePage.connect.failure.enterprise": "Verbind één Slack-werkruimte, niet een hele organisatie.",
   "sitePage.connect.failure.takenSlack":
-    "Een andere OpenBot-server beantwoordt deze Slack-werkruimte al. Verbreek daar de verbinding en probeer het opnieuw.",
+    "Een andere StarBot-server beantwoordt deze Slack-werkruimte al. Verbreek daar de verbinding en probeer het opnieuw.",
+
   "sitePage.connect.failure.takenDiscord":
-    "Een andere OpenBot-server beantwoordt deze Discord-server al. Verbreek daar de verbinding en probeer het opnieuw.",
-  "sitePage.connect.failure.unavailable": "OpenBot kan nu geen verbinding maken met {name}. Probeer het later opnieuw.",
+    "Een andere StarBot-server beantwoordt deze Discord-server al. Verbreek daar de verbinding en probeer het opnieuw.",
+
+  "sitePage.connect.failure.unavailable": "StarBot kan nu geen verbinding maken met {name}. Probeer het later opnieuw.",
+
   "sitePage.connect.failure.tabClosed":
-    "Het OpenBot-tabblad dat de verbinding met {name} startte, reageert niet. Open OpenBot in je browser en verbind {name} opnieuw.",
+    "Het StarBot-tabblad dat de verbinding met {name} startte, reageert niet. Open StarBot in je browser en verbind {name} opnieuw.",
+
   "sitePage.connect.failure.failed": "{name} heeft de verbinding niet afgerond. Probeer het opnieuw.",
-  "sitePage.connect.restartHint": "Open in OpenBot {marketplace}, dan {apps}, dan {name}, en kies {connect}.",
+  "sitePage.connect.restartHint": "Open in StarBot {marketplace}, dan {apps}, dan {name}, en kies {connect}.",
+
   "sitePage.connect.notOpened":
-    "Start OpenBot en probeer het opnieuw. Staat OpenBot niet op deze computer? Download het dan en verbind {name} vanuit de app.",
+    "Start StarBot en probeer het opnieuw. Staat StarBot niet op deze computer? Download het dan en verbind {name} vanuit de app.",
+
   "sitePage.openApp.title": "Is er niets geopend?",
   "sitePage.openApp.dismiss": "Niet nu",
-  "sitePage.billing.pageTitle": "OpenBot-facturering",
+  "sitePage.billing.pageTitle": "StarBot-facturering",
+
   "sitePage.billing.updatedTitle": "Facturering bijgewerkt",
-  "sitePage.billing.updatedBody": "Ga terug naar OpenBot. Je kunt deze pagina sluiten.",
+  "sitePage.billing.updatedBody": "Ga terug naar StarBot. Je kunt deze pagina sluiten.",
+
   "sitePage.billing.cancelledTitle": "Afrekenen geannuleerd",
-  "sitePage.billing.cancelledBody": "Er is niets in rekening gebracht. Ga terug naar OpenBot.",
-  "sitePage.report.pageTitle": "Een gehoste site melden — OpenBot",
+  "sitePage.billing.cancelledBody": "Er is niets in rekening gebracht. Ga terug naar StarBot.",
+
+  "sitePage.report.pageTitle": "Een gehoste site melden — StarBot",
+
   "sitePage.report.title": "Een gehoste site melden",
-  "sitePage.report.intro": "Stuur een melding over schadelijke of onrechtmatige inhoud op een openbot.site-adres.",
+  "sitePage.report.intro": "Stuur een melding over schadelijke of onrechtmatige inhoud op een starbot.site-adres.",
+
   "sitePage.report.hostnameLabel": "Siteadres",
   "sitePage.report.hostnameMissing": "Vul het siteadres in",
   "sitePage.report.reasonLabel": "Reden",
@@ -77,10 +101,13 @@ export const messages = {
   "sitePage.report.sentTitle": "Melding verstuurd",
   "sitePage.report.sentBody": "Bedankt. We hebben je melding ontvangen.",
   "sitePage.report.home": "Naar de startpagina",
-  "sitePage.pricing.title": "OpenBot-prijzen",
+  "sitePage.pricing.title": "StarBot-prijzen",
+
   "sitePage.pricing.description":
-    "Gehoste servers en een licentie voor teams. Voor persoonlijk gebruik op je eigen computer is OpenBot gratis.",
-  "sitePage.pricing.imageAlt": "‘Small team. Bright ideas.’ Drie OpenBot-agents onder een glazen stolp",
+    "Gehoste servers en een licentie voor teams. Voor persoonlijk gebruik op je eigen computer is StarBot gratis.",
+
+  "sitePage.pricing.imageAlt": "‘Small team. Bright ideas.’ Drie StarBot-agents onder een glazen stolp",
+
   "sitePage.pricing.heading": "Prijzen",
   "sitePage.pricing.personal.title": "Persoonlijk gebruik is gratis",
   "sitePage.pricing.personal.body":
@@ -94,10 +121,13 @@ export const messages = {
   "sitePage.pricing.consent.terms": "de voorwaarden en het herroepingsrecht",
   "sitePage.pricing.consent.earlyStart":
     "Ik verzoek dat de hostingdienst begint vóór het einde van de herroepingstermijn van 14 dagen. Ik erken dat ik, als ik de overeenkomst herroep voordat de dienst volledig is uitgevoerd, moet betalen voor de diensten die tot het moment van herroeping zijn geleverd, en dat ik mijn herroepingsrecht verlies zodra de dienst volledig is uitgevoerd.",
-  "sitePage.teams.title": "OpenBot voor Teams",
+  "sitePage.teams.title": "StarBot voor Teams",
+
   "sitePage.teams.description":
-    "Draai OpenBot op beheerde infrastructuur, of laat ons een implementatie op maat ontwerpen rond je team, je workflows en je bestaande systemen.",
-  "sitePage.teams.imageAlt": "‘Big plans. Better together.’ Twee OpenBot-agents verbonden door een papieren brug",
+    "Draai StarBot op beheerde infrastructuur, of laat ons een implementatie op maat ontwerpen rond je team, je workflows en je bestaande systemen.",
+
+  "sitePage.teams.imageAlt": "‘Big plans. Better together.’ Twee StarBot-agents verbonden door een papieren brug",
+
   "sitePage.teams.hero.heading": "Haal een team van {team} AI-collega’s in je bedrijf",
   "sitePage.teams.setups.heading": "Kies de opzet die bij je team past",
   "sitePage.teams.setups.question": "Twijfel je welke opzet je nodig hebt?",
@@ -105,18 +135,21 @@ export const messages = {
   "sitePage.teams.setups.local.label": "Lokaal",
   "sitePage.teams.setups.local.title": "Lokaal draaien",
   "sitePage.teams.setups.local.description":
-    "Ideaal voor individuele gebruikers die OpenBot direct op hun eigen infrastructuur willen draaien.",
+    "Ideaal voor individuele gebruikers die StarBot direct op hun eigen infrastructuur willen draaien.",
+
   "sitePage.teams.setups.managed.label": "Beheerde server",
   "sitePage.teams.setups.managed.title": "Gebruik een beheerde server",
   "sitePage.teams.setups.managed.description":
-    "Houd OpenBot beschikbaar zonder afhankelijk te zijn van een persoonlijke computer. Wij leveren en onderhouden de server, zodat jij je kunt richten op je agents en workflows.",
+    "Houd StarBot beschikbaar zonder afhankelijk te zijn van een persoonlijke computer. Wij leveren en onderhouden de server, zodat jij je kunt richten op je agents en workflows.",
+
   "sitePage.teams.setups.custom.label": "Implementatie op maat",
   "sitePage.teams.setups.custom.title": "Een opzet voor het hele bedrijf",
   "sitePage.teams.setups.custom.description":
     "We helpen je omgevingen, agents, rechten en integraties in te richten rond de manier waarop je organisatie al werkt.",
   "sitePage.teams.benefits.alwaysOn.title": "Je agents werken 24/7",
   "sitePage.teams.benefits.alwaysOn.description":
-    "Draai OpenBot op beheerde infrastructuur en geef je team een gedeelde omgeving waarin mensen, agents en automatiseringen samenwerken.",
+    "Draai StarBot op beheerde infrastructuur en geef je team een gedeelde omgeving waarin mensen, agents en automatiseringen samenwerken.",
+
   "sitePage.teams.benefits.automations.title": "Automatiseringen die nooit stoppen",
   "sitePage.teams.benefits.automations.description":
     "Draai geplande routines en terugkerende workflows 24/7 – ook ’s nachts, in het weekend of als je team offline is.",
@@ -125,10 +158,13 @@ export const messages = {
     "Breng mensen en AI-collega’s samen op één gedeelde server. Teamleden werken met agents, stemmen taken af en werken samen in dezelfde omgeving.",
   "sitePage.teams.benefits.anywhere.title": "Overal toegang",
   "sitePage.teams.benefits.anywhere.description":
-    "Maak op afstand verbinding met je OpenBot-omgeving en werk verder op ondersteunde computers en mobiele apparaten.",
-  "sitePage.teams.custom.heading": "OpenBot, afgestemd op je bedrijf",
+    "Maak op afstand verbinding met je StarBot-omgeving en werk verder op ondersteunde computers en mobiele apparaten.",
+
+  "sitePage.teams.custom.heading": "StarBot, afgestemd op je bedrijf",
+
   "sitePage.teams.custom.intro":
-    "Een server is pas het begin. Heeft je bedrijf een complete oplossing nodig, dan helpen we OpenBot te ontwerpen en in te voeren rond je echte processen.",
+    "Een server is pas het begin. Heeft je bedrijf een complete oplossing nodig, dan helpen we StarBot te ontwerpen en in te voeren rond je echte processen.",
+
   "sitePage.teams.custom.infrastructure": "Inrichting en configuratie van de infrastructuur",
   "sitePage.teams.custom.agents": "Eerste configuratie van agents",
   "sitePage.teams.custom.integrations": "Integratie met bestaande tools en interne systemen",
@@ -143,12 +179,16 @@ export const messages = {
   "sitePage.teams.closing.heading": "Vertel ons wat je {accent} moeten bereiken",
   "sitePage.teams.closing.accent": "AI-collega’s",
   "sitePage.teams.closing.action": "Bespreek je opzet",
-  "sitePage.contact.title": "Neem contact op met het OpenBot-team",
+  "sitePage.contact.title": "Neem contact op met het StarBot-team",
+
   "sitePage.contact.description":
-    "Stuur het OpenBot-team een bericht over een opzet op maat, een samenwerking of de pers. Elk bericht wordt door een mens gelezen.",
-  "sitePage.contact.imageAlt": "‘Small team. Always on it.’ OpenBot-agents rond een papieren planeet",
+    "Stuur het StarBot-team een bericht over een opzet op maat, een samenwerking of de pers. Elk bericht wordt door een mens gelezen.",
+
+  "sitePage.contact.imageAlt": "‘Small team. Always on it.’ StarBot-agents rond een papieren planeet",
+
   "sitePage.contact.heading": "Praat met het team",
-  "sitePage.contact.intro": "Vertel ons wat je nodig hebt. Iemand van het OpenBot-team leest elk bericht.",
+  "sitePage.contact.intro": "Vertel ons wat je nodig hebt. Iemand van het StarBot-team leest elk bericht.",
+
   "sitePage.contact.channel.discord": "Community en hulp",
   "sitePage.contact.channel.github": "Bugs en broncode",
   "sitePage.contact.channel.x": "Nieuws",
@@ -174,19 +214,29 @@ export const messages = {
   "sitePage.contact.sentTitle": "Bericht verstuurd",
   "sitePage.contact.sentBody": "We antwoorden op {email}.",
   "sitePage.contact.sendAnother": "Nog een bericht sturen",
-  "sitePage.marketplace.agents.title": "Agents — OpenBot Marktplaats",
+  "sitePage.marketplace.agents.title": "Agents — StarBot Marktplaats",
+
   "sitePage.marketplace.agents.description":
-    "Agents die anderen in OpenBot hebben gemaakt. Voeg er een toe aan OpenBot, met zijn vaardigheden en routines.",
-  "sitePage.marketplace.skills.title": "Vaardigheden — OpenBot Marktplaats",
+    "Agents die anderen in StarBot hebben gemaakt. Voeg er een toe aan StarBot, met zijn vaardigheden en routines.",
+
+  "sitePage.marketplace.skills.title": "Vaardigheden — StarBot Marktplaats",
+
   "sitePage.marketplace.skills.description":
-    "Vaardigheden die een OpenBot-agent kan gebruiken. Voeg er een toe aan OpenBot.",
-  "sitePage.marketplace.apps.title": "Apps — OpenBot Marktplaats",
+    "Vaardigheden die een StarBot-agent kan gebruiken. Voeg er een toe aan StarBot.",
+
+  "sitePage.marketplace.apps.title": "Apps — StarBot Marktplaats",
+
   "sitePage.marketplace.apps.description":
-    "Apps en tools die een OpenBot-agent kan gebruiken. Open een app in OpenBot en kies daar waarmee hij verbindt.",
-  "sitePage.marketplace.agentTitle": "{name} — OpenBot-agent",
-  "sitePage.marketplace.skillTitle": "{name} — OpenBot-vaardigheid",
-  "sitePage.marketplace.agentImageAlt": "{name}, een OpenBot-agent van {creator}",
-  "sitePage.marketplace.skillImageAlt": "{name}, een OpenBot-vaardigheid van {creator}",
+    "Apps en tools die een StarBot-agent kan gebruiken. Open een app in StarBot en kies daar waarmee hij verbindt.",
+
+  "sitePage.marketplace.agentTitle": "{name} — StarBot-agent",
+
+  "sitePage.marketplace.skillTitle": "{name} — StarBot-vaardigheid",
+
+  "sitePage.marketplace.agentImageAlt": "{name}, een StarBot-agent van {creator}",
+
+  "sitePage.marketplace.skillImageAlt": "{name}, een StarBot-vaardigheid van {creator}",
+
   "sitePage.marketplace.categories": "Categorieën",
   "sitePage.marketplace.allCategories": "Alle",
   "sitePage.marketplace.searchAgents": "Agents zoeken",
@@ -197,7 +247,8 @@ export const messages = {
   "sitePage.marketplace.seeAll": "Alles bekijken",
   "sitePage.marketplace.add": "Toevoegen",
   "sitePage.marketplace.by": "door {name}",
-  "sitePage.marketplace.verifiedName": ", geverifieerd door OpenBot",
+  "sitePage.marketplace.verifiedName": ", geverifieerd door StarBot",
+
   "sitePage.marketplace.shownAgents": "Getoonde agents: {shown} van {total}",
   "sitePage.marketplace.shownSkills": "Getoonde vaardigheden: {shown} van {total}",
   "sitePage.marketplace.shownApps": "Getoonde apps: {shown} van {total}",
@@ -207,20 +258,27 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "Geen vaardigheden passen bij ‘{query}’.",
   "sitePage.marketplace.emptyApps": "Geen app past.",
   "sitePage.marketplace.breadcrumb": "Kruimelpad",
-  "sitePage.marketplace.addToOpenBot": "Toevoegen aan OpenBot",
+  "sitePage.marketplace.addToOpenBot": "Toevoegen aan StarBot",
+
   "sitePage.marketplace.addFromApp":
-    "Je voegt {name} toe vanuit OpenBot. Download de app en open deze link daarna opnieuw.",
+    "Je voegt {name} toe vanuit StarBot. Download de app en open deze link daarna opnieuw.",
+
   "sitePage.marketplace.downloadFor": "Downloaden voor {platform}",
   "sitePage.marketplace.copyLink": "Link kopiëren",
   "sitePage.marketplace.copied": "Gekopieerd",
   "sitePage.marketplace.trust.agentReviewed":
-    "Gemaakt door een andere OpenBot-gebruiker. OpenBot heeft het gecontroleerd voordat het online kwam. Na het toevoegen kan het namens jou handelen.",
+    "Gemaakt door een andere StarBot-gebruiker. StarBot heeft het gecontroleerd voordat het online kwam. Na het toevoegen kan het namens jou handelen.",
+
   "sitePage.marketplace.trust.agentPending":
-    "Gedeeld door de maker voordat OpenBot het controleerde. Na het toevoegen kan het namens jou handelen.",
+    "Gedeeld door de maker voordat StarBot het controleerde. Na het toevoegen kan het namens jou handelen.",
+
   "sitePage.marketplace.trust.skillReviewed":
-    "Gemaakt door een andere OpenBot-gebruiker. OpenBot heeft het gecontroleerd voordat het online kwam.",
-  "sitePage.marketplace.source.verified": "Geverifieerd door OpenBot",
-  "sitePage.marketplace.source.reviewed": "Gecontroleerd door OpenBot",
+    "Gemaakt door een andere StarBot-gebruiker. StarBot heeft het gecontroleerd voordat het online kwam.",
+
+  "sitePage.marketplace.source.verified": "Geverifieerd door StarBot",
+
+  "sitePage.marketplace.source.reviewed": "Gecontroleerd door StarBot",
+
   "sitePage.marketplace.source.pending": "Nog niet gecontroleerd",
   "sitePage.marketplace.information": "Informatie",
   "sitePage.marketplace.fact.creator": "Maker",
@@ -232,9 +290,11 @@ export const messages = {
   "sitePage.marketplace.routineOff": "Start uit",
   "sitePage.marketplace.missing.title": "Niet in de Marktplaats",
   "sitePage.marketplace.missing.body":
-    "De maker heeft het verwijderd, OpenBot heeft het niet goedgekeurd, of de link klopt niet.",
+    "De maker heeft het verwijderd, StarBot heeft het niet goedgekeurd, of de link klopt niet.",
+
   "sitePage.marketplace.missing.open": "Marktplaats openen",
-  "sitePage.landing.title": "OpenBot: een team van AI-agents op je eigen computer",
+  "sitePage.landing.title": "StarBot: een team van AI-agents op je eigen computer",
+
   "sitePage.landing.description":
     "Een gratis desktopapp die AI-agents als team laat werken op je eigen computer, met het ChatGPT-, Claude-, Gemini- of Grok-abonnement dat je al betaalt, of met je eigen model.",
   "sitePage.landing.hero.new": "NIEUW",
@@ -246,8 +306,10 @@ export const messages = {
   "sitePage.landing.hero.choosePlatform": "Kies een downloadplatform",
   "sitePage.landing.hero.platforms": "Downloadplatforms",
   "sitePage.landing.hero.phoneApps": "Telefoonapps",
-  "sitePage.landing.preview.title": "Interactieve preview van de OpenBot-app",
-  "sitePage.landing.preview.loading": "OpenBot-preview laden",
+  "sitePage.landing.preview.title": "Interactieve preview van de StarBot-app",
+
+  "sitePage.landing.preview.loading": "StarBot-preview laden",
+
   "sitePage.landing.network.title": "Je agents werken samen.",
   "sitePage.landing.network.description":
     "Elke agent heeft een eigen rol, eigen instructies en een eigen werkruimte. Ze sturen elkaar berichten, geven taken door, delen bestanden en controleren resultaten.",
@@ -270,7 +332,8 @@ export const messages = {
     "Ik pak het op.\nBegrepen. Ik begin nu.\nBij mij slagen de tests.\nIk neem de review.\nIk heb een fix gepusht.\nWie heeft de Safari-taak?\nKlaar. Aan jou.\nIk heb nog één bestand nodig.\nGemerged.\nDe build is groen.\nIk heb de bug gevonden.\nKan iemand mijn branch reviewen?\nShippen maar.\nGeef me vijf minuten.\nIk heb de release notes geschreven.",
   "sitePage.landing.network.eggs.hover":
     "Ik lijk alleen maar druk.\nVraag me naar de Safari-taak.\nIk heb de hele repository gelezen. Twee keer.\nIn mijn contextvenster is nog plek voor jou.\nSluit dit tabblad alsjeblieft niet.\nEén bug opgelost, drie nieuwe gevonden.\nIk draai op jouw computer, niet in een cloud.",
-  "sitePage.landing.features.title": "Wat OpenBot doet",
+  "sitePage.landing.features.title": "Wat StarBot doet",
+
   "sitePage.landing.features.description":
     "Eén app voor een team van AI-agents dat op een server of op je computer werkt. Op een abonnement dat je al hebt.",
   "sitePage.landing.features.team.title": "Agents werken als team",
@@ -283,10 +346,12 @@ export const messages = {
   "sitePage.landing.features.providers.localLink": "Ollama of LM Studio",
   "sitePage.landing.features.local.title": "Opgeslagen op je computer",
   "sitePage.landing.features.local.description":
-    "Werkruimtes, gesprekken, bestanden en browsergegevens blijven op de computer waarop OpenBot draait, niet op onze servers.",
+    "Werkruimtes, gesprekken, bestanden en browsergegevens blijven op de computer waarop StarBot draait, niet op onze servers.",
+
   "sitePage.landing.features.multiplayer.title": "Multiplayermodus",
   "sitePage.landing.features.multiplayer.description":
-    "Nodig je teamgenoten uit in OpenBot. Mensen en AI-agents werken samen in gedeelde kanalen aan dezelfde projecten.",
+    "Nodig je teamgenoten uit in StarBot. Mensen en AI-agents werken samen in gedeelde kanalen aan dezelfde projecten.",
+
   "sitePage.landing.features.workflows.title": "Workflows",
   "sitePage.landing.features.workflows.description":
     "Combineer agents, modellen en goedkeuringsstappen tot heldere workflows in meerdere stappen. Hergebruik het proces en pas het aan als je werk verandert.",
@@ -329,10 +394,12 @@ export const messages = {
   "sitePage.landing.pricing.yourPlans": "Gebruikt de AI-abonnementen die je al betaalt",
   "sitePage.landing.pricing.download": "Downloaden",
   "sitePage.landing.pricing.license": "Licentie voor werk",
-  "sitePage.landing.teams.title": "OpenBot voor Teams",
+  "sitePage.landing.teams.title": "StarBot voor Teams",
+
   "sitePage.landing.teams.statement": "AI-collega’s voor je hele bedrijf.",
   "sitePage.landing.teams.description":
-    "Wij draaien OpenBot op beheerde servers en richten het in rond je team en je tools.",
+    "Wij draaien StarBot op beheerde servers en richten het in rond je team en je tools.",
+
   "sitePage.landing.teams.contact": "Neem contact op",
   "sitePage.landing.teams.learn": "Meer over Teams",
   "sitePage.landing.teams.servers.label": "Beheerde servers",
@@ -343,24 +410,30 @@ export const messages = {
   "sitePage.landing.teams.environments.description": "Eén bedrijfsserver, één per medewerker, of allebei.",
   "sitePage.landing.teams.integrations.label": "Integraties op maat",
   "sitePage.landing.teams.integrations.title": "Je eigen tools",
-  "sitePage.landing.teams.integrations.description": "We koppelen OpenBot aan je systemen, API’s en workflows.",
+  "sitePage.landing.teams.integrations.description": "We koppelen StarBot aan je systemen, API’s en workflows.",
+
   "sitePage.landing.teams.support.label": "Implementatie en support",
   "sitePage.landing.teams.support.title": "We lanceren het samen",
   "sitePage.landing.teams.support.description": "Inrichting, testen, onboarding en doorlopende support.",
   "sitePage.landing.faq.title": "Vragen",
   "sitePage.landing.faq.description": "Korte antwoorden over prijs, installatie, aanbieders en je gegevens.",
   "sitePage.landing.faq.contact": "Stel ons een andere vraag",
-  "sitePage.landing.faq.free.question": "Is OpenBot gratis?",
+  "sitePage.landing.faq.free.question": "Is StarBot gratis?",
+
   "sitePage.landing.faq.free.answer":
-    "Ja, voor persoonlijk en ander niet-commercieel gebruik. OpenBot kost $ 0, zonder vergrendelde functies. Je betaalt alleen je AI-aanbieder, via het abonnement of de API-sleutel die je al hebt. Voor commercieel gebruik heb je een licentie nodig.",
-  "sitePage.landing.faq.source.question": "Is de broncode van OpenBot open?",
+    "Ja, voor persoonlijk en ander niet-commercieel gebruik. StarBot kost $ 0, zonder vergrendelde functies. Je betaalt alleen je AI-aanbieder, via het abonnement of de API-sleutel die je al hebt. Voor commercieel gebruik heb je een licentie nodig.",
+
+  "sitePage.landing.faq.source.question": "Is de broncode van StarBot open?",
+
   "sitePage.landing.faq.source.answer":
-    "Ja. Alle broncode staat open op GitHub, dus je kunt nagaan wat OpenBot doet. Voor niet-commercieel gebruik, zoals persoonlijke projecten, studie of onderzoek, mag je hem gratis aanpassen en draaien. Voor commercieel gebruik heb je een aparte licentie nodig. De licentie is PolyForm Noncommercial 1.0.0.",
+    "Ja. Alle broncode staat open op GitHub, dus je kunt nagaan wat StarBot doet. Voor niet-commercieel gebruik, zoals persoonlijke projecten, studie of onderzoek, mag je hem gratis aanpassen en draaien. Voor commercieel gebruik heb je een aparte licentie nodig. De licentie is PolyForm Noncommercial 1.0.0.",
+
   "sitePage.landing.faq.source.link": "Bekijk de broncode op GitHub",
   "sitePage.landing.faq.plans.question": "Kan ik mijn ChatGPT- of Claude-abonnement gebruiken?",
   "sitePage.landing.faq.plans.answer":
     "Ja. Codex logt in met je ChatGPT-abonnement en Claude Code met je Claude-abonnement. Gemini gebruikt een Google AI Pro- of Ultra-abonnement. OpenCode heeft gratis modellen waarvoor je geen account nodig hebt.",
-  "sitePage.landing.faq.models.question": "Welke AI-modellen kan OpenBot gebruiken?",
+  "sitePage.landing.faq.models.question": "Welke AI-modellen kan StarBot gebruiken?",
+
   "sitePage.landing.faq.models.answer":
     "Codex, Claude Code, Gemini, Grok, OpenCode, Cursor, Cline, Muse Code en Pi, en de Mercury-modellen van Inception. Je kunt ook elke agent draaien die het Agent Client Protocol spreekt, zoals Goose of Qwen Code, elk OpenAI-compatibel endpoint koppelen en lokale modellen gebruiken in Ollama of LM Studio.",
   "sitePage.landing.faq.limit.question": "Wat gebeurt er als mijn abonnement zijn limiet bereikt?",
@@ -368,18 +441,23 @@ export const messages = {
     "Een agent kan overstappen op een reservemodel bij een andere aanbieder als zijn abonnement de limiet bereikt, of als zijn aanbieder overbelast of onbereikbaar is. Hij houdt zijn chat en werkruimte, en een melding in de chat laat de wissel zien.",
   "sitePage.landing.faq.start.question": "Hoe begin ik?",
   "sitePage.landing.faq.start.answer":
-    "Download OpenBot en koppel een aanbieder. Beschrijf dan in één prompt de agent die je wilt, controleer zijn instructies en sla hem op. Je kunt hem meteen werk sturen: berichten wachten in een wachtrij tot hij vrij is.",
+    "Download StarBot en koppel een aanbieder. Beschrijf dan in één prompt de agent die je wilt, controleer zijn instructies en sla hem op. Je kunt hem meteen werk sturen: berichten wachten in een wachtrij tot hij vrij is.",
+
   "sitePage.landing.faq.data.question": "Waar gaan mijn gegevens naartoe?",
   "sitePage.landing.faq.data.answer":
-    "Werkruimtes, gesprekken, bijlagen en browsergegevens blijven op de computer waarop OpenBot draait. De AI-aanbieder die je kiest, ontvangt de prompts die je agents ernaar sturen, en de pagina’s die agents openen, gebruiken het netwerk.",
-  "sitePage.landing.faq.computers.question": "Op welke computers draait OpenBot?",
+    "Werkruimtes, gesprekken, bijlagen en browsergegevens blijven op de computer waarop StarBot draait. De AI-aanbieder die je kiest, ontvangt de prompts die je agents ernaar sturen, en de pagina’s die agents openen, gebruiken het netwerk.",
+
+  "sitePage.landing.faq.computers.question": "Op welke computers draait StarBot?",
+
   "sitePage.landing.faq.computers.answer":
     "macOS 13 of nieuwer op Apple silicon of Intel, Windows 10 of nieuwer op x64, en Linux op x64 of arm64 als AppImage.",
   "sitePage.landing.faq.safety.question": "Is het veilig om agents op mijn computer te laten werken?",
   "sitePage.landing.faq.safety.answer":
     "Agents kunnen bestanden lezen en wijzigen, opdrachten uitvoeren, het netwerk gebruiken en de ingebouwde browser bedienen zonder het elke keer te vragen. Geef ze alleen taken die je vertrouwt, en maak back-ups.",
-  "sitePage.landing.faq.compare": "OpenBot vergelijken",
-  "sitePage.landing.download.title": "OpenBot downloaden",
+  "sitePage.landing.faq.compare": "StarBot vergelijken",
+
+  "sitePage.landing.download.title": "StarBot downloaden",
+
   "sitePage.landing.download.description":
     "Kies je platform. Draai Codex, Claude, Gemini, Grok, OpenCode, Muse Code, Pi of je eigen model vanuit één desktopapp, en praat met je agents vanaf je telefoon.",
   "sitePage.landing.download.available": "Beschikbaar",
@@ -388,8 +466,10 @@ export const messages = {
   "sitePage.landing.download.googlePlay": "Ontdek het op Google Play",
   "sitePage.landing.download.pages": "Systeemvereisten en installatiestappen:",
   "sitePage.landing.download.apk": "APK downloaden",
-  "sitePage.referral.invitedBy": "{name} heeft je uitgenodigd voor OpenBot",
-  "sitePage.referral.invited": "Je hebt een uitnodiging voor OpenBot",
+  "sitePage.referral.invitedBy": "{name} heeft je uitgenodigd voor StarBot",
+
+  "sitePage.referral.invited": "Je hebt een uitnodiging voor StarBot",
+
   "sitePage.referral.offer": "{percent} korting",
   "sitePage.referral.offerDetail": "op je eerste betaling",
   "sitePage.referral.lead":
@@ -419,7 +499,8 @@ export const messages = {
   "sitePage.site.language": "Taal",
   "sitePage.site.language.current": "Taal: {language}",
   "sitePage.site.latest": "Nieuwste",
-  "sitePage.site.home": "OpenBot-startpagina",
+  "sitePage.site.home": "StarBot-startpagina",
+
   "sitePage.site.logo.menu": "Logo",
   "sitePage.site.logo.copyIcon": "Logo kopiëren als SVG",
   "sitePage.site.logo.copyLockup": "Logo met naam kopiëren als SVG",
@@ -429,16 +510,19 @@ export const messages = {
   "sitePage.site.news.summary": "Wat er nieuw is, en waarom het ertoe doet.",
   "sitePage.site.news.index": "Al het nieuws",
   "sitePage.site.guides": "Handleidingen",
-  "sitePage.site.guides.summary": "Leer OpenBot stap voor stap kennen.",
+  "sitePage.site.guides.summary": "Leer StarBot stap voor stap kennen.",
+
   "sitePage.site.guides.index": "Alle handleidingen",
   "sitePage.site.compare": "Vergelijken",
-  "sitePage.site.compare.summary": "Hoe OpenBot verschilt van andere agentapps.",
+  "sitePage.site.compare.summary": "Hoe StarBot verschilt van andere agentapps.",
+
   "sitePage.site.compare.index": "Alle vergelijkingen",
   "sitePage.site.plugins": "Plugins",
   "sitePage.site.plugins.summary": "Apps en vaardigheden die een agent kan gebruiken.",
   "sitePage.site.plugins.index": "Plugins bekijken",
   "sitePage.site.resources": "Bronnen",
-  "sitePage.site.resources.summary": "De broncode van OpenBot is open.",
+  "sitePage.site.resources.summary": "De broncode van StarBot is open.",
+
   "sitePage.site.sourceCode": "Broncode",
   "sitePage.site.download.description": "macOS, Windows en Linux",
   "sitePage.site.changelog": "Changelog",
@@ -446,7 +530,8 @@ export const messages = {
   "sitePage.site.community": "Community",
   "sitePage.site.community.description": "Praat met ons op Discord",
   "sitePage.site.documentation": "Documentatie",
-  "sitePage.site.documentation.description": "OpenBot instellen en gebruiken",
+  "sitePage.site.documentation.description": "StarBot instellen en gebruiken",
+
   "sitePage.site.brand": "Merk",
   "sitePage.site.brand.description": "Het logo als SVG en PNG",
   "sitePage.site.status": "Status",
@@ -456,7 +541,8 @@ export const messages = {
   "sitePage.site.cta.title": "Maak kennis met je eerste teamgenoot",
   "sitePage.site.cta.description":
     "Draai Codex, Claude, Gemini, Grok of je eigen model met de abonnementen die je al betaalt, elk met een eigen werkruimte en context. Je werk blijft op je computer.",
-  "sitePage.site.downloadOpenBot": "OpenBot downloaden",
+  "sitePage.site.downloadOpenBot": "StarBot downloaden",
+
   "sitePage.site.contact": "Contact",
   "sitePage.site.footer.description":
     "Blijvende AI-teamgenoten op je eigen computer. Draai Codex, Claude, Gemini, Grok, Muse Code, Pi of je eigen model met de abonnementen die je al betaalt.",

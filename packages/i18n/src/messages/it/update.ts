@@ -33,29 +33,39 @@ export const messages = {
   "update.provider.showDetails": "Mostra dettagli",
   "update.provider.hideDetails": "Nascondi dettagli",
 
-  "update.scheduled.title": "{name} ha programmato un aggiornamento di OpenBot",
-  "update.scheduled.automaticTitle": "OpenBot installa un aggiornamento",
-  "update.scheduled.whenIdle": "OpenBot si riavvia quando gli agenti sono inattivi.",
-  "update.scheduled.now": "OpenBot si riavvia quando l'aggiornamento è stato scaricato.",
+  "update.scheduled.title": "{name} ha programmato un aggiornamento di StarBot",
+
+  "update.scheduled.automaticTitle": "StarBot installa un aggiornamento",
+
+  "update.scheduled.whenIdle": "StarBot si riavvia quando gli agenti sono inattivi.",
+
+  "update.scheduled.now": "StarBot si riavvia quando l'aggiornamento è stato scaricato.",
+
   "update.scheduled.cancel": "Annulla aggiornamento",
   "update.scheduled.cancelFailed": "Impossibile annullare l'aggiornamento.",
 
-  "update.idleRestart.relaunchTitle": "OpenBot si riavvia quando gli agenti sono inattivi",
-  "update.idleRestart.updateTitle": "OpenBot installa l'aggiornamento quando gli agenti sono inattivi",
+  "update.idleRestart.relaunchTitle": "StarBot si riavvia quando gli agenti sono inattivi",
+
+  "update.idleRestart.updateTitle": "StarBot installa l'aggiornamento quando gli agenti sono inattivi",
+
   "update.idleRestart.description": "Le nuove esecuzioni delle routine attendono il riavvio.",
   "update.idleRestart.waitingFor": "In attesa di {reasons}.",
   "update.idleRestart.cancel": "Annulla riavvio",
   "update.idleRestart.restartNow": "Riavvia ora",
-  "update.idleRestart.restartNowTitle": "Riavviare OpenBot ora?",
+  "update.idleRestart.restartNowTitle": "Riavviare StarBot ora?",
+
   "update.idleRestart.restartNowDescription":
     "I turni degli agenti e le esecuzioni delle routine non finiti si fermano ora.",
   "update.idleRestart.keepWaiting": "Continua ad attendere",
   "update.idleRestart.cancelFailed": "Impossibile annullare il riavvio.",
   "update.idleRestart.requestFailed": "Impossibile programmare il riavvio.",
-  "update.idleRestart.failedTitle": "OpenBot non si è riavviato",
+  "update.idleRestart.failedTitle": "StarBot non si è riavviato",
 
-  "update.whatsNew.title": "Novità di OpenBot",
-  "update.whatsNew.description": "Le nuove funzioni e le modifiche di questa versione di OpenBot.",
+
+  "update.whatsNew.title": "Novità di StarBot",
+
+  "update.whatsNew.description": "Le nuove funzioni e le modifiche di questa versione di StarBot.",
+
   "update.whatsNew.version": "Versione {version}",
   "update.whatsNew.updatedFrom": "Aggiornato da {from} a {to}",
   "update.whatsNew.group.added": "Novità",
@@ -72,12 +82,15 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Questa versione non ha note da mostrare qui. Il changelog completo mostra tutte le modifiche.",
   "update.whatsNew.changelog": "Changelog completo",
-  "update.whatsNew.changelogFailed": "OpenBot non è riuscito ad aprire il changelog.",
+  "update.whatsNew.changelogFailed": "StarBot non è riuscito ad aprire il changelog.",
+
   "update.whatsNew.done": "Ho capito",
   "update.required.title": "Aggiornamento richiesto",
   "update.required.description":
-    "OpenBot {version} non è più supportato. Aggiorna alla versione {minimum} o successiva per continuare.",
-  "update.required.download": "Scarica OpenBot",
+    "StarBot {version} non è più supportato. Aggiorna alla versione {minimum} o successiva per continuare.",
+
+  "update.required.download": "Scarica StarBot",
+
   "update.required.continue": "Continua senza aggiornare",
   "update.required.failed": "L’aggiornamento non è stato completato.",
 } as const satisfies PartialTranslation<typeof source>;

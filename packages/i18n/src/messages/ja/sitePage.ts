@@ -7,55 +7,79 @@ export const messages = {
     "接続を確認して、ページを再読み込みしてください。それでも読み込めない場合は、ホームページに戻ってください。",
   "sitePage.error.reload": "再読み込み",
   "sitePage.error.home": "ホームに戻る",
-  "sitePage.join.title": "OpenBot サーバーに参加",
-  "sitePage.join.description": "非公開のサーバー招待を OpenBot で開きます。",
+  "sitePage.join.title": "StarBot サーバーに参加",
+
+  "sitePage.join.description": "非公開のサーバー招待を StarBot で開きます。",
+
   "sitePage.join.eyebrow": "非公開の招待",
-  "sitePage.join.intro": "この招待を OpenBot で開いてください。アプリがサーバーを確認し、接続する前に確認を求めます。",
+  "sitePage.join.intro": "この招待を StarBot で開いてください。アプリがサーバーを確認し、接続する前に確認を求めます。",
+
   "sitePage.join.invalid": "この招待リンクは無効か、不完全です。サーバーのオーナーに新しい招待を依頼してください。",
-  "sitePage.join.open": "OpenBot を開く",
+  "sitePage.join.open": "StarBot を開く",
+
   "sitePage.join.browser": "ブラウザーで開く",
   "sitePage.join.noApp": "アプリがない場合は、{browser}するか、{download}してください。",
   "sitePage.join.noAppMobile": "アプリがない場合は、{browser}してください。",
   "sitePage.join.browserLink": "このブラウザーで参加",
-  "sitePage.join.downloadLink": "OpenBot をダウンロード",
+  "sitePage.join.downloadLink": "StarBot をダウンロード",
+
   "sitePage.join.notOpened":
-    "このコンピューターに OpenBot がある場合は、起動してからもう一度 {open} を押してください。ない場合は、先にダウンロードしてください。",
+    "このコンピューターに StarBot がある場合は、起動してからもう一度 {open} を押してください。ない場合は、先にダウンロードしてください。",
+
   "sitePage.join.mobile":
-    "OpenBot がインストールされている場合は、{open} をタップしてください。このリンクをアプリの「サーバーを追加」に貼り付けることもできます。",
-  "sitePage.join.email": "招待がメールで届いた場合は、そのメールアドレスで OpenBot にサインインしてください。",
-  "sitePage.connect.title": "OpenBot に戻る",
+    "StarBot がインストールされている場合は、{open} をタップしてください。このリンクをアプリの「サーバーを追加」に貼り付けることもできます。",
+
+  "sitePage.join.email": "招待がメールで届いた場合は、そのメールアドレスで StarBot にサインインしてください。",
+
+  "sitePage.connect.title": "StarBot に戻る",
+
   "sitePage.connect.failedTitle": "接続が完了しませんでした",
-  "sitePage.connect.openApp": "OpenBot を開く",
-  "sitePage.connect.tryAgainApp": "OpenBot で再試行",
+  "sitePage.connect.openApp": "StarBot を開く",
+
+  "sitePage.connect.tryAgainApp": "StarBot で再試行",
+
   "sitePage.connect.tryAgainBrowser": "ブラウザーで再試行",
-  "sitePage.connect.doneInWebClient": "OpenBot のタブが {name} との接続を完了します。このタブは閉じてかまいません。",
-  "sitePage.connect.doneInApp": "OpenBot がこのコンピューターで {name} との接続を完了します。",
+  "sitePage.connect.doneInWebClient": "StarBot のタブが {name} との接続を完了します。このタブは閉じてかまいません。",
+
+  "sitePage.connect.doneInApp": "StarBot がこのコンピューターで {name} との接続を完了します。",
+
   "sitePage.connect.failure.cancelled": "{name} との接続はキャンセルされました。何も変更されていません。",
   "sitePage.connect.failure.expired": "{name} へのサインインの期限が切れました。接続をもう一度始めてください。",
   "sitePage.connect.failure.exchange": "{name} が接続を確認しませんでした。もう一度お試しください。",
   "sitePage.connect.failure.enterprise": "組織全体ではなく、Slack ワークスペースを 1 つ接続してください。",
   "sitePage.connect.failure.takenSlack":
-    "別の OpenBot サーバーがすでにこの Slack ワークスペースで応答しています。そのサーバーで接続を解除してから、もう一度お試しください。",
+    "別の StarBot サーバーがすでにこの Slack ワークスペースで応答しています。そのサーバーで接続を解除してから、もう一度お試しください。",
+
   "sitePage.connect.failure.takenDiscord":
-    "別の OpenBot サーバーがすでにこの Discord サーバーで応答しています。そのサーバーで接続を解除してから、もう一度お試しください。",
+    "別の StarBot サーバーがすでにこの Discord サーバーで応答しています。そのサーバーで接続を解除してから、もう一度お試しください。",
+
   "sitePage.connect.failure.unavailable":
-    "OpenBot は現在 {name} に接続できません。しばらくしてからもう一度お試しください。",
+    "StarBot は現在 {name} に接続できません。しばらくしてからもう一度お試しください。",
+
   "sitePage.connect.failure.tabClosed":
-    "{name} との接続を始めた OpenBot のタブが応答しませんでした。ブラウザーで OpenBot を開き、{name} をもう一度接続してください。",
+    "{name} との接続を始めた StarBot のタブが応答しませんでした。ブラウザーで StarBot を開き、{name} をもう一度接続してください。",
+
   "sitePage.connect.failure.failed": "{name} が接続を完了しませんでした。もう一度お試しください。",
-  "sitePage.connect.restartHint": "OpenBot で {marketplace}、{apps}、{name} の順に開き、{connect} を選択してください。",
+  "sitePage.connect.restartHint": "StarBot で {marketplace}、{apps}、{name} の順に開き、{connect} を選択してください。",
+
   "sitePage.connect.notOpened":
-    "OpenBot を起動してから、もう一度お試しください。このコンピューターに OpenBot がない場合は、ダウンロードしてアプリから {name} を接続してください。",
+    "StarBot を起動してから、もう一度お試しください。このコンピューターに StarBot がない場合は、ダウンロードしてアプリから {name} を接続してください。",
+
   "sitePage.openApp.title": "何も開きませんでしたか?",
   "sitePage.openApp.dismiss": "後で",
-  "sitePage.billing.pageTitle": "OpenBot の請求",
+  "sitePage.billing.pageTitle": "StarBot の請求",
+
   "sitePage.billing.updatedTitle": "請求情報を更新しました",
-  "sitePage.billing.updatedBody": "OpenBot に戻ってください。このページは閉じてかまいません。",
+  "sitePage.billing.updatedBody": "StarBot に戻ってください。このページは閉じてかまいません。",
+
   "sitePage.billing.cancelledTitle": "支払いをキャンセルしました",
-  "sitePage.billing.cancelledBody": "請求は発生していません。OpenBot に戻ってください。",
-  "sitePage.report.pageTitle": "ホストされたサイトを報告 — OpenBot",
+  "sitePage.billing.cancelledBody": "請求は発生していません。StarBot に戻ってください。",
+
+  "sitePage.report.pageTitle": "ホストされたサイトを報告 — StarBot",
+
   "sitePage.report.title": "ホストされたサイトを報告",
-  "sitePage.report.intro": "openbot.site のアドレスにある有害または違法なコンテンツを報告します。",
+  "sitePage.report.intro": "starbot.site のアドレスにある有害または違法なコンテンツを報告します。",
+
   "sitePage.report.hostnameLabel": "サイトのアドレス",
   "sitePage.report.hostnameMissing": "サイトのアドレスを入力してください",
   "sitePage.report.reasonLabel": "理由",
@@ -75,10 +99,13 @@ export const messages = {
   "sitePage.report.sentTitle": "報告を送信しました",
   "sitePage.report.sentBody": "ありがとうございます。報告を受け付けました。",
   "sitePage.report.home": "ホームページへ",
-  "sitePage.pricing.title": "OpenBot の料金",
+  "sitePage.pricing.title": "StarBot の料金",
+
   "sitePage.pricing.description":
-    "ホスト型サーバーとチーム向けライセンス。自分のコンピューターでの個人利用なら OpenBot は無料です。",
-  "sitePage.pricing.imageAlt": "「Small team. Bright ideas.」ガラスのドームの中にいる 3 体の OpenBot エージェント",
+    "ホスト型サーバーとチーム向けライセンス。自分のコンピューターでの個人利用なら StarBot は無料です。",
+
+  "sitePage.pricing.imageAlt": "「Small team. Bright ideas.」ガラスのドームの中にいる 3 体の StarBot エージェント",
+
   "sitePage.pricing.heading": "料金",
   "sitePage.pricing.personal.title": "個人利用は無料",
   "sitePage.pricing.personal.body":
@@ -92,28 +119,34 @@ export const messages = {
   "sitePage.pricing.consent.terms": "利用規約および撤回権",
   "sitePage.pricing.consent.earlyStart":
     "14日間の撤回期間が終わる前にホスティングサービスを開始することを請求します。サービスが完全に履行される前に契約を撤回した場合は撤回時までに提供されたサービスの料金を支払う必要があること、またサービスが完全に履行された後は契約を撤回する権利を失うことを了承します。",
-  "sitePage.teams.title": "チーム向け OpenBot",
+  "sitePage.teams.title": "チーム向け StarBot",
+
   "sitePage.teams.description":
-    "OpenBot をマネージドインフラで運用するか、チームやワークフロー、既存のシステムに合わせたカスタム導入を私たちに設計させてください。",
-  "sitePage.teams.imageAlt": "「Big plans. Better together.」紙の橋でつながった 2 体の OpenBot エージェント",
+    "StarBot をマネージドインフラで運用するか、チームやワークフロー、既存のシステムに合わせたカスタム導入を私たちに設計させてください。",
+
+  "sitePage.teams.imageAlt": "「Big plans. Better together.」紙の橋でつながった 2 体の StarBot エージェント",
+
   "sitePage.teams.hero.heading": "会社に AI の同僚チームを {team} 迎えましょう",
   "sitePage.teams.setups.heading": "チームに合った構成を選びましょう",
   "sitePage.teams.setups.question": "どの構成が必要か迷っていますか?",
   "sitePage.teams.setups.action": "相談する",
   "sitePage.teams.setups.local.label": "ローカル",
   "sitePage.teams.setups.local.title": "ローカルで実行",
-  "sitePage.teams.setups.local.description": "自分のインフラで OpenBot を直接動かしたい個人ユーザーに最適です。",
+  "sitePage.teams.setups.local.description": "自分のインフラで StarBot を直接動かしたい個人ユーザーに最適です。",
+
   "sitePage.teams.setups.managed.label": "マネージドサーバー",
   "sitePage.teams.setups.managed.title": "マネージドサーバーを使う",
   "sitePage.teams.setups.managed.description":
-    "個人のコンピューターに頼らずに、OpenBot をいつでも使える状態に保てます。サーバーの提供と保守は私たちが行うので、エージェントとワークフローに集中できます。",
+    "個人のコンピューターに頼らずに、StarBot をいつでも使える状態に保てます。サーバーの提供と保守は私たちが行うので、エージェントとワークフローに集中できます。",
+
   "sitePage.teams.setups.custom.label": "カスタム導入",
   "sitePage.teams.setups.custom.title": "全社向けの構成を作る",
   "sitePage.teams.setups.custom.description":
     "環境、エージェント、権限、連携を、組織のいまの働き方に合わせて設定するお手伝いをします。",
   "sitePage.teams.benefits.alwaysOn.title": "エージェントが 24 時間 365 日稼働",
   "sitePage.teams.benefits.alwaysOn.description":
-    "OpenBot をマネージドインフラで運用し、人、エージェント、自動化が一緒に働く共有環境をチームに用意できます。",
+    "StarBot をマネージドインフラで運用し、人、エージェント、自動化が一緒に働く共有環境をチームに用意できます。",
+
   "sitePage.teams.benefits.automations.title": "止まらない自動化",
   "sitePage.teams.benefits.automations.description":
     "スケジュールしたルーティンや定期的なワークフローを 24 時間 365 日実行します。夜間も週末も、チームがオフラインのときも動き続けます。",
@@ -122,10 +155,13 @@ export const messages = {
     "人と AI の同僚が 1 つの共有サーバーに集まります。チームメンバーは同じ環境でエージェントと働き、タスクを調整し、協力できます。",
   "sitePage.teams.benefits.anywhere.title": "どこからでもアクセス",
   "sitePage.teams.benefits.anywhere.description":
-    "OpenBot の環境にリモートで接続し、対応するデスクトップやモバイル端末から作業を続けられます。",
-  "sitePage.teams.custom.heading": "ビジネスに合わせた OpenBot",
+    "StarBot の環境にリモートで接続し、対応するデスクトップやモバイル端末から作業を続けられます。",
+
+  "sitePage.teams.custom.heading": "ビジネスに合わせた StarBot",
+
   "sitePage.teams.custom.intro":
-    "サーバーの用意は始まりにすぎません。会社として完全なソリューションが必要なら、実際の業務プロセスに合わせた OpenBot の設計と導入をお手伝いします。",
+    "サーバーの用意は始まりにすぎません。会社として完全なソリューションが必要なら、実際の業務プロセスに合わせた StarBot の設計と導入をお手伝いします。",
+
   "sitePage.teams.custom.infrastructure": "インフラの構築と設定",
   "sitePage.teams.custom.agents": "エージェントの初期設定",
   "sitePage.teams.custom.integrations": "既存のツールや社内システムとの連携",
@@ -140,12 +176,16 @@ export const messages = {
   "sitePage.teams.closing.heading": "{accent}に任せたいことをお聞かせください",
   "sitePage.teams.closing.accent": "AI の同僚",
   "sitePage.teams.closing.action": "構成を相談する",
-  "sitePage.contact.title": "OpenBot チームへのお問い合わせ",
+  "sitePage.contact.title": "StarBot チームへのお問い合わせ",
+
   "sitePage.contact.description":
-    "カスタム構成、パートナーシップ、取材について OpenBot チームにメッセージを送れます。すべてのメッセージに担当者が目を通します。",
-  "sitePage.contact.imageAlt": "「Small team. Always on it.」紙の惑星を囲む OpenBot エージェント",
+    "カスタム構成、パートナーシップ、取材について StarBot チームにメッセージを送れます。すべてのメッセージに担当者が目を通します。",
+
+  "sitePage.contact.imageAlt": "「Small team. Always on it.」紙の惑星を囲む StarBot エージェント",
+
   "sitePage.contact.heading": "チームに相談する",
-  "sitePage.contact.intro": "ご要望をお聞かせください。すべてのメッセージに OpenBot チームの担当者が目を通します。",
+  "sitePage.contact.intro": "ご要望をお聞かせください。すべてのメッセージに StarBot チームの担当者が目を通します。",
+
   "sitePage.contact.channel.discord": "コミュニティとヘルプ",
   "sitePage.contact.channel.github": "バグとソースコード",
   "sitePage.contact.channel.x": "ニュース",
@@ -172,18 +212,28 @@ export const messages = {
   "sitePage.contact.sentTitle": "メッセージを送信しました",
   "sitePage.contact.sentBody": "{email} 宛てにご返信します。",
   "sitePage.contact.sendAnother": "別のメッセージを送る",
-  "sitePage.marketplace.agents.title": "エージェント — OpenBot マーケットプレイス",
+  "sitePage.marketplace.agents.title": "エージェント — StarBot マーケットプレイス",
+
   "sitePage.marketplace.agents.description":
-    "OpenBot でほかの人が作ったエージェントです。スキルやルーティンと一緒に OpenBot に追加できます。",
-  "sitePage.marketplace.skills.title": "スキル — OpenBot マーケットプレイス",
-  "sitePage.marketplace.skills.description": "OpenBot のエージェントが使えるスキルです。OpenBot に追加できます。",
-  "sitePage.marketplace.apps.title": "アプリ — OpenBot マーケットプレイス",
+    "StarBot でほかの人が作ったエージェントです。スキルやルーティンと一緒に StarBot に追加できます。",
+
+  "sitePage.marketplace.skills.title": "スキル — StarBot マーケットプレイス",
+
+  "sitePage.marketplace.skills.description": "StarBot のエージェントが使えるスキルです。StarBot に追加できます。",
+
+  "sitePage.marketplace.apps.title": "アプリ — StarBot マーケットプレイス",
+
   "sitePage.marketplace.apps.description":
-    "OpenBot のエージェントが使えるアプリとツールです。OpenBot でアプリを開き、接続先をそこで決めます。",
-  "sitePage.marketplace.agentTitle": "{name} — OpenBot エージェント",
-  "sitePage.marketplace.skillTitle": "{name} — OpenBot スキル",
-  "sitePage.marketplace.agentImageAlt": "{name}（{creator} が作った OpenBot エージェント）",
-  "sitePage.marketplace.skillImageAlt": "{name}（{creator} が作った OpenBot スキル）",
+    "StarBot のエージェントが使えるアプリとツールです。StarBot でアプリを開き、接続先をそこで決めます。",
+
+  "sitePage.marketplace.agentTitle": "{name} — StarBot エージェント",
+
+  "sitePage.marketplace.skillTitle": "{name} — StarBot スキル",
+
+  "sitePage.marketplace.agentImageAlt": "{name}（{creator} が作った StarBot エージェント）",
+
+  "sitePage.marketplace.skillImageAlt": "{name}（{creator} が作った StarBot スキル）",
+
   "sitePage.marketplace.categories": "カテゴリー",
   "sitePage.marketplace.allCategories": "すべて",
   "sitePage.marketplace.searchAgents": "エージェントを検索",
@@ -194,7 +244,8 @@ export const messages = {
   "sitePage.marketplace.seeAll": "すべて表示",
   "sitePage.marketplace.add": "追加",
   "sitePage.marketplace.by": "作成者: {name}",
-  "sitePage.marketplace.verifiedName": "、OpenBot が検証済み",
+  "sitePage.marketplace.verifiedName": "、StarBot が検証済み",
+
   "sitePage.marketplace.shownAgents": "表示中のエージェント: {shown} / {total}",
   "sitePage.marketplace.shownSkills": "表示中のスキル: {shown} / {total}",
   "sitePage.marketplace.shownApps": "表示中のアプリ: {shown} / {total}",
@@ -204,20 +255,27 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "「{query}」に一致するスキルはありません。",
   "sitePage.marketplace.emptyApps": "一致するアプリはありません。",
   "sitePage.marketplace.breadcrumb": "パンくずリスト",
-  "sitePage.marketplace.addToOpenBot": "OpenBot に追加",
+  "sitePage.marketplace.addToOpenBot": "StarBot に追加",
+
   "sitePage.marketplace.addFromApp":
-    "{name} は OpenBot の中から追加します。アプリを入手してから、このリンクをもう一度開いてください。",
+    "{name} は StarBot の中から追加します。アプリを入手してから、このリンクをもう一度開いてください。",
+
   "sitePage.marketplace.downloadFor": "{platform} 版をダウンロード",
   "sitePage.marketplace.copyLink": "リンクをコピー",
   "sitePage.marketplace.copied": "コピーしました",
   "sitePage.marketplace.trust.agentReviewed":
-    "ほかの OpenBot ユーザーが作りました。公開前に OpenBot が確認しています。追加すると、あなたの代わりに操作できます。",
+    "ほかの StarBot ユーザーが作りました。公開前に StarBot が確認しています。追加すると、あなたの代わりに操作できます。",
+
   "sitePage.marketplace.trust.agentPending":
-    "OpenBot が確認する前に作成者が共有しました。追加すると、あなたの代わりに操作できます。",
+    "StarBot が確認する前に作成者が共有しました。追加すると、あなたの代わりに操作できます。",
+
   "sitePage.marketplace.trust.skillReviewed":
-    "ほかの OpenBot ユーザーが作りました。公開前に OpenBot が確認しています。",
-  "sitePage.marketplace.source.verified": "OpenBot が検証済み",
-  "sitePage.marketplace.source.reviewed": "OpenBot が確認済み",
+    "ほかの StarBot ユーザーが作りました。公開前に StarBot が確認しています。",
+
+  "sitePage.marketplace.source.verified": "StarBot が検証済み",
+
+  "sitePage.marketplace.source.reviewed": "StarBot が確認済み",
+
   "sitePage.marketplace.source.pending": "未確認",
   "sitePage.marketplace.information": "情報",
   "sitePage.marketplace.fact.creator": "作成者",
@@ -228,9 +286,11 @@ export const messages = {
   "sitePage.marketplace.skillVersion": "バージョン {version}",
   "sitePage.marketplace.routineOff": "最初はオフ",
   "sitePage.marketplace.missing.title": "マーケットプレイスにありません",
-  "sitePage.marketplace.missing.body": "作成者が削除したか、OpenBot が承認しなかったか、リンクが間違っています。",
+  "sitePage.marketplace.missing.body": "作成者が削除したか、StarBot が承認しなかったか、リンクが間違っています。",
+
   "sitePage.marketplace.missing.open": "マーケットプレイスを開く",
-  "sitePage.landing.title": "OpenBot: AI エージェントのチームを自分のコンピューターで",
+  "sitePage.landing.title": "StarBot: AI エージェントのチームを自分のコンピューターで",
+
   "sitePage.landing.description":
     "AI エージェントをチームとして自分のコンピューターで動かせる無料のデスクトップアプリ。すでに契約している ChatGPT、Claude、Gemini、Grok のプランや、自分のモデルで使えます。",
   "sitePage.landing.hero.new": "新登場",
@@ -242,8 +302,10 @@ export const messages = {
   "sitePage.landing.hero.choosePlatform": "ダウンロードするプラットフォームを選択",
   "sitePage.landing.hero.platforms": "ダウンロードできるプラットフォーム",
   "sitePage.landing.hero.phoneApps": "スマートフォンアプリ",
-  "sitePage.landing.preview.title": "OpenBot アプリのインタラクティブなプレビュー",
-  "sitePage.landing.preview.loading": "OpenBot のプレビューを読み込み中",
+  "sitePage.landing.preview.title": "StarBot アプリのインタラクティブなプレビュー",
+
+  "sitePage.landing.preview.loading": "StarBot のプレビューを読み込み中",
+
   "sitePage.landing.network.title": "エージェントが力を合わせて働きます。",
   "sitePage.landing.network.description":
     "エージェントにはそれぞれ役割、指示、ワークスペースがあります。互いにメッセージを送り、タスクを引き継ぎ、ファイルを共有し、結果をレビューします。",
@@ -266,7 +328,8 @@ export const messages = {
     "やります。\n了解。始めます。\nこちらではテストが通っています。\nレビューは私がやります。\n修正をプッシュしました。\nSafari のタスクは誰が担当?\n完了。あとはお願いします。\nファイルがもう 1 つ必要です。\nマージしました。\nビルドはグリーンです。\nバグを見つけました。\n誰か私のブランチをレビューしてくれる?\nリリースしよう。\n5 分ください。\nリリースノートを書きました。",
   "sitePage.landing.network.eggs.hover":
     "忙しそうに見えるだけです。\nSafari のタスクについて聞いてください。\nリポジトリを全部読みました。2 回。\nコンテキストウィンドウにはあなたの分の空きがあります。\nこのタブを閉じないでください。\nバグを 1 つ直したら 3 つ見つかりました。\nクラウドではなく、あなたのコンピューターで動いています。",
-  "sitePage.landing.features.title": "OpenBot でできること",
+  "sitePage.landing.features.title": "StarBot でできること",
+
   "sitePage.landing.features.description":
     "サーバーやあなたのコンピューターで働く AI エージェントのチームを、1 つのアプリで。すでに契約しているサブスクリプションで動きます。",
   "sitePage.landing.features.team.title": "エージェントがチームで働く",
@@ -279,10 +342,12 @@ export const messages = {
   "sitePage.landing.features.providers.localLink": "Ollama や LM Studio",
   "sitePage.landing.features.local.title": "データはあなたのコンピューターに",
   "sitePage.landing.features.local.description":
-    "ワークスペース、会話、ファイル、ブラウザーのデータは、私たちのサーバーではなく、OpenBot を動かすコンピューターに保存されます。",
+    "ワークスペース、会話、ファイル、ブラウザーのデータは、私たちのサーバーではなく、StarBot を動かすコンピューターに保存されます。",
+
   "sitePage.landing.features.multiplayer.title": "マルチプレイヤーモード",
   "sitePage.landing.features.multiplayer.description":
-    "チームメンバーを OpenBot に招待しましょう。人と AI エージェントが共有チャンネルで協力し、同じプロジェクトに取り組みます。",
+    "チームメンバーを StarBot に招待しましょう。人と AI エージェントが共有チャンネルで協力し、同じプロジェクトに取り組みます。",
+
   "sitePage.landing.features.workflows.title": "ワークフロー",
   "sitePage.landing.features.workflows.description":
     "エージェント、モデル、承認ステップを組み合わせて、わかりやすい複数ステップのワークフローを作れます。プロセスは再利用でき、仕事の変化に合わせて更新できます。",
@@ -325,10 +390,12 @@ export const messages = {
   "sitePage.landing.pricing.yourPlans": "契約中の AI プランをそのまま利用",
   "sitePage.landing.pricing.download": "ダウンロード",
   "sitePage.landing.pricing.license": "業務用ライセンス",
-  "sitePage.landing.teams.title": "チーム向け OpenBot",
+  "sitePage.landing.teams.title": "チーム向け StarBot",
+
   "sitePage.landing.teams.statement": "会社全体に AI の同僚を。",
   "sitePage.landing.teams.description":
-    "OpenBot をマネージドサーバーで運用し、チームとツールに合わせてセットアップします。",
+    "StarBot をマネージドサーバーで運用し、チームとツールに合わせてセットアップします。",
+
   "sitePage.landing.teams.contact": "お問い合わせ",
   "sitePage.landing.teams.learn": "Teams について",
   "sitePage.landing.teams.servers.label": "マネージドサーバー",
@@ -340,24 +407,30 @@ export const messages = {
   "sitePage.landing.teams.environments.description": "会社で 1 台、社員ごとに 1 台、またはその両方。",
   "sitePage.landing.teams.integrations.label": "カスタム連携",
   "sitePage.landing.teams.integrations.title": "いつものツールと",
-  "sitePage.landing.teams.integrations.description": "OpenBot をあなたのシステム、API、ワークフローにつなぎます。",
+  "sitePage.landing.teams.integrations.description": "StarBot をあなたのシステム、API、ワークフローにつなぎます。",
+
   "sitePage.landing.teams.support.label": "導入とサポート",
   "sitePage.landing.teams.support.title": "立ち上げまで伴走",
   "sitePage.landing.teams.support.description": "セットアップ、テスト、オンボーディング、継続的なサポート。",
   "sitePage.landing.faq.title": "よくある質問",
   "sitePage.landing.faq.description": "料金、セットアップ、プロバイダー、データについての簡単な回答です。",
   "sitePage.landing.faq.contact": "ほかの質問をする",
-  "sitePage.landing.faq.free.question": "OpenBot は無料ですか?",
+  "sitePage.landing.faq.free.question": "StarBot は無料ですか?",
+
   "sitePage.landing.faq.free.answer":
-    "はい。個人利用やその他の非商用利用なら無料です。OpenBot は $0 で、機能の制限もありません。支払うのは、すでにお持ちのプランまたは API キーを通じた AI プロバイダーへの料金だけです。商用利用にはライセンスが必要です。",
-  "sitePage.landing.faq.source.question": "OpenBot のソースコードは公開されていますか?",
+    "はい。個人利用やその他の非商用利用なら無料です。StarBot は $0 で、機能の制限もありません。支払うのは、すでにお持ちのプランまたは API キーを通じた AI プロバイダーへの料金だけです。商用利用にはライセンスが必要です。",
+
+  "sitePage.landing.faq.source.question": "StarBot のソースコードは公開されていますか?",
+
   "sitePage.landing.faq.source.answer":
-    "はい。ソースコードはすべて GitHub で公開されているので、OpenBot が何をしているか確認できます。個人のプロジェクト、学習、研究などの非商用利用なら、無料で変更して実行できます。商用利用には別途ライセンスが必要です。ライセンスは PolyForm Noncommercial 1.0.0 です。",
+    "はい。ソースコードはすべて GitHub で公開されているので、StarBot が何をしているか確認できます。個人のプロジェクト、学習、研究などの非商用利用なら、無料で変更して実行できます。商用利用には別途ライセンスが必要です。ライセンスは PolyForm Noncommercial 1.0.0 です。",
+
   "sitePage.landing.faq.source.link": "GitHub でソースコードを見る",
   "sitePage.landing.faq.plans.question": "ChatGPT や Claude のプランを使えますか?",
   "sitePage.landing.faq.plans.answer":
     "はい。Codex は ChatGPT のプランで、Claude Code は Claude のプランでサインインします。Gemini は Google AI Pro または Ultra のプランを使います。OpenCode にはアカウント不要の無料モデルがあります。",
-  "sitePage.landing.faq.models.question": "OpenBot ではどの AI モデルを使えますか?",
+  "sitePage.landing.faq.models.question": "StarBot ではどの AI モデルを使えますか?",
+
   "sitePage.landing.faq.models.answer":
     "Codex、Claude Code、Gemini、Grok、OpenCode、Cursor、Cline、Muse Code、Pi、そして Inception の Mercury モデルです。Goose や Qwen Code など Agent Client Protocol に対応したエージェントの実行、OpenAI 互換エンドポイントへの接続、Ollama や LM Studio のローカルモデルの利用もできます。",
   "sitePage.landing.faq.limit.question": "プランが上限に達したらどうなりますか?",
@@ -365,18 +438,23 @@ export const messages = {
     "プランが上限に達したときや、プロバイダーが混雑・停止しているときは、エージェントが別のプロバイダーのバックアップモデルに切り替えられます。チャットとワークスペースはそのまま保たれ、切り替えたことはチャット内のメモで確認できます。",
   "sitePage.landing.faq.start.question": "どうやって始めればいいですか?",
   "sitePage.landing.faq.start.answer":
-    "OpenBot をダウンロードして、プロバイダーを接続します。次に、ほしいエージェントを 1 つのプロンプトで説明し、指示を確認して保存します。すぐに仕事を頼めます。エージェントの手が空くまで、メッセージはキューで待機します。",
+    "StarBot をダウンロードして、プロバイダーを接続します。次に、ほしいエージェントを 1 つのプロンプトで説明し、指示を確認して保存します。すぐに仕事を頼めます。エージェントの手が空くまで、メッセージはキューで待機します。",
+
   "sitePage.landing.faq.data.question": "データはどこに送られますか?",
   "sitePage.landing.faq.data.answer":
-    "ワークスペース、会話、添付ファイル、ブラウザーのデータは、OpenBot を動かすコンピューターに保存されます。選んだ AI プロバイダーはエージェントが送るプロンプトを受け取り、エージェントが開くページはネットワークを使います。",
-  "sitePage.landing.faq.computers.question": "OpenBot はどのコンピューターで動きますか?",
+    "ワークスペース、会話、添付ファイル、ブラウザーのデータは、StarBot を動かすコンピューターに保存されます。選んだ AI プロバイダーはエージェントが送るプロンプトを受け取り、エージェントが開くページはネットワークを使います。",
+
+  "sitePage.landing.faq.computers.question": "StarBot はどのコンピューターで動きますか?",
+
   "sitePage.landing.faq.computers.answer":
     "Apple シリコンまたは Intel の macOS 13 以降、x64 の Windows 10 以降、x64 または arm64 の Linux（AppImage）で動きます。",
   "sitePage.landing.faq.safety.question": "エージェントに自分のコンピューターで作業させても安全ですか?",
   "sitePage.landing.faq.safety.answer":
     "エージェントは、毎回確認を求めることなく、ファイルの読み取りと変更、コマンドの実行、ネットワークの利用、内蔵ブラウザーの操作ができます。信頼できるタスクだけを任せ、バックアップを取っておいてください。",
-  "sitePage.landing.faq.compare": "OpenBot を比較する",
-  "sitePage.landing.download.title": "OpenBot をダウンロード",
+  "sitePage.landing.faq.compare": "StarBot を比較する",
+
+  "sitePage.landing.download.title": "StarBot をダウンロード",
+
   "sitePage.landing.download.description":
     "プラットフォームを選んでください。Codex、Claude、Gemini、Grok、OpenCode、Muse Code、Pi、または自分のモデルを 1 つのデスクトップアプリで動かし、スマートフォンからエージェントと話せます。",
   "sitePage.landing.download.available": "提供中",
@@ -385,8 +463,10 @@ export const messages = {
   "sitePage.landing.download.googlePlay": "Google Play で手に入れよう",
   "sitePage.landing.download.pages": "システム要件とインストール手順:",
   "sitePage.landing.download.apk": "APK を入手",
-  "sitePage.referral.invitedBy": "{name} さんから OpenBot に招待されました",
-  "sitePage.referral.invited": "OpenBot への招待が届いています",
+  "sitePage.referral.invitedBy": "{name} さんから StarBot に招待されました",
+
+  "sitePage.referral.invited": "StarBot への招待が届いています",
+
   "sitePage.referral.offer": "{percent} オフ",
   "sitePage.referral.offerDetail": "初回のお支払い",
   "sitePage.referral.lead":
@@ -414,7 +494,8 @@ export const messages = {
   "sitePage.site.language": "言語",
   "sitePage.site.language.current": "言語: {language}",
   "sitePage.site.latest": "最新",
-  "sitePage.site.home": "OpenBot ホーム",
+  "sitePage.site.home": "StarBot ホーム",
+
   "sitePage.site.logo.menu": "ロゴ",
   "sitePage.site.logo.copyIcon": "ロゴを SVG でコピー",
   "sitePage.site.logo.copyLockup": "名前入りのロゴを SVG でコピー",
@@ -424,7 +505,8 @@ export const messages = {
   "sitePage.site.news.summary": "リリース内容と、その意味。",
   "sitePage.site.news.index": "すべてのニュース",
   "sitePage.site.guides": "ガイド",
-  "sitePage.site.guides.summary": "OpenBot を 1 ステップずつ学びましょう。",
+  "sitePage.site.guides.summary": "StarBot を 1 ステップずつ学びましょう。",
+
   "sitePage.site.guides.index": "すべてのガイド",
   "sitePage.site.compare": "比較",
   "sitePage.site.compare.summary": "ほかのエージェントアプリとの違い。",
@@ -433,7 +515,8 @@ export const messages = {
   "sitePage.site.plugins.summary": "エージェントが使えるアプリとスキル。",
   "sitePage.site.plugins.index": "プラグインを見る",
   "sitePage.site.resources": "リソース",
-  "sitePage.site.resources.summary": "OpenBot のソースコードは公開されています。",
+  "sitePage.site.resources.summary": "StarBot のソースコードは公開されています。",
+
   "sitePage.site.sourceCode": "ソースコード",
   "sitePage.site.download.description": "macOS、Windows、Linux",
   "sitePage.site.changelog": "変更履歴",
@@ -441,7 +524,8 @@ export const messages = {
   "sitePage.site.community": "コミュニティ",
   "sitePage.site.community.description": "Discord で話しましょう",
   "sitePage.site.documentation": "ドキュメント",
-  "sitePage.site.documentation.description": "OpenBot のセットアップと使い方",
+  "sitePage.site.documentation.description": "StarBot のセットアップと使い方",
+
   "sitePage.site.brand": "ブランド",
   "sitePage.site.brand.description": "SVG と PNG のロゴ",
   "sitePage.site.status": "ステータス",
@@ -451,7 +535,8 @@ export const messages = {
   "sitePage.site.cta.title": "最初のチームメイトに会いましょう",
   "sitePage.site.cta.description":
     "Codex、Claude、Gemini、Grok、または自分のモデルを、すでに契約しているプランで動かせます。それぞれに専用のワークスペースとコンテキストがあります。作業はあなたのコンピューターに残ります。",
-  "sitePage.site.downloadOpenBot": "OpenBot をダウンロード",
+  "sitePage.site.downloadOpenBot": "StarBot をダウンロード",
+
   "sitePage.site.contact": "お問い合わせ",
   "sitePage.site.footer.description":
     "あなたのコンピューターで働き続ける AI のチームメイト。Codex、Claude、Gemini、Grok、Muse Code、Pi、または自分のモデルを、すでに契約しているプランで動かせます。",

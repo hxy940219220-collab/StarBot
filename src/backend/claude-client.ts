@@ -322,7 +322,7 @@ function withClaudeClientLabels(environment: NodeJS.ProcessEnv): NodeJS.ProcessE
   };
 }
 const CLAUDE_MCP_USER_AGENT = "claude-code-mcp-client";
-const CLAUDE_SESSION_TITLE = "OpenBot";
+const CLAUDE_SESSION_TITLE = "StarBot";
 
 interface ClientEvents {
   notification: [notification: AppServerNotification];
@@ -543,7 +543,7 @@ const readClaudeSettingsFile = Effect.fn("readClaudeSettingsFile")(function* (pa
   try {
     parsed = JSON.parse(text.value);
   } catch {
-    queryLogger.warn("OpenBot reads no values from a Claude settings file: the file is not valid JSON.", { path });
+    queryLogger.warn("StarBot reads no values from a Claude settings file: the file is not valid JSON.", { path });
     return {};
   }
   const record: DynamicRecord = isDynamicRecord(parsed) ? parsed : {};

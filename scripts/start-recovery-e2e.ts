@@ -319,7 +319,7 @@ try {
     () => {
       const line = readFileSync(runLog, "utf8")
         .split("\n")
-        .find((candidate) => candidate.includes(`OpenBot ${LOOP_VERSION} did not start. Not installing it.`));
+        .find((candidate) => candidate.includes(`StarBot ${LOOP_VERSION} did not start. Not installing it.`));
       return line ?? null;
     },
     RUN_TIMEOUT_MS,

@@ -9,7 +9,8 @@ export const messages = {
   "server.connection.waking": "Запуск {name}",
   "server.connection.startProgress": "{step} · {time}",
   "server.connection.providerLimit":
-    "Облачный провайдер сейчас ограничивает новые запуски. OpenBot скоро повторит попытку.",
+    "Облачный провайдер сейчас ограничивает новые запуски. StarBot скоро повторит попытку.",
+
   "server.connection.updating": "Обновление {name}",
   "server.connection.loading": "Загрузка {name}",
   "server.connection.connecting": "Подключение к {name}",
@@ -23,7 +24,8 @@ export const messages = {
   "server.connection.cachedHint":
     "Загруженное содержимое и черновики сохранены. Действия сервера возобновятся после повторного подключения.",
   "server.connection.computerOffline":
-    "{name} не в сети. Убедитесь, что его компьютер включён, OpenBot открыт, а Опубликовать этот сервер включено в Настройки сервера > Участники.",
+    "{name} не в сети. Убедитесь, что его компьютер включён, StarBot открыт, а Опубликовать этот сервер включено в Настройки сервера > Участники.",
+
   "server.connection.conversationFailed": "Не удалось загрузить диалог. Повторите попытку.",
   "server.connection.panelsFailed": "Не удалось загрузить некоторые панели рабочего пространства. Повторите попытку.",
   "server.connection.retry": "Повторить",
@@ -32,13 +34,17 @@ export const messages = {
   "server.connection.details": "Подробности",
 
   "server.status.steps": "Этапы подключения",
-  "server.status.updateCause": "{name} перезапускается, чтобы установить OpenBot {version}.",
-  "server.status.updateCauseNoVersion": "{name} перезапускается, чтобы установить обновление OpenBot.",
-  "server.status.wakeCause": "{name} был остановлен. OpenBot запускает его снова.",
+  "server.status.updateCause": "{name} перезапускается, чтобы установить StarBot {version}.",
+
+  "server.status.updateCauseNoVersion": "{name} перезапускается, чтобы установить обновление StarBot.",
+
+  "server.status.wakeCause": "{name} был остановлен. StarBot запускает его снова.",
+
   "server.status.connectCause": "Приложение подключается к {name}.",
   "server.status.connectionCause": "Приложение потеряло соединение с {name}. Оно подключится снова автоматически.",
   "server.status.stepUpdate": "Установить обновление",
-  "server.status.stepUpdateDetail": "OpenBot останавливается, устанавливает обновление и запускается снова.",
+  "server.status.stepUpdateDetail": "StarBot останавливается, устанавливает обновление и запускается снова.",
+
   "server.status.stepWake": "Запустить сервер",
   "server.status.stepWakeDetail": "Это может занять несколько минут.",
   "server.status.stepConnect": "Подключиться",
@@ -46,8 +52,10 @@ export const messages = {
   "server.status.stepLoad": "Загрузить рабочее пространство",
   "server.status.stepLoadDetail": "Агенты и чаты загружаются с сервера.",
   "server.status.elapsed": "Прошло: {time}",
-  "server.compatibility.updateClientTitle": "Обновите это приложение OpenBot",
-  "server.compatibility.updateHostTitle": "Обновите OpenBot на {name}",
+  "server.compatibility.updateClientTitle": "Обновите это приложение StarBot",
+
+  "server.compatibility.updateHostTitle": "Обновите StarBot на {name}",
+
   "server.compatibility.unsafeDataTitle": "Хост вернул небезопасные данные",
   "server.compatibility.cannotConnectTitle": "Не удаётся подключиться к {name}",
   "server.compatibility.safeModeTitle": "{name} не запускается",
@@ -56,7 +64,8 @@ export const messages = {
   "server.compatibility.updateHostDescription":
     "Хост поддерживает только более старые протоколы, чем это приложение. Обновите хост и повторите попытку.",
   "server.compatibility.unsafeDataDescription":
-    "OpenBot прервал это подключение, потому что известные данные оказались недопустимыми. Данные вашего текущего рабочего пространства не изменены.",
+    "StarBot прервал это подключение, потому что известные данные оказались недопустимыми. Данные вашего текущего рабочего пространства не изменены.",
+
   "server.compatibility.clientVersion": "Версия клиента",
   "server.compatibility.hostVersion": "Версия хоста",
   "server.compatibility.negotiatedProtocol": "Согласованный протокол",
@@ -83,9 +92,11 @@ export const messages = {
   "server.join.account": "Аккаунт",
   "server.join.emailBound": "Это приглашение работает только для получателя на указанную почту.",
   "server.join.unknownDate": "Неизвестно",
-  "server.add.title": "Запустите OpenBot 24/7 на внешнем сервере",
+  "server.add.title": "Запустите StarBot 24/7 на внешнем сервере",
+
   "server.add.description":
-    "Серверы OpenBot поддерживают работу ваших агентов и регулярных задач, даже когда компьютер выключен. Мы берём на себя инфраструктуру и обслуживание, поэтому сервер готов к работе без технической настройки.",
+    "Серверы StarBot поддерживают работу ваших агентов и регулярных задач, даже когда компьютер выключен. Мы берём на себя инфраструктуру и обслуживание, поэтому сервер готов к работе без технической настройки.",
+
   "server.add.billing.label": "Период оплаты",
   "server.add.currency.label": "Валюта",
   "server.add.billing.monthly": "Помесячно",
@@ -122,18 +133,22 @@ export const messages = {
   "server.local.creating": "Создание сервера…",
   "server.local.createFailed": "Не удалось создать сервер.",
   "server.local.createFailedRetry":
-    "Что-то пошло не так. Повторите попытку. Если ошибка повторится, перезапустите OpenBot.",
+    "Что-то пошло не так. Повторите попытку. Если ошибка повторится, перезапустите StarBot.",
+
   "server.local.limitReached":
     "На этом компьютере может быть не больше {limit} серверов. Удалите один, чтобы создать новый.",
   "server.local.deleteConfirmTitle": "Удалить {name}?",
-  "server.local.deleteConfirmDescription": "OpenBot остановит сервер и переместит его агентов, чаты и файлы в корзину.",
+  "server.local.deleteConfirmDescription": "StarBot остановит сервер и переместит его агентов, чаты и файлы в корзину.",
+
   "server.local.deleting": "Удаление сервера…",
   "server.local.deletedTitle": "{name} удалён",
   "server.install.title": "Новый сервер на другом компьютере",
   "server.install.description":
-    "Выполните эту команду на своём компьютере с Linux или VPS. Она устанавливает OpenBot и добавляет сервер в этот аккаунт.",
+    "Выполните эту команду на своём компьютере с Linux или VPS. Она устанавливает StarBot и добавляет сервер в этот аккаунт.",
+
   "server.install.making": "Создание команды для этого аккаунта…",
-  "server.install.failed": "OpenBot не удалось создать команду. Проверьте подключение к интернету.",
+  "server.install.failed": "StarBot не удалось создать команду. Проверьте подключение к интернету.",
+
   "server.install.copyForAgent": "Копировать для ИИ-агента",
   "server.install.expiresIn": "Работает один раз. Истекает через {time}.",
   "server.install.newCommand": "Новая команда",
@@ -146,7 +161,8 @@ export const messages = {
     'Установи OpenBot на этот сервер Linux и подключи его к моему аккаунту OpenBot.\nВыполни эту команду от root. Она не задаёт вопросов и занимает несколько минут:\n\n{command}\n\nОна завершается строкой "OpenBot is connected to your account." и кодом выхода 0.\nКоманда работает один раз, в течение 15 минут. Нигде её не сохраняй.',
   "server.install.setUpWithAgent": "Настроить с агентом",
   "server.install.sshAgentPrompt":
-    "Подключись по SSH к моему серверу Linux и установи на него OpenBot как сервер.\n\nАдрес SSH (user@host):",
+    "Подключись по SSH к моему серверу Linux и установи на него StarBot как сервер.\n\nАдрес SSH (user@host):",
+
   "server.add.limit.title": "В этом аккаунте максимальное число серверов",
   "server.add.limit.description": {
     one: "В аккаунте может быть {count} платный сервер. Чтобы добавить сервер, сначала удалите один из существующих.",
@@ -169,15 +185,19 @@ export const messages = {
   "server.hosted.defaultName": "Облачный сервер",
   "server.hosted.defaultNameNumbered": "Облачный сервер {number}",
   "server.hosted.step.create": "Создание машины",
-  "server.hosted.step.start": "Запуск OpenBot",
+  "server.hosted.step.start": "Запуск StarBot",
+
   "server.hosted.step.connect": "Подключение к вашему аккаунту",
   "server.hosted.detail.create.reserve": "Резервирование отдельной машины",
-  "server.hosted.detail.create.copy": "Копирование OpenBot на машину",
+  "server.hosted.detail.create.copy": "Копирование StarBot на машину",
+
   "server.hosted.detail.create.key": "Добавление одноразового ключа входа",
   "server.hosted.detail.start.boot": "Включение машины",
   "server.hosted.detail.start.restore": "Восстановление данных",
-  "server.hosted.detail.start.app": "Запуск OpenBot",
-  "server.hosted.detail.start.wait": "Ожидание ответа OpenBot",
+  "server.hosted.detail.start.app": "Запуск StarBot",
+
+  "server.hosted.detail.start.wait": "Ожидание ответа StarBot",
+
   "server.hosted.detail.connect.signIn": "Вход от вашего имени",
   "server.hosted.detail.connect.publish": "Добавление сервера в ваш аккаунт",
   "server.hosted.detail.connect.check": "Проверка подключения",
@@ -245,7 +265,8 @@ export const messages = {
   "server.plan.deletedOn": "Удаление {date}",
   "server.plan.dialogTitle": "Не дайте агентам исчезнуть",
   "server.plan.dialogDescription":
-    "{name} остановлен, потому что тариф закончился. {date} OpenBot удалит его агентов со всеми чатами и файлами.",
+    "{name} остановлен, потому что тариф закончился. {date} StarBot удалит его агентов со всеми чатами и файлами.",
+
   "server.plan.dialogDaysLeft": {
     one: "Остался {count} день",
     few: "Осталось {count} дня",
@@ -282,13 +303,16 @@ export const messages = {
   "server.settings.identityLocalOnly":
     "Название и логотип этого сервера можно изменить только на компьютере, на котором он работает.",
   "server.settings.publicationLocalOnly": "Изменять публикацию может только локальный сервер.",
-  "server.compatibility.versionMismatchTitle": "Разные версии OpenBot на {name}",
+  "server.compatibility.versionMismatchTitle": "Разные версии StarBot на {name}",
+
   "server.compatibility.versionMismatchDescription":
     "Подключение использует протокол {protocol}. Некоторые новые функции могут быть недоступны. Клиент {clientVersion}; хост {hostVersion}.",
   "server.compatibility.versionMismatchUpdateHostDescription":
-    "Обновите OpenBot на {name}, чтобы использовать все функции. Подключение использует протокол {protocol}. Клиент {clientVersion}; хост {hostVersion}.",
+    "Обновите StarBot на {name}, чтобы использовать все функции. Подключение использует протокол {protocol}. Клиент {clientVersion}; хост {hostVersion}.",
+
   "server.compatibility.versionMismatchUpdateClientDescription":
-    "Обновите это приложение OpenBot, чтобы использовать все функции. Подключение использует протокол {protocol}. Клиент {clientVersion}; хост {hostVersion}.",
+    "Обновите это приложение StarBot, чтобы использовать все функции. Подключение использует протокол {protocol}. Клиент {clientVersion}; хост {hostVersion}.",
+
   "server.connection.failedTitle": "Не удалось подключиться",
   "server.connection.failedDescription":
     "Не удалось подключиться к этому серверу. Убедитесь, что хост в сети, и повторите попытку.",
@@ -306,10 +330,12 @@ export const messages = {
   "server.settings.desktopTitle": "Рабочий стол",
   "server.settings.desktopDescription": "Настройте рабочий стол этого сервера или подключитесь к нему.",
   "server.settings.storageTitle": "Хранилище",
-  "server.settings.storageDescription": "Посмотрите, что OpenBot хранит на диске этого сервера, и освободите место.",
+  "server.settings.storageDescription": "Посмотрите, что StarBot хранит на диске этого сервера, и освободите место.",
+
   "server.settings.hostedSitesTitle": "Сайты",
   "server.settings.hostedSitesDescription":
-    "Статические сайты, которые агенты этого сервера опубликовали на openbot.site.",
+    "Статические сайты, которые агенты этого сервера опубликовали на starbot.site.",
+
   "server.settings.importTitle": "Импорт",
   "server.settings.importDescription": "Перенесите своих агентов из Grok Bot или Hermes Agent на этот сервер.",
   "server.settings.transferTitle": "Перенос",
@@ -344,9 +370,11 @@ export const messages = {
   "server.settings.nameTooLong": "Используйте не более {limit} символов.",
   "server.settings.actionFailedTitle": "Не удалось выполнить действие с сервером",
   "server.settings.actionFailed": "Не удалось выполнить действие с сервером.",
-  "server.settings.imageReadFailed": "OpenBot не удалось прочитать это изображение.",
+  "server.settings.imageReadFailed": "StarBot не удалось прочитать это изображение.",
+
   "server.settings.copyFailedTitle": "Не удалось скопировать",
-  "server.settings.copyFailed": "OpenBot не удалось скопировать это значение.",
+  "server.settings.copyFailed": "StarBot не удалось скопировать это значение.",
+
   "server.settings.unavailableTitle": "Настройки сервера недоступны",
   "server.settings.reset": "Сбросить",
   "server.settings.unsavedChanges": "Несохранённые изменения",
@@ -386,7 +414,8 @@ export const messages = {
   "server.settings.appearanceColorOption": "Цвет сервера: {color}",
   "server.settings.appearanceReset": "Сбросить форму и цвет",
   "server.settings.access": "Доступ",
-  "server.companySignIn.desktopOnly": "Настройте единый вход в настольном приложении OpenBot.",
+  "server.companySignIn.desktopOnly": "Настройте единый вход в настольном приложении StarBot.",
+
   "server.settings.publish": "Опубликовать этот сервер",
   "server.settings.published": "Сервер опубликован",
   "server.settings.setUpDesktopTitle": "Настройка удалённого рабочего стола",
@@ -500,7 +529,8 @@ export const messages = {
   "server.settings.restartTitle": "Перезапустить",
   "server.settings.restarting": "Перезапуск…",
   "server.settings.restartedTitle": "{name} перезапускается",
-  "server.settings.restartHiddenDescription": "OpenBot подключится автоматически, когда сервер вернётся.",
+  "server.settings.restartHiddenDescription": "StarBot подключится автоматически, когда сервер вернётся.",
+
   "server.settings.restartHide": "Скрыть",
   "server.settings.restartProgressTitle": "Перезапуск {name}",
   "server.settings.restartProgressDescription": "{time} · обычно около минуты. Вы можете скрыть это окно.",
@@ -571,7 +601,8 @@ export const messages = {
       "На этом сервере максимальное число участников: {count}. Удалите участника, чтобы пригласить нового человека.",
   },
   "server.invite.qrLabel": "QR-код приглашения",
-  "server.invite.qrDescription": "Отсканируйте этот код в OpenBot Mobile, чтобы присоединиться к серверу.",
+  "server.invite.qrDescription": "Отсканируйте этот код в StarBot Mobile, чтобы присоединиться к серверу.",
+
   "server.invite.accepted": "Приглашение принято",
   "server.invite.expired": "Приглашение истекло",
   "server.invite.sent": "Приглашение отправлено",
@@ -579,7 +610,8 @@ export const messages = {
   "server.invite.acceptedDescription":
     "Участник присоединился к этому серверу. Создайте новую ссылку, чтобы пригласить кого-то ещё.",
   "server.invite.expiredDescription": "Создайте новую ссылку, чтобы пригласить человека.",
-  "server.invite.linkReadyDescription": "Поделитесь ссылкой или отсканируйте QR-код в OpenBot Mobile.",
+  "server.invite.linkReadyDescription": "Поделитесь ссылкой или отсканируйте QR-код в StarBot Mobile.",
+
   "server.invite.pendingTitle": "Ожидающие приглашения",
   "server.invite.pendingCount": "Ожидают: {total}",
   "server.invite.noPending": "Ожидающих приглашений нет.",
@@ -610,7 +642,8 @@ export const messages = {
   "server.desktop.connectionUnavailable": "Подключение недоступно",
   "server.desktop.hostOffline": "Хост не в сети",
   "server.desktop.hostOfflineDescription": "Переподключитесь к хосту, прежде чем открывать его рабочий стол.",
-  "server.desktop.hostUpdateDescription": "Обновите OpenBot на хосте, чтобы пользоваться удалённым управлением.",
+  "server.desktop.hostUpdateDescription": "Обновите StarBot на хосте, чтобы пользоваться удалённым управлением.",
+
   "server.desktop.serviceAvailable": "Служба доступна",
   "server.desktop.serviceNotReady": "Служба не готова",
   "server.desktop.serviceNotReadyDescription":
@@ -625,7 +658,8 @@ export const messages = {
   "server.desktop.accessMembers": "Все участники",
   "server.desktop.askLabel": "Спрашивать на этом компьютере",
   "server.desktop.askDescription":
-    "Каждый сеанс ждёт, пока человек за этим компьютером его разрешит. Если ответа нет 30 секунд, OpenBot его отклоняет.",
+    "Каждый сеанс ждёт, пока человек за этим компьютером его разрешит. Если ответа нет 30 секунд, StarBot его отклоняет.",
+
   "server.desktop.activeTitle": "Активные сеансы удалённого рабочего стола: {active}",
   "server.desktop.activeDescription": "Сразу завершает каждый сеанс. Участники могут запросить снова.",
   "server.desktop.stopAll": "Остановить всё удалённое управление",
@@ -637,9 +671,12 @@ export const messages = {
   "server.settings.providersSwitchNote": "Переключитесь на {name}, чтобы управлять его провайдерами ИИ.",
   "server.settings.providersSwitch": "Переключиться на этот сервер",
   "server.settings.updatesTitle": "Обновления",
-  "server.settings.updatesDescription": "Обновите OpenBot на компьютере, на котором работает этот сервер.",
-  "server.update.hostTitle": "OpenBot · {name}",
-  "server.update.version": "OpenBot {version}",
+  "server.settings.updatesDescription": "Обновите StarBot на компьютере, на котором работает этот сервер.",
+
+  "server.update.hostTitle": "StarBot · {name}",
+
+  "server.update.version": "StarBot {version}",
+
   "server.update.status.idle": "Проверьте обновления, чтобы найти последний релиз.",
   "server.update.status.checking": "Проверка обновлений…",
   "server.update.status.available": "Доступна версия {version}.",
@@ -647,28 +684,35 @@ export const messages = {
   "server.update.status.downloadingUnknown": "Скачивание {version}…",
   "server.update.status.ready": "Версия {version} скачана.",
   "server.update.status.installing": "{name} перезапускается, чтобы установить обновление.",
-  "server.update.status.upToDate": "На {name} установлена последняя версия OpenBot.",
+  "server.update.status.upToDate": "На {name} установлена последняя версия StarBot.",
+
   "server.update.status.checkFailed": "{name} не удалось проверить обновления. Повторите попытку.",
   "server.update.status.downloadFailed": "{name} не удалось скачать обновление. Повторите попытку.",
   "server.update.status.installFailed":
-    "{name} не удалось установить обновление. Убедитесь, что другие пользователи этого компьютера не запускают OpenBot, и повторите попытку.",
+    "{name} не удалось установить обновление. Убедитесь, что другие пользователи этого компьютера не запускают StarBot, и повторите попытку.",
+
   "server.update.releaseCheckFailed":
     "{name} не удалось прочитать ленту релизов. Проверьте сетевое подключение хоста и повторите попытку.",
   "server.update.releaseUnavailable":
     "Для этой сборки проверка релизов недоступна. Попросите администратора хоста проверить совместимый релиз.",
   "server.update.externalTitle": "Установкой управляет хост",
   "server.update.path.hostManager":
-    "OpenBot Host Manager ставит обновления, когда все пользователи свободны. Если обновление не начинается, попросите администратора проверить статус Host Manager.",
+    "StarBot Host Manager ставит обновления, когда все пользователи свободны. Если обновление не начинается, попросите администратора проверить статус Host Manager.",
+
   "server.update.path.hosted":
     "Облачный сервис скачивает обновления в фоне. Скачанное обновление ставится при следующем запуске сервера. Дождитесь окончания текущей работы, прежде чем остановить и снова запустить сервер. Если версия не меняется, свяжитесь с администратором хоста.",
   "server.update.path.system":
-    "На хосте выполните sudo openbot update, чтобы поставить последний релиз. Команда останавливает OpenBot, поэтому сначала дождитесь окончания текущей работы. Автоматически скачанные обновления ставятся при следующей загрузке.",
+    "На хосте выполните sudo openbot update, чтобы поставить последний релиз. Команда останавливает StarBot, поэтому сначала дождитесь окончания текущей работы. Автоматически скачанные обновления ставятся при следующей загрузке.",
+
   "server.update.path.container":
-    "На Docker-хосте скачайте новый образ OpenBot и пересоздайте контейнер с теми же томами данных. Сначала дождитесь окончания текущей работы. Сохраните существующие тома, чтобы не потерять данные.",
+    "На Docker-хосте скачайте новый образ StarBot и пересоздайте контейнер с теми же томами данных. Сначала дождитесь окончания текущей работы. Сохраните существующие тома, чтобы не потерять данные.",
+
   "server.update.path.manual":
-    "Эта установка не может обновить себя сама. Попросите администратора хоста поставить совместимый релиз с github.com/nightly-labs/openbot/releases. Сохраните существующие данные OpenBot.",
+    "Эта установка не может обновить себя сама. Попросите администратора хоста поставить совместимый релиз с github.com/hxy940219220-collab/StarBot-Desktop/releases. Сохраните существующие данные StarBot.",
+
   "server.update.path.unavailable":
-    "Это сборка для разработки. Чтобы проверять обновления, используйте установленный релиз OpenBot.",
+    "Это сборка для разработки. Чтобы проверять обновления, используйте установленный релиз StarBot.",
+
   "server.update.check": "Проверить обновления",
   "server.update.start": "Обновить при простое",
   "server.update.restartNow": "Перезапустить сейчас",
@@ -678,36 +722,46 @@ export const messages = {
   "server.update.requestedBy": "Это обновление запросил(а) {member}.",
   "server.update.automatic": "{name} устанавливает обновления автоматически.",
   "server.update.autoDownloadTitle": "Скачивать обновления автоматически",
-  "server.update.autoDownloadDescription": "{name} скачивает каждую новую версию OpenBot, как только она выходит.",
+  "server.update.autoDownloadDescription": "{name} скачивает каждую новую версию StarBot, как только она выходит.",
+
   "server.update.autoInstallTitle": "Устанавливать обновления автоматически",
   "server.update.autoInstallDescription":
     "{name} перезапустится со скачанным обновлением, когда его агенты простаивают. Участники ненадолго отключатся и подключатся снова автоматически.",
   "server.update.waitingFor": "Ожидание: {reasons}.",
   "server.update.disabledTitle": "Удалённые обновления отключены",
   "server.update.disabledDescription":
-    "Пользователь {name} отключил обновления от участников сервера. Попросите его обновить OpenBot или открыть на своём компьютере «Настройки» > «Обновления» и включить «Разрешить обновления от участников сервера».",
+    "Пользователь {name} отключил обновления от участников сервера. Попросите его обновить StarBot или открыть на своём компьютере «Настройки» > «Обновления» и включить «Разрешить обновления от участников сервера».",
+
   "server.update.managedTitle": "Обновлениями управляет Host Manager",
-  "server.update.managedDescription": "OpenBot Host Manager обновляет {name}. Обратитесь к администратору хоста.",
+  "server.update.managedDescription": "StarBot Host Manager обновляет {name}. Обратитесь к администратору хоста.",
+
   "server.update.unsupportedTitle": "{name} не может обновляться сам",
   "server.update.unsupportedDescription":
-    "В этой сборке OpenBot нет средства обновления. Установите новую версию на {name}.",
+    "В этой сборке StarBot нет средства обновления. Установите новую версию на {name}.",
+
   "server.update.restarting": "Перезапуск…",
   "server.update.loadFailed": "Не удалось загрузить статус обновления {name}.",
   "server.update.hostAction": "Обновить хост",
-  "server.update.dialog.offerTitle": "Обновить {name} до OpenBot {version}",
+  "server.update.dialog.offerTitle": "Обновить {name} до StarBot {version}",
+
   "server.update.dialog.offerDescription":
-    "{name} использует OpenBot {current}. Сначала скачивается обновление, затем сервер перезапускается.",
+    "{name} использует StarBot {current}. Сначала скачивается обновление, затем сервер перезапускается.",
+
   "server.update.dialog.offerReadyDescription":
-    "{name} использует OpenBot {current}. Обновление скачано. {name} перезапустится, чтобы установить его.",
+    "{name} использует StarBot {current}. Обновление скачано. {name} перезапустится, чтобы установить его.",
+
   "server.update.dialog.progressTitle": "Обновление {name}",
   "server.update.dialog.progressDescription": "{time} · Это окно можно скрыть.",
-  "server.update.dialog.doneTitle": "{name} работает на OpenBot {version}",
+  "server.update.dialog.doneTitle": "{name} работает на StarBot {version}",
+
   "server.update.dialog.doneDescription": "Обновление заняло {time}.",
   "server.update.dialog.failedTitle": "Не удалось обновить {name}",
   "server.update.dialog.restartFailed": "{name} не вернулся в сеть. Проверьте хост и повторите попытку.",
-  "server.update.dialog.notInstalled": "{name} перезапустился с OpenBot {current}. Повторите обновление.",
+  "server.update.dialog.notInstalled": "{name} перезапустился с StarBot {current}. Повторите обновление.",
+
   "server.update.dialog.steps": "Шаги обновления",
-  "server.update.dialog.downloadStep": "Скачать OpenBot {version}",
+  "server.update.dialog.downloadStep": "Скачать StarBot {version}",
+
   "server.update.dialog.downloadPending": "Агенты продолжают работать во время скачивания.",
   "server.update.dialog.downloadPreparing": "Подготовка к скачиванию…",
   "server.update.dialog.downloadRunning": "{progress} · Агенты продолжают работать.",
@@ -716,10 +770,12 @@ export const messages = {
   "server.update.dialog.restartPending": "Участники потеряют соединение примерно на минуту.",
   "server.update.dialog.restartWaiting": "Ожидание завершения: {reasons}.",
   "server.update.dialog.restartSoon": "Перезапуск скоро начнётся.",
-  "server.update.dialog.restartRunning": "Запуск OpenBot {version}…",
+  "server.update.dialog.restartRunning": "Запуск StarBot {version}…",
+
   "server.update.dialog.onlineStep": "Снова в сети",
   "server.update.dialog.onlinePending": "Участники подключатся снова автоматически.",
-  "server.update.dialog.onlineDone": "OpenBot {version} запущен через {time}.",
+  "server.update.dialog.onlineDone": "StarBot {version} запущен через {time}.",
+
   "server.update.dialog.waitIdle": "Дождаться, пока агенты освободятся",
   "server.update.dialog.waitIdleDescription": "Перезапуск ждёт завершения ходов агентов и запусков регулярных задач.",
   "server.update.dialog.updateNow": "Обновить сейчас",
@@ -744,14 +800,18 @@ export const messages = {
   "server.update.reason.fileTransfer": "передача файла",
   "server.update.reason.browserControl": "управление браузером агентом",
   "server.update.reason.updateOperation": "другой шаг обновления",
-  "server.update.reason.initialization": "запуск OpenBot",
+  "server.update.reason.initialization": "запуск StarBot",
+
   "server.update.reason.other": "другая работа",
   "server.restartNotice.waitingTitle": "{name} перезапустится, чтобы установить обновление",
-  "server.restartNotice.waitingVersionTitle": "{name} перезапустится, чтобы установить OpenBot {version}",
+  "server.restartNotice.waitingVersionTitle": "{name} перезапустится, чтобы установить StarBot {version}",
+
   "server.restartNotice.waitingDescription":
-    "Перезапуск дождётся, пока агенты освободятся. Вы ненадолго отключитесь, затем OpenBot подключится снова автоматически.",
+    "Перезапуск дождётся, пока агенты освободятся. Вы ненадолго отключитесь, затем StarBot подключится снова автоматически.",
+
   "server.restartNotice.restartingTitle": "{name} перезапускается, чтобы установить обновление",
-  "server.restartNotice.restartingDescription": "OpenBot подключится снова автоматически, когда {name} вернётся.",
+  "server.restartNotice.restartingDescription": "StarBot подключится снова автоматически, когда {name} вернётся.",
+
   "server.restartNotice.backTitle": "{name} снова в сети",
   "server.settings.personalityTitle": "Характер",
   "server.settings.personalityDescription": "Выберите, как агенты на этом сервере общаются с вами.",
@@ -788,7 +848,8 @@ export const messages = {
   "server.ownerTransfer.incomingStays":
     "Входы в провайдеры, сохранённые ключи, логины Vault, входы в браузере и подключённые приложения на сервере останутся там, и вы сможете ими пользоваться.",
   "server.ownerTransfer.incomingMachine":
-    "Любой, кто ещё может войти на компьютер, где работает сервер, может пользоваться вашим аккаунтом OpenBot. Смените на нём пароли и SSH-ключи.",
+    "Любой, кто ещё может войти на компьютер, где работает сервер, может пользоваться вашим аккаунтом StarBot. Смените на нём пароли и SSH-ключи.",
+
   "server.ownerTransfer.later": "Позже",
   "server.ownerTransfer.decline": "Отклонить",
   "server.ownerTransfer.accept": "Принять",

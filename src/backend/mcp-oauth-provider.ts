@@ -48,11 +48,11 @@ import {
 } from "./network-address";
 import { withTimeout } from "./with-timeout";
 
-const MCP_CLIENT_METADATA_URL = "https://openbot.run/oauth/mcp-client.json";
+const MCP_CLIENT_METADATA_URL = "https://starbot.app/oauth/mcp-client.json";
 
-const MCP_CLIENT_NAME = "OpenBot";
+const MCP_CLIENT_NAME = "StarBot";
 
-export const MCP_OAUTH_RELAY_URL = "https://openbot.run/oauth/mcp-callback";
+export const MCP_OAUTH_RELAY_URL = "https://starbot.app/oauth/mcp-callback";
 
 interface BuiltInMcpClient {
   resource: string;
@@ -807,8 +807,8 @@ class McpOAuthClientProvider implements OAuthClientProvider {
     const methods = this.#discoveryState?.authorizationServerMetadata?.token_endpoint_auth_methods_supported;
     return {
       client_name: MCP_CLIENT_NAME,
-      client_uri: "https://openbot.run",
-      logo_uri: "https://openbot.run/icon-512x512.png",
+      client_uri: "https://starbot.app",
+      logo_uri: "https://starbot.app/icon-512x512.png",
       redirect_uris: [this.#retryRedirectUrl ?? this.#options.redirectUrl],
       application_type: "native",
       grant_types: ["authorization_code", "refresh_token"],

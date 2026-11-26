@@ -65,10 +65,14 @@ export const messages = {
   "mobile.marketplace.facts.accessMac": "Mac בלבד",
   "mobile.marketplace.permission.admin": "רק בעלים ומנהלים יכולים להתקין מהחנות.",
   "mobile.marketplace.permission.unavailable":
-    "השרת הזה לא מקוון, או שגרסת OpenBot שלו ישנה מדי לכך. יש לעדכן את OpenBot במחשב שמריץ אותו.",
-  "mobile.marketplace.error.agentUnsupported": "יש לעדכן את OpenBot בשרת כדי להוסיף סוכנים מהחנות.",
-  "mobile.marketplace.error.agentUpdateUnsupported": "יש לעדכן את OpenBot בשרת כדי לעדכן סוכנים מהחנות.",
-  "mobile.marketplace.error.signInUnsupported": "יש לעדכן את OpenBot בשרת כדי להתחבר לאפליקציות מהטלפון.",
+    "השרת הזה לא מקוון, או שגרסת StarBot שלו ישנה מדי לכך. יש לעדכן את StarBot במחשב שמריץ אותו.",
+
+  "mobile.marketplace.error.agentUnsupported": "יש לעדכן את StarBot בשרת כדי להוסיף סוכנים מהחנות.",
+
+  "mobile.marketplace.error.agentUpdateUnsupported": "יש לעדכן את StarBot בשרת כדי לעדכן סוכנים מהחנות.",
+
+  "mobile.marketplace.error.signInUnsupported": "יש לעדכן את StarBot בשרת כדי להתחבר לאפליקציות מהטלפון.",
+
   "mobile.marketplace.agent.add": "הוספת סוכן",
   "mobile.marketplace.agent.adding": "מוסיף סוכן",
   "mobile.marketplace.agent.update": "עדכון הסוכן",
@@ -110,10 +114,13 @@ export const messages = {
   "mobile.marketplace.app.connectFailed": "האפליקציה לא התחברה.",
   "mobile.marketplace.app.linkInvalid": "יש להשתמש בקישור https ב-{hostname}.",
   "mobile.marketplace.app.docs": "קבלת מפתח",
-  "mobile.marketplace.app.local": "האפליקציה הזו פועלת במחשב עם OpenBot. יש להגדיר אותה באותו מחשב.",
-  "mobile.marketplace.app.needsMac": "האפליקציה הזו פועלת רק ב-Mac שמריץ את OpenBot, והשרת הזה אינו Mac.",
+  "mobile.marketplace.app.local": "האפליקציה הזו פועלת במחשב עם StarBot. יש להגדיר אותה באותו מחשב.",
+
+  "mobile.marketplace.app.needsMac": "האפליקציה הזו פועלת רק ב-Mac שמריץ את StarBot, והשרת הזה אינו Mac.",
+
   "mobile.marketplace.app.relayUnsupported":
-    "האפליקציה הזו דורשת התחברות בדפדפן. יש לעדכן את OpenBot בשרת, או לחבר את האפליקציה במחשב.",
+    "האפליקציה הזו דורשת התחברות בדפדפן. יש לעדכן את StarBot בשרת, או לחבר את האפליקציה במחשב.",
+
   "mobile.marketplace.app.waiting": "ממתין לדף ההתחברות…",
   "mobile.marketplace.app.openAgain": "פתיחת דף ההתחברות שוב",
   "mobile.marketplace.app.pasteHint":

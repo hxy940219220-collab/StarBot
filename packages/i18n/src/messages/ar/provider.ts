@@ -52,7 +52,8 @@ export const messages = {
   "provider.status.checking": "جارٍ التحقق",
   "provider.status.off": "متوقف",
   "provider.gemini.hostSignIn":
-    "لتوصيل Gemini، افتح OpenBot على المضيف واختر «اتصال» في إعدادات الخادم > المزوّدون. يحتاج تسجيل الدخول عبر Google إلى متصفح على ذلك المضيف. تسجيل الدخول عن بُعد غير مدعوم.",
+    "لتوصيل Gemini، افتح StarBot على المضيف واختر «اتصال» في إعدادات الخادم > المزوّدون. يحتاج تسجيل الدخول عبر Google إلى متصفح على ذلك المضيف. تسجيل الدخول عن بُعد غير مدعوم.",
+
   "provider.key.free": "مجاني",
   "provider.action.connect": "اتصال",
   "provider.action.reconnect": "إعادة الاتصال",
@@ -78,12 +79,14 @@ export const messages = {
   "provider.aria.cancelSignIn": "إلغاء تسجيل الدخول إلى {name}",
   "provider.aria.apiKey": "مفتاح API لـ {name}",
   "provider.connecting.browserHint": "أكمل تسجيل الدخول إذا فُتحت صفحة في المتصفح.",
-  "provider.connecting.cancelFailed": "تعذّر على OpenBot إلغاء تسجيل الدخول إلى {name}. حاول مرة أخرى.",
+  "provider.connecting.cancelFailed": "تعذّر على StarBot إلغاء تسجيل الدخول إلى {name}. حاول مرة أخرى.",
+
   "provider.aria.install": "تثبيت {name}",
   "provider.aria.signIn": "تسجيل الدخول إلى {name}",
   "provider.aria.codeFallback": "تسجيل الدخول إلى {name} برمز",
   "provider.aria.moreActions": "إجراءات إضافية لـ {name}",
-  "provider.aria.use": "استخدام {name} في OpenBot",
+  "provider.aria.use": "استخدام {name} في StarBot",
+
   "provider.use.inUseOne": "يستخدم {agent} المزوّد {name}. غيّر نموذج هذا الوكيل، ثم أوقف {name}.",
   "provider.use.inUse": {
     zero: "لا وكلاء يستخدمون {name}.",
@@ -94,7 +97,8 @@ export const messages = {
     other: "يستخدم {count} وكيل {name}. غيّر نموذج هؤلاء الوكلاء، ثم أوقف {name}.",
   },
   "provider.codeLogin.title": "تسجيل الدخول إلى {name} برمز",
-  "provider.codeLogin.description": "أكمل على هاتفك أو في متصفح آخر. ينتظر OpenBot هنا.",
+  "provider.codeLogin.description": "أكمل على هاتفك أو في متصفح آخر. ينتظر StarBot هنا.",
+
   "provider.codeLogin.starting": "جارٍ الحصول على رمز من {name}…",
   "provider.codeLogin.qrLabel": "رمز QR لصفحة تسجيل الدخول إلى {name}",
   "provider.codeLogin.open": "فتح",
@@ -115,12 +119,15 @@ export const messages = {
   "provider.codeLogin.pageDescription": "هذه الصفحة مفتوحة في المتصفح على {host}. سجّل الدخول هنا.",
   "provider.codeLogin.relayStarting": "جارٍ بدء تسجيل الدخول إلى {name} على {host}…",
   "provider.codeLogin.pageOpening": "جارٍ فتح صفحة تسجيل الدخول إلى {name} على {host}…",
-  "provider.codeLogin.linkStep": "سجّل الدخول إلى {name}. سيتابع OpenBot تلقائيًا.",
+  "provider.codeLogin.linkStep": "سجّل الدخول إلى {name}. سيتابع StarBot تلقائيًا.",
+
   "provider.codeLogin.chatgptDeviceSetting":
     "في ChatGPT على كمبيوتر، افتح إعدادات الأمان وفعّل تسجيل الدخول برمز الجهاز لـ Codex. في حساب العمل، يفعّله مسؤول مساحة العمل.",
-  "provider.useApp.title": "توصيل {name} في تطبيق OpenBot",
+  "provider.useApp.title": "توصيل {name} في تطبيق StarBot",
+
   "provider.useApp.description":
-    "يعود تسجيل الدخول إلى {name} إلى الحاسوب الذي بدأه، ولا يمكن لعلامة تبويب في المتصفح استقباله. وصّل {name} في تطبيق OpenBot. يُكمل التطبيق تسجيل الدخول تلقائيًا.",
+    "يعود تسجيل الدخول إلى {name} إلى الحاسوب الذي بدأه، ولا يمكن لعلامة تبويب في المتصفح استقباله. وصّل {name} في تطبيق StarBot. يُكمل التطبيق تسجيل الدخول تلقائيًا.",
+
   "provider.useApp.download": "الحصول على التطبيق",
   "provider.picker.noEndpoints": "لا نقاط نهاية بعد",
   "provider.picker.customCounts": "{endpoints} · {agents}",
@@ -130,7 +137,8 @@ export const messages = {
   "provider.picker.providers": "مزوّدو النماذج",
   "provider.picker.downloading": "جارٍ التنزيل {percent}",
   "provider.picker.unavailable": "{name} غير متاح.",
-  "provider.picker.updateToUse": "حدّث OpenBot لاستخدام {name}",
+  "provider.picker.updateToUse": "حدّث StarBot لاستخدام {name}",
+
   "provider.picker.models": "نماذج {name}",
   "provider.picker.addProvider": "إضافة مزوّد",
   "provider.picker.download": "تنزيل {name}",
@@ -214,21 +222,27 @@ export const messages = {
   "provider.cursorKey.label": "مفتاح Cursor API",
   "provider.inceptionKey.title": "مفتاح Inception API",
   "provider.inceptionKey.description":
-    "احفظ مفتاح Inception API على هذا الحاسوب لاستخدام نماذج Mercury. يشغّلها OpenBot في Pi CLI الذي ينزّله.",
+    "احفظ مفتاح Inception API على هذا الحاسوب لاستخدام نماذج Mercury. يشغّلها StarBot في Pi CLI الذي ينزّله.",
+
   "provider.inceptionKey.descriptionHost":
-    "احفظ مفتاح Inception API على المضيف لاستخدام نماذج Mercury. يشغّلها OpenBot في Pi CLI الذي ينزّله.",
+    "احفظ مفتاح Inception API على المضيف لاستخدام نماذج Mercury. يشغّلها StarBot في Pi CLI الذي ينزّله.",
+
   "provider.inceptionKey.label": "مفتاح Inception API",
   "provider.deepseekKey.title": "مفتاح DeepSeek API",
   "provider.deepseekKey.description":
-    "احفظ مفتاح DeepSeek API على هذا الحاسوب لاستخدام نماذج DeepSeek. يشغّلها OpenBot في Pi CLI الذي ينزّله.",
+    "احفظ مفتاح DeepSeek API على هذا الحاسوب لاستخدام نماذج DeepSeek. يشغّلها StarBot في Pi CLI الذي ينزّله.",
+
   "provider.deepseekKey.descriptionHost":
-    "احفظ مفتاح DeepSeek API على المضيف لاستخدام نماذج DeepSeek. يشغّلها OpenBot في Pi CLI الذي ينزّله.",
+    "احفظ مفتاح DeepSeek API على المضيف لاستخدام نماذج DeepSeek. يشغّلها StarBot في Pi CLI الذي ينزّله.",
+
   "provider.deepseekKey.label": "مفتاح DeepSeek API",
   "provider.openrouterKey.title": "مفتاح OpenRouter API",
   "provider.openrouterKey.description":
-    "احفظ مفتاح OpenRouter API على هذا الحاسوب لاستخدام النماذج التي يقدمها OpenRouter. يشغّلها OpenBot في Pi CLI الذي ينزّله.",
+    "احفظ مفتاح OpenRouter API على هذا الحاسوب لاستخدام النماذج التي يقدمها OpenRouter. يشغّلها StarBot في Pi CLI الذي ينزّله.",
+
   "provider.openrouterKey.descriptionHost":
-    "احفظ مفتاح OpenRouter API على المضيف لاستخدام النماذج التي يقدمها OpenRouter. يشغّلها OpenBot في Pi CLI الذي ينزّله.",
+    "احفظ مفتاح OpenRouter API على المضيف لاستخدام النماذج التي يقدمها OpenRouter. يشغّلها StarBot في Pi CLI الذي ينزّله.",
+
   "provider.openrouterKey.label": "مفتاح OpenRouter API",
   "provider.openCodeKey.title": "تسجيل الدخول إلى OpenCode Go",
   "provider.openCodeKey.description": "لا تحتاج النماذج المجانية إلى حساب. يفتح المفتاح نماذج Go المدفوعة.",
@@ -330,12 +344,15 @@ export const messages = {
   "provider.settings.removeTitle": "إزالة {name}؟",
   "provider.settings.removeMoves": "سيستخدم {agents} الحساب {name}.",
   "provider.settings.removeUnused": "لا يستخدم أي وكيل هذا الحساب.",
-  "provider.settings.removeCredentials": "يحذف OpenBot بيانات تسجيل الدخول لهذا الحساب من هذا الحاسوب.",
+  "provider.settings.removeCredentials": "يحذف StarBot بيانات تسجيل الدخول لهذا الحساب من هذا الحاسوب.",
+
   "provider.settings.disconnectTitle": "قطع الاتصال بـ {name}؟",
   "provider.settings.disconnectOthers": "تنتظر حسابات {provider} الأخرى حتى توصّل {provider} مرة أخرى.",
   "provider.settings.disconnectLocal":
-    "يسجّل OpenBot الخروج من {provider} على هذا الحاسوب. ويُسجَّل الخروج أيضًا من {provider} CLI في الطرفية.",
-  "provider.settings.disconnectHost": "يسجّل OpenBot الخروج من {provider} على الخادم.",
+    "يسجّل StarBot الخروج من {provider} على هذا الحاسوب. ويُسجَّل الخروج أيضًا من {provider} CLI في الطرفية.",
+
+  "provider.settings.disconnectHost": "يسجّل StarBot الخروج من {provider} على الخادم.",
+
   "provider.settings.usageLow": "متبقٍ {percent} · {window}",
   "provider.settings.usageOf": "استخدام {name}",
   "provider.settings.signIn": "تسجيل الدخول",
@@ -359,13 +376,17 @@ export const messages = {
   "provider.settings.version": "الإصدار",
   "provider.settings.versionAvailable": "{installed} · يتوفر {available}",
   "provider.settings.versionInstalledByUser": "{version} · ثبّته أنت",
-  "provider.settings.versionDownloaded": "{version} · نزّله OpenBot",
+  "provider.settings.versionDownloaded": "{version} · نزّله StarBot",
+
   "provider.settings.otherVersionInstalledByUser": "غير مستخدم: {version} · ثبّته أنت",
-  "provider.settings.otherVersionDownloaded": "غير مستخدم: {version} · نزّله OpenBot",
+  "provider.settings.otherVersionDownloaded": "غير مستخدم: {version} · نزّله StarBot",
+
   "provider.settings.installedVersionIncomplete":
-    "تحتاج بعض النماذج إلى جزء غير موجود في هذا الإصدار. نزّل إصدار OpenBot لاستخدامها.",
+    "تحتاج بعض النماذج إلى جزء غير موجود في هذا الإصدار. نزّل إصدار StarBot لاستخدامها.",
+
   "provider.settings.useInstalledVersion": "استخدم الإصدار المثبّت",
-  "provider.settings.useDownloadedVersion": "استخدم إصدار OpenBot",
+  "provider.settings.useDownloadedVersion": "استخدم إصدار StarBot",
+
   "provider.settings.update": "تحديث",
   "provider.settings.downloadLabel": "تنزيل {name}",
   "provider.settings.diagnostics": "التشخيص",
@@ -442,9 +463,11 @@ export const messages = {
   "provider.settings.useTitle": "استخدام {name}",
   "provider.settings.deleteTitle": "حذف {name}",
   "provider.settings.deleteOn":
-    "يوقف {name} ويحذف واجهة CLI التي نزّلها OpenBot. تبقى الحسابات وبيانات تسجيل الدخول والوكلاء.",
+    "يوقف {name} ويحذف واجهة CLI التي نزّلها StarBot. تبقى الحسابات وبيانات تسجيل الدخول والوكلاء.",
+
   "provider.settings.deleteOff":
-    "يحذف واجهة CLI التي نزّلها OpenBot لـ {name} ({size}). تبقى الحسابات وبيانات تسجيل الدخول والوكلاء.",
+    "يحذف واجهة CLI التي نزّلها StarBot لـ {name} ({size}). تبقى الحسابات وبيانات تسجيل الدخول والوكلاء.",
+
   "provider.settings.removeDownloadFailed": "تعذّرت إزالة التنزيل.",
   "provider.settings.endpoints": "نقاط النهاية",
   "provider.settings.noEndpoints": "لا نقاط نهاية.",
@@ -457,6 +480,7 @@ export const messages = {
     other: "{url} · {count} نموذج",
   },
   "provider.settings.disconnectLocalOnly":
-    "يسجّل OpenBot خروج {provider} على هذا الكمبيوتر. تحتفظ واجهة {provider} CLI في الطرفية بتسجيل دخولها.",
+    "يسجّل StarBot خروج {provider} على هذا الكمبيوتر. تحتفظ واجهة {provider} CLI في الطرفية بتسجيل دخولها.",
+
   "provider.settings.updateAll": "تحديث الكل",
 } as const satisfies PartialTranslation<typeof source>;

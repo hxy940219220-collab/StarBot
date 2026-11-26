@@ -7,7 +7,7 @@
   "preview_urls": false,
   "routes": [
     {
-      "pattern": "updates.openbot.run",
+      "pattern": "updates.starbot.app",
       "custom_domain": true
     }
   ],

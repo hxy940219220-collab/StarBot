@@ -3,5 +3,5 @@ export function githubStarPromptShownThisSession(): boolean {
 }
 
 export function noteAgentMessageSent(): void {
-  // Disabled in StarBot (星友): never prompt to star upstream OpenBot GitHub repo.
+  // Disabled in StarBot (星友): never prompt to star upstream StarBot GitHub repo.
 }

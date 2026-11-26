@@ -20,7 +20,7 @@ function linuxDesktopEntry(appImagePath: string, iconPath: string, ownsWindow: b
   return `${[
     "[Desktop Entry]",
     "Type=Application",
-    "Name=OpenBot",
+    "Name=StarBot",
     "Comment=A local-first multi-agent desktop workspace.",
     `Exec=${quoteExecutable(appImagePath)} %U`,
     `Icon=${iconPath}`,

@@ -11,18 +11,18 @@ describe("maskIdentifiers", () => {
       "[ipv6], [ipv6], [ipv6]",
     );
     expect(maskIdentifiers("http://192.168.1.5:8080/v1/me")).toBe("http://[private-ip]:8080/v1/me");
-    expect(maskIdentifiers("OpenBot 1.4.0 (212), 999.1.1.1")).toBe("OpenBot 1.4.0 (212), 999.1.1.1");
+    expect(maskIdentifiers("StarBot 1.4.0 (212), 999.1.1.1")).toBe("StarBot 1.4.0 (212), 999.1.1.1");
   });
 
-  it("masks each host name that is not an OpenBot service", () => {
+  it("masks each host name that is not an StarBot service", () => {
     expect(maskIdentifiers("GET https://anna.example.com:8443/v1/me -> failed")).toBe(
       "GET https://[host]:8443/v1/me -> failed",
     );
     expect(maskIdentifiers("wss://user@my-server.internal/socket")).toBe("wss://[host]/socket");
-    expect(maskIdentifiers("Failed to resolve nas.anna.pl, then anna-pages.openbot.site.")).toBe(
+    expect(maskIdentifiers("Failed to resolve nas.anna.pl, then anna-pages.starbot.site.")).toBe(
       "Failed to resolve [host], then [host].",
     );
-    const service = "GET https://api.openbot.run/v1/me and turn2.openbot.run and http://localhost:8081/status";
+    const service = "GET https://api.starbot.app/v1/me and turn2.starbot.app and http://localhost:8081/status";
     expect(maskIdentifiers(service)).toBe(service);
   });
 

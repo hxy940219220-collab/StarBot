@@ -38,7 +38,7 @@ import { sourceText } from "@openbot/i18n/source";
 import { nextValidRoutineOccurrence } from "@openbot/team-client/routine-schedule";
 import { workflowMediaCreditsOf, workflowMediaProvidersOf } from "@openbot/team-client/workflow-decoding";
 
-const PREVIEW_HOOKS = "https://hooks.openbot.run/wf";
+const PREVIEW_HOOKS = "https://hooks.starbot.app/wf";
 
 const PREVIEW_GITHUB_CATALOG: WorkflowGitHubCatalog = {
   connected: true,

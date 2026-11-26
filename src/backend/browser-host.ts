@@ -1730,7 +1730,7 @@ export class BrowserHost {
       throw new Error(`${action} is unavailable while the page shows a filled card. Use snapshots until it navigates.`);
     if (tab.secretShown)
       throw new Error(
-        `${action} is unavailable while the page can show a password or code that OpenBot typed. Use snapshots until it navigates.`,
+        `${action} is unavailable while the page can show a password or code that StarBot typed. Use snapshots until it navigates.`,
       );
   }
 
@@ -4673,7 +4673,7 @@ function boundedCaptureDataUrl(image: NativeImage): string {
   const size = image.getSize();
   if (size.width <= 0 || size.height <= 0)
     throw new Error(
-      "Browser screenshot is empty: the page drew no image. This can happen while the OpenBot window is minimized or hidden. If it is, ask the person to open the OpenBot window, then try again.",
+      "Browser screenshot is empty: the page drew no image. This can happen while the StarBot window is minimized or hidden. If it is, ask the person to open the StarBot window, then try again.",
     );
   const area = size.width * size.height;
   const scale = Math.sqrt(MAX_ENCODED_CAPTURE_PIXELS / area);

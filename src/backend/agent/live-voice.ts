@@ -243,7 +243,7 @@ export class LiveVoice {
               {
                 type: "namespace",
                 name: ASK_NAMESPACE,
-                description: "OpenBot, which runs the agent.",
+                description: "StarBot, which runs the agent.",
                 tools: [
                   {
                     type: "function",

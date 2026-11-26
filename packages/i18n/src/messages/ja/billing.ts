@@ -81,7 +81,8 @@ export const messages = {
   "billing.license.description": "企業での業務向けです。サーバーは含まれません。",
   "billing.license.loadFailed": "ライセンスを読み込めませんでした。",
   "billing.license.actionFailed": "ライセンスを変更できませんでした。",
-  "billing.license.contactSales": "詳しくは licenses@openbot.run までお問い合わせください。",
+  "billing.license.contactSales": "詳しくは licenses@starbot.app までお問い合わせください。",
+
   "billing.license.saving": "保存中…",
   "billing.license.personal.title": "個人利用",
   "billing.license.personal.description": "非商用利用は無料です。",
@@ -91,7 +92,8 @@ export const messages = {
   "billing.license.buy": "ライセンスを購入",
   "billing.license.offer.title": "商用ライセンス",
   "billing.license.offer.description": "Starter は 1 ユーザー、Team は {count} ユーザー以上。",
-  "billing.license.buy.description": "業務で OpenBot を使う人は何人ですか？AI エージェントはユーザーに含まれません。",
+  "billing.license.buy.description": "業務で StarBot を使う人は何人ですか？AI エージェントはユーザーに含まれません。",
+
   "billing.license.buy.confirm": "お支払いへ進む",
   "billing.license.trial.until": "{date}まで無料",
   "billing.license.trial.confirm": "無料トライアルを開始",
@@ -151,9 +153,11 @@ export const messages = {
   "billing.order.yearly": "年払い",
   "billing.order.yearlySaving": "年払いで −{percent}%",
   "billing.order.server.title": "ホスト型サーバー",
-  "billing.order.server.summary": "チームのために OpenBot を運用します。",
+  "billing.order.server.summary": "チームのために StarBot を運用します。",
+
   "billing.order.server.none": "サーバーなし",
-  "billing.order.server.noneDetail": "自分のコンピューターで OpenBot を実行",
+  "billing.order.server.noneDetail": "自分のコンピューターで StarBot を実行",
+
   "billing.order.server.thisComputer": "自分のコンピューター",
   "billing.order.server.bestValue": "おすすめ",
   "billing.order.server.bestFor.starter": "1 人での利用に最適",
@@ -162,7 +166,8 @@ export const messages = {
   "billing.order.server.storage": "{size} GB のストレージ",
   "billing.order.server.speed": "{speed} 倍の速度",
   "billing.order.license.title": "ライセンス",
-  "billing.order.license.summary": "業務で OpenBot を使う場合に必要です。",
+  "billing.order.license.summary": "業務で StarBot を使う場合に必要です。",
+
   "billing.order.license.none": "ライセンスなし",
   "billing.order.license.noneDetail": "個人利用と非商用利用",
   "billing.order.license.starter": "Starter ライセンス",

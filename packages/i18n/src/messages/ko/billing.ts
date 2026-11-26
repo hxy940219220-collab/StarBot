@@ -80,7 +80,8 @@ export const messages = {
   "billing.license.description": "회사 업무용이에요. 서버는 포함되지 않아요.",
   "billing.license.loadFailed": "라이선스를 불러올 수 없어요.",
   "billing.license.actionFailed": "라이선스를 변경할 수 없어요.",
-  "billing.license.contactSales": "자세한 내용은 licenses@openbot.run으로 문의해 주세요.",
+  "billing.license.contactSales": "자세한 내용은 licenses@starbot.app으로 문의해 주세요.",
+
   "billing.license.saving": "저장 중…",
   "billing.license.personal.title": "개인용",
   "billing.license.personal.description": "비상업적 용도로는 무료예요.",
@@ -150,7 +151,8 @@ export const messages = {
   "billing.order.server.title": "호스팅 서버",
   "billing.order.server.summary": "팀을 위해 OpenBot을 대신 운영해요.",
   "billing.order.server.none": "서버 없음",
-  "billing.order.server.noneDetail": "내 컴퓨터에서 OpenBot 실행",
+  "billing.order.server.noneDetail": "내 컴퓨터에서 StarBot 실행",
+
   "billing.order.server.thisComputer": "내 컴퓨터",
   "billing.order.server.bestValue": "가성비 최고",
   "billing.order.server.bestFor.starter": "1인 사용에 적합",

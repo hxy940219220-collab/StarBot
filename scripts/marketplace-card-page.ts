@@ -145,10 +145,10 @@ function drawBrand(context: CanvasRenderingContext2D): void {
   drawLogo(context, BRAND.x, BRAND.y, BRAND.logo);
   setFont(context, 600, BRAND.font, -0.02);
   context.fillStyle = PRIMARY;
-  const metrics = context.measureText("OpenBot");
+  const metrics = context.measureText("StarBot");
   const textHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
   const baseline = BRAND.y + (BRAND.logo - textHeight) / 2 + metrics.fontBoundingBoxAscent;
-  context.fillText("OpenBot", BRAND.x + BRAND.logo + BRAND.gap, baseline);
+  context.fillText("StarBot", BRAND.x + BRAND.logo + BRAND.gap, baseline);
 }
 
 function drawLogo(context: CanvasRenderingContext2D, x: number, y: number, size: number): void {

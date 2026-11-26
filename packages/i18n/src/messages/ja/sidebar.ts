@@ -138,7 +138,8 @@ export const messages = {
   "sidebar.delete.pending": "削除中…",
   "sidebar.delete.title": "{name} を削除しますか？",
   "sidebar.delete.agentDescription":
-    "エージェントとその OpenBot の会話をアプリから削除します。キュー、メモリー、ルーティン、ワークスペースも削除されます。接続した CLI プロバイダーが別に保存している履歴は削除されません。",
+    "エージェントとその StarBot の会話をアプリから削除します。キュー、メモリー、ルーティン、ワークスペースも削除されます。接続した CLI プロバイダーが別に保存している履歴は削除されません。",
+
   "sidebar.delete.channelDescription":
     "チャンネルを停止します。履歴は「削除済みのチャンネル」にプレビュー専用で残ります。そこから復元できます。メンバーのエージェントは残ります。",
   "sidebar.delete.sectionDescription":
@@ -181,6 +182,7 @@ export const messages = {
   "sidebar.community.title": "どうぞ、席へ。",
   "sidebar.community.body": "AI の未来に、あなたの居場所があります。Discord と X のコミュニティに参加しましょう。",
   "sidebar.community.joinDiscord": "Discord に参加",
-  "sidebar.community.followX": "X で OpenBot をフォロー",
+  "sidebar.community.followX": "X で StarBot をフォロー",
+
   "sidebar.community.dismiss": "コミュニティへの招待を閉じる",
 } as const satisfies PartialTranslation<typeof source>;

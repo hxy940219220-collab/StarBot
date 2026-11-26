@@ -79,7 +79,8 @@ export const messages = {
   "billing.license.description": "לעבודה בחברה. אינו כולל שרת.",
   "billing.license.loadFailed": "לא ניתן היה לטעון את הרישיון.",
   "billing.license.actionFailed": "לא ניתן היה לשנות את הרישיון.",
-  "billing.license.contactSales": "למידע נוסף אפשר לפנות אל licenses@openbot.run.",
+  "billing.license.contactSales": "למידע נוסף אפשר לפנות אל licenses@starbot.app.",
+
   "billing.license.saving": "שומר…",
   "billing.license.personal.title": "שימוש אישי",
   "billing.license.personal.description": "חינם לשימוש לא מסחרי.",
@@ -89,7 +90,8 @@ export const messages = {
   "billing.license.buy": "רכישת רישיון",
   "billing.license.offer.title": "רישיון מסחרי",
   "billing.license.offer.description": "Starter למשתמש אחד, או Team ל-{count} משתמשים ומעלה.",
-  "billing.license.buy.description": "כמה אנשים משתמשים ב-OpenBot בעבודה? סוכני בינה מלאכותית אינם משתמשים.",
+  "billing.license.buy.description": "כמה אנשים משתמשים ב-StarBot בעבודה? סוכני בינה מלאכותית אינם משתמשים.",
+
   "billing.license.buy.confirm": "המשך לתשלום",
   "billing.license.trial.until": "חינם עד {date}",
   "billing.license.trial.confirm": "התחלת תקופת ניסיון חינם",
@@ -151,9 +153,11 @@ export const messages = {
   "billing.order.yearly": "שנתי",
   "billing.order.yearlySaving": "הנחה של {percent}% בחיוב שנתי",
   "billing.order.server.title": "שרת מאוחסן",
-  "billing.order.server.summary": "אנחנו מפעילים את OpenBot עבור הצוות שלך.",
+  "billing.order.server.summary": "אנחנו מפעילים את StarBot עבור הצוות שלך.",
+
   "billing.order.server.none": "ללא שרת",
-  "billing.order.server.noneDetail": "הרצת OpenBot במחשב שלך",
+  "billing.order.server.noneDetail": "הרצת StarBot במחשב שלך",
+
   "billing.order.server.thisComputer": "המחשב שלך",
   "billing.order.server.bestValue": "המשתלם ביותר",
   "billing.order.server.bestFor.starter": "הכי מתאים לאדם אחד",
@@ -162,7 +166,8 @@ export const messages = {
   "billing.order.server.storage": "{size} GB אחסון",
   "billing.order.server.speed": "מהירות ×{speed}",
   "billing.order.license.title": "רישיון",
-  "billing.order.license.summary": "לשימוש ב-OpenBot בעבודה.",
+  "billing.order.license.summary": "לשימוש ב-StarBot בעבודה.",
+
   "billing.order.license.none": "ללא רישיון",
   "billing.order.license.noneDetail": "שימוש אישי ולא מסחרי",
   "billing.order.license.starter": "רישיון Starter",

@@ -46,7 +46,8 @@ export const messages = defineMessages("error.import", {
   "error.import.uploadDiskSpace":
     "The export needs {size} GB of free disk space on the server, and {free} GB is free. Free up space on the server, then choose the export again.",
   "error.import.remoteZipTooLargeOldHost":
-    "This server accepts an export of up to 100 MB. Update OpenBot on the server to import a larger export.",
+    "This server accepts an export of up to 100 MB. Update StarBot on the server to import a larger export.",
+
   "error.import.skillKept":
     '{name}: the server already has the skill "{skill}", so the agent uses that skill. Ask an admin to update it.',
   "error.import.skillRenamed":
@@ -61,7 +62,8 @@ export const messages = defineMessages("error.import", {
   "error.import.hermesSkillCodeAdded":
     "It has code that it did not have when the profiles were read. Read them again to allow it.",
   "error.import.hermesLinkNotSaved":
-    "{name}: OpenBot could not save which agent came from this profile, so the next import adds it as a new agent.",
+    "{name}: StarBot could not save which agent came from this profile, so the next import adds it as a new agent.",
+
   "error.import.transferRemoteTooLarge":
     "A transfer file for a joined server must be under 100 MB. Turn off workspace files, or export fewer agents.",
   "error.import.transferNotFile": "This file is not a StarBot transfer file.",

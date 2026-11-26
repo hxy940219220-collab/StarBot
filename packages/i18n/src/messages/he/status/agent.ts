@@ -24,7 +24,8 @@ export const messages = {
   "status.agent.channelTaskCancelled": "{agent} ביטל את המשימה ״{task}״ ואת תתי-המשימות שלה. {person} ביקש זאת.",
   "status.agent.screenCaptureScreen": "צילום המסך הראשי ושליחת התמונה אל המודל של הסוכן.",
   "status.agent.screenCaptureChannel": "התמונה מוצגת בערוץ {channel}, וכל חבר בשרת הזה שקורא את הערוץ יכול לראות אותה.",
-  "status.agent.screenCapturePermissionNext": "לאחר מכן macOS עשוי לבקש ממך לאפשר ל-OpenBot את Screen Recording.",
+  "status.agent.screenCapturePermissionNext": "לאחר מכן macOS עשוי לבקש ממך לאפשר ל-StarBot את Screen Recording.",
+
   "status.agent.screenCaptureDisplay": "צילום התצוגה {name} ושליחת התמונה אל המודל של הסוכן.",
   "status.agent.screenCaptureWindow": "צילום החלון {name} ושליחת התמונה אל המודל של הסוכן.",
   "status.agent.screenCaptureRegion":
@@ -37,25 +38,30 @@ export const messages = {
   "status.agent.sendIdea": "זה יהפוך ל-issue ציבורי ב-GitHub. השם שלך לא מוצג.",
   "status.agent.feedbackRecentErrors": "שגיאות אחרונות בצ'אט:",
   "status.agent.feedbackSameAs": "מתווסף ל-issue #{issue}",
-  "status.agent.feedbackSent": "נשלח לצוות OpenBot: {title}",
+  "status.agent.feedbackSent": "נשלח לצוות StarBot: {title}",
+
   "status.agent.feedbackWithdrawn": "הוסר מ-GitHub: {title}",
   "status.agent.feedbackWithdrawCommand": "הסרת הדיווח #{issue} מ-GitHub",
   "status.agent.feedbackWithdrawReason":
     "אף אחד לא יוכל לראות את הדיווח הזה ב-GitHub. אי אפשר לבטל את הפעולה. כדי לתקן אותו, הסוכן יכול לשלוח דיווח מתוקן.",
   "status.agent.feedbackWithdrawing": "מסיר את הדיווח שלך מ-GitHub…",
   "status.agent.serverInstallCommand":
-    "ליצור פקודה חד־פעמית שמתקינה את OpenBot במחשב אחר כשרת {name} ומחברת אותו לחשבון שלך. הסוכן מריץ אותה שם.",
+    "ליצור פקודה חד־פעמית שמתקינה את StarBot במחשב אחר כשרת {name} ומחברת אותו לחשבון שלך. הסוכן מריץ אותה שם.",
+
   "status.agent.serverInstallCard": "פקודת התקנה לשרת {name}",
   "status.agent.browserProfileNamed":
     "העבר את {agents} לפרופיל הדפדפן {profile}. הם יקבלו את ההתחברויות והעוגיות שלו. הכרטיסיות הפתוחות שלהם ייסגרו.",
-  "status.agent.commitCoAuthorOff": "להפסיק להוסיף את OpenBot כמחבר שותף בקומיטים של כל הסוכנים.",
-  "status.agent.commitCoAuthorOn": "להוסיף שוב את OpenBot כמחבר שותף בקומיטים של כל הסוכנים.",
+  "status.agent.commitCoAuthorOff": "להפסיק להוסיף את StarBot כמחבר שותף בקומיטים של כל הסוכנים.",
+
+  "status.agent.commitCoAuthorOn": "להוסיף שוב את StarBot כמחבר שותף בקומיטים של כל הסוכנים.",
+
   "status.agent.browserProfileNew":
     "צור את פרופיל הדפדפן החדש {profile} והעבר אליו את {agents}. אין בו התחברויות. הכרטיסיות הפתוחות שלהם ייסגרו.",
   "status.agent.browserProfileShared":
     "העבר את {agents} לפרופיל הדפדפן המשותף. הם יקבלו את ההתחברויות והעוגיות שלו. הכרטיסיות הפתוחות שלהם ייסגרו.",
   "status.agent.browserProfileOwn": "תן לכל אחד מ-{agents} פרופיל דפדפן משלו. הכרטיסיות הפתוחות שלהם ייסגרו.",
-  "status.agent.feedbackSending": "שולח את המשוב שלך לצוות OpenBot…",
+  "status.agent.feedbackSending": "שולח את המשוב שלך לצוות StarBot…",
+
   "status.agent.workflowDelete": "מחיקת תהליך העבודה {title} יחד עם ההרצות והגרסאות שלו. השלבים הפתוחים שלו ייעצרו.",
   "status.agent.deleteAgents": "מחיקת {agents} יחד עם הצ'אטים והקבצים שלהם. לא ניתן לבטל פעולה זו.",
   "status.agent.vaultCardFillFrames": "שדות הכרטיס נמצאים במסגרות מ-{origins}.",
@@ -110,9 +116,11 @@ export const messages = {
   "status.agent.memoryChangesWithConflicts":
     "זיכרון: {saved} נשמרו, {updated} עודכנו, {forgotten} נשכחו, {notChanged} לא שונו כי שרשור אחר שינה אותם קודם.",
   "status.agent.mcpServerAdd":
-    "הוספת שרת MCP {name}: {target}. כל סוכן בשרת הזה מקבל את הכלים שלו. OpenBot מתחבר אליו כדי לבדוק אותו.",
+    "הוספת שרת MCP {name}: {target}. כל סוכן בשרת הזה מקבל את הכלים שלו. StarBot מתחבר אליו כדי לבדוק אותו.",
+
   "status.agent.mcpServerChange":
-    "שינוי שרת MCP {name} אל {target}. כל סוכן בשרת הזה מקבל את הכלים שלו. OpenBot מתחבר אליו כדי לבדוק אותו.",
+    "שינוי שרת MCP {name} אל {target}. כל סוכן בשרת הזה מקבל את הכלים שלו. StarBot מתחבר אליו כדי לבדוק אותו.",
+
   "status.agent.mcpServerHeaders": "הוא גם משנה את הכותרות האלה: {names}.",
   "status.agent.mcpServerEnable": "הפעלת שרת MCP {name} עבור כל סוכן בשרת הזה.",
   "status.agent.mcpServerDisable": "כיבוי שרת MCP {name} עבור כל סוכן בשרת הזה.",

@@ -6,7 +6,7 @@ import { createOpenBotLogger, toLogValue } from "@openbot/logging";
 
 const logger = createOpenBotLogger("backfill-openpanel-identities");
 
-const DEFAULT_OPENPANEL_API_URL = "https://analytics.openbot.run/api";
+const DEFAULT_OPENPANEL_API_URL = "https://analytics.starbot.app/api";
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY_MS = 250;
 const DEFAULT_REQUEST_TIMEOUT_MS = 10_000;

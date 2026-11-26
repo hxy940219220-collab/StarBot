@@ -10,7 +10,8 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "Fernsteuerung",
   "remoteDesktop.displayLabel": "Remote-Bildschirm",
   "remoteDesktop.selectDisplay": "Bildschirm auswählen",
-  "remoteDesktop.backToOpenBot": "Zurück zu OpenBot",
+  "remoteDesktop.backToOpenBot": "Zurück zu StarBot",
+
   "remoteDesktop.disconnect": "Trennen",
   "remoteDesktop.viewerTitle": "Sunshine-Remotedesktop",
   "remoteDesktop.viewerLoadFailed": "Der Moonlight-Viewer konnte nicht geladen werden.",
@@ -21,7 +22,8 @@ export const messages = {
   "remoteDesktop.openFailed": "Desktop konnte nicht geöffnet werden",
   "remoteDesktop.notSharingTitle": "{name} gibt seinen Bildschirm nicht frei",
   "remoteDesktop.notSharingDescription":
-    "Der Server verhindert, dass OpenBot seinen Bildschirm aufnimmt. Öffne auf diesem Server Systemeinstellungen → Datenschutz & Sicherheit → Bildschirmaufnahme, aktiviere OpenBot und versuche es hier erneut.",
+    "Der Server verhindert, dass StarBot seinen Bildschirm aufnimmt. Öffne auf diesem Server Systemeinstellungen → Datenschutz & Sicherheit → Bildschirmaufnahme, aktiviere StarBot und versuche es hier erneut.",
+
   "remoteDesktop.setup.check.screenRecording": "Bildschirmaufnahme",
   "remoteDesktop.setup.check.accessibility": "Bedienungshilfen",
   "remoteDesktop.setup.check.service": "Sunshine-Dienst",
@@ -42,7 +44,8 @@ export const messages = {
   "remoteDesktop.setup.startFailed": "Der Remotedesktop-Test konnte nicht gestartet werden.",
   "remoteDesktop.setup.connectionLost": "Die Testverbindung wurde unterbrochen.",
   "remoteDesktop.setup.hostUpdateRequired":
-    "Aktualisiere OpenBot auf dem Server, um Berechtigungen zu prüfen und den Remotedesktop zu testen.",
+    "Aktualisiere StarBot auf dem Server, um Berechtigungen zu prüfen und den Remotedesktop zu testen.",
+
   "remoteDesktop.setup.permissions": "Berechtigungen",
   "remoteDesktop.setup.checked": "Geprüft",
   "remoteDesktop.setup.checkAgain": "Erneut prüfen",
@@ -77,12 +80,14 @@ export const messages = {
   "remoteDesktop.setup.finishTest": "Test beenden",
   "remoteDesktop.host.questionTitle": "{name} möchte diesen Computer steuern",
   "remoteDesktop.host.questionDetail":
-    "{name} sieht deinen Bildschirm und kann Maus und Tastatur verwenden. Wenn du nicht innerhalb von 30 Sekunden antwortest, lehnt OpenBot die Anfrage ab.",
+    "{name} sieht deinen Bildschirm und kann Maus und Tastatur verwenden. Wenn du nicht innerhalb von 30 Sekunden antwortest, lehnt StarBot die Anfrage ab.",
+
   "remoteDesktop.host.allow": "Erlauben",
   "remoteDesktop.host.deny": "Ablehnen",
   "remoteDesktop.host.startedTitle": "Fernsteuerung gestartet",
   "remoteDesktop.host.startedBody": "{name} steuert jetzt diesen Computer.",
-  "remoteDesktop.host.trayTooltip": "OpenBot: Fernsteuerung aktiv",
+  "remoteDesktop.host.trayTooltip": "StarBot: Fernsteuerung aktiv",
+
   "remoteDesktop.host.trayControlledBy": "{name} steuert diesen Computer",
   "remoteDesktop.host.stopAll": "Alle Fernsteuerungen beenden",
 } as const satisfies PartialTranslation<typeof source>;

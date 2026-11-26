@@ -99,9 +99,11 @@ export const messages = {
   "provider.codeLogin.chatgptDeviceSetting":
     "컴퓨터의 ChatGPT에서 보안 설정을 열고 Codex용 기기 코드 로그인을 켜세요. 회사 계정은 워크스페이스 관리자가 켜요.",
 
-  "provider.useApp.title": "OpenBot 앱에서 {name} 연결",
+  "provider.useApp.title": "StarBot 앱에서 {name} 연결",
+
   "provider.useApp.description":
-    "{name} 로그인은 시작한 컴퓨터로 돌아오는데, 브라우저 탭은 이를 받을 수 없어요. OpenBot 앱에서 {name}을(를) 연결하세요. 앱이 로그인을 알아서 마무리해요.",
+    "{name} 로그인은 시작한 컴퓨터로 돌아오는데, 브라우저 탭은 이를 받을 수 없어요. StarBot 앱에서 {name}을(를) 연결하세요. 앱이 로그인을 알아서 마무리해요.",
+
   "provider.useApp.download": "앱 받기",
 
   "provider.picker.noEndpoints": "아직 엔드포인트가 없어요",
@@ -318,9 +320,11 @@ export const messages = {
   "provider.settings.otherVersionInstalledByUser": "사용 안 함: {version} · 직접 설치함",
   "provider.settings.otherVersionDownloaded": "사용 안 함: {version} · OpenBot이 다운로드함",
   "provider.settings.installedVersionIncomplete":
-    "일부 모델에는 이 버전에 없는 구성 요소가 필요합니다. 사용하려면 OpenBot 버전을 다운로드하세요.",
+    "일부 모델에는 이 버전에 없는 구성 요소가 필요합니다. 사용하려면 StarBot 버전을 다운로드하세요.",
+
   "provider.settings.useInstalledVersion": "설치한 버전 사용",
-  "provider.settings.useDownloadedVersion": "OpenBot 버전 사용",
+  "provider.settings.useDownloadedVersion": "StarBot 버전 사용",
+
   "provider.settings.update": "업데이트",
   "provider.settings.downloadLabel": "{name} 다운로드",
   "provider.settings.diagnostics": "진단",

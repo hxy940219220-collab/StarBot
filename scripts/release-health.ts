@@ -17,7 +17,7 @@ Options:
   --state <file>        with --discord: post the same worse rows of a release only once
   --max-age <hours>     stop with code 0 when <version> is older than this (for the scheduled run)`;
 
-const REPOSITORY = "nightly-labs/openbot";
+const REPOSITORY = "hxy940219220-collab/StarBot-Desktop";
 const MAX_WINDOW_HOURS = 72;
 const MIN_STARTS = 200;
 const MIN_INSTALLS = 50;

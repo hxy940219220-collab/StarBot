@@ -48,7 +48,7 @@ adding a module or moving ownership between workspaces.
 ## Product constraints
 
 - Workspaces, conversations, attachments, browser data, and team data stay on the computer that
-  runs OpenBot. Providers, visited pages, and plugins can use the network. Exception: a signed-in
+  runs StarBot. Providers, visited pages, and plugins can use the network. Exception: a signed-in
   phone keeps an encrypted, read-only copy of the agents, sections, recent chats, channels and drawer
   values of its servers (`apps/mobile/src/features/workspace/model/workspace-cache.ts`). The copy stays
   on that phone, the host stays the source of truth, and sign-out, session expiry and server removal delete it.
@@ -62,7 +62,7 @@ adding a module or moving ownership between workspaces.
 - Cloudflare holds accounts, avatars, host configuration, memberships, invitations, and logical
   sessions; it does not hold chats, files, or commands. It also holds the signed JavaScript bundles
   of mobile over-the-air updates (`apps/mobile-updates`), which are public code and have no user data.
-  Exception: a workflow step with an OpenBot credits model sends its prompt and input pictures through
+  Exception: a workflow step with an StarBot credits model sends its prompt and input pictures through
   the account service (`/v1/media/*`) to the media generation processor, and the result file comes
   back the same way. The account service passes them through in transit only: it does not store or
   log them, and keeps only the credit hold record. Keep the processor's name, address, key and model
@@ -73,7 +73,7 @@ adding a module or moving ownership between workspaces.
 
 ## Joined servers
 
-Many users run OpenBot only on a joined server: a VPS, a hosted server, or another member's computer.
+Many users run StarBot only on a joined server: a VPS, a hosted server, or another member's computer.
 A feature for agents, chats, channels, routines or server settings must work there as it does on
 this computer. Make it local only when it needs this computer itself: its files and folders, its
 windows, its OS dialogs or its native notifications.
@@ -216,7 +216,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
 - Desktop renderer (`src/renderer`), mobile (`apps/mobile`), public web (`apps/auth-api`; no separate
   landing app), hosted-site routing (`apps/site-router`), the mobile update server
   (`apps/mobile-updates`), and Signal (`remote/api`).
-- Joined servers: the desktop with a joined server, the web client (`openbot.run/app`), and mobile.
+- Joined servers: the desktop with a joined server, the web client (`starbot.app/app`), and mobile.
   See [Joined servers](#joined-servers).
 - IPC contracts (`packages/contracts`) and their preview implementation
   (`src/renderer/src/preview/mock-openbot.ts`).
@@ -244,7 +244,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
   `DOTENV_PRIVATE_KEY_DEV`. Every encrypted env file, `remote/.env.production` included, uses one of
   them. Never make a new key pair. Pass `-fk` with the root `.env.keys` so Dotenvx does not make one.
 - For direct Cloudflare changes, `apps/auth-api/.env.production` holds `CLOUDFLARE_API_TOKEN`
-  (write access to all resources in the OpenBot account) and `CLOUDFLARE_ACCOUNT_ID`. Load them
+  (write access to all resources in the StarBot account) and `CLOUDFLARE_ACCOUNT_ID`. Load them
   with `bunx dotenvx run -f apps/auth-api/.env.production -fk <root>/.env.keys -- <command>`. A worktree
   has no `.env.keys`; use the one in the main checkout. Never print the token: do not use
   `dotenvx get` or `echo`. Ask before a change that deletes data or affects production users.
@@ -261,7 +261,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
   Its X account uses the same email and password. A Google sign-in from a new browser gets a phone
   check that only the developer can do. To skip it, load the saved session into a new browser
   context (Playwright `storageState`) from `~/.config/openbot/test-google-account.storage.json` on
-  the developer's Mac. For the OpenBot browser, open a tab over CDP and set the same cookies with
+  the developer's Mac. For the StarBot browser, open a tab over CDP and set the same cookies with
   `Network.setCookies` on that tab: agents share that session. If that session has expired, ask the
   developer to do the phone check, then save the session again.
 
@@ -288,7 +288,7 @@ owner, through a server claim; never sign the server in to an operator account.
   when it cannot confirm a PID's identity; resolve the process, then `bun run dev:forget`. Dead
   records do not reserve ports.
 - Reuse a running dev instance. `bun run dev` opens a profile tied to this worktree; `--shared`
-  opens the shared `OpenBot Dev` profile. Use the ports the stack reports rather than a fixed port.
+  opens the shared `StarBot Dev` profile. Use the ports the stack reports rather than a fixed port.
 
 See [README.md — Commands](README.md#commands) for the flags these commands take, and
 [docs/architecture/change-rules.md](docs/architecture/change-rules.md#change-rules) for why the registry works this way, when a dev command
@@ -297,7 +297,7 @@ does not behave as expected.
 ## Terms
 
 - **bot** is not for new product code. Released names stay: Team API v1-v3 `bot`/`botId`,
-  `bots.json`, `legacy-import:bots:v1`, and `~/OpenBot/Bots` path prefixes.
+  `bots.json`, `legacy-import:bots:v1`, and `~/StarBot/Bots` path prefixes.
 - **teammate** and **group** are prompt and UI words, never types.
 
 Use [docs/glossary.md](docs/glossary.md) when naming a new type, table, IPC channel or product

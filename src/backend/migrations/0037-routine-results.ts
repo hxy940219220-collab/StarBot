@@ -3,7 +3,7 @@ import type { OpenBotMigration } from "./migration";
 // Shared by migration v37 and the separate new-database schema. IF NOT EXISTS throughout, because
 // this text is both the migration and the tail of the latest schema.
 //
-// A routine result is the answer of an agent routine's run, sent on to a place outside OpenBot. The
+// A routine result is the answer of an agent routine's run, sent on to a place outside StarBot. The
 // rows are written directly, not through `database.dispatch`: a delivery holds the answer text, and
 // the event log is never deleted from.
 //
@@ -59,6 +59,6 @@ export const migration: OpenBotMigration = {
   version: 37,
   name: "routine-results",
   // Only creates tables, so no foreign-key pause and no vacuum. No routine has a destination yet, so every
-  // routine keeps its answers in OpenBot, which is what it did before.
+  // routine keeps its answers in StarBot, which is what it did before.
   up: (db) => db.exec(ROUTINE_RESULT_SCHEMA_SQL),
 };

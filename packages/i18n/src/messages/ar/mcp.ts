@@ -9,10 +9,12 @@ export const messages = {
   "mcp.connect.getKey": "الحصول على مفتاح",
   "mcp.connect.useKey": "استخدام مفتاح API بدلًا من ذلك",
   "mcp.connect.useSignIn": "تسجيل الدخول بدلًا من ذلك",
-  "mcp.connect.keyDescription": "الصق بيانات اعتماد من حسابك في {name}. يتصل OpenBot بها ويحتفظ بها على {host}.",
+  "mcp.connect.keyDescription": "الصق بيانات اعتماد من حسابك في {name}. يتصل StarBot بها ويحتفظ بها على {host}.",
+
   "mcp.connect.thisComputer": "هذا الحاسوب",
   "mcp.connect.noCredentialDescription":
-    "لا يطلب {name} أي بيانات اعتماد. يتصل OpenBot مرة واحدة لمعرفة الأدوات التي يقدمها.",
+    "لا يطلب {name} أي بيانات اعتماد. يتصل StarBot مرة واحدة لمعرفة الأدوات التي يقدمها.",
+
   "mcp.connect.connect": "ربط",
   "mcp.connect.required": "مطلوب.",
   "mcp.connect.keptOn": "محفوظ على {host}.",
@@ -22,7 +24,8 @@ export const messages = {
   "mcp.local.address": "العنوان",
   "mcp.local.docs": "دليل الإعداد",
   "mcp.signIn.description":
-    "سجّل الدخول إلى حسابك في {name}. يحصل OpenBot على الأدوات التي يمكن لهذا الحساب الوصول إليها، ولا يحصل على أي كلمة مرور.",
+    "سجّل الدخول إلى حسابك في {name}. يحصل StarBot على الأدوات التي يمكن لهذا الحساب الوصول إليها، ولا يحصل على أي كلمة مرور.",
+
   "mcp.signIn.waiting": "جارٍ انتظار المتصفح…",
   "mcp.signIn.continue": "المتابعة إلى {name}",
   "mcp.signIn.pageDescription": "هذه الصفحة مفتوحة في المتصفح على {host}. سجّل الدخول هنا.",
@@ -62,7 +65,8 @@ export const messages = {
   "mcp.panel.editTitle": "تعديل خادم MCP",
   "mcp.panel.enable": "تفعيل {name}",
   "mcp.panel.detailsTitle": "التفاصيل",
-  "mcp.panel.detailsDescription": "سمِّ هذا الخادم واختر كيف يصل إليه OpenBot.",
+  "mcp.panel.detailsDescription": "سمِّ هذا الخادم واختر كيف يصل إليه StarBot.",
+
   "mcp.panel.transport": "النقل",
   "mcp.panel.name": "الاسم",
   "mcp.panel.namePlaceholder": "اسم خادم MCP",
@@ -124,7 +128,8 @@ export const messages = {
   },
   "mcp.panel.appTitle": "تطبيق تسجيل الدخول",
   "mcp.panel.appDescription":
-    "استخدم تطبيق OAuth سجّلته لدى مزوّد الخادم. يستخدمه OpenBot عندما لا يستطيع الخادم تسجيل OpenBot بنفسه. اتركه فارغًا ليسجّل OpenBot بنفسه.",
+    "استخدم تطبيق OAuth سجّلته لدى مزوّد الخادم. يستخدمه StarBot عندما لا يستطيع الخادم تسجيل StarBot بنفسه. اتركه فارغًا ليسجّل StarBot بنفسه.",
+
   "mcp.panel.appSaveFirst": "احفظ هذا الخادم أولًا. ثم يمكنك إضافة تطبيق تسجيل دخول.",
   "mcp.panel.appUrlChanged": "احفظ URL الخادم الجديد أولًا. ينتمي تطبيق تسجيل الدخول إلى URL المحفوظ.",
   "mcp.panel.appLoadFailed": "تعذّرت قراءة تطبيق تسجيل الدخول.",
@@ -146,17 +151,22 @@ export const messages = {
   "mcp.panel.removeApp": "إزالة التطبيق",
   "mcp.panel.appSaved": "تم حفظ التطبيق. سجّل الدخول لاستخدامه.",
   "mcp.panel.appRemoved": "تمت إزالة التطبيق.",
-  "mcp.signIn.relayDescription": "سجّل الدخول على {page} في متصفحك. عند الانتهاء، يرسل OpenBot تسجيل الدخول إلى {host}.",
+  "mcp.signIn.relayDescription": "سجّل الدخول على {page} في متصفحك. عند الانتهاء، يرسل StarBot تسجيل الدخول إلى {host}.",
+
   "mcp.signIn.relayOpenDescription":
-    "سجّل الدخول على {page} في متصفحك. عند الانتهاء، الصق هنا العنوان الذي يعرضه المتصفح. ثم يرسل OpenBot تسجيل الدخول إلى {host}.",
+    "سجّل الدخول على {page} في متصفحك. عند الانتهاء، الصق هنا العنوان الذي يعرضه المتصفح. ثم يرسل StarBot تسجيل الدخول إلى {host}.",
+
   "mcp.signIn.relayDeviceDescription": "سجّل الدخول على {page} في متصفحك وأكمل هناك. يرى {host} تسجيل الدخول بنفسه.",
   "mcp.signIn.relayOpen": "فتح صفحة تسجيل الدخول",
   "mcp.signIn.relayCopy": "نسخ الرابط",
-  "mcp.signIn.relayPasteHint": "إذا لم يعد المتصفح إلى OpenBot، فانسخ العنوان الذي يعرضه والصقه هنا.",
+  "mcp.signIn.relayPasteHint": "إذا لم يعد المتصفح إلى StarBot، فانسخ العنوان الذي يعرضه والصقه هنا.",
+
   "mcp.signIn.relayPasteRequired":
-    "لا يمكن لـ OpenBot الحصول على تسجيل الدخول من المتصفح بنفسه. عند الانتهاء، انسخ العنوان الذي يعرضه المتصفح والصقه هنا.",
+    "لا يمكن لـ StarBot الحصول على تسجيل الدخول من المتصفح بنفسه. عند الانتهاء، انسخ العنوان الذي يعرضه المتصفح والصقه هنا.",
+
   "mcp.signIn.relayAddress": "عنوان المتصفح",
   "mcp.signIn.relaySend": "إرسال",
   "mcp.panel.callbackUrlRelayed":
-    "تُفتح صفحة تسجيل الدخول في متصفحك، ويرسل OpenBot على حاسوبك تسجيل الدخول إلى {host}. أضف هذا URL بالضبط إلى عناوين URL المسموح بإعادة التوجيه إليها في التطبيق.",
+    "تُفتح صفحة تسجيل الدخول في متصفحك، ويرسل StarBot على حاسوبك تسجيل الدخول إلى {host}. أضف هذا URL بالضبط إلى عناوين URL المسموح بإعادة التوجيه إليها في التطبيق.",
+
 } as const satisfies PartialTranslation<typeof source>;

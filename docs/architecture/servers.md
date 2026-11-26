@@ -112,7 +112,7 @@ stays closed for that metric and level until the use goes below every level.
 
 A hosted site belongs to the server that published it (`hosted_sites.server_id`, D1 `0024`). The user
 stays the accountable owner, for abuse reports, blocks and account deletion. The desktop sends
-`OpenBot-Host-Id` and `OpenBot-Host-Token` (the machine token of `/v2/remote/hosts/register`) on each
+`StarBot-Host-Id` and `StarBot-Host-Token` (the machine token of `/v2/remote/hosts/register`) on each
 `/v1/sites` request when it is a registered server. The Worker checks the hash and that the host owner
 is the request user; a wrong token is refused with 401, never counted as unlinked. A server with a
 custom limit (see below) or an entitled plan (`siteLimitForPlan`: Starter 3, Standard 10, Pro 50) has its
@@ -296,7 +296,7 @@ handle. A client sends v1 to an older host, and refuses a file over 100 MB there
 
 ### Instance transfer with a joined server
 
-`instance-transfer-v1` moves a server's agents and server settings to or from an OpenBot transfer file
+`instance-transfer-v1` moves a server's agents and server settings to or from an StarBot transfer file
 (see [Instance transfer](agents.md#instance-transfer)). Only an owner or admin can use it: the file holds
 every agent's memories and files, and an import adds server settings. It is protocol 7 only. Every file
 that crosses the connection is at most 100 MB, the size of one WebRTC file transfer; a computer's own
@@ -749,7 +749,7 @@ resolution leave it out. The provider transcript of the tool call can keep it, a
 repeat it in a reply or a thought, which the conversation stores as any other message.
 
 The `ask_ui` tool gives agents only the `confirm` block, to approve an action or a draft; a question
-with options goes to `ask_user`. The contract and every client keep `choice` and `form`: OpenBot
+with options goes to `ask_user`. The contract and every client keep `choice` and `form`: StarBot
 builds forms itself, such as the API key and Vault cards, and older messages hold both.
 
 `agent-task-ui-blocks-v1` (`team-protocol/agent-task-ui-blocks-v1.ts`) adds the same `uiBlock`, with
@@ -1077,7 +1077,7 @@ host advertises a capability only when its `TeamApiAdmin` member exists.
 | `agent-task-limit-v1` | Agent task limit: how many tasks run at the same time, 1 to 4, or the host default | `agentAdmin` |
 | `agent-new-chat-v1` | Whether the agent starts a new chat itself when its chat gets long. The read gives the agent's choice or the host default; a change saves the agent's choice. Protocol 9 only | `agentAdmin` |
 | `agent-plan-card-v1` | Whether the agent shows its plan before a long task; reads the value that applies on the host. Protocol 9 only | `agentAdmin` |
-| `agent-builtin-memory-v1` | Whether the agent uses OpenBot memory (`/v1/admin/agents/builtin-memory`, `/update`). When it is off, the agent gets no saved memories, its memory tools refuse, and the memory review saves no memories; saved memories stay. A user can then connect a memory app such as Mem0. Protocol 10 only | `agentAdmin` |
+| `agent-builtin-memory-v1` | Whether the agent uses StarBot memory (`/v1/admin/agents/builtin-memory`, `/update`). When it is off, the agent gets no saved memories, its memory tools refuse, and the memory review saves no memories; saved memories stay. A user can then connect a memory app such as Mem0. Protocol 10 only | `agentAdmin` |
 | `agent-defaults-v1` | Server Settings › Agents of the host: the defaults of local scripts, the agent's own new chats and the plan card, the plan start time, the local script limit for each hour, the commit co-author line and "Steer agents while they work", and the own value of each visible agent. An update changes only the fields it sends; a choice sets `default`, `on` or `off` for a list of agents. Owners and admins only. Before it, these defaults were a local choice of the host. Protocol 9 only | `agentAdmin` |
 | `agent-fast-mode-v1` | Whether the agent asks for the fast service tier, and the host models that have one with the tier id (the released model list drops it). A member reads it with view access to the agent and changes it with manage access, as the model and effort. Protocol 9 only | `agentAdmin` |
 | `agent-speed-v1` | The speed of the agent: standard, fast or ultrafast. Its model list adds the Ultrafast tier ids and the Claude models, which `agent-fast-mode-v1` leaves out. A client that advertises it asks the user to confirm the price before it turns on a faster speed for a Claude agent. The access is that of `agent-fast-mode-v1`. A client uses it in place of `agent-fast-mode-v1` when the host has both. Protocol 9 only | `agentAdmin` |
@@ -1116,14 +1116,14 @@ host advertises a capability only when its `TeamApiAdmin` member exists.
 | `host-personality-v1` | Read (any member) and set (owner or admin) the response style of the agents | `hostAdmin` |
 | `host-key-rotation-v1` | Change the host's key. Owner only: an admin gets 403 | none: only the mobile app sends it |
 | `host-restart-v1` | Restart a self-hosted server now. Owner or admin. Only a host in server mode advertises it. Protocol 9 only | `hostAdmin` |
-| `owner-transfer-v1` | No routes. The host can take a new owner: the owner gives the server to another account through the account service, and the host applies the change. Only a host in server mode that OpenBot does not host advertises it | none: the client calls the account service |
+| `owner-transfer-v1` | No routes. The host can take a new owner: the owner gives the server to another account through the account service, and the host applies the change. Only a host in server mode that StarBot does not host advertises it | none: the client calls the account service |
 | `local-servers-v1` | List the servers that the desktop app runs on the host computer, create one, and delete one. Owner only: an admin gets 403. Only the desktop app's own server advertises it | none: only the mobile app sends it |
 | `agent-memory-limit-v1` | Read and set how many memories each agent keeps | `hostAdmin` |
 | `memory-review-v1` | Read and set how often the host's agents review their memories in the background, or Off | `hostAdmin` |
 | `browsing-memory-v1` | Read and set whether the host records what a person does in an agent's browser tab that they hold, for the memory review of that agent. Protocol 9 only | `hostAdmin` |
 | `browser-teach-v1` | Start and stop the recording of a task that a member shows in an agent's browser tab. The steps go only to the session that started it. Protocol 9 only | none: each member, for a tab they can see |
 | `skill-learning-v1` | Read and set whether the memory reviews of the host's agents save the skills they learn, ask first, or do not look for skills. Sends the skill name of a skill question in chat messages, and saves that skill on Save (any member with chat level). Protocol 9 only | `hostAdmin`, `agent.saveSkillSuggestion` |
-| `feedback-withdraw-v1` | Remove on a feedback thank-you card in an agent's own chat (the owner only, who approves each report). The host takes the report off GitHub with its own OpenBot account, which sent it, and changes the card for every member. Protocol 9 only | `agent.withdrawFeedback` |
+| `feedback-withdraw-v1` | Remove on a feedback thank-you card in an agent's own chat (the owner only, who approves each report). The host takes the report off GitHub with its own StarBot account, which sent it, and changes the card for every member. Protocol 9 only | `agent.withdrawFeedback` |
 | `agent-notification-levels-v1` | Read and set the member's own notification level of the server and of each agent | none: each member, own levels only |
 | `sidebar-pins-v1` | Read, replace and seed the member's own ordered list of pinned agents and channels | none: each member, own pins only |
 | `live-voice-v1` | Start and stop Codex live voice with an agent, with the host's Codex sign-in; the `live-voice` event goes to the member who started it. Protocol 9 only | none: each member who can chat with the agent |
@@ -1139,7 +1139,7 @@ host advertises a capability only when its `TeamApiAdmin` member exists.
 | `provider-default-v1` | Read and set the provider that a new agent of the host starts on | none: only the mobile app sends it |
 | `agent-access-v1` | Read and set the roles that give members access to agents (see [Roles](#roles)) | `hostAdmin` |
 | `server-audit-v1` | Read the changes to the members, roles and agent access of the server (see [Audit log](#audit-log)). Protocol 9 only | `hostAdmin` |
-| `discord-access-v1` | Read and set which Discord roles can use OpenBot in a Discord server; list its roles | `messaging` |
+| `discord-access-v1` | Read and set which Discord roles can use StarBot in a Discord server; list its roles | `messaging` |
 | `events-v1` | Manage webhook routines, their secrets, and activity | `events` |
 | `routine-recovery-v1` | Read and set a routine's missed-run policy; read its runs with the missed occurrences | `events` |
 | `routine-results-v1` | List the messaging connections and their places; read and set where an agent routine sends its answers. Deliveries stay on the host | none: only the mobile app sends it |
@@ -1250,12 +1250,12 @@ The host answers, then quits; it does not use `app.relaunch`, which would start 
 account service, and a server on this computer through `localServers`. A host that does not answer
 cannot get the request; then the owner runs `sudo openbot restart`.
 
-`owner-transfer-v1` lets the owner give the server to another OpenBot account from Server Settings ›
+`owner-transfer-v1` lets the owner give the server to another StarBot account from Server Settings ›
 Members (desktop, web client and mobile). The owner enters an email; the account service stores a
 request in `remote_owner_transfers`, sends an email and an `account-servers-changed` event to that
 account, and the new owner accepts or declines in the app while signed in with that email. The
 request expires after 7 days, and a new request replaces it. A server with a `hosted_servers` row
-(OpenBot hosts it) is refused with `owner_transfer_hosted`, when the request is made and when it is
+(StarBot hosts it) is refused with `owner_transfer_hosted`, when the request is made and when it is
 accepted. Accept changes, in one D1 batch, `remote_hosts.owner_user_id`, the owner membership (the
 earlier owner is removed), the member and site limits, the hosted sites and the Slack, Discord,
 Telegram and webhook routes of the server, and it raises the auth epoch. A server plan stays with
@@ -1265,7 +1265,7 @@ the change when its account registration gets `host_owner_mismatch` or when a re
 names another account. It then asks `POST /v2/remote/hosts/:hostId/owner-session` with its machine
 token for a session of the new owner, which revokes the session of the earlier owner on the host,
 rebinds the owner of its team file and signs in as the new owner. Only a host in server mode that
-OpenBot does not host does this, because a desktop app must keep the account of the person at the
+StarBot does not host does this, because a desktop app must keep the account of the person at the
 computer.
 Agents, chats, provider sign-ins, saved keys, Vault logins and browser sign-ins stay on the server.
 
@@ -1463,7 +1463,7 @@ the host advertises the capability.
 `codex-api-key-v1` has no routes. It tells a client that the host logs Codex in with an OpenAI API
 key that the released `apiKeySet` route of `providers-v1`, `-v5` or `-v8` sends for `codex`, as
 `codex login --with-api-key` does on this computer. Codex keeps the key in its own login, not in the
-OpenBot key store. The released agent status does not carry the login type, so `apiKeyState` for
+StarBot key store. The released agent status does not carry the login type, so `apiKeyState` for
 `codex` answers from that login: `saved` while Codex runs on a key. `apiKeyClear` does not remove the
 login, as on this computer. OpenAI bills each request to the key. The ChatGPT sign-in and the sign-out
 replace the key.
@@ -1513,12 +1513,12 @@ a new agent is open to every member until an admin closes it.
 
 An agent that works for a member keeps to the member's levels too. In a turn that a member's message
 started, `list_agents` lists, and `send_message` reaches, only the agents where the member has `chat`
-or more (`OpenBotToolRouter.#reachableAgents`). An agent that the member cannot use reads as an
+or more (`StarBotToolRouter.#reachableAgents`). An agent that the member cannot use reads as an
 unknown id, so the refusal does not name it. The message that such an agent sends to another agent,
 its automatic result, the note about a failed request, its interrupt notice and a task that it starts
 keep the IDs of those members (`requesterIds` in the stored message), so each next agent in the chain
 keeps to the same levels. The field is optional JSON in `message_json`: there is no migration, and an
-older build ignores it. This is a routing rule for the OpenBot tools, not a wall between agents: an
+older build ignores it. This is a routing rule for the StarBot tools, not a wall between agents: an
 agent with Full access can still read the files of other agents on the host.
 `scripts/agent-message-access-e2e.ts` checks these rules.
 
@@ -1593,7 +1593,7 @@ has no page or date filter.
 
 Company sign-in connects one server to the company's OpenID Connect provider (Entra ID, Okta, Google
 Workspace or another one). The account service does all provider work
-(`apps/auth-api/src/server/company-sign-in.ts`); the host and the clients see only OpenBot sessions.
+(`apps/auth-api/src/server/company-sign-in.ts`); the host and the clients see only StarBot sessions.
 Migration `0047_company_sign_in.sql` adds the tables. SAML is not supported.
 
 Setup is desktop only: Server settings → Members → Company sign-in (`ServerCompanySignInSection.tsx`),
@@ -1654,7 +1654,7 @@ member limit of the server and the license users of the owner. The rules:
 SCIM 2.0 (`/scim/v2/Users`, `company-sign-in-scim.ts`) supports what Entra ID and Okta send: list
 with the filter `userName eq "…"`, create, read, and PATCH, PUT and DELETE of `active`. The bearer
 token starts with `obscim_`, shows once, and D1 keeps only its hash. Other attributes belong to the
-OpenBot account and do not change. `active` accepts the strings `"True"` and `"False"`. Off, and
+StarBot account and do not change. `active` accepts the strings `"True"` and `"False"`. Off, and
 DELETE, end every session of the account, spend its open email and company sign-in codes, and revoke the membership. A
 create for a person who exists sets `active` as a PATCH does. Off → on joins the person again,
 also after that revocation. A repeated on does not change a membership that the owner revoked.
@@ -1871,7 +1871,7 @@ the tiers used the same lookup key. The license terms allow 3 devices for each u
   the new page with `license_exists`. A second open license can still come from the
   Stripe Dashboard; `sync` logs a warning, and a person refunds it.
 - Refunds are by email only; the app and the Worker have no refund action. A customer emails
-  licenses@openbot.run within 24 hours of the first payment for a refund less a €3 / $3.60 /
+  licenses@starbot.app within 24 hours of the first payment for a refund less a €3 / $3.60 /
   13.20 zł fee, once per account. There are no refunds for later changes.
 - When the owner of a full license creates an invite, the members section asks to add 1 user and
   shows the extra price, then adds the user and creates the invite. A 1-user license changes to Team
@@ -1889,7 +1889,7 @@ change.
 
 Each extra server is a headless child process of the same binary (`src/main/local-server-child.ts`).
 `LocalServers` (`src/main/local-servers/local-servers.ts`) starts it with its own `--user-data-dir`
-(`<userData>/local-servers/<id>`) and its own agent root (`~/OpenBot/Servers/<id>`). The child
+(`<userData>/local-servers/<id>`) and its own agent root (`~/StarBot/Servers/<id>`). The child
 sets up a password host whose one member is the owner, starts the Team API on loopback only, and
 writes one ready line to stdout with the API address and its identity. The line has no secret. The
 desktop pins the identity at the first start, signs in as the owner with the password, and attaches
@@ -1952,7 +1952,7 @@ the server as a joined server with `thisComputer: true`. `kind` stays `"remote"`
 Limits:
 
 - A user can create at most `LOCAL_SERVER_LIMIT` (5) servers on this computer, in addition to
-  "Local", because each one is a full OpenBot process that runs all the time. `LocalServers.create`
+  "Local", because each one is a full StarBot process that runs all the time. `LocalServers.create`
   refuses one more with `error.remote.localServerLimit`. The create dialog tells the user before
   they type a name.
 - A child server is reached as a joined server. Features behind `kind === "local"`, such as
@@ -1995,7 +1995,7 @@ See [multi-tenant hosting](../multi-tenant-hosting.md) for installation, permiss
 ## Hosted servers
 
 A hosted server is one [boat](https://boat.dev) sandbox for one account. It runs the Linux
-OpenBot build under Xvfb and is a normal Remote host after its first start. The account Worker
+StarBot build under Xvfb and is a normal Remote host after its first start. The account Worker
 owns the sandbox lifecycle: it creates, resumes and deletes sandboxes, and D1 keeps the desired
 and observed state. A server reports each minute while it is in use, and the Worker stops it after
 15 minutes with no report. boat also stops each sandbox at the end of a 2-hour lease that activity
@@ -2007,7 +2007,7 @@ turns while it is low and limits the turns that run at the same time. See
 [hosted servers](../hosted-servers.md) for the flow, the configuration, the memory guards and the template.
 
 A self-hosted server uses the same Linux build, scripts and units on the owner's own computer, with
-`/opt/OpenBot/hosted/mode` set to `self`. It has no claim: main starts in server mode
+`/opt/StarBot/hosted/mode` set to `self`. It has no claim: main starts in server mode
 (`src/main/server-mode.ts`, `OPENBOT_SERVER=1`), and the `openbot` terminal command signs it in over
 a Unix socket in the 0700 runtime directory of the service user. Main publishes the host after each
 sign-in. See [self-hosted servers](../self-hosted-server.md).

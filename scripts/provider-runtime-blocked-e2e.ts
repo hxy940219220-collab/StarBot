@@ -12,7 +12,7 @@ import { parseAgentRuntimeLock } from "./agent-runtime-lock";
 const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-runtime-blocked-e2e");
 const WAIT_MS = 15_000;
 const BLOCKED_VERSION = "2.3.2";
-const BLOCKLIST_URL = "https://raw.githubusercontent.com/nightly-labs/openbot/main/provider-runtime-blocklist.json";
+const BLOCKLIST_URL = "https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/provider-runtime-blocklist.json";
 const LICENSE = "fake OpenCode license\n";
 
 interface Scenario {
@@ -175,7 +175,7 @@ try {
   assert.equal(versionAfter, pinnedVersion, "a copy on a blocked version moves back to the pinned one");
   assert.equal(blockedCopyKept, false, "the blocked copy goes after the move back");
   assert.equal(versionAfterRestart, pinnedVersion, "a restart keeps the pinned copy");
-  assert.equal(copyInUseKept, true, "a blocked copy that another OpenBot process stamped stays");
+  assert.equal(copyInUseKept, true, "a blocked copy that another StarBot process stamped stays");
   assert.equal(report.blocked.unusedCopyKept, false, "the next check removes a blocked copy that nothing uses");
 
   const notBlocked = await startManager("not-blocked", []);
@@ -199,7 +199,7 @@ try {
     versionAfter: version(userCli.manager),
     blockedCopyKept: await exists(userCli.blockedRoot),
   };
-  assert.equal(report.userCli.versionAfter, BLOCKED_VERSION, "OpenBot leaves OpenCode alone next to a user's CLI");
+  assert.equal(report.userCli.versionAfter, BLOCKED_VERSION, "StarBot leaves OpenCode alone next to a user's CLI");
 
   report.passed = true;
 } finally {

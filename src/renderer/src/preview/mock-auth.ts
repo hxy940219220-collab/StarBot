@@ -63,8 +63,8 @@ export function createMockAuth(options: MockAuthOptions, { emit }: MockRuntime) 
     },
   ];
   let companySignIn: CompanySignInSettings = {
-    redirectUri: "https://api.openbot.run/v1/auth/company/callback",
-    scimUrl: "https://api.openbot.run/scim/v2",
+    redirectUri: "https://api.starbot.app/v1/auth/company/callback",
+    scimUrl: "https://api.starbot.app/scim/v2",
     domainRecord: { name: "_openbot", value: "openbot-domain=preview" },
     domainCheck: false,
     connection: null,
@@ -124,14 +124,14 @@ export function createMockAuth(options: MockAuthOptions, { emit }: MockRuntime) 
     },
     createMobileConnect: async () => ({
       qrData:
-        "openbot://mobile-connect?api=https%3A%2F%2Fapi.openbot.run&ticket=preview-mobile-ticket_1234567890abcdef",
+        "openbot://mobile-connect?api=https%3A%2F%2Fapi.starbot.app&ticket=preview-mobile-ticket_1234567890abcdef",
       expiresAt: Date.now() + 120_000,
     }),
     cancelMobileConnect: async () => undefined,
     getMobileConnectLink: async () => clone(mobileConnectLink),
     createMobileConnectLink: async () => {
       mobileConnectLink = {
-        url: `openbot://mobile-connect?api=https%3A%2F%2Fapi.openbot.run&ticket=preview-mobile-link_${crypto.randomUUID().replaceAll("-", "")}`,
+        url: `openbot://mobile-connect?api=https%3A%2F%2Fapi.starbot.app&ticket=preview-mobile-link_${crypto.randomUUID().replaceAll("-", "")}`,
         createdAt: Date.now(),
       };
       return clone(mobileConnectLink);

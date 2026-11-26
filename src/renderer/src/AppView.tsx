@@ -79,7 +79,7 @@ export function AppAccessGate() {
     },
   );
 
-  // Streamlined StarBot onboarding: skip OpenBot's free-vs-own-model screen;
+  // Streamlined StarBot onboarding: skip StarBot's free-vs-own-model screen;
   // automatically scan local desktop agents/models once and enter workspace directly.
   let autoSetupInitialized = false;
   createEffect(

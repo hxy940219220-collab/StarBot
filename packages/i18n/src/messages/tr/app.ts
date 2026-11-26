@@ -2,7 +2,8 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/app";
 
 export const messages = {
-  "app.loading": "OpenBot yükleniyor",
+  "app.loading": "StarBot yükleniyor",
+
   "app.leftPanel.resize": "Sol kenar çubuğunu yeniden boyutlandır",
   "app.host.thisMac": "Bu Mac",
   "app.host.thisComputer": "Bu bilgisayar",
@@ -28,16 +29,20 @@ export const messages = {
   "app.provider.codeExpired": "{name} kodunun süresi doldu",
   "app.provider.codeExpiredDescription": "Kimse zamanında girmedi. Bu kod artık geçerli değil.",
   "app.provider.connectFailed": "{name} bağlanamadı",
-  "app.provider.connectFailedRetry": "OpenBot {name} sağlayıcısına bağlanamadı. Tekrar deneyin.",
+  "app.provider.connectFailedRetry": "StarBot {name} sağlayıcısına bağlanamadı. Tekrar deneyin.",
+
   "app.provider.restartFailed": "{name} yeniden başlatılamadı",
-  "app.provider.included": "{name}, OpenBot ile birlikte gelir.",
+  "app.provider.included": "{name}, StarBot ile birlikte gelir.",
+
   "app.clipboard.copyFailed": "Metin kopyalanamadı.",
   "app.voice.tooLong": "Ses kayıtları 10 dakika ile sınırlıdır.",
   "app.avatar.type": "Bir PNG, JPEG, GIF veya WebP görseli seçin.",
   "app.avatar.size": "10 MB'tan küçük bir görsel seçin.",
   "app.avatar.processingUnavailable": "Görsel işleme kullanılamıyor.",
-  "app.avatar.tooLarge": "OpenBot bu görseli yeterince küçültemedi. Daha sade bir görsel seçin.",
-  "app.avatar.processFailed": "OpenBot bu görseli işleyemedi.",
+  "app.avatar.tooLarge": "StarBot bu görseli yeterince küçültemedi. Daha sade bir görsel seçin.",
+
+  "app.avatar.processFailed": "StarBot bu görseli işleyemedi.",
+
   "app.chart.total": "Toplam",
   "app.modelVariant.default": "Varsayılan",
   "app.qrCode.label": "QR kodu",
@@ -48,7 +53,8 @@ export const messages = {
   "app.standingApproval.title": "{name} için her zaman izin verilsin mi?",
   "app.standingApproval.titleUnnamed": "Bu ajan için her zaman izin verilsin mi?",
   "app.rail.label": "Sayfalar",
-  "app.rail.website": "OpenBot web sitesi",
+  "app.rail.website": "StarBot web sitesi",
+
   "app.rail.agents": "Ajanlar",
   "app.rail.schedule": "Zamanlama",
   "app.rail.tasks": "Görevler",
@@ -69,31 +75,40 @@ export const messages = {
   "app.help.guides": "Kılavuzlar",
   "app.help.discord": "Discord'a katıl",
   "app.help.reportProblem": "Sorun bildir",
-  "app.githubStar.title": "OpenBot'u şimdiye kadar beğendin mi?",
-  "app.githubStar.description": "GitHub'da bir yıldız, daha fazla kişinin OpenBot'u bulmasına yardım eder.",
+  "app.githubStar.title": "StarBot'u şimdiye kadar beğendin mi?",
+
+  "app.githubStar.description": "GitHub'da bir yıldız, daha fazla kişinin StarBot'u bulmasına yardım eder.",
+
   "app.githubStar.star": "GitHub'da yıldızla",
   "app.githubStar.notNow": "Şimdi değil",
   "app.githubStar.thanksTitle": "Teşekkürler!",
   "app.githubStar.thanksBody": "Günümüzü güzelleştirdin.",
-  "app.socialFollow.title": "OpenBot'u sevdin mi?",
+  "app.socialFollow.title": "StarBot'u sevdin mi?",
+
   "app.socialFollow.description": "Bir gönderiyle anlat. Bu bize her reklamdan daha çok yardım eder.",
-  "app.socialFollow.networks": "OpenBot hakkında paylaş:",
+  "app.socialFollow.networks": "StarBot hakkında paylaş:",
+
   "app.socialFollow.post": "{name} üzerinde paylaş",
   "app.socialFollow.postCopy": "Gönderiyi kopyala ve {name} uygulamasını aç",
   "app.socialFollow.postCommunity": "{name} içinde paylaş",
   "app.socialFollow.thanksTitle": "Teşekkürler!",
   "app.socialFollow.openedText": "{name} ilk gönderiyle açık. Kendine göre düzenle.",
-  "app.socialFollow.openedLink": "{name} OpenBot bağlantısıyla açık.",
+  "app.socialFollow.openedLink": "{name} StarBot bağlantısıyla açık.",
+
   "app.socialFollow.copied": "Senin için bir gönderi kopyaladık. {name} içine yapıştır.",
-  "app.socialFollow.opened": "{name} açık. OpenBot hakkında birkaç söz yaz.",
+  "app.socialFollow.opened": "{name} açık. StarBot hakkında birkaç söz yaz.",
+
   "app.socialFollow.follow": "{handle} hesabını takip et",
-  "app.socialFollow.followOn": "OpenBot'u {name} üzerinde takip et",
+  "app.socialFollow.followOn": "StarBot'u {name} üzerinde takip et",
+
   "app.socialFollow.join": "{handle} topluluğuna katıl",
   "app.socialFollow.followedTitle": "{name} üzerinde görüşürüz!",
   "app.socialFollow.followedBody": "Haberlerimiz önce orada çıkar.",
   "app.socialFollow.draftPost":
-    "Yapay zekâ ajanlarım artık OpenBot ile kendi bilgisayarımda çalışıyor. Sohbetlerim ve dosyalarım bende kalıyor. Dene: {site}",
-  "app.socialFollow.redditTitle": "OpenBot'u nasıl kullanıyorum",
+    "Yapay zekâ ajanlarım artık StarBot ile kendi bilgisayarımda çalışıyor. Sohbetlerim ve dosyalarım bende kalıyor. Dene: {site}",
+
+  "app.socialFollow.redditTitle": "StarBot'u nasıl kullanıyorum",
+
   "app.rail.usageRings": "{name} kullanımı: {windows}. Kullanımı aç",
   "app.rail.usageUnavailable": "{name} kullanımı kullanılamıyor. Kullanımı aç",
   "app.rail.customAgentUsage": "{name} kullanımı. Kullanımı aç",

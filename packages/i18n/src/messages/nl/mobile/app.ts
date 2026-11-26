@@ -40,21 +40,28 @@ export const messages = {
   "mobile.app.route.marketplace": "Marktplaats",
   "mobile.app.route.library": "Bibliotheek",
   "mobile.app.quickAction.search": "Zoeken",
-  "mobile.app.quickAction.share": "OpenBot delen",
+  "mobile.app.quickAction.share": "StarBot delen",
+
   "mobile.app.quickAction.support": "Wacht, verwijder me niet!",
   "mobile.app.quickAction.supportSubtitle": "Vertel ons wat beter kan",
-  "mobile.app.update.title": "OpenBot {version} is er",
-  "mobile.app.update.readyTitle": "Een nieuwe OpenBot staat klaar",
+  "mobile.app.update.title": "StarBot {version} is er",
+
+  "mobile.app.update.readyTitle": "Een nieuwe StarBot staat klaar",
+
   "mobile.app.update.storeBody": "Krijg de nieuwste functies en oplossingen.",
-  "mobile.app.update.readyBody": "OpenBot start opnieuw om het te installeren.",
+  "mobile.app.update.readyBody": "StarBot start opnieuw om het te installeren.",
+
   "mobile.app.update.install": "Bijwerken",
   "mobile.app.update.later": "Later",
   "mobile.app.update.failedTitle": "Bijwerken mislukt",
-  "mobile.app.update.restartFailed": "Sluit OpenBot en open het opnieuw om de update af te ronden.",
-  "mobile.app.update.storeFailed": "Open de App Store of Google Play en werk OpenBot daar bij.",
+  "mobile.app.update.restartFailed": "Sluit StarBot en open het opnieuw om de update af te ronden.",
+
+  "mobile.app.update.storeFailed": "Open de App Store of Google Play en werk StarBot daar bij.",
+
   "mobile.app.update.whatsNew": "Wat is er nieuw",
   "mobile.app.update.hideWhatsNew": "Verbergen",
-  "mobile.app.update.releaseTitle": "OpenBot {version}",
+  "mobile.app.update.releaseTitle": "StarBot {version}",
+
   "mobile.app.update.group.notice": "Actie nodig",
   "mobile.app.update.group.added": "Nieuw",
   "mobile.app.update.group.changed": "Gewijzigd",
@@ -64,12 +71,15 @@ export const messages = {
   "mobile.app.update.group.security": "Beveiliging",
   "mobile.app.update.requiredTitle": "Update vereist",
   "mobile.app.update.requiredBody":
-    "OpenBot {version} wordt niet meer ondersteund. Werk bij naar {minimum} of nieuwer om door te gaan.",
+    "StarBot {version} wordt niet meer ondersteund. Werk bij naar {minimum} of nieuwer om door te gaan.",
+
   "mobile.app.update.notesFailed": "De release-opmerkingen konden niet laden.",
   "mobile.app.update.notesEmpty": "Er zijn nog geen release-opmerkingen voor deze versie.",
   "mobile.app.update.fullChangelog": "Volledig wijzigingslog",
-  "mobile.app.rate.title": "Vind je OpenBot fijn?",
-  "mobile.app.rate.body": "Een beoordeling helpt andere teams OpenBot te vinden.",
+  "mobile.app.rate.title": "Vind je StarBot fijn?",
+
+  "mobile.app.rate.body": "Een beoordeling helpt andere teams StarBot te vinden.",
+
   "mobile.app.rate.ratingLabel": "Beoordeling",
   "mobile.app.rate.star": { one: "{count} ster", other: "{count} sterren" },
   "mobile.app.rate.hint.none": "Tik op een ster.",

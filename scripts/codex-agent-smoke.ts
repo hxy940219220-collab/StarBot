@@ -54,14 +54,14 @@ const TURNS: Array<{ step: string; prompt: string; expect: string[] }> = [
   {
     step: "deferred tool",
     prompt:
-      `Use the OpenBot tool_search tool to find the \`${ECHO_TOOL}\` tool, then run it once with tool_call. ` +
+      `Use the StarBot tool_search tool to find the \`${ECHO_TOOL}\` tool, then run it once with tool_call. ` +
       "Reply with the text it returns.",
     expect: ["dynamicToolCall:tool_search", "dynamicToolCall:tool_call"],
   },
   {
     step: "browser tool",
     prompt:
-      "List the tabs of the OpenBot browser with its list_tabs tool. Do not open a page. " +
+      "List the tabs of the StarBot browser with its list_tabs tool. Do not open a page. " +
       "Reply with the title of the first tab.",
     expect: ["dynamicToolCall:list_tabs"],
   },

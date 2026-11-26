@@ -364,7 +364,7 @@ try {
   assert.equal(report.priorities[1]?.priority, "now", "The steer stops the running tool call.");
   assert.ok(
     report.turns.every((turn) => turn.status === "completed"),
-    "No OpenBot turn ends as interrupted when Claude stops its tools for a steer.",
+    "No StarBot turn ends as interrupted when Claude stops its tools for a steer.",
   );
   assert.ok(
     report.deliveries.every((delivery) => delivery.status === "completed"),

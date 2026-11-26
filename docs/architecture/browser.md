@@ -35,7 +35,7 @@ Browser tickets and session termination require the same account-session hash th
 remote session. Existing bearer-token endpoints retain their behavior. The browser edits the
 account's name, avatar, and sessions through `v1/me/profile`, `v1/me/avatar`, and `v1/me/sessions`,
 which call the same `AuthService` methods and avatar storage (`avatar-storage.ts`) as the bearer
-routes. The avatar upload is the one write that is not JSON; the origin and `X-OpenBot-Browser`
+routes. The avatar upload is the one write that is not JSON; the origin and `X-StarBot-Browser`
 checks still apply. `web-account.ts` makes these calls, and the Profile tab of the web Settings dialog
 (`WebAccountSettings.tsx`) shows them.
 
@@ -89,7 +89,7 @@ so a supplied image or text MIME type cannot enable a preview. Remote support is
 the `media-attachments` capability; released protocol adapters keep their existing meanings.
 
 ZIP attachments use the same contract with `application/zip` and no inline preview. Import copies
-and hashes the archive; OpenBot never extracts it. Remote support is additive through the
+and hashes the archive; StarBot never extracts it. Remote support is additive through the
 `zip-attachments` capability.
 
 MP4 attachments use the MP3 and MOV contract with `video/mp4`. Remote support is additive through
@@ -130,7 +130,7 @@ text is already in the field. The check also reads each frame element that holds
 because a frame in another process can keep its active element after the page takes focus.
 `bun run test:browser --scenario=typing-focus` covers it and writes
 `.openbot-build/browser-typing-focus.json`.
-The browser session and service-worker fallback remove the `OpenBot/` and `Electron/` user-agent
+The browser session and service-worker fallback remove the `StarBot/` and `Electron/` user-agent
 tokens. They keep the installed Chromium major version and host platform, and give the other version
 parts as `0.0.0` (`Chrome/156.0.0.0`), as Chrome does: some bot checks refuse the full version that
 Electron sends. The `Accept-Language` header adds the base language of each regional language
@@ -557,7 +557,7 @@ settings > Browser profiles and in Agent info > Advanced > Browser profile.
 
 A named profile can use a saved proxy (migration 56: `browser_proxies` and `browser_profile_proxies`).
 Without one it is "Automatic": `{ mode: "system" }`, the proxy settings of the computer that runs
-OpenBot. The shared profile and "Only this agent" are always Automatic. A proxy is one address,
+StarBot. The shared profile and "Only this agent" are always Automatic. A proxy is one address,
 `scheme://[user[:password]@]host[:port]` with socks5, http or https (`parseBrowserProxyAddress`).
 Without a scheme it is http and needs a port: `user:password@host:port` or the
 `host:port:user:password` form of proxy sellers. The password can contain a raw `/`, `#` or `@`.
@@ -767,7 +767,7 @@ unclear OAuth account selection, CAPTCHA (after the one checkbox click that a sn
 passkeys, and a payment confirmation that the agent cannot complete, such as approval in a bank app,
 use takeover.
 
-A bank's payment code at checkout (3-D Secure) is not an OpenBot secret. When the code is in an email
+A bank's payment code at checkout (3-D Secure) is not an StarBot secret. When the code is in an email
 or SMS that the agent can read, such as a mail tab that it reloads, the agent types it into the bank's frame, so a weekly order
 does not wait for a person. The browser core guidance (`tool-guidance.ts`) limits this to a checkout
 that the user approved, and to a message that names the same merchant and amount; the agent types the

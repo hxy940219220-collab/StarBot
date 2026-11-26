@@ -33,7 +33,8 @@ export const messages = {
   "notification.machineAlert.cpu": "{server}: CPU загружен на {percent}",
   "notification.machineAlert.body": "Превышен порог оповещения {level}. См. «Настройки сервера» → «Хранилище».",
   "notification.test": "Уведомления работают.",
-  "notification.welcome": "OpenBot сообщит здесь, когда вы понадобитесь агенту.",
+  "notification.welcome": "StarBot сообщит здесь, когда вы понадобитесь агенту.",
+
   "notification.toast.region": "Уведомления",
   "notification.toast.close": "Закрыть уведомление",
 } as const satisfies PartialTranslation<typeof source>;

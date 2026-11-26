@@ -415,7 +415,7 @@ try {
   assert.equal(noLoadStop.status, "interrupted", "A stop ends the turn of an agent that cannot load sessions.");
   assert.equal(noLoadNext.status, "completed", "The next turn of that agent completes.");
   assert.equal(report.noLoad.sessionsOpened, 0, "The agent keeps its session.");
-  assert.equal(report.noLoad.loads, 0, "OpenBot does not try to open the session again.");
+  assert.equal(report.noLoad.loads, 0, "StarBot does not try to open the session again.");
 
   const silentNew = await open("cline", DEFAULT_ACP_FLAVOR, join(root, "silent-new.jsonl"), { FAKE_SILENT_NEW: "1" });
   const silentStart = await timed(() =>

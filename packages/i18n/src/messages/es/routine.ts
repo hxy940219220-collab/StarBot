@@ -9,7 +9,8 @@ export const messages = {
   "routine.kind.monthly": "Cada mes",
   "routine.kind.yearly": "Cada año",
   "routine.kind.custom": "Personalizada",
-  "routine.feed.calendarName": "Rutinas de OpenBot",
+  "routine.feed.calendarName": "Rutinas de StarBot",
+
   "routine.feed.eventAgent": "Agente: {name}",
   "routine.feed.eventChannel": "Canal: {name}",
   "routine.feed.eventTimezone": "Zona horaria: {timezone}",
@@ -142,7 +143,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "la conexión está desactivada o eliminada",
   "routine.delivery.reason.refused": "no puede publicar en este lugar",
   "routine.delivery.reason.sendFailed": "la plataforma no lo aceptó",
-  "routine.delivery.reason.restart": "OpenBot se detuvo durante el envío",
+  "routine.delivery.reason.restart": "StarBot se detuvo durante el envío",
+
   "routine.delivery.reason.stopped": "se desactivó el envío a este lugar",
   "routine.delivery.resend": "Enviar de nuevo",
   "routine.delivery.resending": "Enviando…",
@@ -338,9 +340,11 @@ export const messages = {
   "routine.settings.limitPolicy": "Si la cuenta alcanza su límite",
   "routine.settings.limitPolicy.wait": "Esperar y ejecutar cuando se restablezca el límite",
   "routine.settings.limitPolicy.skip": "Omitir ejecución",
-  "routine.settings.missedPolicy": "Si OpenBot estaba cerrado a la hora programada",
+  "routine.settings.missedPolicy": "Si StarBot estaba cerrado a la hora programada",
+
   "routine.settings.missedPolicy.skip": "Omitir ejecución",
-  "routine.settings.missedPolicy.runOnce": "Ejecutar una vez al abrir OpenBot",
+  "routine.settings.missedPolicy.runOnce": "Ejecutar una vez al abrir StarBot",
+
   "routine.settings.runInThread": "Ejecutar en un hilo aparte",
   "routine.settings.runInSaveFailed": "La rutina está guardada, pero su ajuste de hilo aparte no. Inténtalo de nuevo.",
   "routine.settings.resultDestination": "Enviar respuestas a",

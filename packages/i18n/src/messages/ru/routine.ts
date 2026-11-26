@@ -10,7 +10,8 @@ export const messages = {
   "routine.kind.yearly": "Ежегодно",
   "routine.kind.custom": "Свой",
 
-  "routine.feed.calendarName": "Регулярные задачи OpenBot",
+  "routine.feed.calendarName": "Регулярные задачи StarBot",
+
   "routine.feed.eventAgent": "Агент: {name}",
   "routine.feed.eventChannel": "Канал: {name}",
   "routine.feed.eventTimezone": "Часовой пояс: {timezone}",
@@ -168,7 +169,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "подключение выключено или удалено",
   "routine.delivery.reason.refused": "нельзя публиковать в этом месте",
   "routine.delivery.reason.sendFailed": "платформа не приняла сообщение",
-  "routine.delivery.reason.restart": "OpenBot остановился во время отправки",
+  "routine.delivery.reason.restart": "StarBot остановился во время отправки",
+
   "routine.delivery.reason.stopped": "отправка в это место была отключена",
   "routine.delivery.resend": "Отправить снова",
   "routine.delivery.resending": "Отправка…",
@@ -382,9 +384,11 @@ export const messages = {
   "routine.settings.limitPolicy": "Если аккаунт достиг лимита",
   "routine.settings.limitPolicy.wait": "Подождать и запустить после сброса",
   "routine.settings.limitPolicy.skip": "Пропустить запуск",
-  "routine.settings.missedPolicy": "Если OpenBot был закрыт в запланированное время",
+  "routine.settings.missedPolicy": "Если StarBot был закрыт в запланированное время",
+
   "routine.settings.missedPolicy.skip": "Пропустить запуск",
-  "routine.settings.missedPolicy.runOnce": "Запустить один раз при открытии OpenBot",
+  "routine.settings.missedPolicy.runOnce": "Запустить один раз при открытии StarBot",
+
   "routine.settings.runInThread": "Запускать в отдельной ветке",
   "routine.settings.runInSaveFailed":
     "Регулярная задача сохранена, но настройка отдельной ветки — нет. Повторите попытку.",

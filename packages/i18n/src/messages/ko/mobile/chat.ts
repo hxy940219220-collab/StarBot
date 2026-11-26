@@ -379,7 +379,8 @@ export const messages = {
   "mobile.chat.browserSecret.takeoverBody": "OpenBot을 실행하는 컴퓨터의 브라우저에서 이 단계를 완료해 주세요.",
   "mobile.chat.browserSecret.signInBlockedTitle": "내 컴퓨터에서 로그인해 주세요",
   "mobile.chat.browserSecret.signInBlockedBody":
-    "이 사이트는 서버에서의 로그인을 받지 않아요. 내 컴퓨터의 OpenBot 데스크톱 앱에서 이 채팅을 열고 그곳에서 로그인해 주세요.",
+    "이 사이트는 서버에서의 로그인을 받지 않아요. 내 컴퓨터의 StarBot 데스크톱 앱에서 이 채팅을 열고 그곳에서 로그인해 주세요.",
+
   "mobile.chat.browserSecret.takeoverReload":
     "OpenBot이 비밀번호 또는 코드를 끝까지 입력하지 못했어요. 페이지에서 빠진 부분을 입력해 주세요. 그런 다음 ‘완료’를 누르기 전에 페이지를 새로 고쳐 주세요.",
   "mobile.chat.browserSecret.takeoverFailed": "요청을 완료할 수 없어요.",
@@ -463,14 +464,16 @@ export const messages = {
   "mobile.chat.approval.effect.permissions":
     "허용하면 {name}에게 {server}에서 이 권한을 부여해요. 거부하면 현재 권한이 유지돼요.",
   "mobile.chat.approval.partial":
-    "{server}는 이 요청의 앞부분만 휴대폰으로 보내요. 허용하려면 {server}의 OpenBot을 업데이트하거나 OpenBot 데스크톱 앱에서 이 채팅을 열어 주세요. 여기서는 거부할 수 있어요.",
+    "{server}는 이 요청의 앞부분만 휴대폰으로 보내요. 허용하려면 {server}의 OpenBot을 업데이트하거나 StarBot 데스크톱 앱에서 이 채팅을 열어 주세요. 여기서는 거부할 수 있어요.",
+
   "mobile.chat.approval.loading": "전체 요청을 불러오는 중…",
   "mobile.chat.approval.loadFailed": "전체 요청을 불러오지 못했어요. 여기서는 거부할 수 있어요.",
   "mobile.chat.approval.retry": "다시 시도",
   "mobile.chat.approval.report.bugHeadline": "버그를 찾으셨나요? 고쳐 봅시다.",
   "mobile.chat.approval.report.ideaHeadline": "아이디어가 있나요? 실현해 봅시다.",
   "mobile.chat.approval.report.dontSend": "나중에",
-  "mobile.chat.approval.report.send": "OpenBot 팀에 보내기",
+  "mobile.chat.approval.report.send": "StarBot 팀에 보내기",
+
   "mobile.chat.approval.report.phoneAdds": "이 휴대폰이 신고에 추가하는 정보:",
   "mobile.chat.approval.allow": "허용",
   "mobile.chat.approval.deny": "거부",

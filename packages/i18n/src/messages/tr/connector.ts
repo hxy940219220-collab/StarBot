@@ -16,11 +16,14 @@ export const messages = {
   "connector.github.connectedAs": "@{login} olarak bağlandı",
   "connector.github.repositoriesTitle": "Depolar",
   "connector.github.repositoriesDescription":
-    "Ajanlar yalnızca OpenBot GitHub Uygulamasının yüklü olduğu depoları kullanabilir.",
+    "Ajanlar yalnızca StarBot GitHub Uygulamasının yüklü olduğu depoları kullanabilir.",
+
   "connector.github.chooseRepositories": "Depoları seç",
   "connector.github.repositoriesLoading": "Depolar GitHub'dan okunuyor",
-  "connector.github.repositoriesFailed": "OpenBot depoları GitHub'dan okuyamadı.",
-  "connector.github.noRepositories": "OpenBot GitHub Uygulaması henüz bir depoya yüklenmedi.",
+  "connector.github.repositoriesFailed": "StarBot depoları GitHub'dan okuyamadı.",
+
+  "connector.github.noRepositories": "StarBot GitHub Uygulaması henüz bir depoya yüklenmedi.",
+
   "connector.github.moreRepositories": {
     one: "Ve {count} depo daha",
     other: "Ve {count} depo daha",
@@ -32,7 +35,8 @@ export const messages = {
   "connector.github.expiredTitle": "GitHub bağlantısının süresi doldu",
   "connector.github.expiredDescription": "Ajanlara yeniden GitHub erişimi vermek için @{login} olarak tekrar bağlanın.",
   "connector.github.reconnect": "Yeniden bağlan",
-  "connector.github.actionFailed": "OpenBot GitHub bağlantısını değiştiremedi.",
+  "connector.github.actionFailed": "StarBot GitHub bağlantısını değiştiremedi.",
+
   "connector.github.statusConnected": "Bağlandı",
   "connector.github.statusConnecting": "Bağlanıyor",
   "connector.github.statusExpired": "Süresi doldu",
@@ -45,7 +49,8 @@ export const messages = {
   "connector.github.noMatch": "“{query}” ile eşleşen depo bulunamadı.",
   "connector.github.stepSignIn": "Oturum aç",
   "connector.github.stepConnected": "Bağlandı",
-  "connector.github.requestingCode": "OpenBot GitHub'dan bir kod istiyor.",
+  "connector.github.requestingCode": "StarBot GitHub'dan bir kod istiyor.",
+
   "connector.github.codeLabel": "Kod {code}",
   "connector.github.failedTitle": "GitHub bağlanamadı",
   "connector.github.cancelConnecting": "GitHub bağlantısını iptal et",
@@ -58,7 +63,8 @@ export const messages = {
   "connector.github.disconnectConfirmTitle": "GitHub bağlantısı kesilsin mi?",
   "connector.github.disconnectConfirmDescription": "Bağlantıyı kesmek @{login} oturumunu bu bilgisayardan kaldırır.",
   "connector.github.disconnectEffectTools": "Tüm ajanlar GitHub araçlarını, gh ve git erişimini kaybeder.",
-  "connector.github.disconnectEffectRevoke": "Ardından OpenBot yetkisini kaldırabileceğiniz GitHub açılır.",
+  "connector.github.disconnectEffectRevoke": "Ardından StarBot yetkisini kaldırabileceğiniz GitHub açılır.",
+
   "connector.github.disconnectEffectKept": "Sohbetler, dosyalar ve ajan belleği bu bilgisayarda kalır.",
   "connector.github.descriptionHost":
     "{host} sunucusundaki her ajan GitHub depolarınızı, sorunlarınızı (issues), çekme isteklerinizi (pull requests), gh ve git araçlarını kullanabilir.",
@@ -73,11 +79,13 @@ export const messages = {
   "connector.github.close": "Kapat",
   "connector.dangerZone": "Tehlikeli bölge",
   "connector.statusUnknown": "Bilinmiyor",
-  "connector.readFailed": "OpenBot bu bağlantının durumunu okuyamadı.",
+  "connector.readFailed": "StarBot bu bağlantının durumunu okuyamadı.",
+
 
   "connector.slack.title": "Slack",
   "connector.slack.description":
-    "Kullanıcılar Slack'te @OpenBot'tan bahseder veya doğrudan mesaj gönderir. Slack Düzenleyicisi doğru ajana sorar ve yanıtlar.",
+    "Kullanıcılar Slack'te @StarBot'tan bahseder veya doğrudan mesaj gönderir. Slack Düzenleyicisi doğru ajana sorar ve yanıtlar.",
+
   "connector.slack.statusConnected": "Bağlandı",
   "connector.slack.statusAttention": "Dikkat gerekiyor",
   "connector.slack.summaryConnected": "{workspace} · Slack Düzenleyicisi yanıtlıyor",
@@ -91,16 +99,21 @@ export const messages = {
   "connector.slack.addAgent": "Ajan ekle",
   "connector.slack.actionFailed": "Slack değişikliği kabul etmedi",
   "connector.slack.workspaceTitle": "Çalışma alanları",
-  "connector.slack.workspaceDescription": "Kullanıcılar @OpenBot'tan bahseder veya doğrudan mesaj gönderir.",
+  "connector.slack.workspaceDescription": "Kullanıcılar @StarBot'tan bahseder veya doğrudan mesaj gönderir.",
+
   "connector.slack.disconnectWorkspace": "Bağlantıyı kes",
   "connector.slack.disconnectAllTitle": "Slack bağlantısını kes",
   "connector.slack.disconnectAllSummary":
-    "Tüm çalışma alanlarının bağlantısı kesilir. Kimse ajanlarınıza artık @OpenBot üzerinden ulaşamaz.",
+    "Tüm çalışma alanlarının bağlantısı kesilir. Kimse ajanlarınıza artık @StarBot üzerinden ulaşamaz.",
+
   "connector.slack.disconnectAllSummaryOrchestrator":
-    "Tüm çalışma alanlarının bağlantısı kesilir. Slack Düzenleyicisi ve sohbetleri OpenBot'tan silinir.",
+    "Tüm çalışma alanlarının bağlantısı kesilir. Slack Düzenleyicisi ve sohbetleri StarBot'tan silinir.",
+
   "connector.slack.missingScopes":
-    "OpenBot Slack'te şu izinlere sahip değil: {scopes}. Çalışma alanı bağlantısını kesin, ardından tekrar bağlayın.",
-  "connector.slack.retryAt": "Slack OpenBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+    "StarBot Slack'te şu izinlere sahip değil: {scopes}. Çalışma alanı bağlantısını kesin, ardından tekrar bağlayın.",
+
+  "connector.slack.retryAt": "Slack StarBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+
   "connector.slack.reconnect": "Yeniden bağlan",
   "connector.slack.pause": "Duraklat",
   "connector.slack.resume": "Sürdür",
@@ -111,36 +124,46 @@ export const messages = {
   "connector.slack.orchestratorNone": "Henüz yanıt veren bir ajan yok",
   "connector.slack.orchestratorNoneDescription": "Slack Düzenleyicisini ekleyin, aksi takdirde Slack yanıt alamaz.",
   "connector.slack.inviteNote":
-    "OpenBot her genel kanala ve her yeni kanala kendiliğinden katılır. Özel bir kanal için onu davet edin: /invite @OpenBot.",
+    "StarBot her genel kanala ve her yeni kanala kendiliğinden katılır. Özel bir kanal için onu davet edin: /invite @StarBot.",
+
   "connector.slack.stepWorkspace": "Çalışma alanı",
   "connector.slack.stepAgent": "Ajan",
   "connector.slack.connectTitle": "Bir Slack çalışma alanına bağlanın",
   "connector.slack.connectDescription":
-    "OpenBot çalışma alanına OpenBot adında bir uygulama yükler ve her genel kanala katılır.",
+    "StarBot çalışma alanına StarBot adında bir uygulama yükler ve her genel kanala katılır.",
+
   "connector.slack.connectStepBrowser": "Slack tarayıcınızda açılır",
   "connector.slack.connectStepAllow": "Sağ üst köşeden çalışma alanını seçin, ardından İzin Ver'e tıklayın",
   "connector.slack.connectStepReturn": "Slack işlemi tamamlandığında bu iletişim kutusu devam eder",
   "connector.slack.connectInSlack": "Slack'te bağlan",
   "connector.slack.connectWaiting": "Slack bekleniyor. Kurulumu tarayıcınızda tamamlayın.",
   "connector.slack.agentStepTitle": "Slack Düzenleyicisini ekleyin",
-  "connector.slack.agentStepDescription": "Bu yeni ajan, {workspace} içinde @OpenBot'a gönderilen her şeyi yanıtlar.",
+  "connector.slack.agentStepDescription": "Bu yeni ajan, {workspace} içinde @StarBot'a gönderilen her şeyi yanıtlar.",
+
   "connector.slack.orchestratorName": "Slack Düzenleyicisi",
   "connector.slack.orchestratorRole": "Slack'te yanıt verir ve ekibe sorar",
   "connector.slack.orchestratorDoesReceive": "Her Slack isteğini ilk olarak alır",
   "connector.slack.orchestratorDoesDelegate": "Her görevi en uygun ajana iletir",
   "connector.slack.orchestratorDoesAnswer": "Yanıtı Slack ileti dizisinde paylaşır",
   "connector.slack.orchestratorModel": "Model",
-  "connector.slack.doneTitle": "OpenBot {workspace} içinde",
-  "connector.slack.doneDescription": "Herhangi bir genel kanalda @OpenBot'tan bahsedin veya doğrudan mesaj gönderin.",
+  "connector.slack.doneTitle": "StarBot {workspace} içinde",
+
+  "connector.slack.doneDescription": "Herhangi bir genel kanalda @StarBot'tan bahsedin veya doğrudan mesaj gönderin.",
+
   "connector.slack.done": "Bitti",
   "connector.slack.disconnectTitle": "{workspace} bağlantısı kesilsin mi?",
   "connector.slack.disconnectDescription":
-    "OpenBot {workspace} içinde yanıt vermeyi durdurur ve Slack belirtecini bu bilgisayardan kaldırır.",
+    "StarBot {workspace} içinde yanıt vermeyi durdurur ve Slack belirtecini bu bilgisayardan kaldırır.",
+
   "connector.slack.disconnectDescriptionHost":
-    "OpenBot {workspace} içinde yanıt vermeyi durdurur ve Slack belirtecini {host} sunucusundan kaldırır.",
-  "connector.slack.disconnectEffect": "{workspace} içindeki kişiler artık @OpenBot aracılığıyla ajanlarınıza ulaşamaz.",
-  "connector.slack.removeEffectKept": "Konuşmalar ve Slack Düzenleyicisi OpenBot'ta kalır.",
-  "connector.slack.removeEffectDeleted": "Slack Düzenleyicisi ve konuşmaları OpenBot'tan silinir.",
+    "StarBot {workspace} içinde yanıt vermeyi durdurur ve Slack belirtecini {host} sunucusundan kaldırır.",
+
+  "connector.slack.disconnectEffect": "{workspace} içindeki kişiler artık @StarBot aracılığıyla ajanlarınıza ulaşamaz.",
+
+  "connector.slack.removeEffectKept": "Konuşmalar ve Slack Düzenleyicisi StarBot'ta kalır.",
+
+  "connector.slack.removeEffectDeleted": "Slack Düzenleyicisi ve konuşmaları StarBot'tan silinir.",
+
   "connector.slack.keep": "Bağlı tut",
   "connector.slack.close": "Kapat",
   "connector.slack.addWorkspace": "Çalışma alanı ekle",
@@ -155,7 +178,8 @@ export const messages = {
 
   "connector.discord.title": "Discord",
   "connector.discord.description":
-    "Kullanıcılar bir Discord sunucusunun kanalında @OpenBot'tan bahseder. Discord Düzenleyicisi doğru ajana sorar ve yanıtlar.",
+    "Kullanıcılar bir Discord sunucusunun kanalında @StarBot'tan bahseder. Discord Düzenleyicisi doğru ajana sorar ve yanıtlar.",
+
   "connector.discord.statusConnected": "Bağlandı",
   "connector.discord.statusAttention": "Dikkat gerekiyor",
   "connector.discord.summaryConnected": "{workspace} · Discord Düzenleyicisi yanıtlıyor",
@@ -170,16 +194,21 @@ export const messages = {
   "connector.discord.actionFailed": "Discord değişikliği kabul etmedi",
   "connector.discord.workspaceTitle": "Discord sunucuları",
   "connector.discord.workspaceDescription":
-    "Bir kanalda @OpenBot'tan bahsedin. Devam etmek için OpenBot'a yanıt verin.",
+    "Bir kanalda @StarBot'tan bahsedin. Devam etmek için StarBot'a yanıt verin.",
+
   "connector.discord.disconnectWorkspace": "Bağlantıyı kes",
   "connector.discord.disconnectAllTitle": "Discord bağlantısını kes",
   "connector.discord.disconnectAllSummary":
-    "Tüm sunucuların bağlantısı kesilir. Kimse ajanlarınıza artık @OpenBot üzerinden ulaşamaz.",
+    "Tüm sunucuların bağlantısı kesilir. Kimse ajanlarınıza artık @StarBot üzerinden ulaşamaz.",
+
   "connector.discord.disconnectAllSummaryOrchestrator":
-    "Tüm sunucuların bağlantısı kesilir. Discord Düzenleyicisi ve sohbetleri OpenBot'tan silinir.",
+    "Tüm sunucuların bağlantısı kesilir. Discord Düzenleyicisi ve sohbetleri StarBot'tan silinir.",
+
   "connector.discord.missingScopes":
-    "OpenBot Discord'da şu izinlere sahip değil: {scopes}. Discord sunucusu bağlantısını kesin, ardından tekrar bağlayın.",
-  "connector.discord.retryAt": "Discord OpenBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+    "StarBot Discord'da şu izinlere sahip değil: {scopes}. Discord sunucusu bağlantısını kesin, ardından tekrar bağlayın.",
+
+  "connector.discord.retryAt": "Discord StarBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+
   "connector.discord.reconnect": "Yeniden bağlan",
   "connector.discord.pause": "Duraklat",
   "connector.discord.resume": "Sürdür",
@@ -190,36 +219,46 @@ export const messages = {
   "connector.discord.orchestratorNone": "Henüz yanıt veren bir ajan yok",
   "connector.discord.orchestratorNoneDescription":
     "Discord Düzenleyicisini ekleyin, aksi takdirde Discord yanıt alamaz.",
-  "connector.discord.channelsNote": "OpenBot, rolünün görebildiği kanalları görür.",
+  "connector.discord.channelsNote": "StarBot, rolünün görebildiği kanalları görür.",
+
   "connector.discord.stepWorkspace": "Discord sunucusu",
   "connector.discord.stepAgent": "Ajan",
   "connector.discord.connectTitle": "Bir Discord sunucusuna bağlanın",
-  "connector.discord.connectDescription": "OpenBot, Discord sunucusuna OpenBot adında bir bot ekler.",
+  "connector.discord.connectDescription": "StarBot, Discord sunucusuna StarBot adında bir bot ekler.",
+
   "connector.discord.connectStepBrowser": "Discord tarayıcınızda açılır",
   "connector.discord.connectStepAllow": "Sunucuyu seçin, ardından Yetkilendir'e tıklayın",
   "connector.discord.connectStepReturn": "Discord işlemi tamamlandığında bu iletişim kutusu devam eder",
   "connector.discord.connectInDiscord": "Discord'da bağlan",
   "connector.discord.connectWaiting": "Discord bekleniyor. Yetkilendirmeyi tarayıcınızda tamamlayın.",
   "connector.discord.agentStepTitle": "Discord Düzenleyicisini ekleyin",
-  "connector.discord.agentStepDescription": "Bu yeni ajan, {workspace} içinde @OpenBot'a gönderilen her şeyi yanıtlar.",
+  "connector.discord.agentStepDescription": "Bu yeni ajan, {workspace} içinde @StarBot'a gönderilen her şeyi yanıtlar.",
+
   "connector.discord.orchestratorName": "Discord Düzenleyicisi",
   "connector.discord.orchestratorRole": "Discord'da yanıt verir ve ekibe sorar",
   "connector.discord.orchestratorDoesReceive": "Her Discord isteğini ilk olarak alır",
   "connector.discord.orchestratorDoesDelegate": "Her görevi en uygun ajana iletir",
   "connector.discord.orchestratorDoesAnswer": "Yanıtı Discord kanalında verir",
   "connector.discord.orchestratorModel": "Model",
-  "connector.discord.doneTitle": "OpenBot {workspace} içinde",
-  "connector.discord.doneDescription": "Bir kanalda @OpenBot'tan bahsedin. Devam etmek için OpenBot'a yanıt verin.",
+  "connector.discord.doneTitle": "StarBot {workspace} içinde",
+
+  "connector.discord.doneDescription": "Bir kanalda @StarBot'tan bahsedin. Devam etmek için StarBot'a yanıt verin.",
+
   "connector.discord.done": "Bitti",
   "connector.discord.disconnectTitle": "{workspace} bağlantısı kesilsin mi?",
   "connector.discord.disconnectDescription":
-    "OpenBot {workspace} içinde yanıt vermeyi bırakır ve Discord bağlantısını bu bilgisayardan kaldırır.",
+    "StarBot {workspace} içinde yanıt vermeyi bırakır ve Discord bağlantısını bu bilgisayardan kaldırır.",
+
   "connector.discord.disconnectDescriptionHost":
-    "OpenBot {workspace} içinde yanıt vermeyi bırakır ve Discord bağlantısını {host} sunucusundan kaldırır.",
+    "StarBot {workspace} içinde yanıt vermeyi bırakır ve Discord bağlantısını {host} sunucusundan kaldırır.",
+
   "connector.discord.disconnectEffect":
-    "{workspace} içindeki kişiler artık @OpenBot aracılığıyla ajanlarınıza ulaşamaz.",
-  "connector.discord.removeEffectKept": "Konuşmalar ve Discord Düzenleyicisi OpenBot'ta kalır.",
-  "connector.discord.removeEffectDeleted": "Discord Düzenleyicisi ve konuşmaları OpenBot'tan silinir.",
+    "{workspace} içindeki kişiler artık @StarBot aracılığıyla ajanlarınıza ulaşamaz.",
+
+  "connector.discord.removeEffectKept": "Konuşmalar ve Discord Düzenleyicisi StarBot'ta kalır.",
+
+  "connector.discord.removeEffectDeleted": "Discord Düzenleyicisi ve konuşmaları StarBot'tan silinir.",
+
   "connector.discord.keep": "Bağlı tut",
   "connector.discord.close": "Kapat",
   "connector.discord.addWorkspace": "Discord sunucusu ekle",
@@ -231,24 +270,31 @@ export const messages = {
     one: "{count} Discord sunucusu · Discord Düzenleyicisi yanıtlıyor",
     other: "{count} Discord sunucusu · Discord Düzenleyicisi yanıtlıyor",
   },
-  "connector.discord.accessTitle": "OpenBot'u kimler kullanabilir",
+  "connector.discord.accessTitle": "StarBot'u kimler kullanabilir",
+
   "connector.discord.accessDescription":
-    "OpenBot yalnızca bu kişilere yanıt verir. Diğerlerinin bahsetmelerini yok sayar.",
+    "StarBot yalnızca bu kişilere yanıt verir. Diğerlerinin bahsetmelerini yok sayar.",
+
   "connector.discord.accessEveryone": "Sunucudaki herkes",
-  "connector.discord.accessEveryoneDescription": "OpenBot'un gördüğü bir kanala yazabilen herkes ondan bahsedebilir.",
+  "connector.discord.accessEveryoneDescription": "StarBot'un gördüğü bir kanala yazabilen herkes ondan bahsedebilir.",
+
   "connector.discord.accessRoles": "{roles} rolüne sahip üyeler",
   "connector.discord.accessChoose": "Rolleri seç",
-  "connector.discord.accessDialogTitle": "{workspace} içinde OpenBot'u kimler kullanabilir?",
-  "connector.discord.accessDialogDescription": "Hiçbir rol seçilmezse herkes OpenBot'tan bahsedebilir.",
+  "connector.discord.accessDialogTitle": "{workspace} içinde StarBot'u kimler kullanabilir?",
+
+  "connector.discord.accessDialogDescription": "Hiçbir rol seçilmezse herkes StarBot'tan bahsedebilir.",
+
   "connector.discord.accessLoading": "Roller yükleniyor…",
   "connector.discord.accessLoadFailed": "Discord rolleri yüklenmedi",
   "connector.discord.accessNoRoles": "Bu sunucuda seçilecek rol yok.",
   "connector.discord.accessRoleDeleted": "{role} (silindi)",
   "connector.discord.accessSave": "Kaydet",
-  "connector.discord.accessHostUpdate": "Rol seçmek için {host} üzerindeki OpenBot'u güncelleyin.",
+  "connector.discord.accessHostUpdate": "Rol seçmek için {host} üzerindeki StarBot'u güncelleyin.",
+
   "connector.telegram.title": "Telegram",
   "connector.telegram.description":
-    "OpenBot botunu bir Telegram grubuna ekleyin veya botla doğrudan bir sohbet açın. Telegram Düzenleyicisi doğru ajana sorar ve yanıtlar.",
+    "StarBot botunu bir Telegram grubuna ekleyin veya botla doğrudan bir sohbet açın. Telegram Düzenleyicisi doğru ajana sorar ve yanıtlar.",
+
   "connector.telegram.statusConnected": "Bağlandı",
   "connector.telegram.statusAttention": "Dikkat gerekiyor",
   "connector.telegram.summaryConnected": {
@@ -271,30 +317,38 @@ export const messages = {
   "connector.telegram.groupDescription": "Kullanıcılar bottan bahseder veya mesajlarını yanıtlar.",
   "connector.telegram.directDescription": "Bu sohbetteki her mesaj Telegram Düzenleyicisine gider.",
   "connector.telegram.helpRemoved":
-    "OpenBot botu artık bu sohbette değil. Sohbetin bağlantısını kesin, sonra botu yeniden ekleyin.",
+    "StarBot botu artık bu sohbette değil. Sohbetin bağlantısını kesin, sonra botu yeniden ekleyin.",
+
   "connector.telegram.helpRelayUnavailable":
-    "OpenBot bu bilgisayarda Telegram mesajlarını alamıyor. Oturum açın, Sunucu ayarlarında bu bilgisayara bir ad verin ve OpenBot'u açık tutun.",
+    "StarBot bu bilgisayarda Telegram mesajlarını alamıyor. Oturum açın, Sunucu ayarlarında bu bilgisayara bir ad verin ve StarBot'u açık tutun.",
+
   "connector.telegram.helpRelayUnavailableHost":
-    "{host} üzerindeki OpenBot Telegram mesajlarını alamıyor. {host} üzerinde oturum açın, Sunucu ayarlarında sunucuya bir ad verin ve OpenBot'u açık tutun.",
-  "connector.telegram.helpError": "OpenBot bu sohbete ulaşamıyor. Yeniden bağlanın veya sohbetin bağlantısını kesin.",
+    "{host} üzerindeki StarBot Telegram mesajlarını alamıyor. {host} üzerinde oturum açın, Sunucu ayarlarında sunucuya bir ad verin ve StarBot'u açık tutun.",
+
+  "connector.telegram.helpError": "StarBot bu sohbete ulaşamıyor. Yeniden bağlanın veya sohbetin bağlantısını kesin.",
+
   "connector.telegram.helpNotLinked": "Bu sohbet bu sunucuya bağlı değil. Bağlamak için Yeniden bağlan'ı seçin.",
-  "connector.telegram.retryAt": "Telegram OpenBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+  "connector.telegram.retryAt": "Telegram StarBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+
   "connector.telegram.pause": "Duraklat",
   "connector.telegram.resume": "Sürdür",
   "connector.telegram.reconnect": "Yeniden bağlan",
   "connector.telegram.disconnectChat": "Bağlantıyı kes",
   "connector.telegram.disconnectAllTitle": "Telegram bağlantısını kes",
   "connector.telegram.disconnectAllSummary":
-    "Tüm sohbetlerin bağlantısı kesilir. Kimse ajanlarınıza artık OpenBot botu üzerinden ulaşamaz.",
+    "Tüm sohbetlerin bağlantısı kesilir. Kimse ajanlarınıza artık StarBot botu üzerinden ulaşamaz.",
+
   "connector.telegram.disconnectAllSummaryOrchestrator":
-    "Tüm sohbetlerin bağlantısı kesilir. Telegram Düzenleyicisi ve sohbetleri OpenBot'tan silinir.",
+    "Tüm sohbetlerin bağlantısı kesilir. Telegram Düzenleyicisi ve sohbetleri StarBot'tan silinir.",
+
   "connector.telegram.rowAction": "{action}: {name}",
   "connector.telegram.linkChat": "Sohbet bağla",
   "connector.telegram.addToGroup": "Bir gruba ekle",
   "connector.telegram.openDirectChat": "Doğrudan sohbet aç",
   "connector.telegram.orchestratorTitle": "Telegram Düzenleyicisi",
   "connector.telegram.orchestratorDescription":
-    "Bu ajan tüm Telegram sohbetlerinizden OpenBot'a gelen mesajları alır. Kısa olanları kendisi yanıtlar, diğer işleri doğru ajana iletir ve yanıtı sohbette paylaşır.",
+    "Bu ajan tüm Telegram sohbetlerinizden StarBot'a gelen mesajları alır. Kısa olanları kendisi yanıtlar, diğer işleri doğru ajana iletir ve yanıtı sohbette paylaşır.",
+
   "connector.telegram.orchestratorNone": "Henüz yanıt veren bir ajan yok",
   "connector.telegram.orchestratorNoneDescription":
     "Telegram Düzenleyicisini ekleyin, aksi takdirde Telegram yanıt alamaz.",
@@ -304,30 +358,38 @@ export const messages = {
   "connector.telegram.stepAgent": "Ajan",
   "connector.telegram.connectTitle": "Bir Telegram sohbeti bağlayın",
   "connector.telegram.connectDescription":
-    "OpenBot botunu bir gruba ekleyin veya botla doğrudan bir sohbet açın. Tek bir bot tüm sohbetlerinize hizmet eder.",
+    "StarBot botunu bir gruba ekleyin veya botla doğrudan bir sohbet açın. Tek bir bot tüm sohbetlerinize hizmet eder.",
+
   "connector.telegram.connectStepBrowser": "Telegram tarayıcınızda açılır",
   "connector.telegram.connectStepPick": "Grubu seçin veya doğrudan sohbette Başlat'a dokunun",
   "connector.telegram.connectStepReturn": "Sohbet bağlandığında bu iletişim kutusu devam eder",
   "connector.telegram.connectWaiting": "Telegram bekleniyor. Telegram'da sohbeti seçin.",
   "connector.telegram.agentStepTitle": "Telegram Düzenleyicisini ekleyin",
   "connector.telegram.agentStepDescription":
-    "Bu yeni ajan, {chat} içinde ve daha sonra bağladığınız her sohbette OpenBot'a gelen mesajları yanıtlar.",
+    "Bu yeni ajan, {chat} içinde ve daha sonra bağladığınız her sohbette StarBot'a gelen mesajları yanıtlar.",
+
   "connector.telegram.orchestratorName": "Telegram Düzenleyicisi",
   "connector.telegram.orchestratorRole": "Telegram'da yanıt verir ve ekibe sorar",
-  "connector.telegram.orchestratorDoesReceive": "OpenBot'a gelen her Telegram mesajını ilk olarak alır",
+  "connector.telegram.orchestratorDoesReceive": "StarBot'a gelen her Telegram mesajını ilk olarak alır",
+
   "connector.telegram.orchestratorDoesDelegate": "Her görevi en uygun ajana iletir",
   "connector.telegram.orchestratorDoesAnswer": "Yanıtı Telegram sohbetinde paylaşır",
   "connector.telegram.orchestratorModel": "Model",
-  "connector.telegram.doneTitle": "OpenBot {chat} içinde",
+  "connector.telegram.doneTitle": "StarBot {chat} içinde",
+
   "connector.telegram.done": "Bitti",
   "connector.telegram.disconnectTitle": "{chat} bağlantısı kesilsin mi?",
   "connector.telegram.leaveDescription":
-    "OpenBot botu {chat} sohbetinden ayrılır ve OpenBot orada yanıt vermeyi bırakır.",
+    "StarBot botu {chat} sohbetinden ayrılır ve StarBot orada yanıt vermeyi bırakır.",
+
   "connector.telegram.disconnectEffect":
-    "{chat} içindeki kişiler artık OpenBot botu aracılığıyla ajanlarınıza ulaşamaz.",
-  "connector.telegram.removeEffectKept": "Konuşmalar ve Telegram Düzenleyicisi OpenBot'ta kalır.",
+    "{chat} içindeki kişiler artık StarBot botu aracılığıyla ajanlarınıza ulaşamaz.",
+
+  "connector.telegram.removeEffectKept": "Konuşmalar ve Telegram Düzenleyicisi StarBot'ta kalır.",
+
   "connector.telegram.removeEffectDeleted":
-    "Bu son sohbet olduğundan Telegram Düzenleyicisi ve konuşmaları OpenBot'tan silinir.",
+    "Bu son sohbet olduğundan Telegram Düzenleyicisi ve konuşmaları StarBot'tan silinir.",
+
   "connector.telegram.keep": "Bağlı tut",
   "connector.telegram.close": "Kapat",
   "connector.whatsapp.title": "WhatsApp",
@@ -355,16 +417,21 @@ export const messages = {
   "connector.whatsapp.actionFailed": "WhatsApp değişikliği kabul etmedi",
   "connector.whatsapp.numbersTitle": "Numaralar",
   "connector.whatsapp.linkNumber": "Numara bağla",
-  "connector.whatsapp.ownNumberNote": "“Kendine mesaj gönder” sohbetiniz ve izin verdiğiniz kişiler OpenBot'a ulaşır.",
+  "connector.whatsapp.ownNumberNote": "“Kendine mesaj gönder” sohbetiniz ve izin verdiğiniz kişiler StarBot'a ulaşır.",
+
   "connector.whatsapp.dedicatedNote":
-    "“Kendine mesaj gönder” sohbetiniz ve izin verdiğiniz kişiler OpenBot'a ulaşır. Diğer kişiler size iletmeleri için bir kod alır.",
+    "“Kendine mesaj gönder” sohbetiniz ve izin verdiğiniz kişiler StarBot'a ulaşır. Diğer kişiler size iletmeleri için bir kod alır.",
+
   "connector.whatsapp.helpLoggedOut": "WhatsApp bu bilgisayarı bağlı cihazlardan kaldırdı. Numarayı yeniden bağlayın.",
   "connector.whatsapp.helpLoggedOutHost": "WhatsApp bu sunucuyu bağlı cihazlardan kaldırdı. Numarayı yeniden bağlayın.",
   "connector.whatsapp.helpError":
-    "OpenBot bu numarada WhatsApp'a ulaşamıyor. Yeniden bağlanın veya numaranın bağlantısını kesin.",
+    "StarBot bu numarada WhatsApp'a ulaşamıyor. Yeniden bağlanın veya numaranın bağlantısını kesin.",
+
   "connector.whatsapp.helpKeysUnreadable":
-    "OpenBot bu numaranın kayıtlı anahtarlarını okuyamıyor. Numarayı yeniden bağlayın.",
-  "connector.whatsapp.retryAt": "WhatsApp OpenBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+    "StarBot bu numaranın kayıtlı anahtarlarını okuyamıyor. Numarayı yeniden bağlayın.",
+
+  "connector.whatsapp.retryAt": "WhatsApp StarBot'tan beklemesini istedi. {time} saatinde tekrar deneyecek.",
+
   "connector.whatsapp.pause": "Duraklat",
   "connector.whatsapp.resume": "Sürdür",
   "connector.whatsapp.reconnect": "Yeniden bağlan",
@@ -374,20 +441,25 @@ export const messages = {
   "connector.whatsapp.disconnectAllSummary":
     "Tüm numaraların bağlantısı kesilir. Kimse ajanlarınıza artık WhatsApp üzerinden ulaşamaz.",
   "connector.whatsapp.disconnectAllSummaryOrchestrator":
-    "Tüm numaraların bağlantısı kesilir. WhatsApp Düzenleyicisi ve sohbetleri OpenBot'tan silinir.",
+    "Tüm numaraların bağlantısı kesilir. WhatsApp Düzenleyicisi ve sohbetleri StarBot'tan silinir.",
+
   "connector.whatsapp.rowAction": "{action}: {name}",
   "connector.whatsapp.ownNumber": "Kişisel numara",
   "connector.whatsapp.ownNumberDescription":
-    "Yalnızca “Kendine mesaj gönder” sohbetiniz ve izin verdiğiniz kişiler yazabilir. Diğer kişiler yanıt almaz. Kapalıyken OpenBot tanımadığınız kişilere bir kodla yanıt verir.",
+    "Yalnızca “Kendine mesaj gönder” sohbetiniz ve izin verdiğiniz kişiler yazabilir. Diğer kişiler yanıt almaz. Kapalıyken StarBot tanımadığınız kişilere bir kodla yanıt verir.",
+
   "connector.whatsapp.workingMessage": "“Üzerinde çalışılıyor…” mesajı",
   "connector.whatsapp.workingMessageDescription":
-    "OpenBot bunu ajan çalışırken gönderir, sonra yanıtla değiştirir. Önceki bir isteği bekleyen istek de bir bekleme mesajı alır. Yalnızca yanıtı göndermek için kapatın.",
+    "StarBot bunu ajan çalışırken gönderir, sonra yanıtla değiştirir. Önceki bir isteği bekleyen istek de bir bekleme mesajı alır. Yalnızca yanıtı göndermek için kapatın.",
+
   "connector.whatsapp.statusReactions": "Durum tepkileri",
   "connector.whatsapp.statusReactionsDescription":
-    "OpenBot bir mesaj geldiğinde 👀, yanıt hazır olduğunda ✅ tepkisi verir. Hiç tepki göndermemek için kapatın.",
+    "StarBot bir mesaj geldiğinde 👀, yanıt hazır olduğunda ✅ tepkisi verir. Hiç tepki göndermemek için kapatın.",
+
   "connector.whatsapp.orchestratorTitle": "WhatsApp Düzenleyicisi",
   "connector.whatsapp.orchestratorDescription":
-    "Bu ajan bağlı tüm numaralarınızdan OpenBot'a gelen mesajları alır. Kısa olanları kendisi yanıtlar, diğer işleri doğru ajana iletir ve WhatsApp'ta yanıt verir.",
+    "Bu ajan bağlı tüm numaralarınızdan StarBot'a gelen mesajları alır. Kısa olanları kendisi yanıtlar, diğer işleri doğru ajana iletir ve WhatsApp'ta yanıt verir.",
+
   "connector.whatsapp.orchestratorNone": "Henüz yanıt veren bir ajan yok",
   "connector.whatsapp.orchestratorNoneDescription":
     "WhatsApp Düzenleyicisini ekleyin, aksi takdirde WhatsApp yanıt alamaz.",
@@ -403,10 +475,13 @@ export const messages = {
   "connector.whatsapp.kindLabel": "Numara",
   "connector.whatsapp.kindPersonal": "Kişisel numaram",
   "connector.whatsapp.kindPersonalDescription":
-    "OpenBot yalnızca “Kendine mesaj gönder” sohbetinizi ve izin verdiğiniz kişileri yanıtlar. Diğer kişiler yanıt almaz.",
-  "connector.whatsapp.kindDedicated": "Yalnızca OpenBot için bir numara",
+    "StarBot yalnızca “Kendine mesaj gönder” sohbetinizi ve izin verdiğiniz kişileri yanıtlar. Diğer kişiler yanıt almaz.",
+
+  "connector.whatsapp.kindDedicated": "Yalnızca StarBot için bir numara",
+
   "connector.whatsapp.kindDedicatedDescription":
-    "OpenBot bu numaradan tanımadığınız her kişiye, size iletmesi için bir kodla yanıt verir. Onları burada onaylarsınız.",
+    "StarBot bu numaradan tanımadığınız her kişiye, size iletmesi için bir kodla yanıt verir. Onları burada onaylarsınız.",
+
   "connector.whatsapp.methodLabel": "Bağlama yöntemi",
   "connector.whatsapp.methodQr": "QR kodu",
   "connector.whatsapp.methodCode": "Eşleme kodu",
@@ -431,26 +506,33 @@ export const messages = {
   "connector.whatsapp.failedTimeout": "Telefon kullanmadan önce kodun süresi doldu.",
   "connector.whatsapp.failedRefused": "WhatsApp bağlantıyı reddetti. Birkaç dakika bekleyin, sonra tekrar deneyin.",
   "connector.whatsapp.failedBusy": "Başka bir bağlama işlemi sürüyor. Bitmesini bekleyin, sonra tekrar deneyin.",
-  "connector.whatsapp.failedUnavailable": "OpenBot WhatsApp'a ulaşamıyor. İnternet bağlantısını kontrol edin.",
+  "connector.whatsapp.failedUnavailable": "StarBot WhatsApp'a ulaşamıyor. İnternet bağlantısını kontrol edin.",
+
   "connector.whatsapp.tryAgain": "Tekrar dene",
   "connector.whatsapp.agentStepTitle": "WhatsApp Düzenleyicisini ekleyin",
   "connector.whatsapp.agentStepDescription":
-    "Bu yeni ajan, {number} üzerinde ve daha sonra bağladığınız her numarada OpenBot'a gelen mesajları yanıtlar.",
+    "Bu yeni ajan, {number} üzerinde ve daha sonra bağladığınız her numarada StarBot'a gelen mesajları yanıtlar.",
+
   "connector.whatsapp.orchestratorName": "WhatsApp Düzenleyicisi",
   "connector.whatsapp.orchestratorRole": "WhatsApp'ta yanıt verir ve ekibe sorar",
-  "connector.whatsapp.orchestratorDoesReceive": "OpenBot'a gelen her WhatsApp mesajını ilk olarak alır",
+  "connector.whatsapp.orchestratorDoesReceive": "StarBot'a gelen her WhatsApp mesajını ilk olarak alır",
+
   "connector.whatsapp.orchestratorDoesDelegate": "Her görevi en uygun ajana iletir",
   "connector.whatsapp.orchestratorDoesAnswer": "Yanıtı WhatsApp sohbetinde paylaşır",
   "connector.whatsapp.orchestratorModel": "Model",
-  "connector.whatsapp.doneTitle": "OpenBot {number} ile bağlandı",
+  "connector.whatsapp.doneTitle": "StarBot {number} ile bağlandı",
+
   "connector.whatsapp.done": "Bitti",
   "connector.whatsapp.disconnectTitle": "{number} bağlantısı kesilsin mi?",
   "connector.whatsapp.disconnectDescription":
-    "OpenBot {number} üzerinde WhatsApp oturumunu kapatır. OpenBot kapalıysa cihazı WhatsApp > Bağlı cihazlar bölümünden de kaldırın.",
+    "StarBot {number} üzerinde WhatsApp oturumunu kapatır. StarBot kapalıysa cihazı WhatsApp > Bağlı cihazlar bölümünden de kaldırın.",
+
   "connector.whatsapp.disconnectEffect": "Kişiler artık {number} üzerinden ajanlarınıza ulaşamaz.",
-  "connector.whatsapp.removeEffectKept": "Konuşmalar ve WhatsApp Düzenleyicisi OpenBot'ta kalır.",
+  "connector.whatsapp.removeEffectKept": "Konuşmalar ve WhatsApp Düzenleyicisi StarBot'ta kalır.",
+
   "connector.whatsapp.removeEffectDeleted":
-    "Bu son numara olduğundan WhatsApp Düzenleyicisi ve konuşmaları OpenBot'tan silinir.",
+    "Bu son numara olduğundan WhatsApp Düzenleyicisi ve konuşmaları StarBot'tan silinir.",
+
   "connector.whatsapp.keep": "Bağlı tut",
   "connector.whatsapp.close": "Kapat",
   "connector.whatsapp.sendersTitle": "{number} için kimler yazabilir",
@@ -474,7 +556,8 @@ export const messages = {
     "Bu gruptaki kişiler numarayı etiketlediğinde veya mesajlarını yanıtladığında ajanlarınıza iş verebilir.",
   "connector.whatsapp.groupSearch": "Grup ara",
   "connector.whatsapp.groupsLoading": "Gruplar okunuyor…",
-  "connector.whatsapp.groupsLoadFailed": "OpenBot grupları okuyamadı",
+  "connector.whatsapp.groupsLoadFailed": "StarBot grupları okuyamadı",
+
   "connector.whatsapp.groupsEmpty": "Bu numara hiçbir grupta değil.",
   "connector.whatsapp.groupsNoMatch": "Bu adda bir grup yok.",
   "connector.whatsapp.groupAdded": "Eklendi",
@@ -487,9 +570,11 @@ export const messages = {
   "connector.whatsapp.deny": "Reddet",
   "connector.onePassword.title": "1Password",
   "connector.onePassword.description":
-    "Ajanların OpenBot tarayıcısında sitelere oturum açabilmesi için özel bir 1Password kasasını bir hizmet hesabı aracılığıyla OpenBot ile paylaşın.",
+    "Ajanların StarBot tarayıcısında sitelere oturum açabilmesi için özel bir 1Password kasasını bir hizmet hesabı aracılığıyla StarBot ile paylaşın.",
+
   "connector.onePassword.howItWorks":
-    "Bağlanma, 1Password hesabınızda “Shared with OpenBot” adlı bir kasa ve yalnızca bu kasayı okuyabilen bir hizmet hesabı oluşturur. OpenBot kayıtlı girişleri bu bilgisayardaki kendi tarayıcısında doldurur; bu nedenle yalnızca o kasaya taşıdığınız öğeler paylaşılır. Ajanlar hiçbir zaman parola görmez.",
+    "Bağlanma, 1Password hesabınızda “Shared with StarBot” adlı bir kasa ve yalnızca bu kasayı okuyabilen bir hizmet hesabı oluşturur. StarBot kayıtlı girişleri bu bilgisayardaki kendi tarayıcısında doldurur; bu nedenle yalnızca o kasaya taşıdığınız öğeler paylaşılır. Ajanlar hiçbir zaman parola görmez.",
+
   "connector.onePassword.connect": "1Password'e bağlan",
   "connector.onePassword.setupTitle": "Kurulum",
   "connector.onePassword.stepCliTitle": "1Password CLI'yi yükleyin",
@@ -497,20 +582,24 @@ export const messages = {
   "connector.onePassword.stepCliInstalling": "1Password CLI, 1Password'den indiriliyor",
   "connector.onePassword.stepCliReady": "{version} sürümü yüklü.",
   "connector.onePassword.stepCliMissing":
-    "OpenBot bunu 1Password'den kendi klasörüne indirir. Yönetici parolası gerekmez.",
+    "StarBot bunu 1Password'den kendi klasörüne indirir. Yönetici parolası gerekmez.",
+
   "connector.onePassword.stepCliManual":
-    "OpenBot bunu bu bilgisayara yükleyemiyor. 1Password'den yükleyin, ardından bu sayfaya dönün.",
+    "StarBot bunu bu bilgisayara yükleyemiyor. 1Password'den yükleyin, ardından bu sayfaya dönün.",
+
   "connector.onePassword.installCli": "Yükle",
   "connector.onePassword.stepAppTitle": "CLI entegrasyonunu açın",
   "connector.onePassword.stepAppDescription":
     "1Password uygulamasında Settings > Developer bölümünü açın ve “Integrate with 1Password CLI” seçeneğini açın.",
   "connector.onePassword.stepAppReady": "1Password uygulaması, CLI'nin paylaşılan kasayı oluşturmasına izin veriyor.",
   "connector.onePassword.openApp": "1Password'ü aç",
-  "connector.onePassword.openAppFailed": "OpenBot, 1Password'ü açamadı.",
+  "connector.onePassword.openAppFailed": "StarBot, 1Password'ü açamadı.",
+
   "connector.onePassword.checkAgain": "Tekrar denetle",
   "connector.onePassword.stepVaultTitle": "Paylaşılan kasayı oluşturun",
   "connector.onePassword.stepVaultDescription":
-    "OpenBot, “Shared with OpenBot” kasasını ve yalnızca onu okuyabilen bir hizmet hesabı oluşturur. 1Password sizden onay ister.",
+    "StarBot, “Shared with StarBot” kasasını ve yalnızca onu okuyabilen bir hizmet hesabı oluşturur. 1Password sizden onay ister.",
+
   "connector.onePassword.useTokenDescription":
     "Bu adımlar yerine 1Password.com'dan bir hizmet hesabı belirteci yapıştırın.",
   "connector.onePassword.useTokenAction": "Belirteç kullan",
@@ -520,7 +609,8 @@ export const messages = {
   "connector.onePassword.approveInApp": "İsteği 1Password uygulamasında onaylayın",
   "connector.onePassword.cancel": "İptal",
   "connector.onePassword.chooseAccountTitle": "Bir hesap seçin",
-  "connector.onePassword.chooseAccountDescription": "OpenBot paylaşılan kasayı seçtiğiniz hesapta oluşturur.",
+  "connector.onePassword.chooseAccountDescription": "StarBot paylaşılan kasayı seçtiğiniz hesapta oluşturur.",
+
   "connector.onePassword.useAccount": "Bu hesabı kullan",
   "connector.onePassword.vaultTitle": "Paylaşılan kasa",
   "connector.onePassword.vaultDescription":
@@ -533,47 +623,59 @@ export const messages = {
   "connector.onePassword.disconnect": "Bağlantıyı kes",
   "connector.onePassword.disconnectTitle": "1Password bağlantısını kes",
   "connector.onePassword.disconnectSummary":
-    "OpenBot belirteci unutur. Kasa ve hizmet hesabı 1Password'de kalır; artık gerekmiyorsa onları orada kaldırın.",
-  "connector.onePassword.actionFailed": "OpenBot 1Password bağlantısını değiştiremedi.",
+    "StarBot belirteci unutur. Kasa ve hizmet hesabı 1Password'de kalır; artık gerekmiyorsa onları orada kaldırın.",
+
+  "connector.onePassword.actionFailed": "StarBot 1Password bağlantısını değiştiremedi.",
+
   "connector.onePassword.statusConnected": "Bağlandı",
   "connector.onePassword.statusConnecting": "Bağlanıyor",
   "connector.onePassword.descriptionHost":
-    "Ayrı bir 1Password kasasını bir hizmet hesabıyla {host} üzerindeki OpenBot ile paylaşın; böylece {host} üzerindeki ajanlar onun tarayıcısında sitelere oturum açabilir.",
+    "Ayrı bir 1Password kasasını bir hizmet hesabıyla {host} üzerindeki StarBot ile paylaşın; böylece {host} üzerindeki ajanlar onun tarayıcısında sitelere oturum açabilir.",
+
   "connector.onePassword.howItWorksHost":
-    "{host} bir hizmet hesabı belirteciyle bağlanır. 1Password.com'da yalnızca OpenBot ile paylaştığınız kasayı okuyabilen bir hizmet hesabı oluşturun ve belirtecini buraya yapıştırın. {host} belirteci denetler ve saklar; bu bilgisayar saklamaz. Ajanlar hiçbir zaman parola görmez.",
+    "{host} bir hizmet hesabı belirteciyle bağlanır. 1Password.com'da yalnızca StarBot ile paylaştığınız kasayı okuyabilen bir hizmet hesabı oluşturun ve belirtecini buraya yapıştırın. {host} belirteci denetler ve saklar; bu bilgisayar saklamaz. Ajanlar hiçbir zaman parola görmez.",
+
   "connector.onePassword.disconnectSummaryHost":
     "{host} belirteci unutur. Kasa ve hizmet hesabı 1Password'de kalır; artık gerekmiyorsa onları orada kaldırın.",
   "connector.bitwarden.title": "Bitwarden",
   "connector.bitwarden.description": "Tarayıcı girişlerini Bitwarden'dan doldurun.",
   "connector.bitwarden.setup":
-    "Bitwarden CLI'yi yükleyin ve bw login ile oturum açın. Shared with OpenBot adlı bir klasör oluşturun ve içine yalnızca ajanların kullanabileceği girişleri koyun. bw unlock --raw komutunu çalıştırın ve oturum anahtarını aşağıya yapıştırın. Ana parolanızı yapıştırmayın.",
+    "Bitwarden CLI'yi yükleyin ve bw login ile oturum açın. Shared with StarBot adlı bir klasör oluşturun ve içine yalnızca ajanların kullanabileceği girişleri koyun. bw unlock --raw komutunu çalıştırın ve oturum anahtarını aşağıya yapıştırın. Ana parolanızı yapıştırmayın.",
+
   "connector.bitwarden.scope":
-    "Bu bilgisayardaki tüm ajanlar Shared with OpenBot içindeki eşleşen girişleri kullanabilir. OpenBot tam HTTPS kaynaklarını kullanır. Ana parola istemi veya özel URI eşleştirme kuralı gerektiren öğeleri kullanmaz.",
+    "Bu bilgisayardaki tüm ajanlar Shared with StarBot içindeki eşleşen girişleri kullanabilir. StarBot tam HTTPS kaynaklarını kullanır. Ana parola istemi veya özel URI eşleştirme kuralı gerektiren öğeleri kullanmaz.",
+
   "connector.bitwarden.session":
-    "Oturum anahtarı bellekte kalır. Kasa 8 saat kullanılmazsa veya OpenBot kapanırsa tekrar bağlanın. Bağlantıyı kesmek OpenBot erişimini durdurur; diğer Bitwarden istemcilerini kilitlemez.",
+    "Oturum anahtarı bellekte kalır. Kasa 8 saat kullanılmazsa veya StarBot kapanırsa tekrar bağlanın. Bağlantıyı kesmek StarBot erişimini durdurur; diğer Bitwarden istemcilerini kilitlemez.",
+
   "connector.bitwarden.sessionKey": "Bitwarden oturum anahtarı",
   "connector.bitwarden.connect": "Bitwarden'a bağlan",
   "connector.bitwarden.disconnect": "Bitwarden bağlantısını kes",
   "connector.bitwarden.disconnectAction": "Bağlantıyı kes",
   "connector.bitwarden.disconnectSummary":
-    "OpenBot oturum anahtarını unutur. Ajanlar artık Bitwarden'dan giriş bilgisi dolduramaz. Diğer Bitwarden istemcilerinin kilidi açık kalır.",
+    "StarBot oturum anahtarını unutur. Ajanlar artık Bitwarden'dan giriş bilgisi dolduramaz. Diğer Bitwarden istemcilerinin kilidi açık kalır.",
+
   "connector.bitwarden.disconnectSummaryHost":
     "{host} API anahtarını ve ana parolayı kaldırır. {host} üzerindeki ajanlar artık Bitwarden'dan giriş bilgisi dolduramaz.",
   "connector.bitwarden.connected": "Bağlandı",
-  "connector.bitwarden.actionFailed": "OpenBot Bitwarden bağlantısını değiştiremedi.",
+  "connector.bitwarden.actionFailed": "StarBot Bitwarden bağlantısını değiştiremedi.",
+
   "connector.bitwarden.descriptionHost":
     "{host} üzerindeki tarayıcı girişlerini Bitwarden veya Vaultwarden'dan doldurun.",
   "connector.bitwarden.setupHost":
-    "{host} kendi Bitwarden CLI'si ile oturum açar. Kasanızda Shared with OpenBot adlı bir klasör oluşturun ve içine yalnızca ajanların kullanabileceği girişleri koyun. Web kasasında Ayarlar › Güvenlik › Anahtarlar'ı açın ve API anahtarınızı görüntüleyin. Aşağıya sunucu adresini, client_id, client_secret ve ana parolanızı girin.",
+    "{host} kendi Bitwarden CLI'si ile oturum açar. Kasanızda Shared with StarBot adlı bir klasör oluşturun ve içine yalnızca ajanların kullanabileceği girişleri koyun. Web kasasında Ayarlar › Güvenlik › Anahtarlar'ı açın ve API anahtarınızı görüntüleyin. Aşağıya sunucu adresini, client_id, client_secret ve ana parolanızı girin.",
+
   "connector.bitwarden.scopeHost":
-    "{host} üzerindeki tüm ajanlar Shared with OpenBot içindeki eşleşen girişleri kullanabilir. OpenBot tam HTTPS kaynaklarını kullanır. Ana parola isteyen öğeleri veya özel URI eşleşme kuralı olan öğeleri kullanmaz.",
+    "{host} üzerindeki tüm ajanlar Shared with StarBot içindeki eşleşen girişleri kullanabilir. StarBot tam HTTPS kaynaklarını kullanır. Ana parola isteyen öğeleri veya özel URI eşleşme kuralı olan öğeleri kullanmaz.",
+
   "connector.bitwarden.sessionHost":
     "{host}, yeniden başlatmadan sonra kilidi tekrar açabilmek için API anahtarını ve ana parolayı şifreli olarak saklar. Bu bilgisayar bunları saklamaz. Bağlantıyı kesmek bunları {host} üzerinden kaldırır. {host} sunucu adresine HTTPS ile ulaşabilmelidir.",
   "connector.bitwarden.serverUrl": "Sunucu adresi",
   "connector.bitwarden.folderTitle": "Paylaşılan klasör",
   "connector.bitwarden.folderDescription":
     "Ajanların bir girişle oturum açmasına izin vermek için girişi Bitwarden'da bu klasöre taşıyın. Durdurmak için kaldırın.",
-  "connector.bitwarden.folderName": "Shared with OpenBot",
+  "connector.bitwarden.folderName": "Shared with StarBot",
+
   "connector.bitwarden.folderKind": "Bitwarden'daki klasör",
   "connector.bitwarden.clientId": "API anahtarı client_id",
   "connector.bitwarden.clientSecret": "API anahtarı client_secret",
@@ -591,19 +693,23 @@ export const messages = {
   "connector.protonPass.keyPlaceholder": "pst_…",
   "connector.protonPass.setupTitle": "Kurulum",
   "connector.protonPass.setupDescription":
-    "Bağla, Proton oturum açma sayfasını tarayıcınızda açar. Sonra OpenBot paylaşılan kasayı oluşturur ve yalnızca salt okunur bir anahtar saklar.",
+    "Bağla, Proton oturum açma sayfasını tarayıcınızda açar. Sonra StarBot paylaşılan kasayı oluşturur ve yalnızca salt okunur bir anahtar saklar.",
+
   "connector.protonPass.setupDescriptionHost":
     "Bağla, Proton oturum açma sayfasını tarayıcınızda açar. Sonra {host} paylaşılan kasayı oluşturur ve yalnızca salt okunur bir anahtar saklar.",
-  "connector.protonPass.vaultName": "Shared with OpenBot",
+  "connector.protonPass.vaultName": "Shared with StarBot",
+
   "connector.protonPass.vaultSetup":
-    "OpenBot bu kasayı bağlandığınızda oluşturur. Paylaşmak için oturum bilgilerini buraya taşıyın.",
+    "StarBot bu kasayı bağlandığınızda oluşturur. Paylaşmak için oturum bilgilerini buraya taşıyın.",
+
   "connector.protonPass.showSteps": "Adımları göster",
   "connector.protonPass.stepsLabel": "Bağlantı adımları",
   "connector.protonPass.stepSignIn": "Oturum aç",
   "connector.protonPass.stepVault": "Paylaşılan kasayı oluştur",
   "connector.protonPass.stepDone": "Bitti",
   "connector.protonPass.signInTitle": "Proton’da oturum açın",
-  "connector.protonPass.signInStarting": "OpenBot oturum açmayı başlatıyor. Proton sayfası tarayıcınızda açılır.",
+  "connector.protonPass.signInStarting": "StarBot oturum açmayı başlatıyor. Proton sayfası tarayıcınızda açılır.",
+
   "connector.protonPass.signInDescription":
     "Oturum açma tarayıcınızda açık. Proton parolanızı ve ikinci faktörünüzü ister.",
   "connector.protonPass.signInDescriptionHost":
@@ -614,7 +720,8 @@ export const messages = {
   "connector.protonPass.continue": "Devam",
   "connector.protonPass.setupStepTitle": "Paylaşılan kasa oluşturuluyor",
   "connector.protonPass.setupStepDescription":
-    "OpenBot “{vault}” kasasını ve onun için salt okunur bir anahtar oluşturur. Sonra Proton oturumunuzu kapatır.",
+    "StarBot “{vault}” kasasını ve onun için salt okunur bir anahtar oluşturur. Sonra Proton oturumunuzu kapatır.",
+
   "connector.protonPass.doneTitle": "Proton Pass bağlandı",
   "connector.protonPass.doneDescription":
     "Ajanların oturum açabilmesi için oturum bilgilerini “{vault}” kasasına taşıyın.",
@@ -644,9 +751,12 @@ export const messages = {
   "connector.protonPass.keyNoExpiry": "Salt okunur. Süresi dolmaz.",
   "connector.protonPass.disconnectTitle": "Proton Pass bağlantısını kes",
   "connector.protonPass.disconnectSummary":
-    "OpenBot bu bilgisayardaki erişim anahtarını siler. Kasa ve içindeki oturum bilgileri Proton hesabınızda kalır.",
+    "StarBot bu bilgisayardaki erişim anahtarını siler. Kasa ve içindeki oturum bilgileri Proton hesabınızda kalır.",
+
   "connector.protonPass.disconnectSummaryHost":
-    "OpenBot {host} üzerindeki erişim anahtarını siler. Kasa ve içindeki oturum bilgileri Proton hesabınızda kalır.",
+    "StarBot {host} üzerindeki erişim anahtarını siler. Kasa ve içindeki oturum bilgileri Proton hesabınızda kalır.",
+
   "connector.protonPass.disconnect": "Bağlantıyı kes",
-  "connector.protonPass.actionFailed": "OpenBot, Proton Pass bağlantısını değiştiremedi.",
+  "connector.protonPass.actionFailed": "StarBot, Proton Pass bağlantısını değiştiremedi.",
+
 } as const satisfies PartialTranslation<typeof source>;

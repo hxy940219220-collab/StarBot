@@ -100,10 +100,12 @@ export const messages = {
   "import.result.notImportedTitle": "Не импортировано",
   "import.result.warnings": "Часть элементов не перенесена",
   "import.source.ledeServer":
-    "OpenBot копирует их на сервер. Вы видите каждый элемент до того, как что-либо изменится.",
+    "StarBot копирует их на сервер. Вы видите каждый элемент до того, как что-либо изменится.",
+
   "import.source.hermesNoteServer": "Прочитайте папку Hermes на сервере или экспортируйте файл .zip из Hermes.",
   "import.source.hermesNoteExport": "Экспортируйте файл .zip из Hermes.",
   "import.hermes.notFoundServer": "На этом сервере нет профилей Hermes",
   "import.hermes.notFoundServerNote":
-    "OpenBot читает папку Hermes на сервере. Чтобы импортировать Hermes с этого компьютера, экспортируйте файл .zip из Hermes.",
+    "StarBot читает папку Hermes на сервере. Чтобы импортировать Hermes с этого компьютера, экспортируйте файл .zip из Hermes.",
+
 } as const satisfies PartialTranslation<typeof source>;

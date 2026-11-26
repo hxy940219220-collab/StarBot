@@ -2,7 +2,8 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/conversation";
 
 export const messages = {
-  "conversation.globalSearch.title": "OpenBot を検索",
+  "conversation.globalSearch.title": "StarBot を検索",
+
   "conversation.globalSearch.filter": "結果を絞り込む",
   "conversation.globalSearch.tab.all": "すべて",
   "conversation.globalSearch.tab.messages": "メッセージ",
@@ -100,7 +101,8 @@ export const messages = {
   "conversation.threads.error.branch": "チャットを分岐できませんでした。",
   "conversation.threads.error.send": "スレッドにメッセージを送信できませんでした。",
   "conversation.threads.error.files":
-    "このサーバーはスレッドでファイルを受け付けません。サーバーの OpenBot を更新してください。",
+    "このサーバーはスレッドでファイルを受け付けません。サーバーの StarBot を更新してください。",
+
   "conversation.threads.error.stop": "スレッドを停止できませんでした。",
   "conversation.threads.error.archive": "スレッドをアーカイブできませんでした。",
   "conversation.threads.error.restore": "スレッドを復元できませんでした。",

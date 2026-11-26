@@ -9,7 +9,8 @@ export const messages = {
   "routine.kind.monthly": "毎月",
   "routine.kind.yearly": "毎年",
   "routine.kind.custom": "カスタム",
-  "routine.feed.calendarName": "OpenBot のルーティン",
+  "routine.feed.calendarName": "StarBot のルーティン",
+
   "routine.feed.eventAgent": "エージェント: {name}",
   "routine.feed.eventChannel": "チャンネル: {name}",
   "routine.feed.eventTimezone": "タイムゾーン: {timezone}",
@@ -138,7 +139,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "接続がオフか削除されています",
   "routine.delivery.reason.refused": "この場所には投稿できません",
   "routine.delivery.reason.sendFailed": "プラットフォームが受け付けませんでした",
-  "routine.delivery.reason.restart": "送信中に OpenBot が停止しました",
+  "routine.delivery.reason.restart": "送信中に StarBot が停止しました",
+
   "routine.delivery.reason.stopped": "この場所への送信がオフになりました",
   "routine.delivery.resend": "再送信",
   "routine.delivery.resending": "送信中…",
@@ -325,9 +327,11 @@ export const messages = {
   "routine.settings.limitPolicy": "アカウントが上限に達している場合",
   "routine.settings.limitPolicy.wait": "待機してリセット後に実行",
   "routine.settings.limitPolicy.skip": "この実行をスキップ",
-  "routine.settings.missedPolicy": "予定時刻に OpenBot が閉じていた場合",
+  "routine.settings.missedPolicy": "予定時刻に StarBot が閉じていた場合",
+
   "routine.settings.missedPolicy.skip": "この実行をスキップ",
-  "routine.settings.missedPolicy.runOnce": "OpenBot を開いたときに 1 回実行",
+  "routine.settings.missedPolicy.runOnce": "StarBot を開いたときに 1 回実行",
+
   "routine.settings.runInThread": "別のスレッドで実行",
   "routine.settings.runInSaveFailed":
     "ルーティンは保存されましたが、別スレッドの設定は保存されていません。もう一度お試しください。",

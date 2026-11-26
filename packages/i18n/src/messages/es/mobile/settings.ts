@@ -8,12 +8,15 @@ export const messages = {
   "mobile.settings.language.system": "Predeterminado del sistema",
   "mobile.settings.language.footer":
     "El valor predeterminado del sistema sigue el primer idioma de los ajustes del teléfono. El texto aún no traducido se muestra en inglés.",
-  "mobile.settings.language.restartTitle": "¿Reiniciar OpenBot?",
+  "mobile.settings.language.restartTitle": "¿Reiniciar StarBot?",
+
   "mobile.settings.language.restartBody":
-    "Este idioma se lee en la otra dirección. Las pantallas cambian de dirección cuando OpenBot se inicia de nuevo. Si las pantallas siguen viéndose mal después del reinicio, cierra OpenBot en el selector de apps y vuelve a abrirlo.",
+    "Este idioma se lee en la otra dirección. Las pantallas cambian de dirección cuando StarBot se inicia de nuevo. Si las pantallas siguen viéndose mal después del reinicio, cierra StarBot en el selector de apps y vuelve a abrirlo.",
+
   "mobile.settings.language.restartNow": "Reiniciar ahora",
   "mobile.settings.language.restartFailed":
-    "OpenBot no pudo reiniciarse. Las pantallas cambian de dirección la próxima vez que abras OpenBot.",
+    "StarBot no pudo reiniciarse. Las pantallas cambian de dirección la próxima vez que abras StarBot.",
+
   "mobile.settings.dictation.language": "Idioma del dictado",
   "mobile.settings.about.development": "Desarrollo",
   "mobile.settings.about.openFailed": "No se pudo abrir el enlace. Vuelve a intentarlo.",
@@ -22,7 +25,8 @@ export const messages = {
   "mobile.settings.about.privacy": "Política de privacidad",
   "mobile.settings.home.profile": "Perfil",
   "mobile.settings.home.preferences": "Preferencias",
-  "mobile.settings.home.about": "Acerca de OpenBot",
+  "mobile.settings.home.about": "Acerca de StarBot",
+
   "mobile.settings.home.support": "Ayuda",
   "mobile.settings.home.supportHint": "Obtener ayuda y guardar un registro de soporte",
   "mobile.settings.home.account": "Cuenta",
@@ -45,7 +49,8 @@ export const messages = {
   "mobile.settings.billing.status.unpaid": "Sin pagar",
   "mobile.settings.billing.status.paused": "En pausa",
   "mobile.settings.billing.footer":
-    "Para cambiar un plan o el método de pago, o ver las facturas, abre Ajustes → Facturación en OpenBot en tu ordenador.",
+    "Para cambiar un plan o el método de pago, o ver las facturas, abre Ajustes → Facturación en StarBot en tu ordenador.",
+
   "mobile.settings.support.help": "Obtener ayuda",
   "mobile.settings.support.discord": "Abrir un ticket en Discord",
   "mobile.settings.support.discordHint": "La forma más rápida de obtener ayuda",
@@ -64,7 +69,8 @@ export const messages = {
   "mobile.settings.support.clearTitle": "¿Borrar el registro de soporte?",
   "mobile.settings.support.clearBody": "Esto elimina todos los eventos del registro de este teléfono.",
   "mobile.settings.support.logFooter":
-    "El registro permanece en este teléfono. OpenBot envía líneas del registro solo con un informe de error de la app del teléfono que tú envías, y la tarjeta del informe las muestra antes. Registra los pasos de conexión, las solicitudes y los errores. No registra mensajes ni archivos, y oculta contraseñas y tokens. Lee el archivo antes de compartirlo.",
+    "El registro permanece en este teléfono. StarBot envía líneas del registro solo con un informe de error de la app del teléfono que tú envías, y la tarjeta del informe las muestra antes. Registra los pasos de conexión, las solicitudes y los errores. No registra mensajes ni archivos, y oculta contraseñas y tokens. Lee el archivo antes de compartirlo.",
+
   "mobile.settings.support.saveFailed": "No se pudo guardar el archivo de registro. Vuelve a intentarlo.",
   "mobile.settings.support.sharingUnavailable": "La función de compartir no está disponible en este teléfono.",
   "mobile.settings.support.newestFirst": "Los más recientes primero.",
@@ -202,31 +208,39 @@ export const messages = {
   "mobile.settings.feedback.retry": "Reintentar guardar el ajuste háptico",
   "mobile.settings.liveActivities.title": "Actividades en directo",
   "mobile.settings.liveActivities.footer":
-    "Muestra el trabajo de los agentes, mensajes, preguntas y aprobaciones en la pantalla de bloqueo y en la Dynamic Island mientras OpenBot está en ejecución.",
+    "Muestra el trabajo de los agentes, mensajes, preguntas y aprobaciones en la pantalla de bloqueo y en la Dynamic Island mientras StarBot está en ejecución.",
+
   "mobile.settings.liveActivities.toggle": "Mostrar actividad de los agentes",
   "mobile.settings.liveActivities.retry": "Reintentar guardar el ajuste de actividades en directo",
   "mobile.settings.notifications.title": "Notificaciones",
   "mobile.settings.notifications.toggle": "Permitir notificaciones",
   "mobile.settings.notifications.footer":
-    "Los agentes te avisan cuando terminan, se detienen con un error o necesitan tu respuesta, una aprobación o un paso en el navegador. No llega nada mientras usas OpenBot aquí o en la app de escritorio. Mientras se muestra la actividad en directo, el evento aparece allí en su lugar.",
+    "Los agentes te avisan cuando terminan, se detienen con un error o necesitan tu respuesta, una aprobación o un paso en el navegador. No llega nada mientras usas StarBot aquí o en la app de escritorio. Mientras se muestra la actividad en directo, el evento aparece allí en su lugar.",
+
   "mobile.settings.notifications.footerAndroid":
-    "Los agentes te avisan cuando terminan, se detienen con un error o necesitan tu respuesta, una aprobación o un paso en el navegador. No llega nada mientras usas OpenBot aquí o en la app de escritorio.",
-  "mobile.settings.notifications.denied": "Las notificaciones de OpenBot están desactivadas en los Ajustes de iOS.",
+    "Los agentes te avisan cuando terminan, se detienen con un error o necesitan tu respuesta, una aprobación o un paso en el navegador. No llega nada mientras usas StarBot aquí o en la app de escritorio.",
+
+  "mobile.settings.notifications.denied": "Las notificaciones de StarBot están desactivadas en los Ajustes de iOS.",
+
   "mobile.settings.notifications.deniedAndroid":
-    "Las notificaciones de OpenBot están desactivadas en los ajustes de Android.",
+    "Las notificaciones de StarBot están desactivadas en los ajustes de Android.",
+
   "mobile.settings.notifications.openSettings": "Abrir Ajustes de iOS",
   "mobile.settings.notifications.openSettingsAndroid": "Abrir ajustes de Android",
   "mobile.settings.notifications.preview": "Mostrar vista previa de la respuesta",
   "mobile.settings.notifications.previewFooter":
-    "Muestra el inicio de una respuesta, una pregunta o la acción que hay que aprobar. Apple y el servicio de cuentas de OpenBot no pueden leerlo.",
+    "Muestra el inicio de una respuesta, una pregunta o la acción que hay que aprobar. Apple y el servicio de cuentas de StarBot no pueden leerlo.",
+
   "mobile.settings.notifications.previewFooterAndroid":
-    "Muestra el inicio de una respuesta, una pregunta o la acción que hay que aprobar. Google y el servicio de cuentas de OpenBot no pueden leerlo.",
+    "Muestra el inicio de una respuesta, una pregunta o la acción que hay que aprobar. Google y el servicio de cuentas de StarBot no pueden leerlo.",
+
   "mobile.settings.notifications.threadReplies": "Respuestas en hilos",
   "mobile.settings.notifications.threadRepliesFooter":
     "Las respuestas en hilos te avisan cuando un agente termina o se detiene con un error en un hilo. Sin ellas, un hilo te sigue avisando cuando necesita tu respuesta o una aprobación.",
   "mobile.settings.notifications.sound": "Sonido",
   "mobile.settings.notifications.playSound": "Reproducir sonido",
-  "mobile.settings.notifications.sound.openbot": "OpenBot",
+  "mobile.settings.notifications.sound.openbot": "StarBot",
+
   "mobile.settings.notifications.sound.warm": "Cálido",
   "mobile.settings.notifications.sound.mech": "Mecánico",
   "mobile.settings.notifications.sound.bubble": "Burbujas",
@@ -234,9 +248,11 @@ export const messages = {
   "mobile.settings.notifications.sound.default": "Predeterminado de iOS",
   "mobile.settings.notifications.sound.defaultAndroid": "Predeterminado de Android",
   "mobile.settings.notifications.soundFooter":
-    "Las notificaciones y la actividad en directo reproducen este sonido. La actividad en directo también enciende la pantalla. El sonido de OpenBot es el que reproduce la app de escritorio cuando termina una tarea. Los cuatro sonidos siguientes son los de los temas de sonido de la app de escritorio.",
+    "Las notificaciones y la actividad en directo reproducen este sonido. La actividad en directo también enciende la pantalla. El sonido de StarBot es el que reproduce la app de escritorio cuando termina una tarea. Los cuatro sonidos siguientes son los de los temas de sonido de la app de escritorio.",
+
   "mobile.settings.notifications.soundFooterAndroid":
-    "Las notificaciones reproducen este sonido. El sonido de OpenBot es el que reproduce la app de escritorio cuando termina una tarea. Los cuatro sonidos siguientes son los de los temas de sonido de la app de escritorio.",
+    "Las notificaciones reproducen este sonido. El sonido de StarBot es el que reproduce la app de escritorio cuando termina una tarea. Los cuatro sonidos siguientes son los de los temas de sonido de la app de escritorio.",
+
   "mobile.settings.notifications.level.all": "Toda la actividad",
   "mobile.settings.notifications.level.needsMe": "Solo cuando me necesite",
   "mobile.settings.notifications.level.nothing": "Nada",
@@ -252,7 +268,8 @@ export const messages = {
   "mobile.settings.notifications.serverFooter":
     "Los eventos de este servidor que notifican a este teléfono. La app de escritorio tiene sus propios ajustes.",
   "mobile.settings.notifications.serverUnsupported":
-    "Este servidor no puede enviar notificaciones. Actualiza OpenBot en el equipo que lo ejecuta.",
+    "Este servidor no puede enviar notificaciones. Actualiza StarBot en el equipo que lo ejecuta.",
+
   "mobile.settings.notifications.thisPhone": "Este teléfono",
   "mobile.settings.notifications.whatYouHear": "Qué te llega",
   "mobile.settings.notifications.wholeServer": "Todo el servidor",
@@ -266,7 +283,8 @@ export const messages = {
   "mobile.settings.notifications.chooseAgent": "Elegir para un agente",
   "mobile.settings.notifications.chooseAnotherAgent": "Elegir otro agente",
   "mobile.settings.notifications.levelsFooter": "Toca otra vez el nivel de un agente para que siga al servidor.",
-  "mobile.settings.notifications.agentsUnsupported": "Actualiza OpenBot en este servidor para elegir agentes.",
+  "mobile.settings.notifications.agentsUnsupported": "Actualiza StarBot en este servidor para elegir agentes.",
+
   "mobile.settings.notifications.agentsOffline": "Los agentes aparecen cuando este servidor está en línea.",
   "mobile.settings.notifications.scopeFooter":
     "Tus elecciones se aplican en todos tus dispositivos. Silenciar solo se aplica a este teléfono.",
@@ -274,7 +292,8 @@ export const messages = {
   "mobile.settings.notifications.channelSilent": "Notificaciones de agentes (sin sonido)",
   "mobile.settings.privacy.title": "Privacidad",
   "mobile.settings.privacy.footer":
-    "El uso de funciones y los resultados de conexión de este teléfono siempre se envían a la analítica de OpenBot. Activado: con tu ID de cuenta y correo electrónico. Desactivado: solo con un ID de instalación aleatorio. No se envían mensajes ni archivos.",
+    "El uso de funciones y los resultados de conexión de este teléfono siempre se envían a la analítica de StarBot. Activado: con tu ID de cuenta y correo electrónico. Desactivado: solo con un ID de instalación aleatorio. No se envían mensajes ni archivos.",
+
   "mobile.settings.privacy.analytics": "Vincular la analítica a mi cuenta",
   "mobile.settings.privacy.retry": "Reintentar guardar el ajuste de privacidad",
   "mobile.settings.conversations.title": "Conversaciones",
@@ -319,7 +338,8 @@ export const messages = {
   "mobile.settings.profile.security": "Seguridad",
   "mobile.settings.profile.accountSessions": "Sesiones de la cuenta",
   "mobile.settings.profile.signOutTitle": "¿Cerrar sesión?",
-  "mobile.settings.profile.signOutBody": "Vuelve a conectarte escaneando un nuevo código desde OpenBot en tu equipo.",
+  "mobile.settings.profile.signOutBody": "Vuelve a conectarte escaneando un nuevo código desde StarBot en tu equipo.",
+
   "mobile.settings.profile.signOut": "Cerrar sesión",
   "mobile.settings.profile.options": "Opciones del perfil",
   "mobile.settings.profile.activity.title": "Actividad en {server}",
@@ -357,7 +377,8 @@ export const messages = {
   "mobile.settings.profile.models.title": "Uso de modelos",
   "mobile.settings.profile.share": "Compartir",
   "mobile.settings.profile.shareTitle": "Comparte tu actividad",
-  "mobile.settings.profile.share.caption": "Mis últimos seis meses con OpenBot",
+  "mobile.settings.profile.share.caption": "Mis últimos seis meses con StarBot",
+
   "mobile.settings.profile.share.createFailed": "No se pudo crear la imagen.",
   "mobile.settings.profile.share.fileName": "openbot-activity.png",
   "mobile.settings.voice.title": "Voz",
@@ -389,7 +410,8 @@ export const messages = {
   "mobile.settings.voice.supertonic.male": "Voz masculina {number}",
   "mobile.settings.voice.elevenLabs.title": "ElevenLabs",
   "mobile.settings.voice.elevenLabs.footer":
-    "OpenBot envía el texto de cada respuesta a ElevenLabs con tu clave, y ElevenLabs cobra a tu cuenta. La clave queda en el llavero de este teléfono.",
+    "StarBot envía el texto de cada respuesta a ElevenLabs con tu clave, y ElevenLabs cobra a tu cuenta. La clave queda en el llavero de este teléfono.",
+
   "mobile.settings.voice.elevenLabs.key": "Clave de API",
   "mobile.settings.voice.elevenLabs.keySaved": "Guardada en este teléfono",
   "mobile.settings.voice.elevenLabs.chooseVoice": "Elige una voz",
@@ -399,7 +421,8 @@ export const messages = {
   "mobile.settings.voice.elevenLabs.removeBody": "Supertonic 3 vuelve a leer las respuestas.",
   "mobile.settings.voice.elevenLabs.saveKey": "Guardar clave",
   "mobile.settings.voice.elevenLabs.testing": "Probando la clave",
-  "mobile.settings.voice.elevenLabs.keyHint": "OpenBot prueba los dos primeros permisos antes de guardar la clave.",
+  "mobile.settings.voice.elevenLabs.keyHint": "StarBot prueba los dos primeros permisos antes de guardar la clave.",
+
   "mobile.settings.voice.elevenLabs.testFailed": "ElevenLabs no respondió. Inténtalo de nuevo.",
   "mobile.settings.voice.elevenLabs.refused": "ElevenLabs rechazó la solicitud: {reason}",
   "mobile.settings.voice.elevenLabs.getKey": "Obtener una clave de API",
@@ -455,11 +478,13 @@ export const messages = {
   "mobile.settings.voice.pause.title": "Pausa antes de enviar",
   "mobile.settings.voice.pause.label": "Esperar palabras nuevas",
   "mobile.settings.voice.pause.footer":
-    "En una conversación de voz, OpenBot envía tus palabras cuando no reconoce palabras nuevas durante este tiempo. El ruido sin palabras no lo mantiene escuchando. Elige una pausa más larga si hablas despacio o te detienes a pensar.",
+    "En una conversación de voz, StarBot envía tus palabras cuando no reconoce palabras nuevas durante este tiempo. El ruido sin palabras no lo mantiene escuchando. Elige una pausa más larga si hablas despacio o te detienes a pensar.",
+
   "mobile.settings.voice.pause.seconds": "{seconds} s",
   "mobile.settings.voice.speed.title": "Velocidad de respuesta",
   "mobile.settings.voice.speed.footer":
-    "La velocidad de las respuestas que OpenBot lee en voz alta, también en una conversación de voz.",
+    "La velocidad de las respuestas que StarBot lee en voz alta, también en una conversación de voz.",
+
   "mobile.settings.voice.speed.value": "{speed}×",
   "mobile.settings.voice.gptLive.title": "GPT Live Voice",
   "mobile.settings.voice.gptLive.footer":
@@ -474,13 +499,15 @@ export const messages = {
   "mobile.settings.voice.gptLive.status.ready": "Listo",
   "mobile.settings.voice.gptLive.status.supported": "Compatible",
   "mobile.settings.voice.gptLive.status.offline": "Sin conexión",
-  "mobile.settings.voice.gptLive.status.update": "Necesita un OpenBot más reciente en su ordenador",
+  "mobile.settings.voice.gptLive.status.update": "Necesita un StarBot más reciente en su ordenador",
+
   "mobile.settings.voice.gptLive.status.signIn": "Inicia sesión en Codex con ChatGPT",
   "mobile.settings.voice.server.title": "Servidor de voz",
   "mobile.settings.voice.server.row": "Servidor compatible con OpenAI",
   "mobile.settings.voice.server.notSetUp": "Sin configurar",
   "mobile.settings.voice.server.footer":
-    "Tu propio servidor con las rutas /v1/audio de OpenAI, como Speaches o Kokoro-FastAPI, igual que en el escritorio. OpenBot envía tus grabaciones y el texto de las respuestas solo a su dirección, y el teléfono debe poder llegar a ella, por ejemplo en la misma red.",
+    "Tu propio servidor con las rutas /v1/audio de OpenAI, como Speaches o Kokoro-FastAPI, igual que en el escritorio. StarBot envía tus grabaciones y el texto de las respuestas solo a su dirección, y el teléfono debe poder llegar a ella, por ejemplo en la misma red.",
+
   "mobile.settings.voice.server.choice": "Tu servidor de voz",
   "mobile.settings.voice.server.dictationReady": "En tu servidor de voz · {model}",
   "mobile.settings.voice.server.dictationOff": "Configura el dictado en tu servidor de voz",
@@ -506,7 +533,8 @@ export const messages = {
     "El reconocedor del teléfono y Supertonic 3 toman el relevo donde el servidor escuchaba o hablaba, y su clave de API se borra de este teléfono.",
   "mobile.settings.voice.server.removeFailed": "No se pudo quitar el servidor de voz.",
   "mobile.settings.voice.elevenLabs.recognitionFooter":
-    "OpenBot transmite tu voz a ElevenLabs con un token de un solo uso, y ElevenLabs lo cobra en tu cuenta. La clave se queda en este teléfono.",
+    "StarBot transmite tu voz a ElevenLabs con un token de un solo uso, y ElevenLabs lo cobra en tu cuenta. La clave se queda en este teléfono.",
+
   "mobile.settings.voice.elevenLabs.model.title": "Modelo",
   "mobile.settings.voice.elevenLabs.model.footer":
     "Cada modelo tiene su propio precio en ElevenLabs. El cambio se aplica a la siguiente respuesta.",
@@ -539,9 +567,11 @@ export const messages = {
     "Los mensajes nuevos se incorporan al trabajo actual del agente, no a la cola. Con los agentes que no lo admiten, esperan en la cola.",
   "mobile.settings.agents.planCardFooter": "Antes de una tarea larga, el agente muestra su plan.",
   "mobile.settings.agents.commitSection": "Commits de Git",
-  "mobile.settings.agents.commitCoAuthor": "Mencionar a OpenBot en los commits",
+  "mobile.settings.agents.commitCoAuthor": "Mencionar a StarBot en los commits",
+
   "mobile.settings.agents.commitCoAuthorFooter":
-    "Los agentes añaden a OpenBot como coautor en sus commits. Tú sigues siendo el autor.",
+    "Los agentes añaden a StarBot como coautor en sus commits. Tú sigues siendo el autor.",
+
   "mobile.settings.agents.planStart.title": "Empezar el trabajo",
   "mobile.settings.agents.planStart.wait": "Cuando pulse Iniciar",
   "mobile.settings.agents.planStart.after": "Tras {time}",
@@ -557,7 +587,8 @@ export const messages = {
     "El máximo de mensajes y ejecuciones de rutinas que los scripts locales pueden enviar a cada agente en una hora. Se aplica a todos los agentes de este servidor.",
   "mobile.settings.agents.processes.title": "Procesos en segundo plano",
   "mobile.settings.agents.processes.description":
-    "Programas que los agentes iniciaron y dejaron en marcha, como servidores de desarrollo. Siguen en marcha cuando termina el chat y cuando sales de OpenBot.",
+    "Programas que los agentes iniciaron y dejaron en marcha, como servidores de desarrollo. Siguen en marcha cuando termina el chat y cuando sales de StarBot.",
+
   "mobile.settings.agents.processes.empty": "No hay programas de agentes en marcha.",
   "mobile.settings.agents.processes.loadFailed": "No se pudieron leer los procesos en segundo plano.",
   "mobile.settings.agents.processes.noAgent": "Ningún agente",
@@ -569,7 +600,8 @@ export const messages = {
   "mobile.settings.agents.processes.stopLabel": "Detener el proceso {pid}",
   "mobile.settings.quickActions.title": "Menú del icono de la app",
   "mobile.settings.quickActions.footer":
-    "Mantén pulsado el icono de OpenBot para ver estas acciones. Puedes activar hasta {count}.",
+    "Mantén pulsado el icono de StarBot para ver estas acciones. Puedes activar hasta {count}.",
+
   "mobile.settings.quickActions.latestChat": "Último chat",
   "mobile.settings.quickActions.secondChat": "Penúltimo chat",
   "mobile.settings.shortcuts.title": "Atajos",
@@ -578,40 +610,49 @@ export const messages = {
   "mobile.settings.shortcuts.unsupported": "Los atajos necesitan iOS 26 o posterior.",
   "mobile.settings.shortcuts.card.agents": "Agentes",
   "mobile.settings.shortcuts.card.noAgents": "Aún no hay agentes",
-  "mobile.settings.shortcuts.card.setUp.title": "Abre OpenBot para configurar los atajos",
-  "mobile.settings.shortcuts.card.setUp.action": "Abrir OpenBot",
+  "mobile.settings.shortcuts.card.setUp.title": "Abre StarBot para configurar los atajos",
+
+  "mobile.settings.shortcuts.card.setUp.action": "Abrir StarBot",
+
   "mobile.settings.shortcuts.card.noAgent.title": "Elige un agente para los atajos",
   "mobile.settings.shortcuts.card.noAgent.detail": "Los atajos envían a un agente.",
   "mobile.settings.shortcuts.card.noAgent.action": "Elegir agente",
-  "mobile.settings.shortcuts.card.locked.title": "OpenBot está bloqueado",
-  "mobile.settings.shortcuts.card.locked.action": "Abrir OpenBot",
+  "mobile.settings.shortcuts.card.locked.title": "StarBot está bloqueado",
+
+  "mobile.settings.shortcuts.card.locked.action": "Abrir StarBot",
+
   "mobile.settings.shortcuts.card.message": "Enviar mensaje a {name}",
   "mobile.settings.shortcuts.card.messagePrompt": "Mensaje para {name}",
   "mobile.settings.shortcuts.footer":
     "Send Message en la app Atajos envía a este agente. La app no se abre. Open Agent abre su chat.",
   "mobile.settings.shortcuts.send.sent": "Enviado",
-  "mobile.settings.shortcuts.send.failed": "OpenBot no pudo enviar esto.",
+  "mobile.settings.shortcuts.send.failed": "StarBot no pudo enviar esto.",
+
   "mobile.settings.shortcuts.send.unconfirmed": "El servidor no respondió. El mensaje puede estar en el chat.",
-  "mobile.settings.shortcuts.send.inApp": "Enviar en OpenBot",
+  "mobile.settings.shortcuts.send.inApp": "Enviar en StarBot",
+
   "mobile.settings.shortcuts.send.openChat": "Abrir chat",
   "mobile.settings.invite.title": "Invitar amigos",
   "mobile.settings.invite.heading": "Una entrada. Un amigo.",
   "mobile.settings.invite.subtitle": "Rasga el talón por la línea para compartir tu invitación.",
-  "mobile.settings.invite.pass": "OpenBot · Pase de invitado",
+  "mobile.settings.invite.pass": "StarBot · Pase de invitado",
+
   "mobile.settings.invite.from": "De {name}",
   "mobile.settings.invite.headline": "Tus propios\nagentes de IA",
   "mobile.settings.invite.perk.friendLabel": "Tu amigo",
   "mobile.settings.invite.perk.youLabel": "Tú",
   "mobile.settings.invite.perk.friendValue": "{percent} de descuento",
   "mobile.settings.invite.perk.youValue": "{percent} de crédito",
-  "mobile.settings.invite.perk.friendDetail": "para tu amigo, en su plan de OpenBot",
+  "mobile.settings.invite.perk.friendDetail": "para tu amigo, en su plan de StarBot",
+
   "mobile.settings.invite.perk.youDetail": "para ti, de cada pago de tu amigo, como crédito en tus facturas",
   "mobile.settings.invite.admit": "Entrada para un amigo",
   "mobile.settings.invite.tearHint": "Rasga por la línea",
   "mobile.settings.invite.copy": "Copiar enlace",
   "mobile.settings.invite.stub": "Talón con tu enlace de invitación",
   "mobile.settings.invite.stubHint": "Rásgalo para compartir tu enlace de invitación.",
-  "mobile.settings.invite.shareMessage": "Únete a OpenBot y consigue un {percent} de descuento en tu plan:",
+  "mobile.settings.invite.shareMessage": "Únete a StarBot y consigue un {percent} de descuento en tu plan:",
+
   "mobile.settings.invite.loading": "Cargando tu enlace de invitación…",
   "mobile.settings.invite.loadFailed": "No se pudo cargar tu enlace de invitación.",
   "mobile.settings.invite.unavailable": "Los enlaces de invitación no están disponibles en este servidor de cuentas.",

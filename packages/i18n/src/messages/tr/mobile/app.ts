@@ -40,21 +40,28 @@ export const messages = {
   "mobile.app.route.marketplace": "Pazaryeri",
   "mobile.app.route.library": "Kitaplık",
   "mobile.app.quickAction.search": "Ara",
-  "mobile.app.quickAction.share": "OpenBot'u paylaş",
+  "mobile.app.quickAction.share": "StarBot'u paylaş",
+
   "mobile.app.quickAction.support": "Dur, beni silme!",
   "mobile.app.quickAction.supportSubtitle": "Neyi iyileştirelim, söyle",
-  "mobile.app.update.title": "OpenBot {version} çıktı",
-  "mobile.app.update.readyTitle": "Yeni bir OpenBot hazır",
+  "mobile.app.update.title": "StarBot {version} çıktı",
+
+  "mobile.app.update.readyTitle": "Yeni bir StarBot hazır",
+
   "mobile.app.update.storeBody": "En yeni özellikleri ve düzeltmeleri alın.",
-  "mobile.app.update.readyBody": "OpenBot yüklemek için yeniden başlar.",
+  "mobile.app.update.readyBody": "StarBot yüklemek için yeniden başlar.",
+
   "mobile.app.update.install": "Güncelle",
   "mobile.app.update.later": "Sonra",
   "mobile.app.update.failedTitle": "Güncellenemedi",
-  "mobile.app.update.restartFailed": "Güncellemeyi bitirmek için OpenBot'u kapatıp yeniden açın.",
-  "mobile.app.update.storeFailed": "App Store veya Google Play'i açıp OpenBot'u oradan güncelleyin.",
+  "mobile.app.update.restartFailed": "Güncellemeyi bitirmek için StarBot'u kapatıp yeniden açın.",
+
+  "mobile.app.update.storeFailed": "App Store veya Google Play'i açıp StarBot'u oradan güncelleyin.",
+
   "mobile.app.update.whatsNew": "Yenilikler",
   "mobile.app.update.hideWhatsNew": "Gizle",
-  "mobile.app.update.releaseTitle": "OpenBot {version}",
+  "mobile.app.update.releaseTitle": "StarBot {version}",
+
   "mobile.app.update.group.notice": "İşlem gerekli",
   "mobile.app.update.group.added": "Yeni",
   "mobile.app.update.group.changed": "Değişti",
@@ -64,12 +71,15 @@ export const messages = {
   "mobile.app.update.group.security": "Güvenlik",
   "mobile.app.update.requiredTitle": "Güncelleme gerekli",
   "mobile.app.update.requiredBody":
-    "OpenBot {version} artık desteklenmiyor. Devam etmek için {minimum} veya daha yeni bir sürüme güncelleyin.",
+    "StarBot {version} artık desteklenmiyor. Devam etmek için {minimum} veya daha yeni bir sürüme güncelleyin.",
+
   "mobile.app.update.notesFailed": "Sürüm notları yüklenemedi.",
   "mobile.app.update.notesEmpty": "Bu sürüm için henüz sürüm notu yok.",
   "mobile.app.update.fullChangelog": "Tüm değişiklikler",
-  "mobile.app.rate.title": "OpenBot'u beğendin mi?",
-  "mobile.app.rate.body": "Bir puan, diğer ekiplerin OpenBot'u bulmasına yardım eder.",
+  "mobile.app.rate.title": "StarBot'u beğendin mi?",
+
+  "mobile.app.rate.body": "Bir puan, diğer ekiplerin StarBot'u bulmasına yardım eder.",
+
   "mobile.app.rate.ratingLabel": "Puan",
   "mobile.app.rate.star": { one: "{count} yıldız", other: "{count} yıldız" },
   "mobile.app.rate.hint.none": "Bir yıldıza dokun.",

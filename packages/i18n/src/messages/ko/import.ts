@@ -97,7 +97,8 @@ export const messages = {
   "import.source.hermesNoteServer": "서버의 Hermes 폴더를 읽거나 Hermes에서 .zip 파일을 내보내세요.",
   "import.source.hermesNoteExport": "Hermes에서 .zip 파일을 내보내세요.",
   "import.source.grokNote": "클라우드에 있어요. 그곳의 내보내기 에이전트가 .zip 파일을 만들어요.",
-  "import.source.transfer": "다른 OpenBot 컴퓨터",
+  "import.source.transfer": "다른 StarBot 컴퓨터",
+
   "import.source.transferNote": "에이전트와 설정을 함께 옮기려면 전송을 사용하세요.",
   "import.hermes.reading": "Hermes 프로필 읽는 중…",
   "import.hermes.readFailed": "Hermes 폴더를 읽을 수 없어요",

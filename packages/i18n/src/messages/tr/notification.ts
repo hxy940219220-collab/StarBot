@@ -29,7 +29,8 @@ export const messages = {
   "notification.machineAlert.cpu": "{server}: CPU {percent} meşgul",
   "notification.machineAlert.body": "{level} uyarı seviyesi aşıldı. Sunucu ayarları > Depolama bölümüne bakın.",
   "notification.test": "Bildirimler çalışıyor.",
-  "notification.welcome": "Bir ajanın size ihtiyacı olduğunda OpenBot burada bildirecektir.",
+  "notification.welcome": "Bir ajanın size ihtiyacı olduğunda StarBot burada bildirecektir.",
+
   "notification.toast.region": "Bildirimler",
   "notification.toast.close": "Bildirimi kapat",
 } as const satisfies PartialTranslation<typeof source>;

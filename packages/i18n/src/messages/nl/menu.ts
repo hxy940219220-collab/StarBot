@@ -11,18 +11,25 @@ export const messages = {
   "menu.closeDeveloperTools": "Ontwikkelaarstools sluiten",
   "menu.copyLink": "Kopieer link",
   "menu.copyImage": "Kopieer afbeelding",
-  "menu.quit": "Stop OpenBot",
-  "menu.quitConfirmTitle": "OpenBot stoppen?",
-  "menu.quitConfirmBody": "Agents en routines stoppen tot je OpenBot weer opent.",
+  "menu.quit": "Stop StarBot",
+
+  "menu.quitConfirmTitle": "StarBot stoppen?",
+
+  "menu.quitConfirmBody": "Agents en routines stoppen tot je StarBot weer opent.",
+
   "menu.quitConfirm": "Stop",
   "menu.quitHint": "Houd ⌘Q ingedrukt of druk twee keer om te stoppen",
   "menu.closeWorkingTitle": { one: "{count} agent werkt nog", other: "{count} agents werken nog" },
   "menu.closeWorkingBody":
-    "Als je OpenBot stopt, stoppen de agents. Laat OpenBot draaien, zodat ze klaar worden. Open OpenBot om het venster weer te tonen.",
+    "Als je StarBot stopt, stoppen de agents. Laat StarBot draaien, zodat ze klaar worden. Open StarBot om het venster weer te tonen.",
+
   "menu.closeKeepRunning": "Laat draaien",
-  "menu.trayOpen": "Open OpenBot",
-  "menu.trayQuit": "Stop OpenBot",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "Open StarBot",
+
+  "menu.trayQuit": "Stop StarBot",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Dynamic Island verbergen",
   "menu.undo": "Herstel",
   "menu.redo": "Opnieuw",

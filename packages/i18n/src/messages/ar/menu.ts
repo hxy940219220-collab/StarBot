@@ -11,9 +11,12 @@ export const messages = {
   "menu.closeDeveloperTools": "إغلاق أدوات المطوّرين",
   "menu.copyLink": "نسخ الرابط",
   "menu.copyImage": "نسخ الصورة",
-  "menu.quit": "إنهاء OpenBot",
-  "menu.quitConfirmTitle": "هل تريد إنهاء OpenBot؟",
-  "menu.quitConfirmBody": "يتوقف الوكلاء والمهام الدورية حتى تفتح OpenBot مرة أخرى.",
+  "menu.quit": "إنهاء StarBot",
+
+  "menu.quitConfirmTitle": "هل تريد إنهاء StarBot؟",
+
+  "menu.quitConfirmBody": "يتوقف الوكلاء والمهام الدورية حتى تفتح StarBot مرة أخرى.",
+
   "menu.quitConfirm": "إنهاء",
   "menu.quitHint": "اضغط ⌘Q مطولًا أو مرتين للإنهاء",
   "menu.closeWorkingTitle": {
@@ -25,11 +28,15 @@ export const messages = {
     other: "{count} وكيل لا يزالون يعملون",
   },
   "menu.closeWorkingBody":
-    "إذا أنهيت OpenBot، يتوقف الوكلاء. أبقه قيد التشغيل ليُكملوا عملهم. لإظهار النافذة مرة أخرى، افتح OpenBot.",
+    "إذا أنهيت StarBot، يتوقف الوكلاء. أبقه قيد التشغيل ليُكملوا عملهم. لإظهار النافذة مرة أخرى، افتح StarBot.",
+
   "menu.closeKeepRunning": "إبقاء التشغيل",
-  "menu.trayOpen": "فتح OpenBot",
-  "menu.trayQuit": "إنهاء OpenBot",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "فتح StarBot",
+
+  "menu.trayQuit": "إنهاء StarBot",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "إخفاء Dynamic Island",
   "menu.undo": "تراجع",
   "menu.redo": "إعادة",

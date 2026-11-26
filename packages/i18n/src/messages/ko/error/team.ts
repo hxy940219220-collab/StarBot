@@ -2,8 +2,10 @@ import type { PartialTranslation } from "../../../message";
 import type { messages as source } from "../../en/error/team";
 
 export const messages = {
-  "error.team.ownerNotLinked": "이 호스트는 OpenBot 소유자 계정에 연결되어 있지 않아요.",
-  "error.team.ownerEmailRequired": "이 호스트를 만든 OpenBot 이메일로 로그인해 주세요.",
+  "error.team.ownerNotLinked": "이 호스트는 StarBot 소유자 계정에 연결되어 있지 않아요.",
+
+  "error.team.ownerEmailRequired": "이 호스트를 만든 StarBot 이메일로 로그인해 주세요.",
+
   "error.team.hostNotConfigured": "팀 호스트가 설정되지 않았어요.",
   "error.team.alreadyConfigured": "팀 서버가 이미 설정되어 있어요.",
   "error.team.identityCreateFailed": "팀 ID를 만들 수 없어요.",
@@ -21,9 +23,11 @@ export const messages = {
   "error.team.inviteEmailMismatch": "이 초대는 다른 이메일 주소로 보낸 초대예요.",
   "error.team.memberDisabled": "이 팀 멤버는 비활성화되어 있어요.",
   "error.team.memberLimit": "호스트당 멤버는 최대 {limit}명까지 가능해요.",
-  "error.team.accountNotMember": "이 OpenBot 계정은 팀 멤버가 아니에요.",
+  "error.team.accountNotMember": "이 StarBot 계정은 팀 멤버가 아니에요.",
+
   "error.team.usernameTaken": "이미 사용 중인 사용자 이름이에요.",
-  "error.team.inviteRequiresAccount": "이 초대를 수락하려면 인증된 OpenBot 계정이 필요해요.",
+  "error.team.inviteRequiresAccount": "이 초대를 수락하려면 인증된 StarBot 계정이 필요해요.",
+
   "error.team.loginIncorrect": "사용자 이름 또는 비밀번호가 올바르지 않아요.",
   "error.team.currentPasswordIncorrect": "현재 비밀번호가 올바르지 않아요.",
   "error.team.memberNotFound": "팀 멤버를 찾을 수 없어요.",
@@ -44,19 +48,23 @@ export const messages = {
   "error.team.usernameInvalid": "사용자 이름은 영문자, 숫자, 점, 대시, 밑줄로 이루어진 3~32자여야 해요.",
   "error.team.passwordLength": "비밀번호는 12~256자여야 해요.",
   "error.team.bindFailed": "팀 API를 바인딩할 수 없어요.",
-  "error.team.signInRequired": "OpenBot 로그인이 필요해요.",
+  "error.team.signInRequired": "StarBot 로그인이 필요해요.",
+
   "error.team.authenticationRequired": "인증이 필요해요.",
   "error.team.agentNotFound": "에이전트를 찾을 수 없어요.",
   "error.team.routeNotFound": "경로를 찾을 수 없어요.",
   "error.team.requestFailed": "요청에 실패했어요.",
   "error.team.tooManySignInAttempts": "로그인 시도가 너무 많아요. 나중에 다시 시도해 주세요.",
-  "error.team.clientUpdateRequired": "이 호스트에 연결하기 전에 이 OpenBot 클라이언트를 업데이트해 주세요.",
+  "error.team.clientUpdateRequired": "이 호스트에 연결하기 전에 이 StarBot 클라이언트를 업데이트해 주세요.",
+
   "error.team.hostUpdateRequired": "연결하기 전에 호스트의 OpenBot을 업데이트해 주세요.",
   "error.team.serverSafeMode": "이 서버에서 OpenBot이 시작되지 않아 안전 모드로 실행 중입니다.",
   "error.team.serverSafeModeNewerDatabase":
-    "이 서버의 OpenBot {version}은(는) 데이터를 열 수 없습니다. 더 새로운 OpenBot 버전이 데이터를 저장했기 때문입니다. 서버에 더 새로운 OpenBot 릴리스를 설치하면 해결됩니다.",
+    "이 서버의 StarBot {version}은(는) 데이터를 열 수 없습니다. 더 새로운 StarBot 버전이 데이터를 저장했기 때문입니다. 서버에 더 새로운 StarBot 릴리스를 설치하면 해결됩니다.",
+
   "error.team.serverSafeModeStartFailed":
-    "이 서버의 OpenBot {version}은(는) 여러 번 시작에 실패한 후 중지되었습니다. 서버에 더 새로운 OpenBot 릴리스를 설치하면 해결됩니다.",
+    "이 서버의 StarBot {version}은(는) 여러 번 시작에 실패한 후 중지되었습니다. 서버에 더 새로운 StarBot 릴리스를 설치하면 해결됩니다.",
+
   "error.team.sidebarLayoutUnavailable": "사이드바 레이아웃을 사용할 수 없어요.",
   "error.team.providersUnsupported": "이 연결에서는 제공자 설정을 지원하지 않아요.",
   "error.team.providerNotManaged": "OpenBot은 이 제공자의 CLI를 관리하지 않아요.",

@@ -163,19 +163,19 @@ function containedInAnotherId(agentId: string, taken: ReadonlySet<string>): bool
   return false;
 }
 
-// The workspace root moves from `OpenBot/Bots` to `OpenBot/Agents`; the id in the leaf is rewritten by the
+// The workspace root moves from `StarBot/Bots` to `StarBot/Agents`; the id in the leaf is rewritten by the
 // id substitution that follows. The root is only ever substituted with its full absolute prefix attached,
 // derived from a path this database actually stored, so a user whose own checkout sits at
-// `~/Projects/OpenBot/Bots` does not get their files silently repointed.
+// `~/Projects/StarBot/Bots` does not get their files silently repointed.
 function legacyWorkspaceRoots(renames: readonly AgentIdRename[]): readonly { from: string; to: string }[] {
   const roots = new Map<string, { from: string; to: string }>();
   for (const rename of renames) {
     if (rename.workspacePath === null) continue;
     // A Windows profile stores this path with backslashes. Matching only the POSIX form would leave the
-    // root behind and rewrite the leaf alone, giving `OpenBot\Bots\agent-<uuid>` -- a name no reader
+    // root behind and rewrite the leaf alone, giving `StarBot\Bots\agent-<uuid>` -- a name no reader
     // recognizes, since rebasing a path out of a resumed provider transcript looks for an `Agents` parent.
     for (const separator of ["/", "\\"]) {
-      const root = ["OpenBot", "Bots", ""].join(separator);
+      const root = ["StarBot", "Bots", ""].join(separator);
       const suffix = `${separator}${root}${rename.oldId}`;
       if (!rename.workspacePath.endsWith(suffix)) continue;
       const from = `${rename.workspacePath.slice(0, -suffix.length)}${separator}${root}`;

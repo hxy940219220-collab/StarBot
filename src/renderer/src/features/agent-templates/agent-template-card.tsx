@@ -113,7 +113,7 @@ async function drawColumn(
   await drawLogo(context, x, 92, 44, colors);
   context.fillStyle = colors.primary;
   context.font = `600 28px ${FONT}`;
-  context.fillText("OpenBot", x + 58, 124);
+  context.fillText("StarBot", x + 58, 124);
 
   let y = 154;
   context.font = `700 60px ${FONT}`;

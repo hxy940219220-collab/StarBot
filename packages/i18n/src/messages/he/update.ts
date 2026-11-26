@@ -31,26 +31,36 @@ export const messages = {
   "update.provider.startFailed": "לא ניתן להתחיל את העדכון. אפשר לנסות שוב.",
   "update.provider.showDetails": "הצגת פרטים",
   "update.provider.hideDetails": "הסתרת פרטים",
-  "update.scheduled.title": "{name} תזמן עדכון של OpenBot",
-  "update.scheduled.automaticTitle": "OpenBot מתקין עדכון",
-  "update.scheduled.whenIdle": "OpenBot יופעל מחדש כשהסוכנים לא פעילים.",
-  "update.scheduled.now": "OpenBot יופעל מחדש כשהעדכון יורד.",
+  "update.scheduled.title": "{name} תזמן עדכון של StarBot",
+
+  "update.scheduled.automaticTitle": "StarBot מתקין עדכון",
+
+  "update.scheduled.whenIdle": "StarBot יופעל מחדש כשהסוכנים לא פעילים.",
+
+  "update.scheduled.now": "StarBot יופעל מחדש כשהעדכון יורד.",
+
   "update.scheduled.cancel": "ביטול העדכון",
   "update.scheduled.cancelFailed": "לא ניתן לבטל את העדכון.",
-  "update.idleRestart.relaunchTitle": "OpenBot יופעל מחדש כשהסוכנים לא פעילים",
-  "update.idleRestart.updateTitle": "OpenBot יתקין את העדכון כשהסוכנים לא פעילים",
+  "update.idleRestart.relaunchTitle": "StarBot יופעל מחדש כשהסוכנים לא פעילים",
+
+  "update.idleRestart.updateTitle": "StarBot יתקין את העדכון כשהסוכנים לא פעילים",
+
   "update.idleRestart.description": "הרצות שגרה חדשות ימתינו עד ההפעלה מחדש.",
   "update.idleRestart.waitingFor": "ממתין: {reasons}.",
   "update.idleRestart.cancel": "ביטול ההפעלה מחדש",
   "update.idleRestart.restartNow": "הפעלה מחדש עכשיו",
-  "update.idleRestart.restartNowTitle": "להפעיל מחדש את OpenBot עכשיו?",
+  "update.idleRestart.restartNowTitle": "להפעיל מחדש את StarBot עכשיו?",
+
   "update.idleRestart.restartNowDescription": "תורות של סוכנים והרצות שגרה שלא הסתיימו ייעצרו עכשיו.",
   "update.idleRestart.keepWaiting": "להמשיך להמתין",
   "update.idleRestart.cancelFailed": "לא ניתן לבטל את ההפעלה מחדש.",
   "update.idleRestart.requestFailed": "לא ניתן לתזמן את ההפעלה מחדש.",
-  "update.idleRestart.failedTitle": "OpenBot לא הופעל מחדש",
-  "update.whatsNew.title": "מה חדש ב-OpenBot",
-  "update.whatsNew.description": "התכונות והשינויים החדשים בגרסה הזו של OpenBot.",
+  "update.idleRestart.failedTitle": "StarBot לא הופעל מחדש",
+
+  "update.whatsNew.title": "מה חדש ב-StarBot",
+
+  "update.whatsNew.description": "התכונות והשינויים החדשים בגרסה הזו של StarBot.",
+
   "update.whatsNew.version": "גרסה {version}",
   "update.whatsNew.updatedFrom": "עודכן מגרסה {from} לגרסה {to}",
   "update.whatsNew.group.added": "חדש",
@@ -65,11 +75,14 @@ export const messages = {
   "update.whatsNew.empty.title": "אין תכונות חדשות בגרסה הזו",
   "update.whatsNew.empty.body": "אין לגרסה הזו הערות להצגה כאן. יומן השינויים המלא מציג את כל השינויים.",
   "update.whatsNew.changelog": "יומן שינויים מלא",
-  "update.whatsNew.changelogFailed": "OpenBot לא הצליח לפתוח את יומן השינויים.",
+  "update.whatsNew.changelogFailed": "StarBot לא הצליח לפתוח את יומן השינויים.",
+
   "update.whatsNew.done": "הבנתי",
   "update.required.title": "נדרש עדכון",
-  "update.required.description": "OpenBot {version} כבר לא נתמך. יש לעדכן לגרסה {minimum} ומעלה כדי להמשיך.",
-  "update.required.download": "הורדת OpenBot",
+  "update.required.description": "StarBot {version} כבר לא נתמך. יש לעדכן לגרסה {minimum} ומעלה כדי להמשיך.",
+
+  "update.required.download": "הורדת StarBot",
+
   "update.required.continue": "המשך בלי לעדכן",
   "update.required.failed": "העדכון לא הסתיים.",
 } as const satisfies PartialTranslation<typeof source>;

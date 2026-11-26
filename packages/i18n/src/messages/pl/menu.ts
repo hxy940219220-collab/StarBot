@@ -11,9 +11,12 @@ export const messages = {
   "menu.closeDeveloperTools": "Zamknij narzędzia dla programistów",
   "menu.copyLink": "Kopiuj link",
   "menu.copyImage": "Kopiuj obraz",
-  "menu.quit": "Zamknij OpenBot",
-  "menu.quitConfirmTitle": "Zamknąć OpenBot?",
-  "menu.quitConfirmBody": "Agenci i rutyny zatrzymają się, dopóki nie otworzysz OpenBot ponownie.",
+  "menu.quit": "Zamknij StarBot",
+
+  "menu.quitConfirmTitle": "Zamknąć StarBot?",
+
+  "menu.quitConfirmBody": "Agenci i rutyny zatrzymają się, dopóki nie otworzysz StarBot ponownie.",
+
   "menu.quitConfirm": "Zamknij",
   "menu.quitHint": "Przytrzymaj ⌘Q lub naciśnij dwa razy, aby zamknąć",
   "menu.closeWorkingTitle": {
@@ -23,11 +26,15 @@ export const messages = {
     other: "{count} agenta nadal pracuje",
   },
   "menu.closeWorkingBody":
-    "Jeśli zamkniesz OpenBot, agenci się zatrzymają. Zostaw go uruchomionego, aby skończyli. Aby znowu pokazać okno, otwórz OpenBot.",
+    "Jeśli zamkniesz StarBot, agenci się zatrzymają. Zostaw go uruchomionego, aby skończyli. Aby znowu pokazać okno, otwórz StarBot.",
+
   "menu.closeKeepRunning": "Nie zamykaj",
-  "menu.trayOpen": "Otwórz OpenBot",
-  "menu.trayQuit": "Zamknij OpenBot",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "Otwórz StarBot",
+
+  "menu.trayQuit": "Zamknij StarBot",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Ukryj Dynamic Island",
   "menu.undo": "Cofnij",
   "menu.redo": "Przywróć",

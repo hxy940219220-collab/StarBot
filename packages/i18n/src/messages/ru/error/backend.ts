@@ -3,7 +3,8 @@ import type { messages as source } from "../../en/error/backend";
 
 export const messages = {
   "error.backend.eventsUnavailable": "События недоступны на этом хосте.",
-  "error.backend.databaseIntegrity": "База данных OpenBot не прошла проверку целостности.",
+  "error.backend.databaseIntegrity": "База данных StarBot не прошла проверку целостности.",
+
   "error.backend.webhookRouteLimit": "На хосте может быть не более {limit} регулярных задач с вебхуком.",
   "error.backend.webhookSettingsInvalid": "Проверьте настройки вебхука и повторите попытку.",
   "error.backend.webhookSenderSecretInvalid":
@@ -15,8 +16,10 @@ export const messages = {
   "error.backend.browserViewLimit": "На этом хосте открыто слишком много видов браузера.",
   "error.backend.browserViewEnded": "Показ этой страницы в реальном времени завершён.",
   "error.backend.browserViewFailed": "Не удалось показать эту страницу в реальном времени.",
-  "error.backend.windowTemporarilyUnavailable": "Окно OpenBot временно недоступно.",
-  "error.backend.windowUnavailable": "Окно OpenBot недоступно.",
+  "error.backend.windowTemporarilyUnavailable": "Окно StarBot временно недоступно.",
+
+  "error.backend.windowUnavailable": "Окно StarBot недоступно.",
+
   "error.backend.sunshineApiHttp": "API Sunshine вернул ошибку HTTP {status}.",
   "error.backend.sunshinePortsUnavailable":
     "Не удалось зарезервировать свободное семейство портов Sunshine для удалённого рабочего стола.",
@@ -34,7 +37,8 @@ export const messages = {
   "error.backend.moonlightRejectedPairing": "Moonlight отклонил сопряжение с Sunshine.",
   "error.backend.moonlightNoPin": "Moonlight не вернул PIN-код сопряжения.",
   "error.backend.moonlightPairingIncomplete": "Сопряжение Moonlight не завершено.",
-  "error.backend.moonlightWebNotEmbedded": "Moonlight Web — не встроенная сборка OpenBot.",
+  "error.backend.moonlightWebNotEmbedded": "Moonlight Web — не встроенная сборка StarBot.",
+
   "error.backend.moonlightEmptyResponse": "Moonlight вернул пустой ответ.",
   "error.backend.remoteDesktopTimeout": "Время запроса к удалённому рабочему столу истекло.",
   "error.backend.moonlightApiHttp": "API Moonlight вернул ошибку HTTP {status}.",
@@ -53,10 +57,13 @@ export const messages = {
   "error.backend.browserTeachUnsupported": "Этот удалённый хост не поддерживает запись задачи.",
   "error.backend.browserUserControlUnsupported": "Этот удалённый хост не поддерживает управление вкладкой браузера.",
   "error.backend.browserSignInUnsupported": "Этот удалённый хост не может принять вход с этого компьютера.",
-  "error.backend.browserSignInOpenFailed": "OpenBot не удалось открыть окно входа.",
+  "error.backend.browserSignInOpenFailed": "StarBot не удалось открыть окно входа.",
+
   "error.backend.browserSignInLoadFailed":
-    "OpenBot не удалось загрузить страницу в окне входа. Проверьте подключение к интернету, затем снова откройте окно входа.",
-  "error.backend.browserSignInReadFailed": "OpenBot не удалось прочитать вход из окна.",
+    "StarBot не удалось загрузить страницу в окне входа. Проверьте подключение к интернету, затем снова откройте окно входа.",
+
+  "error.backend.browserSignInReadFailed": "StarBot не удалось прочитать вход из окна.",
+
   "error.backend.browserStopUnsupported": "Этот удалённый хост не может остановить загрузку страницы.",
   "error.backend.sharedDataLocalOnly": "Общими данными управляют на компьютере, где работают эти агенты.",
   "error.backend.browserUrlProtocol": "Допускаются только URL браузера с HTTP(S).",
@@ -64,17 +71,21 @@ export const messages = {
   "error.backend.sunshineNotReadyReason": "Sunshine не стал готов. {reason}",
   "error.backend.channelLeadModelUnavailable": "Модель ведущего канала недоступна.",
   "error.backend.contextCompactionIneffective":
-    "Сжатие не уменьшает этот чат: после двух сжатий он всё ещё занимает {percent}% окна контекста модели, поэтому OpenBot перестаёт его сжимать. Большую часть окна занимают инструменты и инструкции. Отключите MCP-серверы или управление компьютером, которые не нужны этому агенту, или выберите модель с большим окном. Затем начните новый чат.",
+    "Сжатие не уменьшает этот чат: после двух сжатий он всё ещё занимает {percent}% окна контекста модели, поэтому StarBot перестаёт его сжимать. Большую часть окна занимают инструменты и инструкции. Отключите MCP-серверы или управление компьютером, которые не нужны этому агенту, или выберите модель с большим окном. Затем начните новый чат.",
+
   "error.backend.contextCompactionStopped":
-    "Два сжатия этого чата подряд не удались, поэтому OpenBot больше не сжимает его автоматически. Каждая попытка отправляет весь чат модели и расходует лимит тарифа. Выберите «Сжать сейчас», чтобы попробовать снова, или начните новый чат.",
+    "Два сжатия этого чата подряд не удались, поэтому StarBot больше не сжимает его автоматически. Каждая попытка отправляет весь чат модели и расходует лимит тарифа. Выберите «Сжать сейчас», чтобы попробовать снова, или начните новый чат.",
+
   "error.backend.providerModelAtCapacity":
     "Модель перегружена. Провайдер повторит попытку через несколько минут. Чтобы продолжить сейчас, остановите ход и выберите другую модель.",
   "error.backend.providerRetrying":
     "Провайдер не выполнил этот запрос {attempts} раза и пробует снова. Если агент не продолжит, остановите ход.",
   "error.backend.providerRetryingLargeContext":
-    "Провайдер не выполнил этот запрос {attempts} раза и пробует снова. Этот чат занимает {percent}% окна контекста модели. Если агент не продолжит, остановите ход: тогда OpenBot сожмёт чат перед следующим сообщением.",
+    "Провайдер не выполнил этот запрос {attempts} раза и пробует снова. Этот чат занимает {percent}% окна контекста модели. Если агент не продолжит, остановите ход: тогда StarBot сожмёт чат перед следующим сообщением.",
+
   "error.backend.sharedDataUnavailable": "Общие данные недоступны.",
-  "error.backend.shuttingDown": "OpenBot завершает работу.",
+  "error.backend.shuttingDown": "StarBot завершает работу.",
+
   "error.backend.channelUnconfirmedStart":
     "У канала есть неподтверждённый запуск назначения. Проверьте его результат, прежде чем удалять канал.",
   "error.backend.channelNotFound": "Канал не найден.",
@@ -132,7 +143,8 @@ export const messages = {
     "Запуск остановился с ошибкой, но причина не пришла. Откройте запуск, чтобы увидеть, что сделал агент.",
   "error.backend.turnNotStarted": "Провайдер не начал этот ход.",
   "error.backend.turnStartUnconfirmed":
-    "{provider} не подтвердил вовремя, что начал обрабатывать это сообщение. OpenBot не отправляет его снова, чтобы работа не выполнилась дважды. OpenBot ждёт до 5 минут, пока агент начнёт.",
+    "{provider} не подтвердил вовремя, что начал обрабатывать это сообщение. StarBot не отправляет его снова, чтобы работа не выполнилась дважды. StarBot ждёт до 5 минут, пока агент начнёт.",
+
   "error.backend.turnStartAbandoned":
     "Агент не начал обрабатывать это сообщение за 5 минут. Отправьте сообщение снова.",
   "error.backend.routineResultConnectionOff":
@@ -172,7 +184,8 @@ export const messages = {
   "error.backend.fileGone": "Файл не существует или уже удалён.",
   "error.backend.managedAttachmentChanged": "Управляемое вложение отсутствует или изменилось: {name}",
   "error.backend.mailboxStateCorrupt":
-    "Состояние почтового ящика повреждено или создано более новой версией OpenBot; перезапись отклонена.",
+    "Состояние почтового ящика повреждено или создано более новой версией StarBot; перезапись отклонена.",
+
   "error.backend.recipientDeleting": "Получатель удаляется. Повторите попытку, когда удаление завершится.",
   "error.backend.recipientHidden": "Этот агент скрыт. Восстановите его, чтобы отправлять сообщения.",
   "error.backend.agentIdUnknown": "Нет агента с ID {id}. Получите ID через openbot.list_agents и повторите попытку.",
@@ -186,7 +199,8 @@ export const messages = {
   "error.backend.videoGenerationNoVideo": "Создание видео не вернуло видео.",
   "error.backend.videoGenerationInterrupted": "Создание видео прервано.",
   "error.backend.attachmentNotRegularFile": "Прикреплять можно только обычные файлы: {name}",
-  "error.backend.attachmentCopyFailed": "OpenBot не смог скопировать {name}.",
+  "error.backend.attachmentCopyFailed": "StarBot не смог скопировать {name}.",
+
   "error.backend.routineNameRequired": "Нужно название регулярной задачи.",
   "error.backend.routineNameTooLong": "Название регулярной задачи слишком длинное.",
   "error.backend.routineInstructionRequired": "Нужна инструкция регулярной задачи.",
@@ -210,7 +224,8 @@ export const messages = {
   "error.backend.routineRunStarting":
     "Этот запуск регулярной задачи ещё начинается. Повторите попытку, когда начнётся его ход.",
   "error.backend.routineRunNoSession":
-    "OpenBot не может прервать активный запуск регулярной задачи, потому что сессия его провайдера недоступна.",
+    "StarBot не может прервать активный запуск регулярной задачи, потому что сессия его провайдера недоступна.",
+
   "error.backend.interruptSelf": "Агент не может прервать сам себя.",
   "error.backend.interruptOtherWork":
     "Этот агент работает над задачей, которую начало не ваше сообщение. Остановить её могут только пользователь или отправитель этой задачи.",
@@ -218,7 +233,8 @@ export const messages = {
     "Ход этого агента обрабатывает ваше сообщение, а также сообщение пользователя или другого агента. Остановить его может только пользователь кнопкой «Остановить агента» в чате этого агента.",
   "error.backend.interruptStarting": "Этот агент ещё начинает ход. Повторите попытку, когда ход начнётся.",
   "error.backend.interruptNoSession":
-    "OpenBot не может прервать этого агента, потому что сессия его провайдера недоступна.",
+    "StarBot не может прервать этого агента, потому что сессия его провайдера недоступна.",
+
   "error.backend.memoryTextRequired": "Нужен текст записи памяти.",
   "error.backend.memoryTextTooLong": "Текст записи памяти слишком длинный.",
   "error.backend.mcpServerGone": "Этого сервера MCP больше нет.",
@@ -251,9 +267,11 @@ export const messages = {
   "error.backend.messagePinLimit":
     "В этом чате 50 закреплённых сообщений. Открепите одно, прежде чем закрепить другое.",
   "error.backend.routineFlowHandoffFailed": "Регулярной задаче не удалось передать работу этому агенту.",
-  "error.backend.mcpServerLimit": "OpenBot хранит не более {limit} серверов MCP.",
+  "error.backend.mcpServerLimit": "StarBot хранит не более {limit} серверов MCP.",
+
   "error.backend.mcpServerNameTaken": "Сервер MCP с именем {name} уже существует.",
-  "error.backend.mcpServerInvalid": "OpenBot не может сохранить эту конфигурацию сервера MCP.",
+  "error.backend.mcpServerInvalid": "StarBot не может сохранить эту конфигурацию сервера MCP.",
+
   "error.backend.mcpHeaderNameInvalid":
     "Имена заголовков не могут содержать пробелы и символы вроде : ( ) /. Используйте имя вроде Authorization, а ключ или токен укажите в поле «Значение».",
   "error.backend.mcpServerNoAnswer": "Сервер не ответил за {seconds} с.",
@@ -263,25 +281,30 @@ export const messages = {
   "error.backend.mcpSignInAccountRefused":
     "Сервер отклонил аккаунт, с которым вы вошли. Проверьте, что у этого аккаунта есть доступ к сервису. Чтобы использовать другой аккаунт, выйдите и войдите снова.",
   "error.backend.mcpSignInClientRefused":
-    "Сервер входа не принял OpenBot при завершении входа. Войдите снова: OpenBot заново зарегистрируется на сервере.",
+    "Сервер входа не принял StarBot при завершении входа. Войдите снова: StarBot заново зарегистрируется на сервере.",
+
   "error.backend.mcpSignInAppRefused":
     "Сервер входа не принял приложение входа этого сервера. Проверьте ID клиента и секрет клиента приложения входа, затем войдите снова.",
   "error.backend.mcpCommandNotFound": "Команда не найдена: {command}",
   "error.backend.mcpProviderLimit":
     "Этот агент может использовать только ограниченное число серверов MCP. Чтобы использовать этот сервер, выключите сервер MCP, который агенту не нужен.",
   "error.backend.mcpRegistrationRefused":
-    "Сервер входа пока не принимает OpenBot как приложение. Дело не в вашем аккаунте. Подключитесь другим способом, например через локальный сервер MCP.",
+    "Сервер входа пока не принимает StarBot как приложение. Дело не в вашем аккаунте. Подключитесь другим способом, например через локальный сервер MCP.",
+
   "error.backend.mcpRegistrationUnavailable":
-    "Сервер входа не может зарегистрировать OpenBot как приложение. Дело не в вашем аккаунте. Чтобы подключиться, сохраните этот сервер в разделе Каталог, Приложения, затем добавьте к нему приложение входа.",
+    "Сервер входа не может зарегистрировать StarBot как приложение. Дело не в вашем аккаунте. Чтобы подключиться, сохраните этот сервер в разделе Каталог, Приложения, затем добавьте к нему приложение входа.",
+
   "error.backend.mcpSignInAbandonedGeneric": "Вход прерван.",
   "error.backend.mcpSignInForgotten": "Вход в MCP был забыт, пока выполнялся.",
   "error.backend.mcpSignInAbandoned": "Вход в MCP прерван.",
   "error.backend.mcpSignInNoBrowser": "Этот вход в MCP не может открыть браузер.",
   "error.backend.mcpSignInNotWebPage": "Адрес входа — не веб-страница.",
   "error.backend.mcpSignInRequired": "Этот сервер просит войти. Нажмите «Войти», чтобы продолжить в браузере.",
-  "error.backend.mcpSignInOnHost": "Этот сервер просит войти. Войдите в него в OpenBot на компьютере-хосте.",
+  "error.backend.mcpSignInOnHost": "Этот сервер просит войти. Войдите в него в StarBot на компьютере-хосте.",
+
   "error.backend.mcpSignInNeedsHttps":
-    "Этот сервер просит войти, а OpenBot входит только по https. Измените URL на {url}.",
+    "Этот сервер просит войти, а StarBot входит только по https. Измените URL на {url}.",
+
   "error.backend.mcpSignInOtherAddress":
     "Этот сервер выполняет вход только по адресу {url}. Измените URL на этот адрес, затем войдите снова.",
   "error.backend.mcpSignInCancelled": "Вход отменён.",
@@ -289,9 +312,11 @@ export const messages = {
   "error.backend.mcpSignInRefused": "Страница входа отказала в доступе. Войдите снова.",
   "error.backend.mcpSignInResponseTimedOut": "Ответ на вход не пришёл вовремя.",
   "error.backend.mcpSignInMetadataUnreadable":
-    "OpenBot не удалось прочитать сведения о входе для этого сервера. Проверьте адрес сервера и повторите попытку.",
+    "StarBot не удалось прочитать сведения о входе для этого сервера. Проверьте адрес сервера и повторите попытку.",
+
   "error.backend.mcpSignInAnswerUnreadable":
-    "Сервер входа прислал ответ, который OpenBot не может прочитать. Если сервис выдаёт API-ключ или токен, добавьте его в настройки этого сервера и снова проверьте подключение.",
+    "Сервер входа прислал ответ, который StarBot не может прочитать. Если сервис выдаёт API-ключ или токен, добавьте его в настройки этого сервера и снова проверьте подключение.",
+
   "error.backend.mcpServerExited":
     "Сервер остановился, не ответив. Запустите команду в терминале, чтобы увидеть ошибку.",
   "error.backend.mcpServerExitedWithOutput": "Сервер остановился, не ответив. Он написал: {detail}",
@@ -308,7 +333,8 @@ export const messages = {
   "error.backend.mcpServerFailedForProvider":
     "{provider} не может запустить MCP-сервер {name}. Откройте {name} в разделе Каталог, Приложения и выберите «Проверить подключение», чтобы увидеть причину.",
   "error.backend.mcpServerFailedInProvider":
-    "{provider} не может запустить MCP-сервер {name}. Его инструменты недоступны для {provider}. {provider} запускает сервер сам, поэтому проверка подключения в OpenBot может пройти успешно. Начните новый чат, чтобы попробовать снова.",
+    "{provider} не может запустить MCP-сервер {name}. Его инструменты недоступны для {provider}. {provider} запускает сервер сам, поэтому проверка подключения в StarBot может пройти успешно. Начните новый чат, чтобы попробовать снова.",
+
   "error.backend.mcpServerTimedOutInProvider":
     "{provider} не может запустить MCP-сервер {name}, потому что сервер не ответил вовремя. Начните новый чат, чтобы попробовать снова.",
   "error.backend.mcpServerUnavailableInProvider":
@@ -318,12 +344,16 @@ export const messages = {
   "error.backend.githubToolsNotStarted":
     "{provider} не может получить инструменты GitHub, потому что GitHub не ответил. Откройте GitHub в разделе Каталог, Приложения и подключите его снова, если он попросит. Затем начните новый чат, чтобы попробовать снова.",
   "error.backend.mcpOAuthProxyUnavailable":
-    "OpenBot не смог запустить локальное подключение для входа на этот сервер. Перезапустите OpenBot и повторите попытку.",
+    "StarBot не смог запустить локальное подключение для входа на этот сервер. Перезапустите StarBot и повторите попытку.",
+
   "error.backend.mcpOAuthSignInNeeded":
-    "Вход на этот MCP-сервер завершён. Пользователю нужно снова войти на него в OpenBot.",
+    "Вход на этот MCP-сервер завершён. Пользователю нужно снова войти на него в StarBot.",
+
   "error.backend.mcpOAuthRenewalFailed":
-    "OpenBot не смог сейчас обновить вход на этот MCP-сервер. Вход сохранён, следующий запрос попробует снова. Если ошибка повторяется, пользователь может выйти из сервера в OpenBot и войти снова.",
-  "error.backend.mcpServerUnreachable": "OpenBot не смог связаться с сервером. Проверьте URL и сеть.",
+    "StarBot не смог сейчас обновить вход на этот MCP-сервер. Вход сохранён, следующий запрос попробует снова. Если ошибка повторяется, пользователь может выйти из сервера в StarBot и войти снова.",
+
+  "error.backend.mcpServerUnreachable": "StarBot не смог связаться с сервером. Проверьте URL и сеть.",
+
   "error.backend.mcpLocalServerOff":
     "На этом компьютере по адресу {address} не отвечает ни один сервер. Запустите сервер или включите его в приложении, которое его запускает, и повторите попытку.",
   "error.backend.mcpServerBlocked":
@@ -331,7 +361,8 @@ export const messages = {
   "error.backend.mcpServerIncompatible":
     "По этому адресу что-то ответило, но не как сервер MCP через Streamable HTTP. Проверьте URL и обновите приложение, которое запускает сервер.",
   "error.backend.mcpRemoteBridge":
-    "{reason} Эта команда запускает мост mcp-remote. Выберите вместо него Streamable HTTP с URL {url}, и OpenBot выполнит вход.",
+    "{reason} Эта команда запускает мост mcp-remote. Выберите вместо него Streamable HTTP с URL {url}, и StarBot выполнит вход.",
+
   "error.backend.oauthNotHttps": "Эндпоинт OAuth {origin} не использует https, поэтому учётные данные не отправлены.",
   "error.backend.oauthTooManyRedirects": "Эндпоинт OAuth слишком много раз перенаправлял.",
   "error.backend.oauthRedirectOrigin": "Эндпоинт OAuth перенаправил на {origin}, поэтому учётные данные не переданы.",
@@ -386,14 +417,18 @@ export const messages = {
   "error.backend.uiBlockActionNotAllowed": "Это действие может выбрать только владелец или админ сервера.",
   "error.backend.approvalInactive": "Это подтверждение больше не активно.",
   "error.backend.feedbackNeedsPhone":
-    "Этот отчёт может отправить только приложение OpenBot на телефоне: оно добавляет версию и журнал поддержки телефона. Откройте этот чат на телефоне. Если вы видите это сообщение там, обновите приложение на телефоне.",
+    "Этот отчёт может отправить только приложение StarBot на телефоне: оно добавляет версию и журнал поддержки телефона. Откройте этот чат на телефоне. Если вы видите это сообщение там, обновите приложение на телефоне.",
+
   "error.backend.takeoverInactive": "Этот перехват браузера больше не активен.",
   "error.backend.authSubmitting": "Отправка аутентификации уже выполняется.",
-  "error.backend.apiKeyListFailed": "OpenBot не удалось прочитать сохранённые ключи API.",
-  "error.backend.apiKeySaveFailed": "OpenBot не удалось сохранить ключ API. Повторите попытку.",
+  "error.backend.apiKeyListFailed": "StarBot не удалось прочитать сохранённые ключи API.",
+
+  "error.backend.apiKeySaveFailed": "StarBot не удалось сохранить ключ API. Повторите попытку.",
+
   "error.backend.apiKeySaving": "Ключ API уже сохраняется.",
   "error.backend.apiKeyAnswerUnreadable":
-    "OpenBot не смог прочитать ключ API. Введите ключ длиной не более 8000 символов и выберите, кто может его использовать.",
+    "StarBot не смог прочитать ключ API. Введите ключ длиной не более 8000 символов и выберите, кто может его использовать.",
+
   "error.backend.authRequestInactive": "Этот запрос безопасной аутентификации больше не активен.",
   "error.backend.secureAuthUnavailable": "Безопасная аутентификация недоступна.",
   "error.backend.browserUrlRequired": "Нужен URL для браузера.",
@@ -415,7 +450,8 @@ export const messages = {
   "error.backend.browserProxyUnreachable": "Прокси {name} не отвечает, поэтому страница не открылась.",
   "error.backend.browserProxySignInRefused": "Прокси {name} отклонил вход, поэтому страница не открылась.",
   "error.backend.browserSystemProxyFailed":
-    "Прокси в настройках компьютера, на котором работает OpenBot, не отвечает или отклонил подключение, поэтому страница не открылась. Проверьте настройки прокси этого компьютера.",
+    "Прокси в настройках компьютера, на котором работает StarBot, не отвечает или отклонил подключение, поэтому страница не открылась. Проверьте настройки прокси этого компьютера.",
+
   "error.backend.browserProxyComputerUnreachable":
     "Компьютер этого профиля не отвечает, поэтому страница не открылась.",
   "error.backend.browserProxyComputerLocalAddress":
@@ -450,7 +486,8 @@ export const messages = {
   "error.backend.mcpSignInAppUrl": "Для приложения входа нужен правильный URL сервера.",
   "error.backend.mcpSignInAppClientId": "Введите ID клиента приложения входа.",
   "error.backend.mcpSignInAppIssuerChanged":
-    "Сервер входа этого MCP-сервера изменился, поэтому OpenBot не отправил ему приложение входа. Если это изменение верно, удалите приложение входа и добавьте его снова.",
+    "Сервер входа этого MCP-сервера изменился, поэтому StarBot не отправил ему приложение входа. Если это изменение верно, удалите приложение входа и добавьте его снова.",
+
   "error.backend.mcpSignInAppNoServer":
     "Сохраните этот MCP-сервер как URL-сервер, прежде чем добавлять приложение входа.",
   "error.backend.mcpSignInAppUnavailable": "Этот компьютер не может хранить приложение входа.",
@@ -482,6 +519,8 @@ export const messages = {
   "error.backend.taskOpenLimitReached":
     "У этого агента открыто задач: {count}. Закройте задачу, затем начните или откройте другую.",
   "error.backend.taskRemoteUnsupported": "Задачи доступны только для агентов на этом компьютере.",
-  "error.backend.taskMessageFailed": "OpenBot не удалось отправить сообщение задаче. Повторите попытку позже.",
-  "error.backend.taskStartFailed": "OpenBot не удалось запустить задачу. Выполните работу в этом ходе.",
+  "error.backend.taskMessageFailed": "StarBot не удалось отправить сообщение задаче. Повторите попытку позже.",
+
+  "error.backend.taskStartFailed": "StarBot не удалось запустить задачу. Выполните работу в этом ходе.",
+
 } as const satisfies PartialTranslation<typeof source>;

@@ -33,29 +33,39 @@ export const messages = {
   "update.provider.showDetails": "Показать подробности",
   "update.provider.hideDetails": "Скрыть подробности",
 
-  "update.scheduled.title": "{name} запланировал(а) обновление OpenBot",
-  "update.scheduled.automaticTitle": "OpenBot устанавливает обновление",
-  "update.scheduled.whenIdle": "OpenBot перезапустится, когда агенты освободятся.",
-  "update.scheduled.now": "OpenBot перезапустится после загрузки обновления.",
+  "update.scheduled.title": "{name} запланировал(а) обновление StarBot",
+
+  "update.scheduled.automaticTitle": "StarBot устанавливает обновление",
+
+  "update.scheduled.whenIdle": "StarBot перезапустится, когда агенты освободятся.",
+
+  "update.scheduled.now": "StarBot перезапустится после загрузки обновления.",
+
   "update.scheduled.cancel": "Отменить обновление",
   "update.scheduled.cancelFailed": "Не удалось отменить обновление.",
 
-  "update.idleRestart.relaunchTitle": "OpenBot перезапустится, когда агенты освободятся",
-  "update.idleRestart.updateTitle": "OpenBot установит обновление, когда агенты освободятся",
+  "update.idleRestart.relaunchTitle": "StarBot перезапустится, когда агенты освободятся",
+
+  "update.idleRestart.updateTitle": "StarBot установит обновление, когда агенты освободятся",
+
   "update.idleRestart.description": "Новые запуски регулярных задач ждут перезапуска.",
   "update.idleRestart.waitingFor": "Ожидание: {reasons}.",
   "update.idleRestart.cancel": "Отменить перезапуск",
   "update.idleRestart.restartNow": "Перезапустить сейчас",
-  "update.idleRestart.restartNowTitle": "Перезапустить OpenBot сейчас?",
+  "update.idleRestart.restartNowTitle": "Перезапустить StarBot сейчас?",
+
   "update.idleRestart.restartNowDescription":
     "Незавершённые ходы агентов и запуски регулярных задач сейчас остановятся.",
   "update.idleRestart.keepWaiting": "Ждать дальше",
   "update.idleRestart.cancelFailed": "Не удалось отменить перезапуск.",
   "update.idleRestart.requestFailed": "Не удалось запланировать перезапуск.",
-  "update.idleRestart.failedTitle": "OpenBot не перезапустился",
+  "update.idleRestart.failedTitle": "StarBot не перезапустился",
 
-  "update.whatsNew.title": "Что нового в OpenBot",
-  "update.whatsNew.description": "Новые функции и изменения в этой версии OpenBot.",
+
+  "update.whatsNew.title": "Что нового в StarBot",
+
+  "update.whatsNew.description": "Новые функции и изменения в этой версии StarBot.",
+
   "update.whatsNew.version": "Версия {version}",
   "update.whatsNew.updatedFrom": "Обновлено с {from} до {to}",
   "update.whatsNew.group.added": "Новое",
@@ -76,12 +86,15 @@ export const messages = {
   "update.whatsNew.empty.title": "В этой версии нет новых функций",
   "update.whatsNew.empty.body": "Для этой версии нет примечаний. Все изменения есть в полном списке изменений.",
   "update.whatsNew.changelog": "Все изменения",
-  "update.whatsNew.changelogFailed": "OpenBot не удалось открыть список изменений.",
+  "update.whatsNew.changelogFailed": "StarBot не удалось открыть список изменений.",
+
   "update.whatsNew.done": "Понятно",
   "update.required.title": "Требуется обновление",
   "update.required.description":
-    "OpenBot {version} больше не поддерживается. Обновите до версии {minimum} или новее, чтобы продолжить.",
-  "update.required.download": "Скачать OpenBot",
+    "StarBot {version} больше не поддерживается. Обновите до версии {minimum} или новее, чтобы продолжить.",
+
+  "update.required.download": "Скачать StarBot",
+
   "update.required.continue": "Продолжить без обновления",
   "update.required.failed": "Обновление не завершилось.",
 } as const satisfies PartialTranslation<typeof source>;

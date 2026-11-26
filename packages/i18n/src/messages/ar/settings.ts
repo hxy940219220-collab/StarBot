@@ -3,7 +3,8 @@ import type { messages as source } from "../en/settings";
 
 export const messages = {
   "settings.language.title": "اللغة",
-  "settings.language.description": "يعرض OpenBot القوائم والأزرار والرسائل بهذه اللغة.",
+  "settings.language.description": "يعرض StarBot القوائم والأزرار والرسائل بهذه اللغة.",
+
   "settings.language.system": "الافتراضي في النظام",
   "settings.appearance.title": "المظهر",
   "settings.appearance.theme.title": "السمة",
@@ -15,7 +16,8 @@ export const messages = {
   "settings.appearance.transparentWindow.description":
     "عرض سطح المكتب الضبابي خلف النافذة. تستخدم المواقع والقوائم حينها سمة التطبيق.",
   "settings.interfaceSize.title": "حجم الواجهة",
-  "settings.interfaceSize.description": "حجم النص وعناصر التحكم في OpenBot.",
+  "settings.interfaceSize.description": "حجم النص وعناصر التحكم في StarBot.",
+
   "settings.interfaceFont.title": "خط الواجهة",
   "settings.interfaceFont.description": "خط القوائم والمحادثات والإعدادات.",
   "settings.interfaceFont.default": "الافتراضي (Inter)",
@@ -29,7 +31,8 @@ export const messages = {
   "settings.movingFaces.title": "وجوه الوكلاء المتحركة",
   "settings.movingFaces.description": "ترمش وجوه الوكلاء وتتحرك. تبدأ ثابتة على جهاز بلا GPU.",
   "settings.startupAnimation.title": "رسوم البدء المتحركة",
-  "settings.startupAnimation.description": "اعرض رسوم الوكلاء المتحركة أثناء فتح OpenBot.",
+  "settings.startupAnimation.description": "اعرض رسوم الوكلاء المتحركة أثناء فتح StarBot.",
+
   "settings.logoColor.title": "لون الشعار",
   "settings.logoColor.description": "يظهر في Dock وشريط المهام وDynamic Island.",
   "settings.logoColor.buildNote": "يحتفظ هذا الإصدار بلون شعاره الخاص. ينطبق الاختيار على التطبيق الرسمي.",
@@ -89,12 +92,16 @@ export const messages = {
   "settings.bubbleStyle.classic": "كلاسيكي",
   "settings.appBehavior.title": "سلوك التطبيق",
   "settings.conversations.title": "المحادثات",
-  "settings.launchAtLogin.title": "تشغيل OpenBot عند تسجيل الدخول",
+  "settings.launchAtLogin.title": "تشغيل StarBot عند تسجيل الدخول",
+
   "settings.launchAtLogin.description": "فتح التطبيق عند تسجيل الدخول إلى هذا الحاسوب.",
-  "settings.keepRunning.title": "إبقاء OpenBot يعمل في الخلفية",
+  "settings.keepRunning.title": "إبقاء StarBot يعمل في الخلفية",
+
   "settings.keepRunning.description": "إبقاء المهام النشطة قيد التشغيل بعد إغلاق النافذة.",
-  "settings.menuBar.title": "عرض OpenBot في شريط القوائم",
-  "settings.menuBar.description": "فتح OpenBot أو إنهاؤه من أيقونة في شريط القوائم.",
+  "settings.menuBar.title": "عرض StarBot في شريط القوائم",
+
+  "settings.menuBar.description": "فتح StarBot أو إنهاؤه من أيقونة في شريط القوائم.",
+
   "settings.keepAwake.title": "إبقاء هذا الحاسوب في وضع التشغيل",
   "settings.keepAwake.description":
     "تعمل المهام الدورية في موعدها ما دام الحاسوب متصلًا بالكهرباء. يمكن أن تنطفئ الشاشة مع ذلك.",
@@ -111,7 +118,8 @@ export const messages = {
   "settings.externalLinks.title": "فتح الروابط الخارجية في",
   "settings.externalLinks.description": "تُفتح هنا الروابط في الدردشات وصفحات تسجيل الدخول وصفحات الفوترة.",
   "settings.externalLinks.defaultBrowser": "المتصفح الافتراضي",
-  "settings.externalLinks.openbot": "OpenBot",
+  "settings.externalLinks.openbot": "StarBot",
+
   "settings.externalLinks.defaultBrowserNamed": "المتصفح الافتراضي ({name})",
   "settings.externalLinks.otherApp": "تطبيق آخر…",
   "settings.externalLinks.command": "أمر…",
@@ -153,9 +161,11 @@ export const messages = {
   "settings.agentDefaults.agentLabel": "{setting} لـ {agent}",
   "settings.agentDefaults.loadFailed": "تعذّرت قراءة الوكلاء.",
   "settings.commitCoAuthor.sectionTitle": "إيداعات Git",
-  "settings.commitCoAuthor.title": "ذكر OpenBot في الإيداعات",
+  "settings.commitCoAuthor.title": "ذكر StarBot في الإيداعات",
+
   "settings.commitCoAuthor.description":
-    "يضيف الوكلاء OpenBot كمؤلف مشارك في الإيداعات التي يُنشئونها. وتبقى أنت المؤلف.",
+    "يضيف الوكلاء StarBot كمؤلف مشارك في الإيداعات التي يُنشئونها. وتبقى أنت المؤلف.",
+
   "settings.planStart.title": "بدء العمل",
   "settings.planStart.wait": "عند الضغط على «بدء»",
   "settings.planStart.after": "بعد {time}",
@@ -180,7 +190,8 @@ export const messages = {
     "أقصى عدد من الرسائل وتشغيلات المهام الدورية التي يمكن للبرامج النصية المحلية إرسالها إلى كل وكيل في ساعة واحدة.",
   "settings.backgroundProcesses.title": "العمليات في الخلفية",
   "settings.backgroundProcesses.description":
-    "برامج بدأها الوكلاء وتركوها تعمل، مثل خوادم التطوير. تستمر في العمل بعد انتهاء الدردشة وبعد إنهاء OpenBot.",
+    "برامج بدأها الوكلاء وتركوها تعمل، مثل خوادم التطوير. تستمر في العمل بعد انتهاء الدردشة وبعد إنهاء StarBot.",
+
   "settings.backgroundProcesses.empty": "لا توجد برامج من الوكلاء قيد التشغيل.",
   "settings.backgroundProcesses.loadFailed": "تعذّرت قراءة العمليات في الخلفية.",
   "settings.backgroundProcesses.noAgent": "لا وكيل",
@@ -198,7 +209,8 @@ export const messages = {
   "settings.backgroundProcesses.stopFailed": "تعذّر إيقاف العملية.",
   "settings.keepRemoteSessions.title": "اتصال سريع بالخوادم",
   "settings.keepRemoteSessions.description":
-    "الإبقاء على الاتصال بالخوادم المنضم إليها بين مرات التشغيل. يبدأ OpenBot أسرع بنحو ثانية. عند إنهاء OpenBot، لا تغلق خدمة OpenBot الاتصال.",
+    "الإبقاء على الاتصال بالخوادم المنضم إليها بين مرات التشغيل. يبدأ StarBot أسرع بنحو ثانية. عند إنهاء StarBot، لا تغلق خدمة StarBot الاتصال.",
+
   "settings.permissions.title": "الأذونات",
   "settings.notifications.whatYouHear": "ما تُبلَّغ به",
   "settings.notifications.allDevices": "كل أجهزتي",
@@ -215,7 +227,8 @@ export const messages = {
   "settings.notificationMatrix.offline": "غير متصل",
   "settings.notificationMatrix.thisComputerOnly": "هذا الحاسوب فقط",
   "settings.notificationMatrix.thisBrowserOnly": "هذا المتصفح فقط",
-  "settings.notificationMatrix.updateServer": "حدّث OpenBot على هذا الخادم لاختيار الوكلاء",
+  "settings.notificationMatrix.updateServer": "حدّث StarBot على هذا الخادم لاختيار الوكلاء",
+
   "settings.notificationMatrix.loading": "جارٍ تحميل الوكلاء…",
   "settings.notificationMatrix.loadFailed": "تعذّر تحميل وكلاء هذا الخادم.",
   "settings.desktopNotifications.title": "إشعارات سطح المكتب",
@@ -223,7 +236,8 @@ export const messages = {
   "settings.notificationPreview.title": "عرض معاينة الرسالة",
   "settings.notificationPreview.description": "عرض بداية رد الوكيل أو سؤاله في الإشعارات.",
   "settings.testNotification.title": "إشعار تجريبي",
-  "settings.testNotification.description": "اعرض واحدًا الآن. إذا لم يظهر، اسمح بإشعارات OpenBot في إعدادات النظام.",
+  "settings.testNotification.description": "اعرض واحدًا الآن. إذا لم يظهر، اسمح بإشعارات StarBot في إعدادات النظام.",
+
   "settings.testNotification.action": "إرسال تجربة",
   "settings.testNotification.failed": "تعذّر عرض إشعار.",
   "settings.testNotification.openSettings": "فتح إعدادات النظام",
@@ -245,12 +259,14 @@ export const messages = {
   "settings.notch.show.description": "عرض نشاط الوكلاء والعناصر التي تحتاج إلى انتباهك أعلى كل شاشة.",
   "settings.notch.xwayland.title": "يلزم إعادة التشغيل",
   "settings.notch.xwayland.description":
-    "على Wayland، يجب أن يستخدم OpenBot ‏XWayland ليعرض Dynamic Island فوق التطبيقات الأخرى. حتى ذلك الحين، لا تظهر الجزيرة.",
+    "على Wayland، يجب أن يستخدم StarBot ‏XWayland ليعرض Dynamic Island فوق التطبيقات الأخرى. حتى ذلك الحين، لا تظهر الجزيرة.",
+
   "settings.notch.xwayland.unsupported":
     "على Wayland بدون XWayland، لا يمكن أن تظهر Dynamic Island فوق التطبيقات الأخرى.",
   "settings.notch.xwayland.restart": "إعادة التشغيل",
   "settings.notch.idle.title": "عرض الجزيرة في وضع الخمول",
-  "settings.notch.idle.description": "عرض شعار OpenBot والتحية عند عدم وجود حالة نشطة.",
+  "settings.notch.idle.description": "عرض شعار StarBot والتحية عند عدم وجود حالة نشطة.",
+
   "settings.notch.displays.title": "العرض على شاشات إضافية",
   "settings.notch.displays.description": "عرض Dynamic Island على الشاشات الخارجية المتصلة.",
   "settings.notch.haptics.title": "الاستجابة اللمسية",
@@ -270,18 +286,24 @@ export const messages = {
   "settings.agentDock.show.description": "يعرض وكلاءك عند حافة الشاشة، جاهزين لدردشة سريعة.",
   "settings.agentDock.placement.title": "الموضع",
   "settings.agentDock.placement.description":
-    "يُبقي خيار «فوق التطبيقات الأخرى» الشريط على الشاشة عندما يعمل OpenBot في الخلفية.",
+    "يُبقي خيار «فوق التطبيقات الأخرى» الشريط على الشاشة عندما يعمل StarBot في الخلفية.",
+
   "settings.agentDock.placement.screen": "فوق التطبيقات الأخرى",
-  "settings.agentDock.placement.window": "في نافذة OpenBot",
+  "settings.agentDock.placement.window": "في نافذة StarBot",
+
   "settings.agentDock.xwayland.title": "يلزم إعادة التشغيل",
   "settings.agentDock.xwayland.description":
-    "على Wayland، يجب أن يستخدم OpenBot ‏XWayland ليعرض الشريط فوق التطبيقات الأخرى. حتى ذلك الحين، يظهر الشريط في نافذة OpenBot.",
+    "على Wayland، يجب أن يستخدم StarBot ‏XWayland ليعرض الشريط فوق التطبيقات الأخرى. حتى ذلك الحين، يظهر الشريط في نافذة StarBot.",
+
   "settings.agentDock.xwayland.unsupported":
-    "على Wayland بدون XWayland، لا يمكن أن يظهر الشريط فوق التطبيقات الأخرى. يظهر في نافذة OpenBot.",
+    "على Wayland بدون XWayland، لا يمكن أن يظهر الشريط فوق التطبيقات الأخرى. يظهر في نافذة StarBot.",
+
   "settings.agentDock.xwayland.restart": "إعادة التشغيل",
   "settings.agentDock.display.title": "الشاشة",
-  "settings.agentDock.display.description": "إذا لم تكن تلك الشاشة متصلة، فسينتقل الشريط إلى شاشة نافذة OpenBot.",
-  "settings.agentDock.display.window": "مع نافذة OpenBot",
+  "settings.agentDock.display.description": "إذا لم تكن تلك الشاشة متصلة، فسينتقل الشريط إلى شاشة نافذة StarBot.",
+
+  "settings.agentDock.display.window": "مع نافذة StarBot",
+
   "settings.agentDock.display.primary": "الشاشة الرئيسية",
   "settings.agentDock.display.all": "كل الشاشات",
   "settings.agentDock.display.unnamed": "الشاشة {number}",
@@ -308,23 +330,29 @@ export const messages = {
   "settings.agentDock.agents.empty": "لا يوجد وكلاء على هذا الخادم بعد.",
   "settings.analytics.title": "ربط التحليلات بحسابي",
   "settings.analytics.description":
-    "مفعّل: تُرسل بيانات الاستخدام والموثوقية الوصفية إلى تحليلات OpenBot المستضافة ذاتيًا مع معرّف حسابك وبريدك الإلكتروني، ومع المواقع التي تزورها أنت ووكلاؤك، واستخدام الأدوات وملخص يومي لإعدادك. متوقف: يُرسل الاستخدام الأساسي فقط، مثل الأدوار وأعداد الرموز، مع معرّف تثبيت عشوائي. لا تُرسل الدردشات والملفات والموجّهات أبدًا.",
+    "مفعّل: تُرسل بيانات الاستخدام والموثوقية الوصفية إلى تحليلات StarBot المستضافة ذاتيًا مع معرّف حسابك وبريدك الإلكتروني، ومع المواقع التي تزورها أنت ووكلاؤك، واستخدام الأدوات وملخص يومي لإعدادك. متوقف: يُرسل الاستخدام الأساسي فقط، مثل الأدوار وأعداد الرموز، مع معرّف تثبيت عشوائي. لا تُرسل الدردشات والملفات والموجّهات أبدًا.",
+
   "settings.analytics.webDescription":
-    "مفعّل: تُرسل بيانات الاستخدام والموثوقية الوصفية إلى تحليلات OpenBot المستضافة ذاتيًا مع معرّف حسابك وبريدك الإلكتروني. متوقف: تُرسل البيانات الوصفية نفسها مع معرّف تثبيت عشوائي فقط. لا تُرسل الدردشات والملفات والموجّهات أبدًا. ينطبق هذا الإعداد على هذا المتصفح.",
+    "مفعّل: تُرسل بيانات الاستخدام والموثوقية الوصفية إلى تحليلات StarBot المستضافة ذاتيًا مع معرّف حسابك وبريدك الإلكتروني. متوقف: تُرسل البيانات الوصفية نفسها مع معرّف تثبيت عشوائي فقط. لا تُرسل الدردشات والملفات والموجّهات أبدًا. ينطبق هذا الإعداد على هذا المتصفح.",
+
   "settings.tab.general.title": "عام",
-  "settings.tab.general.description": "اختر كيف تعمل المحادثات وما يشاركه OpenBot.",
+  "settings.tab.general.description": "اختر كيف تعمل المحادثات وما يشاركه StarBot.",
+
   "settings.tab.agents.title": "الوكلاء",
   "settings.tab.agents.description": "اختر ما يمكن للوكلاء على هذا الحاسوب فعله عندما لا تحدده لوكيل.",
   "settings.tab.notifications.title": "الإشعارات",
-  "settings.tab.notifications.description": "اختر كيف ينبّهك OpenBot.",
+  "settings.tab.notifications.description": "اختر كيف ينبّهك StarBot.",
+
   "settings.tab.voice.title": "الصوت",
   "settings.tab.voice.description":
     "الإملاء في مربع الرسالة. تعمل النماذج المحلية على هذا الحاسوب؛ ويعمل ElevenLabs وGroq في السحابة.",
   "settings.tab.computerUse.title": "التحكم في الحاسوب",
   "settings.tab.computerUse.description":
-    "السماح للوكلاء في OpenBot على هذا الحاسوب برؤية تطبيقاته واستخدامها. يستخدم الوكلاء على خادم آخر حاسوب ذلك الخادم.",
+    "السماح للوكلاء في StarBot على هذا الحاسوب برؤية تطبيقاته واستخدامها. يستخدم الوكلاء على خادم آخر حاسوب ذلك الخادم.",
+
   "settings.tab.profile.title": "الملف الشخصي",
-  "settings.tab.profile.description": "إدارة كيفية ظهورك في OpenBot.",
+  "settings.tab.profile.description": "إدارة كيفية ظهورك في StarBot.",
+
   "settings.tab.mobileConnect.title": "Mobile Connect",
   "settings.tab.mobileConnect.description": "سجّل الدخول بأمان على هاتفك.",
   "settings.tab.dynamicIsland.title": "Dynamic Island",
@@ -332,13 +360,16 @@ export const messages = {
   "settings.tab.agentDock.title": "شريط الوكلاء",
   "settings.tab.agentDock.description": "اختر مكان ظهور الشريط والوكلاء الموجودين عليه.",
   "settings.tab.updates.title": "التحديثات",
-  "settings.tab.updates.description": "إبقاء OpenBot محدّثًا على هذا الحاسوب.",
+  "settings.tab.updates.description": "إبقاء StarBot محدّثًا على هذا الحاسوب.",
+
   "settings.tab.billing.title": "الفوترة",
   "settings.tab.billing.description": "الترخيص وخطط الخوادم وطريقة الدفع والفواتير.",
   "settings.tab.hostedServers.title": "الخوادم المستضافة",
-  "settings.tab.hostedServers.description": "أنشئ خوادم OpenBot تعمل عندما يكون هذا الحاسوب مطفأً.",
+  "settings.tab.hostedServers.description": "أنشئ خوادم StarBot تعمل عندما يكون هذا الحاسوب مطفأً.",
+
   "settings.tab.appearance.description": "اختر السمة والألوان واللغة والخطوط.",
-  "settings.tab.appBehavior.description": "اختر كيف يبدأ OpenBot ويعمل على هذا الحاسوب.",
+  "settings.tab.appBehavior.description": "اختر كيف يبدأ StarBot ويعمل على هذا الحاسوب.",
+
   "settings.appearance.colorsTitle": "الألوان",
   "settings.appearance.textTitle": "اللغة والنص",
   "settings.appBehavior.startTitle": "البدء والإنهاء",
@@ -355,26 +386,31 @@ export const messages = {
   "settings.disconnect.action": "قطع الاتصال",
   "settings.disconnect.pending": "جارٍ قطع الاتصال…",
   "settings.mobileConnect.phones.title": "هواتفك",
-  "settings.mobileConnect.phones.description": "الهواتف التي تستخدم OpenBot بهذا الحساب.",
+  "settings.mobileConnect.phones.description": "الهواتف التي تستخدم StarBot بهذا الحساب.",
+
   "settings.mobileConnect.phones.add": "إضافة هاتف",
   "settings.mobileConnect.phones.empty.title": "لا هواتف بعد",
   "settings.mobileConnect.phones.empty.description": "دردش مع وكلائك وتابع عملهم من هاتفك.",
   "settings.mobileConnect.devices.lastActive": "آخر نشاط: {time}",
   "settings.mobileConnect.add.title": "إضافة هاتف",
-  "settings.mobileConnect.add.question": "هل OpenBot مثبّت على الهاتف؟",
+  "settings.mobileConnect.add.question": "هل StarBot مثبّت على الهاتف؟",
+
   "settings.mobileConnect.add.signIn.title": "نعم، تسجيل الدخول",
   "settings.mobileConnect.add.signIn.hint": "عرض رمز لمرة واحدة",
   "settings.mobileConnect.add.install.title": "لا، الحصول على التطبيق",
   "settings.mobileConnect.add.install.hint": "iPhone أو Android",
   "settings.mobileConnect.add.install.heading": "الحصول على التطبيق",
-  "settings.mobileConnect.add.install.note": "وجّه كاميرا الهاتف نحو الرمز، وثبّت OpenBot، ثم تابع.",
+  "settings.mobileConnect.add.install.note": "وجّه كاميرا الهاتف نحو الرمز، وثبّت StarBot، ثم تابع.",
+
   "settings.mobileConnect.add.continue": "المتابعة إلى تسجيل الدخول",
   "settings.mobileConnect.qr.appStore": "يفتح App Store",
   "settings.mobileConnect.qr.playStore": "يفتح Google Play",
-  "settings.mobileConnect.qr.signIn": "امسح في تطبيق OpenBot",
+  "settings.mobileConnect.qr.signIn": "امسح في تطبيق StarBot",
+
   "settings.mobileConnect.qr.permanent": "رمز دائم",
   "settings.mobileConnect.qr.connected": "تم توصيل {name}",
-  "settings.mobileConnect.step.open": "افتح OpenBot على هاتفك.",
+  "settings.mobileConnect.step.open": "افتح StarBot على هاتفك.",
+
   "settings.mobileConnect.step.scan": "اضغط على «مسح رمز QR».",
   "settings.mobileConnect.step.point": "وجّه الكاميرا نحو هذه الشاشة.",
   "settings.mobileConnect.code.expired": "انتهت صلاحية الرمز",
@@ -428,13 +464,15 @@ export const messages = {
   "settings.mobileConnect.route.title": "كيف تتصل الأجهزة",
   "settings.mobileConnect.route.description": "للهواتف والحواسيب الأخرى وأعضاء الفريق الذين يتصلون بهذا الحاسوب.",
   "settings.mobileConnect.route.chipLabel": "كيف تتصل الأجهزة: {route}",
-  "settings.mobileConnect.route.openbot.title": "عبر OpenBot",
+  "settings.mobileConnect.route.openbot.title": "عبر StarBot",
+
   "settings.mobileConnect.route.openbot.badge": "مستحسن",
   "settings.mobileConnect.route.openbot.description": "يعمل على أي شبكة. الدردشات والملفات مشفّرة بين أجهزتك.",
   "settings.mobileConnect.route.private.title": "شبكة خاصة",
   "settings.mobileConnect.route.private.tailscale": "تم العثور على Tailscale",
   "settings.mobileConnect.route.private.description":
-    "Tailscale أو شبكة Wi-Fi هذه. لا تزال الأجهزة تسجّل الدخول عبر OpenBot. لا تمر الدردشات والملفات عبر خوادم OpenBot أبدًا، ولا تتصل الأجهزة إلا على تلك الشبكة.",
+    "Tailscale أو شبكة Wi-Fi هذه. لا تزال الأجهزة تسجّل الدخول عبر StarBot. لا تمر الدردشات والملفات عبر خوادم StarBot أبدًا، ولا تتصل الأجهزة إلا على تلك الشبكة.",
+
   "settings.mobileConnect.route.error.load": "تعذّر تحميل طريقة اتصال الأجهزة.",
   "settings.mobileConnect.route.error.save": "تعذّر تغيير طريقة اتصال الأجهزة.",
   "settings.mobileConnect.disconnectInfo.description":
@@ -469,14 +507,16 @@ export const messages = {
   "settings.profile.edit.title": "تعديل الملف الشخصي",
   "settings.profile.share.action": "مشاركة",
   "settings.profile.share.title": "مشاركة نشاطك",
-  "settings.profile.share.imageAlt": "نشاطك في OpenBot خلال الأشهر الستة الماضية",
+  "settings.profile.share.imageAlt": "نشاطك في StarBot خلال الأشهر الستة الماضية",
+
   "settings.profile.share.copy": "نسخ الصورة",
   "settings.profile.share.save": "حفظ الصورة",
   "settings.profile.share.copied": "تم نسخ الصورة",
   "settings.profile.share.copyFailed": "تعذّر نسخ الصورة.",
   "settings.profile.share.createFailed": "تعذّر إنشاء الصورة.",
   "settings.profile.share.fileName": "openbot-activity.png",
-  "settings.profile.share.caption": "أشهري الستة الأخيرة مع OpenBot",
+  "settings.profile.share.caption": "أشهري الستة الأخيرة مع StarBot",
+
   "settings.profile.activity.title": "النشاط على هذا الحاسوب",
   "settings.profile.activity.activeDays": {
     zero: "لا أيام نشطة في السنة الماضية",
@@ -526,7 +566,8 @@ export const messages = {
   "settings.profile.models.title": "استخدام النماذج",
   "settings.profile.account.title": "الحساب",
   "settings.profile.email.title": "البريد الإلكتروني",
-  "settings.profile.email.description": "يُستخدم لتسجيل الدخول إلى OpenBot.",
+  "settings.profile.email.description": "يُستخدم لتسجيل الدخول إلى StarBot.",
+
   "settings.profile.sessions.title": "جلسات الحساب",
   "settings.profile.sessions.description":
     "تبقى الجلسات مسجّلة الدخول حتى تسجّل الخروج أو تقطع اتصالها. يُنهي قطع الاتصال أيضًا الاتصالات البعيدة النشطة لهذا الحساب.",
@@ -545,9 +586,11 @@ export const messages = {
   "settings.profile.sessions.disconnectConfirm.title": "قطع اتصال هذه الجلسة؟",
   "settings.profile.sessions.disconnectConfirm.description":
     "سيُسجَّل خروج هذا الجهاز من حسابك. يجب أن يسجّل الدخول مرة أخرى للاتصال.",
-  "settings.updates.title": "تحديثات OpenBot",
+  "settings.updates.title": "تحديثات StarBot",
+
   "settings.updates.track.title": "مسار التحديث",
-  "settings.updates.track.description": "يتلقى المسار المستقر إصدارات OpenBot المختبرة.",
+  "settings.updates.track.description": "يتلقى المسار المستقر إصدارات StarBot المختبرة.",
+
   "settings.updates.track.stable": "مستقر",
   "settings.updates.version": "الإصدار {version}",
   "settings.updates.versionUnknown": "غير معروف",
@@ -557,9 +600,12 @@ export const messages = {
   "settings.updates.autoDownload.description": "تنزيل الإصدارات الجديدة عند توفرها.",
   "settings.updates.managed.title": "يديره Host Manager",
   "settings.updates.managed.description":
-    "يدير OpenBot Host Manager تحديثات جهاز Mac هذا تلقائيًا. يتشارك كل المستخدمين تطبيق OpenBot نفسه ويُحدَّثون معًا عندما يكون المستخدمون المسجّلون في وضع الخمول.",
-  "settings.updates.target.latest": "أحدث تحديث لـ OpenBot",
-  "settings.updates.host.upToDate": "محدّث. يُبقي OpenBot Host Manager جهاز Mac هذا محدّثًا.",
+    "يدير StarBot Host Manager تحديثات جهاز Mac هذا تلقائيًا. يتشارك كل المستخدمين تطبيق StarBot نفسه ويُحدَّثون معًا عندما يكون المستخدمون المسجّلون في وضع الخمول.",
+
+  "settings.updates.target.latest": "أحدث تحديث لـ StarBot",
+
+  "settings.updates.host.upToDate": "محدّث. يُبقي StarBot Host Manager جهاز Mac هذا محدّثًا.",
+
   "settings.updates.host.ready": "تم تنزيل {target}. في انتظار أن يكون المستخدمون الآخرون لجهاز Mac هذا في وضع الخمول.",
   "settings.updates.host.installing": "جارٍ تثبيت {target}…",
   "settings.updates.host.failed": "فشل التحديث المُدار. تواصل مع مسؤول جهاز Mac هذا.",
@@ -570,19 +616,26 @@ export const messages = {
   "settings.updates.status.downloadingProgress": "جارٍ تنزيل {target} · {progress}",
   "settings.updates.status.ready": "{target} جاهز. أعد التشغيل للتطبيق.",
   "settings.updates.status.installing": "جارٍ إعادة التشغيل لتطبيق {target}…",
-  "settings.updates.status.upToDate": "OpenBot محدّث على المسار المستقر.",
+  "settings.updates.status.upToDate": "StarBot محدّث على المسار المستقر.",
+
   "settings.updates.status.staged": "يُطرح {target} لبعض الأجهزة أولًا. تحقق من وجود تحديثات للحصول عليه الآن.",
-  "settings.updates.status.checkFailed": "تعذّر على OpenBot التحقق من وجود تحديثات. حاول مرة أخرى.",
+  "settings.updates.status.checkFailed": "تعذّر على StarBot التحقق من وجود تحديثات. حاول مرة أخرى.",
+
   "settings.updates.status.unsupported": "التحديثات غير متاحة في هذا الإصدار.",
-  "settings.updates.actionFailed": "تعذّر تحديث OpenBot.",
+  "settings.updates.actionFailed": "تعذّر تحديث StarBot.",
+
   "settings.updates.autoInstall.title": "تثبيت التحديثات تلقائيًا",
   "settings.updates.autoInstall.description":
-    "يعيد OpenBot التشغيل إلى تحديث منزَّل عندما يكون الوكلاء في وضع الخمول. يُقطع اتصال أعضاء خوادمك لوقت قصير.",
-  "settings.updates.idleRestart.title": "إعادة تشغيل OpenBot",
+    "يعيد StarBot التشغيل إلى تحديث منزَّل عندما يكون الوكلاء في وضع الخمول. يُقطع اتصال أعضاء خوادمك لوقت قصير.",
+
+  "settings.updates.idleRestart.title": "إعادة تشغيل StarBot",
+
   "settings.updates.idleRestart.relaunchDescription":
-    "يعيد OpenBot التشغيل عندما لا يعمل أي وكيل. تنتظر تشغيلات المهام الدورية الجديدة حتى ذلك الحين.",
+    "يعيد StarBot التشغيل عندما لا يعمل أي وكيل. تنتظر تشغيلات المهام الدورية الجديدة حتى ذلك الحين.",
+
   "settings.updates.idleRestart.updateDescription":
-    "يثبّت OpenBot {target} عندما لا يعمل أي وكيل. تنتظر تشغيلات المهام الدورية الجديدة حتى ذلك الحين.",
+    "يثبّت StarBot {target} عندما لا يعمل أي وكيل. تنتظر تشغيلات المهام الدورية الجديدة حتى ذلك الحين.",
+
   "settings.updates.idleRestart.relaunch": "إعادة التشغيل عند الخمول",
   "settings.updates.idleRestart.update": "التثبيت عند الخمول",
   "settings.updates.allowRemote.title": "السماح بالتحديثات من أعضاء الخادم",
@@ -718,7 +771,8 @@ export const messages = {
   "settings.voice.language.automatic": "تلقائي",
   "settings.voice.pause.title": "التوقف قبل الإرسال",
   "settings.voice.pause.description":
-    "في المحادثة الصوتية، يرسل OpenBot كلماتك عندما تتوقف عن الكلام لهذه المدة. اختر توقفًا أطول إذا كنت تتكلم ببطء أو تتوقف للتفكير. صوت Codex المباشر يحدد النهاية بنفسه.",
+    "في المحادثة الصوتية، يرسل StarBot كلماتك عندما تتوقف عن الكلام لهذه المدة. اختر توقفًا أطول إذا كنت تتكلم ببطء أو تتوقف للتفكير. صوت Codex المباشر يحدد النهاية بنفسه.",
+
   "settings.voice.pause.seconds": "{seconds} ث",
   "settings.voice.loadFailed": "تعذّرت قراءة نماذج الصوت.",
   "settings.voice.saveFailed": "تعذّر حفظ إعداد الصوت. حاول مرة أخرى.",
@@ -881,8 +935,10 @@ export const messages = {
   "settings.transfer.upload.etaHours": "يتبقى نحو {hours} س {minutes} د",
   "settings.transfer.import.openFailed": "تعذّر فتح الملف",
   "settings.transfer.import.contains": "يحتوي هذا الملف على",
-  "settings.transfer.import.source": "OpenBot {version} · صُدّر في {date}",
-  "settings.transfer.import.sourceNoDate": "OpenBot {version}",
+  "settings.transfer.import.source": "StarBot {version} · صُدّر في {date}",
+
+  "settings.transfer.import.sourceNoDate": "StarBot {version}",
+
   "settings.transfer.import.warnings": "قبل بدء الاستيراد",
   "settings.transfer.import.agentsLabel": "الوكلاء في الملف",
   "settings.transfer.import.nameExists": "الاسم مستخدم بالفعل",

@@ -773,7 +773,7 @@ export class GitHubConnectorService {
         Effect.sync(() => {
           this.#refreshFailures += 1;
           if (this.#refreshFailures === 1) {
-            logger.warn("The GitHub token could not be refreshed. OpenBot tries again each minute.", {
+            logger.warn("The GitHub token could not be refreshed. StarBot tries again each minute.", {
               cause: toLogValue(error),
             });
           }
@@ -945,7 +945,7 @@ function githubApiHeaders(accessToken: string): Record<string, string> {
   return {
     Accept: "application/vnd.github+json",
     Authorization: `Bearer ${accessToken}`,
-    "User-Agent": "OpenBot",
+    "User-Agent": "StarBot",
     "X-GitHub-Api-Version": "2022-11-28",
   };
 }

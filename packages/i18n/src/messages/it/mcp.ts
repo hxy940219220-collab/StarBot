@@ -10,10 +10,12 @@ export const messages = {
   "mcp.connect.useKey": "Usa invece una chiave API",
   "mcp.connect.useSignIn": "Accedi invece",
   "mcp.connect.keyDescription":
-    "Incolla una credenziale del tuo account {name}. OpenBot si collega con quella e la conserva su {host}.",
+    "Incolla una credenziale del tuo account {name}. StarBot si collega con quella e la conserva su {host}.",
+
   "mcp.connect.thisComputer": "questo computer",
   "mcp.connect.noCredentialDescription":
-    "{name} non richiede credenziali. OpenBot si collega una volta per vedere quali tool offre.",
+    "{name} non richiede credenziali. StarBot si collega una volta per vedere quali tool offre.",
+
   "mcp.connect.connect": "Connetti",
   "mcp.connect.required": "Obbligatorio.",
   "mcp.connect.keptOn": "Conservata su {host}.",
@@ -24,7 +26,8 @@ export const messages = {
   "mcp.local.address": "Indirizzo",
   "mcp.local.docs": "Guida alla configurazione",
   "mcp.signIn.description":
-    "Accedi al tuo account {name}. OpenBot ottiene i tool raggiungibili da quell'account, senza password.",
+    "Accedi al tuo account {name}. StarBot ottiene i tool raggiungibili da quell'account, senza password.",
+
   "mcp.signIn.waiting": "In attesa del browser…",
   "mcp.signIn.continue": "Continua su {name}",
   "mcp.signIn.pageDescription": "Questa pagina è aperta nel browser su {host}. Accedi da lì.",
@@ -59,7 +62,8 @@ export const messages = {
   "mcp.panel.editTitle": "Modifica server MCP",
   "mcp.panel.enable": "Attiva {name}",
   "mcp.panel.detailsTitle": "Dettagli",
-  "mcp.panel.detailsDescription": "Dai un nome a questo server e scegli come OpenBot lo raggiunge.",
+  "mcp.panel.detailsDescription": "Dai un nome a questo server e scegli come StarBot lo raggiunge.",
+
   "mcp.panel.transport": "Trasporto",
   "mcp.panel.name": "Nome",
   "mcp.panel.namePlaceholder": "Nome del server MCP",
@@ -113,7 +117,8 @@ export const messages = {
   },
   "mcp.panel.appTitle": "App di accesso",
   "mcp.panel.appDescription":
-    "Usa un'app OAuth che hai registrato presso il provider del server. OpenBot la usa quando il server non può registrare OpenBot da solo. Lascia vuoto per far registrare OpenBot.",
+    "Usa un'app OAuth che hai registrato presso il provider del server. StarBot la usa quando il server non può registrare StarBot da solo. Lascia vuoto per far registrare StarBot.",
+
   "mcp.panel.appSaveFirst": "Prima salva questo server. Poi puoi aggiungere un'app di accesso.",
   "mcp.panel.appUrlChanged": "Prima salva il nuovo URL del server. L'app di accesso appartiene all'URL salvato.",
   "mcp.panel.appLoadFailed": "Impossibile leggere l'app di accesso.",
@@ -136,18 +141,23 @@ export const messages = {
   "mcp.panel.removeApp": "Rimuovi l'app",
   "mcp.panel.appSaved": "App salvata. Accedi per usarla.",
   "mcp.panel.appRemoved": "App rimossa.",
-  "mcp.signIn.relayDescription": "Accedi su {page} nel browser. Quando hai finito, OpenBot invia l'accesso a {host}.",
+  "mcp.signIn.relayDescription": "Accedi su {page} nel browser. Quando hai finito, StarBot invia l'accesso a {host}.",
+
   "mcp.signIn.relayOpenDescription":
-    "Accedi su {page} nel browser. Quando hai finito, incolla qui l'indirizzo che mostra il browser. OpenBot poi invia l'accesso a {host}.",
+    "Accedi su {page} nel browser. Quando hai finito, incolla qui l'indirizzo che mostra il browser. StarBot poi invia l'accesso a {host}.",
+
   "mcp.signIn.relayDeviceDescription":
     "Accedi su {page} nel browser e completa l'accesso lì. {host} vede l'accesso da solo.",
   "mcp.signIn.relayOpen": "Apri la pagina di accesso",
   "mcp.signIn.relayCopy": "Copia link",
-  "mcp.signIn.relayPasteHint": "Se il browser non torna a OpenBot, copia l'indirizzo che mostra e incollalo qui.",
+  "mcp.signIn.relayPasteHint": "Se il browser non torna a StarBot, copia l'indirizzo che mostra e incollalo qui.",
+
   "mcp.signIn.relayPasteRequired":
-    "OpenBot non può ottenere l'accesso dal browser da solo. Quando hai finito, copia l'indirizzo che mostra il browser e incollalo qui.",
+    "StarBot non può ottenere l'accesso dal browser da solo. Quando hai finito, copia l'indirizzo che mostra il browser e incollalo qui.",
+
   "mcp.signIn.relayAddress": "Indirizzo del browser",
   "mcp.signIn.relaySend": "Invia",
   "mcp.panel.callbackUrlRelayed":
-    "La pagina di accesso si apre nel tuo browser, e OpenBot sul tuo computer invia l'accesso a {host}. Aggiungi esattamente questo URL agli URL di reindirizzamento consentiti dell'app.",
+    "La pagina di accesso si apre nel tuo browser, e StarBot sul tuo computer invia l'accesso a {host}. Aggiungi esattamente questo URL agli URL di reindirizzamento consentiti dell'app.",
+
 } as const satisfies PartialTranslation<typeof source>;

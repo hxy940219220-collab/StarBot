@@ -18,7 +18,7 @@ const WAIT_DEADLINE_MS = 420_000;
 const PROBE = `
 set -u
 export LC_ALL=C
-user=$(</opt/OpenBot/hosted/service-user)
+user=$(</opt/StarBot/hosted/service-user)
 router=$(cut -d, -f1 ${STATE_FILE})
 connect='exec 3<>"/dev/tcp/$0/$1"'
 result() {
@@ -53,7 +53,7 @@ echo "userMetadata=$(as_user 169.254.169.254 80)"
 echo "rootMetadata=$(as_root 169.254.169.254 80)"
 echo "userPrivate=$(as_user 10.0.0.1 80)"
 echo "rootPrivate=$(as_root 10.0.0.1 80)"
-echo "userPublic=$(as_user openbot.run 443)"
+echo "userPublic=$(as_user starbot.app 443)"
 echo "userSubmission=$(as_user smtp.gmail.com 587)"
 before=$(mail_rejects)
 echo "rootMail=$(as_root 1.1.1.1 25)"
@@ -111,7 +111,7 @@ async function main(): Promise<void> {
   };
 
   const start = await probe(options.host);
-  if (start.openbot !== "active") throw new Error("openbot.service is not active. Install OpenBot first.");
+  if (start.openbot !== "active") throw new Error("openbot.service is not active. Install StarBot first.");
   const server = start.server ?? "";
   const address = options.host.slice(options.host.indexOf("@") + 1);
   const keyDirectory = await mkdtemp(join(tmpdir(), "leaseweb-bootstrap-e2e-"));
@@ -126,7 +126,7 @@ async function main(): Promise<void> {
       if (result.code !== 0) logger.error("The bootstrap failed.", { stderr: result.stderr.slice(-2000) });
     }
     const hardened = await probe(options.host);
-    expect("OpenBot keeps its process through the bootstrap", hardened.openbotPid, start.openbotPid ?? "");
+    expect("StarBot keeps its process through the bootstrap", hardened.openbotPid, start.openbotPid ?? "");
     expectHardened(expect, "bootstrap", hardened, server);
     expect("SSH offers keys only", await offeredLoginMethods(options.host), "publickey");
     expect("an operator key signs in as root", await signIn(`root@${address}`, operator.path), "root");
@@ -183,7 +183,7 @@ async function restartChecks(host: string, expect: Expect, hardened: Facts, serv
     host,
     "systemctl is-active openbot.service; nft list table inet openbot_egress >/dev/null 2>&1; echo table=$?",
   );
-  expect("OpenBot stops with the rules", stopped.trim().split("\n").join(","), "inactive,table=1");
+  expect("StarBot stops with the rules", stopped.trim().split("\n").join(","), "inactive,table=1");
   await sshOk(host, "systemctl start openbot.service");
   await waitForServer(host, server);
   expectHardened(expect, "start after a stop of the rules", await probe(host), server);
@@ -239,7 +239,7 @@ function expectHardened(expect: Expect, phase: string, facts: Facts, server: str
   );
   expect(name("updates install each day"), facts.updatePeriod, "1");
   expect(name("updates do not restart the server"), facts.updateReboot, "false");
-  expect(name("updates do not restart OpenBot"), facts.updateServiceRestart, "0");
+  expect(name("updates do not restart StarBot"), facts.updateServiceRestart, "0");
   const origins = (facts.updateOrigins ?? "").split(",");
   expect(
     name("updates come only from security origins"),
@@ -316,7 +316,7 @@ async function waitForBoot(host: string, lastBootId: string): Promise<string> {
 
 async function waitForServer(host: string, server: string): Promise<void> {
   const deadline = Date.now() + WAIT_DEADLINE_MS;
-  const command = `runuser -u "$(</opt/OpenBot/hosted/service-user)" -- openbot status 2>/dev/null | sed -n 's/^Server: //p'`;
+  const command = `runuser -u "$(</opt/StarBot/hosted/service-user)" -- openbot status 2>/dev/null | sed -n 's/^Server: //p'`;
   while (Date.now() < deadline) {
     const result = await ssh(host, command);
     if (result.code === 0 && result.stdout.trim() === server) return;

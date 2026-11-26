@@ -292,7 +292,8 @@ export const messages = {
 
   "workflow.output.title": "출력",
   "workflow.output.name": "출력",
-  "workflow.output.channel.openbot": "OpenBot",
+  "workflow.output.channel.openbot": "StarBot",
+
   "workflow.output.channel.search": "채널 검색",
   "workflow.output.postsAs": "게시 방식",
   "workflow.output.postsAsNote": "메모, 작업이 시작되지 않음",
@@ -311,7 +312,8 @@ export const messages = {
   "workflow.discord.server": "서버",
   "workflow.discord.chooseServer": "서버 선택",
   "workflow.discord.event": "이벤트",
-  "workflow.discord.event.mention": "OpenBot 멘션",
+  "workflow.discord.event.mention": "StarBot 멘션",
+
   "workflow.discord.anyChannel": "모든 채널",
   "workflow.discord.roles": "역할",
   "workflow.discord.anyRole": "모든 역할",
@@ -337,7 +339,8 @@ export const messages = {
   "workflow.telegram.anyChat": "연결된 모든 채팅",
   "workflow.telegram.sameChat": "트리거와 같음",
   "workflow.telegram.event": "이벤트",
-  "workflow.telegram.event.mention": "OpenBot 멘션",
+  "workflow.telegram.event.mention": "StarBot 멘션",
+
   "workflow.telegram.text": "텍스트 포함",
   "workflow.telegram.anyText": "모든 텍스트",
   "workflow.telegram.on": "대상",
@@ -620,9 +623,11 @@ export const messages = {
   "workflow.file.import.files": "업로드할 파일: {count}",
   "workflow.file.import.noUpload": "이 서버는 파일을 보관할 수 없습니다. 파일은 가져오지 않습니다.",
   "workflow.file.import.confirm": "가져오기",
-  "workflow.file.import.notFile": "이 파일은 OpenBot 워크플로가 아닙니다.",
+  "workflow.file.import.notFile": "이 파일은 StarBot 워크플로가 아닙니다.",
+
   "workflow.file.import.invalid": "이 워크플로 파일이 손상되었습니다.",
-  "workflow.file.import.newer": "이 워크플로에는 OpenBot {version} 이상이 필요합니다.",
+  "workflow.file.import.newer": "이 워크플로에는 StarBot {version} 이상이 필요합니다.",
+
   "workflow.file.import.newerUnknown": "이 워크플로에는 최신 버전의 OpenBot이 필요합니다.",
   "workflow.file.import.newerSteps": "이 버전에서 알 수 없는 단계: {steps}.",
   "workflow.file.import.failed": "워크플로를 가져오지 못했습니다.",

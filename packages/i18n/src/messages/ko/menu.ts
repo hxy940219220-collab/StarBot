@@ -11,7 +11,8 @@ export const messages = {
   "menu.closeDeveloperTools": "개발자 도구 닫기",
   "menu.copyLink": "링크 복사",
   "menu.copyImage": "이미지 복사",
-  "menu.quit": "OpenBot 종료",
+  "menu.quit": "StarBot 종료",
+
   "menu.quitConfirmTitle": "OpenBot을 종료할까요?",
   "menu.quitConfirmBody": "OpenBot을 다시 열 때까지 에이전트와 루틴이 멈춥니다.",
   "menu.quitConfirm": "종료",
@@ -20,9 +21,12 @@ export const messages = {
   "menu.closeWorkingBody":
     "OpenBot을 종료하면 에이전트가 멈춰요. 작업이 끝나도록 계속 실행해 두세요. 창을 다시 보려면 OpenBot을 여세요.",
   "menu.closeKeepRunning": "계속 실행",
-  "menu.trayOpen": "OpenBot 열기",
-  "menu.trayQuit": "OpenBot 종료",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "StarBot 열기",
+
+  "menu.trayQuit": "StarBot 종료",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Dynamic Island 숨기기",
   "menu.undo": "실행 취소",
   "menu.redo": "다시 실행",

@@ -63,12 +63,12 @@ remote/bin/dotenvx run --overload -f remote/.env.production -fk remote/.env.keys
 remote/bin/dotenvx run --overload -f remote/.env.production -fk remote/.env.keys -- \
   docker compose -p openbot-remote -f remote/compose.yaml up -d --no-build --no-deps remote-api
 docker inspect openbot-remote-remote-api-1 --format '{{.Image}} {{.State.Health.Status}}'
-curl --fail --silent --show-error https://signal1.openbot.run/health/ready
-curl --fail --silent --show-error https://signal1.openbot.run/health/live
-curl --fail --silent --show-error https://signal1.openbot.run/health/turn
+curl --fail --silent --show-error https://signal1.starbot.app/health/ready
+curl --fail --silent --show-error https://signal1.starbot.app/health/live
+curl --fail --silent --show-error https://signal1.starbot.app/health/turn
 ```
 
-Use `signal1.openbot.run`, not `signal.openbot.run`: the entry name can point to `signal2`.
+Use `signal1.starbot.app`, not `signal.starbot.app`: the entry name can point to `signal2`.
 
 `/health/turn` makes one real UDP allocation on the TURN server of `TURN_HOST` and frees it. It answers
 503 with `turn_full` when coturn refuses the allocation at its quota. The result stays cached for one
@@ -109,7 +109,7 @@ restart ICE. Do it in a quiet hour, one machine at a time, and only with approva
    gets ports before the firewall allows them, the firewall drops the first packets of the peers:
 
    ```sh
-   ufw allow 16384:65535/udp comment 'OpenBot TURN relay UDP'
+   ufw allow 16384:65535/udp comment 'StarBot TURN relay UDP'
    ```
 
    A narrower older rule, such as `49152:65535/udp`, is then not necessary. Remove it after both
@@ -130,8 +130,8 @@ restart ICE. Do it in a quiet hour, one machine at a time, and only with approva
 
    ```sh
    docker exec openbot-coturn grep -E '^(min-port|max-port|total-quota)=' /tmp/openbot-turnserver.conf
-   curl --fail --silent --show-error https://signal1.openbot.run/health/turn
-   curl --fail --silent --show-error https://signal2.openbot.run/health/turn
+   curl --fail --silent --show-error https://signal1.starbot.app/health/turn
+   curl --fail --silent --show-error https://signal2.starbot.app/health/turn
    curl -s 127.0.0.1:9641/metrics | grep '^turn_total_allocations'
    ```
 
@@ -160,29 +160,29 @@ Rollback restores the old one-session limit. It does not reverse D1 migrations o
 
 ## Second Signal machine
 
-The machine `signal2.openbot.run` (`65.109.88.58`, ssh as `root`) runs a second copy of Signal,
+The machine `signal2.starbot.app` (`65.109.88.58`, ssh as `root`) runs a second copy of Signal,
 coturn and Nginx in the Compose project `openbot-remote`, next to an IOTA validator. Since 2026-10-31
 (#4309) both machines hold rooms (see [Two active Signal machines](#two-active-signal-machines)):
-`sui-alexandria` is home `a` (`signal1.openbot.run`) and this machine is home `b`. The entry name
-`signal.openbot.run` can point to either machine, and the Worker moves it when the entry machine
-fails. To reach one machine, use `signal1.openbot.run` or `signal2.openbot.run`. Its coturn is the
+`sui-alexandria` is home `a` (`signal1.starbot.app`) and this machine is home `b`. The entry name
+`signal.starbot.app` can point to either machine, and the Worker moves it when the entry machine
+fails. To reach one machine, use `signal1.starbot.app` or `signal2.starbot.app`. Its coturn is the
 second TURN relay (see [TURN relays](../remote/README.md#turn-relays)).
 
-- `signal2.openbot.run` and `turn2.openbot.run` point to this machine (DNS only). Check it with
-  `curl --fail https://signal2.openbot.run/health/ready`.
-- Its certificate covers `signal.openbot.run`, `turn2.openbot.run` and `signal2.openbot.run`
-  (`ACME_EXTRA_DOMAINS=signal2.openbot.run`). The certificate of `sui-alexandria` covers
-  `signal.openbot.run`, `signal1.openbot.run` and `turn.openbot.run`.
+- `signal2.starbot.app` and `turn2.starbot.app` point to this machine (DNS only). Check it with
+  `curl --fail https://signal2.starbot.app/health/ready`.
+- Its certificate covers `signal.starbot.app`, `turn2.starbot.app` and `signal2.starbot.app`
+  (`ACME_EXTRA_DOMAINS=signal2.starbot.app`). The certificate of `sui-alexandria` covers
+  `signal.starbot.app`, `signal1.starbot.app` and `turn.starbot.app`.
 - Its `/opt/openbot/remote/.env.production` is a copy of the production file with these changes:
-  `TURN_DOMAIN=turn2.openbot.run`, `TURN_PUBLIC_IP=65.109.88.58`, `ACME_EXTRA_DOMAINS`,
-  `REMOTE_SIGNAL_PUBLIC_PORT=8091`, `TURN_EXTRA_HOSTS=turn.openbot.run`, `SIGNAL_ID=b` and
+  `TURN_DOMAIN=turn2.starbot.app`, `TURN_PUBLIC_IP=65.109.88.58`, `ACME_EXTRA_DOMAINS`,
+  `REMOTE_SIGNAL_PUBLIC_PORT=8091`, `TURN_EXTRA_HOSTS=turn.starbot.app`, `SIGNAL_ID=b` and
   `SIGNAL_PUBLIC_IPV4=65.109.88.58`. `REMOTE_SIGNAL_BIND_ADDRESS=127.0.0.1` comes from the production file;
   Docker ports skip ufw, so do not change it. Do not copy the production file over it.
 - The Discord, Telegram and Slack values are the same as on `sui-alexandria`. Only the entry machine
   starts the bots; `openbot_remote_signal_entry` in `/metrics` is 1 there.
 
 - The IOTA node uses ports 8080 and 8081, so Signal listens on `127.0.0.1:8091`. Apache uses port 80.
-- Nginx uses `remote/nginx/signal.openbot.run.conf` with `signal2.openbot.run` added to `server_name`,
+- Nginx uses `remote/nginx/signal.starbot.app.conf` with `signal2.starbot.app` added to `server_name`,
   `proxy_pass` to port 8091, and no port 80 server. The reload units are the ones in `remote/nginx`.
 - The firewall (ufw) allows 443/tcp, 3478/tcp, 3478/udp, 5349/tcp and the coturn relay range UDP
   16384-65535, as on production (see [coturn configuration update](#coturn-configuration-update)).
@@ -193,7 +193,7 @@ second TURN relay (see [TURN relays](../remote/README.md#turn-relays)).
 - Tags before `ACME_EXTRA_DOMAINS` lack it in `remote/acme/renew.sh` and `remote/compose.yaml`. For
   such a tag, copy these two files from `main` into the release directory before the build.
 
-TURN relays: production sets `TURN_EXTRA_HOSTS=turn2.openbot.run`, so each Signal gives each host
+TURN relays: production sets `TURN_EXTRA_HOSTS=turn2.starbot.app`, so each Signal gives each host
 `turn` or `turn2`. Both coturns must have the same `TURN_SHARED_SECRET`. Compare it by hash on the two
 hosts before you set `TURN_EXTRA_HOSTS`. Deploy a Signal that knows `TURN_EXTRA_HOSTS` (it is in
 `remote/compose.yaml`) before you set it; an older Signal ignores it. To take a relay out, remove it
@@ -204,37 +204,37 @@ Failover is automatic: see "What moves when a machine stops" below. Each Signal 
 first and skips a relay that does not allocate, so a TURN name does not need a change.
 
 After each Signal deployment, stage and build the same commit on `signal2` with the same commands,
-and start `remote-api` there. Send the `curl` checks to `signal2.openbot.run`.
+and start `remote-api` there. Send the `curl` checks to `signal2.starbot.app`.
 
 ## Two active Signal machines
 
 Live since 2026-10-31 (#4309). The steps below record how it was set up; repeat them only for a new
 machine, and get approval for each one. Both machines hold rooms at the same time. The Worker gives each current
 host a home machine, and the host's devices meet it there. The bots, `ingress` sockets and released
-hosts stay on the entry machine, which `signal.openbot.run` names. Each step below is a production
+hosts stay on the entry machine, which `signal.starbot.app` names. Each step below is a production
 change, and each one needs its own approval.
 
-1. DNS (DNS only, not proxied): add `signal1.openbot.run` → `95.216.243.233`. `signal2.openbot.run`
-   already exists. Add `signal1.openbot.run` to `ACME_EXTRA_DOMAINS` on `sui-alexandria` and get the
-   certificate. Check `curl --fail https://signal1.openbot.run/health/ready`.
+1. DNS (DNS only, not proxied): add `signal1.starbot.app` → `95.216.243.233`. `signal2.starbot.app`
+   already exists. Add `signal1.starbot.app` to `ACME_EXTRA_DOMAINS` on `sui-alexandria` and get the
+   certificate. Check `curl --fail https://signal1.starbot.app/health/ready`.
 2. Secrets: compare `REMOTE_SESSION_SECRET`, `TURN_SHARED_SECRET` and `REMOTE_AUTH_WEBHOOK_SECRET` by
    hash on the two hosts. Resume tokens and TURN credentials must work on both machines. Do not print
    the values.
 3. Signal environment: on `sui-alexandria` set `SIGNAL_ID=a`, `SIGNAL_PUBLIC_IPV4=95.216.243.233`; on
    `signal2` set `SIGNAL_ID=b`, `SIGNAL_PUBLIC_IPV4=65.109.88.58`. On both set
-   `SIGNAL_ENTRY_HOST=signal.openbot.run`. Give `signal2` the Discord, Telegram and Slack values of the
+   `SIGNAL_ENTRY_HOST=signal.starbot.app`. Give `signal2` the Discord, Telegram and Slack values of the
    production file: the entry rule starts the bots only on the entry machine.
 4. Deploy the same Signal commit to both machines and recreate only `remote-api`. Check
    `openbot_remote_signal_entry` in `/metrics`: 1 on `sui-alexandria`, 0 on `signal2`.
 5. Worker variables, after step 4:
-   `REMOTE_SIGNAL_HOMES=a=wss://signal1.openbot.run/v1/signal,b=wss://signal2.openbot.run/v1/signal` and
-   `REMOTE_AUTH_WEBHOOK_URLS=https://signal1.openbot.run/internal/auth-events,https://signal2.openbot.run/internal/auth-events`.
+   `REMOTE_SIGNAL_HOMES=a=wss://signal1.starbot.app/v1/signal,b=wss://signal2.starbot.app/v1/signal` and
+   `REMOTE_AUTH_WEBHOOK_URLS=https://signal1.starbot.app/internal/auth-events,https://signal2.starbot.app/internal/auth-events`.
    Set both in the same deploy: with homes and no `REMOTE_AUTH_WEBHOOK_URLS`, a revoke reaches only
    the entry machine, and revoked devices on the other home keep their sockets.
    Apply D1 migration `0044_remote_signal_homes.sql` before the Worker deploy. Until a desktop release
    that asks for a home, all hosts stay on the entry.
-6. Entry failover: set the TTL of the `signal.openbot.run` A record to 60 seconds (it is 300). Make a
-   Cloudflare API token with only `Zone.DNS:Edit` on `openbot.run`, and set it as the Worker secret
+6. Entry failover: set the TTL of the `signal.starbot.app` A record to 60 seconds (it is 300). Make a
+   Cloudflare API token with only `Zone.DNS:Edit` on `starbot.app`, and set it as the Worker secret
    `SIGNAL_ENTRY_DNS_TOKEN` (`wrangler secret put`, never in a file or a log). `SIGNAL_ENTRY_ZONE_ID`
    is in `wrangler.jsonc`. The cron `*/1 * * * *` then runs the check
    (`apps/auth-api/src/server/signal-entry-failover.ts`); without the token, it does nothing.
@@ -251,7 +251,7 @@ What moves when a machine stops:
   which names the host's new home. The client drops its resume token, because the other machine does
   not know the socket.
 - The entry: each minute the account Worker checks `/health/ready` of the machine that
-  `signal.openbot.run` gives. When it fails three checks 20 seconds apart, the Worker sets the record to
+  `signal.starbot.app` gives. When it fails three checks 20 seconds apart, the Worker sets the record to
   the address of the first other home in `REMOTE_SIGNAL_HOMES` that answers. When no machine answers,
   or the records do not show one entry machine (proxied, two A records, or an address of no home),
   it changes nothing. The name does not go back when the old machine starts again. With the 60-second
@@ -263,7 +263,7 @@ What moves when a machine stops:
 Failover drill (after approval): stop `remote-api` on `signal2`, check that a host with home `b` and
 its clients connect on `signal1` within 1 minute, then start it again. Hosts stay on their new home
 until it fails, or until it is no longer near (see "Regional Signal machines"). Then do the same for `sui-alexandria` in a quiet hour, which also moves the entry:
-check that `dig signal.openbot.run` gives `65.109.88.58` within 3 minutes and that
+check that `dig signal.starbot.app` gives `65.109.88.58` within 3 minutes and that
 `openbot_remote_signal_entry` is 1 on `signal2`. To move the entry back, set the A record by hand.
 
 A host whose owner or admin chose a home in Server settings sends it as `preferredSignalHome`. It gets
@@ -305,17 +305,17 @@ Setup of each machine (Ubuntu 26.04):
 2. DNS only, TTL 300: `signal-<home>` and `turn-<home>` → the machine address.
 3. `/opt/openbot/remote/.env.production` is a copy of the `signal2` file with these plain values
    changed: `SIGNAL_ID=<home>`, `SIGNAL_PUBLIC_IPV4`, `TURN_PUBLIC_IP`,
-   `TURN_DOMAIN=turn-<home>.openbot.run`, `ACME_EXTRA_DOMAINS=signal-<home>.openbot.run`,
+   `TURN_DOMAIN=turn-<home>.starbot.app`, `ACME_EXTRA_DOMAINS=signal-<home>.starbot.app`,
    `REMOTE_SIGNAL_PUBLIC_PORT=8081` and an empty `TURN_EXTRA_HOSTS`, so each machine gives only its
-   own relay. `SIGNAL_DOMAIN` and `SIGNAL_ENTRY_HOST` stay `signal.openbot.run`: the certificate also
+   own relay. `SIGNAL_DOMAIN` and `SIGNAL_ENTRY_HOST` stay `signal.starbot.app`: the certificate also
    names the entry, so the machine can take the entry after a failover.
 4. Stage the same Signal commit as on `signal1` and `signal2`, build `remote-api`, `capacity-report`
    and `coturn`, and start the project. Before the start, set `{"dns": ["1.1.1.1", "1.0.0.1"]}` in
    `/etc/docker/daemon.json` and restart Docker. The Leaseweb resolver keeps the NXDOMAIN answer for
    the challenge name for 30 minutes, so each certificate attempt fails, and after 5 failures Let's
-   Encrypt blocks the name for an hour. Cloudflare serves the `openbot.run` zone, so `1.1.1.1` sees the
+   Encrypt blocks the name for an hour. Cloudflare serves the `starbot.app` zone, so `1.1.1.1` sees the
    record at once. This is also necessary for each renewal.
-5. Nginx: the `signal2` vhost with `server_name signal.openbot.run signal-<home>.openbot.run` and
+5. Nginx: the `signal2` vhost with `server_name signal.starbot.app signal-<home>.starbot.app` and
    `proxy_pass http://127.0.0.1:8081`, plus the `openbot-remote-nginx-reload` path and service units.
 6. Check `/health/ready`, `/health/live` (the commit) and `/health/turn` on `signal-<home>`, and
    `openbot_remote_signal_entry` 0.

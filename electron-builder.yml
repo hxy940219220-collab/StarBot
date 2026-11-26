@@ -1,8 +1,8 @@
-appId: app.openbot.desktop
-productName: OpenBot
+appId: app.starbot.desktop
+productName: StarBot
 copyright: Copyright © 2026 Synthetify Labs spółka z ograniczoną odpowiedzialnością
 protocols:
-  - name: OpenBot invitations
+  - name: StarBot invitations
     schemes:
       - openbot
 asar: true
@@ -20,8 +20,8 @@ electronFuses:
   grantFileProtocolExtraPrivileges: false
 publish:
   provider: github
-  owner: nightly-labs
-  repo: openbot
+  owner: hxy940219220-collab
+  repo: StarBot-Desktop
 files:
   - out/**/*
   - package.json
@@ -114,14 +114,14 @@ mac:
   extendInfo:
     CFBundleIconName: Icon
     ElectronTeamID: ZTRDTUL87R
-    NSMicrophoneUsageDescription: OpenBot uses the microphone to transcribe voice prompts locally on this Mac.
-    NSScreenCaptureUsageDescription: OpenBot captures the screen so an agent can see the app windows you ask it to control.
-    NSAppleEventsUsageDescription: OpenBot sends Automation events so an agent can control the apps you ask it to control.
-    NSCalendarsFullAccessUsageDescription: OpenBot lets the commands that an agent runs read and change your calendar events.
-    NSCalendarsWriteOnlyAccessUsageDescription: OpenBot lets the commands that an agent runs add events to your calendars.
-    NSCalendarsUsageDescription: OpenBot lets the commands that an agent runs use your calendars.
-    NSRemindersFullAccessUsageDescription: OpenBot lets the commands that an agent runs read and change your reminders.
-    NSRemindersUsageDescription: OpenBot lets the commands that an agent runs use your reminders.
+    NSMicrophoneUsageDescription: StarBot uses the microphone to transcribe voice prompts locally on this Mac.
+    NSScreenCaptureUsageDescription: StarBot captures the screen so an agent can see the app windows you ask it to control.
+    NSAppleEventsUsageDescription: StarBot sends Automation events so an agent can control the apps you ask it to control.
+    NSCalendarsFullAccessUsageDescription: StarBot lets the commands that an agent runs read and change your calendar events.
+    NSCalendarsWriteOnlyAccessUsageDescription: StarBot lets the commands that an agent runs add events to your calendars.
+    NSCalendarsUsageDescription: StarBot lets the commands that an agent runs use your calendars.
+    NSRemindersFullAccessUsageDescription: StarBot lets the commands that an agent runs read and change your reminders.
+    NSRemindersUsageDescription: StarBot lets the commands that an agent runs use your reminders.
     NSUserActivityTypes:
       - NSUserActivityTypeBrowsingWeb
   target:

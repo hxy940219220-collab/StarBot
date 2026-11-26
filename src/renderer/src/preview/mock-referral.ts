@@ -81,7 +81,7 @@ export function createMockReferral(friendCount = 45, now = Date.now()): Referral
       const page = Math.min(request.page, lastPage);
       return {
         available: true,
-        link: `https://openbot.run/?ref=${OWN_CODE}`,
+        link: `https://starbot.app/?ref=${OWN_CODE}`,
         credit: [{ currency: "eur", amountMinor: 1240 }],
         earned: [{ currency: "eur", amountMinor: 8600 }],
         pending: [{ currency: "eur", amountMinor: 190 }],

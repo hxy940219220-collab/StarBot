@@ -12,7 +12,7 @@ interface SettingLinkEntry {
   words: string;
 }
 
-const APP = "OpenBot Settings";
+const APP = "StarBot Settings";
 const AGENT = "agent settings (side panel of the agent's chat)";
 
 const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
@@ -43,7 +43,7 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
   "general.external-links": {
     title: "Open external links in",
     place: `${APP} > General`,
-    about: "Open links from chats in the OpenBot browser or the default browser of the computer.",
+    about: "Open links from chats in the StarBot browser or the default browser of the computer.",
     words: "links browser chrome safari default open url",
   },
   "appearance.theme": {
@@ -55,7 +55,7 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
   "appearance.language": {
     title: "Language",
     place: `${APP} > Appearance`,
-    about: "The language of the OpenBot menus, buttons and messages.",
+    about: "The language of the StarBot menus, buttons and messages.",
     words: "translation locale interface english polish german spanish french",
   },
   "appearance.interface-size": {
@@ -97,7 +97,7 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
   "appearance.logo-color": {
     title: "Logo color",
     place: `${APP} > Appearance`,
-    about: "The color of the OpenBot icon in the Dock, the taskbar and the Dynamic Island.",
+    about: "The color of the StarBot icon in the Dock, the taskbar and the Dynamic Island.",
     words: "app icon dock icon",
   },
   "notifications.desktop": {
@@ -139,7 +139,7 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
   "voice.read-replies": {
     title: "Read replies aloud",
     place: `${APP} > Voice`,
-    about: "When the user dictates a message, OpenBot reads the agent's reply aloud.",
+    about: "When the user dictates a message, StarBot reads the agent's reply aloud.",
     words: "text to speech tts speak voice output read aloud audio say cloud elevenlabs xai api key",
   },
   "voice.speech-voice": {
@@ -171,13 +171,13 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
   "phones.devices": {
     title: "Your phones",
     place: `${APP} > Mobile Connect`,
-    about: "Connect the OpenBot phone app (iPhone, Android) to this computer, and see the connected phones.",
+    about: "Connect the StarBot phone app (iPhone, Android) to this computer, and see the connected phones.",
     words: "mobile iphone android ios app pair qr code",
   },
   "app.launch-at-login": {
-    title: "Launch OpenBot at login",
+    title: "Launch StarBot at login",
     place: `${APP} > App behavior`,
-    about: "Open OpenBot when the user signs in to the computer.",
+    about: "Open StarBot when the user signs in to the computer.",
     words: "startup autostart boot login items",
   },
   "app.restore-workspace": {
@@ -225,13 +225,13 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
   "updates.track": {
     title: "Update track",
     place: `${APP} > Updates`,
-    about: "Stable or beta releases of OpenBot.",
+    about: "Stable or beta releases of StarBot.",
     words: "beta nightly channel version",
   },
   "updates.auto-install": {
     title: "Install updates automatically",
     place: `${APP} > Updates`,
-    about: "Install new OpenBot versions without a question.",
+    about: "Install new StarBot versions without a question.",
     words: "auto update upgrade",
   },
   "agent.model": {
@@ -338,10 +338,10 @@ const SETTING_LINKS: Record<SettingLinkId, SettingLinkEntry> = {
     words: "plan card confirm before start",
   },
   "agent.builtin-memory": {
-    title: "OpenBot memory",
+    title: "StarBot memory",
     place: `${AGENT} > Advanced`,
     about:
-      "Turn off OpenBot memory to use only a memory app that you connect, such as Mem0. The agent then does not read or save OpenBot memories. Saved memories stay.",
+      "Turn off StarBot memory to use only a memory app that you connect, such as Mem0. The agent then does not read or save StarBot memories. Saved memories stay.",
     words: "memory mem0 openviking provider external remember disable off",
   },
 };

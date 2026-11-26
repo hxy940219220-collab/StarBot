@@ -2,16 +2,25 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/island";
 
 export const messages = {
-  "island.surface.label": "הנוץ של ה-MacBook עם OpenBot",
-  "island.surface.labelIsland": "Dynamic Island של OpenBot",
+  "island.surface.label": "הנוץ של ה-MacBook עם StarBot",
+
+  "island.surface.labelIsland": "Dynamic Island של StarBot",
+
   "island.surface.interactionArea": "אזור האינטראקציה של Dynamic Island",
-  "island.label.idle": "פתיחת OpenBot",
-  "island.label.working": "מצב העבודה של OpenBot",
-  "island.label.message": "עדכון צ'אט של OpenBot",
-  "island.label.question": "שאלה מהבינה המלאכותית ב-OpenBot",
-  "island.label.approval": "בקשת אישור של OpenBot",
-  "island.label.takeover": "השתלטות על הדפדפן ב-OpenBot",
-  "island.label.failed": "משימה ב-OpenBot נכשלה",
+  "island.label.idle": "פתיחת StarBot",
+
+  "island.label.working": "מצב העבודה של StarBot",
+
+  "island.label.message": "עדכון צ'אט של StarBot",
+
+  "island.label.question": "שאלה מהבינה המלאכותית ב-StarBot",
+
+  "island.label.approval": "בקשת אישור של StarBot",
+
+  "island.label.takeover": "השתלטות על הדפדפן ב-StarBot",
+
+  "island.label.failed": "משימה ב-StarBot נכשלה",
+
   "island.label.externalDisplay": "{label} בצג חיצוני",
   "island.badge.working": "עובד",
   "island.badge.message": "הודעה",
@@ -33,12 +42,14 @@ export const messages = {
   "island.action.openChat": "פתיחת הצ'אט",
   "island.action.openDetails": "פתיחת הפרטים",
   "island.action.takeOver": "השתלטות",
-  "island.action.reviewInOpenBot": "סקירה ב-OpenBot",
+  "island.action.reviewInOpenBot": "סקירה ב-StarBot",
+
   "island.action.decline": "דחייה",
   "island.action.approve": "אישור",
   "island.action.later": "מאוחר יותר",
   "island.action.dismiss": "סגירה",
-  "island.action.answerInOpenBot": "מענה ב-OpenBot",
+  "island.action.answerInOpenBot": "מענה ב-StarBot",
+
   "island.action.stopAgent": "עצירת {name}",
   "island.action.failed": "הפעולה לא הצליחה. יש לנסות שוב.",
   "island.action.expand": "הרחבת {label}",
@@ -69,7 +80,8 @@ export const messages = {
   "island.question.suggestedAnswers": "תשובות מוצעות",
   "island.question.option": "{label}. {description}",
   "island.question.defaultHeader": "שאלה מהסוכן שלך",
-  "island.question.defaultText": "יש לפתוח את OpenBot כדי לענות על השאלה.",
+  "island.question.defaultText": "יש לפתוח את StarBot כדי לענות על השאלה.",
+
   "island.question.optionFallback": "אפשרות {number}",
   "island.task.working": "עובד על הבקשה שלך",
   "island.error.openRemoteTitle": "לא ניתן היה לפתוח את הפריט המרוחק",

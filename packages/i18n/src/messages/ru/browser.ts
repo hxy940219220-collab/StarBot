@@ -58,10 +58,13 @@ export const messages = {
   "browser.pip.reattach": "Вернуть браузер в правую боковую панель",
   "browser.pip.reattachTitle": "Вернуть браузер",
   "browser.pip.close": "Закрыть окно браузера",
-  "browser.pip.reattachFailed": "OpenBot не удалось вернуть браузер в боковую панель.",
-  "browser.pip.closeFailed": "OpenBot не удалось закрыть окно браузера.",
+  "browser.pip.reattachFailed": "StarBot не удалось вернуть браузер в боковую панель.",
+
+  "browser.pip.closeFailed": "StarBot не удалось закрыть окно браузера.",
+
   "browser.window.open": "Открыть браузер в новом окне",
-  "browser.window.openFailed": "OpenBot не удалось открыть окно браузера.",
+  "browser.window.openFailed": "StarBot не удалось открыть окно браузера.",
+
   "browser.popupBlocked.title": "Всплывающее окно заблокировано",
   "browser.popupBlocked.dismiss": "Скрыть сообщение о всплывающем окне",
   "browser.liveView.label": "Страница на сервере в реальном времени",
@@ -99,17 +102,23 @@ export const messages = {
   "browser.secret.failed": "Не удалось выполнить запрос. Проверьте соединение и повторите попытку.",
   "browser.secret.ended": "Этот запрос на вход завершён. Попросите агента повторить попытку.",
   "browser.secret.vaultSkip.agentScript":
-    "OpenBot не использовал ваши сохранённые учётные данные, потому что агент запустил скрипт на этой странице. Чтобы их использовать, попросите агента перезагрузить страницу и попробовать снова.",
+    "StarBot не использовал ваши сохранённые учётные данные, потому что агент запустил скрипт на этой странице. Чтобы их использовать, попросите агента перезагрузить страницу и попробовать снова.",
+
   "browser.secret.vaultSkip.fieldKind":
-    "OpenBot не использовал ваши сохранённые учётные данные, потому что агент выбрал не то поле на странице.",
+    "StarBot не использовал ваши сохранённые учётные данные, потому что агент выбрал не то поле на странице.",
+
   "browser.secret.vaultSkip.loginChoice":
-    "OpenBot не использовал сохранённые учётные данные, потому что агент не выбрал ни одни из учётных данных, сохранённых для этого сайта. Скажите агенту, какой аккаунт использовать.",
+    "StarBot не использовал сохранённые учётные данные, потому что агент не выбрал ни одни из учётных данных, сохранённых для этого сайта. Скажите агенту, какой аккаунт использовать.",
+
   "browser.secret.vaultSkip.noPassword":
-    "OpenBot не использовал ваши сохранённые учётные данные, потому что в них нет пароля для этого сайта.",
+    "StarBot не использовал ваши сохранённые учётные данные, потому что в них нет пароля для этого сайта.",
+
   "browser.secret.vaultSkip.noAuthenticatorKey":
-    "OpenBot не использовал ваши сохранённые учётные данные, потому что в них нет ключа аутентификатора.",
+    "StarBot не использовал ваши сохранённые учётные данные, потому что в них нет ключа аутентификатора.",
+
   "browser.secret.vaultSkip.vaultUnreadable":
-    "OpenBot не использовал сохранённые учётные данные, потому что не смог прочитать ваш менеджер паролей.",
+    "StarBot не использовал сохранённые учётные данные, потому что не смог прочитать ваш менеджер паролей.",
+
   "browser.error.openAddress": "Не удалось открыть адрес в этой вкладке.",
   "browser.error.channelNoBrowserMember": "Ни один участник не может открыть новую вкладку в этом канале.",
   "browser.error.closeTab": "Не удалось закрыть вкладку браузера.",
@@ -172,20 +181,25 @@ export const messages = {
   "browser.signIn.local": "Войти на этом компьютере",
   "browser.signIn.title": "Вход в {site}",
   "browser.signIn.description":
-    "Некоторые сайты отклоняют вход с сервера. Войдите на этом компьютере, и OpenBot отправит вход в {site} на {server}. Все агенты и участники на {server} смогут использовать его в браузере.",
+    "Некоторые сайты отклоняют вход с сервера. Войдите на этом компьютере, и StarBot отправит вход в {site} на {server}. Все агенты и участники на {server} смогут использовать его в браузере.",
+
   "browser.signIn.windowOpen":
-    "Войдите в открывшемся окне. OpenBot отправит вход, когда он будет выполнен. Если окно останется открытым, выберите «Готово».",
+    "Войдите в открывшемся окне. StarBot отправит вход, когда он будет выполнен. Если окно останется открытым, выберите «Готово».",
+
   "browser.signIn.windowClosed":
     "Окно входа закрыто. Выберите «Готово», чтобы отправить вход, или откройте окно снова.",
   "browser.signIn.reopen": "Открыть окно входа",
   "browser.signIn.sending": "Отправка на {server}…",
   "browser.signIn.sent": "Выполнен вход в {site} на {server}",
-  "browser.signIn.notFound": "OpenBot не нашёл вход в {site}. Войдите в окне, затем выберите «Готово».",
+  "browser.signIn.notFound": "StarBot не нашёл вход в {site}. Войдите в окне, затем выберите «Готово».",
+
   "browser.signIn.stillSignedOut": "{server} всё ещё показывает страницу входа в {site}. Завершите вход в окне.",
-  "browser.signIn.failed": "OpenBot не удалось отправить вход.",
+  "browser.signIn.failed": "StarBot не удалось отправить вход.",
+
   "browser.profiles.title": "Профили браузера",
   "browser.profiles.subtitle":
-    "Каждый профиль хранит свои входы в аккаунты, cookie и данные сайтов на компьютере, где работает OpenBot.",
+    "Каждый профиль хранит свои входы в аккаунты, cookie и данные сайтов на компьютере, где работает StarBot.",
+
   "browser.profiles.label": "Профили браузера",
   "browser.profiles.newName": "Имя профиля",
   "browser.profiles.create": "Добавить",
@@ -214,8 +228,10 @@ export const messages = {
   "browser.profiles.deleteDescription":
     "Это удалит входы в аккаунты, cookie и данные сайтов этого профиля. Его открытые вкладки закроются.",
   "browser.profiles.deleteAgents": "Эти агенты перейдут на общий профиль: {agents}.",
-  "browser.profiles.failed": "OpenBot не удалось изменить профили браузера.",
-  "browser.profiles.loadFailed": "OpenBot не удалось загрузить профили браузера.",
+  "browser.profiles.failed": "StarBot не удалось изменить профили браузера.",
+
+  "browser.profiles.loadFailed": "StarBot не удалось загрузить профили браузера.",
+
   "browser.profiles.tabLabel": "Профиль: {name}",
   "browser.profiles.tabLabelProxy": "Профиль: {name} · Прокси: {proxy}",
   "browser.profiles.agentTabLabel": "Собственный профиль агента",
@@ -235,7 +251,8 @@ export const messages = {
   "browser.proxies.addTitle": "Добавить прокси",
   "browser.proxies.editTitle": "Изменить «{name}»",
   "browser.proxies.dialogDescription":
-    "Используйте socks5, http или https. Имя пользователя и пароль необязательны для любого типа. Пароль хранится в зашифрованном виде на компьютере, где работает OpenBot.",
+    "Используйте socks5, http или https. Имя пользователя и пароль необязательны для любого типа. Пароль хранится в зашифрованном виде на компьютере, где работает StarBot.",
+
   "browser.proxies.address": "Адрес",
   "browser.proxies.addressPlaceholder": "socks5://user:password@host:1080",
   "browser.proxies.deleteUsed": {
@@ -247,7 +264,8 @@ export const messages = {
   "browser.proxies.deleteUnused": "Ни один профиль не использует этот прокси.",
   "browser.proxies.failing": "{name} не отвечает",
   "browser.proxies.signInRefused": "{name} отклонил вход",
-  "browser.proxies.unsupported": "Этот сервер не может использовать прокси. Обновите OpenBot на этом сервере.",
+  "browser.proxies.unsupported": "Этот сервер не может использовать прокси. Обновите StarBot на этом сервере.",
+
   "browser.proxies.yourComputer": "Ваш компьютер",
   "browser.proxies.memberComputer": "Компьютер участника {name}",
   "browser.proxies.unknownComputer": "Компьютер участника",
@@ -258,7 +276,8 @@ export const messages = {
   "browser.proxies.offlineBadge": "{name} не в сети",
   "browser.proxies.shareTitle": "Поделиться подключением этого компьютера?",
   "browser.proxies.shareDescription":
-    "Профили, которые используют ваш компьютер, открывают общедоступные сайты через интернет-подключение этого компьютера. Это работает, только пока OpenBot открыт здесь. Сервер не может открывать адреса в вашей локальной сети.",
+    "Профили, которые используют ваш компьютер, открывают общедоступные сайты через интернет-подключение этого компьютера. Это работает, только пока StarBot открыт здесь. Сервер не может открывать адреса в вашей локальной сети.",
+
   "browser.proxies.share": "Поделиться",
   "browser.proxies.stopSharing": "Перестать делиться",
   "browser.proxies.closesTabs": {

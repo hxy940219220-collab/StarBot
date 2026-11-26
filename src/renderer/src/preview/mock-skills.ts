@@ -95,7 +95,7 @@ function readMockGithub(link: string): GithubSkillSource {
   const match = /^(?:https?:\/\/)?(?:www\.)?github\.com\/anthropics\/skills(?:\/(?:tree|blob)\/[^/]+\/?(.*))?$/iu.exec(
     link.trim(),
   );
-  if (!match) throw new Error("OpenBot cannot open this repository. The repository is private, or it does not exist.");
+  if (!match) throw new Error("StarBot cannot open this repository. The repository is private, or it does not exist.");
   const folder = (match[1] ?? "").replace(/\/?SKILL\.md$/iu, "").replace(/\/$/u, "");
   const source = mockGithubSource();
   const skills = source.skills.filter(
@@ -275,7 +275,7 @@ export function createMockSkills(options: MockSkillsOptions, onChanged: (agentId
     },
     uninstall: async ({ agentId, skillId }) => {
       const skill = readInstalledSkills(agentId).find((item) => item.skillId === skillId);
-      if (skill?.origin === "managed") throw new Error("This skill is managed by OpenBot.");
+      if (skill?.origin === "managed") throw new Error("This skill is managed by StarBot.");
       writeInstalled(
         agentId,
         readInstalledSkills(agentId).filter((item) => item.skillId !== skillId),
@@ -285,7 +285,7 @@ export function createMockSkills(options: MockSkillsOptions, onChanged: (agentId
       const current = readInstalledSkills(agentId);
       const skill = current.find((item) => item.skillId === skillId);
       if (!skill) throw new Error("Skill not found.");
-      if (skill.origin === "managed") throw new Error("This skill is managed by OpenBot.");
+      if (skill.origin === "managed") throw new Error("This skill is managed by StarBot.");
       const next: InstalledSkill = { ...skill, enabled };
       writeInstalled(
         agentId,

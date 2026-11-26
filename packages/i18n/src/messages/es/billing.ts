@@ -82,7 +82,8 @@ export const messages = {
   "billing.license.description": "Para trabajar en una empresa. No incluye un servidor.",
   "billing.license.loadFailed": "No se pudo cargar la licencia.",
   "billing.license.actionFailed": "No se pudo cambiar la licencia.",
-  "billing.license.contactSales": "Escribe a licenses@openbot.run para más información.",
+  "billing.license.contactSales": "Escribe a licenses@starbot.app para más información.",
+
   "billing.license.saving": "Guardando…",
   "billing.license.personal.title": "Uso personal",
   "billing.license.personal.description": "Gratis para uso no comercial.",
@@ -92,7 +93,8 @@ export const messages = {
   "billing.license.buy": "Comprar licencia",
   "billing.license.offer.title": "Licencia comercial",
   "billing.license.offer.description": "Starter para 1 usuario, o Team para {count} usuarios o más.",
-  "billing.license.buy.description": "¿Cuántas personas usan OpenBot en el trabajo? Los agentes de IA no son usuarios.",
+  "billing.license.buy.description": "¿Cuántas personas usan StarBot en el trabajo? Los agentes de IA no son usuarios.",
+
   "billing.license.buy.confirm": "Continuar al pago",
   "billing.license.trial.until": "Gratis hasta el {date}",
   "billing.license.trial.confirm": "Empezar prueba gratis",
@@ -153,9 +155,11 @@ export const messages = {
   "billing.order.yearly": "Anual",
   "billing.order.yearlySaving": "−{percent}% anual",
   "billing.order.server.title": "Servidor alojado",
-  "billing.order.server.summary": "Alojamos OpenBot para tu equipo.",
+  "billing.order.server.summary": "Alojamos StarBot para tu equipo.",
+
   "billing.order.server.none": "Sin servidor",
-  "billing.order.server.noneDetail": "Ejecuta OpenBot en tu propio equipo",
+  "billing.order.server.noneDetail": "Ejecuta StarBot en tu propio equipo",
+
   "billing.order.server.thisComputer": "Tu equipo",
   "billing.order.server.bestValue": "Mejor oferta",
   "billing.order.server.bestFor.starter": "Ideal para una persona",
@@ -164,7 +168,8 @@ export const messages = {
   "billing.order.server.storage": "{size} GB de almacenamiento",
   "billing.order.server.speed": "Velocidad {speed}×",
   "billing.order.license.title": "Licencia",
-  "billing.order.license.summary": "Para usar OpenBot en el trabajo.",
+  "billing.order.license.summary": "Para usar StarBot en el trabajo.",
+
   "billing.order.license.none": "Sin licencia",
   "billing.order.license.noneDetail": "Uso personal y no comercial",
   "billing.order.license.starter": "Licencia Starter",

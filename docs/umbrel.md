@@ -1,34 +1,34 @@
 # Umbrel
 
-The Umbrel app runs the [OpenBot image](docker.md) on an [Umbrel](https://umbrel.com) home server. It
+The Umbrel app runs the [StarBot image](docker.md) on an [Umbrel](https://umbrel.com) home server. It
 is a [self-hosted server](self-hosted-server.md) of your account. You use it from the desktop app, the
-iPhone app or `openbot.run/app`, as any other server.
+iPhone app or `starbot.app/app`, as any other server.
 
 ## Install
 
-The app is in the OpenBot community app store,
-[nightly-labs/openbot-umbrel-store](https://github.com/nightly-labs/openbot-umbrel-store). It is not in
+The app is in the StarBot community app store,
+[hxy940219220-collab/StarBot-Desktop-umbrel-store](https://github.com/hxy940219220-collab/StarBot-Desktop-umbrel-store). It is not in
 the official Umbrel App Store yet.
 
 1. On your Umbrel, open the **App Store**.
 2. Open the **⋯** menu at the top right and select **Community App Stores**.
-3. Paste `https://github.com/nightly-labs/openbot-umbrel-store` and select **Add**.
-4. Open the **OpenBot** store and install **OpenBot**.
+3. Paste `https://github.com/hxy940219220-collab/StarBot-Desktop-umbrel-store` and select **Add**.
+4. Open the **StarBot** store and install **StarBot**.
 
 Umbrel keeps the data of an app in a folder with the name of its app id, here `openbot-server`. An
-OpenBot app from another store has another id and does not get that data.
+StarBot app from another store has another id and does not get that data.
 
 ## Sign in
 
 1. Open the app from the Umbrel home screen.
 2. The setup page shows the sign-in screen of the app. Enter your email and select
    **Send sign-in code**.
-3. Enter the code that OpenBot sends to the email. The page signs in when the code is complete.
-4. The page shows when the server is online. Then open OpenBot on your computer, on your phone or at
-   `openbot.run/app`, sign in with the same email and select the server.
+3. Enter the code that StarBot sends to the email. The page signs in when the code is complete.
+4. The page shows when the server is online. Then open StarBot on your computer, on your phone or at
+   `starbot.app/app`, sign in with the same email and select the server.
 5. Connect a provider from the app, as on a [hosted server](hosted-servers.md#providers).
 
-The server gets the name `OpenBot`. To change it, open Server Settings in the app.
+The server gets the name `StarBot`. To change it, open Server Settings in the app.
 
 The setup page can only show the status and sign the server in. To sign out, or to use another
 account, open a terminal of the app in Umbrel (Settings › Advanced settings › Terminal) and run
@@ -37,10 +37,10 @@ account, open a terminal of the app in Umbrel (Settings › Advanced settings �
 
 ## The setup page
 
-`OPENBOT_SETUP_PAGE_PORT` starts the page in the container. The page is part of OpenBot:
+`OPENBOT_SETUP_PAGE_PORT` starts the page in the container. The page is part of StarBot:
 `src/main/server-setup-page.ts` serves the `server-setup` entry of the renderer build
 (`out/renderer/server-setup.html` and its `assets/`). The entry,
-`src/renderer/src/features/server-setup/`, shows the shared `AccountLogin` screen of the app. It starts only in the OpenBot image, where `/opt/OpenBot/hosted/mode`
+`src/renderer/src/features/server-setup/`, shows the shared `AccountLogin` screen of the app. It starts only in the StarBot image, where `/opt/StarBot/hosted/mode`
 is `container`. A self-hosted server that systemd runs writes a warning and does not start it.
 
 Umbrel asks for the Umbrel password before it sends a request to the page. The `app_proxy` service
@@ -70,7 +70,7 @@ The page uses the language and the color scheme of the browser.
 ## Updates
 
 Umbrel installs a new version of the app when the app store has one. A new version of the app pins a
-new image by its digest. OpenBot does not update itself in the container, and Server settings ›
+new image by its digest. StarBot does not update itself in the container, and Server settings ›
 Updates offers no update. Do not go back to an older version: see [Upgrades](docker.md#upgrades).
 
 ## Make the app for a release
@@ -94,7 +94,7 @@ run the workflow from the Actions tab of the store.
 
 | File | Use |
 | --- | --- |
-| `umbrel-app.yml` | The manifest. Umbrel opens the app on port 4180. The icon is `openbot.run/icon-512x512.png`, except with `--official`. |
+| `umbrel-app.yml` | The manifest. Umbrel opens the app on port 4180. The icon is `starbot.app/icon-512x512.png`, except with `--official`. |
 | `docker-compose.yml` | The container, with the same options as `docker/compose.yaml`. Umbrel sends the requests of the app to the setup page on port 8080. |
 | `data/.gitkeep` | Keeps the source folder of the `/data` bind mount in the app store. Umbrel's linter needs it. |
 | `hooks/pre-start` | Makes the data folder and gives it to UID 1000, the user of the image. |
@@ -117,7 +117,7 @@ Write these reasons in the pull request, because Umbrel asks for them:
   of Docker refuses the calls for it, and the container stops. `seccomp.json` is the default profile
   with one more rule: `clone` and `unshare` without limits on their flags (see
   [Security](docker.md#security)). `no-new-privileges` is also set.
-- `restart: unless-stopped`: OpenBot exits with code 0 when an owner restarts the server from Server
+- `restart: unless-stopped`: StarBot exits with code 0 when an owner restarts the server from Server
   Settings. With `on-failure`, the app then stays stopped.
 
 `bun run test:server-setup-page` runs the setup page with a fake account service in Chrome and
@@ -131,7 +131,7 @@ Desktop on macOS), with the setup page of this branch on the 0.71.0 image:
 - umbreld installed `openbot-server` from the community app store. It accepted `seccomp.json`, and the
   `pre-start` hook gave the data folder to UID 1000 with mode 0700. The Electron sandbox started.
 - Without an Umbrel sign-in, the app port sends the browser to the Umbrel sign-in. After it, the setup
-  page shows the sign-in screen of OpenBot.
+  page shows the sign-in screen of StarBot.
 - After a restart of the app in umbreld, the data and `openbot.db` stay.
 - `openbot logout` runs in the app container.
 - Umbrel's linter (`lint:apps`) shows no errors on the `--official` app with a submission URL.

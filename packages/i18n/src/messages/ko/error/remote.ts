@@ -17,7 +17,8 @@ export const messages = {
   "error.remote.sessionCapacity": "호스트에 이미 활성 세션이 4개 있어요.",
   "error.remote.linuxNeedsX11": "Linux의 원격 데스크톱에는 X11 세션이 필요해요. Wayland는 지원하지 않아요.",
   "error.remote.runtimeMissing":
-    "Sunshine 및 Moonlight Web 런타임이 없거나 이 호스트에서 지원되지 않아요. Mac, Windows x64 호스트 또는 Linux x64 호스트에 전체 OpenBot 릴리스를 설치한 다음 OpenBot을 다시 시작해 주세요.",
+    "Sunshine 및 Moonlight Web 런타임이 없거나 이 호스트에서 지원되지 않아요. Mac, Windows x64 호스트 또는 Linux x64 호스트에 전체 StarBot 릴리스를 설치한 다음 OpenBot을 다시 시작해 주세요.",
+
   "error.remote.testActive": "원격 데스크톱 테스트가 진행 중이에요. 테스트가 끝난 후에 다시 시도해 주세요.",
   "error.remote.screenRecordingDenied":
     "호스트에서 OpenBot의 화면 녹화를 허용하지 않았어요. 호스트에서 화면 녹화 권한을 허용한 다음 다시 시도해 주세요.",
@@ -53,7 +54,8 @@ export const messages = {
   "error.remote.invalidData": "호스트가 잘못된 데이터를 반환했어요.",
   "error.remote.unsafeData": "호스트가 이 앱에서 안전하게 사용할 수 없는 데이터를 반환했어요.",
   "error.remote.requestFailedStatus": "원격 서버 요청에 실패했어요({status}).",
-  "error.remote.appUpdateRequired": "호스트에 연결하기 전에 이 OpenBot 앱을 업데이트해 주세요.",
+  "error.remote.appUpdateRequired": "호스트에 연결하기 전에 이 StarBot 앱을 업데이트해 주세요.",
+
   "error.remote.identityNotVerified": "서버 ID를 확인할 수 없어요.",
   "error.remote.webRtcUnavailable": "WebRTC 전송을 사용할 수 없어요.",
   "error.remote.invalidCompatibility": "호스트가 잘못된 호환성 정보를 반환했어요.",
@@ -94,7 +96,8 @@ export const messages = {
   "error.remote.connectionNotStarted":
     "OpenBot이 이 서버와 연결을 시작하지 못했어요. 문제가 계속되면 OpenBot을 종료하고 다시 여세요.",
   "error.remote.connectionServiceUnreachable":
-    "이 컴퓨터가 OpenBot 연결 서비스에 연결할 수 없어요. 인터넷 연결을 확인하세요. OpenBot이 자동으로 다시 연결해요.",
+    "이 컴퓨터가 StarBot 연결 서비스에 연결할 수 없어요. 인터넷 연결을 확인하세요. OpenBot이 자동으로 다시 연결해요.",
+
   "error.remote.serverAnswerTimeout": "서버가 제때 응답하지 않았어요. OpenBot이 자동으로 다시 연결해요.",
   "error.remote.connectionCancelled": "원격 연결이 취소되었어요.",
   "error.remote.hostDisconnected": "서버와의 연결이 끊어졌어요. 작업이 완료되었는지 확인한 후 다시 시도해 주세요.",
@@ -146,11 +149,13 @@ export const messages = {
   "error.remote.permanentInviteNoEmail": "영구 초대는 이메일로 보낼 수 없어요.",
   "error.remote.selfHostedInviteNoEmail":
     "자체 호스팅 계정 서비스의 초대는 이메일로 보낼 수 없어요. 링크를 복사해 주세요.",
-  "error.remote.inviteOtherService": "이 초대는 다른 OpenBot 서비스의 초대예요.",
+  "error.remote.inviteOtherService": "이 초대는 다른 StarBot 서비스의 초대예요.",
+
   "error.remote.inviteFingerprintMismatch": "초대 호스트 ID가 지문과 일치하지 않아요.",
   "error.remote.inviteHostKeyMissing": "초대 호스트 키가 없어요.",
   "error.remote.inviteKeyConflict": "초대가 신뢰하는 호스트 키와 충돌해요.",
-  "error.remote.serviceRequestFailed": "OpenBot 서비스 요청에 실패했어요.",
+  "error.remote.serviceRequestFailed": "StarBot 서비스 요청에 실패했어요.",
+
   "error.remote.downloadTimeout": "첨부 파일 다운로드 시간이 초과되었어요. 다시 시도해 주세요.",
   "error.remote.attachmentConnectionClosed": "첨부 파일 연결이 닫혔어요.",
   "error.remote.tooManyDownloads": "첨부 파일 다운로드가 너무 많아요.",
@@ -176,7 +181,8 @@ export const messages = {
   "error.remote.signalInvalidMessage": "Signal이 잘못된 메시지를 반환했어요.",
   "error.remote.sessionInvalid": "원격 세션이 올바르지 않아요.",
   "error.remote.ticketInvalid": "연결 티켓이 올바르지 않아요.",
-  "error.remote.mobileUpdateRequired": "연결하기 전에 OpenBot 모바일 또는 데스크톱 앱을 업데이트해 주세요.",
+  "error.remote.mobileUpdateRequired": "연결하기 전에 StarBot 모바일 또는 데스크톱 앱을 업데이트해 주세요.",
+
   "error.remote.connectionStepFailed": "이 연결 단계를 완료할 수 없었어요.",
   "error.remote.signalNotConnected": "Signal에 연결되어 있지 않아요.",
   "error.remote.signalFrameUnreadable": "Signal이 이 피어가 읽을 수 없는 프레임을 보냈어요.",
@@ -196,21 +202,25 @@ export const messages = {
   "error.remote.iceDisconnected": "호스트와의 직접 연결이 끊어졌어요.",
   "error.remote.webrtcBlocked":
     "이 기기가 OpenBot에 필요한 연결을 차단합니다. 차단 모드가 켜져 있으면 설정 > 개인정보 보호 및 보안 > 차단 모드에서 OpenBot에 대해 끄세요.",
-  "error.remote.directoryUnreachable": "OpenBot이 OpenBot 서비스에 연결할 수 없어요. 연결 상태를 확인해 주세요.",
-  "error.remote.directoryTimeout": "OpenBot 서비스가 제때 응답하지 않았어요. 다시 시도해 주세요.",
+  "error.remote.directoryUnreachable": "OpenBot이 StarBot 서비스에 연결할 수 없어요. 연결 상태를 확인해 주세요.",
+
+  "error.remote.directoryTimeout": "StarBot 서비스가 제때 응답하지 않았어요. 다시 시도해 주세요.",
+
   "error.remote.inviteAlreadyUsed": "이미 사용된 초대예요. 새 초대를 요청해 주세요.",
   "error.remote.inviteNotFound": "초대가 없거나 만료되었어요. 새 초대를 요청해 주세요.",
   "error.remote.licenseUsersFull":
     "서버 소유자의 라이선스에 남은 사용자 자리가 없어요. 소유자에게 라이선스에 사용자를 추가해 달라고 요청해 주세요.",
   "error.remote.memberLimitReached":
     "이 호스트의 멤버 한도에 도달했어요. 소유자에게 자리를 만들어 달라고 요청해 주세요.",
-  "error.remote.hostNotRegistered": "이 호스트는 더 이상 OpenBot 서비스에 등록되어 있지 않아요.",
+  "error.remote.hostNotRegistered": "이 호스트는 더 이상 StarBot 서비스에 등록되어 있지 않아요.",
+
   "error.remote.membershipEnded": "더 이상 이 호스트의 멤버가 아니에요. 소유자에게 새 초대를 요청해 주세요.",
   "error.remote.membershipChanged":
     "다른 사람이 동시에 이 멤버를 변경했어요. 멤버 목록을 다시 불러온 뒤 다시 시도해 주세요.",
   "error.remote.accountSessionInactive": "로그인이 더 이상 유효하지 않아요. 다시 로그인해 주세요.",
   "error.remote.hostOtherAccount": "이 호스트는 다른 계정의 호스트예요.",
-  "error.remote.remoteNotConfigured": "이 OpenBot 서비스에는 원격 연결이 설정되어 있지 않아요.",
+  "error.remote.remoteNotConfigured": "이 StarBot 서비스에는 원격 연결이 설정되어 있지 않아요.",
+
   "error.remote.hostRefused": "호스트가 요청을 거부했어요({status}).",
   "error.remote.formUnavailable": "이 양식은 더 이상 사용할 수 없어요.",
   "error.remote.hostedServerRemoval": "호스팅 서버를 삭제하려면 결제에서 삭제해 주세요.",

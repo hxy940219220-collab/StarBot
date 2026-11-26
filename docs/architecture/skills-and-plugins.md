@@ -11,41 +11,41 @@ A skill follows the [Agent Skills specification](https://agentskills.io/specific
 
 | Folder | Written by | Read by |
 | --- | --- | --- |
-| `<workspace>/.agents/skills/` | OpenBot, the user, the agent | Codex, Grok, OpenCode, Gemini, Cursor, Cline, Pi, Muse, custom agents |
-| `<workspace>/.claude/skills/` | OpenBot, the user, the agent | Claude Code, OpenCode, Cursor |
+| `<workspace>/.agents/skills/` | StarBot, the user, the agent | Codex, Grok, OpenCode, Gemini, Cursor, Cline, Pi, Muse, custom agents |
+| `<workspace>/.claude/skills/` | StarBot, the user, the agent | Claude Code, OpenCode, Cursor |
 | `<workspace>/.opencode/skills/` | the user, the agent | OpenCode |
 | `<workspace>/.gemini/skills/` | the user, the agent | Gemini |
 | `<workspace>/.cursor/skills/` | the user, the agent | Cursor |
 | `<workspace>/.cline/skills/`, `<workspace>/.clinerules/skills/` | the user, the agent | Cline |
-| `~/.agents/skills/` | the user | Codex, Grok, OpenCode, Cursor, Cline, Pi; Claude through OpenBot (see below) |
+| `~/.agents/skills/` | the user | Codex, Grok, OpenCode, Cursor, Cline, Pi; Claude through StarBot (see below) |
 | `~/.claude/skills/` | the user | Claude Code, OpenCode, Grok, Cursor |
 | `~/.codex/skills/`, `~/.config/opencode/skills/` | the user | Codex, OpenCode |
 
 A confined agent (Grok, OpenCode, Gemini, Cursor, Cline, Pi, Muse or a custom agent, not in Full access) cannot write the workspace
 skill folders: `src/backend/process-confinement.ts` protects them as project settings.
 
-OpenBot writes each skill that it installs to both `.agents/skills/<slug>` and
+StarBot writes each skill that it installs to both `.agents/skills/<slug>` and
 `.claude/skills/<slug>`, because Claude Code does not read `.agents/skills`. It copies the files and
 does not make links. `.openbot/skills-lock.json` in the workspace records the file hashes, and
 `.openbot/skills-disabled/` holds disabled skills. A bundled skill has an `.openbot-managed.json`
 marker.
 
 `src/main/skill-folder-discovery.ts` lists all other skills in the seven workspace folders as
-`workspace` skills. The list is read-only: OpenBot never writes, moves or deletes these folders, and
+`workspace` skills. The list is read-only: StarBot never writes, moves or deletes these folders, and
 they do not count toward the agent's skill limit. A folder without `SKILL.md` is not a skill. A
 skill gets a `problem` when its `SKILL.md` does not follow the specification, or when it is in a
 folder that the agent's provider does not read. An agent keeps its workspace when its provider
 changes, so a skill in `.agents/skills` stops working after a change to Claude Code. A skill with a
 problem is not offered as a chat tag.
 
-OpenBot does not show the home-directory folders in the Skills panel. They hold the host user's
+StarBot does not show the home-directory folders in the Skills panel. They hold the host user's
 skills, which are the same for every agent, and each provider CLI changes its home-folder rules
 without notice. `~/.agents/skills` is the one exception, because it is the folder that the Agent
 Skills tools share, so every provider gets it. `src/backend/home-skills.ts` reads it and never writes
 to it; it lists each folder with a valid `SKILL.md`, at most 200. `homeSkills` in the provider
 descriptor says how each CLI gets these skills:
 
-- `native`: the CLI reads the folder by itself. OpenBot gives it nothing.
+- `native`: the CLI reads the folder by itself. StarBot gives it nothing.
 - `plugin` (Claude Code): `claudeHomeSkillPlugin` (`src/backend/claude-workspace-sandbox.ts`) makes a
   plugin named `agents` in the provider state folder, with one link for each skill, and each session
   gets it. A skill whose folder name is also in `$CLAUDE_CONFIG_DIR/skills` (else `~/.claude/skills`)
@@ -73,14 +73,14 @@ shows the skills that loaded and tries again after a reconnect.
 MCP servers do not use folders. `projection_mcp_servers` in SQLite is the source of truth for the
 whole computer. No shared MCP file format exists: Claude Code reads `.mcp.json` and
 `~/.claude.json`, Codex reads `config.toml`, OpenCode reads `opencode.json`, and Cursor, Cline and
-Gemini CLI read their own folders. OpenBot writes none of these files. It gives the servers to each
+Gemini CLI read their own folders. StarBot writes none of these files. It gives the servers to each
 provider when the session starts. Claude starts with `strictMcpConfig`, so it ignores `.mcp.json`
 and its user settings (see `plans/003-mcp-works-on-a-clean-machine.md`). The panel masks header and
 environment values, `src/backend/mcp-redaction.ts` removes them from logs, and OAuth tokens are in
 `safeStorage`.
 
 The 1Password connector is built in and has no SQLite row. `src/main/onepassword-connector-service.ts`
-runs the user's `op` CLI once to create the vault "Shared with OpenBot" and a `read_items` service
+runs the user's `op` CLI once to create the vault "Shared with StarBot" and a `read_items` service
 account, or takes a pasted service account token. Before Connect, the page shows three setup steps
 that `checkSetup()` reads: a CLI of 2.18 or later (the user's own on `PATH`, else the copy that
 `src/main/onepassword-cli-installer.ts` downloads, with a SHA-256 pinned per target, into
@@ -102,7 +102,7 @@ A script can also write Cache Storage that a service worker serves as page code,
 the worker claims after it loaded, so the origin stays tainted in that session. Thus, while a scripted
 page is open, no page of its origin in the same session fills. When it ends, a same-origin page of a
 connected popup or opener keeps that mark, each other open page of the origin must navigate before
-its own fill, and OpenBot clears the origin's Cache Storage and service workers. It deletes the service workers when
+its own fill, and StarBot clears the origin's Cache Storage and service workers. It deletes the service workers when
 no page of the origin loads, after at most 10 seconds, because a deleted worker fails the requests of a page that loads
 (#9981). A fill waits for the Cache Storage purge, and clears both again when no other page of
 the origin is open. A page whose navigation a service worker handled must reload once with `navigate direction=reload`.
@@ -118,19 +118,19 @@ password or a code.
 The Bitwarden connector also implements `PasswordVault`. It uses an installed `bw` executable,
 resolved to an absolute path from absolute `PATH` entries or common installation directories.
 It runs fixed arguments without a shell and with an allowlisted environment. The user supplies a
-CLI session key after signing in and unlocking Bitwarden outside OpenBot. OpenBot keeps no
+CLI session key after signing in and unlocking Bitwarden outside StarBot. StarBot keeps no
 connection file and never asks for the master password. The CLI owns its encrypted cache and server
 configuration. Each operation has a 30-second deadline and an output limit. Errors discard all
 CLI output. Disconnect cancels active calls, and a late call cannot return a credential from an
 old session. Eight hours without a successful vault call ends the connection.
 
-Connect requires exactly one folder named `Shared with OpenBot`. Its id scopes later reads.
+Connect requires exactly one folder named `Shared with StarBot`. Its id scopes later reads.
 Each fill syncs and checks the current item, its folder, its saved URI, its deleted state,
 and its master-password prompt setting. Only an HTTPS saved URI and an HTTPS page match; a URI with
 no scheme counts as HTTPS. The default and base domain URI rules compare the registrable domain, as
 Bitwarden does, so `myaccount.google.com` also fills on `accounts.google.com`. The host rule needs
 the same host and port. Other URI rules are not supported; those logins use the manual secret card.
-The session key can decrypt the wider vault; the folder limit is enforced by OpenBot, not Bitwarden.
+The session key can decrypt the wider vault; the folder limit is enforced by StarBot, not Bitwarden.
 All local agents share this grant. Prompt injection can still use an approved account on its own
 site; this feature does not authorize or constrain actions after sign-in.
 
@@ -145,7 +145,7 @@ agent that can use it. A key for every agent also goes to `.vault/<NAME>`, the p
 before 0.70.0, because scripts, MCP servers and provider configs read it (#8983); a key for chosen
 agents never does. "Only this agent" saves a Vault key for the asking agent. All agents run as
 the same system user, so an agent can read the key files of other agents: the scope controls which
-agents OpenBot gives a key to, not which agents can read it. The Vault text says this. Otherwise, `AttentionRegistry` saves the value with
+agents StarBot gives a key to, not which agents can read it. The Vault text says this. Otherwise, `AttentionRegistry` saves the value with
 `AgentApiKeys` (`src/backend/agent-api-keys.ts`) before the prompt resolves, as
 `<userData>/agent-api-keys/<agentId>/<NAME>`: a 0600 file in a 0700 folder, outside every workspace,
 and not encrypted. A failed save leaves the form open. The agent gets only the name and the path, and
@@ -159,7 +159,7 @@ saves it in the encrypted Vault as an `apiKey` item for every agent (`VaultItems
 `openbot_browser.save_vault_item kind=login` saves a website password (`VaultItems.saveLogin`). Both
 register a value of 8 or more characters for log redaction when the call arrives, before any check;
 the Vault registers a shorter value when it saves it. Both work only when a
-person's message in this computer's OpenBot chat started the turn, as for workflow changes: an
+person's message in this computer's StarBot chat started the turn, as for workflow changes: an
 external chat, a team member, a routine, another agent, or a web page cannot replace a key or a
 password. In a channel task, `save_api_key` saves only a value that the request of the root task holds
 as a whole token of 8 or more characters, when this computer's user wrote that request
@@ -168,7 +168,7 @@ yet: the agent also reads the lead's and the other members' words there. Otherwi
 agent to call `request_api_key`, whose form works in a channel and can replace a key. They return no secret. `save_api_key` replaces a Vault key with the same name and deletes
 the calling agent's own key with that name, because the agent's own key wins in `list_api_keys`.
 Another agent's own key with that name stays and still wins for that agent. The value is in the provider's
-transcript because the agent sent it; OpenBot keeps no tool arguments in its trace. An agent cannot
+transcript because the agent sent it; StarBot keeps no tool arguments in its trace. An agent cannot
 delete a Vault key: for a name that only the Vault has, `remove_api_key` fails and tells the agent
 that the user deletes it in Server settings > Vault.
 
@@ -204,13 +204,13 @@ with the name `github` wins. For `gh` and `git`, the service writes the token to
 token. The helper gives the `openbotgit[bot]` token for a repository that has one. For other
 repositories, it first asks the git credential helpers that the computer had before (with the
 original `GH_CONFIG_DIR` and no prompts), and gives the connector's user token only when they have
-no credential. The OpenBot GitHub App reaches only the repositories where it is installed, so this
+no credential. The StarBot GitHub App reaches only the repositories where it is installed, so this
 keeps git working on private repositories that the user's own login reaches. The fallback only
 reads: git does not send a store or an erase to the helpers of the computer, and when GitHub refuses
 the computer's credential, git does not try the connector token in the same command. Codex gets
 these values through `shell_environment_policy.set` in the thread config.
 
-A user token makes GitHub show "user with OpenBotGit". To show `openbotgit[bot]`, the desktop sends
+A user token makes GitHub show "user with StarBotGit". To show `openbotgit[bot]`, the desktop sends
 the user token to `POST /v1/github/installation-tokens` on the account Worker
 (`apps/auth-api/src/server/github-installation-tokens.ts`). The Worker holds the app's private key
 (`GITHUB_APP_PRIVATE_KEY`, PKCS #8) and signs an app JWT. It mints one installation token for each
@@ -251,6 +251,6 @@ The backend local skill tools derive the agent from the calling provider session
 
 ## Plugin distribution
 
-A plugin is one developer's bundle: an MCP server, shown as an app, the skills that drive it, and the listing text. The catalog of available plugins is a static file set that the Account Worker serves from `openbot.run` without an account, and the main process keeps a copy in the user-data directory rather than in SQLite, because a remote catalog is a cache and not the source of truth. An install saves the app as a host-global MCP server and installs the pinned skills into the chosen agent. A share link at `openbot.run/plugins/<slug>` opens a public page, and `openbot://plugins/<slug>` opens the listing in the app; neither one installs anything.
+A plugin is one developer's bundle: an MCP server, shown as an app, the skills that drive it, and the listing text. The catalog of available plugins is a static file set that the Account Worker serves from `starbot.app` without an account, and the main process keeps a copy in the user-data directory rather than in SQLite, because a remote catalog is a cache and not the source of truth. An install saves the app as a host-global MCP server and installs the pinned skills into the chosen agent. A share link at `starbot.app/plugins/<slug>` opens a public page, and `openbot://plugins/<slug>` opens the listing in the app; neither one installs anything.
 
-See [plugin distribution and sharing](../plugin-distribution.md) for the catalog shape, the fetch and cache rules, the install and uninstall order, the deep-link parser rules, and the security review. Three parts of that design run today. The Apps tab installs the listing's pinned skills into the chosen agent and saves its app as a host-global MCP server. The links work: `openbot.run/marketplace/apps` (which `openbot.run/plugins` redirects to) and `openbot.run/plugins/<slug>` are pages on the public site, and `openbot://plugins/<slug>` opens that listing in the app, which is one of the link kinds that `src/main/deep-link-router.ts` recognises beside an invitation. Both sides read one catalog, generated from `marketplace/plugin-catalog/`, because a listing that said one thing on the page and another in the app would be two catalogs. The Apps tab also uninstalls a listing. The catalog files, the Worker routes that serve them, and the cache in the main process are still design.
+See [plugin distribution and sharing](../plugin-distribution.md) for the catalog shape, the fetch and cache rules, the install and uninstall order, the deep-link parser rules, and the security review. Three parts of that design run today. The Apps tab installs the listing's pinned skills into the chosen agent and saves its app as a host-global MCP server. The links work: `starbot.app/marketplace/apps` (which `starbot.app/plugins` redirects to) and `starbot.app/plugins/<slug>` are pages on the public site, and `openbot://plugins/<slug>` opens that listing in the app, which is one of the link kinds that `src/main/deep-link-router.ts` recognises beside an invitation. Both sides read one catalog, generated from `marketplace/plugin-catalog/`, because a listing that said one thing on the page and another in the app would be two catalogs. The Apps tab also uninstalls a listing. The catalog files, the Worker routes that serve them, and the cache in the main process are still design.

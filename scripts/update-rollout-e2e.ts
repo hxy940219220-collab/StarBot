@@ -34,7 +34,7 @@ class ProbeUpdater extends AppUpdater {
   constructor(userData: string, version: string, platform: NodeJS.Platform) {
     super(null, {
       version,
-      name: "OpenBot",
+      name: "StarBot",
       isPackaged: true,
       appUpdateConfigPath: join(userData, "app-update.yml"),
       userDataPath: userData,
@@ -93,7 +93,7 @@ if (parsed.values.manifests) {
     "download",
     RELEASE_TAG,
     "--repo",
-    "nightly-labs/openbot",
+    "hxy940219220-collab/StarBot-Desktop",
     "--pattern",
     "*.yml",
     "--dir",

@@ -43,7 +43,7 @@ Messages use `AgentService.sendMessage` and its persisted retry keys. The attent
 each pending object an opaque local handle. Responses match that handle and agent together; an
 expired handle cannot answer a later provider request. Pending details are not trimmed to the UI
 snapshot budget. The HTTP boundary redacts outgoing values. Browser takeovers and secret questions
-are notices only and direct the person to OpenBot. Messages and routine runs share the rate limit.
+are notices only and direct the person to StarBot. Messages and routine runs share the rate limit.
 
 ## Scheduled routine changes
 
@@ -101,7 +101,7 @@ call. A file, an image or a question keeps the whole turn in the chat. So the re
 agent that the user does not see its written answer, and to ask the user with `ask_user`, whose
 question card keeps the turn shown (#11012). The tool still accepts a
 request: before the reply it answers that the agent must send the result first, but only when the
-missing reply is all that keeps the turn from a quiet end. When the agent sends no reply, OpenBot
+missing reply is all that keeps the turn from a quiet end. When the agent sends no reply, StarBot
 sends the turn's answer to the teammate as its result when the turn ends (`#relayAgentResult`). The
 teammate then has the answer, so the turn ends quiet too (#8021). The turn completion makes this
 decision with the same check as the relay (`#sendsResult`), and reads the answer before the quiet end
@@ -233,7 +233,7 @@ scheduled run that drives a desktop app has no person to continue the step in th
 routine thread and the chat of one agent can then drive the screen at the same time, as two agents
 can. A channel thread keeps Computer Use too (see [channels](channels-and-messaging.md)). Only
 `start_task` tasks and branches run without it. The runs of a routine thread also keep the tools of
-the chat that side threads do not have: `OpenBotToolRouter` does not count a routine thread as an
+the chat that side threads do not have: `StarBotToolRouter` does not count a routine thread as an
 execution thread, so a run can call `await_event` and `start_task`. A side thread that the user
 opened can call `await_event` too, but not `start_task`. A thread that the agent started cannot. A wait keeps no thread column: `AgentWaits`
 finds the side thread from the mailbox message of the wait's request. `RoutineScheduler` sends a run
@@ -367,7 +367,7 @@ changed, on this computer and on a joined host.
   the time zone of the trigger, the same "Local time of this run" line that a routine prompt has.
   A manual run of a schedule trigger gives its start time. A webhook trigger has a route of its own owner kind (`workflow`); see
   [Route lifecycle](events.md#route-lifecycle).
-- A GitHub trigger starts a run for each event of the OpenBot GitHub App that matches it
+- A GitHub trigger starts a run for each event of the StarBot GitHub App that matches it
   (`github-matching.ts`); see [Workflow GitHub triggers](events.md#workflow-github-triggers). A
   GitHub run blocks only its own issue or pull request: a second event for the same item waits, and
   events for other items run at the same time. Schedule and webhook triggers keep one open run per
@@ -418,7 +418,7 @@ changed, on this computer and on a joined host.
   failed or were stopped, or skipped after a failure (`stepAnswerGap`). A field that a skipped
   branch did not give stays empty. In a check, a missing value makes every test false except
   `not name`. In a model or agent text, a text value comes in JSON quotes and a list comes as a JSON array,
-  because they can hold text from outside OpenBot, also when a model or an agent copies webhook text
+  because they can hold text from outside StarBot, also when a model or an agent copies webhook text
   into its answer. An approval question is for a person, so it gets plain text. In a check, a quote
   starts only at the start of a value, so `it's` is a word. A step reads the answers of the connected steps before it, through conditions and
   approvals, in run order (`workflowAnswerSources`); an output shows them as `name: value` lines.
@@ -457,7 +457,7 @@ changed, on this computer and on a joined host.
   channel ids become keys and then new ids, connections and file ids are cleared, and a value that
   follows the trigger stays. Each workflow in the file has its graph `format`. Import keeps a step of
   an unknown kind as a locked note with its fields, drops the edges that this version cannot read, and
-  warns that the workflow needs a newer OpenBot. Each workflow goes through `parseCreateWorkflow` (the
+  warns that the workflow needs a newer StarBot. Each workflow goes through `parseCreateWorkflow` (the
   1 MB limit) and is created paused.
 - Agents use workflows with six `openbot` tools (`workflow-tools.ts`): `list_workflows`,
   `read_workflow`, `edit_workflow`, `delete_workflow`, `run_workflow` and `read_workflow_runs`. They
@@ -795,7 +795,7 @@ each branch under its source. The branch has no provider session, so its first t
 its own transcript, with a note that workspace files were not rolled back. A branch counts toward the
 open-thread limit.
 
-The agent starts a side thread with the `start_task` OpenBot tool, up to 8 open tasks. On desktop and
+The agent starts a side thread with the `start_task` StarBot tool, up to 8 open tasks. On desktop and
 the web, it opens as a tab of the agent and does not take focus. An agent has at most 50
 open tasks (`INPUT_LIMITS.agentTasks`, the size of the task list), so each open task stays visible. A message to a
 running task waits in the task, or steers the turn when the agent's busy-message mode is "steer"
@@ -914,10 +914,10 @@ instead, as on desktop: a finished task stays with its result until the person c
 opens the task.
 
 Shared writes: each task thread owns its own browser tabs and tab queue. Computer Use is an MCP
-server that the provider starts, so OpenBot cannot queue its calls; `ThreadLifecycle` starts a task
+server that the provider starts, so StarBot cannot queue its calls; `ThreadLifecycle` starts a task
 session without it, and the instructions send desktop work to the agent's own chat. A routine thread
 is the exception (see above). Tasks share the
-workspace, and OpenBot does not lock files; the `start_task` guidance warns the agent about this.
+workspace, and StarBot does not lock files; the `start_task` guidance warns the agent about this.
 
 A provider, account or custom-agent change that a user or an agent asks for while a turn, a task or
 a queued message waits is stored on the agent as `pendingRuntime`. The running work keeps its
@@ -989,7 +989,7 @@ the tools. Full access answers it, as for other built-in tool approvals. `save_m
 before it saves (`inspectMcpServer`, the silent Test): a server that does not answer is not saved; a
 server that needs an OAuth sign-in or a key is saved. `save_mcp_server` takes the headers of an http
 server that the user gave in the conversation, such as `Authorization: Bearer <token>`: each one sets or
-replaces the header of that name, and an empty value removes it. OpenBot registers the value of each
+replaces the header of that name, and an empty value removes it. StarBot registers the value of each
 header with a secret name before it parses the call, so logs mask it, and a failure masks every new
 value. A key value needs the same source as `save_api_key`: never an external chat, in a channel only a
 key that the local user wrote in the request of the task, and elsewhere only a person's message. The
@@ -1025,7 +1025,7 @@ a person's approval, answer or browser takeover stays open, so its agent stays `
 turn of the agent, such as a channel turn, can still work. A detached question holds no turn, so it
 does not count. `turnStartedAt` and `lastActivityAt` come from the provider
 notifications that `TurnLifecycle` sees; they are in memory only, so after a restart
-`lastActivityAt` falls back to the newest message for the agent. OpenBot does not record which
+`lastActivityAt` falls back to the newest message for the agent. StarBot does not record which
 files a turn changed. `openbot.interrupt_agent` (`src/backend/agent/agent-interrupt-tool.ts`)
 refuses the caller itself, a channel turn, and a turn that any delivery other than the caller's
 started, so an agent cannot stop work from the user, a routine, or another agent. It cancels the
@@ -1052,7 +1052,7 @@ for a sub-agent result. The later answer stays in the chat. A turn whose results
 (`restartedResult`, #12039) ends quietly too (#14330) when each result was `running` in a provider turn
 before the restart (`restartedTurnId`): the requester can have taken them in that turn, and the turn note tells it
 to check its earlier work. A result that was only `starting`, also a steer that the provider did not confirm, keeps the retry and
-the error. An OpenBot note for a failed request does
+the error. An StarBot note for a failed request does
 not count as an earlier answer, so the first real result after it still fails as above. The error waits for the end
 of the turn, also with no backup model. A backup model then runs the turn again, as for a provider
 error. With no backup, a turn that only teammate results started runs once more on the same model.
@@ -1091,7 +1091,7 @@ reads the host's default from `agent-host-settings-v1`, so a host on an older ve
 "queue" default. A provider that cannot steer natively (an ACP agent with no steer request of its
 own) queues the message in both modes. OpenCode steers through its `_session/steering` ACP extension
 (`steerAcpSession` in `src/backend/acp-session-steering.ts`). Only OpenCode 2.3.0 and later have it,
-and the copy that OpenBot installs can be older (2.3.0-2.3.2 are blocked, #13640). So the `opencode`
+and the copy that StarBot installs can be older (2.3.0-2.3.2 are blocked, #13640). So the `opencode`
 descriptor has `steer: "reported"`: the catalog keeps the `steersTurns` of the `model/list` answer on
 each OpenCode model, and `agentSteersTurns` reads it for the whole OpenCode process. An OpenCode
 without the extension shows the agent settings warning and "Send now", and its messages wait in the
@@ -1103,7 +1103,7 @@ the prompt ended, is listed in `unreadSteers` of `turn/completed` (not after a s
 puts those deliveries back in the queue with `restoreUnsteered`, so they run in the next turn and
 the sender gets no "blocked" note (#15062). A channel steer sends a channel message id, not a
 delivery id, so this does not cover it. OpenCode can still give its kept copy to a later prompt, as
-it does after a manual resend; over ACP, OpenBot cannot take that copy back. `scripts/opencode-late-steer-e2e.ts` checks both orders
+it does after a manual resend; over ACP, StarBot cannot take that copy back. `scripts/opencode-late-steer-e2e.ts` checks both orders
 of the race and that a read steer does not run again. Antigravity and Devin steer with
 a second `session/prompt` (`AcpFlavor.steerByPromptSince` for Antigravity 1.5.0 and later,
 `steerByPromptCapability` for a Devin CLI that reports `cognition.ai/midTurnPrompts`, because Devin
@@ -1153,7 +1153,7 @@ steer with `priority: "now"`. Claude Code then stops the turn (`terminal_reason`
 it moves a running shell command to the background and stops other tools, a subagent included, and
 starts a new turn with the steer. The aborted result does not list the steer's uuid
 (`untakenSteerIds`), so the client closes the open tool calls, aborts its open host tool calls
-(`hostToolCalls`, so the host removes their approval cards), and keeps the OpenBot turn open. The
+(`hostToolCalls`, so the host removes their approval cards), and keeps the StarBot turn open. The
 result of the steer's turn completes it. A stop from the person (`stopRequested`) still ends the turn
 as interrupted. While a question, an elicitation or a write approval waits for the person
 (`personRequests`), the steer has no priority: the open card stays the one that Claude waits for, and
@@ -1170,7 +1170,7 @@ its result separate from the answer to the person: the request text tells the re
 result with `send_message`. The turn's answer is for the person or another request, so the turn end
 never relays it for a steered request, and sends no "no reply" note: Claude can still answer a late
 steer in a turn of its own (`moveSteerToTurn`). When the turn ends as interrupted before a reply (a
-stop, or an exit of the provider process), the sender gets an OpenBot note (`MailboxStore.answerFailedRequest`), and does not wait for a result that
+stop, or an exit of the provider process), the sender gets an StarBot note (`MailboxStore.answerFailedRequest`), and does not wait for a result that
 never comes. Routine runs, channel work and messages from Slack, Telegram or
 WhatsApp do not steer automatically: each starts a turn of its own. A question back (a reply that
 expects a reply) asks for no `send_message` reply, so it stays queued and its own turn's answer goes
@@ -1223,7 +1223,7 @@ conversation. `openbot.create_agent` creates a persistent teammate with instruct
 task; `openbot.update_profile` changes an existing agent's name, title, instructions, generated
 or custom avatar, provider, model, reasoning effort, account, backup models, access, Computer Use, or notifications. `avatarPath` accepts a local PNG, JPEG, or WebP file up to 512 KB, with relative
 paths resolved from the calling agent’s workspace. The agent uses its available tools to resize or
-compress a copy when needed. OpenBot validates the prepared file before profile changes and copies
+compress a copy when needed. StarBot validates the prepared file before profile changes and copies
 it into managed avatar storage. Generated avatar settings remove the custom image. Both run through
 the existing agent service and validate arguments before changing state.
 `openbot.create_agent` also accepts an optional `provider`, `model` and `reasoningEffort`. The
@@ -1238,13 +1238,13 @@ that can hold more than one account also lists its accounts, with the provider's
 (`default`) first: the id, the name the user gave it (or null), and the state. It never lists the
 account email, credentials or account folders. `update_profile` takes the
 agent's `providerAccountId` and its `backupModels` (`automatic` and an `order` of provider, model
-and account), the same choices that the settings page offers. OpenBot checks each backup model and
+and account), the same choices that the settings page offers. StarBot checks each backup model and
 account against the lists before it writes, and the agent service checks the primary account; an
 account change, like a provider change, waits until the agent is idle. These changes apply at once,
 as the other profile fields do. `read_agent` and the `update_profile` result return the account,
 the backup models and `usageLimitReturn`, the model that the agent left for a usage limit or a provider error (`cause: "provider-error"`). A spent credit balance
 that names no reset sets no `usageLimitReturn`, so the agent does not go back to it by itself. An unknown
-model or an unsupported effort is an error that names the valid values; OpenBot checks them before
+model or an unsupported effort is an error that names the valid values; StarBot checks them before
 it creates the agent. Without a provider and a model, the new agent starts on the calling agent's
 provider, model and reasoning effort, so a team that one agent creates runs where that agent runs.
 When the caller's provider no longer lists its model, the new agent starts on the user's default.
@@ -1276,7 +1276,7 @@ the sidebar or Library cleanup fails after an agent is deleted, the tool logs it
 agent as deleted; the next start removes the places of agents that are gone. `scripts/agent-delete-tool-e2e.ts`
 checks these rules.
 `openbot.set_commit_co_author` turns off, or on again, the `commitCoAuthor` agent default: the
-OpenBot co-author trailer that the developer instructions tell each agent to add to its git commits.
+StarBot co-author trailer that the developer instructions tell each agent to add to its git commits.
 It writes through the same `AgentDefaultsSettings.update` as Server settings › Agent defaults and the
 `agent-defaults-v1` host route, so every agent gets the change. The setting applies to every agent,
 so the tool asks the owner on one owner-only card, also when the agent has Full access. Only a
@@ -1385,7 +1385,7 @@ Unchanged fingerprints resume the existing session. Pending history handoffs are
 the replacement is bound, reloaded after restart, and removed after a turn accepts the handoff.
 
 The same handoff carries a chat to another provider after a provider switch. It holds the user and
-assistant messages after the last context-reset marker, with attachment names only. OpenBot stores
+assistant messages after the last context-reset marker, with attachment names only. StarBot stores
 no tool steps, so the work log comes from the providers. At the switch, before the old sessions are
 retired, `ThreadLifecycle.readWorkSteps` reads each active session with the provider history read
 through the client that holds it, with a 10-second limit. The switch then checks again that no turn started.
@@ -1487,7 +1487,7 @@ memory step fails is deleted. Step 1 offers two ways to add the export agent: it
 
 ## Instance transfer
 
-Server settings > Transfer moves a server's agents and server settings to another OpenBot server with
+Server settings > Transfer moves a server's agents and server settings to another StarBot server with
 one `.zip` file. It is a separate format from the Grok Bot agent import. The first screen offers "Export
 from this server" and "Import into this server". The section shows for this computer's server, and for a
 joined server with `instance-transfer-v1` when the user is an owner or admin (see
@@ -1496,7 +1496,7 @@ client does not show it; the phone shows it for a joined server. App preferences
 the providers that are off belong to the app, not to a server, so they are not in the file.
 
 The file has `openbot-transfer.json` at its root, `agents/<key>/` folders (`avatar.<ext>`,
-`skills/<slug>/` and `workspace/`), and `shared/` for `~/OpenBot/Shared`. The manifest is
+`skills/<slug>/` and `workspace/`), and `shared/` for `~/StarBot/Shared`. The manifest is
 `{ format: "openbot-instance-transfer", version: 1, source, agents, settings, shared, signedIn }`.
 `src/main/instance-transfer-manifest.ts` writes and reads it with Effect `Schema`; it is a contract
 between app versions, so add only optional fields and raise `version` for a change of meaning. A file
@@ -1508,7 +1508,7 @@ colour is in the optional `avatarColor` field, and an older app draws the neares
 and reasoning effort, notifications and busy-message mode, its routines (schedule, limit and missed
 policies; one-time routines are in the optional `oneTimeRoutines` field, so an older app skips them and
 keeps the agent), its memories (with the essential or searchable choice the user made) and the skill folders
-in `.agents/skills` and `.claude/skills` that OpenBot does not manage. Workspace files are optional
+in `.agents/skills` and `.claude/skills` that StarBot does not manage. Workspace files are optional
 and leave out `.openbot/`, the skill folders, links, and every path `isUnsafeArchivePath` refuses
 (`.git`, `node_modules`, `.env*`, private keys, nested archives). Server settings are optional: MCP servers,
 custom model providers, custom ACP agents (as a warning, see below), sidebar sections and routine flows
@@ -1601,7 +1601,7 @@ There is no review and no marketplace listing. Before a publish, the renderer dr
 card (`agent-template-card.tsx`) with the agent's avatar and text. It draws it there because the
 avatar and its fonts are there, and it uses a `data:` URL because the Content Security Policy
 refuses `blob:` images. The Worker accepts only a PNG of that size, stores it in R2, and serves it
-as the page's `og:image`, so a post on X shows the agent. `openbot.run/agents/<id>` is a public
+as the page's `og:image`, so a post on X shows the agent. `starbot.app/agents/<id>` is a public
 card page, tinted with the avatar colour. The Bloub library uses browser-only APIs when its module
 loads, so the page loads the avatar and its colour in the browser after hydration. Its button opens
 `openbot://agents/<id>`, the third renderer link kind in

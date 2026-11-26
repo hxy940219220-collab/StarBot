@@ -31,27 +31,37 @@ export const messages = {
   "update.provider.startFailed": "Das Update konnte nicht gestartet werden. Versuche es erneut.",
   "update.provider.showDetails": "Details anzeigen",
   "update.provider.hideDetails": "Details ausblenden",
-  "update.scheduled.title": "{name} hat ein OpenBot-Update geplant",
-  "update.scheduled.automaticTitle": "OpenBot installiert ein Update",
-  "update.scheduled.whenIdle": "OpenBot startet neu, wenn die Agenten inaktiv sind.",
-  "update.scheduled.now": "OpenBot startet neu, sobald das Update heruntergeladen wurde.",
+  "update.scheduled.title": "{name} hat ein StarBot-Update geplant",
+
+  "update.scheduled.automaticTitle": "StarBot installiert ein Update",
+
+  "update.scheduled.whenIdle": "StarBot startet neu, wenn die Agenten inaktiv sind.",
+
+  "update.scheduled.now": "StarBot startet neu, sobald das Update heruntergeladen wurde.",
+
   "update.scheduled.cancel": "Update abbrechen",
   "update.scheduled.cancelFailed": "Das Update konnte nicht abgebrochen werden.",
-  "update.idleRestart.relaunchTitle": "OpenBot startet neu, wenn die Agenten inaktiv sind",
-  "update.idleRestart.updateTitle": "OpenBot installiert das Update, wenn die Agenten inaktiv sind",
+  "update.idleRestart.relaunchTitle": "StarBot startet neu, wenn die Agenten inaktiv sind",
+
+  "update.idleRestart.updateTitle": "StarBot installiert das Update, wenn die Agenten inaktiv sind",
+
   "update.idleRestart.description": "Neue Ausführungen von Routinen warten bis zum Neustart.",
   "update.idleRestart.waitingFor": "Warten auf {reasons}.",
   "update.idleRestart.cancel": "Neustart abbrechen",
   "update.idleRestart.restartNow": "Jetzt neu starten",
-  "update.idleRestart.restartNowTitle": "OpenBot jetzt neu starten?",
+  "update.idleRestart.restartNowTitle": "StarBot jetzt neu starten?",
+
   "update.idleRestart.restartNowDescription":
     "Nicht beendete Agentendurchläufe und Routinen-Ausführungen werden jetzt gestoppt.",
   "update.idleRestart.keepWaiting": "Weiter warten",
   "update.idleRestart.cancelFailed": "Der Neustart konnte nicht abgebrochen werden.",
   "update.idleRestart.requestFailed": "Der Neustart konnte nicht geplant werden.",
-  "update.idleRestart.failedTitle": "OpenBot wurde nicht neu gestartet",
-  "update.whatsNew.title": "Neues in OpenBot",
-  "update.whatsNew.description": "Neue Funktionen und Änderungen in dieser OpenBot-Version.",
+  "update.idleRestart.failedTitle": "StarBot wurde nicht neu gestartet",
+
+  "update.whatsNew.title": "Neues in StarBot",
+
+  "update.whatsNew.description": "Neue Funktionen und Änderungen in dieser StarBot-Version.",
+
   "update.whatsNew.version": "Version {version}",
   "update.whatsNew.updatedFrom": "Von {from} auf {to} aktualisiert",
   "update.whatsNew.group.added": "Neu",
@@ -71,12 +81,15 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Für diese Version gibt es hier keine Hinweise. Das vollständige Änderungsprotokoll zeigt alle Änderungen.",
   "update.whatsNew.changelog": "Alle Änderungen",
-  "update.whatsNew.changelogFailed": "OpenBot konnte das Änderungsprotokoll nicht öffnen.",
+  "update.whatsNew.changelogFailed": "StarBot konnte das Änderungsprotokoll nicht öffnen.",
+
   "update.whatsNew.done": "Verstanden",
   "update.required.title": "Update erforderlich",
   "update.required.description":
-    "OpenBot {version} wird nicht mehr unterstützt. Aktualisiere auf {minimum} oder neuer, um fortzufahren.",
-  "update.required.download": "OpenBot herunterladen",
+    "StarBot {version} wird nicht mehr unterstützt. Aktualisiere auf {minimum} oder neuer, um fortzufahren.",
+
+  "update.required.download": "StarBot herunterladen",
+
   "update.required.continue": "Ohne Update fortfahren",
   "update.required.failed": "Das Update wurde nicht abgeschlossen.",
 } as const satisfies PartialTranslation<typeof source>;

@@ -2,16 +2,25 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/island";
 
 export const messages = {
-  "island.surface.label": "OpenBot MacBook çentiği",
-  "island.surface.labelIsland": "OpenBot Dynamic Island",
+  "island.surface.label": "StarBot MacBook çentiği",
+
+  "island.surface.labelIsland": "StarBot Dynamic Island",
+
   "island.surface.interactionArea": "Dynamic Island etkileşim alanı",
-  "island.label.idle": "OpenBot'u aç",
-  "island.label.working": "OpenBot çalışma durumu",
-  "island.label.message": "OpenBot sohbet güncellemesi",
-  "island.label.question": "Yapay zekadan OpenBot sorusu",
-  "island.label.approval": "OpenBot onay isteği",
-  "island.label.takeover": "OpenBot tarayıcı devralma",
-  "island.label.failed": "OpenBot görevi başarısız oldu",
+  "island.label.idle": "StarBot'u aç",
+
+  "island.label.working": "StarBot çalışma durumu",
+
+  "island.label.message": "StarBot sohbet güncellemesi",
+
+  "island.label.question": "Yapay zekadan StarBot sorusu",
+
+  "island.label.approval": "StarBot onay isteği",
+
+  "island.label.takeover": "StarBot tarayıcı devralma",
+
+  "island.label.failed": "StarBot görevi başarısız oldu",
+
   "island.label.externalDisplay": "Harici ekranda {label}",
   "island.badge.working": "Çalışıyor",
   "island.badge.message": "Mesaj",
@@ -29,12 +38,14 @@ export const messages = {
   "island.action.openChat": "Sohbeti aç",
   "island.action.openDetails": "Ayrıntıları aç",
   "island.action.takeOver": "Devral",
-  "island.action.reviewInOpenBot": "OpenBot'ta incele",
+  "island.action.reviewInOpenBot": "StarBot'ta incele",
+
   "island.action.decline": "Reddet",
   "island.action.approve": "Onayla",
   "island.action.later": "Daha sonra",
   "island.action.dismiss": "Kapat",
-  "island.action.answerInOpenBot": "OpenBot'ta yanıtla",
+  "island.action.answerInOpenBot": "StarBot'ta yanıtla",
+
   "island.action.stopAgent": "Durdur: {name}",
   "island.action.failed": "Bu işlem başarısız oldu. Tekrar deneyin.",
   "island.action.expand": "{label} öğesini genişlet",
@@ -66,7 +77,8 @@ export const messages = {
   "island.question.suggestedAnswers": "Önerilen yanıtlar",
   "island.question.option": "{label}. {description}",
   "island.question.defaultHeader": "Ajanınızdan soru",
-  "island.question.defaultText": "Bu soruyu yanıtlamak için OpenBot'u açın.",
+  "island.question.defaultText": "Bu soruyu yanıtlamak için StarBot'u açın.",
+
   "island.question.optionFallback": "{number}. seçenek",
   "island.task.working": "İsteğiniz üzerinde çalışılıyor",
   "island.error.openRemoteTitle": "Bu uzak öğe açılamadı",

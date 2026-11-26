@@ -9,7 +9,8 @@ export const messages = {
   "routine.kind.monthly": "Aylık",
   "routine.kind.yearly": "Yıllık",
   "routine.kind.custom": "Özel",
-  "routine.feed.calendarName": "OpenBot rutinleri",
+  "routine.feed.calendarName": "StarBot rutinleri",
+
   "routine.feed.eventAgent": "Ajan: {name}",
   "routine.feed.eventChannel": "Kanal: {name}",
   "routine.feed.eventTimezone": "Saat dilimi: {timezone}",
@@ -141,7 +142,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "bağlantı kapalı veya kaldırılmış",
   "routine.delivery.reason.refused": "bu yerde gönderi yapılamıyor",
   "routine.delivery.reason.sendFailed": "platform kabul etmedi",
-  "routine.delivery.reason.restart": "OpenBot gönderim sırasında durdu",
+  "routine.delivery.reason.restart": "StarBot gönderim sırasında durdu",
+
   "routine.delivery.reason.stopped": "bu yere gönderim kapatıldı",
   "routine.delivery.resend": "Yeniden gönder",
   "routine.delivery.resending": "Gönderiliyor…",
@@ -337,9 +339,11 @@ export const messages = {
   "routine.settings.limitPolicy": "Hesap sınırındaysa",
   "routine.settings.limitPolicy.wait": "Bekle ve sıfırlamadan sonra çalıştır",
   "routine.settings.limitPolicy.skip": "Bu çalıştırmayı atla",
-  "routine.settings.missedPolicy": "Planlanan zamanda OpenBot kapalıysa",
+  "routine.settings.missedPolicy": "Planlanan zamanda StarBot kapalıysa",
+
   "routine.settings.missedPolicy.skip": "Bu çalıştırmayı atla",
-  "routine.settings.missedPolicy.runOnce": "OpenBot açıldığında bir kez çalıştır",
+  "routine.settings.missedPolicy.runOnce": "StarBot açıldığında bir kez çalıştır",
+
   "routine.settings.runInThread": "Ayrı bir dizide çalıştır",
   "routine.settings.runInSaveFailed": "Rutin kaydedildi ama ayrı dizi ayarı kaydedilmedi. Tekrar deneyin.",
   "routine.settings.resultDestination": "Yanıtları şuraya gönder",

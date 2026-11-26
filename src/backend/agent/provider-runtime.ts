@@ -3210,7 +3210,7 @@ export class ProviderRuntime implements ProviderPort {
       .request(
         "initialize",
         {
-          clientInfo: { name: "openbot", title: "OpenBot", version: "0.1.0" },
+          clientInfo: { name: "openbot", title: "StarBot", version: "0.1.0" },
           capabilities: { experimentalApi: true, mcpServerOpenaiFormElicitation: true },
         },
         decodeRecordResponse,
@@ -3473,7 +3473,7 @@ export class ProviderRuntime implements ProviderPort {
     const readable =
       matchingSourceKeys(rawMessage).length > 0 ||
       error instanceof ProviderSignInError ||
-      /^(ChatGPT connection|OpenBot|StarBot|星友)/u.test(rawMessage);
+      /^(ChatGPT connection|StarBot|StarBot|星友)/u.test(rawMessage);
     if (isProviderTimeout(error) || !readable) this.#recordProviderError(provider, error);
     const message = readable ? redactText(rawMessage) : fallbackMessage;
     const status = hasActiveClient
@@ -3957,7 +3957,7 @@ export class ProviderRuntime implements ProviderPort {
       const redacted = this.#redactMcp(raw);
       const message = shortenDiagnostic(redacted);
       if (origin?.duringStop) {
-        stderrLogger.warn("A provider wrote an error while OpenBot stopped it.", {
+        stderrLogger.warn("A provider wrote an error while StarBot stopped it.", {
           provider: client.provider,
           message,
         });
@@ -4139,7 +4139,7 @@ export class ProviderRuntime implements ProviderPort {
               capabilities: { ...this.#status.capabilities, chat: "unavailable" },
               message: startStopped
                 ? this.#startStoppedMessage(client.provider, error.message)
-                : `${providerLabel(client.provider)} stopped repeatedly. Restart OpenBot after checking the CLI.`,
+                : `${providerLabel(client.provider)} stopped repeatedly. Restart StarBot after checking the CLI.`,
             },
       );
       return;
@@ -4567,7 +4567,7 @@ export class ProviderRuntime implements ProviderPort {
       Effect.tap((routesToOpenai) => Effect.sync(() => this.#codexRoutesToOpenai.set(client, routesToOpenai))),
       Effect.catch(() =>
         Effect.sync(() => {
-          logger.warn("Codex did not give its model route. OpenBot reads the ChatGPT usage.");
+          logger.warn("Codex did not give its model route. StarBot reads the ChatGPT usage.");
           return this.#codexRoutesToOpenai.get(client) ?? true;
         }),
       ),

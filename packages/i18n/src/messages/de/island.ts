@@ -2,16 +2,25 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/island";
 
 export const messages = {
-  "island.surface.label": "OpenBot in der MacBook-Aussparung",
-  "island.surface.labelIsland": "OpenBot Dynamic Island",
+  "island.surface.label": "StarBot in der MacBook-Aussparung",
+
+  "island.surface.labelIsland": "StarBot Dynamic Island",
+
   "island.surface.interactionArea": "Interaktionsbereich von Dynamic Island",
-  "island.label.idle": "OpenBot öffnen",
-  "island.label.working": "OpenBot-Arbeitsstatus",
-  "island.label.message": "OpenBot-Chat-Aktualisierung",
-  "island.label.question": "KI-Frage in OpenBot",
-  "island.label.approval": "OpenBot-Genehmigungsanfrage",
-  "island.label.takeover": "OpenBot-Browserübernahme",
-  "island.label.failed": "OpenBot-Aufgabe fehlgeschlagen",
+  "island.label.idle": "StarBot öffnen",
+
+  "island.label.working": "StarBot-Arbeitsstatus",
+
+  "island.label.message": "StarBot-Chat-Aktualisierung",
+
+  "island.label.question": "KI-Frage in StarBot",
+
+  "island.label.approval": "StarBot-Genehmigungsanfrage",
+
+  "island.label.takeover": "StarBot-Browserübernahme",
+
+  "island.label.failed": "StarBot-Aufgabe fehlgeschlagen",
+
   "island.label.externalDisplay": "{label} auf externem Display",
   "island.badge.working": "In Arbeit",
   "island.badge.message": "Nachricht",
@@ -35,12 +44,14 @@ export const messages = {
   "island.action.openChat": "Chat öffnen",
   "island.action.openDetails": "Details öffnen",
   "island.action.takeOver": "Übernehmen",
-  "island.action.reviewInOpenBot": "In OpenBot prüfen",
+  "island.action.reviewInOpenBot": "In StarBot prüfen",
+
   "island.action.decline": "Ablehnen",
   "island.action.approve": "Genehmigen",
   "island.action.later": "Später",
   "island.action.dismiss": "Ausblenden",
-  "island.action.answerInOpenBot": "In OpenBot antworten",
+  "island.action.answerInOpenBot": "In StarBot antworten",
+
   "island.action.stopAgent": "{name} stoppen",
   "island.action.failed": "Das hat nicht funktioniert. Versuche es erneut.",
   "island.action.expand": "{label} ausklappen",
@@ -73,7 +84,8 @@ export const messages = {
   "island.question.suggestedAnswers": "Vorgeschlagene Antworten",
   "island.question.option": "{label}. {description}",
   "island.question.defaultHeader": "Frage von deinem Agenten",
-  "island.question.defaultText": "Öffne OpenBot, um diese Frage zu beantworten.",
+  "island.question.defaultText": "Öffne StarBot, um diese Frage zu beantworten.",
+
   "island.question.optionFallback": "Option {number}",
   "island.task.working": "Deine Anfrage wird bearbeitet",
   "island.error.openRemoteTitle": "Dieses Remote-Element konnte nicht geöffnet werden",

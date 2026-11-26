@@ -3,7 +3,7 @@ import type { OpenBotMigration } from "./migration";
 // Shared by migration v62 and the separate new-database schema. IF NOT EXISTS throughout.
 //
 // The messages that a linked WhatsApp number saw in its allowed chats, also those that did not
-// mention OpenBot, so an agent can read a chat after a restart. WhatsApp sends no history to a new
+// mention StarBot, so an agent can read a chat after a restart. WhatsApp sends no history to a new
 // device, so this is the only copy on this computer. `seq` keeps the order in which they arrived,
 // also after a VACUUM, for the context of a conversation; a search reads them by `sent_at`.
 // `files_json` lists the message's files, with the path of the copy that was saved when the message

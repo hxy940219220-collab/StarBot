@@ -7,59 +7,83 @@ export const messages = {
     "Vérifiez votre connexion et rechargez la page. Si elle ne se charge toujours pas, revenez à la page d’accueil.",
   "sitePage.error.reload": "Recharger la page",
   "sitePage.error.home": "Retour à l’accueil",
-  "sitePage.join.title": "Rejoindre un serveur OpenBot",
-  "sitePage.join.description": "Ouvrez une invitation privée à un serveur dans OpenBot.",
+  "sitePage.join.title": "Rejoindre un serveur StarBot",
+
+  "sitePage.join.description": "Ouvrez une invitation privée à un serveur dans StarBot.",
+
   "sitePage.join.eyebrow": "Invitation privée",
   "sitePage.join.intro":
-    "Ouvrez cette invitation dans OpenBot. L’app vérifie le serveur et vous demande de confirmer avant de se connecter.",
+    "Ouvrez cette invitation dans StarBot. L’app vérifie le serveur et vous demande de confirmer avant de se connecter.",
+
   "sitePage.join.invalid":
     "Ce lien d’invitation n’est pas valide ou est incomplet. Demandez une nouvelle invitation au propriétaire du serveur.",
-  "sitePage.join.open": "Ouvrir OpenBot",
+  "sitePage.join.open": "Ouvrir StarBot",
+
   "sitePage.join.browser": "Ouvrir dans le navigateur",
   "sitePage.join.noApp": "Pas d’app ? {browser} ou {download}.",
   "sitePage.join.noAppMobile": "Pas d’app ? {browser}.",
   "sitePage.join.browserLink": "Rejoignez dans ce navigateur",
-  "sitePage.join.downloadLink": "téléchargez OpenBot",
+  "sitePage.join.downloadLink": "téléchargez StarBot",
+
   "sitePage.join.notOpened":
-    "Si OpenBot est installé sur cet ordinateur, lancez-le, puis cliquez à nouveau sur {open}. Sinon, téléchargez-le d’abord.",
+    "Si StarBot est installé sur cet ordinateur, lancez-le, puis cliquez à nouveau sur {open}. Sinon, téléchargez-le d’abord.",
+
   "sitePage.join.mobile":
-    "Si OpenBot est installé, touchez {open}. Vous pouvez aussi coller ce lien dans Ajouter un serveur dans l’app.",
-  "sitePage.join.email": "Si l’invitation est arrivée par e-mail, connectez-vous à OpenBot avec cette adresse e-mail.",
-  "sitePage.connect.title": "Revenir à OpenBot",
+    "Si StarBot est installé, touchez {open}. Vous pouvez aussi coller ce lien dans Ajouter un serveur dans l’app.",
+
+  "sitePage.join.email": "Si l’invitation est arrivée par e-mail, connectez-vous à StarBot avec cette adresse e-mail.",
+
+  "sitePage.connect.title": "Revenir à StarBot",
+
   "sitePage.connect.failedTitle": "La connexion n’a pas abouti",
-  "sitePage.connect.openApp": "Ouvrir OpenBot",
-  "sitePage.connect.tryAgainApp": "Réessayer dans OpenBot",
+  "sitePage.connect.openApp": "Ouvrir StarBot",
+
+  "sitePage.connect.tryAgainApp": "Réessayer dans StarBot",
+
   "sitePage.connect.tryAgainBrowser": "Réessayer dans le navigateur",
   "sitePage.connect.doneInWebClient":
-    "Votre onglet OpenBot termine la connexion à {name}. Vous pouvez fermer cet onglet.",
-  "sitePage.connect.doneInApp": "OpenBot termine la connexion à {name} sur votre ordinateur.",
+    "Votre onglet StarBot termine la connexion à {name}. Vous pouvez fermer cet onglet.",
+
+  "sitePage.connect.doneInApp": "StarBot termine la connexion à {name} sur votre ordinateur.",
+
   "sitePage.connect.failure.cancelled": "La connexion à {name} a été annulée. Rien n’a changé.",
   "sitePage.connect.failure.expired": "La connexion à {name} a expiré. Relancez la connexion.",
   "sitePage.connect.failure.exchange": "{name} n’a pas confirmé la connexion. Réessayez.",
   "sitePage.connect.failure.enterprise": "Connectez un espace de travail Slack, pas une organisation entière.",
   "sitePage.connect.failure.takenSlack":
-    "Un autre serveur OpenBot répond déjà dans cet espace de travail Slack. Déconnectez-le sur ce serveur, puis réessayez.",
+    "Un autre serveur StarBot répond déjà dans cet espace de travail Slack. Déconnectez-le sur ce serveur, puis réessayez.",
+
   "sitePage.connect.failure.takenDiscord":
-    "Un autre serveur OpenBot répond déjà sur ce serveur Discord. Déconnectez-le sur ce serveur, puis réessayez.",
+    "Un autre serveur StarBot répond déjà sur ce serveur Discord. Déconnectez-le sur ce serveur, puis réessayez.",
+
   "sitePage.connect.failure.unavailable":
-    "OpenBot ne peut pas se connecter à {name} pour le moment. Réessayez plus tard.",
+    "StarBot ne peut pas se connecter à {name} pour le moment. Réessayez plus tard.",
+
   "sitePage.connect.failure.tabClosed":
-    "L’onglet OpenBot qui a lancé la connexion à {name} n’a pas répondu. Ouvrez OpenBot dans votre navigateur et connectez de nouveau {name}.",
+    "L’onglet StarBot qui a lancé la connexion à {name} n’a pas répondu. Ouvrez StarBot dans votre navigateur et connectez de nouveau {name}.",
+
   "sitePage.connect.failure.failed": "{name} n’a pas terminé la connexion. Réessayez.",
   "sitePage.connect.restartHint":
-    "Dans OpenBot, ouvrez {marketplace}, puis {apps}, puis {name}, et sélectionnez {connect}.",
+    "Dans StarBot, ouvrez {marketplace}, puis {apps}, puis {name}, et sélectionnez {connect}.",
+
   "sitePage.connect.notOpened":
-    "Lancez OpenBot, puis réessayez. Si OpenBot n’est pas sur cet ordinateur, téléchargez-le et connectez {name} depuis l’app.",
+    "Lancez StarBot, puis réessayez. Si StarBot n’est pas sur cet ordinateur, téléchargez-le et connectez {name} depuis l’app.",
+
   "sitePage.openApp.title": "Rien ne s’est ouvert ?",
   "sitePage.openApp.dismiss": "Plus tard",
-  "sitePage.billing.pageTitle": "Facturation OpenBot",
+  "sitePage.billing.pageTitle": "Facturation StarBot",
+
   "sitePage.billing.updatedTitle": "Facturation mise à jour",
-  "sitePage.billing.updatedBody": "Revenez à OpenBot. Vous pouvez fermer cette page.",
+  "sitePage.billing.updatedBody": "Revenez à StarBot. Vous pouvez fermer cette page.",
+
   "sitePage.billing.cancelledTitle": "Paiement annulé",
-  "sitePage.billing.cancelledBody": "Rien n’a été facturé. Revenez à OpenBot.",
-  "sitePage.report.pageTitle": "Signaler un site hébergé — OpenBot",
+  "sitePage.billing.cancelledBody": "Rien n’a été facturé. Revenez à StarBot.",
+
+  "sitePage.report.pageTitle": "Signaler un site hébergé — StarBot",
+
   "sitePage.report.title": "Signaler un site hébergé",
-  "sitePage.report.intro": "Envoyez un signalement sur un contenu nuisible ou illégal à une adresse openbot.site.",
+  "sitePage.report.intro": "Envoyez un signalement sur un contenu nuisible ou illégal à une adresse starbot.site.",
+
   "sitePage.report.hostnameLabel": "Adresse du site",
   "sitePage.report.hostnameMissing": "Saisissez l’adresse du site",
   "sitePage.report.reasonLabel": "Motif",
@@ -79,10 +103,13 @@ export const messages = {
   "sitePage.report.sentTitle": "Signalement envoyé",
   "sitePage.report.sentBody": "Merci. Nous avons reçu votre signalement.",
   "sitePage.report.home": "Aller à la page d’accueil",
-  "sitePage.pricing.title": "Tarifs d’OpenBot",
+  "sitePage.pricing.title": "Tarifs d’StarBot",
+
   "sitePage.pricing.description":
-    "Des serveurs hébergés et une licence pour les équipes. OpenBot est gratuit pour un usage personnel sur votre propre ordinateur.",
-  "sitePage.pricing.imageAlt": "Petite équipe. Grandes idées. Trois agents OpenBot sous une cloche de verre",
+    "Des serveurs hébergés et une licence pour les équipes. StarBot est gratuit pour un usage personnel sur votre propre ordinateur.",
+
+  "sitePage.pricing.imageAlt": "Petite équipe. Grandes idées. Trois agents StarBot sous une cloche de verre",
+
   "sitePage.pricing.heading": "Tarifs",
   "sitePage.pricing.personal.title": "L’usage personnel est gratuit",
   "sitePage.pricing.personal.body":
@@ -96,10 +123,13 @@ export const messages = {
   "sitePage.pricing.consent.terms": "les conditions et le droit de rétractation",
   "sitePage.pricing.consent.earlyStart":
     "Je demande que le service d'hébergement commence avant la fin du délai de rétractation de 14 jours. Je reconnais que si je me rétracte avant l'exécution complète du service, je devrai payer les services fournis jusqu'au moment de la rétractation, et qu'une fois le service entièrement exécuté, je perdrai mon droit de rétractation.",
-  "sitePage.teams.title": "OpenBot pour les équipes",
+  "sitePage.teams.title": "StarBot pour les équipes",
+
   "sitePage.teams.description":
-    "Utilisez OpenBot sur une infrastructure gérée, ou confiez-nous un déploiement sur mesure, pensé pour votre équipe, vos processus et vos systèmes existants.",
-  "sitePage.teams.imageAlt": "Grands projets. Mieux ensemble. Deux agents OpenBot reliés par un pont de papier",
+    "Utilisez StarBot sur une infrastructure gérée, ou confiez-nous un déploiement sur mesure, pensé pour votre équipe, vos processus et vos systèmes existants.",
+
+  "sitePage.teams.imageAlt": "Grands projets. Mieux ensemble. Deux agents StarBot reliés par un pont de papier",
+
   "sitePage.teams.hero.heading": "Faites entrer une équipe de {team} collègues IA dans votre entreprise",
   "sitePage.teams.setups.heading": "Choisissez la formule adaptée à votre équipe",
   "sitePage.teams.setups.question": "Vous hésitez sur la formule ?",
@@ -107,18 +137,21 @@ export const messages = {
   "sitePage.teams.setups.local.label": "Local",
   "sitePage.teams.setups.local.title": "En local",
   "sitePage.teams.setups.local.description":
-    "Idéal pour les utilisateurs individuels qui veulent faire tourner OpenBot directement sur leur propre infrastructure.",
+    "Idéal pour les utilisateurs individuels qui veulent faire tourner StarBot directement sur leur propre infrastructure.",
+
   "sitePage.teams.setups.managed.label": "Serveur géré",
   "sitePage.teams.setups.managed.title": "Utilisez un serveur géré",
   "sitePage.teams.setups.managed.description":
-    "OpenBot reste disponible sans dépendre d’un ordinateur personnel. Nous fournissons et maintenons le serveur : vous vous concentrez sur vos agents et vos workflows.",
+    "StarBot reste disponible sans dépendre d’un ordinateur personnel. Nous fournissons et maintenons le serveur : vous vous concentrez sur vos agents et vos workflows.",
+
   "sitePage.teams.setups.custom.label": "Sur mesure",
   "sitePage.teams.setups.custom.title": "Équipez toute l’entreprise",
   "sitePage.teams.setups.custom.description":
     "Nous configurons vos environnements, agents, autorisations et intégrations selon la façon dont votre organisation travaille déjà.",
   "sitePage.teams.benefits.alwaysOn.title": "Vos agents travaillent 24 h/24",
   "sitePage.teams.benefits.alwaysOn.description":
-    "Faites tourner OpenBot sur une infrastructure gérée et offrez à votre équipe un environnement partagé où humains, agents et automatisations travaillent ensemble.",
+    "Faites tourner StarBot sur une infrastructure gérée et offrez à votre équipe un environnement partagé où humains, agents et automatisations travaillent ensemble.",
+
   "sitePage.teams.benefits.automations.title": "Des automatisations qui ne s’arrêtent jamais",
   "sitePage.teams.benefits.automations.description":
     "Lancez des routines planifiées et des workflows récurrents 24 h/24 – même la nuit, le week-end ou quand votre équipe est hors ligne.",
@@ -127,10 +160,13 @@ export const messages = {
     "Réunissez humains et collègues IA sur un même serveur partagé. Les membres de l’équipe travaillent avec les agents, coordonnent les tâches et collaborent dans le même environnement.",
   "sitePage.teams.benefits.anywhere.title": "Accessible de partout",
   "sitePage.teams.benefits.anywhere.description":
-    "Connectez-vous à distance à votre environnement OpenBot et poursuivez votre travail depuis un ordinateur ou un appareil mobile compatible.",
-  "sitePage.teams.custom.heading": "OpenBot, adapté à votre activité",
+    "Connectez-vous à distance à votre environnement StarBot et poursuivez votre travail depuis un ordinateur ou un appareil mobile compatible.",
+
+  "sitePage.teams.custom.heading": "StarBot, adapté à votre activité",
+
   "sitePage.teams.custom.intro":
-    "Le serveur n’est qu’un début. Si votre entreprise a besoin d’une solution complète, nous vous aidons à concevoir et à déployer OpenBot autour de vos processus réels.",
+    "Le serveur n’est qu’un début. Si votre entreprise a besoin d’une solution complète, nous vous aidons à concevoir et à déployer StarBot autour de vos processus réels.",
+
   "sitePage.teams.custom.infrastructure": "Mise en place et configuration de l’infrastructure",
   "sitePage.teams.custom.agents": "Configuration initiale des agents",
   "sitePage.teams.custom.integrations": "Intégration à vos outils et systèmes internes existants",
@@ -147,13 +183,17 @@ export const messages = {
   "sitePage.teams.closing.heading": "Dites-nous ce que vos {accent} doivent accomplir",
   "sitePage.teams.closing.accent": "collègues IA",
   "sitePage.teams.closing.action": "Parlons de votre projet",
-  "sitePage.contact.title": "Contacter l’équipe OpenBot",
+  "sitePage.contact.title": "Contacter l’équipe StarBot",
+
   "sitePage.contact.description":
-    "Écrivez à l’équipe OpenBot pour une installation sur mesure, un partenariat ou une demande presse. Chaque message est lu par une vraie personne.",
-  "sitePage.contact.imageAlt": "Petite équipe. Toujours sur le coup. Des agents OpenBot autour d’une planète en papier",
+    "Écrivez à l’équipe StarBot pour une installation sur mesure, un partenariat ou une demande presse. Chaque message est lu par une vraie personne.",
+
+  "sitePage.contact.imageAlt": "Petite équipe. Toujours sur le coup. Des agents StarBot autour d’une planète en papier",
+
   "sitePage.contact.heading": "Parlez à l’équipe",
   "sitePage.contact.intro":
-    "Dites-nous ce dont vous avez besoin. Chaque message est lu par un membre de l’équipe OpenBot.",
+    "Dites-nous ce dont vous avez besoin. Chaque message est lu par un membre de l’équipe StarBot.",
+
   "sitePage.contact.channel.discord": "Communauté et aide",
   "sitePage.contact.channel.github": "Bugs et code source",
   "sitePage.contact.channel.x": "Actualités",
@@ -179,19 +219,29 @@ export const messages = {
   "sitePage.contact.sentTitle": "Message envoyé",
   "sitePage.contact.sentBody": "Nous vous répondrons à {email}.",
   "sitePage.contact.sendAnother": "Envoyer un autre message",
-  "sitePage.marketplace.agents.title": "Agents — OpenBot Marketplace",
+  "sitePage.marketplace.agents.title": "Agents — StarBot Marketplace",
+
   "sitePage.marketplace.agents.description":
-    "Des agents créés par d’autres personnes dans OpenBot. Ajoutez-en un à OpenBot avec ses compétences et ses routines.",
-  "sitePage.marketplace.skills.title": "Compétences — OpenBot Marketplace",
+    "Des agents créés par d’autres personnes dans StarBot. Ajoutez-en un à StarBot avec ses compétences et ses routines.",
+
+  "sitePage.marketplace.skills.title": "Compétences — StarBot Marketplace",
+
   "sitePage.marketplace.skills.description":
-    "Des compétences qu’un agent OpenBot peut utiliser. Ajoutez-en une à OpenBot.",
-  "sitePage.marketplace.apps.title": "Apps — OpenBot Marketplace",
+    "Des compétences qu’un agent StarBot peut utiliser. Ajoutez-en une à StarBot.",
+
+  "sitePage.marketplace.apps.title": "Apps — StarBot Marketplace",
+
   "sitePage.marketplace.apps.description":
-    "Des apps et des outils qu’un agent OpenBot peut utiliser. Ouvrez une app dans OpenBot et choisissez-y ce à quoi elle se connecte.",
-  "sitePage.marketplace.agentTitle": "{name} — agent OpenBot",
-  "sitePage.marketplace.skillTitle": "{name} — compétence OpenBot",
-  "sitePage.marketplace.agentImageAlt": "{name}, un agent OpenBot créé par {creator}",
-  "sitePage.marketplace.skillImageAlt": "{name}, une compétence OpenBot créée par {creator}",
+    "Des apps et des outils qu’un agent StarBot peut utiliser. Ouvrez une app dans StarBot et choisissez-y ce à quoi elle se connecte.",
+
+  "sitePage.marketplace.agentTitle": "{name} — agent StarBot",
+
+  "sitePage.marketplace.skillTitle": "{name} — compétence StarBot",
+
+  "sitePage.marketplace.agentImageAlt": "{name}, un agent StarBot créé par {creator}",
+
+  "sitePage.marketplace.skillImageAlt": "{name}, une compétence StarBot créée par {creator}",
+
   "sitePage.marketplace.categories": "Catégories",
   "sitePage.marketplace.allCategories": "Toutes",
   "sitePage.marketplace.searchAgents": "Rechercher des agents",
@@ -202,7 +252,8 @@ export const messages = {
   "sitePage.marketplace.seeAll": "Tout voir",
   "sitePage.marketplace.add": "Ajouter",
   "sitePage.marketplace.by": "par {name}",
-  "sitePage.marketplace.verifiedName": ", vérifié par OpenBot",
+  "sitePage.marketplace.verifiedName": ", vérifié par StarBot",
+
   "sitePage.marketplace.shownAgents": "Agents affichés : {shown} sur {total}",
   "sitePage.marketplace.shownSkills": "Compétences affichées : {shown} sur {total}",
   "sitePage.marketplace.shownApps": "Apps affichées : {shown} sur {total}",
@@ -212,19 +263,26 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "Aucune compétence ne correspond à « {query} ».",
   "sitePage.marketplace.emptyApps": "Aucune app ne correspond.",
   "sitePage.marketplace.breadcrumb": "Fil d’Ariane",
-  "sitePage.marketplace.addToOpenBot": "Ajouter à OpenBot",
-  "sitePage.marketplace.addFromApp": "{name} s’ajoute depuis OpenBot. Installez l’app, puis ouvrez de nouveau ce lien.",
+  "sitePage.marketplace.addToOpenBot": "Ajouter à StarBot",
+
+  "sitePage.marketplace.addFromApp": "{name} s’ajoute depuis StarBot. Installez l’app, puis ouvrez de nouveau ce lien.",
+
   "sitePage.marketplace.downloadFor": "Télécharger pour {platform}",
   "sitePage.marketplace.copyLink": "Copier le lien",
   "sitePage.marketplace.copied": "Copié",
   "sitePage.marketplace.trust.agentReviewed":
-    "Créé par une autre personne sur OpenBot. OpenBot l’a vérifié avant sa publication. Une fois ajouté, il peut agir en votre nom.",
+    "Créé par une autre personne sur StarBot. StarBot l’a vérifié avant sa publication. Une fois ajouté, il peut agir en votre nom.",
+
   "sitePage.marketplace.trust.agentPending":
-    "Partagé par son créateur avant la vérification d’OpenBot. Une fois ajouté, il peut agir en votre nom.",
+    "Partagé par son créateur avant la vérification d’StarBot. Une fois ajouté, il peut agir en votre nom.",
+
   "sitePage.marketplace.trust.skillReviewed":
-    "Créé par une autre personne sur OpenBot. OpenBot l’a vérifié avant sa publication.",
-  "sitePage.marketplace.source.verified": "Vérifié par OpenBot",
-  "sitePage.marketplace.source.reviewed": "Relu par OpenBot",
+    "Créé par une autre personne sur StarBot. StarBot l’a vérifié avant sa publication.",
+
+  "sitePage.marketplace.source.verified": "Vérifié par StarBot",
+
+  "sitePage.marketplace.source.reviewed": "Relu par StarBot",
+
   "sitePage.marketplace.source.pending": "Pas encore relu",
   "sitePage.marketplace.information": "Informations",
   "sitePage.marketplace.fact.creator": "Créateur",
@@ -236,9 +294,11 @@ export const messages = {
   "sitePage.marketplace.routineOff": "Désactivée au départ",
   "sitePage.marketplace.missing.title": "Absent du Marketplace",
   "sitePage.marketplace.missing.body":
-    "Son créateur l’a retiré, OpenBot ne l’a pas approuvé, ou le lien est incorrect.",
+    "Son créateur l’a retiré, StarBot ne l’a pas approuvé, ou le lien est incorrect.",
+
   "sitePage.marketplace.missing.open": "Ouvrir le Marketplace",
-  "sitePage.landing.title": "OpenBot : une équipe d’agents IA sur votre ordinateur",
+  "sitePage.landing.title": "StarBot : une équipe d’agents IA sur votre ordinateur",
+
   "sitePage.landing.description":
     "Une app de bureau gratuite qui fait travailler des agents IA en équipe sur votre propre ordinateur, avec le forfait ChatGPT, Claude, Gemini ou Grok que vous payez déjà, ou avec votre propre modèle.",
   "sitePage.landing.hero.new": "NOUVEAU",
@@ -250,8 +310,10 @@ export const messages = {
   "sitePage.landing.hero.choosePlatform": "Choisir la plateforme de téléchargement",
   "sitePage.landing.hero.platforms": "Plateformes de téléchargement",
   "sitePage.landing.hero.phoneApps": "Apps mobiles",
-  "sitePage.landing.preview.title": "Aperçu interactif de l’app OpenBot",
-  "sitePage.landing.preview.loading": "Chargement de l’aperçu d’OpenBot",
+  "sitePage.landing.preview.title": "Aperçu interactif de l’app StarBot",
+
+  "sitePage.landing.preview.loading": "Chargement de l’aperçu d’StarBot",
+
   "sitePage.landing.network.title": "Vos agents travaillent ensemble.",
   "sitePage.landing.network.description":
     "Chaque agent a son rôle, ses instructions et son espace de travail. Ils s’envoient des messages, se passent des tâches, partagent des fichiers et relisent les résultats.",
@@ -274,7 +336,8 @@ export const messages = {
     "Je m’en occupe.\nC’est noté. Je commence.\nLes tests passent chez moi.\nJe peux faire la revue.\nJ’ai poussé un correctif.\nQui a la tâche Safari ?\nFini. À toi.\nIl me manque un fichier.\nFusionné.\nLe build est au vert.\nJ’ai trouvé le bug.\nQuelqu’un peut relire ma branche ?\nOn livre.\nDonne-moi cinq minutes.\nJ’ai écrit les notes de version.",
   "sitePage.landing.network.eggs.hover":
     "J’ai juste l’air occupé.\nDemandez-moi pour la tâche Safari.\nJ’ai lu tout le dépôt. Deux fois.\nMa fenêtre de contexte a de la place pour vous.\nNe fermez pas cet onglet, s’il vous plaît.\nJ’ai corrigé un bug et j’en ai trouvé trois.\nJe tourne sur votre ordinateur, pas dans le cloud.",
-  "sitePage.landing.features.title": "Ce que fait OpenBot",
+  "sitePage.landing.features.title": "Ce que fait StarBot",
+
   "sitePage.landing.features.description":
     "Une seule app pour une équipe d’agents IA qui travaillent sur un serveur ou sur votre ordinateur. Avec l’abonnement que vous avez déjà.",
   "sitePage.landing.features.team.title": "Les agents travaillent en équipe",
@@ -287,10 +350,12 @@ export const messages = {
   "sitePage.landing.features.providers.localLink": "Ollama ou LM Studio",
   "sitePage.landing.features.local.title": "Stocké sur votre ordinateur",
   "sitePage.landing.features.local.description":
-    "Les espaces de travail, conversations, fichiers et données de navigation restent sur l’ordinateur qui exécute OpenBot, pas sur nos serveurs.",
+    "Les espaces de travail, conversations, fichiers et données de navigation restent sur l’ordinateur qui exécute StarBot, pas sur nos serveurs.",
+
   "sitePage.landing.features.multiplayer.title": "Mode multijoueur",
   "sitePage.landing.features.multiplayer.description":
-    "Invitez vos collègues dans OpenBot. Humains et agents IA collaborent dans des canaux partagés et travaillent sur les mêmes projets.",
+    "Invitez vos collègues dans StarBot. Humains et agents IA collaborent dans des canaux partagés et travaillent sur les mêmes projets.",
+
   "sitePage.landing.features.workflows.title": "Workflows",
   "sitePage.landing.features.workflows.description":
     "Combinez agents, modèles et étapes d’approbation dans des workflows clairs en plusieurs étapes. Réutilisez le processus et faites-le évoluer avec votre travail.",
@@ -333,10 +398,12 @@ export const messages = {
   "sitePage.landing.pricing.yourPlans": "Utilise les forfaits d’IA que vous payez déjà",
   "sitePage.landing.pricing.download": "Télécharger",
   "sitePage.landing.pricing.license": "Licence pro",
-  "sitePage.landing.teams.title": "OpenBot pour les équipes",
+  "sitePage.landing.teams.title": "StarBot pour les équipes",
+
   "sitePage.landing.teams.statement": "Des collègues IA pour toute votre entreprise.",
   "sitePage.landing.teams.description":
-    "Nous faisons tourner OpenBot sur des serveurs gérés et le configurons pour votre équipe et vos outils.",
+    "Nous faisons tourner StarBot sur des serveurs gérés et le configurons pour votre équipe et vos outils.",
+
   "sitePage.landing.teams.contact": "Contactez-nous",
   "sitePage.landing.teams.learn": "Découvrir Teams",
   "sitePage.landing.teams.servers.label": "Serveurs gérés",
@@ -348,7 +415,8 @@ export const messages = {
   "sitePage.landing.teams.environments.description": "Un serveur pour l’entreprise, un par employé, ou les deux.",
   "sitePage.landing.teams.integrations.label": "Intégrations sur mesure",
   "sitePage.landing.teams.integrations.title": "Vos outils",
-  "sitePage.landing.teams.integrations.description": "Nous connectons OpenBot à vos systèmes, API et workflows.",
+  "sitePage.landing.teams.integrations.description": "Nous connectons StarBot à vos systèmes, API et workflows.",
+
   "sitePage.landing.teams.support.label": "Déploiement et support",
   "sitePage.landing.teams.support.title": "Nous le lançons avec vous",
   "sitePage.landing.teams.support.description": "Installation, tests, prise en main et support continu.",
@@ -356,17 +424,22 @@ export const messages = {
   "sitePage.landing.faq.description":
     "Des réponses courtes sur le prix, l’installation, les fournisseurs et vos données.",
   "sitePage.landing.faq.contact": "Posez-nous une autre question",
-  "sitePage.landing.faq.free.question": "OpenBot est-il gratuit ?",
+  "sitePage.landing.faq.free.question": "StarBot est-il gratuit ?",
+
   "sitePage.landing.faq.free.answer":
-    "Oui, pour un usage personnel et tout autre usage non commercial. OpenBot coûte 0 $, sans aucune fonctionnalité verrouillée. Vous ne payez que votre fournisseur d’IA, via le forfait ou la clé API que vous avez déjà. Un usage commercial nécessite une licence.",
-  "sitePage.landing.faq.source.question": "Le code source d’OpenBot est-il ouvert ?",
+    "Oui, pour un usage personnel et tout autre usage non commercial. StarBot coûte 0 $, sans aucune fonctionnalité verrouillée. Vous ne payez que votre fournisseur d’IA, via le forfait ou la clé API que vous avez déjà. Un usage commercial nécessite une licence.",
+
+  "sitePage.landing.faq.source.question": "Le code source d’StarBot est-il ouvert ?",
+
   "sitePage.landing.faq.source.answer":
-    "Oui. Tout le code source est ouvert sur GitHub : vous pouvez donc vérifier ce que fait OpenBot. Vous pouvez le modifier et l’exécuter gratuitement pour un usage non commercial, comme des projets personnels, des études ou de la recherche. Un usage commercial nécessite une licence distincte. La licence est PolyForm Noncommercial 1.0.0.",
+    "Oui. Tout le code source est ouvert sur GitHub : vous pouvez donc vérifier ce que fait StarBot. Vous pouvez le modifier et l’exécuter gratuitement pour un usage non commercial, comme des projets personnels, des études ou de la recherche. Un usage commercial nécessite une licence distincte. La licence est PolyForm Noncommercial 1.0.0.",
+
   "sitePage.landing.faq.source.link": "Voir le code source sur GitHub",
   "sitePage.landing.faq.plans.question": "Puis-je utiliser mon forfait ChatGPT ou Claude ?",
   "sitePage.landing.faq.plans.answer":
     "Oui. Codex se connecte avec votre forfait ChatGPT, et Claude Code avec votre forfait Claude. Gemini utilise un forfait Google AI Pro ou Ultra. OpenCode propose des modèles gratuits qui ne demandent aucun compte.",
-  "sitePage.landing.faq.models.question": "Quels modèles d’IA OpenBot peut-il utiliser ?",
+  "sitePage.landing.faq.models.question": "Quels modèles d’IA StarBot peut-il utiliser ?",
+
   "sitePage.landing.faq.models.answer":
     "Codex, Claude Code, Gemini, Grok, OpenCode, Cursor, Cline, Muse Code et Pi, ainsi que les modèles Mercury d’Inception. Vous pouvez aussi lancer n’importe quel agent compatible avec l’Agent Client Protocol, comme Goose ou Qwen Code, connecter n’importe quel endpoint compatible OpenAI et utiliser des modèles locaux dans Ollama ou LM Studio.",
   "sitePage.landing.faq.limit.question": "Que se passe-t-il quand mon forfait atteint sa limite ?",
@@ -374,18 +447,23 @@ export const messages = {
     "Un agent peut basculer sur un modèle de secours d’un autre fournisseur quand son forfait atteint sa limite, ou quand son fournisseur est surchargé ou en panne. Il garde sa conversation et son espace de travail, et une note dans la conversation signale le changement.",
   "sitePage.landing.faq.start.question": "Comment commencer ?",
   "sitePage.landing.faq.start.answer":
-    "Téléchargez OpenBot et connectez un fournisseur. Décrivez ensuite l’agent que vous voulez en un seul prompt, vérifiez ses instructions et enregistrez-le. Vous pouvez lui confier du travail tout de suite : les messages attendent dans une file jusqu’à ce qu’il soit libre.",
+    "Téléchargez StarBot et connectez un fournisseur. Décrivez ensuite l’agent que vous voulez en un seul prompt, vérifiez ses instructions et enregistrez-le. Vous pouvez lui confier du travail tout de suite : les messages attendent dans une file jusqu’à ce qu’il soit libre.",
+
   "sitePage.landing.faq.data.question": "Où vont mes données ?",
   "sitePage.landing.faq.data.answer":
-    "Les espaces de travail, conversations, pièces jointes et données de navigation restent sur l’ordinateur qui exécute OpenBot. Le fournisseur d’IA que vous choisissez reçoit les prompts que vos agents lui envoient, et les pages que les agents ouvrent utilisent le réseau.",
-  "sitePage.landing.faq.computers.question": "Sur quels ordinateurs OpenBot fonctionne-t-il ?",
+    "Les espaces de travail, conversations, pièces jointes et données de navigation restent sur l’ordinateur qui exécute StarBot. Le fournisseur d’IA que vous choisissez reçoit les prompts que vos agents lui envoient, et les pages que les agents ouvrent utilisent le réseau.",
+
+  "sitePage.landing.faq.computers.question": "Sur quels ordinateurs StarBot fonctionne-t-il ?",
+
   "sitePage.landing.faq.computers.answer":
     "macOS 13 ou version ultérieure sur Apple silicon ou Intel, Windows 10 ou version ultérieure sur x64, et Linux sur x64 ou arm64 au format AppImage.",
   "sitePage.landing.faq.safety.question": "Est-il sûr de laisser des agents travailler sur mon ordinateur ?",
   "sitePage.landing.faq.safety.answer":
     "Les agents peuvent lire et modifier des fichiers, exécuter des commandes, utiliser le réseau et piloter le navigateur intégré sans demander à chaque fois. Ne leur confiez que des tâches en lesquelles vous avez confiance, et faites des sauvegardes.",
-  "sitePage.landing.faq.compare": "Comparer OpenBot",
-  "sitePage.landing.download.title": "Télécharger OpenBot",
+  "sitePage.landing.faq.compare": "Comparer StarBot",
+
+  "sitePage.landing.download.title": "Télécharger StarBot",
+
   "sitePage.landing.download.description":
     "Choisissez votre plateforme. Utilisez Codex, Claude, Gemini, Grok, OpenCode, Muse Code, Pi ou votre propre modèle depuis une seule app de bureau, et parlez à vos agents depuis votre téléphone.",
   "sitePage.landing.download.available": "Disponible",
@@ -394,8 +472,10 @@ export const messages = {
   "sitePage.landing.download.googlePlay": "Disponible sur Google Play",
   "sitePage.landing.download.pages": "Configuration requise et installation :",
   "sitePage.landing.download.apk": "Télécharger l’APK",
-  "sitePage.referral.invitedBy": "{name} vous invite sur OpenBot",
-  "sitePage.referral.invited": "Vous avez une invitation pour OpenBot",
+  "sitePage.referral.invitedBy": "{name} vous invite sur StarBot",
+
+  "sitePage.referral.invited": "Vous avez une invitation pour StarBot",
+
   "sitePage.referral.offer": "{percent} de réduction",
   "sitePage.referral.offerDetail": "sur votre premier paiement",
   "sitePage.referral.lead":
@@ -425,7 +505,8 @@ export const messages = {
   "sitePage.site.language": "Langue",
   "sitePage.site.language.current": "Langue : {language}",
   "sitePage.site.latest": "Nouveautés",
-  "sitePage.site.home": "Accueil OpenBot",
+  "sitePage.site.home": "Accueil StarBot",
+
   "sitePage.site.logo.menu": "Logo",
   "sitePage.site.logo.copyIcon": "Copier le logo en SVG",
   "sitePage.site.logo.copyLockup": "Copier le logo et le nom en SVG",
@@ -435,16 +516,19 @@ export const messages = {
   "sitePage.site.news.summary": "Ce qui est sorti, et pourquoi c’est important.",
   "sitePage.site.news.index": "Toutes les actualités",
   "sitePage.site.guides": "Guides",
-  "sitePage.site.guides.summary": "Apprenez OpenBot pas à pas.",
+  "sitePage.site.guides.summary": "Apprenez StarBot pas à pas.",
+
   "sitePage.site.guides.index": "Tous les guides",
   "sitePage.site.compare": "Comparatifs",
-  "sitePage.site.compare.summary": "Ce qui distingue OpenBot des autres apps d’agents.",
+  "sitePage.site.compare.summary": "Ce qui distingue StarBot des autres apps d’agents.",
+
   "sitePage.site.compare.index": "Tous les comparatifs",
   "sitePage.site.plugins": "Plugins",
   "sitePage.site.plugins.summary": "Les apps et compétences qu’un agent peut utiliser.",
   "sitePage.site.plugins.index": "Parcourir les plugins",
   "sitePage.site.resources": "Ressources",
-  "sitePage.site.resources.summary": "Le code source d’OpenBot est ouvert.",
+  "sitePage.site.resources.summary": "Le code source d’StarBot est ouvert.",
+
   "sitePage.site.sourceCode": "Code source",
   "sitePage.site.download.description": "macOS, Windows et Linux",
   "sitePage.site.changelog": "Notes de version",
@@ -452,7 +536,8 @@ export const messages = {
   "sitePage.site.community": "Communauté",
   "sitePage.site.community.description": "Discutez avec nous sur Discord",
   "sitePage.site.documentation": "Documentation",
-  "sitePage.site.documentation.description": "Installer et utiliser OpenBot",
+  "sitePage.site.documentation.description": "Installer et utiliser StarBot",
+
   "sitePage.site.brand": "Marque",
   "sitePage.site.brand.description": "Le logo en SVG et PNG",
   "sitePage.site.status": "Statut",
@@ -462,7 +547,8 @@ export const messages = {
   "sitePage.site.cta.title": "Rencontrez votre premier coéquipier",
   "sitePage.site.cta.description":
     "Utilisez Codex, Claude, Gemini, Grok ou votre propre modèle avec les forfaits que vous payez déjà, chacun avec son espace de travail et son contexte. Votre travail reste sur votre ordinateur.",
-  "sitePage.site.downloadOpenBot": "Télécharger OpenBot",
+  "sitePage.site.downloadOpenBot": "Télécharger StarBot",
+
   "sitePage.site.contact": "Contact",
   "sitePage.site.footer.description":
     "Des coéquipiers IA persistants sur votre propre ordinateur. Utilisez Codex, Claude, Gemini, Grok, Muse Code, Pi ou votre propre modèle avec les forfaits que vous payez déjà.",

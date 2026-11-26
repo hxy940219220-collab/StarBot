@@ -18,13 +18,13 @@ export function announcementProblems(announcement: string, version: string): str
 }
 
 function changelogUrl(version: string): string {
-  return `https://openbot.run/changelog#${releaseAnchor(version)}`;
+  return `https://starbot.app/changelog#${releaseAnchor(version)}`;
 }
 
 function announcementMessage(highlights: readonly unknown[], version: string, roleId?: string): string {
   return [
     roleId === undefined ? "@Release Pings" : `<@&${roleId}>`,
-    `**OpenBot v${version} is out**`,
+    `**StarBot v${version} is out**`,
     "",
     ...highlights.map((highlight) => `- ${String(highlight).trim()}`),
     "",
@@ -45,7 +45,7 @@ if (import.meta.main) {
   if (problems.length > 0) {
     process.stderr.write(
       [
-        `The Discord announcement for OpenBot ${version} is not ready:`,
+        `The Discord announcement for StarBot ${version} is not ready:`,
         ...problems.map((problem) => `- ${problem}`),
         "",
         `See ${DOCS}.`,

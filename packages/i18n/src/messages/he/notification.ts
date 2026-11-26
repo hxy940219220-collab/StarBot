@@ -31,7 +31,8 @@ export const messages = {
   "notification.machineAlert.cpu": "{server}: ה-CPU עמוס ב-{percent}",
   "notification.machineAlert.body": "הערך עבר את סף ההתראה של {level}. אפשר לראות בהגדרות השרת > אחסון.",
   "notification.test": "ההתראות פועלות.",
-  "notification.welcome": "OpenBot יודיע לך כאן כשסוכן יזדקק לך.",
+  "notification.welcome": "StarBot יודיע לך כאן כשסוכן יזדקק לך.",
+
   "notification.toast.region": "התראות",
   "notification.toast.close": "סגירת ההתראה",
 } as const satisfies PartialTranslation<typeof source>;

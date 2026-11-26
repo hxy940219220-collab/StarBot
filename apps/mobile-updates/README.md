@@ -1,6 +1,6 @@
-# OpenBot mobile update server
+# StarBot mobile update server
 
-This Worker gives the mobile app its over-the-air updates at `https://updates.openbot.run`. It
+This Worker gives the mobile app its over-the-air updates at `https://updates.starbot.app`. It
 answers the [Expo Updates protocol](https://docs.expo.dev/technical-specs/expo-updates-1/), version
 1, for the `expo-updates` client in each store binary. It replaces EAS Update: the binaries name
 this server in `updates.url` of `apps/mobile/app.json`.
@@ -84,11 +84,11 @@ One-time setup:
 
 1. `bun run updates:bucket:create` makes the bucket `openbot-mobile-updates`. Make
    `openbot-mobile-updates-test` in the same way for `wrangler dev`.
-2. The route `updates.openbot.run` is a custom domain of the Worker. The first deploy makes its DNS
+2. The route `updates.starbot.app` is a custom domain of the Worker. The first deploy makes its DNS
    record.
 3. In the `cloudflare-production` environment of the repository, add the secret
    `CLOUDFLARE_MOBILE_UPDATES_DEPLOY_TOKEN`: a Cloudflare API token with **Workers Scripts Write**
-   for the account and **Workers Routes Write** for the zone `openbot.run`. A deploy needs no more,
+   for the account and **Workers Routes Write** for the zone `starbot.app`. A deploy needs no more,
    and the token cannot read or write a bucket. Cloudflare has no permission for one Worker only,
    so the token can deploy each Worker of the account: keep it in this environment only. Do not use
    the token of the account Worker. The token in Cloudflare is `openbot-mobile-updates-deploy`.

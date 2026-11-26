@@ -1,16 +1,16 @@
 # Privacy
 
-OpenBot is local-first, but it is not offline-only. Agent workspaces, conversations, attachments,
-browser data, and team data stay on the computer that runs OpenBot. The one exception is the
+StarBot is local-first, but it is not offline-only. Agent workspaces, conversations, attachments,
+browser data, and team data stay on the computer that runs StarBot. The one exception is the
 encrypted copy that the signed-in mobile app keeps of what it shows (see the mobile section below).
-The optional OpenBot account
+The optional StarBot account
 service stores the minimum central data needed for email sign-in, account avatars, remote host
 configuration, memberships, invitations, ownership transfers, logical sessions, and the account's
 product analytics answer. An ownership transfer keeps the server, the email that the owner entered
 and the two accounts, also after it ends, so that a server plan of the earlier owner still counts
 for the server.
 
-The optional browser client at `/app` connects to the computer that runs OpenBot. Conversation
+The optional browser client at `/app` connects to the computer that runs StarBot. Conversation
 and attachment data travel through the existing encrypted host connection, not through the
 account Worker. The browser keeps chat pages, drafts, search results, and file previews in memory;
 it does not create a persistent offline chat cache. Files that the user downloads are saved by
@@ -20,7 +20,7 @@ user can also change the display name and avatar and disconnect account sessions
 these requests and the avatar image go to the same account Worker as from the desktop app. Host
 settings, such as MCP servers and the server's hosted sites, travel through the encrypted host
 connection. A hosted site belongs to the server that published it. When the computer that runs
-OpenBot is a registered server, its site requests to the account Worker also send that server's id and
+StarBot is a registered server, its site requests to the account Worker also send that server's id and
 machine token. The account Worker already holds both, and uses them only to find the server and its
 plan's site limit.
 A Grok Bot export that a member imports into a joined server, from the desktop app or the browser, goes
@@ -45,14 +45,14 @@ and the server tab opens it.
 Neither computer logs the cookie values. The desktop app then removes the window's session.
 An owner or admin can give a named browser profile a proxy. The pages of that profile then go
 through the proxy server that they chose, and that server can see which sites the profile opens.
-OpenBot keeps the proxy password encrypted on the computer that runs OpenBot, sends it only to that
+StarBot keeps the proxy password encrypted on the computer that runs StarBot, sends it only to that
 proxy, and does not log it or send it back to a client.
 The desktop app, the web client and the mobile app send a new password to that computer only in a
 save, through the encrypted host connection, and do not keep it.
 An owner or admin of a joined server can also share the internet connection of their own computer
 with that server. While their desktop app is open and sharing is on, the pages of the profiles that
 use that computer go through it: the sites see the address of that computer, and the bytes go
-through the encrypted host connection, through an OpenBot TURN relay when no direct path exists.
+through the encrypted host connection, through an StarBot TURN relay when no direct path exists.
 The computer connects only to public internet addresses, so the server cannot reach its local
 network. Neither computer logs the sites or the bytes. Stop sharing, or a closed app, stops it.
 To show each server's state, the browser also keeps a status connection to each host of the account
@@ -72,7 +72,7 @@ The web client records the product events that "Product analytics" describes. At
 of the browser, described in "Product analytics", to the account service. It does not send email codes, credentials,
 message content, file content, or search queries to telemetry.
 
-Production builds of OpenBot desktop, the browser client at `/app`, the configured mobile app, and the website use a
+Production builds of StarBot desktop, the browser client at `/app`, the configured mobile app, and the website use a
 self-hosted OpenPanel service for product analytics. Development builds, previews, tests, and Storybook do not send analytics.
 
 The production account service also sends OpenPanel an event when a paid plan or a hosted server
@@ -82,9 +82,9 @@ after no use, starts, becomes ready after a start, changes its machine, stops at
 It also sends these events for a license: a Checkout starts, the license starts, its number of
 users goes up or down, its renewal is cancelled or resumed, it ends, or its payment succeeds, fails,
 is refunded or is disputed.
-It also sends an event when your OpenBot credits change: a credits Checkout starts, is paid or
+It also sends an event when your StarBot credits change: a credits Checkout starts, is paid or
 expires, a refund or a lost dispute takes credits back, you move credits to or from a server, a
-license gives free monthly credits or they expire, or a workflow step that uses OpenBot credits
+license gives free monthly credits or they expire, or a workflow step that uses StarBot credits
 starts, is charged or ends with no charge. A credits event has your account ID (for a server step
 that no member started, or a server's free credits, the account ID of the server owner), whether
 the credits are personal or a server's, the number of credits, the currency and amount of a
@@ -127,15 +127,15 @@ that first visit when the account has one.
 
 ## AI conversation context
 
-When a provider session is replaced, OpenBot sends a bounded excerpt of the current conversation
+When a provider session is replaced, StarBot sends a bounded excerpt of the current conversation
 to the selected provider. The agent can request older messages from that same conversation through
 local history tools. Requested text and selected saved work steps are then sent to that provider.
 These tools exclude messages before the latest context reset and cannot search another conversation,
 except a side thread of the same agent that the agent names by its task id.
-A user can tag a browser tab or a side thread of the agent in a message. When OpenBot delivers the
+A user can tag a browser tab or a side thread of the agent in a message. When StarBot delivers the
 message, it sends the provider the tab's title and address, or the thread's title, state, and the start
 of its last answer. Card numbers and known secrets are removed first.
-When a user selects "Teach a task" and saves the recording, OpenBot sends the agent's provider a
+When a user selects "Teach a task" and saves the recording, StarBot sends the agent's provider a
 message with the steps in an attached text file: the host, path and title of each page, and the role and name of each control
 that the user clicked. The steps have no query, no typed text and no field value. A discarded
 recording is sent to nobody.
@@ -161,9 +161,9 @@ account service or analytics by these tools.
 
 Local scripts is off by default for each agent. When enabled, scripts that run as the same OS user
 on the host can read a local token and use the loopback API. They can send messages, run routines,
-read pending questions and approvals, and submit answers or approval decisions. OpenBot redacts
+read pending questions and approvals, and submit answers or approval decisions. StarBot redacts
 secrets in API responses. Secret questions and browser takeovers return notices only and must be
-completed in OpenBot. OpenBot does not send these API responses to the account service or analytics.
+completed in StarBot. StarBot does not send these API responses to the account service or analytics.
 A script can send the data elsewhere under its own configuration.
 
 ## Agent and host usage
@@ -187,7 +187,7 @@ agent deletion removes it. A duplicate agent starts with no usage history.
 Authenticated members of a host team can also see that host's storage through the Team API: how
 much disk space each location, agent and chat uses, and the name, size, type, date and chat title of
 each sent or generated file. They can also read the free and total size of the disk that holds the
-host's OpenBot data, and, on a hosted server, the total size of the files in the home folder and the
+host's StarBot data, and, on a hosted server, the total size of the files in the home folder and the
 temporary folders of the server's user. The response contains no file paths, and workspace and download files
 are counted only as totals. Only owners and admins can delete a file or clear caches and logs. A
 deleted file is removed from the host's disk; the message that sent it stays and shows that the file
@@ -223,7 +223,7 @@ send only lengths, times, counts, the chosen voice (for example `F1`), whether t
 remote, and whether speech recognition runs on the computer or in the cloud. They never send what
 the user said, the reply, a transcript, or audio.
 
-The production browser client at `/app` on `https://openbot.run` records the same product events
+The production browser client at `/app` on `https://starbot.app` records the same product events
 as the desktop app, with the same limits, and labels them as web. When its **Link analytics to my
 account** setting in account settings is off, these events and the error reports are anonymous. They
 carry only the random install ID that "Install ID" describes, and no name, email or account. When the
@@ -258,7 +258,7 @@ as a lowercase label of at most 64 characters made of letters, digits, dots, hyp
 underscores; any other value is dropped rather than shortened. No other query parameter, hash, or
 invitation value is sent. Session replay and automatic interaction capture are disabled.
 
-When a user signs in, OpenPanel receives the OpenBot account ID and normalized account email so UI
+When a user signs in, OpenPanel receives the StarBot account ID and normalized account email so UI
 actions can be associated with the account that started them. The email is stored on the OpenPanel
 profile and is not copied into individual event properties. Agent lifecycle events are emitted once
 by the local host and associated with the host owner's account; clients that observe a remote host do
@@ -268,32 +268,32 @@ platform name (or unknown), and the referring domain when available. A recognize
 takes precedence over the referring domain for platform classification; unrecognized tags are not
 sent. Attribution excludes referrer paths, query parameters, fragments, credentials, ports, and
 campaign URLs other than the allowlisted tags described above. Website page and article events carry
-the path of a news article, guide or comparison published on openbot.run, together with the collection name, the
+the path of a news article, guide or comparison published on starbot.app, together with the collection name, the
 reading position reached (start, half, or end), and the section of the page a link was clicked in.
 That path is a published article address and nothing else: it is matched against the site's own list
 of articles, so no other part of a visited URL can be reported through it. Reading position is taken
-from where the article sits on screen, never from how long it was open. Referrals from openbot.run and its subdomains are omitted.
+from where the article sits on screen, never from how long it was open. Referrals from starbot.app and its subdomains are omitted.
 The production website also saves the first visit of the browser in its `localStorage`: the source
 category, the platform name, the first website page, the day, and the allowlisted campaign tags.
 It saves no referrer, IP address or identifier. A later visit does not change it, and it is not used
 after 90 days. When you sign in on the web, or open the page after a desktop checkout in the same
 browser, the browser sends it to the account service. The account service keeps the first one that
 it gets on your account and sends it to OpenPanel with your account ID. To remove it from a
-browser, clear the site data of openbot.run. When you open a discount link (an openbot.run address
+browser, clear the site data of starbot.app. When you open a discount link (an starbot.app address
 with `?promo=CODE`), the website saves the code and the time in its `localStorage` for 30 days. When
 you pay on the web, the web client sends the code to the account service, which gives it to Stripe
-for that Checkout page. It is not sent to analytics. When you open an invite link (an openbot.run
+for that Checkout page. It is not sent to analytics. When you open an invite link (an starbot.app
 address with `?ref=CODE`), the website saves the code and the time in its `localStorage` for 30 days.
 When you sign in on the web, the web client sends the code to the account service and removes it from
 `localStorage`. On the desktop, on the web and on the phone, you can also type an invite link or code
 on the sign-in screen; the app sends only the code. The account service uses a code only for a new account. It is not sent to analytics. The invite page shows the first name from the profile of the account that made the link to anyone who opens the link. It shows no other name, picture or email. When you choose a language on the website, it saves
 the language code, and nothing else, in the `openbot_lang` cookie for one year, so that the next
-pages open in that language. The browser sends this cookie only to openbot.run. OpenPanel can also derive
+pages open in that language. The browser sends this cookie only to starbot.app. OpenPanel can also derive
 session, device, browser, operating-system, network, and approximate geographic metadata from a
-request. The analytics service runs on OpenBot's self-hosted infrastructure and receives events
-through `analytics.openbot.run`.
+request. The analytics service runs on StarBot's self-hosted infrastructure and receives events
+through `analytics.starbot.app`.
 Desktop and web installs from before the first-run analytics box keep analytics on. On a new desktop
-install, and at web sign-in with no saved choice, the **Help make OpenBot better** box starts ticked
+install, and at web sign-in with no saved choice, the **Help make StarBot better** box starts ticked
 only when both the region (of the system on desktop, of the browser language on web) and the time
 zone are in the United States and its territories, Mexico, Australia, New Zealand or Japan. The
 check runs on the device and sends nothing. Everywhere else, and when the region is unknown, the box starts
@@ -341,8 +341,8 @@ The local host also records how the agents are used:
 - **Tools.** When a turn completes, the host sends one count per kind of tool the agent used (for
   example command, file change, web search, browser, or MCP), how many of those calls failed (Claude
   does not report failed tool calls, so its count is 0), and
-  the plugin: the slug of an OpenBot catalog plugin, `builtin` for OpenBot's own tools, or `custom`.
-  The tool name is sent only for OpenBot's own tools and catalog plugins. The name, address and
+  the plugin: the slug of an StarBot catalog plugin, `builtin` for StarBot's own tools, or `custom`.
+  The tool name is sent only for StarBot's own tools and catalog plugins. The name, address and
   command of a server the user added, the tool arguments and the tool results are not sent. The
   host sends this only when analytics is on.
 - **Routine runs.** The host sends the outcome of a routine run, whether it was scheduled or manual,
@@ -356,7 +356,7 @@ The local host also records how the agents are used:
   curated skills and agents; the providers in use; and whether Computer Use is enabled. The host sends
   this only when analytics is on.
 - **Resource use.** At most once a day, the host sends a summary of the previous day: the memory and
-  CPU use of OpenBot's process groups (main, windows, browser tabs, GPU, the database and voice
+  CPU use of StarBot's process groups (main, windows, browser tabs, GPU, the database and voice
   processes) and of each provider's CLI and its child processes, by provider id; the main process
   responsiveness, with the number of minutes that had a delay of 1 second or more, and for the
   longest delay whether it came in the first minutes after the start or a wake from sleep, in the
@@ -378,7 +378,7 @@ when there is no install ID.
   connection to that server since the app started; whether the session was new or saved; how many
   attempts failed before it; and, for a hosted server, how long the server took to start. The first
   attempt that fails after a connection also sends the last step that finished. It also sends the short
-  name of the OpenBot Signal machine that the connection used, as the connection ticket names it. The server ID, address, session, ticket and keys are not sent.
+  name of the StarBot Signal machine that the connection used, as the connection ticket names it. The server ID, address, session, ticket and keys are not sent.
 - **Turn times.** When a turn completes, the host sends how long the message waited in the queue, how
   long the provider took to start the turn and, when it had to start, its process, and how long until
   the first output. These are times only; the messages are not sent.
@@ -410,13 +410,13 @@ agent workspaces, conversations, attachments, browser data, and team data are st
 When analytics is off or not answered, the desktop app, the local host, the browser app and the
 mobile app still send basic product events and error reports. These are anonymous: they carry a
 random install ID (`install-` and a random UUID) and no name, email or account. The ID has no part
-of the account, the email, the device name or the hardware, and OpenBot does not join these
+of the account, the email, the device name or the hardware, and StarBot does not join these
 events to an account. The events and their limits are the same as above, with one exception: the
 local host sends the **Websites**, **Tools** and **Setup** records only when analytics is on.
 The desktop app and the local host keep the ID in a file in the app data folder, the browser app in
-the `localStorage` of openbot.run, and the mobile app in the phone's keychain. At the first start
+the `localStorage` of starbot.app, and the mobile app in the phone's keychain. At the first start
 after 13 months, a new ID replaces it. Deleting the desktop app data or the site data of
-openbot.run also makes a new ID. When the device cannot save the ID, it sends no events without an
+starbot.app also makes a new ID. When the device cannot save the ID, it sends no events without an
 account. OpenPanel still derives session, device, browser, operating-system, network, and approximate
 geographic metadata from each request, as for other events. Because the session comes from the
 network and the browser, on the day that you turn analytics off, OpenPanel can show the last events
@@ -473,13 +473,13 @@ The service stores:
   and whether it ends at the period end. For a license, it keeps the same fields and the number of
   users in place of the plan. The service also keeps the ID, type and receive time of each
   Stripe webhook event for 7 days, to ignore a repeated event. These records hold no card data.
-- OpenBot credits: for each credit purchase, the Stripe Checkout Session ID, the account, the server
+- StarBot credits: for each credit purchase, the Stripe Checkout Session ID, the account, the server
   that gets the credits (when one is selected), the number of credits, the currency, the amount, the
   Stripe payment ID, the status and the times. For each purchase, move, reversal, use, free monthly
   grant and expiry, the service keeps a ledger entry: the amount, the account or server whose balance changes, the account that
   made the change, and the time. A balance is the sum of its entries. Deleting the account removes
   its purchases and the entries of its own balance. The entries of a server stay with the server,
-  without the ID of the deleted account. For each image or video that OpenBot credits pay for, the
+  without the ID of the deleted account. For each image or video that StarBot credits pay for, the
   service keeps a hold record: the job ID, the account or server that pays, the account that started
   it, the model, the credits held and charged, the result (completed, failed, canceled, refused or
   expired), the media generation processor and its job ID, and the times. It keeps no prompt, picture
@@ -529,16 +529,16 @@ the token to disk.
 
 On Linux, that protection is the system keyring (Secret Service or KWallet). When the keyring has no
 key, or gives a key that does not open a saved secret (for example a locked keyring, or one that
-keeps its items only in memory), OpenBot makes its own random key in
-`~/.config/OpenBot/secret-storage.key`, which only your user can read (mode `0600`). From then on,
-OpenBot encrypts new secrets on this computer with that key (AES-256-GCM), as on a self-hosted
+keeps its items only in memory), StarBot makes its own random key in
+`~/.config/StarBot/secret-storage.key`, which only your user can read (mode `0600`). From then on,
+StarBot encrypts new secrets on this computer with that key (AES-256-GCM), as on a self-hosted
 server. The key never leaves this computer. Anyone who can read your files can read the key, so
 protect this computer as you protect your home folder. Delete the file to go back to the keyring;
 then sign in again and save the secrets again.
 
-On macOS, that protection is the Keychain. When the Keychain refuses OpenBot (for example after
-"Deny" at its prompt, or with no usable login keychain), OpenBot makes the same random key in
-`~/Library/Application Support/OpenBot/secret-storage.key` (mode `0600`) and encrypts new secrets
+On macOS, that protection is the Keychain. When the Keychain refuses StarBot (for example after
+"Deny" at its prompt, or with no usable login keychain), StarBot makes the same random key in
+`~/Library/Application Support/StarBot/secret-storage.key` (mode `0600`) and encrypts new secrets
 with it while the Keychain cannot encrypt. Secrets that the Keychain keeps stay there, and when the
 Keychain works again, it keeps the new secrets. Delete the file only when no secret uses it; a
 secret that it encrypted then cannot be read, and you must sign in again or save it again.
@@ -559,7 +559,7 @@ in `openbot-remote-session-reuse-preference-v1.json`.
 The desktop app and the web client keep a copy of the agent and channel pictures that they loaded
 from a joined server, so that the agent pictures show while the server is offline, for example during its
 restart for an update. The desktop app keeps the copies in the `remote-pictures` folder of its data
-folder; the web client keeps the agent pictures in the Cache storage of openbot.run in your browser.
+folder; the web client keeps the agent pictures in the Cache storage of starbot.app in your browser.
 The copies stay on that computer or in that browser. They are deleted when you sign out, when
 another account signs in, when the server leaves your list, and when the server ends your access.
 
@@ -569,13 +569,13 @@ the avatar without an account session.
 ## Hosted servers
 
 Each account can buy hosted servers. A hosted server is a Linux
-OpenBot computer. It runs on a virtual server that OpenBot rents from
+StarBot computer. It runs on a virtual server that StarBot rents from
 [Leaseweb](https://www.leaseweb.com) when one is free at the purchase (see below), and otherwise in a
 [boat](https://boat.dev) sandbox in the EU (Germany, Finland or
 France). The sandbox holds the server's workspaces, conversations, attachments, browser data and
 team data, the same as your own computer would. The server stops 15 to 30 minutes after its last use and
 starts again when you press a key or click in an app that shows it, when a Slack, Discord or
-Telegram message addresses OpenBot, or a few minutes before its next scheduled routine run. Use means that an agent works, a remote desktop is open, a file moves, or you
+Telegram message addresses StarBot, or a few minutes before its next scheduled routine run. Use means that an agent works, a remote desktop is open, a file moves, or you
 sent a message, made a change, typed or used a shared browser view in the last 5 minutes. An app
 that has focus (a focused window or tab, or the phone app in the foreground) also counts, for at
 most 30 minutes after your last message, change or typing, or after you return to the app. The app
@@ -604,7 +604,7 @@ boat dashboard: `openbot-`, the plan, your account email with each other charact
 first 8 characters of the server ID, such as `openbot-starter-ada-example-com-1a2b3c4d`. boat keeps
 the name with the sandbox.
 
-A new hosted server of each plan starts on a virtual server that OpenBot rents from
+A new hosted server of each plan starts on a virtual server that StarBot rents from
 [Leaseweb](https://www.leaseweb.com) when one is free at the purchase. For a purchase in euros or
 złotys, it is in Amsterdam, the Netherlands. For a purchase in US dollars or Brazilian reais, it is
 near Washington, D.C., in the United States, or in Amsterdam when none is free there. When no
@@ -729,7 +729,7 @@ written. For the report, the phone also masks:
 - each server ID, which becomes `server-1`, `server-2`;
 - each network address, which keeps only its kind (`[private-ip]`, `[shared-ip]`, `[public-ip]`,
   `[ipv6]`);
-- each host name that is not an OpenBot service (`openbot.run`), which becomes `[host]`;
+- each host name that is not an StarBot service (`starbot.app`), which becomes `[host]`;
 - each record ID and hash, which becomes `[id]`, and the name of a user folder.
 
 The message of an error is free text, so it can still hold a word that these rules do not know. The
@@ -739,12 +739,12 @@ report, as described under [Other network connections](#other-network-connection
 of the public GitHub issue. No report about the phone app is sent without this data.
 
 The mobile app asks an update server for a newer JavaScript bundle each time it starts, and when
-you come back to it, at most one time in 15 minutes. App versions after 1.4.8 ask OpenBot's server
-`updates.openbot.run`, a Cloudflare Worker; version 1.4.8 and earlier versions ask Expo's server
+you come back to it, at most one time in 15 minutes. App versions after 1.4.8 ask StarBot's server
+`updates.starbot.app`, a Cloudflare Worker; version 1.4.8 and earlier versions ask Expo's server
 `u.expo.dev`. The request has the platform, the runtime version of the build, the build channel, the
 ID of the bundle that runs, a random ID that the update client made for this install, the IDs of
 updates that failed on the phone a short time ago and, after a crash at start, the first 1,024
-characters of the error text. It does not have your account, your servers or your content. OpenBot's
+characters of the error text. It does not have your account, your servers or your content. StarBot's
 server uses the random ID only to decide if the install is in a part rollout. It does not store or
 log the request, and Cloudflare sees it in transit as for each request to a Worker. The phone then
 downloads the bundle and its files from the same server. Each update is signed, and the app refuses
@@ -775,9 +775,9 @@ Image attachment previews are downloaded from the desktop host through the same 
 Other attachments are downloaded when you choose Open or save. The phone creates a temporary file for
 the system share sheet and removes it when that sheet closes. The app you select can keep its own copy.
 Cloudflare account storage does not receive these files.
-When you share text, a link, an image or a file from another app to OpenBot, the phone keeps a copy
+When you share text, a link, an image or a file from another app to StarBot, the phone keeps a copy
 of each file in its app cache until the chat that you choose has read it, or until you close the
-share sheet. Nothing is sent until you send the message. On iPhone, the OpenBot share extension can
+share sheet. Nothing is sent until you send the message. On iPhone, the StarBot share extension can
 send the message itself, without the app. It uses the same encrypted connection to the host and the
 same account service as the app. For this, the app gives the extension its session in a keychain
 item that only the app and the extension can read, and writes the names of your servers and agents,
@@ -809,7 +809,7 @@ The phone recognizer asks for on-device recognition. On iOS, this applies when t
 Android, it applies when the language model is installed. Otherwise, or when on-device recognition
 fails before it recognizes any speech, the phone's recognition service, Apple or Google, receives the
 audio. The recognized text goes into the message field and is sent
-only when you send the message. OpenBot does not store or send the audio.
+only when you send the message. StarBot does not store or send the audio.
 
 In a mobile voice conversation, the same recognizer hears what you say, and the recognized text is
 sent to the agent as a message. The phone then reads the agent's reply aloud with the voice chosen in
@@ -826,7 +826,7 @@ sent to the agent as a message. The phone then reads the agent's reply aloud wit
   plan. The key is kept in the phone's keychain (iOS) or encrypted storage (Android), never in a log
   or an analytics event. Remove key in **Settings → Voice** deletes it.
 
-The chosen voice settings are kept on the phone. OpenBot does not store the reply audio.
+The chosen voice settings are kept on the phone. StarBot does not store the reply audio.
 
 ## Company sign-in
 
@@ -840,10 +840,10 @@ The account service stores in D1:
   last passed test, whether it is on, the account of the owner who saved it, and creation and update
   times. The client secret is encrypted with a key that only the account service has;
 - the company domains and the server that each domain belongs to;
-- for each person who signed in at the provider: the issuer, the provider's subject ID, the OpenBot
+- for each person who signed in at the provider: the issuer, the provider's subject ID, the StarBot
   account and the link time. The service does not keep the provider's tokens or other claims;
 - the hash of the SCIM token, and its creation time. The token shows once;
-- for each person that the provider manages through SCIM: the server, the OpenBot account, the
+- for each person that the provider manages through SCIM: the server, the StarBot account, the
   provider's external ID, whether the person is on, and the update time;
 - sign-in flows in progress, for 10 minutes: the hash of the state, the values of the connection at
   the start, the PKCE verifier, the nonce, the return address, and the app's challenge;
@@ -857,7 +857,7 @@ provider's token endpoint. From the ID token, it uses only the subject ID and th
 a production account service, a test also asks Cloudflare DNS over HTTPS (`cloudflare-dns.com`) for
 the TXT record `_openbot.<domain>` of each domain.
 
-A person who signs in this way gets an OpenBot account for the email address, or the account that
+A person who signs in this way gets an StarBot account for the email address, or the account that
 already has it, and joins the server as a member with no invitation, while the server has a free
 seat. A person whom the owner removed, or who left, stays out.
 
@@ -874,30 +874,30 @@ removes the connection. Deleting an account removes its provider links and SCIM 
 
 ## Email delivery and infrastructure providers
 
-OpenBot sends sign-in, team invitation, and welcome messages from `no_reply@openbot.run` through the
-configured SMTP provider. A reply goes to `hello@openbot.run`. The provider receives the recipient address and the message content. A sign-in message contains the
+StarBot sends sign-in, team invitation, and welcome messages from `no_reply@starbot.app` through the
+configured SMTP provider. A reply goes to `hello@starbot.app`. The provider receives the recipient address and the message content. A sign-in message contains the
 one-time code and its expiration time. A team invitation can contain the inviter address, team name,
 role, and invite URL. When the first cloud server plan of an account starts, a welcome message goes
 to the account address. It contains the plan name and the server name. License messages go to the
-account address from `no_reply@openbot.run` through the same provider, and a reply goes to
-`licenses@openbot.run`. When a license has its first
+account address from `no_reply@starbot.app` through the same provider, and a reply goes to
+`licenses@starbot.app`. When a license has its first
 payment, the message contains the license tier, the number of users, the list price when no discount
 applies, the currency, the billing period, and the date of the next payment. When a renewal payment fails, the message contains
 the license tier, the number of users, the amount due, the currency, the date of the next payment
 try, and the link to the Stripe page of the invoice. When a paid license ends, the message contains
-the license tier, the number of users, and whether it ended after a failed payment. The HTML version of a message loads the OpenBot logo from `openbot.run` when
+the license tier, the number of users, and whether it ended after a failed payment. The HTML version of a message loads the StarBot logo from `starbot.app` when
 the mail client shows images. The image address is the same in every message and identifies no
 recipient.
 
 When the SMTP provider surely did not send a message, for example because its hourly sending limit
 is spent, Cloudflare Email Service sends the same message instead. It then receives the same
-recipient address and message content as the SMTP provider. OpenBot does not use it after an
+recipient address and message content as the SMTP provider. StarBot does not use it after an
 unconfirmed SMTP send, so you do not get the same message twice.
 
-The contact form on `openbot.run/contact` sends your message to the OpenBot mailbox through the same
+The contact form on `starbot.app/contact` sends your message to the StarBot mailbox through the same
 SMTP provider. The message contains the email address, topic and text that you enter, and the name and
 company when you enter them. The account service stores none of these values. To limit how many
-messages one address can send, it keeps a hash of your IP address in its rate-limit records. The OpenBot team receives the message
+messages one address can send, it keeps a hash of your IP address in its rate-limit records. The StarBot team receives the message
 in its mailbox and uses your address only to answer you.
 
 Cloudflare processes account and configuration API requests. It does not carry Team API, file,
@@ -906,20 +906,20 @@ Live Activity updates and phone notifications that it cannot read; see [iPhone L
 [iPhone notifications](#iphone-notifications) and [Android notifications](#android-notifications). For an
 agent's Slack app, it exchanges the Slack sign-in and serves the install page; see
 [Slack connections](#slack-connections). It does the same for the Discord app; see
-[Discord connections](#discord-connections). For the OpenBot Telegram bot, it records which
+[Discord connections](#discord-connections). For the StarBot Telegram bot, it records which
 computer answers each chat; see [Telegram connections](#telegram-connections). Cloudflare and the
 email provider can keep their own security, delivery, and network logs under their own policies. These provider logs are outside the
-OpenBot application database and its daily maintenance task.
+StarBot application database and its daily maintenance task.
 
-The public status page at `status.openbot.run` is on GitHub Pages. GitHub serves it and keeps its
+The public status page at `status.starbot.app` is on GitHub Pages. GitHub serves it and keeps its
 own request logs under its own policy. The page has no analytics and no cookies, and it loads
-nothing from other sites. A GitHub Actions workflow checks the OpenBot services about every 5 minutes
+nothing from other sites. A GitHub Actions workflow checks the StarBot services about every 5 minutes
 with plain requests that carry no account or user data. Incidents on the page come from issues
-with the `status` label in the public OpenBot repository. The same workflow sends the public incident
-and service state to webhook addresses that the OpenBot team sets, such as a team chat channel. It
+with the `status` label in the public StarBot repository. The same workflow sends the public incident
+and service state to webhook addresses that the StarBot team sets, such as a team chat channel. It
 sends no account or user data.
 
-Paid server plans use Stripe. You enter card and billing details on Stripe's pages, not in OpenBot.
+Paid server plans use Stripe. You enter card and billing details on Stripe's pages, not in StarBot.
 Stripe sends the account service the subscription state, the plan, its price, the period, and the
 account and server IDs that the subscription names, never the card number. When you choose a plan
 for a new hosted server, the account service sends Stripe your account email and account ID (to
@@ -930,7 +930,7 @@ your billing country and, for a company in the EU, an optional EU VAT ID. The ac
 them on your Stripe customer, because they decide the VAT. When the VAT ID is of an EU country other
 than Poland, the account service first sends only that VAT ID to the EU VAT check service (VIES,
 `ec.europa.eu`) of the European Commission, which says if it is valid. When the billing address that you enter on the
-payment page is in another country than the one you gave, the account service sends the OpenBot team
+payment page is in another country than the one you gave, the account service sends the StarBot team
 the ID of that payment page and the two countries, through a Discord webhook, to check the VAT. When you delete a hosted server, the account service
 tells Stripe to cancel its plan. When you manage billing,
 the account service sends Stripe your Stripe customer ID, and the subscription ID of the plan you
@@ -940,16 +940,16 @@ Billing is off, and Stripe receives nothing, when the account service has no Str
 
 When a server plan or a license starts or ends, when you cancel or resume its renewal, and when a
 payment for it succeeds, fails, or goes back (a refund or a dispute), the account service sends one
-message to a private Discord channel of the OpenBot team, through a Discord webhook. The message has
+message to a private Discord channel of the StarBot team, through a Discord webhook. The message has
 your account email, the plan or the license tier and its number of users, the billing period, the
 currency, and the list amount or the amount of the payment. It has no card data, no Stripe ID and no
 server ID. Discord keeps the message under its own policy.
 
-When your hosted server plan ends and the OpenBot team stores the data of the server in its archive,
+When your hosted server plan ends and the StarBot team stores the data of the server in its archive,
 the same channel gets one message with your account email, the plan, the first 8 characters of the
 server ID, the size of the archive and the ID of the machine.
 
-## Data stored on the OpenBot computer
+## Data stored on the StarBot computer
 
 Saved agent memories, their inclusion settings, and their full-text search index stay in the local
 SQLite database. Essential memories enter the agent's provider instructions within a fixed size
@@ -957,7 +957,7 @@ limit. Other saved memories reach the provider only when the agent retrieves the
 tool. Search runs locally and does not use an external search or embedding service. Memory content
 is not included in analytics; provider output uses the application's secret redaction. After every
 20 turns of an agent's chat or side thread, after 15 minutes with no new turn, when the user clears
-the chat, and when the user closes a side thread, OpenBot sends the agent's profile, its essential
+the chat, and when the user closes a side thread, StarBot sends the agent's profile, its essential
 memories, the saved memories that relate most to the conversation, and the new part of the
 conversation, with secrets redacted, to the agent's own provider, on the agent's model or on the
 provider's lower-priced default model, which proposes memory changes. Nothing else receives them.
@@ -966,7 +966,7 @@ the server, or turns these reviews off; off, no review sends anything. An owner 
 server can change it.
 
 Server settings > General > Learn from my browsing is off by default. When it is on, and you or a
-team member control a page of an agent's browser, OpenBot records the address of each page (the host
+team member control a page of an agent's browser, StarBot records the address of each page (the host
 and the path, without the query or the hash, and with each path part that looks like a code or an id
 replaced), its title, and the kind and the label of each control
 you click. It does not record what you type, field values, password fields, card or one-time code
@@ -975,73 +975,73 @@ fields, secret tabs, or private sign-ins. The steps stay on this computer in
 redacted, to the agent's own provider, as part of the review above, and then deletes them. Steps that
 no review reads are deleted after 30 days. Turning the setting off deletes all recorded steps.
 
-- `~/OpenBot/Agents` contains one workspace per agent. A profile written by a release before the
-  bot-to-agent rename holds them under `~/OpenBot/Bots`; the application moves them on first launch.
-- `~/OpenBot/Shared` contains managed transfers shared between agents, and
-  `~/OpenBot/Shared/Data/agent-data.db` holds the records the agents keep for themselves between tasks.
+- `~/StarBot/Agents` contains one workspace per agent. A profile written by a release before the
+  bot-to-agent rename holds them under `~/StarBot/Bots`; the application moves them on first launch.
+- `~/StarBot/Shared` contains managed transfers shared between agents, and
+  `~/StarBot/Shared/Data/agent-data.db` holds the records the agents keep for themselves between tasks.
   Every agent on this computer can read and write every table in that file, and the user can delete any
   table in agent settings.
-- `~/OpenBot/Downloads` contains files downloaded by the embedded browser.
-- `~/Library/Application Support/OpenBot` contains the OpenBot SQLite database, agent metadata,
+- `~/StarBot/Downloads` contains files downloaded by the embedded browser.
+- `~/Library/Application Support/StarBot` contains the StarBot SQLite database, agent metadata,
   conversations, message queues, direct messages, reactions, read state, attachment drafts and
   indexes, team configuration, local team members and sessions, the browser profiles and their
-  cookies, application preferences, and the provider CLIs OpenBot downloads. The downloaded CLIs are kept in
+  cookies, application preferences, and the provider CLIs StarBot downloads. The downloaded CLIs are kept in
   one store for the whole computer, which no other profile data shares.
 - The local team configuration contains team member profiles, password hashes and salts when local
   password sign-in is used, invite and session token hashes, and the team identity key pair.
-- `~/.codex` is owned by Codex CLI and contains its login and thread data. OpenBot does not copy or
+- `~/.codex` is owned by Codex CLI and contains its login and thread data. StarBot does not copy or
   manage Codex credentials.
-- `~/.claude` is owned by Claude CLI and contains its login and session data. OpenBot does not copy
+- `~/.claude` is owned by Claude CLI and contains its login and session data. StarBot does not copy
   or manage Claude credentials.
-- The MCP sign-ins are kept in `~/Library/Application Support/OpenBot`, encrypted by the operating
+- The MCP sign-ins are kept in `~/Library/Application Support/StarBot`, encrypted by the operating
   system's secret storage in the same way as provider API keys. One record per server address holds
   the client registration and the access and refresh tokens. Removing the server in settings, or
   choosing Sign out on it, deletes its record. These values are redacted from logs, exports and diagnostics.
   The port and secret of the local MCP sign-in server are kept in
-  `~/Library/Application Support/OpenBot/openbot-mcp-oauth-proxy-v1.json`, encrypted in the same way.
+  `~/Library/Application Support/StarBot/openbot-mcp-oauth-proxy-v1.json`, encrypted in the same way.
 - The GitHub connection (Marketplace › Apps › GitHub) is kept in
-  `~/Library/Application Support/OpenBot/openbot-github-connector-v1.json`, encrypted by the operating
+  `~/Library/Application Support/StarBot/openbot-github-connector-v1.json`, encrypted by the operating
   system's secret storage. It holds the GitHub access and refresh tokens, the account name, ID and
   avatar address, and the port and secret of the local GitHub MCP server.
   While the connection is on, `provider-state/github` in the same folder holds the access token and
-  the OpenBot GitHub App's installation tokens in plain text, with mode 0600, for `gh` and `git` in
-  agent tools. OpenBot deletes that folder when you disconnect and when the app closes; after a crash
+  the StarBot GitHub App's installation tokens in plain text, with mode 0600, for `gh` and `git` in
+  agent tools. StarBot deletes that folder when you disconnect and when the app closes; after a crash
   it stays until the next start. The tokens are redacted from logs, exports and diagnostics.
 - The Link payment account (Server settings › Vault › Cards) is kept in
-  `~/Library/Application Support/OpenBot/openbot-link-account-v1.json`, encrypted by the operating
+  `~/Library/Application Support/StarBot/openbot-link-account-v1.json`, encrypted by the operating
   system's secret storage. It holds the Link access and refresh tokens and the account email.
   Disconnect deletes the file and asks Link to revoke the sign-in. A one-time Link card is not
-  stored: OpenBot reads it from Link for each fill and types it into the page. The tokens and the
+  stored: StarBot reads it from Link for each fill and types it into the page. The tokens and the
   card number are redacted from logs, exports and diagnostics.
 - The ElevenLabs API key for dictation and spoken replies is kept in
-  `~/Library/Application Support/OpenBot/voice-api-key.json`, encrypted by the operating system's
+  `~/Library/Application Support/StarBot/voice-api-key.json`, encrypted by the operating system's
   secret storage. The app window never receives the key back. Remove key in **Settings → Voice**
   deletes the file. The key is redacted from logs, exports and diagnostics.
 - The Groq API key for dictation is kept in
-  `~/Library/Application Support/OpenBot/groq-api-key.json`, encrypted by the operating system's
+  `~/Library/Application Support/StarBot/groq-api-key.json`, encrypted by the operating system's
   secret storage. The app window never receives the key back. Remove key in **Settings → Voice**
   deletes the file. The key is redacted from logs, exports and diagnostics.
 - The restricted Stripe key of the CRM is kept in
-  `~/Library/Application Support/OpenBot/crm-stripe-key.json` on the computer that runs OpenBot (on a
+  `~/Library/Application Support/StarBot/crm-stripe-key.json` on the computer that runs StarBot (on a
   joined server, on that server), encrypted by the operating system's secret storage. The app window
   receives only its last four characters. The customers, plans and payments that the sync copies from
   Stripe go in the CRM tables of `openbot.db`, as rows that a person adds. Disconnect on the CRM page
   deletes the key file; the copied rows stay until a person deletes them. The key is redacted from
   logs, exports and diagnostics.
 - The xAI API key for spoken replies is kept in
-  `~/Library/Application Support/OpenBot/xai-api-key.json`, encrypted by the operating system's
+  `~/Library/Application Support/StarBot/xai-api-key.json`, encrypted by the operating system's
   secret storage. The app window never receives the key back. Remove key in **Settings → Voice**
   deletes the file. The key is redacted from logs, exports and diagnostics.
 - The API key of the voice server is kept in
-  `~/Library/Application Support/OpenBot/voice-server-key.json`, encrypted by the operating system's
+  `~/Library/Application Support/StarBot/voice-server-key.json`, encrypted by the operating system's
   secret storage. The app window never receives the key back. Remove in the Voice server section of
   **Settings → Voice** deletes the file. The key is redacted from logs, exports and diagnostics.
-- The Bitwarden connection keeps a CLI session key in process memory only. OpenBot does not
+- The Bitwarden connection keeps a CLI session key in process memory only. StarBot does not
   save it to a file. Disconnect, eight hours without vault use, and app exit stop this connection.
   The log redactor can retain values in memory until exit to mask later messages.
-  The Bitwarden CLI keeps its own encrypted vault cache. OpenBot reads login items in the folder
-  `Shared with OpenBot`. Agents receive item ids, titles, and usernames; passwords and authenticator
-  codes go through the main process to the browser page. This folder is an OpenBot access rule;
+  The Bitwarden CLI keeps its own encrypted vault cache. StarBot reads login items in the folder
+  `Shared with StarBot`. Agents receive item ids, titles, and usernames; passwords and authenticator
+  codes go through the main process to the browser page. This folder is an StarBot access rule;
   the CLI session key can decrypt the wider vault. Use a separate Bitwarden account if you need
   the password manager itself to enforce that separation.
   An owner or admin of a joined server can connect that server's Bitwarden or Vaultwarden in
@@ -1054,9 +1054,9 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   cache. The API key and the master password can open the whole vault, not only the shared folder.
   They are redacted from logs, exports and diagnostics.
 - The 1Password connection (Marketplace > 1Password) is kept in
-  `~/Library/Application Support/OpenBot/openbot-onepassword-connector-v1.json`, encrypted by the
+  `~/Library/Application Support/StarBot/openbot-onepassword-connector-v1.json`, encrypted by the
   operating system's secret storage. It holds the service account token and the account ID only.
-  OpenBot keeps the list of logins (titles and web addresses) in memory, never on disk. A password
+  StarBot keeps the list of logins (titles and web addresses) in memory, never on disk. A password
   or a one-time code is read from 1Password when the browser fills it, goes only to that page, and
   is never sent to an agent, a provider, a log or a team member. The token and each filled value
   are redacted from logs, exports and diagnostics. An owner or admin of a joined server can paste a
@@ -1064,15 +1064,15 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   encrypted connection, to the server, which keeps it in the same file on its own disk. The
   computer that sent it does not keep it, and no answer from the server carries it.
 - The Proton Pass connection (Marketplace › Apps › Proton Pass) runs Proton's `pass-cli`, which
-  OpenBot downloads from proton.me and checks against a pinned SHA-256. The computer or server talks
+  StarBot downloads from proton.me and checks against a pinned SHA-256. The computer or server talks
   to Proton directly. A sign-in on Proton's web page makes an agent access key that reads only the
-  vault `Shared with OpenBot`; you can also paste an agent access key that you made. OpenBot keeps
+  vault `Shared with StarBot`; you can also paste an agent access key that you made. StarBot keeps
   only that access key, in `openbot-protonpass-connector-v1.json` in its application data folder,
   encrypted by the operating system's secret storage, and the CLI's session in
   `provider-state/protonpass-host` in the same folder. An extra password goes to the CLI once,
-  through a pipe, and is not saved. OpenBot keeps the list of logins (titles, user names and web
+  through a pipe, and is not saved. StarBot keeps the list of logins (titles, user names and web
   addresses) in memory, never on disk. Each time it reads a login, the CLI sends Proton the reason
-  "OpenBot fills this login in its browser." A password or a one-time code goes only to the browser
+  "StarBot fills this login in its browser." A password or a one-time code goes only to the browser
   page that it fills, never to an agent, a provider, a log or a team member. The access key, the
   extra password and each filled value are redacted from logs, exports and diagnostics. An owner or
   admin of a joined server connects that server's Proton Pass from their own computer or phone: the
@@ -1081,11 +1081,11 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   the session; the agent access key stays on your Proton account until it ends after one year or
   you remove it in Proton Pass.
 - The Vault (Server settings › Vault) is kept in
-  `~/Library/Application Support/OpenBot/openbot-vault-v1.json`, encrypted by the operating system's
+  `~/Library/Application Support/StarBot/openbot-vault-v1.json`, encrypted by the operating system's
   secret storage. It holds the logins, payment cards (number, expiry, security code, name), contact
   info and API keys (variable name, key, notes) that the user saves. A login can also keep a two-step
-  (authenticator) setup key. OpenBot makes its sign-in codes on this computer; the key itself never
-  leaves it, and no window, phone or agent gets it back after it is saved. On Linux with no keyring, OpenBot
+  (authenticator) setup key. StarBot makes its sign-in codes on this computer; the key itself never
+  leaves it, and no window, phone or agent gets it back after it is saved. On Linux with no keyring, StarBot
   encrypts it with its own key file, as [Data stored by the central account service](#data-stored-by-the-central-account-service)
   tells. The file never leaves this computer. An owner or admin of a joined
   server can open that server's Vault in Server settings, from the desktop app or the web app: the
@@ -1103,12 +1103,12 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   turn on two-step verification; only a person's message can start that save. An agent can add and change contact info, change the username of a login (not
   its site) and the name, expiry and billing address of a card, and delete items, with no approval: the
   chat shows each change, and an item that an agent adds keeps the agent's name. Agents cannot see,
-  add, change or delete a Vault API key as an item. When an agent lists its API keys, OpenBot writes
+  add, change or delete a Vault API key as an item. When an agent lists its API keys, StarBot writes
   each Vault key that the agent can use, readable only by the user, to
-  `~/Library/Application Support/OpenBot/agent-api-keys/.vault/<agentId>/<NAME>`, outside every
+  `~/Library/Application Support/StarBot/agent-api-keys/.vault/<agentId>/<NAME>`, outside every
   workspace, and gives the agent the path. All agents run as the same system user, so every agent on
   the server can read these files in its commands, also the files of a key that is for other agents
-  or for "Only this agent". The choice of agents controls which agents OpenBot gives a key to; it does
+  or for "Only this agent". The choice of agents controls which agents StarBot gives a key to; it does
   not keep a key from the other agents. A changed
   key is written again, and a deleted key or a Vault that cannot be read removes its file, also at
   start. When an agent has a key folder from 0.69 or earlier, or from a save without a Vault, each key
@@ -1130,7 +1130,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   a CSV export that an owner or admin picks in the iPhone app (`vault-import-v1`). That text goes once
   over the encrypted connection; the answer carries only the counts, and the phone deletes its copy
   of the file after it reads it.
-- `~/Library/Application Support/OpenBot/logs/trace.ndjson` is a local trace of IPC calls,
+- `~/Library/Application Support/StarBot/logs/trace.ndjson` is a local trace of IPC calls,
   provider turns, main-process failures, and the steps of each connection to a joined server. Each
   line holds a time, the IPC channel name, the turn origin, the failure origin (`uncaughtException`
   or `unhandledRejection`) or the connection step (such as `remote-connect:ticket`), the duration,
@@ -1138,56 +1138,56 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   messages, URLs, paths, or identifiers, and it goes through log redaction before it is written. It
   is kept to two files of 2 MB each and is never sent. It also records the exit of a renderer or
   helper process with its reason word and process type, each main-process delay of 1 second or more
-  with the phase word described above, and the reason that OpenBot quit (such as
+  with the phase word described above, and the reason that StarBot quit (such as
   `main_window_closed` or `quit`).
-- `~/Library/Application Support/OpenBot/logs/main/main.log` holds the redacted lines of the main
-  process: startup failures, uncaught errors, the reason that OpenBot quit, and why an update check,
+- `~/Library/Application Support/StarBot/logs/main/main.log` holds the redacted lines of the main
+  process: startup failures, uncaught errors, the reason that StarBot quit, and why an update check,
   download or install failed. It is kept to two
   files of 1 MB each and is never sent.
-- OpenBot keeps crash dumps of its own processes in the `Crashpad` folder of its user data
-  (`%APPDATA%\OpenBot\Crashpad` on Windows). A dump holds part of the memory of the process that
+- StarBot keeps crash dumps of its own processes in the `Crashpad` folder of its user data
+  (`%APPDATA%\StarBot\Crashpad` on Windows). A dump holds part of the memory of the process that
   crashed, which can include conversation text, tokens or other secrets, and cannot be redacted.
   Dumps are never uploaded or added to a diagnostics export. Crashpad deletes old dumps by itself.
-  Do not attach a dump to a public issue. At the next start, OpenBot counts the dumps that a run
+  Do not attach a dump to a public issue. At the next start, StarBot counts the dumps that a run
   left after its last sign of life, by file name and time only, and the analytics event below sends
   that count, never a dump, a name or a path.
-- `~/Library/Application Support/OpenBot/openbot-run-marker-v1.json` holds the app version, the
+- `~/Library/Application Support/StarBot/openbot-run-marker-v1.json` holds the app version, the
   start time and the last sign of life of the current run, written once a minute, whether the
   computer slept, and whether a quit started or ended. At the next start, a run that did not quit
   cleanly sends one product analytics event: the phase, the previous app version, a coarse uptime
   class, the dump count, whether the computer slept or started again, and whether it is a server.
-- `~/Library/Application Support/OpenBot/logs/resources.ndjson` holds one line a minute: the memory
-  and CPU use of each OpenBot process group and provider id, the heap sizes and DOM node count of
+- `~/Library/Application Support/StarBot/logs/resources.ndjson` holds one line a minute: the memory
+  and CPU use of each StarBot process group and provider id, the heap sizes and DOM node count of
   the app windows, the main process delay and its phase, the number of
   agent database statements, active turns and browser tabs. It holds no process IDs, program names,
   command lines or paths. It is kept to two files of 1 MB each and is never sent.
-  `~/Library/Application Support/OpenBot/openbot-resource-summary-v1.json` holds the totals of
+  `~/Library/Application Support/StarBot/openbot-resource-summary-v1.json` holds the totals of
   today and of the previous day for the daily analytics summary and the diagnostics export.
-- `~/Library/Application Support/OpenBot/logs/stall-profiles.ndjson` holds one line for a minute in
-  which the main process froze for 2 seconds or more, twice in a row: the functions of OpenBot's code
-  that used the time, and their callers. A line holds function names, the file name of an OpenBot
+- `~/Library/Application Support/StarBot/logs/stall-profiles.ndjson` holds one line for a minute in
+  which the main process froze for 2 seconds or more, twice in a row: the functions of StarBot's code
+  that used the time, and their callers. A line holds function names, the file name of an StarBot
   file, package names and Node module names. It holds no directories, arguments, values, queries or
   text of the user. It is kept to two files of 256 KB each. The five heaviest functions of a line
   also go out as one product analytics event, at most once in 6 hours.
-- `~/Library/Application Support/OpenBot/openbot-push-notifications-v1.json` holds, for each member
+- `~/Library/Application Support/StarBot/openbot-push-notifications-v1.json` holds, for each member
   phone that gets notifications from this host, the session ID, the member ID, the Apple or Firebase
   push token, the secret that seals the notifications, the interface language, and the notification
   choices. Only the user can read the file, and it is not in the diagnostics export or the data
   export. See [iPhone notifications](#iphone-notifications) and
   [Android notifications](#android-notifications).
-- `~/Library/Application Support/OpenBot/openbot-agent-notification-levels-v1.json` holds the
+- `~/Library/Application Support/StarBot/openbot-agent-notification-levels-v1.json` holds the
   notification level that the owner and each member of this host chose for the whole server and for
   each agent ("All activity", "Only when it needs me" or "Nothing"), by member ID and agent ID. Each member reads and
   sets only their own levels, and the host applies them to the desktop notifications of this computer
   and to the notifications that it sends to that member's phones. A removed member's levels are
-  deleted. It is never sent to the OpenBot account service.
-- `~/Library/Application Support/OpenBot/openbot-sidebar-pins-v1.json` holds the agents and channels
+  deleted. It is never sent to the StarBot account service.
+- `~/Library/Application Support/StarBot/openbot-sidebar-pins-v1.json` holds the agents and channels
   that the owner and each member of this host pinned, in their order, by member ID, with agent and
   channel IDs only. Each member reads and sets only their own list, so their desktop app, web client
-  and phones show the same pins. A removed member's list is deleted. It is never sent to the OpenBot
+  and phones show the same pins. A removed member's list is deleted. It is never sent to the StarBot
   account service.
 
-Attachments copied into OpenBot remain in managed storage after their original file is moved or
+Attachments copied into StarBot remain in managed storage after their original file is moved or
 deleted. By default, all agents share one embedded browser profile, including cookies and website
 sessions. An agent can instead use a profile of its own, or a named profile that only the agents
 assigned to it share. Profile names stay in the local database of the computer that runs the agents.
@@ -1201,21 +1201,21 @@ Google account requests retain the Electron version token for sign-in compatibil
 
 ## Remote Team API
 
-When the owner publishes OpenBot, the app starts an authenticated Team API on a localhost port. The
-client and host use a separate OpenBot Signal service to establish WebRTC. Signal carries only
+When the owner publishes StarBot, the app starts an authenticated Team API on a localhost port. The
+client and host use a separate StarBot Signal service to establish WebRTC. Signal carries only
 short-lived authentication, SDP, and ICE messages. Team API data uses WebRTC DataChannels. Remote
 Desktop media and input use a separate WebRTC connection. A paste in the Remote Desktop viewer
 sends the member's clipboard text to the host, which puts it on the host's clipboard. The live browser view sends compressed
 images of the host's browser tab, and the watching member's pointer and key input, through the
-desktop DataChannel of the Team API connection. ICE uses a direct peer-to-peer path when possible. If a direct path is not possible, encrypted WebRTC traffic uses an OpenBot coturn relay.
+desktop DataChannel of the Team API connection. ICE uses a direct peer-to-peer path when possible. If a direct path is not possible, encrypted WebRTC traffic uses an StarBot coturn relay.
 When the owner selects **Private network** in Settings › Mobile Connect, the host gets no STUN or
-TURN server, so no WebRTC traffic goes through an OpenBot relay. Team API connections then use only
+TURN server, so no WebRTC traffic goes through an StarBot relay. Team API connections then use only
 addresses on a private network, such as the Wi-Fi or a Tailscale tailnet. The desktop media
 connection gets the same empty server list for each new stream, so it also uses only a direct path,
 which can be a public IPv6 address of the computer. Sign-in and Signal messages do not change.
 
 When an owner or an admin opens Server settings › General, the host sends a few `GET /health/ready`
-requests to each OpenBot Signal machine to measure its latency. The requests carry no account, server
+requests to each StarBot Signal machine to measure its latency. The requests carry no account, server
 or chat data. When the owner or admin chooses a Signal machine, the host keeps the choice in a local
 file and sends only its name (such as `au`) with each Signal ticket request to the account service.
 
@@ -1236,7 +1236,7 @@ Agents, conversations, queues, direct messages, attachments, browser data, promp
 Remote Desktop data remain on the host. The central account service does not copy them into D1 or
 R2. The Signal service does not proxy them or write them to logs. The host does not need a public
 inbound port. The things Signal passes to a host are the Slack events of an agent's Slack app, the
-Discord mentions of the Discord app, the updates of the OpenBot Telegram bot, the GitHub events of
+Discord mentions of the Discord app, the updates of the StarBot Telegram bot, the GitHub events of
 the repositories that its GitHub triggers watch, and the requests to webhook routines, in transit;
 see [Workflows](#workflows), [Slack connections](#slack-connections),
 [Discord connections](#discord-connections), [Telegram connections](#telegram-connections), and
@@ -1261,80 +1261,80 @@ Network traffic can also occur when:
 - a user or an agent visits a page in the embedded browser;
 - a user submits text that is not a web address in the browser address bar, which sends the query to Google Search;
 - a user clicks a web link in a chat of the desktop app or the web client, and it opens in the
-  system browser or a new browser tab. OpenBot adds `utm_source=openbot` to the address, so the
-  site can see that the visit came from OpenBot. It adds nothing else. It does not change a link that already has a `utm_source`,
+  system browser or a new browser tab. StarBot adds `utm_source=openbot` to the address, so the
+  site can see that the visit came from StarBot. It adds nothing else. It does not change a link that already has a `utm_source`,
   a link to a local or private address, or a link with sign-in or signature values such as `state`,
   `code`, `token` or `X-Amz-Signature`;
 - a locally installed Codex plugin connects to its service;
 - an MCP server the user enabled is reached at its own address, and, when that server asks for a
-  sign-in, OpenBot connects to the server's authorization service to register itself, to exchange
+  sign-in, StarBot connects to the server's authorization service to register itself, to exchange
   the grant the browser returns, and to renew the token. When the user signs out of the server or
-  removes it, OpenBot sends the tokens it deleted to that same service once, to revoke them.
-  Agents reach a server that OpenBot signed in to through a local server on `127.0.0.1`, which adds
+  removes it, StarBot sends the tokens it deleted to that same service once, to revoke them.
+  Agents reach a server that StarBot signed in to through a local server on `127.0.0.1`, which adds
   the token to each call, so the token does not go to the agent's process.
-  That local server tells the MCP server that the client is OpenBot: it sends
-  `User-Agent: OpenBot/<version>` and, when a session starts, the client name `openbot`, the
-  OpenBot version and the title `<agent name> (OpenBot)`, so the server can show which agent made a
+  That local server tells the MCP server that the client is StarBot: it sends
+  `User-Agent: StarBot/<version>` and, when a session starts, the client name `openbot`, the
+  StarBot version and the title `<agent name> (StarBot)`, so the server can show which agent made a
   change. Nothing else about the user's agents, conversations or files is sent in those requests. The
-  registration names OpenBot's logo at `openbot.run`; an authorization service that shows it on its
-  sign-in page can make the browser load it from `openbot.run`. Meta Ads takes no loopback address,
-  so its sign-in page sends the browser to `https://openbot.run/oauth/mcp-callback` with the grant
+  registration names StarBot's logo at `starbot.app`; an authorization service that shows it on its
+  sign-in page can make the browser load it from `starbot.app`. Meta Ads takes no loopback address,
+  so its sign-in page sends the browser to `https://starbot.app/oauth/mcp-callback` with the grant
   and the sign-in's random state. The account service keeps nothing and sends the browser on at once
-  to `127.0.0.1` on the same computer. The grant cannot be used without a code that only OpenBot on
+  to `127.0.0.1` on the same computer. The grant cannot be used without a code that only StarBot on
   that computer holds;
 - an owner or admin pastes a GitHub link into the Marketplace Skills search. The computer that runs
-  OpenBot, or the joined server, reads that public repository from `api.github.com` and
-  `raw.githubusercontent.com` without a GitHub account, with `User-Agent: OpenBot`. It reads the
+  StarBot, or the joined server, reads that public repository from `api.github.com` and
+  `raw.githubusercontent.com` without a GitHub account, with `User-Agent: StarBot`. It reads the
   commit, the file list and each `SKILL.md`, and when the user adds a skill, the files of that skill
   folder. The requests carry the repository, the folder and the commit, and no other user data. The
   skill is kept with the agent like a Marketplace skill;
-- an owner or admin connects Stripe on the CRM page. The computer that runs OpenBot, or the joined
+- an owner or admin connects Stripe on the CRM page. The computer that runs StarBot, or the joined
   server, sends the restricted key to `api.stripe.com` and reads the account name, customers,
   subscriptions, invoices and products of that Stripe account, when the key is connected,
-  every 5 minutes, and on Sync now. OpenBot only reads: it sends no CRM data to Stripe, and the
+  every 5 minutes, and on Sync now. StarBot only reads: it sends no CRM data to Stripe, and the
   requests carry no other user data. Disconnect stops the requests;
-- the user presses Install on the 1Password page. OpenBot downloads the 1Password CLI release that it
+- the user presses Install on the 1Password page. StarBot downloads the 1Password CLI release that it
   pins from `cache.agilebits.com`, checks its SHA-256, and keeps it in
-  `~/Library/Application Support/OpenBot/provider-state/1password-cli`. The request carries no user
+  `~/Library/Application Support/StarBot/provider-state/1password-cli`. The request carries no user
   data;
 - the user dictates or starts a voice conversation for the first time, or presses Download in **Settings →
-  Voice**. OpenBot downloads the speech model that it pins, Parakeet TDT, Parakeet Unified EN,
+  Voice**. StarBot downloads the speech model that it pins, Parakeet TDT, Parakeet Unified EN,
   Underdog Bark 3.0 Plus, Whisper turbo or Cohere Transcribe, from `huggingface.co`, checks its size and SHA-256, and keeps it in `runtimes` in
   the application data folder. The request carries no user data. Dictation audio from these models
   stays on the computer, and the chosen model and language are saved in `voice-preference.json` in
   the same folder;
 - the user selects ElevenLabs Scribe v2 Realtime in **Settings → Voice** and dictates or talks in
-  a voice conversation. While the microphone records, or when a voice conversation turn ends, OpenBot streams the
+  a voice conversation. While the microphone records, or when a voice conversation turn ends, StarBot streams the
   audio and the chosen language to `api.elevenlabs.io` with the user's own API key, and receives the
   text. Nothing else is sent: no conversation, file or agent instruction. ElevenLabs handles the
   audio and the text under its own policy and the user's ElevenLabs plan. The local models send
   nothing;
 - the user selects Groq Whisper large-v3 turbo or Groq Whisper large-v3 in **Settings → Voice** and
   dictates or talks in a voice conversation. When the recording stops, or when a voice conversation turn ends,
-  OpenBot sends the recorded audio, the chosen model and, when the user set one, the language to
+  StarBot sends the recorded audio, the chosen model and, when the user set one, the language to
   `api.groq.com` with the user's own API key, and receives the text. Nothing else is sent: no
   conversation, file or agent instruction. Groq handles the audio and the text under its own policy
   and the user's Groq plan;
-- the user sets up a voice server in **Settings → Voice**. OpenBot sends requests only to the address
+- the user sets up a voice server in **Settings → Voice**. StarBot sends requests only to the address
   that the user enters, with the user's API key when there is one. To connect, it lists the server's
-  models and voices. When the server does dictation, OpenBot sends the recorded audio, the chosen
+  models and voices. When the server does dictation, StarBot sends the recorded audio, the chosen
   model and, when the user set one, the language to `/v1/audio/transcriptions` and receives the text. When the server reads
-  replies aloud, OpenBot sends the text of each reply that it reads, the chosen model and the voice to
+  replies aloud, StarBot sends the text of each reply that it reads, the chosen model and the voice to
   `/v1/audio/speech` and receives the audio. Nothing else is sent: no conversation, file or agent
   instruction. The server handles the audio and the text under the policy of the person who runs it.
   The address and the choices are saved in `voice-server.json` in the application data folder;
 - the user sets up a voice server in **Settings → Voice** of the phone app. The phone sends the same
-  requests as above directly to that address, not through a server of OpenBot. For dictation it keeps
+  requests as above directly to that address, not through a server of StarBot. For dictation it keeps
   the recording in memory, writes it as a WAV file to the app's cache folder only while the request
   runs, and deletes it after. The address and the choices are saved in the phone's keychain, and the
   API key in a separate keychain entry. **Remove voice server** deletes both;
 - the user turns on Read replies aloud, starts a voice conversation for the first time, or presses Download
-  in the Spoken replies section of **Settings → Voice**. OpenBot downloads the Supertonic 3 voice
+  in the Spoken replies section of **Settings → Voice**. StarBot downloads the Supertonic 3 voice
   model that it pins from `huggingface.co`, checks its size and SHA-256, and keeps it in `runtimes`
   in the application data folder. The request carries no user data. When Supertonic reads a reply
   aloud, the text and its audio stay on the computer. The setting and the chosen voice are saved in
   `speech-preference.json` in the same folder. When the user selects an ElevenLabs model (Flash
-  v2.5, Multilingual v2 or Eleven v3) or xAI Text to Speech as the spoken replies model, OpenBot
+  v2.5, Multilingual v2 or Eleven v3) or xAI Text to Speech as the spoken replies model, StarBot
   sends the text of each reply that it reads, the chosen model, the voice and the speech language to
   `api.elevenlabs.io` or `api.x.ai` with the user's own API key, and receives the audio. Listen
   sends a short sample text. Nothing else is sent: no conversation, file or agent instruction. The
@@ -1349,118 +1349,118 @@ Network traffic can also occur when:
   **Server Settings**, where the user can delete them, and are part of a data export. A recording is
   deleted with the agent's or channel's data;
 - the user turns on Codex live voice in **Settings → Voice** and starts a voice conversation with an agent on
-  this computer, with any provider. OpenBot starts a separate Codex App Server process for the
+  this computer, with any provider. StarBot starts a separate Codex App Server process for the
   session. The app window sends a WebRTC offer to it, and it opens a realtime voice session with
   OpenAI through the user's own Codex sign-in: the agent's own Codex account for an agent on Codex,
   else the default Codex sign-in. The microphone audio then goes from this computer to OpenAI, and the
   spoken reply comes back, until the pane closes. OpenAI also gets the short relay instructions of
-  OpenBot, with the agent's name, but not the agent's chat. Each request that the voice gives to the agent goes to the
+  StarBot, with the agent's name, but not the agent's chat. Each request that the voice gives to the agent goes to the
   agent's own provider as a text message, as for a typed message, and shows in the chat. The agent's
-  text answer then goes to OpenAI to be spoken. OpenBot never reads the Codex credentials. The voice
+  text answer then goes to OpenAI to be spoken. StarBot never reads the Codex credentials. The voice
   transcript is not added to the chat; no recording is kept. OpenAI handles the audio and the text
   under its own policy and the user's ChatGPT plan. The setting is saved in `speech-preference.json`
   in the application data folder. It is off by default;
 - a member of a server that this computer hosts starts live voice in an agent's chat from their
   desktop or phone. The member's device sends a WebRTC offer to this computer through the Team API,
-  and OpenBot answers it as above, with the Codex sign-in of this computer: the call uses the ChatGPT
+  and StarBot answers it as above, with the Codex sign-in of this computer: the call uses the ChatGPT
   account of the host owner. The microphone audio and the spoken reply then go directly between the
   member's device and OpenAI, not through this computer. Each request that the voice gives to the
   agent goes into the chat as the member's message, and the agent's text answer goes to OpenAI to be
   spoken. The live transcript goes only to that member's devices and is not saved. The session stops
   when the member ends it, closes the app or loses access;
 - an agent uses the `openbot.web_search` tool. Only agents on a provider with no web search tool of
-  its own get it. OpenBot starts a separate Codex App Server process, which sends the agent's question
+  its own get it. StarBot starts a separate Codex App Server process, which sends the agent's question
   to OpenAI through the default Codex sign-in of this computer. OpenAI searches the web and returns a
-  short answer with source URLs to the agent. Only the question and short OpenBot instructions go to
+  short answer with source URLs to the agent. Only the question and short StarBot instructions go to
   OpenAI, not the agent's chat, files or instructions, and not the agent's own provider account.
   OpenAI handles the question under its own policy and the user's ChatGPT plan;
-- an agent uses the `openbot.read_video` tool on a video link. The first time, OpenBot downloads the
+- an agent uses the `openbot.read_video` tool on a video link. The first time, StarBot downloads the
   yt-dlp release that it pins from `github.com`, checks its SHA-256, and keeps it in `runtimes` in the
   application data folder. yt-dlp then requests the video page and the video file from the site of the
   link, as a browser does, with no cookies or sign-in. The file goes to a temporary folder on this
-  computer and is deleted after the read. A hidden OpenBot window takes still frames and the sound on
+  computer and is deleted after the read. A hidden StarBot window takes still frames and the sound on
   this computer. Only a speech recognition model that the user set up in **Settings → Voice**
   transcribes the sound: a local model keeps it on this computer, and Groq or a voice server gets the
   sound in parts of 60 seconds as described for dictation. The agent gets the title, the author, the
   counts, the description, the transcript and the frames;
-- the user connects Bitwarden. OpenBot runs the installed `bw` CLI to sync with the server already
+- the user connects Bitwarden. StarBot runs the installed `bw` CLI to sync with the server already
   configured in that CLI, including a self-hosted server. It syncs before listing or filling logins.
-  These calls send no OpenBot conversations, files, or agent instructions to Bitwarden. For a
+  These calls send no StarBot conversations, files, or agent instructions to Bitwarden. For a
   joined server's connection, the server's own `bw` signs in to the server address that the admin
   entered with the API key, and unlocks with the master password on that server. When that server has
-  no `bw`, it downloads the Bitwarden CLI release that OpenBot pins from `github.com`, checks its
+  no `bw`, it downloads the Bitwarden CLI release that StarBot pins from `github.com`, checks its
   SHA-256, and keeps it in `provider-state/bitwarden-cli` in its application data folder. That
   download carries no user data;
 - the user connects 1Password. Connect runs the user's own 1Password CLI (`op`) on this computer to
-  create the vault "Shared with OpenBot" and a service account that can read only it. OpenBot then
+  create the vault "Shared with StarBot" and a service account that can read only it. StarBot then
   reads that vault from 1Password's servers with the token: the vault names, the login titles and
   web addresses, and, when an agent signs in to a site, that login's username and password or code.
   Nothing about the user's agents, conversations or files is sent to 1Password;
-- the user connects GitHub in Server settings. OpenBot asks `github.com` for a sign-in code and a
-  token, renews the token, and reads the account name and the repositories of the OpenBot GitHub App
+- the user connects GitHub in Server settings. StarBot asks `github.com` for a sign-in code and a
+  token, renews the token, and reads the account name and the repositories of the StarBot GitHub App
   from `api.github.com`. The GitHub page in Server settings loads the account picture from the
   address that GitHub gives, on GitHub's image host. Agents then reach the
   GitHub MCP server at `api.githubcopilot.com` and GitHub itself through `gh` and `git`, with that
-  token. So that GitHub shows the OpenBot app as the author of an agent's work, OpenBot sends that
-  token to the central account service (`api.openbot.run`) about once an hour, and when you open the
+  token. So that GitHub shows the StarBot app as the author of an agent's work, StarBot sends that
+  token to the central account service (`api.starbot.app`) about once an hour, and when you open the
   repository list. The service uses it
   only to ask GitHub which repositories you can push to, and gets back short-lived installation
   tokens for those repositories. It does not store or log either token, and it gets no chats, files
   or commands. Agents reach the GitHub MCP server through a local server on `127.0.0.1`, which adds
   the right token to each call;
-- the user approves a bug report or a feature idea that an agent wrote. Before the card, OpenBot
-  sends the title to the central account service (`api.openbot.run`) with the account session, and the
-  service gives the open issues of the OpenBot GitHub App with similar titles, from GitHub search. The service does not store or log the title. The
-  agent can then add the report to one of them as a comment. OpenBot shows the title and
+- the user approves a bug report or a feature idea that an agent wrote. Before the card, StarBot
+  sends the title to the central account service (`api.starbot.app`) with the account session, and the
+  service gives the open issues of the StarBot GitHub App with similar titles, from GitHub search. The service does not store or log the title. The
+  agent can then add the report to one of them as a comment. StarBot shows the title and
   the agent's text first (what happened and the steps, or what the user wants and why). It then sends the text to the central account
   service with the account session: that text, the agent's choice of the form's
   area and severity, or of the request type, when it gives them, where the user saw the problem when
-  the agent gives it, the OpenBot version, the operating system and processor architecture, whether
+  the agent gives it, the StarBot version, the operating system and processor architecture, whether
   the agent runs in the desktop app, on a server or on a hosted server, and the agent's provider, CLI
   version, model and reasoning effort. It also sends up to 5 error lines of the chat from the last
-  hour: the errors of failed tools other than shell commands, and of OpenBot tools. The card shows the
-  errors. OpenBot removes known secrets from the text and the errors before it shows them. A bug
+  hour: the errors of failed tools other than shell commands, and of StarBot tools. The card shows the
+  errors. StarBot removes known secrets from the text and the errors before it shows them. A bug
   report about the phone app also has the phone's system, app version, device, network with the name
   of its VPN, and support log lines,
   which the phone adds when the user sends the report there (see
   [bug reports about the phone app](#bug-reports-about-the-phone-app)); the service refuses such a
   report without them. The service opens it as a public
   issue, or a comment on the issue that the agent chose, in the
-  `nightly-labs/openbot` repository on GitHub, as the OpenBot GitHub App, so the issue does not show
+  `hxy940219220-collab/StarBot-Desktop` repository on GitHub, as the StarBot GitHub App, so the issue does not show
   the account. The service does not store or log the text. It adds a hidden owner mark to the end of
   the text: a random value and a keyed hash of that value and the account ID. The mark does not name
   the account, and the service stores nothing for it. When the user removes the report (Fix or remove on the
-  thank-you card, or the agent's `withdraw_feedback` after the user approves), OpenBot sends the issue
+  thank-you card, or the agent's `withdraw_feedback` after the user approves), StarBot sends the issue
   number with the account session. The service checks the mark, then deletes a comment, or moves an
-  issue with its edit history to a private repository that only the OpenBot team can read. For the limit of a few issues each minute and
+  issue with its edit history to a private repository that only the StarBot team can read. For the limit of a few issues each minute and
   10 each day, it counts the issues of each account; D1 keeps the account ID, the UTC day and the
   count, and deletes the earlier days of an account when the account sends again, or when the account
-  is deleted. When the user is not signed in or the send fails, OpenBot gives a link to the GitHub
+  is deleted. When the user is not signed in or the send fails, StarBot gives a link to the GitHub
   form with the same text instead, and nothing goes to the account service. For a report about the
   phone app, the link is to the form for the phone app, with the phone's system, app version and
   device when the phone sent them, and never with log lines;
-- the user connects Link in Server settings › Vault. OpenBot asks `login.link.com` for a sign-in
-  code and a token, with the label "OpenBot on" and this computer's name, which Link shows in its list
-  of connected apps. OpenBot renews and revokes the token there, and reads the account email from
-  `api.link.com`. When an agent pays with Link, OpenBot reads the payment methods of the account
+- the user connects Link in Server settings › Vault. StarBot asks `login.link.com` for a sign-in
+  code and a token, with the label "StarBot on" and this computer's name, which Link shows in its list
+  of connected apps. StarBot renews and revokes the token there, and reads the account email from
+  `api.link.com`. When an agent pays with Link, StarBot reads the payment methods of the account
   from `api.link.com` and sends a payment request: the method ID, the amount and currency, the
   merchant name and address, and the agent's description of the purchase. Link asks the user to
-  approve it, and OpenBot then reads the one-time card from `api.link.com`. Nothing else about the
+  approve it, and StarBot then reads the one-time card from `api.link.com`. Nothing else about the
   user's agents, conversations or files is sent to Link;
 - an installed build checks GitHub Releases for updates;
-- OpenBot checks for new provider CLI releases when it starts, once an hour, and when you select
+- StarBot checks for new provider CLI releases when it starts, once an hour, and when you select
   `Check for updates`. It asks `api.github.com` for Codex, Kimi, GitHub Copilot, Mistral and Gemini, `registry.npmjs.org` for Claude,
   OpenCode and Cline, `x.ai/cli` for Grok, `raw.githubusercontent.com/agentclientprotocol/registry` and
   `downloads.cursor.com` (for the download size) for Cursor, `static.devin.ai` (the manifest, and the
   download size) for Devin, and it reads a list of blocked
-  versions from `raw.githubusercontent.com/nightly-labs/openbot`. These requests contain no account, agent,
+  versions from `raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop`. These requests contain no account, agent,
   conversation or file data;
 - an agent shows a visual reply, an agent checks its page with `html_preview`, or a user opens an
   HTML attachment, shared file or workspace file in the file preview. The page is HTML that the
   agent or the file wrote. It runs its scripts in a sandbox and can load scripts, styles, fonts
   and images from any address, such as a
   CDN. The server that holds those files gets the request and the network address of the computer,
-  but no OpenBot cookies. The page cannot read the app, the conversation or other
+  but no StarBot cookies. The page cannot read the app, the conversation or other
   files. `html_preview` draws the page in a hidden window that has its own
   session in memory. The web client gets the page through the host connection and runs it in a
   sandboxed `srcdoc` frame with an opaque origin, so the page cannot read the web client's storage
@@ -1481,7 +1481,7 @@ signing secret. The host stores the trigger and the encrypted secret in its loca
 The signing secret is encrypted with the operating system's secret storage. It is shown one time.
 Management screens do not return saved secrets.
 
-Requests to a webhook routine pass through OpenBot's Signal service to the connected host. Signal
+Requests to a webhook routine pass through StarBot's Signal service to the connected host. Signal
 uses the sender's IP address in memory for rate limits. The account service keeps only the route
 metadata above. Neither cloud service stores or logs request bodies. The host verifies the request
 signature before it accepts the event. If the host is offline, the sender receives an error and
@@ -1520,8 +1520,8 @@ graph, or ID.
   signing secret, and 7-day receipts without the request body. The host refuses a body of more than
   64,000 characters. The body, marked as data, is the trigger's output and goes to the next steps.
   Remove the trigger, or delete the workflow, to stop its URL.
-- **GitHub triggers** receive the events of the OpenBot GitHub App: issues, comments, pull requests,
-  reviews and checks. GitHub sends each event to OpenBot's Signal service (`signal.openbot.run`).
+- **GitHub triggers** receive the events of the StarBot GitHub App: issues, comments, pull requests,
+  reviews and checks. GitHub sends each event to StarBot's Signal service (`signal.starbot.app`).
   Signal checks GitHub's signature, reads only the installation and repository IDs, and passes the
   event to every computer that watches the repository, in transit only: it does not store or log it.
   When the Signal connection opens, the computer sends the account service its GitHub sign-in and the
@@ -1530,23 +1530,23 @@ graph, or ID.
   the list. The computer keeps the newest 50 deliveries of each trigger, without the event body: the
   delivery ID, event name, item number, time, and whether it started a run. An event that arrives
   while the computer is offline is lost; the history shows the gap.
-- **Discord triggers** start a run from a mention of the OpenBot Discord app. The trigger's output, and
+- **Discord triggers** start a run from a mention of the StarBot Discord app. The trigger's output, and
   the run that keeps it, has the message text, the author, and the name, type, size and Discord
   address of each file of the message and of the message that it replies to. These addresses expire
   after about a day.
 - **Telegram triggers** start a run from a new conversation in a linked Telegram group: a message that
-  mentions the OpenBot bot or replies to it. The trigger's output, and the run that keeps it, has the
+  mentions the StarBot bot or replies to it. The trigger's output, and the run that keeps it, has the
   message text, the author's name and Telegram ID, the chat name and ID, and the message ID. It has no
   files. A message that starts a run does not go to the Telegram Orchestrator.
 - **Telegram outputs** reply to that message, post in a linked chat, or add one reaction from a fixed
   list, through Signal as other Telegram posts do. The text is redacted.
-- **Slack triggers** start a run from a mention of the OpenBot Slack app in a channel. The trigger's
+- **Slack triggers** start a run from a mention of the StarBot Slack app in a channel. The trigger's
   output, and the run that keeps it, has the message text, the author, the workspace and channel
   names, and the name, type and size of each file of the message. It does not keep the Slack address
   of a file, and a GitHub output does not copy Slack files.
 - **Slack outputs** reply in the mention's thread, post in a chosen channel, or add a reaction,
   through the workspace's Slack connection. The text goes to Slack.
-- **GitHub outputs** make the change through the OpenBot GitHub App: a comment, a label, a person, a
+- **GitHub outputs** make the change through the StarBot GitHub App: a comment, a label, a person, a
   review, a close or a new issue. The text goes to GitHub. When a Discord mention started the run, a
   new issue or a comment also keeps those files: the computer downloads each file of up to 25 MB, and
   up to 50 MB for each change, from Discord and commits it to the `openbot-attachments` branch of the target repository,
@@ -1565,8 +1565,8 @@ uploads to an asset step goes to that computer and stays in its Library.
 A step with a Sunra model uses the Sunra sign-in of that computer's Apps. The computer sends the
 prompt, the model, the size settings and the input pictures to Sunra's MCP server (`mcp.sunra.ai`):
 it puts each input picture in Sunra's upload storage first, then asks Sunra to make the file, and
-downloads the result only from Sunra's file hosts. Sunra keeps the file in a project named "OpenBot"
-of the signed-in Sunra account, and the credits of that account pay for it. OpenBot does not change
+downloads the result only from Sunra's file hosts. Sunra keeps the file in a project named "StarBot"
+of the signed-in Sunra account, and the credits of that account pay for it. StarBot does not change
 which Sunra account pays. While the Canvas page is open, the computer also asks Sunra for the credits
 of that account, with Sunra's `get_balance` tool, which spends no credits. It shows the number only
 in the page rail, and each member of a joined server who can use workflows can see it. Sunra's own
@@ -1577,22 +1577,22 @@ The computer sends the prompt, the model, the size settings and the input pictur
 MCP server (`mcp.higgsfield.ai`): it puts each input picture in Higgsfield's upload storage first,
 then asks Higgsfield to make the file, and downloads the result only from Higgsfield's file hosts.
 Higgsfield keeps the file in the history of the signed-in Higgsfield account, and the credits of that
-account pay for it. OpenBot never spends an unlimited-generation allowance of that account. While the
+account pay for it. StarBot never spends an unlimited-generation allowance of that account. While the
 Canvas page is open, the computer also asks Higgsfield for the credits of that account, with
 Higgsfield's `balance` tool, which spends no credits. It shows the number only in the page rail, and
 each member of a joined server who can use workflows can see it. Higgsfield's own privacy policy
 covers what Higgsfield keeps.
 
-A step with an OpenBot model uses OpenBot credits. When the computer is signed in to an OpenBot
+A step with an StarBot model uses StarBot credits. When the computer is signed in to an StarBot
 account, the credits of that account pay; a server pays with its own credits. The computer sends the
 prompt, the model, the size settings and the input pictures to the account service
-(`openbot.run`). The account service holds the credits, sends the same values to a media generation
+(`starbot.app`). The account service holds the credits, sends the same values to a media generation
 processor, and returns the result file to the computer, which keeps it. A processor can keep the
 input pictures for up to three days so that it can read them. The account service passes
 the prompt, the pictures and the file through in transit only: it does not store or log them. It
 keeps only the hold record above. A failed or refused generation spends no credits. A stop does not
 cancel a generation that was sent: when the run stops or the app closes, the job continues, and the
-computer gets the file when the job ends or at its next start. While the Canvas page is open, the computer also asks the account service for the OpenBot models, their
+computer gets the file when the job ends or at its next start. While the Canvas page is open, the computer also asks the account service for the StarBot models, their
 prices in credits and the credit balance. Each member of a joined server who can use workflows can
 see them.
 
@@ -1607,16 +1607,16 @@ workflow deletes its versions, runs, steps, and receipts.
 
 ## Slack connections
 
-A workspace member installs the OpenBot Slack app in their workspace from OpenBot on their computer.
+A workspace member installs the StarBot Slack app in their workspace from StarBot on their computer.
 The account service exchanges that install with Slack, because the app's secret lives there. It
-records which OpenBot computer answers the workspace: the Slack workspace ID, the computer, the
-OpenBot account that connected it, and the Slack app and bot user IDs. It keeps no Slack token and no
+records which StarBot computer answers the workspace: the Slack workspace ID, the computer, the
+StarBot account that connected it, and the Slack app and bot user IDs. It keeps no Slack token and no
 message. It gives the bot token to the computer encrypted to a key that only that computer has.
 
-Slack sends the workspace's events, which contain the Slack messages in the channels OpenBot is in
-and its direct messages, to OpenBot's Signal service (`signal.openbot.run`). Signal checks Slack's
+Slack sends the workspace's events, which contain the Slack messages in the channels StarBot is in
+and its direct messages, to StarBot's Signal service (`signal.starbot.app`). Signal checks Slack's
 signature and reads only the app ID and the workspace ID, to find the computer, and the type,
-channel type, thread and bot ID of the event, to know whether it addresses OpenBot. It passes each
+channel type, thread and bot ID of the event, to know whether it addresses StarBot. It passes each
 request to that computer over its Signal connection, in transit only: it does not store or log the
 message. The answers go from the computer to the Slack Web API directly.
 
@@ -1629,12 +1629,12 @@ message. The answers go from the computer to the Slack Web API directly.
   (workspace memories); every conversation of that workspace shows them to the agent that answers.
   Disconnect revokes and removes the token and keeps the conversations and the workspace memories;
   deleting an agent removes its conversations and keeps the workspace memories.
-- **Read from Slack.** The messages that mention OpenBot, the replies in a thread an agent answers,
+- **Read from Slack.** The messages that mention StarBot, the replies in a thread an agent answers,
   its direct messages, the files in them, the display names of their authors and of the people they
   mention, the names of the channels, earlier messages of a thread as context, and, when an agent
-  asks for them, the newest messages of the channel or thread it answers in. OpenBot joins every public channel of the
-  workspace, and Slack sends every message of each channel that OpenBot is in; the computer keeps
-  only the messages that address OpenBot or continue a conversation.
+  asks for them, the newest messages of the channel or thread it answers in. StarBot joins every public channel of the
+  workspace, and Slack sends every message of each channel that StarBot is in; the computer keeps
+  only the messages that address StarBot or continue a conversation.
 - **Given to the Slack Orchestrator.** Every new Slack request goes first to the orchestrator agent,
   which runs on its provider like any other agent and passes the work to a teammate with the facts
   it needs.
@@ -1643,7 +1643,7 @@ message. The answers go from the computer to the Slack Web API directly.
   thinking), reactions, and approval requests with the command, folder and reason the provider gave,
   redacted. A failed request posts a fixed sentence, never the provider's
   error. Any agent, also in the user's own chat or a routine run, can post text, redacted, and
-  files from its workspace or the OpenBot shared directory to a channel that OpenBot is a member of,
+  files from its workspace or the StarBot shared directory to a channel that StarBot is a member of,
   and list those channels' names. A new post can ping a user that it mentions, never a channel,
   `@here`, `@everyone` or a user group.
   In answers, status posts and posts, redacted means that text in a known key format, such as an
@@ -1652,28 +1652,28 @@ message. The answers go from the computer to the Slack Web API directly.
   Approval requests have all known secrets and email addresses removed.
 
 Anyone who can post in the Slack workspace, guests and Slack Connect members included, can give the
-agents work. The agents run on the host with the access the user gave them. A hosted server that sleeps starts for a message that addresses OpenBot. Until it connects,
+agents work. The agents run on the host with the access the user gave them. A hosted server that sleeps starts for a message that addresses StarBot. Until it connects,
 Signal keeps that message in memory for at most 10 minutes, encrypted to a key that only that server
 has, so Signal cannot read it; a restart of Signal deletes it.
 
 ## Discord connections
 
-A member of a Discord server with the **Manage Server** permission installs the OpenBot Discord app in
-that server from OpenBot on their computer. The account service exchanges that install with Discord,
+A member of a Discord server with the **Manage Server** permission installs the StarBot Discord app in
+that server from StarBot on their computer. The account service exchanges that install with Discord,
 because the app's secret lives there, and revokes the Discord sign-in token that it gets at once. It
-records which OpenBot computer answers the Discord server: the Discord server ID, the computer and the
-OpenBot account that connected it. It keeps no Discord token and no message.
+records which StarBot computer answers the Discord server: the Discord server ID, the computer and the
+StarBot account that connected it. It keeps no Discord token and no message.
 
-Discord has one bot token for every server, so only OpenBot's Signal service (`signal.openbot.run`)
+Discord has one bot token for every server, so only StarBot's Signal service (`signal.starbot.app`)
 holds it. Unlike Slack, both directions go through Signal:
 
 - **To the computer.** Signal keeps the bot's connection to Discord. Discord sends it the messages of
-  the channels OpenBot can view. When OpenBot's Signal has the Message Content intent, they include
-  the text of every message; otherwise only the messages that mention OpenBot have text. Signal
-  passes on only the messages that mention OpenBot or OpenBot's own role in the server, and the
-  presses of OpenBot's buttons: the message
+  the channels StarBot can view. When StarBot's Signal has the Message Content intent, they include
+  the text of every message; otherwise only the messages that mention StarBot have text. Signal
+  passes on only the messages that mention StarBot or StarBot's own role in the server, and the
+  presses of StarBot's buttons: the message
   text, the author's ID, name and role IDs in the server, the channel, the addresses of its files, and
-  the message it replies to when OpenBot did not write it (with its author, time, and the text, embed
+  the message it replies to when StarBot did not write it (with its author, time, and the text, embed
   text and file addresses that Discord gave). The computer downloads the files from Discord directly.
 - **From the computer.** The computer sends its posts, edits, reactions, files and name lookups to
   Signal, which makes each call to Discord for it, only in the Discord servers linked to that
@@ -1682,15 +1682,15 @@ holds it. Unlike Slack, both directions go through Signal:
   and, when an agent asks for them, for the newest messages of the channel it answers in. These
   earlier messages have their embed text and the addresses of their files, and the computer downloads those files from
   Discord directly. With the Message Content intent, these earlier messages have their text and files
-  also when they do not mention OpenBot. It also asks for the names of the people that a message
-  mentions, and, when the user chooses who can use OpenBot, for the names of the server's roles.
+  also when they do not mention StarBot. It also asks for the names of the people that a message
+  mentions, and, when the user chooses who can use StarBot, for the names of the server's roles.
 
 Signal does not store or log a message, a file or a token; it keeps the server and channel names and
-IDs in memory to check each call. It answers a direct message to OpenBot with one fixed sentence and
+IDs in memory to check each call. It answers a direct message to StarBot with one fixed sentence and
 passes nothing on.
 
 - **Stored on the host.** The Discord server's name and ID, which agent is its Discord Orchestrator,
-  the IDs and names of the roles allowed to use OpenBot in it, and one row per conversation that an agent answers, kept as a conversation of that agent with the
+  the IDs and names of the roles allowed to use StarBot in it, and one row per conversation that an agent answers, kept as a conversation of that agent with the
   Discord display name of each author. Files people send are kept with the agent's attachments.
   Workspace memories are kept as for Slack. Disconnect removes the link and keeps the conversations,
   the workspace memories and the allowed roles; deleting an agent removes its conversations. The
@@ -1699,30 +1699,30 @@ passes nothing on.
 - **Sent to Discord.** As for Slack: the answers, attached files of at most 10 MB, status posts,
   reactions, and redacted approval requests. A post can ping a user that it mentions, never a role or
   `@everyone`. As for Slack, any agent can
-  post redacted text and files from its workspace or the OpenBot shared directory to a channel or
+  post redacted text and files from its workspace or the StarBot shared directory to a channel or
   thread of the server, and list their names through Signal.
 
-Anyone who can post in a channel that OpenBot can view can give the agents work, unless the user
-chose roles: then only members with one of those roles can, and OpenBot ignores the others. The agents run on the
-host with the access the user gave them. A hosted server that sleeps starts for a message that addresses OpenBot. Until it connects,
+Anyone who can post in a channel that StarBot can view can give the agents work, unless the user
+chose roles: then only members with one of those roles can, and StarBot ignores the others. The agents run on the
+host with the access the user gave them. A hosted server that sleeps starts for a message that addresses StarBot. Until it connects,
 Signal keeps that message in memory for at most 10 minutes, encrypted to a key that only that server
 has, so Signal cannot read it; a restart of Signal deletes it.
 
 ## Telegram connections
 
-One OpenBot Telegram bot serves every user. Its token is only in OpenBot's Signal service
-(`signal.openbot.run`); no computer has it. The user connects a chat from OpenBot on their computer:
+One StarBot Telegram bot serves every user. Its token is only in StarBot's Signal service
+(`signal.starbot.app`); no computer has it. The user connects a chat from StarBot on their computer:
 the account service gives a one-use code, and the browser opens a `t.me` link with it. When the user
 adds the bot to a group, or starts a direct chat with it, Telegram sends the code in that chat.
 Signal then asks the account service to link the chat to the computer. The account service records
-the Telegram chat ID, the bot ID, the computer, the OpenBot account and the time of the link, and a
+the Telegram chat ID, the bot ID, the computer, the StarBot account and the time of the link, and a
 hash of each code until it is used or expires. It keeps no chat name and no message.
 
 Telegram sends each update of a linked chat, which contains every message of a group or a direct chat
 and button presses, to Signal. Signal checks Telegram's secret
 header and reads only the chat ID, a link code and the ID of a button press, to find the computer, and
 the chat type, the entity types and whether a message replies or is in a thread, to know whether it
-can address OpenBot. It
+can address StarBot. It
 passes each update to that computer over its Signal connection, in transit only: it does not store or
 log it. The computer's answers, status posts, reactions and files go to Telegram through Signal,
 because only Signal has the token. Signal accepts only a fixed list of Bot API calls, only for the
@@ -1734,14 +1734,14 @@ short-lived signed addresses, in transit only.
   database holds the chat name and IDs, which agent is the Telegram Orchestrator, and one row per
   conversation that an agent answers. The messages of that conversation are kept as a conversation
   of that agent, with the Telegram name of each author, and files people send are kept with the
-  agent's attachments. The names of authors are also kept in memory for context, until OpenBot
-  quits. The messages of the chat that OpenBot sees, also those that do not address it, are kept in
+  agent's attachments. The names of authors are also kept in memory for context, until StarBot
+  quits. The messages of the chat that StarBot sees, also those that do not address it, are kept in
   the database for 90 days after they arrive, with the names of their files, so that an agent can
   read them after a restart. Workspace memories are kept for each chat, as for Slack.
   Disconnect makes the bot leave the chat, unlinks it, deletes the saved messages and keeps the
   conversations and the workspace memories; deleting an agent removes its conversations.
 - **Read from Telegram.** Every message of a linked chat, the files in them, the names of their
-  authors and the name of the chat. The OpenBot bot has privacy mode off, because with it on,
+  authors and the name of the chat. The StarBot bot has privacy mode off, because with it on,
   Telegram does not send a plain mention to a bot that is not a group admin. A request starts only
   from a message that mentions the bot, a reply to it, another message of a reply chain that an
   agent answers, or a message of a direct chat. A new conversation in a group can start a workflow
@@ -1753,32 +1753,32 @@ short-lived signed addresses, in transit only.
 - **Sent to Telegram.** The agents' answers and the files they attach, short status posts ("Working on
   it…", or the redacted progress line, as for Slack), reactions, and approval requests with the command, folder and reason the provider gave,
   redacted. A failed request posts a fixed sentence, never the provider's error. As for Slack, any
-  agent can post redacted text and files from its workspace or the OpenBot shared directory to a
+  agent can post redacted text and files from its workspace or the StarBot shared directory to a
   linked chat. An answer or a post can ping a person that it mentions.
 
 Anyone who can post in a linked chat can give the agents work. The agents run on the host with the
-access the user gave them. A hosted server that sleeps starts for a message that addresses OpenBot. Until it connects,
+access the user gave them. A hosted server that sleeps starts for a message that addresses StarBot. Until it connects,
 Signal keeps that message in memory for at most 10 minutes, encrypted to a key that only that server
 has, so Signal cannot read it; a restart of Signal deletes it.
 
-Plugin pages on openbot.run show each listing's own icon. The page asks `openbot.run` for that
+Plugin pages on starbot.app show each listing's own icon. The page asks `starbot.app` for that
 picture, and the website fetches it there from the address the plugin catalog holds, so reading a
 plugin page does not connect your browser to the plugin developer's servers.
 
-Account usage shown in OpenBot is requested through the local Codex App Server. OpenBot does not send
+Account usage shown in StarBot is requested through the local Codex App Server. StarBot does not send
 that usage to its maintainer.
 
 ## WhatsApp connections
 
 A WhatsApp number links as a device of the computer that runs the agents, as WhatsApp Web does. The
-computer connects directly to WhatsApp's servers. No OpenBot service takes part: the account service
-and Signal do not know the number, the link or any message, and Meta gets no OpenBot business account.
-To link, the user scans a QR code that OpenBot shows, or types a pairing code on the phone. Before each
-connection, OpenBot asks `web.whatsapp.com` for the current WhatsApp Web version, as a browser does.
-OpenBot uses an unofficial client (a modified copy of the open-source Baileys library), so WhatsApp can
+computer connects directly to WhatsApp's servers. No StarBot service takes part: the account service
+and Signal do not know the number, the link or any message, and Meta gets no StarBot business account.
+To link, the user scans a QR code that StarBot shows, or types a pairing code on the phone. Before each
+connection, StarBot asks `web.whatsapp.com` for the current WhatsApp Web version, as a browser does.
+StarBot uses an unofficial client (a modified copy of the open-source Baileys library), so WhatsApp can
 restrict or block a number that it sees as automated.
 
-- **Stored on the host.** The device's keys, its Signal sessions, the messages that OpenBot sent in the
+- **Stored on the host.** The device's keys, its Signal sessions, the messages that StarBot sent in the
   last day (WhatsApp asks for them again when a phone could not decrypt one), the last 30 minutes of
   received messages that the agents took (so a crash does not lose them), and the reply chains of the
   last 7 days are in `<userData>/whatsapp/`. Every value is encrypted with a random key that the
@@ -1786,21 +1786,21 @@ restrict or block a number that it sees as automated.
   holds the number, a masked name, which agent is the WhatsApp Orchestrator, the contacts and groups
   that the owner allowed, and one row per conversation that an agent answers. The messages of that
   conversation are kept as a conversation of that agent, and files people send are kept with the
-  agent's attachments. The messages of the allowed chats that OpenBot sees, also those that do not
+  agent's attachments. The messages of the allowed chats that StarBot sees, also those that do not
   mention the number, are kept in the database for 90 days after they arrive, so that an agent can
   read and search them. The files of these messages are downloaded when they arrive, up to 100 MB
   each, to `<userData>/whatsapp/files/`, readable only by the user, and are deleted with their
   message. The copies of one number use at most 2 GB: when they use more, the copies of the oldest
   messages are deleted first, and those messages keep only the names of their files. A message that
-  its author deletes for everyone is deleted with its files, and a changed message keeps the new text. Names are kept in memory until OpenBot quits. Pairing requests are kept in memory for at
-  most an hour. Disconnect logs the device out (when OpenBot is connected), deletes its keys, the saved
+  its author deletes for everyone is deleted with its files, and a changed message keeps the new text. Names are kept in memory until StarBot quits. Pairing requests are kept in memory for at
+  most an hour. Disconnect logs the device out (when StarBot is connected), deletes its keys, the saved
   messages and their files, and keeps the conversations, the workspace memories and the allowed
   senders.
-- **Read from WhatsApp.** WhatsApp gives a linked device every message of the account. OpenBot reads
+- **Read from WhatsApp.** WhatsApp gives a linked device every message of the account. StarBot reads
   only the owner's own "Message yourself" chat, direct messages of the contacts the owner allowed, and
   the groups the owner allowed, where a request starts only from a mention of the number or a reply in
   a conversation that an agent answers. Every other chat is dropped when it arrives and is not stored.
-  When a device links, WhatsApp sends it a first part of the account's history; OpenBot keeps from it
+  When a device links, WhatsApp sends it a first part of the account's history; StarBot keeps from it
   only contact names and the phone forms of contacts, in memory, and drops the messages. It does not
   ask WhatsApp for the full or recent history.
 - **Given to the WhatsApp Orchestrator.** Every new WhatsApp request goes first to the orchestrator
@@ -1814,9 +1814,9 @@ restrict or block a number that it sees as automated.
   leave the host.
 - **Sent to WhatsApp.** The agents' answers and the files they attach, short status posts, reactions,
   and approval requests with the command, folder and reason the provider gave, redacted. On a number
-  used only by OpenBot, a person whom the owner did not allow gets one message with a pairing code.
-  On the owner's personal number, OpenBot never writes to anyone else first. Any agent can post
-  redacted text and files from its workspace or the OpenBot shared directory to the allowed chats.
+  used only by StarBot, a person whom the owner did not allow gets one message with a pairing code.
+  On the owner's personal number, StarBot never writes to anyone else first. Any agent can post
+  redacted text and files from its workspace or the StarBot shared directory to the allowed chats.
   An answer or a post can ping a person that it mentions.
 
 Anyone whom the owner allowed can give the agents work. The agents run on the host with the access
@@ -1826,33 +1826,33 @@ the message until the server connects again.
 ## Agent access
 
 Agents currently use `danger-full-access` with `approvalPolicy: never`. They can read and modify local
-files, run programs, use the network, and control the embedded browser without an OpenBot confirmation
+files, run programs, use the network, and control the embedded browser without an StarBot confirmation
 dialog. This is an explicit product behavior, not a host security boundary. Keep backups and do not
 give an agent a task you would not allow a local command-line tool to perform.
 
-On first launch, OpenBot explains this access and does not start the agent services until you
-explicitly accept it. The acceptance record stays in OpenBot's local application-support directory.
+On first launch, StarBot explains this access and does not start the agent services until you
+explicitly accept it. The acceptance record stays in StarBot's local application-support directory.
 
-Computer Use is provided by `cua-driver`, a local binary that OpenBot ships and starts as its own
+Computer Use is provided by `cua-driver`, a local binary that StarBot ships and starts as its own
 child process. It starts only when you open the Computer Use panel or an agent uses the function, and
-it stops when OpenBot stops. Because OpenBot starts it directly, macOS attributes the Screen Recording
-and Accessibility grants to OpenBot, and macOS keeps control of the prompts. Windows and Linux ask for
+it stops when StarBot stops. Because StarBot starts it directly, macOS attributes the Screen Recording
+and Accessibility grants to StarBot, and macOS keeps control of the prompts. Windows and Linux ask for
 no such grant. Screen contents and accessibility trees that an agent reads through the driver go to
 that agent's provider, the same as any other message content.
 
 The driver is third-party software with its own product analytics, which its vendor turns on by
-default and which are not OpenBot's. They would send the driver version, the operating system, a
+default and which are not StarBot's. They would send the driver version, the operating system, a
 random installation identifier, and a bucketed record of each tool call to that vendor. They never
 send screen contents, window or application names, typed text, or the content of a tool result.
 
 On its own the driver also asks GitHub for a newer release each time it starts.
 
-**OpenBot stops both calls, always.** Every copy of the driver OpenBot starts gets
+**StarBot stops both calls, always.** Every copy of the driver StarBot starts gets
 `CUA_DRIVER_RS_TELEMETRY_ENABLED=0` and `CUA_DRIVER_RS_UPDATE_CHECK=0`, so it sends the vendor
-nothing and asks GitHub nothing. OpenBot pins the driver version it packages, so a release check
-could only offer you an update OpenBot would refuse. The driver reads the environment before its own
-configuration, and OpenBot sets both variables last, so nothing can turn them back on for a driver
-OpenBot started. OpenBot writes no file, so a driver you run yourself keeps the settings you gave
+nothing and asks GitHub nothing. StarBot pins the driver version it packages, so a release check
+could only offer you an update StarBot would refuse. The driver reads the environment before its own
+configuration, and StarBot sets both variables last, so nothing can turn them back on for a driver
+StarBot started. StarBot writes no file, so a driver you run yourself keeps the settings you gave
 it.
 
 Full access also permits that agent to publish, update and delete public hosted sites without
@@ -1873,35 +1873,35 @@ contents, or local file paths.
 
 ## Delete local data
 
-Quit OpenBot, then remove the OpenBot folders listed above. Removing
-`~/Library/Application Support/OpenBot` also removes the embedded browser's cookies and logins.
-Removing `~/OpenBot` removes agent workspaces, transfers, downloads, and the records the agents kept. OpenBot does not delete
+Quit StarBot, then remove the StarBot folders listed above. Removing
+`~/Library/Application Support/StarBot` also removes the embedded browser's cookies and logins.
+Removing `~/StarBot` removes agent workspaces, transfers, downloads, and the records the agents kept. StarBot does not delete
 `~/.codex` or `~/.claude`; use each CLI's own controls if you also want to remove its local data.
 
 Review folders before deleting them and keep a backup of anything you need.
 
 ## Questions
 
-Use [GitHub Discussions](https://github.com/nightly-labs/openbot/discussions) for privacy questions.
+Use [GitHub Discussions](https://github.com/hxy940219220-collab/StarBot-Desktop/discussions) for privacy questions.
 Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md), without attaching
 credentials, conversations, or unrelated private files.
 
-When you ask OpenBot to generate or revise an agent profile, it sends your setup
+When you ask StarBot to generate or revise an agent profile, it sends your setup
 prompt, the current profile draft (when present), and available sidebar section
 names and identifiers to the selected AI provider through its local CLI. This
 request does not include conversation history, saved memories, or workspace files.
-The draft is reviewed before OpenBot saves it; generating a draft does not create
-an OpenBot conversation or change an existing agent. The provider's own data and
+The draft is reviewed before StarBot saves it; generating a draft does not create
+an StarBot conversation or change an existing agent. The provider's own data and
 CLI retention policies still apply.
 
 When you change an agent's provider, the new provider receives the chat history with its first
 message. That history includes the work steps that the previous provider recorded: commands, the end
-of their output, changed file paths, tool names, searches and progress notes. OpenBot removes known
+of their output, changed file paths, tool names, searches and progress notes. StarBot removes known
 secrets from these steps first. Command output can contain file contents. Reasoning, diffs and
 attachment contents are not sent.
 
 Publishing an agent template from the chat makes its instructions, skills, and routines public to
-anyone with the link at `openbot.run/agents/<id>`, with your account name as the creator. OpenBot
+anyone with the link at `starbot.app/agents/<id>`, with your account name as the creator. StarBot
 stops the publish when a text field looks like a secret. Workspace files and memories are not sent.
 An owner or admin of a server can also publish, update or unpublish an agent of that server from the
 browser client. The host sends the template content and the agent's avatar to that browser for the
@@ -1911,7 +1911,7 @@ Marketplace submissions from the desktop app show the publisher’s current acco
 
 ### OpenCode
 
-OpenBot downloads the OpenCode CLI (the `@opencode/cli` packages) and its license (from the
+StarBot downloads the OpenCode CLI (the `@opencode/cli` packages) and its license (from the
 `opencode-ai` package) from `registry.npmjs.org`, then starts it with `opencode acp`. Prompts, attachments, and tool
 results go to that local process. OpenCode can send them to the model provider selected in its
 configuration. OpenCode's free models are the default, and they reach OpenCode Go with no account,
@@ -1919,95 +1919,95 @@ so a first OpenCode turn leaves this computer without a sign-in.
 
 An OpenCode agent searches the web with OpenCode's own web search tool. OpenCode sends the search
 query, and no other part of the chat, to one of the web search services that it supports, such as
-Exa, Firecrawl, Parallel, Tavily or TinyFish. OpenCode 2 asks before its first search; OpenBot gives
+Exa, Firecrawl, Parallel, Tavily or TinyFish. OpenCode 2 asks before its first search; StarBot gives
 the answer "allow" for it, so that an agent in a Slack, Discord, Telegram or WhatsApp chat can search
-too. OpenBot does not give this answer when OpenCode already has an answer that you gave, or when
+too. StarBot does not give this answer when OpenCode already has an answer that you gave, or when
 your global OpenCode configuration file or the project's `opencode.json` sets `websearch`. Set
 `"websearch": false` in one of them to stop web search.
 
-An OpenCode Go key is optional and unlocks the paid catalog. OpenBot encrypts it with the operating
+An OpenCode Go key is optional and unlocks the paid catalog. StarBot encrypts it with the operating
 system's secret storage, writes it to a file that only your user account can read, and passes it
-to the local OpenCode process. To show the remaining Go quota in Usage, OpenBot also sends the key
+to the local OpenCode process. To show the remaining Go quota in Usage, StarBot also sends the key
 to `opencode.ai/zen/go/v1/usage`; that request contains no conversation, file, or model data, and
-the response contains only the used percentage and reset time of each Go limit. OpenBot does not
+the response contains only the used percentage and reset time of each Go limit. StarBot does not
 send that usage to its maintainer. No screen, log, data export, or diagnostics report contains the
 key; the data export lists it under `scope.excludes`.
 
-When you saved no key in OpenBot, OpenBot reads the Go quota with the key that the OpenCode CLI
+When you saved no key in StarBot, StarBot reads the Go quota with the key that the OpenCode CLI
 uses: an OpenCode Console connection in OpenCode's database (`opencode.db`), else the Go key. The Go
 key is the `opencode-go` key in OpenCode's `auth.json` (or `OPENCODE_AUTH_CONTENT`), or
-`OPENCODE_API_KEY` from the environment that started OpenBot when `auth.json` has none. OpenBot reads
+`OPENCODE_API_KEY` from the environment that started StarBot when `auth.json` has none. StarBot reads
 these from OpenCode's data folder (`$XDG_DATA_HOME/opencode`, or `~/.local/share/opencode`) and sends
-the key only to `opencode.ai/zen/go/v1/usage`. When OpenCode rejects the Console key, OpenBot tries
-the Go key. OpenBot does not store, log, or show these keys. OpenBot does not copy OpenCode credentials or upload its session
+the key only to `opencode.ai/zen/go/v1/usage`. When OpenCode rejects the Console key, StarBot tries
+the Go key. StarBot does not store, log, or show these keys. StarBot does not copy OpenCode credentials or upload its session
 files. OpenCode manages its own login and resume state.
 
 ### Gemini
 
-OpenBot downloads Google's Antigravity CLI from its GitHub releases (`github.com`) when you select
-Download on the Gemini row. Google's license does not let OpenBot include it in the application. OpenBot
+StarBot downloads Google's Antigravity CLI from its GitHub releases (`github.com`) when you select
+Download on the Gemini row. Google's license does not let StarBot include it in the application. StarBot
 starts the CLI's `acp` server as a local process. Prompts, attachments, and tool results go to that process,
 and the server sends them to Google. Connect opens Google's sign-in page in your browser. On this
-computer, Sign in saves a Gemini API key instead: OpenBot encrypts it in its existing provider
+computer, Sign in saves a Gemini API key instead: StarBot encrypts it in its existing provider
 credential store, gives it to the server as `GEMINI_API_KEY`, and redacts it from logs. The server
 sends the key to Google. The server keeps its login and session files in `~/.gemini/antigravity-acp`, or in the same folder of
-`$GEMINI_HOME`. OpenBot tells it to keep the Google token in a file there, not in the macOS Keychain. Each Gemini
-account that you add after the first keeps them in a folder of its own in OpenBot's data folder, and gets no saved API key;
+`$GEMINI_HOME`. StarBot tells it to keep the Google token in a file there, not in the macOS Keychain. Each Gemini
+account that you add after the first keeps them in a folder of its own in StarBot's data folder, and gets no saved API key;
 Remove deletes that folder. Once, when an account still has the token file of the earlier Antigravity server
-(`acp_token.json`), OpenBot copies its refresh token into the new token file in the same folder, so you do not
-sign in again. The old file stays. The CLI's own log in that folder names your Google account. OpenBot does
+(`acp_token.json`), StarBot copies its refresh token into the new token file in the same folder, so you do not
+sign in again. The old file stays. The CLI's own log in that folder names your Google account. StarBot does
 not upload these files and does not put them in a diagnostics export. Reconnect and Remove delete the token file but
 do not revoke the sign-in at Google; remove Antigravity's access in your Google account to do that. Google's terms
 apply: <https://antigravity.google/terms>.
-Gemini agents stay on this computer: OpenBot does not show them to team members.
+Gemini agents stay on this computer: StarBot does not show them to team members.
 
-To show the remaining Gemini quota in Usage, OpenBot reads the access token from the server's token file
+To show the remaining Gemini quota in Usage, StarBot reads the access token from the server's token file
 and asks Google's Code Assist service (`cloudcode-pa.googleapis.com` and
 `daily-cloudcode-pa.googleapis.com`) for the account's project and quota, as the Antigravity app does.
 The requests carry that token and a User-Agent with the Antigravity desktop app's client name, version
 and build number, your operating system and processor type. They contain no conversation, file, or model data. With an API key
-sign-in, or an expired token, OpenBot sends nothing and shows no Gemini usage. OpenBot does not send that
+sign-in, or an expired token, StarBot sends nothing and shows no Gemini usage. StarBot does not send that
 usage to its maintainer.
 
 ### Cursor
 
-OpenBot downloads the Cursor CLI from `downloads.cursor.com` when you select Download on the Cursor
+StarBot downloads the Cursor CLI from `downloads.cursor.com` when you select Download on the Cursor
 row. Each provider update check also asks `downloads.cursor.com` for the size of the newest
-download, also when you do not use Cursor. OpenBot starts the CLI as a local process. Prompts,
+download, also when you do not use Cursor. StarBot starts the CLI as a local process. Prompts,
 attachments, and tool results go to that process, and the CLI sends them to Cursor. Sign in opens
 Cursor's sign-in page in your browser, or the CLI uses `CURSOR_API_KEY` from the environment that
-started OpenBot. OpenBot gives that key only to the local CLI, in its environment, and does
+started StarBot. StarBot gives that key only to the local CLI, in its environment, and does
 not store it. The CLI keeps its login and session files
 in `~/.cursor` (on Linux, the login is in `~/.config/cursor`). On macOS the CLI keeps its login in
-the login Keychain. OpenBot does not copy or upload these files. Cursor's terms apply:
+the login Keychain. StarBot does not copy or upload these files. Cursor's terms apply:
 <https://cursor.com/terms-of-service>. Team members see the host's Cursor agents, as for the other
 providers, when their app supports Cursor.
 
-To show the remaining Cursor plan usage in Usage, OpenBot reads the CLI's access token: on macOS
-from the Keychain item `cursor-access-token`, else from the CLI's `auth.json`. OpenBot sends the
+To show the remaining Cursor plan usage in Usage, StarBot reads the CLI's access token: on macOS
+from the Keychain item `cursor-access-token`, else from the CLI's `auth.json`. StarBot sends the
 token only to Cursor (`api2.cursor.sh`, or `CURSOR_API_ENDPOINT` when you set it for the CLI), in
 the same usage request that the CLI sends. The request contains no conversation, file, or model
-data. OpenBot does not store, log, or send the token or the usage to its maintainer.
+data. StarBot does not store, log, or send the token or the usage to its maintainer.
 
 A Cursor account after the first is a Cursor API key that you type under Providers › Cursor › Add
-account. OpenBot keeps the key encrypted on the OpenBot computer, in the same file as the other
+account. StarBot keeps the key encrypted on the StarBot computer, in the same file as the other
 provider API keys, and deletes it when you remove the account. For a joined server, the key goes to
-that server's host over the encrypted Team channel and is kept there. To check a key, OpenBot sends
+that server's host over the encrypted Team channel and is kept there. To check a key, StarBot sends
 it to Cursor (`api2.cursor.sh`, or `CURSOR_API_ENDPOINT`), in the request with which the CLI signs a
 key in, and does not keep the answer. The CLI processes of the agents on that account get the key in
 their environment. Those processes keep their sign-in in memory only: they do not read or change the
-CLI's own login. OpenBot does not log the key or send it to its maintainer.
+CLI's own login. StarBot does not log the key or send it to its maintainer.
 
 ### Cline
 
-OpenBot downloads the Cline CLI from `registry.npmjs.org`, and its license file from `github.com`,
-when you select Download on the Cline row. OpenBot starts the CLI as a local process. Prompts,
+StarBot downloads the Cline CLI from `registry.npmjs.org`, and its license file from `github.com`,
+when you select Download on the Cline row. StarBot starts the CLI as a local process. Prompts,
 attachments, and tool results go to that process, and the CLI sends them to Cline and to the model
 provider you select in Cline. The provider of a free model can use your prompts to train models.
 Sign in opens Cline's sign-in page in your browser, or the CLI uses `CLINE_API_KEY` from the
-environment that started OpenBot. OpenBot gives that key only to the local CLI, in its environment,
+environment that started StarBot. StarBot gives that key only to the local CLI, in its environment,
 and does not store it. The CLI keeps its login and session files in `~/.cline`, or in `$CLINE_DIR`.
-OpenBot does not read, copy, or upload these files. When OpenBot reads the Cline model list, it
+StarBot does not read, copy, or upload these files. When StarBot reads the Cline model list, it
 also sends `GET https://api.cline.bot/api/v1/ai/cline/recommended-models` to read Cline's free
 models, which the CLI does not list. The request has no account, key, or prompt in it, and Cline
 sees the IP address of this computer. Cline's terms apply:
@@ -2016,79 +2016,79 @@ for the other providers, when their app supports Cline.
 
 ### Kimi
 
-OpenBot downloads the Kimi Code CLI from `github.com` (GitHub release assets), and its license file
-from `github.com`, when you select Download on the Kimi row. OpenBot starts the CLI as a local
+StarBot downloads the Kimi Code CLI from `github.com` (GitHub release assets), and its license file
+from `github.com`, when you select Download on the Kimi row. StarBot starts the CLI as a local
 process. Prompts, attachments, and tool results go to that process, and the CLI sends them to
 Moonshot AI: `api.kimi.ai` for a global account, or `api.kimi.com` for a mainland China account.
 Sign in runs `kimi login`, which opens Kimi's sign-in page in your browser: `auth.kimi.ai` for
 Connect, or `auth.kimi.com` when you select the kimi.com (China) item in the row's ⋯ menu. The CLI
 keeps its login, device ID, session files, and settings in `~/.kimi`, or in `$KIMI_SHARE_DIR`.
-OpenBot reads the API address in `config.toml` on this computer, to start the CLI with the
-region of its login. OpenBot does not copy or upload these files. Unless you
+StarBot reads the API address in `config.toml` on this computer, to start the CLI with the
+region of its login. StarBot does not copy or upload these files. Unless you
 set `telemetry = false` in `~/.kimi/config.toml`, or set `KIMI_DISABLE_TELEMETRY=1` in the
-environment that starts OpenBot, the CLI sends anonymous usage events to
-`telemetry-logs.kimi.com`. OpenBot does not change this setting. Moonshot AI's terms for Kimi Code
+environment that starts StarBot, the CLI sends anonymous usage events to
+`telemetry-logs.kimi.com`. StarBot does not change this setting. Moonshot AI's terms for Kimi Code
 apply. Team members see the host's Kimi agents when their app supports Kimi.
 
-To show the Kimi Code plan usage in Usage, OpenBot reads the CLI's API address and the name of its
+To show the Kimi Code plan usage in Usage, StarBot reads the CLI's API address and the name of its
 token in `config.toml`, and the CLI's access token in `credentials`: in `~/.kimi` or
 `$KIMI_SHARE_DIR` for Kimi CLI 1.x, and in `~/.kimi-code` or `$KIMI_CODE_HOME` for Kimi Code 2.x.
-OpenBot sends the token only to Moonshot AI (`api.kimi.ai`, `api.kimi.com`, or `KIMI_CODE_BASE_URL`
+StarBot sends the token only to Moonshot AI (`api.kimi.ai`, `api.kimi.com`, or `KIMI_CODE_BASE_URL`
 when you set it for the CLI), in the same usage request that the CLI's `/usage` command sends. The
-request contains no conversation, file, or model data. OpenBot does not store, log, or send the
+request contains no conversation, file, or model data. StarBot does not store, log, or send the
 token or the usage to its maintainer.
 
 ### Devin
 
-OpenBot downloads the Devin CLI from `static.devin.ai` when you select Download on the Devin row.
-OpenBot starts the CLI as a local process. Prompts, attachments, and tool results go to that
+StarBot downloads the Devin CLI from `static.devin.ai` when you select Download on the Devin row.
+StarBot starts the CLI as a local process. Prompts, attachments, and tool results go to that
 process, and the CLI sends them to Cognition (`app.devin.ai` and `api.devin.ai`). Sign in opens
 Devin's sign-in page on `app.devin.ai` in your browser. The CLI keeps its login and session files
 in `~/.local/share/devin`, its settings in `~/.config/devin`, and its plans in `~/.devin`, or in the
-XDG folders that you set. OpenBot does not read, copy, or upload these files; it reads only the
+XDG folders that you set. StarBot does not read, copy, or upload these files; it reads only the
 change time of `credentials.toml`, to see a sign-in. When it starts, the CLI reads feature flags and
-sends product analytics events to Cognition. OpenBot does not change these settings. Cognition's
+sends product analytics events to Cognition. StarBot does not change these settings. Cognition's
 terms for Devin apply. Team members see the host's Devin agents when their app supports Devin.
 
 ### GitHub Copilot
 
-OpenBot downloads the GitHub Copilot CLI from GitHub Releases (`github.com/github/copilot-cli`) when
-you select Download on the GitHub Copilot row. OpenBot starts the CLI as a local process. Prompts,
+StarBot downloads the GitHub Copilot CLI from GitHub Releases (`github.com/github/copilot-cli`) when
+you select Download on the GitHub Copilot row. StarBot starts the CLI as a local process. Prompts,
 attachments, and tool results go to that process, and the CLI sends them to GitHub
 (`api.githubcopilot.com` and `api.github.com`). Sign in opens GitHub's sign-in page on `github.com`
 in your browser. The CLI keeps its sign-in in the system keychain, and its settings and session
-files in `~/.copilot`, or in `$COPILOT_HOME`. OpenBot does not read, copy, or upload them. The CLI
-uses `COPILOT_GITHUB_TOKEN`, `GH_TOKEN` or `GITHUB_TOKEN` when OpenBot's environment has one; OpenBot
-does not log or export these values. The CLI sends its own usage data to GitHub, and OpenBot does not
+files in `~/.copilot`, or in `$COPILOT_HOME`. StarBot does not read, copy, or upload them. The CLI
+uses `COPILOT_GITHUB_TOKEN`, `GH_TOKEN` or `GITHUB_TOKEN` when StarBot's environment has one; StarBot
+does not log or export these values. The CLI sends its own usage data to GitHub, and StarBot does not
 change that setting. GitHub's terms for Copilot apply. Team members see the host's Copilot agents
 when their app supports GitHub Copilot.
 
 ### Mistral
 
-OpenBot downloads Mistral Vibe's ACP server from GitHub Releases (`github.com/mistralai/mistral-vibe`)
-when you select Download on the Mistral row. OpenBot starts it as a local process. Prompts,
+StarBot downloads Mistral Vibe's ACP server from GitHub Releases (`github.com/mistralai/mistral-vibe`)
+when you select Download on the Mistral row. StarBot starts it as a local process. Prompts,
 attachments, and tool results go to that process, and Vibe sends them to Mistral
 (`api.mistral.ai`). Vibe also asks Mistral for its model list, your account details, and the
 settings that your Mistral organization manages (`console.mistral.ai` and `chat.mistral.ai`). Sign in
 opens Mistral's sign-in page in your browser, and Vibe asks Mistral until the sign-in ends. Vibe
 keeps the API key of the sign-in in the system keychain, or in `~/.vibe/.env`, and its settings, logs
-and session files in `~/.vibe`, or in `$VIBE_HOME`. OpenBot does not read, copy, or upload them. Vibe
-uses `MISTRAL_API_KEY` when OpenBot's environment has it; OpenBot does not log or export this value.
-OpenBot starts Vibe with its telemetry off (`VIBE_ENABLE_TELEMETRY=false`), so it sends no usage
+and session files in `~/.vibe`, or in `$VIBE_HOME`. StarBot does not read, copy, or upload them. Vibe
+uses `MISTRAL_API_KEY` when StarBot's environment has it; StarBot does not log or export this value.
+StarBot starts Vibe with its telemetry off (`VIBE_ENABLE_TELEMETRY=false`), so it sends no usage
 events, traces or experiment requests, unless your Mistral organization's managed settings turn
-telemetry on. OpenBot also turns on Vibe's model catalogue (`VIBE_EXPERIMENTAL_ENABLE_MODEL_CATALOG=true`):
+telemetry on. StarBot also turns on Vibe's model catalogue (`VIBE_EXPERIMENTAL_ENABLE_MODEL_CATALOG=true`):
 when a session opens, Vibe asks Mistral (`api.mistral.ai`) for the models of your account, with the
 same API key, and keeps the list in `model_catalog_cache.json` in `~/.vibe`, or in `$VIBE_HOME`.
 Mistral's terms apply. Team members see the host's Mistral agents when their app supports Mistral.
 
 ### Hermes
 
-OpenBot does not download Hermes Agent. It starts the `hermes` that you installed, with `hermes acp`,
+StarBot does not download Hermes Agent. It starts the `hermes` that you installed, with `hermes acp`,
 as a local process. Prompts, attachments, and tool results go to that process, and Hermes sends them
 to Nous Portal or to the model provider that you select in Hermes. Sign in runs
 `hermes auth add nous`, which opens Nous Portal's sign-in page in your browser. Hermes keeps its
 sign-ins, settings, memories, skills and session history in `~/.hermes`, or in `$HERMES_HOME`, and
-it can change them during a turn. OpenBot does not read, copy, or upload these files. It reads only
+it can change them during a turn. StarBot does not read, copy, or upload these files. It reads only
 the change time of `auth.json`, `.env` and `config.yaml` in that folder, or in the Hermes profile
 that you use, to see that you signed in. Hermes can also use the network
 for its own tools and plugins, as you set them up in Hermes. Nous Research's terms apply. Team
@@ -2096,61 +2096,61 @@ members see the host's Hermes agents, as for the other providers, when their app
 
 ### Inception
 
-Inception agents run in the Pi CLI that OpenBot downloads for Pi. On this computer, Sign in on the
-Inception row saves an Inception API key. OpenBot encrypts it in its existing provider credential
+Inception agents run in the Pi CLI that StarBot downloads for Pi. On this computer, Sign in on the
+Inception row saves an Inception API key. StarBot encrypts it in its existing provider credential
 store, gives it to the local Pi process in its environment, and redacts it from logs. Pi does not
 write the key to a file. Prompts, attachments, and tool results go to that process, and Pi sends
-them with the key to `api.inceptionlabs.ai`. When OpenBot reads the Mercury model list, Pi does not
-contact Inception. Pi keeps its session files in its own folder, as for Pi agents. OpenBot does not
+them with the key to `api.inceptionlabs.ai`. When StarBot reads the Mercury model list, Pi does not
+contact Inception. Pi keeps its session files in its own folder, as for Pi agents. StarBot does not
 copy or upload these files. Inception's terms apply: <https://www.inceptionlabs.ai/docs/terms-of-use>.
-Inception agents stay on this computer: OpenBot does not show them to team members.
+Inception agents stay on this computer: StarBot does not show them to team members.
 
 ### DeepSeek
 
-DeepSeek agents run in the Pi CLI that OpenBot downloads for Pi. On this computer, Connect on the
-DeepSeek row saves a DeepSeek API key. OpenBot encrypts it in its existing provider credential
+DeepSeek agents run in the Pi CLI that StarBot downloads for Pi. On this computer, Connect on the
+DeepSeek row saves a DeepSeek API key. StarBot encrypts it in its existing provider credential
 store, gives it to the local Pi process in its environment, and redacts it from logs. Pi does not
 write the key to a file. Prompts, attachments, and tool results go to that process, and Pi sends
-them with this key to `api.deepseek.com`, also when Pi has its own DeepSeek key. When OpenBot reads
+them with this key to `api.deepseek.com`, also when Pi has its own DeepSeek key. When StarBot reads
 the DeepSeek model list, Pi first refreshes its model catalog, as described in
 [Pi, Muse, and ACP registry setup](#pi-muse-and-acp-registry-setup). Pi keeps its
-session files in its own folder, as for Pi agents. OpenBot does not copy or upload these files.
+session files in its own folder, as for Pi agents. StarBot does not copy or upload these files.
 DeepSeek's terms apply:
 <https://cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html>.
-DeepSeek agents stay on this computer: OpenBot does not show them to team members.
+DeepSeek agents stay on this computer: StarBot does not show them to team members.
 
 ### OpenRouter
 
-OpenRouter agents run in the Pi CLI that OpenBot downloads for Pi. On this computer, Connect on the
-OpenRouter row saves an OpenRouter API key. OpenBot encrypts it in its existing provider credential
+OpenRouter agents run in the Pi CLI that StarBot downloads for Pi. On this computer, Connect on the
+OpenRouter row saves an OpenRouter API key. StarBot encrypts it in its existing provider credential
 store, gives it to the local Pi process in its environment, and redacts it from logs. Pi does not
 write the key to a file. Prompts, attachments, and tool results go to that process, and Pi sends
 them with this key to `openrouter.ai`, also when Pi has its own OpenRouter key. OpenRouter sends the
 request to the company that serves the selected model, and that company's terms also apply. When
-OpenBot reads the OpenRouter model list, Pi first refreshes its model catalog, as described in
+StarBot reads the OpenRouter model list, Pi first refreshes its model catalog, as described in
 [Pi, Muse, and ACP registry setup](#pi-muse-and-acp-registry-setup). It also asks `openrouter.ai`,
-with the key, for the models that the key can use. Pi keeps its session files in its own folder, as for Pi agents. OpenBot does not copy or upload these
+with the key, for the models that the key can use. Pi keeps its session files in its own folder, as for Pi agents. StarBot does not copy or upload these
 files. OpenRouter's terms apply: <https://openrouter.ai/terms>. OpenRouter agents stay on this
-computer: OpenBot does not show them to team members.
+computer: StarBot does not show them to team members.
 
 ### Local model servers
 
 When Server settings shows the Providers section of this computer, and once on the onboarding
-provider step, OpenBot looks
+provider step, StarBot looks
 for model servers on this computer. It sends `GET <address>/models` to
 `http://127.0.0.1:11434/v1` (Ollama), `http://127.0.0.1:1234/v1` (LM Studio), and each address you
 add under Local detection. These requests
-contain no key, header, conversation or file data, and OpenBot does not follow a redirect. A found
-server is only listed; OpenBot saves nothing until you select Add.
+contain no key, header, conversation or file data, and StarBot does not follow a redirect. A found
+server is only listed; StarBot saves nothing until you select Add.
 
 When you add or edit an endpoint, Load models sends the key and headers you typed to that address.
-For a saved endpoint, OpenBot sends the stored key and headers only to the same origin as the saved
+For a saved endpoint, StarBot sends the stored key and headers only to the same origin as the saved
 address. For each saved endpoint that OpenCode runs, with an address that ends in `/v1` and a model
-with no saved efforts, OpenBot asks that origin if it is an Ollama server: `GET <origin>/api/version`
-when OpenBot starts and when you save an endpoint. At a start, it asks again at most 3 times in the
-first 90 seconds while the server does not answer. When the server is Ollama, OpenBot sends
+with no saved efforts, StarBot asks that origin if it is an Ollama server: `GET <origin>/api/version`
+when StarBot starts and when you save an endpoint. At a start, it asks again at most 3 times in the
+first 90 seconds while the server does not answer. When the server is Ollama, StarBot sends
 `POST <origin>/api/show` with the model ID for each such model, to learn if the model can reason.
-These requests contain the stored key and headers and no conversation or file data. OpenBot does not
+These requests contain the stored key and headers and no conversation or file data. StarBot does not
 follow a redirect and does not save the answers. Local detection can be turned off in Settings. Its switch, addresses, folders and hidden
 rows are in `openbot-provider-detection-v1.json` in the app profile.
 
@@ -2167,16 +2167,16 @@ can read the variables.
 
 ### Custom agents
 
-A custom agent is an ACP program that you name. OpenBot starts it as a local process, and prompts, attachments, and tool results go to that process. What the program sends
+A custom agent is an ACP program that you name. StarBot starts it as a local process, and prompts, attachments, and tool results go to that process. What the program sends
 to the network is its own choice. Check agent starts it once in an empty temporary folder, sends
 `initialize`, opens one session with no MCP servers to read the agent's models, and stops it.
-To find agents, OpenBot looks up the names of known agents on your `PATH` and in the folders you
+To find agents, StarBot looks up the names of known agents on your `PATH` and in the folders you
 add under Local detection. It does not start a file that it finds.
 
 The command, arguments, and environment names are in `custom-agents.json` in the app profile. The
 environment values are encrypted with the operating system's secret storage, go only to that
 process, and are not in a screen, log, data export, or diagnostics report; the data export lists
-them under `scope.excludes`. Custom agents stay on this computer: OpenBot does not show them to
+them under `scope.excludes`. Custom agents stay on this computer: StarBot does not show them to
 team members.
 
 ## Shared desktop channels
@@ -2233,12 +2233,12 @@ Each update contains the text that the view shows: agent names, the current task
 sentences of the last reply, a question and its options, or a command that waits for approval. The
 host and the phone hide secrets and email addresses in this text, as in notifications. The host seals the update with
 keys made from the secret (an HMAC-SHA256 keystream and an HMAC-SHA256 tag) and sends it to the
-OpenBot account service, which sends it to Apple. The account service and Apple receive only the
+StarBot account service, which sends it to Apple. The account service and Apple receive only the
 push token, the sealed bytes, the time, the priority, the time when the content becomes out of
 date, and, for an update that shows an event that would notify the member, the sound name. They
 cannot read the content. The widget on the phone opens it and shows nothing with a
 wrong tag. The account service stores nothing from these requests and does not log them. It makes
-the Apple request itself. An update with a sound lights up the screen and has "OpenBot" as its
+the Apple request itself. An update with a sound lights up the screen and has "StarBot" as its
 only text, so a host cannot use it to send an ordinary notification. Apple can keep its own delivery logs under its own policy.
 
 The buttons in the view open the app. A button that changes host state, such as Approve or an
@@ -2257,7 +2257,7 @@ side threads of an agent, unless you turn Thread replies off in the app; the pho
 host that choice, and the host keeps it with the other notification choices of the phone. The host does not
 send one while the member uses a desktop app or the computer that it runs on. For this, it keeps in
 memory the time of the last send, answer or typing of each session, and on its own computer it reads
-whether the OpenBot window has focus and how long the computer has had no input. The desktop app also
+whether the StarBot window has focus and how long the computer has had no input. The desktop app also
 tells each joined server that shows its events on the desktop, after input, how many seconds ago the
 computer last had keyboard or mouse input, in any app. It sends only this number, not what you typed or
 which app you used. The host keeps the time in memory only, uses it for 30 seconds only to keep your
@@ -2281,10 +2281,10 @@ Each notification contains the agent name and a short text. With previews on, th
 sentences of the agent reply, the question, or the command or reason of an approval, at most 200
 characters, with secrets and email addresses hidden as in desktop notifications. With previews off, it only says what
 happened, such as "Finished working.". The host seals the notification with keys made from the
-secret, as it seals a Live Activity update, and sends it to the OpenBot account service with the
+secret, as it seals a Live Activity update, and sends it to the StarBot account service with the
 account session of the phone. The account service sends nothing when that session has ended, when
 the device signed out, or when the membership was removed. Otherwise it sends the notification to
-Apple with "OpenBot" as its only text. The account service receives only the push token, the session
+Apple with "StarBot" as its only text. The account service receives only the push token, the session
 ID, the sealed bytes, the sound name, and the time. Apple receives the same values without the
 session ID. They cannot read the agent name or the text. The account service stores nothing from these requests and does not log them. Apple can
 keep its own delivery logs under its own policy.
@@ -2315,7 +2315,7 @@ library in the app connects to Google. The app has no Firebase analytics. The ho
 these values as it does for an iPhone, in the same file, and removes them also when Google refuses
 the phone.
 
-The host seals each notification as it seals an iPhone notification, and sends it to the OpenBot
+The host seals each notification as it seals an iPhone notification, and sends it to the StarBot
 account service with the account session of the phone. The account service checks the session as it
 does for an iPhone. Then it sends Google a data message that has only the sealed bytes and the sound
 name. The account service receives only the push token, the session ID, the sealed bytes, the sound
@@ -2341,7 +2341,7 @@ runs, and it can run it less often or not at all. The app refreshes only while i
 memory of the phone.
 
 A refresh uses the same encrypted host connection and the same requests as the app on screen, for at
-most 25 seconds. It sends no new data to the hosts, the OpenBot services, Apple or Google. The phone
+most 25 seconds. It sends no new data to the hosts, the StarBot services, Apple or Google. The phone
 keeps what it reads in the same encrypted copy that it keeps for an offline start. During a refresh,
 the hosts know that the app is not on screen, so they continue to send notifications, and the app does
 not mark a chat as read.
@@ -2355,7 +2355,7 @@ An administrator can install a local Host Manager for several native macOS users
 registered UIDs, process IDs, application versions, restart readiness, timestamps, and health
 booleans through separate local status directories. It does not read or back up tenant homes,
 workspaces, databases, provider directories, browser data, or conversations. It requests release
-metadata and application downloads from the fixed OpenBot GitHub repository; those requests
+metadata and application downloads from the fixed StarBot GitHub repository; those requests
 expose the host's network address to GitHub. It sends no tenant status or tenant content to GitHub.
 
 The separate, optional administrator account-setup command creates new local Standard users and
@@ -2382,14 +2382,14 @@ the authenticated Team API to the computer running the browser. The handoff does
 to chat, provider tool arguments, diagnostics, analytics, or a credential store. Input and submission
 values are held in memory for the operation; cancellation and submission clear the input.
 
-OpenBot blocks agent browser access while consent is pending. Before entering a submitted value, it
+StarBot blocks agent browser access while consent is pending. Before entering a submitted value, it
 blocks image capture and live browser streams, and stops
 and discards the active browser recording before entry. After entry, protection stays until the
-browser replaces the document. After a same-page submission, OpenBot clears the filled fields and,
+browser replaces the document. After a same-page submission, StarBot clears the filled fields and,
 when the value no longer appears in the page title, address, text, field values, or attributes, keeps
 the page, so a later login step on the same page stays available. Page code can still hold the
 value, so page evaluation and recording stay blocked in that tab and its connected popup or opener
-tabs until the page navigates. Otherwise OpenBot loads the current URL as a new
+tabs until the page navigates. Otherwise StarBot loads the current URL as a new
 document with a GET request instead. Failed submission or reload requires manual takeover. Recording does not restart
 automatically, and the tab's back/forward history is cleared after replacement to prevent restoring
 the sensitive document. The destination site receives the value and controls its own processing.
@@ -2404,7 +2404,7 @@ operation, severity, and a fixed cause code. They also record whether a problem 
 toast, shared alert or chat banner, or native error/warning alert. These reports do not include displayed text,
 raw exceptions, stack traces, prompts, messages, file names, paths, commands, or credentials.
 A random report ID helps identify repeated delivery attempts; it is not a conversation or file ID.
-A reported cause describes the error observed by OpenBot and might not explain its root cause.
+A reported cause describes the error observed by StarBot and might not explain its root cause.
 
 Validated reports wait in local files on the host and mobile, or IndexedDB in desktop and browser
 clients. Each queue is limited to 1,000 reports, 1 MiB, and seven days. Reports are removed after
@@ -2420,7 +2420,7 @@ keeps it off. Existing OpenPanel retention rules apply after delivery.
 
 ### Remote host release checks
 
-When a server administrator checks an OpenBot release, the host requests the public stable
+When a server administrator checks an StarBot release, the host requests the public stable
 release manifest from GitHub for its operating system and architecture. The request includes no
 account data, chats, files, commands, or credentials. GitHub receives the host IP address as part
 of the connection. Connected administrators receive the installed version, release version,
@@ -2428,7 +2428,7 @@ check status, and installation method.
 
 ### Minimum app version
 
-A packaged desktop app and a server ask the account service for the lowest OpenBot version that it
+A packaged desktop app and a server ask the account service for the lowest StarBot version that it
 still supports, 15 seconds after start and then every 6 hours. The request names only the surface
 (`desktop` or `host`). It has no account, session, version, chat, file or command; the account
 service gets the IP address as part of the connection and stores nothing. The app compares its own
@@ -2440,7 +2440,7 @@ feature flag request that it already makes now also has the lowest supported sto
 
 Pi and Muse run on the host selected for the agent. They receive the conversation input, attached
 images, tool definitions, and enabled MCP server configuration needed for a turn. Provider account
-files remain under each provider's control. An explicit Meta API key is encrypted in OpenBot's
+files remain under each provider's control. An explicit Meta API key is encrypted in StarBot's
 existing provider credential store. Log in with code for Muse starts a local Muse process, with no
 shell, no file writes and no Meta API key, that asks Meta for a code. You confirm the code on Meta's
 page, and Muse keeps the account in its own files. Settings responses and settings-change events contain no
@@ -2448,7 +2448,7 @@ provider credentials; the event carries only the agent ID.
 
 ACP registry search fetches the catalog from `cdn.agentclientprotocol.com`; search text is matched
 on the host. Installation downloads the selected distribution from its published source. Pi update
-checks use `api.github.com`. When OpenBot reads the model list of Pi, DeepSeek or OpenRouter, it runs
+checks use `api.github.com`. When StarBot reads the model list of Pi, DeepSeek or OpenRouter, it runs
 `pi update --models`. Pi then gets the current model list of each provider that has a key from
 `pi.dev`. This request contains no key and no conversation data. Pi saves the lists in
 `models-store.json` in its own folder. Muse update checks use `api.meta.ai`, and manifests and binaries come

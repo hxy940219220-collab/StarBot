@@ -6,7 +6,7 @@ import { Schema } from "effect";
 const logger = createOpenBotLogger("umbrel-app");
 const ROOT = resolve(import.meta.dirname, "..");
 const TEMPLATE = join(ROOT, "docker/umbrel/openbot");
-const IMAGE = "nightly-labs/openbot";
+const IMAGE = "hxy940219220-collab/StarBot-Desktop";
 const decodePullToken = Schema.decodeUnknownSync(Schema.fromJsonString(Schema.Struct({ token: Schema.String })));
 const INDEX_TYPES = [
   "application/vnd.oci.image.index.v1+json",

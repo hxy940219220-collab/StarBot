@@ -4,7 +4,8 @@ import type { messages as source } from "../../en/mobile/chat";
 export const messages = {
   "mobile.chat.dictation.microphoneOffTitle": "الوصول إلى الميكروفون متوقف",
   "mobile.chat.dictation.microphoneOffMessage":
-    "لإملاء رسالة، اسمح لـ OpenBot باستخدام الميكروفون والتعرّف على الكلام في الإعدادات.",
+    "لإملاء رسالة، اسمح لـ StarBot باستخدام الميكروفون والتعرّف على الكلام في الإعدادات.",
+
   "mobile.chat.dictation.stopped": "توقف الإملاء",
   "mobile.chat.dictation.tryAgain": "حاول مرة أخرى.",
   "mobile.chat.dictation.unavailable": "الإملاء غير متاح",
@@ -227,7 +228,8 @@ export const messages = {
   "mobile.chat.attachment.unavailable": "المرفق غير متاح. حاول مرة أخرى.",
   "mobile.chat.attachment.openFailed": "تعذّر فتح المرفق",
   "mobile.chat.attachment.photosNeedUpdate": "يتطلب حفظ الصور أحدث إصدار من التطبيق.",
-  "mobile.chat.attachment.photosPermission": "اسمح لـ OpenBot بإضافة الصور في الإعدادات لحفظ هذه الصورة.",
+  "mobile.chat.attachment.photosPermission": "اسمح لـ StarBot بإضافة الصور في الإعدادات لحفظ هذه الصورة.",
+
   "mobile.chat.attachment.imageUnavailable": "الصورة غير متاحة. حاول مرة أخرى.",
   "mobile.chat.attachment.saveImageFailed": "تعذّر حفظ الصورة",
   "mobile.chat.attachment.copyImageFailed": "تعذّر نسخ الصورة",
@@ -258,8 +260,10 @@ export const messages = {
   "mobile.chat.attachment.limit": "يمكنك إرفاق {limit} ملفات كحد أقصى.",
   "mobile.chat.attachment.unsupported":
     "{name}: اختر صورًا، أو صوت MP3، أو فيديو MOV أو MP4، أو أرشيفات ZIP، أو PDF، أو مستندات Office، أو EML، أو نصًا، أو Markdown، أو ملفات بيانات أو ملفات مصدرية.",
-  "mobile.chat.attachment.hostRejectsType": "{name}: لا يقبل الحاسوب المضيف ملفات {type}. حدّث OpenBot هناك لإرفاقها.",
-  "mobile.chat.attachment.hostRejects": "{name}: لا يقبل الحاسوب المضيف هذه الملفات. حدّث OpenBot هناك لإرفاقها.",
+  "mobile.chat.attachment.hostRejectsType": "{name}: لا يقبل الحاسوب المضيف ملفات {type}. حدّث StarBot هناك لإرفاقها.",
+
+  "mobile.chat.attachment.hostRejects": "{name}: لا يقبل الحاسوب المضيف هذه الملفات. حدّث StarBot هناك لإرفاقها.",
+
   "mobile.chat.attachment.nameTooLong": "اختر ملفًا باسم أقصر.",
   "mobile.chat.attachment.damaged": "المرفق تالف. اختره مرة أخرى.",
   "mobile.chat.attachment.tooLarge": "{name} أكبر من {limit}.",
@@ -304,11 +308,13 @@ export const messages = {
   "mobile.chat.liveVoice.elevenLabsPermission": "ينقص مفتاح ElevenLabs إذنٌ. تحقق منه في الإعدادات > الصوت.",
   "mobile.chat.liveVoice.networkNeeded": "يحتاج ElevenLabs إلى اتصال بالشبكة.",
   "mobile.chat.liveVoice.voiceServerFailed": "تعذّر على خادم الصوت قراءة الرد. تحقّق منه في الإعدادات > الصوت.",
-  "mobile.chat.liveVoice.gptUnsupported": "هذا الخادم لا يدعم GPT Live Voice. حدّث OpenBot على الكمبيوتر الذي يشغّله.",
+  "mobile.chat.liveVoice.gptUnsupported": "هذا الخادم لا يدعم GPT Live Voice. حدّث StarBot على الكمبيوتر الذي يشغّله.",
+
   "mobile.chat.liveVoice.gptFailed": "تعذّر بدء GPT Live Voice. ألغِ كتم الميكروفون للمحاولة مرة أخرى.",
   "mobile.chat.liveVoice.gptEnded": "توقّف GPT Live Voice. ألغِ كتم الميكروفون لبدئه مرة أخرى.",
   "mobile.chat.liveVoice.gptMicrophoneOff":
-    "اسمح لـ OpenBot باستخدام الميكروفون في الإعدادات. ثم ألغِ الكتم للمحاولة مرة أخرى.",
+    "اسمح لـ StarBot باستخدام الميكروفون في الإعدادات. ثم ألغِ الكتم للمحاولة مرة أخرى.",
+
   "mobile.chat.composer.addAttachment": "إضافة مرفق",
   "mobile.chat.composer.ask": "اسأل {name}",
   "mobile.chat.composer.stopFailed": "تعذّر إيقاف الوكيل. ربما انتهى بالفعل.",
@@ -331,7 +337,8 @@ export const messages = {
   "mobile.chat.sideQuestion.deleteTitle": "حذف هذا السؤال الجانبي؟",
   "mobile.chat.sideQuestion.deleteBody": "أسئلته وإجاباته موجودة على هذا الهاتف فقط. لا يمكنك استعادتها.",
   "mobile.chat.sideQuestion.notFound": "لم يعد هذا الوكيل على الخادم.",
-  "mobile.chat.sideQuestion.unsupported": "لا يمكن لهذا المضيف الإجابة عن الأسئلة الجانبية. حدّث OpenBot على المضيف.",
+  "mobile.chat.sideQuestion.unsupported": "لا يمكن لهذا المضيف الإجابة عن الأسئلة الجانبية. حدّث StarBot على المضيف.",
+
   "mobile.chat.pins.title": "الرسائل المثبتة",
   "mobile.chat.pins.emptyTitle": "لا توجد رسائل مثبتة",
   "mobile.chat.pins.emptyBody": "المس رسالة مع الاستمرار ثم اضغط تثبيت لإبقائها هنا.",
@@ -340,7 +347,8 @@ export const messages = {
   "mobile.chat.pins.unpin": "إلغاء التثبيت",
   "mobile.chat.pins.failed": "لم يتغير التثبيت.",
   "mobile.chat.pins.loadFailed": "تعذر تحميل الرسائل المثبتة.",
-  "mobile.chat.pins.unsupported": "لا يمكن لهذا المضيف تثبيت الرسائل. حدّث OpenBot على المضيف.",
+  "mobile.chat.pins.unsupported": "لا يمكن لهذا المضيف تثبيت الرسائل. حدّث StarBot على المضيف.",
+
   "mobile.chat.pins.mainChat": "الدردشة الرئيسية",
   "mobile.chat.pins.thread": "سلسلة جانبية",
   "mobile.chat.pins.pinnedBy": "ثبّتها {name}",
@@ -441,7 +449,8 @@ export const messages = {
   "mobile.chat.imageGallery.saveAll": "حفظ الكل",
   "mobile.chat.imageGallery.saved": "تم الحفظ في الصور",
   "mobile.chat.imageGallery.shareAll": "مشاركة الكل",
-  "mobile.chat.imageGallery.photosPermission": "اسمح لـ OpenBot بإضافة الصور في الإعدادات لحفظ هذه الصور.",
+  "mobile.chat.imageGallery.photosPermission": "اسمح لـ StarBot بإضافة الصور في الإعدادات لحفظ هذه الصور.",
+
   "mobile.chat.imageGallery.saveFailed": "تعذّر حفظ الصور",
   "mobile.chat.imageGallery.shareFailed": "تعذّرت مشاركة الصور",
   "mobile.chat.imageGallery.shareNeedsUpdate": "تتطلب مشاركة صور كثيرة أحدث إصدار من التطبيق.",
@@ -451,7 +460,8 @@ export const messages = {
   "mobile.chat.video.loading": "جارٍ تحميل {name}",
   "mobile.chat.video.share": "مشاركة {name}",
   "mobile.chat.video.save": "حفظ {name} في الصور",
-  "mobile.chat.video.photosPermission": "اسمح لـ OpenBot بإضافة الصور في الإعدادات لحفظ هذا الفيديو.",
+  "mobile.chat.video.photosPermission": "اسمح لـ StarBot بإضافة الصور في الإعدادات لحفظ هذا الفيديو.",
+
   "mobile.chat.video.saveFailed": "تعذّر حفظ الفيديو",
   "mobile.chat.audio.play": "تشغيل {name}",
   "mobile.chat.audio.pause": "إيقاف {name} مؤقتًا",
@@ -466,28 +476,37 @@ export const messages = {
   "mobile.chat.browserSecret.ended": "انتهى طلب تسجيل الدخول هذا. اطلب من الوكيل المحاولة مرة أخرى.",
   "mobile.chat.browserSecret.oneTimeCode": "رمز لمرة واحدة",
   "mobile.chat.browserSecret.takeoverTitle": "تولي التحكم في المتصفح",
-  "mobile.chat.browserSecret.takeoverBody": "أكمل هذه الخطوة في المتصفح على الحاسوب الذي يشغّل OpenBot.",
+  "mobile.chat.browserSecret.takeoverBody": "أكمل هذه الخطوة في المتصفح على الحاسوب الذي يشغّل StarBot.",
+
   "mobile.chat.browserSecret.signInBlockedTitle": "سجّل الدخول على حاسوبك",
   "mobile.chat.browserSecret.signInBlockedBody":
-    "لا يقبل هذا الموقع تسجيل الدخول من الخادم. افتح هذه المحادثة في تطبيق OpenBot لسطح المكتب على حاسوبك، وسجّل الدخول هناك.",
+    "لا يقبل هذا الموقع تسجيل الدخول من الخادم. افتح هذه المحادثة في تطبيق StarBot لسطح المكتب على حاسوبك، وسجّل الدخول هناك.",
+
   "mobile.chat.browserSecret.takeoverReload":
-    "تعذّر على OpenBot إكمال إدخال كلمة المرور أو الرمز. أدخل ما ينقص في الصفحة. ثم أعد تحميل الصفحة قبل اختيار «انتهيت».",
+    "تعذّر على StarBot إكمال إدخال كلمة المرور أو الرمز. أدخل ما ينقص في الصفحة. ثم أعد تحميل الصفحة قبل اختيار «انتهيت».",
+
   "mobile.chat.browserSecret.takeoverFailed": "تعذّر إكمال الطلب.",
   "mobile.chat.browserSecret.done": "انتهيت",
   "mobile.chat.browserSecret.submitOnce": "إرسال مرة واحدة إلى {origin}. لا تُضاف هذه القيمة إلى الدردشة.",
   "mobile.chat.browserSecret.submitFailed": "تعذّر إكمال الطلب. تحقق من الاتصال وحاول مرة أخرى.",
   "mobile.chat.browserSecret.vaultSkip.agentScript":
-    "لم يستخدم OpenBot بيانات تسجيل الدخول المحفوظة لأن الوكيل شغّل نصًا برمجيًا في هذه الصفحة. لاستخدامها، اطلب من الوكيل إعادة تحميل الصفحة والمحاولة مرة أخرى.",
+    "لم يستخدم StarBot بيانات تسجيل الدخول المحفوظة لأن الوكيل شغّل نصًا برمجيًا في هذه الصفحة. لاستخدامها، اطلب من الوكيل إعادة تحميل الصفحة والمحاولة مرة أخرى.",
+
   "mobile.chat.browserSecret.vaultSkip.fieldKind":
-    "لم يستخدم OpenBot بيانات تسجيل الدخول المحفوظة لأن الوكيل اختار حقلًا خاطئًا في الصفحة.",
+    "لم يستخدم StarBot بيانات تسجيل الدخول المحفوظة لأن الوكيل اختار حقلًا خاطئًا في الصفحة.",
+
   "mobile.chat.browserSecret.vaultSkip.loginChoice":
-    "لم يستخدم OpenBot بيانات تسجيل دخول محفوظة لأن الوكيل لم يختر أيًّا من بيانات تسجيل الدخول المحفوظة لهذا الموقع. أخبر الوكيل بالحساب الذي يجب استخدامه.",
+    "لم يستخدم StarBot بيانات تسجيل دخول محفوظة لأن الوكيل لم يختر أيًّا من بيانات تسجيل الدخول المحفوظة لهذا الموقع. أخبر الوكيل بالحساب الذي يجب استخدامه.",
+
   "mobile.chat.browserSecret.vaultSkip.noPassword":
-    "لم يستخدم OpenBot بيانات تسجيل الدخول المحفوظة لأنها لا تحتوي على كلمة مرور لهذا الموقع.",
+    "لم يستخدم StarBot بيانات تسجيل الدخول المحفوظة لأنها لا تحتوي على كلمة مرور لهذا الموقع.",
+
   "mobile.chat.browserSecret.vaultSkip.noAuthenticatorKey":
-    "لم يستخدم OpenBot بيانات تسجيل الدخول المحفوظة لأنها لا تحتوي على مفتاح تطبيق المصادقة.",
+    "لم يستخدم StarBot بيانات تسجيل الدخول المحفوظة لأنها لا تحتوي على مفتاح تطبيق المصادقة.",
+
   "mobile.chat.browserSecret.vaultSkip.vaultUnreadable":
-    "لم يستخدم OpenBot بيانات تسجيل دخول محفوظة لأنه تعذّر عليه قراءة مدير كلمات المرور.",
+    "لم يستخدم StarBot بيانات تسجيل دخول محفوظة لأنه تعذّر عليه قراءة مدير كلمات المرور.",
+
   "mobile.chat.browserSecret.submit": "إرسال",
   "mobile.chat.browserSecret.takeOver": "تولي التحكم",
   "mobile.chat.starter.title": "على ماذا نعمل أولًا؟",
@@ -575,14 +594,16 @@ export const messages = {
   "mobile.chat.approval.effect.permissions":
     "«سماح» يمنح {name} هذه الأذونات على {server}. «رفض» يبقي الأذونات الحالية.",
   "mobile.chat.approval.partial":
-    "يرسل {server} بداية هذا الطلب فقط إلى الهاتف. للسماح به، حدّث OpenBot على {server}، أو افتح هذه الدردشة في تطبيق OpenBot لسطح المكتب. يمكنك رفضه هنا.",
+    "يرسل {server} بداية هذا الطلب فقط إلى الهاتف. للسماح به، حدّث StarBot على {server}، أو افتح هذه الدردشة في تطبيق StarBot لسطح المكتب. يمكنك رفضه هنا.",
+
   "mobile.chat.approval.loading": "جارٍ تحميل الطلب كاملًا…",
   "mobile.chat.approval.loadFailed": "تعذّر تحميل الطلب كاملًا. يمكنك رفضه هنا.",
   "mobile.chat.approval.retry": "إعادة المحاولة",
   "mobile.chat.approval.report.bugHeadline": "وجدت خطأً؟ لنُصلحه.",
   "mobile.chat.approval.report.ideaHeadline": "لديك فكرة؟ لنحققها.",
   "mobile.chat.approval.report.dontSend": "ليس الآن",
-  "mobile.chat.approval.report.send": "إرسال إلى فريق OpenBot",
+  "mobile.chat.approval.report.send": "إرسال إلى فريق StarBot",
+
   "mobile.chat.approval.report.phoneAdds": "يضيف هذا الهاتف إلى البلاغ:",
   "mobile.chat.approval.allow": "سماح",
   "mobile.chat.approval.deny": "رفض",
@@ -689,7 +710,8 @@ export const messages = {
   "mobile.chat.queue.sendNowNeedsTurn": "يحتاج «أرسل الآن» إلى دور قيد التشغيل.",
   "mobile.chat.queue.stillHoldingTitle": "لا تزال الرسالة معلّقة",
   "mobile.chat.queue.stillHoldingMessage":
-    "تعذّر على OpenBot تحرير هذه الرسالة، لذا يستمر الوكيل في انتظارها. حاول مرة أخرى بعد إعادة اتصال الهاتف.",
+    "تعذّر على StarBot تحرير هذه الرسالة، لذا يستمر الوكيل في انتظارها. حاول مرة أخرى بعد إعادة اتصال الهاتف.",
+
   "mobile.chat.queue.keepEditing": "متابعة التعديل",
   "mobile.chat.queue.leaveAnyway": "المغادرة على أي حال",
   "mobile.chat.queue.discardTitle": "تجاهل التغييرات؟",
@@ -699,7 +721,8 @@ export const messages = {
   "mobile.chat.queue.alreadyReceivedKept":
     "تلقى الوكيل هذه الرسالة بالفعل، لذا لا يمكن تغييرها. عند إغلاق هذه الشاشة، ينتقل نصك إلى مربع الرسالة.",
   "mobile.chat.queue.holding": "جارٍ تعليق الرسالة من أجلك…",
-  "mobile.chat.queue.holdFailed": "تعذّر على OpenBot تعليق هذه الرسالة لتعديلها.",
+  "mobile.chat.queue.holdFailed": "تعذّر على StarBot تعليق هذه الرسالة لتعديلها.",
+
   "mobile.chat.queue.messageLabel": "الرسالة",
   "mobile.chat.queue.messagePlaceholder": "نص الرسالة",
   "mobile.chat.queue.save": "حفظ الرسالة في قائمة الانتظار",
@@ -751,12 +774,16 @@ export const messages = {
   "mobile.chat.threads.renameSave": "حفظ",
   "mobile.chat.threads.name": "اسم السلسلة",
   "mobile.chat.threads.renameUnavailable":
-    "لا يمكنك إعادة تسمية هذه السلسلة الآن. اتصل بالخادم، أو حدّث OpenBot على المضيف.",
+    "لا يمكنك إعادة تسمية هذه السلسلة الآن. اتصل بالخادم، أو حدّث StarBot على المضيف.",
+
   "mobile.chat.threads.delete.action": "حذف",
   "mobile.chat.threads.delete.title": "حذف هذه السلسلة؟",
-  "mobile.chat.threads.delete.body": "يحذف OpenBot السلسلة ورسائلها وملفاتها نهائيًا. لا تتغير الدردشة الرئيسية.",
-  "mobile.chat.threads.filesUnsupported": "لا يمكن لهذا المضيف استقبال ملفات في سلسلة. حدّث OpenBot على المضيف.",
-  "mobile.chat.threads.unsupported": "لا يمكن لهذا المضيف إعادة تسمية السلاسل أو حذفها. حدّث OpenBot على المضيف.",
+  "mobile.chat.threads.delete.body": "يحذف StarBot السلسلة ورسائلها وملفاتها نهائيًا. لا تتغير الدردشة الرئيسية.",
+
+  "mobile.chat.threads.filesUnsupported": "لا يمكن لهذا المضيف استقبال ملفات في سلسلة. حدّث StarBot على المضيف.",
+
+  "mobile.chat.threads.unsupported": "لا يمكن لهذا المضيف إعادة تسمية السلاسل أو حذفها. حدّث StarBot على المضيف.",
+
   "mobile.chat.threads.error.rename": "تعذّرت إعادة تسمية السلسلة.",
   "mobile.chat.threads.error.delete": "تعذّر حذف السلسلة.",
   "mobile.chat.channelWork.working": "يعمل في {channel}",
@@ -813,6 +840,7 @@ export const messages = {
   "mobile.chat.locationRequest.declined": "لم تتم المشاركة",
   "mobile.chat.locationRequest.unavailable": "تعذّر على هاتفك تحديد موقعك. حاول مرة أخرى.",
   "mobile.chat.locationRequest.deniedTitle": "الوصول إلى الموقع متوقف",
-  "mobile.chat.locationRequest.denied": "لمشاركة موقعك، اسمح لـ OpenBot باستخدامه في الإعدادات.",
+  "mobile.chat.locationRequest.denied": "لمشاركة موقعك، اسمح لـ StarBot باستخدامه في الإعدادات.",
+
   "mobile.chat.locationRequest.openSettings": "فتح الإعدادات",
 } as const satisfies PartialTranslation<typeof source>;

@@ -81,7 +81,8 @@ export const messages = {
   "billing.license.description": "Bir şirketteki iş için. Sunucu içermez.",
   "billing.license.loadFailed": "Lisans yüklenemedi.",
   "billing.license.actionFailed": "Lisans değiştirilemedi.",
-  "billing.license.contactSales": "Daha fazla bilgi için licenses@openbot.run adresine yazın.",
+  "billing.license.contactSales": "Daha fazla bilgi için licenses@starbot.app adresine yazın.",
+
   "billing.license.saving": "Kaydediliyor…",
   "billing.license.personal.title": "Kişisel kullanım",
   "billing.license.personal.description": "Ticari olmayan kullanım için ücretsizdir.",
@@ -91,7 +92,8 @@ export const messages = {
   "billing.license.buy": "Lisans satın al",
   "billing.license.offer.title": "Ticari lisans",
   "billing.license.offer.description": "1 kullanıcı için Starter veya {count} ya da daha fazla kullanıcı için Team.",
-  "billing.license.buy.description": "OpenBot'u işte kaç kişi kullanıyor? Yapay zeka ajanları kullanıcı sayılmaz.",
+  "billing.license.buy.description": "StarBot'u işte kaç kişi kullanıyor? Yapay zeka ajanları kullanıcı sayılmaz.",
+
   "billing.license.buy.confirm": "Ödemeye geç",
   "billing.license.trial.until": "{date} tarihine kadar ücretsiz",
   "billing.license.trial.confirm": "Ücretsiz denemeyi başlat",
@@ -153,9 +155,11 @@ export const messages = {
   "billing.order.yearly": "Yıllık",
   "billing.order.yearlySaving": "Yıllık −%{percent}",
   "billing.order.server.title": "Barındırılan sunucu",
-  "billing.order.server.summary": "OpenBot'u ekibiniz için biz çalıştırırız.",
+  "billing.order.server.summary": "StarBot'u ekibiniz için biz çalıştırırız.",
+
   "billing.order.server.none": "Sunucu yok",
-  "billing.order.server.noneDetail": "OpenBot'u kendi bilgisayarınızda çalıştırın",
+  "billing.order.server.noneDetail": "StarBot'u kendi bilgisayarınızda çalıştırın",
+
   "billing.order.server.thisComputer": "Bilgisayarınız",
   "billing.order.server.bestValue": "En avantajlı",
   "billing.order.server.bestFor.starter": "Tek kişi için ideal",
@@ -164,7 +168,8 @@ export const messages = {
   "billing.order.server.storage": "{size} GB depolama",
   "billing.order.server.speed": "{speed}× hız",
   "billing.order.license.title": "Lisans",
-  "billing.order.license.summary": "OpenBot'u işte kullanmak için.",
+  "billing.order.license.summary": "StarBot'u işte kullanmak için.",
+
   "billing.order.license.none": "Lisans yok",
   "billing.order.license.noneDetail": "Kişisel ve ticari olmayan kullanım",
   "billing.order.license.starter": "Starter lisansı",

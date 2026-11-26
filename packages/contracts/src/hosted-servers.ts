@@ -98,19 +98,19 @@ export function parseHostedServerName(value: string): string | null {
   return slugifyTeamServerName(name).length >= INPUT_LIMITS.serverNameMin ? name : null;
 }
 
-const HOSTED_SERVER_CONTACT_SUBJECT = "Custom OpenBot setup";
+const HOSTED_SERVER_CONTACT_SUBJECT = "Custom StarBot setup";
 const HOSTED_SERVER_CONTACT_BODY = [
-  "I’d like to discuss a custom OpenBot setup for my needs. Please get in touch so we can explore the available options.",
+  "I’d like to discuss a custom StarBot setup for my needs. Please get in touch so we can explore the available options.",
   "",
   "Here’s some additional context:",
   "",
   "[Tell us what you need]",
 ].join("\r\n");
 
-export const HOSTED_SERVER_CONTACT_URL = `mailto:hello@openbot.run?subject=${encodeURIComponent(
+export const HOSTED_SERVER_CONTACT_URL = `mailto:hello@starbot.app?subject=${encodeURIComponent(
   HOSTED_SERVER_CONTACT_SUBJECT,
 )}&body=${encodeURIComponent(HOSTED_SERVER_CONTACT_BODY)}`;
-export const HOSTING_DEVELOPER_KEY_HEADER = "OpenBot-Hosting-Developer-Key";
+export const HOSTING_DEVELOPER_KEY_HEADER = "StarBot-Hosting-Developer-Key";
 
 export interface HostedServerSummary {
   deletionScheduledAt?: number | null;
@@ -488,7 +488,7 @@ export function parseServerClaim(value: unknown): ServerClaim | null {
 }
 
 export const INSTALL_SERVER_SCRIPT_URL =
-  "https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/install-server.sh";
+  "https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/scripts/install-server.sh";
 
 function shellWord(value: string): string {
   return `'${value.replaceAll("'", "'\\''")}'`;

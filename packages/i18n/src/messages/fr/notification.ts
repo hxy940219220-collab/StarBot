@@ -29,7 +29,8 @@ export const messages = {
   "notification.machineAlert.cpu": "{server} : CPU occupé à {percent}",
   "notification.machineAlert.body": "Le seuil d’alerte de {level} est dépassé. Voir Réglages du serveur > Stockage.",
   "notification.test": "Les notifications fonctionnent.",
-  "notification.welcome": "OpenBot vous préviendra ici quand un agent aura besoin de vous.",
+  "notification.welcome": "StarBot vous préviendra ici quand un agent aura besoin de vous.",
+
   "notification.toast.region": "Notifications",
   "notification.toast.close": "Fermer la notification",
 } as const satisfies PartialTranslation<typeof source>;

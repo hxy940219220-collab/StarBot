@@ -70,7 +70,7 @@ function previewCreditsState(): CreditsState {
     servers: [
       {
         serverId: "team",
-        name: "OpenBot team",
+        name: "StarBot team",
         role: "owner",
         balance: 1_799.5,
         expiring: { credits: 30, expiresAt: Date.now() + 12 * DAY_MS },

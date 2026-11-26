@@ -9,7 +9,8 @@ export const messages = defineMessages("error.update", {
   "error.update.notInstalled": "The last restart did not install the update. Restart to try again.",
   "error.update.downloadFailed": "Could not download the update. Try again.",
   "error.update.signatureNotConfirmed":
-    "StarBot could not verify the update. Try again. If this error continues, download StarBot from openbot.run/download.",
+    "StarBot could not verify the update. Try again. If this error continues, download StarBot from starbot.app/download.",
+
   "error.update.checkFailed": "Could not check for updates. Try again.",
   "error.update.checkStalled": "The update check stopped responding. Try again.",
   "error.update.checkOffline": "Could not reach the update service. Check your internet connection, then try again.",

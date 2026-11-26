@@ -8,8 +8,8 @@ describe("buildContentSecurityPolicy", () => {
     expect(policy).toContain(
       "connect-src 'self' openbot-attachment: openbot-remote-attachment: ws://127.0.0.1:*",
     );
-    expect(policy).not.toContain("analytics.openbot.run");
-    expect(policy).not.toContain("openbot.run");
+    expect(policy).not.toContain("analytics.starbot.app");
+    expect(policy).not.toContain("starbot.app");
     expect(policy.split("; ").find((directive) => directive.startsWith("connect-src "))).not.toContain("localhost");
   });
 

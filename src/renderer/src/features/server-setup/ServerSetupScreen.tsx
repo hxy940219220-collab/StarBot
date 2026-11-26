@@ -15,9 +15,9 @@ import {
   text,
 } from "./server-setup-port";
 
-const APP_URL = "https://openbot.run/app";
-const PRODUCT_NAME = "OpenBot";
-const DEFAULT_SERVER_NAME = "OpenBot";
+const APP_URL = "https://starbot.app/app";
+const PRODUCT_NAME = "StarBot";
+const DEFAULT_SERVER_NAME = "StarBot";
 const STATUS_POLL_MS = 2_000;
 const ERROR_POLL_MS = 10_000;
 

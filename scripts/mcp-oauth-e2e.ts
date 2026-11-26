@@ -715,9 +715,9 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
       name: "openbot",
       title,
       version: "9.9.9-e2e",
-      websiteUrl: "https://openbot.run",
+      websiteUrl: "https://starbot.app",
     });
-    assert.deepEqual(resource.clients.at(-1), openbotClient("OpenBot"));
+    assert.deepEqual(resource.clients.at(-1), openbotClient("StarBot"));
     assert.ok(upstream.every((hit) => !/bot/iu.test(hit.userAgent ?? "")));
     const titleOf = async (route: { url: string; bearer: string }) => {
       const before = resource.clients.length;
@@ -730,24 +730,24 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
     };
     const researchRoute = await endpointOf(gateway, direct, "agent-research");
     assert.notEqual(researchRoute.url, directRoute.url);
-    assert.equal(await titleOf(researchRoute), "Research Bot (OpenBot)");
-    assert.equal(await titleOf(chiefRoute), "Ops Bot (OpenBot)");
+    assert.equal(await titleOf(researchRoute), "Research Bot (StarBot)");
+    assert.equal(await titleOf(chiefRoute), "Ops Bot (StarBot)");
     const research = agents[0];
     assert.ok(research);
     research.name = "Renamed Bot";
-    assert.equal(await titleOf(researchRoute), "Renamed Bot (OpenBot)");
-    assert.equal(await titleOf(await endpointOf(gateway, direct, "removed-agent")), "OpenBot");
+    assert.equal(await titleOf(researchRoute), "Renamed Bot (StarBot)");
+    assert.equal(await titleOf(await endpointOf(gateway, direct, "removed-agent")), "StarBot");
     const hitsBeforeCross = resource.hits.length;
     assert.equal(await rawPost(researchRoute.url, { authorization: `Bearer ${directRoute.bearer}` }), 403);
     assert.equal(await rawPost(directRoute.url, { authorization: `Bearer ${researchRoute.bearer}` }), 403);
     assert.equal(await rawPost(chiefRoute.url, { authorization: `Bearer ${researchRoute.bearer}` }), 403);
     assert.equal(resource.hits.length, hitsBeforeCross, "A request with another route's bearer reached the server.");
     const clientIdentity = {
-      withoutAgent: "OpenBot",
-      agent: "Research Bot (OpenBot)",
-      controlCharacters: "Ops Bot (OpenBot)",
-      renamed: "Renamed Bot (OpenBot)",
-      unknownAgent: "OpenBot",
+      withoutAgent: "StarBot",
+      agent: "Research Bot (StarBot)",
+      controlCharacters: "Ops Bot (StarBot)",
+      renamed: "Renamed Bot (StarBot)",
+      unknownAgent: "StarBot",
       userAgentWithoutBot: true,
       crossAgentBearers: 403,
     };

@@ -9,11 +9,13 @@ export const messages = {
   "mobile.server.drawer.leaveFailed": "Nie udało się opuścić serwera {name}",
   "mobile.server.drawer.removeFailed": "Nie udało się usunąć serwera {name}",
   "mobile.server.drawer.deleteFailed": "Nie można usunąć {name}",
-  "mobile.server.drawer.actionFailed": "OpenBot nie mógł wykonać tej czynności. Spróbuj ponownie.",
+  "mobile.server.drawer.actionFailed": "StarBot nie mógł wykonać tej czynności. Spróbuj ponownie.",
+
   "mobile.server.drawer.moveUp": "Przenieś w górę",
   "mobile.server.drawer.moveDown": "Przenieś w dół",
   "mobile.server.drawer.orderHint":
-    "OpenBot otwiera się na pierwszym serwerze. Kolejność jest zapisana na tym urządzeniu.",
+    "StarBot otwiera się na pierwszym serwerze. Kolejność jest zapisana na tym urządzeniu.",
+
   "mobile.server.drawer.title": "Serwery",
   "mobile.server.drawer.serverSettings": "Ustawienia serwera",
   "mobile.server.drawer.serverListHint": "Pokazuje lub ukrywa serwery",
@@ -98,7 +100,8 @@ export const messages = {
   "mobile.server.local.optionHint": "Na komputerze, na którym działa {name}, z własnymi agentami, czatami i plikami.",
   "mobile.server.local.title": "Nowy serwer",
   "mobile.server.local.description":
-    "Serwer działa na komputerze, na którym działa {name}, z własnymi agentami, czatami i plikami. Jest dostępny, gdy OpenBot działa na tym komputerze.",
+    "Serwer działa na komputerze, na którym działa {name}, z własnymi agentami, czatami i plikami. Jest dostępny, gdy StarBot działa na tym komputerze.",
+
   "mobile.server.local.nameLabel": "Nazwa serwera",
   "mobile.server.local.nameTooShort": "Użyj co najmniej {limit} znaków.",
   "mobile.server.local.create": "Utwórz",
@@ -110,25 +113,32 @@ export const messages = {
   "mobile.server.local.createdOn": "{name} działa na tym samym komputerze co {computer}.",
   "mobile.server.local.waiting": "Czekanie, aż {name} będzie online…",
   "mobile.server.local.notPublished":
-    "{name} działa, ale ten telefon nie może go jeszcze otworzyć. Sprawdź, czy OpenBot na komputerze, na którym działa {computer}, jest zalogowany i online.",
+    "{name} działa, ale ten telefon nie może go jeszcze otworzyć. Sprawdź, czy StarBot na komputerze, na którym działa {computer}, jest zalogowany i online.",
+
   "mobile.server.local.open": "Otwórz serwer",
   "mobile.server.local.ownerOnly": "Tylko właściciel może utworzyć serwer na tym komputerze.",
-  "mobile.server.local.unsupported": "Zaktualizuj OpenBot na tym komputerze, aby utworzyć tu serwer.",
+  "mobile.server.local.unsupported": "Zaktualizuj StarBot na tym komputerze, aby utworzyć tu serwer.",
+
   "mobile.server.local.deleteOffline":
-    "Tylko komputer tego serwera może go usunąć. Otwórz OpenBot na tym komputerze i spróbuj ponownie.",
+    "Tylko komputer tego serwera może go usunąć. Otwórz StarBot na tym komputerze i spróbuj ponownie.",
+
   "mobile.server.hosted.intro.title": "Twoi agenci zawsze aktywni",
   "mobile.server.hosted.intro.description":
-    "Serwer w chmurze uruchamia agentów i rutyny, gdy komputer jest wyłączony. OpenBot go konfiguruje i utrzymuje.",
+    "Serwer w chmurze uruchamia agentów i rutyny, gdy komputer jest wyłączony. StarBot go konfiguruje i utrzymuje.",
+
   "mobile.server.hosted.planFacts": "{members} · {storage} · {sites} · {speed}",
   "mobile.server.hosted.steps.title": "Dodaj go na komputerze",
-  "mobile.server.hosted.steps.open": "Otwórz OpenBot na komputerze.",
+  "mobile.server.hosted.steps.open": "Otwórz StarBot na komputerze.",
+
   "mobile.server.hosted.steps.settings": "Przejdź do Ustawienia → Hostowane serwery.",
   "mobile.server.hosted.steps.add": "Wybierz „Dodaj serwer” i plan.",
   "mobile.server.hosted.plansToggle": "Co zawiera każdy plan",
   "mobile.server.hosted.computer.add": "Dodaj serwer w chmurze",
-  "mobile.server.hosted.computer.addHint": "W OpenBot otwórz Ustawienia → Hostowane serwery i wybierz „Dodaj serwer”.",
+  "mobile.server.hosted.computer.addHint": "W StarBot otwórz Ustawienia → Hostowane serwery i wybierz „Dodaj serwer”.",
+
   "mobile.server.hosted.computer.change": "Zmień plan",
-  "mobile.server.hosted.computer.changeHint": "W OpenBot otwórz Ustawienia → Rozliczenia.",
+  "mobile.server.hosted.computer.changeHint": "W StarBot otwórz Ustawienia → Rozliczenia.",
+
   "mobile.server.hosted.yourServers": "Twoje serwery",
   "mobile.server.hosted.currentPlan": "Twój plan",
   "mobile.server.hosted.soldOut": "Wyprzedany",
@@ -146,7 +156,8 @@ export const messages = {
   "mobile.server.hosted.paymentTitle": "Oczekiwanie na płatność",
   "mobile.server.hosted.paymentDescription": "Konfiguracja zacznie się, gdy płatność zostanie potwierdzona.",
   "mobile.server.hosted.progressTitle": "Konfigurowanie: {name}",
-  "mobile.server.hosted.progressDescription": "OpenBot przygotowuje dla ciebie prywatną maszynę.",
+  "mobile.server.hosted.progressDescription": "StarBot przygotowuje dla ciebie prywatną maszynę.",
+
   "mobile.server.hosted.closeHint":
     "Możesz zamknąć ten panel. Konfiguracja trwa dalej, a serwer pojawi się na liście, gdy będzie gotowy.",
   "mobile.server.hosted.readyTitle": "Serwer {name} jest gotowy",
@@ -155,21 +166,26 @@ export const messages = {
   "mobile.server.hosted.open": "Otwórz serwer",
   "mobile.server.hosted.failedTitle": "Nie udało się uruchomić serwera",
   "mobile.server.hosted.failedDescription":
-    "Spróbuj ponownie. Jeśli znowu się nie uda, usuń serwer w Ustawieniach OpenBot na komputerze.",
+    "Spróbuj ponownie. Jeśli znowu się nie uda, usuń serwer w Ustawieniach StarBot na komputerze.",
+
   "mobile.server.hosted.retrying": "Uruchamianie…",
   "mobile.server.hosted.expiredTitle": "Strona płatności wygasła",
   "mobile.server.hosted.expiredDescription": "Serwer nie został opłacony, więc został usunięty.",
   "mobile.server.hosted.step.payment": "Potwierdzenie płatności",
   "mobile.server.hosted.step.create": "Tworzenie maszyny",
-  "mobile.server.hosted.step.start": "Uruchomienie OpenBot",
+  "mobile.server.hosted.step.start": "Uruchomienie StarBot",
+
   "mobile.server.hosted.step.connect": "Połączenie z kontem",
   "mobile.server.hosted.detail.payment": "Oczekiwanie na Stripe",
   "mobile.server.hosted.detail.reserve": "Rezerwowanie prywatnej maszyny",
-  "mobile.server.hosted.detail.copy": "Kopiowanie OpenBot na maszynę",
+  "mobile.server.hosted.detail.copy": "Kopiowanie StarBot na maszynę",
+
   "mobile.server.hosted.detail.key": "Dodawanie jednorazowego klucza logowania",
   "mobile.server.hosted.detail.boot": "Włączanie maszyny",
-  "mobile.server.hosted.detail.app": "Uruchamianie OpenBot",
-  "mobile.server.hosted.detail.wait": "Oczekiwanie na odpowiedź OpenBot",
+  "mobile.server.hosted.detail.app": "Uruchamianie StarBot",
+
+  "mobile.server.hosted.detail.wait": "Oczekiwanie na odpowiedź StarBot",
+
   "mobile.server.hosted.detail.signIn": "Logowanie na twoje konto",
   "mobile.server.hosted.detail.publish": "Dodawanie serwera do konta",
   "mobile.server.hosted.detail.check": "Sprawdzanie połączenia",
@@ -177,7 +193,8 @@ export const messages = {
   "mobile.server.hosted.stepActive": "w toku",
   "mobile.server.hosted.stepPending": "nierozpoczęte",
   "mobile.server.hosted.stepFailed": "niepowodzenie",
-  "mobile.server.scan.notInvitation": "Ten kod QR nie jest zaproszeniem OpenBot.",
+  "mobile.server.scan.notInvitation": "Ten kod QR nie jest zaproszeniem StarBot.",
+
   "mobile.server.scan.title": "Skanuj zaproszenie",
   "mobile.server.role.owner": "właściciel",
   "mobile.server.role.admin": "administrator",
@@ -229,7 +246,8 @@ export const messages = {
   "mobile.server.routines.status.paused": "Wstrzymana",
   "mobile.server.routines.status.failed": "Niepowodzenie",
   "mobile.server.routines.status.completed": "Ukończona",
-  "mobile.server.threads.unsupported": "Ten host nie obsługuje wątków. Zaktualizuj OpenBot na hoście.",
+  "mobile.server.threads.unsupported": "Ten host nie obsługuje wątków. Zaktualizuj StarBot na hoście.",
+
   "mobile.server.threads.ask": "Co ma zostać zrobione?",
   "mobile.server.threads.chooseAgent": "Rozpocznij wątek z",
   "mobile.server.threads.agentLabel": "Rozpocznij wątek z {name}",
@@ -306,7 +324,8 @@ export const messages = {
     "Serwer zatrzyma się i uruchomi ponownie. Trwa to około minuty. Trwające tury agentów zostaną przerwane, a członkowie stracą połączenie do powrotu serwera. Pliki i czaty zostaną zachowane.",
   "mobile.server.settings.restartConfirm": "Uruchom ponownie",
   "mobile.server.settings.restarted": "{name} uruchamia się ponownie",
-  "mobile.server.settings.restartUnsupported": "Zaktualizuj OpenBot na tym serwerze, aby uruchomić go ponownie stąd.",
+  "mobile.server.settings.restartUnsupported": "Zaktualizuj StarBot na tym serwerze, aby uruchomić go ponownie stąd.",
+
   "mobile.server.settings.leaveTitle": "Opuścić serwer {name}?",
   "mobile.server.settings.leaveBody": "Aby dołączyć ponownie, potrzebne będzie nowe zaproszenie.",
   "mobile.server.settings.leave": "Opuść serwer",
@@ -316,7 +335,8 @@ export const messages = {
   "mobile.server.settings.remove": "Usuń serwer",
   "mobile.server.settings.deleteTitle": "Usunąć {name}?",
   "mobile.server.settings.deleteBody":
-    "OpenBot zatrzymuje serwer na jego komputerze i przenosi jego agentów, czaty i pliki do kosza tego komputera. Serwer znika z listy serwerów na wszystkich Twoich urządzeniach.",
+    "StarBot zatrzymuje serwer na jego komputerze i przenosi jego agentów, czaty i pliki do kosza tego komputera. Serwer znika z listy serwerów na wszystkich Twoich urządzeniach.",
+
   "mobile.server.settings.delete": "Usuń serwer",
   "mobile.server.settings.name": "Nazwa serwera",
   "mobile.server.settings.nameLength": "Użyj od {min} do {max} znaków.",
@@ -328,7 +348,8 @@ export const messages = {
   "mobile.server.settings.identitySaveFailed": "Nie udało się zapisać nazwy i logo serwera. Spróbuj ponownie.",
   "mobile.server.settings.identityNotAllowed": "Tylko właściciel lub administrator może zmienić nazwę i logo serwera.",
   "mobile.server.settings.identityUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zmienić tutaj jego nazwę i logo.",
+    "Zaktualizuj StarBot na tym serwerze, aby zmienić tutaj jego nazwę i logo.",
+
   "mobile.server.settings.identityOffline": "Połącz się z tym serwerem, aby zmienić jego nazwę i logo.",
   "mobile.server.settings.appearance": "Kształt i kolor",
   "mobile.server.settings.appearanceShape": "Kształt",
@@ -398,7 +419,8 @@ export const messages = {
   "mobile.server.storage.category.caches": "Pliki serwera w pamięci podręcznej",
   "mobile.server.storage.category.runtimes": "Środowiska dostawców",
   "mobile.server.storage.category.logs": "Logi",
-  "mobile.server.storage.total": "OpenBot na serwerze {name}",
+  "mobile.server.storage.total": "StarBot na serwerze {name}",
+
   "mobile.server.storage.used": "Zajęte",
   "mobile.server.storage.byType": "Miejsce według typu",
   "mobile.server.storage.free": "Wolne na tym dysku: {size}",
@@ -424,10 +446,12 @@ export const messages = {
   "mobile.server.storage.clearCategory": "Wyczyść: {category}",
   "mobile.server.storage.clearTitle.caches": "Wyczyścić pliki serwera z pamięci podręcznej?",
   "mobile.server.storage.clearTitle.logs": "Wyczyścić logi?",
-  "mobile.server.storage.clearBody.caches": "Kopie plików serwera. OpenBot pobierze je ponownie, gdy je otworzysz.",
+  "mobile.server.storage.clearBody.caches": "Kopie plików serwera. StarBot pobierze je ponownie, gdy je otworzysz.",
+
   "mobile.server.storage.clearBody.logs": "Logi diagnostyczne. Nowe logi są tworzone od razu.",
   "mobile.server.storage.clearFailed": "Nie udało się wyczyścić danych",
-  "mobile.server.storage.clearFailedBody": "OpenBot nie mógł wyczyścić tych danych na serwerze.",
+  "mobile.server.storage.clearFailedBody": "StarBot nie mógł wyczyścić tych danych na serwerze.",
+
   "mobile.server.storage.noFiles": "Na tym serwerze nie ma zapisanych plików.",
   "mobile.server.library.type.all": "Wszystkie",
   "mobile.server.library.type.images": "Obrazy",
@@ -521,7 +545,8 @@ export const messages = {
   "mobile.server.settings.timezoneUnavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby zmienić jego strefę czasową.",
   "mobile.server.settings.timezoneUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zmienić tu jego strefę czasową.",
+    "Zaktualizuj StarBot na tym serwerze, aby zmienić tu jego strefę czasową.",
+
   "mobile.server.settings.signalHomeAutomatic": "Automatycznie",
   "mobile.server.settings.signalHomeNearest": "Najbliższy serwer Signal",
   "mobile.server.settings.signalHomeInUse": "W użyciu: {name}",
@@ -530,7 +555,8 @@ export const messages = {
   "mobile.server.settings.signalHomeUnavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby zmienić jego serwer Signal.",
   "mobile.server.settings.signalHomeUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zmienić tu jego serwer Signal.",
+    "Zaktualizuj StarBot na tym serwerze, aby zmienić tu jego serwer Signal.",
+
   "mobile.server.settings.signalHomeDescription":
     "Członkowie łączą się z tym serwerem przez ten serwer Signal. Serwer Signal z mniejszym opóźnieniem daje szybsze połączenia.",
   "mobile.server.settings.signalHomeFallback":
@@ -551,7 +577,8 @@ export const messages = {
   "mobile.server.settings.voiceModelLoadFailed": "Nie udało się wczytać modelu rozpoznawania mowy serwera.",
   "mobile.server.settings.voiceModelSaveFailed": "Nie udało się zmienić modelu rozpoznawania mowy. Spróbuj ponownie.",
   "mobile.server.settings.voiceModelUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zmienić tutaj jego rozpoznawanie mowy.",
+    "Zaktualizuj StarBot na tym serwerze, aby zmienić tutaj jego rozpoznawanie mowy.",
+
   "mobile.server.settings.voiceModelReady": "Gotowy",
   "mobile.server.settings.voiceModelDownloading": "Pobieranie: {percent}",
   "mobile.server.settings.voiceModelSize": "Pobieranie {size}",
@@ -575,13 +602,15 @@ export const messages = {
     "Serwer używa nowego klucza. Ta aplikacja przejdzie na niego po ponownym wczytaniu listy serwerów.",
   "mobile.server.settings.keyChangeFailed": "Nie udało się zmienić klucza serwera. Spróbuj ponownie.",
   "mobile.server.settings.keyOwnerOnly": "Tylko właściciel może zmienić klucz serwera.",
-  "mobile.server.settings.keyUnsupported": "Zaktualizuj OpenBot na tym serwerze, aby zmienić tutaj jego klucz.",
+  "mobile.server.settings.keyUnsupported": "Zaktualizuj StarBot na tym serwerze, aby zmienić tutaj jego klucz.",
+
   "mobile.server.settings.memoryLimit": "Wspomnienia na agenta",
   "mobile.server.settings.memoryLimitDescription": "Ile wspomnień może przechowywać każdy agent na tym serwerze.",
   "mobile.server.settings.memoryLimitLoadFailed": "Nie udało się wczytać limitu wspomnień tego serwera.",
   "mobile.server.settings.memoryLimitSaveFailed": "Nie udało się zapisać limitu wspomnień. Spróbuj ponownie.",
   "mobile.server.settings.memoryLimitUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zmienić tu jego limit wspomnień.",
+    "Zaktualizuj StarBot na tym serwerze, aby zmienić tu jego limit wspomnień.",
+
   "mobile.server.settings.memoryReview": "Przegląd wspomnień",
   "mobile.server.settings.memoryReviewDescription":
     "Jak często agenci na tym serwerze zapisują w tle trwałe fakty ze swoich czatów.",
@@ -605,7 +634,8 @@ export const messages = {
     "Gdy sterujesz przeglądarką agenta, agent uczy się działania stron z używanych przez Ciebie stron i przycisków. Wpisany tekst nie jest zapisywany.",
   "mobile.server.settings.browsingMemoryLoadFailed": "Nie udało się wczytać ustawienia przeglądania.",
   "mobile.server.settings.learningSaveFailed": "Nie udało się zapisać tego ustawienia. Spróbuj ponownie.",
-  "mobile.server.settings.learningUnsupported": "Zaktualizuj OpenBot na tym serwerze, aby zmienić tu to ustawienie.",
+  "mobile.server.settings.learningUnsupported": "Zaktualizuj StarBot na tym serwerze, aby zmienić tu to ustawienie.",
+
   "mobile.server.settings.responseStyleDescription":
     "Naturalny: agenci wysyłają krótkie aktualizacje podczas pracy, a czat je pokazuje. Klasyczny: agenci odpowiadają raz, gdy skończą.",
   "mobile.server.settings.responseStyleNatural": "Naturalny",
@@ -613,17 +643,21 @@ export const messages = {
   "mobile.server.settings.personalityLoadFailed": "Nie udało się wczytać osobowości serwera.",
   "mobile.server.settings.personalitySaveFailed": "Nie udało się zapisać stylu odpowiedzi. Spróbuj ponownie.",
   "mobile.server.settings.personalityUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zmienić tu jego styl odpowiedzi.",
+    "Zaktualizuj StarBot na tym serwerze, aby zmienić tu jego styl odpowiedzi.",
+
   "mobile.server.settings.agentsUnavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby zmienić ustawienia agentów.",
   "mobile.server.route.browserProfiles": "Profile przeglądarki",
   "mobile.server.browserProfiles.unavailable":
     "Tylko właściciel lub administrator serwera online może zarządzać jego profilami przeglądarki.",
   "mobile.server.browserProfiles.unsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zarządzać tu jego profilami przeglądarki.",
+    "Zaktualizuj StarBot na tym serwerze, aby zarządzać tu jego profilami przeglądarki.",
+
   "mobile.server.browserProfiles.loading": "Wczytywanie profili przeglądarki…",
-  "mobile.server.browserProfiles.loadFailed": "OpenBot nie mógł wczytać profili przeglądarki.",
-  "mobile.server.browserProfiles.saveFailed": "OpenBot nie mógł zmienić profilu przeglądarki.",
+  "mobile.server.browserProfiles.loadFailed": "StarBot nie mógł wczytać profili przeglądarki.",
+
+  "mobile.server.browserProfiles.saveFailed": "StarBot nie mógł zmienić profilu przeglądarki.",
+
   "mobile.server.browserProfiles.description":
     "Każdy profil ma własne logowania, pliki cookie i dane witryn na komputerze, na którym działa serwer. Agenci z tym samym profilem dzielą jego logowania.",
   "mobile.server.browserProfiles.shared": "Wspólny",
@@ -669,13 +703,17 @@ export const messages = {
     "To usuwa logowania, pliki cookie i dane witryn profilu. Jego otwarte karty zostaną zamknięte.",
   "mobile.server.browserProfiles.deleteAgents": "Ci agenci przejdą do profilu wspólnego: {agents}.",
   "mobile.server.browserProxies.unsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby zarządzać tu jego serwerami proxy.",
+    "Zaktualizuj StarBot na tym serwerze, aby zarządzać tu jego serwerami proxy.",
+
   "mobile.server.browserProxies.loading": "Wczytywanie serwerów proxy…",
-  "mobile.server.browserProxies.loadFailed": "OpenBot nie mógł wczytać serwerów proxy.",
-  "mobile.server.browserProxies.saveFailed": "OpenBot nie mógł zmienić serwera proxy.",
+  "mobile.server.browserProxies.loadFailed": "StarBot nie mógł wczytać serwerów proxy.",
+
+  "mobile.server.browserProxies.saveFailed": "StarBot nie mógł zmienić serwera proxy.",
+
   "mobile.server.browserProxies.title": "Serwery proxy",
   "mobile.server.browserProxies.sectionHint":
-    "Profil z serwerem proxy otwiera strony przez ten serwer proxy. Członek udostępnia komputer z aplikacji OpenBot na komputer.",
+    "Profil z serwerem proxy otwiera strony przez ten serwer proxy. Członek udostępnia komputer z aplikacji StarBot na komputer.",
+
   "mobile.server.browserProxies.limit": "Serwer może mieć najwyżej {limit} serwerów proxy.",
   "mobile.server.browserProxies.add": "Dodaj proxy",
   "mobile.server.browserProxies.new": "Nowe proxy",
@@ -708,7 +746,8 @@ export const messages = {
   "mobile.server.browserProxies.addressInvalid":
     "To nie jest adres serwera proxy. Użyj socks5://host:1080, http://user:password@host:3128 lub host:port:user:password.",
   "mobile.server.browserProxies.computerHint":
-    "Strony profili, które używają tego komputera, przechodzą przez jego połączenie internetowe, gdy jego członek udostępnia go w aplikacji OpenBot na komputer. Komputer otwiera tylko publiczne adresy internetowe.",
+    "Strony profili, które używają tego komputera, przechodzą przez jego połączenie internetowe, gdy jego członek udostępnia go w aplikacji StarBot na komputer. Komputer otwiera tylko publiczne adresy internetowe.",
+
   "mobile.server.browserProxies.profilesTitle": "Profile",
   "mobile.server.browserProxies.delete": "Usuń proxy",
   "mobile.server.browserProxies.deleteHint": "Usunięcie przełącza profile tego serwera proxy na „Automatycznie”.",
@@ -730,11 +769,13 @@ export const messages = {
   "mobile.server.browserProxies.choiceHint":
     "„Automatycznie” używa ustawień proxy komputera, na którym działa serwer. Zmiana zamyka otwarte karty profilu.",
   "mobile.server.browserProxies.shareHint":
-    "Aby użyć swojego komputera, udostępnij go w aplikacji OpenBot na komputer.",
+    "Aby użyć swojego komputera, udostępnij go w aplikacji StarBot na komputer.",
+
   "mobile.server.route.connectors": "Konektory",
   "mobile.server.connectors.unavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby zarządzać jego konektorami.",
-  "mobile.server.connectors.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby zarządzać tutaj jego konektorami.",
+  "mobile.server.connectors.unsupported": "Zaktualizuj StarBot na tym serwerze, aby zarządzać tutaj jego konektorami.",
+
   "mobile.server.connectors.loading": "Wczytywanie konektorów…",
   "mobile.server.connectors.localOnly": "Tylko aplikacja na komputer",
   "mobile.server.connectors.statusConnected": "Połączono",
@@ -758,7 +799,8 @@ export const messages = {
   "mobile.server.connectors.bitwarden.description":
     "Wypełniaj loginy w przeglądarce na {host} z Bitwarden lub Vaultwarden.",
   "mobile.server.connectors.bitwarden.howItWorks":
-    "{host} loguje się własnym Bitwarden CLI. W sejfie utwórz folder o nazwie Shared with OpenBot i umieść w nim tylko loginy, których agenci mogą używać. W sejfie internetowym otwórz Ustawienia › Zabezpieczenia › Klucze i wyświetl klucz API.",
+    "{host} loguje się własnym Bitwarden CLI. W sejfie utwórz folder o nazwie Shared with StarBot i umieść w nim tylko loginy, których agenci mogą używać. W sejfie internetowym otwórz Ustawienia › Zabezpieczenia › Klucze i wyświetl klucz API.",
+
   "mobile.server.connectors.bitwarden.serverUrl": "Adres serwera",
   "mobile.server.connectors.bitwarden.serverUrlHint":
     "Bitwarden albo adres Twojego serwera Vaultwarden. {host} musi łączyć się z nim przez HTTPS.",
@@ -772,7 +814,8 @@ export const messages = {
   "mobile.server.connectors.bitwarden.connectingBody":
     "{host} loguje się do Bitwarden. Pierwsze logowanie może potrwać kilka minut.",
   "mobile.server.connectors.bitwarden.folderTitle": "Udostępniony folder",
-  "mobile.server.connectors.bitwarden.folderName": "Shared with OpenBot",
+  "mobile.server.connectors.bitwarden.folderName": "Shared with StarBot",
+
   "mobile.server.connectors.bitwarden.folderKind": "Folder w Bitwarden",
   "mobile.server.connectors.bitwarden.folderFooter":
     "Przenieś login do tego folderu w Bitwarden, aby agenci mogli się nim logować. Usuń go z folderu, aby cofnąć dostęp.",
@@ -783,7 +826,8 @@ export const messages = {
   "mobile.server.connectors.github.title": "GitHub",
   "mobile.server.connectors.github.description":
     "Każdy agent na serwerze {host} może używać twoich repozytoriów, zgłoszeń i pull requestów z GitHub oraz gh i git.",
-  "mobile.server.connectors.github.unavailable": "OpenBot na tym serwerze nie może połączyć z GitHub.",
+  "mobile.server.connectors.github.unavailable": "StarBot na tym serwerze nie może połączyć z GitHub.",
+
   "mobile.server.connectors.github.connect": "Połącz GitHub",
   "mobile.server.connectors.github.codeTitle": "Wpisz ten kod w GitHub",
   "mobile.server.connectors.github.codeFooter":
@@ -793,12 +837,15 @@ export const messages = {
   "mobile.server.connectors.github.connectedAs": "Połączono jako @{login}",
   "mobile.server.connectors.github.chooseRepositories": "Wybierz repozytoria",
   "mobile.server.connectors.github.repositoriesFooter":
-    "Agenci mogą używać tylko repozytoriów, w których zainstalowano OpenBot GitHub App.",
+    "Agenci mogą używać tylko repozytoriów, w których zainstalowano StarBot GitHub App.",
+
   "mobile.server.connectors.github.repositoriesTitle": "Repozytoria",
   "mobile.server.connectors.github.repositoriesLoading": "Odczytywanie repozytoriów z GitHub",
-  "mobile.server.connectors.github.repositoriesFailed": "OpenBot nie mógł odczytać repozytoriów z GitHub.",
+  "mobile.server.connectors.github.repositoriesFailed": "StarBot nie mógł odczytać repozytoriów z GitHub.",
+
   "mobile.server.connectors.github.noRepositories":
-    "OpenBot GitHub App nie jest jeszcze zainstalowana w żadnym repozytorium.",
+    "StarBot GitHub App nie jest jeszcze zainstalowana w żadnym repozytorium.",
+
   "mobile.server.connectors.github.moreRepositories": {
     one: "I jeszcze {count} repozytorium",
     few: "I jeszcze {count} repozytoria",
@@ -814,12 +861,15 @@ export const messages = {
   "mobile.server.connectors.github.disconnect": "Odłącz GitHub",
   "mobile.server.connectors.github.disconnectTitle": "Odłączyć GitHub?",
   "mobile.server.connectors.github.disconnectBody":
-    "To usunie logowanie @{login} z serwera {host}, a każdy agent straci narzędzia GitHub, gh i git. Potem otworzy się GitHub, gdzie możesz cofnąć dostęp dla OpenBot.",
+    "To usunie logowanie @{login} z serwera {host}, a każdy agent straci narzędzia GitHub, gh i git. Potem otworzy się GitHub, gdzie możesz cofnąć dostęp dla StarBot.",
+
   "mobile.server.connectors.onePassword.title": "1Password",
   "mobile.server.connectors.onePassword.description":
-    "Udostępnij OpenBot na serwerze {host} osobny sejf 1Password przez konto usługi, aby agenci na serwerze {host} mogli logować się na strony w jego przeglądarce.",
+    "Udostępnij StarBot na serwerze {host} osobny sejf 1Password przez konto usługi, aby agenci na serwerze {host} mogli logować się na strony w jego przeglądarce.",
+
   "mobile.server.connectors.onePassword.howItWorks":
-    "Na 1Password.com utwórz konto usługi, które może odczytywać tylko sejf udostępniany OpenBot, a potem wklej tutaj jego token. {host} sprawdza token i go przechowuje; ten telefon go nie przechowuje. Agenci nigdy nie widzą hasła.",
+    "Na 1Password.com utwórz konto usługi, które może odczytywać tylko sejf udostępniany StarBot, a potem wklej tutaj jego token. {host} sprawdza token i go przechowuje; ten telefon go nie przechowuje. Agenci nigdy nie widzą hasła.",
+
   "mobile.server.connectors.onePassword.token": "Token konta usługi",
   "mobile.server.connectors.onePassword.tokenPlaceholder": "ops_…",
   "mobile.server.connectors.onePassword.connect": "Połącz 1Password",
@@ -890,7 +940,8 @@ export const messages = {
     "{host} usuwa swój klucz dostępu. Sejf i jego loginy zostają na Twoim koncie {name}.",
   "mobile.server.connectors.slack.title": "Slack",
   "mobile.server.connectors.slack.description":
-    "Ludzie oznaczają @OpenBot w Slacku lub wysyłają mu wiadomość prywatną. Slack Orchestrator pyta odpowiedniego agenta i odpowiada.",
+    "Ludzie oznaczają @StarBot w Slacku lub wysyłają mu wiadomość prywatną. Slack Orchestrator pyta odpowiedniego agenta i odpowiada.",
+
   "mobile.server.connectors.slack.attention": {
     one: "{count} obszar roboczy wymaga uwagi",
     few: "{count} obszary robocze wymagają uwagi",
@@ -899,7 +950,8 @@ export const messages = {
   },
   "mobile.server.connectors.slack.connect": "Połącz Slack",
   "mobile.server.connectors.slack.connectFooter":
-    "Slack otworzy się w przeglądarce. Wybierz obszar roboczy w prawym górnym rogu, a potem Allow. OpenBot instaluje jedną aplikację o nazwie OpenBot, która dołącza do każdego publicznego kanału.",
+    "Slack otworzy się w przeglądarce. Wybierz obszar roboczy w prawym górnym rogu, a potem Allow. StarBot instaluje jedną aplikację o nazwie StarBot, która dołącza do każdego publicznego kanału.",
+
   "mobile.server.connectors.slack.add": "Dodaj obszar roboczy",
   "mobile.server.connectors.slack.limit": {
     one: "Możesz połączyć maksymalnie {count} obszar roboczy.",
@@ -909,16 +961,22 @@ export const messages = {
   },
   "mobile.server.connectors.slack.workspaceTitle": "Obszar roboczy",
   "mobile.server.connectors.slack.workspaceDescription":
-    "Ludzie oznaczają @OpenBot lub wysyłają mu wiadomość prywatną.",
+    "Ludzie oznaczają @StarBot lub wysyłają mu wiadomość prywatną.",
+
   "mobile.server.connectors.slack.missingScopes":
-    "OpenBot nie ma tych uprawnień w Slacku: {scopes}. Odłącz obszar roboczy, a potem połącz go ponownie.",
-  "mobile.server.connectors.slack.retryAt": "Slack poprosił OpenBot o czekanie. Kolejna próba o {time}.",
+    "StarBot nie ma tych uprawnień w Slacku: {scopes}. Odłącz obszar roboczy, a potem połącz go ponownie.",
+
+  "mobile.server.connectors.slack.retryAt": "Slack poprosił StarBot o czekanie. Kolejna próba o {time}.",
+
   "mobile.server.connectors.slack.helpInvalidToken":
-    "Slack nie akceptuje już OpenBot w tym obszarze roboczym. Mógł zostać odinstalowany. Połącz obszar roboczy ponownie.",
+    "Slack nie akceptuje już StarBot w tym obszarze roboczym. Mógł zostać odinstalowany. Połącz obszar roboczy ponownie.",
+
   "mobile.server.connectors.slack.helpSecretStorage":
-    "OpenBot nie może odczytać zapisanych tokenów na serwerze {host}. Odłącz obszar roboczy, a potem połącz go ponownie.",
+    "StarBot nie może odczytać zapisanych tokenów na serwerze {host}. Odłącz obszar roboczy, a potem połącz go ponownie.",
+
   "mobile.server.connectors.slack.helpRelay":
-    "OpenBot na serwerze {host} nie może odbierać zdarzeń Slack. Na serwerze {host} zaloguj się, nadaj serwerowi nazwę w ustawieniach serwera i nie zamykaj OpenBot.",
+    "StarBot na serwerze {host} nie może odbierać zdarzeń Slack. Na serwerze {host} zaloguj się, nadaj serwerowi nazwę w ustawieniach serwera i nie zamykaj StarBot.",
+
   "mobile.server.connectors.slack.helpNotLinked":
     "Ten obszar roboczy nie jest połączony z {host}. Stuknij Połącz ponownie, aby go połączyć.",
   "mobile.server.connectors.slack.orchestratorTitle": "Slack Orchestrator",
@@ -927,19 +985,25 @@ export const messages = {
   "mobile.server.connectors.slack.orchestratorNone": "Dodaj Slack Orchestrator, inaczej Slack nie dostanie odpowiedzi.",
   "mobile.server.connectors.slack.addAgent": "Dodaj Slack Orchestrator",
   "mobile.server.connectors.slack.note":
-    "OpenBot sam dołącza do każdego publicznego kanału, także do nowych. Do kanału prywatnego zaproś go: /invite @OpenBot.",
+    "StarBot sam dołącza do każdego publicznego kanału, także do nowych. Do kanału prywatnego zaproś go: /invite @StarBot.",
+
   "mobile.server.connectors.slack.disconnectTitle": "Odłączyć {workspace}?",
   "mobile.server.connectors.slack.disconnectBody":
-    "OpenBot przestaje odpowiadać w obszarze roboczym {workspace} i usuwa swój token Slack z serwera {host}.",
-  "mobile.server.connectors.slack.disconnectKept": "Rozmowy i Slack Orchestrator zostają w OpenBot.",
-  "mobile.server.connectors.slack.disconnectDeleted": "Slack Orchestrator i jego rozmowy zostaną usunięte z OpenBot.",
+    "StarBot przestaje odpowiadać w obszarze roboczym {workspace} i usuwa swój token Slack z serwera {host}.",
+
+  "mobile.server.connectors.slack.disconnectKept": "Rozmowy i Slack Orchestrator zostają w StarBot.",
+
+  "mobile.server.connectors.slack.disconnectDeleted": "Slack Orchestrator i jego rozmowy zostaną usunięte z StarBot.",
+
   "mobile.server.connectors.slack.agentPromptTitle": "Dodać Slack Orchestrator?",
   "mobile.server.connectors.slack.agentPromptBody":
-    "Ten nowy agent odpowiada na wszystko, co ludzie wysyłają do @OpenBot w obszarze roboczym {workspace}.",
+    "Ten nowy agent odpowiada na wszystko, co ludzie wysyłają do @StarBot w obszarze roboczym {workspace}.",
+
   "mobile.server.connectors.slack.installFailed": "Slack nie ukończył instalacji. Spróbuj ponownie.",
   "mobile.server.connectors.discord.title": "Discord",
   "mobile.server.connectors.discord.description":
-    "Ludzie oznaczają @OpenBot na kanale serwera Discord. Discord Orchestrator pyta odpowiedniego agenta i odpowiada.",
+    "Ludzie oznaczają @StarBot na kanale serwera Discord. Discord Orchestrator pyta odpowiedniego agenta i odpowiada.",
+
   "mobile.server.connectors.discord.attention": {
     one: "{count} serwer Discord wymaga uwagi",
     few: "{count} serwery Discord wymagają uwagi",
@@ -948,7 +1012,8 @@ export const messages = {
   },
   "mobile.server.connectors.discord.connect": "Połącz Discord",
   "mobile.server.connectors.discord.connectFooter":
-    "Discord otworzy się w przeglądarce. Wybierz serwer Discord, a potem Authorize. OpenBot dodaje jednego bota o nazwie OpenBot.",
+    "Discord otworzy się w przeglądarce. Wybierz serwer Discord, a potem Authorize. StarBot dodaje jednego bota o nazwie StarBot.",
+
   "mobile.server.connectors.discord.add": "Dodaj serwer Discord",
   "mobile.server.connectors.discord.limit": {
     one: "Możesz połączyć maksymalnie {count} serwer Discord.",
@@ -958,16 +1023,22 @@ export const messages = {
   },
   "mobile.server.connectors.discord.workspaceTitle": "Serwer Discord",
   "mobile.server.connectors.discord.workspaceDescription":
-    "Oznacz @OpenBot na kanale. Odpowiedz na wiadomość OpenBot, aby kontynuować.",
+    "Oznacz @StarBot na kanale. Odpowiedz na wiadomość StarBot, aby kontynuować.",
+
   "mobile.server.connectors.discord.missingScopes":
-    "OpenBot nie ma tych uprawnień w Discordzie: {scopes}. Odłącz serwer Discord, a potem połącz go ponownie.",
-  "mobile.server.connectors.discord.retryAt": "Discord poprosił OpenBot o czekanie. Kolejna próba o {time}.",
+    "StarBot nie ma tych uprawnień w Discordzie: {scopes}. Odłącz serwer Discord, a potem połącz go ponownie.",
+
+  "mobile.server.connectors.discord.retryAt": "Discord poprosił StarBot o czekanie. Kolejna próba o {time}.",
+
   "mobile.server.connectors.discord.helpInvalidToken":
-    "Discord nie akceptuje już OpenBot na tym serwerze Discord. Mógł zostać usunięty. Połącz serwer Discord ponownie.",
+    "Discord nie akceptuje już StarBot na tym serwerze Discord. Mógł zostać usunięty. Połącz serwer Discord ponownie.",
+
   "mobile.server.connectors.discord.helpSecretStorage":
-    "OpenBot nie może odczytać zapisanych tokenów na serwerze {host}. Odłącz serwer Discord, a potem połącz go ponownie.",
+    "StarBot nie może odczytać zapisanych tokenów na serwerze {host}. Odłącz serwer Discord, a potem połącz go ponownie.",
+
   "mobile.server.connectors.discord.helpRelay":
-    "OpenBot na serwerze {host} nie może odbierać zdarzeń Discord. Na serwerze {host} zaloguj się, nadaj serwerowi nazwę w ustawieniach serwera i nie zamykaj OpenBot.",
+    "StarBot na serwerze {host} nie może odbierać zdarzeń Discord. Na serwerze {host} zaloguj się, nadaj serwerowi nazwę w ustawieniach serwera i nie zamykaj StarBot.",
+
   "mobile.server.connectors.discord.helpNotLinked":
     "Ten serwer Discord nie jest połączony z {host}. Stuknij Połącz ponownie, aby go połączyć.",
   "mobile.server.connectors.discord.orchestratorTitle": "Discord Orchestrator",
@@ -976,20 +1047,26 @@ export const messages = {
   "mobile.server.connectors.discord.orchestratorNone":
     "Dodaj Discord Orchestrator, inaczej Discord nie dostanie odpowiedzi.",
   "mobile.server.connectors.discord.addAgent": "Dodaj Discord Orchestrator",
-  "mobile.server.connectors.discord.note": "OpenBot widzi kanały, które może wyświetlać jego rola.",
+  "mobile.server.connectors.discord.note": "StarBot widzi kanały, które może wyświetlać jego rola.",
+
   "mobile.server.connectors.discord.disconnectTitle": "Odłączyć {workspace}?",
   "mobile.server.connectors.discord.disconnectBody":
-    "OpenBot przestaje odpowiadać na serwerze {workspace} i usuwa połączenie z Discord z serwera {host}.",
-  "mobile.server.connectors.discord.disconnectKept": "Rozmowy i Discord Orchestrator zostają w OpenBot.",
+    "StarBot przestaje odpowiadać na serwerze {workspace} i usuwa połączenie z Discord z serwera {host}.",
+
+  "mobile.server.connectors.discord.disconnectKept": "Rozmowy i Discord Orchestrator zostają w StarBot.",
+
   "mobile.server.connectors.discord.disconnectDeleted":
-    "Discord Orchestrator i jego rozmowy zostaną usunięte z OpenBot.",
+    "Discord Orchestrator i jego rozmowy zostaną usunięte z StarBot.",
+
   "mobile.server.connectors.discord.agentPromptTitle": "Dodać Discord Orchestrator?",
   "mobile.server.connectors.discord.agentPromptBody":
-    "Ten nowy agent odpowiada na wszystko, co ludzie wysyłają do @OpenBot w obszarze roboczym {workspace}.",
+    "Ten nowy agent odpowiada na wszystko, co ludzie wysyłają do @StarBot w obszarze roboczym {workspace}.",
+
   "mobile.server.connectors.discord.installFailed": "Discord nie ukończył autoryzacji. Spróbuj ponownie.",
   "mobile.server.connectors.telegram.title": "Telegram",
   "mobile.server.connectors.telegram.description":
-    "Dodaj bota OpenBot do grupy Telegram lub otwórz z nim czat prywatny. Telegram Orchestrator pyta odpowiedniego agenta i odpowiada.",
+    "Dodaj bota StarBot do grupy Telegram lub otwórz z nim czat prywatny. Telegram Orchestrator pyta odpowiedniego agenta i odpowiada.",
+
   "mobile.server.connectors.telegram.attention": {
     one: "{count} czat wymaga uwagi",
     few: "{count} czaty wymagają uwagi",
@@ -1002,14 +1079,18 @@ export const messages = {
   "mobile.server.connectors.telegram.directDescription":
     "Każda wiadomość w tym czacie trafia do Telegram Orchestrator.",
   "mobile.server.connectors.telegram.helpRemoved":
-    "Bota OpenBot nie ma już w tym czacie. Odłącz czat, a potem dodaj bota ponownie.",
+    "Bota StarBot nie ma już w tym czacie. Odłącz czat, a potem dodaj bota ponownie.",
+
   "mobile.server.connectors.telegram.helpRelay":
-    "OpenBot na serwerze {host} nie może odbierać wiadomości z Telegram. Na serwerze {host} zaloguj się, nadaj serwerowi nazwę w ustawieniach serwera i nie zamykaj OpenBot.",
+    "StarBot na serwerze {host} nie może odbierać wiadomości z Telegram. Na serwerze {host} zaloguj się, nadaj serwerowi nazwę w ustawieniach serwera i nie zamykaj StarBot.",
+
   "mobile.server.connectors.telegram.helpError":
-    "OpenBot nie może połączyć się z tym czatem. Połącz ponownie lub odłącz czat.",
+    "StarBot nie może połączyć się z tym czatem. Połącz ponownie lub odłącz czat.",
+
   "mobile.server.connectors.telegram.helpNotLinked":
     "Ten czat nie jest połączony z {host}. Stuknij Połącz ponownie, aby go połączyć.",
-  "mobile.server.connectors.telegram.retryAt": "Telegram poprosił OpenBot o czekanie. Kolejna próba o {time}.",
+  "mobile.server.connectors.telegram.retryAt": "Telegram poprosił StarBot o czekanie. Kolejna próba o {time}.",
+
   "mobile.server.connectors.telegram.linkTitle": "Połącz czat",
   "mobile.server.connectors.telegram.linkAnother": "Połącz kolejny czat",
   "mobile.server.connectors.telegram.linkFooter":
@@ -1024,16 +1105,20 @@ export const messages = {
   "mobile.server.connectors.telegram.openDirectChat": "Otwórz czat prywatny",
   "mobile.server.connectors.telegram.orchestratorTitle": "Telegram Orchestrator",
   "mobile.server.connectors.telegram.orchestratorDescription":
-    "Ten agent odbiera wiadomości do OpenBot ze wszystkich twoich czatów Telegram. Na krótkie odpowiada sam, inną pracę przekazuje odpowiedniemu agentowi i publikuje odpowiedź w czacie.",
+    "Ten agent odbiera wiadomości do StarBot ze wszystkich twoich czatów Telegram. Na krótkie odpowiada sam, inną pracę przekazuje odpowiedniemu agentowi i publikuje odpowiedź w czacie.",
+
   "mobile.server.connectors.telegram.orchestratorNone":
     "Dodaj Telegram Orchestrator, inaczej Telegram nie dostanie odpowiedzi.",
   "mobile.server.connectors.telegram.addAgent": "Dodaj Telegram Orchestrator",
   "mobile.server.connectors.telegram.disconnectTitle": "Odłączyć {chat}?",
   "mobile.server.connectors.telegram.disconnectBody":
-    "Bot OpenBot opuści czat {chat}, a OpenBot przestanie tam odpowiadać.",
-  "mobile.server.connectors.telegram.disconnectKept": "Rozmowy i Telegram Orchestrator zostają w OpenBot.",
+    "Bot StarBot opuści czat {chat}, a StarBot przestanie tam odpowiadać.",
+
+  "mobile.server.connectors.telegram.disconnectKept": "Rozmowy i Telegram Orchestrator zostają w StarBot.",
+
   "mobile.server.connectors.telegram.disconnectDeleted":
-    "To ostatni czat, więc Telegram Orchestrator i jego rozmowy zostaną usunięte z OpenBot.",
+    "To ostatni czat, więc Telegram Orchestrator i jego rozmowy zostaną usunięte z StarBot.",
+
   "mobile.server.connectors.whatsapp.title": "WhatsApp",
   "mobile.server.connectors.whatsapp.description":
     "Połącz numer WhatsApp z tym serwerem. WhatsApp Orchestrator pyta odpowiedniego agenta i odpowiada.",
@@ -1046,29 +1131,38 @@ export const messages = {
   "mobile.server.connectors.whatsapp.numbersTitle": "Numery",
   "mobile.server.connectors.whatsapp.linkNumber": "Połącz numer",
   "mobile.server.connectors.whatsapp.ownNumberNote":
-    "Do OpenBot trafiają wiadomości z twojego czatu „Wiadomość do siebie” i od osób, którym pozwolisz.",
+    "Do StarBot trafiają wiadomości z twojego czatu „Wiadomość do siebie” i od osób, którym pozwolisz.",
+
   "mobile.server.connectors.whatsapp.dedicatedNote":
-    "Do OpenBot trafiają wiadomości z twojego czatu „Wiadomość do siebie” i od osób, którym pozwolisz. Inne osoby dostają kod, który mają ci przekazać.",
+    "Do StarBot trafiają wiadomości z twojego czatu „Wiadomość do siebie” i od osób, którym pozwolisz. Inne osoby dostają kod, który mają ci przekazać.",
+
   "mobile.server.connectors.whatsapp.helpLoggedOut":
     "WhatsApp usunął ten serwer z połączonych urządzeń. Połącz numer ponownie.",
   "mobile.server.connectors.whatsapp.helpError":
-    "OpenBot nie może połączyć się z WhatsApp na tym numerze. Połącz ponownie lub odłącz numer.",
+    "StarBot nie może połączyć się z WhatsApp na tym numerze. Połącz ponownie lub odłącz numer.",
+
   "mobile.server.connectors.whatsapp.helpKeysUnreadable":
-    "OpenBot nie może odczytać zapisanych kluczy tego numeru. Połącz numer ponownie.",
-  "mobile.server.connectors.whatsapp.retryAt": "WhatsApp poprosił OpenBot o czekanie. Kolejna próba o {time}.",
+    "StarBot nie może odczytać zapisanych kluczy tego numeru. Połącz numer ponownie.",
+
+  "mobile.server.connectors.whatsapp.retryAt": "WhatsApp poprosił StarBot o czekanie. Kolejna próba o {time}.",
+
   "mobile.server.connectors.whatsapp.linkAgain": "Połącz od nowa",
   "mobile.server.connectors.whatsapp.ownNumber": "Numer prywatny",
   "mobile.server.connectors.whatsapp.ownNumberDescription":
-    "Pisać mogą tylko twój czat „Wiadomość do siebie” i osoby, którym pozwolisz. Inne osoby nie dostają odpowiedzi. Gdy jest wyłączone, OpenBot odpowiada nieznanym osobom kodem.",
+    "Pisać mogą tylko twój czat „Wiadomość do siebie” i osoby, którym pozwolisz. Inne osoby nie dostają odpowiedzi. Gdy jest wyłączone, StarBot odpowiada nieznanym osobom kodem.",
+
   "mobile.server.connectors.whatsapp.workingMessage": "Wiadomość „Pracuję nad tym…”",
   "mobile.server.connectors.whatsapp.workingMessageDescription":
-    "OpenBot wysyła ją, gdy agent pracuje, a potem zastępuje odpowiedzią. Żądanie, które czeka na wcześniejsze, też dostaje wiadomość o oczekiwaniu. Wyłącz, aby wysyłać tylko odpowiedź.",
+    "StarBot wysyła ją, gdy agent pracuje, a potem zastępuje odpowiedzią. Żądanie, które czeka na wcześniejsze, też dostaje wiadomość o oczekiwaniu. Wyłącz, aby wysyłać tylko odpowiedź.",
+
   "mobile.server.connectors.whatsapp.statusReactions": "Reakcje stanu",
   "mobile.server.connectors.whatsapp.statusReactionsDescription":
-    "OpenBot reaguje 👀, gdy przychodzi wiadomość, i ✅, gdy odpowiedź jest gotowa. Wyłącz, aby nie wysyłać reakcji.",
+    "StarBot reaguje 👀, gdy przychodzi wiadomość, i ✅, gdy odpowiedź jest gotowa. Wyłącz, aby nie wysyłać reakcji.",
+
   "mobile.server.connectors.whatsapp.orchestratorTitle": "WhatsApp Orchestrator",
   "mobile.server.connectors.whatsapp.orchestratorDescription":
-    "Ten agent odbiera wiadomości do OpenBot ze wszystkich twoich połączonych numerów. Na krótkie odpowiada sam, inną pracę przekazuje odpowiedniemu agentowi i odpowiada w WhatsApp.",
+    "Ten agent odbiera wiadomości do StarBot ze wszystkich twoich połączonych numerów. Na krótkie odpowiada sam, inną pracę przekazuje odpowiedniemu agentowi i odpowiada w WhatsApp.",
+
   "mobile.server.connectors.whatsapp.orchestratorNone":
     "Dodaj WhatsApp Orchestrator, inaczej WhatsApp nie dostanie odpowiedzi.",
   "mobile.server.connectors.whatsapp.addAgent": "Dodaj WhatsApp Orchestrator",
@@ -1078,14 +1172,18 @@ export const messages = {
   "mobile.server.connectors.whatsapp.linkDescription":
     "Wybierz numer, a potem połącz ten serwer w WhatsApp na telefonie.",
   "mobile.server.connectors.whatsapp.codeOnly":
-    "Na telefonie połącz za pomocą kodu parowania. Aby zeskanować kod QR, użyj OpenBot na komputerze.",
+    "Na telefonie połącz za pomocą kodu parowania. Aby zeskanować kod QR, użyj StarBot na komputerze.",
+
   "mobile.server.connectors.whatsapp.kindLabel": "Numer",
   "mobile.server.connectors.whatsapp.kindPersonal": "Mój numer prywatny",
   "mobile.server.connectors.whatsapp.kindPersonalDescription":
-    "OpenBot odpowiada tylko w twoim czacie „Wiadomość do siebie” i osobom, którym pozwolisz. Inne osoby nie dostają odpowiedzi.",
-  "mobile.server.connectors.whatsapp.kindDedicated": "Numer tylko dla OpenBot",
+    "StarBot odpowiada tylko w twoim czacie „Wiadomość do siebie” i osobom, którym pozwolisz. Inne osoby nie dostają odpowiedzi.",
+
+  "mobile.server.connectors.whatsapp.kindDedicated": "Numer tylko dla StarBot",
+
   "mobile.server.connectors.whatsapp.kindDedicatedDescription":
-    "OpenBot odpowiada z tego numeru każdej nieznanej osobie kodem, który ma ci przekazać. Zatwierdzasz je tutaj.",
+    "StarBot odpowiada z tego numeru każdej nieznanej osobie kodem, który ma ci przekazać. Zatwierdzasz je tutaj.",
+
   "mobile.server.connectors.whatsapp.phoneLabel": "Numer telefonu",
   "mobile.server.connectors.whatsapp.phoneDescription": "Z kodem kraju, np. +44 7700 900123.",
   "mobile.server.connectors.whatsapp.phoneInvalid": "Wpisz numer telefonu z kodem kraju.",
@@ -1104,20 +1202,26 @@ export const messages = {
     "WhatsApp odrzucił połączenie. Odczekaj kilka minut i spróbuj ponownie.",
   "mobile.server.connectors.whatsapp.failedBusy": "Trwa inne łączenie. Poczekaj, aż się skończy, i spróbuj ponownie.",
   "mobile.server.connectors.whatsapp.failedUnavailable":
-    "OpenBot nie może połączyć się z WhatsApp. Sprawdź połączenie z internetem.",
+    "StarBot nie może połączyć się z WhatsApp. Sprawdź połączenie z internetem.",
+
   "mobile.server.connectors.whatsapp.tryAgain": "Ponów",
   "mobile.server.connectors.whatsapp.agentStepDescription":
-    "Ten nowy agent odpowiada na wiadomości do OpenBot na numerze {number} i na każdym numerze, który połączysz później.",
-  "mobile.server.connectors.whatsapp.doneTitle": "OpenBot jest połączony z numerem {number}",
+    "Ten nowy agent odpowiada na wiadomości do StarBot na numerze {number} i na każdym numerze, który połączysz później.",
+
+  "mobile.server.connectors.whatsapp.doneTitle": "StarBot jest połączony z numerem {number}",
+
   "mobile.server.connectors.whatsapp.done": "Gotowe",
   "mobile.server.connectors.whatsapp.disconnectTitle": "Odłączyć {number}?",
   "mobile.server.connectors.whatsapp.disconnectBody":
-    "OpenBot wyloguje się z WhatsApp na numerze {number}. Jeśli OpenBot był wyłączony, usuń też urządzenie w WhatsApp > Połączone urządzenia.",
+    "StarBot wyloguje się z WhatsApp na numerze {number}. Jeśli StarBot był wyłączony, usuń też urządzenie w WhatsApp > Połączone urządzenia.",
+
   "mobile.server.connectors.whatsapp.disconnectEffect":
     "Ludzie nie będą już mogli kontaktować się z twoimi agentami przez numer {number}.",
-  "mobile.server.connectors.whatsapp.removeEffectKept": "Rozmowy i WhatsApp Orchestrator zostają w OpenBot.",
+  "mobile.server.connectors.whatsapp.removeEffectKept": "Rozmowy i WhatsApp Orchestrator zostają w StarBot.",
+
   "mobile.server.connectors.whatsapp.removeEffectDeleted":
-    "To ostatni numer, więc WhatsApp Orchestrator i jego rozmowy zostaną usunięte z OpenBot.",
+    "To ostatni numer, więc WhatsApp Orchestrator i jego rozmowy zostaną usunięte z StarBot.",
+
   "mobile.server.connectors.whatsapp.keep": "Nie odłączaj",
   "mobile.server.connectors.whatsapp.sendersTitle": "Kto może pisać na {number}",
   "mobile.server.connectors.whatsapp.sendersDescription": "Te kontakty i grupy mogą zlecać pracę twoim agentom.",
@@ -1129,7 +1233,8 @@ export const messages = {
   "mobile.server.connectors.whatsapp.makeReadOnly": "Ustaw tylko odczyt",
   "mobile.server.connectors.whatsapp.allowWork": "Pozwól zlecać pracę",
   "mobile.server.connectors.whatsapp.readOnlyDetail":
-    "Tylko odczyt: agenci mogą czytać ten czat, a OpenBot nigdy w nim nie pisze.",
+    "Tylko odczyt: agenci mogą czytać ten czat, a StarBot nigdy w nim nie pisze.",
+
   "mobile.server.connectors.whatsapp.addContact": "Dodaj kontakt",
   "mobile.server.connectors.whatsapp.addGroup": "Dodaj grupę",
   "mobile.server.connectors.whatsapp.contactTitle": "Dodaj kontakt",
@@ -1142,7 +1247,8 @@ export const messages = {
     "Osoby w tej grupie mogą zlecać pracę twoim agentom, gdy oznaczą ten numer lub odpowiedzą na jego wiadomości.",
   "mobile.server.connectors.whatsapp.groupSearch": "Szukaj grup",
   "mobile.server.connectors.whatsapp.groupsLoading": "Odczytywanie grup…",
-  "mobile.server.connectors.whatsapp.groupsLoadFailed": "OpenBot nie mógł odczytać grup",
+  "mobile.server.connectors.whatsapp.groupsLoadFailed": "StarBot nie mógł odczytać grup",
+
   "mobile.server.connectors.whatsapp.groupsEmpty": "Ten numer nie należy do żadnej grupy.",
   "mobile.server.connectors.whatsapp.groupsNoMatch": "Żadna grupa nie ma tej nazwy.",
   "mobile.server.connectors.whatsapp.groupAdded": "Dodano",
@@ -1171,9 +1277,11 @@ export const messages = {
   "mobile.server.providers.runtimesFailed": "Nie udało się wczytać pobrań tego serwera.",
   "mobile.server.providers.unavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby zarządzać jego dostawcami.",
-  "mobile.server.providers.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby zarządzać tu jego dostawcami.",
+  "mobile.server.providers.unsupported": "Zaktualizuj StarBot na tym serwerze, aby zarządzać tu jego dostawcami.",
+
   "mobile.server.providers.signInUnsupported": "Ten serwer nie może zalogować tego dostawcy z telefonu.",
-  "mobile.server.providers.actionFailed": "OpenBot nie mógł wykonać tej czynności. Spróbuj ponownie.",
+  "mobile.server.providers.actionFailed": "StarBot nie mógł wykonać tej czynności. Spróbuj ponownie.",
+
   "mobile.server.providers.openFailed": "Nie udało się otworzyć strony logowania.",
   "mobile.server.providers.copyFailed": "Nie udało się skopiować kodu.",
   "mobile.server.providers.statusLabel": "Stan",
@@ -1182,10 +1290,13 @@ export const messages = {
   "mobile.server.providers.connect": "Połącz",
   "mobile.server.providers.reconnect": "Połącz ponownie",
   "mobile.server.providers.connectHint":
-    "Serwer rozpoczyna logowanie. Potem OpenBot pokazuje kroki, a ty kończysz je na tym telefonie.",
+    "Serwer rozpoczyna logowanie. Potem StarBot pokazuje kroki, a ty kończysz je na tym telefonie.",
+
   "mobile.server.providers.relayHint":
-    "OpenBot otwiera stronę logowania dostawcy na tym telefonie. Jeśli musisz coś skopiować z powrotem, OpenBot najpierw pokazuje kroki.",
-  "mobile.server.providers.connectOnComputer": "Połącz tego dostawcę w OpenBot na komputerze.",
+    "StarBot otwiera stronę logowania dostawcy na tym telefonie. Jeśli musisz coś skopiować z powrotem, StarBot najpierw pokazuje kroki.",
+
+  "mobile.server.providers.connectOnComputer": "Połącz tego dostawcę w StarBot na komputerze.",
+
   "mobile.server.providers.signInTo": "Zaloguj się do {name}",
   "mobile.server.providers.starting": "Rozpoczynanie logowania na serwerze…",
   "mobile.server.providers.openPage": "Otwórz stronę logowania",
@@ -1196,15 +1307,19 @@ export const messages = {
     "W ChatGPT na komputerze otwórz ustawienia bezpieczeństwa i włącz logowanie kodem urządzenia dla Codex. Na koncie służbowym włącza je administrator obszaru roboczego.",
   "mobile.server.providers.codeStepCopy": "Skopiuj kod.",
   "mobile.server.providers.codeStepEnter": "Otwórz stronę logowania i wpisz kod.",
-  "mobile.server.providers.codeStepReturn": "Wróć do OpenBot. Logowanie zakończy się samo.",
+  "mobile.server.providers.codeStepReturn": "Wróć do StarBot. Logowanie zakończy się samo.",
+
   "mobile.server.providers.pasteStepSignIn": "Otwórz stronę logowania i zaloguj się.",
   "mobile.server.providers.pasteStepCopy": "Skopiuj kod, który pokazuje strona.",
-  "mobile.server.providers.pasteStepReturn": "Wróć do OpenBot i wklej kod poniżej.",
+  "mobile.server.providers.pasteStepReturn": "Wróć do StarBot i wklej kod poniżej.",
+
   "mobile.server.providers.relayStepSignIn": "Otwórz stronę logowania i zaloguj się.",
   "mobile.server.providers.relayStepBlank": "Ostatnia strona się nie wczyta. To prawidłowe.",
   "mobile.server.providers.relayStepCopy": "Stuknij pasek adresu i skopiuj cały adres.",
-  "mobile.server.providers.relayStepReturn": "Wróć do OpenBot i wklej adres poniżej.",
-  "mobile.server.providers.linkHint": "Zaloguj się na stronie. OpenBot sam kontynuuje.",
+  "mobile.server.providers.relayStepReturn": "Wróć do StarBot i wklej adres poniżej.",
+
+  "mobile.server.providers.linkHint": "Zaloguj się na stronie. StarBot sam kontynuuje.",
+
   "mobile.server.providers.relayWaiting": "Oczekiwanie na stronę logowania z serwera…",
   "mobile.server.providers.code": "Kod ze strony",
   "mobile.server.providers.codePlaceholder": "Wklej tutaj kod",
@@ -1269,7 +1384,8 @@ export const messages = {
   "mobile.server.providers.accountsPooledHint":
     "Agenci współdzielą te konta. Nowe konto loguje się na swojej stronie na tym telefonie.",
   "mobile.server.providers.accountsPooledOnComputer":
-    "Agenci współdzielą te konta. Dodaj konto w OpenBot na komputerze.",
+    "Agenci współdzielą te konta. Dodaj konto w StarBot na komputerze.",
+
   "mobile.server.providers.inUse": "W użyciu",
   "mobile.server.providers.notInPool": "Poza pulą",
   "mobile.server.providers.leaveOutOfPool": "Wyłącz z puli",
@@ -1329,7 +1445,8 @@ export const messages = {
   "mobile.server.providers.disconnect": "Rozłącz",
   "mobile.server.providers.disconnectTitle": "Rozłączyć {name}?",
   "mobile.server.providers.disconnectBody":
-    "OpenBot wylogowuje {provider} na serwerze. Agenci czekają, aż ponownie połączysz {provider}.",
+    "StarBot wylogowuje {provider} na serwerze. Agenci czekają, aż ponownie połączysz {provider}.",
+
   "mobile.server.providers.resetUsage": "Zresetuj użycie",
   "mobile.server.providers.resettingUsage": "Resetowanie…",
   "mobile.server.providers.resetUsageTitle": "Zresetować użycie {name}?",
@@ -1347,7 +1464,8 @@ export const messages = {
   "mobile.server.providers.sectionRuntime": "Środowisko uruchomieniowe",
   "mobile.server.providers.updateTo": "Zaktualizuj do {version}",
   "mobile.server.providers.versionInstalledByUser": "{version} · zainstalowana przez Ciebie",
-  "mobile.server.providers.versionDownloaded": "{version} · pobrana przez OpenBot",
+  "mobile.server.providers.versionDownloaded": "{version} · pobrana przez StarBot",
+
   "mobile.server.providers.keyFree": "Darmowy",
   "mobile.server.providers.keyOptional": "Opcjonalnie. Klucz dodaje płatne modele.",
   "mobile.server.providers.geminiKeyInUse":
@@ -1371,18 +1489,21 @@ export const messages = {
   "mobile.server.providers.defaultForNew": "Domyślny dla nowych agentów",
   "mobile.server.providers.startsWith": "Nowi agenci startują z {name}.",
   "mobile.server.providers.connectFirst": "Najpierw połącz {name}.",
-  "mobile.server.mcp.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby zarządzać tutaj jego serwerami MCP.",
+  "mobile.server.mcp.unsupported": "Zaktualizuj StarBot na tym serwerze, aby zarządzać tutaj jego serwerami MCP.",
+
   "mobile.server.mcp.unavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby zarządzać jego serwerami MCP.",
   "mobile.server.mcp.accessUnsupported":
-    "Zaktualizuj OpenBot na tym serwerze, aby wybrać, kto dostaje jego serwery MCP.",
+    "Zaktualizuj StarBot na tym serwerze, aby wybrać, kto dostaje jego serwery MCP.",
+
   "mobile.server.mcp.loading": "Wczytywanie serwerów MCP…",
   "mobile.server.mcp.gone": "Tego serwera MCP nie ma już na tym serwerze.",
   "mobile.server.mcp.addTitle": "Dodaj serwer MCP",
   "mobile.server.mcp.addConfirm": "Dodaj",
   "mobile.server.mcp.name": "Nazwa",
   "mobile.server.mcp.namePlaceholder": "Nazwa serwera MCP",
-  "mobile.server.mcp.nameReserved": "OpenBot już używa nazwy {name}.",
+  "mobile.server.mcp.nameReserved": "StarBot już używa nazwy {name}.",
+
   "mobile.server.mcp.transport": "Transport",
   "mobile.server.mcp.stdio": "Polecenie (STDIO)",
   "mobile.server.mcp.http": "URL (HTTP)",
@@ -1393,12 +1514,14 @@ export const messages = {
   "mobile.server.mcp.command": "Polecenie",
   "mobile.server.mcp.commandHint": "Tylko program. Każde następne słowo wpisz w Argumentach.",
   "mobile.server.mcp.arguments": "Argumenty",
-  "mobile.server.mcp.argumentsHint": "OpenBot przekazuje programowi każdy argument jako jedno słowo.",
+  "mobile.server.mcp.argumentsHint": "StarBot przekazuje programowi każdy argument jako jedno słowo.",
+
   "mobile.server.mcp.addArgument": "Dodaj argument",
   "mobile.server.mcp.argument": "Argument {position}",
   "mobile.server.mcp.removeArgument": "Usuń argument {position}",
   "mobile.server.mcp.environment": "Zmienne środowiskowe",
-  "mobile.server.mcp.environmentHint": "OpenBot przekazuje te zmienne serwerowi MCP, gdy się uruchamia.",
+  "mobile.server.mcp.environmentHint": "StarBot przekazuje te zmienne serwerowi MCP, gdy się uruchamia.",
+
   "mobile.server.mcp.addVariable": "Dodaj zmienną",
   "mobile.server.mcp.variableKey": "Nazwa zmiennej {position}",
   "mobile.server.mcp.variableValue": "Wartość zmiennej {position}",
@@ -1413,7 +1536,8 @@ export const messages = {
   "mobile.server.mcp.url": "URL serwera",
   "mobile.server.mcp.urlInvalid": "Wpisz adres http lub https.",
   "mobile.server.mcp.headers": "Nagłówki",
-  "mobile.server.mcp.headersHint": "OpenBot wysyła te nagłówki z każdym żądaniem.",
+  "mobile.server.mcp.headersHint": "StarBot wysyła te nagłówki z każdym żądaniem.",
+
   "mobile.server.mcp.addHeader": "Dodaj nagłówek",
   "mobile.server.mcp.headerName": "Nazwa nagłówka {position}",
   "mobile.server.mcp.headerValue": "Wartość nagłówka {position}",
@@ -1435,7 +1559,8 @@ export const messages = {
     other: "Połączono · {count} narzędzia",
   },
   "mobile.server.mcp.signInOnComputer":
-    "Ten serwer MCP prosi o zalogowanie. Zaloguj się w OpenBot na komputerze, a potem przetestuj ponownie.",
+    "Ten serwer MCP prosi o zalogowanie. Zaloguj się w StarBot na komputerze, a potem przetestuj ponownie.",
+
   "mobile.server.mcp.signIn": "Zaloguj się",
   "mobile.server.mcp.signInHere":
     "Ten serwer MCP prosi o zalogowanie. Stuknij Zaloguj się, a potem przetestuj ponownie.",
@@ -1503,8 +1628,10 @@ export const messages = {
   "mobile.server.settings.updates": "Aktualizacje",
   "mobile.server.settings.updateAvailable": "Dostępna aktualizacja",
   "mobile.server.route.updates": "Aktualizacje",
-  "mobile.server.update.hostTitle": "OpenBot na serwerze {name}",
-  "mobile.server.update.version": "OpenBot {version}",
+  "mobile.server.update.hostTitle": "StarBot na serwerze {name}",
+
+  "mobile.server.update.version": "StarBot {version}",
+
   "mobile.server.update.status.idle": "Sprawdź aktualizacje, aby znaleźć najnowsze wydanie.",
   "mobile.server.update.status.checking": "Sprawdzanie aktualizacji…",
   "mobile.server.update.status.available": "Dostępna jest wersja {version}.",
@@ -1512,28 +1639,35 @@ export const messages = {
   "mobile.server.update.status.downloadingUnknown": "Pobieranie {version}…",
   "mobile.server.update.status.ready": "Pobrano wersję {version}.",
   "mobile.server.update.status.installing": "{name} uruchamia się ponownie, aby zainstalować aktualizację.",
-  "mobile.server.update.status.upToDate": "OpenBot na serwerze {name} jest aktualny.",
+  "mobile.server.update.status.upToDate": "StarBot na serwerze {name} jest aktualny.",
+
   "mobile.server.update.status.checkFailed": "{name}: nie udało się sprawdzić aktualizacji. Spróbuj ponownie.",
   "mobile.server.update.status.downloadFailed": "{name}: nie udało się pobrać aktualizacji. Spróbuj ponownie.",
   "mobile.server.update.status.installFailed":
-    "{name}: nie udało się zainstalować aktualizacji. Upewnij się, że żaden inny użytkownik tego komputera nie uruchamia OpenBot, i spróbuj ponownie.",
+    "{name}: nie udało się zainstalować aktualizacji. Upewnij się, że żaden inny użytkownik tego komputera nie uruchamia StarBot, i spróbuj ponownie.",
+
   "mobile.server.update.releaseCheckFailed":
     "{name}: nie udało się odczytać kanału wydań. Sprawdź połączenie sieciowe hosta i spróbuj ponownie.",
   "mobile.server.update.releaseUnavailable":
     "Sprawdzanie wydań jest niedostępne dla tej kompilacji. Poproś administratora hosta o sprawdzenie zgodnego wydania.",
   "mobile.server.update.externalTitle": "Instalacją zarządza host",
   "mobile.server.update.path.hostManager":
-    "OpenBot Host Manager instaluje aktualizacje, gdy wszyscy użytkownicy są bezczynni. Jeśli aktualizacja się nie zaczyna, poproś administratora hosta o sprawdzenie stanu Host Managera.",
+    "StarBot Host Manager instaluje aktualizacje, gdy wszyscy użytkownicy są bezczynni. Jeśli aktualizacja się nie zaczyna, poproś administratora hosta o sprawdzenie stanu Host Managera.",
+
   "mobile.server.update.path.hosted":
     "Usługa hostingu pobiera aktualizacje w tle. Pobrana aktualizacja zostanie zastosowana przy następnym uruchomieniu serwera. Poczekaj na zakończenie aktywnej pracy, zanim zatrzymasz i wznowisz serwer. Jeśli serwer pozostaje na starej wersji, skontaktuj się z administratorem hosta.",
   "mobile.server.update.path.system":
-    "Na hoście uruchom sudo openbot update, aby zainstalować najnowsze wydanie. To polecenie zatrzymuje OpenBot. Najpierw poczekaj na zakończenie aktywnej pracy. Automatycznie pobrane aktualizacje instalują się przy następnym rozruchu.",
+    "Na hoście uruchom sudo openbot update, aby zainstalować najnowsze wydanie. To polecenie zatrzymuje StarBot. Najpierw poczekaj na zakończenie aktywnej pracy. Automatycznie pobrane aktualizacje instalują się przy następnym rozruchu.",
+
   "mobile.server.update.path.container":
-    "Na hoście Docker pobierz nowy obraz OpenBot i utwórz kontener ponownie z tymi samymi woluminami danych. Najpierw poczekaj na zakończenie aktywnej pracy. Zachowaj istniejące woluminy, aby nie stracić danych.",
+    "Na hoście Docker pobierz nowy obraz StarBot i utwórz kontener ponownie z tymi samymi woluminami danych. Najpierw poczekaj na zakończenie aktywnej pracy. Zachowaj istniejące woluminy, aby nie stracić danych.",
+
   "mobile.server.update.path.manual":
-    "Ta instalacja nie może sama się zastąpić. Poproś administratora hosta o zainstalowanie zgodnego wydania z github.com/nightly-labs/openbot/releases. Zachowaj istniejące dane OpenBot.",
+    "Ta instalacja nie może sama się zastąpić. Poproś administratora hosta o zainstalowanie zgodnego wydania z github.com/hxy940219220-collab/StarBot-Desktop/releases. Zachowaj istniejące dane StarBot.",
+
   "mobile.server.update.path.unavailable":
-    "To jest kompilacja deweloperska. Użyj zainstalowanego wydania OpenBot, aby sprawdzać aktualizacje.",
+    "To jest kompilacja deweloperska. Użyj zainstalowanego wydania StarBot, aby sprawdzać aktualizacje.",
+
   "mobile.server.update.check": "Sprawdź aktualizacje",
   "mobile.server.update.start": "Zaktualizuj, gdy bezczynny",
   "mobile.server.update.restartNow": "Uruchom ponownie teraz",
@@ -1543,27 +1677,34 @@ export const messages = {
   "mobile.server.update.requestedBy": "O tę aktualizację prosi: {member}.",
   "mobile.server.update.automatic": "{name} instaluje aktualizacje automatycznie.",
   "mobile.server.update.autoDownloadTitle": "Pobieraj aktualizacje automatycznie",
-  "mobile.server.update.autoDownloadDescription": "{name} pobiera każdą nową wersję OpenBot, gdy tylko się ukaże.",
+  "mobile.server.update.autoDownloadDescription": "{name} pobiera każdą nową wersję StarBot, gdy tylko się ukaże.",
+
   "mobile.server.update.autoInstallTitle": "Instaluj aktualizacje automatycznie",
   "mobile.server.update.autoInstallDescription":
     "{name} uruchamia się ponownie z pobraną aktualizacją, gdy agenci są bezczynni. Członkowie zostają na chwilę rozłączeni i łączą się ponownie automatycznie.",
   "mobile.server.update.waitingFor": "Oczekiwanie na: {reasons}.",
   "mobile.server.update.disabledTitle": "Zdalne aktualizacje są wyłączone",
   "mobile.server.update.disabledDescription":
-    "Użytkownik serwera {name} wyłączył aktualizacje od członków serwera. Poproś go o zaktualizowanie OpenBot lub o otwarcie sekcji Ustawienia > Aktualizacje na jego komputerze i włączenie „Zezwalaj członkom serwera na aktualizacje”.",
+    "Użytkownik serwera {name} wyłączył aktualizacje od członków serwera. Poproś go o zaktualizowanie StarBot lub o otwarcie sekcji Ustawienia > Aktualizacje na jego komputerze i włączenie „Zezwalaj członkom serwera na aktualizacje”.",
+
   "mobile.server.update.managedTitle": "Aktualizacjami zarządza Host Manager",
   "mobile.server.update.managedDescription":
-    "OpenBot Host Manager aktualizuje serwer {name}. Skontaktuj się z administratorem hosta.",
+    "StarBot Host Manager aktualizuje serwer {name}. Skontaktuj się z administratorem hosta.",
+
   "mobile.server.update.unsupportedTitle": "{name} nie może się sam zaktualizować",
   "mobile.server.update.unsupportedDescription":
-    "Ta kompilacja OpenBot nie ma aktualizatora. Zainstaluj nową wersję na serwerze {name}.",
+    "Ta kompilacja StarBot nie ma aktualizatora. Zainstaluj nową wersję na serwerze {name}.",
+
   "mobile.server.update.restarting": "Restartowanie…",
   "mobile.server.update.loadFailed": "Nie udało się wczytać stanu aktualizacji serwera {name}.",
-  "mobile.server.update.dialog.offerTitle": "Zaktualizuj serwer {name} do OpenBot {version}",
+  "mobile.server.update.dialog.offerTitle": "Zaktualizuj serwer {name} do StarBot {version}",
+
   "mobile.server.update.dialog.offerDescription":
-    "{name} używa OpenBot {current}. Najpierw pobierze aktualizację, a potem uruchomi się ponownie.",
+    "{name} używa StarBot {current}. Najpierw pobierze aktualizację, a potem uruchomi się ponownie.",
+
   "mobile.server.update.dialog.offerReadyDescription":
-    "{name} używa OpenBot {current}. Aktualizacja jest pobrana. {name} uruchomi się ponownie, aby ją zainstalować.",
+    "{name} używa StarBot {current}. Aktualizacja jest pobrana. {name} uruchomi się ponownie, aby ją zainstalować.",
+
   "mobile.server.update.dialog.waitIdleDescription":
     "Restart czeka, aż zakończą się tury agentów i uruchomienia rutyn.",
   "mobile.server.update.dialog.updateNow": "Zaktualizuj teraz",
@@ -1579,10 +1720,12 @@ export const messages = {
   "mobile.server.update.reason.fileTransfer": "transfer pliku",
   "mobile.server.update.reason.browserControl": "sterowanie przeglądarką przez agenta",
   "mobile.server.update.reason.updateOperation": "inny krok aktualizacji",
-  "mobile.server.update.reason.initialization": "uruchomienie OpenBot",
+  "mobile.server.update.reason.initialization": "uruchomienie StarBot",
+
   "mobile.server.update.reason.other": "inną pracę",
   "mobile.server.update.actionFailed": "Działanie serwera nie powiodło się.",
-  "mobile.server.update.unavailable": "Połącz się z tym serwerem, aby zobaczyć jego aktualizacje OpenBot.",
+  "mobile.server.update.unavailable": "Połącz się z tym serwerem, aby zobaczyć jego aktualizacje StarBot.",
+
   "mobile.server.update.loading": "Wczytywanie aktualizacji…",
   "mobile.server.route.sites": "Witryny",
   "mobile.server.settings.sites": "Witryny",
@@ -1611,13 +1754,15 @@ export const messages = {
   "mobile.server.sites.deleteDescription": "Ten adres natychmiast zacznie zwracać 410 Gone.",
   "mobile.server.sites.deleteFailed": "Nie udało się usunąć witryny.",
   "mobile.server.sites.openFailed": "Nie udało się otworzyć witryny.",
-  "mobile.server.sites.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby zobaczyć tutaj jego witryny.",
+  "mobile.server.sites.unsupported": "Zaktualizuj StarBot na tym serwerze, aby zobaczyć tutaj jego witryny.",
+
   "mobile.server.sites.offline": "Połącz się z tym serwerem, aby zobaczyć jego witryny.",
   "mobile.server.route.roles": "Uprawnienia",
   "mobile.server.route.role": "Rola",
   "mobile.server.roles.description":
     "Wybierz agentów, z których mogą korzystać członkowie. Właściciele i administratorzy mogą korzystać ze wszystkich agentów.",
-  "mobile.server.roles.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby zarządzać rolami.",
+  "mobile.server.roles.unsupported": "Zaktualizuj StarBot na tym serwerze, aby zarządzać rolami.",
+
   "mobile.server.roles.unavailable": "Rolami może zarządzać tylko właściciel lub administrator serwera online.",
   "mobile.server.roles.loading": "Wczytywanie ról…",
   "mobile.server.roles.loadFailed": "Nie udało się wczytać ról tego serwera.",
@@ -1667,7 +1812,8 @@ export const messages = {
   "mobile.server.route.audit": "Dziennik zmian",
   "mobile.server.audit.description":
     "Zmiany członków, ról i dostępu do agentów na tym serwerze, od najnowszych. Host przechowuje 500 najnowszych zmian.",
-  "mobile.server.audit.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby zobaczyć jego dziennik zmian.",
+  "mobile.server.audit.unsupported": "Zaktualizuj StarBot na tym serwerze, aby zobaczyć jego dziennik zmian.",
+
   "mobile.server.audit.unavailable": "Dziennik zmian może zobaczyć tylko właściciel lub administrator serwera online.",
   "mobile.server.audit.loading": "Wczytywanie zmian…",
   "mobile.server.audit.loadFailed": "Nie udało się wczytać dziennika zmian tego serwera.",
@@ -1694,7 +1840,8 @@ export const messages = {
   "mobile.server.audit.agentLevel": "{agent} dla {role}: {change}",
   "mobile.server.settings.importAgents": "Importuj agentów",
   "mobile.server.route.import": "Importuj agentów",
-  "mobile.server.import.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby importować tutaj agentów.",
+  "mobile.server.import.unsupported": "Zaktualizuj StarBot na tym serwerze, aby importować tutaj agentów.",
+
   "mobile.server.import.unavailable": "Połącz się z tym serwerem, aby importować agentów.",
   "mobile.server.import.count.agent": {
     one: "{count} agent",
@@ -1734,10 +1881,12 @@ export const messages = {
   },
   "mobile.server.import.sourceTitle": "Gdzie są teraz twoi agenci?",
   "mobile.server.import.sourceLede":
-    "OpenBot kopiuje ich na ten serwer. Zobaczysz każdy element, zanim cokolwiek się zmieni.",
+    "StarBot kopiuje ich na ten serwer. Zobaczysz każdy element, zanim cokolwiek się zmieni.",
+
   "mobile.server.import.hermesNote": "Wyeksportuj plik .zip z Hermes.",
   "mobile.server.import.grokNote": "W chmurze. Agent eksportu tworzy tam plik .zip.",
-  "mobile.server.import.transfer": "Inny serwer OpenBot",
+  "mobile.server.import.transfer": "Inny serwer StarBot",
+
   "mobile.server.import.transferNote": "Użyj Przeniesienia, aby przenieść agentów razem z ustawieniami.",
   "mobile.server.import.grokLede":
     "Agent eksportu w Grok Bot pakuje nazwy, instrukcje, awatary, umiejętności, rutyny, wspomnienia i wybrane pliki do jednego pliku .zip.",
@@ -1799,7 +1948,8 @@ export const messages = {
   "mobile.server.route.transferExport": "Eksport",
   "mobile.server.route.transferImport": "Import",
   "mobile.server.route.transferCopy": "Kopiuj na inny serwer",
-  "mobile.server.transfer.unsupported": "Zaktualizuj OpenBot na tym serwerze, aby go tutaj przenieść.",
+  "mobile.server.transfer.unsupported": "Zaktualizuj StarBot na tym serwerze, aby go tutaj przenieść.",
+
   "mobile.server.transfer.unavailable":
     "Połącz się z tym serwerem jako właściciel lub administrator, aby go przenieść.",
   "mobile.server.transfer.title": "Przenieś ten serwer na inny komputer",
@@ -1844,8 +1994,10 @@ export const messages = {
   "mobile.server.transfer.reading": "Odczytywanie pliku…",
   "mobile.server.transfer.sending": "Wysyłanie pliku… {percent}%",
   "mobile.server.transfer.openFailed": "Nie udało się otworzyć pliku.",
-  "mobile.server.transfer.source": "OpenBot {version} · eksport: {date}",
-  "mobile.server.transfer.sourceNoDate": "OpenBot {version}",
+  "mobile.server.transfer.source": "StarBot {version} · eksport: {date}",
+
+  "mobile.server.transfer.sourceNoDate": "StarBot {version}",
+
   "mobile.server.transfer.importWarnings": "Przed rozpoczęciem importu",
   "mobile.server.transfer.importAgents": "Agenci w pliku",
   "mobile.server.transfer.nameExists": "Nazwa zajęta",
@@ -1904,7 +2056,8 @@ export const messages = {
     "Połącz się z innym serwerem jako właściciel lub administrator, aby skopiować na niego agentów.",
   "mobile.server.route.ownerTransfer": "Przekaż własność",
   "mobile.server.ownerTransfer.unavailable": "Połącz się z tym serwerem jako właściciel, aby przekazać własność.",
-  "mobile.server.ownerTransfer.hosted": "OpenBot hostuje ten serwer, więc jego właściciel nie może się zmienić.",
+  "mobile.server.ownerTransfer.hosted": "StarBot hostuje ten serwer, więc jego właściciel nie może się zmienić.",
+
   "mobile.server.ownerTransfer.lede":
     "Nowy właściciel dostanie e-mail i musi zaakceptować, będąc zalogowanym na ten adres. Potem zostaniesz usunięty z tego serwera.",
   "mobile.server.ownerTransfer.email": "E-mail nowego właściciela",
@@ -1930,7 +2083,8 @@ export const messages = {
   "mobile.server.ownerTransfer.cancelFailed": "Przekazanie nie zostało anulowane.",
   "mobile.server.ownerTransfer.incomingTitle": "Zostać właścicielem {server}?",
   "mobile.server.ownerTransfer.incomingBody":
-    "{name} chce uczynić cię właścicielem {server}. Dostaniesz pełną kontrolę nad serwerem, a jego agenci, czaty, rutyny i zapisane logowania na nim zostają. {name} traci dostęp. Każdy, kto nadal może zalogować się na komputerze, na którym działa serwer, może używać twojego konta OpenBot. Zmień na nim hasła i klucze SSH.",
+    "{name} chce uczynić cię właścicielem {server}. Dostaniesz pełną kontrolę nad serwerem, a jego agenci, czaty, rutyny i zapisane logowania na nim zostają. {name} traci dostęp. Każdy, kto nadal może zalogować się na komputerze, na którym działa serwer, może używać twojego konta StarBot. Zmień na nim hasła i klucze SSH.",
+
   "mobile.server.ownerTransfer.accept": "Akceptuj",
   "mobile.server.ownerTransfer.decline": "Odrzuć",
   "mobile.server.ownerTransfer.accepted": "Jesteś teraz właścicielem {server}.",

@@ -11,9 +11,12 @@ export const messages = {
   "menu.closeDeveloperTools": "Chiudi Strumenti per sviluppatori",
   "menu.copyLink": "Copia link",
   "menu.copyImage": "Copia immagine",
-  "menu.quit": "Esci da OpenBot",
-  "menu.quitConfirmTitle": "Uscire da OpenBot?",
-  "menu.quitConfirmBody": "Agenti e routine si fermano finché non riapri OpenBot.",
+  "menu.quit": "Esci da StarBot",
+
+  "menu.quitConfirmTitle": "Uscire da StarBot?",
+
+  "menu.quitConfirmBody": "Agenti e routine si fermano finché non riapri StarBot.",
+
   "menu.quitConfirm": "Esci",
   "menu.quitHint": "Tieni premuto ⌘Q o premilo due volte per uscire",
   "menu.closeWorkingTitle": {
@@ -21,11 +24,15 @@ export const messages = {
     other: "{count} agenti stanno ancora lavorando",
   },
   "menu.closeWorkingBody":
-    "Se esci da OpenBot, gli agenti si fermano. Lascialo in esecuzione per farli finire. Per mostrare di nuovo la finestra, apri OpenBot.",
+    "Se esci da StarBot, gli agenti si fermano. Lascialo in esecuzione per farli finire. Per mostrare di nuovo la finestra, apri StarBot.",
+
   "menu.closeKeepRunning": "Continua",
-  "menu.trayOpen": "Apri OpenBot",
-  "menu.trayQuit": "Esci da OpenBot",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "Apri StarBot",
+
+  "menu.trayQuit": "Esci da StarBot",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Nascondi Dynamic Island",
   "menu.undo": "Annulla",
   "menu.redo": "Ripeti",

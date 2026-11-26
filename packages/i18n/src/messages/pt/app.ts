@@ -2,7 +2,8 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/app";
 
 export const messages = {
-  "app.loading": "Carregando o OpenBot",
+  "app.loading": "Carregando o StarBot",
+
   "app.leftPanel.resize": "Redimensionar barra lateral esquerda",
   "app.host.thisMac": "Este Mac",
   "app.host.thisComputer": "Este computador",
@@ -28,16 +29,20 @@ export const messages = {
   "app.provider.codeExpired": "O código de {name} expirou",
   "app.provider.codeExpiredDescription": "Ninguém o inseriu a tempo. Esse código não funciona mais.",
   "app.provider.connectFailed": "Não foi possível conectar {name}",
-  "app.provider.connectFailedRetry": "O OpenBot não conseguiu conectar {name}. Tente novamente.",
+  "app.provider.connectFailedRetry": "O StarBot não conseguiu conectar {name}. Tente novamente.",
+
   "app.provider.restartFailed": "Não foi possível reiniciar {name}",
-  "app.provider.included": "{name} está incluído no OpenBot.",
+  "app.provider.included": "{name} está incluído no StarBot.",
+
   "app.clipboard.copyFailed": "Não foi possível copiar o texto.",
   "app.voice.tooLong": "As gravações de voz são limitadas a 10 minutos.",
   "app.avatar.type": "Escolha uma imagem PNG, JPEG, GIF ou WebP.",
   "app.avatar.size": "Escolha uma imagem menor que 10 MB.",
   "app.avatar.processingUnavailable": "O processamento de imagem está indisponível.",
-  "app.avatar.tooLarge": "O OpenBot não conseguiu reduzir esta imagem o suficiente. Escolha uma imagem mais simples.",
-  "app.avatar.processFailed": "O OpenBot não conseguiu processar esta imagem.",
+  "app.avatar.tooLarge": "O StarBot não conseguiu reduzir esta imagem o suficiente. Escolha uma imagem mais simples.",
+
+  "app.avatar.processFailed": "O StarBot não conseguiu processar esta imagem.",
+
   "app.chart.total": "Total",
   "app.modelVariant.default": "Padrão",
   "app.qrCode.label": "Código QR",
@@ -48,7 +53,8 @@ export const messages = {
   "app.standingApproval.title": "Sempre permitir {name}?",
   "app.standingApproval.titleUnnamed": "Sempre permitir este agente?",
   "app.rail.label": "Páginas",
-  "app.rail.website": "Site do OpenBot",
+  "app.rail.website": "Site do StarBot",
+
   "app.rail.agents": "Agentes",
   "app.rail.schedule": "Agenda",
   "app.rail.tasks": "Tarefas",
@@ -69,31 +75,40 @@ export const messages = {
   "app.help.guides": "Guias",
   "app.help.discord": "Entrar no Discord",
   "app.help.reportProblem": "Relatar um problema",
-  "app.githubStar.title": "Está gostando do OpenBot?",
-  "app.githubStar.description": "Uma estrela no GitHub ajuda mais pessoas a encontrar o OpenBot.",
+  "app.githubStar.title": "Está gostando do StarBot?",
+
+  "app.githubStar.description": "Uma estrela no GitHub ajuda mais pessoas a encontrar o StarBot.",
+
   "app.githubStar.star": "Dar uma estrela no GitHub",
   "app.githubStar.notNow": "Agora não",
   "app.githubStar.thanksTitle": "Obrigado!",
   "app.githubStar.thanksBody": "Você fez o nosso dia.",
-  "app.socialFollow.title": "Está gostando do OpenBot?",
+  "app.socialFollow.title": "Está gostando do StarBot?",
+
   "app.socialFollow.description": "Conte em uma publicação. Isso nos ajuda mais do que qualquer anúncio.",
-  "app.socialFollow.networks": "Publicar sobre o OpenBot no",
+  "app.socialFollow.networks": "Publicar sobre o StarBot no",
+
   "app.socialFollow.post": "Publicar no {name}",
   "app.socialFollow.postCopy": "Copiar uma publicação e abrir o {name}",
   "app.socialFollow.postCommunity": "Publicar em {name}",
   "app.socialFollow.thanksTitle": "Obrigado!",
   "app.socialFollow.openedText": "O {name} está aberto com uma primeira publicação. Deixe com a sua cara.",
-  "app.socialFollow.openedLink": "O {name} está aberto com o link do OpenBot.",
+  "app.socialFollow.openedLink": "O {name} está aberto com o link do StarBot.",
+
   "app.socialFollow.copied": "Copiamos uma publicação. Cole no {name}.",
-  "app.socialFollow.opened": "O {name} está aberto. Escreva algumas palavras sobre o OpenBot.",
+  "app.socialFollow.opened": "O {name} está aberto. Escreva algumas palavras sobre o StarBot.",
+
   "app.socialFollow.follow": "Seguir {handle}",
-  "app.socialFollow.followOn": "Seguir o OpenBot no {name}",
+  "app.socialFollow.followOn": "Seguir o StarBot no {name}",
+
   "app.socialFollow.join": "Entrar em {handle}",
   "app.socialFollow.followedTitle": "Até logo no {name}!",
   "app.socialFollow.followedBody": "Nossas novidades saem lá primeiro.",
   "app.socialFollow.draftPost":
-    "Meus agentes de IA agora trabalham no meu próprio computador com o OpenBot. Minhas conversas e arquivos ficam comigo. Experimente: {site}",
-  "app.socialFollow.redditTitle": "Como eu uso o OpenBot",
+    "Meus agentes de IA agora trabalham no meu próprio computador com o StarBot. Minhas conversas e arquivos ficam comigo. Experimente: {site}",
+
+  "app.socialFollow.redditTitle": "Como eu uso o StarBot",
+
   "app.rail.usageRings": "Uso de {name}: {windows}. Abrir uso",
   "app.rail.usageUnavailable": "Uso de {name} indisponível. Abrir uso",
   "app.rail.customAgentUsage": "Uso de {name}. Abrir uso",

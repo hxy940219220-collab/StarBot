@@ -49,7 +49,7 @@ const PRECEDING_MESSAGES = 10;
 const PRECEDING_WINDOW_MS = 15 * 60_000;
 const RECENT_WINDOWS_MS = [3_600_000, 86_400_000, 604_800_000];
 const NO_RECENT_MESSAGES =
-  "This Discord channel has no messages from the last 7 days. OpenBot reads only the last 7 days of a Discord channel.";
+  "This Discord channel has no messages from the last 7 days. StarBot reads only the last 7 days of a Discord channel.";
 const RECENT_CALLS = 6;
 const CLOCK_MARGIN_MS = 60_000;
 const DISCORD_EPOCH_MS = 1_420_070_400_000n;
@@ -568,9 +568,9 @@ function hasContent(message: DiscordHistoryMessage): boolean {
 function leftOutNote(count: number): string {
   const messages =
     count === 1
-      ? "1 message of this channel has no text or files that OpenBot can read, so it is left out."
-      : `${count} messages of this channel have no text or files that OpenBot can read, so they are left out.`;
-  return `${messages} Possible causes: Discord gives OpenBot the text of a message only when the message mentions OpenBot, or the message is a system message, such as a member join. A person can mention OpenBot in a message so that OpenBot can read it.`;
+      ? "1 message of this channel has no text or files that StarBot can read, so it is left out."
+      : `${count} messages of this channel have no text or files that StarBot can read, so they are left out.`;
+  return `${messages} Possible causes: Discord gives StarBot the text of a message only when the message mentions StarBot, or the message is a system message, such as a member join. A person can mention StarBot in a message so that StarBot can read it.`;
 }
 
 function compareSnowflakes(left: string, right: string): number {

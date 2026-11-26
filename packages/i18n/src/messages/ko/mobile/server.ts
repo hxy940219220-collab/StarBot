@@ -132,21 +132,26 @@ export const messages = {
   "mobile.server.hosted.open": "서버 열기",
   "mobile.server.hosted.failedTitle": "서버를 시작하지 못했어요",
   "mobile.server.hosted.failedDescription":
-    "다시 시도해 주세요. 계속 실패하면 컴퓨터의 OpenBot 설정에서 서버를 삭제해 주세요.",
+    "다시 시도해 주세요. 계속 실패하면 컴퓨터의 StarBot 설정에서 서버를 삭제해 주세요.",
+
   "mobile.server.hosted.retrying": "시작 중…",
   "mobile.server.hosted.expiredTitle": "결제 페이지가 만료되었어요",
   "mobile.server.hosted.expiredDescription": "서버가 결제되지 않아 삭제되었어요.",
   "mobile.server.hosted.step.payment": "결제 확인",
   "mobile.server.hosted.step.create": "머신 생성",
-  "mobile.server.hosted.step.start": "OpenBot 시작",
+  "mobile.server.hosted.step.start": "StarBot 시작",
+
   "mobile.server.hosted.step.connect": "계정에 연결",
   "mobile.server.hosted.detail.payment": "Stripe 응답 대기 중",
   "mobile.server.hosted.detail.reserve": "전용 머신 예약 중",
-  "mobile.server.hosted.detail.copy": "머신에 OpenBot 복사 중",
+  "mobile.server.hosted.detail.copy": "머신에 StarBot 복사 중",
+
   "mobile.server.hosted.detail.key": "일회용 로그인 키 추가 중",
   "mobile.server.hosted.detail.boot": "머신 켜는 중",
-  "mobile.server.hosted.detail.app": "OpenBot 시작 중",
-  "mobile.server.hosted.detail.wait": "OpenBot 응답 대기 중",
+  "mobile.server.hosted.detail.app": "StarBot 시작 중",
+
+  "mobile.server.hosted.detail.wait": "StarBot 응답 대기 중",
+
   "mobile.server.hosted.detail.signIn": "내 계정으로 로그인 중",
   "mobile.server.hosted.detail.publish": "계정에 서버 추가 중",
   "mobile.server.hosted.detail.check": "연결 확인 중",
@@ -154,7 +159,8 @@ export const messages = {
   "mobile.server.hosted.stepActive": "진행 중",
   "mobile.server.hosted.stepPending": "시작 전",
   "mobile.server.hosted.stepFailed": "실패",
-  "mobile.server.scan.notInvitation": "이 QR 코드는 OpenBot 초대가 아니에요.",
+  "mobile.server.scan.notInvitation": "이 QR 코드는 StarBot 초대가 아니에요.",
+
   "mobile.server.scan.title": "초대 스캔",
   "mobile.server.role.owner": "소유자",
   "mobile.server.role.admin": "관리자",
@@ -342,7 +348,8 @@ export const messages = {
   "mobile.server.storage.category.caches": "서버 파일 캐시",
   "mobile.server.storage.category.runtimes": "제공자 런타임",
   "mobile.server.storage.category.logs": "로그",
-  "mobile.server.storage.total": "{name}의 OpenBot",
+  "mobile.server.storage.total": "{name}의 StarBot",
+
   "mobile.server.storage.used": "사용 중",
   "mobile.server.storage.byType": "유형별 저장 공간",
   "mobile.server.storage.free": "이 디스크에 {size} 남음",
@@ -579,7 +586,8 @@ export const messages = {
   "mobile.server.browserProxies.saveFailed": "OpenBot이 프록시를 바꾸지 못했어요.",
   "mobile.server.browserProxies.title": "프록시",
   "mobile.server.browserProxies.sectionHint":
-    "프록시가 있는 프로필은 그 프록시를 통해 페이지를 열어요. 멤버는 OpenBot 데스크톱 앱에서 컴퓨터를 공유해요.",
+    "프록시가 있는 프로필은 그 프록시를 통해 페이지를 열어요. 멤버는 StarBot 데스크톱 앱에서 컴퓨터를 공유해요.",
+
   "mobile.server.browserProxies.limit": "서버 하나에 프록시는 최대 {limit}개예요.",
   "mobile.server.browserProxies.add": "프록시 추가",
   "mobile.server.browserProxies.new": "새 프록시",
@@ -606,7 +614,8 @@ export const messages = {
   "mobile.server.browserProxies.addressInvalid":
     "프록시 주소가 아니에요. socks5://host:1080, http://user:password@host:3128 또는 host:port:user:password를 사용하세요.",
   "mobile.server.browserProxies.computerHint":
-    "이 컴퓨터를 사용하는 프로필의 페이지는 멤버가 OpenBot 데스크톱 앱에서 이 컴퓨터를 공유하는 동안 이 컴퓨터의 인터넷 연결을 통해 나가요. 이 컴퓨터는 공개 인터넷 주소만 열어요.",
+    "이 컴퓨터를 사용하는 프로필의 페이지는 멤버가 StarBot 데스크톱 앱에서 이 컴퓨터를 공유하는 동안 이 컴퓨터의 인터넷 연결을 통해 나가요. 이 컴퓨터는 공개 인터넷 주소만 열어요.",
+
   "mobile.server.browserProxies.profilesTitle": "프로필",
   "mobile.server.browserProxies.delete": "프록시 삭제",
   "mobile.server.browserProxies.deleteHint": "삭제하면 이 프록시의 프로필이 ‘자동’으로 바뀌어요.",
@@ -619,7 +628,8 @@ export const messages = {
   "mobile.server.browserProxies.change": "프록시 바꾸기",
   "mobile.server.browserProxies.choiceHint":
     "‘자동’은 서버를 실행하는 컴퓨터의 프록시 설정을 사용해요. 변경하면 프로필의 열린 탭이 닫혀요.",
-  "mobile.server.browserProxies.shareHint": "내 컴퓨터를 사용하려면 OpenBot 데스크톱 앱에서 공유하세요.",
+  "mobile.server.browserProxies.shareHint": "내 컴퓨터를 사용하려면 StarBot 데스크톱 앱에서 공유하세요.",
+
   "mobile.server.route.connectors": "커넥터",
   "mobile.server.connectors.unavailable": "커넥터를 관리하려면 소유자나 관리자로 이 서버에 연결하세요.",
   "mobile.server.connectors.unsupported": "여기에서 커넥터를 관리하려면 이 서버의 OpenBot을 업데이트해 주세요.",
@@ -660,7 +670,8 @@ export const messages = {
   "mobile.server.connectors.bitwarden.connectingBody":
     "{host}이(가) Bitwarden에 로그인하고 있어요. 처음 로그인할 때는 몇 분 걸릴 수 있어요.",
   "mobile.server.connectors.bitwarden.folderTitle": "공유 폴더",
-  "mobile.server.connectors.bitwarden.folderName": "Shared with OpenBot",
+  "mobile.server.connectors.bitwarden.folderName": "Shared with StarBot",
+
   "mobile.server.connectors.bitwarden.folderKind": "Bitwarden 폴더",
   "mobile.server.connectors.bitwarden.folderFooter":
     "에이전트가 로그인 정보를 사용하게 하려면 Bitwarden에서 이 폴더로 옮기세요. 사용을 멈추려면 폴더에서 제거하세요.",
@@ -681,11 +692,13 @@ export const messages = {
   "mobile.server.connectors.github.connectedAs": "@{login}(으)로 연결됨",
   "mobile.server.connectors.github.chooseRepositories": "저장소 선택",
   "mobile.server.connectors.github.repositoriesFooter":
-    "에이전트는 OpenBot GitHub 앱이 설치된 저장소만 사용할 수 있어요.",
+    "에이전트는 StarBot GitHub 앱이 설치된 저장소만 사용할 수 있어요.",
+
   "mobile.server.connectors.github.repositoriesTitle": "저장소",
   "mobile.server.connectors.github.repositoriesLoading": "GitHub에서 저장소를 읽는 중",
   "mobile.server.connectors.github.repositoriesFailed": "OpenBot에서 GitHub의 저장소를 읽지 못했어요.",
-  "mobile.server.connectors.github.noRepositories": "OpenBot GitHub 앱이 설치된 저장소가 아직 없어요.",
+  "mobile.server.connectors.github.noRepositories": "StarBot GitHub 앱이 설치된 저장소가 아직 없어요.",
+
   "mobile.server.connectors.github.moreRepositories": {
     other: "저장소 {count}개 더 있음",
   },
@@ -698,7 +711,8 @@ export const messages = {
   "mobile.server.connectors.github.disconnect": "GitHub 연결 해제",
   "mobile.server.connectors.github.disconnectTitle": "GitHub 연결을 해제할까요?",
   "mobile.server.connectors.github.disconnectBody":
-    "{host}에서 @{login}의 로그인 정보가 삭제되고, 모든 에이전트가 GitHub 도구, gh, git을 사용할 수 없게 돼요. 이후 GitHub가 열리면 OpenBot 접근 권한을 취소할 수 있어요.",
+    "{host}에서 @{login}의 로그인 정보가 삭제되고, 모든 에이전트가 GitHub 도구, gh, git을 사용할 수 없게 돼요. 이후 GitHub가 열리면 StarBot 접근 권한을 취소할 수 있어요.",
+
   "mobile.server.connectors.onePassword.title": "1Password",
   "mobile.server.connectors.onePassword.description":
     "서비스 계정을 통해 {host}의 OpenBot과 전용 1Password 보관함을 공유하면, {host}의 에이전트가 브라우저에서 사이트에 로그인할 수 있어요.",
@@ -849,7 +863,8 @@ export const messages = {
   "mobile.server.connectors.discord.installFailed": "Discord 승인이 완료되지 않았어요. 다시 시도해 주세요.",
   "mobile.server.connectors.telegram.title": "Telegram",
   "mobile.server.connectors.telegram.description":
-    "Telegram 그룹에 OpenBot 봇을 추가하거나 봇과 1:1 채팅을 시작하세요. Telegram Orchestrator가 알맞은 에이전트에게 물어보고 답변해요.",
+    "Telegram 그룹에 StarBot 봇을 추가하거나 봇과 1:1 채팅을 시작하세요. Telegram Orchestrator가 알맞은 에이전트에게 물어보고 답변해요.",
+
   "mobile.server.connectors.telegram.attention": {
     other: "채팅 {count}개 확인 필요",
   },
@@ -858,7 +873,8 @@ export const messages = {
   "mobile.server.connectors.telegram.groupDescription": "봇을 멘션하거나 봇의 메시지에 답장하세요.",
   "mobile.server.connectors.telegram.directDescription": "이 채팅의 모든 메시지는 Telegram Orchestrator로 전달돼요.",
   "mobile.server.connectors.telegram.helpRemoved":
-    "OpenBot 봇이 더 이상 이 채팅에 없어요. 채팅 연결을 해제한 다음 봇을 다시 추가해 주세요.",
+    "StarBot 봇이 더 이상 이 채팅에 없어요. 채팅 연결을 해제한 다음 봇을 다시 추가해 주세요.",
+
   "mobile.server.connectors.telegram.helpRelay":
     "{host}의 OpenBot이 Telegram 메시지를 받을 수 없어요. {host}에서 로그인하고, 서버 설정에서 서버 이름을 지정한 다음 OpenBot을 계속 실행해 두세요.",
   "mobile.server.connectors.telegram.helpError":
@@ -883,7 +899,8 @@ export const messages = {
   "mobile.server.connectors.telegram.addAgent": "Telegram Orchestrator 추가",
   "mobile.server.connectors.telegram.disconnectTitle": "{chat} 연결을 해제할까요?",
   "mobile.server.connectors.telegram.disconnectBody":
-    "OpenBot 봇이 {chat}에서 나가고, OpenBot이 그곳에서 답변을 중지해요.",
+    "StarBot 봇이 {chat}에서 나가고, OpenBot이 그곳에서 답변을 중지해요.",
+
   "mobile.server.connectors.telegram.disconnectKept": "대화와 Telegram Orchestrator는 OpenBot에 그대로 남아 있어요.",
   "mobile.server.connectors.telegram.disconnectDeleted":
     "마지막 채팅이므로 Telegram Orchestrator와 해당 대화가 OpenBot에서 삭제돼요.",
@@ -930,7 +947,8 @@ export const messages = {
   "mobile.server.connectors.whatsapp.kindPersonal": "내 개인 번호",
   "mobile.server.connectors.whatsapp.kindPersonalDescription":
     "OpenBot은 “나에게 메시지 보내기” 채팅과 허용한 사람들에게만 답해요. 다른 사람에게는 답장하지 않아요.",
-  "mobile.server.connectors.whatsapp.kindDedicated": "OpenBot 전용 번호",
+  "mobile.server.connectors.whatsapp.kindDedicated": "StarBot 전용 번호",
+
   "mobile.server.connectors.whatsapp.kindDedicatedDescription":
     "OpenBot이 이 번호로 모르는 사람마다 나에게 알려 줄 코드를 답장해요. 여기에서 승인하세요.",
   "mobile.server.connectors.whatsapp.phoneLabel": "전화번호",
@@ -1316,8 +1334,10 @@ export const messages = {
   "mobile.server.settings.updates": "업데이트",
   "mobile.server.settings.updateAvailable": "업데이트 가능",
   "mobile.server.route.updates": "업데이트",
-  "mobile.server.update.hostTitle": "{name}의 OpenBot",
-  "mobile.server.update.version": "OpenBot {version}",
+  "mobile.server.update.hostTitle": "{name}의 StarBot",
+
+  "mobile.server.update.version": "StarBot {version}",
+
   "mobile.server.update.status.idle": "업데이트를 확인해 최신 릴리스를 찾아보세요.",
   "mobile.server.update.status.checking": "업데이트 확인 중…",
   "mobile.server.update.status.available": "{version}을(를) 사용할 수 있어요.",
@@ -1336,16 +1356,20 @@ export const messages = {
     "이 빌드에서는 릴리스를 확인할 수 없어요. 호스트 관리자에게 호환되는 릴리스를 확인해 달라고 요청하세요.",
   "mobile.server.update.externalTitle": "호스트에서 설치를 관리해요",
   "mobile.server.update.path.hostManager":
-    "모든 사용자가 대기 상태일 때 OpenBot Host Manager가 업데이트를 설치해요. 업데이트가 시작되지 않으면 호스트 관리자에게 Host Manager 상태를 확인해 달라고 요청하세요.",
+    "모든 사용자가 대기 상태일 때 StarBot Host Manager가 업데이트를 설치해요. 업데이트가 시작되지 않으면 호스트 관리자에게 Host Manager 상태를 확인해 달라고 요청하세요.",
+
   "mobile.server.update.path.hosted":
     "호스팅 서비스가 백그라운드에서 업데이트를 다운로드해요. 다운로드된 업데이트는 서버가 다음에 시작될 때 적용돼요. 서버를 중지했다가 재개하기 전에 진행 중인 작업이 끝나기를 기다리세요. 이전 버전에서 바뀌지 않으면 호스트 관리자에게 문의하세요.",
   "mobile.server.update.path.system":
     "호스트에서 sudo openbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 OpenBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다리세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
   "mobile.server.update.path.container":
-    "Docker 호스트에서 새 OpenBot 이미지를 가져오고 같은 데이터 볼륨으로 컨테이너를 다시 만드세요. 먼저 진행 중인 작업이 끝나기를 기다리세요. 데이터를 보존하려면 기존 볼륨을 유지하세요.",
+    "Docker 호스트에서 새 StarBot 이미지를 가져오고 같은 데이터 볼륨으로 컨테이너를 다시 만드세요. 먼저 진행 중인 작업이 끝나기를 기다리세요. 데이터를 보존하려면 기존 볼륨을 유지하세요.",
+
   "mobile.server.update.path.manual":
-    "이 설치본은 스스로 교체할 수 없어요. 호스트 관리자에게 github.com/nightly-labs/openbot/releases에서 호환되는 릴리스를 설치해 달라고 요청하세요. 기존 OpenBot 데이터는 유지하세요.",
-  "mobile.server.update.path.unavailable": "개발 빌드예요. 업데이트를 확인하려면 설치된 OpenBot 릴리스를 사용하세요.",
+    "이 설치본은 스스로 교체할 수 없어요. 호스트 관리자에게 github.com/hxy940219220-collab/StarBot-Desktop/releases에서 호환되는 릴리스를 설치해 달라고 요청하세요. 기존 StarBot 데이터는 유지하세요.",
+
+  "mobile.server.update.path.unavailable": "개발 빌드예요. 업데이트를 확인하려면 설치된 StarBot 릴리스를 사용하세요.",
+
   "mobile.server.update.check": "업데이트 확인",
   "mobile.server.update.start": "대기 상태일 때 업데이트",
   "mobile.server.update.restartNow": "지금 다시 시작",
@@ -1365,17 +1389,22 @@ export const messages = {
     "{name} 사용자가 서버 멤버의 업데이트를 껐어요. OpenBot을 업데이트하거나, 그 컴퓨터에서 설정 > 업데이트를 열고 ‘서버 멤버의 업데이트 허용’을 켜 달라고 요청하세요.",
   "mobile.server.update.managedTitle": "Host Manager가 업데이트를 관리해요",
   "mobile.server.update.managedDescription":
-    "OpenBot Host Manager가 {name}을(를) 업데이트해요. 호스트 관리자에게 문의하세요.",
+    "StarBot Host Manager가 {name}을(를) 업데이트해요. 호스트 관리자에게 문의하세요.",
+
   "mobile.server.update.unsupportedTitle": "{name}은(는) 스스로 업데이트할 수 없어요",
   "mobile.server.update.unsupportedDescription":
-    "이 OpenBot 빌드에는 업데이터가 없어요. {name}에 새 버전을 설치하세요.",
+    "이 StarBot 빌드에는 업데이터가 없어요. {name}에 새 버전을 설치하세요.",
+
   "mobile.server.update.restarting": "다시 시작 중…",
   "mobile.server.update.loadFailed": "{name}의 업데이트 상태를 불러오지 못했어요.",
-  "mobile.server.update.dialog.offerTitle": "{name}을(를) OpenBot {version}(으)로 업데이트",
+  "mobile.server.update.dialog.offerTitle": "{name}을(를) StarBot {version}(으)로 업데이트",
+
   "mobile.server.update.dialog.offerDescription":
-    "{name}은(는) OpenBot {current}을(를) 사용 중이에요. 먼저 업데이트를 다운로드한 다음 다시 시작해요.",
+    "{name}은(는) StarBot {current}을(를) 사용 중이에요. 먼저 업데이트를 다운로드한 다음 다시 시작해요.",
+
   "mobile.server.update.dialog.offerReadyDescription":
-    "{name}은(는) OpenBot {current}을(를) 사용 중이에요. 업데이트가 다운로드되었어요. 설치하려면 {name}이(가) 다시 시작돼요.",
+    "{name}은(는) StarBot {current}을(를) 사용 중이에요. 업데이트가 다운로드되었어요. 설치하려면 {name}이(가) 다시 시작돼요.",
+
   "mobile.server.update.dialog.waitIdleDescription": "에이전트 턴과 루틴 실행이 끝날 때까지 다시 시작을 기다려요.",
   "mobile.server.update.dialog.updateNow": "지금 업데이트",
   "mobile.server.update.dialog.restartWhenIdle": "대기 상태일 때 다시 시작",
@@ -1390,10 +1419,12 @@ export const messages = {
   "mobile.server.update.reason.fileTransfer": "파일 전송",
   "mobile.server.update.reason.browserControl": "에이전트의 브라우저 제어",
   "mobile.server.update.reason.updateOperation": "다른 업데이트 단계",
-  "mobile.server.update.reason.initialization": "OpenBot 시작",
+  "mobile.server.update.reason.initialization": "StarBot 시작",
+
   "mobile.server.update.reason.other": "기타 작업",
   "mobile.server.update.actionFailed": "서버 작업에 실패했어요.",
-  "mobile.server.update.unavailable": "OpenBot 업데이트를 보려면 이 서버에 연결하세요.",
+  "mobile.server.update.unavailable": "StarBot 업데이트를 보려면 이 서버에 연결하세요.",
+
   "mobile.server.update.loading": "업데이트 불러오는 중…",
   "mobile.server.route.sites": "사이트",
   "mobile.server.settings.sites": "사이트",
@@ -1498,7 +1529,8 @@ export const messages = {
   "mobile.server.import.sourceLede": "OpenBot이 이 서버로 복사해요. 변경하기 전에 모든 항목을 확인할 수 있어요.",
   "mobile.server.import.hermesNote": "Hermes에서 .zip 파일을 내보내세요.",
   "mobile.server.import.grokNote": "클라우드에 있어요. 그곳의 내보내기 에이전트가 .zip 파일을 만들어요.",
-  "mobile.server.import.transfer": "다른 OpenBot 서버",
+  "mobile.server.import.transfer": "다른 StarBot 서버",
+
   "mobile.server.import.transferNote": "에이전트와 설정을 함께 옮기려면 이전을 사용하세요.",
   "mobile.server.import.grokLede":
     "Grok Bot의 내보내기 에이전트가 이름, 지침, 아바타, 스킬, 루틴, 메모리와 포함하기로 한 파일을 .zip 파일 하나로 묶어요.",
@@ -1601,8 +1633,10 @@ export const messages = {
   "mobile.server.transfer.reading": "파일을 읽는 중…",
   "mobile.server.transfer.sending": "파일을 보내는 중… {percent}%",
   "mobile.server.transfer.openFailed": "파일을 열 수 없어요.",
-  "mobile.server.transfer.source": "OpenBot {version} · {date}에 내보냄",
-  "mobile.server.transfer.sourceNoDate": "OpenBot {version}",
+  "mobile.server.transfer.source": "StarBot {version} · {date}에 내보냄",
+
+  "mobile.server.transfer.sourceNoDate": "StarBot {version}",
+
   "mobile.server.transfer.importWarnings": "가져오기를 시작하기 전에",
   "mobile.server.transfer.importAgents": "파일 속 에이전트",
   "mobile.server.transfer.nameExists": "이미 사용 중인 이름",
@@ -1666,7 +1700,8 @@ export const messages = {
   "mobile.server.ownerTransfer.cancelFailed": "이전을 취소하지 못했어요.",
   "mobile.server.ownerTransfer.incomingTitle": "{server}의 소유자가 될까요?",
   "mobile.server.ownerTransfer.incomingBody":
-    "{name}님이 나를 {server}의 소유자로 지정하려고 해요. 서버를 완전히 관리할 수 있고, 에이전트, 채팅, 루틴, 저장된 로그인은 그대로 남아요. {name}님은 접근 권한을 잃어요. 서버를 실행하는 컴퓨터에 아직 로그인할 수 있는 사람은 회원님의 OpenBot 계정을 사용할 수 있어요. 그 컴퓨터의 비밀번호와 SSH 키를 바꾸세요.",
+    "{name}님이 나를 {server}의 소유자로 지정하려고 해요. 서버를 완전히 관리할 수 있고, 에이전트, 채팅, 루틴, 저장된 로그인은 그대로 남아요. {name}님은 접근 권한을 잃어요. 서버를 실행하는 컴퓨터에 아직 로그인할 수 있는 사람은 회원님의 StarBot 계정을 사용할 수 있어요. 그 컴퓨터의 비밀번호와 SSH 키를 바꾸세요.",
+
   "mobile.server.ownerTransfer.accept": "수락",
   "mobile.server.ownerTransfer.decline": "거절",
   "mobile.server.ownerTransfer.accepted": "이제 {server}의 소유자예요.",

@@ -21,7 +21,8 @@ export const messages = {
   "error.agent.toolCallUnknownToolSuggest":
     "도구가 실행되지 않았어요. tool_call이 이 이름의 도구를 찾지 못했어요. 전체 이름은 {name}일 수 있어요. 맞다면 그 이름으로 다시 호출하세요.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe가 {names} 이름의 OpenBot 도구를 찾지 못했습니다. openbot.tool_search가 나열하는 OpenBot 및 브라우저 도구만 설명하며 MCP 도구는 설명하지 않습니다.",
+    "tool_describe가 {names} 이름의 StarBot 도구를 찾지 못했습니다. openbot.tool_search가 나열하는 StarBot 및 브라우저 도구만 설명하며 MCP 도구는 설명하지 않습니다.",
+
   "error.agent.toolDescribeDiscoveryNames":
     "{names}은(는) 직접 호출하세요. tool_describe는 검색 도구를 설명하지 않습니다.",
   "error.agent.routineScheduleArgumentsInvalid":
@@ -94,7 +95,8 @@ export const messages = {
   "error.agent.hostLimit": "호스트 하나에는 에이전트를 최대 {limit}개까지 둘 수 있어요.",
   "error.agent.changedWhileDuplicating": "복제하는 동안 에이전트가 변경되었어요. 다시 시도해 주세요.",
   "error.agent.duplicatedAgentGone": "복제한 에이전트가 더 이상 없어요.",
-  "error.agent.stateCorrupt": "에이전트 상태가 손상되었거나 더 새로운 OpenBot 버전의 것이에요. 덮어쓰지 않아요.",
+  "error.agent.stateCorrupt": "에이전트 상태가 손상되었거나 더 새로운 StarBot 버전의 것이에요. 덮어쓰지 않아요.",
+
   "error.agent.oldRoleField":
     "저장된 에이전트 프로필이 이전 role 필드를 사용해요. OpenBot을 시작하기 전에 데이터를 업데이트하세요.",
   "error.agent.duplicateIds": "에이전트 상태에 중복된 에이전트 ID가 있어요. 덮어쓰지 않아요.",

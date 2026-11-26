@@ -73,7 +73,7 @@ later add context and can add model steps. Provider prompts, external plugins, c
 native model serialization are outside this measurement.
 
 Claude Code adds its own system prompt, tools, and skill listing to each Claude request.
-`claude-client.ts` turns off the bundled skills that cannot work in an OpenBot agent, lists the
+`claude-client.ts` turns off the bundled skills that cannot work in an StarBot agent, lists the
 bundled coding skills by name only, and turns off Remote Control, commit attribution, and the tools and
 agent types made for a Claude Code host (`CLAUDE_HOST_TOOLS`). These flag settings come before the
 user, project and local settings, so the client leaves out a skill override for a user or project skill
@@ -88,9 +88,9 @@ Pi adds its own system prompt, tools, and skill listing to each request of the P
 (`pi`, `inception`, `deepseek`, `openrouter`). The MCP extension of `pi-mcp.ts` removes Pi's `<docs>`
 section, which gives the paths of Pi's own documentation, from the copy of the messages that each
 request gets (`context_with_system`). A prompt returned from `before_agent_start` would also drop the
-`<mcp_servers>` section that names the user's deferred servers. The OpenBot bridge hides
+`<mcp_servers>` section that names the user's deferred servers. The StarBot bridge hides
 `request_api_key` and `suggest_marketplace_app` from Pi (`PI_SEARCH_ONLY_OPENBOT_TOOLS`). The agent
-finds and runs these two tools through OpenBot's `tool_search` and `tool_call`. They are `hidden`, not
+finds and runs these two tools through StarBot's `tool_search` and `tool_call`. They are `hidden`, not
 `deferred`: a deferred tool adds Pi's own `tool_search` and an `<mcp_servers>` line. `ask_ui` stays
 declared for its confirm card. The user's Pi settings, extensions, and skills stay, and a user extension
 can still change the prompt. `bun run bench:pi-prompt-settings`
@@ -102,15 +102,15 @@ agent session through the core tools, a commit, and a hidden tool, checks each r
 Codex adds its own base prompt, tools, and skill listing to each Codex request.
 `agent/codex-prompt-settings.ts` turns off `features.tool_suggest` and `features.recommended_plugins`,
 also when the user's `config.toml` turns them on: their `list_available_plugins_to_install` and
-`request_plugin_install` offer Codex plugins and ChatGPT apps that OpenBot cannot install, and the agent
+`request_plugin_install` offer Codex plugins and ChatGPT apps that StarBot cannot install, and the agent
 then tells the user about a prompt that never shows (#8515). It also turns off the skills about the Codex
 app (`CODEX_UNFIT_SKILLS`). The thread value of `skills.config` replaces the whole list, so the user's own
-entries go first and OpenBot adds only the skills that no entry names. On Codex 0.166 and GPT-6
+entries go first and StarBot adds only the skills that no entry names. On Codex 0.166 and GPT-6
 Luna these settings remove about 1,050 input tokens from each request: `request_plugin_install` about 430
 and the five skills about 620. Skill descriptions (about 2,950 tokens) and image generation (about 600)
 stay, as agent capabilities. `bun run bench:codex-prompt-settings` runs real turns and writes
 `.openbot-build/codex-prompt-settings-bench/report.json`. `bun run smoke:codex-agent` runs one thread
-through `update_plan`, the shell, `apply_patch`, a subagent, a skill, a deferred OpenBot tool, Codex's
+through `update_plan`, the shell, `apply_patch`, a subagent, a skill, a deferred StarBot tool, Codex's
 own web search, and a commit, and writes `.openbot-build/codex-agent-smoke/report.json`.
 
 Codex keeps its own inline web search (`web__run`, about 2,450 tokens in each request). Agents on a
@@ -327,7 +327,7 @@ before with `read_local_skill` and publish its files with `revise_skill`.
 ## Idle provider sessions
 
 A loaded provider session holds processes: the CLI, its MCP servers and its background terminals.
-OpenBot unloads a session that has no turn, keeps its identity, and resumes it at the next turn.
+StarBot unloads a session that has no turn, keeps its identity, and resumes it at the next turn.
 
 - Claude closes the `claude` process of an idle thread, and each ACP client closes an idle session
   (`IdleThreadPool` in `src/backend/idle-thread-pool.ts`). The client opens it again from the session.
@@ -349,7 +349,7 @@ OpenBot unloads a session that has no turn, keeps its identity, and resumes it a
 - When the memory of a server is critical, `MemoryHold` releases every idle session of each kind at once.
 - A routine session is ephemeral and is not released.
 - Outside Windows, the Claude, Codex and Pi CLIs start as the leaders of their own process groups
-  (`src/backend/provider-process-group.ts`). When the CLI exits, OpenBot sends SIGTERM to what is
+  (`src/backend/provider-process-group.ts`). When the CLI exits, StarBot sends SIGTERM to what is
   left of the group, then SIGKILL after 2 seconds. A child of an MCP server outlived the Claude CLI
   without this. Shell commands run in groups of their own, so a server that the agent started keeps
   running. Windows stops the tree with `taskkill /T`.
@@ -363,7 +363,7 @@ would end a server that the user started from the agent.
 
 Codex and Muse complete explicit compaction through turn events. Pi completes it through the request
 response. Claude manages compaction natively. ACP and custom ACP expose no explicit compaction
-operation to the OpenBot scheduler. Unsupported or native-managed clients cannot reserve its queue
+operation to the StarBot scheduler. Unsupported or native-managed clients cannot reserve its queue
 for a no-op request. Request completion clears the hold and keeps the minimum-growth guard.
 
 Antigravity reports its context fill but has no compact operation, so its flavor sets the `handoff`
@@ -378,7 +378,7 @@ Cumulative account usage is not context occupancy. A missing report is not zero 
 200,000-token context window, per-turn model summary, or new automatic model call is added.
 
 The design uses Hermes's on-demand discovery, stable instruction ordering, and bounded local
-history recall as references. OpenBot retains each native provider's session and compaction rules.
+history recall as references. StarBot retains each native provider's session and compaction rules.
 
 ## Model catalog
 
@@ -409,10 +409,10 @@ file it installed, and every start verifies that record and the binary's `--vers
 install is used. The newest version in the store that verifies is the one that runs.
 
 `provider-runtime-blocklist.json` on `main` names versions no installation may offer. It stops a
-broken upstream release without an OpenBot release. When the OpenBot copy of a provider runs a blocked
+broken upstream release without an StarBot release. When the StarBot copy of a provider runs a blocked
 version, the automatic update installs the version that the check offers, also when it is older, and then
 removes the blocked copy. Each update check also removes a blocked copy that is not active. A copy that
-another OpenBot process stamped in the retention time stays. A CLI that the user installed or configured stays. A list
+another StarBot process stamped in the retention time stays. A CLI that the user installed or configured stays. A list
 that cannot be read blocks nothing.
 
 The `Provider CLI canary` workflow (`.github/workflows/provider-cli-canary.yml`) finds a broken
@@ -444,14 +444,14 @@ On macOS and Linux, discovery looks in the folders of the login-shell `PATH` (`l
 folders: `~/.local/bin`, `~/.npm-global/bin`, `~/.volta/bin`, `~/.bun/bin`, the pnpm home, Homebrew
 and the system folders. nvm folders are not searched, because only nvm's shell setup selects a
 version. The login shell is `$SHELL` when it is a known POSIX shell or fish; otherwise macOS uses
-`/bin/zsh`. The version probe and each process that OpenBot starts for the CLI (app server, ACP,
+`/bin/zsh`. The version probe and each process that StarBot starts for the CLI (app server, ACP,
 Claude sessions, sign-in and sign-out) start with the resolved `launchPath`: the login-shell
-folders, then OpenBot's own, then the CLI's folder for a system copy. An app that Finder starts can
+folders, then StarBot's own, then the CLI's folder for a system copy. An app that Finder starts can
 then run a `#!/usr/bin/env node` CLI. A CLI that exists but does not start reports whether the
 managed copy or the user's copy failed.
 
-Installed runtimes live in one store per computer, `appData/OpenBot/provider-runtimes`, which is the
-path the packaged app always used: its `userData` is `appData/OpenBot`. Development profiles differ
+Installed runtimes live in one store per computer, `appData/StarBot/provider-runtimes`, which is the
+path the packaged app always used: its `userData` is `appData/StarBot`. Development profiles differ
 per renderer port and per worktree, so a store inside `userData` started empty in each
 one, fell back to the user's own CLI, and offered and downloaded the managed copy again. An explicit
 `--user-data-dir` still keeps its own store, so automation and packaged smoke checks stay
@@ -512,7 +512,7 @@ A provider that is off in this profile runs no CLI, so the manager does not stam
 counts as in use while a key-only provider that runs on it is on. Its
 provider page in Settings offers Delete (#3321), which removes every version of that CLI and
 this profile's partial downloads of it, and leaves accounts and sign-ins alone. On a provider that
-is on and runs the CLI that OpenBot downloaded, Delete first turns the provider off. An agent that
+is on and runs the CLI that StarBot downloaded, Delete first turns the provider off. An agent that
 uses the provider stops it, as it stops the switch. It is refused while
 the provider is on, while its download runs, and for a provider with an explicit CLI path. The same
 age rule keeps a version another instance stamped, with one change: the manager remembers its own
@@ -585,10 +585,10 @@ sets up its own environment, such as a `pi` script that picks `PI_CODING_AGENT_D
 status row therefore names the other CLI in `otherCliVersion`, and the Runtime section offers "Use
 installed version". `chooseInstalledCli` saves the choice in the `installed` list of
 `openbot-provider-use-v1.json`, and `chooseInstalledFirst` then runs the user's CLI also when the copy
-is newer. The row then offers "Use OpenBot's version", and an update clears the choice. The offer
+is newer. The row then offers "Use StarBot's version", and an update clears the choice. The offer
 compares the release with the newer of the two CLIs, so a copy that is already the newest offers no
 update. When the user's CLI goes away, main calls
-`providerUseChanged`, which stamps the copy again, or reads the store when a sibling collected it. OpenBot never runs the CLI's own updater, so no version it offers depends
+`providerUseChanged`, which stamps the copy again, or reads the store when a sibling collected it. StarBot never runs the CLI's own updater, so no version it offers depends
 on another release channel. An explicit `OPENBOT_*_PATH` suppresses the offer, because that path
 names the binary to run and the managed copy is not it. The owner comes from the last resolution of
 the binary, not from the client that runs it, so a provider that is signed out still reports its own
@@ -643,11 +643,11 @@ failure as well as after a success.
 `src/backend/acp-connection.ts` owns ACP process transport. `acp-configuration.ts` owns
 configuration and model discovery. `src/backend/acp-client.ts` owns session start/load,
 streamed messages, permissions, tool bridging, and cancellation. `grok-client.ts` supplies xAI
-login and billing hooks. The OpenCode driver starts `opencode acp` on the runtime OpenBot pins and
+login and billing hooks. The OpenCode driver starts `opencode acp` on the runtime StarBot pins and
 downloads, or on a CLI the user installed. Profile clients deny tool permissions.
 
 OpenCode 2.x keeps the MCP servers of a session for its directory after `session/close`, so the
-stdio servers that each chat and subagent started stayed until OpenCode stopped (#9254). OpenBot
+stdio servers that each chat and subagent started stayed until OpenCode stopped (#9254). StarBot
 starts each stdio server itself (`mcp-stdio-relay.ts`) and gives OpenCode a Streamable HTTP URL on
 127.0.0.1 with a bearer token. The sessions of one directory share the relay of each server, and the
 last of them to close stops it and its process group.
@@ -655,35 +655,35 @@ last of them to close stops it and its process group.
 OpenCode also keeps one `openbot` server for each directory, so the sessions of one directory share
 its token in the local MCP bridge. OpenCode gives a server 30 s to connect, then continues without it
 and does not connect again while the settings stay the same (#10749). When the bridge did not list
-its tools within that time after the session request, OpenBot gives the directory a new token and
+its tools within that time after the session request, StarBot gives the directory a new token and
 resumes the session once. The earlier tokens stay valid until the last session of the directory closes.
 
 OpenCode adds its own system prompt, tools, skill listing and Code Mode catalog to each request of an
-agent. `opencode-agent-defaults.ts` denies the parts that an OpenBot agent does not use: the
-`question` tool (OpenBot has `ask_user`), the `opencode_list_mcp_resources` and
-`opencode_read_mcp_resource` tools (OpenBot's MCP servers serve no resources), and the `report` and
+agent. `opencode-agent-defaults.ts` denies the parts that an StarBot agent does not use: the
+`question` tool (StarBot has `ask_user`), the `opencode_list_mcp_resources` and
+`opencode_read_mcp_resource` tools (StarBot's MCP servers serve no resources), and the `report` and
 `opencode` skills. These rules go in an `OPENCODE_CONFIG` file in the provider state folder, not in
 `OPENCODE_CONFIG_CONTENT`, so a rule in the project's `opencode.json` comes after them and wins. The
 global config (the XDG folder and `OPENCODE_CONFIG_DIR`) comes before that file, so the driver leaves
 out each rule that a global name or pattern matches, also in an agent's rules. The global catch-all `"*"` only sets how OpenCode asks for tools and does not count.
-When the user sets `OPENCODE_CONFIG`, or a global config file cannot be decoded, OpenBot adds no rule.
-The `models` tool, the `explore` agent and all OpenBot tools stay; with two tools gone, the Code Mode
-catalog shows 14 of 16 OpenBot tools, not 13, and `search` still finds the others. On OpenCode 2.2.6
+When the user sets `OPENCODE_CONFIG`, or a global config file cannot be decoded, StarBot adds no rule.
+The `models` tool, the `explore` agent and all StarBot tools stay; with two tools gone, the Code Mode
+catalog shows 14 of 16 StarBot tools, not 13, and `search` still finds the others. On OpenCode 2.2.6
 a one-reply request goes from 5,987 to 5,288 o200k tokens (−11.7%), and a read-then-reply task from
 12,130 to 10,732. `bun run bench:opencode-prompt-settings` runs the real driver and CLI against a fake
 model on loopback in temporary XDG folders and reports the tokens, tools, skills and catalog of each
 variant in `.openbot-build/opencode-prompt-settings-bench/report.json`. `bun run smoke:opencode-agent`
-runs one agent turn with the core tools, a subagent and an OpenBot tool through `execute`, then checks
+runs one agent turn with the core tools, a subagent and an StarBot tool through `execute`, then checks
 that global and project rules of the user win, in `.openbot-build/opencode-agent-smoke/report.json`.
 
 Grok `agent stdio` ignores `--tools` and `--disallowed-tools`, so only environment and `config.toml`
 switches remove a Grok feature. At each spawn, `grok-client.ts` turns off four features that an
-OpenBot agent does not use: feedback (`GROK_FEEDBACK_ENABLED`), workflows (`GROK_WORKFLOWS`), the
+StarBot agent does not use: feedback (`GROK_FEEDBACK_ENABLED`), workflows (`GROK_WORKFLOWS`), the
 turn summary (`GROK_TURN_SUMMARY`) and the skills of `~/.claude/skills` (`GROK_CLAUDE_SKILLS_ENABLED`).
-An environment value wins over every Grok config layer, so OpenBot sets a switch only when the
+An environment value wins over every Grok config layer, so StarBot sets a switch only when the
 user's environment and the layers below it (`$GROK_HOME/managed_config.toml`, `$GROK_HOME/config.toml`,
 `GROK_CONFIG_PATH` and `GROK_CONFIG`) all leave its key unset. When a layer does not read or parse,
-OpenBot sets no switch. A user can turn each feature back on in `config.toml`. On Grok CLI 1.0.70
+StarBot sets no switch. A user can turn each feature back on in `config.toml`. On Grok CLI 1.0.70
 and Grok Build Fast, feedback and workflows cost 1,707 prompt tokens in each request, the turn summary
 is one more request of about 1,600 after each turn, and one developer's Claude skills cost 2,811 in
 each request. The image, video, search, subagent and question tools stay: together they cost about
@@ -699,7 +699,7 @@ the stage step copies `LICENSE` from the `opencode-ai` tarball that `licensePack
 `session_v2` and keeps `session`, so OpenCode 1 can still open it. A database that OpenCode 2
 creates has no `session` table, and OpenCode 1 then refuses to start with "Database is not empty and
 has no session table" (OpenCode issue #53221); `ProviderRuntime` replaces that exit text with
-`error.provider.opencodeDatabaseNewer`. OpenBot does
+`error.provider.opencodeDatabaseNewer`. StarBot does
 not move OpenCode to a separate database, because the threads would lose their sessions. OpenCode 2
 differs from OpenCode 1 on the wire in three places that `acp-client.ts` handles: a missing session
 is `-32602` "session not found: <id>" instead of an `-32603` service failure; `session/resume` can
@@ -707,8 +707,8 @@ fail with `ServiceUnavailableError` while the CLI starts (OpenCode issue #57204)
 more after two seconds; and a model name starts with the provider id, not its name, so
 `openCodeModelName` restores the group name.
 
-OpenCode has no login step OpenBot can drive, because the account is one key: a spawn without it
-lists the free models, and a spawn with it lists the paid Go catalog. OpenBot sends the stored key
+OpenCode has no login step StarBot can drive, because the account is one key: a spawn without it
+lists the free models, and a spawn with it lists the paid Go catalog. StarBot sends the stored key
 only as `options.apiKey` of the `opencode-go` provider in `OPENCODE_CONFIG_CONTENT`, never as
 `OPENCODE_API_KEY` or on the free `opencode` provider. OpenCode gives the free tier its anonymous key
 only while that provider has no key, so a refused key there failed every free model with
@@ -726,7 +726,7 @@ the provider's serialized connection command. It refuses a provider that is runn
 deliveries while it writes, and reports success only after a new process runs with the new key.
 
 OpenCode reports OpenCode Zen and OpenCode Go as a single catalog, on the separate endpoints
-`opencode.ai/zen/v1` and `opencode.ai/zen/go/v1`, and OpenBot supports only Go. The saved key goes
+`opencode.ai/zen/v1` and `opencode.ai/zen/go/v1`, and StarBot supports only Go. The saved key goes
 only to the `opencode-go` provider, so OpenCode lists a paid Zen model only when the user signed in
 to Zen in OpenCode itself (`opencode auth login`). That sign-in buys the model, so the catalog shows
 each model that OpenCode lists. Checked in OpenCode 2.2.5 and 2.3.0: a key on `opencode-go` lists
@@ -751,7 +751,7 @@ SQLite call. `scripts/opencode-go-usage-e2e.ts` covers it.
 `PREFERRED_MODEL_ORDER` (in the same file) reorders that catalog, because a provider with no
 `defaultProviderModel` runs the first model of its list and OpenCode reports the third-party
 services the user signed in to before its own — so the fallback used to pick a model behind a token
-OpenBot can neither see nor refresh. `opencodeModelRank` sorts free models first, with
+StarBot can neither see nor refresh. `opencodeModelRank` sorts free models first, with
 `OPENCODE_RECOMMENDED_FREE_MODELS` (`packages/contracts/src/agent-providers.ts`, chosen by
 `bun run bench:opencode-free-models`) ahead of the rest in their order, then OpenCode's own paid models, then everything behind a separate sign-in. Inside one
 tier the newest version comes first. The sort is stable, so the CLI's order stays between models of
@@ -778,7 +778,7 @@ one with `-32000` "provider authentication required" and no provider ID. `OPENCO
 maps that code to `error.provider.opencodeAuthRequired`, which names the provider from the model ID
 before its first `/` and lists the fixes: a Free model, a Go key, or `opencode auth login`.
 OpenCode 2.2.5 sends the same error, with no reason, when OpenCode Go refuses a key, such as an
-expired one (#9095). OpenBot sends its saved key only to OpenCode Go, so with a saved key and an
+expired one (#9095). StarBot sends its saved key only to OpenCode Go, so with a saved key and an
 `opencode-go/` model the client's `savedKey` option makes the flavor show
 `error.provider.opencodeKeyRefused`. With no saved key, a refused key and a missing key look the
 same, and the text stays `error.provider.opencodeAuthRequired`.
@@ -798,7 +798,7 @@ of OpenCode 2, an `auth.json` entry, or `OPENCODE_AUTH_CONTENT`. With a key for 
 flavor shows `error.provider.opencodeProviderRefused`: the provider refused the request, and a VPN,
 a proxy or a blocked country can be the cause. A key in an environment variable or a config file is
 not found, so the text stays `error.provider.opencodeAuthRequired`. An `opencode-go/` model keeps
-that text too, because it names the fix in OpenBot's settings for an expired Go key.
+that text too, because it names the fix in StarBot's settings for an expired Go key.
 
 #### Turns of a background subagent or shell command
 
@@ -809,9 +809,9 @@ command that runs in the background does the same when it ends (#7713). The flag
 `unsentBackgroundTurns` of `OPENCODE_ACP_FLAVOR` turns on the recovery in `acp-client.ts`:
 
 - A tool call that ends with `rawOutput.metadata.status` "running" and a `sessionID` (a subagent)
-  or a `shellID` (a shell command, OpenCode 2.2.7) started a background task. OpenBot then watches the session for 30 minutes, and longer while it changes.
+  or a `shellID` (a shell command, OpenCode 2.2.7) started a background task. StarBot then watches the session for 30 minutes, and longer while it changes.
   The idle pool does not close a watched session, because a closed one never reports the result.
-- Every 2 seconds, when no prompt runs or opens, OpenBot reads `session/list`. When the session's
+- Every 2 seconds, when no prompt runs or opens, StarBot reads `session/list`. When the session's
   `updatedAt` changes, it sends `session/load` with the session's own MCP servers, and collects the
   replay apart from live updates until the load answers, also after the request time limit. A
   prompt waits for the load meanwhile. A failed load is tried again at the next poll.
@@ -822,23 +822,23 @@ command that runs in the background does the same when it ends (#7713). The flag
   its text when the step ends, so a replay can find it empty first. As for Claude
   (#1904), no delivery attaches to that turn, and a message sent meanwhile fails with
   `ProviderTurnActiveError` and waits in the queue.
-- OpenBot ends that turn when the session sends nothing new for 15 seconds and no tool call is open,
+- StarBot ends that turn when the session sends nothing new for 15 seconds and no tool call is open,
   or after the stall limit while one is. A step that writes for longer can split one turn in two;
   nothing is lost. A stop cancels the turn and marks its open tool calls as stopped. For 30 seconds
   after any turn that does not complete, a replay marks new entries as shown and does not show
   them, because OpenCode can go on with a stopped turn (#2858).
 
-The watch is in memory. A background task that ends while OpenBot is closed, or after OpenBot
+The watch is in memory. A background task that ends while StarBot is closed, or after StarBot
 loaded the session again, shows only in OpenCode's own store.
 
 #### Model retries and the stall limit
 
 OpenCode 2.2.7 waits 300 s for a model's response headers (`headerTimeout`; 30 minutes for a custom
-endpoint), the same time as OpenBot's stall limit, and then sends the request again, up to three
+endpoint), the same time as StarBot's stall limit, and then sends the request again, up to three
 times for a timeout. It reports each retry as a `session_info_update` with
-`_meta["opencode/retry"]`, and a failed retried attempt as the same key with null. OpenBot ended
+`_meta["opencode/retry"]`, and a failed retried attempt as the same key with null. StarBot ended
 the turn as stalled at the moment when the retry started (#9941). `modelRetryUpdate` of
-`OPENCODE_ACP_FLAVOR` makes OpenBot wait 1.2 times the limit, so the retry notice comes first. Only
+`OPENCODE_ACP_FLAVOR` makes StarBot wait 1.2 times the limit, so the retry notice comes first. Only
 the first timeout retry notice after other output or a steer counts as activity: a model that also
 does not answer the retry fails the turn after about 11 minutes, with the stall message, and not
 after all four attempts with OpenCode's raw error text. A retry after a rate limit, a provider
@@ -870,12 +870,12 @@ The Gemini provider (id `antigravity`) starts the `acp` command of Google's Anti
 (`antigravity`, from GitHub `google-antigravity/antigravity-cli`). Google's license does not allow
 redistribution, so the runtime manager downloads the archive on the user's computer. Each archive
 holds only the program, which `nativeProviderRuntime` stages as `bin/antigravity`. The CLI prints its
-version with `--version`. OpenBot never searches `PATH`, because the Antigravity editor installs an
+version with `--version`. StarBot never searches `PATH`, because the Antigravity editor installs an
 `antigravity` command that is not this CLI. Up to 1.4.5 the provider ran the ACP server
 `agy_acp_server` from the ACP registry; an install of it is not used (`legacyExecutableNames`), and
 `antigravityTakesStateFolders` (1.5.3 and later) gates the accounts after the first.
 
-The 1.5 CLI offers its Claude and GPT models to every client, so the flavor sends OpenBot's own
+The 1.5 CLI offers its Claude and GPT models to every client, so the flavor sends StarBot's own
 `clientInfo`. (1.4 offered them only to a client named `zed`.)
 
 The CLI lists the plan's models best first, and the catalog keeps that order (`ownOrder`): an Ultra
@@ -884,7 +884,7 @@ plan on 1.5.5 lists Gemini 4 Argon, Gemini 3.8 Flash, Claude Opus 5.5, Claude So
 runs the first one. A version sort puts Claude Opus 5.5 ahead of Gemini 4 Argon, and before
 `modelVersion` skipped parameter counts, "GPT-OSS 120B" read as version 120 and came first. Google
 lists Gemini 4 Carbon for a Google sign-in on a plan that has it (seen in #7913); CLI 1.5.5 also
-added it for an Application Default Credentials sign-in (`AGY_ADC_AUTH`), which OpenBot does not use.
+added it for an Application Default Credentials sign-in (`AGY_ADC_AUTH`), which StarBot does not use.
 A saved Gemini API key lists the key's models: Gemini 4 Argon, the Flash models and Gemini 3.1 Pro,
 with no Carbon, Claude or GPT. The key comes before the own Google sign-in, so an agent on Carbon
 moves to another model (`moveAgentsOffUnlistedModels`), and the own account's row says that the key
@@ -894,11 +894,11 @@ the turns.
 The CLI ignores `GEMINI_HOME`. It takes its folders as flags: `--gemini-dir` as an absolute path
 and `--app-data-dir` relative to the Gemini home (`antigravityArgv`). A relative `--gemini-dir` logs
 `Failed to resolve GeminiDir ... must be an absolute path ... falling back to default`, and on
-Windows no relative path reaches another drive. OpenBot passes the account's `GEMINI_HOME` (default `~/.gemini`) and
+Windows no relative path reaches another drive. StarBot passes the account's `GEMINI_HOME` (default `~/.gemini`) and
 `antigravity-acp`, the folder that 1.4 used. On macOS the CLI keeps the Google token in one Keychain
 item (`gemini`/`antigravity`) that every account would share. With `WSL_DISTRO_NAME` set it keeps the
 token in the file `antigravity-oauth-token` in the app data folder, so every Antigravity process gets
-`WSL_DISTRO_NAME=OpenBot` (`ANTIGRAVITY_ENV`). The CLI gives the variable to its tools and MCP
+`WSL_DISTRO_NAME=StarBot` (`ANTIGRAVITY_ENV`). The CLI gives the variable to its tools and MCP
 servers too. On Linux the CLI still opens the sign-in page with `xdg-open` (checked in Docker with
 1.5.4). `SSH_CONNECTION` also selects the file, but then the CLI refuses a browser sign-in. A confined process also cannot write the Keychain (#2988).
 
@@ -910,21 +910,21 @@ no copy. The old file stays, and after a sign-out the marker stops a second copy
 
 When the CLI cannot open `settings.json`, it has no sign-in method and answers `authRequired`. A sign-in
 succeeds but cannot save the method, so the next process is refused again (#6200). On that answer
-OpenBot reads the file itself (`antigravitySettingsUnreadable`). Any failure except a missing file fails
+StarBot reads the file itself (`antigravitySettingsUnreadable`). Any failure except a missing file fails
 the start with a message that names the action: remove and add the account again, or, for the own
-sign-in, quit the other apps that use Gemini and open OpenBot again. The row is in error, not signed out,
+sign-in, quit the other apps that use Gemini and open StarBot again. The row is in error, not signed out,
 and keeps that message after the start limit, because a refresh cannot repair it (`#startStoppedMessage`).
 
 Sign in is an ACP `authenticate` call with `oauth-personal`, in a separate process
 (`src/backend/acp-sign-in.ts`). The CLI writes no sign-in link; it runs `open` (macOS) or `xdg-open`
 (Linux) from `PATH`. So the sign-in process gets a private folder first on `PATH` with an `open` and an
-`xdg-open` script that write the link to a file. OpenBot accepts only an `accounts.google.com` OAuth
+`xdg-open` script that write the link to a file. StarBot accepts only an `accounts.google.com` OAuth
 page, registers it as a secret, and opens it in the desktop browser or in the host's private tab. A
 failed browser launch gives an actionable error; the OAuth link and browser error details are not
 logged. On Windows the CLI runs `C:\Windows\System32\rundll32.exe url.dll,FileProtocolHandler` by its
-absolute path, so a folder on `PATH` cannot catch the link. There OpenBot makes no opener folder
-(`googleSignInByOpenBot`): the page opens from the CLI itself. A remote host cannot relay it, as
-with 1.4.5 (#4521), so OpenBot refuses a sign-in from another device before the process starts, and
+absolute path, so a folder on `PATH` cannot catch the link. There StarBot makes no opener folder
+(`googleSignInByStarBot`): the page opens from the CLI itself. A remote host cannot relay it, as
+with 1.4.5 (#4521), so StarBot refuses a sign-in from another device before the process starts, and
 a Reconnect does not sign the account out. A relayed sign-in from the desktop app that runs a server
 on this computer is not from another device: its Team API session is a password session of the
 owner, which only that app can open. The owner's other devices connect through Signal and stay
@@ -934,9 +934,9 @@ So a Reconnect of a connected Google sign-in, with no saved key, first calls ACP
 `initialize` advertises in `agentCapabilities.auth.logout`. `logout` deletes `antigravity-oauth-token`
 and `cache/acp-auth-state.json` only: it does not revoke the token at Google, and a copy of the old
 refresh token still gets new access tokens. The Google page then opens. A Reconnect is
-refused while a Gemini turn runs. When the sign-in stops after the logout answered, OpenBot stops the
+refused while a Gemini turn runs. When the sign-in stops after the logout answered, StarBot stops the
 old client and reports Gemini signed out; a failure keeps its own reason. A status probe must never
-call `authenticate`. The serving client does not call it. OpenBot checks authentication through model
+call `authenticate`. The serving client does not call it. StarBot checks authentication through model
 discovery (`session/new`), not the auth methods advertised by `initialize`. A session process
 refreshes the token when its session opens. When Google refuses it, 1.5.4 answers `session/new` with
 ACP's `authRequired` error and opens no browser; the flavor's `authRequiredSignsOut` then reports the
@@ -954,7 +954,7 @@ from the CLI in a private tab of its browser. The client polls `status`, shows t
 the live view (`browser-view`), and closes the dialog on the `result`. The Google callback goes to
 `127.0.0.1` on the host, so the host's browser completes it. No route carries the link or a
 credential, and every route requires an owner or admin. A host on another platform does not
-advertise the capability; open OpenBot in the host's desktop session to connect it there.
+advertise the capability; open StarBot in the host's desktop session to connect it there.
 
 A host on any platform also advertises the `antigravity-code-sign-in-v1` marker (Team API v10). It
 adds nothing to the wire: it tells a client that the released providers-v8 `codeLoginStart` route
@@ -969,9 +969,9 @@ error takes priority over runtime readiness.
 
 #### External runtime
 
-Set `OPENBOT_ANTIGRAVITY_PATH` to an Antigravity CLI executable, 1.5.3 or later, that the OpenBot host
-user can run, and restart OpenBot. The variable names the executable, not the directory. OpenBot reads
-the version with `--version`. An invalid override remains an error: OpenBot does not replace it with
+Set `OPENBOT_ANTIGRAVITY_PATH` to an Antigravity CLI executable, 1.5.3 or later, that the StarBot host
+user can run, and restart StarBot. The variable names the executable, not the directory. StarBot reads
+the version with `--version`. An invalid override remains an error: StarBot does not replace it with
 the managed runtime. Managed updates do not change the explicit override.
 
 The CLI runs confined; `antigravityStatePaths` gives it the app data folder, `artifacts` and
@@ -980,13 +980,13 @@ to `projection_provider_sessions`.
 
 The CLI keeps the token, `settings.json` (which names the sign-in method) and its conversations in the
 app data folder. Its own log there (`log/`) contains the Google account email (`applyAuthResult`).
-OpenBot does not read that folder into its log or a diagnostics export. In the 1.5.4 tests the CLI wrote
+StarBot does not read that folder into its log or a diagnostics export. In the 1.5.4 tests the CLI wrote
 nothing to stderr. So Gemini can hold more than one account: each account after the first gets
 `GEMINI_HOME` set to its own folder, which `antigravityArgv` passes as `--gemini-dir`, and
 `antigravityStatePaths` confines its process to that folder. A usage read needs an access token that
 has not expired, and only a running CLI refreshes it, so a usage read of an account with no agent
 process starts no process: the account shows its reading from the sign-in check. The sandbox cannot
-create folders in a new account's home, so OpenBot makes them.
+create folders in a new account's home, so StarBot makes them.
 A plan can serve models that the first account's does not, so the account check also reads the account's own
 `model/list` (`ModelCatalog.read`) after it marks the account connected (#5217). The account row carries as
 `models` only the ones that the provider's catalogue does not list: the picker shows the catalogue on the
@@ -998,7 +998,7 @@ The account sign-in is the same ACP `authenticate` call as the first account's; 
 account's idle agent processes, which keep the old token. A saved Gemini API key belongs to the
 first account: an account process never gets `GEMINI_API_KEY`. The ACP server reports no email. The driver's `readAccount`
 (`readAntigravityEmail`) reads `id_token_email` from the account's token file instead, so each row names its Google
-account, and a second account with the same email is refused as already added. A token that OpenBot copied from the
+account, and a second account with the same email is refused as already added. A token that StarBot copied from the
 1.4 server has an empty email, and the row then shows its label. With a saved key, the first account names no email. A joined server relays the account's sign-in to the
 client's browser with `provider-account-relay-v2`. A host with only `provider-account-relay-v1`, which
 names Codex and Claude only, signs the account in through the live view.
@@ -1013,7 +1013,7 @@ form, `antigravity/hub/<version> (aidev_client; os_type=<os>; arch=<arch>; cl=<b
 `antigravity/<version> <os>/<arch>`, Pro plans got no "Gemini 4 Argon" group (#10934). 
 `loadCodeAssist` goes to `cloudcode-pa`. The summary comes only from `daily-cloudcode-pa`, the host
 that meters a Google account sign-in: the other host's room for the account can be wrong, and a wrong
-"spent" reading would hold Gemini turns. OpenBot does not refresh the token: it
+"spent" reading would hold Gemini turns. StarBot does not refresh the token: it
 does not keep the CLI's client secret. An expired token, an API key sign-in, or a failed call gives no
 reading. Only a new CLI session refreshes the token, so an idle sign-in loses it after an hour. The
 driver sets `usageLeavesSession`: an account after the first and the own sign-in keep their last
@@ -1050,7 +1050,7 @@ limit can be for one model and that the plan's usage page can still show room.
 
 Antigravity 1.3.0 to 1.4.5 send ACP `usage_update` after each model step: `used` is the size of
 the last model call, and `size` is the model's context window. The adapter turns it into
-`thread/tokenUsage/updated`, also after a turn that OpenBot already ended. The update has no
+`thread/tokenUsage/updated`, also after a turn that StarBot already ended. The update has no
 category breakdown. The 1.5.4 CLI sends no `usage_update` (checked on macOS and Windows), so a
 Gemini agent shows no context reading until the CLI sends it again.
 
@@ -1160,7 +1160,7 @@ npm packages have no license file, so staging downloads `LICENSE` from the `cli-
 checks the pinned hash. `resolveClineCli` refuses a CLI older than 3.0.68.
 
 By default the CLI runs its sessions in a hub process that it detaches and that other Cline
-processes share. That process outlives OpenBot and is outside a Workspace only sandbox, so every
+processes share. That process outlives StarBot and is outside a Workspace only sandbox, so every
 Cline process, the sign-in included, gets `CLINE_SESSION_BACKEND_MODE=local` and
 `CLINE_NO_AUTO_UPDATE=1` (`CLINE_ENV` in `provider-drivers.ts`). Sign in is an ACP `authenticate`
 call with `cline`, as for Gemini. `CLINE_API_KEY` in the environment also signs the CLI in.
@@ -1190,10 +1190,10 @@ the download size. `OPENBOT_DEVIN_PATH` selects another executable.
 Sign in calls the ACP `authenticate` method `devin-browser`, which opens Devin's page in the system
 browser. Devin CLI 3000.11.234 keeps the sign-in in `credentials.toml` of its XDG data folder
 (`~/.local/share/devin`). It has no device-code sign-in. For a user at another device, the CLI gives
-its page (`https://app.devin.ai/auth/cli/continue`, with a loopback `redirect_uri`) to OpenBot's
+its page (`https://app.devin.ai/auth/cli/continue`, with a loopback `redirect_uri`) to StarBot's
 `open` command, and `provider-sign-in-relay-v2` relays it to the client's browser (#9561). Only a Linux host
-advertises it: on macOS the CLI runs `/usr/bin/open` by its absolute path, and on Windows OpenBot has
-no `open` command that the CLI uses, so OpenBot cannot take the page there. Sign out
+advertises it: on macOS the CLI runs `/usr/bin/open` by its absolute path, and on Windows StarBot has
+no `open` command that the CLI uses, so StarBot cannot take the page there. Sign out
 runs `devin auth logout`. A signed-out Devin process answers `session/new` with an empty model list
 and no error. `noModelsWhenSignedOut` reads that list as "sign-in required".
 
@@ -1206,10 +1206,10 @@ and `{ "cognition.ai/errorKind": "session_not_found" }`, which `DEVIN_ACP_FLAVOR
 session.
 
 Devin CLI 3000.14.30821 keeps a session after a plain `session/close`, also in the background process
-that outlives OpenBot for about 10 minutes, and a later `session/load` keeps the MCP servers that the
+that outlives StarBot for about 10 minutes, and a later `session/load` keeps the MCP servers that the
 session got first. It advertises `sessionCapabilities.close._meta["cognition.ai/force"]`, so the ACP
 client sends that `_meta` with each `session/close`, and a forced close before it loads a session that
-it does not hold. The session then gets the new token of the OpenBot bridge (#12082).
+it does not hold. The session then gets the new token of the StarBot bridge (#12082).
 
 No frozen Team API protocol knows `devin`. The host hides Devin agents, models, status, and sign-in
 state from peers below protocol 8, and `providers-v8` carries it.
@@ -1219,7 +1219,7 @@ state from peers below protocol 8, and `providers-v8` carries it.
 The GitHub Copilot provider (id `copilot`, issue #4637) starts GitHub's Copilot CLI with
 `copilot --acp --no-auto-update`. The runtime manager reads `releases/latest` of
 `github/copilot-cli` and downloads `copilot-<target>.tar.gz` (`.zip` on Windows). Each archive holds
-only `copilot` (`copilot.exe`). The licence lets an app include the CLI only unchanged, so OpenBot
+only `copilot` (`copilot.exe`). The licence lets an app include the CLI only unchanged, so StarBot
 downloads it and does not ship it. `OPENBOT_COPILOT_PATH` selects another executable. Every Copilot
 process gets `COPILOT_AUTO_UPDATE=false`, because `copilot login` refuses `--no-auto-update`. The
 install check runs `copilot --version` with it too: without it, the CLI runs the newest package in its
@@ -1234,7 +1234,7 @@ Sign in runs `copilot login`, which opens GitHub's page in the system browser an
 on a `127.0.0.1` callback. A joined computer signs in the host with `copilot login --device-code`,
 which prints "visit PAGE and enter code CODE". Copilot CLI 1.0.105 keeps the token in the system
 keychain. It prefers `COPILOT_GITHUB_TOKEN`, `GH_TOKEN` and `GITHUB_TOKEN`, in that order, to the
-keychain sign-in, so one of them in OpenBot's environment selects the account. The CLI has no
+keychain sign-in, so one of them in StarBot's environment selects the account. The CLI has no
 sign-out command: Sign out starts its ACP server and calls the ACP `logout` method
 (`acpLogout`). It cannot sign out a token from the environment. A signed-out process answers
 `session/new` with `-32000`. Not confirmed: a Linux server with no keychain service, and the form
@@ -1272,7 +1272,7 @@ not confirmed in a run).
 Each Mistral session runs in a `vibe-acp` process of its own (`sessionProcesses`). Vibe 3.1.2 keeps
 one MCP server of each name for the whole process, and its server fingerprint holds the header names
 but not their values. In one shared process, each session's `openbot` call went out with the bearer
-token of the session that opened last, so OpenBot ran it in that session's chat (#9805). Vibe loads
+token of the session that opened last, so StarBot ran it in that session's chat (#9805). Vibe loads
 a session that another process created (`session/load`), so an idle session closes with its
 process and opens again in a new one. A process with one session uses about 150 MB on Linux.
 
@@ -1286,7 +1286,7 @@ the page as a `link` on the released providers-v8 `codeLoginStart`, and a client
 host with `mistral-code-sign-in-v1`. The
 sign-in saves an API key in the system keychain (`ai.mistral.vibe`, `MISTRAL_API_KEY`), or in
 `$VIBE_HOME/.env` when there is no keychain, and can write the provider and console address to
-`config.toml`. `MISTRAL_API_KEY` in OpenBot's environment also signs in. A signed-out process answers
+`config.toml`. `MISTRAL_API_KEY` in StarBot's environment also signs in. A signed-out process answers
 `session/new` with `-32000` and "Missing API key for mistral provider.". Sign out starts the ACP
 server and calls `_auth/signOut` (`acpLogout`). It cannot sign out a key from the environment:
 Vibe refuses with `-32602`. The keychain item is global, so Mistral has no added accounts.
@@ -1296,12 +1296,12 @@ history and caches. Its settings stay read-only, because every other Vibe proces
 `config.toml`, `.env`, `trusted_folders.toml`, `hooks.toml`, `AGENTS.md`, `tools`, `skills`,
 `skills.toml`, `skills-registry-cache`, `agents`, `prompts`, `plugins`, `projects.toml`,
 `local_projects.toml`, `managed_config_cache.json` and `connector_bootstrap_cache.json`. Vibe writes
-`trusted_folders.toml` at startup when it is missing, and stops when it cannot. So OpenBot makes an
+`trusted_folders.toml` at startup when it is missing, and stops when it cannot. So StarBot makes an
 empty file first (`makeMistralTrustedFolders`), and never changes one that exists. `.vibe` in a
 workspace is project settings, so a confined process cannot write it.
 
 Vibe 3.1.0 reads `AGENTS.md`, `.vibe` and `.agents/skills` only in a trusted folder. Its ACP trust
-decision writes `trusted_folders.toml`, so OpenBot sends the workspace in the session's
+decision writes `trusted_folders.toml`, so StarBot sends the workspace in the session's
 `additionalDirectories` instead (`workspaceAsAdditionalDirectory` in `MISTRAL_ACP_FLAVOR`). A folder
 there is trusted for that session only.
 
@@ -1337,7 +1337,7 @@ open a browser on the host. On Windows the page can open on the host. Sign out r
 with `-32602` and `{ session_id: "Session not found" }`, which `KIMI_ACP_FLAVOR` reads as a missing
 session.
 
-Kimi CLI 1.52.0 has no ACP configuration options, so OpenBot changes the model with
+Kimi CLI 1.52.0 has no ACP configuration options, so StarBot changes the model with
 `session/set_model`. Kimi moves the session to the model, and then saves the model as its default in
 `config.toml`. A Workspace only Kimi process cannot write that file, and the save fails with `-32603`
 and the path in `data.details`. `AcpFlavor.modelSetUnsaved` reads that failure as a model change
@@ -1403,30 +1403,30 @@ is ready. The `providers-v5` and `providers-v1` key routes refuse its key.
 
 A v8 client keeps the agents of a provider that its build does not know (`ForeignProviderId`,
 `AgentProviderRef`). The agent stays in the list and chat works, because the host runs it. The
-provider and model pickers show the agent disabled, with "Update OpenBot to use {name}" and the
+provider and model pickers show the agent disabled, with "Update StarBot to use {name}" and the
 neutral `unknown` logo. They do not reset the agent. The model picker and the backup models leave
 out the models of that provider. Host types (`AgentProviderId`, the database, the drivers) stay
 closed.
 
 ### Hermes
 
-The Hermes provider (id `hermes`) starts the user's own Hermes Agent with `hermes acp`. OpenBot has
+The Hermes provider (id `hermes`) starts the user's own Hermes Agent with `hermes acp`. StarBot has
 no managed runtime for it: a newer Hermes moves `state.db` and `config.yaml` in `~/.hermes` forward,
 and the user's own older Hermes then cannot read them. `resolveHermesCli` looks for `hermes` on
 `PATH` and in `~/.local/bin`, and on Windows also in `bin` of `HERMES_HOME` and of
 `%LOCALAPPDATA%\hermes`, where the Hermes Windows installer puts it. It reads the version from
 `hermes acp --version`, or from `Hermes Agent vX.Y.Z` in `hermes --version` before Hermes 0.14.
 On Windows, `where.exe` for each provider CLI also searches the User and Machine `PATH` that the registry
-holds now, after the `PATH` that OpenBot got at start, so a check finds a CLI that was installed or
-repaired while OpenBot was open.
+holds now, after the `PATH` that StarBot got at start, so a check finds a CLI that was installed or
+repaired while StarBot was open.
 
 A missing CLI is `not-installed`. On macOS and Linux, with no `OPENBOT_HERMES_PATH`, its row has a
 Download: `HermesInstaller` (`src/main/hermes-installer.ts`) runs the official installer as the
-OpenBot user. The script is pinned to the commit of one release (`HERMES_INSTALLER`), and OpenBot
+StarBot user. The script is pinned to the commit of one release (`HERMES_INSTALLER`), and StarBot
 checks its SHA-256 before it runs. It runs one `--stage <name> --json` at a time, with no browser,
 computer-use or setup stage, so each stage moves the progress bar and Cancel stops its process
 group. Hermes goes to `~/.hermes` and `~/.local/bin/hermes`, as a terminal install puts it, and
-OpenBot does not update or remove it. The installer status is an optional `providers.hermes` in the
+StarBot does not update or remove it. The installer status is an optional `providers.hermes` in the
 runtime snapshot: `not-downloaded`, `downloading`, `finishing`, `download-error`, and `ready` when
 Hermes is installed, so that a server's row offers its Connect. Team API protocols below 8 never
 carry it; `providers-v8` adds the row, and an older client drops it. On Windows and with
@@ -1452,7 +1452,7 @@ and the reply does not carry its id: each later prompt to the saved id would end
 `HERMES_ACP_FLAVOR.loadInsteadOfResume` restores with `session/load`, whose reply for a missing
 session is null, which the SDK gives as `{}`; a reply with no `modes` is a missing session.
 Hermes before 0.22.1 keeps one MCP server of each name for its whole process, so in one shared
-process each session's `openbot` call went out with the bearer token of the first session. OpenBot
+process each session's `openbot` call went out with the bearer token of the first session. StarBot
 then ran it as that session's agent, and a message to that agent was refused as a message to
 itself (#13120). Hermes 0.22.1 gives each session its own servers (`GatewayACPAgent`). Both Hermes
 flavors set `sessionProcessesBefore: "0.22.1"`: when `initialize` reports an older `agentInfo.version`,
@@ -1465,17 +1465,17 @@ reads project skills only in a git root that `skills.trusted_project_dirs` names
 with an exception in Hermes ends as answer text `Error: …`, not as a failed turn. Team API
 protocols below 8 hide Hermes; protocol 8 and newer carry it as any other provider id.
 
-OpenBot gives its Hermes agents two `agent` settings, `HERMES_AGENT_SETTINGS` in
+StarBot gives its Hermes agents two `agent` settings, `HERMES_AGENT_SETTINGS` in
 `src/backend/hermes-settings.ts`: `coding_context: focus` shows the skills of non-coding categories
 by name only, and `disabled_toolsets: [browser]` removes the Hermes browser tools, because each agent
 has `openbot_browser`. `hermesSettingsEnvironment` writes them to a `config.yaml` in
 `<provider state>/hermes-settings/<hash>/` and sets `HERMES_MANAGED_DIR` to that folder. Hermes
 merges a managed `config.yaml` over the user's, and a Hermes process that saves its settings removes
-the managed keys from the user's file. So OpenBot sets only the keys that the user's `config.yaml`
+the managed keys from the user's file. So StarBot sets only the keys that the user's `config.yaml`
 does not have, and sets nothing when `HERMES_MANAGED_DIR` is set, when `/etc/hermes` exists, or when
 it cannot read the user's file. The chat client and the profile client both get the folder. This has
 two limits. Commands that the agent runs keep `HERMES_MANAGED_DIR`, so in them
-`hermes config set` refuses the two keys as "managed by your administrator". OpenBot reads the
+`hermes config set` refuses the two keys as "managed by your administrator". StarBot reads the
 user's file when the Hermes process starts, so a key that the user adds while an agent runs applies
 only after the next start, and a settings save of that process can remove it from the user's file.
 `bun run bench:hermes-prompt-settings` measures each setting with real
@@ -1487,15 +1487,15 @@ user's runtime, and stops when the launchers change.
 
 Hermes hides all MCP tools behind its own `tool_search`, `tool_describe` and `tool_call`. In Hermes
 0.23.1, the default `tools.tool_search.enabled: auto` is the same as `on`, and a session cannot turn it
-off. Behind OpenBot's own search, the model had to find OpenBot's `tool_call` with the Hermes search,
+off. Behind StarBot's own search, the model had to find StarBot's `tool_call` with the Hermes search,
 and the Hermes `tool_call` refused `openbot.channel_result` (#9312). So the Hermes flavors, also that of
 a custom `hermes` agent, set `catalogAsMcpTools`: `AcpClient` gives the bridge `withCatalogTools`,
-which adds each catalog tool to its namespace and removes OpenBot's `tool_search` and `tool_describe`.
-OpenBot's `tool_call` stays for the instructions that name it. Hermes names a tool
+which adds each catalog tool to its namespace and removes StarBot's `tool_search` and `tool_describe`.
+StarBot's `tool_call` stays for the instructions that name it. Hermes names a tool
 `mcp__editor_openbot_<tag>__<tool>`, and the developer instructions give that form. A tool's guidance
 goes in the root `description` of its schema, which the Hermes `tool_describe` shows and its search
 does not read; in the tool description it moved results down. The tools that every agent has directly
-get it too, because OpenBot's `tool_describe` is not listed. The browser core guidance comes with the
+get it too, because StarBot's `tool_describe` is not listed. The browser core guidance comes with the
 first browser result (`browserToolsPrimer`), as for the other providers. With the Hermes search off,
 the model gets all tools: about 230 KB of schemas with 142 catalog tools. `bun run test:hermes-catalog-tools`
 (`HERMES_REPO`, `HERMES_PYTHON`) gives the tools of the real bridge to the tool search of a Hermes
@@ -1527,7 +1527,7 @@ failed `session/new` (an agent that needs sign-in first) gives no models and doe
 check. The registry install check (`acp-registry-install.ts`) sends `initialize` only. The scan (`src/backend/acp-agent-scan.ts`) looks up the preset names on the
 login-shell `PATH` and in the user's folders, and never starts a file. An agent and its check start
 with the `PATH` that its command was looked up in (`agentLaunchPath`): the absolute folders of the
-login-shell `PATH`, then those of OpenBot's own, so an app that Finder starts can still run a
+login-shell `PATH`, then those of StarBot's own, so an app that Finder starts can still run a
 `#!/usr/bin/env node` agent. A `PATH` saved on the agent wins. Claude agent sessions start with the
 same `PATH`, so their Bash tool and hooks find the user's tools; an `env.PATH` in the Claude settings
 wins. The agents run confined with no state paths. Migration 23 adds `acp` to
@@ -1538,7 +1538,7 @@ A custom agent can have a usage prompt (`usagePrompt`, "Usage command" in the fo
 as `/usage`. `customAgents.usage` asks each agent that has one: `ProviderRuntime.customAgentUsage`
 sends it through `readUsageText` on the agent's model list process, in the session that no thread
 owns (`privatePrompt`). The answer is redacted and kept to `CUSTOM_AGENT_LIMITS.usageAnswer`
-characters. OpenBot does not read a percent from it, so `acp` keeps `reportsUsage: false`: the rail
+characters. StarBot does not read a percent from it, so `acp` keeps `reportsUsage: false`: the rail
 shows the agent's logo with no ring, and its hover card shows the text. The renderer polls with the
 plan usage interval, only while the local server is active. One read runs at a time, and a read from
 the last minute answers the next request. While `acp` is released, the read returns the last answers
@@ -1582,10 +1582,10 @@ the provider starts with, such as API keys and base URLs (`provider-environment-
 `src/main/provider-environment-store.ts`). Claude, Codex and Gemini take them. Names and plain values
 are in `openbot-provider-environment-v1.json`. A sensitive value is in the encrypted provider key file
 under `openbot:provider-env:<provider>:<NAME>`; a read gives `stored: true` and never the value. The
-host refuses an invalid or repeated name, and a name that OpenBot sets for each process
+host refuses an invalid or repeated name, and a name that StarBot sets for each process
 (`PROVIDER_ENVIRONMENT_RESERVED_NAMES`: `PATH`, `HOME`, `NODE_OPTIONS`, the process marker and the
 account folder variable). `ProviderClientContext.providerEnvironment` gives each spawn the values, after
-OpenBot's own, so they replace a saved key or an inherited value of the same name. A change restarts
+StarBot's own, so they replace a saved key or an inherited value of the same name. A change restarts
 the provider when its turns end (`ProviderRuntime.spawnSettingsChanged`), and an agent's own process,
 such as one of an account after the first, before the agent's next turn.
 
@@ -1600,10 +1600,10 @@ accounts and shares the requests between them, is one use:
 
 Each sends the key as `Authorization: Bearer`. The token of Claude Code comes before a claude.ai
 sign-in, and Claude Code then reports itself signed in, also on a server with no Claude login. With
-`ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` in the variables, OpenBot does not give the saved
+`ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` in the variables, StarBot does not give the saved
 Anthropic key, which Claude Code would send as `x-api-key` next to the token. With
 `AGY_LLM_GATEWAY_URL` or `GEMINI_API_KEY`, it does not give the saved Gemini key. Without "Use my
-Claude Code setup", OpenBot copies the `env` of the user's Claude settings into the flag settings,
+Claude Code setup", StarBot copies the `env` of the user's Claude settings into the flag settings,
 which come before the process environment; when the variables name a gateway (`ANTHROPIC_BASE_URL`
 and `ANTHROPIC_AUTH_TOKEN`), the copy leaves out the variables that choose the API and its credential
 (`withoutReplacedGateway` in `claude-client.ts`). With the setup on, the user's settings file loads as
@@ -1618,7 +1618,7 @@ to `GROK_XAI_API_BASE_URL` and ignores `XAI_API_KEY`.
 
 The user's own Codex settings can also give Codex another model provider (`model_provider`, such as
 Ollama) or a model list file (`model_catalog_json`). Codex then lists those models in `model/list`, and
-OpenBot shows them on the ChatGPT tab (#9956). With each good model list, `readCodexModelSource` reads
+StarBot shows them on the ChatGPT tab (#9956). With each good model list, `readCodexModelSource` reads
 `config/read` and the Codex status row gets `modelSource`. The model picker shows it on the ChatGPT tab
 in place of the pool and version line, so the user sees why the list is not OpenAI's. The
 `openbot_environment` provider above is not a source: the user set it on this page, and Codex keeps
@@ -1680,7 +1680,7 @@ account after the first also counts as a read.
 
 The values follow t3code (one refresh in five minutes for each host, one at a time) and openusage (5
 minutes, doubling up to an hour). CodexBar and openusage first wait for `Retry-After`; the Claude Agent
-SDK and the Codex app-server do not give OpenBot that header, so the gate uses only the doubling.
+SDK and the Codex app-server do not give StarBot that header, so the gate uses only the doubling.
 `scripts/usage-read-pacing-e2e.ts` checks the gate with a fake Codex.
 
 ### Usage reset credits
@@ -1709,7 +1709,7 @@ them (issues #4013 and #6046). The `rateLimits` snapshot of `account/rateLimits/
 `decodeRateLimitCredits` (`src/backend/protocol.ts`) keeps only whether credits remain
 (`hasCredits || unlimited`), and `normalizeAccountUsage` puts it in `AccountUsageLimit.creditsAvailable`.
 A full reading with `null` sets `false`. An `account/rateLimits/updated` push with `null` keeps the
-last value, as Codex's own view does. OpenBot does not show the balance, and it does not read
+last value, as Codex's own view does. StarBot does not show the balance, and it does not read
 `ordinaryUsageAllowed`: a turn still goes to Codex, and Codex decides if it uses credits.
 
 `spentUsageWindow` (`packages/team-client/src/plan-limits.ts`) gives `onCredits` for such an account.
@@ -1776,13 +1776,13 @@ Grok, Muse, Cursor, Devin, GitHub Copilot, Mistral and Gemini have a driver `sig
 `antigravity acp`, and the `_auth/signOut` extension method of `vibe-acp`)
 for the own sign-in only. Gemini's `logout` deletes the token file of the default Gemini home, as a
 Reconnect does; it does not revoke the token at Google. A Gemini account after the first has no
-sign-out: **Remove account** deletes its folder. Muse offers it only on this computer with no OpenBot key saved
+sign-out: **Remove account** deletes its folder. Muse offers it only on this computer with no StarBot key saved
 (`apiKeyInUse`): the key keeps Muse connected, and the key dialog removes it. Cline and Pi have no sign-out command.
 `ProviderRuntime.signOutProvider` refuses while the provider runs a turn, cancels a
 sign-in, and runs that command with no home variable, so it signs out the user's own home folder.
 On this computer a terminal CLI shares that folder and the macOS keychain item, so it signs out too;
-the confirmation says so. Gemini is the exception: OpenBot keeps its sign-in in a token file of
-its own (`ANTIGRAVITY_ENV`), so a terminal Gemini CLI keeps its sign-in, and the confirmation says so. Then OpenBot stops the client and reports the provider signed out, as a
+the confirmation says so. Gemini is the exception: StarBot keeps its sign-in in a token file of
+its own (`ANTIGRAVITY_ENV`), so a terminal Gemini CLI keeps its sign-in, and the confirmation says so. Then StarBot stops the client and reports the provider signed out, as a
 Gemini Reconnect does. A failed sign-out keeps the client and shows its reason. Agents keep the own
 sign-in and wait for a Reconnect. The accounts after the first and their folders stay, but they
 need the connected CLI, so they wait too. A joined server uses the optional `provider-sign-out-v1`
@@ -1793,7 +1793,7 @@ route.
 `AgentClient` remains the provider boundary. ACP session ownership, history replay, and turn
 completion stay together. Boolean and select settings can include grouped choices. The client
 processes configuration notifications while idle. Model and reasoning continue to use their
-existing fields. Permission, access, and approval settings remain under OpenBot controls: the agent's
+existing fields. Permission, access, and approval settings remain under StarBot controls: the agent's
 Permissions level decides them, not an ACP setting.
 
 Additional overrides are stored in validated agent JSON, by provider identity. A custom ACP
@@ -1816,15 +1816,15 @@ Pi uses its native `--mode rpc` interface. It does not use an ACP wrapper. Reque
 `agent_settled` completes a turn. A successful `prompt` response only accepts the prompt. Cancellation
 clears queued work before abort. Session paths and the active conversation branch are preserved.
 Models come from the running CLI. A small extension uses Pi's `registerMcpServer` interface to
-register configured MCP servers and OpenBot tools. Secrets are supplied through process state,
+register configured MCP servers and StarBot tools. Secrets are supplied through process state,
 not copied into the extension source. A Workspace only Pi runs in a sandbox that its MCP servers
-would inherit, so OpenBot starts each stdio server itself (`mcp-stdio-relay.ts`) and registers it
+would inherit, so StarBot starts each stdio server itself (`mcp-stdio-relay.ts`) and registers it
 in Pi as a Streamable HTTP server on 127.0.0.1, with a bearer token. Each Pi session of the server
 starts its own process, and the process stops with that session or with the thread. The Access
 setting does not limit MCP servers, as for Claude and Codex (#6191).
 
 Managed Pi archives come from official GitHub releases and use the published SHA-256 digest.
-Sign-in opens Pi in a host terminal. Close Pi after sign-in to refresh models in OpenBot.
+Sign-in opens Pi in a host terminal. Close Pi after sign-in to refresh models in StarBot.
 Remote clients must complete sign-in on the host. There is no separate Pi account screen.
 
 ## Inception
@@ -1847,7 +1847,7 @@ with a key as its only sign-in (`KEY_ONLY_PROVIDERS` in contracts). The key is s
 `deepseek` API key. Pi has a built-in `deepseek` provider, so the extension from
 `pi-key-providers.ts` calls `pi.registerProvider("deepseek", ...)` with the key and no models. A
 registration with only the key keeps Pi's DeepSeek models, endpoint and thinking levels (checked in
-Pi 1.4.0), so OpenBot keeps no DeepSeek model list. Pi prefers a `deepseek` key in its own
+Pi 1.4.0), so StarBot keeps no DeepSeek model list. Pi prefers a `deepseek` key in its own
 `auth.json` to the registered `apiKey`, so the extension also sets the `Authorization` header,
 which replaces either key. A 401 or a 402 from a key provider shows a text about the saved key or
 the account balance (`#failureText` in `pi-client.ts`). The DeepSeek client lists only the `deepseek`
@@ -1860,10 +1860,10 @@ Peers see DeepSeek from v8, as Inception.
 OpenRouter works as DeepSeek does: a key-only provider on Pi's managed CLI. The key is stored as the
 `openrouter` API key. Pi has a built-in `openrouter` provider with OpenRouter's model list (401 models
 in Pi 1.1.0 and 1.4.0), so the extension registers only the key and the `Authorization` header, and
-OpenBot keeps no OpenRouter model list. Pi sends some models to OpenRouter's Anthropic Messages
+StarBot keeps no OpenRouter model list. Pi sends some models to OpenRouter's Anthropic Messages
 endpoint and the others to its chat completions endpoint; both read the header. On the Anthropic
 Messages endpoint Pi also sends the key from its own `auth.json` as `x-api-key`, so the extension sets
-that header to the OpenBot key too (checked in Pi 1.4.0 with a local server). Pi's own
+that header to the StarBot key too (checked in Pi 1.4.0 with a local server). Pi's own
 `/api/models/user` request still uses a key from `auth.json` when the user saved one there; it reads
 the model list and sends no turn content. Model ids keep
 OpenRouter's `<lab>/<model>` form, such as `anthropic/claude-opus-5.5`, and the client passes them to
@@ -1880,7 +1880,7 @@ newer SDK versions must meet the three-day dependency rule before adoption. The 
 supplies `sessionMcp`, preserves native session identity, and reads durable items to recover missed
 events before completion. A cached model list does not prove authentication. Connect starts the
 `muse serve` device sign-in and opens its page, because `muse login` with no terminal never opens
-it; an explicit Meta API key uses OpenBot's encrypted credential store. The account check asks a
+it; an explicit Meta API key uses StarBot's encrypted credential store. The account check asks a
 short-lived `muse serve` host, which gets the same key, for the experimental `account/read`. The
 session host does not opt in to experimental MSP, so its strict event decoders see no experimental
 variants. A Muse CLI without `account/read` stays "not verified" and keeps running.
@@ -1893,7 +1893,7 @@ then select Muse for the agent. The local echo test and synthetic MCP marker rec
 authentication test.
 
 Managed Muse downloads use the official stable-channel manifest and artifact SHA-256 values.
-The CLI remains an optional download, outside the OpenBot package. OpenBot does not overwrite
+The CLI remains an optional download, outside the StarBot package. StarBot does not overwrite
 provider account files or run upstream self-updaters against managed installations. Both Pi and
 Muse use the existing process confinement boundary. Workspace-only mode fails closed on hosts
 without confinement support.
@@ -1946,7 +1946,7 @@ The latest marker and timing are runtime state, not new saved conversation messa
 summary is not copied into this state.
 
 `agent:compact-context` asks for a compaction now, below the threshold too. The popover offers it
-when `autoCompactAt` is set, which means that OpenBot compacts the thread (`events`, `request` or
+when `autoCompactAt` is set, which means that StarBot compacts the thread (`events`, `request` or
 `handoff`). It refuses while a turn, a queued message or a session start needs the session. It is
 local only: the Team API has no route, and a joined server's agent shows no ring.
 `agent:tasks:compact-context` does the same for one open side thread. It refuses while the thread

@@ -56,7 +56,7 @@ const AAVE: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/aave",
+  shareUrl: "https://starbot.app/plugins/aave",
 };
 
 const CANVA: MarketplacePluginDetail = {
@@ -97,7 +97,7 @@ const CANVA: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/canva",
+  shareUrl: "https://starbot.app/plugins/canva",
 };
 
 const LINEAR: MarketplacePluginDetail = {
@@ -138,7 +138,7 @@ const LINEAR: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/linear",
+  shareUrl: "https://starbot.app/plugins/linear",
 };
 
 const NOTION: MarketplacePluginDetail = {
@@ -179,7 +179,7 @@ const NOTION: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/notion",
+  shareUrl: "https://starbot.app/plugins/notion",
 };
 
 const OBSIDIAN: MarketplacePluginDetail = {
@@ -237,7 +237,7 @@ const OBSIDIAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/obsidian",
+  shareUrl: "https://starbot.app/plugins/obsidian",
 };
 
 const ATLASSIAN: MarketplacePluginDetail = {
@@ -277,7 +277,7 @@ const ATLASSIAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/atlassian",
+  shareUrl: "https://starbot.app/plugins/atlassian",
 };
 
 const TODOIST: MarketplacePluginDetail = {
@@ -317,7 +317,7 @@ const TODOIST: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/todoist",
+  shareUrl: "https://starbot.app/plugins/todoist",
 };
 
 const TICKTICK: MarketplacePluginDetail = {
@@ -357,7 +357,7 @@ const TICKTICK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ticktick",
+  shareUrl: "https://starbot.app/plugins/ticktick",
 };
 
 const TRELLO: MarketplacePluginDetail = {
@@ -397,7 +397,7 @@ const TRELLO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/trello",
+  shareUrl: "https://starbot.app/plugins/trello",
 };
 
 const COBRAIN: MarketplacePluginDetail = {
@@ -437,7 +437,7 @@ const COBRAIN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/cobrain",
+  shareUrl: "https://starbot.app/plugins/cobrain",
 };
 
 const HONCHO: MarketplacePluginDetail = {
@@ -446,7 +446,7 @@ const HONCHO: MarketplacePluginDetail = {
   name: "Honcho",
   tagline: "Your memory across AI tools",
   description:
-    "Honcho by Plastic Labs gives agents a long-term memory of you that other AI tools you connect can share. Agents save what they learn, and Honcho reasons over it to build a model of your preferences, goals and ways of working. Agents ask it questions before they start. OpenBot agents keep their own memory too; Honcho is the memory that follows you to other tools. Messages that agents save go to your Honcho account.",
+    "Honcho by Plastic Labs gives agents a long-term memory of you that other AI tools you connect can share. Agents save what they learn, and Honcho reasons over it to build a model of your preferences, goals and ways of working. Agents ask it questions before they start. StarBot agents keep their own memory too; Honcho is the memory that follows you to other tools. Messages that agents save go to your Honcho account.",
   category: "productivity",
   creatorName: "Plastic Labs",
   iconUrl: "https://honcho.dev/favicon.ico",
@@ -496,7 +496,7 @@ const HONCHO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/honcho",
+  shareUrl: "https://starbot.app/plugins/honcho",
 };
 
 const HINDSIGHT: MarketplacePluginDetail = {
@@ -505,7 +505,7 @@ const HINDSIGHT: MarketplacePluginDetail = {
   name: "Hindsight",
   tagline: "Memory that learns over time",
   description:
-    "Hindsight by Vectorize gives agents a long-term memory in Hindsight Cloud. Agents retain facts and events, recall them by meaning, time and entity, and reflect on them to form mental models. Memories are kept in banks, and agents can make a bank for each project or person. OpenBot agents keep their own memory too; Hindsight is the memory that other AI tools you connect can share. What agents retain goes to your Hindsight Cloud account.",
+    "Hindsight by Vectorize gives agents a long-term memory in Hindsight Cloud. Agents retain facts and events, recall them by meaning, time and entity, and reflect on them to form mental models. Memories are kept in banks, and agents can make a bank for each project or person. StarBot agents keep their own memory too; Hindsight is the memory that other AI tools you connect can share. What agents retain goes to your Hindsight Cloud account.",
   category: "productivity",
   creatorName: "Vectorize",
   iconUrl: "https://ui.hindsight.vectorize.io/apple-touch-icon.png",
@@ -558,7 +558,7 @@ const HINDSIGHT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/hindsight",
+  shareUrl: "https://starbot.app/plugins/hindsight",
 };
 
 const MEM0: MarketplacePluginDetail = {
@@ -567,7 +567,7 @@ const MEM0: MarketplacePluginDetail = {
   name: "Mem0",
   tagline: "Memory layer for AI agents",
   description:
-    "Mem0 gives agents a long-term memory in your Mem0 account. Agents add facts and preferences, search them by meaning, and update or delete them. Other AI tools that you connect to Mem0 share the same memories. To make Mem0 the only memory of an agent, turn off OpenBot memory in the agent's settings. What agents save goes to your Mem0 account.",
+    "Mem0 gives agents a long-term memory in your Mem0 account. Agents add facts and preferences, search them by meaning, and update or delete them. Other AI tools that you connect to Mem0 share the same memories. To make Mem0 the only memory of an agent, turn off StarBot memory in the agent's settings. What agents save goes to your Mem0 account.",
   category: "productivity",
   creatorName: "Mem0",
   iconUrl: "https://app.mem0.ai/apple-icon.png",
@@ -602,7 +602,7 @@ const MEM0: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mem0",
+  shareUrl: "https://starbot.app/plugins/mem0",
 };
 
 const FIGMA: MarketplacePluginDetail = {
@@ -657,7 +657,7 @@ const FIGMA: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/figma",
+  shareUrl: "https://starbot.app/plugins/figma",
 };
 
 const PAPER: MarketplacePluginDetail = {
@@ -666,7 +666,7 @@ const PAPER: MarketplacePluginDetail = {
   name: "Paper",
   tagline: "Design canvas built on HTML and CSS",
   description:
-    "Paper lets agents read and write the design file that is open in Paper Desktop: inspect artboards, selections, computed styles, JSX and tokens, and create or change frames, text and styles. Install Paper Desktop, open it once, and open a file before you start. OpenBot starts the Paper CLI that Paper Desktop installs. Paper needs no key. Write tools change the open file, so review each write before you approve it.",
+    "Paper lets agents read and write the design file that is open in Paper Desktop: inspect artboards, selections, computed styles, JSX and tokens, and create or change frames, text and styles. Install Paper Desktop, open it once, and open a file before you start. StarBot starts the Paper CLI that Paper Desktop installs. Paper needs no key. Write tools change the open file, so review each write before you approve it.",
   category: "design",
   creatorName: "Paper",
   iconUrl: "https://paper.design/apple-touch-icon.png",
@@ -693,7 +693,7 @@ const PAPER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/paper",
+  shareUrl: "https://starbot.app/plugins/paper",
 };
 
 const HIGGSFIELD: MarketplacePluginDetail = {
@@ -734,7 +734,7 @@ const HIGGSFIELD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/higgsfield",
+  shareUrl: "https://starbot.app/plugins/higgsfield",
 };
 
 const SUNRA: MarketplacePluginDetail = {
@@ -775,7 +775,7 @@ const SUNRA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/sunra",
+  shareUrl: "https://starbot.app/plugins/sunra",
 };
 
 const ELEVENLABS: MarketplacePluginDetail = {
@@ -816,7 +816,7 @@ const ELEVENLABS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/elevenlabs",
+  shareUrl: "https://starbot.app/plugins/elevenlabs",
 };
 
 const APPLE_APPS: MarketplacePluginDetail = {
@@ -825,7 +825,7 @@ const APPLE_APPS: MarketplacePluginDetail = {
   name: "Apple apps",
   tagline: "Mail, Calendar and more on your Mac",
   description:
-    "Apple apps lets agents use Mail, Calendar, Contacts, Reminders, Notes, Messages and Safari on this Mac. It works on macOS only. OpenBot starts mcp-icloud, a community server that is not made by Apple or OpenBot. The server controls the apps through AppleScript, on this computer, and needs no account and no key. When you install it, OpenBot can ask macOS for access to all of these apps at once, with one prompt for each app. If you do not, macOS asks the first time an agent uses an app. To change this later, open System Settings › Privacy & Security › Automation. Agents can send email and iMessages, and change or delete events, contacts and reminders, so review each write before you approve it. What the tools read, such as email text, goes to the model provider of the agent.",
+    "Apple apps lets agents use Mail, Calendar, Contacts, Reminders, Notes, Messages and Safari on this Mac. It works on macOS only. StarBot starts mcp-icloud, a community server that is not made by Apple or StarBot. The server controls the apps through AppleScript, on this computer, and needs no account and no key. When you install it, StarBot can ask macOS for access to all of these apps at once, with one prompt for each app. If you do not, macOS asks the first time an agent uses an app. To change this later, open System Settings › Privacy & Security › Automation. Agents can send email and iMessages, and change or delete events, contacts and reminders, so review each write before you approve it. What the tools read, such as email text, goes to the model provider of the agent.",
   category: "productivity",
   creatorName: "MrGo2",
   iconUrl: "https://www.apple.com/apple-touch-icon.png",
@@ -856,7 +856,7 @@ const APPLE_APPS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/apple-apps",
+  shareUrl: "https://starbot.app/plugins/apple-apps",
 };
 
 const SENTRY: MarketplacePluginDetail = {
@@ -896,7 +896,7 @@ const SENTRY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/sentry",
+  shareUrl: "https://starbot.app/plugins/sentry",
 };
 
 const APPSIGNAL: MarketplacePluginDetail = {
@@ -937,7 +937,7 @@ const APPSIGNAL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/appsignal",
+  shareUrl: "https://starbot.app/plugins/appsignal",
 };
 
 const GITLAB: MarketplacePluginDetail = {
@@ -978,7 +978,7 @@ const GITLAB: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/gitlab",
+  shareUrl: "https://starbot.app/plugins/gitlab",
 };
 
 const VERCEL: MarketplacePluginDetail = {
@@ -1019,7 +1019,7 @@ const VERCEL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/vercel",
+  shareUrl: "https://starbot.app/plugins/vercel",
 };
 
 const CLOUDFLARE: MarketplacePluginDetail = {
@@ -1059,7 +1059,7 @@ const CLOUDFLARE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/cloudflare",
+  shareUrl: "https://starbot.app/plugins/cloudflare",
 };
 
 const SUPABASE: MarketplacePluginDetail = {
@@ -1099,7 +1099,7 @@ const SUPABASE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/supabase",
+  shareUrl: "https://starbot.app/plugins/supabase",
 };
 
 const NEON: MarketplacePluginDetail = {
@@ -1142,7 +1142,7 @@ const NEON: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/neon",
+  shareUrl: "https://starbot.app/plugins/neon",
 };
 
 const PRISMA: MarketplacePluginDetail = {
@@ -1182,7 +1182,7 @@ const PRISMA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/prisma",
+  shareUrl: "https://starbot.app/plugins/prisma",
 };
 
 const NETLIFY: MarketplacePluginDetail = {
@@ -1223,7 +1223,7 @@ const NETLIFY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/netlify",
+  shareUrl: "https://starbot.app/plugins/netlify",
 };
 
 const RAILWAY: MarketplacePluginDetail = {
@@ -1263,7 +1263,7 @@ const RAILWAY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/railway",
+  shareUrl: "https://starbot.app/plugins/railway",
 };
 
 const RENDER: MarketplacePluginDetail = {
@@ -1321,7 +1321,7 @@ const RENDER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/render",
+  shareUrl: "https://starbot.app/plugins/render",
 };
 
 const CLOUD66: MarketplacePluginDetail = {
@@ -1362,7 +1362,7 @@ const CLOUD66: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/cloud66",
+  shareUrl: "https://starbot.app/plugins/cloud66",
 };
 
 const CONTEXT7: MarketplacePluginDetail = {
@@ -1397,7 +1397,7 @@ const CONTEXT7: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/context7",
+  shareUrl: "https://starbot.app/plugins/context7",
 };
 
 const HUGGINGFACE: MarketplacePluginDetail = {
@@ -1432,7 +1432,7 @@ const HUGGINGFACE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/huggingface",
+  shareUrl: "https://starbot.app/plugins/huggingface",
 };
 
 const STRIPE: MarketplacePluginDetail = {
@@ -1472,7 +1472,7 @@ const STRIPE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/stripe",
+  shareUrl: "https://starbot.app/plugins/stripe",
 };
 
 const REVENUECAT: MarketplacePluginDetail = {
@@ -1531,7 +1531,7 @@ const REVENUECAT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/revenuecat",
+  shareUrl: "https://starbot.app/plugins/revenuecat",
 };
 
 const POSTHOG: MarketplacePluginDetail = {
@@ -1589,7 +1589,7 @@ const POSTHOG: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/posthog",
+  shareUrl: "https://starbot.app/plugins/posthog",
 };
 
 const AIRTABLE: MarketplacePluginDetail = {
@@ -1639,7 +1639,7 @@ const AIRTABLE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/airtable",
+  shareUrl: "https://starbot.app/plugins/airtable",
 };
 
 const FIRECRAWL: MarketplacePluginDetail = {
@@ -1697,7 +1697,7 @@ const FIRECRAWL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/firecrawl",
+  shareUrl: "https://starbot.app/plugins/firecrawl",
 };
 
 const BRAVE_SEARCH: MarketplacePluginDetail = {
@@ -1751,7 +1751,7 @@ const BRAVE_SEARCH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/brave-search",
+  shareUrl: "https://starbot.app/plugins/brave-search",
 };
 
 const RESEND: MarketplacePluginDetail = {
@@ -1803,7 +1803,7 @@ const RESEND: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/resend",
+  shareUrl: "https://starbot.app/plugins/resend",
 };
 
 const OMNISEND: MarketplacePluginDetail = {
@@ -1860,7 +1860,7 @@ const OMNISEND: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/omnisend",
+  shareUrl: "https://starbot.app/plugins/omnisend",
 };
 
 const POSTIZ: MarketplacePluginDetail = {
@@ -1919,7 +1919,7 @@ const POSTIZ: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/postiz",
+  shareUrl: "https://starbot.app/plugins/postiz",
 };
 
 const TRYPOST: MarketplacePluginDetail = {
@@ -1959,7 +1959,7 @@ const TRYPOST: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/trypost",
+  shareUrl: "https://starbot.app/plugins/trypost",
 };
 
 const COMPOSIO: MarketplacePluginDetail = {
@@ -2017,7 +2017,7 @@ const COMPOSIO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/composio",
+  shareUrl: "https://starbot.app/plugins/composio",
 };
 
 const CLICKUP: MarketplacePluginDetail = {
@@ -2057,7 +2057,7 @@ const CLICKUP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/clickup",
+  shareUrl: "https://starbot.app/plugins/clickup",
 };
 
 const COINBASE: MarketplacePluginDetail = {
@@ -2100,7 +2100,7 @@ const COINBASE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/coinbase",
+  shareUrl: "https://starbot.app/plugins/coinbase",
 };
 
 const ROBINHOOD: MarketplacePluginDetail = {
@@ -2140,7 +2140,7 @@ const ROBINHOOD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/robinhood",
+  shareUrl: "https://starbot.app/plugins/robinhood",
 };
 
 const PLUGIN_1INCH: MarketplacePluginDetail = {
@@ -2175,7 +2175,7 @@ const PLUGIN_1INCH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/1inch",
+  shareUrl: "https://starbot.app/plugins/1inch",
 };
 
 const PLUGIN_21ST: MarketplacePluginDetail = {
@@ -2215,7 +2215,7 @@ const PLUGIN_21ST: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/21st",
+  shareUrl: "https://starbot.app/plugins/21st",
 };
 
 const PLUGIN_2CHAT: MarketplacePluginDetail = {
@@ -2255,7 +2255,7 @@ const PLUGIN_2CHAT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/2chat",
+  shareUrl: "https://starbot.app/plugins/2chat",
 };
 
 const ADOBE_ANALYTICS: MarketplacePluginDetail = {
@@ -2296,7 +2296,7 @@ const ADOBE_ANALYTICS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/adobe-analytics",
+  shareUrl: "https://starbot.app/plugins/adobe-analytics",
 };
 
 const ADSPIRER: MarketplacePluginDetail = {
@@ -2336,7 +2336,7 @@ const ADSPIRER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/adspirer",
+  shareUrl: "https://starbot.app/plugins/adspirer",
 };
 
 const AFFINITY: MarketplacePluginDetail = {
@@ -2376,7 +2376,7 @@ const AFFINITY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/affinity",
+  shareUrl: "https://starbot.app/plugins/affinity",
 };
 
 const AGENTMAIL: MarketplacePluginDetail = {
@@ -2416,7 +2416,7 @@ const AGENTMAIL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/agentmail",
+  shareUrl: "https://starbot.app/plugins/agentmail",
 };
 
 const AHREFS: MarketplacePluginDetail = {
@@ -2456,7 +2456,7 @@ const AHREFS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ahrefs",
+  shareUrl: "https://starbot.app/plugins/ahrefs",
 };
 
 const AIRWALLEX: MarketplacePluginDetail = {
@@ -2499,7 +2499,7 @@ const AIRWALLEX: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/airwallex",
+  shareUrl: "https://starbot.app/plugins/airwallex",
 };
 
 const AKIFLOW: MarketplacePluginDetail = {
@@ -2539,7 +2539,7 @@ const AKIFLOW: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/akiflow",
+  shareUrl: "https://starbot.app/plugins/akiflow",
 };
 
 const ALEPH: MarketplacePluginDetail = {
@@ -2580,7 +2580,7 @@ const ALEPH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/aleph",
+  shareUrl: "https://starbot.app/plugins/aleph",
 };
 
 const ALGOLIA: MarketplacePluginDetail = {
@@ -2620,7 +2620,7 @@ const ALGOLIA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/algolia",
+  shareUrl: "https://starbot.app/plugins/algolia",
 };
 
 const ALLO: MarketplacePluginDetail = {
@@ -2660,7 +2660,7 @@ const ALLO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/allo",
+  shareUrl: "https://starbot.app/plugins/allo",
 };
 
 const ALPHAVANTAGE: MarketplacePluginDetail = {
@@ -2700,7 +2700,7 @@ const ALPHAVANTAGE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/alphavantage",
+  shareUrl: "https://starbot.app/plugins/alphavantage",
 };
 
 const AMPLEMARKET: MarketplacePluginDetail = {
@@ -2744,7 +2744,7 @@ const AMPLEMARKET: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/amplemarket",
+  shareUrl: "https://starbot.app/plugins/amplemarket",
 };
 
 const AMPLITUDE: MarketplacePluginDetail = {
@@ -2784,7 +2784,7 @@ const AMPLITUDE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/amplitude",
+  shareUrl: "https://starbot.app/plugins/amplitude",
 };
 
 const ANDO: MarketplacePluginDetail = {
@@ -2824,7 +2824,7 @@ const ANDO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ando",
+  shareUrl: "https://starbot.app/plugins/ando",
 };
 
 const APIFY: MarketplacePluginDetail = {
@@ -2864,7 +2864,7 @@ const APIFY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/apify",
+  shareUrl: "https://starbot.app/plugins/apify",
 };
 
 const APOLLO: MarketplacePluginDetail = {
@@ -2904,7 +2904,7 @@ const APOLLO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/apollo",
+  shareUrl: "https://starbot.app/plugins/apollo",
 };
 
 const ARTIE: MarketplacePluginDetail = {
@@ -2944,7 +2944,7 @@ const ARTIE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/artie",
+  shareUrl: "https://starbot.app/plugins/artie",
 };
 
 const ATLAN: MarketplacePluginDetail = {
@@ -2984,7 +2984,7 @@ const ATLAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/atlan",
+  shareUrl: "https://starbot.app/plugins/atlan",
 };
 
 const ATTIO: MarketplacePluginDetail = {
@@ -3026,7 +3026,7 @@ const ATTIO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/attio",
+  shareUrl: "https://starbot.app/plugins/attio",
 };
 
 const AWS_KNOWLEDGE: MarketplacePluginDetail = {
@@ -3062,7 +3062,7 @@ const AWS_KNOWLEDGE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/aws-knowledge",
+  shareUrl: "https://starbot.app/plugins/aws-knowledge",
 };
 
 const BASE44: MarketplacePluginDetail = {
@@ -3104,7 +3104,7 @@ const BASE44: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/base44",
+  shareUrl: "https://starbot.app/plugins/base44",
 };
 
 const BASECAMP: MarketplacePluginDetail = {
@@ -3144,7 +3144,7 @@ const BASECAMP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/basecamp",
+  shareUrl: "https://starbot.app/plugins/basecamp",
 };
 
 const BEEHIIV: MarketplacePluginDetail = {
@@ -3184,7 +3184,7 @@ const BEEHIIV: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/beehiiv",
+  shareUrl: "https://starbot.app/plugins/beehiiv",
 };
 
 const BETTERSTACK: MarketplacePluginDetail = {
@@ -3224,7 +3224,7 @@ const BETTERSTACK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/betterstack",
+  shareUrl: "https://starbot.app/plugins/betterstack",
 };
 
 const BIRD: MarketplacePluginDetail = {
@@ -3264,7 +3264,7 @@ const BIRD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/bird",
+  shareUrl: "https://starbot.app/plugins/bird",
 };
 
 const BLOTATO: MarketplacePluginDetail = {
@@ -3304,7 +3304,7 @@ const BLOTATO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/blotato",
+  shareUrl: "https://starbot.app/plugins/blotato",
 };
 
 const BREX: MarketplacePluginDetail = {
@@ -3344,7 +3344,7 @@ const BREX: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/brex",
+  shareUrl: "https://starbot.app/plugins/brex",
 };
 
 const BRIGHTDATA: MarketplacePluginDetail = {
@@ -3388,7 +3388,7 @@ const BRIGHTDATA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/brightdata",
+  shareUrl: "https://starbot.app/plugins/brightdata",
 };
 
 const BROWSERLESS: MarketplacePluginDetail = {
@@ -3429,7 +3429,7 @@ const BROWSERLESS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/browserless",
+  shareUrl: "https://starbot.app/plugins/browserless",
 };
 
 const BUFFER: MarketplacePluginDetail = {
@@ -3469,7 +3469,7 @@ const BUFFER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/buffer",
+  shareUrl: "https://starbot.app/plugins/buffer",
 };
 
 const BUILDKITE: MarketplacePluginDetail = {
@@ -3509,7 +3509,7 @@ const BUILDKITE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/buildkite",
+  shareUrl: "https://starbot.app/plugins/buildkite",
 };
 
 const CALENDLY: MarketplacePluginDetail = {
@@ -3550,7 +3550,7 @@ const CALENDLY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/calendly",
+  shareUrl: "https://starbot.app/plugins/calendly",
 };
 
 const CARTESIA: MarketplacePluginDetail = {
@@ -3591,7 +3591,7 @@ const CARTESIA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/cartesia",
+  shareUrl: "https://starbot.app/plugins/cartesia",
 };
 
 const CIRCLEBACK: MarketplacePluginDetail = {
@@ -3631,7 +3631,7 @@ const CIRCLEBACK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/circleback",
+  shareUrl: "https://starbot.app/plugins/circleback",
 };
 
 const CLARIFY: MarketplacePluginDetail = {
@@ -3671,7 +3671,7 @@ const CLARIFY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/clarify",
+  shareUrl: "https://starbot.app/plugins/clarify",
 };
 
 const CLERK: MarketplacePluginDetail = {
@@ -3711,7 +3711,7 @@ const CLERK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/clerk",
+  shareUrl: "https://starbot.app/plugins/clerk",
 };
 
 const CLICKHOUSE: MarketplacePluginDetail = {
@@ -3752,7 +3752,7 @@ const CLICKHOUSE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/clickhouse",
+  shareUrl: "https://starbot.app/plugins/clickhouse",
 };
 
 const CLOSE: MarketplacePluginDetail = {
@@ -3794,7 +3794,7 @@ const CLOSE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/close",
+  shareUrl: "https://starbot.app/plugins/close",
 };
 
 const CLOUDINARY: MarketplacePluginDetail = {
@@ -3834,7 +3834,7 @@ const CLOUDINARY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/cloudinary",
+  shareUrl: "https://starbot.app/plugins/cloudinary",
 };
 
 const CODA: MarketplacePluginDetail = {
@@ -3874,7 +3874,7 @@ const CODA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/coda",
+  shareUrl: "https://starbot.app/plugins/coda",
 };
 
 const COINGECKO: MarketplacePluginDetail = {
@@ -3911,7 +3911,7 @@ const COINGECKO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/coingecko",
+  shareUrl: "https://starbot.app/plugins/coingecko",
 };
 
 const CONVEX: MarketplacePluginDetail = {
@@ -3946,7 +3946,7 @@ const CONVEX: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/convex",
+  shareUrl: "https://starbot.app/plugins/convex",
 };
 
 const CRAFT: MarketplacePluginDetail = {
@@ -3986,7 +3986,7 @@ const CRAFT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/craft",
+  shareUrl: "https://starbot.app/plugins/craft",
 };
 
 const CRUSTDATA: MarketplacePluginDetail = {
@@ -4027,7 +4027,7 @@ const CRUSTDATA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/crustdata",
+  shareUrl: "https://starbot.app/plugins/crustdata",
 };
 
 const CUSTOMERIO: MarketplacePluginDetail = {
@@ -4068,7 +4068,7 @@ const CUSTOMERIO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/customerio",
+  shareUrl: "https://starbot.app/plugins/customerio",
 };
 
 const DART: MarketplacePluginDetail = {
@@ -4108,7 +4108,7 @@ const DART: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/dart",
+  shareUrl: "https://starbot.app/plugins/dart",
 };
 
 const DATADOG: MarketplacePluginDetail = {
@@ -4148,7 +4148,7 @@ const DATADOG: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/datadog",
+  shareUrl: "https://starbot.app/plugins/datadog",
 };
 
 const DATADOG_EU: MarketplacePluginDetail = {
@@ -4188,7 +4188,7 @@ const DATADOG_EU: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/datadog-eu",
+  shareUrl: "https://starbot.app/plugins/datadog-eu",
 };
 
 const DATAFORSEO: MarketplacePluginDetail = {
@@ -4229,7 +4229,7 @@ const DATAFORSEO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/dataforseo",
+  shareUrl: "https://starbot.app/plugins/dataforseo",
 };
 
 const DEALROOM: MarketplacePluginDetail = {
@@ -4270,7 +4270,7 @@ const DEALROOM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/dealroom",
+  shareUrl: "https://starbot.app/plugins/dealroom",
 };
 
 const DEEPLEDGER: MarketplacePluginDetail = {
@@ -4310,7 +4310,7 @@ const DEEPLEDGER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/deepledger",
+  shareUrl: "https://starbot.app/plugins/deepledger",
 };
 
 const DEEPWIKI: MarketplacePluginDetail = {
@@ -4345,7 +4345,7 @@ const DEEPWIKI: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/deepwiki",
+  shareUrl: "https://starbot.app/plugins/deepwiki",
 };
 
 const DIDA365: MarketplacePluginDetail = {
@@ -4385,7 +4385,7 @@ const DIDA365: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/dida365",
+  shareUrl: "https://starbot.app/plugins/dida365",
 };
 
 const DIGITALOCEAN: MarketplacePluginDetail = {
@@ -4426,7 +4426,7 @@ const DIGITALOCEAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/digitalocean",
+  shareUrl: "https://starbot.app/plugins/digitalocean",
 };
 
 const DROPBOX: MarketplacePluginDetail = {
@@ -4466,7 +4466,7 @@ const DROPBOX: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/dropbox",
+  shareUrl: "https://starbot.app/plugins/dropbox",
 };
 
 const EDEN: MarketplacePluginDetail = {
@@ -4506,7 +4506,7 @@ const EDEN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/eden",
+  shareUrl: "https://starbot.app/plugins/eden",
 };
 
 const ERA: MarketplacePluginDetail = {
@@ -4546,7 +4546,7 @@ const ERA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/era",
+  shareUrl: "https://starbot.app/plugins/era",
 };
 
 const ETORO: MarketplacePluginDetail = {
@@ -4586,7 +4586,7 @@ const ETORO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/etoro",
+  shareUrl: "https://starbot.app/plugins/etoro",
 };
 
 const EVERNOTE: MarketplacePluginDetail = {
@@ -4626,7 +4626,7 @@ const EVERNOTE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/evernote",
+  shareUrl: "https://starbot.app/plugins/evernote",
 };
 
 const EXA: MarketplacePluginDetail = {
@@ -4660,7 +4660,7 @@ const EXA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/exa",
+  shareUrl: "https://starbot.app/plugins/exa",
 };
 
 const EXCALIDRAW: MarketplacePluginDetail = {
@@ -4698,7 +4698,7 @@ const EXCALIDRAW: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/excalidraw",
+  shareUrl: "https://starbot.app/plugins/excalidraw",
 };
 
 const EXTEND: MarketplacePluginDetail = {
@@ -4740,7 +4740,7 @@ const EXTEND: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/extend",
+  shareUrl: "https://starbot.app/plugins/extend",
 };
 
 const FAL: MarketplacePluginDetail = {
@@ -4784,7 +4784,7 @@ const FAL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/fal",
+  shareUrl: "https://starbot.app/plugins/fal",
 };
 
 const FANVUE: MarketplacePluginDetail = {
@@ -4824,7 +4824,7 @@ const FANVUE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/fanvue",
+  shareUrl: "https://starbot.app/plugins/fanvue",
 };
 
 const FASTMAIL: MarketplacePluginDetail = {
@@ -4864,7 +4864,7 @@ const FASTMAIL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/fastmail",
+  shareUrl: "https://starbot.app/plugins/fastmail",
 };
 
 const FATHOM: MarketplacePluginDetail = {
@@ -4906,7 +4906,7 @@ const FATHOM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/fathom",
+  shareUrl: "https://starbot.app/plugins/fathom",
 };
 
 const FEISHU: MarketplacePluginDetail = {
@@ -4946,7 +4946,7 @@ const FEISHU: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/feishu",
+  shareUrl: "https://starbot.app/plugins/feishu",
 };
 
 const FELLOW: MarketplacePluginDetail = {
@@ -4986,7 +4986,7 @@ const FELLOW: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/fellow",
+  shareUrl: "https://starbot.app/plugins/fellow",
 };
 
 const FIREFLIES: MarketplacePluginDetail = {
@@ -5029,7 +5029,7 @@ const FIREFLIES: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/fireflies",
+  shareUrl: "https://starbot.app/plugins/fireflies",
 };
 
 const FLOOT: MarketplacePluginDetail = {
@@ -5069,7 +5069,7 @@ const FLOOT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/floot",
+  shareUrl: "https://starbot.app/plugins/floot",
 };
 
 const FOLK: MarketplacePluginDetail = {
@@ -5111,7 +5111,7 @@ const FOLK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/folk",
+  shareUrl: "https://starbot.app/plugins/folk",
 };
 
 const FREEE: MarketplacePluginDetail = {
@@ -5151,7 +5151,7 @@ const FREEE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/freee",
+  shareUrl: "https://starbot.app/plugins/freee",
 };
 
 const FUTU: MarketplacePluginDetail = {
@@ -5193,7 +5193,7 @@ const FUTU: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/futu",
+  shareUrl: "https://starbot.app/plugins/futu",
 };
 
 const GITBOOK: MarketplacePluginDetail = {
@@ -5233,7 +5233,7 @@ const GITBOOK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/gitbook",
+  shareUrl: "https://starbot.app/plugins/gitbook",
 };
 
 const GODADDY: MarketplacePluginDetail = {
@@ -5273,7 +5273,7 @@ const GODADDY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/godaddy",
+  shareUrl: "https://starbot.app/plugins/godaddy",
 };
 
 const GOJIBERRY: MarketplacePluginDetail = {
@@ -5313,7 +5313,7 @@ const GOJIBERRY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/gojiberry",
+  shareUrl: "https://starbot.app/plugins/gojiberry",
 };
 
 const GRAFANA: MarketplacePluginDetail = {
@@ -5355,7 +5355,7 @@ const GRAFANA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/grafana",
+  shareUrl: "https://starbot.app/plugins/grafana",
 };
 
 const GRANOLA: MarketplacePluginDetail = {
@@ -5395,7 +5395,7 @@ const GRANOLA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/granola",
+  shareUrl: "https://starbot.app/plugins/granola",
 };
 
 const GREENHOUSE: MarketplacePluginDetail = {
@@ -5439,7 +5439,7 @@ const GREENHOUSE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/greenhouse",
+  shareUrl: "https://starbot.app/plugins/greenhouse",
 };
 
 const GURU: MarketplacePluginDetail = {
@@ -5481,7 +5481,7 @@ const GURU: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/guru",
+  shareUrl: "https://starbot.app/plugins/guru",
 };
 
 const HARMONIC: MarketplacePluginDetail = {
@@ -5526,7 +5526,7 @@ const HARMONIC: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/harmonic",
+  shareUrl: "https://starbot.app/plugins/harmonic",
 };
 
 const HELIUM10: MarketplacePluginDetail = {
@@ -5568,7 +5568,7 @@ const HELIUM10: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/helium10",
+  shareUrl: "https://starbot.app/plugins/helium10",
 };
 
 const HELPSCOUT: MarketplacePluginDetail = {
@@ -5611,7 +5611,7 @@ const HELPSCOUT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/helpscout",
+  shareUrl: "https://starbot.app/plugins/helpscout",
 };
 
 const HEX: MarketplacePluginDetail = {
@@ -5651,7 +5651,7 @@ const HEX: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/hex",
+  shareUrl: "https://starbot.app/plugins/hex",
 };
 
 const HEYREACH: MarketplacePluginDetail = {
@@ -5693,7 +5693,7 @@ const HEYREACH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/heyreach",
+  shareUrl: "https://starbot.app/plugins/heyreach",
 };
 
 const HIGHLEVEL: MarketplacePluginDetail = {
@@ -5758,7 +5758,7 @@ const HIGHLEVEL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/highlevel",
+  shareUrl: "https://starbot.app/plugins/highlevel",
 };
 
 const HOSPITABLE: MarketplacePluginDetail = {
@@ -5799,7 +5799,7 @@ const HOSPITABLE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/hospitable",
+  shareUrl: "https://starbot.app/plugins/hospitable",
 };
 
 const HOSTINGER: MarketplacePluginDetail = {
@@ -5839,7 +5839,7 @@ const HOSTINGER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/hostinger",
+  shareUrl: "https://starbot.app/plugins/hostinger",
 };
 
 const HUBSPOT: MarketplacePluginDetail = {
@@ -5898,7 +5898,7 @@ const HUBSPOT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/hubspot",
+  shareUrl: "https://starbot.app/plugins/hubspot",
 };
 
 const IBKR: MarketplacePluginDetail = {
@@ -5939,7 +5939,7 @@ const IBKR: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ibkr",
+  shareUrl: "https://starbot.app/plugins/ibkr",
 };
 
 const IFTTT: MarketplacePluginDetail = {
@@ -5979,7 +5979,7 @@ const IFTTT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ifttt",
+  shareUrl: "https://starbot.app/plugins/ifttt",
 };
 
 const INCIDENTIO: MarketplacePluginDetail = {
@@ -6020,7 +6020,7 @@ const INCIDENTIO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/incidentio",
+  shareUrl: "https://starbot.app/plugins/incidentio",
 };
 
 const INSTANTLY: MarketplacePluginDetail = {
@@ -6063,7 +6063,7 @@ const INSTANTLY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/instantly",
+  shareUrl: "https://starbot.app/plugins/instantly",
 };
 
 const INTERCOM: MarketplacePluginDetail = {
@@ -6103,7 +6103,7 @@ const INTERCOM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/intercom",
+  shareUrl: "https://starbot.app/plugins/intercom",
 };
 
 const INVIDEO: MarketplacePluginDetail = {
@@ -6143,7 +6143,7 @@ const INVIDEO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/invideo",
+  shareUrl: "https://starbot.app/plugins/invideo",
 };
 
 const JOBTREAD: MarketplacePluginDetail = {
@@ -6183,7 +6183,7 @@ const JOBTREAD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/jobtread",
+  shareUrl: "https://starbot.app/plugins/jobtread",
 };
 
 const KAJABI: MarketplacePluginDetail = {
@@ -6223,7 +6223,7 @@ const KAJABI: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/kajabi",
+  shareUrl: "https://starbot.app/plugins/kajabi",
 };
 
 const KENSHO: MarketplacePluginDetail = {
@@ -6263,7 +6263,7 @@ const KENSHO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/kensho",
+  shareUrl: "https://starbot.app/plugins/kensho",
 };
 
 const KIT: MarketplacePluginDetail = {
@@ -6303,7 +6303,7 @@ const KIT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/kit",
+  shareUrl: "https://starbot.app/plugins/kit",
 };
 
 const KLAVIYO: MarketplacePluginDetail = {
@@ -6346,7 +6346,7 @@ const KLAVIYO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/klaviyo",
+  shareUrl: "https://starbot.app/plugins/klaviyo",
 };
 
 const KNOWIFY: MarketplacePluginDetail = {
@@ -6388,7 +6388,7 @@ const KNOWIFY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/knowify",
+  shareUrl: "https://starbot.app/plugins/knowify",
 };
 
 const KRISP: MarketplacePluginDetail = {
@@ -6431,7 +6431,7 @@ const KRISP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/krisp",
+  shareUrl: "https://starbot.app/plugins/krisp",
 };
 
 const LARK: MarketplacePluginDetail = {
@@ -6471,7 +6471,7 @@ const LARK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/lark",
+  shareUrl: "https://starbot.app/plugins/lark",
 };
 
 const LAUNCHDARKLY: MarketplacePluginDetail = {
@@ -6514,7 +6514,7 @@ const LAUNCHDARKLY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/launchdarkly",
+  shareUrl: "https://starbot.app/plugins/launchdarkly",
 };
 
 const LEMLIST: MarketplacePluginDetail = {
@@ -6554,7 +6554,7 @@ const LEMLIST: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/lemlist",
+  shareUrl: "https://starbot.app/plugins/lemlist",
 };
 
 const LITTLEBIRD: MarketplacePluginDetail = {
@@ -6596,7 +6596,7 @@ const LITTLEBIRD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/littlebird",
+  shareUrl: "https://starbot.app/plugins/littlebird",
 };
 
 const LOCALMCP: MarketplacePluginDetail = {
@@ -6636,7 +6636,7 @@ const LOCALMCP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/localmcp",
+  shareUrl: "https://starbot.app/plugins/localmcp",
 };
 
 const LONGBRIDGE: MarketplacePluginDetail = {
@@ -6676,7 +6676,7 @@ const LONGBRIDGE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/longbridge",
+  shareUrl: "https://starbot.app/plugins/longbridge",
 };
 
 const LOVABLE: MarketplacePluginDetail = {
@@ -6718,7 +6718,7 @@ const LOVABLE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/lovable",
+  shareUrl: "https://starbot.app/plugins/lovable",
 };
 
 const LUSHA: MarketplacePluginDetail = {
@@ -6761,7 +6761,7 @@ const LUSHA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/lusha",
+  shareUrl: "https://starbot.app/plugins/lusha",
 };
 
 const MAGICPATTERNS: MarketplacePluginDetail = {
@@ -6801,7 +6801,7 @@ const MAGICPATTERNS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/magicpatterns",
+  shareUrl: "https://starbot.app/plugins/magicpatterns",
 };
 
 const MAGNIFIC: MarketplacePluginDetail = {
@@ -6841,7 +6841,7 @@ const MAGNIFIC: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/magnific",
+  shareUrl: "https://starbot.app/plugins/magnific",
 };
 
 const MAILERLITE: MarketplacePluginDetail = {
@@ -6882,7 +6882,7 @@ const MAILERLITE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mailerlite",
+  shareUrl: "https://starbot.app/plugins/mailerlite",
 };
 
 const MAKE: MarketplacePluginDetail = {
@@ -6924,7 +6924,7 @@ const MAKE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/make",
+  shareUrl: "https://starbot.app/plugins/make",
 };
 
 const MASSIVE: MarketplacePluginDetail = {
@@ -6964,7 +6964,7 @@ const MASSIVE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/massive",
+  shareUrl: "https://starbot.app/plugins/massive",
 };
 
 const MEM: MarketplacePluginDetail = {
@@ -7006,7 +7006,7 @@ const MEM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mem",
+  shareUrl: "https://starbot.app/plugins/mem",
 };
 
 const MERCURY: MarketplacePluginDetail = {
@@ -7047,7 +7047,7 @@ const MERCURY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mercury",
+  shareUrl: "https://starbot.app/plugins/mercury",
 };
 
 const META_ADS: MarketplacePluginDetail = {
@@ -7092,7 +7092,7 @@ const META_ADS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/meta-ads",
+  shareUrl: "https://starbot.app/plugins/meta-ads",
 };
 
 const METRICOOL: MarketplacePluginDetail = {
@@ -7135,7 +7135,7 @@ const METRICOOL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/metricool",
+  shareUrl: "https://starbot.app/plugins/metricool",
 };
 
 const MIRO: MarketplacePluginDetail = {
@@ -7175,7 +7175,7 @@ const MIRO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/miro",
+  shareUrl: "https://starbot.app/plugins/miro",
 };
 
 const MIXPANEL: MarketplacePluginDetail = {
@@ -7215,7 +7215,7 @@ const MIXPANEL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mixpanel",
+  shareUrl: "https://starbot.app/plugins/mixpanel",
 };
 
 const MOBBIN: MarketplacePluginDetail = {
@@ -7255,7 +7255,7 @@ const MOBBIN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mobbin",
+  shareUrl: "https://starbot.app/plugins/mobbin",
 };
 
 const MONARCH: MarketplacePluginDetail = {
@@ -7295,7 +7295,7 @@ const MONARCH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/monarch",
+  shareUrl: "https://starbot.app/plugins/monarch",
 };
 
 const MONDAY: MarketplacePluginDetail = {
@@ -7341,7 +7341,7 @@ const MONDAY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/monday",
+  shareUrl: "https://starbot.app/plugins/monday",
 };
 
 const MOOMOO: MarketplacePluginDetail = {
@@ -7383,7 +7383,7 @@ const MOOMOO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/moomoo",
+  shareUrl: "https://starbot.app/plugins/moomoo",
 };
 
 const MURAL: MarketplacePluginDetail = {
@@ -7423,7 +7423,7 @@ const MURAL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/mural",
+  shareUrl: "https://starbot.app/plugins/mural",
 };
 
 const NAVAN: MarketplacePluginDetail = {
@@ -7463,7 +7463,7 @@ const NAVAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/navan",
+  shareUrl: "https://starbot.app/plugins/navan",
 };
 
 const NORTHBEAM: MarketplacePluginDetail = {
@@ -7505,7 +7505,7 @@ const NORTHBEAM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/northbeam",
+  shareUrl: "https://starbot.app/plugins/northbeam",
 };
 
 const OMNEKY: MarketplacePluginDetail = {
@@ -7545,7 +7545,7 @@ const OMNEKY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/omneky",
+  shareUrl: "https://starbot.app/plugins/omneky",
 };
 
 const OPENART: MarketplacePluginDetail = {
@@ -7585,7 +7585,7 @@ const OPENART: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/openart",
+  shareUrl: "https://starbot.app/plugins/openart",
 };
 
 const OPUSCLIP: MarketplacePluginDetail = {
@@ -7625,7 +7625,7 @@ const OPUSCLIP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/opusclip",
+  shareUrl: "https://starbot.app/plugins/opusclip",
 };
 
 const OTTER: MarketplacePluginDetail = {
@@ -7665,7 +7665,7 @@ const OTTER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/otter",
+  shareUrl: "https://starbot.app/plugins/otter",
 };
 
 const PANDADOC: MarketplacePluginDetail = {
@@ -7706,7 +7706,7 @@ const PANDADOC: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/pandadoc",
+  shareUrl: "https://starbot.app/plugins/pandadoc",
 };
 
 const PARALLEL: MarketplacePluginDetail = {
@@ -7745,7 +7745,7 @@ const PARALLEL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/parallel",
+  shareUrl: "https://starbot.app/plugins/parallel",
 };
 
 const PENNYLANE: MarketplacePluginDetail = {
@@ -7785,7 +7785,7 @@ const PENNYLANE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/pennylane",
+  shareUrl: "https://starbot.app/plugins/pennylane",
 };
 
 const PICSART: MarketplacePluginDetail = {
@@ -7825,7 +7825,7 @@ const PICSART: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/picsart",
+  shareUrl: "https://starbot.app/plugins/picsart",
 };
 
 const PIPEDRIVE: MarketplacePluginDetail = {
@@ -7867,7 +7867,7 @@ const PIPEDRIVE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/pipedrive",
+  shareUrl: "https://starbot.app/plugins/pipedrive",
 };
 
 const PLANETSCALE: MarketplacePluginDetail = {
@@ -7908,7 +7908,7 @@ const PLANETSCALE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/planetscale",
+  shareUrl: "https://starbot.app/plugins/planetscale",
 };
 
 const PLANNINGCENTER: MarketplacePluginDetail = {
@@ -7948,7 +7948,7 @@ const PLANNINGCENTER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/planningcenter",
+  shareUrl: "https://starbot.app/plugins/planningcenter",
 };
 
 const PLAUD: MarketplacePluginDetail = {
@@ -7988,7 +7988,7 @@ const PLAUD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/plaud",
+  shareUrl: "https://starbot.app/plugins/plaud",
 };
 
 const POSTMAN: MarketplacePluginDetail = {
@@ -8029,7 +8029,7 @@ const POSTMAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/postman",
+  shareUrl: "https://starbot.app/plugins/postman",
 };
 
 const PROFOUND: MarketplacePluginDetail = {
@@ -8069,7 +8069,7 @@ const PROFOUND: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/profound",
+  shareUrl: "https://starbot.app/plugins/profound",
 };
 
 const PUBLIC: MarketplacePluginDetail = {
@@ -8111,7 +8111,7 @@ const PUBLIC: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/public",
+  shareUrl: "https://starbot.app/plugins/public",
 };
 
 const PYLON: MarketplacePluginDetail = {
@@ -8151,7 +8151,7 @@ const PYLON: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/pylon",
+  shareUrl: "https://starbot.app/plugins/pylon",
 };
 
 const QONTO: MarketplacePluginDetail = {
@@ -8193,7 +8193,7 @@ const QONTO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/qonto",
+  shareUrl: "https://starbot.app/plugins/qonto",
 };
 
 const QUO: MarketplacePluginDetail = {
@@ -8233,7 +8233,7 @@ const QUO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/quo",
+  shareUrl: "https://starbot.app/plugins/quo",
 };
 
 const RAINDROP: MarketplacePluginDetail = {
@@ -8275,7 +8275,7 @@ const RAINDROP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/raindrop",
+  shareUrl: "https://starbot.app/plugins/raindrop",
 };
 
 const RAMP: MarketplacePluginDetail = {
@@ -8315,7 +8315,7 @@ const RAMP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ramp",
+  shareUrl: "https://starbot.app/plugins/ramp",
 };
 
 const READAI: MarketplacePluginDetail = {
@@ -8357,7 +8357,7 @@ const READAI: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/readai",
+  shareUrl: "https://starbot.app/plugins/readai",
 };
 
 const READWISE: MarketplacePluginDetail = {
@@ -8397,7 +8397,7 @@ const READWISE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/readwise",
+  shareUrl: "https://starbot.app/plugins/readwise",
 };
 
 const REFERO: MarketplacePluginDetail = {
@@ -8437,7 +8437,7 @@ const REFERO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/refero",
+  shareUrl: "https://starbot.app/plugins/refero",
 };
 
 const RESTREAM: MarketplacePluginDetail = {
@@ -8477,7 +8477,7 @@ const RESTREAM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/restream",
+  shareUrl: "https://starbot.app/plugins/restream",
 };
 
 const RIVERSIDE: MarketplacePluginDetail = {
@@ -8517,7 +8517,7 @@ const RIVERSIDE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/riverside",
+  shareUrl: "https://starbot.app/plugins/riverside",
 };
 
 const ROAM: MarketplacePluginDetail = {
@@ -8557,7 +8557,7 @@ const ROAM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/roam",
+  shareUrl: "https://starbot.app/plugins/roam",
 };
 
 const RUNPOD: MarketplacePluginDetail = {
@@ -8599,7 +8599,7 @@ const RUNPOD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/runpod",
+  shareUrl: "https://starbot.app/plugins/runpod",
 };
 
 const RUNWAY: MarketplacePluginDetail = {
@@ -8639,7 +8639,7 @@ const RUNWAY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/runway",
+  shareUrl: "https://starbot.app/plugins/runway",
 };
 
 const RYZE: MarketplacePluginDetail = {
@@ -8682,7 +8682,7 @@ const RYZE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ryze",
+  shareUrl: "https://starbot.app/plugins/ryze",
 };
 
 const SALESLOFT: MarketplacePluginDetail = {
@@ -8722,7 +8722,7 @@ const SALESLOFT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/salesloft",
+  shareUrl: "https://starbot.app/plugins/salesloft",
 };
 
 const SANITY: MarketplacePluginDetail = {
@@ -8762,7 +8762,7 @@ const SANITY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/sanity",
+  shareUrl: "https://starbot.app/plugins/sanity",
 };
 
 const SCRAPECREATORS: MarketplacePluginDetail = {
@@ -8802,7 +8802,7 @@ const SCRAPECREATORS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/scrapecreators",
+  shareUrl: "https://starbot.app/plugins/scrapecreators",
 };
 
 const SEARCHATLAS: MarketplacePluginDetail = {
@@ -8842,7 +8842,7 @@ const SEARCHATLAS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/searchatlas",
+  shareUrl: "https://starbot.app/plugins/searchatlas",
 };
 
 const SEMRUSH: MarketplacePluginDetail = {
@@ -8882,7 +8882,7 @@ const SEMRUSH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/semrush",
+  shareUrl: "https://starbot.app/plugins/semrush",
 };
 
 const SERANKING: MarketplacePluginDetail = {
@@ -8922,7 +8922,7 @@ const SERANKING: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/seranking",
+  shareUrl: "https://starbot.app/plugins/seranking",
 };
 
 const SERVICEM8: MarketplacePluginDetail = {
@@ -8962,7 +8962,7 @@ const SERVICEM8: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/servicem8",
+  shareUrl: "https://starbot.app/plugins/servicem8",
 };
 
 const SMARTLEAD: MarketplacePluginDetail = {
@@ -9005,7 +9005,7 @@ const SMARTLEAD: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/smartlead",
+  shareUrl: "https://starbot.app/plugins/smartlead",
 };
 
 const SNAPTRADE: MarketplacePluginDetail = {
@@ -9045,7 +9045,7 @@ const SNAPTRADE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/snaptrade",
+  shareUrl: "https://starbot.app/plugins/snaptrade",
 };
 
 const SONARQUBE: MarketplacePluginDetail = {
@@ -9086,7 +9086,7 @@ const SONARQUBE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/sonarqube",
+  shareUrl: "https://starbot.app/plugins/sonarqube",
 };
 
 const SPACEFAST: MarketplacePluginDetail = {
@@ -9126,7 +9126,7 @@ const SPACEFAST: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/spacefast",
+  shareUrl: "https://starbot.app/plugins/spacefast",
 };
 
 const SPEKO: MarketplacePluginDetail = {
@@ -9166,7 +9166,7 @@ const SPEKO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/speko",
+  shareUrl: "https://starbot.app/plugins/speko",
 };
 
 const SQUARE: MarketplacePluginDetail = {
@@ -9206,7 +9206,7 @@ const SQUARE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/square",
+  shareUrl: "https://starbot.app/plugins/square",
 };
 
 const STATSIG: MarketplacePluginDetail = {
@@ -9253,7 +9253,7 @@ const STATSIG: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/statsig",
+  shareUrl: "https://starbot.app/plugins/statsig",
 };
 
 const SUNSAMA: MarketplacePluginDetail = {
@@ -9296,7 +9296,7 @@ const SUNSAMA: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/sunsama",
+  shareUrl: "https://starbot.app/plugins/sunsama",
 };
 
 const SUPERHUMAN: MarketplacePluginDetail = {
@@ -9338,7 +9338,7 @@ const SUPERHUMAN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/superhuman",
+  shareUrl: "https://starbot.app/plugins/superhuman",
 };
 
 const SUPERME: MarketplacePluginDetail = {
@@ -9384,7 +9384,7 @@ const SUPERME: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/superme",
+  shareUrl: "https://starbot.app/plugins/superme",
 };
 
 const SUPERMEMORY: MarketplacePluginDetail = {
@@ -9424,7 +9424,7 @@ const SUPERMEMORY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/supermemory",
+  shareUrl: "https://starbot.app/plugins/supermemory",
 };
 
 const SVELTE: MarketplacePluginDetail = {
@@ -9460,7 +9460,7 @@ const SVELTE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/svelte",
+  shareUrl: "https://starbot.app/plugins/svelte",
 };
 
 const SYNCRO: MarketplacePluginDetail = {
@@ -9500,7 +9500,7 @@ const SYNCRO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/syncro",
+  shareUrl: "https://starbot.app/plugins/syncro",
 };
 
 const TABLEAU: MarketplacePluginDetail = {
@@ -9544,7 +9544,7 @@ const TABLEAU: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/tableau",
+  shareUrl: "https://starbot.app/plugins/tableau",
 };
 
 const TAVILY: MarketplacePluginDetail = {
@@ -9584,7 +9584,7 @@ const TAVILY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/tavily",
+  shareUrl: "https://starbot.app/plugins/tavily",
 };
 
 const TESSIE: MarketplacePluginDetail = {
@@ -9643,7 +9643,7 @@ const TESSIE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/tessie",
+  shareUrl: "https://starbot.app/plugins/tessie",
 };
 
 const TINYFISH: MarketplacePluginDetail = {
@@ -9683,7 +9683,7 @@ const TINYFISH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/tinyfish",
+  shareUrl: "https://starbot.app/plugins/tinyfish",
 };
 
 const TRADINGVIEW: MarketplacePluginDetail = {
@@ -9723,7 +9723,7 @@ const TRADINGVIEW: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/tradingview",
+  shareUrl: "https://starbot.app/plugins/tradingview",
 };
 
 const TRANSCRIPTAPI: MarketplacePluginDetail = {
@@ -9763,7 +9763,7 @@ const TRANSCRIPTAPI: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/transcriptapi",
+  shareUrl: "https://starbot.app/plugins/transcriptapi",
 };
 
 const TRUTHIFI: MarketplacePluginDetail = {
@@ -9803,7 +9803,7 @@ const TRUTHIFI: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/truthifi",
+  shareUrl: "https://starbot.app/plugins/truthifi",
 };
 
 const TURSO: MarketplacePluginDetail = {
@@ -9843,7 +9843,7 @@ const TURSO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/turso",
+  shareUrl: "https://starbot.app/plugins/turso",
 };
 
 const TWILIO_DOCS: MarketplacePluginDetail = {
@@ -9878,7 +9878,7 @@ const TWILIO_DOCS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/twilio-docs",
+  shareUrl: "https://starbot.app/plugins/twilio-docs",
 };
 
 const TYPEFORM: MarketplacePluginDetail = {
@@ -9922,7 +9922,7 @@ const TYPEFORM: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/typeform",
+  shareUrl: "https://starbot.app/plugins/typeform",
 };
 
 const TYPEFULLY: MarketplacePluginDetail = {
@@ -9962,7 +9962,7 @@ const TYPEFULLY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/typefully",
+  shareUrl: "https://starbot.app/plugins/typefully",
 };
 
 const UBERSUGGEST: MarketplacePluginDetail = {
@@ -10003,7 +10003,7 @@ const UBERSUGGEST: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ubersuggest",
+  shareUrl: "https://starbot.app/plugins/ubersuggest",
 };
 
 const UPWORK: MarketplacePluginDetail = {
@@ -10047,7 +10047,7 @@ const UPWORK: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/upwork",
+  shareUrl: "https://starbot.app/plugins/upwork",
 };
 
 const VIDEOGEN: MarketplacePluginDetail = {
@@ -10087,7 +10087,7 @@ const VIDEOGEN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/videogen",
+  shareUrl: "https://starbot.app/plugins/videogen",
 };
 
 const VIDIQ: MarketplacePluginDetail = {
@@ -10127,7 +10127,7 @@ const VIDIQ: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/vidiq",
+  shareUrl: "https://starbot.app/plugins/vidiq",
 };
 
 const WEBFLOW: MarketplacePluginDetail = {
@@ -10167,7 +10167,7 @@ const WEBFLOW: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/webflow",
+  shareUrl: "https://starbot.app/plugins/webflow",
 };
 
 const WELLNESSPROJECT: MarketplacePluginDetail = {
@@ -10208,7 +10208,7 @@ const WELLNESSPROJECT: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/wellnessproject",
+  shareUrl: "https://starbot.app/plugins/wellnessproject",
 };
 
 const WHOP: MarketplacePluginDetail = {
@@ -10248,7 +10248,7 @@ const WHOP: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/whop",
+  shareUrl: "https://starbot.app/plugins/whop",
 };
 
 const WINDSOR: MarketplacePluginDetail = {
@@ -10288,7 +10288,7 @@ const WINDSOR: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/windsor",
+  shareUrl: "https://starbot.app/plugins/windsor",
 };
 
 const WITHINGS: MarketplacePluginDetail = {
@@ -10330,7 +10330,7 @@ const WITHINGS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/withings",
+  shareUrl: "https://starbot.app/plugins/withings",
 };
 
 const WIX: MarketplacePluginDetail = {
@@ -10371,7 +10371,7 @@ const WIX: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/wix",
+  shareUrl: "https://starbot.app/plugins/wix",
 };
 
 const WORDPRESS: MarketplacePluginDetail = {
@@ -10411,7 +10411,7 @@ const WORDPRESS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/wordpress",
+  shareUrl: "https://starbot.app/plugins/wordpress",
 };
 
 const WORKABLE: MarketplacePluginDetail = {
@@ -10454,7 +10454,7 @@ const WORKABLE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/workable",
+  shareUrl: "https://starbot.app/plugins/workable",
 };
 
 const WORKOS: MarketplacePluginDetail = {
@@ -10494,7 +10494,7 @@ const WORKOS: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/workos",
+  shareUrl: "https://starbot.app/plugins/workos",
 };
 
 const WPVIBE: MarketplacePluginDetail = {
@@ -10534,7 +10534,7 @@ const WPVIBE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/wpvibe",
+  shareUrl: "https://starbot.app/plugins/wpvibe",
 };
 
 const YNAB: MarketplacePluginDetail = {
@@ -10575,7 +10575,7 @@ const YNAB: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/ynab",
+  shareUrl: "https://starbot.app/plugins/ynab",
 };
 
 const YOU: MarketplacePluginDetail = {
@@ -10615,7 +10615,7 @@ const YOU: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/you",
+  shareUrl: "https://starbot.app/plugins/you",
 };
 
 const ZAPIER: MarketplacePluginDetail = {
@@ -10658,7 +10658,7 @@ const ZAPIER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/zapier",
+  shareUrl: "https://starbot.app/plugins/zapier",
 };
 
 const ZOOMINFO: MarketplacePluginDetail = {
@@ -10701,7 +10701,7 @@ const ZOOMINFO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-11-10T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/zoominfo",
+  shareUrl: "https://starbot.app/plugins/zoominfo",
 };
 
 export const MARKETPLACE_PLUGINS: MarketplacePluginDetail[] = [

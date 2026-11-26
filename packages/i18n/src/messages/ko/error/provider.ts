@@ -18,9 +18,11 @@ export const messages = {
   "error.provider.acpPlanUsedUp":
     "{provider} 요금제 사용량을 모두 사용했습니다. 다른 모델을 선택하거나 {provider} 요금제를 업그레이드하세요.",
   "error.provider.acpMcpNotLoaded":
-    "{provider}가 OpenBot 도구를 불러오지 않아 이 에이전트는 도구를 사용하거나 팀원에게 연락할 수 없습니다. {provider} 팀 정책이 로컬 MCP 서버를 차단할 수 있습니다. 팀 관리자에게 허용을 요청한 다음 다시 시도하세요.",
+    "{provider}가 StarBot 도구를 불러오지 않아 이 에이전트는 도구를 사용하거나 팀원에게 연락할 수 없습니다. {provider} 팀 정책이 로컬 MCP 서버를 차단할 수 있습니다. 팀 관리자에게 허용을 요청한 다음 다시 시도하세요.",
+
   "error.provider.acpToolsNotLoaded":
-    "{provider}가 OpenBot 도구 없이 이 메시지를 실행해서 에이전트가 팀원에게 연락하거나 브라우저를 사용하거나 파일을 첨부할 수 없었습니다. 다시 시도하세요.",
+    "{provider}가 StarBot 도구 없이 이 메시지를 실행해서 에이전트가 팀원에게 연락하거나 브라우저를 사용하거나 파일을 첨부할 수 없었습니다. 다시 시도하세요.",
+
   "error.provider.acpOwnMcpServerFailed":
     "{provider}가 MCP 서버 {name}을(를) 시작하지 못해 응답이 중단되었습니다. 이 서버는 OpenBot이 아니라 사용자의 {provider} 설정에 있습니다. 그곳에서 서버를 제거하거나 고친 다음 새 채팅을 시작하세요.",
   "error.provider.endpointsReadOnly":
@@ -588,7 +590,8 @@ export const messages = {
   "error.provider.museRequestUnsupported": "지원하지 않는 Muse 서버 요청이에요.",
   "error.provider.museConnectionFailed": "Muse 연결에 실패했어요. 대화를 재개해서 저장된 기록을 복구하세요.",
   "error.provider.museUnknownSession": "알 수 없는 Muse 세션이에요.",
-  "error.provider.museInvalidToolResult": "올바르지 않은 OpenBot 도구 결과예요.",
+  "error.provider.museInvalidToolResult": "올바르지 않은 StarBot 도구 결과예요.",
+
   "error.provider.museMcpRequired": "Muse는 세션 MCP 서버를 지원해야 해요.",
   "error.provider.museSessionMismatch": "Muse가 다른 세션을 반환했어요.",
   "error.provider.museCompactRejected": "Muse가 압축을 수락하지 않았어요.",

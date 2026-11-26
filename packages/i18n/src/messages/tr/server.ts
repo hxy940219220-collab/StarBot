@@ -9,7 +9,8 @@ export const messages = {
   "server.connection.waking": "{name} başlatılıyor",
   "server.connection.startProgress": "{step} · {time}",
   "server.connection.providerLimit":
-    "Bulut sağlayıcısı şu anda yeni başlatmaları sınırlıyor. OpenBot kısa süre içinde yeniden deneyecek.",
+    "Bulut sağlayıcısı şu anda yeni başlatmaları sınırlıyor. StarBot kısa süre içinde yeniden deneyecek.",
+
   "server.connection.updating": "{name} güncelleniyor",
   "server.connection.loading": "{name} yükleniyor",
   "server.connection.connecting": "{name} sunucusuna bağlanılıyor",
@@ -22,7 +23,8 @@ export const messages = {
   "server.connection.cachedHint":
     "Yüklenen içerik ve taslaklar korunur. Sunucu işlemleri yeniden bağlandıktan sonra devam eder.",
   "server.connection.computerOffline":
-    "{name} çevrimdışı. Bilgisayarının açık olduğundan, OpenBot'un açık olduğundan ve Sunucu ayarları > Üyeler bölümünde Bu sunucuyu yayımla seçeneğinin etkin olduğundan emin olun.",
+    "{name} çevrimdışı. Bilgisayarının açık olduğundan, StarBot'un açık olduğundan ve Sunucu ayarları > Üyeler bölümünde Bu sunucuyu yayımla seçeneğinin etkin olduğundan emin olun.",
+
   "server.connection.conversationFailed": "Konuşma yüklenemedi. Tekrar deneyin.",
   "server.connection.panelsFailed": "Bazı çalışma alanı panelleri yüklenemedi. Tekrar deneyin.",
   "server.connection.retry": "Tekrar dene",
@@ -31,13 +33,17 @@ export const messages = {
   "server.connection.details": "Ayrıntılar",
 
   "server.status.steps": "Bağlantı adımları",
-  "server.status.updateCause": "{name}, OpenBot {version} sürümünü yüklemek için yeniden başlıyor.",
-  "server.status.updateCauseNoVersion": "{name}, bir OpenBot güncellemesini yüklemek için yeniden başlıyor.",
-  "server.status.wakeCause": "{name} durdurulmuştu. OpenBot onu yeniden başlatıyor.",
+  "server.status.updateCause": "{name}, StarBot {version} sürümünü yüklemek için yeniden başlıyor.",
+
+  "server.status.updateCauseNoVersion": "{name}, bir StarBot güncellemesini yüklemek için yeniden başlıyor.",
+
+  "server.status.wakeCause": "{name} durdurulmuştu. StarBot onu yeniden başlatıyor.",
+
   "server.status.connectCause": "Bu uygulama {name} sunucusuna bağlanıyor.",
   "server.status.connectionCause": "Bu uygulamanın {name} ile bağlantısı kesildi. Otomatik olarak yeniden bağlanır.",
   "server.status.stepUpdate": "Güncellemeyi yükle",
-  "server.status.stepUpdateDetail": "OpenBot durur, güncellemeyi yükler ve yeniden başlar.",
+  "server.status.stepUpdateDetail": "StarBot durur, güncellemeyi yükler ve yeniden başlar.",
+
   "server.status.stepWake": "Sunucuyu başlat",
   "server.status.stepWakeDetail": "Bu birkaç dakika sürebilir.",
   "server.status.stepConnect": "Bağlan",
@@ -45,8 +51,10 @@ export const messages = {
   "server.status.stepLoad": "Çalışma alanını yükle",
   "server.status.stepLoadDetail": "Ajanlar ve sohbetler sunucudan yüklenir.",
   "server.status.elapsed": "Geçen süre: {time}",
-  "server.compatibility.updateClientTitle": "Bu OpenBot uygulamasını güncelleyin",
-  "server.compatibility.updateHostTitle": "{name} üzerindeki OpenBot'u güncelleyin",
+  "server.compatibility.updateClientTitle": "Bu StarBot uygulamasını güncelleyin",
+
+  "server.compatibility.updateHostTitle": "{name} üzerindeki StarBot'u güncelleyin",
+
   "server.compatibility.unsafeDataTitle": "Ana makine güvenli olmayan veri döndürdü",
   "server.compatibility.cannotConnectTitle": "{name} ile bağlantı kurulamıyor",
   "server.compatibility.safeModeTitle": "{name} başlamıyor",
@@ -55,7 +63,8 @@ export const messages = {
   "server.compatibility.updateHostDescription":
     "Ana makine yalnızca bu uygulamadan daha eski protokolleri destekliyor. Ana makineyi güncelleyin, ardından tekrar deneyin.",
   "server.compatibility.unsafeDataDescription":
-    "Bilinen bir veri yükü geçersiz olduğu için OpenBot bu bağlantıyı durdurdu. Geçerli çalışma alanı verileriniz değiştirilmedi.",
+    "Bilinen bir veri yükü geçersiz olduğu için StarBot bu bağlantıyı durdurdu. Geçerli çalışma alanı verileriniz değiştirilmedi.",
+
   "server.compatibility.clientVersion": "İstemci sürümü",
   "server.compatibility.hostVersion": "Ana makine sürümü",
   "server.compatibility.negotiatedProtocol": "Anlaşılan protokol",
@@ -82,9 +91,11 @@ export const messages = {
   "server.join.account": "Hesap",
   "server.join.emailBound": "Bu davet yalnızca e-posta alıcısı için geçerlidir.",
   "server.join.unknownDate": "Bilinmiyor",
-  "server.add.title": "OpenBot'u harici bir sunucuda 7/24 çalıştırın",
+  "server.add.title": "StarBot'u harici bir sunucuda 7/24 çalıştırın",
+
   "server.add.description":
-    "OpenBot Sunucuları, bilgisayarınız kapalıyken bile ajanlarınızı ve rutinlerinizi çalışır durumda tutar. Altyapı ve bakımla biz ilgileniriz; sunucunuz teknik bir kurulum gerektirmeden kullanıma hazır olur.",
+    "StarBot Sunucuları, bilgisayarınız kapalıyken bile ajanlarınızı ve rutinlerinizi çalışır durumda tutar. Altyapı ve bakımla biz ilgileniriz; sunucunuz teknik bir kurulum gerektirmeden kullanıma hazır olur.",
+
   "server.add.billing.label": "Faturalandırma dönemi",
   "server.add.currency.label": "Para birimi",
   "server.add.billing.monthly": "Aylık",
@@ -120,19 +131,23 @@ export const messages = {
   "server.local.creating": "Sunucu oluşturuluyor…",
   "server.local.createFailed": "Sunucu oluşturulamadı.",
   "server.local.createFailedRetry":
-    "Bir sorun oluştu. Tekrar deneyin. Yine başarısız olursa OpenBot'u yeniden başlatın.",
+    "Bir sorun oluştu. Tekrar deneyin. Yine başarısız olursa StarBot'u yeniden başlatın.",
+
   "server.local.limitReached":
     "Bu bilgisayarda en fazla {limit} sunucunuz olabilir. Yeni bir sunucu oluşturmak için birini silin.",
   "server.local.deleteConfirmTitle": "{name} silinsin mi?",
   "server.local.deleteConfirmDescription":
-    "OpenBot sunucuyu durdurur ve ajanlarını, sohbetlerini ve dosyalarını çöp kutusuna taşır.",
+    "StarBot sunucuyu durdurur ve ajanlarını, sohbetlerini ve dosyalarını çöp kutusuna taşır.",
+
   "server.local.deleting": "Sunucu siliniyor…",
   "server.local.deletedTitle": "{name} silindi",
   "server.install.title": "Başka bir bilgisayarda yeni sunucu",
   "server.install.description":
-    "Bu komutu size ait bir Linux bilgisayarda veya VPS'te çalıştırın. Komut OpenBot'u kurar ve sunucuyu bu hesaba ekler.",
+    "Bu komutu size ait bir Linux bilgisayarda veya VPS'te çalıştırın. Komut StarBot'u kurar ve sunucuyu bu hesaba ekler.",
+
   "server.install.making": "Bu hesap için komut oluşturuluyor…",
-  "server.install.failed": "OpenBot komut oluşturamadı. İnternet bağlantısını kontrol edin.",
+  "server.install.failed": "StarBot komut oluşturamadı. İnternet bağlantısını kontrol edin.",
+
   "server.install.copyForAgent": "Yapay zekâ ajanı için kopyala",
   "server.install.expiresIn": "Bir kez çalışır. {time} sonra sona erer.",
   "server.install.newCommand": "Yeni komut",
@@ -145,7 +160,8 @@ export const messages = {
     'OpenBot\'u bu Linux sunucuya kur ve OpenBot hesabımda oturum aç.\nBu komutu root olarak çalıştır. Soru sormaz ve birkaç dakika sürer:\n\n{command}\n\n"OpenBot is connected to your account." satırı ve 0 çıkış koduyla biter.\nKomut 15 dakika boyunca bir kez çalışır. Hiçbir yere kaydetme.',
   "server.install.setUpWithAgent": "Bir ajanla kur",
   "server.install.sshAgentPrompt":
-    "Linux sunucuma SSH ile bağlan ve OpenBot'u sunucu olarak oraya kur.\n\nSSH adresi (user@host):",
+    "Linux sunucuma SSH ile bağlan ve StarBot'u sunucu olarak oraya kur.\n\nSSH adresi (user@host):",
+
   "server.add.limit.title": "Bu hesap maksimum sunucu sayısına ulaştı",
   "server.add.limit.description": {
     one: "Bir hesap en fazla {count} ücretli sunucuya sahip olabilir. Sunucu eklemek için önce birini silin.",
@@ -165,15 +181,19 @@ export const messages = {
   "server.hosted.defaultName": "Bulut sunucusu",
   "server.hosted.defaultNameNumbered": "Bulut sunucusu {number}",
   "server.hosted.step.create": "Makineyi oluştur",
-  "server.hosted.step.start": "OpenBot'u başlat",
+  "server.hosted.step.start": "StarBot'u başlat",
+
   "server.hosted.step.connect": "Hesaba bağlan",
   "server.hosted.detail.create.reserve": "Özel bir makine ayrılıyor",
-  "server.hosted.detail.create.copy": "OpenBot makineye kopyalanıyor",
+  "server.hosted.detail.create.copy": "StarBot makineye kopyalanıyor",
+
   "server.hosted.detail.create.key": "Tek seferlik oturum açma anahtarı ekleniyor",
   "server.hosted.detail.start.boot": "Makine açılıyor",
   "server.hosted.detail.start.restore": "Veriler geri yükleniyor",
-  "server.hosted.detail.start.app": "OpenBot başlatılıyor",
-  "server.hosted.detail.start.wait": "OpenBot'un yanıt vermesi bekleniyor",
+  "server.hosted.detail.start.app": "StarBot başlatılıyor",
+
+  "server.hosted.detail.start.wait": "StarBot'un yanıt vermesi bekleniyor",
+
   "server.hosted.detail.connect.signIn": "Sizin adınıza oturum açılıyor",
   "server.hosted.detail.connect.publish": "Sunucu hesabınıza ekleniyor",
   "server.hosted.detail.connect.check": "Bağlantı kontrol ediliyor",
@@ -238,7 +258,8 @@ export const messages = {
   "server.plan.deletedOn": "{date} tarihinde silinecek",
   "server.plan.dialogTitle": "Ajanlarını kaybetme",
   "server.plan.dialogDescription":
-    "{name}, planı sona erdiği için durdu. OpenBot {date} tarihinde ajanlarını tüm sohbetleri ve dosyalarıyla birlikte siler.",
+    "{name}, planı sona erdiği için durdu. StarBot {date} tarihinde ajanlarını tüm sohbetleri ve dosyalarıyla birlikte siler.",
+
   "server.plan.dialogDaysLeft": {
     one: "{count} gün kaldı",
     other: "{count} gün kaldı",
@@ -273,13 +294,16 @@ export const messages = {
   "server.settings.identityLocalOnly":
     "Bu sunucunun adı ve logosu yalnızca onu çalıştıran bilgisayarda değiştirilebilir.",
   "server.settings.publicationLocalOnly": "Yayımlama durumunu yalnızca yerel sunucu değiştirebilir.",
-  "server.compatibility.versionMismatchTitle": "{name} üzerinde farklı OpenBot sürümleri",
+  "server.compatibility.versionMismatchTitle": "{name} üzerinde farklı StarBot sürümleri",
+
   "server.compatibility.versionMismatchDescription":
     "Bağlantı {protocol} protokolünü kullanıyor. Bazı yeni özellikler kullanılamayabilir. İstemci {clientVersion}; ana makine {hostVersion}.",
   "server.compatibility.versionMismatchUpdateHostDescription":
-    "Tüm özellikleri kullanmak için {name} üzerindeki OpenBot'u güncelleyin. Bağlantı {protocol} protokolünü kullanıyor. İstemci {clientVersion}; ana makine {hostVersion}.",
+    "Tüm özellikleri kullanmak için {name} üzerindeki StarBot'u güncelleyin. Bağlantı {protocol} protokolünü kullanıyor. İstemci {clientVersion}; ana makine {hostVersion}.",
+
   "server.compatibility.versionMismatchUpdateClientDescription":
-    "Tüm özellikleri kullanmak için bu OpenBot uygulamasını güncelleyin. Bağlantı {protocol} protokolünü kullanıyor. İstemci {clientVersion}; ana makine {hostVersion}.",
+    "Tüm özellikleri kullanmak için bu StarBot uygulamasını güncelleyin. Bağlantı {protocol} protokolünü kullanıyor. İstemci {clientVersion}; ana makine {hostVersion}.",
+
   "server.connection.failedTitle": "Bağlantı başarısız oldu",
   "server.connection.failedDescription":
     "Bu sunucuya bağlanılamadı. Ana makinenin çevrim içi olduğunu kontrol edip tekrar deneyin.",
@@ -297,9 +321,11 @@ export const messages = {
   "server.settings.desktopTitle": "Uzak masaüstü",
   "server.settings.desktopDescription": "Bu sunucunun masaüstünü yapılandırın veya masaüstüne bağlanın.",
   "server.settings.storageTitle": "Depolama",
-  "server.settings.storageDescription": "OpenBot'un bu sunucunun diskinde ne sakladığını ve boş alanı görün.",
+  "server.settings.storageDescription": "StarBot'un bu sunucunun diskinde ne sakladığını ve boş alanı görün.",
+
   "server.settings.hostedSitesTitle": "Siteler",
-  "server.settings.hostedSitesDescription": "Bu sunucudaki ajanların openbot.site üzerinde yayımladığı statik siteler.",
+  "server.settings.hostedSitesDescription": "Bu sunucudaki ajanların starbot.site üzerinde yayımladığı statik siteler.",
+
   "server.settings.importTitle": "İçe aktar",
   "server.settings.importDescription": "Ajanlarınızı Grok Bot'tan veya Hermes Agent'tan bu sunucuya taşıyın.",
   "server.settings.transferTitle": "Aktarım",
@@ -333,9 +359,11 @@ export const messages = {
   "server.settings.nameTooLong": "En fazla {limit} karakter kullanın.",
   "server.settings.actionFailedTitle": "Sunucu eylemi başarısız oldu",
   "server.settings.actionFailed": "Sunucu eylemi başarısız oldu.",
-  "server.settings.imageReadFailed": "OpenBot bu görseli okuyamadı.",
+  "server.settings.imageReadFailed": "StarBot bu görseli okuyamadı.",
+
   "server.settings.copyFailedTitle": "Kopyalama başarısız oldu",
-  "server.settings.copyFailed": "OpenBot bu değeri kopyalayamadı.",
+  "server.settings.copyFailed": "StarBot bu değeri kopyalayamadı.",
+
   "server.settings.unavailableTitle": "Sunucu ayarları kullanılamıyor",
   "server.settings.reset": "Sıfırla",
   "server.settings.unsavedChanges": "Kaydedilmemiş değişiklikler",
@@ -375,7 +403,8 @@ export const messages = {
   "server.settings.appearanceColorOption": "{color} sunucu rengi",
   "server.settings.appearanceReset": "Şekli ve rengi sıfırla",
   "server.settings.access": "Erişim",
-  "server.companySignIn.desktopOnly": "Çoklu oturum açmayı OpenBot masaüstü uygulamasında ayarlayın.",
+  "server.companySignIn.desktopOnly": "Çoklu oturum açmayı StarBot masaüstü uygulamasında ayarlayın.",
+
   "server.settings.publish": "Bu sunucuyu yayımla",
   "server.settings.published": "Sunucu yayımlandı",
   "server.settings.setUpDesktopTitle": "Uzak masaüstünü ayarlayın",
@@ -484,7 +513,8 @@ export const messages = {
   "server.settings.restartTitle": "Yeniden başlat",
   "server.settings.restarting": "Yeniden başlatılıyor…",
   "server.settings.restartedTitle": "{name} yeniden başlatılıyor",
-  "server.settings.restartHiddenDescription": "Sunucu geri geldiğinde OpenBot otomatik olarak yeniden bağlanır.",
+  "server.settings.restartHiddenDescription": "Sunucu geri geldiğinde StarBot otomatik olarak yeniden bağlanır.",
+
   "server.settings.restartHide": "Gizle",
   "server.settings.restartProgressTitle": "{name} yeniden başlatılıyor",
   "server.settings.restartProgressDescription":
@@ -549,7 +579,8 @@ export const messages = {
     other: "Bu sunucu {count} üye sınırına ulaştı. Yeni bir kişiyi davet etmek için bir üyeyi kaldırın.",
   },
   "server.invite.qrLabel": "Davet QR kodu",
-  "server.invite.qrDescription": "Bu sunucuya katılmak için bu kodu OpenBot Mobile uygulamasında tarayın.",
+  "server.invite.qrDescription": "Bu sunucuya katılmak için bu kodu StarBot Mobile uygulamasında tarayın.",
+
   "server.invite.accepted": "Davet kabul edildi",
   "server.invite.expired": "Davetin süresi doldu",
   "server.invite.sent": "Davet gönderildi",
@@ -557,7 +588,8 @@ export const messages = {
   "server.invite.acceptedDescription":
     "Üye bu sunucuya katıldı. Başka birini davet etmek için yeni bir bağlantı oluşturun.",
   "server.invite.expiredDescription": "Birini davet etmek için yeni bir bağlantı oluşturun.",
-  "server.invite.linkReadyDescription": "Bağlantıyı paylaşın veya QR kodunu OpenBot Mobile uygulamasında tarayın.",
+  "server.invite.linkReadyDescription": "Bağlantıyı paylaşın veya QR kodunu StarBot Mobile uygulamasında tarayın.",
+
   "server.invite.pendingTitle": "Bekleyen davetler",
   "server.invite.pendingCount": "{total} bekliyor",
   "server.invite.noPending": "Bekleyen davet yok.",
@@ -585,7 +617,8 @@ export const messages = {
   "server.desktop.connectionUnavailable": "Bağlantı kullanılamıyor",
   "server.desktop.hostOffline": "Ana makine çevrim dışı",
   "server.desktop.hostOfflineDescription": "Masaüstünü açmadan önce ana makineye yeniden bağlanın.",
-  "server.desktop.hostUpdateDescription": "Uzaktan kontrolü kullanmak için ana makinedeki OpenBot'u güncelleyin.",
+  "server.desktop.hostUpdateDescription": "Uzaktan kontrolü kullanmak için ana makinedeki StarBot'u güncelleyin.",
+
   "server.desktop.serviceAvailable": "Hizmet kullanılabilir",
   "server.desktop.serviceNotReady": "Hizmet hazır değil",
   "server.desktop.serviceNotReadyDescription":
@@ -599,7 +632,8 @@ export const messages = {
   "server.desktop.accessMembers": "Tüm üyeler",
   "server.desktop.askLabel": "Bu bilgisayarda sor",
   "server.desktop.askDescription":
-    "Her oturum, bu bilgisayarın başındaki bir kişi izin verene kadar bekler. 30 saniye içinde yanıt gelmezse OpenBot oturumu reddeder.",
+    "Her oturum, bu bilgisayarın başındaki bir kişi izin verene kadar bekler. 30 saniye içinde yanıt gelmezse StarBot oturumu reddeder.",
+
   "server.desktop.activeTitle": "Etkin uzak masaüstü oturumları: {active}",
   "server.desktop.activeDescription": "Her oturumu hemen sonlandırır. Üyeler yeniden isteyebilir.",
   "server.desktop.stopAll": "Tüm uzaktan kontrolü durdur",
@@ -611,9 +645,12 @@ export const messages = {
   "server.settings.providersSwitchNote": "Yapay zeka sağlayıcılarını yönetmek için {name} sunucusuna geçin.",
   "server.settings.providersSwitch": "Bu sunucuya geç",
   "server.settings.updatesTitle": "Güncellemeler",
-  "server.settings.updatesDescription": "Bu sunucuyu çalıştıran bilgisayardaki OpenBot'u güncelleyin.",
-  "server.update.hostTitle": "{name} üzerinde OpenBot",
-  "server.update.version": "OpenBot {version}",
+  "server.settings.updatesDescription": "Bu sunucuyu çalıştıran bilgisayardaki StarBot'u güncelleyin.",
+
+  "server.update.hostTitle": "{name} üzerinde StarBot",
+
+  "server.update.version": "StarBot {version}",
+
   "server.update.status.idle": "En son sürümü bulmak için güncellemeleri denetleyin.",
   "server.update.status.checking": "Güncellemeler denetleniyor…",
   "server.update.status.available": "{version} sürümü mevcut.",
@@ -621,28 +658,35 @@ export const messages = {
   "server.update.status.downloadingUnknown": "{version} indiriliyor…",
   "server.update.status.ready": "{version} indirildi.",
   "server.update.status.installing": "{name}, güncellemeyi yüklemek için yeniden başlatılıyor.",
-  "server.update.status.upToDate": "{name} üzerinde OpenBot güncel.",
+  "server.update.status.upToDate": "{name} üzerinde StarBot güncel.",
+
   "server.update.status.checkFailed": "{name} güncellemeleri denetleyemedi. Tekrar deneyin.",
   "server.update.status.downloadFailed": "{name} güncellemeyi indiremedi. Tekrar deneyin.",
   "server.update.status.installFailed":
-    "{name} güncellemeyi yükleyemedi. O bilgisayarın başka hiçbir kullanıcısının OpenBot çalıştırmadığından emin olun, ardından tekrar deneyin.",
+    "{name} güncellemeyi yükleyemedi. O bilgisayarın başka hiçbir kullanıcısının StarBot çalıştırmadığından emin olun, ardından tekrar deneyin.",
+
   "server.update.releaseCheckFailed":
     "{name} sürüm akışını okuyamadı. Ana makinenin ağ bağlantısını kontrol edin, ardından tekrar deneyin.",
   "server.update.releaseUnavailable":
     "Bu derleme için sürüm denetimleri kullanılamıyor. Ana makine yöneticisinden uyumlu bir sürümü kontrol etmesini isteyin.",
   "server.update.externalTitle": "Kurulumu ana makine yönetir",
   "server.update.path.hostManager":
-    "OpenBot Host Manager, tüm kullanıcılar boştayken güncellemeleri yükler. Bir güncelleme başlamazsa ana makine yöneticisinden Host Manager durumunu kontrol etmesini isteyin.",
+    "StarBot Host Manager, tüm kullanıcılar boştayken güncellemeleri yükler. Bir güncelleme başlamazsa ana makine yöneticisinden Host Manager durumunu kontrol etmesini isteyin.",
+
   "server.update.path.hosted":
     "Barındırılan hizmet güncellemeleri arka planda indirir. İndirilen bir güncelleme, sunucu bir sonraki başlatılışında başlar. Sunucuyu durdurup sürdürmeden önce etkin çalışmanın bitmesini bekleyin. Sunucu eski bir sürümde kalırsa ana makine yöneticisiyle iletişime geçin.",
   "server.update.path.system":
-    "En son sürümü yüklemek için ana makinede sudo openbot update komutunu çalıştırın. Bu komut OpenBot'u durdurur. Önce etkin çalışmanın bitmesini bekleyin. Otomatik indirmeler bir sonraki önyüklemede yüklenir.",
+    "En son sürümü yüklemek için ana makinede sudo openbot update komutunu çalıştırın. Bu komut StarBot'u durdurur. Önce etkin çalışmanın bitmesini bekleyin. Otomatik indirmeler bir sonraki önyüklemede yüklenir.",
+
   "server.update.path.container":
-    "Docker ana makinesinde yeni OpenBot görüntüsünü çekin ve kapsayıcıyı aynı veri birimleriyle yeniden oluşturun. Önce etkin çalışmanın bitmesini bekleyin. Verilerinizi korumak için mevcut birimleri saklayın.",
+    "Docker ana makinesinde yeni StarBot görüntüsünü çekin ve kapsayıcıyı aynı veri birimleriyle yeniden oluşturun. Önce etkin çalışmanın bitmesini bekleyin. Verilerinizi korumak için mevcut birimleri saklayın.",
+
   "server.update.path.manual":
-    "Bu kurulum kendini değiştiremez. Ana makine yöneticisinden uyumlu sürümü github.com/nightly-labs/openbot/releases adresinden yüklemesini isteyin. Mevcut OpenBot verilerini saklayın.",
+    "Bu kurulum kendini değiştiremez. Ana makine yöneticisinden uyumlu sürümü github.com/hxy940219220-collab/StarBot-Desktop/releases adresinden yüklemesini isteyin. Mevcut StarBot verilerini saklayın.",
+
   "server.update.path.unavailable":
-    "Bu bir geliştirme derlemesidir. Güncellemeleri denetlemek için yüklü bir OpenBot sürümü kullanın.",
+    "Bu bir geliştirme derlemesidir. Güncellemeleri denetlemek için yüklü bir StarBot sürümü kullanın.",
+
   "server.update.check": "Güncellemeleri denetle",
   "server.update.start": "Boşta olduğunda güncelle",
   "server.update.restartNow": "Şimdi yeniden başlat",
@@ -652,38 +696,49 @@ export const messages = {
   "server.update.requestedBy": "{member} bu güncellemeyi istedi.",
   "server.update.automatic": "{name} güncellemeleri otomatik olarak yükler.",
   "server.update.autoDownloadTitle": "Güncellemeleri otomatik olarak indir",
-  "server.update.autoDownloadDescription": "{name}, OpenBot'un her yeni sürümü çıktığında indirir.",
+  "server.update.autoDownloadDescription": "{name}, StarBot'un her yeni sürümü çıktığında indirir.",
+
   "server.update.autoInstallTitle": "Güncellemeleri otomatik olarak yükle",
   "server.update.autoInstallDescription":
     "{name}, ajanları boşta olduğunda indirilen güncellemeyle yeniden başlar. Üyelerin bağlantısı kısa bir süre için kesilir ve otomatik olarak tekrar bağlanır.",
   "server.update.waitingFor": "{reasons} bekleniyor.",
   "server.update.disabledTitle": "Uzaktan güncellemeler kapalı",
   "server.update.disabledDescription":
-    "{name} kullanıcısı sunucu üyelerinin güncelleme yapmasını kapattı. OpenBot uygulamasını güncellemesini veya o bilgisayarda Ayarlar > Güncellemeler bölümünü açıp “Sunucu üyelerinin güncelleme yapmasına izin ver” seçeneğini açmasını isteyin.",
-  "server.update.managedTitle": "Güncellemeleri OpenBot Host Manager yönetiyor",
+    "{name} kullanıcısı sunucu üyelerinin güncelleme yapmasını kapattı. StarBot uygulamasını güncellemesini veya o bilgisayarda Ayarlar > Güncellemeler bölümünü açıp “Sunucu üyelerinin güncelleme yapmasına izin ver” seçeneğini açmasını isteyin.",
+
+  "server.update.managedTitle": "Güncellemeleri StarBot Host Manager yönetiyor",
+
   "server.update.managedDescription":
-    "OpenBot Host Manager, {name} sunucusunu günceller. Ana makine yöneticisiyle iletişime geçin.",
+    "StarBot Host Manager, {name} sunucusunu günceller. Ana makine yöneticisiyle iletişime geçin.",
+
   "server.update.unsupportedTitle": "{name} kendini güncelleyemiyor",
   "server.update.unsupportedDescription":
-    "Bu OpenBot derlemesinde güncelleyici yok. {name} üzerine yeni bir sürüm yükleyin.",
+    "Bu StarBot derlemesinde güncelleyici yok. {name} üzerine yeni bir sürüm yükleyin.",
+
   "server.update.restarting": "Yeniden başlatılıyor…",
   "server.update.loadFailed": "{name} güncelleme durumu yüklenemedi.",
   "server.update.hostAction": "Ana makineyi güncelle",
-  "server.update.dialog.offerTitle": "{name} sunucusunu OpenBot {version} sürümüne güncelle",
+  "server.update.dialog.offerTitle": "{name} sunucusunu StarBot {version} sürümüne güncelle",
+
   "server.update.dialog.offerDescription":
-    "{name}, OpenBot {current} kullanıyor. Önce güncellemeyi indirir, ardından yeniden başlar.",
+    "{name}, StarBot {current} kullanıyor. Önce güncellemeyi indirir, ardından yeniden başlar.",
+
   "server.update.dialog.offerReadyDescription":
-    "{name}, OpenBot {current} kullanıyor. Güncelleme indirildi. {name}, güncellemeyi yüklemek için yeniden başlar.",
+    "{name}, StarBot {current} kullanıyor. Güncelleme indirildi. {name}, güncellemeyi yüklemek için yeniden başlar.",
+
   "server.update.dialog.progressTitle": "{name} güncelleniyor",
   "server.update.dialog.progressDescription": "{time} · Bu pencereyi gizleyebilirsiniz.",
-  "server.update.dialog.doneTitle": "{name}, OpenBot {version} sürümünde",
+  "server.update.dialog.doneTitle": "{name}, StarBot {version} sürümünde",
+
   "server.update.dialog.doneDescription": "Güncelleme {time} sürdü.",
   "server.update.dialog.failedTitle": "{name} güncellenmedi",
   "server.update.dialog.restartFailed":
     "{name} tekrar çevrim içi olmadı. Ana makineyi kontrol edin, ardından tekrar deneyin.",
-  "server.update.dialog.notInstalled": "{name}, OpenBot {current} ile yeniden başladı. Güncellemeyi tekrar deneyin.",
+  "server.update.dialog.notInstalled": "{name}, StarBot {current} ile yeniden başladı. Güncellemeyi tekrar deneyin.",
+
   "server.update.dialog.steps": "Güncelleme adımları",
-  "server.update.dialog.downloadStep": "OpenBot {version} sürümünü indir",
+  "server.update.dialog.downloadStep": "StarBot {version} sürümünü indir",
+
   "server.update.dialog.downloadPending": "İndirme sırasında ajanlar çalışmaya devam eder.",
   "server.update.dialog.downloadPreparing": "İndirme hazırlanıyor…",
   "server.update.dialog.downloadRunning": "{progress} · Ajanlar çalışmaya devam ediyor.",
@@ -692,10 +747,12 @@ export const messages = {
   "server.update.dialog.restartPending": "Üyelerin bağlantısı yaklaşık bir dakika kesilir.",
   "server.update.dialog.restartWaiting": "Bitmesi beklenen işler: {reasons}.",
   "server.update.dialog.restartSoon": "Yeniden başlatma birazdan başlıyor.",
-  "server.update.dialog.restartRunning": "OpenBot {version} başlatılıyor…",
+  "server.update.dialog.restartRunning": "StarBot {version} başlatılıyor…",
+
   "server.update.dialog.onlineStep": "Tekrar çevrim içi",
   "server.update.dialog.onlinePending": "Üyeler otomatik olarak tekrar bağlanır.",
-  "server.update.dialog.onlineDone": "{time} sonra OpenBot {version} sürümünde.",
+  "server.update.dialog.onlineDone": "{time} sonra StarBot {version} sürümünde.",
+
   "server.update.dialog.waitIdle": "Ajanlar boşta olana kadar bekle",
   "server.update.dialog.waitIdleDescription":
     "Yeniden başlatma, ajan turlarının ve rutin çalıştırmalarının bitmesini bekler.",
@@ -721,14 +778,18 @@ export const messages = {
   "server.update.reason.fileTransfer": "bir dosya aktarımı",
   "server.update.reason.browserControl": "bir ajan tarafından tarayıcı kontrolü",
   "server.update.reason.updateOperation": "başka bir güncelleme adımı",
-  "server.update.reason.initialization": "OpenBot'un başlatılması",
+  "server.update.reason.initialization": "StarBot'un başlatılması",
+
   "server.update.reason.other": "diğer çalışmalar",
   "server.restartNotice.waitingTitle": "{name}, bir güncellemeyi yüklemek için yeniden başlatılacak",
-  "server.restartNotice.waitingVersionTitle": "{name}, OpenBot {version} sürümünü yüklemek için yeniden başlatılacak",
+  "server.restartNotice.waitingVersionTitle": "{name}, StarBot {version} sürümünü yüklemek için yeniden başlatılacak",
+
   "server.restartNotice.waitingDescription":
-    "Yeniden başlatma, ajanları boşta kalana kadar bekler. Kısa bir süre için bağlantınız kesilir, ardından OpenBot otomatik olarak tekrar bağlanır.",
+    "Yeniden başlatma, ajanları boşta kalana kadar bekler. Kısa bir süre için bağlantınız kesilir, ardından StarBot otomatik olarak tekrar bağlanır.",
+
   "server.restartNotice.restartingTitle": "{name}, güncellemeyi yüklemek için yeniden başlatılıyor",
-  "server.restartNotice.restartingDescription": "{name} geri geldiğinde OpenBot otomatik olarak tekrar bağlanır.",
+  "server.restartNotice.restartingDescription": "{name} geri geldiğinde StarBot otomatik olarak tekrar bağlanır.",
+
   "server.restartNotice.backTitle": "{name} tekrar çevrim içi",
   "server.settings.personalityTitle": "Kişilik",
   "server.settings.personalityDescription": "Bu sunucudaki ajanların sizinle nasıl konuşacağını seçin.",
@@ -764,7 +825,8 @@ export const messages = {
   "server.ownerTransfer.incomingStays":
     "Sunucudaki sağlayıcı oturumları, kayıtlı anahtarlar, Vault girişleri, tarayıcı oturumları ve bağlı uygulamalar orada kalır ve bunları kullanabilirsiniz.",
   "server.ownerTransfer.incomingMachine":
-    "Sunucuyu çalıştıran bilgisayarda hâlâ oturum açabilen herkes OpenBot hesabınızı kullanabilir. O bilgisayarın parolalarını ve SSH anahtarlarını değiştirin.",
+    "Sunucuyu çalıştıran bilgisayarda hâlâ oturum açabilen herkes StarBot hesabınızı kullanabilir. O bilgisayarın parolalarını ve SSH anahtarlarını değiştirin.",
+
   "server.ownerTransfer.later": "Sonra",
   "server.ownerTransfer.decline": "Reddet",
   "server.ownerTransfer.accept": "Kabul et",

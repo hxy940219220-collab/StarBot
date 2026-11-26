@@ -138,7 +138,7 @@ deployment dependencies keep their existing order. Local commands do not change.
 times on GitHub before claiming a time reduction; parallel steps share the runner's resources.
 
 The `Provider CLI canary` workflow is not a pull request check. It runs every six hours on the newest
-upstream provider CLIs, which reach users without an OpenBot release; see
+upstream provider CLIs, which reach users without an StarBot release; see
 [Provider CLI updates](architecture/providers.md#provider-cli-updates).
 
 The `Provider live E2E` workflow is not a pull request check either. It runs only when somebody
@@ -278,7 +278,7 @@ files in worker threads, and a thread's `process.env` does not reach the native 
 start.
 
 A key in the developer's shell could otherwise let a fake-provider test reach a real provider, and
-every profile path (`~/OpenBot`, the app data directory) comes from `homedir()`, so a path bug could
+every profile path (`~/StarBot`, the app data directory) comes from `homedir()`, so a path bug could
 write into the developer's own conversations. A test that needs a token or a directory sets it
 itself.
 
@@ -396,11 +396,11 @@ baseline. Do not name the script `typecheck:*`:
 
 ### Agent context budget
 
-`bun run check:agent-context` holds the text that OpenBot adds to an agent's context to the byte
+`bun run check:agent-context` holds the text that StarBot adds to an agent's context to the byte
 counts in `tools/agent-context/budget.json`. It uses the same rules as the type debt ratchet
 (`scripts/debt-ratchet.ts`): more bytes fail, and fewer bytes fail until `--write` lowers the
 baseline. A raise is a hand edit that a reviewer sees. The fixture agent has no memories, teammates,
-skills, or connected vault, so the counts measure only OpenBot's own text:
+skills, or connected vault, so the counts measure only StarBot's own text:
 
 - `instructions.claude` and `instructions.codex`: `developerInstructions()` with the options of each
   provider.

@@ -6,7 +6,8 @@ export const messages = {
   "account.menu.sendFeedback": "Invia un feedback",
   "account.menu.signOut": "Esci",
   "account.menu.signingOut": "Uscita in corso…",
-  "account.menu.updateFailed": "Impossibile aggiornare OpenBot.",
+  "account.menu.updateFailed": "Impossibile aggiornare StarBot.",
+
   "account.menu.signOutFailed": "Impossibile uscire.",
   "account.usage.title": "Utilizzo",
   "account.usage.refresh": "Aggiorna",
@@ -59,17 +60,21 @@ export const messages = {
   "account.update.ready": "Aggiornamento pronto",
   "account.update.notInstalled": "Installazione fallita",
   "account.update.progress": "Avanzamento del download dell'aggiornamento",
-  "account.login.connectingTitle": "Connessione a OpenBot",
+  "account.login.connectingTitle": "Connessione a StarBot",
+
   "account.login.unavailableTitle": "Servizio non disponibile",
   "account.login.signedInTitle": "Hai effettuato l'accesso",
   "account.login.checkInboxTitle": "Controlla la posta",
-  "account.login.signInTitle": "Accedi a OpenBot",
+  "account.login.signInTitle": "Accedi a StarBot",
+
   "account.login.connectingDescription": "Avvio del servizio account. Di solito basta un attimo.",
-  "account.login.unavailableDescription": "Al momento OpenBot non riesce a raggiungere il servizio account.",
+  "account.login.unavailableDescription": "Al momento StarBot non riesce a raggiungere il servizio account.",
+
   "account.login.signInDescription":
     "Usa la tua email per accedere o creare un account. Ti invieremo un codice monouso.",
   "account.login.keyringChangedDescription":
-    "Il portachiavi di sistema ha perso il tuo ultimo accesso. Ora OpenBot conserva gli accessi in un proprio file su questo computer. Accedi ancora una volta.",
+    "Il portachiavi di sistema ha perso il tuo ultimo accesso. Ora StarBot conserva gli accessi in un proprio file su questo computer. Accedi ancora una volta.",
+
   "account.login.codeAccepted": "Il codice è stato accettato.",
   "account.login.codeSent": "Abbiamo inviato un codice a {email}.",
   "account.login.connectingSecurely": "Connessione sicura…",
@@ -82,15 +87,19 @@ export const messages = {
   "account.login.tryAgainIn": "Riprova tra {time}",
   "account.login.checkingDelivery": "Controllo della consegna…",
   "account.login.sendingCode": "Invio del codice…",
-  "account.login.localData": "Le tue chat e i tuoi file restano sul computer su cui gira OpenBot.",
+  "account.login.localData": "Le tue chat e i tuoi file restano sul computer su cui gira StarBot.",
+
   "account.login.sendFailed": "Qualcosa è andato storto durante l'invio del codice. Riprova.",
   "account.login.codeIncomplete": "Inserisci il codice completo di 8 caratteri.",
   "account.login.verifyFailed": "Qualcosa è andato storto durante la verifica del codice. Riprova.",
   "account.login.resendFailed": "Qualcosa è andato storto durante l'invio di un nuovo codice. Riprova.",
-  "account.login.stillUnreachable": "OpenBot non riesce ancora a raggiungere il servizio account.",
-  "account.login.resetFailed": "OpenBot non è riuscito a riavviare l'accesso. Riprova.",
+  "account.login.stillUnreachable": "StarBot non riesce ancora a raggiungere il servizio account.",
+
+  "account.login.resetFailed": "StarBot non è riuscito a riavviare l'accesso. Riprova.",
+
   "account.login.codeHint": "Inserisci tutti gli 8 caratteri per continuare.",
-  "account.login.verified": "Verificato. Apertura di OpenBot…",
+  "account.login.verified": "Verificato. Apertura di StarBot…",
+
   "account.login.developmentCode": "Codice di sviluppo: {code}",
   "account.login.sendNewCode": "Invia un nuovo codice",
   "account.login.sendNewCodeIn": "Invia un nuovo codice tra {time}",
@@ -98,7 +107,8 @@ export const messages = {
   "account.login.changeEmail": "Cambia email",
   "account.login.resend": "Reinvia codice",
   "account.login.resendIn": "Reinvia tra {time}",
-  "account.login.loadFailed": "OpenBot non è riuscito a caricare il servizio account.",
+  "account.login.loadFailed": "StarBot non è riuscito a caricare il servizio account.",
+
   "account.otp.incorrect": "Il codice non è corretto. Riprova.",
   "account.otp.verifying": "Verifica…",
   "account.otp.entry": "Inserimento del codice monouso",

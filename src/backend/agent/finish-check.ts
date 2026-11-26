@@ -3,7 +3,7 @@ import { Schema } from "effect";
 
 export const FINISH_CHECK_DEADLINE_MS = 30_000;
 
-const FINISH_CHECK_MARKER = "OpenBot finish check";
+const FINISH_CHECK_MARKER = "StarBot finish check";
 
 export const FINISH_CHECK_ABORT_POLL = "250 millis";
 
@@ -103,7 +103,7 @@ export function finishCheckPrompt(input: FinishCheckInput): string {
     ...(input.awaitsTeammate
       ? [
           "",
-          "The agent sent requests to teammate agents, and they still work on them. OpenBot gives each reply to the agent automatically, and the reply starts a new turn of the agent.",
+          "The agent sent requests to teammate agents, and they still work on them. StarBot gives each reply to the agent automatically, and the reply starts a new turn of the agent.",
         ]
       : []),
     "",

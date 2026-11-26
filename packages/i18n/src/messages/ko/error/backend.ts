@@ -3,7 +3,8 @@ import type { messages as source } from "../../en/error/backend";
 
 export const messages = {
   "error.backend.eventsUnavailable": "이 호스트에서는 이벤트를 사용할 수 없어요.",
-  "error.backend.databaseIntegrity": "OpenBot 데이터베이스가 무결성 검사에 실패했어요.",
+  "error.backend.databaseIntegrity": "StarBot 데이터베이스가 무결성 검사에 실패했어요.",
+
   "error.backend.webhookRouteLimit": "호스트 하나에는 웹훅 루틴을 최대 {limit}개까지 둘 수 있어요.",
   "error.backend.webhookSettingsInvalid": "웹훅 설정을 확인한 후 다시 시도해 주세요.",
   "error.backend.webhookSenderSecretInvalid":
@@ -18,8 +19,10 @@ export const messages = {
   "error.backend.browserViewLimit": "이 호스트에서 열린 브라우저 보기가 너무 많아요.",
   "error.backend.browserViewEnded": "이 페이지의 실시간 보기가 종료되었어요.",
   "error.backend.browserViewFailed": "이 페이지의 실시간 보기에 실패했어요.",
-  "error.backend.windowTemporarilyUnavailable": "OpenBot 창을 일시적으로 사용할 수 없어요.",
-  "error.backend.windowUnavailable": "OpenBot 창을 사용할 수 없어요.",
+  "error.backend.windowTemporarilyUnavailable": "StarBot 창을 일시적으로 사용할 수 없어요.",
+
+  "error.backend.windowUnavailable": "StarBot 창을 사용할 수 없어요.",
+
   "error.backend.sunshineApiHttp": "Sunshine API가 HTTP {status}(으)로 실패했어요.",
   "error.backend.sunshinePortsUnavailable": "원격 데스크톱용으로 사용 가능한 Sunshine 포트 그룹을 확보할 수 없었어요.",
   "error.backend.moonlightPortsUnavailable":
@@ -35,7 +38,8 @@ export const messages = {
   "error.backend.moonlightRejectedPairing": "Moonlight이 Sunshine 페어링을 거부했어요.",
   "error.backend.moonlightNoPin": "Moonlight이 페어링 PIN을 반환하지 않았어요.",
   "error.backend.moonlightPairingIncomplete": "Moonlight 페어링이 완료되지 않았어요.",
-  "error.backend.moonlightWebNotEmbedded": "Moonlight Web이 OpenBot 내장 빌드가 아니에요.",
+  "error.backend.moonlightWebNotEmbedded": "Moonlight Web이 StarBot 내장 빌드가 아니에요.",
+
   "error.backend.moonlightEmptyResponse": "Moonlight이 빈 응답을 반환했어요.",
   "error.backend.remoteDesktopTimeout": "원격 데스크톱 요청 시간이 초과되었어요.",
   "error.backend.moonlightApiHttp": "Moonlight API가 HTTP {status}(으)로 실패했어요.",
@@ -165,7 +169,8 @@ export const messages = {
   "error.backend.queueOrderStale": "대기열 순서가 오래되었어요. 대기열을 새로 고친 후 다시 시도해 주세요.",
   "error.backend.fileGone": "파일이 없거나 이미 삭제되었어요.",
   "error.backend.managedAttachmentChanged": "관리 중인 첨부 파일이 없거나 변경되었어요: {name}",
-  "error.backend.mailboxStateCorrupt": "메일함 상태가 손상되었거나 더 새로운 OpenBot 버전의 것이에요. 덮어쓰지 않아요.",
+  "error.backend.mailboxStateCorrupt": "메일함 상태가 손상되었거나 더 새로운 StarBot 버전의 것이에요. 덮어쓰지 않아요.",
+
   "error.backend.recipientDeleting": "받는 사람을 삭제하는 중이에요. 삭제가 끝난 후 다시 시도해 주세요.",
   "error.backend.recipientHidden": "이 에이전트는 숨겨져 있어요. 메시지를 보내려면 복원하세요.",
   "error.backend.agentIdUnknown":
@@ -373,7 +378,8 @@ export const messages = {
   "error.backend.uiBlockActionNotAllowed": "서버 소유자 또는 관리자만 이 작업을 선택할 수 있어요.",
   "error.backend.approvalInactive": "이 승인은 더 이상 활성 상태가 아니에요.",
   "error.backend.feedbackNeedsPhone":
-    "이 신고는 OpenBot 휴대폰 앱에서만 보낼 수 있어요. 휴대폰의 버전과 지원 로그를 추가하기 때문이에요. 휴대폰에서 이 채팅을 열어 주세요. 거기서도 이 메시지가 보이면 휴대폰 앱을 업데이트해 주세요.",
+    "이 신고는 StarBot 휴대폰 앱에서만 보낼 수 있어요. 휴대폰의 버전과 지원 로그를 추가하기 때문이에요. 휴대폰에서 이 채팅을 열어 주세요. 거기서도 이 메시지가 보이면 휴대폰 앱을 업데이트해 주세요.",
+
   "error.backend.takeoverInactive": "이 브라우저 제어권 가져오기는 더 이상 활성 상태가 아니에요.",
   "error.backend.authSubmitting": "인증을 이미 제출하는 중이에요.",
   "error.backend.apiKeyListFailed": "OpenBot이 저장된 API 키를 읽을 수 없었어요.",

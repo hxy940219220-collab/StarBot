@@ -1308,8 +1308,8 @@ function sharedOpenBotRuntimePaths(
   if (platform === "win32") return [];
   const runtimeBase =
     platform === "darwin"
-      ? posix.join(userHome, "Library", "Application Support", "OpenBot", "provider-runtimes")
-      : posix.join(userHome, ".config", "OpenBot", "provider-runtimes");
+      ? posix.join(userHome, "Library", "Application Support", "StarBot", "provider-runtimes")
+      : posix.join(userHome, ".config", "StarBot", "provider-runtimes");
   const targetDir = posix.join(runtimeBase, provider, `${platform}-${arch}`);
   let entries: string[];
   try {

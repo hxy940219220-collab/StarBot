@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { Schema } from "effect";
 import { loadSharedDevelopmentEnvironment } from "./development-environment";
 
-const SERVER_URL = "https://analytics.openbot.run/api/mcp";
+const SERVER_URL = "https://analytics.starbot.app/api/mcp";
 
 const McpParams = Schema.Record(Schema.String, Schema.Unknown);
 type McpParams = typeof McpParams.Type;

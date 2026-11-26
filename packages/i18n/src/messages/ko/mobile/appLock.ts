@@ -12,7 +12,8 @@ export const messages = {
     "PIN, {method} 또는 둘 다 켤 수 있어요. 켜면 OpenBot을 벗어날 때 잠기고, 돌아오면 둘 중 하나를 요청해요.",
   "mobile.appLock.methods.footerPinOnly": "PIN을 켜 보세요. 켜면 OpenBot을 벗어날 때 잠기고, 돌아오면 PIN을 요청해요.",
   "mobile.appLock.changePin": "PIN 변경",
-  "mobile.appLock.lockAfter.title": "OpenBot 잠금",
+  "mobile.appLock.lockAfter.title": "StarBot 잠금",
+
   "mobile.appLock.lockAfter.immediately": "즉시",
   "mobile.appLock.lockAfter.minutes": { other: "{count}분 후" },
   "mobile.appLock.lockAfter.hours": { other: "{count}시간 후" },
@@ -29,7 +30,8 @@ export const messages = {
   "mobile.appLock.lock.title": "OpenBot이 잠겨 있어요",
   "mobile.appLock.lock.confirmTitle": "본인 확인",
   "mobile.appLock.lock.enterPin": "PIN을 입력해 주세요",
-  "mobile.appLock.lock.unlockPrompt": "OpenBot 잠금 해제",
+  "mobile.appLock.lock.unlockPrompt": "StarBot 잠금 해제",
+
   "mobile.appLock.lock.useDevice": "{method} 사용",
   "mobile.appLock.lock.unlock": "잠금 해제",
   "mobile.appLock.lock.wrongPin": "PIN이 올바르지 않아요.",
@@ -43,7 +45,8 @@ export const messages = {
     other: "시도 횟수가 너무 많아요. {count}분 후에 다시 시도해 주세요.",
   },
   "mobile.appLock.lock.checkFailed": "PIN을 확인할 수 없어요. 다시 시도해 주세요.",
-  "mobile.appLock.lock.pinMissing": "이 휴대폰에는 OpenBot PIN이 없어요. 로그아웃해서 앱 잠금을 초기화해 주세요.",
+  "mobile.appLock.lock.pinMissing": "이 휴대폰에는 StarBot PIN이 없어요. 로그아웃해서 앱 잠금을 초기화해 주세요.",
+
   "mobile.appLock.lock.loadFailed": "앱 잠금 설정을 읽을 수 없어요.",
   "mobile.appLock.lock.retry": "다시 시도",
   "mobile.appLock.lock.forgotPin": "PIN을 잊으셨나요?",

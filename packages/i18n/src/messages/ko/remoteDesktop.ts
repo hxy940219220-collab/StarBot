@@ -80,7 +80,8 @@ export const messages = {
   "remoteDesktop.host.deny": "거부",
   "remoteDesktop.host.startedTitle": "원격 제어 시작됨",
   "remoteDesktop.host.startedBody": "{name}님이 지금 이 컴퓨터를 제어하고 있어요.",
-  "remoteDesktop.host.trayTooltip": "OpenBot: 원격 제어 중",
+  "remoteDesktop.host.trayTooltip": "StarBot: 원격 제어 중",
+
   "remoteDesktop.host.trayControlledBy": "{name}님이 이 컴퓨터를 제어하는 중",
   "remoteDesktop.host.stopAll": "모든 원격 제어 중지",
 } as const satisfies PartialTranslation<typeof source>;

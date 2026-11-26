@@ -79,7 +79,8 @@ export const messages = {
   "billing.license.description": "للعمل في شركة. لا يتضمن خادمًا.",
   "billing.license.loadFailed": "تعذّر تحميل الترخيص.",
   "billing.license.actionFailed": "تعذّر تغيير الترخيص.",
-  "billing.license.contactSales": "تواصل مع licenses@openbot.run لمزيد من المعلومات.",
+  "billing.license.contactSales": "تواصل مع licenses@starbot.app لمزيد من المعلومات.",
+
   "billing.license.saving": "جارٍ الحفظ…",
   "billing.license.personal.title": "استخدام شخصي",
   "billing.license.personal.description": "مجاني للاستخدام غير التجاري.",
@@ -89,7 +90,8 @@ export const messages = {
   "billing.license.buy": "شراء ترخيص",
   "billing.license.offer.title": "ترخيص تجاري",
   "billing.license.offer.description": "Starter لمستخدم واحد، أو Team لـ {count} مستخدمين أو أكثر.",
-  "billing.license.buy.description": "كم شخصًا يستخدم OpenBot في العمل؟ وكلاء الذكاء الاصطناعي ليسوا مستخدمين.",
+  "billing.license.buy.description": "كم شخصًا يستخدم StarBot في العمل؟ وكلاء الذكاء الاصطناعي ليسوا مستخدمين.",
+
   "billing.license.buy.confirm": "المتابعة إلى الدفع",
   "billing.license.trial.until": "مجاني حتى {date}",
   "billing.license.trial.confirm": "بدء التجربة المجانية",
@@ -166,9 +168,11 @@ export const messages = {
   "billing.order.yearly": "سنوي",
   "billing.order.yearlySaving": "خصم {percent}% سنويًا",
   "billing.order.server.title": "خادم مستضاف",
-  "billing.order.server.summary": "نشغّل OpenBot لفريقك.",
+  "billing.order.server.summary": "نشغّل StarBot لفريقك.",
+
   "billing.order.server.none": "بلا خادم",
-  "billing.order.server.noneDetail": "شغّل OpenBot على حاسوبك",
+  "billing.order.server.noneDetail": "شغّل StarBot على حاسوبك",
+
   "billing.order.server.thisComputer": "حاسوبك",
   "billing.order.server.bestValue": "أفضل قيمة",
   "billing.order.server.bestFor.starter": "الأفضل لشخص واحد",
@@ -177,7 +181,8 @@ export const messages = {
   "billing.order.server.storage": "مساحة تخزين {size} GB",
   "billing.order.server.speed": "سرعة {speed}×",
   "billing.order.license.title": "الترخيص",
-  "billing.order.license.summary": "لاستخدام OpenBot في العمل.",
+  "billing.order.license.summary": "لاستخدام StarBot في العمل.",
+
   "billing.order.license.none": "بلا ترخيص",
   "billing.order.license.noneDetail": "استخدام شخصي وغير تجاري",
   "billing.order.license.starter": "ترخيص Starter",

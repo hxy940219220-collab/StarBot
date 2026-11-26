@@ -11,18 +11,25 @@ export const messages = {
   "menu.closeDeveloperTools": "デベロッパー ツールを閉じる",
   "menu.copyLink": "リンクをコピー",
   "menu.copyImage": "画像をコピー",
-  "menu.quit": "OpenBot を終了",
-  "menu.quitConfirmTitle": "OpenBot を終了しますか？",
-  "menu.quitConfirmBody": "OpenBot を再び開くまで、エージェントとルーティンは停止します。",
+  "menu.quit": "StarBot を終了",
+
+  "menu.quitConfirmTitle": "StarBot を終了しますか？",
+
+  "menu.quitConfirmBody": "StarBot を再び開くまで、エージェントとルーティンは停止します。",
+
   "menu.quitConfirm": "終了",
   "menu.quitHint": "終了するには ⌘Q を長押しするか、2 回押します",
   "menu.closeWorkingTitle": { other: "{count} 個のエージェントがまだ作業中です" },
   "menu.closeWorkingBody":
-    "OpenBot を終了すると、エージェントは止まります。終わるまで OpenBot を実行したままにしてください。ウィンドウをもう一度表示するには、OpenBot を開きます。",
+    "StarBot を終了すると、エージェントは止まります。終わるまで StarBot を実行したままにしてください。ウィンドウをもう一度表示するには、StarBot を開きます。",
+
   "menu.closeKeepRunning": "実行を続ける",
-  "menu.trayOpen": "OpenBot を開く",
-  "menu.trayQuit": "OpenBot を終了",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "StarBot を開く",
+
+  "menu.trayQuit": "StarBot を終了",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Dynamic Island を隠す",
   "menu.undo": "取り消す",
   "menu.redo": "やり直す",

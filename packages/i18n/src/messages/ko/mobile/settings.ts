@@ -22,7 +22,8 @@ export const messages = {
   "mobile.settings.about.privacy": "개인정보 처리방침",
   "mobile.settings.home.profile": "프로필",
   "mobile.settings.home.preferences": "환경설정",
-  "mobile.settings.home.about": "OpenBot 정보",
+  "mobile.settings.home.about": "StarBot 정보",
+
   "mobile.settings.home.support": "지원",
   "mobile.settings.home.supportHint": "도움을 받고 지원 로그를 저장해요",
   "mobile.settings.home.account": "계정",
@@ -204,21 +205,26 @@ export const messages = {
     "에이전트가 작업을 마치거나, 오류로 멈추거나, 입력·승인·브라우저 단계가 필요할 때 알려 줘요. 여기나 데스크톱 앱에서 OpenBot을 사용 중일 때는 알림이 오지 않아요. 실시간 현황이 표시되는 동안에는 알림 대신 실시간 현황에 이벤트가 표시돼요.",
   "mobile.settings.notifications.footerAndroid":
     "에이전트가 작업을 마치거나, 오류로 멈추거나, 입력·승인·브라우저 단계가 필요할 때 알려 줘요. 여기나 데스크톱 앱에서 OpenBot을 사용 중일 때는 알림이 오지 않아요.",
-  "mobile.settings.notifications.denied": "iOS 설정에서 OpenBot 알림이 꺼져 있어요.",
-  "mobile.settings.notifications.deniedAndroid": "Android 설정에서 OpenBot 알림이 꺼져 있어요.",
+  "mobile.settings.notifications.denied": "iOS 설정에서 StarBot 알림이 꺼져 있어요.",
+
+  "mobile.settings.notifications.deniedAndroid": "Android 설정에서 StarBot 알림이 꺼져 있어요.",
+
   "mobile.settings.notifications.openSettings": "iOS 설정 열기",
   "mobile.settings.notifications.openSettingsAndroid": "Android 설정 열기",
   "mobile.settings.notifications.preview": "답변 미리보기 표시",
   "mobile.settings.notifications.previewFooter":
-    "답변의 시작 부분, 질문, 승인할 작업을 표시해요. Apple과 OpenBot 계정 서비스는 이 내용을 읽을 수 없어요.",
+    "답변의 시작 부분, 질문, 승인할 작업을 표시해요. Apple과 StarBot 계정 서비스는 이 내용을 읽을 수 없어요.",
+
   "mobile.settings.notifications.previewFooterAndroid":
-    "답변의 시작 부분, 질문, 승인할 작업을 표시해요. Google과 OpenBot 계정 서비스는 이 내용을 읽을 수 없어요.",
+    "답변의 시작 부분, 질문, 승인할 작업을 표시해요. Google과 StarBot 계정 서비스는 이 내용을 읽을 수 없어요.",
+
   "mobile.settings.notifications.threadReplies": "스레드 답변",
   "mobile.settings.notifications.threadRepliesFooter":
     "스레드 답변을 켜면 에이전트가 스레드에서 작업을 마치거나 오류로 멈출 때 알려 줘요. 꺼도 스레드에서 입력이나 승인이 필요할 때는 알려 줘요.",
   "mobile.settings.notifications.sound": "소리",
   "mobile.settings.notifications.playSound": "소리 재생",
-  "mobile.settings.notifications.sound.openbot": "OpenBot",
+  "mobile.settings.notifications.sound.openbot": "StarBot",
+
   "mobile.settings.notifications.sound.warm": "따뜻한 소리",
   "mobile.settings.notifications.sound.mech": "기계음",
   "mobile.settings.notifications.sound.bubble": "뽀글뽀글",
@@ -226,9 +232,11 @@ export const messages = {
   "mobile.settings.notifications.sound.default": "iOS 기본값",
   "mobile.settings.notifications.sound.defaultAndroid": "Android 기본값",
   "mobile.settings.notifications.soundFooter":
-    "알림과 실시간 현황이 이 소리를 재생해요. 실시간 현황은 화면도 켜요. OpenBot 소리는 작업이 끝났을 때 데스크톱 앱이 재생하는 소리예요. 그 뒤의 네 가지 소리는 데스크톱 소리 테마의 소리예요.",
+    "알림과 실시간 현황이 이 소리를 재생해요. 실시간 현황은 화면도 켜요. StarBot 소리는 작업이 끝났을 때 데스크톱 앱이 재생하는 소리예요. 그 뒤의 네 가지 소리는 데스크톱 소리 테마의 소리예요.",
+
   "mobile.settings.notifications.soundFooterAndroid":
-    "알림이 이 소리를 재생해요. OpenBot 소리는 작업이 끝났을 때 데스크톱 앱이 재생하는 소리예요. 그 뒤의 네 가지 소리는 데스크톱 소리 테마의 소리예요.",
+    "알림이 이 소리를 재생해요. StarBot 소리는 작업이 끝났을 때 데스크톱 앱이 재생하는 소리예요. 그 뒤의 네 가지 소리는 데스크톱 소리 테마의 소리예요.",
+
   "mobile.settings.notifications.level.all": "모든 활동",
   "mobile.settings.notifications.level.needsMe": "내 입력이 필요할 때만",
   "mobile.settings.notifications.level.nothing": "없음",
@@ -266,7 +274,8 @@ export const messages = {
   "mobile.settings.notifications.channelSilent": "에이전트 알림 (소리 없음)",
   "mobile.settings.privacy.title": "개인정보 보호",
   "mobile.settings.privacy.footer":
-    "이 휴대전화의 기능 사용 현황과 연결 결과는 항상 OpenBot 분석 서비스로 전송돼요. 켜짐: 계정 ID 및 이메일과 함께. 꺼짐: 임의의 설치 ID만 함께. 메시지 내용과 파일은 전송하지 않아요.",
+    "이 휴대전화의 기능 사용 현황과 연결 결과는 항상 StarBot 분석 서비스로 전송돼요. 켜짐: 계정 ID 및 이메일과 함께. 꺼짐: 임의의 설치 ID만 함께. 메시지 내용과 파일은 전송하지 않아요.",
+
   "mobile.settings.privacy.analytics": "분석 데이터를 내 계정에 연결",
   "mobile.settings.privacy.retry": "개인정보 설정 다시 저장",
   "mobile.settings.conversations.title": "대화",
@@ -518,7 +527,8 @@ export const messages = {
     "새 메시지가 대기열이 아니라 에이전트의 현재 작업에 반영돼요. 지원하지 않는 에이전트에서는 대기열에서 기다려요.",
   "mobile.settings.agents.planCardFooter": "긴 작업 전에 에이전트가 계획을 보여줘요.",
   "mobile.settings.agents.commitSection": "Git 커밋",
-  "mobile.settings.agents.commitCoAuthor": "커밋에 OpenBot 표시",
+  "mobile.settings.agents.commitCoAuthor": "커밋에 StarBot 표시",
+
   "mobile.settings.agents.commitCoAuthorFooter":
     "에이전트가 만든 커밋에 OpenBot을 공동 작성자로 추가해요. 커밋 작성자는 바뀌지 않아요.",
   "mobile.settings.agents.planStart.title": "작업 시작",
@@ -548,7 +558,8 @@ export const messages = {
   "mobile.settings.agents.processes.stopLabel": "프로세스 {pid} 중지",
   "mobile.settings.quickActions.title": "앱 아이콘 메뉴",
   "mobile.settings.quickActions.footer":
-    "OpenBot 아이콘을 길게 누르면 이 동작이 표시됩니다. 최대 {count}개까지 켤 수 있습니다.",
+    "StarBot 아이콘을 길게 누르면 이 동작이 표시됩니다. 최대 {count}개까지 켤 수 있습니다.",
+
   "mobile.settings.quickActions.latestChat": "최근 채팅",
   "mobile.settings.quickActions.secondChat": "두 번째 최근 채팅",
   "mobile.settings.shortcuts.title": "단축어",
@@ -558,12 +569,14 @@ export const messages = {
   "mobile.settings.shortcuts.card.agents": "에이전트",
   "mobile.settings.shortcuts.card.noAgents": "아직 에이전트가 없습니다",
   "mobile.settings.shortcuts.card.setUp.title": "단축어를 설정하려면 OpenBot을 여세요",
-  "mobile.settings.shortcuts.card.setUp.action": "OpenBot 열기",
+  "mobile.settings.shortcuts.card.setUp.action": "StarBot 열기",
+
   "mobile.settings.shortcuts.card.noAgent.title": "단축어에 사용할 에이전트를 선택하세요",
   "mobile.settings.shortcuts.card.noAgent.detail": "단축어는 에이전트 하나에게 보냅니다.",
   "mobile.settings.shortcuts.card.noAgent.action": "에이전트 선택",
   "mobile.settings.shortcuts.card.locked.title": "OpenBot이 잠겨 있습니다",
-  "mobile.settings.shortcuts.card.locked.action": "OpenBot 열기",
+  "mobile.settings.shortcuts.card.locked.action": "StarBot 열기",
+
   "mobile.settings.shortcuts.card.message": "{name}에게 메시지 보내기",
   "mobile.settings.shortcuts.card.messagePrompt": "{name}에게 보낼 메시지",
   "mobile.settings.shortcuts.footer":
@@ -576,14 +589,16 @@ export const messages = {
   "mobile.settings.invite.title": "친구 초대",
   "mobile.settings.invite.heading": "티켓 한 장, 친구 한 명.",
   "mobile.settings.invite.subtitle": "점선을 따라 쿠폰을 뜯어 초대를 공유하세요.",
-  "mobile.settings.invite.pass": "OpenBot · 게스트 패스",
+  "mobile.settings.invite.pass": "StarBot · 게스트 패스",
+
   "mobile.settings.invite.from": "{name} 님이 보냄",
   "mobile.settings.invite.headline": "나만의\nAI 에이전트",
   "mobile.settings.invite.perk.friendLabel": "친구",
   "mobile.settings.invite.perk.youLabel": "나",
   "mobile.settings.invite.perk.friendValue": "{percent} 할인",
   "mobile.settings.invite.perk.youValue": "{percent} 크레딧",
-  "mobile.settings.invite.perk.friendDetail": "친구의 OpenBot 요금제에 적용",
+  "mobile.settings.invite.perk.friendDetail": "친구의 StarBot 요금제에 적용",
+
   "mobile.settings.invite.perk.youDetail": "친구가 결제할 때마다, 내 청구서의 크레딧으로",
   "mobile.settings.invite.admit": "친구 1명 입장",
   "mobile.settings.invite.tearHint": "점선을 따라 뜯기",

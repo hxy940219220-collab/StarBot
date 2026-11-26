@@ -45,7 +45,7 @@ async function accountServiceFetch(input: string | URL | Request, init?: Request
 export function centralAuthApiUrl(): string {
   return readCentralAuthApiUrl(
     process.env.OPENBOT_AUTH_API_URL,
-    app.isPackaged ? "https://api.openbot.run" : "http://127.0.0.1:3100",
+    app.isPackaged ? "https://api.starbot.app" : "http://127.0.0.1:3100",
   );
 }
 

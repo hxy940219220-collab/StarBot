@@ -2,35 +2,47 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/onboarding";
 
 export const messages = {
-  "onboarding.readFailed.title": "OpenBot kurulumunuzu okuyamadı.",
+  "onboarding.readFailed.title": "StarBot kurulumunuzu okuyamadı.",
+
   "onboarding.readFailed.description":
-    "Yerel verileriniz değişmedi. Yeniden deneyin. Sorun devam ederse OpenBot'u yeniden kurun.",
+    "Yerel verileriniz değişmedi. Yeniden deneyin. Sorun devam ederse StarBot'u yeniden kurun.",
+
   "onboarding.readFailed.setUpAgain": "Yeniden kur",
-  "onboarding.setup.saveFailed": "OpenBot yerel kurulumunuzu kaydedemedi.",
-  "onboarding.setup.verifyFailed": "OpenBot bu daveti doğrulayamadı.",
-  "onboarding.setup.connectFailed": "OpenBot bu ana makineye bağlanamadı.",
+  "onboarding.setup.saveFailed": "StarBot yerel kurulumunuzu kaydedemedi.",
+
+  "onboarding.setup.verifyFailed": "StarBot bu daveti doğrulayamadı.",
+
+  "onboarding.setup.connectFailed": "StarBot bu ana makineye bağlanamadı.",
+
   "onboarding.setup.localTitle": "Bu bilgisayarı ayarla",
   "onboarding.setup.remoteTitle": "Bir ana makineye bağlan",
-  "onboarding.setup.title": "OpenBot nerede çalışacak?",
+  "onboarding.setup.title": "StarBot nerede çalışacak?",
+
   "onboarding.setup.localDescription": "Ajanlar, konuşmalar ve dosyalar bu bilgisayarda kalır.",
-  "onboarding.setup.remoteDescription": "OpenBot ana makinenizi çalıştıran kişiden gelen daveti kullanın.",
+  "onboarding.setup.remoteDescription": "StarBot ana makinenizi çalıştıran kişiden gelen daveti kullanın.",
+
   "onboarding.setup.description":
-    "Bu bilgisayarı kullanın veya başka bir yerde çalışan bir OpenBot ana makinesine bağlanın.",
+    "Bu bilgisayarı kullanın veya başka bir yerde çalışan bir StarBot ana makinesine bağlanın.",
+
   "onboarding.setup.back": "Bağlantı seçimine geri dön",
   "onboarding.setup.signOut": "Oturumu kapat",
-  "onboarding.setup.eyebrow": "OpenBot kurulumu",
+  "onboarding.setup.eyebrow": "StarBot kurulumu",
+
   "onboarding.setup.connectionType": "Bağlantı türü",
   "onboarding.setup.localIcon": "Yerel bilgisayar",
   "onboarding.setup.localRoute": "Bu bilgisayarı kullan",
   "onboarding.setup.localRouteDetail":
-    "{providers} sağlayıcılarını yerel olarak çalıştırın. Tüm OpenBot verilerini burada tutun.",
+    "{providers} sağlayıcılarını yerel olarak çalıştırın. Tüm StarBot verilerini burada tutun.",
+
   "onboarding.setup.remoteIcon": "Uzak ana makine",
-  "onboarding.setup.remoteRouteDetail": "Mevcut bir OpenBot ana makinesindeki ajanları ve konuşmaları kullanın.",
+  "onboarding.setup.remoteRouteDetail": "Mevcut bir StarBot ana makinesindeki ajanları ve konuşmaları kullanın.",
+
   "onboarding.setup.defaultProvider": "Varsayılan sağlayıcı",
   "onboarding.setup.defaultProviderHint":
     "Yeni yerel ajanlar için kullanılır. Daha sonra her ajan için değiştirebilirsiniz.",
   "onboarding.setup.invitation": "Ana makine daveti",
-  "onboarding.setup.invitationPlaceholder": "Bir https://openbot.run/join davet bağlantısı yapıştırın",
+  "onboarding.setup.invitationPlaceholder": "Bir https://starbot.app/join davet bağlantısı yapıştırın",
+
   "onboarding.setup.otherInvitation": "Başka bir davet kullan",
   "onboarding.setup.joinNote":
     "{email} olarak katılacaksınız. E-posta davetleri yalnızca onları alan adres için çalışır.",
@@ -71,50 +83,66 @@ export const messages = {
   "onboarding.next.notDownloaded": "Devam etmek için {provider} sağlayıcısını indirin.",
   "onboarding.next.connecting": "{provider} bağlanıyor.",
   "onboarding.next.connect": "Devam etmek için {provider} sağlayıcısını bağlayın.",
-  "onboarding.error.installGuide": "OpenBot, {provider} için kurulum kılavuzunu açamadı.",
-  "onboarding.error.signInGuide": "OpenBot, {provider} için oturum açma kılavuzunu açamadı.",
-  "onboarding.error.connect": "OpenBot, {provider} sağlayıcısına bağlanamadı. Tekrar deneyin.",
-  "onboarding.error.download": "OpenBot, {provider} sağlayıcısını indiremedi. Tekrar deneyin.",
-  "onboarding.error.cancelDownload": "OpenBot, {provider} indirmesini iptal edemedi. Tekrar deneyin.",
-  "onboarding.error.refresh": "OpenBot, yerel yapay zeka sağlayıcılarınızı yenileyemedi. Tekrar deneyin.",
-  "onboarding.error.finish": "OpenBot kurulumu tamamlayamadı.",
+  "onboarding.error.installGuide": "StarBot, {provider} için kurulum kılavuzunu açamadı.",
+
+  "onboarding.error.signInGuide": "StarBot, {provider} için oturum açma kılavuzunu açamadı.",
+
+  "onboarding.error.connect": "StarBot, {provider} sağlayıcısına bağlanamadı. Tekrar deneyin.",
+
+  "onboarding.error.download": "StarBot, {provider} sağlayıcısını indiremedi. Tekrar deneyin.",
+
+  "onboarding.error.cancelDownload": "StarBot, {provider} indirmesini iptal edemedi. Tekrar deneyin.",
+
+  "onboarding.error.refresh": "StarBot, yerel yapay zeka sağlayıcılarınızı yenileyemedi. Tekrar deneyin.",
+
+  "onboarding.error.finish": "StarBot kurulumu tamamlayamadı.",
+
   "onboarding.toast.connecting": "{provider} bağlanıyor. Bir tarayıcı penceresi açılırsa oturum açmayı tamamlayın.",
   "onboarding.progress": "Katılım adımı {step} / {total}",
   "onboarding.choice.title": "Yapay zeka ekibinizi kurun.",
-  "onboarding.choice.description": "OpenBot kişisel kullanım için ücretsizdir. Ajanlarınız için yapay zekâyı seçin.",
+  "onboarding.choice.description": "StarBot kişisel kullanım için ücretsizdir. Ajanlarınız için yapay zekâyı seçin.",
+
   "onboarding.choice.startFree": "Ücretsiz modelleri kullan",
   "onboarding.choice.freeDetail": "Yapay zekâ aboneliği gerekmez.",
   "onboarding.choice.subscription": "Yapay zekâ aboneliğimi kullan",
   "onboarding.choice.subscriptionDetail": "ChatGPT, Claude veya Grok",
   "onboarding.choice.startFreeInstead": "Bunun yerine ücretsiz modeller",
   "onboarding.existing.title": "Tekrar hoş geldiniz.",
-  "onboarding.existing.description": "Hesabınız zaten OpenBot kullanıyor. Burada devam etmek için bir sunucu açın.",
+  "onboarding.existing.description": "Hesabınız zaten StarBot kullanıyor. Burada devam etmek için bir sunucu açın.",
+
   "onboarding.existing.open": "{name} sunucusunu aç",
   "onboarding.existing.openDetail": "Ajanlarını ve sohbetlerini burada açar.",
   "onboarding.existing.offlineDetail": "Şu anda çevrimdışı. Açıldığında açılır.",
   "onboarding.existing.startNew": "Bu bilgisayarda yeniden başla",
   "onboarding.existing.startNewDetail":
     "Burada yeni bir ekip oluşturun. Sunucularınız ajanlarını ve sohbetlerini korur.",
-  "onboarding.existing.openFailed": "OpenBot, {name} sunucusunu açamadı.",
+  "onboarding.existing.openFailed": "StarBot, {name} sunucusunu açamadı.",
+
   "onboarding.consent.notice": "Devam ederek {terms}’nı kabul etmiş ve {privacy}’nı okumuş olursunuz.",
-  "onboarding.consent.analyticsTitle": "OpenBot'u geliştirmemize yardım edin",
+  "onboarding.consent.analyticsTitle": "StarBot'u geliştirmemize yardım edin",
+
   "onboarding.consent.analyticsDetail": "Kullanımı hesabınızla paylaşın. Sohbetler ve dosyalar asla.",
   "onboarding.consent.thanksTitle": "Teşekkürler! Ekip size bir iyilik borçlu.",
-  "onboarding.consent.thanksToast": "OpenBot'u geliştirmemize yardım ettiğiniz için teşekkürler 💜",
+  "onboarding.consent.thanksToast": "StarBot'u geliştirmemize yardım ettiğiniz için teşekkürler 💜",
+
   "onboarding.consent.thanksToastDetail": "Bunu istediğiniz zaman Ayarlar'dan değiştirebilirsiniz.",
   "onboarding.consent.termsLink": "Hizmet Şartları",
   "onboarding.consent.privacyLink": "Gizlilik Politikası",
   "onboarding.plan.title": "Planınızı bağlayın",
   "onboarding.plan.description": "Bir kez oturum açın. Ajanlarınız planınızı kullanır.",
-  "onboarding.computer.title": "OpenBot bilgisayarınızı kontrol edebilir",
-  "onboarding.opening": "OpenBot açılıyor…",
+  "onboarding.computer.title": "StarBot bilgisayarınızı kontrol edebilir",
+
+  "onboarding.opening": "StarBot açılıyor…",
+
   "onboarding.launch.downloading": "Ücretsiz modeller indiriliyor…",
   "onboarding.action.connect": "Bağlan",
-  "onboarding.action.open": "OpenBot'u aç",
+  "onboarding.action.open": "StarBot'u aç",
+
   "onboarding.action.next": "İleri",
   "onboarding.server.title": "{server} sunucusuna hoş geldiniz",
   "onboarding.server.description":
-    "OpenBot bir yapay zeka aboneliği içermez. Bir ajan oluşturmadan önce kendi sağlayıcınızı bu sunucuya bağlayın.",
+    "StarBot bir yapay zeka aboneliği içermez. Bir ajan oluşturmadan önce kendi sağlayıcınızı bu sunucuya bağlayın.",
+
   "onboarding.server.label": "Bu sunucunun yapay zeka sağlayıcısını seçin",
   "onboarding.server.hint": "Oturum bilgileri sunucuda kalır. Her ajanın sağlayıcısını daha sonra değiştirebilirsiniz.",
   "onboarding.server.continue": "Devam et",

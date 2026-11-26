@@ -337,8 +337,8 @@ describe("OpenBotDatabase", () => {
       details: {
         siteId: "site-1",
         title: "Launch page",
-        hostname: "launch-page-23456789ab.openbot.site",
-        url: "https://launch-page-23456789ab.openbot.site",
+        hostname: "launch-page-23456789ab.starbot.site",
+        url: "https://launch-page-23456789ab.starbot.site",
       },
       markerCommandId: "hosted-site-event:chief:operation-1:succeeded",
       createdAt: "2026-09-01T12:00:00.000Z",
@@ -393,8 +393,8 @@ describe("OpenBotDatabase", () => {
     const details = {
       siteId: "site-1",
       title: "Launch page",
-      hostname: "launch-page-23456789ab.openbot.site",
-      url: "https://launch-page-23456789ab.openbot.site",
+      hostname: "launch-page-23456789ab.starbot.site",
+      url: "https://launch-page-23456789ab.starbot.site",
     };
     const recordActive = (operationId: string, createdAt: string) => {
       database.recordActiveHostedSiteConversationEvent({
@@ -2313,8 +2313,8 @@ describe("OpenBotDatabase", () => {
 
     const legacyId = "bot-2f1c9a44-1d2e-4a7b-9c30-5e6f7a8b9c0d";
     const agentId = "agent-2f1c9a44-1d2e-4a7b-9c30-5e6f7a8b9c0d";
-    const legacyWorkspace = `/Users/dev/OpenBot/Agents/${legacyId}`;
-    const workspace = `/Users/dev/OpenBot/Agents/${agentId}`;
+    const legacyWorkspace = `/Users/dev/StarBot/Agents/${legacyId}`;
+    const workspace = `/Users/dev/StarBot/Agents/${agentId}`;
     const legacy = new DatabaseSync(database.path);
     removeSchemaAfterVersion14(legacy);
     downgradeToV11(legacy);
@@ -2505,7 +2505,7 @@ describe("OpenBotDatabase", () => {
     const legacy = new DatabaseSync(database.path);
     removeSchemaAfterVersion14(legacy);
     downgradeToV11(legacy);
-    seedLegacyAgent(legacy, legacyId, `/Users/dev/OpenBot/Bots/${legacyId}`);
+    seedLegacyAgent(legacy, legacyId, `/Users/dev/StarBot/Bots/${legacyId}`);
     legacy.exec("CREATE TABLE blocker (value TEXT CHECK(value NOT LIKE 'agent-%'))");
     legacy.prepare("INSERT INTO blocker (value) VALUES (?)").run(legacyId);
     legacy.close();
@@ -2541,13 +2541,13 @@ describe("OpenBotDatabase", () => {
     const legacy = new DatabaseSync(database.path);
     removeSchemaAfterVersion14(legacy);
     downgradeToV11(legacy);
-    seedLegacyAgent(legacy, "bot-research", "/Users/dev/OpenBot/Agents/bot-research");
-    seedLegacyAgent(legacy, "agent-research", "/Users/dev/OpenBot/Agents/agent-research");
-    seedLegacyAgent(legacy, "bot-8c41d0f2-6b5a-4e93-8d17-2a0b3c4d5e6f", "/Users/dev/OpenBot/Agents/pair-legacy");
-    seedLegacyAgent(legacy, "agent-8c41d0f2-6b5a-4e93-8d17-2a0b3c4d5e6f", "/Users/dev/OpenBot/Agents/pair");
-    seedLegacyAgent(legacy, "bot-1f0a2b3c-4d5e-4f60-8a91-b2c3d4e5f607", "/Users/dev/OpenBot/Agents/prefix");
-    seedLegacyAgent(legacy, "bot-1f0a2b3c-4d5e-4f60-8a91-b2c3d4e5f607-copy", "/Users/dev/OpenBot/Agents/copy");
-    seedLegacyAgent(legacy, "agent-1f0a2b3c-4d5e-4f60-8a91-b2c3d4e5f607-copy", "/Users/dev/OpenBot/Agents/twin");
+    seedLegacyAgent(legacy, "bot-research", "/Users/dev/StarBot/Agents/bot-research");
+    seedLegacyAgent(legacy, "agent-research", "/Users/dev/StarBot/Agents/agent-research");
+    seedLegacyAgent(legacy, "bot-8c41d0f2-6b5a-4e93-8d17-2a0b3c4d5e6f", "/Users/dev/StarBot/Agents/pair-legacy");
+    seedLegacyAgent(legacy, "agent-8c41d0f2-6b5a-4e93-8d17-2a0b3c4d5e6f", "/Users/dev/StarBot/Agents/pair");
+    seedLegacyAgent(legacy, "bot-1f0a2b3c-4d5e-4f60-8a91-b2c3d4e5f607", "/Users/dev/StarBot/Agents/prefix");
+    seedLegacyAgent(legacy, "bot-1f0a2b3c-4d5e-4f60-8a91-b2c3d4e5f607-copy", "/Users/dev/StarBot/Agents/copy");
+    seedLegacyAgent(legacy, "agent-1f0a2b3c-4d5e-4f60-8a91-b2c3d4e5f607-copy", "/Users/dev/StarBot/Agents/twin");
     legacy.close();
 
     const migrated = new OpenBotDatabase(root);
@@ -4053,8 +4053,8 @@ function seedLegacyAgent(database: DatabaseSync, legacyId: string, workspacePath
     details: {
       siteId: "site-1",
       title: "Launch page",
-      hostname: "launch-page-23456789ab.openbot.site",
-      url: "https://launch-page-23456789ab.openbot.site",
+      hostname: "launch-page-23456789ab.starbot.site",
+      url: "https://launch-page-23456789ab.starbot.site",
     },
     markerCommandId: `hosted-site-event:${legacyId}:operation-1:succeeded`,
     createdAt: "2026-09-01T12:00:00.000Z",

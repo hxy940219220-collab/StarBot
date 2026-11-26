@@ -70,12 +70,16 @@ export const messages = {
   "composer.voice.transcribing": "Trascrizione del prompt vocale",
   "composer.voice.start": "Crea un prompt con la voce",
   "composer.voice.blocked":
-    "L'accesso al microfono è bloccato. Consenti a OpenBot di usare il microfono nelle impostazioni di sistema.",
+    "L'accesso al microfono è bloccato. Consenti a StarBot di usare il microfono nelle impostazioni di sistema.",
+
   "composer.voice.noMicrophone": "Nessun microfono disponibile.",
-  "composer.voice.startFailed": "OpenBot non è riuscito ad avviare la registrazione vocale.",
+  "composer.voice.startFailed": "StarBot non è riuscito ad avviare la registrazione vocale.",
+
   "composer.voice.microphoneUnavailable":
-    "OpenBot non è riuscito ad aprire il microfono. Chiudi le altre app che lo usano, verifica che sia collegato e consentito nelle impostazioni di sistema, poi riprova.",
-  "composer.voice.transcribeFailed": "OpenBot non è riuscito a trascrivere questa registrazione.",
+    "StarBot non è riuscito ad aprire il microfono. Chiudi le altre app che lo usano, verifica che sia collegato e consentito nelle impostazioni di sistema, poi riprova.",
+
+  "composer.voice.transcribeFailed": "StarBot non è riuscito a trascrivere questa registrazione.",
+
   "composer.reply.toYou": "Risposta al tuo messaggio",
   "composer.reply.toAgent": "Risposta all'agente",
   "composer.reply.attachment": "Allegato",

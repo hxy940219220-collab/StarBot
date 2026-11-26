@@ -19,15 +19,15 @@
   },
   "routes": [
     {
-      "pattern": "openbot.run/*",
+      "pattern": "starbot.app/*",
       "zone_id": "bac5e044ba951c390229f0e93673ebd3"
     },
     {
-      "pattern": "www.openbot.run/*",
+      "pattern": "www.starbot.app/*",
       "zone_id": "bac5e044ba951c390229f0e93673ebd3"
     },
     {
-      "pattern": "api.openbot.run",
+      "pattern": "api.starbot.app",
       "custom_domain": true
     }
   ],
@@ -45,18 +45,18 @@
     "AUTH_EXPOSE_DEVELOPMENT_CODE": "false",
     "EMAIL_SMTP_HOST": "mail.privateemail.com",
     "EMAIL_SMTP_PORT": "465",
-    "EMAIL_SMTP_USERNAME": "no_reply@openbot.run",
-    "EMAIL_FROM": "no_reply@openbot.run",
-    "EMAIL_REPLY_TO": "hello@openbot.run",
-    "EMAIL_LICENSE_REPLY_TO": "licenses@openbot.run",
+    "EMAIL_SMTP_USERNAME": "no_reply@starbot.app",
+    "EMAIL_FROM": "no_reply@starbot.app",
+    "EMAIL_REPLY_TO": "hello@starbot.app",
+    "EMAIL_LICENSE_REPLY_TO": "licenses@starbot.app",
     "EMAIL_LICENSE_FROM": "",
     "REMOTE_TICKET_KEY_ID": "openbot-remote-1",
-    "REMOTE_SIGNAL_URL": "wss://signal.openbot.run/v1/signal",
-    "REMOTE_SIGNAL_HOMES": "a=wss://signal1.openbot.run/v1/signal,b=wss://signal2.openbot.run/v1/signal,us=wss://signal-us.openbot.run/v1/signal,au=wss://signal-au.openbot.run/v1/signal,sg=wss://signal-sg.openbot.run/v1/signal",
+    "REMOTE_SIGNAL_URL": "wss://signal.starbot.app/v1/signal",
+    "REMOTE_SIGNAL_HOMES": "a=wss://signal1.starbot.app/v1/signal,b=wss://signal2.starbot.app/v1/signal,us=wss://signal-us.starbot.app/v1/signal,au=wss://signal-au.starbot.app/v1/signal,sg=wss://signal-sg.starbot.app/v1/signal",
     "REMOTE_SIGNAL_HOME_LOCATIONS": "a=60.17:24.94,b=60.17:24.94,us=37.34:-121.89,au=-33.87:151.21,sg=1.35:103.82",
     "REMOTE_SIGNAL_HOME_COUNTRIES": "CN=us",
-    "REMOTE_AUTH_WEBHOOK_URL": "https://signal.openbot.run/internal/auth-events",
-    "REMOTE_AUTH_WEBHOOK_URLS": "https://signal1.openbot.run/internal/auth-events,https://signal2.openbot.run/internal/auth-events,https://signal-us.openbot.run/internal/auth-events,https://signal-au.openbot.run/internal/auth-events,https://signal-sg.openbot.run/internal/auth-events",
+    "REMOTE_AUTH_WEBHOOK_URL": "https://signal.starbot.app/internal/auth-events",
+    "REMOTE_AUTH_WEBHOOK_URLS": "https://signal1.starbot.app/internal/auth-events,https://signal2.starbot.app/internal/auth-events,https://signal-us.starbot.app/internal/auth-events,https://signal-au.starbot.app/internal/auth-events,https://signal-sg.starbot.app/internal/auth-events",
     "SIGNAL_ENTRY_ZONE_ID": "bac5e044ba951c390229f0e93673ebd3",
     "HOSTED_SERVERS_ENABLED": "true",
     "HOSTED_SERVERS_ALLOWED_USER_IDS": "*",
@@ -76,7 +76,7 @@
   "send_email": [
     {
       "name": "EMAIL_FALLBACK",
-      "allowed_sender_addresses": ["no_reply@openbot.run"]
+      "allowed_sender_addresses": ["no_reply@starbot.app"]
     }
   ],
   "d1_databases": [
@@ -157,10 +157,10 @@
         "AUTH_EXPOSE_DEVELOPMENT_CODE": "false",
         "EMAIL_SMTP_HOST": "mail.privateemail.com",
         "EMAIL_SMTP_PORT": "465",
-        "EMAIL_SMTP_USERNAME": "no_reply@openbot.run",
-        "EMAIL_FROM": "no_reply@openbot.run",
-        "EMAIL_REPLY_TO": "hello@openbot.run",
-        "EMAIL_LICENSE_REPLY_TO": "licenses@openbot.run",
+        "EMAIL_SMTP_USERNAME": "no_reply@starbot.app",
+        "EMAIL_FROM": "no_reply@starbot.app",
+        "EMAIL_REPLY_TO": "hello@starbot.app",
+        "EMAIL_LICENSE_REPLY_TO": "licenses@starbot.app",
         "EMAIL_LICENSE_FROM": "",
         "SITE_PUBLISH_ENABLED": "false",
         "SITE_COOKIE_ISOLATION_READY": "false",
@@ -253,17 +253,17 @@
         "AUTH_EXPOSE_DEVELOPMENT_CODE": "false",
         "EMAIL_SMTP_HOST": "mail.privateemail.com",
         "EMAIL_SMTP_PORT": "465",
-        "EMAIL_SMTP_USERNAME": "no_reply@openbot.run",
-        "EMAIL_FROM": "no_reply@openbot.run",
-        "EMAIL_REPLY_TO": "hello@openbot.run",
-        "EMAIL_LICENSE_REPLY_TO": "licenses@openbot.run",
+        "EMAIL_SMTP_USERNAME": "no_reply@starbot.app",
+        "EMAIL_FROM": "no_reply@starbot.app",
+        "EMAIL_REPLY_TO": "hello@starbot.app",
+        "EMAIL_LICENSE_REPLY_TO": "licenses@starbot.app",
         "EMAIL_LICENSE_FROM": "",
         "SITE_PUBLISH_ENABLED": "false",
         "SITE_COOKIE_ISOLATION_READY": "false",
         "REMOTE_TICKET_KEY_ID": "openbot-remote-1",
-        "REMOTE_SIGNAL_URL": "wss://signal.openbot.run/v1/signal",
+        "REMOTE_SIGNAL_URL": "wss://signal.starbot.app/v1/signal",
         "REMOTE_SIGNAL_HOMES": "",
-        "REMOTE_AUTH_WEBHOOK_URL": "https://signal.openbot.run/internal/auth-events",
+        "REMOTE_AUTH_WEBHOOK_URL": "https://signal.starbot.app/internal/auth-events",
         "REMOTE_AUTH_WEBHOOK_URLS": "",
         "SIGNAL_ENTRY_ZONE_ID": "",
         "HOSTED_SERVERS_ENABLED": "true",

@@ -180,7 +180,7 @@ export class BootRecovery {
   ) {
     const interrupted = {
       terminal: "interrupted" as const,
-      reason: "OpenBot restarted before this delivery reached a confirmed terminal state.",
+      reason: "StarBot restarted before this delivery reached a confirmed terminal state.",
     };
     const recovered = yield* Effect.gen({ self: this }, function* () {
       const { agent, client, session } = yield* recoveryStep(() => {

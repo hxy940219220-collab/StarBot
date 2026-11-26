@@ -141,7 +141,8 @@ export const messages = {
   "mobile.agent.info.noSkills": "아직 스킬이 없어요.",
   "mobile.agent.info.skillsManaged": "이 에이전트의 스킬은 호스트에서 관리해요.",
   "mobile.agent.info.skillsAddOnComputer":
-    "+를 눌러 이 에이전트와 함께 스킬을 만들 수 있어요. 마켓플레이스 스킬은 컴퓨터의 OpenBot 또는 웹 앱에서 추가해 주세요.",
+    "+를 눌러 이 에이전트와 함께 스킬을 만들 수 있어요. 마켓플레이스 스킬은 컴퓨터의 StarBot 또는 웹 앱에서 추가해 주세요.",
+
   "mobile.agent.info.filesUnsupported":
     "이 호스트는 파일 관리를 지원하지 않아요. 호스트의 OpenBot을 업데이트해 주세요.",
   "mobile.agent.info.memoryGone": "이 메모리는 더 이상 사용할 수 없어요.",
@@ -334,7 +335,8 @@ export const messages = {
   "mobile.agent.access.autoApproveLocked": "이 호스트는 터보 모드가 켜져 있어서 모든 에이전트가 자동 승인돼요.",
   "mobile.agent.access.workspaceNote": "에이전트는 호스트의 워크스페이스와 공유 폴더에서 작업해요.",
   "mobile.agent.access.askNote":
-    "에이전트가 OpenBot 도구를 사용하거나 사이트를 게시하기 전, 그리고 제공자가 승인을 요청할 때 먼저 물어봐요.",
+    "에이전트가 StarBot 도구를 사용하거나 사이트를 게시하기 전, 그리고 제공자가 승인을 요청할 때 먼저 물어봐요.",
+
   "mobile.agent.access.fullNote": "에이전트가 사용자에게 하는 질문을 제외하고는 묻지 않고 작업해요.",
   "mobile.agent.access.fullTitle": "이 에이전트에게 전체 접근 권한을 줄까요?",
   "mobile.agent.access.askTitle": "이 에이전트가 워크스페이스 밖에서 작업하도록 허용할까요?",
@@ -403,7 +405,8 @@ export const messages = {
   "mobile.agent.planCard.label": "긴 작업 전에 계획 표시",
   "mobile.agent.planCard.footer":
     "긴 작업 전에 에이전트가 계획을 보여줘요. 10초 후 또는 시작을 누르면 작업이 시작돼요.",
-  "mobile.agent.builtinMemory.label": "OpenBot 메모리",
+  "mobile.agent.builtinMemory.label": "StarBot 메모리",
+
   "mobile.agent.builtinMemory.footer":
     "에이전트가 자신의 메모리를 저장하고 읽어요. Mem0 같은 메모리 앱만 쓰려면 끄세요. 저장된 메모리는 그대로 남아요.",
   "mobile.agent.workspace.title": "워크스페이스 폴더",
@@ -440,7 +443,8 @@ export const messages = {
     "아직 테이블이 없어요. 작업에 턴 사이의 레코드가 필요하면 에이전트가 직접 만들고, 모든 에이전트가 사용할 수 있어요.",
   "mobile.agent.tables.note":
     "이 호스트의 모든 에이전트가 이 테이블을 공유해요. 삭제한 테이블은 모든 에이전트에서 사라져요.",
-  "mobile.agent.tables.madeOutside": "OpenBot 밖에서 만들어짐 · 모든 에이전트가 삭제할 수 있어요",
+  "mobile.agent.tables.madeOutside": "StarBot 밖에서 만들어짐 · 모든 에이전트가 삭제할 수 있어요",
+
   "mobile.agent.tables.keptBy": "{name}이(가) 보관 중",
   "mobile.agent.tables.keptByDeleted": "더 이상 존재하지 않는 에이전트가 보관 중",
   "mobile.agent.tables.notCounted": "집계되지 않음",
@@ -653,7 +657,8 @@ export const messages = {
   "mobile.agent.folders.inShared": "{folder}은(는) 공유 폴더 안에 있어서 {agent}이(가) 이미 변경할 수 있어요",
   "mobile.agent.folders.inFolder": "{folder}은(는) 이미 추가된 {parent} 안에 있어요",
   "mobile.agent.folders.protected":
-    "{folder}은(는) 추가할 수 없어요. OpenBot 데이터나 다른 에이전트의 파일이 들어 있어요",
+    "{folder}은(는) 추가할 수 없어요. StarBot 데이터나 다른 에이전트의 파일이 들어 있어요",
+
   "mobile.agent.folders.missing": "{folder}은(는) 호스트 컴퓨터의 폴더가 아니에요",
   "mobile.agent.folders.limit": { other: "폴더는 최대 {count}개까지 추가할 수 있어요" },
   "mobile.agent.folders.failed": "폴더를 변경하지 못했어요",

@@ -109,7 +109,7 @@ function webAnalyticsDefault(): boolean {
 
 export function configureWebReports(user: Pick<CentralAuthUser, "id" | "email"> | null): void {
   webSignedIn = user !== null;
-  if (!import.meta.env.PROD || window.location.origin !== "https://openbot.run") return;
+  if (!import.meta.env.PROD || window.location.origin !== "https://starbot.app") return;
   queue ??= new ReportQueue(
     indexedReportStorage("openbot-web-error-reports-v1"),
     openPanelTransport({ clientId: "6c989975-87ef-4f0c-857e-ab449a65b5c2" }),

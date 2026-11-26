@@ -31,26 +31,36 @@ export const messages = {
   "update.provider.startFailed": "De update kan niet starten. Probeer het opnieuw.",
   "update.provider.showDetails": "Details tonen",
   "update.provider.hideDetails": "Details verbergen",
-  "update.scheduled.title": "{name} heeft een OpenBot-update gepland",
-  "update.scheduled.automaticTitle": "OpenBot installeert een update",
-  "update.scheduled.whenIdle": "OpenBot herstart wanneer de agents niets doen.",
-  "update.scheduled.now": "OpenBot herstart zodra de update is gedownload.",
+  "update.scheduled.title": "{name} heeft een StarBot-update gepland",
+
+  "update.scheduled.automaticTitle": "StarBot installeert een update",
+
+  "update.scheduled.whenIdle": "StarBot herstart wanneer de agents niets doen.",
+
+  "update.scheduled.now": "StarBot herstart zodra de update is gedownload.",
+
   "update.scheduled.cancel": "Update annuleren",
   "update.scheduled.cancelFailed": "Kan de update niet annuleren.",
-  "update.idleRestart.relaunchTitle": "OpenBot herstart wanneer de agents niets doen",
-  "update.idleRestart.updateTitle": "OpenBot installeert de update wanneer de agents niets doen",
+  "update.idleRestart.relaunchTitle": "StarBot herstart wanneer de agents niets doen",
+
+  "update.idleRestart.updateTitle": "StarBot installeert de update wanneer de agents niets doen",
+
   "update.idleRestart.description": "Nieuwe routineruns wachten tot de herstart.",
   "update.idleRestart.waitingFor": "Wachten op {reasons}.",
   "update.idleRestart.cancel": "Herstart annuleren",
   "update.idleRestart.restartNow": "Nu herstarten",
-  "update.idleRestart.restartNowTitle": "OpenBot nu herstarten?",
+  "update.idleRestart.restartNowTitle": "StarBot nu herstarten?",
+
   "update.idleRestart.restartNowDescription": "Beurten van agents en routineruns die niet klaar zijn, stoppen nu.",
   "update.idleRestart.keepWaiting": "Blijven wachten",
   "update.idleRestart.cancelFailed": "Kan de herstart niet annuleren.",
   "update.idleRestart.requestFailed": "Kan de herstart niet plannen.",
-  "update.idleRestart.failedTitle": "OpenBot is niet herstart",
-  "update.whatsNew.title": "Nieuw in OpenBot",
-  "update.whatsNew.description": "De nieuwe functies en wijzigingen in deze versie van OpenBot.",
+  "update.idleRestart.failedTitle": "StarBot is niet herstart",
+
+  "update.whatsNew.title": "Nieuw in StarBot",
+
+  "update.whatsNew.description": "De nieuwe functies en wijzigingen in deze versie van StarBot.",
+
   "update.whatsNew.version": "Versie {version}",
   "update.whatsNew.updatedFrom": "Bijgewerkt van {from} naar {to}",
   "update.whatsNew.group.added": "Nieuw",
@@ -67,12 +77,15 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Deze versie heeft geen opmerkingen om hier te tonen. De volledige changelog toont alle wijzigingen.",
   "update.whatsNew.changelog": "Volledige changelog",
-  "update.whatsNew.changelogFailed": "OpenBot kan de changelog niet openen.",
+  "update.whatsNew.changelogFailed": "StarBot kan de changelog niet openen.",
+
   "update.whatsNew.done": "Begrepen",
   "update.required.title": "Update vereist",
   "update.required.description":
-    "OpenBot {version} wordt niet meer ondersteund. Werk bij naar {minimum} of nieuwer om door te gaan.",
-  "update.required.download": "OpenBot downloaden",
+    "StarBot {version} wordt niet meer ondersteund. Werk bij naar {minimum} of nieuwer om door te gaan.",
+
+  "update.required.download": "StarBot downloaden",
+
   "update.required.continue": "Doorgaan zonder update",
   "update.required.failed": "De update is niet voltooid.",
 } as const satisfies PartialTranslation<typeof source>;

@@ -10,8 +10,10 @@ export const messages = {
   "error.voice.modelUnavailable": "Das Sprachmodell ist nicht verfügbar.",
   "error.voice.transcriptionTimedOut": "Die Zeit für die Sprachtranskription ist abgelaufen.",
   "error.voice.prepareRequired":
-    "Lokale Sprachtranskription ist nicht verfügbar. Führe `bun run voice:prepare` aus und starte OpenBot neu.",
-  "error.voice.transcriptionFailed": "OpenBot konnte diese Aufnahme nicht transkribieren.",
+    "Lokale Sprachtranskription ist nicht verfügbar. Führe `bun run voice:prepare` aus und starte StarBot neu.",
+
+  "error.voice.transcriptionFailed": "StarBot konnte diese Aufnahme nicht transkribieren.",
+
   "error.voice.videoModelMissing":
     "Unter Einstellungen → Diktat ist kein Spracherkennungsmodell für Aufnahmen eingerichtet.",
   "error.voice.videoModelMissingServer":
@@ -29,9 +31,11 @@ export const messages = {
   "error.voice.speech.runtimeUnavailable": "Lokale Sprachausgabe ist auf dieser Plattform nicht verfügbar.",
   "error.voice.speech.modelRequired": "Lade das Sprachausgabemodell unter Einstellungen → Diktat herunter.",
   "error.voice.speech.timedOut": "Das Vorlesen der Antwort hat zu lange gedauert.",
-  "error.voice.speech.failed": "OpenBot konnte die Antwort nicht vorlesen.",
+  "error.voice.speech.failed": "StarBot konnte die Antwort nicht vorlesen.",
+
   "error.voice.speech.providerRefused": "{provider} hat die Audioausgabe abgelehnt: {reason}",
-  "error.voice.recordingNotKept": "OpenBot konnte die Sprachaufnahme nicht speichern.",
+  "error.voice.recordingNotKept": "StarBot konnte die Sprachaufnahme nicht speichern.",
+
   "error.voice.live.timedOut": "Codex-Live-Sprache ist nicht rechtzeitig gestartet. Versuche es erneut.",
   "error.voice.live.failed": "Live-Sprache wurde beendet: {reason}",
   "error.voice.live.disconnected": "Live-Sprache wurde getrennt.",

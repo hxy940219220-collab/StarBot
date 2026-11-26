@@ -59,10 +59,10 @@ the application.
 
 ## MCP sign-in redirect address
 
-An MCP server that asks its users to sign in sends the grant back to a redirect address. OpenBot
+An MCP server that asks its users to sign in sends the grant back to a redirect address. StarBot
 registers that address with the authorization server (RFC 7591) and sends it again at `/authorize`
 and at `/token`. The three must agree, or the authorization server stops the sign-in on its own
-page, where OpenBot can see nothing and can explain nothing. Canva does this: it accepts
+page, where StarBot can see nothing and can explain nothing. Canva does this: it accepts
 `openbot://mcp-auth` at registration and then answers `Invalid redirect URI.` at `/authorize`.
 
 So `src/main/mcp-oauth-redirect-server.ts` listens on `127.0.0.1` and the address it listens on is
@@ -116,7 +116,7 @@ There is no configuration for a developer or for a packaged build:
   that starts again at `127.0.0.1`. A refusal of the deep link at registration gets `127.0.0.1`,
   and then `localhost`.
   A sign-in that an in-app tab shows keeps the two loopback names: the deep link opens only in a
-  browser of a computer that runs OpenBot, and only while the operating system opens `openbot://`
+  browser of a computer that runs StarBot, and only while the operating system opens `openbot://`
   in that app (`app.isDefaultProtocolClient`). A relayed sign-in does the same, except when the
   client starts it with `sign-in-relay-deep-link-v1`: its computer opens the link, and passes the
   callback to the relay by `state` (#9209). The web client and the phone do not. The deep link is sent only in the

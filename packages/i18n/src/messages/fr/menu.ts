@@ -11,18 +11,25 @@ export const messages = {
   "menu.closeDeveloperTools": "Fermer les outils de développement",
   "menu.copyLink": "Copier le lien",
   "menu.copyImage": "Copier l’image",
-  "menu.quit": "Quitter OpenBot",
-  "menu.quitConfirmTitle": "Quitter OpenBot ?",
-  "menu.quitConfirmBody": "Les agents et les routines s’arrêtent jusqu’à la prochaine ouverture d’OpenBot.",
+  "menu.quit": "Quitter StarBot",
+
+  "menu.quitConfirmTitle": "Quitter StarBot ?",
+
+  "menu.quitConfirmBody": "Les agents et les routines s’arrêtent jusqu’à la prochaine ouverture d’StarBot.",
+
   "menu.quitConfirm": "Quitter",
   "menu.quitHint": "Maintenez ⌘Q ou appuyez deux fois pour quitter",
   "menu.closeWorkingTitle": { one: "{count} agent travaille encore", other: "{count} agents travaillent encore" },
   "menu.closeWorkingBody":
-    "Si vous quittez OpenBot, les agents s’arrêtent. Laissez-le tourner pour qu’ils terminent. Pour revoir la fenêtre, ouvrez OpenBot.",
+    "Si vous quittez StarBot, les agents s’arrêtent. Laissez-le tourner pour qu’ils terminent. Pour revoir la fenêtre, ouvrez StarBot.",
+
   "menu.closeKeepRunning": "Continuer",
-  "menu.trayOpen": "Ouvrir OpenBot",
-  "menu.trayQuit": "Quitter OpenBot",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "Ouvrir StarBot",
+
+  "menu.trayQuit": "Quitter StarBot",
+
+  "menu.trayTooltip": "StarBot",
+
   "menu.hideDynamicIsland": "Masquer Dynamic Island",
   "menu.undo": "Annuler",
   "menu.redo": "Rétablir",

@@ -10,8 +10,10 @@ export const messages = {
   "error.voice.modelUnavailable": "Ses modeli kullanılamıyor.",
   "error.voice.transcriptionTimedOut": "Ses dökümü zaman aşımına uğradı.",
   "error.voice.prepareRequired":
-    "Yerel ses dökümü kullanılamıyor. `bun run voice:prepare` komutunu çalıştırın ve OpenBot'u yeniden başlatın.",
-  "error.voice.transcriptionFailed": "OpenBot bu kaydın dökümünü çıkaramadı.",
+    "Yerel ses dökümü kullanılamıyor. `bun run voice:prepare` komutunu çalıştırın ve StarBot'u yeniden başlatın.",
+
+  "error.voice.transcriptionFailed": "StarBot bu kaydın dökümünü çıkaramadı.",
+
   "error.voice.videoModelMissing": "Ayarlar → Ses bölümünde kayıtlar için bir konuşma tanıma modeli ayarlanmamış.",
   "error.voice.videoModelMissingServer":
     "Bu sunucuda bir konuşma tanıma modeli ayarlanmamış. Bir sahip veya yönetici, sunucu ayarlarındaki Konuşma tanıma bölümünden bir model ayarlayabilir.",
@@ -27,9 +29,11 @@ export const messages = {
   "error.voice.speech.runtimeUnavailable": "Yerel konuşma sentezi bu platformda kullanılamıyor.",
   "error.voice.speech.modelRequired": "Konuşma modelini Ayarlar → Ses bölümünden indirin.",
   "error.voice.speech.timedOut": "Yanıtı sesli okuma zaman aşımına uğradı.",
-  "error.voice.speech.failed": "OpenBot yanıtı sesli okuyamadı.",
+  "error.voice.speech.failed": "StarBot yanıtı sesli okuyamadı.",
+
   "error.voice.speech.providerRefused": "{provider} sesi oluşturmayı reddetti: {reason}",
-  "error.voice.recordingNotKept": "OpenBot ses kaydını saklayamadı.",
+  "error.voice.recordingNotKept": "StarBot ses kaydını saklayamadı.",
+
   "error.voice.live.timedOut": "Codex canlı ses zamanında başlamadı. Tekrar dene.",
   "error.voice.live.failed": "Canlı ses durdu: {reason}",
   "error.voice.live.disconnected": "Canlı ses bağlantısı kesildi.",

@@ -1039,7 +1039,7 @@ try {
     JSON.stringify({ length: newLongDesk?.instructions.length, warnings: exported.warnings }),
   );
   pass(
-    "a workflow with a step that this OpenBot cannot read stays out of the file, and the user is told",
+    "a workflow with a step that this StarBot cannot read stays out of the file, and the user is told",
     !(manifest.settings?.workflows ?? []).some((workflow) => workflow.title === "Broken row") &&
       exported.warnings.some((warning) => warning.startsWith("Broken row is not imported.")),
     JSON.stringify(exported.warnings),
@@ -1154,7 +1154,7 @@ try {
       !telegramTriggerMatches(unlinkedTelegram, mention("messaging-new")) &&
       !telegramTriggerMatches(unlinkedTelegram, mention("messaging-2")),
   );
-  pass("a saved value that this OpenBot does not know moves as it is", node("slack")?.event === "message");
+  pass("a saved value that this StarBot does not know moves as it is", node("slack")?.event === "message");
   const movedWorkflows = target.workflows.listWithGraphs();
   pass(
     "every moved workflow is paused",
@@ -1168,7 +1168,7 @@ try {
   const newer = movedWorkflows.find((item) => item.summary.title === "Newer steps");
   const future = newer?.graph.nodes.find((item) => item.id === "future");
   pass(
-    "a step from a newer OpenBot is kept as a locked note with its settings",
+    "a step from a newer StarBot is kept as a locked note with its settings",
     future?.kind === "note" &&
       future.locked === true &&
       future.fields.text === "Hologram" &&
@@ -1177,7 +1177,7 @@ try {
     JSON.stringify({ graph: newer?.graph, warnings: result.warnings }),
   );
   pass(
-    "the user is told which workflows need a newer OpenBot, and only a workflow with locked notes is told about notes",
+    "the user is told which workflows need a newer StarBot, and only a workflow with locked notes is told about notes",
     result.warnings.some((warning) => warning.startsWith("Newer steps:") && warning.includes("locked notes")) &&
       result.warnings.some((warning) => warning.startsWith("Paper pipeline:") && warning.includes("newer version")) &&
       !result.warnings.some((warning) => warning.startsWith("Paper pipeline:") && warning.includes("locked notes")),

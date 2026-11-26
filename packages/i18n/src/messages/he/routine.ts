@@ -10,7 +10,8 @@ export const messages = {
   "routine.kind.yearly": "שנתית",
   "routine.kind.custom": "מותאמת אישית",
 
-  "routine.feed.calendarName": "שגרות OpenBot",
+  "routine.feed.calendarName": "שגרות StarBot",
+
   "routine.feed.eventAgent": "סוכן: {name}",
   "routine.feed.eventChannel": "ערוץ: {name}",
   "routine.feed.eventTimezone": "אזור זמן: {timezone}",
@@ -146,7 +147,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "החיבור כבוי או הוסר",
   "routine.delivery.reason.refused": "אי אפשר לפרסם במקום הזה",
   "routine.delivery.reason.sendFailed": "הפלטפורמה לא קיבלה את ההודעה",
-  "routine.delivery.reason.restart": "OpenBot נעצר במהלך השליחה",
+  "routine.delivery.reason.restart": "StarBot נעצר במהלך השליחה",
+
   "routine.delivery.reason.stopped": "השליחה למקום הזה כובתה",
   "routine.delivery.resend": "שליחה חוזרת",
   "routine.delivery.resending": "שולח…",
@@ -342,11 +344,13 @@ export const messages = {
   "routine.webhook.stepUrlHint": "השולח שולח בקשת POST עם גוף JSON בגודל של עד 64 KiB.",
   "routine.webhook.saveForUrl": "שמירה וקבלת נקודת הקצה",
   "routine.webhook.stepSecret": "יש להוסיף את סוד החתימה אצל השולח",
-  "routine.webhook.stepSecretHint": "השולח חותם כל בקשה בסוד הזה. OpenBot דוחה בקשה בלי חתימה תקפה.",
+  "routine.webhook.stepSecretHint": "השולח חותם כל בקשה בסוד הזה. StarBot דוחה בקשה בלי חתימה תקפה.",
+
   "routine.webhook.howToSign": "איך לחתום על בקשה",
   "routine.webhook.howToSignHint": "יש לשמור את הסוד ב-OPENBOT_WEBHOOK_SECRET אצל השולח. אין להכניס אותו לקוד.",
   "routine.webhook.stepTest": "שליחת אירוע בדיקה",
-  "routine.webhook.stepTestHint": "OpenBot חותם על אירוע שמתאים לשגרה הזו ומקבל אותו כבקשה אמיתית. השגרה רצה פעם אחת.",
+  "routine.webhook.stepTestHint": "StarBot חותם על אירוע שמתאים לשגרה הזו ומקבל אותו כבקשה אמיתית. השגרה רצה פעם אחת.",
+
   "routine.webhook.sendTest": "שליחת אירוע בדיקה",
   "routine.webhook.sendingTest": "שולח…",
   "routine.webhook.testStarted": "אירוע הבדיקה {eventType} התחיל ריצה. היא מופיעה בהיסטוריית הריצות.",
@@ -363,9 +367,11 @@ export const messages = {
   "routine.settings.limitPolicy": "אם החשבון הגיע למגבלה",
   "routine.settings.limitPolicy.wait": "להמתין ולהריץ אחרי האיפוס",
   "routine.settings.limitPolicy.skip": "לדלג על הריצה הזו",
-  "routine.settings.missedPolicy": "אם OpenBot היה סגור בזמן המתוזמן",
+  "routine.settings.missedPolicy": "אם StarBot היה סגור בזמן המתוזמן",
+
   "routine.settings.missedPolicy.skip": "לדלג על הריצה הזו",
-  "routine.settings.missedPolicy.runOnce": "להריץ פעם אחת כש-OpenBot נפתח",
+  "routine.settings.missedPolicy.runOnce": "להריץ פעם אחת כש-StarBot נפתח",
+
   "routine.settings.runInThread": "הרצה בשרשור נפרד",
   "routine.settings.runInSaveFailed": "השגרה נשמרה, אבל ההגדרה של השרשור הנפרד לא נשמרה. יש לנסות שוב.",
   "routine.settings.resultDestination": "שליחת תשובות אל",

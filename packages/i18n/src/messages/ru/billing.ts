@@ -81,7 +81,8 @@ export const messages = {
   "billing.license.description": "Для работы в компании. Сервер в неё не входит.",
   "billing.license.loadFailed": "Не удалось загрузить лицензию.",
   "billing.license.actionFailed": "Не удалось изменить лицензию.",
-  "billing.license.contactSales": "Подробнее — по адресу licenses@openbot.run.",
+  "billing.license.contactSales": "Подробнее — по адресу licenses@starbot.app.",
+
   "billing.license.saving": "Сохранение…",
   "billing.license.personal.title": "Личное использование",
   "billing.license.personal.description": "Бесплатно для некоммерческого использования.",
@@ -92,7 +93,8 @@ export const messages = {
   "billing.license.offer.title": "Коммерческая лицензия",
   "billing.license.offer.description": "Starter для 1 пользователя или Team для {count} и более пользователей.",
   "billing.license.buy.description":
-    "Сколько человек используют OpenBot в работе? ИИ-агенты не считаются пользователями.",
+    "Сколько человек используют StarBot в работе? ИИ-агенты не считаются пользователями.",
+
   "billing.license.buy.confirm": "Перейти к оплате",
   "billing.license.trial.until": "Бесплатно до {date}",
   "billing.license.trial.confirm": "Начать бесплатно",
@@ -161,9 +163,11 @@ export const messages = {
   "billing.order.yearly": "Ежегодно",
   "billing.order.yearlySaving": "−{percent}% за год",
   "billing.order.server.title": "Облачный сервер",
-  "billing.order.server.summary": "Мы размещаем OpenBot для вашей команды.",
+  "billing.order.server.summary": "Мы размещаем StarBot для вашей команды.",
+
   "billing.order.server.none": "Без сервера",
-  "billing.order.server.noneDetail": "Запускайте OpenBot на своём компьютере",
+  "billing.order.server.noneDetail": "Запускайте StarBot на своём компьютере",
+
   "billing.order.server.thisComputer": "Ваш компьютер",
   "billing.order.server.bestValue": "Самый выгодный",
   "billing.order.server.bestFor.starter": "Лучший выбор для одного человека",
@@ -172,7 +176,8 @@ export const messages = {
   "billing.order.server.storage": "{size} ГБ хранилища",
   "billing.order.server.speed": "Скорость {speed}×",
   "billing.order.license.title": "Лицензия",
-  "billing.order.license.summary": "Для использования OpenBot в работе.",
+  "billing.order.license.summary": "Для использования StarBot в работе.",
+
   "billing.order.license.none": "Без лицензии",
   "billing.order.license.noneDetail": "Личное и некоммерческое использование",
   "billing.order.license.starter": "Лицензия Starter",

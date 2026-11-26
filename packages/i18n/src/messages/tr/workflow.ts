@@ -295,7 +295,8 @@ export const messages = {
 
   "workflow.output.title": "Çıktı",
   "workflow.output.name": "çıktı",
-  "workflow.output.channel.openbot": "OpenBot",
+  "workflow.output.channel.openbot": "StarBot",
+
   "workflow.output.channel.search": "Kanal ara",
   "workflow.output.postsAs": "Şu şekilde paylaşır",
   "workflow.output.postsAsNote": "Not; görev başlamaz",
@@ -314,7 +315,8 @@ export const messages = {
   "workflow.discord.server": "Sunucu",
   "workflow.discord.chooseServer": "Sunucu seç",
   "workflow.discord.event": "Olay",
-  "workflow.discord.event.mention": "OpenBot anıldı",
+  "workflow.discord.event.mention": "StarBot anıldı",
+
   "workflow.discord.anyChannel": "Herhangi bir kanal",
   "workflow.discord.roles": "Rolü var",
   "workflow.discord.anyRole": "Herhangi bir rol",
@@ -340,7 +342,8 @@ export const messages = {
   "workflow.telegram.anyChat": "Bağlı herhangi bir sohbet",
   "workflow.telegram.sameChat": "Tetikleyiciyle aynı",
   "workflow.telegram.event": "Olay",
-  "workflow.telegram.event.mention": "OpenBot anıldı",
+  "workflow.telegram.event.mention": "StarBot anıldı",
+
   "workflow.telegram.text": "Metin içerir",
   "workflow.telegram.anyText": "Herhangi bir metin",
   "workflow.telegram.on": "Hedef",
@@ -393,15 +396,18 @@ export const messages = {
   "workflow.github.filter.branch": "Temel dal",
   "workflow.github.filter.titleValue": "Başlık “{text}” içerir",
   "workflow.github.filter.branchValue": "Temel dal: {branch}",
-  "workflow.github.alert.missing": "OpenBot, GitHub'da {repository} deposunu göremiyor.",
-  "workflow.github.alert.readOnly": "OpenBot, {repository} deposundaki sorunları ve çekme isteklerini değiştiremez.",
+  "workflow.github.alert.missing": "StarBot, GitHub'da {repository} deposunu göremiyor.",
+
+  "workflow.github.alert.readOnly": "StarBot, {repository} deposundaki sorunları ve çekme isteklerini değiştiremez.",
+
   "workflow.github.alert.eventsOff": "GitHub henüz {repository} deposundan olay göndermiyor.",
   "workflow.github.alert.noEvent": "Tetikleyici bir GitHub olayı değil. Bir depo seçin ve numarayı girdiden alın.",
   "workflow.github.alert.pullRequestOnly":
     "“{action}” yalnızca çekme isteklerinde çalışır. Tetikleyici sorunlarda başlar.",
   "workflow.github.history.name": "Olaylar",
   "workflow.github.history.none": "Yok",
-  "workflow.github.history.offline": "OpenBot çevrimdışıydı",
+  "workflow.github.history.offline": "StarBot çevrimdışıydı",
+
   "workflow.github.history.waitingGroup": "Bekleyenler",
   "workflow.github.history.startedGroup": "Başlatanlar",
   "workflow.github.history.skippedGroup": "Atlananlar",
@@ -625,10 +631,13 @@ export const messages = {
   "workflow.file.import.files": "Yüklenecek dosyalar: {count}",
   "workflow.file.import.noUpload": "Bu sunucu dosya saklayamıyor. Dosyalar içe aktarılmaz.",
   "workflow.file.import.confirm": "İçe aktar",
-  "workflow.file.import.notFile": "Bu dosya bir OpenBot iş akışı değil.",
+  "workflow.file.import.notFile": "Bu dosya bir StarBot iş akışı değil.",
+
   "workflow.file.import.invalid": "Bu iş akışı dosyası bozuk.",
-  "workflow.file.import.newer": "Bu iş akışı OpenBot {version} veya üstünü gerektirir.",
-  "workflow.file.import.newerUnknown": "Bu iş akışı OpenBot'un daha yeni bir sürümünü gerektirir.",
+  "workflow.file.import.newer": "Bu iş akışı StarBot {version} veya üstünü gerektirir.",
+
+  "workflow.file.import.newerUnknown": "Bu iş akışı StarBot'un daha yeni bir sürümünü gerektirir.",
+
   "workflow.file.import.newerSteps": "Bu sürümün tanımadığı adımlar: {steps}.",
   "workflow.file.import.failed": "İş akışı içe aktarılamadı.",
   "workflow.file.export.secret": "Dışa aktarmadan önce gizli bilgileri kaldırın. Bulunduğu yer: {fields}",
@@ -668,8 +677,10 @@ export const messages = {
   "workflow.canvas.none.trigger": "Bir tetikleyici iş akışını başlatır.",
   "workflow.canvas.none.handoff": "Her adım sonucunu bir sonrakine aktarır.",
   "workflow.canvas.none.open": "{name} öğesini aç",
-  "workflow.page.failed": "OpenBot bunu yapamadı. Tekrar deneyin.",
+  "workflow.page.failed": "StarBot bunu yapamadı. Tekrar deneyin.",
+
   "workflow.page.needsNewerApp":
-    "Bu iş akışında daha yeni bir OpenBot sürümünden adımlar var. Değiştirmek için OpenBot'u güncelleyin.",
+    "Bu iş akışında daha yeni bir StarBot sürümünden adımlar var. Değiştirmek için StarBot'u güncelleyin.",
+
   "workflow.page.manageOnly": "Bu iş akışını değiştirmek için her bir ajanı üzerinde Yönetme erişiminiz olmalı.",
 } as const satisfies PartialTranslation<typeof source>;

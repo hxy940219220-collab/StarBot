@@ -146,7 +146,7 @@ function readUserRules(env: NodeJS.ProcessEnv, home: string): UserRules | null {
       const config = decodeUserConfig(stripJsonc(text));
       if (Option.isNone(config)) {
         if (!warnedFiles.has(file))
-          logger.warn("OpenBot could not read an OpenCode config file, so it adds no prompt rules.", { file: name });
+          logger.warn("StarBot could not read an OpenCode config file, so it adds no prompt rules.", { file: name });
         warnedFiles.add(file);
         return null;
       }
@@ -176,7 +176,7 @@ function hasWebSearchAnswer(env: NodeJS.ProcessEnv, home: string): boolean | nul
       return database.prepare("SELECT 1 FROM kv WHERE key = ?").get(WEB_SEARCH_ANSWER_KEY) !== undefined;
     });
   } catch (cause) {
-    logger.warn("OpenBot could not read OpenCode's web search answer.", toLogValue(cause));
+    logger.warn("StarBot could not read OpenCode's web search answer.", toLogValue(cause));
     return null;
   }
 }
@@ -227,7 +227,7 @@ export function openCodeAgentDefaultsEnv(
       renameSync(temporary, file);
     }
   } catch (cause) {
-    logger.warn("OpenBot could not write its OpenCode prompt rules.", toLogValue(cause));
+    logger.warn("StarBot could not write its OpenCode prompt rules.", toLogValue(cause));
     return {};
   }
   return { OPENCODE_CONFIG: file };

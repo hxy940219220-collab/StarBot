@@ -7,17 +7,20 @@ export const messages = {
     "연결 상태를 확인하고 페이지를 새로 고쳐 주세요. 계속 불러오지 못하면 홈 페이지로 돌아가 주세요.",
   "sitePage.error.reload": "페이지 새로 고침",
   "sitePage.error.home": "홈으로 돌아가기",
-  "sitePage.join.title": "OpenBot 서버 참여",
+  "sitePage.join.title": "StarBot 서버 참여",
+
   "sitePage.join.description": "비공개 서버 초대를 OpenBot에서 열어요.",
   "sitePage.join.eyebrow": "비공개 초대",
   "sitePage.join.intro": "이 초대를 OpenBot에서 열어 주세요. 앱이 서버를 확인하고, 연결하기 전에 확인을 요청해요.",
   "sitePage.join.invalid": "이 초대 링크가 올바르지 않거나 완전하지 않아요. 서버 소유자에게 새 초대를 요청해 주세요.",
-  "sitePage.join.open": "OpenBot 열기",
+  "sitePage.join.open": "StarBot 열기",
+
   "sitePage.join.browser": "브라우저에서 열기",
   "sitePage.join.noApp": "앱이 없나요? {browser} 또는 {download}",
   "sitePage.join.noAppMobile": "앱이 없나요? {browser}",
   "sitePage.join.browserLink": "이 브라우저에서 참여",
-  "sitePage.join.downloadLink": "OpenBot 다운로드",
+  "sitePage.join.downloadLink": "StarBot 다운로드",
+
   "sitePage.join.notOpened":
     "이 컴퓨터에 OpenBot이 있다면 실행한 다음 {open}을(를) 다시 눌러 주세요. 없다면 먼저 다운로드하세요.",
   "sitePage.join.mobile":
@@ -25,22 +28,27 @@ export const messages = {
   "sitePage.join.email": "초대를 이메일로 받았다면 해당 이메일 주소로 OpenBot에 로그인해 주세요.",
   "sitePage.connect.title": "OpenBot으로 돌아가기",
   "sitePage.connect.failedTitle": "연결을 완료하지 못했어요",
-  "sitePage.connect.openApp": "OpenBot 열기",
+  "sitePage.connect.openApp": "StarBot 열기",
+
   "sitePage.connect.tryAgainApp": "OpenBot에서 다시 시도",
   "sitePage.connect.tryAgainBrowser": "브라우저에서 다시 시도",
-  "sitePage.connect.doneInWebClient": "OpenBot 탭에서 {name} 연결을 마무리해요. 이 탭은 닫아도 돼요.",
+  "sitePage.connect.doneInWebClient": "StarBot 탭에서 {name} 연결을 마무리해요. 이 탭은 닫아도 돼요.",
+
   "sitePage.connect.doneInApp": "컴퓨터의 OpenBot에서 {name} 연결을 마무리해요.",
   "sitePage.connect.failure.cancelled": "{name} 연결이 취소되었어요. 변경된 내용은 없어요.",
   "sitePage.connect.failure.expired": "{name} 로그인이 만료되었어요. 연결을 다시 시작해 주세요.",
   "sitePage.connect.failure.exchange": "{name}에서 연결을 확인하지 않았어요. 다시 시도해 주세요.",
   "sitePage.connect.failure.enterprise": "조직 전체가 아니라 Slack 워크스페이스 하나를 연결해 주세요.",
   "sitePage.connect.failure.takenSlack":
-    "다른 OpenBot 서버가 이미 이 Slack 워크스페이스에 응답하고 있어요. 해당 서버에서 연결을 해제한 다음 다시 시도해 주세요.",
+    "다른 StarBot 서버가 이미 이 Slack 워크스페이스에 응답하고 있어요. 해당 서버에서 연결을 해제한 다음 다시 시도해 주세요.",
+
   "sitePage.connect.failure.takenDiscord":
-    "다른 OpenBot 서버가 이미 이 Discord 서버에 응답하고 있어요. 해당 서버에서 연결을 해제한 다음 다시 시도해 주세요.",
+    "다른 StarBot 서버가 이미 이 Discord 서버에 응답하고 있어요. 해당 서버에서 연결을 해제한 다음 다시 시도해 주세요.",
+
   "sitePage.connect.failure.unavailable": "지금은 OpenBot이 {name}에 연결할 수 없어요. 나중에 다시 시도해 주세요.",
   "sitePage.connect.failure.tabClosed":
-    "{name} 연결을 시작한 OpenBot 탭이 응답하지 않았어요. 브라우저에서 OpenBot을 열고 {name}을(를) 다시 연결해 주세요.",
+    "{name} 연결을 시작한 StarBot 탭이 응답하지 않았어요. 브라우저에서 OpenBot을 열고 {name}을(를) 다시 연결해 주세요.",
+
   "sitePage.connect.failure.failed": "{name} 연결을 완료하지 못했어요. 다시 시도해 주세요.",
   "sitePage.connect.restartHint":
     "OpenBot에서 {marketplace}, {apps}, {name}을(를) 차례로 열고 {connect}을(를) 선택해 주세요.",
@@ -48,14 +56,17 @@ export const messages = {
     "OpenBot을 실행한 다음 다시 시도해 주세요. 이 컴퓨터에 OpenBot이 없다면 다운로드해서 앱에서 {name}을(를) 연결해 주세요.",
   "sitePage.openApp.title": "아무것도 열리지 않았나요?",
   "sitePage.openApp.dismiss": "나중에",
-  "sitePage.billing.pageTitle": "OpenBot 결제",
+  "sitePage.billing.pageTitle": "StarBot 결제",
+
   "sitePage.billing.updatedTitle": "결제가 업데이트되었어요",
   "sitePage.billing.updatedBody": "OpenBot으로 돌아가 주세요. 이 페이지는 닫아도 돼요.",
   "sitePage.billing.cancelledTitle": "결제가 취소되었어요",
   "sitePage.billing.cancelledBody": "요금이 청구되지 않았어요. OpenBot으로 돌아가 주세요.",
-  "sitePage.report.pageTitle": "호스팅 사이트 신고 — OpenBot",
+  "sitePage.report.pageTitle": "호스팅 사이트 신고 — StarBot",
+
   "sitePage.report.title": "호스팅 사이트 신고",
-  "sitePage.report.intro": "openbot.site 주소의 유해하거나 불법적인 콘텐츠를 신고해 주세요.",
+  "sitePage.report.intro": "starbot.site 주소의 유해하거나 불법적인 콘텐츠를 신고해 주세요.",
+
   "sitePage.report.hostnameLabel": "사이트 주소",
   "sitePage.report.hostnameMissing": "사이트 주소를 입력해 주세요",
   "sitePage.report.reasonLabel": "사유",
@@ -75,9 +86,11 @@ export const messages = {
   "sitePage.report.sentTitle": "신고를 보냈어요",
   "sitePage.report.sentBody": "감사합니다. 신고를 받았어요.",
   "sitePage.report.home": "홈 페이지로 이동",
-  "sitePage.pricing.title": "OpenBot 요금",
+  "sitePage.pricing.title": "StarBot 요금",
+
   "sitePage.pricing.description": "호스팅 서버와 팀용 라이선스. 내 컴퓨터에서 개인용으로 사용하면 OpenBot은 무료예요.",
-  "sitePage.pricing.imageAlt": "“Small team. Bright ideas.” 유리 돔 안에 있는 OpenBot 에이전트 세 명",
+  "sitePage.pricing.imageAlt": "“Small team. Bright ideas.” 유리 돔 안에 있는 StarBot 에이전트 세 명",
+
   "sitePage.pricing.heading": "요금",
   "sitePage.pricing.personal.title": "개인 사용은 무료예요",
   "sitePage.pricing.personal.body":
@@ -91,10 +104,12 @@ export const messages = {
   "sitePage.pricing.consent.terms": "이용약관 및 청약 철회권",
   "sitePage.pricing.consent.earlyStart":
     "14일의 청약 철회 기간이 끝나기 전에 호스팅 서비스를 시작해 줄 것을 요청합니다. 서비스가 완전히 제공되기 전에 계약을 철회하면 철회 시점까지 제공된 서비스 요금을 지불해야 하며, 서비스가 완전히 제공된 후에는 계약 철회 권리를 잃는다는 것을 확인합니다.",
-  "sitePage.teams.title": "팀을 위한 OpenBot",
+  "sitePage.teams.title": "팀을 위한 StarBot",
+
   "sitePage.teams.description":
     "관리형 인프라에서 OpenBot을 운영하거나, 팀과 워크플로, 기존 시스템에 맞춘 맞춤 구축을 저희와 함께 설계해 보세요.",
-  "sitePage.teams.imageAlt": "“Big plans. Better together.” 종이 다리로 이어진 OpenBot 에이전트 두 명",
+  "sitePage.teams.imageAlt": "“Big plans. Better together.” 종이 다리로 이어진 StarBot 에이전트 두 명",
+
   "sitePage.teams.hero.heading": "회사에 AI 동료 팀을 {team} 들여 보세요",
   "sitePage.teams.setups.heading": "팀에 맞는 구성을 고르세요",
   "sitePage.teams.setups.question": "어떤 구성이 필요한지 모르겠나요?",
@@ -122,8 +137,10 @@ export const messages = {
     "사람과 AI 동료가 하나의 공유 서버에 모여요. 팀원은 같은 환경에서 에이전트와 함께 일하고, 작업을 조율하며 협업할 수 있어요.",
   "sitePage.teams.benefits.anywhere.title": "어디서나 접속",
   "sitePage.teams.benefits.anywhere.description":
-    "OpenBot 환경에 원격으로 연결하고, 지원되는 데스크톱이나 모바일 기기에서 이어서 작업하세요.",
-  "sitePage.teams.custom.heading": "비즈니스에 맞춘 OpenBot",
+    "StarBot 환경에 원격으로 연결하고, 지원되는 데스크톱이나 모바일 기기에서 이어서 작업하세요.",
+
+  "sitePage.teams.custom.heading": "비즈니스에 맞춘 StarBot",
+
   "sitePage.teams.custom.intro":
     "서버는 시작일 뿐이에요. 회사에 완전한 솔루션이 필요하다면, 실제 업무 프로세스에 맞춰 OpenBot을 설계하고 구축하도록 도와드려요.",
   "sitePage.teams.custom.infrastructure": "인프라 구축 및 설정",
@@ -140,12 +157,16 @@ export const messages = {
   "sitePage.teams.closing.heading": "{accent}에게 맡기고 싶은 일을 알려 주세요",
   "sitePage.teams.closing.accent": "AI 동료",
   "sitePage.teams.closing.action": "구성 상담하기",
-  "sitePage.contact.title": "OpenBot 팀에 문의",
+  "sitePage.contact.title": "StarBot 팀에 문의",
+
   "sitePage.contact.description":
-    "맞춤 구성, 파트너십, 언론 문의를 OpenBot 팀에 보내 주세요. 모든 메시지는 사람이 직접 읽어요.",
-  "sitePage.contact.imageAlt": "“Small team. Always on it.” 종이 행성을 둘러싼 OpenBot 에이전트들",
+    "맞춤 구성, 파트너십, 언론 문의를 StarBot 팀에 보내 주세요. 모든 메시지는 사람이 직접 읽어요.",
+
+  "sitePage.contact.imageAlt": "“Small team. Always on it.” 종이 행성을 둘러싼 StarBot 에이전트들",
+
   "sitePage.contact.heading": "팀과 이야기하기",
-  "sitePage.contact.intro": "필요한 것을 알려 주세요. 모든 메시지는 OpenBot 팀원이 직접 읽어요.",
+  "sitePage.contact.intro": "필요한 것을 알려 주세요. 모든 메시지는 StarBot 팀원이 직접 읽어요.",
+
   "sitePage.contact.channel.discord": "커뮤니티와 도움말",
   "sitePage.contact.channel.github": "버그와 소스 코드",
   "sitePage.contact.channel.x": "소식",
@@ -171,18 +192,27 @@ export const messages = {
   "sitePage.contact.sentTitle": "메시지를 보냈어요",
   "sitePage.contact.sentBody": "{email}(으)로 답변드릴게요.",
   "sitePage.contact.sendAnother": "다른 메시지 보내기",
-  "sitePage.marketplace.agents.title": "에이전트 — OpenBot 마켓플레이스",
+  "sitePage.marketplace.agents.title": "에이전트 — StarBot 마켓플레이스",
+
   "sitePage.marketplace.agents.description":
     "다른 사람이 OpenBot에서 만든 에이전트예요. 스킬과 루틴과 함께 OpenBot에 추가할 수 있어요.",
-  "sitePage.marketplace.skills.title": "스킬 — OpenBot 마켓플레이스",
-  "sitePage.marketplace.skills.description": "OpenBot 에이전트가 쓸 수 있는 스킬이에요. OpenBot에 추가할 수 있어요.",
-  "sitePage.marketplace.apps.title": "앱 — OpenBot 마켓플레이스",
+  "sitePage.marketplace.skills.title": "스킬 — StarBot 마켓플레이스",
+
+  "sitePage.marketplace.skills.description": "StarBot 에이전트가 쓸 수 있는 스킬이에요. OpenBot에 추가할 수 있어요.",
+
+  "sitePage.marketplace.apps.title": "앱 — StarBot 마켓플레이스",
+
   "sitePage.marketplace.apps.description":
-    "OpenBot 에이전트가 쓸 수 있는 앱과 도구예요. OpenBot에서 앱을 열고 무엇에 연결할지 정하세요.",
-  "sitePage.marketplace.agentTitle": "{name} — OpenBot 에이전트",
-  "sitePage.marketplace.skillTitle": "{name} — OpenBot 스킬",
-  "sitePage.marketplace.agentImageAlt": "{creator}님이 만든 OpenBot 에이전트 {name}",
-  "sitePage.marketplace.skillImageAlt": "{creator}님이 만든 OpenBot 스킬 {name}",
+    "StarBot 에이전트가 쓸 수 있는 앱과 도구예요. OpenBot에서 앱을 열고 무엇에 연결할지 정하세요.",
+
+  "sitePage.marketplace.agentTitle": "{name} — StarBot 에이전트",
+
+  "sitePage.marketplace.skillTitle": "{name} — StarBot 스킬",
+
+  "sitePage.marketplace.agentImageAlt": "{creator}님이 만든 StarBot 에이전트 {name}",
+
+  "sitePage.marketplace.skillImageAlt": "{creator}님이 만든 StarBot 스킬 {name}",
+
   "sitePage.marketplace.categories": "카테고리",
   "sitePage.marketplace.allCategories": "전체",
   "sitePage.marketplace.searchAgents": "에이전트 검색",
@@ -204,15 +234,18 @@ export const messages = {
   "sitePage.marketplace.emptyApps": "일치하는 앱이 없어요.",
   "sitePage.marketplace.breadcrumb": "이동 경로",
   "sitePage.marketplace.addToOpenBot": "OpenBot에 추가",
-  "sitePage.marketplace.addFromApp": "{name}은(는) OpenBot 안에서 추가해요. 앱을 받은 다음 이 링크를 다시 여세요.",
+  "sitePage.marketplace.addFromApp": "{name}은(는) StarBot 안에서 추가해요. 앱을 받은 다음 이 링크를 다시 여세요.",
+
   "sitePage.marketplace.downloadFor": "{platform}용 다운로드",
   "sitePage.marketplace.copyLink": "링크 복사",
   "sitePage.marketplace.copied": "복사됨",
   "sitePage.marketplace.trust.agentReviewed":
-    "다른 OpenBot 사용자가 만들었어요. 공개 전에 OpenBot이 검토했어요. 추가하면 사용자를 대신해 작업할 수 있어요.",
+    "다른 StarBot 사용자가 만들었어요. 공개 전에 OpenBot이 검토했어요. 추가하면 사용자를 대신해 작업할 수 있어요.",
+
   "sitePage.marketplace.trust.agentPending":
     "OpenBot이 검토하기 전에 만든 사람이 공유했어요. 추가하면 사용자를 대신해 작업할 수 있어요.",
-  "sitePage.marketplace.trust.skillReviewed": "다른 OpenBot 사용자가 만들었어요. 공개 전에 OpenBot이 검토했어요.",
+  "sitePage.marketplace.trust.skillReviewed": "다른 StarBot 사용자가 만들었어요. 공개 전에 OpenBot이 검토했어요.",
+
   "sitePage.marketplace.source.verified": "OpenBot이 검증함",
   "sitePage.marketplace.source.reviewed": "OpenBot이 검토함",
   "sitePage.marketplace.source.pending": "아직 검토 안 됨",
@@ -227,7 +260,8 @@ export const messages = {
   "sitePage.marketplace.missing.title": "마켓플레이스에 없어요",
   "sitePage.marketplace.missing.body": "만든 사람이 삭제했거나, OpenBot이 승인하지 않았거나, 링크가 잘못되었어요.",
   "sitePage.marketplace.missing.open": "마켓플레이스 열기",
-  "sitePage.landing.title": "OpenBot: 내 컴퓨터에서 AI 에이전트 팀을 운영하세요",
+  "sitePage.landing.title": "StarBot: 내 컴퓨터에서 AI 에이전트 팀을 운영하세요",
+
   "sitePage.landing.description":
     "AI 에이전트를 팀으로 내 컴퓨터에서 실행하는 무료 데스크톱 앱. 이미 결제 중인 ChatGPT, Claude, Gemini, Grok 요금제나 나만의 모델로 쓸 수 있어요.",
   "sitePage.landing.hero.new": "신규",
@@ -239,8 +273,10 @@ export const messages = {
   "sitePage.landing.hero.choosePlatform": "다운로드할 플랫폼 선택",
   "sitePage.landing.hero.platforms": "다운로드 플랫폼",
   "sitePage.landing.hero.phoneApps": "모바일 앱",
-  "sitePage.landing.preview.title": "OpenBot 앱 인터랙티브 미리보기",
-  "sitePage.landing.preview.loading": "OpenBot 미리보기 불러오는 중",
+  "sitePage.landing.preview.title": "StarBot 앱 인터랙티브 미리보기",
+
+  "sitePage.landing.preview.loading": "StarBot 미리보기 불러오는 중",
+
   "sitePage.landing.network.title": "에이전트가 함께 일해요.",
   "sitePage.landing.network.description":
     "에이전트마다 자신만의 역할, 지침, 워크스페이스가 있어요. 서로 메시지를 주고받고, 작업을 넘기고, 파일을 공유하고, 결과를 검토해요.",
@@ -320,7 +356,8 @@ export const messages = {
   "sitePage.landing.pricing.yourPlans": "이미 결제 중인 AI 요금제 사용",
   "sitePage.landing.pricing.download": "다운로드",
   "sitePage.landing.pricing.license": "업무용 라이선스",
-  "sitePage.landing.teams.title": "팀을 위한 OpenBot",
+  "sitePage.landing.teams.title": "팀을 위한 StarBot",
+
   "sitePage.landing.teams.statement": "회사 전체를 위한 AI 동료.",
   "sitePage.landing.teams.description": "관리형 서버에서 OpenBot을 운영하고 팀과 도구에 맞게 설정해 드려요.",
   "sitePage.landing.teams.contact": "문의하기",
@@ -368,8 +405,10 @@ export const messages = {
   "sitePage.landing.faq.safety.question": "에이전트가 내 컴퓨터에서 일해도 안전한가요?",
   "sitePage.landing.faq.safety.answer":
     "에이전트는 매번 묻지 않고 파일을 읽고 바꾸고, 명령을 실행하고, 네트워크를 쓰고, 내장 브라우저를 조작할 수 있어요. 믿을 수 있는 작업만 맡기고, 백업을 꼭 해 두세요.",
-  "sitePage.landing.faq.compare": "OpenBot 비교하기",
-  "sitePage.landing.download.title": "OpenBot 다운로드",
+  "sitePage.landing.faq.compare": "StarBot 비교하기",
+
+  "sitePage.landing.download.title": "StarBot 다운로드",
+
   "sitePage.landing.download.description":
     "플랫폼을 선택하세요. Codex, Claude, Gemini, Grok, OpenCode, Muse Code, Pi 또는 나만의 모델을 하나의 데스크톱 앱에서 실행하고, 휴대폰에서 에이전트와 대화하세요.",
   "sitePage.landing.download.available": "사용 가능",
@@ -379,7 +418,8 @@ export const messages = {
   "sitePage.landing.download.pages": "시스템 요구 사항 및 설치 방법:",
   "sitePage.landing.download.apk": "APK 받기",
   "sitePage.referral.invitedBy": "{name}님이 OpenBot에 초대했어요",
-  "sitePage.referral.invited": "OpenBot 초대가 도착했어요",
+  "sitePage.referral.invited": "StarBot 초대가 도착했어요",
+
   "sitePage.referral.offer": "{percent} 할인",
   "sitePage.referral.offerDetail": "첫 결제",
   "sitePage.referral.lead":
@@ -407,7 +447,8 @@ export const messages = {
   "sitePage.site.language": "언어",
   "sitePage.site.language.current": "언어: {language}",
   "sitePage.site.latest": "최신",
-  "sitePage.site.home": "OpenBot 홈",
+  "sitePage.site.home": "StarBot 홈",
+
   "sitePage.site.logo.menu": "로고",
   "sitePage.site.logo.copyIcon": "로고를 SVG로 복사",
   "sitePage.site.logo.copyLockup": "이름이 있는 로고를 SVG로 복사",
@@ -434,7 +475,8 @@ export const messages = {
   "sitePage.site.community": "커뮤니티",
   "sitePage.site.community.description": "Discord에서 이야기 나눠요",
   "sitePage.site.documentation": "문서",
-  "sitePage.site.documentation.description": "OpenBot 설정과 사용법",
+  "sitePage.site.documentation.description": "StarBot 설정과 사용법",
+
   "sitePage.site.brand": "브랜드",
   "sitePage.site.brand.description": "SVG 및 PNG 로고",
   "sitePage.site.status": "상태",
@@ -444,7 +486,8 @@ export const messages = {
   "sitePage.site.cta.title": "첫 번째 팀원을 만나 보세요",
   "sitePage.site.cta.description":
     "이미 결제 중인 요금제로 Codex, Claude, Gemini, Grok 또는 나만의 모델을 실행하세요. 각각 자신만의 워크스페이스와 컨텍스트를 가져요. 작업은 내 컴퓨터에 남아요.",
-  "sitePage.site.downloadOpenBot": "OpenBot 다운로드",
+  "sitePage.site.downloadOpenBot": "StarBot 다운로드",
+
   "sitePage.site.contact": "문의",
   "sitePage.site.footer.description":
     "내 컴퓨터에서 계속 함께하는 AI 팀원. 이미 결제 중인 요금제로 Codex, Claude, Gemini, Grok, Muse Code, Pi 또는 나만의 모델을 실행하세요.",

@@ -30,7 +30,8 @@ export const messages = {
   "notification.machineAlert.body":
     "Der Warnwert von {level} wurde überschritten. Siehe Servereinstellungen → Speicher.",
   "notification.test": "Benachrichtigungen funktionieren.",
-  "notification.welcome": "OpenBot informiert dich hier, wenn ein Agent dich braucht.",
+  "notification.welcome": "StarBot informiert dich hier, wenn ein Agent dich braucht.",
+
   "notification.toast.region": "Benachrichtigungen",
   "notification.toast.close": "Benachrichtigung schließen",
 } as const satisfies PartialTranslation<typeof source>;

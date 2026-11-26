@@ -6,7 +6,8 @@ export const messages = {
   "account.menu.sendFeedback": "إرسال ملاحظات",
   "account.menu.signOut": "تسجيل الخروج",
   "account.menu.signingOut": "جارٍ تسجيل الخروج…",
-  "account.menu.updateFailed": "تعذّر تحديث OpenBot.",
+  "account.menu.updateFailed": "تعذّر تحديث StarBot.",
+
   "account.menu.signOutFailed": "تعذّر تسجيل الخروج.",
   "account.usage.title": "الاستخدام",
   "account.usage.refresh": "تحديث",
@@ -66,16 +67,20 @@ export const messages = {
   "account.update.ready": "التحديث جاهز",
   "account.update.notInstalled": "فشل التثبيت",
   "account.update.progress": "تقدّم تنزيل التحديث",
-  "account.login.connectingTitle": "جارٍ الاتصال بـ OpenBot",
+  "account.login.connectingTitle": "جارٍ الاتصال بـ StarBot",
+
   "account.login.unavailableTitle": "الخدمة غير متاحة",
   "account.login.signedInTitle": "سجّلت الدخول",
   "account.login.checkInboxTitle": "تحقّق من بريدك الوارد",
-  "account.login.signInTitle": "تسجيل الدخول إلى OpenBot",
+  "account.login.signInTitle": "تسجيل الدخول إلى StarBot",
+
   "account.login.connectingDescription": "جارٍ بدء خدمة الحساب. يستغرق هذا عادةً لحظة.",
-  "account.login.unavailableDescription": "يتعذّر على OpenBot الوصول إلى خدمة الحساب الآن.",
+  "account.login.unavailableDescription": "يتعذّر على StarBot الوصول إلى خدمة الحساب الآن.",
+
   "account.login.signInDescription": "استخدم بريدك الإلكتروني لتسجيل الدخول أو إنشاء حساب. سنرسل إليك رمزًا لمرة واحدة.",
   "account.login.keyringChangedDescription":
-    "فقدت سلسلة مفاتيح النظام آخر تسجيل دخول لك. يحفظ OpenBot الآن تسجيلات الدخول في ملف خاص به على هذا الحاسوب. سجّل الدخول مرة أخرى.",
+    "فقدت سلسلة مفاتيح النظام آخر تسجيل دخول لك. يحفظ StarBot الآن تسجيلات الدخول في ملف خاص به على هذا الحاسوب. سجّل الدخول مرة أخرى.",
+
   "account.login.codeAccepted": "قُبل رمزك.",
   "account.login.codeSent": "أرسلنا رمزًا إلى {email}.",
   "account.login.connectingSecurely": "جارٍ الاتصال بأمان…",
@@ -88,15 +93,19 @@ export const messages = {
   "account.login.tryAgainIn": "حاول مرة أخرى بعد {time}",
   "account.login.checkingDelivery": "جارٍ التحقق من التسليم…",
   "account.login.sendingCode": "جارٍ إرسال الرمز…",
-  "account.login.localData": "تبقى دردشاتك وملفاتك على الحاسوب الذي يشغّل OpenBot.",
+  "account.login.localData": "تبقى دردشاتك وملفاتك على الحاسوب الذي يشغّل StarBot.",
+
   "account.login.sendFailed": "حدث خطأ أثناء إرسال الرمز. حاول مرة أخرى.",
   "account.login.codeIncomplete": "أدخل الرمز كاملًا المكوّن من 8 أحرف.",
   "account.login.verifyFailed": "حدث خطأ أثناء التحقق من الرمز. حاول مرة أخرى.",
   "account.login.resendFailed": "حدث خطأ أثناء إرسال رمز جديد. حاول مرة أخرى.",
-  "account.login.stillUnreachable": "لا يزال يتعذّر على OpenBot الوصول إلى خدمة الحساب.",
-  "account.login.resetFailed": "تعذّر على OpenBot إعادة بدء تسجيل الدخول. حاول مرة أخرى.",
+  "account.login.stillUnreachable": "لا يزال يتعذّر على StarBot الوصول إلى خدمة الحساب.",
+
+  "account.login.resetFailed": "تعذّر على StarBot إعادة بدء تسجيل الدخول. حاول مرة أخرى.",
+
   "account.login.codeHint": "أدخل الأحرف الثمانية كلها للمتابعة.",
-  "account.login.verified": "تم التحقق. جارٍ فتح OpenBot…",
+  "account.login.verified": "تم التحقق. جارٍ فتح StarBot…",
+
   "account.login.developmentCode": "رمز التطوير: {code}",
   "account.login.sendNewCode": "إرسال رمز جديد",
   "account.login.sendNewCodeIn": "إرسال رمز جديد بعد {time}",
@@ -104,7 +113,8 @@ export const messages = {
   "account.login.changeEmail": "تغيير البريد الإلكتروني",
   "account.login.resend": "إعادة إرسال الرمز",
   "account.login.resendIn": "إعادة الإرسال بعد {time}",
-  "account.login.loadFailed": "تعذّر على OpenBot تحميل خدمة الحساب.",
+  "account.login.loadFailed": "تعذّر على StarBot تحميل خدمة الحساب.",
+
   "account.login.companyTitle": "تابع في متصفحك",
   "account.login.companyDescription":
     "يسجّل {email} الدخول بحساب شركة. أكمل تسجيل الدخول في الصفحة التي فُتحت في متصفحك.",
@@ -112,7 +122,8 @@ export const messages = {
   "account.login.companyOpenAgain": "افتح صفحة تسجيل الدخول مرة أخرى",
   "account.login.companyOpening": "جارٍ الفتح…",
   "account.login.companyUseAnotherEmail": "استخدم بريدًا إلكترونيًا آخر",
-  "account.login.companyOpenFailed": "تعذّر على OpenBot فتح صفحة تسجيل الدخول. حاول مرة أخرى.",
+  "account.login.companyOpenFailed": "تعذّر على StarBot فتح صفحة تسجيل الدخول. حاول مرة أخرى.",
+
   "account.otp.incorrect": "هذا الرمز غير صحيح. حاول مرة أخرى.",
   "account.otp.verifying": "جارٍ التحقق…",
   "account.otp.entry": "إدخال الرمز لمرة واحدة",

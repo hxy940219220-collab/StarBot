@@ -1,6 +1,6 @@
 /**
  * StarBot (星友) — Original Kawaii Web Audio Synthesizer & Mascot Interaction Sound Engine.
- * Replaces OpenBot/cuelume wooden/mechanical clicks with warm, cute plush/bubble/chime sounds,
+ * Replaces StarBot/cuelume wooden/mechanical clicks with warm, cute plush/bubble/chime sounds,
  * plus dedicated interactive character sounds for hover approach, click/poke, and long-hover petting.
  */
 

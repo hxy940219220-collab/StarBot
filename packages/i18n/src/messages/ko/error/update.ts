@@ -10,7 +10,8 @@ export const messages = {
   "error.update.notInstalled": "마지막 재시작에서 업데이트가 설치되지 않았어요. 다시 시작해서 다시 시도해 주세요.",
   "error.update.downloadFailed": "업데이트를 다운로드할 수 없었어요. 다시 시도해 주세요.",
   "error.update.signatureNotConfirmed":
-    "OpenBot이 업데이트를 확인할 수 없었어요. 다시 시도해 주세요. 이 오류가 계속되면 openbot.run/download에서 OpenBot을 다운로드하세요.",
+    "OpenBot이 업데이트를 확인할 수 없었어요. 다시 시도해 주세요. 이 오류가 계속되면 starbot.app/download에서 OpenBot을 다운로드하세요.",
+
   "error.update.checkFailed": "업데이트를 확인할 수 없었어요. 다시 시도해 주세요.",
   "error.update.checkStalled": "업데이트 확인이 응답하지 않아요. 다시 시도해 주세요.",
   "error.update.checkOffline": "업데이트 서비스에 연결할 수 없어요. 인터넷 연결을 확인한 후 다시 시도해 주세요.",
@@ -21,12 +22,16 @@ export const messages = {
   "error.update.managedByHost":
     "이 Mac의 업데이트는 호스트가 설치해요. 호스트의 유지 관리가 실행될 때까지 업데이트는 준비된 상태로 남아요.",
   "error.update.siblingSession":
-    "이 애플리케이션에서 다른 OpenBot 세션이 아직 실행 중이에요. 다른 모든 macOS 사용자 계정에서 OpenBot을 종료한 후 업데이트를 다시 설치해 주세요.",
+    "이 애플리케이션에서 다른 StarBot 세션이 아직 실행 중이에요. 다른 모든 macOS 사용자 계정에서 OpenBot을 종료한 후 업데이트를 다시 설치해 주세요.",
+
   "error.update.siblingSessionSameAccount":
-    "이 사용자 계정에서 다른 OpenBot 프로세스가 아직 실행 중이에요. 종료한 후 업데이트를 다시 설치해 주세요.",
-  "error.update.siblingCheckFailed": "다른 OpenBot 세션을 확인할 수 없었어요. 설치하기 전에 다시 시도해 주세요.",
+    "이 사용자 계정에서 다른 StarBot 프로세스가 아직 실행 중이에요. 종료한 후 업데이트를 다시 설치해 주세요.",
+
+  "error.update.siblingCheckFailed": "다른 StarBot 세션을 확인할 수 없었어요. 설치하기 전에 다시 시도해 주세요.",
+
   "error.update.readOnlyLocation":
-    "이 위치에서는 OpenBot 업데이트를 설치할 수 없습니다. OpenBot을 종료하세요. Finder에서 OpenBot을 응용 프로그램 폴더로 드래그하세요(이미 그곳에 있다면 밖으로 꺼냈다가 다시 넣으세요). 그런 다음 OpenBot을 열고 업데이트를 다시 설치하세요.",
+    "이 위치에서는 StarBot 업데이트를 설치할 수 없습니다. OpenBot을 종료하세요. Finder에서 OpenBot을 응용 프로그램 폴더로 드래그하세요(이미 그곳에 있다면 밖으로 꺼냈다가 다시 넣으세요). 그런 다음 OpenBot을 열고 업데이트를 다시 설치하세요.",
+
   "error.update.appImageMissing":
     "AppImage 파일이 이동되었거나 이름이 바뀌었거나 교체되어 OpenBot이 업데이트를 설치할 수 없습니다. OpenBot을 종료한 다음 AppImage 파일을 다시 여세요.",
   "error.update.appImageReadOnly":

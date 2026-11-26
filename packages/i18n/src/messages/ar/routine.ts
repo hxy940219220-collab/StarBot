@@ -10,7 +10,8 @@ export const messages = {
   "routine.kind.yearly": "سنويًا",
   "routine.kind.custom": "مخصص",
 
-  "routine.feed.calendarName": "مهام OpenBot الدورية",
+  "routine.feed.calendarName": "مهام StarBot الدورية",
+
   "routine.feed.eventAgent": "الوكيل: {name}",
   "routine.feed.eventChannel": "القناة: {name}",
   "routine.feed.eventTimezone": "المنطقة الزمنية: {timezone}",
@@ -180,7 +181,8 @@ export const messages = {
   "routine.delivery.reason.connectionGone": "الاتصال متوقف أو تمت إزالته",
   "routine.delivery.reason.refused": "لا يمكن النشر في هذا المكان",
   "routine.delivery.reason.sendFailed": "لم تقبله المنصة",
-  "routine.delivery.reason.restart": "توقف OpenBot أثناء الإرسال",
+  "routine.delivery.reason.restart": "توقف StarBot أثناء الإرسال",
+
   "routine.delivery.reason.stopped": "أُوقف الإرسال إلى هذا المكان",
   "routine.delivery.resend": "الإرسال مرة أخرى",
   "routine.delivery.resending": "جارٍ الإرسال…",
@@ -404,12 +406,14 @@ export const messages = {
   "routine.webhook.stepUrlHint": "يرسل المرسل طلب POST بنص JSON لا يتجاوز 64 KiB.",
   "routine.webhook.saveForUrl": "الحفظ والحصول على نقطة النهاية",
   "routine.webhook.stepSecret": "أضف سر التوقيع إلى المرسل",
-  "routine.webhook.stepSecretHint": "يوقّع المرسل كل طلب بهذا السر. يرفض OpenBot أي طلب بلا توقيع صالح.",
+  "routine.webhook.stepSecretHint": "يوقّع المرسل كل طلب بهذا السر. يرفض StarBot أي طلب بلا توقيع صالح.",
+
   "routine.webhook.howToSign": "كيفية توقيع طلب",
   "routine.webhook.howToSignHint": "احفظ السر في OPENBOT_WEBHOOK_SECRET لدى المرسل. لا تضعه في الشيفرة.",
   "routine.webhook.stepTest": "إرسال حدث تجريبي",
   "routine.webhook.stepTestHint":
-    "يوقّع OpenBot حدثًا يطابق هذه المهمة الدورية ويتلقاه كطلب حقيقي. تعمل المهمة الدورية مرة واحدة.",
+    "يوقّع StarBot حدثًا يطابق هذه المهمة الدورية ويتلقاه كطلب حقيقي. تعمل المهمة الدورية مرة واحدة.",
+
   "routine.webhook.sendTest": "إرسال حدث تجريبي",
   "routine.webhook.sendingTest": "جارٍ الإرسال…",
   "routine.webhook.testStarted": "بدأ الحدث التجريبي {eventType} تشغيلًا. يظهر في سجل التشغيل.",
@@ -427,9 +431,11 @@ export const messages = {
   "routine.settings.limitPolicy": "إذا بلغ الحساب حده",
   "routine.settings.limitPolicy.wait": "الانتظار والتشغيل بعد إعادة التعيين",
   "routine.settings.limitPolicy.skip": "تخطي هذا التشغيل",
-  "routine.settings.missedPolicy": "إذا كان OpenBot مغلقًا في الوقت المجدول",
+  "routine.settings.missedPolicy": "إذا كان StarBot مغلقًا في الوقت المجدول",
+
   "routine.settings.missedPolicy.skip": "تخطي هذا التشغيل",
-  "routine.settings.missedPolicy.runOnce": "التشغيل مرة واحدة عند فتح OpenBot",
+  "routine.settings.missedPolicy.runOnce": "التشغيل مرة واحدة عند فتح StarBot",
+
   "routine.settings.runInThread": "التشغيل في سلسلة منفصلة",
   "routine.settings.runInSaveFailed": "حُفظت المهمة الدورية، لكن إعداد السلسلة المنفصلة لم يُحفظ. أعد المحاولة.",
   "routine.settings.resultDestination": "إرسال الإجابات إلى",

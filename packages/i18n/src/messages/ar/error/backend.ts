@@ -3,7 +3,8 @@ import type { messages as source } from "../../en/error/backend";
 
 export const messages = {
   "error.backend.eventsUnavailable": "الأحداث غير متاحة على هذا المضيف.",
-  "error.backend.databaseIntegrity": "فشلت قاعدة بيانات OpenBot في فحص السلامة.",
+  "error.backend.databaseIntegrity": "فشلت قاعدة بيانات StarBot في فحص السلامة.",
+
   "error.backend.webhookRouteLimit": "يمكن أن يحتوي المضيف على {limit} مهام دورية webhook كحد أقصى.",
   "error.backend.webhookSettingsInvalid": "تحقق من إعدادات webhook وحاول مرة أخرى.",
   "error.backend.webhookSenderSecretInvalid":
@@ -17,8 +18,10 @@ export const messages = {
   "error.backend.browserViewLimit": "يوجد عدد كبير جدًا من عروض المتصفح المفتوحة على هذا المضيف.",
   "error.backend.browserViewEnded": "انتهى العرض المباشر لهذه الصفحة.",
   "error.backend.browserViewFailed": "فشل العرض المباشر لهذه الصفحة.",
-  "error.backend.windowTemporarilyUnavailable": "نافذة OpenBot غير متاحة مؤقتًا.",
-  "error.backend.windowUnavailable": "نافذة OpenBot غير متاحة.",
+  "error.backend.windowTemporarilyUnavailable": "نافذة StarBot غير متاحة مؤقتًا.",
+
+  "error.backend.windowUnavailable": "نافذة StarBot غير متاحة.",
+
   "error.backend.sunshineApiHttp": "فشل Sunshine API برمز HTTP {status}.",
   "error.backend.sunshinePortsUnavailable": "تعذّر حجز مجموعة منافذ Sunshine حرة لسطح المكتب البعيد.",
   "error.backend.moonlightPortsUnavailable": "تعذّر حجز نطاق منافذ Moonlight WebRTC حر لسطح المكتب البعيد.",
@@ -33,7 +36,8 @@ export const messages = {
   "error.backend.moonlightRejectedPairing": "رفض Moonlight الاقتران مع Sunshine.",
   "error.backend.moonlightNoPin": "لم يُرجع Moonlight رمز PIN للاقتران.",
   "error.backend.moonlightPairingIncomplete": "لم يكتمل اقتران Moonlight.",
-  "error.backend.moonlightWebNotEmbedded": "Moonlight Web ليس إصدارًا مضمّنًا في OpenBot.",
+  "error.backend.moonlightWebNotEmbedded": "Moonlight Web ليس إصدارًا مضمّنًا في StarBot.",
+
   "error.backend.moonlightEmptyResponse": "أعاد Moonlight استجابة فارغة.",
   "error.backend.remoteDesktopTimeout": "انتهت مهلة طلب سطح المكتب البعيد.",
   "error.backend.moonlightApiHttp": "فشل Moonlight API برمز HTTP {status}.",
@@ -51,10 +55,13 @@ export const messages = {
   "error.backend.browserTeachUnsupported": "لا يدعم هذا المضيف البعيد تسجيل مهمة.",
   "error.backend.browserUserControlUnsupported": "لا يدعم هذا المضيف البعيد التحكم في علامة تبويب المتصفح.",
   "error.backend.browserSignInUnsupported": "لا يمكن لهذا المضيف البعيد استقبال تسجيل دخول من هذا الحاسوب.",
-  "error.backend.browserSignInOpenFailed": "تعذّر على OpenBot فتح نافذة تسجيل الدخول.",
+  "error.backend.browserSignInOpenFailed": "تعذّر على StarBot فتح نافذة تسجيل الدخول.",
+
   "error.backend.browserSignInLoadFailed":
-    "تعذّر على OpenBot تحميل الصفحة في نافذة تسجيل الدخول. تحقّق من الاتصال بالإنترنت، ثم افتح نافذة تسجيل الدخول مرة أخرى.",
-  "error.backend.browserSignInReadFailed": "تعذّر على OpenBot قراءة تسجيل الدخول من النافذة.",
+    "تعذّر على StarBot تحميل الصفحة في نافذة تسجيل الدخول. تحقّق من الاتصال بالإنترنت، ثم افتح نافذة تسجيل الدخول مرة أخرى.",
+
+  "error.backend.browserSignInReadFailed": "تعذّر على StarBot قراءة تسجيل الدخول من النافذة.",
+
   "error.backend.browserStopUnsupported": "لا يمكن لهذا المضيف البعيد إيقاف تحميل الصفحة.",
   "error.backend.sharedDataLocalOnly": "تتم إدارة البيانات المشتركة على الحاسوب الذي يشغّل هؤلاء الوكلاء.",
   "error.backend.browserUrlProtocol": "يُسمح فقط بعناوين URL من نوع HTTP(S) في المتصفح.",
@@ -62,7 +69,8 @@ export const messages = {
   "error.backend.sunshineNotReadyReason": "لم يصبح Sunshine جاهزًا. {reason}",
   "error.backend.channelLeadModelUnavailable": "نموذج الوكيل الرئيسي للقناة غير متاح.",
   "error.backend.contextCompactionIneffective":
-    "لا يؤدي الضغط إلى تصغير هذه الدردشة: بعد عمليتي ضغط لا تزال تستخدم {percent}% من نافذة سياق النموذج، لذا يتوقف OpenBot عن ضغطها. تستخدم الأدوات والتعليمات معظم النافذة. أوقف خوادم MCP أو التحكم في الحاسوب التي لا يحتاج إليها هذا الوكيل، أو اختر نموذجًا بنافذة أكبر. ثم ابدأ دردشة جديدة.",
+    "لا يؤدي الضغط إلى تصغير هذه الدردشة: بعد عمليتي ضغط لا تزال تستخدم {percent}% من نافذة سياق النموذج، لذا يتوقف StarBot عن ضغطها. تستخدم الأدوات والتعليمات معظم النافذة. أوقف خوادم MCP أو التحكم في الحاسوب التي لا يحتاج إليها هذا الوكيل، أو اختر نموذجًا بنافذة أكبر. ثم ابدأ دردشة جديدة.",
+
   "error.backend.contextCompactionStopped":
     'فشلت عمليتا ضغط متتاليتان لهذه الدردشة، لذا يتوقف OpenBot عن ضغطها تلقائيًا. كل محاولة ترسل الدردشة كاملة إلى النموذج وتستهلك من حد خطتك. اختر "الضغط الآن" للمحاولة مرة أخرى، أو ابدأ دردشة جديدة.',
   "error.backend.providerModelAtCapacity":
@@ -70,9 +78,11 @@ export const messages = {
   "error.backend.providerRetrying":
     "فشل المزوّد في هذا الطلب {attempts} مرات ويحاول مرة أخرى. إذا لم يتابع الوكيل، فأوقف الدور.",
   "error.backend.providerRetryingLargeContext":
-    "فشل المزوّد في هذا الطلب {attempts} مرات ويحاول مرة أخرى. تستخدم هذه الدردشة {percent}% من نافذة سياق النموذج. إذا لم يتابع الوكيل، فأوقف الدور: سيضغط OpenBot الدردشة قبل الرسالة التالية.",
+    "فشل المزوّد في هذا الطلب {attempts} مرات ويحاول مرة أخرى. تستخدم هذه الدردشة {percent}% من نافذة سياق النموذج. إذا لم يتابع الوكيل، فأوقف الدور: سيضغط StarBot الدردشة قبل الرسالة التالية.",
+
   "error.backend.sharedDataUnavailable": "البيانات المشتركة غير متاحة.",
-  "error.backend.shuttingDown": "يتم إيقاف تشغيل OpenBot.",
+  "error.backend.shuttingDown": "يتم إيقاف تشغيل StarBot.",
+
   "error.backend.channelUnconfirmedStart": "للقناة بدء تعيين غير مؤكد. تحقق من نتيجته قبل حذفها.",
   "error.backend.channelNotFound": "لم يتم العثور على القناة.",
   "error.backend.channelMemberUnavailable": "أحد أعضاء القناة غير متاح.",
@@ -124,7 +134,8 @@ export const messages = {
     "توقف التشغيل بسبب خطأ، لكن لم يصل معه أي سبب. افتح التشغيل لترى ما فعله الوكيل.",
   "error.backend.turnNotStarted": "لم يبدأ المزوّد هذا الدور.",
   "error.backend.turnStartUnconfirmed":
-    "لم يؤكد {provider} في الوقت المحدد أنه بدأ هذه الرسالة. لا يرسلها OpenBot مرة أخرى، حتى لا يتكرر العمل. ينتظر OpenBot حتى 5 دقائق ليبدأ الوكيل.",
+    "لم يؤكد {provider} في الوقت المحدد أنه بدأ هذه الرسالة. لا يرسلها StarBot مرة أخرى، حتى لا يتكرر العمل. ينتظر StarBot حتى 5 دقائق ليبدأ الوكيل.",
+
   "error.backend.turnStartAbandoned": "لم يبدأ الوكيل هذه الرسالة خلال 5 دقائق. أرسل الرسالة مرة أخرى.",
   "error.backend.routineResultConnectionOff": "اتصال المراسلة هذا متوقف أو تمت إزالته. اختر مكانًا آخر.",
   "error.backend.routineResultNoDelivery": "لا توجد لهذا التشغيل إجابة لإرسالها مرة أخرى.",
@@ -160,7 +171,8 @@ export const messages = {
   "error.backend.queueOrderStale": "ترتيب قائمة الانتظار قديم. حدّث قائمة الانتظار وحاول مرة أخرى.",
   "error.backend.fileGone": "الملف غير موجود أو تم حذفه بالفعل.",
   "error.backend.managedAttachmentChanged": "المرفق المُدار مفقود أو تغيّر: {name}",
-  "error.backend.mailboxStateCorrupt": "حالة صندوق البريد تالفة أو من إصدار أحدث من OpenBot؛ تم رفض الكتابة فوقها.",
+  "error.backend.mailboxStateCorrupt": "حالة صندوق البريد تالفة أو من إصدار أحدث من StarBot؛ تم رفض الكتابة فوقها.",
+
   "error.backend.recipientDeleting": "يتم حذف المستلم. أعد المحاولة بعد انتهاء الحذف.",
   "error.backend.recipientHidden": "هذا الوكيل مخفي. استعده لإرسال الرسائل.",
   "error.backend.agentIdUnknown":
@@ -175,7 +187,8 @@ export const messages = {
   "error.backend.videoGenerationNoVideo": "لم يُرجع إنشاء الفيديو أي فيديو.",
   "error.backend.videoGenerationInterrupted": "تمت مقاطعة إنشاء الفيديو.",
   "error.backend.attachmentNotRegularFile": "يمكن إرفاق الملفات العادية فقط: {name}",
-  "error.backend.attachmentCopyFailed": "تعذّر على OpenBot نسخ {name}.",
+  "error.backend.attachmentCopyFailed": "تعذّر على StarBot نسخ {name}.",
+
   "error.backend.routineNameRequired": "يلزم اسم للمهمة الدورية.",
   "error.backend.routineNameTooLong": "اسم المهمة الدورية طويل جدًا.",
   "error.backend.routineInstructionRequired": "تلزم تعليمات للمهمة الدورية.",
@@ -197,14 +210,16 @@ export const messages = {
   "error.backend.routineWaitForAgent": "انتظر حتى تنتهي عملية الوكيل قبل تشغيل مهمة دورية.",
   "error.backend.routineRunStarting": "لا يزال تشغيل هذه المهمة الدورية قيد البدء. حاول مرة أخرى بعد بدء دورها.",
   "error.backend.routineRunNoSession":
-    "لا يمكن لـ OpenBot مقاطعة تشغيل المهمة الدورية النشط لأن جلسة المزوّد غير متاحة.",
+    "لا يمكن لـ StarBot مقاطعة تشغيل المهمة الدورية النشط لأن جلسة المزوّد غير متاحة.",
+
   "error.backend.interruptSelf": "لا يمكن للوكيل مقاطعة نفسه.",
   "error.backend.interruptOtherWork":
     "يعمل هذا الوكيل على مهمة لم تبدأها رسالتك. يمكن للمستخدم أو لمرسل تلك المهمة فقط إيقافها.",
   "error.backend.interruptSharedWork":
     "يعمل دور هذا الوكيل على رسالتك وأيضًا على رسالة من المستخدم أو من وكيل آخر. المستخدم وحده يمكنه إيقافه، باستخدام إيقاف الوكيل في محادثة ذلك الوكيل.",
   "error.backend.interruptStarting": "لا يزال هذا الوكيل يبدأ دورًا. حاول مرة أخرى بعد بدء الدور.",
-  "error.backend.interruptNoSession": "لا يمكن لـ OpenBot مقاطعة هذا الوكيل لأن جلسة المزوّد غير متاحة.",
+  "error.backend.interruptNoSession": "لا يمكن لـ StarBot مقاطعة هذا الوكيل لأن جلسة المزوّد غير متاحة.",
+
   "error.backend.memoryTextRequired": "يلزم نص الذكرى.",
   "error.backend.memoryTextTooLong": "نص الذكرى طويل جدًا.",
   "error.backend.mcpServerGone": "خادم MCP هذا لم يعد موجودًا.",
@@ -233,9 +248,11 @@ export const messages = {
   "error.backend.messagePinNotFound": "هذه الرسالة ليست في المحادثة.",
   "error.backend.messagePinLimit": "في هذه المحادثة 50 رسالة مثبتة. ألغِ تثبيت واحدة قبل تثبيت أخرى.",
   "error.backend.routineFlowHandoffFailed": "تعذّر على المهمة الدورية تمرير العمل إلى هذا الوكيل.",
-  "error.backend.mcpServerLimit": "يحتفظ OpenBot بـ {limit} خوادم MCP كحد أقصى.",
+  "error.backend.mcpServerLimit": "يحتفظ StarBot بـ {limit} خوادم MCP كحد أقصى.",
+
   "error.backend.mcpServerNameTaken": "يوجد بالفعل خادم MCP باسم {name}.",
-  "error.backend.mcpServerInvalid": "لا يمكن لـ OpenBot حفظ إعداد خادم MCP هذا.",
+  "error.backend.mcpServerInvalid": "لا يمكن لـ StarBot حفظ إعداد خادم MCP هذا.",
+
   "error.backend.mcpHeaderNameInvalid":
     "لا يمكن أن تحتوي أسماء الترويسات على مسافات أو رموز مثل : ( ) /. استخدم اسمًا مثل Authorization، وضع المفتاح أو الرمز المميز في القيمة.",
   "error.backend.mcpServerNoAnswer": "لم يُجب الخادم خلال {seconds} ثانية.",
@@ -245,25 +262,30 @@ export const messages = {
   "error.backend.mcpSignInAccountRefused":
     "رفض الخادم الحساب الذي سجّلت الدخول به. تحقّق من أن هذا الحساب يمكنه استخدام الخدمة. لاستخدام حساب آخر، سجّل الخروج ثم سجّل الدخول مرة أخرى.",
   "error.backend.mcpSignInClientRefused":
-    "لم يقبل خادم تسجيل الدخول OpenBot عند إكمال تسجيل الدخول. سجّل الدخول مرة أخرى: سيسجّل OpenBot لدى الخادم مرة أخرى.",
+    "لم يقبل خادم تسجيل الدخول StarBot عند إكمال تسجيل الدخول. سجّل الدخول مرة أخرى: سيسجّل StarBot لدى الخادم مرة أخرى.",
+
   "error.backend.mcpSignInAppRefused":
     "لم يقبل خادم تسجيل الدخول تطبيق تسجيل الدخول لهذا الخادم. تحقّق من Client ID وClient secret لتطبيق تسجيل الدخول، ثم سجّل الدخول مرة أخرى.",
   "error.backend.mcpCommandNotFound": "لم يتم العثور على الأمر: {command}",
   "error.backend.mcpProviderLimit":
     "يمكن لهذا الوكيل استخدام عدد محدود فقط من خوادم MCP. لاستخدام هذا الخادم، أوقف خادم MCP لا يحتاجه الوكيل.",
   "error.backend.mcpRegistrationRefused":
-    "لا يقبل خادم تسجيل الدخول OpenBot كتطبيق بعد. حسابك ليس السبب. استخدم طريقة أخرى للاتصال، مثل خادم MCP محلي.",
+    "لا يقبل خادم تسجيل الدخول StarBot كتطبيق بعد. حسابك ليس السبب. استخدم طريقة أخرى للاتصال، مثل خادم MCP محلي.",
+
   "error.backend.mcpRegistrationUnavailable":
-    "لا يستطيع خادم تسجيل الدخول تسجيل OpenBot كتطبيق. حسابك ليس السبب. للاتصال، احفظ هذا الخادم في المتجر، التطبيقات، ثم أضف إليه تطبيق تسجيل دخول.",
+    "لا يستطيع خادم تسجيل الدخول تسجيل StarBot كتطبيق. حسابك ليس السبب. للاتصال، احفظ هذا الخادم في المتجر، التطبيقات، ثم أضف إليه تطبيق تسجيل دخول.",
+
   "error.backend.mcpSignInAbandonedGeneric": "تم التخلي عن تسجيل الدخول.",
   "error.backend.mcpSignInForgotten": "تم نسيان تسجيل الدخول إلى MCP أثناء تشغيله.",
   "error.backend.mcpSignInAbandoned": "تم التخلي عن تسجيل الدخول إلى MCP.",
   "error.backend.mcpSignInNoBrowser": "لا يمكن لتسجيل الدخول إلى MCP هذا فتح متصفح.",
   "error.backend.mcpSignInNotWebPage": "عنوان تسجيل الدخول ليس صفحة ويب.",
   "error.backend.mcpSignInRequired": "يطلب منك هذا الخادم تسجيل الدخول. اختر «تسجيل الدخول» للمتابعة في متصفحك.",
-  "error.backend.mcpSignInOnHost": "يطلب هذا الخادم تسجيل الدخول. سجّل الدخول إليه في OpenBot على الحاسوب المضيف.",
+  "error.backend.mcpSignInOnHost": "يطلب هذا الخادم تسجيل الدخول. سجّل الدخول إليه في StarBot على الحاسوب المضيف.",
+
   "error.backend.mcpSignInNeedsHttps":
-    "يطلب هذا الخادم تسجيل الدخول، ولا يسجّل OpenBot الدخول إلا عبر https. غيّر URL إلى {url}.",
+    "يطلب هذا الخادم تسجيل الدخول، ولا يسجّل StarBot الدخول إلا عبر https. غيّر URL إلى {url}.",
+
   "error.backend.mcpSignInOtherAddress":
     "يسجّل هذا الخادم الدخول فقط على {url}. غيّر عنوان URL إلى هذا العنوان، ثم سجّل الدخول مرة أخرى.",
   "error.backend.mcpSignInCancelled": "تم إلغاء تسجيل الدخول.",
@@ -271,9 +293,11 @@ export const messages = {
   "error.backend.mcpSignInRefused": "رفضت صفحة تسجيل الدخول الوصول. سجّل الدخول مرة أخرى.",
   "error.backend.mcpSignInResponseTimedOut": "لم تصل استجابة تسجيل الدخول في الوقت المحدد.",
   "error.backend.mcpSignInMetadataUnreadable":
-    "تعذّر على OpenBot قراءة معلومات تسجيل الدخول لهذا الخادم. تحقق من عنوان الخادم وحاول مرة أخرى.",
+    "تعذّر على StarBot قراءة معلومات تسجيل الدخول لهذا الخادم. تحقق من عنوان الخادم وحاول مرة أخرى.",
+
   "error.backend.mcpSignInAnswerUnreadable":
-    "أرسل خادم تسجيل الدخول ردًا لا يستطيع OpenBot قراءته. إذا كانت الخدمة تمنحك مفتاح API أو رمزًا، فأضفه إلى إعدادات هذا الخادم، ثم اختبر الاتصال مرة أخرى.",
+    "أرسل خادم تسجيل الدخول ردًا لا يستطيع StarBot قراءته. إذا كانت الخدمة تمنحك مفتاح API أو رمزًا، فأضفه إلى إعدادات هذا الخادم، ثم اختبر الاتصال مرة أخرى.",
+
   "error.backend.mcpServerExited": "توقف الخادم قبل أن يُجيب. شغّل الأمر في الطرفية لرؤية الخطأ.",
   "error.backend.mcpServerExitedWithOutput": "توقف الخادم قبل أن يُجيب. كتب: {detail}",
   "error.backend.mcpServerFailedToStart": "لم يبدأ الخادم: {reason}",
@@ -289,7 +313,8 @@ export const messages = {
   "error.backend.mcpServerFailedForProvider":
     "تعذّر على {provider} تشغيل خادم MCP {name}. افتح {name} في المتجر، التطبيقات، واختر اختبار الاتصال لمعرفة السبب.",
   "error.backend.mcpServerFailedInProvider":
-    "تعذّر على {provider} تشغيل خادم MCP {name}. أدواته غير متاحة لـ {provider}. يشغّل {provider} الخادم بنفسه، لذلك قد ينجح اختبار الاتصال في OpenBot. ابدأ محادثة جديدة للمحاولة مرة أخرى.",
+    "تعذّر على {provider} تشغيل خادم MCP {name}. أدواته غير متاحة لـ {provider}. يشغّل {provider} الخادم بنفسه، لذلك قد ينجح اختبار الاتصال في StarBot. ابدأ محادثة جديدة للمحاولة مرة أخرى.",
+
   "error.backend.mcpServerTimedOutInProvider":
     "تعذّر على {provider} تشغيل خادم MCP {name}، لأن الخادم لم يردّ في الوقت المحدد. ابدأ محادثة جديدة للمحاولة مرة أخرى.",
   "error.backend.mcpServerUnavailableInProvider":
@@ -299,12 +324,16 @@ export const messages = {
   "error.backend.githubToolsNotStarted":
     "تعذّر على {provider} الحصول على أدوات GitHub، لأن GitHub لم يردّ. افتح GitHub في المتجر، التطبيقات، واربطه مرة أخرى إذا طلب منك ذلك. ثم ابدأ محادثة جديدة للمحاولة مرة أخرى.",
   "error.backend.mcpOAuthProxyUnavailable":
-    "تعذّر على OpenBot بدء اتصال تسجيل الدخول المحلي لهذا الخادم. أعد تشغيل OpenBot، ثم حاول مرة أخرى.",
+    "تعذّر على StarBot بدء اتصال تسجيل الدخول المحلي لهذا الخادم. أعد تشغيل StarBot، ثم حاول مرة أخرى.",
+
   "error.backend.mcpOAuthSignInNeeded":
-    "انتهى تسجيل الدخول إلى خادم MCP هذا. يجب على المستخدم تسجيل الدخول إليه مرة أخرى في OpenBot.",
+    "انتهى تسجيل الدخول إلى خادم MCP هذا. يجب على المستخدم تسجيل الدخول إليه مرة أخرى في StarBot.",
+
   "error.backend.mcpOAuthRenewalFailed":
-    "تعذّر على OpenBot تجديد تسجيل الدخول إلى خادم MCP هذا الآن. يبقى تسجيل الدخول محفوظًا، وسيحاول الطلب التالي مرة أخرى. إذا استمر هذا الخطأ، يمكن للمستخدم تسجيل الخروج من الخادم في OpenBot ثم تسجيل الدخول مرة أخرى.",
-  "error.backend.mcpServerUnreachable": "تعذّر على OpenBot الوصول إلى الخادم. تحقق من URL ومن شبكتك.",
+    "تعذّر على StarBot تجديد تسجيل الدخول إلى خادم MCP هذا الآن. يبقى تسجيل الدخول محفوظًا، وسيحاول الطلب التالي مرة أخرى. إذا استمر هذا الخطأ، يمكن للمستخدم تسجيل الخروج من الخادم في StarBot ثم تسجيل الدخول مرة أخرى.",
+
+  "error.backend.mcpServerUnreachable": "تعذّر على StarBot الوصول إلى الخادم. تحقق من URL ومن شبكتك.",
+
   "error.backend.mcpLocalServerOff":
     "لا يُجيب أي خادم على {address} في هذا الحاسوب. شغّل الخادم، أو فعّله في التطبيق الذي يشغّله، ثم حاول مرة أخرى.",
   "error.backend.mcpServerBlocked":
@@ -312,7 +341,8 @@ export const messages = {
   "error.backend.mcpServerIncompatible":
     "أجاب شيء ما على هذا العنوان، لكن ليس كخادم MCP عبر Streamable HTTP. تحقق من URL، وحدّث التطبيق الذي يشغّل الخادم.",
   "error.backend.mcpRemoteBridge":
-    "{reason} يشغّل هذا الأمر جسر mcp-remote. اختر Streamable HTTP مع URL {url} بدلًا من ذلك، وسيسجّل OpenBot دخولك.",
+    "{reason} يشغّل هذا الأمر جسر mcp-remote. اختر Streamable HTTP مع URL {url} بدلًا من ذلك، وسيسجّل StarBot دخولك.",
+
   "error.backend.oauthNotHttps": "نقطة نهاية OAuth {origin} ليست https، لذا لم يتم إرسال بيانات الاعتماد.",
   "error.backend.oauthTooManyRedirects": "أعادت نقطة نهاية OAuth التوجيه مرات كثيرة جدًا.",
   "error.backend.oauthRedirectOrigin": "أعادت نقطة نهاية OAuth التوجيه إلى {origin}، لذا لم يتم تمرير بيانات الاعتماد.",
@@ -365,14 +395,18 @@ export const messages = {
   "error.backend.approvalInactive": "هذه الموافقة لم تعد نشطة.",
   "error.backend.approvalOwnerOnly": "يمكن لمالك الخادم فقط الموافقة على هذا الإجراء.",
   "error.backend.feedbackNeedsPhone":
-    "يمكن لتطبيق OpenBot على الهاتف فقط إرسال هذا البلاغ، لأنه يضيف إصدار الهاتف وسجل الدعم. افتح هذه المحادثة على الهاتف. إذا ظهرت لك هذه الرسالة هناك، فحدّث تطبيق الهاتف.",
+    "يمكن لتطبيق StarBot على الهاتف فقط إرسال هذا البلاغ، لأنه يضيف إصدار الهاتف وسجل الدعم. افتح هذه المحادثة على الهاتف. إذا ظهرت لك هذه الرسالة هناك، فحدّث تطبيق الهاتف.",
+
   "error.backend.takeoverInactive": "تولي التحكم في المتصفح هذا لم يعد نشطًا.",
   "error.backend.authSubmitting": "إرسال المصادقة قيد التنفيذ بالفعل.",
-  "error.backend.apiKeyListFailed": "تعذّر على OpenBot قراءة مفاتيح API المحفوظة.",
-  "error.backend.apiKeySaveFailed": "تعذّر على OpenBot حفظ مفتاح API. حاول مرة أخرى.",
+  "error.backend.apiKeyListFailed": "تعذّر على StarBot قراءة مفاتيح API المحفوظة.",
+
+  "error.backend.apiKeySaveFailed": "تعذّر على StarBot حفظ مفتاح API. حاول مرة أخرى.",
+
   "error.backend.apiKeySaving": "يتم حفظ مفتاح API بالفعل.",
   "error.backend.apiKeyAnswerUnreadable":
-    "تعذّر على OpenBot قراءة مفتاح API. أدخل مفتاحًا من 8000 حرف أو أقل، واختر من يمكنه استخدامه.",
+    "تعذّر على StarBot قراءة مفتاح API. أدخل مفتاحًا من 8000 حرف أو أقل، واختر من يمكنه استخدامه.",
+
   "error.backend.vaultItemSaving": "يتم حفظ عنصر الخزنة بالفعل.",
   "error.backend.authRequestInactive": "طلب المصادقة الآمنة هذا لم يعد نشطًا.",
   "error.backend.secureAuthUnavailable": "المصادقة الآمنة غير متاحة.",
@@ -394,7 +428,8 @@ export const messages = {
   "error.backend.browserProxyUnreachable": "الوكيل {name} لا يستجيب، لذلك لم تُفتح الصفحة.",
   "error.backend.browserProxySignInRefused": "رفض الوكيل {name} تسجيل الدخول، لذلك لم تُفتح الصفحة.",
   "error.backend.browserSystemProxyFailed":
-    "الوكيل في إعدادات الكمبيوتر الذي يشغّل OpenBot لا يستجيب أو رفض الاتصال، لذلك لم تُفتح الصفحة. تحقّق من إعدادات الوكيل في ذلك الكمبيوتر.",
+    "الوكيل في إعدادات الكمبيوتر الذي يشغّل StarBot لا يستجيب أو رفض الاتصال، لذلك لم تُفتح الصفحة. تحقّق من إعدادات الوكيل في ذلك الكمبيوتر.",
+
   "error.backend.browserProxyComputerUnreachable":
     "الكمبيوتر الذي يستخدمه هذا الملف الشخصي لا يستجيب، لذلك لم تُفتح الصفحة.",
   "error.backend.browserProxyComputerLocalAddress":
@@ -434,7 +469,8 @@ export const messages = {
   "error.backend.mcpSignInAppUrl": "يحتاج تطبيق تسجيل الدخول إلى URL خادم صالح.",
   "error.backend.mcpSignInAppClientId": "أدخل Client ID لتطبيق تسجيل الدخول.",
   "error.backend.mcpSignInAppIssuerChanged":
-    "تغيّر خادم تسجيل الدخول لخادم MCP هذا، لذا لم يرسل OpenBot إليه تطبيق تسجيل الدخول. إذا كان التغيير صحيحًا، فأزل تطبيق تسجيل الدخول وأضفه مرة أخرى.",
+    "تغيّر خادم تسجيل الدخول لخادم MCP هذا، لذا لم يرسل StarBot إليه تطبيق تسجيل الدخول. إذا كان التغيير صحيحًا، فأزل تطبيق تسجيل الدخول وأضفه مرة أخرى.",
+
   "error.backend.mcpSignInAppNoServer": "احفظ خادم MCP هذا كخادم URL قبل إضافة تطبيق تسجيل دخول.",
   "error.backend.mcpSignInAppUnavailable": "لا يمكن لهذا الحاسوب الاحتفاظ بتطبيق تسجيل دخول.",
   "error.backend.taskMoveRefused": "يمكن تشغيل الرسالة التي أرسلتها إلى هذا الوكيل وحده فقط كمهمة.",
@@ -461,6 +497,8 @@ export const messages = {
     "لدى هذا الوكيل بالفعل {count} مهام غير مكتملة. ابدأ مهمة أخرى عند انتهاء إحداها.",
   "error.backend.taskOpenLimitReached": "لدى هذا الوكيل {count} مهام مفتوحة. أغلق مهمة، ثم ابدأ مهمة أخرى أو افتحها.",
   "error.backend.taskRemoteUnsupported": "المهام متاحة فقط للوكلاء على هذا الحاسوب.",
-  "error.backend.taskMessageFailed": "تعذّر على OpenBot إرسال الرسالة إلى المهمة. حاول مرة أخرى لاحقًا.",
-  "error.backend.taskStartFailed": "تعذّر على OpenBot بدء المهمة. أنجز العمل في هذا الدور بدلًا من ذلك.",
+  "error.backend.taskMessageFailed": "تعذّر على StarBot إرسال الرسالة إلى المهمة. حاول مرة أخرى لاحقًا.",
+
+  "error.backend.taskStartFailed": "تعذّر على StarBot بدء المهمة. أنجز العمل في هذا الدور بدلًا من ذلك.",
+
 } as const satisfies PartialTranslation<typeof source>;

@@ -209,7 +209,7 @@ const agents = new AgentService({
         sent.push(feedback);
         return {
           status: "sent" as const,
-          url: "https://github.com/nightly-labs/openbot/issues/9001",
+          url: "https://github.com/hxy940219220-collab/StarBot-Desktop/issues/9001",
           number: 9001,
           comment: false,
         };
@@ -257,7 +257,7 @@ try {
       .deliveries.every((delivery) => !["queued", "starting", "running"].includes(delivery.status)),
   );
 
-  const connection = agents.messaging.store.ensureConnection("discord", "guild-e2e", "OpenBot e2e");
+  const connection = agents.messaging.store.ensureConnection("discord", "guild-e2e", "StarBot e2e");
   const receive = (id: string, text: string) =>
     runCauseEffect(
       agents.messaging.receive({

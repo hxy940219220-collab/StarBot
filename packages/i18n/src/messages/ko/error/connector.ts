@@ -2,7 +2,8 @@ import type { PartialTranslation } from "../../../message";
 import type { messages as source } from "../../en/error/connector";
 
 export const messages = {
-  "error.connector.githubUnavailable": "이 OpenBot 빌드에는 GitHub App이 없어요.",
+  "error.connector.githubUnavailable": "이 StarBot 빌드에는 GitHub App이 없어요.",
+
   "error.connector.githubDenied": "GitHub 로그인이 거부됐어요.",
   "error.connector.githubCodeExpired": "GitHub 코드가 만료됐어요. GitHub를 다시 연결해 주세요.",
   "error.connector.githubDeviceFlowDisabled": "이 GitHub App은 기기 로그인을 허용하지 않아요.",
@@ -70,5 +71,6 @@ export const messages = {
   "error.connector.protonPassFileUnreadable": "Proton Pass 연결 파일을 읽을 수 없습니다.",
   "error.connector.protonPassSignInTimeout": "Proton 로그인이 너무 오래 걸렸습니다. 다시 연결하세요.",
   "error.connector.protonPassSetupFailed":
-    "Proton Pass에서 Shared with OpenBot 보관함이나 해당 액세스 키를 만들지 못했습니다. 다시 연결하세요.",
+    "Proton Pass에서 Shared with StarBot 보관함이나 해당 액세스 키를 만들지 못했습니다. 다시 연결하세요.",
+
 } as const satisfies PartialTranslation<typeof source>;

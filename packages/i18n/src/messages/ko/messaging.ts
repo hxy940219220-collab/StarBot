@@ -16,5 +16,6 @@ export const messages = {
   "messaging.discordHelp.relay_unavailable":
     "OpenBot이 이 컴퓨터에서 Discord 이벤트를 받을 수 없어요. 로그인하고 서버 설정에서 이 컴퓨터에 이름을 지정한 다음 OpenBot을 열어 두세요.",
   "messaging.discordHelp.not_linked":
-    "이 Discord 서버는 이 OpenBot 서버에 연결되어 있지 않습니다. 연결하려면 다시 연결을 선택하세요.",
+    "이 Discord 서버는 이 StarBot 서버에 연결되어 있지 않습니다. 연결하려면 다시 연결을 선택하세요.",
+
 } as const satisfies PartialTranslation<typeof source>;

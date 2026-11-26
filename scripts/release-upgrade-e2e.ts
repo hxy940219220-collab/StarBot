@@ -34,7 +34,7 @@ declare global {
 }
 
 const logger = createOpenBotLogger("release-upgrade-e2e");
-const REPOSITORY = "nightly-labs/openbot";
+const REPOSITORY = "hxy940219220-collab/StarBot-Desktop";
 const OUT = resolve(import.meta.dirname, "../.openbot-build/release-upgrade-e2e");
 const LAUNCH_LIMIT_MS = 5 * 60_000;
 const TURN_LIMIT_MS = 2 * 60_000;
@@ -59,7 +59,7 @@ if (target === "linux-arm64" && process.arch !== "arm64")
   throw new Error("The linux-arm64 test needs an arm64 computer.");
 if (target === "windows" && process.arch !== "x64") throw new Error("The windows test needs an x64 computer.");
 if (target === "windows" && process.env.GITHUB_ACTIONS !== "true") {
-  throw new Error("The Windows test installs OpenBot for this user and runs only on a GitHub Actions runner.");
+  throw new Error("The Windows test installs StarBot for this user and runs only on a GitHub Actions runner.");
 }
 
 function option(name: string): string | undefined {
@@ -127,7 +127,7 @@ const userDataPath = join(root, "user-data");
 const homePath = join(root, "home");
 await mkdir(userDataPath);
 await mkdir(homePath);
-const agentsFolder = join(target === "windows" ? (process.env.USERPROFILE ?? homePath) : homePath, "OpenBot", "Agents");
+const agentsFolder = join(target === "windows" ? (process.env.USERPROFILE ?? homePath) : homePath, "StarBot", "Agents");
 const earlierWorkspaces = new Set(await listWorkspaces());
 const current: { process: LaunchedProcess | null; app: RunningApp | null } = { process: null, app: null };
 
@@ -185,9 +185,9 @@ function previousTag(ageDays?: number): string {
 }
 
 function artifactName(version: string): string {
-  if (target === "macos") return `OpenBot-${version}-${process.arch === "arm64" ? "arm64" : "x64"}.zip`;
-  if (target === "windows") return `OpenBot-${version}-x64.exe`;
-  return `OpenBot-${version}-${target === "linux" ? "x86_64" : "arm64"}.AppImage`;
+  if (target === "macos") return `StarBot-${version}-${process.arch === "arm64" ? "arm64" : "x64"}.zip`;
+  if (target === "windows") return `StarBot-${version}-x64.exe`;
+  return `StarBot-${version}-${target === "linux" ? "x86_64" : "arm64"}.AppImage`;
 }
 
 async function sha256(path: string): Promise<string> {
@@ -239,13 +239,13 @@ async function newArtifact(): Promise<string> {
 }
 
 const macApplications = join(root, "Applications");
-const macBundle = join(macApplications, "OpenBot.app");
-const windowsFolder = join(process.env.LOCALAPPDATA ?? "", "Programs", "OpenBot");
-const linuxAppImage = "/opt/OpenBot/OpenBot.AppImage";
+const macBundle = join(macApplications, "StarBot.app");
+const windowsFolder = join(process.env.LOCALAPPDATA ?? "", "Programs", "StarBot");
+const linuxAppImage = "/opt/StarBot/StarBot.AppImage";
 
 function executablePath(): string {
-  if (target === "macos") return join(macBundle, "Contents", "MacOS", "OpenBot");
-  if (target === "windows") return join(windowsFolder, "OpenBot.exe");
+  if (target === "macos") return join(macBundle, "Contents", "MacOS", "StarBot");
+  if (target === "windows") return join(windowsFolder, "StarBot.exe");
   return linuxAppImage;
 }
 
@@ -284,16 +284,16 @@ async function installPrevious(artifact: string): Promise<void> {
   }
   if (target === "windows") {
     check(process.env.LOCALAPPDATA, "LOCALAPPDATA is not set.");
-    check(!existsSync(executablePath()), `${windowsFolder} already has OpenBot. Use a computer with no OpenBot.`);
+    check(!existsSync(executablePath()), `${windowsFolder} already has StarBot. Use a computer with no StarBot.`);
     const exitCode = await runInstaller(artifact, "/S");
     check(exitCode === 0, `The installer of the previous release exited with code ${exitCode}.`);
-    check(existsSync(executablePath()), "The installer of the previous release did not install OpenBot.exe.");
+    check(existsSync(executablePath()), "The installer of the previous release did not install StarBot.exe.");
     return;
   }
-  await access("/opt/OpenBot", constants.W_OK).catch(() => {
-    throw new Error("/opt/OpenBot must exist and be writable, with the AppArmor profile installed.");
+  await access("/opt/StarBot", constants.W_OK).catch(() => {
+    throw new Error("/opt/StarBot must exist and be writable, with the AppArmor profile installed.");
   });
-  check(!existsSync(linuxAppImage), `${linuxAppImage} already exists. Use a computer with no OpenBot there.`);
+  check(!existsSync(linuxAppImage), `${linuxAppImage} already exists. Use a computer with no StarBot there.`);
   await copyFile(artifact, linuxAppImage);
   await chmod(linuxAppImage, 0o755);
 }
@@ -304,7 +304,7 @@ async function installNew(artifact: string): Promise<void> {
     await mkdir(staging);
     extractMacZip(artifact, staging);
     await rm(macBundle, { recursive: true, force: true });
-    await rename(join(staging, "OpenBot.app"), macBundle);
+    await rename(join(staging, "StarBot.app"), macBundle);
     verifyMacSignature();
     return;
   }
@@ -357,7 +357,7 @@ async function waitFor<T>(
   for (;;) {
     const value = await read();
     if (value !== null && value !== undefined) return value;
-    if (stopped) throw new Error(`OpenBot exited before ${description}.`);
+    if (stopped) throw new Error(`StarBot exited before ${description}.`);
     if (Date.now() > deadline) throw new Error(`Timed out waiting for ${description}.`);
     await sleep(POLL_MS);
   }
@@ -483,7 +483,7 @@ async function quit(app: RunningApp, byWindowClose = process.platform === "win32
     stopLeftovers(app);
     return { clean: true, exitCode: outcome, runMarker: await readRunMarkerState() };
   }
-  logger.warn("OpenBot did not quit in time; it is killed.");
+  logger.warn("StarBot did not quit in time; it is killed.");
   forceKill(app.child);
   const exitCode = await app.exited;
   stopLeftovers(app);
@@ -959,7 +959,7 @@ try {
   report.error = error instanceof Error ? error.message : String(error);
   logger.error(`Release upgrade check failed: ${report.error}`);
   const running = current.app ?? current.process;
-  if (running) logger.error(`OpenBot stderr (last lines):\n${running.stderr()}`);
+  if (running) logger.error(`StarBot stderr (last lines):\n${running.stderr()}`);
   await printLogs().catch(() => undefined);
   process.exitCode = 1;
 } finally {

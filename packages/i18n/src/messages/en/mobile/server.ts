@@ -1799,7 +1799,8 @@ export const messages = defineMessages("mobile.server", {
   "mobile.server.update.path.container":
     "On the Docker host, pull the new StarBot image and create the container again with the same data volumes. Wait for active work to finish first. Keep the existing volumes to preserve your data.",
   "mobile.server.update.path.manual":
-    "This installation cannot replace itself. Ask the host administrator to install the compatible release from github.com/nightly-labs/openbot/releases. Keep the existing StarBot data.",
+    "This installation cannot replace itself. Ask the host administrator to install the compatible release from github.com/hxy940219220-collab/StarBot-Desktop/releases. Keep the existing StarBot data.",
+
   "mobile.server.update.path.unavailable":
     "This is a development build. Use an installed StarBot release to check for updates.",
   "mobile.server.update.check": "Check for updates",
@@ -1937,7 +1938,8 @@ export const messages = defineMessages("mobile.server", {
   "mobile.server.audit.agentLevel": "{agent} for {role}: {change}",
   "mobile.server.settings.importAgents": "Import agents",
   "mobile.server.route.import": "Import agents",
-  "mobile.server.import.unsupported": "Update OpenBot on this server to import agents here.",
+  "mobile.server.import.unsupported": "Update StarBot on this server to import agents here.",
+
   "mobile.server.import.unavailable": "Connect to this server to import agents.",
   "mobile.server.import.count.agent": { one: "{count} agent", other: "{count} agents" },
   "mobile.server.import.count.channel": { one: "{count} channel", other: "{count} channels" },

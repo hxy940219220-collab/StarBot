@@ -7,9 +7,11 @@ export const messages = {
   "status.computerUse.driverNoAnswer": "מנהל ההתקן של שליטה במחשב לא השיב. {reason}",
   "status.computerUse.driverStopped": "מנהל ההתקן של שליטה במחשב נעצר.",
   "status.computerUse.unsupported": "שליטה במחשב זמינה ב-macOS, ב-Windows וב-Linux.",
-  "status.computerUse.driverMissing": "גרסת OpenBot הזו אינה כוללת מנהל התקן של שליטה במחשב.",
+  "status.computerUse.driverMissing": "גרסת StarBot הזו אינה כוללת מנהל התקן של שליטה במחשב.",
+
   "status.computerUse.inputRefused":
-    "בשולחן העבודה הזה OpenBot לא יכול להקליד או ללחוץ באפליקציות אחרות. למשימות באתרים, אפשר לבקש מהסוכן להשתמש בדפדפן של OpenBot.",
+    "בשולחן העבודה הזה StarBot לא יכול להקליד או ללחוץ באפליקציות אחרות. למשימות באתרים, אפשר לבקש מהסוכן להשתמש בדפדפן של StarBot.",
+
   "status.computerUse.progressActing": "משתמש באפליקציה במחשב הזה…",
   "status.computerUse.progressDeciding": "מחליט על הצעד הבא באפליקציה…",
 } as const satisfies PartialTranslation<typeof source>;

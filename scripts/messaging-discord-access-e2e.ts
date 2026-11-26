@@ -193,7 +193,7 @@ const rest = {
           { id: GUILD_ONE, name: "@everyone", position: 0 },
           { id: MEMBERS, name: "Members", position: 1 },
           { id: MAINTAINERS, name: "Maintainers", position: 2 },
-          { id: "400000000000000009", name: "OpenBot", position: 3, managed: true },
+          { id: "400000000000000009", name: "StarBot", position: 3, managed: true },
           { id: LONG_ROLE, name: "🦊".repeat(60), position: 0 },
         ]);
       return Effect.fail(new DiscordTransportError({ status: 404 }));
@@ -204,7 +204,7 @@ const signal = new DiscordState(APP);
 signal.handle(
   gateway("READY", {
     v: 10,
-    user: { id: APP, username: "OpenBot", bot: true },
+    user: { id: APP, username: "StarBot", bot: true },
     application: { id: APP, flags: 0 },
     guilds: [
       { id: GUILD_ONE, unavailable: true },
@@ -486,14 +486,14 @@ try {
     return { listed: listed.places.length, firstThread: threadIds[0], note: listed.note };
   });
 
-  await step("a mention of OpenBot's own role reaches OpenBot; a mention of another role does not", async () => {
+  await step("a mention of StarBot's own role reaches StarBot; a mention of another role does not", async () => {
     const BOT_ROLE = "1300000000000000001";
     const OTHER_ROLE = "1300000000000000002";
     const state = new DiscordState(APP);
     state.handle(
       gateway("READY", {
         v: 10,
-        user: { id: APP, username: "OpenBot", bot: true },
+        user: { id: APP, username: "StarBot", bot: true },
         application: { id: APP, flags: 0 },
         guilds: [{ id: GUILD_ONE, unavailable: true }],
         session_id: "session",
@@ -508,7 +508,7 @@ try {
         channels: [{ id: CHANNEL_ONE, type: 0, name: "general" }],
         roles,
       });
-    const botRole = { id: BOT_ROLE, name: "OpenBot", managed: true, tags: { bot_id: APP } };
+    const botRole = { id: BOT_ROLE, name: "StarBot", managed: true, tags: { bot_id: APP } };
     const otherRole = { id: OTHER_ROLE, name: "Mods", managed: false };
     const roleMention = (roleId: string): string | null => {
       const actions = state.handle(
@@ -609,7 +609,7 @@ try {
         () => null,
         (error: unknown) => (error instanceof Error ? error.message : String(error)),
       );
-      assert.equal(failure, "OpenBot cannot list Discord roles yet. Try again later.");
+      assert.equal(failure, "StarBot cannot list Discord roles yet. Try again later.");
       return { failure };
     });
 
@@ -627,7 +627,7 @@ try {
       return { refused: true };
     });
 
-    await step("with a role list, only members with one of its roles reach OpenBot", async () => {
+    await step("with a role list, only members with one of its roles reach StarBot", async () => {
       const input = parseSetDiscordAccessInput({
         workspaceId: GUILD_ONE,
         allowedRoles: [{ id: MAINTAINERS, name: "Maintainers" }],
@@ -665,8 +665,8 @@ try {
         content: "do it",
       });
       await received(maintainer);
-      assert.equal(touched(outsider), false, "OpenBot reacted or replied to a member without a listed role.");
-      assert.equal(touched(unknownRoles), false, "OpenBot reacted or replied to a mention without roles.");
+      assert.equal(touched(outsider), false, "StarBot reacted or replied to a member without a listed role.");
+      assert.equal(touched(unknownRoles), false, "StarBot reacted or replied to a mention without roles.");
       const record = services.threads.store.connectionForWorkspace("discord", GUILD_ONE);
       assert.ok(record);
       assert.equal(
@@ -707,14 +707,14 @@ try {
           id: replied,
           authorId: KAMIL,
           authorName: "Kamil",
-          content: `Feature idea: webhooks for OpenBot. <@${BOB}> agrees.`,
+          content: `Feature idea: webhooks for StarBot. <@${BOB}> agrees.`,
         },
       });
       await received(id);
       const prompt = await promptOf(services, GUILD_ONE, id, CHANNEL_ONE);
       assert.match(
         prompt,
-        /--- the message this one replies to \(context\) ---\n\[2026-10-19T11:40:00\.000Z\] Kamil: Feature idea: webhooks for OpenBot\. @Bob agrees\.\n--- message ---\nmake an issue for this/u,
+        /--- the message this one replies to \(context\) ---\n\[2026-10-19T11:40:00\.000Z\] Kamil: Feature idea: webhooks for StarBot\. @Bob agrees\.\n--- message ---\nmake an issue for this/u,
       );
       assert.doesNotMatch(prompt, /earlier messages/u);
 
@@ -1072,7 +1072,7 @@ try {
               {
                 fields: [
                   { name: "What do you need?", value: "```Bug```", inline: false },
-                  { name: "OpenBot version", value: "```0.59.0```", inline: false },
+                  { name: "StarBot version", value: "```0.59.0```", inline: false },
                   { name: "\u200b", value: "\u200b" },
                 ],
               },
@@ -1095,7 +1095,7 @@ try {
           embeds: [
             {
               title: "Login fails after the update",
-              url: "https://github.com/nightly-labs/openbot/issues/1",
+              url: "https://github.com/hxy940219220-collab/StarBot-Desktop/issues/1",
               description: "The app closes at start.",
             },
           ],
@@ -1174,5 +1174,5 @@ try {
   writeFileSync(REPORT, `${JSON.stringify(report, null, 2)}\n`);
   await rm(root, { recursive: true, force: true });
 }
-assert.ok(!readFileSync(REPORT, "utf8").includes("webhooks for OpenBot"), "The report contains message text.");
+assert.ok(!readFileSync(REPORT, "utf8").includes("webhooks for StarBot"), "The report contains message text.");
 process.stdout.write(`Discord access check passed. Report: ${REPORT}\n`);

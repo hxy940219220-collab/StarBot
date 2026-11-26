@@ -33,28 +33,38 @@ export const messages = {
   "update.provider.showDetails": "Ayrıntıları göster",
   "update.provider.hideDetails": "Ayrıntıları gizle",
 
-  "update.scheduled.title": "{name} bir OpenBot güncellemesi zamanladı",
-  "update.scheduled.automaticTitle": "OpenBot bir güncelleme yüklüyor",
-  "update.scheduled.whenIdle": "OpenBot, ajanlar boştayken yeniden başlar.",
-  "update.scheduled.now": "OpenBot, güncelleme indirildiğinde yeniden başlar.",
+  "update.scheduled.title": "{name} bir StarBot güncellemesi zamanladı",
+
+  "update.scheduled.automaticTitle": "StarBot bir güncelleme yüklüyor",
+
+  "update.scheduled.whenIdle": "StarBot, ajanlar boştayken yeniden başlar.",
+
+  "update.scheduled.now": "StarBot, güncelleme indirildiğinde yeniden başlar.",
+
   "update.scheduled.cancel": "Güncellemeyi iptal et",
   "update.scheduled.cancelFailed": "Güncelleme iptal edilemedi.",
 
-  "update.idleRestart.relaunchTitle": "Ajanlar boştayken OpenBot yeniden başlatılır",
-  "update.idleRestart.updateTitle": "Ajanlar boştayken OpenBot güncellemeyi yükler",
+  "update.idleRestart.relaunchTitle": "Ajanlar boştayken StarBot yeniden başlatılır",
+
+  "update.idleRestart.updateTitle": "Ajanlar boştayken StarBot güncellemeyi yükler",
+
   "update.idleRestart.description": "Yeni rutin çalıştırmaları yeniden başlatmaya kadar bekler.",
   "update.idleRestart.waitingFor": "{reasons} bekleniyor.",
   "update.idleRestart.cancel": "Yeniden başlatmayı iptal et",
   "update.idleRestart.restartNow": "Şimdi yeniden başlat",
-  "update.idleRestart.restartNowTitle": "OpenBot şimdi yeniden başlatılsın mı?",
+  "update.idleRestart.restartNowTitle": "StarBot şimdi yeniden başlatılsın mı?",
+
   "update.idleRestart.restartNowDescription": "Bitmemiş ajan turları ve rutin çalıştırmaları şimdi durur.",
   "update.idleRestart.keepWaiting": "Beklemeye devam et",
   "update.idleRestart.cancelFailed": "Yeniden başlatma iptal edilemedi.",
   "update.idleRestart.requestFailed": "Yeniden başlatma zamanlanamadı.",
-  "update.idleRestart.failedTitle": "OpenBot yeniden başlatılmadı",
+  "update.idleRestart.failedTitle": "StarBot yeniden başlatılmadı",
 
-  "update.whatsNew.title": "OpenBot'taki yenilikler",
-  "update.whatsNew.description": "OpenBot'un bu sürümündeki yeni özellikler ve değişiklikler.",
+
+  "update.whatsNew.title": "StarBot'taki yenilikler",
+
+  "update.whatsNew.description": "StarBot'un bu sürümündeki yeni özellikler ve değişiklikler.",
+
   "update.whatsNew.version": "Sürüm {version}",
   "update.whatsNew.updatedFrom": "{from} sürümünden {to} sürümüne güncellendi",
   "update.whatsNew.group.added": "Yeni",
@@ -71,12 +81,15 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Bu sürümde burada gösterilecek bir not yok. Tüm değişiklikler tam sürüm günlüğünde gösterilir.",
   "update.whatsNew.changelog": "Tam sürüm günlüğü",
-  "update.whatsNew.changelogFailed": "OpenBot sürüm günlüğünü açamadı.",
+  "update.whatsNew.changelogFailed": "StarBot sürüm günlüğünü açamadı.",
+
   "update.whatsNew.done": "Anladım",
   "update.required.title": "Güncelleme gerekli",
   "update.required.description":
-    "OpenBot {version} artık desteklenmiyor. Devam etmek için {minimum} veya daha yeni bir sürüme güncelleyin.",
-  "update.required.download": "OpenBot’u indir",
+    "StarBot {version} artık desteklenmiyor. Devam etmek için {minimum} veya daha yeni bir sürüme güncelleyin.",
+
+  "update.required.download": "StarBot’u indir",
+
   "update.required.continue": "Güncellemeden devam et",
   "update.required.failed": "Güncelleme tamamlanmadı.",
 } as const satisfies PartialTranslation<typeof source>;

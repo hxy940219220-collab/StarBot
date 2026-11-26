@@ -30,7 +30,8 @@ export const messages = {
   "notification.machineAlert.body":
     "Superó el nivel de alerta del {level}. Consulta Ajustes del servidor > Almacenamiento.",
   "notification.test": "Las notificaciones funcionan.",
-  "notification.welcome": "OpenBot te avisará aquí cuando un agente te necesite.",
+  "notification.welcome": "StarBot te avisará aquí cuando un agente te necesite.",
+
   "notification.toast.region": "Notificaciones",
   "notification.toast.close": "Cerrar notificación",
 } as const satisfies PartialTranslation<typeof source>;

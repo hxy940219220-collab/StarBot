@@ -118,7 +118,7 @@ const gateway = (t: string, d: unknown): Parameters<DiscordState["handle"]>[0] =
 signal.handle(
   gateway("READY", {
     v: 10,
-    user: { id: APP, username: "OpenBot", bot: true },
+    user: { id: APP, username: "StarBot", bot: true },
     application: { id: APP, flags: 0 },
     guilds: [{ id: GUILD, unavailable: true }],
     session_id: "session",
@@ -239,13 +239,13 @@ async function post(threads: MessagingThreads, connection: string, args: Dynamic
 const embed = {
   title: "  Nightly report  ",
   description: `All checks passed. Key ${SECRET} is set.`,
-  url: "https://openbot.run/report",
+  url: "https://starbot.app/report",
   color: 0x5865f2,
   timestamp: "2026-11-09T10:00:00.000Z",
-  author: { name: "OpenBot", icon_url: "https://openbot.run/icon.png" },
+  author: { name: "StarBot", icon_url: "https://starbot.app/icon.png" },
   footer: { text: "Routine: nightly" },
-  thumbnail: { url: "https://openbot.run/thumb.png" },
-  image: { url: "https://openbot.run/chart.png" },
+  thumbnail: { url: "https://starbot.app/thumb.png" },
+  image: { url: "https://starbot.app/chart.png" },
   fields: [
     { name: "Passed", value: "41", inline: true },
     { name: "Failed", value: "0", inline: true },
@@ -334,7 +334,7 @@ try {
         { embeds: [{}] },
         { embeds: [{ title: "Link", url: "javascript:alert(1)" }] },
         { embeds: [{ title: "Color", color: 0x1000000 }] },
-        { embeds: [{ title: "Unknown", video: { url: "https://openbot.run/v.mp4" } }] },
+        { embeds: [{ title: "Unknown", video: { url: "https://starbot.app/v.mp4" } }] },
         { embeds: Array.from({ length: 11 }, () => ({ title: "Many" })) },
         { embeds: [{ description: "d".repeat(4_000) }, { description: "d".repeat(2_001) }] },
       ];

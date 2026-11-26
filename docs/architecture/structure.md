@@ -5,13 +5,13 @@
 ```text
 apps/
   auth-api/          Public web and /app browser entry, accounts, memberships, connection tickets, and billing
-  discord-app/       Developer Portal settings of the OpenBot Discord app (no code)
+  discord-app/       Developer Portal settings of the StarBot Discord app (no code)
   mobile/            Expo React Native client for remote team hosts
   mobile-updates/    Cloudflare Worker that gives the mobile app its over-the-air updates from private R2 storage
   site-router/       Cloudflare Worker that serves published sites from private R2 storage
-  slack-app/         Slack CLI projects with the OpenBot Slack app manifests (production, development)
+  slack-app/         Slack CLI projects with the StarBot Slack app manifests (production, development)
   status/            Public status page on GitHub Pages, and the check and webhook scripts of its workflow
-  telegram-app/      BotFather settings of the OpenBot Telegram bot (no code)
+  telegram-app/      BotFather settings of the StarBot Telegram bot (no code)
 packages/
   ui/                Shared SolidJS controls and primitive styles for desktop, web, and Storybook
   brand/             Shared logos, avatars, and design tokens
@@ -66,7 +66,7 @@ SolidJS, provider, Cloudflare, and application code; and the account server to d
 
 ## State ownership
 
-- `openbot.db` is the source of truth for OpenBot agents, conversations, queues, reactions,
+- `openbot.db` is the source of truth for StarBot agents, conversations, queues, reactions,
   attachments, and provider-session bindings.
 - `RoutineStore` saves a routine and its webhook trigger in one transaction. `WebhookRouteStore`
   owns route IDs, encrypted secrets, receipts, and route revocations. `RoutineRecords` gives main one
@@ -83,19 +83,19 @@ SolidJS, provider, Cloudflare, and application code; and the account server to d
 - `src/backend/provider-history.ts` defines the internal fragment reader. Provider adapters own
   pagination and decoding. `provider-history-import.ts` commits normalized message pages without
   deleting messages absent from a page. SQLite stores incomplete turns and import progress.
-  ACP replay records without stable OpenBot message IDs remain provider records for handoff and
+  ACP replay records without stable StarBot message IDs remain provider records for handoff and
   recovery. They do not create a second copy of messages already saved by the live turn.
 - `ConversationRuntime` keeps active work and a bounded recent cache. Released full-history APIs
   build their responses from SQLite for each request. They do not set the working cache.
 - `~/.codex`, `~/.claude`, `~/.grok`, `~/.gemini`, `~/.cursor`, `~/.cline`, `~/.kimi`, `~/.pi`, `~/.devin`, `~/.copilot`, `~/.vibe`, and the OpenCode,
-  Muse and Devin XDG folders are provider-owned login and resume state. They are not OpenBot
+  Muse and Devin XDG folders are provider-owned login and resume state. They are not StarBot
   conversation storage.
 - D1 is the source of truth for central accounts, remote membership, invitations, and logical sessions.
 - Stripe is the source of truth for paid plans. D1 `billing_subscriptions` is a copy that the Stripe
   webhook keeps current; see [Billing](servers.md#billing).
 - A local team host owns conversations, files, agents, and the local member projection used by Team API.
 - `openbot-approval-automation-v3.json` holds which agents have Full access: the `autoApprove` half of
-  each agent's Permissions level (Workspace only, Ask first, Full access). OpenBot reads an older
+  each agent's Permissions level (Workspace only, Ask first, Full access). StarBot reads an older
   `-v2` or `-v1` file when no v3 file exists and leaves it in place for a downgrade; Turbo mode on in
   such a file gives every agent Full access. It belongs to the computer that runs the agent and never crosses the Team API, whose released
   adapters freeze an approval response to `accept` or `decline`: a remote host that has automation
@@ -107,7 +107,7 @@ SolidJS, provider, Cloudflare, and application code; and the account server to d
   (`AttentionRegistry.answerGrantedRequests`). The registry also accepts, once, Codex's consent to run
   an MCP tool (`_meta.codex_approval_kind` `mcp_tool_call`, a tool set to ask every time included), and
   saves nothing: "Always allow" stays the user's choice, which Codex keeps per server and tool. A
-  Workspace only agent keeps its card; a Computer Use tool does not. OpenBot keeps Codex's `approvalPolicy`
+  Workspace only agent keeps its card; a Computer Use tool does not. StarBot keeps Codex's `approvalPolicy`
   at `on-request`, because `never` denies MCP tool calls and rejects elicitations. At Ask first
   (`codexApprovalPolicy`) it sends `untrusted`: with no sandbox, `on-request` asks before almost no
   command, and `untrusted` asks before each command and file change. Other questions, MCP
@@ -116,7 +116,7 @@ SolidJS, provider, Cloudflare, and application code; and the account server to d
   user added (`AgentSummary.additionalFolders`, in `agent_json`, real paths, at most 32). One function,
   `workspaceWritableRoots`, gives these roots to every provider sandbox, and the agent's developer
   instructions name them. Only the local `agentFolders` IPC endpoints change the list; an agent cannot
-  add a folder to itself. Main refuses a disk root, the home folder, and a folder that holds OpenBot data.
+  add a folder to itself. Main refuses a disk root, the home folder, and a folder that holds StarBot data.
   A folder that is not on the disk stays in the list but is not a root. The list is local, like
   `access`: the Team API does not carry it.
 - `browser-tabs.json` is the embedded browser's own durable state, outside `openbot.db` and outside the
@@ -129,7 +129,7 @@ SolidJS, provider, Cloudflare, and application code; and the account server to d
   Nothing copies it first, so `src/backend/browser-state.ts` re-validates every bound it reads rather
   than trusting it: a tab whose environment fails validation is still returned, without that
   environment, because losing the user's open tab is worse than losing an emulated viewport.
-- `~/OpenBot/Shared/Data/agent-data.db` is one SQLite file that holds every table the agents create
+- `~/StarBot/Shared/Data/agent-data.db` is one SQLite file that holds every table the agents create
   for themselves, outside `openbot.db` and outside the migration runner. One file gives the agents
   one namespace and lets them join across each other's tables. Every agent can read and write every
   table; the `openbot_metadata` table records the agent that created each one, and that owner is the
@@ -137,7 +137,7 @@ SolidJS, provider, Cloudflare, and application code; and the account server to d
   rule does not depend on reading the model's SQL. The agents own these schemas, so nothing copies
   or migrates them before a release, and a table stays when the agent that made it is deleted. The
   user deletes one from agent settings, which is the only way to remove a table whose owner is gone.
-  OpenBot's own schema of the file (the `openbot_metadata` table) has a version in `PRAGMA
+  StarBot's own schema of the file (the `openbot_metadata` table) has a version in `PRAGMA
   user_version`. A file without one is version 1. The host refuses a file with a newer version, and
   changes nothing in it.
   The guidance the agents read ships as the managed skill `resources/managed-skills/openbot-data`,

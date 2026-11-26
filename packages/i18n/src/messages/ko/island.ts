@@ -2,16 +2,25 @@ import type { PartialTranslation } from "../../message";
 import type { messages as source } from "../en/island";
 
 export const messages = {
-  "island.surface.label": "OpenBot MacBook 노치",
-  "island.surface.labelIsland": "OpenBot Dynamic Island",
+  "island.surface.label": "StarBot MacBook 노치",
+
+  "island.surface.labelIsland": "StarBot Dynamic Island",
+
   "island.surface.interactionArea": "Dynamic Island 상호작용 영역",
-  "island.label.idle": "OpenBot 열기",
-  "island.label.working": "OpenBot 작업 상태",
-  "island.label.message": "OpenBot 채팅 업데이트",
-  "island.label.question": "OpenBot AI의 질문",
-  "island.label.approval": "OpenBot 승인 요청",
-  "island.label.takeover": "OpenBot 브라우저 직접 진행",
-  "island.label.failed": "OpenBot 작업 실패",
+  "island.label.idle": "StarBot 열기",
+
+  "island.label.working": "StarBot 작업 상태",
+
+  "island.label.message": "StarBot 채팅 업데이트",
+
+  "island.label.question": "StarBot AI의 질문",
+
+  "island.label.approval": "StarBot 승인 요청",
+
+  "island.label.takeover": "StarBot 브라우저 직접 진행",
+
+  "island.label.failed": "StarBot 작업 실패",
+
   "island.label.externalDisplay": "외부 디스플레이의 {label}",
   "island.badge.working": "작업 중",
   "island.badge.message": "메시지",

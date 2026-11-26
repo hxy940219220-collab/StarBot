@@ -74,8 +74,8 @@ export async function postAnnouncement(
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        username: "OpenBot",
-        avatar_url: "https://openbot.run/icon-512x512.png",
+        username: "StarBot",
+        avatar_url: "https://starbot.app/icon-512x512.png",
         content,
         allowed_mentions: allowedMentions,
       }),

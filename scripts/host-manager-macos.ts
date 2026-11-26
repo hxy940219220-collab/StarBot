@@ -9,7 +9,7 @@ import type { HostManagerOperations } from "../src/main/host-manager";
 import { HOST_MANAGER_DIRECTORY, verifyHostDirectory } from "../src/main/host-update-files";
 
 const exec = promisify(execFile);
-export const SHARED_APP = "/Applications/OpenBot.app";
+export const SHARED_APP = "/Applications/StarBot.app";
 const STAGING = "/Applications/.openbot-host-stage";
 const PRIVATE = join(HOST_MANAGER_DIRECTORY, "private");
 const SIGNING_REQUIREMENT =
@@ -131,7 +131,7 @@ export async function bundleProcesses(): Promise<Array<{ uid: number; pid: numbe
       processes.push({
         pid: Number(pid),
         uid: Number(uid),
-        main: executable === `${SHARED_APP}/Contents/MacOS/OpenBot`,
+        main: executable === `${SHARED_APP}/Contents/MacOS/StarBot`,
       });
   }
   return processes;
@@ -154,7 +154,7 @@ export function macHostOperations(): HostManagerOperations {
       await verifySharedAppParent();
       await verifyBundleTree(SHARED_APP, true);
       await verifySignature(SHARED_APP);
-      const response = await fetch("https://api.github.com/repos/nightly-labs/openbot/releases/latest", {
+      const response = await fetch("https://api.github.com/repos/hxy940219220-collab/StarBot-Desktop/releases/latest", {
         signal: AbortSignal.timeout(30_000),
         headers: { Accept: "application/vnd.github+json" },
       });
@@ -167,7 +167,7 @@ export function macHostOperations(): HostManagerOperations {
       await ensureHostDirectory(STAGING, 0o700);
       const dmg = join(PRIVATE, "release.dmg");
       await rm(dmg, { force: true });
-      const url = `https://github.com/nightly-labs/openbot/releases/download/${release.tag_name}/OpenBot-${version}-arm64.dmg`;
+      const url = `https://github.com/hxy940219220-collab/StarBot-Desktop/releases/download/${release.tag_name}/StarBot-${version}-arm64.dmg`;
       await command(
         "/usr/bin/curl",
         [
@@ -191,11 +191,11 @@ export function macHostOperations(): HostManagerOperations {
       await ensureHostDirectory(mount, 0o700);
       await command("/usr/bin/hdiutil", ["attach", dmg, "-readonly", "-nobrowse", "-noautoopen", "-mountpoint", mount]);
       try {
-        const source = join(mount, "OpenBot.app");
+        const source = join(mount, "StarBot.app");
         await verifyBundleTree(source, false);
         await verifySignature(source);
         if ((await bundleVersion(source)) !== version) throw new Error("Downloaded version mismatch.");
-        const staged = join(STAGING, "OpenBot.app");
+        const staged = join(STAGING, "StarBot.app");
         await rm(staged, { recursive: true, force: true });
         await command("/usr/bin/ditto", ["--noqtn", source, staged], 180_000);
         await command("/usr/sbin/chown", ["-Rh", "root:wheel", staged]);
@@ -212,11 +212,11 @@ export function macHostOperations(): HostManagerOperations {
     install: async (version) => {
       await verifySharedAppParent();
       await verifyHostPath(STAGING);
-      const staged = join(STAGING, "OpenBot.app");
+      const staged = join(STAGING, "StarBot.app");
       await verifyBundleTree(staged, true);
       await verifySignature(staged);
       if ((await bundleVersion(staged)) !== version) throw new Error("Staged version mismatch.");
-      if ((await bundleProcesses()).length !== 0) throw new Error("OpenBot restarted during maintenance.");
+      if ((await bundleProcesses()).length !== 0) throw new Error("StarBot restarted during maintenance.");
       const retired = join(STAGING, "retired.app");
       await rm(retired, { recursive: true, force: true });
       await rename(SHARED_APP, retired);

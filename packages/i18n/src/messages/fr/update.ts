@@ -33,27 +33,37 @@ export const messages = {
   "update.provider.startFailed": "La mise à jour n’a pas pu démarrer. Réessayez.",
   "update.provider.showDetails": "Afficher les détails",
   "update.provider.hideDetails": "Masquer les détails",
-  "update.scheduled.title": "{name} a planifié une mise à jour d’OpenBot",
-  "update.scheduled.automaticTitle": "OpenBot installe une mise à jour",
-  "update.scheduled.whenIdle": "OpenBot redémarre quand les agents sont inactifs.",
-  "update.scheduled.now": "OpenBot redémarre une fois la mise à jour téléchargée.",
+  "update.scheduled.title": "{name} a planifié une mise à jour d’StarBot",
+
+  "update.scheduled.automaticTitle": "StarBot installe une mise à jour",
+
+  "update.scheduled.whenIdle": "StarBot redémarre quand les agents sont inactifs.",
+
+  "update.scheduled.now": "StarBot redémarre une fois la mise à jour téléchargée.",
+
   "update.scheduled.cancel": "Annuler la mise à jour",
   "update.scheduled.cancelFailed": "La mise à jour n’a pas pu être annulée.",
-  "update.idleRestart.relaunchTitle": "OpenBot redémarre quand les agents sont inactifs",
-  "update.idleRestart.updateTitle": "OpenBot installe la mise à jour quand les agents sont inactifs",
+  "update.idleRestart.relaunchTitle": "StarBot redémarre quand les agents sont inactifs",
+
+  "update.idleRestart.updateTitle": "StarBot installe la mise à jour quand les agents sont inactifs",
+
   "update.idleRestart.description": "Les nouvelles exécutions de routines attendent le redémarrage.",
   "update.idleRestart.waitingFor": "En attente de {reasons}.",
   "update.idleRestart.cancel": "Annuler le redémarrage",
   "update.idleRestart.restartNow": "Redémarrer maintenant",
-  "update.idleRestart.restartNowTitle": "Redémarrer OpenBot maintenant ?",
+  "update.idleRestart.restartNowTitle": "Redémarrer StarBot maintenant ?",
+
   "update.idleRestart.restartNowDescription":
     "Les tours d’agent et les exécutions de routines non terminés s’arrêtent maintenant.",
   "update.idleRestart.keepWaiting": "Continuer d’attendre",
   "update.idleRestart.cancelFailed": "Le redémarrage n’a pas pu être annulé.",
   "update.idleRestart.requestFailed": "Le redémarrage n’a pas pu être planifié.",
-  "update.idleRestart.failedTitle": "OpenBot n’a pas redémarré",
-  "update.whatsNew.title": "Nouveautés d’OpenBot",
-  "update.whatsNew.description": "Les nouvelles fonctionnalités et modifications de cette version d’OpenBot.",
+  "update.idleRestart.failedTitle": "StarBot n’a pas redémarré",
+
+  "update.whatsNew.title": "Nouveautés d’StarBot",
+
+  "update.whatsNew.description": "Les nouvelles fonctionnalités et modifications de cette version d’StarBot.",
+
   "update.whatsNew.version": "Version {version}",
   "update.whatsNew.updatedFrom": "Mis à jour de {from} vers {to}",
   "update.whatsNew.group.added": "Nouveau",
@@ -73,12 +83,15 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Cette version n’a aucune note à afficher ici. Le journal des modifications complet affiche toutes les modifications.",
   "update.whatsNew.changelog": "Journal complet",
-  "update.whatsNew.changelogFailed": "OpenBot n’a pas pu ouvrir le journal des modifications.",
+  "update.whatsNew.changelogFailed": "StarBot n’a pas pu ouvrir le journal des modifications.",
+
   "update.whatsNew.done": "Compris",
   "update.required.title": "Mise à jour requise",
   "update.required.description":
-    "OpenBot {version} n’est plus pris en charge. Passez à la version {minimum} ou plus récente pour continuer.",
-  "update.required.download": "Télécharger OpenBot",
+    "StarBot {version} n’est plus pris en charge. Passez à la version {minimum} ou plus récente pour continuer.",
+
+  "update.required.download": "Télécharger StarBot",
+
   "update.required.continue": "Continuer sans mettre à jour",
   "update.required.failed": "La mise à jour ne s’est pas terminée.",
 } as const satisfies PartialTranslation<typeof source>;
