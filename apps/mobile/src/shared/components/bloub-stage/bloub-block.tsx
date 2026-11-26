@@ -1,11 +1,14 @@
+import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useReducedMotion } from "@/shared/lib/motion";
-import { BloubEyes, EYES_HEIGHT, EYES_WIDTH } from "./bloub-eyes";
+import { EYES_HEIGHT } from "./bloub-eyes";
 import { BLOUB_MOVE, BLOUB_RADIUS, bloubEyesFrame, bloubGradient, useBloubColors } from "./bloub-look";
+
+const STARBOT_BLOCK_MASCOT = require("../../../../assets/zodiac/starbot-badge.webp");
 
 export type BloubEdge = "cover" | "gone" | number;
 
@@ -18,8 +21,6 @@ export function BloubBlock({ edge, dimmed }: { edge: BloubEdge; dimmed: boolean 
   const span = height + BLOUB_RADIUS;
   const target = edge === "cover" ? span : edge === "gone" ? 0 : edge;
   const position = useSharedValue(span);
-  const gazeX = useSharedValue(0);
-  const gazeY = useSharedValue(0);
   useEffect(() => {
     position.set(reduced ? target : withTiming(target, BLOUB_MOVE));
   }, [position, reduced, target]);
@@ -27,7 +28,7 @@ export function BloubBlock({ edge, dimmed }: { edge: BloubEdge; dimmed: boolean 
   const top = insets.top;
   const blockStyle = useAnimatedStyle(() => ({ transform: [{ translateY: position.get() - span }] }));
   const lightStyle = useAnimatedStyle(() => ({ transform: [{ translateY: span - position.get() }] }));
-  const eyesStyle = useAnimatedStyle(() => {
+  const mascotStyle = useAnimatedStyle(() => {
     const frame = bloubEyesFrame(position.get(), height, top);
     return {
       opacity: frame.opacity,
@@ -52,15 +53,8 @@ export function BloubBlock({ edge, dimmed }: { edge: BloubEdge; dimmed: boolean 
           />
         </View>
       </Animated.View>
-      <Animated.View style={[styles.eyes, { left: (window.width - EYES_WIDTH) / 2 }, eyesStyle]}>
-        <BloubEyes
-          mood="idle"
-          active={edge !== "gone"}
-          reduced={reduced}
-          gazeX={gazeX}
-          gazeY={gazeY}
-          eyeColor={colors.eye}
-        />
+      <Animated.View style={[styles.mascotWrap, { left: (window.width - 132) / 2 }, mascotStyle]}>
+        <Image source={STARBOT_BLOCK_MASCOT} contentFit="contain" style={styles.mascot} />
       </Animated.View>
     </View>
   );
@@ -76,5 +70,6 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
   },
   light: { position: "absolute", left: 0, right: 0, top: 0 },
-  eyes: { position: "absolute", top: 0, width: EYES_WIDTH, height: EYES_HEIGHT },
+  mascotWrap: { position: "absolute", top: 0, width: 132, height: 132 },
+  mascot: { width: 132, height: 132 },
 });

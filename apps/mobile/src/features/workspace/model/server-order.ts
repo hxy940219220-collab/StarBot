@@ -10,7 +10,7 @@ export function serverAccent(serverId: string): string {
 }
 
 export function serverOrderKey(apiUrl: string, userId: string): string {
-  return `openbot.server-order.v1.${accountScope(apiUrl, userId)}`;
+  return `starbot.server-order.v1.${accountScope(apiUrl, userId)}`;
 }
 
 export function decodeServerOrder(stored: string | null): string[] {
@@ -24,7 +24,7 @@ export function decodeServerOrder(stored: string | null): string[] {
 }
 
 export function defaultServerKey(apiUrl: string, userId: string): string {
-  return `openbot.default-server.v1.${accountScope(apiUrl, userId)}`;
+  return `starbot.default-server.v1.${accountScope(apiUrl, userId)}`;
 }
 
 export function decodeDefaultServer(stored: string | null, pairedHostId: string | undefined): string | null {

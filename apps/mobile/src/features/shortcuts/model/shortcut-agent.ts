@@ -11,7 +11,7 @@ export const useShortcutAgent = create<{
 }>(() => ({ account: null, target: null, saving: false }));
 
 function accountKey(apiUrl: string, userId: string): string {
-  return `openbot.shortcut-agent.v1.${accountScope(apiUrl, userId)}`;
+  return `starbot.shortcut-agent.v1.${accountScope(apiUrl, userId)}`;
 }
 
 export async function loadShortcutAgent(apiUrl: string, userId: string): Promise<void> {

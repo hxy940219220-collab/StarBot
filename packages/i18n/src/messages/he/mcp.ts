@@ -103,14 +103,14 @@ export const messages = {
   "mcp.panel.useAddress": "שימוש בכתובת הזו",
   "mcp.panel.signInTo": "התחברות ל-{name}",
   "mcp.panel.signInWaiting": {
-    one: "יש לסיים את ההתחברות בדפדפן. OpenBot מפסיק להמתין אחרי דקה.",
-    two: "יש לסיים את ההתחברות בדפדפן. OpenBot מפסיק להמתין אחרי שתי דקות.",
-    other: "יש לסיים את ההתחברות בדפדפן. OpenBot מפסיק להמתין אחרי {count} דקות.",
+    one: "יש לסיים את ההתחברות בדפדפן. StarBot מפסיק להמתין אחרי דקה.",
+    two: "יש לסיים את ההתחברות בדפדפן. StarBot מפסיק להמתין אחרי שתי דקות.",
+    other: "יש לסיים את ההתחברות בדפדפן. StarBot מפסיק להמתין אחרי {count} דקות.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "פותח את דף ההתחברות ב-{host}. OpenBot מפסיק להמתין אחרי דקה.",
-    two: "פותח את דף ההתחברות ב-{host}. OpenBot מפסיק להמתין אחרי שתי דקות.",
-    other: "פותח את דף ההתחברות ב-{host}. OpenBot מפסיק להמתין אחרי {count} דקות.",
+    one: "פותח את דף ההתחברות ב-{host}. StarBot מפסיק להמתין אחרי דקה.",
+    two: "פותח את דף ההתחברות ב-{host}. StarBot מפסיק להמתין אחרי שתי דקות.",
+    other: "פותח את דף ההתחברות ב-{host}. StarBot מפסיק להמתין אחרי {count} דקות.",
   },
   "mcp.panel.appTitle": "אפליקציית התחברות",
   "mcp.panel.appDescription":
@@ -156,5 +156,4 @@ export const messages = {
   "mcp.signIn.relaySend": "שליחה",
   "mcp.panel.callbackUrlRelayed":
     "דף ההתחברות נפתח בדפדפן שלך, ו-StarBot במחשב שלך שולח את ההתחברות ל-{host}. יש להוסיף את ה-URL המדויק הזה ל-URL של ההפניה המותרים באפליקציה.",
-
 } as const satisfies PartialTranslation<typeof source>;

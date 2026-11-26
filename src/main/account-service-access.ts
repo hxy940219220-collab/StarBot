@@ -1,4 +1,6 @@
+import { networkInterfaces } from "node:os";
 import { join } from "node:path";
+import { isMobileConnectDevelopmentHost } from "@openbot/contracts/mobile-connect";
 import { sourceText } from "@openbot/i18n/source";
 import { app, net } from "electron";
 import { CentralAuthManager, readCentralAuthApiUrl, readMobileConnectApiUrl } from "./central-auth-manager";
@@ -49,6 +51,62 @@ export function centralAuthApiUrl(): string {
   );
 }
 
+const PREFERRED_LAN_INTERFACES: readonly string[] = ["en0", "en1", "bridge100", "en2", "en3"];
+
+export function detectLocalLanIpv4Addresses(): string[] {
+  const interfaces = networkInterfaces();
+  const preferredSet = new Set(PREFERRED_LAN_INTERFACES);
+  const orderedNames = [
+    ...PREFERRED_LAN_INTERFACES.filter((name) => name in interfaces),
+    ...Object.keys(interfaces).filter((name) => !preferredSet.has(name)),
+  ];
+  const results: string[] = [];
+  for (const name of orderedNames) {
+    for (const entry of interfaces[name] ?? []) {
+      const family = String(entry.family);
+      if (entry.internal || (family !== "IPv4" && family !== "4")) continue;
+      if (!isMobileConnectDevelopmentHost(entry.address)) continue;
+      if (entry.address === "127.0.0.1") continue;
+      if (!results.includes(entry.address)) results.push(entry.address);
+    }
+  }
+  return results;
+}
+
+export function detectLocalLanIpv4(): string | null {
+  return detectLocalLanIpv4Addresses()[0] ?? null;
+}
+
+function isLoopbackHostname(hostname: string): boolean {
+  return hostname === "127.0.0.1" || hostname === "localhost";
+}
+
+export function resolveMobileConnectApiUrl(configuredMobileApiUrl: string | undefined, apiUrl: string): string {
+  const trimmed = configuredMobileApiUrl?.trim();
+  if (trimmed) {
+    try {
+      if (!isLoopbackHostname(new URL(trimmed).hostname)) {
+        return readMobileConnectApiUrl(trimmed, apiUrl);
+      }
+    } catch {
+      return readMobileConnectApiUrl(trimmed, apiUrl);
+    }
+  }
+  try {
+    const parsed = new URL(apiUrl);
+    if (parsed.protocol === "http:" && isLoopbackHostname(parsed.hostname)) {
+      const lanIp = detectLocalLanIpv4();
+      if (lanIp) {
+        parsed.hostname = lanIp;
+        return readMobileConnectApiUrl(parsed.toString(), apiUrl);
+      }
+    }
+  } catch {
+    // Fall back to configured/default URL validation below.
+  }
+  return readMobileConnectApiUrl(configuredMobileApiUrl, apiUrl);
+}
+
 export function createCentralAuthManager(options: {
   companySignInBrowser?: CompanySignInBrowser;
   confirmSessionAtStart: boolean;
@@ -56,7 +114,7 @@ export function createCentralAuthManager(options: {
   const apiUrl = centralAuthApiUrl();
   return new CentralAuthManager({
     apiUrl,
-    mobileConnectApiUrl: readMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, apiUrl),
+    mobileConnectApiUrl: resolveMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, apiUrl),
     storagePath: join(app.getPath("userData"), CENTRAL_AUTH_FILE),
     fetch: accountServiceFetch,
     ...safeStorageCipher("error.app.macSecureStorageUnavailable"),

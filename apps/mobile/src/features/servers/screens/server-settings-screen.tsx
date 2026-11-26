@@ -6,20 +6,10 @@ import LogOut from "lucide-react-native/icons/log-out";
 import Trash2 from "lucide-react-native/icons/trash";
 import { useRef, useState } from "react";
 import { Alert, Keyboard, View } from "react-native";
-import { ServerAppearancePicker } from "@/features/servers/components/server-appearance-picker";
 import { SERVER_AVATAR_CORNER_RATIO, ServerAvatar } from "@/features/servers/components/server-avatar";
 import { ServerStatusLabel } from "@/features/servers/components/server-status-label";
 import { useOwnerHostedServerIds } from "@/features/servers/model/server-settings-access";
 import { useLockedAction } from "@/features/servers/model/use-locked-action";
-import { useServerUpdate } from "@/features/servers/model/use-server-update";
-import {
-  ServerAiSection,
-  ServerConnectionSection,
-  ServerDataSections,
-  ServerGeneralSection,
-  ServerKeySettings,
-  ServerPeopleSection,
-} from "@/features/servers/screens/server-settings-sections";
 import {
   SettingsContent,
   SettingsNote,
@@ -53,34 +43,20 @@ export function ServerSettingsScreen() {
 
 function ServerSettingsHome({ server }: { server: MobileServer }) {
   const hostedServerIds = useOwnerHostedServerIds(server);
-  const { canEditServerAppearance } = useMobileWorkspace();
   return (
     <SettingsContent>
       {canAdministerServer(server.role) ? <ServerIdentityForm server={server} /> : <ServerHeader server={server} />}
-      {canEditServerAppearance(server.id) && !server.logoKey ? <ServerAppearancePicker server={server} /> : null}
-      <ServerGeneralSection serverId={server.id} />
-      <ServerPeopleSection server={server} />
-      <ServerAiSection serverId={server.id} />
-      <ServerDataSections serverId={server.id} />
-      <ServerConnectionSection server={server} hostedServerIds={hostedServerIds} />
       <ServerExitSection server={server} hostedServerIds={hostedServerIds} />
-      <ServerKeySettings server={server} />
     </SettingsContent>
   );
 }
 
 function ServerStatusLine({ server }: { server: MobileServer }) {
-  const { t, sourceText } = useText();
-  const version = useServerUpdate(server.id, { poll: false }).query.data?.status.currentVersion;
+  const { sourceText } = useText();
   return (
     <View className="gap-1">
       <View className="flex-row flex-wrap items-center">
         <ServerStatusLabel server={server} />
-        {version ? (
-          <Typography.Paragraph className="text-grouped-secondary">
-            {` · ${t("mobile.server.update.version", { version })}`}
-          </Typography.Paragraph>
-        ) : null}
       </View>
       {server.connectionMessage ? (
         <Typography.Paragraph type="body-xs" className="text-grouped-secondary">

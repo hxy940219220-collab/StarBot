@@ -112,16 +112,16 @@ export const messages = {
   "mcp.panel.useAddress": "Использовать этот адрес",
   "mcp.panel.signInTo": "Войти в {name}",
   "mcp.panel.signInWaiting": {
-    one: "Завершите вход в браузере. OpenBot ждёт не дольше {count} минуты.",
-    few: "Завершите вход в браузере. OpenBot ждёт не дольше {count} минут.",
-    many: "Завершите вход в браузере. OpenBot ждёт не дольше {count} минут.",
-    other: "Завершите вход в браузере. OpenBot ждёт не дольше {count} минуты.",
+    one: "Завершите вход в браузере. StarBot ждёт не дольше {count} минуты.",
+    few: "Завершите вход в браузере. StarBot ждёт не дольше {count} минут.",
+    many: "Завершите вход в браузере. StarBot ждёт не дольше {count} минут.",
+    other: "Завершите вход в браузере. StarBot ждёт не дольше {count} минуты.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Открываем страницу входа на {host}. OpenBot ждёт не дольше {count} минуты.",
-    few: "Открываем страницу входа на {host}. OpenBot ждёт не дольше {count} минут.",
-    many: "Открываем страницу входа на {host}. OpenBot ждёт не дольше {count} минут.",
-    other: "Открываем страницу входа на {host}. OpenBot ждёт не дольше {count} минуты.",
+    one: "Открываем страницу входа на {host}. StarBot ждёт не дольше {count} минуты.",
+    few: "Открываем страницу входа на {host}. StarBot ждёт не дольше {count} минут.",
+    many: "Открываем страницу входа на {host}. StarBot ждёт не дольше {count} минут.",
+    other: "Открываем страницу входа на {host}. StarBot ждёт не дольше {count} минуты.",
   },
   "mcp.panel.appTitle": "Приложение входа",
   "mcp.panel.appDescription":
@@ -165,5 +165,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Отправить",
   "mcp.panel.callbackUrlRelayed":
     "Страница входа открывается в вашем браузере, а StarBot на вашем компьютере отправляет вход на {host}. Добавьте именно этот URL в разрешённые URL перенаправления приложения.",
-
 } as const satisfies PartialTranslation<typeof source>;

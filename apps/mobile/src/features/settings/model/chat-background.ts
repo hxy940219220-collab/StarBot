@@ -7,7 +7,7 @@ import { storedFields } from "./stored-fields";
 
 export type ChatBackgroundValue = Record<ChatBackgroundScheme, AvatarColor | null>;
 
-const key = "openbot.mobile.chat-background.v1";
+const key = "starbot.mobile.chat-background.v1";
 
 export const useChatBackground = create<ChatBackgroundValue & { ready: boolean }>(() => ({
   light: null,

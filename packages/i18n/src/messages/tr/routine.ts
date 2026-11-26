@@ -116,10 +116,10 @@ export const messages = {
   "routine.history.ignored.eventType": "Yok sayıldı: başka olay türü",
   "routine.history.ignored.filter": "Yok sayıldı: filtreler eşleşmedi",
   "routine.history.ignored.inactive": "Yok sayıldı: rutin duraklatıldı",
-  "routine.history.skipped": { one: "Atlandı: OpenBot kapalıydı", other: "{count} atlandı: OpenBot kapalıydı" },
+  "routine.history.skipped": { one: "Atlandı: StarBot kapalıydı", other: "{count} atlandı: StarBot kapalıydı" },
   "routine.history.skippedMore": {
-    one: "{count} taneden fazla atlandı: OpenBot kapalıydı",
-    other: "{count} taneden fazla atlandı: OpenBot kapalıydı",
+    one: "{count} taneden fazla atlandı: StarBot kapalıydı",
+    other: "{count} taneden fazla atlandı: StarBot kapalıydı",
   },
   "routine.history.ranLate": "Geç çalıştı: {time}",
   "routine.history.range": "{from} – {until}",

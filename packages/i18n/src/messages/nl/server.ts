@@ -147,7 +147,7 @@ export const messages = {
   "server.install.offline": "{name} is offline.",
   "server.install.expired": "Deze opdracht is verlopen. Maak een nieuwe.",
   "server.install.agentPrompt":
-    'Installeer OpenBot op deze Linux-server en meld hem aan bij mijn OpenBot-account.\nVoer deze opdracht uit als root. Hij stelt geen vragen en duurt een paar minuten:\n\n{command}\n\nHij eindigt met de regel "OpenBot is connected to your account." en exitcode 0.\nDe opdracht werkt één keer, 15 minuten lang. Sla hem nergens op.',
+    'Installeer OpenBot op deze Linux-server en meld hem aan bij mijn OpenBot-account.\nVoer deze opdracht uit als root. Hij stelt geen vragen en duurt een paar minuten:\n\n{command}\n\nHij eindigt met de regel "StarBot is connected to your account." en exitcode 0.\nDe opdracht werkt één keer, 15 minuten lang. Sla hem nergens op.',
   "server.install.setUpWithAgent": "Instellen met een agent",
   "server.install.sshAgentPrompt":
     "Maak via SSH verbinding met mijn Linux-server en installeer StarBot daarop als server.\n\nSSH-adres (user@host):",

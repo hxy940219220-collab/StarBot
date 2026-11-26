@@ -150,7 +150,7 @@ export const messages = {
   "server.install.offline": "{name} לא מחובר.",
   "server.install.expired": "תוקף הפקודה הזו פג. צרו פקודה חדשה.",
   "server.install.agentPrompt":
-    'התקן את OpenBot בשרת ה-Linux הזה וחבר אותו לחשבון OpenBot שלי.\nהרץ את הפקודה הזו כ-root. היא לא שואלת שאלות ולוקחת כמה דקות:\n\n{command}\n\nהיא מסתיימת בשורה "OpenBot is connected to your account." ובקוד יציאה 0.\nהפקודה עובדת פעם אחת, במשך 15 דקות. אל תשמור אותה בשום מקום.',
+    'התקן את OpenBot בשרת ה-Linux הזה וחבר אותו לחשבון OpenBot שלי.\nהרץ את הפקודה הזו כ-root. היא לא שואלת שאלות ולוקחת כמה דקות:\n\n{command}\n\nהיא מסתיימת בשורה "StarBot is connected to your account." ובקוד יציאה 0.\nהפקודה עובדת פעם אחת, במשך 15 דקות. אל תשמור אותה בשום מקום.',
   "server.install.setUpWithAgent": "הגדרה עם סוכן",
   "server.install.sshAgentPrompt": "התחבר ב-SSH לשרת ה-Linux שלי והתקן עליו את StarBot כשרת.\n\nכתובת SSH (user@host):",
 

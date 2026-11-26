@@ -1,36 +1,17 @@
-import { avatarHeadColor, avatarStyleForSeed } from "@openbot/brand/bloub-avatar";
 import { type AvatarMood, avatarMoodIsBusy, avatarMoodPresentation } from "@openbot/brand/bloub-avatar-motion";
 import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
-import { Canvas, Picture } from "@shopify/react-native-skia";
-import { Image } from "expo-image";
-import { memo, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { PixelRatio, StyleSheet, View } from "react-native";
+import { memo, useEffect, useRef, useState } from "react";
+import { View } from "react-native";
 import Animated, {
   convertToRGBA,
-  type DerivedValue,
   Easing,
   ReduceMotion,
-  useAnimatedReaction,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
-  withRepeat,
-  withSequence,
   withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
-import { usePlushFrame } from "@/features/agents/components/use-plush-frame";
-import { loadedPlushArt, loadPlushArt, plushPixels } from "@/features/agents/model/plush/plush-assets";
-import { type PlushArt, recordPlush } from "@/features/agents/model/plush/plush-draw";
-import { PLUSH_BODY_SCALE } from "@/features/agents/model/plush/plush-felt";
-import { plushGeometry } from "@/features/agents/model/plush/plush-frames";
-import {
-  loadPlushPicture,
-  type PlushPictureSpec,
-  plushPictureName,
-  savedPlushPicture,
-} from "@/features/agents/model/plush/plush-picture";
 import { useAgentActivity } from "@/features/workspace/components/use-agent-activity";
 import {
   DISCONNECTED_APPEARANCE,
@@ -42,6 +23,7 @@ import { showsOnline } from "@/features/workspace/model/server-status";
 import { useMotionPreference } from "@/shared/lib/motion";
 import { useScreenFocusedWhile } from "@/shared/lib/use-screen-focused-while";
 import { AgentPhoto, type AgentPhotoProps } from "./agent-photo";
+import { ZodiacClayMobile } from "./zodiac-clay-mobile";
 
 interface BloubAvatarProps extends AgentPhotoProps {
   agentId: string;
@@ -163,38 +145,10 @@ const PlushAvatar = memo(function PlushAvatar({
   const wantsMotion = facesMove && !paused && !disconnected && (avatarMoodIsBusy(mood) || animateIdle);
   const focused = useScreenFocusedWhile(wantsMotion);
   const animate = wantsMotion && focused;
-  const [live, setLive] = useState(animate);
-  if (animate && !live) setLive(true);
   const { shown, style: popStyle } = usePlushPop(seed, hue, color, transition === "pop" && facesMove);
   const appearance = useConnectionAppearance(disconnected);
-  const [saturated, setSaturated] = useState(!disconnected);
-  useAnimatedReaction(
-    () => appearance.get().saturation >= 1,
-    (full, previous) => {
-      if (full !== previous) scheduleOnRN(setSaturated, full);
-    },
-  );
-  const settling = live && !wantsMotion && !disconnected;
-  const [stillShown, setStillShown] = useState(false);
-  const showStill = useCallback(() => setStillShown(true), []);
-  if (!settling && stillShown) setStillShown(false);
-  if (settling && stillShown && saturated) setLive(false);
   const appearanceStyle = useAnimatedStyle(() => ({ opacity: appearance.get().opacity }));
-  const saturation = useDerivedValue(() => appearance.get().saturation);
-  const drawn = size * PLUSH_BODY_SCALE;
-  const pixels = plushPixels(drawn, PixelRatio.get());
-  const picture = (
-    <PlushPicture
-      seed={shown.seed}
-      hue={shown.hue}
-      color={shown.color}
-      mood={mood}
-      size={drawn}
-      pixels={pixels}
-      saturation={disconnected ? DISCONNECTED_APPEARANCE.saturation : 1}
-      onDisplay={settling ? showStill : undefined}
-    />
-  );
+  const drawn = size * 1.06;
   return (
     <Animated.View pointerEvents="none" style={[{ width: size, height: size }, appearanceStyle]}>
       <Animated.View
@@ -203,53 +157,19 @@ const PlushAvatar = memo(function PlushAvatar({
           popStyle,
         ]}
       >
-        {avatarStyleForSeed(shown.seed) === "flat" ? (
-          <FlatBreath amount={animate ? avatarMoodPresentation(mood).breathe : 0} size={drawn}>
-            {picture}
-          </FlatBreath>
-        ) : (
-          <>
-            {settling || !live ? <View style={StyleSheet.absoluteFill}>{picture}</View> : null}
-            {live ? (
-              <PlushCanvas
-                seed={shown.seed}
-                hue={shown.hue}
-                color={shown.color}
-                mood={mood}
-                size={drawn}
-                pixels={pixels}
-                animate={animate}
-                saturation={saturation}
-                fallback={picture}
-              />
-            ) : null}
-          </>
-        )}
+        <ZodiacClayMobile
+          seed={shown.seed}
+          hue={shown.hue}
+          color={shown.color}
+          size={drawn}
+          mood={mood}
+          animate={animate}
+          disconnected={disconnected}
+        />
       </Animated.View>
     </Animated.View>
   );
 });
-
-const BREATH_MS = 1300;
-
-function FlatBreath({ amount, size, children }: { amount: number; size: number; children: ReactNode }) {
-  const scale = useSharedValue(1);
-  useEffect(() => {
-    if (amount <= 0) {
-      scale.set(withTiming(1, { duration: 300 }));
-      return;
-    }
-    const easing = Easing.inOut(Easing.sin);
-    scale.set(
-      withSequence(
-        withTiming(1 - amount, { duration: BREATH_MS / 2, easing }),
-        withRepeat(withTiming(1 + amount, { duration: BREATH_MS, easing }), -1, true),
-      ),
-    );
-  }, [amount, scale]);
-  const style = useAnimatedStyle(() => ({ transform: [{ scale: scale.get() }] }));
-  return <Animated.View style={[{ width: size, height: size }, style]}>{children}</Animated.View>;
-}
 
 function usePlushPop(seed: string, hue: AvatarHue | null, color: AvatarColor | null, pop: boolean) {
   const [shown, setShown] = useState({ seed, hue, color });
@@ -282,113 +202,6 @@ function usePlushPop(seed: string, hue: AvatarHue | null, color: AvatarColor | n
   return { shown: changed && !pop ? { seed, hue, color } : shown, style };
 }
 
-function usePlushArt(
-  seed: string,
-  hue: AvatarHue | null,
-  avatarColor: AvatarColor | null,
-  pixels: number,
-): PlushArt | null {
-  const { shape } = plushGeometry(seed);
-  const color = avatarHeadColor(seed, hue, avatarColor);
-  const key = `${shape}|${color}|${pixels}`;
-  const ready = loadedPlushArt(shape, color, pixels);
-  const [loaded, setLoaded] = useState<{ key: string; art: PlushArt } | null>(null);
-  useEffect(() => {
-    if (ready) return;
-    let current = true;
-    loadPlushArt(shape, color, pixels).then(
-      (art) => {
-        if (current) setLoaded({ key, art });
-      },
-      () => undefined,
-    );
-    return () => {
-      current = false;
-    };
-  }, [color, key, pixels, ready, shape]);
-  return ready ?? (loaded?.key === key ? loaded.art : null);
-}
-
-function PlushCanvas({
-  seed,
-  hue,
-  color,
-  mood,
-  size,
-  pixels,
-  animate,
-  saturation,
-  fallback,
-}: {
-  seed: string;
-  hue: AvatarHue | null;
-  color: AvatarColor | null;
-  mood: AvatarMood;
-  size: number;
-  pixels: number;
-  animate: boolean;
-  saturation: DerivedValue<number>;
-  fallback: ReactNode;
-}) {
-  const geometry = useMemo(() => plushGeometry(seed, mood), [seed, mood]);
-  const art = usePlushArt(seed, hue, color, pixels);
-  const frame = usePlushFrame(geometry, animate && art !== null);
-  const picture = useDerivedValue(() => recordPlush(frame.get(), art, size, saturation.get()));
-  if (!art) return fallback;
-  return (
-    <Canvas accessibilityElementsHidden accessible={false} pointerEvents="none" style={{ width: size, height: size }}>
-      <Picture picture={picture} />
-    </Canvas>
-  );
-}
-
-function usePlushPicture(spec: PlushPictureSpec): string | null {
-  const name = plushPictureName(spec);
-  const known = savedPlushPicture(spec);
-  const [loaded, setLoaded] = useState<{ name: string; uri: string } | null>(null);
-  const { seed, hue, color, mood, pixels, saturation } = spec;
-  useEffect(() => {
-    if (known) return;
-    let current = true;
-    void loadPlushPicture({ seed, hue, color, mood, pixels, saturation }).then((uri) => {
-      if (current && uri) setLoaded({ name, uri });
-    });
-    return () => {
-      current = false;
-    };
-  }, [color, hue, known, mood, name, pixels, saturation, seed]);
-  return known ?? (loaded?.name === name ? loaded.uri : null);
-}
-
-function PlushPicture({
-  seed,
-  hue,
-  color,
-  mood,
-  size,
-  pixels,
-  saturation,
-  crossfade = false,
-  onDisplay,
-}: PlushPictureSpec & { size: number; crossfade?: boolean; onDisplay?: () => void }) {
-  const drawn = usePlushPicture({ seed, hue, color, mood, pixels, saturation });
-  const identity = `${seed}|${hue ?? ""}|${color ?? ""}`;
-  const last = useRef<{ identity: string; uri: string } | null>(null);
-  if (drawn) last.current = { identity, uri: drawn };
-  const uri = drawn ?? (last.current?.identity === identity ? last.current.uri : null);
-  return (
-    <Image
-      accessible={false}
-      source={uri ? { uri } : null}
-      recyclingKey={identity}
-      cachePolicy="memory"
-      transition={crossfade ? 150 : 0}
-      onDisplay={onDisplay}
-      style={{ width: size, height: size }}
-    />
-  );
-}
-
 export const BloubAvatarThumbnail = memo(function BloubAvatarThumbnail(
   props: Omit<BloubAvatarProps, "agentId"> & AgentPhotoProps & { disconnected?: boolean },
 ) {
@@ -405,28 +218,18 @@ export const AvatarThumbnail = memo(function AvatarThumbnail({
   color = null,
   size = 48,
   disconnected = false,
-  animateColor = false,
 }: Omit<BloubAvatarProps, "agentId"> & {
   disconnected?: boolean;
   animateColor?: boolean;
 }) {
-  const drawn = size * PLUSH_BODY_SCALE;
+  const drawn = size * 1.06;
   return (
     <View
       pointerEvents="none"
       style={{ width: size, height: size, opacity: disconnected ? DISCONNECTED_APPEARANCE.opacity : 1 }}
     >
       <View style={{ position: "absolute", left: (size - drawn) / 2, top: (size - drawn) / 2 }}>
-        <PlushPicture
-          seed={seed}
-          hue={hue}
-          color={color}
-          mood="idle"
-          size={drawn}
-          pixels={plushPixels(drawn, PixelRatio.get())}
-          saturation={disconnected ? DISCONNECTED_APPEARANCE.saturation : 1}
-          crossfade={animateColor}
-        />
+        <ZodiacClayMobile seed={seed} hue={hue} color={color} size={drawn} mood="idle" disconnected={disconnected} />
       </View>
     </View>
   );

@@ -1,24 +1,19 @@
-import { avatarHeadColor } from "@openbot/brand/bloub-avatar";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
-import { Typography } from "heroui-native";
-import Monitor from "lucide-react-native/icons/monitor";
 import { useState } from "react";
 import { View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { useCSSVariable } from "uniwind";
-import { thumbnailColor } from "@/features/agents/components/bloub-avatar";
 import { useMobileSession, useQueryScope } from "@/features/auth/context/mobile-session-context";
 import { loadServerLogo } from "@/features/servers/model/server-logo";
-import { useServerPlush } from "@/features/servers/model/server-plush";
 import { DISCONNECTED_APPEARANCE } from "@/features/workspace/components/use-connection-appearance";
 import { queryKeys } from "@/features/workspace/model/query-keys";
 import { showsOnline } from "@/features/workspace/model/server-status";
 import type { MobileServer } from "@/features/workspace/model/workspace-types";
 import { END_X } from "@/shared/lib/text-direction";
 
-const INK = "rgba(0, 0, 0, 0.72)";
+const STARBOT_SERVER_ICON = require("../../../../assets/icons/app-icon.png");
 export const SERVER_AVATAR_CORNER_RATIO = 0.32;
 const DOT = 12;
 const DOT_OVERHANG = 2;
@@ -29,15 +24,6 @@ function cutoutPath(size: number): string {
   const centerX = END_X === 1 ? centerY : size - centerY;
   const radius = DOT / 2 + DOT_GAP;
   return `M0 0H${size}V${size}H0Z M${centerX - radius} ${centerY}a${radius} ${radius} 0 1 0 ${radius * 2} 0a${radius} ${radius} 0 1 0 ${-radius * 2} 0Z`;
-}
-
-function serverInitials(name: string): string {
-  const words = name
-    .trim()
-    .split(/[\s_-]+/u)
-    .filter(Boolean);
-  const initials = words.length > 1 ? `${words[0]?.[0] ?? ""}${words[1]?.[0] ?? ""}` : (words[0]?.slice(0, 2) ?? "");
-  return initials.toUpperCase() || "S";
 }
 
 export function ServerAvatar({
@@ -81,57 +67,29 @@ export function ServerAvatar({
         : offline;
   const muted = showStatus && !online;
   const showsLogo = Boolean(logo && !logoFailed);
-  const showsPlush = !showsLogo && (server.kind !== "local" || Boolean(server.appearance));
-  const plush = useServerPlush(
-    server.id,
-    server.appearance,
-    size,
-    muted ? DISCONNECTED_APPEARANCE.saturation : 1,
-    showsPlush,
-  );
-  const tile =
-    showsPlush && !plush.failed ? (
-      <View style={{ height: size, opacity: muted ? DISCONNECTED_APPEARANCE.opacity : 1, width: size }}>
-        {plush.uri ? (
-          <Image
-            source={{ uri: plush.uri }}
-            contentFit="contain"
-            recyclingKey={plush.uri}
-            style={{ height: size, width: size }}
-          />
-        ) : null}
-      </View>
-    ) : (
-      <View
-        className="items-center justify-center"
-        style={{
-          backgroundColor: thumbnailColor(avatarHeadColor(server.id, null), muted),
-          borderCurve: "continuous",
-          borderRadius: size * SERVER_AVATAR_CORNER_RATIO,
-          height: size,
-          opacity: muted ? DISCONNECTED_APPEARANCE.opacity : 1,
-          overflow: "hidden",
-          width: size,
+  const tile = (
+    <View
+      className="items-center justify-center"
+      style={{
+        borderCurve: "continuous",
+        borderRadius: size * SERVER_AVATAR_CORNER_RATIO,
+        height: size,
+        opacity: muted ? DISCONNECTED_APPEARANCE.opacity : 1,
+        overflow: "hidden",
+        width: size,
+      }}
+    >
+      <Image
+        source={showsLogo && logo ? { uri: logo } : STARBOT_SERVER_ICON}
+        contentFit="cover"
+        recyclingKey={showsLogo && logo ? logo : "starbot-server-icon"}
+        style={{ height: size, width: size }}
+        onError={() => {
+          if (logo) setFailedUri(logo);
         }}
-      >
-        {server.kind === "local" ? (
-          <Monitor color={INK} size={size * 0.42} strokeWidth={2} />
-        ) : (
-          <Typography weight="semibold" style={{ color: INK, fontSize: size * 0.32, lineHeight: size * 0.42 }}>
-            {serverInitials(server.name)}
-          </Typography>
-        )}
-        {showsLogo && logo ? (
-          <Image
-            source={{ uri: logo }}
-            contentFit="cover"
-            recyclingKey={logo}
-            style={{ height: size, position: "absolute", width: size }}
-            onError={() => setFailedUri(logo)}
-          />
-        ) : null}
-      </View>
-    );
+      />
+    </View>
+  );
   if (!showStatus)
     return (
       <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants">

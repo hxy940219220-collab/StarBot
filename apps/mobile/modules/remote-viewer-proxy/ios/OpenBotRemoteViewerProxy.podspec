@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description    = 'Listens on 127.0.0.1 and gives each HTTP request and WebSocket message to JavaScript, which sends it to the host.'
   s.license        = 'PolyForm-Noncommercial-1.0.0'
   s.author         = 'OpenBot'
-  s.homepage       = 'https://openbot.run'
+  s.homepage       = 'https://github.com/hxy940219220-collab/StarBot-Desktop'
   s.platforms      = { :ios => '16.4' }
   s.swift_version  = '5.9'
   s.source         = { git: '' }

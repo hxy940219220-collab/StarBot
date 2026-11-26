@@ -1,10 +1,10 @@
 appId: app.starbot.desktop
 productName: StarBot
-copyright: Copyright © 2026 Synthetify Labs spółka z ograniczoną odpowiedzialnością
+copyright: Copyright © 2026 StarBot
 protocols:
   - name: StarBot invitations
     schemes:
-      - openbot
+      - starbot
 asar: true
 artifactName: ${productName}-${version}-${arch}.${ext}
 electronUpdaterCompatibility: ">=2.16"

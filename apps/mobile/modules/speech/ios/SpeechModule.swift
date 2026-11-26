@@ -217,7 +217,7 @@ private let interimFrames = 10
 /// The microphone, converted to 16 kHz mono. In `transcribe` mode it cuts the speech into segments
 /// at the user's pauses and recognizes each one with the loaded recognizer; in `stream` mode it sends the audio.
 private final class SpeechCapture {
-  let queue = DispatchQueue(label: "run.openbot.speech.capture", qos: .userInitiated)
+  let queue = DispatchQueue(label: "com.think2do.starbot.speech.capture", qos: .userInitiated)
   /// Its own engine: the playback engine changes its configuration when a reply starts. Each capture
   /// makes a new one. An engine keeps the microphone format of the route it first saw, and a reply
   /// or a new route between two captures changes that format: the old engine then cannot start.
@@ -465,7 +465,7 @@ private final class SpeechPlayer {
   private var scheduled: [String] = []
   private let onStart: (String) -> Void
   private let onDone: (String) -> Void
-  let queue = DispatchQueue(label: "run.openbot.speech.playback")
+  let queue = DispatchQueue(label: "com.think2do.starbot.speech.playback")
 
   init(onStart: @escaping (String) -> Void, onDone: @escaping (String) -> Void) {
     self.onStart = onStart
@@ -540,11 +540,11 @@ private final class SpeechPlayer {
 }
 
 public class SpeechModule: Module {
-  private let synthesis = DispatchQueue(label: "run.openbot.speech.synthesis", qos: .userInitiated)
+  private let synthesis = DispatchQueue(label: "com.think2do.starbot.speech.synthesis", qos: .userInitiated)
   private var voice: SupertonicVoice?
   /// Only `recognitionQueue` reads and writes it.
   private var recognizer: OfflineSpeechRecognizer?
-  private let recognitionQueue = DispatchQueue(label: "run.openbot.speech.recognition", qos: .userInitiated)
+  private let recognitionQueue = DispatchQueue(label: "com.think2do.starbot.speech.recognition", qos: .userInitiated)
   private var observers: [NSObjectProtocol] = []
   private lazy var capture = SpeechCapture(
     recognition: recognitionQueue,

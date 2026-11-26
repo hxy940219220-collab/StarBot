@@ -15,7 +15,7 @@ export const messages = {
   "settings.appearance.transparentWindow.description":
     "창 뒤에 흐릿한 바탕화면을 표시해요. 웹사이트와 메뉴도 앱 테마를 사용해요.",
   "settings.interfaceSize.title": "인터페이스 크기",
-  "settings.interfaceSize.description": "OpenBot의 텍스트와 컨트롤 크기예요.",
+  "settings.interfaceSize.description": "StarBot의 텍스트와 컨트롤 크기예요.",
   "settings.interfaceFont.title": "인터페이스 글꼴",
   "settings.interfaceFont.description": "메뉴, 채팅, 설정의 글꼴이에요.",
   "settings.interfaceFont.default": "기본값 (Inter)",
@@ -30,7 +30,7 @@ export const messages = {
   "settings.movingFaces.title": "움직이는 에이전트 얼굴",
   "settings.movingFaces.description": "에이전트 얼굴이 깜빡이고 움직여요. GPU가 없는 컴퓨터에서는 처음에 멈춰 있어요.",
   "settings.startupAnimation.title": "시작 애니메이션",
-  "settings.startupAnimation.description": "OpenBot이 열리는 동안 에이전트 애니메이션을 보여 줘요.",
+  "settings.startupAnimation.description": "StarBot이 열리는 동안 에이전트 애니메이션을 보여 줘요.",
   "settings.logoColor.title": "로고 색상",
   "settings.logoColor.description": "Dock, 작업 표시줄, Dynamic Island에 표시돼요.",
   "settings.logoColor.buildNote": "이 빌드는 자체 로고 색상을 유지해요. 선택한 색상은 릴리스 앱에 적용돼요.",
@@ -94,11 +94,11 @@ export const messages = {
   "settings.launchAtLogin.title": "로그인 시 StarBot 실행",
 
   "settings.launchAtLogin.description": "이 컴퓨터에 로그인하면 앱을 열어요.",
-  "settings.keepRunning.title": "OpenBot을 백그라운드에서 계속 실행",
+  "settings.keepRunning.title": "StarBot을 백그라운드에서 계속 실행",
   "settings.keepRunning.description": "창을 닫은 뒤에도 진행 중인 작업을 계속 실행해요.",
   "settings.menuBar.title": "메뉴 막대에 StarBot 표시",
 
-  "settings.menuBar.description": "메뉴 막대 아이콘에서 OpenBot을 열거나 종료해요.",
+  "settings.menuBar.description": "메뉴 막대 아이콘에서 StarBot을 열거나 종료해요.",
   "settings.keepAwake.title": "이 컴퓨터를 절전 모드로 전환하지 않기",
   "settings.keepAwake.description": "컴퓨터가 전원에 연결되어 있으면 루틴이 제시간에 실행돼요. 화면은 꺼질 수 있어요.",
   "settings.keepAwakeOnBattery.title": "배터리 사용 중에도 적용",
@@ -161,7 +161,7 @@ export const messages = {
   "settings.commitCoAuthor.title": "커밋에 StarBot 표시",
 
   "settings.commitCoAuthor.description":
-    "에이전트가 만든 커밋에 OpenBot을 공동 작성자로 추가해요. 커밋 작성자는 바뀌지 않아요.",
+    "에이전트가 만든 커밋에 StarBot을 공동 작성자로 추가해요. 커밋 작성자는 바뀌지 않아요.",
   "settings.planStart.title": "작업 시작",
   "settings.planStart.wait": "시작을 누를 때",
   "settings.planStart.after": "{time} 후",
@@ -186,7 +186,7 @@ export const messages = {
     "로컬 스크립트가 한 시간에 각 에이전트에게 보낼 수 있는 메시지와 루틴 실행의 최대 수입니다.",
   "settings.backgroundProcesses.title": "백그라운드 프로세스",
   "settings.backgroundProcesses.description":
-    "에이전트가 시작한 뒤 계속 실행 중인 프로그램이에요(예: 개발 서버). 채팅이 끝나도, OpenBot을 종료해도 계속 실행돼요.",
+    "에이전트가 시작한 뒤 계속 실행 중인 프로그램이에요(예: 개발 서버). 채팅이 끝나도, StarBot을 종료해도 계속 실행돼요.",
   "settings.backgroundProcesses.empty": "실행 중인 에이전트 프로그램이 없어요.",
   "settings.backgroundProcesses.loadFailed": "백그라운드 프로세스를 읽을 수 없어요.",
   "settings.backgroundProcesses.noAgent": "에이전트 없음",
@@ -197,7 +197,7 @@ export const messages = {
   "settings.backgroundProcesses.stopFailed": "프로세스를 중지할 수 없어요.",
   "settings.keepRemoteSessions.title": "서버에 빠르게 연결",
   "settings.keepRemoteSessions.description":
-    "참여 중인 서버와의 연결을 실행 사이에도 유지해요. OpenBot이 약 1초 더 빨리 시작돼요. OpenBot을 종료해도 StarBot 서비스가 연결을 닫지 않아요.",
+    "참여 중인 서버와의 연결을 실행 사이에도 유지해요. StarBot이 약 1초 더 빨리 시작돼요. StarBot을 종료해도 StarBot 서비스가 연결을 닫지 않아요.",
 
   "settings.permissions.title": "권한",
   "settings.notifications.whatYouHear": "알림 받을 내용",
@@ -215,7 +215,7 @@ export const messages = {
   "settings.notificationMatrix.offline": "오프라인",
   "settings.notificationMatrix.thisComputerOnly": "이 컴퓨터만",
   "settings.notificationMatrix.thisBrowserOnly": "이 브라우저만",
-  "settings.notificationMatrix.updateServer": "에이전트를 선택하려면 이 서버의 OpenBot을 업데이트하세요",
+  "settings.notificationMatrix.updateServer": "에이전트를 선택하려면 이 서버의 StarBot을 업데이트하세요",
   "settings.notificationMatrix.loading": "에이전트 불러오는 중…",
   "settings.notificationMatrix.loadFailed": "이 서버의 에이전트를 불러올 수 없어요.",
   "settings.desktopNotifications.title": "데스크톱 알림",
@@ -247,7 +247,7 @@ export const messages = {
   "settings.notch.show.description": "각 디스플레이 상단에 에이전트 활동과 확인이 필요한 항목을 표시해요.",
   "settings.notch.xwayland.title": "다시 시작 필요",
   "settings.notch.xwayland.description":
-    "Wayland에서는 다른 앱 위에 Dynamic Island를 표시하려면 OpenBot이 XWayland를 사용해야 합니다. 그 전까지 아일랜드는 표시되지 않습니다.",
+    "Wayland에서는 다른 앱 위에 Dynamic Island를 표시하려면 StarBot이 XWayland를 사용해야 합니다. 그 전까지 아일랜드는 표시되지 않습니다.",
   "settings.notch.xwayland.unsupported":
     "XWayland가 없는 Wayland에서는 Dynamic Island를 다른 앱 위에 표시할 수 없습니다.",
   "settings.notch.xwayland.restart": "다시 시작",
@@ -273,13 +273,13 @@ export const messages = {
   "settings.agentDock.show.description": "에이전트를 화면 가장자리에 표시해 바로 채팅할 수 있습니다.",
   "settings.agentDock.placement.title": "위치",
   "settings.agentDock.placement.description":
-    "'다른 앱 위'를 선택하면 OpenBot이 백그라운드에 있어도 독이 화면에 표시됩니다.",
+    "'다른 앱 위'를 선택하면 StarBot이 백그라운드에 있어도 독이 화면에 표시됩니다.",
   "settings.agentDock.placement.screen": "다른 앱 위",
   "settings.agentDock.placement.window": "StarBot 창 안",
 
   "settings.agentDock.xwayland.title": "다시 시작 필요",
   "settings.agentDock.xwayland.description":
-    "Wayland에서는 다른 앱 위에 독을 표시하려면 OpenBot이 XWayland를 사용해야 합니다. 그 전까지 독은 StarBot 창 안에 표시됩니다.",
+    "Wayland에서는 다른 앱 위에 독을 표시하려면 StarBot이 XWayland를 사용해야 합니다. 그 전까지 독은 StarBot 창 안에 표시됩니다.",
 
   "settings.agentDock.xwayland.unsupported":
     "XWayland가 없는 Wayland에서는 독을 다른 앱 위에 표시할 수 없습니다. StarBot 창 안에 표시됩니다.",
@@ -317,16 +317,16 @@ export const messages = {
   "settings.agentDock.agents.empty": "이 서버에는 아직 에이전트가 없습니다.",
   "settings.analytics.title": "분석 데이터를 내 계정에 연결",
   "settings.analytics.description":
-    "켜짐: 사용 및 안정성 메타데이터를 계정 ID 및 이메일과 함께 OpenBot의 자체 호스팅 분석 서비스로 보내요. 나와 에이전트가 방문한 웹사이트, 도구 사용 현황, 하루 단위 설정 요약도 함께 보내요. 꺼짐: 턴 수와 토큰 수 같은 기본 사용 현황만 임의의 설치 ID와 함께 보내요. 채팅, 파일, 프롬프트는 절대 보내지 않아요.",
+    "켜짐: 사용 및 안정성 메타데이터를 계정 ID 및 이메일과 함께 StarBot의 자체 호스팅 분석 서비스로 보내요. 나와 에이전트가 방문한 웹사이트, 도구 사용 현황, 하루 단위 설정 요약도 함께 보내요. 꺼짐: 턴 수와 토큰 수 같은 기본 사용 현황만 임의의 설치 ID와 함께 보내요. 채팅, 파일, 프롬프트는 절대 보내지 않아요.",
   "settings.analytics.webDescription":
-    "켜짐: 사용 및 안정성 메타데이터를 계정 ID 및 이메일과 함께 OpenBot의 자체 호스팅 분석 서비스로 보내요. 꺼짐: 같은 메타데이터를 임의의 설치 ID만 함께 보내요. 채팅, 파일, 프롬프트는 절대 보내지 않아요. 이 설정은 이 브라우저에 적용돼요.",
+    "켜짐: 사용 및 안정성 메타데이터를 계정 ID 및 이메일과 함께 StarBot의 자체 호스팅 분석 서비스로 보내요. 꺼짐: 같은 메타데이터를 임의의 설치 ID만 함께 보내요. 채팅, 파일, 프롬프트는 절대 보내지 않아요. 이 설정은 이 브라우저에 적용돼요.",
   "settings.tab.general.title": "일반",
-  "settings.tab.general.description": "채팅 동작과 OpenBot이 공유하는 내용을 설정해요.",
+  "settings.tab.general.description": "채팅 동작과 StarBot이 공유하는 내용을 설정해요.",
   "settings.tab.agents.title": "에이전트",
   "settings.tab.agents.description":
     "에이전트별로 따로 설정하지 않았을 때 이 컴퓨터의 에이전트가 할 수 있는 일을 선택해요.",
   "settings.tab.notifications.title": "알림",
-  "settings.tab.notifications.description": "OpenBot이 알려주는 방식을 선택해요.",
+  "settings.tab.notifications.description": "StarBot이 알려주는 방식을 선택해요.",
   "settings.tab.voice.title": "음성",
   "settings.tab.voice.description":
     "메시지 입력란의 음성 받아쓰기예요. 로컬 모델은 이 컴퓨터에서, ElevenLabs와 Groq는 클라우드에서 실행돼요.",
@@ -335,7 +335,7 @@ export const messages = {
     "이 컴퓨터의 StarBot 에이전트가 이 컴퓨터의 앱을 보고 조작하도록 허용해요. 다른 서버의 에이전트는 그 서버의 컴퓨터를 사용해요.",
 
   "settings.tab.profile.title": "프로필",
-  "settings.tab.profile.description": "OpenBot에서 내가 표시되는 방식을 관리해요.",
+  "settings.tab.profile.description": "StarBot에서 내가 표시되는 방식을 관리해요.",
   "settings.tab.mobileConnect.title": "모바일 연결",
   "settings.tab.mobileConnect.description": "휴대폰에서 안전하게 로그인해요.",
   "settings.tab.dynamicIsland.title": "Dynamic Island",
@@ -343,14 +343,14 @@ export const messages = {
   "settings.tab.agentDock.title": "에이전트 독",
   "settings.tab.agentDock.description": "독이 표시되는 위치와 독에 둘 에이전트를 선택하세요.",
   "settings.tab.updates.title": "업데이트",
-  "settings.tab.updates.description": "이 컴퓨터의 OpenBot을 최신 상태로 유지해요.",
+  "settings.tab.updates.description": "이 컴퓨터의 StarBot을 최신 상태로 유지해요.",
   "settings.tab.billing.title": "결제",
   "settings.tab.billing.description": "라이선스, 서버 요금제, 결제 수단, 청구서예요.",
   "settings.tab.hostedServers.title": "호스팅 서버",
   "settings.tab.hostedServers.description": "이 컴퓨터가 꺼져 있어도 실행되는 StarBot 서버를 만들어요.",
 
   "settings.tab.appearance.description": "테마, 색상, 언어, 글꼴을 설정해요.",
-  "settings.tab.appBehavior.description": "이 컴퓨터에서 OpenBot이 시작하고 실행되는 방식을 설정해요.",
+  "settings.tab.appBehavior.description": "이 컴퓨터에서 StarBot이 시작하고 실행되는 방식을 설정해요.",
   "settings.appearance.colorsTitle": "색상",
   "settings.appearance.textTitle": "언어 및 텍스트",
   "settings.appBehavior.startTitle": "시작 및 종료",
@@ -367,20 +367,20 @@ export const messages = {
   "settings.disconnect.action": "연결 해제",
   "settings.disconnect.pending": "연결 해제 중…",
   "settings.mobileConnect.phones.title": "내 휴대폰",
-  "settings.mobileConnect.phones.description": "이 계정으로 OpenBot을 사용하는 휴대폰이에요.",
+  "settings.mobileConnect.phones.description": "이 계정으로 StarBot을 사용하는 휴대폰이에요.",
   "settings.mobileConnect.phones.add": "휴대폰 추가",
   "settings.mobileConnect.phones.empty.title": "아직 휴대폰이 없어요",
   "settings.mobileConnect.phones.empty.description":
     "휴대폰에서 에이전트와 채팅하고 작업 진행 상황을 확인할 수 있어요.",
   "settings.mobileConnect.devices.lastActive": "마지막 활동: {time}",
   "settings.mobileConnect.add.title": "휴대폰 추가",
-  "settings.mobileConnect.add.question": "휴대폰에 OpenBot이 설치되어 있나요?",
+  "settings.mobileConnect.add.question": "휴대폰에 StarBot이 설치되어 있나요?",
   "settings.mobileConnect.add.signIn.title": "예, 로그인",
   "settings.mobileConnect.add.signIn.hint": "일회용 코드 표시",
   "settings.mobileConnect.add.install.title": "아니요, 앱 받기",
   "settings.mobileConnect.add.install.hint": "iPhone 또는 Android",
   "settings.mobileConnect.add.install.heading": "앱 받기",
-  "settings.mobileConnect.add.install.note": "휴대폰 카메라를 코드에 맞추고 OpenBot을 설치한 다음 계속하세요.",
+  "settings.mobileConnect.add.install.note": "휴대폰 카메라를 코드에 맞추고 StarBot을 설치한 다음 계속하세요.",
   "settings.mobileConnect.add.continue": "로그인으로 계속",
   "settings.mobileConnect.qr.appStore": "App Store 열기",
   "settings.mobileConnect.qr.playStore": "Google Play 열기",
@@ -388,7 +388,7 @@ export const messages = {
 
   "settings.mobileConnect.qr.permanent": "영구 코드",
   "settings.mobileConnect.qr.connected": "{name} 연결됨",
-  "settings.mobileConnect.step.open": "휴대폰에서 OpenBot을 여세요.",
+  "settings.mobileConnect.step.open": "휴대폰에서 StarBot을 여세요.",
   "settings.mobileConnect.step.scan": "QR 코드 스캔을 탭하세요.",
   "settings.mobileConnect.step.point": "카메라를 이 화면에 맞추세요.",
   "settings.mobileConnect.code.expired": "코드 만료됨",
@@ -436,14 +436,14 @@ export const messages = {
   "settings.mobileConnect.route.title": "기기 연결 방식",
   "settings.mobileConnect.route.description": "이 컴퓨터에 연결하는 휴대폰, 다른 컴퓨터, 팀 멤버에게 적용돼요.",
   "settings.mobileConnect.route.chipLabel": "기기 연결 방식: {route}",
-  "settings.mobileConnect.route.openbot.title": "OpenBot을 통해 연결",
+  "settings.mobileConnect.route.openbot.title": "StarBot을 통해 연결",
   "settings.mobileConnect.route.openbot.badge": "추천",
   "settings.mobileConnect.route.openbot.description":
     "어떤 네트워크에서나 작동해요. 채팅과 파일은 내 기기 사이에서 암호화돼요.",
   "settings.mobileConnect.route.private.title": "사설 네트워크",
   "settings.mobileConnect.route.private.tailscale": "Tailscale 감지됨",
   "settings.mobileConnect.route.private.description":
-    "Tailscale 또는 이 Wi-Fi를 사용해요. 기기는 여전히 OpenBot으로 로그인해요. 채팅과 파일은 StarBot 서버를 거치지 않고, 기기는 해당 네트워크에서만 연결돼요.",
+    "Tailscale 또는 이 Wi-Fi를 사용해요. 기기는 여전히 StarBot으로 로그인해요. 채팅과 파일은 StarBot 서버를 거치지 않고, 기기는 해당 네트워크에서만 연결돼요.",
 
   "settings.mobileConnect.route.error.load": "기기 연결 방식을 불러올 수 없어요.",
   "settings.mobileConnect.route.error.save": "기기 연결 방식을 변경할 수 없어요.",
@@ -487,7 +487,7 @@ export const messages = {
   "settings.profile.share.copyFailed": "이미지를 복사할 수 없어요.",
   "settings.profile.share.createFailed": "이미지를 만들 수 없어요.",
   "settings.profile.share.fileName": "openbot-activity.png",
-  "settings.profile.share.caption": "OpenBot과 함께한 지난 6개월",
+  "settings.profile.share.caption": "StarBot과 함께한 지난 6개월",
   "settings.profile.activity.title": "이 컴퓨터의 활동",
   "settings.profile.activity.activeDays": {
     other: "지난 1년간 활동한 날 {count}일",
@@ -520,7 +520,7 @@ export const messages = {
   "settings.profile.models.title": "모델 사용량",
   "settings.profile.account.title": "계정",
   "settings.profile.email.title": "이메일",
-  "settings.profile.email.description": "OpenBot에 로그인할 때 사용해요.",
+  "settings.profile.email.description": "StarBot에 로그인할 때 사용해요.",
   "settings.profile.sessions.title": "계정 세션",
   "settings.profile.sessions.description":
     "세션은 로그아웃하거나 연결을 해제할 때까지 로그인 상태로 유지돼요. 연결을 해제하면 이 계정의 활성 원격 연결도 종료돼요.",
@@ -570,21 +570,21 @@ export const messages = {
   "settings.updates.status.downloadingProgress": "{target} 다운로드 중 · {progress}",
   "settings.updates.status.ready": "{target}이(가) 준비되었어요. 다시 시작하면 적용돼요.",
   "settings.updates.status.installing": "{target}을(를) 적용하려고 다시 시작하는 중…",
-  "settings.updates.status.upToDate": "OpenBot이 안정 채널의 최신 상태예요.",
+  "settings.updates.status.upToDate": "StarBot이 안정 채널의 최신 상태예요.",
   "settings.updates.status.staged":
     "{target}이(가) 일부 컴퓨터부터 배포되고 있어요. 지금 받으려면 업데이트를 확인하세요.",
-  "settings.updates.status.checkFailed": "OpenBot이 업데이트를 확인할 수 없어요. 다시 시도해 주세요.",
+  "settings.updates.status.checkFailed": "StarBot이 업데이트를 확인할 수 없어요. 다시 시도해 주세요.",
   "settings.updates.status.unsupported": "이 빌드에서는 업데이트를 사용할 수 없어요.",
-  "settings.updates.actionFailed": "OpenBot을 업데이트할 수 없어요.",
+  "settings.updates.actionFailed": "StarBot을 업데이트할 수 없어요.",
   "settings.updates.autoInstall.title": "업데이트 자동 설치",
   "settings.updates.autoInstall.description":
-    "에이전트가 유휴 상태일 때 OpenBot이 다운로드한 업데이트로 다시 시작해요. 서버 멤버의 연결이 잠시 끊겨요.",
+    "에이전트가 유휴 상태일 때 StarBot이 다운로드한 업데이트로 다시 시작해요. 서버 멤버의 연결이 잠시 끊겨요.",
   "settings.updates.idleRestart.title": "StarBot 다시 시작",
 
   "settings.updates.idleRestart.relaunchDescription":
-    "작업 중인 에이전트가 없을 때 OpenBot이 다시 시작돼요. 새 루틴 실행은 그때까지 기다려요.",
+    "작업 중인 에이전트가 없을 때 StarBot이 다시 시작돼요. 새 루틴 실행은 그때까지 기다려요.",
   "settings.updates.idleRestart.updateDescription":
-    "작업 중인 에이전트가 없을 때 OpenBot이 {target}을(를) 설치해요. 새 루틴 실행은 그때까지 기다려요.",
+    "작업 중인 에이전트가 없을 때 StarBot이 {target}을(를) 설치해요. 새 루틴 실행은 그때까지 기다려요.",
   "settings.updates.idleRestart.relaunch": "유휴 상태일 때 다시 시작",
   "settings.updates.idleRestart.update": "유휴 상태일 때 설치",
   "settings.updates.allowRemote.title": "서버 멤버의 업데이트 허용",
@@ -700,7 +700,7 @@ export const messages = {
   "settings.voice.language.automatic": "자동",
   "settings.voice.pause.title": "보내기 전 멈춤",
   "settings.voice.pause.description":
-    "음성 대화에서 이 시간 동안 말하지 않으면 OpenBot이 말을 보냅니다. 천천히 말하거나 생각하려고 멈춘다면 더 긴 멈춤을 선택하세요. Codex 라이브 음성은 끝을 스스로 찾습니다.",
+    "음성 대화에서 이 시간 동안 말하지 않으면 StarBot이 말을 보냅니다. 천천히 말하거나 생각하려고 멈춘다면 더 긴 멈춤을 선택하세요. Codex 라이브 음성은 끝을 스스로 찾습니다.",
   "settings.voice.pause.seconds": "{seconds}초",
   "settings.voice.loadFailed": "음성 모델을 읽을 수 없어요.",
   "settings.voice.saveFailed": "음성 설정을 저장할 수 없어요. 다시 시도해 주세요.",

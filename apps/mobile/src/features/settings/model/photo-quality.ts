@@ -1,7 +1,7 @@
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 
-const key = "openbot.mobile.full-quality-photos.v1";
+const key = "starbot.mobile.full-quality-photos.v1";
 export const usePhotoQualityPreference = create<{ fullQuality: boolean; ready: boolean; saving: boolean }>(() => ({
   fullQuality: false,
   ready: false,

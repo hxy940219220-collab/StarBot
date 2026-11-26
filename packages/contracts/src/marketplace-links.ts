@@ -63,7 +63,7 @@ function isMarketplaceShareOrigin(origin: string): boolean {
 
 export function createOpenBotMarketplaceUrl(link: MarketplaceListingLink): string {
   assertListing(link);
-  return `openbot://${OPENBOT_MARKETPLACE_HOST}/${LISTING_SEGMENTS[link.kind]}/${link.id}`;
+  return `starbot://${OPENBOT_MARKETPLACE_HOST}/${LISTING_SEGMENTS[link.kind]}/${link.id}`;
 }
 
 export function createWebAppMarketplacePath(link: MarketplaceListingLink): string {
@@ -92,7 +92,8 @@ export function parseMarketplaceUrl(value: string): MarketplaceListingLink {
   const prefix = `${OPENBOT_MARKETPLACE_PATH}/`;
   const canonical =
     url.protocol === "https:" && url.origin === OPENBOT_MARKETPLACE_ORIGIN && url.pathname.startsWith(prefix);
-  const customScheme = url.protocol === "openbot:" && url.hostname === OPENBOT_MARKETPLACE_HOST;
+  const customScheme =
+    (url.protocol === "starbot:" || url.protocol === "openbot:") && url.hostname === OPENBOT_MARKETPLACE_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||

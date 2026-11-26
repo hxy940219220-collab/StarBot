@@ -107,10 +107,10 @@ export const messages = {
   "mcp.panel.useAddress": "このアドレスを使う",
   "mcp.panel.signInTo": "{name} にサインイン",
   "mcp.panel.signInWaiting": {
-    other: "ブラウザーでサインインを完了してください。OpenBot は {count} 分後に待機をやめます。",
+    other: "ブラウザーでサインインを完了してください。StarBot は {count} 分後に待機をやめます。",
   },
   "mcp.panel.signInWaitingOn": {
-    other: "{host} でサインインページを開いています。OpenBot は {count} 分後に待機をやめます。",
+    other: "{host} でサインインページを開いています。StarBot は {count} 分後に待機をやめます。",
   },
   "mcp.panel.appTitle": "サインインアプリ",
   "mcp.panel.appDescription":
@@ -157,5 +157,4 @@ export const messages = {
   "mcp.signIn.relaySend": "送信",
   "mcp.panel.callbackUrlRelayed":
     "サインインページはお使いのブラウザーで開き、このコンピューターの StarBot がサインインを {host} に送信します。この URL をそのまま、アプリで許可するリダイレクト URL に追加してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

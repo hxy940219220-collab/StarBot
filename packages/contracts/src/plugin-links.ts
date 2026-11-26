@@ -26,7 +26,7 @@ export function pluginSlugFromWebAppSearch(search: string): string | null {
 
 export function createOpenBotPluginUrl(slug: string): string {
   assertPluginSlug(slug);
-  return `openbot://${OPENBOT_PLUGIN_HOST}/${slug}`;
+  return `starbot://${OPENBOT_PLUGIN_HOST}/${slug}`;
 }
 
 export function pluginLinkText(url: string): string {
@@ -50,7 +50,8 @@ export function parsePluginUrl(value: string): string {
     url.protocol === "https:" &&
     url.origin === OPENBOT_PLUGIN_ORIGIN &&
     url.pathname.startsWith(OPENBOT_PLUGIN_PATH_PREFIX);
-  const customScheme = url.protocol === "openbot:" && url.hostname === OPENBOT_PLUGIN_HOST;
+  const customScheme =
+    (url.protocol === "starbot:" || url.protocol === "openbot:") && url.hostname === OPENBOT_PLUGIN_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||

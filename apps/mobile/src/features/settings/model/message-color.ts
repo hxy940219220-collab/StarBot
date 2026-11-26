@@ -15,8 +15,8 @@ export interface MessageColorValue {
   seeThrough: boolean;
 }
 
-const key = "openbot.mobile.message-color.v1";
-const agentColorKey = "openbot.mobile.agent-color-messages.v1";
+const key = "starbot.mobile.message-color.v1";
+const agentColorKey = "starbot.mobile.agent-color-messages.v1";
 
 const DEFAULT_CUSTOM_MESSAGE_COLOR: AvatarColor =
   CHAT_COLOR_PRESETS.find((preset) => preset.id === "blue")?.value ?? "#4699fe";

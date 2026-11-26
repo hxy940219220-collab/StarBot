@@ -17,10 +17,10 @@ export const messages = {
   "notification.channelMessage": "Новое сообщение.",
   "notification.usageLimit.title": "Аккаунт {provider} достиг лимита",
   "notification.usageLimit.body": {
-    one: "Ждёт {count} агент. OpenBot попробует позже.",
-    few: "Ждут {count} агента. OpenBot попробует позже.",
-    many: "Ждут {count} агентов. OpenBot попробует позже.",
-    other: "Ждут {count} агента. OpenBot попробует позже.",
+    one: "Ждёт {count} агент. StarBot попробует позже.",
+    few: "Ждут {count} агента. StarBot попробует позже.",
+    many: "Ждут {count} агентов. StarBot попробует позже.",
+    other: "Ждут {count} агента. StarBot попробует позже.",
   },
   "notification.usageLimit.bodyResets": {
     one: "Ждёт {count} агент. Сброс {reset}.",

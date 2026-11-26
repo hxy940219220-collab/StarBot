@@ -163,8 +163,8 @@ export function platformPage(platform: keyof typeof PAGE_HOSTS, address: string 
 }
 
 export const MESSAGING_INSTALL_RETURN = {
-  slack: "openbot://slack-workspace",
-  discord: "openbot://discord-guild",
+  slack: "starbot://slack-workspace",
+  discord: "starbot://discord-guild",
 } as const satisfies Record<WorkspacePlatform, string>;
 
 export function isMessagingInstallReturn(path: string): boolean {

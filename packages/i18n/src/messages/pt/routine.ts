@@ -104,12 +104,12 @@ export const messages = {
   "routine.history.ignored.filter": "Ignorada: os filtros não corresponderam",
   "routine.history.ignored.inactive": "Ignorada: rotina pausada",
   "routine.history.skipped": {
-    one: "Pulada: o OpenBot estava fechado",
-    other: "{count} puladas: o OpenBot estava fechado",
+    one: "Pulada: o StarBot estava fechado",
+    other: "{count} puladas: o StarBot estava fechado",
   },
   "routine.history.skippedMore": {
-    one: "Mais de {count} pulada: o OpenBot estava fechado",
-    other: "Mais de {count} puladas: o OpenBot estava fechado",
+    one: "Mais de {count} pulada: o StarBot estava fechado",
+    other: "Mais de {count} puladas: o StarBot estava fechado",
   },
   "routine.history.ranLate": "Executada com atraso às {time}",
   "routine.history.range": "{from} – {until}",

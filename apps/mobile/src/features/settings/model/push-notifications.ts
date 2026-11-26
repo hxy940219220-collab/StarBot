@@ -5,7 +5,7 @@ import type { PushNotificationSound } from "@openbot/contracts/team-protocol/pus
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 
-const key = "openbot.mobile.push-notifications.v1";
+const key = "starbot.mobile.push-notifications.v1";
 
 export interface ServerNotificationSetting {
   level: ServerNotificationLevel;

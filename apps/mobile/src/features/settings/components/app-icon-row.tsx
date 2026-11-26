@@ -3,9 +3,9 @@ import { router } from "expo-router";
 import { Typography } from "heroui-native";
 import { useEffect } from "react";
 import { View } from "react-native";
-import eyesAsset from "@/assets/icons/app-icon.icon/Assets/eyes.png";
+import appIconAsset from "@/assets/icons/app-icon.png";
 import { SettingsRow, SettingsSection } from "@/features/settings/components/settings-content";
-import { APP_ICON_LABELS, appIconLook, loadAppIcon, useAppIcon } from "@/features/settings/model/app-icon";
+import { APP_ICON_LABELS, loadAppIcon, useAppIcon } from "@/features/settings/model/app-icon";
 import { useText } from "@/shared/lib/text";
 
 export function AppIconSection() {
@@ -17,24 +17,14 @@ export function AppIconSection() {
   }, []);
 
   if (!ready || value === null) return null;
-  const look = appIconLook(value);
   return (
     <SettingsSection>
       <SettingsRow
         value={t(APP_ICON_LABELS[value])}
         onPress={() => router.push("/settings/app-icon")}
         leading={
-          <View
-            className="size-8 items-center justify-center overflow-hidden rounded-[8px]"
-            style={{ backgroundColor: look.body }}
-          >
-            <Image
-              source={eyesAsset}
-              style={{ width: 23, height: 11 }}
-              tintColor={look.eyes}
-              contentFit="contain"
-              accessible={false}
-            />
+          <View className="size-8 items-center justify-center overflow-hidden rounded-[8px]">
+            <Image source={appIconAsset} style={{ width: 32, height: 32 }} contentFit="cover" accessible={false} />
           </View>
         }
       >

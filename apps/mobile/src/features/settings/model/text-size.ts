@@ -4,7 +4,7 @@ import { useTextSize } from "./text-size-store";
 
 export { useTextSize } from "./text-size-store";
 
-const key = "openbot.mobile.text-size.v1";
+const key = "starbot.mobile.text-size.v1";
 
 export async function loadTextSize(): Promise<void> {
   if (useTextSize.getState().ready) return;

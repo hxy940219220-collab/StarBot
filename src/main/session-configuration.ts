@@ -2,11 +2,13 @@ import { readFile, stat } from "node:fs/promises";
 import { isAbsolute, relative, resolve } from "node:path";
 import { CHAT_VISUAL_PAGE_LIMIT, isChatVisualMimeType } from "@openbot/contracts/chat-visual";
 import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
+import { isMobileConnectDevelopmentHost } from "@openbot/contracts/mobile-connect";
 import { createOpenBotLogger, toLogValue } from "@openbot/logging";
 import { app, session } from "electron";
 import type { AgentService } from "../backend/agent-service";
 import { runCauseEffect } from "../backend/effect-boundary";
 import type { MailboxStore } from "../backend/mailbox-store";
+import { centralAuthApiUrl, detectLocalLanIpv4Addresses } from "./account-service-access";
 import { applicationContentType } from "./application-content-type";
 import { attachmentCorsHeaders, attachmentDocumentHeaders, chatVisualResponse } from "./chat-visual-protocol";
 import { inlineContentDisposition } from "./content-disposition";
@@ -20,12 +22,28 @@ import { canCheckRendererPermission, canRequestRendererPermission } from "./rend
 import type { TeamStore } from "./team-store";
 import { isTrustedRendererUrl } from "./trusted-renderer";
 
+function resolveLocalSignalOrigins(authApiUrl: string, signalPort: string): string | null {
+  try {
+    if (!isMobileConnectDevelopmentHost(new URL(authApiUrl).hostname)) return null;
+  } catch {
+    return null;
+  }
+  const port = /^\d+$/u.test(signalPort) ? signalPort : "3101";
+  const origins = [
+    ...detectLocalLanIpv4Addresses().map((ip) => `ws://${ip}:${port}`),
+    `ws://127.0.0.1:${port}`,
+    `ws://localhost:${port}`,
+  ];
+  return origins.join(" ");
+}
+
 export function configureContentSecurityPolicy(): void {
-  const policy = buildContentSecurityPolicy(
-    app.isPackaged,
-    process.env.REMOTE_SIGNAL_URL,
-    readSelfHostedSignalOrigin(process.env.OPENBOT_AUTH_API_URL, process.env.OPENBOT_REMOTE_SIGNAL_URL),
-  );
+  const authApiUrl = process.env.OPENBOT_AUTH_API_URL ?? centralAuthApiUrl();
+  const explicitSelfHostedOrigin = readSelfHostedSignalOrigin(authApiUrl, process.env.OPENBOT_REMOTE_SIGNAL_URL);
+  const localOrigins = resolveLocalSignalOrigins(authApiUrl, process.env.REMOTE_SIGNAL_PORT ?? "3101");
+  const combinedSignalOrigin =
+    [explicitSelfHostedOrigin, localOrigins].filter((value): value is string => Boolean(value)).join(" ") || null;
+  const policy = buildContentSecurityPolicy(app.isPackaged, process.env.REMOTE_SIGNAL_URL, combinedSignalOrigin);
 
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     if (details.resourceType !== "mainFrame" || !isTrustedRendererUrl(details.url)) {

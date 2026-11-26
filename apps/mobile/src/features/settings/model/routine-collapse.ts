@@ -1,6 +1,6 @@
 import { switchPreference } from "./secure-preference";
 
-const preference = switchPreference("openbot.mobile.collapseRoutineRows.v1", true);
+const preference = switchPreference("starbot.mobile.collapseRoutineRows.v1", true);
 
 export const useRoutineCollapsePreference = preference.store;
 export const loadRoutineCollapsePreference = preference.load;

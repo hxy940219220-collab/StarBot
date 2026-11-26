@@ -92,7 +92,7 @@ export const messages = {
   "billing.license.offer.title": "상업용 라이선스",
   "billing.license.offer.description": "Starter는 사용자 1명, Team은 사용자 {count}명 이상.",
   "billing.license.buy.description":
-    "회사 업무에서 OpenBot을 사용하는 사람은 몇 명인가요? AI 에이전트는 사용자에 포함되지 않아요.",
+    "회사 업무에서 StarBot을 사용하는 사람은 몇 명인가요? AI 에이전트는 사용자에 포함되지 않아요.",
   "billing.license.buy.confirm": "결제 계속하기",
   "billing.license.trial.until": "{date}까지 무료",
   "billing.license.trial.confirm": "무료 체험 시작",
@@ -149,7 +149,7 @@ export const messages = {
   "billing.order.yearly": "연간",
   "billing.order.yearlySaving": "연간 −{percent}%",
   "billing.order.server.title": "호스팅 서버",
-  "billing.order.server.summary": "팀을 위해 OpenBot을 대신 운영해요.",
+  "billing.order.server.summary": "팀을 위해 StarBot을 대신 운영해요.",
   "billing.order.server.none": "서버 없음",
   "billing.order.server.noneDetail": "내 컴퓨터에서 StarBot 실행",
 
@@ -161,7 +161,7 @@ export const messages = {
   "billing.order.server.storage": "저장 공간 {size} GB",
   "billing.order.server.speed": "{speed}배 속도",
   "billing.order.license.title": "라이선스",
-  "billing.order.license.summary": "회사 업무에서 OpenBot을 사용하려면 필요해요.",
+  "billing.order.license.summary": "회사 업무에서 StarBot을 사용하려면 필요해요.",
   "billing.order.license.none": "라이선스 없음",
   "billing.order.license.noneDetail": "개인 및 비상업적 용도",
   "billing.order.license.starter": "Starter 라이선스",

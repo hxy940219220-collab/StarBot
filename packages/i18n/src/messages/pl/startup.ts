@@ -41,12 +41,11 @@ export const messages = {
   "startup.recoveryTitle": "StarBot się nie otworzył",
 
   "startup.recoveryBody": {
-    one: "OpenBot {version} zatrzymał się przed otwarciem {count} raz z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
-    few: "OpenBot {version} zatrzymał się przed otwarciem {count} razy z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
-    many: "OpenBot {version} zatrzymał się przed otwarciem {count} razy z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
+    one: "StarBot {version} zatrzymał się przed otwarciem {count} raz z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
+    few: "StarBot {version} zatrzymał się przed otwarciem {count} razy z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
+    many: "StarBot {version} zatrzymał się przed otwarciem {count} razy z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
     other:
       "StarBot {version} zatrzymał się przed otwarciem {count} razy z rzędu. Twoje lokalne dane nie zostały zresetowane ani nadpisane.",
-
   },
   "startup.recoveryHint":
     "Spróbuj ponownie albo zainstaluj ostatnią wersję, która się otwierała. Aby uzyskać pomoc, wyeksportuj diagnostykę i wyślij plik ze zgłoszeniem.",
@@ -61,5 +60,4 @@ export const messages = {
   "startup.recoveryQuit": "Zakończ",
   "startup.recoveryDiagnosticsSaved": "Plik diagnostyki został zapisany.",
   "startup.recoveryActionFailed": "StarBot nie mógł wykonać tej czynności.",
-
 } as const satisfies PartialTranslation<typeof source>;

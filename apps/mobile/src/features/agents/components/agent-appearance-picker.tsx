@@ -24,7 +24,6 @@ import { memo, type ReactNode, useCallback, useMemo, useState } from "react";
 import { Pressable, View } from "react-native";
 import { AgentColorGlow } from "@/features/agents/components/agent-color-glow";
 import { AvatarThumbnail, BloubAvatarPreview } from "@/features/agents/components/bloub-avatar";
-import { UsageSegments } from "@/features/agents/components/usage-segments";
 import { type AvatarFace, avatarSeedForStyledFace, randomAvatarFace } from "@/features/agents/model/avatar-candidates";
 import { haptics } from "@/shared/lib/haptics";
 import { isAndroid } from "@/shared/lib/platform";
@@ -80,7 +79,7 @@ interface AgentAppearancePickerProps extends AgentPhotoProps {
   onColorChange: (value: AgentColorValue) => void;
 }
 
-const SHAPE_COLUMNS = 5;
+const SHAPE_COLUMNS = 4;
 const EYES_COLUMNS = 8;
 const COLOR_COLUMNS = 9;
 
@@ -128,7 +127,6 @@ export function AgentAppearancePicker({
     },
     [expression, faceKey, selectSeed, shape, style],
   );
-  const selectStyle = useCallback((next: AvatarStyle) => selectFace({ style: next }), [selectFace]);
   const resetFace = useCallback(() => selectSeed(resetSeed), [resetSeed, selectSeed]);
   const shuffleFace = useCallback(
     () => selectFace(randomAvatarFace({ shape, expression })),
@@ -164,7 +162,6 @@ export function AgentAppearancePicker({
       ) : null}
       {showFaces ? (
         <>
-          <AvatarStyleOptions style={style} disabled={disabled} onStyleChange={selectStyle} />
           <AvatarShapeOptions
             faceKey={faceKey}
             style={style}
@@ -250,36 +247,6 @@ export function HeadingAction({
     </Button>
   );
 }
-
-const AvatarStyleOptions = memo(function AvatarStyleOptions({
-  style,
-  disabled,
-  onStyleChange,
-}: {
-  style: AvatarStyle;
-  disabled: boolean;
-  onStyleChange: (style: AvatarStyle) => void;
-}) {
-  const { t } = useText();
-  const options = useMemo(
-    () => [
-      { value: "plush" as const, label: t("mobile.agent.appearance.stylePlush") },
-      { value: "flat" as const, label: t("mobile.agent.appearance.styleFlat") },
-    ],
-    [t],
-  );
-  return (
-    <AppearanceSection title={t("mobile.agent.appearance.styleHeading")} plain>
-      <UsageSegments
-        options={options}
-        value={style}
-        disabled={disabled}
-        accessibilityLabel={t("mobile.agent.appearance.style")}
-        onChange={onStyleChange}
-      />
-    </AppearanceSection>
-  );
-});
 
 export function ChoiceCell({
   columns,
@@ -399,7 +366,7 @@ const AvatarShapeOptions = memo(function AvatarShapeOptions({
               seed={seeds[index] ?? faceKey}
               hue={thumbnailHue}
               color={color}
-              size={40}
+              size={52}
               animateColor={!isAndroid}
             />
           </ChoiceCell>

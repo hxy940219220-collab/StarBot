@@ -25,7 +25,7 @@ export const messages = {
   "webClient.pane.workspace": "워크스페이스",
   "webClient.phoneApp.title": "StarBot 앱 사용하기",
 
-  "webClient.phoneApp.description": "휴대폰에서는 앱에서 OpenBot이 가장 잘 작동합니다. 같은 이메일로 로그인하세요.",
+  "webClient.phoneApp.description": "휴대폰에서는 앱에서 StarBot이 가장 잘 작동합니다. 같은 이메일로 로그인하세요.",
   "webClient.phoneApp.ios": "iPhone용 다운로드",
   "webClient.phoneApp.android": "Android용 다운로드",
   "webClient.phoneApp.continue": "브라우저에서 계속",
@@ -34,19 +34,19 @@ export const messages = {
   "webClient.notice.hostsFailed": "서버를 불러올 수 없어요",
   "webClient.notice.connectComputer": "서버 연결",
   "webClient.connect.description":
-    "컴퓨터에서 OpenBot을 실행하면 이 브라우저에서 에이전트와 채팅할 수 있어요. 초대를 받아 서버에 참여할 수도 있어요.",
+    "컴퓨터에서 StarBot을 실행하면 이 브라우저에서 에이전트와 채팅할 수 있어요. 초대를 받아 서버에 참여할 수도 있어요.",
   "webClient.connect.descriptionHosted":
-    "호스팅 서버를 만들면 이 브라우저에서 에이전트와 채팅할 수 있어요. 컴퓨터에서 OpenBot을 실행하거나 초대를 받아 서버에 참여할 수도 있어요.",
-  "webClient.connect.stepInstall": "컴퓨터에 OpenBot을 설치하고 여세요.",
+    "호스팅 서버를 만들면 이 브라우저에서 에이전트와 채팅할 수 있어요. 컴퓨터에서 StarBot을 실행하거나 초대를 받아 서버에 참여할 수도 있어요.",
+  "webClient.connect.stepInstall": "컴퓨터에 StarBot을 설치하고 여세요.",
   "webClient.connect.stepSignIn": "이메일로 로그인하세요.",
-  "webClient.connect.stepRemote": "OpenBot에서 서버 설정 > 멤버를 열고 이 서버 게시를 켜세요.",
+  "webClient.connect.stepRemote": "StarBot에서 서버 설정 > 멤버를 열고 이 서버 게시를 켜세요.",
   "webClient.notice.download": "StarBot 다운로드",
 
   "webClient.notice.createServer": "호스팅 서버 만들기",
   "webClient.notice.join": "초대로 참여",
   "webClient.notice.refreshHosts": "서버 새로 고침",
   "webClient.otherTab.title": "{name}이(가) 다른 탭에서 열려 있습니다",
-  "webClient.otherTab.description": "OpenBot은 한 번에 하나의 탭에서만 서버를 사용할 수 있습니다.",
+  "webClient.otherTab.description": "StarBot은 한 번에 하나의 탭에서만 서버를 사용할 수 있습니다.",
   "webClient.otherTab.useHere": "여기서 사용",
   "webClient.agent.modelsFailed": "서버 모델을 불러올 수 없었어요.",
   "webClient.agent.refreshFailed":
@@ -55,7 +55,7 @@ export const messages = {
   "webClient.error.usageOffline": "사용량을 보려면 서버에 연결해 주세요.",
   "webClient.error.desktopOnly": "이 작업은 데스크톱 앱에서 할 수 있어요.",
   "webClient.settings.preferences.title": "환경설정",
-  "webClient.settings.preferences.description": "이 브라우저에서 OpenBot의 언어와 소리를 선택하세요.",
+  "webClient.settings.preferences.description": "이 브라우저에서 StarBot의 언어와 소리를 선택하세요.",
   "webClient.error.checkConversation": "다시 보내기 전에 대화를 확인해 주세요.",
   "webClient.error.hostReported": "서버에서 오류가 발생했어요. 대화와 서버 상태를 확인해 주세요.",
   "webClient.error.requestFailed": "요청에 실패했어요.",
@@ -91,7 +91,7 @@ export const messages = {
   "webClient.error.duplication": "이 서버는 에이전트 복제를 지원하지 않아요.",
   "webClient.error.connectServerFirst": "먼저 이 서버에 연결해 주세요.",
   "webClient.error.agentInstallNotAllowed":
-    "소유자 또는 관리자만 여기에 에이전트를 추가할 수 있고, 서버에서 최신 OpenBot이 실행 중이어야 해요.",
+    "소유자 또는 관리자만 여기에 에이전트를 추가할 수 있고, 서버에서 최신 StarBot이 실행 중이어야 해요.",
   "webClient.error.linkDesktopOnly": "이 링크는 데스크톱 앱에서만 열 수 있어요.",
   "webClient.error.saveEndpointOffline": "엔드포인트를 저장하려면 서버에 연결해 주세요.",
   "webClient.error.removeEndpointOffline": "엔드포인트를 제거하려면 서버에 연결해 주세요.",

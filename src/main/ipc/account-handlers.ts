@@ -13,7 +13,9 @@ import { isObject, requireString, stringPayload } from "./validation";
 export interface AccountIpcDependencies {
   centralAuth: CentralAuthManager;
   refreshServers: () => void;
-  host: Pick<HostService, "configure" | "getStatus" | "start" | "getMobileConnectHost" | "refreshRegistration">;
+  host: Pick<HostService, "configure" | "getStatus" | "start" | "getMobileConnectHost" | "refreshRegistration"> & {
+    applySignedInAccount?: HostService["applySignedInAccount"];
+  };
 }
 
 export function accountIpcHandlers({
@@ -21,6 +23,13 @@ export function accountIpcHandlers({
   host,
   refreshServers,
 }: AccountIpcDependencies): Pick<IpcGroupHandlers, "auth"> {
+  const ensureMobileConnectSession = async (): Promise<void> => {
+    if (centralAuth.getState().status === "signed_in") return;
+    const nextState = await runCauseEffect(centralAuth.ensureLocalDevelopmentSession());
+    if (nextState.status === "signed_in" && host.applySignedInAccount) {
+      await runCauseEffect(host.applySignedInAccount(nextState.user));
+    }
+  };
   const hostId = (serverId: string): string => {
     if (serverId !== LOCAL_SERVER_ID) return serverId;
     const local = host.getStatus().serverId;
@@ -44,16 +53,23 @@ export function accountIpcHandlers({
       updateChatColor: payloadHandler(parseChatColor, (chatColor) =>
         runCauseEffect(centralAuth.updateChatColor(chatColor)),
       ),
-      createMobileConnect: handler(() => runCauseEffect(createHostedMobileConnect({ centralAuth, host }))),
+      createMobileConnect: handler(async () => {
+        await ensureMobileConnectSession();
+        return runCauseEffect(createHostedMobileConnect({ centralAuth, host }));
+      }),
       cancelMobileConnect: handler(() => runCauseEffect(centralAuth.cancelMobileConnect(host.getMobileConnectHost()))),
       getMobileConnectLink: handler(() => centralAuth.getMobileConnectLink(host.getMobileConnectHost())),
-      createMobileConnectLink: handler(() => runCauseEffect(createHostedMobileConnectLink({ centralAuth, host }))),
+      createMobileConnectLink: handler(async () => {
+        await ensureMobileConnectSession();
+        return runCauseEffect(createHostedMobileConnectLink({ centralAuth, host }));
+      }),
       revokeMobileConnectLink: handler(() =>
         runCauseEffect(centralAuth.revokeMobileConnectLink(host.getMobileConnectHost())),
       ),
-      listMobileConnectedDevices: handler(() =>
-        runCauseEffect(centralAuth.listMobileConnectedDevices(host.getMobileConnectHost())),
-      ),
+      listMobileConnectedDevices: handler(async () => {
+        await ensureMobileConnectSession();
+        return runCauseEffect(centralAuth.listMobileConnectedDevices(host.getMobileConnectHost()));
+      }),
       listAccountSessions: handler(() => runCauseEffect(centralAuth.listAccountSessions())),
       revokeAccountSession: payloadHandler(stringPayload("sessionId", INPUT_LIMITS.identifier), (sessionId) =>
         runCauseEffect(centralAuth.revokeAccountSession(sessionId)),

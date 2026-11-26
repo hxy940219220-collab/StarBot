@@ -139,9 +139,9 @@ export const messages = {
   "error.agent.saveOtherAgent": "השמירה הזו שייכת לסוכן אחר.",
   "error.agent.savedGone": "הסוכן השמור כבר לא קיים.",
   "error.agent.storedProfileUnreadable":
-    'בפרופיל סוכן שמור יש ערך "{field}" שאי אפשר לקרוא; יש לעדכן את הנתונים לפני הפעלת OpenBot.',
+    'בפרופיל סוכן שמור יש ערך "{field}" שאי אפשר לקרוא; יש לעדכן את הנתונים לפני הפעלת StarBot.',
   "error.agent.storedProfileUnreadableId":
-    'בפרופיל הסוכן השמור {id} יש ערך "{field}" שאי אפשר לקרוא; יש לעדכן את הנתונים לפני הפעלת OpenBot.',
+    'בפרופיל הסוכן השמור {id} יש ערך "{field}" שאי אפשר לקרוא; יש לעדכן את הנתונים לפני הפעלת StarBot.',
   "error.agent.queueEditRejected": "עריכת התור נדחתה: {reason}",
   "error.agent.computerUseLocalOnly": "אפשר לשנות שליטה במחשב רק במחשב שמריץ את הסוכן.",
   "error.agent.automationLocalOnly": "אפשר לאפשר סקריפטים מקומיים רק במחשב שמריץ את הסוכן.",

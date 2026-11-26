@@ -6,18 +6,18 @@ export const messages = {
   "error.workflow.versionMissing": "이 버전의 워크플로는 더 이상 존재하지 않아요.",
   "error.workflow.annotation": "텍스트, 메모, 도형에는 연결을 추가할 수 없어요.",
   "error.workflow.port": "단계가 이 유형의 입력을 받을 수 없어요.",
-  "error.workflow.unknownValue": "이 OpenBot은 단계의 설정을 알지 못합니다. OpenBot을 업데이트한 후 다시 시도하세요.",
+  "error.workflow.unknownValue": "이 StarBot은 단계의 설정을 알지 못합니다. StarBot을 업데이트한 후 다시 시도하세요.",
   "error.workflow.branch": "‘예’와 ‘아니요’ 연결은 조건에만 있을 수 있어요.",
   "error.workflow.conditionBranch": "조건에서 나가는 각 연결은 ‘예’ 또는 ‘아니요’여야 해요.",
   "error.workflow.duplicateEdge": "이 두 단계에는 이미 이 연결이 있어요.",
   "error.workflow.serverTooOld":
-    "이 서버는 워크플로를 지원하지 않아요. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트하세요.",
+    "이 서버는 워크플로를 지원하지 않아요. 서버를 실행하는 컴퓨터에서 StarBot을 업데이트하세요.",
   "error.workflow.newerSteps":
-    "이 워크플로에는 최신 버전 OpenBot의 단계가 있어요. 변경하려면 OpenBot을 업데이트하세요.",
-  "error.workflow.nodeUnsupported": "이 버전의 OpenBot은 아직 이미지, 파일, 메시지 단계를 실행할 수 없어요.",
-  "error.workflow.interrupted": "이 단계가 실행되는 동안 OpenBot이 중지됐어요. 다시 실행해 주세요.",
+    "이 워크플로에는 최신 버전 StarBot의 단계가 있어요. 변경하려면 StarBot을 업데이트하세요.",
+  "error.workflow.nodeUnsupported": "이 버전의 StarBot은 아직 이미지, 파일, 메시지 단계를 실행할 수 없어요.",
+  "error.workflow.interrupted": "이 단계가 실행되는 동안 StarBot이 중지됐어요. 다시 실행해 주세요.",
   "error.workflow.agentMissing": "이 단계의 에이전트를 선택하세요.",
-  "error.workflow.handoffFailed": "OpenBot이 이 단계를 에이전트에 보내지 못했어요.",
+  "error.workflow.handoffFailed": "StarBot이 이 단계를 에이전트에 보내지 못했어요.",
   "error.workflow.agentStepEnded": "에이전트가 답하기 전에 이 단계의 메시지가 삭제됐어요.",
   "error.workflow.agentStepStopped": "에이전트가 이 단계에 답하기 전에 멈췄어요. 단계를 다시 실행해 주세요.",
   "error.workflow.conditionUnclear": "모델이 ‘예’ 또는 ‘아니요’로 답하지 않았어요.",
@@ -43,7 +43,7 @@ export const messages = {
   "error.workflow.modelUnavailable": "이 단계의 모델을 사용할 수 없어요. 이 단계에 다른 모델을 골라 주세요.",
   "error.workflow.providerBusy": "제공자가 바빠요. 몇 분 기다린 다음 단계를 다시 실행해 주세요.",
   "error.workflow.providerOffline":
-    "OpenBot이 제공자에 연결할 수 없었어요. 인터넷 연결을 확인한 다음 단계를 다시 실행해 주세요.",
+    "StarBot이 제공자에 연결할 수 없었어요. 인터넷 연결을 확인한 다음 단계를 다시 실행해 주세요.",
   "error.workflow.modelBusy": "다른 모델 요청이 실행 중이에요. 잠시 후 단계를 다시 실행해 주세요.",
   "error.workflow.mediaFailed": "모델이 이미지나 동영상을 만들 수 없었어요. 단계를 다시 실행해 주세요.",
   "error.workflow.mediaNotMade": "모델이 이미지나 동영상을 만들지 않았어요. 모델의 답변: {answer}",
@@ -60,7 +60,7 @@ export const messages = {
   "error.workflow.noDecision": "이 단계는 결정을 기다리고 있지 않아요.",
   "error.workflow.outputPlaceMissing": "이 출력의 메시징 위치를 선택하세요.",
   "error.workflow.outputChannelMissing": "이 출력의 채널을 선택하세요.",
-  "error.workflow.outputChannelFailed": "OpenBot이 결과를 채널에 게시하지 못했습니다. 단계를 다시 실행하세요.",
+  "error.workflow.outputChannelFailed": "StarBot이 결과를 채널에 게시하지 못했습니다. 단계를 다시 실행하세요.",
   "error.workflow.discordNoMessage":
     "이 출력은 실행을 시작한 Discord 메시지에 작동합니다. Discord 멘션으로 실행을 시작하거나 채널에 게시를 선택하세요.",
   "error.workflow.slackNoMessage":
@@ -69,7 +69,7 @@ export const messages = {
     "이 출력은 실행을 시작한 Telegram 메시지에 작동합니다. Telegram 멘션으로 실행을 시작하거나 채팅에 게시를 선택하세요.",
   "error.workflow.outputConnectionOff": "이 출력의 메시징 연결이 꺼져 있거나 삭제됐어요. 위치를 다시 선택하세요.",
   "error.workflow.outputNotRunning": "메시징 연결이 지금 실행되고 있지 않아요. 실행될 때 다시 시도해 주세요.",
-  "error.workflow.outputRefused": "위치에서 게시를 거부했어요. OpenBot이 그곳에 게시할 수 있는지 확인하세요.",
+  "error.workflow.outputRefused": "위치에서 게시를 거부했어요. StarBot이 그곳에 게시할 수 있는지 확인하세요.",
   "error.workflow.outputUncertain":
     "게시가 도중에 멈췄어요. 일부가 이미 그 위치에 있을 수 있어요. 다시 시도하기 전에 확인하세요.",
   "error.workflow.tooLarge":
@@ -96,7 +96,7 @@ export const messages = {
 
   "error.workflow.githubLocked": "이 대화는 GitHub에서 잠겨 있어요.",
   "error.workflow.githubRefused": "GitHub가 변경을 거부했어요: {detail}",
-  "error.workflow.githubUnreachable": "OpenBot이 GitHub에 연결하지 못했어요. 단계를 다시 실행해 주세요.",
+  "error.workflow.githubUnreachable": "StarBot이 GitHub에 연결하지 못했어요. 단계를 다시 실행해 주세요.",
   "error.workflow.githubUncertain":
     "변경이 도중에 멈췄어요. GitHub에 이미 반영됐을 수 있어요. 단계를 다시 실행하기 전에 GitHub를 확인하세요.",
   "error.workflow.githubNoEvent": "이 트리거가 시작할 이슈나 풀 리퀘스트가 GitHub에 없어요.",

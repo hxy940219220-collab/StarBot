@@ -17,9 +17,9 @@ export const messages = {
   "notification.channelMessage": "נשלחה הודעה.",
   "notification.usageLimit.title": "חשבון {provider} הגיע למגבלה",
   "notification.usageLimit.body": {
-    one: "סוכן אחד ממתין. OpenBot ינסה שוב מאוחר יותר.",
-    two: "שני סוכנים ממתינים. OpenBot ינסה שוב מאוחר יותר.",
-    other: "{count} סוכנים ממתינים. OpenBot ינסה שוב מאוחר יותר.",
+    one: "סוכן אחד ממתין. StarBot ינסה שוב מאוחר יותר.",
+    two: "שני סוכנים ממתינים. StarBot ינסה שוב מאוחר יותר.",
+    other: "{count} סוכנים ממתינים. StarBot ינסה שוב מאוחר יותר.",
   },
   "notification.usageLimit.bodyResets": {
     one: "סוכן אחד ממתין. האיפוס: {reset}.",

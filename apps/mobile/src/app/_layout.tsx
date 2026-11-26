@@ -17,7 +17,6 @@ import { useCSSVariable, useUniwind, withUniwind } from "uniwind";
 import { MobileAnalyticsLifecycle } from "@/features/analytics/lifecycle";
 import { AppLockOverlay } from "@/features/app-lock/components/app-lock-overlay";
 import { installAppLock } from "@/features/app-lock/model/app-lock";
-import { UpdateRequiredOverlay } from "@/features/app-update/components/update-required-overlay";
 import { DevelopmentConnectLinkHandler } from "@/features/auth/components/development-connect-link-handler";
 import { MobileSessionProvider, useMobileSession } from "@/features/auth/context/mobile-session-context";
 import { backgroundRefreshNative } from "@/features/background-refresh/background-refresh-native";
@@ -193,7 +192,6 @@ function RootNavigator() {
         </View>
         <BloubStage nativeSplashHidden={nativeHidden} onLayout={() => reportArtwork("stage")} />
         <ThemeSweep />
-        <UpdateRequiredOverlay />
         <AppLockOverlay />
       </View>
     </SplashContentReadyContext.Provider>

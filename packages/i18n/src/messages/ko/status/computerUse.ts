@@ -10,7 +10,7 @@ export const messages = {
   "status.computerUse.driverMissing": "이 StarBot 빌드에는 컴퓨터 제어 드라이버가 없어요.",
 
   "status.computerUse.inputRefused":
-    "이 데스크톱에서는 OpenBot이 다른 앱에서 입력하거나 클릭할 수 없어요. 웹사이트 작업은 에이전트에게 StarBot 브라우저를 사용하라고 요청하세요.",
+    "이 데스크톱에서는 StarBot이 다른 앱에서 입력하거나 클릭할 수 없어요. 웹사이트 작업은 에이전트에게 StarBot 브라우저를 사용하라고 요청하세요.",
 
   "status.computerUse.progressActing": "이 컴퓨터의 앱을 사용하는 중…",
   "status.computerUse.progressDeciding": "앱에서 다음 단계를 결정하는 중…",

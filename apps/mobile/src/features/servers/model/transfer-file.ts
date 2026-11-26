@@ -59,7 +59,7 @@ export async function pickZipUpload(maxBytes: number, tooLarge: string): Promise
 }
 
 export function keepTransferFile(download: RemoteFileUpload): { uri: string; release: () => void } {
-  const file = new File(Paths.cache, `${Date.now()}-openbot-transfer.zip`);
+  const file = new File(Paths.cache, `${Date.now()}-starbot-transfer.zip`);
   file.writeSync(download.base64, { encoding: "base64" });
   return {
     uri: file.uri,

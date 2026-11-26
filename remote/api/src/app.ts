@@ -171,11 +171,11 @@ export function createRemoteApiApp(
   discordApi: () => DiscordApi | null = () => null,
 ) {
   const app = new Elysia()
-    .get("/health/live", () => ({ service: "openbot-remote-api", status: "live", commit: config.sourceCommit }))
-    .get("/health/ready", () => ({ service: "openbot-remote-api", status: "ready" }))
+    .get("/health/live", () => ({ service: "starbot-remote-api", status: "live", commit: config.sourceCommit }))
+    .get("/health/ready", () => ({ service: "starbot-remote-api", status: "ready" }))
     .get("/health/turn", async ({ set }) => {
       const result = await runtime.runPromise(turnRelays.localProbe.pipe(Effect.result));
-      if (Result.isSuccess(result)) return { service: "openbot-turn", status: "ready" };
+      if (Result.isSuccess(result)) return { service: "starbot-turn", status: "ready" };
       set.status = 503;
       return result.failure.reason === "full"
         ? { error: { code: "turn_full", message: "The TURN relay has no free allocation." } }

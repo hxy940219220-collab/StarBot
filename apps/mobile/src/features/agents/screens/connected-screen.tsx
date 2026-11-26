@@ -4,11 +4,11 @@ import { GlassView } from "expo-glass-effect";
 import { type Href, router, Stack, useIsFocused } from "expo-router";
 import { Button, Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
-import Ellipsis from "lucide-react-native/icons/ellipsis";
-import EllipsisVertical from "lucide-react-native/icons/ellipsis-vertical";
+import CalendarClock from "lucide-react-native/icons/calendar-clock";
 import Layers3 from "lucide-react-native/icons/layers";
 import MessagesSquare from "lucide-react-native/icons/messages-square";
 import PanelLeft from "lucide-react-native/icons/panel-left";
+import Plus from "lucide-react-native/icons/plus";
 import WifiOff from "lucide-react-native/icons/wifi-off";
 import { memo, type ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { type FlatList, Pressable, StyleSheet, View, type ViewInstance, type ViewStyle } from "react-native";
@@ -52,11 +52,7 @@ import {
 import { PinnedAgentsGrid } from "@/features/agents/components/pinned-agents-grid";
 import { SidebarSectionHeader } from "@/features/agents/components/sidebar-section-header";
 import { showFailureAlert } from "@/features/analytics/failure-reports";
-import {
-  AppUpdateBlock,
-  AppUpdateSpacer,
-  useAppUpdateHeader,
-} from "@/features/app-update/components/app-update-header";
+import { useAppUpdateHeader } from "@/features/app-update/components/app-update-header";
 import { useAppUpdate } from "@/features/app-update/model/app-update";
 import { ChannelListRow } from "@/features/channels/components/channel-list";
 import { useChannels } from "@/features/channels/components/use-channels";
@@ -72,7 +68,6 @@ import {
 } from "@/features/search/components/home-search";
 import { setHomeSearchUnavailable } from "@/features/search/model/home-search-request";
 import { useAppDrawer } from "@/features/servers/components/app-drawer-shell";
-import { PlanLimitsHeaderButton } from "@/features/servers/components/plan-limits-header-button";
 import { usePlanLimits } from "@/features/servers/model/plan-limits";
 import { saveChatOrderPreference, useChatOrderPreference } from "@/features/settings/model/chat-order";
 import { ConnectionHeaderStatus } from "@/features/workspace/components/connection-header-status";
@@ -89,7 +84,6 @@ import { canAddChatPin } from "@/features/workspace/model/agent-pins";
 import type { DropChange } from "@/features/workspace/model/chat-drag";
 import { showsOnline } from "@/features/workspace/model/server-status";
 import {
-  MOBILE_CHAT_ORDERS,
   type MobileChatOrder,
   type MobileSidebarItem,
   mobileChatOrderSortsSections,
@@ -261,14 +255,14 @@ function applyChatDrop(workspace: MobileWorkspaceActions, serverId: string, chan
   });
 }
 
-const CHAT_ORDER_LABEL = {
+const _CHAT_ORDER_LABEL = {
   manual: "mobile.agent.home.sort.manual",
   recent: "mobile.agent.home.sort.recent",
   "unread-group": "mobile.agent.home.sort.unreadGroup",
   "unread-first": "mobile.agent.home.sort.unreadFirst",
 } as const satisfies Record<MobileChatOrder, MobileTextKey>;
 
-function changeChatOrder(order: MobileChatOrder): void {
+function _changeChatOrder(order: MobileChatOrder): void {
   if (order === useChatOrderPreference.getState().order) return;
   void haptics.selection();
   void saveChatOrderPreference(order).catch(() => undefined);
@@ -381,7 +375,7 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
   const mutedColor = String(muted);
   const hasSelectedServer = servers.some((server) => server.id === activeServer.id);
   const planLimits = usePlanLimits(activeServer.id);
-  const showsPlanLimits = hasSelectedServer && planLimits.rows.length > 0;
+  const _showsPlanLimits = hasSelectedServer && planLimits.rows.length > 0;
   const showLoader =
     (serverDirectoryState === "loading" && servers.length === 0) ||
     (hasSelectedServer && activeServer.initialConnectionPending && channelAgents.size === 0);
@@ -412,11 +406,11 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
     const byId = new Map(openChannels.map((channel) => [channel.id, channel]));
     return pinnedChannelIds.flatMap((channelId) => byId.get(channelId) ?? []);
   }, [openChannels, pinnedChannelIds]);
-  const hasHiddenChats =
+  const _hasHiddenChats =
     hiddenAgents.length > 0 ||
     channels.channels.some((channel) => !channel.archived && hiddenChannelIds.includes(channel.id));
   const hasPins = pinnedAgents.length + pinnedChannels.length > 0;
-  const hasDeletedChannels = channels.supported && channels.channels.some((channel) => channel.archived);
+  const _hasDeletedChannels = channels.supported && channels.channels.some((channel) => channel.archived);
   const unreadAgentIds = useUnreadAgentIds();
   const hasUnread = useMemo(() => {
     const unread = new Set(unreadAgentIds);
@@ -428,7 +422,7 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
   const [markingAllRead, setMarkingAllRead] = useState(false);
   const activeServerOnline = showsOnline(activeServer);
   const canMarkAllRead = hasUnread && !markingAllRead && activeServerOnline;
-  const markAllChatsRead = () => {
+  const _markAllChatsRead = () => {
     if (!canMarkAllRead) return;
     void haptics.impact("soft");
     setMarkingAllRead(true);
@@ -637,25 +631,27 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
           <AgentUnreadGroupHeader count={item.count} />
         </AgentListRowReveal>
       ) : item.kind === "section" ? (
-        <CollapsingRow collapsed={collapsedRowIds.has(item.id)}>
-          <AgentListRowReveal index={index + rowOffset} reveal={listReveal}>
-            <SectionDropTarget sectionId={item.id}>
-              <SidebarSectionHeader
-                key={`${activeServer.id}:${item.id}`}
-                id={item.id}
-                name={item.name}
-                title={item.title}
-                parentName={item.parentName}
-                custom={item.custom}
-                empty={item.empty}
-                unread={folderUnread.get(item.id) ?? 0}
-                visibleSectionIds={visibleSectionIds}
-                collapsed={collapsedSectionIds.has(item.id)}
-                onToggle={toggleSection}
-              />
-            </SectionDropTarget>
-          </AgentListRowReveal>
-        </CollapsingRow>
+        !item.custom && visibleSectionIds.length <= 1 ? null : (
+          <CollapsingRow collapsed={collapsedRowIds.has(item.id)}>
+            <AgentListRowReveal index={index + rowOffset} reveal={listReveal}>
+              <SectionDropTarget sectionId={item.id}>
+                <SidebarSectionHeader
+                  key={`${activeServer.id}:${item.id}`}
+                  id={item.id}
+                  name={item.name}
+                  title={item.title}
+                  parentName={item.parentName}
+                  custom={item.custom}
+                  empty={item.empty}
+                  unread={folderUnread.get(item.id) ?? 0}
+                  visibleSectionIds={visibleSectionIds}
+                  collapsed={collapsedSectionIds.has(item.id)}
+                  onToggle={toggleSection}
+                />
+              </SectionDropTarget>
+            </AgentListRowReveal>
+          </CollapsingRow>
+        )
       ) : item.kind === "channel" ? (
         <TransitioningChatRow
           channel={item.channel}
@@ -749,63 +745,22 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
     ],
   );
   const optionsActions = useMemo<MenuAction[]>(() => {
-    const chatActions: MenuAction[] = [
-      ...(hasSelectedServer
-        ? [
-            {
-              id: "sort",
-              title: t("mobile.agent.home.sort.title"),
-              subactions: MOBILE_CHAT_ORDERS.map(
-                (order): MenuAction => ({
-                  id: `sort:${order}`,
-                  title: t(CHAT_ORDER_LABEL[order]),
-                  state: order === chatOrder ? "on" : "off",
-                }),
-              ),
-            } satisfies MenuAction,
-            {
-              id: "mark-all-read",
-              title: t("mobile.agent.home.markAllRead"),
-              attributes: { disabled: !canMarkAllRead },
-            },
-          ]
-        : []),
-      ...(hasHiddenChats ? [{ id: "hidden-chats", title: t("mobile.agent.hidden.title") }] : []),
-      ...(hasDeletedChannels ? [{ id: "deleted-chats", title: t("mobile.app.route.deletedChannels") }] : []),
-    ];
     return [
       {
         id: "add",
         title: "",
         displayInline: true,
         subactions: [
-          { id: "add-agent", title: t("mobile.agent.home.addAgent") },
-          ...(sidebar?.layout ? [{ id: "add-section", title: t("mobile.agent.sectionForm.newTitle") }] : []),
           ...(channels.supported ? [{ id: "add-channel", title: t("mobile.agent.home.newChannel") }] : []),
+          { id: "add-agent", title: t("mobile.agent.home.addAgent") },
         ],
       },
-      ...(chatActions.length > 0 ? [{ id: "chats", title: "", displayInline: true, subactions: chatActions }] : []),
     ];
-  }, [
-    hasHiddenChats,
-    hasDeletedChannels,
-    hasSelectedServer,
-    canMarkAllRead,
-    channels.supported,
-    sidebar?.layout,
-    chatOrder,
-    t,
-  ]);
+  }, [channels.supported, t]);
 
   const onPressOption = (event: string) => {
-    if (event === "add-section") router.push({ pathname: "/section-form", params: { serverId: activeServer.id } });
     if (event === "add-agent") router.push("/add-agent");
     if (event === "add-channel") router.push({ pathname: "/add-channel", params: { serverId: activeServer.id } });
-    if (event === "hidden-chats") router.push("/hidden-chats");
-    if (event === "deleted-chats") router.push({ pathname: "/deleted-chats", params: { serverId: activeServer.id } });
-    if (event === "mark-all-read") markAllChatsRead();
-    const order = MOBILE_CHAT_ORDERS.find((candidate) => event === `sort:${candidate}`);
-    if (order) changeChatOrder(order);
   };
   const openServersButton = (
     <HeaderIconButton accessibilityLabel={t("mobile.agent.home.openServers")} glass={buttonGlass} onPress={openDrawer}>
@@ -820,26 +775,14 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
   );
   const headerTrailing = (
     <View className="shrink-0 flex-row items-center gap-1">
-      {showsPlanLimits ? (
-        isAndroid ? (
-          <PlanLimitsHeaderButton
-            serverId={activeServer.id}
-            rows={planLimits.rows}
-            accounts={planLimits.accounts}
-            disabled={!planLimits.online}
-            androidGlass={buttonGlass}
-          />
-        ) : (
-          <HeaderGlass glass={buttonGlass} capsule>
-            <PlanLimitsHeaderButton
-              serverId={activeServer.id}
-              rows={planLimits.rows}
-              accounts={planLimits.accounts}
-              disabled={!planLimits.online}
-              androidGlass={buttonGlass}
-            />
-          </HeaderGlass>
-        )
+      {hasSelectedServer ? (
+        <HeaderIconButton
+          accessibilityLabel={t("mobile.app.route.schedule")}
+          glass={buttonGlass}
+          onPress={() => router.push({ pathname: "/server-routines", params: { serverId: activeServer.id } })}
+        >
+          <CalendarClock color={iconColor} size={21} strokeWidth={2} />
+        </HeaderIconButton>
       ) : null}
       <MenuView
         actions={optionsActions}
@@ -853,11 +796,7 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
           className="size-12 items-center justify-center"
         >
           <HeaderGlass glass={buttonGlass}>
-            {isAndroid ? (
-              <EllipsisVertical color={iconColor} size={22} strokeWidth={2} />
-            ) : (
-              <Ellipsis color={iconColor} size={22} strokeWidth={2} />
-            )}
+            <Plus color={iconColor} size={22} strokeWidth={2.2} />
           </HeaderGlass>
         </View>
       </MenuView>
@@ -934,7 +873,6 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
                 ListHeaderComponent={
                   <View onLayout={(event) => layoutStage(event.nativeEvent.layout.height)}>
                     <AgentListRowReveal index={0} reveal={listReveal}>
-                      {hasSelectedServer ? <AppUpdateSpacer header={updateHeader} headerHeight={headerHeight} /> : null}
                       {sidebar?.error ? (
                         <View className="gap-2 px-4">
                           <Typography.Paragraph className="text-danger-text">
@@ -1050,9 +988,7 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
       </AndroidBlurTarget>
 
       {onboarding.active ? null : (
-        <LargeTitleBar scroll={scroll} blurTarget={barBlurTarget} androidSurfaceOnScroll={homeCard}>
-          <AppUpdateBlock header={updateHeader} scroll={scroll} hidden={search.open} />
-        </LargeTitleBar>
+        <LargeTitleBar scroll={scroll} blurTarget={barBlurTarget} androidSurfaceOnScroll={homeCard} />
       )}
 
       {searchShows ? <HomeSearchResults search={search} barHeight={searchBarOffset} /> : null}
@@ -1106,83 +1042,32 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
             </Stack.Toolbar.View>
           </Stack.Toolbar>
           <Stack.Toolbar placement="right">
-            <Stack.Toolbar.View hidden={search.open || !showsPlanLimits}>
-              <PlanLimitsHeaderButton
-                serverId={activeServer.id}
-                rows={planLimits.rows}
-                accounts={planLimits.accounts}
-                disabled={!planLimits.online}
-                androidGlass={buttonGlass}
+            {hasSelectedServer ? (
+              <Stack.Toolbar.Button
+                icon="calendar.badge.clock"
+                hidden={search.open}
+                onPress={() => openFromMenu({ pathname: "/server-routines", params: { serverId: activeServer.id } })}
               />
-            </Stack.Toolbar.View>
+            ) : null}
             <Stack.Toolbar.Menu
-              icon="ellipsis"
+              icon="plus"
               accessibilityLabel={t("mobile.agent.home.chatOptions")}
               separateBackground
               hidden={search.open}
             >
               <Stack.Toolbar.Menu inline>
-                <Stack.Toolbar.MenuAction icon="plus.circle" onPress={() => openFromMenu("/add-agent")}>
-                  {t("mobile.agent.home.addAgent")}
-                </Stack.Toolbar.MenuAction>
-                {sidebar?.layout ? (
-                  <Stack.Toolbar.MenuAction
-                    icon="folder.badge.plus"
-                    onPress={() => openFromMenu({ pathname: "/section-form", params: { serverId: activeServer.id } })}
-                  >
-                    {t("mobile.agent.sectionForm.newTitle")}
-                  </Stack.Toolbar.MenuAction>
-                ) : null}
                 {channels.supported ? (
                   <Stack.Toolbar.MenuAction
-                    icon="number"
+                    icon="bubble.left.and.bubble.right"
                     onPress={() => openFromMenu({ pathname: "/add-channel", params: { serverId: activeServer.id } })}
                   >
                     {t("mobile.agent.home.newChannel")}
                   </Stack.Toolbar.MenuAction>
                 ) : null}
+                <Stack.Toolbar.MenuAction icon="plus.circle" onPress={() => openFromMenu("/add-agent")}>
+                  {t("mobile.agent.home.addAgent")}
+                </Stack.Toolbar.MenuAction>
               </Stack.Toolbar.Menu>
-              {hasSelectedServer || hasHiddenChats || hasDeletedChannels ? (
-                <Stack.Toolbar.Menu inline>
-                  {hasSelectedServer ? (
-                    <Stack.Toolbar.Menu icon="arrow.up.arrow.down" title={t("mobile.agent.home.sort.title")}>
-                      {MOBILE_CHAT_ORDERS.map((order) => (
-                        <Stack.Toolbar.MenuAction
-                          key={order}
-                          isOn={order === chatOrder}
-                          onPress={() => changeChatOrder(order)}
-                        >
-                          {t(CHAT_ORDER_LABEL[order])}
-                        </Stack.Toolbar.MenuAction>
-                      ))}
-                    </Stack.Toolbar.Menu>
-                  ) : null}
-                  {hasSelectedServer ? (
-                    <Stack.Toolbar.MenuAction
-                      icon="envelope.open"
-                      disabled={!canMarkAllRead}
-                      onPress={markAllChatsRead}
-                    >
-                      {t("mobile.agent.home.markAllRead")}
-                    </Stack.Toolbar.MenuAction>
-                  ) : null}
-                  {hasHiddenChats ? (
-                    <Stack.Toolbar.MenuAction icon="eye.slash" onPress={() => openFromMenu("/hidden-chats")}>
-                      {t("mobile.agent.hidden.title")}
-                    </Stack.Toolbar.MenuAction>
-                  ) : null}
-                  {hasDeletedChannels ? (
-                    <Stack.Toolbar.MenuAction
-                      icon="trash"
-                      onPress={() =>
-                        openFromMenu({ pathname: "/deleted-chats", params: { serverId: activeServer.id } })
-                      }
-                    >
-                      {t("mobile.app.route.deletedChannels")}
-                    </Stack.Toolbar.MenuAction>
-                  ) : null}
-                </Stack.Toolbar.Menu>
-              ) : null}
             </Stack.Toolbar.Menu>
           </Stack.Toolbar>
         </>

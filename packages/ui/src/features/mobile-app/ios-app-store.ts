@@ -1,1 +1,1 @@
-export const IOS_APP_STORE_URL = "https://apps.apple.com/us/app/openbot-run/id6807024266";
+export const IOS_APP_STORE_URL = "https://github.com/hxy940219220-collab/StarBot-Desktop/releases";

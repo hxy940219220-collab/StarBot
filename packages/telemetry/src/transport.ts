@@ -10,7 +10,8 @@ export function openPanelTransport(options: {
   const send = options.fetch ?? globalThis.fetch;
   return (report, signal) =>
     telemetryIO(async () => {
-      const response = await send(options.endpoint ?? "https://analytics.starbot.app/api/track", {
+      if (!options.endpoint) return true;
+      const response = await send(options.endpoint, {
         method: "POST",
         signal,
         credentials: "omit",

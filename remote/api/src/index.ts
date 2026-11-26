@@ -402,8 +402,8 @@ const healthServer = Bun.serve({
   hostname: config.healthHost,
   port: config.healthPort,
   routes: {
-    "/health/live": () => Response.json({ service: "openbot-remote-api", status: "live", commit: config.sourceCommit }),
-    "/health/ready": () => Response.json({ service: "openbot-remote-api", status: "ready" }),
+    "/health/live": () => Response.json({ service: "starbot-remote-api", status: "live", commit: config.sourceCommit }),
+    "/health/ready": () => Response.json({ service: "starbot-remote-api", status: "ready" }),
     "/metrics": (request) => {
       const authorization = request.headers.get("Authorization") ?? "";
       if (!config.metricsToken || !sameSecret(authorization, `Bearer ${config.metricsToken}`))
@@ -417,7 +417,7 @@ const healthServer = Bun.serve({
 });
 
 const protocol = tlsPaths ? "https" : "http";
-console.log(`OpenBot Remote API is ready at ${protocol}://${config.host}:${config.port}`);
+console.log(`StarBot Remote API is ready at ${protocol}://${config.host}:${config.port}`);
 
 const readCertificateFile = (path: string) =>
   Effect.tryPromise({
@@ -435,7 +435,7 @@ function reloadTlsWhenChanged(): Promise<void> {
   pendingReload ??= controlPlane
     .runPromise(reloadTlsEffect())
     .catch(() => {
-      console.error("OpenBot Remote API could not reload its TLS certificate.");
+      console.error("StarBot Remote API could not reload its TLS certificate.");
     })
     .finally(() => {
       pendingReload = null;
@@ -456,7 +456,7 @@ const reloadTlsEffect = Effect.fn("Signal.reloadTls")(function* () {
     catch: () => new ControlPlaneError({ message: "The Signal listener could not be restarted." }),
   });
   certificateHash = nextHash;
-  console.log("OpenBot Remote API reloaded its TLS certificate.");
+  console.log("StarBot Remote API reloaded its TLS certificate.");
 });
 
 function tlsCertificateHash(): Effect.Effect<string | null> {

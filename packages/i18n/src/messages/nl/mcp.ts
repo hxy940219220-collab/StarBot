@@ -108,12 +108,12 @@ export const messages = {
   "mcp.panel.useAddress": "Dit adres gebruiken",
   "mcp.panel.signInTo": "Inloggen bij {name}",
   "mcp.panel.signInWaiting": {
-    one: "Rond het inloggen af in je browser. OpenBot stopt met wachten na {count} minuut.",
-    other: "Rond het inloggen af in je browser. OpenBot stopt met wachten na {count} minuten.",
+    one: "Rond het inloggen af in je browser. StarBot stopt met wachten na {count} minuut.",
+    other: "Rond het inloggen af in je browser. StarBot stopt met wachten na {count} minuten.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "De inlogpagina wordt geopend op {host}. OpenBot stopt met wachten na {count} minuut.",
-    other: "De inlogpagina wordt geopend op {host}. OpenBot stopt met wachten na {count} minuten.",
+    one: "De inlogpagina wordt geopend op {host}. StarBot stopt met wachten na {count} minuut.",
+    other: "De inlogpagina wordt geopend op {host}. StarBot stopt met wachten na {count} minuten.",
   },
   "mcp.panel.appTitle": "Inlog-app",
   "mcp.panel.appDescription":
@@ -160,5 +160,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Versturen",
   "mcp.panel.callbackUrlRelayed":
     "De inlogpagina opent in je browser, en StarBot op je computer stuurt de login naar {host}. Voeg precies deze URL toe aan de toegestane redirect-URL’s van de app.",
-
 } as const satisfies PartialTranslation<typeof source>;

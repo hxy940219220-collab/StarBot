@@ -16,14 +16,23 @@ const DRAWER_TOOL_IDS = [
 
 export type DrawerToolId = (typeof DRAWER_TOOL_IDS)[number];
 
-const DEFAULT_UNPINNED: readonly DrawerToolId[] = ["providers"];
+const DEFAULT_UNPINNED: readonly DrawerToolId[] = [
+  "tasks",
+  "workflows",
+  "marketplace",
+  "usage",
+  "library",
+  "providers",
+  "remoteDesktop",
+  "members",
+];
 
 interface DrawerToolLayout {
   order: DrawerToolId[];
   hidden: DrawerToolId[];
 }
 
-const key = "openbot.mobile.drawer-tools.v1";
+const key = "starbot.mobile.drawer-tools.v2";
 
 export function isDrawerToolId(value: unknown): value is DrawerToolId {
   return DRAWER_TOOL_IDS.some((id) => id === value);

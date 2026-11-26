@@ -2,7 +2,7 @@ import { type AppLanguage, DEFAULT_APP_LANGUAGE, isAppLanguage } from "@openbot/
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 
-const key = "openbot.mobile.app-language.v1";
+const key = "starbot.mobile.app-language.v1";
 export const useAppLanguage = create<{ value: AppLanguage; ready: boolean; saving: boolean }>(() => ({
   value: DEFAULT_APP_LANGUAGE,
   ready: false,

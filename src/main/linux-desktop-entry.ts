@@ -26,7 +26,7 @@ function linuxDesktopEntry(appImagePath: string, iconPath: string, ownsWindow: b
     `Icon=${iconPath}`,
     "Terminal=false",
     ...(ownsWindow ? ["Categories=Development;", `StartupWMClass=${WM_CLASS}`] : ["NoDisplay=true"]),
-    "MimeType=x-scheme-handler/openbot;",
+    "MimeType=x-scheme-handler/starbot;",
   ].join("\n")}\n`;
 }
 
@@ -143,7 +143,7 @@ export const installLinuxDesktopEntry = Effect.fn("LinuxDesktopEntry.install")(f
   );
   if (result._tag === "Success") return result.success;
   logger.warn(
-    "Unable to install the desktop entry, so openbot:// links stay unregistered.",
+    "Unable to install the desktop entry, so starbot:// links stay unregistered.",
     toLogValue(result.failure.cause),
   );
   return null;

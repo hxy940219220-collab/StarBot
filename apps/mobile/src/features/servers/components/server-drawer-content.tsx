@@ -71,7 +71,6 @@ import { isAndroid, longPressDelay } from "@/shared/lib/platform";
 import { currentText, useText } from "@/shared/lib/text";
 import { MIRROR_IN_RTL } from "@/shared/lib/text-direction";
 import { typeScale } from "@/shared/lib/type-scale";
-import { DrawerCredits } from "./drawer-credits";
 import { DrawerHeaderBlur } from "./drawer-header-blur";
 import { SERVER_AVATAR_CORNER_RATIO, ServerAvatar } from "./server-avatar";
 import { ServerDrawerIconButton } from "./server-drawer-icon-button";
@@ -179,7 +178,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
   const serverIds = servers.map((server) => server.id);
   const canReorder = serverIds.length > 1;
   const showsList = listOpen || editing || !activeServer;
-  const memberCount = useDrawerMemberCount(activeServer?.id ?? "");
+  const _memberCount = useDrawerMemberCount(activeServer?.id ?? "");
   const hostedServerIds = useHostedServerAvailability((state) =>
     state.userId === session.user.id ? state.serverIds : null,
   );
@@ -272,7 +271,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
     (state) => state.userId === session.user.id && state.ownsServers,
   );
   const cloudServersOn = useMobileFeature(session.apiUrl, "cloudServers");
-  const showsPlans = devFeatureOverride("cloudServers") ?? ((accountHasPlans && cloudServersOn) || ownsHostedServers);
+  const _showsPlans = devFeatureOverride("cloudServers") ?? ((accountHasPlans && cloudServersOn) || ownsHostedServers);
   useEffect(() => {
     if (!open) return;
     void refreshHostedServerAvailability(session.user.id, hostedServerCalls(session));
@@ -386,14 +385,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
     );
   }
 
-  const subtitle = activeServer
-    ? memberCount === null
-      ? serverDetail(activeServer, t)
-      : t("mobile.server.drawer.kindMembers", {
-          kind: serverDetail(activeServer, t),
-          members: t("mobile.server.drawer.memberCount", { count: memberCount }),
-        })
-    : null;
+  const subtitle = activeServer ? serverDetail(activeServer, t) : null;
 
   return (
     <>
@@ -512,11 +504,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
                 accessibilityRole="button"
                 className="flex-row items-center gap-3 rounded-2xl px-3"
                 style={({ pressed }) => ({ height: SERVER_ROW_HEIGHT - 4, opacity: pressed ? 0.58 : 1 })}
-                onPress={() =>
-                  onNavigate(
-                    showsPlans ? { pathname: "/hosted-server", params: { entryPoint: "drawer" } } : "/add-server",
-                  )
-                }
+                onPress={() => onNavigate("/add-server")}
               >
                 <View
                   className="items-center justify-center bg-control"
@@ -529,7 +517,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
                   <Plus color={mutedColor} size={20} strokeWidth={2} />
                 </View>
                 <Typography.Paragraph className="font-medium" numberOfLines={1} style={typeScale.rowTitle}>
-                  {showsPlans ? t("mobile.server.drawer.add") : t("mobile.server.drawer.join")}
+                  {t("mobile.server.drawer.join")}
                 </Typography.Paragraph>
               </Pressable>
             )}
@@ -551,7 +539,6 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
       </View>
 
       <View className="mr-6 pt-2">
-        <DrawerCredits serverId={activeServer?.id ?? null} open={open} onNavigate={onNavigate} />
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={`${displayName}, ${session.user.email}`}
@@ -681,8 +668,8 @@ function DrawerServerTools({
         : { icon: Monitor, label: t("mobile.app.route.remoteDesktop"), disabled: remoteDesktop === "disabled" },
     members: { icon: UsersRound, label: t("mobile.app.route.members"), value: values.members },
   };
-  const available = layout.order.filter((id) => tools[id] !== null);
-  const shown = available.filter((id) => !layout.hidden.includes(id));
+  const available = layout.order.filter((id) => id === "routines" && tools[id] !== null);
+  const shown = available;
   const onToolAction = useCallback(
     (action: string, toolId: DrawerToolId) => {
       if (action === "editSidebar") onEdit();

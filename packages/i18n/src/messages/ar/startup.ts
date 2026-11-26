@@ -41,14 +41,13 @@ export const messages = {
   "startup.recoveryTitle": "لم يُفتح StarBot",
 
   "startup.recoveryBody": {
-    zero: "توقف OpenBot {version} قبل أن يُفتح {count} مرة متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
-    one: "توقف OpenBot {version} قبل أن يُفتح مرة واحدة ({count}). لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
-    two: "توقف OpenBot {version} قبل أن يُفتح مرتين متتاليتين ({count}). لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
-    few: "توقف OpenBot {version} قبل أن يُفتح {count} مرات متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
-    many: "توقف OpenBot {version} قبل أن يُفتح {count} مرة متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
+    zero: "توقف StarBot {version} قبل أن يُفتح {count} مرة متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
+    one: "توقف StarBot {version} قبل أن يُفتح مرة واحدة ({count}). لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
+    two: "توقف StarBot {version} قبل أن يُفتح مرتين متتاليتين ({count}). لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
+    few: "توقف StarBot {version} قبل أن يُفتح {count} مرات متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
+    many: "توقف StarBot {version} قبل أن يُفتح {count} مرة متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
     other:
       "توقف StarBot {version} قبل أن يُفتح {count} مرة متتالية. لم تتم إعادة تعيين بياناتك المحلية أو الكتابة فوقها.",
-
   },
   "startup.recoveryHint":
     "أعد المحاولة، أو ثبّت آخر إصدار فُتح. للحصول على المساعدة، صدّر بيانات التشخيص وأرسل الملف مع بلاغك.",
@@ -63,5 +62,4 @@ export const messages = {
   "startup.recoveryQuit": "إنهاء",
   "startup.recoveryDiagnosticsSaved": "تم حفظ ملف التشخيص.",
   "startup.recoveryActionFailed": "تعذّر على StarBot تنفيذ هذا الإجراء.",
-
 } as const satisfies PartialTranslation<typeof source>;

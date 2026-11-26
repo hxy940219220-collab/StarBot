@@ -9,11 +9,10 @@ export const messages = {
   "status.host.starting": "Uruchamianie hosta WebRTC…",
   "status.host.ready": "Ten StarBot jest gotowy na połączenia WebRTC.",
 
-  "status.host.signalLost": "Inne urządzenia nie mogą teraz połączyć się z tym OpenBotem. Łączy się ponownie.",
+  "status.host.signalLost": "Inne urządzenia nie mogą teraz połączyć się z tym StarBotem. Łączy się ponownie.",
   "status.host.stopping": "Ustawianie tego serwera StarBot jako prywatnego…",
 
   "status.host.private": "Ten StarBot jest prywatny.",
 
   "status.host.removed": "Ten StarBot został usunięty z Twojego konta. Opublikuj go ponownie, aby go udostępnić.",
-
 } as const satisfies PartialTranslation<typeof source>;

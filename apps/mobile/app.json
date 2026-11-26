@@ -1,36 +1,35 @@
 {
   "expo": {
-    "name": "OpenBot",
-    "slug": "openbot",
+    "name": "星友",
+    "slug": "starbot-mobile",
     "platforms": ["ios", "android"],
-    "version": "1.4.12",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/icons/app-icon.png",
-    "scheme": "openbot",
+    "scheme": ["starbot"],
     "userInterfaceStyle": "automatic",
     "ios": {
-      "bundleIdentifier": "run.openbot.mobile",
-      "appleTeamId": "8A47NKRZSJ",
+      "bundleIdentifier": "com.think2do.starbot",
       "supportsTablet": true,
-      "associatedDomains": ["applinks:openbot.run"],
       "infoPlist": {
-        "NSLocalNetworkUsageDescription": "Allow OpenBot to connect to your desktop during local development.",
+        "CFBundleDisplayName": "星友",
+        "NSLocalNetworkUsageDescription": "允许「星友」在同一局域网下直连你电脑上的星友工作台。",
         "NSAppTransportSecurity": {
           "NSAllowsLocalNetworking": true
         },
         "ITSAppUsesNonExemptEncryption": false,
         "UIBackgroundModes": ["fetch"],
-        "BGTaskSchedulerPermittedIdentifiers": ["run.openbot.mobile.refresh"]
+        "BGTaskSchedulerPermittedIdentifiers": ["com.think2do.starbot.refresh"]
       },
-      "icon": "./assets/icons/app-icon.icon"
+      "icon": "./assets/icons/app-icon.png"
     },
     "android": {
-      "package": "run.openbot.mobile",
+      "package": "com.think2do.starbot",
       "icon": "./assets/icons/app-icon.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/android-adaptive-eyes.png",
+        "foregroundImage": "./assets/icons/app-icon.png",
         "backgroundImage": "./assets/icons/android-adaptive-background.png",
-        "monochromeImage": "./assets/icons/android-adaptive-eyes.png"
+        "monochromeImage": "./assets/icons/app-icon.png"
       },
       "predictiveBackGestureEnabled": false,
       "permissions": ["android.permission.CAMERA"],
@@ -46,7 +45,6 @@
       "./plugins/with-rocketsim",
       "./plugins/with-workspace-bundle-inputs",
       "./plugins/with-update-channel",
-      "./plugins/with-app-icons",
       "./plugins/with-android-view-preallocation-off",
       "./plugins/with-android-optional-features",
       "expo-router",
@@ -54,24 +52,24 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#CDADEC",
-          "image": "./assets/splash/eyes.png",
-          "imageWidth": 240,
+          "backgroundColor": "#F7F5FF",
+          "image": "./assets/splash/starbot-splash.png",
+          "imageWidth": 188,
           "resizeMode": "contain",
           "dark": {
-            "backgroundColor": "#756183",
-            "image": "./assets/splash/eyes.png"
+            "backgroundColor": "#151224",
+            "image": "./assets/splash/starbot-splash.png"
           },
           "android": {
-            "imageWidth": 188
+            "imageWidth": 168
           }
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow OpenBot to use your camera to scan QR codes.",
-          "microphonePermission": "Allow OpenBot to use the microphone to dictate messages.",
+          "cameraPermission": "允许「星友」使用相机扫描电脑端配对二维码。",
+          "microphonePermission": "允许「星友」使用麦克风进行语音输入。",
           "recordAudioAndroid": false,
           "barcodeScannerEnabled": true
         }
@@ -79,16 +77,16 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow OpenBot to access the photos you choose to share.",
-          "cameraPermission": "Allow OpenBot to use your camera to add photos.",
-          "microphonePermission": "Allow OpenBot to use the microphone to dictate messages."
+          "photosPermission": "允许「星友」访问你选择的照片并发送给助手。",
+          "cameraPermission": "允许「星友」使用相机拍照发送给助手。",
+          "microphonePermission": "允许「星友」使用麦克风进行语音输入。"
         }
       ],
       [
         "expo-media-library",
         {
-          "photosPermission": "Allow OpenBot to access the photos you choose to share.",
-          "savePhotosPermission": "Allow OpenBot to save images and videos you download from a chat to your photo library.",
+          "photosPermission": "允许「星友」访问你选择的照片。",
+          "savePhotosPermission": "允许「星友」将助手生成的图片或视频保存到系统相册。",
           "granularPermissions": ["photo"]
         }
       ],
@@ -96,7 +94,7 @@
         "expo-notifications",
         {
           "icon": "./assets/icons/notification-icon.png",
-          "color": "#6960F1"
+          "color": "#6E56F5"
         }
       ],
       [
@@ -115,13 +113,13 @@
       [
         "expo-local-authentication",
         {
-          "faceIDPermission": "Allow OpenBot to use Face ID to unlock the app."
+          "faceIDPermission": "允许「星友」使用面容 ID 解锁保护你的私人助手空间。"
         }
       ],
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Allow OpenBot to send your current location to an agent when you tap Share once, so it can answer questions about places near you.",
+          "locationWhenInUsePermission": "允许「星友」在你主动分享位置时获取当前位置，协助查询周边信息。",
           "locationAlwaysAndWhenInUsePermission": false,
           "locationAlwaysPermission": false,
           "locationFullAccuracyPermission": false,
@@ -147,8 +145,8 @@
         {
           "ios": {
             "enabled": true,
-            "appGroupId": "group.run.openbot.mobile",
-            "extensionBundleIdentifier": "run.openbot.mobile.ShareExtension",
+            "appGroupId": "group.com.think2do.starbot",
+            "extensionBundleIdentifier": "com.think2do.starbot.ShareExtension",
             "activationRule": {
               "supportsText": true,
               "supportsWebUrlWithMaxCount": 1,
@@ -224,22 +222,22 @@
       [
         "expo-speech-recognition",
         {
-          "microphonePermission": "Allow OpenBot to use the microphone to dictate messages.",
-          "speechRecognitionPermission": "Allow OpenBot to turn your speech into message text."
+          "microphonePermission": "允许「星友」使用麦克风进行语音输入。",
+          "speechRecognitionPermission": "允许「星友」将你的语音实时转为文字指令。"
         }
       ],
       [
         "@config-plugins/react-native-webrtc",
         {
-          "cameraPermission": "Allow OpenBot to use your camera to scan QR codes.",
-          "microphonePermission": "Allow OpenBot to use the microphone to dictate messages."
+          "cameraPermission": "允许「星友」使用相机扫描电脑端配对二维码。",
+          "microphonePermission": "允许「星友」使用麦克风与助手实时语音通话。"
         }
       ],
       [
         "expo-widgets",
         {
-          "bundleIdentifier": "run.openbot.mobile.ExpoWidgetsTarget",
-          "groupIdentifier": "group.run.openbot.mobile",
+          "bundleIdentifier": "com.think2do.starbot.ExpoWidgetsTarget",
+          "groupIdentifier": "group.com.think2do.starbot",
           "enablePushNotifications": true,
           "frequentUpdates": true
         }
@@ -247,9 +245,9 @@
       [
         "./plugins/with-notification-service",
         {
-          "targetName": "OpenBotNotificationService",
-          "bundleIdentifier": "run.openbot.mobile.NotificationService",
-          "groupIdentifier": "group.run.openbot.mobile"
+          "targetName": "StarBotNotificationService",
+          "bundleIdentifier": "com.think2do.starbot.NotificationService",
+          "groupIdentifier": "group.com.think2do.starbot"
         }
       ],
       "./plugins/with-shortcuts",
@@ -260,22 +258,12 @@
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "eeec730f-c8f4-42c0-a750-64df8af14940"
-      }
+      "router": {}
     },
-    "owner": "openbot",
-    "runtimeVersion": {
-      "policy": "fingerprint"
-    },
+    "runtimeVersion": "0.2.0",
     "updates": {
-      "url": "https://updates.openbot.run/manifest",
-      "codeSigningCertificate": "./certs/certificate.pem",
-      "codeSigningMetadata": {
-        "keyid": "main",
-        "alg": "rsa-v1_5-sha256"
-      }
+      "enabled": false,
+      "checkAutomatically": "NEVER"
     }
   }
 }

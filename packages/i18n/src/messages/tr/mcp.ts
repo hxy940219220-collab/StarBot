@@ -108,12 +108,12 @@ export const messages = {
   "mcp.panel.useAddress": "Bu adresi kullan",
   "mcp.panel.signInTo": "Oturum aç: {name}",
   "mcp.panel.signInWaiting": {
-    one: "Oturum açmayı tarayıcınızda tamamlayın. OpenBot {count} dakika sonra beklemeyi bırakır.",
-    other: "Oturum açmayı tarayıcınızda tamamlayın. OpenBot {count} dakika sonra beklemeyi bırakır.",
+    one: "Oturum açmayı tarayıcınızda tamamlayın. StarBot {count} dakika sonra beklemeyi bırakır.",
+    other: "Oturum açmayı tarayıcınızda tamamlayın. StarBot {count} dakika sonra beklemeyi bırakır.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Oturum açma sayfası {host} üzerinde açılıyor. OpenBot {count} dakika sonra beklemeyi bırakır.",
-    other: "Oturum açma sayfası {host} üzerinde açılıyor. OpenBot {count} dakika sonra beklemeyi bırakır.",
+    one: "Oturum açma sayfası {host} üzerinde açılıyor. StarBot {count} dakika sonra beklemeyi bırakır.",
+    other: "Oturum açma sayfası {host} üzerinde açılıyor. StarBot {count} dakika sonra beklemeyi bırakır.",
   },
   "mcp.panel.appTitle": "Oturum açma uygulaması",
   "mcp.panel.appDescription":
@@ -159,5 +159,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Gönder",
   "mcp.panel.callbackUrlRelayed":
     "Oturum açma sayfası tarayıcınızda açılır ve bilgisayarınızdaki StarBot oturum açmayı {host} sunucusuna gönderir. Bu URL'yi tam olarak uygulamanın izin verilen yönlendirme URL'lerine ekleyin.",
-
 } as const satisfies PartialTranslation<typeof source>;

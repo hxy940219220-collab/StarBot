@@ -111,12 +111,12 @@ export const messages = {
   "mcp.panel.useAddress": "Diese Adresse nutzen",
   "mcp.panel.signInTo": "Bei {name} anmelden",
   "mcp.panel.signInWaiting": {
-    one: "Schließe die Anmeldung im Browser ab. OpenBot wartet höchstens {count} Minute.",
-    other: "Schließe die Anmeldung im Browser ab. OpenBot wartet höchstens {count} Minuten.",
+    one: "Schließe die Anmeldung im Browser ab. StarBot wartet höchstens {count} Minute.",
+    other: "Schließe die Anmeldung im Browser ab. StarBot wartet höchstens {count} Minuten.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Die Anmeldeseite wird auf {host} geöffnet. OpenBot wartet höchstens {count} Minute.",
-    other: "Die Anmeldeseite wird auf {host} geöffnet. OpenBot wartet höchstens {count} Minuten.",
+    one: "Die Anmeldeseite wird auf {host} geöffnet. StarBot wartet höchstens {count} Minute.",
+    other: "Die Anmeldeseite wird auf {host} geöffnet. StarBot wartet höchstens {count} Minuten.",
   },
   "mcp.panel.appTitle": "Anmelde-App",
   "mcp.panel.appDescription":
@@ -163,5 +163,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Senden",
   "mcp.panel.callbackUrlRelayed":
     "Die Anmeldeseite öffnet sich in deinem Browser, und StarBot auf deinem Computer sendet die Anmeldung an {host}. Füge genau diese URL zu den erlaubten Weiterleitungs-URLs der App hinzu.",
-
 } as const satisfies PartialTranslation<typeof source>;

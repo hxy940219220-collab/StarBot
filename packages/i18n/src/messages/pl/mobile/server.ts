@@ -891,9 +891,9 @@ export const messages = {
     "{host} zapomina token. Sejf i konto usługi zostają w 1Password; usuń je tam, jeśli już ich nie potrzebujesz.",
   "mobile.server.connectors.protonPass.title": "Proton Pass",
   "mobile.server.connectors.protonPass.description":
-    "Udostępnij jeden sejf Proton Pass OpenBotowi na {host}, aby agenci na {host} mogli logować się do stron w jego przeglądarce.",
+    "Udostępnij jeden sejf Proton Pass StarBotowi na {host}, aby agenci na {host} mogli logować się do stron w jego przeglądarce.",
   "mobile.server.connectors.protonPass.keyHelp":
-    "W Proton Pass utwórz klucz dostępu, który może czytać tylko sejf udostępniony OpenBotowi, i wklej go tutaj. {host} przechowuje klucz; ten telefon nie.",
+    "W Proton Pass utwórz klucz dostępu, który może czytać tylko sejf udostępniony StarBotowi, i wklej go tutaj. {host} przechowuje klucz; ten telefon nie.",
   "mobile.server.connectors.protonPass.keyPlaceholder": "pst_…",
   "mobile.server.connectors.protonPass.plan":
     "Twój plan Proton nie obejmuje narzędzia wiersza poleceń Proton Pass. Potrzebny jest plan Proton, który obejmuje Pass Plus. Inne płatne plany, takie jak Mail Plus, go nie obejmują. Zmień plan konta, a potem połącz ponownie.",

@@ -111,12 +111,12 @@ export const messages = {
   "mcp.panel.useAddress": "Usar esta dirección",
   "mcp.panel.signInTo": "Iniciar sesión en {name}",
   "mcp.panel.signInWaiting": {
-    one: "Completa el inicio de sesión en tu navegador. OpenBot deja de esperar después de {count} minuto.",
-    other: "Completa el inicio de sesión en tu navegador. OpenBot deja de esperar después de {count} minutos.",
+    one: "Completa el inicio de sesión en tu navegador. StarBot deja de esperar después de {count} minuto.",
+    other: "Completa el inicio de sesión en tu navegador. StarBot deja de esperar después de {count} minutos.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Abriendo la página de inicio de sesión en {host}. OpenBot deja de esperar después de {count} minuto.",
-    other: "Abriendo la página de inicio de sesión en {host}. OpenBot deja de esperar después de {count} minutos.",
+    one: "Abriendo la página de inicio de sesión en {host}. StarBot deja de esperar después de {count} minuto.",
+    other: "Abriendo la página de inicio de sesión en {host}. StarBot deja de esperar después de {count} minutos.",
   },
   "mcp.panel.appTitle": "App de inicio de sesión",
   "mcp.panel.appDescription":
@@ -163,5 +163,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Enviar",
   "mcp.panel.callbackUrlRelayed":
     "La página de inicio de sesión se abre en tu navegador y StarBot en tu equipo envía el inicio de sesión a {host}. Añade exactamente esta URL a las URL de redirección permitidas de la app.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/solid-router";
 
-const PRIVACY_EMAIL = "privacy@openbot.run";
+const PRIVACY_EMAIL = "privacy@starbot.app";
 
 function PrivacyEmail() {
   return <a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a>;
@@ -12,18 +12,18 @@ export function PrivacyPolicy() {
       <p>
         This Privacy Policy describes how Synthetify Labs sp. z o.o., a limited liability company incorporated under the
         laws of Poland, with its registered office at Trzebunia 513, 32-438 Trzebunia, Poland, registered in the Polish
-        National Court Register (KRS) under number 0000895882, Tax Identification Number (NIP) 6812085952 ("OpenBot,"
+        National Court Register (KRS) under number 0000895882, Tax Identification Number (NIP) 6812085952 ("StarBot,"
         "we," "us," or "our"), processes personal data in connection with the Services.
       </p>
       <p>
-        OpenBot is operated from Poland and is available to users worldwide. It provides a platform that allows users to
+        StarBot is operated from Poland and is available to users worldwide. It provides a platform that allows users to
         create and manage AI agents, assign them tasks, and collaborate with them on a wide range of activities,
         including research, content creation, software development, project management, and workflow automation. Users
         can organise agents into teams, enabling them to communicate, share information, and work together on complex
         tasks.
       </p>
       <p>
-        This Privacy Policy applies to the OpenBot website at <a href="https://openbot.run">https://openbot.run</a>, its
+        This Privacy Policy applies to the StarBot website at <a href="https://starbot.app">https://starbot.app</a>, its
         applications, and related services (collectively, the "Services").
       </p>
       <p>
@@ -33,12 +33,12 @@ export function PrivacyPolicy() {
       <p>
         Contact: <PrivacyEmail />
         <br />
-        Website: <a href="https://openbot.run">https://openbot.run</a>
+        Website: <a href="https://starbot.app">https://starbot.app</a>
       </p>
 
       <h2>About Our Services</h2>
       <p>
-        OpenBot provides a source-available platform that enables users to create, customize, and manage AI agents to
+        StarBot provides a source-available platform that enables users to create, customize, and manage AI agents to
         assist with various tasks, including research, content creation, software development, project management, and
         workflow automation. Users can assign specific roles to agents, organise them into collaborative teams, and
         automate recurring activities.
@@ -46,41 +46,41 @@ export function PrivacyPolicy() {
       <p>
         The platform supports integrations with third-party AI providers and external applications, as well as a
         marketplace where users can discover, install, and share agents, plugins, and skills. Users can access their
-        agents through supported devices, collaborate with other users, and choose between running OpenBot on their own
+        agents through supported devices, collaborate with other users, and choose between running StarBot on their own
         computers or using optional hosted servers.
       </p>
       <p>
-        OpenBot follows a local-first approach, under which conversations, files, agent workspaces, and related content
+        StarBot follows a local-first approach, under which conversations, files, agent workspaces, and related content
         are stored on the computer or server running the application. Certain features require the processing of
-        personal data through OpenBot's infrastructure or third-party services, as described in this Privacy Policy.
+        personal data through StarBot's infrastructure or third-party services, as described in this Privacy Policy.
       </p>
 
       <h2>Roles and Responsibilities</h2>
       <p>
-        Depending on the nature of the personal data processed through the Services, OpenBot may act either as a data
+        Depending on the nature of the personal data processed through the Services, StarBot may act either as a data
         controller or a data processor, as defined under the General Data Protection Regulation (GDPR).
       </p>
       <ul>
         <li>
-          <strong>OpenBot as a Data Processor</strong> – OpenBot acts as a Data Processor when it processes personal
+          <strong>StarBot as a Data Processor</strong> – StarBot acts as a Data Processor when it processes personal
           data on behalf of customers who act as Data Controllers, particularly in connection with hosted server
-          services. In such cases, OpenBot processes personal data in accordance with the customer's documented
+          services. In such cases, StarBot processes personal data in accordance with the customer's documented
           instructions and applicable data protection laws.
         </li>
         <li>
-          <strong>OpenBot as Data Controller</strong> – OpenBot acts as a Data Controller when it determines the
+          <strong>StarBot as Data Controller</strong> – StarBot acts as a Data Controller when it determines the
           purposes and means of processing personal data in connection with the operation and provision of the Services.
           This includes managing user accounts, authentication, subscriptions, payments, customer support, platform
           security, and service analytics.
         </li>
       </ul>
       <p>
-        When users operate OpenBot on their own devices or independently managed servers, their conversations, files,
-        and workspace data remain within their chosen environment. OpenBot does not act as a Data Processor solely by
+        When users operate StarBot on their own devices or independently managed servers, their conversations, files,
+        and workspace data remain within their chosen environment. StarBot does not act as a Data Processor solely by
         providing the software used to process such data.
       </p>
       <p>
-        Where required under Article 28 GDPR, OpenBot enters into a{" "}
+        Where required under Article 28 GDPR, StarBot enters into a{" "}
         <Link to="/dpa">Data Processing Agreement (DPA)</Link> with customers governing the processing of personal data
         on their behalf. Any international transfers carried out in this capacity are subject to applicable contractual
         requirements and appropriate data protection safeguards.
@@ -88,13 +88,13 @@ export function PrivacyPolicy() {
 
       <h2>Data We Collect</h2>
       <p>
-        OpenBot processes different categories of personal data depending on how users access and interact with the
+        StarBot processes different categories of personal data depending on how users access and interact with the
         Services. Certain information is provided directly by users, while other information is generated automatically
         through account management, platform operation, analytics, and connected services.
       </p>
 
       <h3>Information we collect automatically</h3>
-      <p>When users access or interact with the Services, OpenBot may process the following information:</p>
+      <p>When users access or interact with the Services, StarBot may process the following information:</p>
       <ul>
         <li>
           <strong>Technical and device information</strong> – application version, operating system, device type,
@@ -113,7 +113,7 @@ export function PrivacyPolicy() {
         <li>
           <strong>Website analytics and attribution information</strong> – visited public pages, selected interactions,
           download events, campaign parameters, referring domains, and information about how users discover and interact
-          with the OpenBot website.
+          with the StarBot website.
         </li>
         <li>
           <strong>Security information</strong> – IP addresses and other network information processed where necessary
@@ -121,13 +121,13 @@ export function PrivacyPolicy() {
         </li>
       </ul>
       <p>
-        OpenBot uses analytics services to collect product usage data from production versions of its website and
+        StarBot uses analytics services to collect product usage data from production versions of its website and
         applications.
       </p>
       <p>
         Analytics events contain operational metadata, including feature usage, event types, provider and model
         identifiers, timing information, performance metrics, and application versions. When a user signs in, their
-        OpenBot account ID and email address are processed for analytics purposes, allowing certain activities to be
+        StarBot account ID and email address are processed for analytics purposes, allowing certain activities to be
         associated with their account. Additional information about their device, browser, operating system, network,
         and approximate geographic location may also be derived.
       </p>
@@ -146,11 +146,11 @@ export function PrivacyPolicy() {
       </p>
 
       <h3>Information You Provide</h3>
-      <p>OpenBot may collect and process personal data provided directly by users, including:</p>
+      <p>StarBot may collect and process personal data provided directly by users, including:</p>
       <ul>
         <li>
           <strong>Account information</strong> – email address, display name, optional profile picture, and other
-          information required to create and manage an OpenBot account.
+          information required to create and manage an StarBot account.
         </li>
         <li>
           <strong>Authentication information</strong> – information necessary to verify identity, including email
@@ -166,7 +166,7 @@ export function PrivacyPolicy() {
         </li>
         <li>
           <strong>Support and communication information</strong> – information voluntarily provided when contacting
-          OpenBot, requesting assistance, reporting a problem, or communicating with us.
+          StarBot, requesting assistance, reporting a problem, or communicating with us.
         </li>
         <li>
           <strong>Marketplace and publicly shared information</strong> – agent templates, descriptions, instructions,
@@ -175,7 +175,7 @@ export function PrivacyPolicy() {
         </li>
       </ul>
       <p>
-        Payment transactions are handled through Stripe. OpenBot does not collect or store complete payment card numbers
+        Payment transactions are handled through Stripe. StarBot does not collect or store complete payment card numbers
         entered through Stripe's payment pages.
       </p>
       <p>
@@ -200,7 +200,7 @@ export function PrivacyPolicy() {
         <li>any other content processed by AI agents or related functionalities.</li>
       </ul>
       <p>
-        Customer Data is stored on the computer or server running OpenBot and is not stored in OpenBot's central account
+        Customer Data is stored on the computer or server running StarBot and is not stored in StarBot's central account
         database.
       </p>
       <p>
@@ -212,14 +212,14 @@ export function PrivacyPolicy() {
         applications, or other external services to perform tasks requested by users.
       </p>
       <p>
-        OpenBot does not require Customer Data to contain any particular type of information, and users are solely
+        StarBot does not require Customer Data to contain any particular type of information, and users are solely
         responsible for the content they choose to make available through the Services and for ensuring that they have
         the necessary rights and legal basis to do so.
       </p>
 
       <h3>Information Obtained from Third Parties</h3>
       <p>
-        OpenBot may process personal data obtained from third-party services when users enable integrations or authorise
+        StarBot may process personal data obtained from third-party services when users enable integrations or authorise
         AI agents to access external applications and platforms.
       </p>
       <p>
@@ -230,21 +230,21 @@ export function PrivacyPolicy() {
       <p>
         For example, integrations with communication platforms such as Slack, Discord, and Telegram may involve
         processing messages, attachments, and information relating to individuals participating in connected
-        conversations or workspaces. These individuals are not necessarily registered OpenBot users.
+        conversations or workspaces. These individuals are not necessarily registered StarBot users.
       </p>
       <p>
         Information obtained through external integrations is processed to provide the functionalities requested by
-        users and is generally stored within the computer or server operating the relevant OpenBot environment.
+        users and is generally stored within the computer or server operating the relevant StarBot environment.
       </p>
       <p>
-        Where OpenBot processes such information on behalf of a customer acting as a Data Controller, the customer is
+        Where StarBot processes such information on behalf of a customer acting as a Data Controller, the customer is
         responsible for ensuring that the processing has an appropriate legal basis and that applicable information
-        obligations towards the individuals concerned are fulfilled. OpenBot assists customers in meeting their
+        obligations towards the individuals concerned are fulfilled. StarBot assists customers in meeting their
         obligations where required by law or contractual arrangements.
       </p>
 
       <h2>How We Use Information</h2>
-      <p>OpenBot processes personal data for the following purposes:</p>
+      <p>StarBot processes personal data for the following purposes:</p>
       <ul>
         <li>to provide, operate, maintain, and secure the Services;</li>
         <li>to create, authenticate, and manage user accounts;</li>
@@ -266,17 +266,17 @@ export function PrivacyPolicy() {
         </li>
         <li>
           to comply with applicable legal obligations, resolve disputes, enforce agreements, and protect the rights and
-          legitimate interests of OpenBot, its users, and third parties.
+          legitimate interests of StarBot, its users, and third parties.
         </li>
       </ul>
       <p>
-        Where OpenBot processes Customer Data on behalf of a customer acting as a Data Controller, such processing is
+        Where StarBot processes Customer Data on behalf of a customer acting as a Data Controller, such processing is
         limited to the purposes specified in the applicable contractual arrangements and documented instructions.
       </p>
 
       <h2>Legal Basis for Processing</h2>
       <p>
-        Where the General Data Protection Regulation (GDPR) or other applicable data protection laws apply, OpenBot
+        Where the General Data Protection Regulation (GDPR) or other applicable data protection laws apply, StarBot
         processes personal data on the basis of a valid legal ground. Depending on the purpose and circumstances of
         processing, we rely on one or more of the following legal bases:
       </p>
@@ -304,14 +304,14 @@ export function PrivacyPolicy() {
         </li>
       </ul>
       <p>
-        Where OpenBot acts as a Data Processor, the relevant customer acting as Data Controller is responsible for
-        determining the applicable legal basis for processing Customer Data. OpenBot processes such data in accordance
+        Where StarBot acts as a Data Processor, the relevant customer acting as Data Controller is responsible for
+        determining the applicable legal basis for processing Customer Data. StarBot processes such data in accordance
         with the customer's documented instructions and applicable data protection laws.
       </p>
 
       <h2>Provision of Personal Data</h2>
       <p>
-        Providing certain personal data is necessary to create and manage an OpenBot account, access account-related
+        Providing certain personal data is necessary to create and manage an StarBot account, access account-related
         functionalities, and use paid Services. This includes information required for authentication, account
         administration, and subscription management.
       </p>
@@ -331,7 +331,7 @@ export function PrivacyPolicy() {
 
       <h2>Use of Artificial Intelligence</h2>
       <p>
-        OpenBot enables users to access and operate artificial intelligence technologies supplied by different
+        StarBot enables users to access and operate artificial intelligence technologies supplied by different
         providers, including OpenAI, Anthropic, Google, xAI, and other supported services or locally configured models.
       </p>
       <p>
@@ -359,7 +359,7 @@ export function PrivacyPolicy() {
         saved work context may be transmitted to the newly selected provider.
       </p>
       <p>
-        OpenBot does not automatically transmit all locally stored Customer Data to every available AI provider. The
+        StarBot does not automatically transmit all locally stored Customer Data to every available AI provider. The
         information transferred depends on the provider, agent configuration, requested functionality, and user
         activity.
       </p>
@@ -373,14 +373,14 @@ export function PrivacyPolicy() {
         improvement or training may differ.
       </p>
       <p>
-        OpenBot does not determine the data processing policies of independently selected AI providers. Users should
+        StarBot does not determine the data processing policies of independently selected AI providers. Users should
         review the relevant provider's terms before transmitting personal, confidential, or otherwise sensitive
         information.
       </p>
 
       <h2>Automated Decision-Making</h2>
       <p>
-        OpenBot enables users to create and configure AI agents that can perform tasks, analyse information, and carry
+        StarBot enables users to create and configure AI agents that can perform tasks, analyse information, and carry
         out automated activities based on their instructions.
       </p>
       <p>
@@ -394,7 +394,7 @@ export function PrivacyPolicy() {
         requirements relating to transparency, human oversight, and the protection of individuals' rights.
       </p>
       <p>
-        OpenBot remains responsible for compliance with its own obligations under applicable data protection laws,
+        StarBot remains responsible for compliance with its own obligations under applicable data protection laws,
         including where it acts as a Data Controller or Data Processor.
       </p>
 
@@ -421,7 +421,7 @@ export function PrivacyPolicy() {
         </li>
         <li>
           <strong>Third-Party Integrations</strong> – external applications, platforms, or services that users choose to
-          connect to OpenBot, including Slack, Discord, Telegram, GitHub, and other supported integrations. Information
+          connect to StarBot, including Slack, Discord, Telegram, GitHub, and other supported integrations. Information
           shared with these services depends on the functionalities enabled by users and is subject to the applicable
           terms and privacy policies of the relevant providers.
         </li>
@@ -453,27 +453,27 @@ export function PrivacyPolicy() {
       </p>
       <p>
         Where users independently select or connect third-party AI providers or external services, those providers may
-        process personal data under their own terms and privacy policies. OpenBot does not determine the purposes and
+        process personal data under their own terms and privacy policies. StarBot does not determine the purposes and
         means of processing carried out independently by such providers.
       </p>
 
       <h2>Third-Party Service Providers</h2>
       <p>
-        OpenBot uses the following third-party service providers in connection with the operation and provision of the
+        StarBot uses the following third-party service providers in connection with the operation and provision of the
         Services:
       </p>
       <ul>
         <li>
           <strong>Cloudflare</strong> – provides infrastructure and security services supporting the operation of the
-          OpenBot website and related online functionalities.
+          StarBot website and related online functionalities.
         </li>
         <li>
           <strong>Dedale AI, Corp. (operating as boat)</strong> – provides cloud-based virtual server infrastructure
-          used to host OpenBot Hosted Server environments.
+          used to host StarBot Hosted Server environments.
         </li>
         <li>
           <strong>Leaseweb Netherlands B.V. and Leaseweb USA, Inc.</strong> – provide virtual servers in the Netherlands
-          and in the United States used to host OpenBot Hosted Server environments.
+          and in the United States used to host StarBot Hosted Server environments.
         </li>
         <li>
           <strong>Backblaze, Inc.</strong> – stores encrypted archives of Hosted Servers whose subscription ended, in
@@ -488,15 +488,15 @@ export function PrivacyPolicy() {
         arrangements, and applicable Data Protection Laws.
       </p>
       <p>
-        Payment card and billing details are provided directly to Stripe through its payment pages. OpenBot receives
+        Payment card and billing details are provided directly to Stripe through its payment pages. StarBot receives
         only the information necessary to administer subscriptions and related transactions, including subscription
-        plans, billing periods, payment statuses, amounts, and transaction references. OpenBot does not collect or store
+        plans, billing periods, payment statuses, amounts, and transaction references. StarBot does not collect or store
         complete payment card numbers.
       </p>
 
       <h2>AI Providers and Optional Integrations</h2>
       <p>
-        OpenBot allows users to select and configure third-party AI providers and connect external applications,
+        StarBot allows users to select and configure third-party AI providers and connect external applications,
         platforms, tools, and services according to their individual needs and preferences. The range of available
         integrations depends on the services and configurations selected by users and is not limited to a predefined
         list of providers.
@@ -511,21 +511,21 @@ export function PrivacyPolicy() {
         Third-party providers process personal data in accordance with their applicable terms, privacy policies, and
         contractual arrangements. Depending on the nature of the service and the processing activities involved, these
         providers may act as independent Data Controllers or Data Processors. Where a third-party provider processes
-        personal data on behalf of OpenBot, appropriate contractual arrangements and data protection safeguards apply.
+        personal data on behalf of StarBot, appropriate contractual arrangements and data protection safeguards apply.
       </p>
-      <p>OpenBot does not sell or rent personal data to third parties.</p>
+      <p>StarBot does not sell or rent personal data to third parties.</p>
 
       <h2>Google User Data</h2>
       <p>
-        OpenBot allows users to connect their Google accounts and authorise AI agents to access Google services through
-        Google APIs. This section describes how OpenBot accesses, uses, stores, and shares information received from
+        StarBot allows users to connect their Google accounts and authorise AI agents to access Google services through
+        Google APIs. This section describes how StarBot accesses, uses, stores, and shares information received from
         Google APIs ("Google User Data") and supplements the other provisions of this Privacy Policy.
       </p>
 
       <h3>Google User Data We Access</h3>
       <p>
-        OpenBot accesses Google User Data only after the user connects a Google account and grants the permissions
-        displayed on Google's consent screen. Depending on the permissions granted and the functionalities used, OpenBot
+        StarBot accesses Google User Data only after the user connects a Google account and grants the permissions
+        displayed on Google's consent screen. Depending on the permissions granted and the functionalities used, StarBot
         may access the following information:
       </p>
       <ul>
@@ -552,7 +552,7 @@ export function PrivacyPolicy() {
       <p>Users decide which Google services to connect and may use the Services without connecting a Google account.</p>
 
       <h3>How We Use Google User Data</h3>
-      <p>OpenBot uses Google User Data solely to provide the functionalities requested by users, including:</p>
+      <p>StarBot uses Google User Data solely to provide the functionalities requested by users, including:</p>
       <ul>
         <li>
           to enable AI agents to read, search, summarise, and organise emails, files, documents, and calendar events at
@@ -569,18 +569,18 @@ export function PrivacyPolicy() {
           issues.
         </li>
       </ul>
-      <p>OpenBot does not use Google User Data for advertising, marketing, or profiling purposes.</p>
+      <p>StarBot does not use Google User Data for advertising, marketing, or profiling purposes.</p>
 
       <h3>Storage of Google User Data</h3>
       <p>
         Google User Data and the access tokens used to connect to Google services are stored on the computer or server
-        running the relevant OpenBot environment. Where users use hosted server services, this information is stored
+        running the relevant StarBot environment. Where users use hosted server services, this information is stored
         within the infrastructure allocated to the relevant server.
       </p>
       <p>
-        OpenBot's central account service only relays the exchange of authorisation codes and access tokens between the
-        user's OpenBot environment and Google. It does not store access tokens, refresh tokens, or any other Google User
-        Data, and Google User Data is not stored in OpenBot's central account database.
+        StarBot's central account service only relays the exchange of authorisation codes and access tokens between the
+        user's StarBot environment and Google. It does not store access tokens, refresh tokens, or any other Google User
+        Data, and Google User Data is not stored in StarBot's central account database.
       </p>
       <p>
         Google User Data is not included in product analytics events or diagnostic reports. Access tokens are protected
@@ -589,12 +589,12 @@ export function PrivacyPolicy() {
 
       <h3>Sharing of Google User Data</h3>
       <p>
-        OpenBot does not sell or rent Google User Data and does not transfer it to advertising platforms, data brokers,
+        StarBot does not sell or rent Google User Data and does not transfer it to advertising platforms, data brokers,
         or information resellers.
       </p>
       <p>
         Google User Data is transmitted to the third-party AI provider selected by the user only when an AI agent
-        performs a task that requires that information, and only to the extent necessary to complete that task. OpenBot
+        performs a task that requires that information, and only to the extent necessary to complete that task. StarBot
         does not transmit Google User Data to AI providers in the background or for purposes unrelated to the requested
         task. Such information is processed by the selected provider as described in the Use of Artificial Intelligence
         section.
@@ -611,13 +611,13 @@ export function PrivacyPolicy() {
 
       <h3>Compliance with the Google API Services User Data Policy</h3>
       <p>
-        OpenBot's use and transfer to any other app of information received from Google APIs will adhere to the{" "}
+        StarBot's use and transfer to any other app of information received from Google APIs will adhere to the{" "}
         <a href="https://developers.google.com/terms/api-services-user-data-policy">
           Google API Services User Data Policy
         </a>
         , including the Limited Use requirements.
       </p>
-      <p>In particular, OpenBot:</p>
+      <p>In particular, StarBot:</p>
       <ul>
         <li>
           uses Google User Data only to provide or improve user-facing features that are visible and prominent in the
@@ -646,37 +646,37 @@ export function PrivacyPolicy() {
 
       <h3>Retention and Deletion of Google User Data</h3>
       <p>
-        Google User Data is retained in the user's OpenBot environment for as long as necessary to provide the requested
+        Google User Data is retained in the user's StarBot environment for as long as necessary to provide the requested
         functionalities or until it is deleted by the user.
       </p>
       <p>
         Users may disconnect a Google account in the application settings at any time. Disconnecting a Google account
         deletes the associated access tokens and stops further access to Google User Data. Users may also revoke
-        OpenBot's access through their Google Account settings at{" "}
+        StarBot's access through their Google Account settings at{" "}
         <a href="https://myaccount.google.com/permissions">https://myaccount.google.com/permissions</a>.
       </p>
       <p>
         Revoking access does not automatically delete Google User Data previously retrieved and stored in the user's
-        OpenBot environment, including conversations, task histories, and agent memories containing such information.
+        StarBot environment, including conversations, task histories, and agent memories containing such information.
         Users can delete such information within the application or remove the relevant environment, as described in the
         Account Deletion and Data Removal section.
       </p>
       <p>
-        Users may contact OpenBot at <PrivacyEmail /> to request information about the processing of Google User Data or
+        Users may contact StarBot at <PrivacyEmail /> to request information about the processing of Google User Data or
         its deletion.
       </p>
 
       <h2>Data Storage and Local Processing</h2>
       <p>
-        OpenBot allows users to store and manage their conversations, files, and other content either on their own
+        StarBot allows users to store and manage their conversations, files, and other content either on their own
         devices or on hosted servers, depending on how they choose to use the Services. Account information and other
-        data necessary for the operation of the Services may be processed through OpenBot's central infrastructure, as
+        data necessary for the operation of the Services may be processed through StarBot's central infrastructure, as
         described in this Privacy Policy.
       </p>
 
       <h2>Product Analytics and Anonymisation</h2>
       <p>
-        OpenBot uses a self-hosted analytics service to monitor the performance, functionality, and use of the Services.
+        StarBot uses a self-hosted analytics service to monitor the performance, functionality, and use of the Services.
         The information collected includes feature usage, application activity, technical performance, error categories,
         and other operational statistics necessary to maintain and improve the Services.
       </p>
@@ -691,10 +691,10 @@ export function PrivacyPolicy() {
       </p>
       <p>
         Certain information remains identifiable where necessary for account authentication, security, and payment or
-        subscription management. Payment card details are processed by Stripe and are not stored by OpenBot.
+        subscription management. Payment card details are processed by Stripe and are not stored by StarBot.
       </p>
       <p>
-        OpenBot does not include conversation content, prompts, AI-generated responses, file contents, credentials, or
+        StarBot does not include conversation content, prompts, AI-generated responses, file contents, credentials, or
         other Customer Data in product analytics events.
       </p>
       <p>
@@ -704,7 +704,7 @@ export function PrivacyPolicy() {
 
       <h2>Data Security</h2>
       <p>
-        OpenBot implements appropriate technical and organisational measures to ensure a level of security appropriate
+        StarBot implements appropriate technical and organisational measures to ensure a level of security appropriate
         to the risks associated with the processing of personal data. These measures are designed to protect personal
         data against accidental or unlawful destruction, loss, alteration, unauthorised disclosure, or access.
       </p>
@@ -721,12 +721,12 @@ export function PrivacyPolicy() {
         <li>regular assessment and improvement of security practices.</li>
       </ul>
       <p>
-        OpenBot allows users to store and manage Customer Data on their own devices or hosted servers. The security of
+        StarBot allows users to store and manage Customer Data on their own devices or hosted servers. The security of
         data stored in user-managed environments also depends on the operating system, device configuration, access
         permissions, and security measures implemented by the relevant user or organisation.
       </p>
       <p>
-        AI agents operating through OpenBot may access and modify local files, execute commands, interact with external
+        AI agents operating through StarBot may access and modify local files, execute commands, interact with external
         applications, and perform other activities using the permissions available to the application. Users are
         informed of these capabilities and should carefully consider the information and resources made accessible to
         agents.
@@ -736,13 +736,13 @@ export function PrivacyPolicy() {
         possible, and maintain appropriate backups and security measures.
       </p>
       <p>
-        While OpenBot takes appropriate measures to protect personal data, no method of electronic transmission or
+        While StarBot takes appropriate measures to protect personal data, no method of electronic transmission or
         storage can guarantee absolute security.
       </p>
 
       <h2>International Data Transfers</h2>
       <p>
-        OpenBot is established in Poland and processes personal data primarily within the European Economic Area (EEA),
+        StarBot is established in Poland and processes personal data primarily within the European Economic Area (EEA),
         including data stored on hosted servers located in the European Union. A hosted server bought in US dollars or
         Brazilian reais can be located in the United States.
       </p>
@@ -752,7 +752,7 @@ export function PrivacyPolicy() {
         information in other jurisdictions.
       </p>
       <p>
-        Where OpenBot transfers personal data outside the EEA, we ensure that such transfers comply with applicable data
+        Where StarBot transfers personal data outside the EEA, we ensure that such transfers comply with applicable data
         protection laws, including Chapter V of the GDPR.
       </p>
       <p>
@@ -773,7 +773,7 @@ export function PrivacyPolicy() {
 
       <h2>Data Retention</h2>
       <p>
-        OpenBot retains personal data only for as long as necessary to fulfil the purposes for which it was collected,
+        StarBot retains personal data only for as long as necessary to fulfil the purposes for which it was collected,
         including providing the Services, maintaining account security, managing subscriptions, complying with
         applicable legal obligations, resolving disputes, and protecting our legitimate interests.
       </p>
@@ -812,7 +812,7 @@ export function PrivacyPolicy() {
         </li>
       </ul>
       <p>
-        Where OpenBot processes personal data on behalf of customers acting as Data Controllers, the retention and
+        Where StarBot processes personal data on behalf of customers acting as Data Controllers, the retention and
         deletion of such data are governed by their documented instructions, applicable contractual arrangements, and
         legal requirements.
       </p>
@@ -823,16 +823,16 @@ export function PrivacyPolicy() {
 
       <h2>Account Deletion and Data Removal</h2>
       <p>
-        Users may request the deletion of their OpenBot account and associated personal data in accordance with
+        Users may request the deletion of their StarBot account and associated personal data in accordance with
         applicable data protection laws.
       </p>
       <p>
-        Upon account deletion, OpenBot removes personal data associated with the account from its central account
+        Upon account deletion, StarBot removes personal data associated with the account from its central account
         services, except where continued retention is necessary to comply with legal obligations, protect legitimate
         interests, or maintain essential security and operational records.
       </p>
       <p>
-        Because OpenBot allows users to store Customer Data on their own devices or independently managed servers,
+        Because StarBot allows users to store Customer Data on their own devices or independently managed servers,
         deleting an account does not automatically remove conversations, files, agent workspaces, or other information
         stored in those environments. Users are responsible for managing and deleting such locally stored data.
       </p>
@@ -843,7 +843,7 @@ export function PrivacyPolicy() {
         integrity and security of the Services.
       </p>
       <p>
-        Content published through OpenBot's sharing functionalities, including publicly available agent templates, can
+        Content published through StarBot's sharing functionalities, including publicly available agent templates, can
         be unpublished or removed. Certain identifiers and technical records may be retained to prevent previously used
         public links from being reassigned.
       </p>
@@ -852,7 +852,7 @@ export function PrivacyPolicy() {
         providers, is subject to their applicable retention and deletion policies.
       </p>
       <p>
-        Users may contact OpenBot using the contact details provided in this Privacy Policy to request information about
+        Users may contact StarBot using the contact details provided in this Privacy Policy to request information about
         the deletion of their personal data or exercise their applicable privacy rights.
       </p>
 
@@ -887,8 +887,8 @@ export function PrivacyPolicy() {
         applicable law.
       </p>
       <p>
-        Where OpenBot processes personal data solely on behalf of a customer as a Data Processor, requests relating to
-        such personal data should generally be directed to the relevant customer acting as the Data Controller. OpenBot
+        Where StarBot processes personal data solely on behalf of a customer as a Data Processor, requests relating to
+        such personal data should generally be directed to the relevant customer acting as the Data Controller. StarBot
         will assist its customers in responding to such requests where required by applicable law or contractual
         arrangements.
       </p>
@@ -898,13 +898,13 @@ export function PrivacyPolicy() {
       </p>
       <p>
         Depending on your country of residence, you may also have additional privacy rights under applicable local laws.
-        OpenBot will honor such rights where required and will process related requests in accordance with the legal
+        StarBot will honor such rights where required and will process related requests in accordance with the legal
         requirements applicable in your jurisdiction.
       </p>
 
       <h2>Use of cookies</h2>
       <p>
-        OpenBot does not use cookies or similar technologies for advertising, marketing, behavioural profiling,
+        StarBot does not use cookies or similar technologies for advertising, marketing, behavioural profiling,
         analytics, or cross-site tracking.
       </p>
       <p>
@@ -913,9 +913,9 @@ export function PrivacyPolicy() {
         the Platform and cannot be disabled without affecting its core functionality.
       </p>
       <p>
-        When you choose a language on the openbot.run website, the website saves that choice in the{" "}
+        When you choose a language on the starbot.app website, the website saves that choice in the{" "}
         <code>openbot_lang</code> cookie for one year, so that the next pages open in the same language. The cookie
-        holds only the language code. To remove it, clear the site data of openbot.run.
+        holds only the language code. To remove it, clear the site data of starbot.app.
       </p>
 
       <h2>Children's Privacy</h2>
@@ -929,7 +929,7 @@ export function PrivacyPolicy() {
       <h2>External services</h2>
       <p>
         The Platform may integrate with or provide access to external services. The collection and processing of
-        information by such services are governed by their own privacy policies and terms. OpenBot is not responsible
+        information by such services are governed by their own privacy policies and terms. StarBot is not responsible
         for the privacy practices or content of any external services.
       </p>
 
@@ -945,7 +945,7 @@ export function PrivacyPolicy() {
       <h2>Contact</h2>
       <p>
         For any questions regarding this Privacy Policy, the processing of personal data, or the exercise of your data
-        protection rights, please contact OpenBot using the following contact details:
+        protection rights, please contact StarBot using the following contact details:
       </p>
       <p>
         Email: <PrivacyEmail />

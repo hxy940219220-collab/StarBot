@@ -17,8 +17,8 @@ export const messages = {
   "notification.channelMessage": "Bir mesaj gönderdi.",
   "notification.usageLimit.title": "{provider} hesabı sınırına ulaştı",
   "notification.usageLimit.body": {
-    one: "{count} ajan bekliyor. OpenBot daha sonra tekrar deneyecek.",
-    other: "{count} ajan bekliyor. OpenBot daha sonra tekrar deneyecek.",
+    one: "{count} ajan bekliyor. StarBot daha sonra tekrar deneyecek.",
+    other: "{count} ajan bekliyor. StarBot daha sonra tekrar deneyecek.",
   },
   "notification.usageLimit.bodyResets": {
     one: "{count} ajan bekliyor. Sıfırlanma: {reset}.",

@@ -108,12 +108,12 @@ export const messages = {
   "mcp.panel.useAddress": "Usa questo indirizzo",
   "mcp.panel.signInTo": "Accedi a {name}",
   "mcp.panel.signInWaiting": {
-    one: "Completa l'accesso nel browser. OpenBot smette di aspettare dopo {count} minuto.",
-    other: "Completa l'accesso nel browser. OpenBot smette di aspettare dopo {count} minuti.",
+    one: "Completa l'accesso nel browser. StarBot smette di aspettare dopo {count} minuto.",
+    other: "Completa l'accesso nel browser. StarBot smette di aspettare dopo {count} minuti.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Apertura della pagina di accesso su {host}. OpenBot smette di aspettare dopo {count} minuto.",
-    other: "Apertura della pagina di accesso su {host}. OpenBot smette di aspettare dopo {count} minuti.",
+    one: "Apertura della pagina di accesso su {host}. StarBot smette di aspettare dopo {count} minuto.",
+    other: "Apertura della pagina di accesso su {host}. StarBot smette di aspettare dopo {count} minuti.",
   },
   "mcp.panel.appTitle": "App di accesso",
   "mcp.panel.appDescription":
@@ -159,5 +159,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Invia",
   "mcp.panel.callbackUrlRelayed":
     "La pagina di accesso si apre nel tuo browser, e StarBot sul tuo computer invia l'accesso a {host}. Aggiungi esattamente questo URL agli URL di reindirizzamento consentiti dell'app.",
-
 } as const satisfies PartialTranslation<typeof source>;

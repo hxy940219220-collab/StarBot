@@ -1,1 +1,1 @@
-export const ANDROID_PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=run.openbot.mobile";
+export const ANDROID_PLAY_STORE_URL = "https://github.com/hxy940219220-collab/StarBot-Desktop/releases";

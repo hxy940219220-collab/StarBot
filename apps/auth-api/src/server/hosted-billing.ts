@@ -67,7 +67,7 @@ export function createHostedBilling(
           fetch: send,
         })
       : undefined;
-  const billing = secretKey
+  const billing: BillingService | null = secretKey
     ? new BillingService({
         database: bindings.DB,
         secretKey,
@@ -110,7 +110,7 @@ export function createHostedBilling(
         onLicenseChanged: options.licenseChanged,
       })
     : null;
-  const hosting = new HostedServerService(bindings, {
+  const hosting: HostedServerService = new HostedServerService(bindings, {
     removeHost: options.removeHost,
     developerKey: options.developerKey ?? null,
     billing,

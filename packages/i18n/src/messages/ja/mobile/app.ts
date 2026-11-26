@@ -40,7 +40,7 @@ export const messages = {
   "mobile.app.route.marketplace": "マーケットプレイス",
   "mobile.app.route.library": "ライブラリ",
   "mobile.app.quickAction.search": "検索",
-  "mobile.app.quickAction.share": "OpenBotを共有",
+  "mobile.app.quickAction.share": "StarBotを共有",
   "mobile.app.quickAction.support": "待って、削除しないで！",
   "mobile.app.quickAction.supportSubtitle": "改善点を教えてください",
   "mobile.app.update.title": "StarBot {version} が登場",

@@ -21,5 +21,5 @@ export const messages = {
   "messaging.discordHelp.relay_unavailable":
     "يتعذّر على StarBot تلقي أحداث Discord على هذا الحاسوب. سجّل الدخول، وامنح هذا الحاسوب اسمًا في إعدادات الخادم، وأبقِ StarBot مفتوحًا.",
 
-  "messaging.discordHelp.not_linked": 'خادم Discord هذا غير مرتبط بخادم OpenBot هذا. اختر "إعادة الربط" لربطه.',
+  "messaging.discordHelp.not_linked": 'خادم Discord هذا غير مرتبط بخادم StarBot هذا. اختر "إعادة الربط" لربطه.',
 } as const satisfies PartialTranslation<typeof source>;

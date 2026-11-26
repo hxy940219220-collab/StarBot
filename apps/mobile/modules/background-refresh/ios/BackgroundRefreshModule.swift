@@ -3,11 +3,11 @@ import ExpoModulesCore
 import UIKit
 import os
 
-private let refreshLog = Logger(subsystem: "run.openbot.mobile", category: "BackgroundRefresh")
-private let refreshIdentifier = "run.openbot.mobile.refresh"
+private let refreshLog = Logger(subsystem: "com.think2do.starbot", category: "BackgroundRefresh")
+private let refreshIdentifier = "com.think2do.starbot.refresh"
 private let refreshEvent = "onRefresh"
 private let expireEvent = "onExpire"
-private let intervalKey = "run.openbot.mobile.backgroundRefreshMinutes"
+private let intervalKey = "com.think2do.starbot.backgroundRefreshMinutes"
 private let listenerWaitSeconds: TimeInterval = 10
 
 final class BackgroundRefreshNotScheduled: GenericException<String>, @unchecked Sendable {

@@ -17,8 +17,8 @@ export const messages = {
   "notification.channelMessage": "Ha inviato un messaggio.",
   "notification.usageLimit.title": "L'account {provider} ha raggiunto il limite",
   "notification.usageLimit.body": {
-    one: "{count} agente è in attesa. OpenBot riproverà più tardi.",
-    other: "{count} agenti sono in attesa. OpenBot riproverà più tardi.",
+    one: "{count} agente è in attesa. StarBot riproverà più tardi.",
+    other: "{count} agenti sono in attesa. StarBot riproverà più tardi.",
   },
   "notification.usageLimit.bodyResets": {
     one: "{count} agente è in attesa. Il limite si azzera {reset}.",

@@ -34,7 +34,7 @@ interface AgentBackdropUndo {
 
 export const CHAT_BACKDROP_STRENGTH = { min: 0.1, max: 1, default: 0.55 } as const;
 
-const key = "openbot.mobile.chat-backdrop.v1";
+const key = "starbot.mobile.chat-backdrop.v1";
 const AGENT_PAGE_FILE = "agent-page.html";
 
 export const useChatBackdrop = create<

@@ -108,12 +108,12 @@ export const messages = {
   "mcp.panel.useAddress": "Utiliser cette adresse",
   "mcp.panel.signInTo": "Se connecter à {name}",
   "mcp.panel.signInWaiting": {
-    one: "Terminez la connexion dans votre navigateur. OpenBot cesse d’attendre après {count} minute.",
-    other: "Terminez la connexion dans votre navigateur. OpenBot cesse d’attendre après {count} minutes.",
+    one: "Terminez la connexion dans votre navigateur. StarBot cesse d’attendre après {count} minute.",
+    other: "Terminez la connexion dans votre navigateur. StarBot cesse d’attendre après {count} minutes.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Ouverture de la page de connexion sur {host}. OpenBot cesse d’attendre après {count} minute.",
-    other: "Ouverture de la page de connexion sur {host}. OpenBot cesse d’attendre après {count} minutes.",
+    one: "Ouverture de la page de connexion sur {host}. StarBot cesse d’attendre après {count} minute.",
+    other: "Ouverture de la page de connexion sur {host}. StarBot cesse d’attendre après {count} minutes.",
   },
   "mcp.panel.appTitle": "App de connexion",
   "mcp.panel.appDescription":
@@ -161,5 +161,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Envoyer",
   "mcp.panel.callbackUrlRelayed":
     "La page de connexion s’ouvre dans votre navigateur, et StarBot sur votre ordinateur envoie la connexion à {host}. Ajoutez exactement cette URL aux URL de redirection autorisées de l’app.",
-
 } as const satisfies PartialTranslation<typeof source>;

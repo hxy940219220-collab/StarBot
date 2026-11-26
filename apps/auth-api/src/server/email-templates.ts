@@ -68,7 +68,7 @@ export type LicenseEmailInput =
   | ({ kind: "payment_failed" } & LicensePaymentFailedEmailInput)
   | ({ kind: "ended" } & LicenseEndedEmailInput);
 
-const SITE_URL = "https://openbot.run";
+const SITE_URL = "https://starbot.app";
 const WEB_APP_URL = `${SITE_URL}/app`;
 const DOWNLOAD_URL = `${SITE_URL}${OPENBOT_DOWNLOAD_PAGE_LINKS.hub}`;
 const PRICING_URL = `${SITE_URL}/pricing`;
@@ -76,7 +76,7 @@ const PLAN_NAMES: Record<BillingPlanId, string> = { starter: "Starter", standard
 const LICENSE_TIER_NAMES: Record<LicenseTier, string> = { starter: "Starter", team: "Team" };
 const LOGO_URL = `${SITE_URL}/icon-192x192.png`;
 const FOOTER_LINKS = [
-  { label: "openbot.run", href: SITE_URL },
+  { label: "starbot.app", href: SITE_URL },
   { label: "X", href: OPENBOT_LINKS.x },
   { label: "GitHub", href: OPENBOT_LINKS.repository },
 ] as const;
@@ -99,14 +99,14 @@ const COLOR = {
 
 export function renderSignInCodeEmail(input: SignInCodeEmailInput): RenderedEmail {
   const minutes = `${input.expiresInMinutes} minute${input.expiresInMinutes === 1 ? "" : "s"}`;
-  const subject = "Your OpenBot sign-in code";
-  const preheader = `${input.code} is your OpenBot sign-in code. It expires in ${minutes}.`;
+  const subject = "Your StarBot sign-in code";
+  const preheader = `${input.code} is your StarBot sign-in code. It expires in ${minutes}.`;
   const footer = "If you did not request this code, you can ignore this email. Nobody can sign in without it.";
   return {
     subject,
     preheader,
     text: textBody(
-      ["Use this code to sign in to OpenBot:", "", input.code, "", `This code expires in ${minutes} and works once.`],
+      ["Use this code to sign in to StarBot:", "", input.code, "", `This code expires in ${minutes} and works once.`],
       footer,
     ),
     html: renderLayout({
@@ -114,7 +114,7 @@ export function renderSignInCodeEmail(input: SignInCodeEmailInput): RenderedEmai
       preheader,
       body: [
         heading("Your sign-in code"),
-        paragraph("Enter this code in OpenBot to finish signing in."),
+        paragraph("Enter this code in StarBot to finish signing in."),
         codeBlock(input.code),
         paragraph(`The code expires in ${minutes} and works once.`, { muted: true, last: true }),
       ].join(""),
@@ -126,7 +126,7 @@ export function renderSignInCodeEmail(input: SignInCodeEmailInput): RenderedEmai
 export function renderTeamInviteEmail(input: TeamInviteEmailInput): RenderedEmail {
   const serverName = input.serverName.trim();
   const access = input.role === "admin" ? "Admin" : "Member";
-  const subject = `Join ${serverName} on OpenBot`;
+  const subject = `Join ${serverName} on StarBot`;
   const preheader = `${input.inviterEmail} invited you to join ${serverName}.`;
   const footer = "If you did not expect this invitation, you can ignore this email.";
   return {
@@ -134,7 +134,7 @@ export function renderTeamInviteEmail(input: TeamInviteEmailInput): RenderedEmai
     preheader,
     text: textBody(
       [
-        `${input.inviterEmail} invited you to join ${serverName} on OpenBot.`,
+        `${input.inviterEmail} invited you to join ${serverName} on StarBot.`,
         "",
         `Access: ${access}`,
         "",
@@ -151,7 +151,7 @@ export function renderTeamInviteEmail(input: TeamInviteEmailInput): RenderedEmai
       body: [
         heading(`Join ${escapeHtml(serverName)}`),
         paragraph(
-          `<strong style="color:${COLOR.text};font-weight:600;">${escapeHtml(input.inviterEmail)}</strong> invited you to a team on OpenBot.`,
+          `<strong style="color:${COLOR.text};font-weight:600;">${escapeHtml(input.inviterEmail)}</strong> invited you to a team on StarBot.`,
         ),
         detailRow("Access", access),
         button("Accept invitation", input.inviteUrl),
@@ -167,7 +167,7 @@ export function renderTeamInviteEmail(input: TeamInviteEmailInput): RenderedEmai
 
 export function renderOwnerTransferEmail(input: OwnerTransferEmailInput): RenderedEmail {
   const serverName = input.serverName.trim();
-  const subject = `Take ownership of ${serverName} on OpenBot`;
+  const subject = `Take ownership of ${serverName} on StarBot`;
   const preheader = `${input.fromEmail} wants to make you the owner of ${serverName}.`;
   const footer = "If you did not expect this email, you can ignore it. Nothing changes until you accept.";
   return {
@@ -175,12 +175,12 @@ export function renderOwnerTransferEmail(input: OwnerTransferEmailInput): Render
     preheader,
     text: textBody(
       [
-        `${input.fromEmail} wants to make you the owner of ${serverName} on OpenBot.`,
+        `${input.fromEmail} wants to make you the owner of ${serverName} on StarBot.`,
         "",
-        "Open OpenBot and sign in with this email address to accept or decline:",
+        "Open StarBot and sign in with this email address to accept or decline:",
         input.appUrl,
         "",
-        "When you accept, the server and its agents, routines and data become yours, and the previous owner loses access. Anyone who can still sign in to the computer that runs the server can use your OpenBot account, so change its passwords and SSH keys. The request expires after 7 days.",
+        "When you accept, the server and its agents, routines and data become yours, and the previous owner loses access. Anyone who can still sign in to the computer that runs the server can use your StarBot account, so change its passwords and SSH keys. The request expires after 7 days.",
       ],
       footer,
     ),
@@ -190,12 +190,12 @@ export function renderOwnerTransferEmail(input: OwnerTransferEmailInput): Render
       body: [
         heading(`Take ownership of ${escapeHtml(serverName)}`),
         paragraph(
-          `<strong style="color:${COLOR.text};font-weight:600;">${escapeHtml(input.fromEmail)}</strong> wants to make you the owner of a server on OpenBot.`,
+          `<strong style="color:${COLOR.text};font-weight:600;">${escapeHtml(input.fromEmail)}</strong> wants to make you the owner of a server on StarBot.`,
         ),
         paragraph(
-          "When you accept, the server and its agents, routines and data become yours, and the previous owner loses access. Anyone who can still sign in to the computer that runs the server can use your OpenBot account, so change its passwords and SSH keys.",
+          "When you accept, the server and its agents, routines and data become yours, and the previous owner loses access. Anyone who can still sign in to the computer that runs the server can use your StarBot account, so change its passwords and SSH keys.",
         ),
-        button("Open OpenBot", input.appUrl),
+        button("Open StarBot", input.appUrl),
         paragraph("Sign in with this email address to accept or decline. The request expires after 7 days.", {
           muted: true,
         }),
@@ -211,7 +211,7 @@ export function renderContactMessageEmail(input: ContactMessageEmailInput): Rend
   const fullSubject = `${input.topic} from ${input.name ?? input.email}`;
   const subject = fullSubject.length > 150 ? `${fullSubject.slice(0, 149)}…` : fullSubject;
   const preheader = input.message.slice(0, 120);
-  const footer = `Sent from the contact form on openbot.run. Reply to this email to answer ${input.email}.`;
+  const footer = `Sent from the contact form on starbot.app. Reply to this email to answer ${input.email}.`;
   return {
     subject,
     preheader,
@@ -242,20 +242,20 @@ export function renderContactMessageEmail(input: ContactMessageEmailInput): Rend
 export function renderWelcomeEmail(input: WelcomeEmailInput): RenderedEmail {
   const serverName = input.serverName.trim();
   const planName = PLAN_NAMES[input.plan];
-  const subject = "Welcome to OpenBot!";
-  const thanks = "Thank you for choosing OpenBot to build and run your AI Coworkers.";
+  const subject = "Welcome to StarBot!";
+  const thanks = "Thank you for choosing StarBot to build and run your AI Coworkers.";
   const reachOut =
     "I just wanted to personally say hello and let you know that if you run into any issues or have any feedback or suggestions - feel free to reach out to me directly by replying to this email.";
   const feedback =
     "Every piece of feedback is incredibly valuable to us. We ship updates almost every day, and your feedback shapes what comes next.";
-  const footer = "You receive this email because you started an OpenBot subscription.";
+  const footer = "You receive this email because you started an StarBot subscription.";
   return {
     subject,
     preheader: thanks,
     text: textBody(
       [
         "Hi,",
-        "Welcome to OpenBot!",
+        "Welcome to StarBot!",
         thanks,
         "",
         `Plan: ${planName}`,
@@ -275,7 +275,7 @@ export function renderWelcomeEmail(input: WelcomeEmailInput): RenderedEmail {
       title: subject,
       preheader: thanks,
       body: [
-        heading("Welcome to OpenBot!", { gap: 16 }),
+        heading("Welcome to StarBot!", { gap: 16 }),
         paragraph("Hi,", { gap: 16 }),
         paragraph(thanks, { gap: 16 }),
         detailRows([
@@ -306,16 +306,16 @@ export function renderLicenseEmail(input: LicenseEmailInput): RenderedEmail {
 function renderLicenseWelcome(input: LicenseWelcomeEmailInput): RenderedEmail {
   const tierName = LICENSE_TIER_NAMES[input.plan.tier];
   const seats = `${input.users} seat${input.users === 1 ? "" : "s"}`;
-  const subject = `Your OpenBot ${tierName} license is active`;
-  const preheader = `Thank you for buying OpenBot. Your license covers ${seats}.`;
-  const active = "Your license is active. You can use OpenBot for work now.";
+  const subject = `Your StarBot ${tierName} license is active`;
+  const preheader = `Thank you for buying StarBot. Your license covers ${seats}.`;
+  const active = "Your license is active. You can use StarBot for work now.";
   const team =
     input.plan.tier === "team"
       ? "Invite your teammates from your server’s Members settings. The license counts each person once."
       : "Your license covers you. Change to the Team license when you invite teammates.";
-  const devices = `Each user can use OpenBot on up to ${LICENSE_DEVICES_PER_USER} devices.`;
+  const devices = `Each user can use StarBot on up to ${LICENSE_DEVICES_PER_USER} devices.`;
   const reply = "If something does not work, or you have an idea, reply to this email. I read every reply.";
-  const footer = "You receive this email because you bought an OpenBot license.";
+  const footer = "You receive this email because you bought an StarBot license.";
   const rows = licenseRows(input.plan, input.users);
   if (input.amount !== null)
     rows.push(["Price", `${formatAmount(input.amount, input.currency)} / ${input.plan.interval}`]);
@@ -327,14 +327,14 @@ function renderLicenseWelcome(input: LicenseWelcomeEmailInput): RenderedEmail {
       [
         "Hi,",
         "",
-        "Thank you for buying OpenBot.",
+        "Thank you for buying StarBot.",
         active,
         "",
         ...rows.map(([label, value]) => `${label}: ${value}`),
         "",
         team,
         devices,
-        `Download OpenBot: ${DOWNLOAD_URL}`,
+        `Download StarBot: ${DOWNLOAD_URL}`,
         "",
         reply,
         ...SIGNATURE_TEXT,
@@ -345,12 +345,12 @@ function renderLicenseWelcome(input: LicenseWelcomeEmailInput): RenderedEmail {
       title: subject,
       preheader,
       body: [
-        heading("Thank you for buying OpenBot", { gap: 16 }),
+        heading("Thank you for buying StarBot", { gap: 16 }),
         paragraph("Hi,", { gap: 16 }),
         paragraph(active, { gap: 16 }),
         detailRows(rows),
         paragraph(`${escapeHtml(team)} ${devices}`, { gap: 16 }),
-        button("Download OpenBot", DOWNLOAD_URL),
+        button("Download StarBot", DOWNLOAD_URL),
         paragraph(reply, { gap: 24 }),
         SIGNATURE_HTML,
       ].join(""),
@@ -361,20 +361,20 @@ function renderLicenseWelcome(input: LicenseWelcomeEmailInput): RenderedEmail {
 
 function renderLicensePaymentFailed(input: LicensePaymentFailedEmailInput): RenderedEmail {
   const tierName = LICENSE_TIER_NAMES[input.plan.tier];
-  const subject = `Payment failed for your OpenBot ${tierName} license`;
+  const subject = `Payment failed for your StarBot ${tierName} license`;
   const preheader = "Pay the invoice to keep your license active.";
-  const failed = "The payment for your OpenBot license did not go through.";
+  const failed = "The payment for your StarBot license did not go through.";
   const retry =
     input.nextAttemptAt === null
       ? "This was the last try. If the invoice stays unpaid, your license ends."
       : `Your license stays active while we try again on ${formatDate(input.nextAttemptAt)}. If no payment goes through, your license ends.`;
   const action = input.invoiceUrl
     ? "Pay the invoice now. You can use a different card."
-    : "Open Billing in the OpenBot settings to pay the invoice.";
-  const buttonLabel = input.invoiceUrl ? "Pay the invoice" : "Open OpenBot";
+    : "Open Billing in the StarBot settings to pay the invoice.";
+  const buttonLabel = input.invoiceUrl ? "Pay the invoice" : "Open StarBot";
   const url = input.invoiceUrl ?? WEB_APP_URL;
   const reply = "If you have a question, reply to this email.";
-  const footer = "You receive this email because you have an OpenBot license.";
+  const footer = "You receive this email because you have an StarBot license.";
   const rows = licenseRows(input.plan, input.users);
   rows.push(["Amount due", formatAmount(input.amount, input.currency)]);
   if (input.nextAttemptAt !== null) rows.push(["Next try", formatDate(input.nextAttemptAt)]);
@@ -418,16 +418,16 @@ function renderLicensePaymentFailed(input: LicensePaymentFailedEmailInput): Rend
 
 function renderLicenseEnded(input: LicenseEndedEmailInput): RenderedEmail {
   const tierName = LICENSE_TIER_NAMES[input.plan.tier];
-  const subject = `Your OpenBot ${tierName} license has ended`;
+  const subject = `Your StarBot ${tierName} license has ended`;
   const ended =
     input.reason === "unpaid"
-      ? "We could not take the payment for your OpenBot license, so it has ended."
-      : "Your OpenBot license was canceled, and it has ended.";
+      ? "We could not take the payment for your StarBot license, so it has ended."
+      : "Your StarBot license was canceled, and it has ended.";
   const preheader = ended;
   const data = "Your workspaces, chats, and files stay on your computer.";
-  const again = "To use OpenBot for work again, buy a new license at any time.";
+  const again = "To use StarBot for work again, buy a new license at any time.";
   const reply = "If this is a mistake, or you have a question, reply to this email.";
-  const footer = "You receive this email because you had an OpenBot license.";
+  const footer = "You receive this email because you had an StarBot license.";
   const rows = licenseRows(input.plan, input.users);
   return {
     subject,
@@ -492,7 +492,7 @@ function textBody(lines: string[], footer: string): string {
     footer,
     "",
     "-- ",
-    `OpenBot · ${SITE_URL}`,
+    `StarBot · ${SITE_URL}`,
     FOOTER_LINKS.slice(1)
       .map((link) => `${link.label}: ${link.href}`)
       .join(" · "),
@@ -558,7 +558,7 @@ function renderLayout(input: LayoutInput): string {
         <tr>
           <td style="padding:0 4px 20px;">
             <a href="${SITE_URL}" style="text-decoration:none;">
-              <img src="${LOGO_URL}" width="32" height="32" alt="OpenBot" style="display:block;border:0;outline:none;border-radius:8px;font-family:${FONT_STACK};font-size:15px;font-weight:600;line-height:32px;color:${COLOR.text};">
+              <img src="${LOGO_URL}" width="32" height="32" alt="StarBot" style="display:block;border:0;outline:none;border-radius:8px;font-family:${FONT_STACK};font-size:15px;font-weight:600;line-height:32px;color:${COLOR.text};">
             </a>
           </td>
         </tr>

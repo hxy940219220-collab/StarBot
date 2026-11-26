@@ -8,7 +8,7 @@ export const messages = {
   "server.connection.sleeping": "{name}이(가) 잠들어 있어요",
   "server.connection.waking": "{name} 시작하는 중",
   "server.connection.startProgress": "{step} · {time}",
-  "server.connection.providerLimit": "클라우드 제공자가 지금 새 시작을 제한하고 있어요. OpenBot이 곧 다시 시도해요.",
+  "server.connection.providerLimit": "클라우드 제공자가 지금 새 시작을 제한하고 있어요. StarBot이 곧 다시 시도해요.",
   "server.connection.updating": "{name} 업데이트 중",
   "server.connection.loading": "{name} 불러오는 중",
   "server.connection.connecting": "{name}에 연결하는 중",
@@ -20,7 +20,7 @@ export const messages = {
   "server.connection.loadingHint": "서버를 불러오는 동안 다른 서버를 선택할 수 있어요.",
   "server.connection.cachedHint": "불러온 내용과 초안은 유지돼요. 다시 연결되면 서버 작업이 재개돼요.",
   "server.connection.computerOffline":
-    "{name}이(가) 오프라인이에요. 그 컴퓨터가 켜져 있고 OpenBot이 열려 있는지, 서버 설정 > 멤버에서 이 서버 게시가 켜져 있는지 확인하세요.",
+    "{name}이(가) 오프라인이에요. 그 컴퓨터가 켜져 있고 StarBot이 열려 있는지, 서버 설정 > 멤버에서 이 서버 게시가 켜져 있는지 확인하세요.",
   "server.connection.conversationFailed": "대화를 불러올 수 없었어요. 다시 시도해 주세요.",
   "server.connection.panelsFailed": "일부 워크스페이스 패널을 불러올 수 없었어요. 다시 시도해 주세요.",
   "server.connection.retry": "다시 시도",
@@ -33,11 +33,11 @@ export const messages = {
 
   "server.status.updateCauseNoVersion": "StarBot 업데이트를 설치하기 위해 {name}이(가) 다시 시작돼요.",
 
-  "server.status.wakeCause": "{name}이(가) 중지되었어요. OpenBot이 다시 시작해요.",
+  "server.status.wakeCause": "{name}이(가) 중지되었어요. StarBot이 다시 시작해요.",
   "server.status.connectCause": "이 앱이 {name}에 연결해요.",
   "server.status.connectionCause": "이 앱이 {name}과(와)의 연결을 잃었어요. 자동으로 다시 연결해요.",
   "server.status.stepUpdate": "업데이트 설치",
-  "server.status.stepUpdateDetail": "OpenBot이 중지되고 업데이트를 설치한 후 다시 시작돼요.",
+  "server.status.stepUpdateDetail": "StarBot이 중지되고 업데이트를 설치한 후 다시 시작돼요.",
   "server.status.stepWake": "서버 시작",
   "server.status.stepWakeDetail": "몇 분 걸릴 수 있어요.",
   "server.status.stepConnect": "연결",
@@ -58,7 +58,7 @@ export const messages = {
   "server.compatibility.updateHostDescription":
     "호스트가 이 앱보다 오래된 프로토콜만 지원해요. 호스트를 업데이트한 후 다시 시도해 주세요.",
   "server.compatibility.unsafeDataDescription":
-    "알려진 페이로드가 올바르지 않아 OpenBot이 이 연결을 중지했어요. 현재 워크스페이스 데이터는 변경되지 않았어요.",
+    "알려진 페이로드가 올바르지 않아 StarBot이 이 연결을 중지했어요. 현재 워크스페이스 데이터는 변경되지 않았어요.",
   "server.compatibility.clientVersion": "클라이언트 버전",
   "server.compatibility.hostVersion": "호스트 버전",
   "server.compatibility.negotiatedProtocol": "협상된 프로토콜",
@@ -85,7 +85,7 @@ export const messages = {
   "server.join.account": "계정",
   "server.join.emailBound": "이 초대는 해당 이메일 수신자만 사용할 수 있어요.",
   "server.join.unknownDate": "알 수 없음",
-  "server.add.title": "외부 서버에서 OpenBot을 24시간 실행하세요",
+  "server.add.title": "외부 서버에서 StarBot을 24시간 실행하세요",
   "server.add.description":
     "StarBot 서버는 컴퓨터가 꺼져 있어도 에이전트와 루틴을 계속 실행해요. 인프라와 유지 관리는 저희가 맡으니, 기술적인 설정 없이 바로 서버를 사용할 수 있어요.",
 
@@ -118,17 +118,17 @@ export const messages = {
   "server.local.create": "서버 만들기",
   "server.local.creating": "서버 만드는 중…",
   "server.local.createFailed": "서버를 만들지 못했어요.",
-  "server.local.createFailedRetry": "문제가 생겼어요. 다시 시도하세요. 또 실패하면 OpenBot을 다시 시작하세요.",
+  "server.local.createFailedRetry": "문제가 생겼어요. 다시 시도하세요. 또 실패하면 StarBot을 다시 시작하세요.",
   "server.local.limitReached": "이 컴퓨터에는 서버를 최대 {limit}개까지 둘 수 있어요. 새로 만들려면 하나를 삭제하세요.",
   "server.local.deleteConfirmTitle": "{name}을(를) 삭제할까요?",
-  "server.local.deleteConfirmDescription": "OpenBot이 서버를 중지하고 에이전트, 채팅, 파일을 휴지통으로 옮겨요.",
+  "server.local.deleteConfirmDescription": "StarBot이 서버를 중지하고 에이전트, 채팅, 파일을 휴지통으로 옮겨요.",
   "server.local.deleting": "서버 삭제 중…",
   "server.local.deletedTitle": "{name}을(를) 삭제했어요",
   "server.install.title": "다른 컴퓨터의 새 서버",
   "server.install.description":
-    "본인이 소유한 Linux 컴퓨터나 VPS에서 이 명령을 실행하세요. OpenBot을 설치하고 서버를 이 계정에 추가해요.",
+    "본인이 소유한 Linux 컴퓨터나 VPS에서 이 명령을 실행하세요. StarBot을 설치하고 서버를 이 계정에 추가해요.",
   "server.install.making": "이 계정용 명령을 만드는 중…",
-  "server.install.failed": "OpenBot이 명령을 만들지 못했어요. 인터넷 연결을 확인하세요.",
+  "server.install.failed": "StarBot이 명령을 만들지 못했어요. 인터넷 연결을 확인하세요.",
   "server.install.copyForAgent": "AI 에이전트용으로 복사",
   "server.install.expiresIn": "한 번만 작동해요. {time} 후에 만료돼요.",
   "server.install.newCommand": "새 명령",
@@ -138,7 +138,7 @@ export const messages = {
   "server.install.offline": "{name}이(가) 오프라인이에요.",
   "server.install.expired": "이 명령은 만료됐어요. 새 명령을 만드세요.",
   "server.install.agentPrompt":
-    '이 Linux 서버에 OpenBot을 설치하고 내 OpenBot 계정에 로그인시켜 줘.\n이 명령을 root로 실행해. 질문은 없고 몇 분 걸려:\n\n{command}\n\n"OpenBot is connected to your account." 줄과 종료 코드 0으로 끝나.\n이 명령은 15분 동안 한 번만 작동해. 어디에도 저장하지 마.',
+    '이 Linux 서버에 OpenBot을 설치하고 내 OpenBot 계정에 로그인시켜 줘.\n이 명령을 root로 실행해. 질문은 없고 몇 분 걸려:\n\n{command}\n\n"StarBot is connected to your account." 줄과 종료 코드 0으로 끝나.\n이 명령은 15분 동안 한 번만 작동해. 어디에도 저장하지 마.',
   "server.install.setUpWithAgent": "에이전트로 설정",
   "server.install.sshAgentPrompt":
     "SSH로 내 Linux 서버에 연결하고 OpenBot을 서버로 설치해 주세요.\n\nSSH 주소 (user@host):",
@@ -185,12 +185,12 @@ export const messages = {
 
   "server.hosted.step.connect": "계정에 연결",
   "server.hosted.detail.create.reserve": "전용 머신을 예약하는 중",
-  "server.hosted.detail.create.copy": "머신에 OpenBot을 복사하는 중",
+  "server.hosted.detail.create.copy": "머신에 StarBot을 복사하는 중",
   "server.hosted.detail.create.key": "일회용 로그인 키를 추가하는 중",
   "server.hosted.detail.start.boot": "머신을 켜는 중",
   "server.hosted.detail.start.restore": "데이터 복원 중",
-  "server.hosted.detail.start.app": "OpenBot을 시작하는 중",
-  "server.hosted.detail.start.wait": "OpenBot의 응답을 기다리는 중",
+  "server.hosted.detail.start.app": "StarBot을 시작하는 중",
+  "server.hosted.detail.start.wait": "StarBot의 응답을 기다리는 중",
   "server.hosted.detail.connect.signIn": "내 계정으로 로그인하는 중",
   "server.hosted.detail.connect.publish": "내 계정에 서버를 추가하는 중",
   "server.hosted.detail.connect.check": "연결을 확인하는 중",
@@ -253,7 +253,7 @@ export const messages = {
   "server.plan.deletedOn": "{date}에 삭제",
   "server.plan.dialogTitle": "에이전트를 떠나보내지 마세요",
   "server.plan.dialogDescription":
-    "{name}의 플랜이 끝나서 서버가 멈췄어요. {date}에 OpenBot이 에이전트와 모든 채팅, 파일을 삭제해요.",
+    "{name}의 플랜이 끝나서 서버가 멈췄어요. {date}에 StarBot이 에이전트와 모든 채팅, 파일을 삭제해요.",
   "server.plan.dialogDaysLeft": {
     other: "{count}일 남음",
   },
@@ -291,7 +291,7 @@ export const messages = {
   "server.compatibility.versionMismatchDescription":
     "연결에 프로토콜 {protocol}을(를) 사용해요. 일부 최신 기능을 사용하지 못할 수 있어요. 클라이언트 {clientVersion}, 호스트 {hostVersion}.",
   "server.compatibility.versionMismatchUpdateHostDescription":
-    "모든 기능을 사용하려면 {name}의 OpenBot을 업데이트하세요. 연결에 프로토콜 {protocol}을(를) 사용해요. 클라이언트 {clientVersion}, 호스트 {hostVersion}.",
+    "모든 기능을 사용하려면 {name}의 StarBot을 업데이트하세요. 연결에 프로토콜 {protocol}을(를) 사용해요. 클라이언트 {clientVersion}, 호스트 {hostVersion}.",
   "server.compatibility.versionMismatchUpdateClientDescription":
     "모든 기능을 사용하려면 이 StarBot 앱을 업데이트하세요. 연결에 프로토콜 {protocol}을(를) 사용해요. 클라이언트 {clientVersion}, 호스트 {hostVersion}.",
 
@@ -312,7 +312,7 @@ export const messages = {
   "server.settings.desktopTitle": "원격 데스크톱",
   "server.settings.desktopDescription": "이 서버의 데스크톱을 설정하거나 연결해요.",
   "server.settings.storageTitle": "저장 공간",
-  "server.settings.storageDescription": "OpenBot이 이 서버의 디스크에 보관하는 항목을 확인하고 공간을 확보해요.",
+  "server.settings.storageDescription": "StarBot이 이 서버의 디스크에 보관하는 항목을 확인하고 공간을 확보해요.",
   "server.settings.hostedSitesTitle": "사이트",
   "server.settings.hostedSitesDescription": "이 서버의 에이전트가 starbot.site에 게시한 정적 사이트예요.",
 
@@ -348,9 +348,9 @@ export const messages = {
   "server.settings.nameTooLong": "{limit}자 이하로 입력해 주세요.",
   "server.settings.actionFailedTitle": "서버 작업 실패",
   "server.settings.actionFailed": "서버 작업에 실패했어요.",
-  "server.settings.imageReadFailed": "OpenBot이 이 이미지를 읽을 수 없었어요.",
+  "server.settings.imageReadFailed": "StarBot이 이 이미지를 읽을 수 없었어요.",
   "server.settings.copyFailedTitle": "복사 실패",
-  "server.settings.copyFailed": "OpenBot이 이 값을 복사할 수 없었어요.",
+  "server.settings.copyFailed": "StarBot이 이 값을 복사할 수 없었어요.",
   "server.settings.unavailableTitle": "서버 설정을 사용할 수 없어요",
   "server.settings.reset": "초기화",
   "server.settings.unsavedChanges": "저장하지 않은 변경 사항",
@@ -501,7 +501,7 @@ export const messages = {
   "server.settings.restartTitle": "다시 시작",
   "server.settings.restarting": "다시 시작하는 중…",
   "server.settings.restartedTitle": "{name}을(를) 다시 시작하는 중이에요",
-  "server.settings.restartHiddenDescription": "서버가 돌아오면 OpenBot이 자동으로 다시 연결해요.",
+  "server.settings.restartHiddenDescription": "서버가 돌아오면 StarBot이 자동으로 다시 연결해요.",
   "server.settings.restartHide": "숨기기",
   "server.settings.restartProgressTitle": "{name} 다시 시작하는 중",
   "server.settings.restartProgressDescription": "{time} · 보통 약 1분 걸려요. 이 창은 숨겨도 돼요.",
@@ -639,7 +639,7 @@ export const messages = {
   "server.desktop.connectionUnavailable": "연결을 사용할 수 없음",
   "server.desktop.hostOffline": "호스트가 오프라인이에요",
   "server.desktop.hostOfflineDescription": "데스크톱을 열기 전에 호스트에 다시 연결하세요.",
-  "server.desktop.hostUpdateDescription": "원격 제어를 사용하려면 호스트의 OpenBot을 업데이트하세요.",
+  "server.desktop.hostUpdateDescription": "원격 제어를 사용하려면 호스트의 StarBot을 업데이트하세요.",
   "server.desktop.serviceAvailable": "서비스 사용 가능",
   "server.desktop.serviceNotReady": "서비스가 준비되지 않았어요",
   "server.desktop.serviceNotReadyDescription":
@@ -653,7 +653,7 @@ export const messages = {
   "server.desktop.accessMembers": "모든 멤버",
   "server.desktop.askLabel": "이 컴퓨터에서 묻기",
   "server.desktop.askDescription":
-    "각 세션은 이 컴퓨터 앞에 있는 사람이 허용할 때까지 기다려요. 30초 안에 응답이 없으면 OpenBot이 거부해요.",
+    "각 세션은 이 컴퓨터 앞에 있는 사람이 허용할 때까지 기다려요. 30초 안에 응답이 없으면 StarBot이 거부해요.",
   "server.desktop.activeTitle": "활성 원격 데스크톱 세션: {active}",
   "server.desktop.activeDescription": "모든 세션을 바로 끝내요. 멤버는 다시 요청할 수 있어요.",
   "server.desktop.stopAll": "모든 원격 제어 중지",
@@ -665,7 +665,7 @@ export const messages = {
   "server.settings.providersSwitchNote": "{name}의 AI 제공자를 관리하려면 해당 서버로 전환하세요.",
   "server.settings.providersSwitch": "이 서버로 전환",
   "server.settings.updatesTitle": "업데이트",
-  "server.settings.updatesDescription": "이 서버를 실행하는 컴퓨터의 OpenBot을 업데이트해요.",
+  "server.settings.updatesDescription": "이 서버를 실행하는 컴퓨터의 StarBot을 업데이트해요.",
   "server.update.hostTitle": "{name}의 StarBot",
 
   "server.update.version": "StarBot {version}",
@@ -677,11 +677,11 @@ export const messages = {
   "server.update.status.downloadingUnknown": "{version} 다운로드 중…",
   "server.update.status.ready": "{version} 다운로드를 완료했어요.",
   "server.update.status.installing": "업데이트를 설치하기 위해 {name}이(가) 다시 시작되고 있어요.",
-  "server.update.status.upToDate": "{name}의 OpenBot이 최신 버전이에요.",
+  "server.update.status.upToDate": "{name}의 StarBot이 최신 버전이에요.",
   "server.update.status.checkFailed": "{name}이(가) 업데이트를 확인하지 못했어요. 다시 시도해 주세요.",
   "server.update.status.downloadFailed": "{name}이(가) 업데이트를 다운로드하지 못했어요. 다시 시도해 주세요.",
   "server.update.status.installFailed":
-    "{name}이(가) 업데이트를 설치하지 못했어요. 그 컴퓨터의 다른 사용자가 OpenBot을 실행하고 있지 않은지 확인한 후 다시 시도해 주세요.",
+    "{name}이(가) 업데이트를 설치하지 못했어요. 그 컴퓨터의 다른 사용자가 StarBot을 실행하고 있지 않은지 확인한 후 다시 시도해 주세요.",
   "server.update.releaseCheckFailed":
     "{name}이(가) 릴리스 피드를 읽지 못했어요. 호스트의 네트워크 연결을 확인한 후 다시 시도해 주세요.",
   "server.update.releaseUnavailable":
@@ -693,7 +693,7 @@ export const messages = {
   "server.update.path.hosted":
     "호스팅 서비스가 백그라운드에서 업데이트를 다운로드해요. 다운로드한 업데이트는 서버가 다음에 시작될 때 적용돼요. 서버를 중지했다가 재개하기 전에 진행 중인 작업이 끝나기를 기다려 주세요. 계속 예전 버전이면 호스트 관리자에게 문의하세요.",
   "server.update.path.system":
-    "호스트에서 sudo openbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 OpenBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다려 주세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
+    "호스트에서 sudo openbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 StarBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다려 주세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
   "server.update.path.container":
     "Docker 호스트에서 새 StarBot 이미지를 가져온 후 같은 데이터 볼륨으로 컨테이너를 다시 만드세요. 먼저 진행 중인 작업이 끝나기를 기다려 주세요. 데이터를 보존하려면 기존 볼륨을 유지하세요.",
 
@@ -719,7 +719,7 @@ export const messages = {
   "server.update.waitingFor": "{reasons}을(를) 기다리는 중이에요.",
   "server.update.disabledTitle": "원격 업데이트가 꺼져 있어요",
   "server.update.disabledDescription":
-    "{name}의 사용자가 서버 멤버의 업데이트를 꺼 두었어요. OpenBot을 업데이트하거나, 그 컴퓨터에서 설정 > 업데이트를 열고 ‘서버 멤버의 업데이트 허용’을 켜 달라고 요청하세요.",
+    "{name}의 사용자가 서버 멤버의 업데이트를 꺼 두었어요. StarBot을 업데이트하거나, 그 컴퓨터에서 설정 > 업데이트를 열고 ‘서버 멤버의 업데이트 허용’을 켜 달라고 요청하세요.",
   "server.update.managedTitle": "Host Manager가 업데이트를 제어해요",
   "server.update.managedDescription": "StarBot Host Manager가 {name}을(를) 업데이트해요. 호스트 관리자에게 문의하세요.",
 
@@ -796,9 +796,9 @@ export const messages = {
   "server.restartNotice.waitingVersionTitle": "StarBot {version}을(를) 설치하기 위해 {name}이(가) 다시 시작돼요",
 
   "server.restartNotice.waitingDescription":
-    "에이전트가 대기 상태가 될 때까지 기다린 후 다시 시작해요. 잠시 연결이 끊어졌다가 OpenBot이 자동으로 다시 연결해요.",
+    "에이전트가 대기 상태가 될 때까지 기다린 후 다시 시작해요. 잠시 연결이 끊어졌다가 StarBot이 자동으로 다시 연결해요.",
   "server.restartNotice.restartingTitle": "업데이트를 설치하기 위해 {name}이(가) 다시 시작되고 있어요",
-  "server.restartNotice.restartingDescription": "{name}이(가) 돌아오면 OpenBot이 자동으로 다시 연결해요.",
+  "server.restartNotice.restartingDescription": "{name}이(가) 돌아오면 StarBot이 자동으로 다시 연결해요.",
   "server.restartNotice.backTitle": "{name}이(가) 다시 온라인이 되었어요",
   "server.settings.personalityTitle": "성격",
   "server.settings.personalityDescription": "이 서버의 에이전트가 말하는 방식을 선택해요.",

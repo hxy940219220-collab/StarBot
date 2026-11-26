@@ -5,7 +5,6 @@ import { homedir, hostname, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { createInterface } from "node:readline";
 import type { Readable } from "node:stream";
-import { overseasProviderProxyEnv, warmLocalProxyDetector } from "../backend/local-proxy-detector";
 import {
   isKeyOnlyProvider,
   isManagedRuntimeProvider,
@@ -99,6 +98,7 @@ import { stripeSource } from "../backend/crm/crm-stripe";
 import { diskRestoreEnded, diskRestoring } from "../backend/disk-restore";
 import { runCauseEffect } from "../backend/effect-boundary";
 import { LIBRARY_FOLDERS_FILE, LibraryFoldersStore } from "../backend/library-folders-store";
+import { overseasProviderProxyEnv, warmLocalProxyDetector } from "../backend/local-proxy-detector";
 import { MailboxStore } from "../backend/mailbox-store";
 import { McpOAuth } from "../backend/mcp-oauth-provider";
 import { DiscordConnectFailed, toDiscordConnectFailed } from "../backend/messaging/discord/discord-connect";
@@ -1776,7 +1776,7 @@ export async function createApplicationServices({
     },
   }).catch((error: unknown) => {
     logger.warn(
-      "StarBot could not listen for MCP sign-ins on this machine, so the openbot:// link is used instead. Servers that refuse it cannot be signed in to:",
+      "StarBot could not listen for MCP sign-ins on this machine, so the starbot:// link is used instead. Servers that refuse it cannot be signed in to:",
       toLogValue(error),
     );
     return null;

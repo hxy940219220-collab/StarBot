@@ -169,21 +169,28 @@ export function MobileConnectAddPhoneDialog(props: {
   onClose: () => void;
 }) {
   const { t } = useText();
-  const [screen, setScreen] = createSignal<AddScreen>("ask");
+  const [screen, setScreen] = createSignal<AddScreen>("signin");
   const [platform, setPlatform] = createSignal<MobilePlatformLogoVariant>("ios");
-  createEffect(
-    () => props.installRequest,
-    (request) => {
-      if (!request) return;
-      setPlatform(request.platform);
-      setScreen("install");
-    },
-  );
   const session = () => props.store.state.connect.session;
   const live = () => {
     const current = session();
     return Boolean(current && !current.collapsing && !current.successDeviceName && !props.store.expired());
   };
+  createEffect(
+    () => ({ open: props.open, installRequest: props.installRequest }),
+    (current, previous) => {
+      if (!current.open) return;
+      if (current.installRequest) {
+        setPlatform(current.installRequest.platform);
+        setScreen("install");
+        return;
+      }
+      if (!previous?.open || previous.installRequest) {
+        setScreen("signin");
+        if (!live() && !props.store.state.connect.busy) void props.store.createTicket();
+      }
+    },
+  );
   createEffect(
     () => !(props.open && screen() === "signin") && live() && !props.store.state.connect.busy && props.canCancelTicket,
     (cancel) => {
@@ -191,7 +198,7 @@ export function MobileConnectAddPhoneDialog(props: {
     },
   );
   const close = () => {
-    setScreen("ask");
+    setScreen("signin");
     setConnected(null);
     props.onClose();
   };
@@ -205,7 +212,6 @@ export function MobileConnectAddPhoneDialog(props: {
     setScreen("signin");
     if (!live()) void props.store.createTicket();
   };
-  const back = () => setScreen("ask");
   const app = () => PHONE_APPS.find((candidate) => candidate.platform === platform()) ?? PHONE_APPS[0];
   const title = () => {
     if (screen() === "install") return t("settings.mobileConnect.add.install.heading");
@@ -286,28 +292,34 @@ export function MobileConnectAddPhoneDialog(props: {
       </Show>
       <Show when={screen() !== "ask"}>
         <footer class="settings-mobile-dialog-footer">
-          <Button type="button" variant="ghost" onClick={back}>
-            <ArrowLeft aria-hidden="true" />
-            {t("common.back")}
-          </Button>
           <Switch>
             <Match when={screen() === "install"}>
+              <Button type="button" variant="ghost" onClick={toSignIn}>
+                <ArrowLeft aria-hidden="true" />
+                {t("common.back")}
+              </Button>
               <Button type="button" onClick={toSignIn}>
                 {t("settings.mobileConnect.add.continue")}
                 <ArrowRight aria-hidden="true" />
               </Button>
             </Match>
-            <Match when={screen() === "signin" && live()}>
-              <Button
-                type="button"
-                size="sm"
-                variant="destructive-ghost"
-                loading={props.store.state.connect.cancelling}
-                disabled={!props.canCancelTicket || props.store.state.connect.busy}
-                onClick={() => void props.store.cancelTicket()}
-              >
-                {t("settings.mobileConnect.code.cancel")}
+            <Match when={screen() === "signin"}>
+              <Button type="button" variant="ghost" onClick={() => setScreen("install")}>
+                <Download aria-hidden="true" />
+                {t("settings.mobileConnect.add.install.title")}
               </Button>
+              <Show when={live()}>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="destructive-ghost"
+                  loading={props.store.state.connect.cancelling}
+                  disabled={!props.canCancelTicket || props.store.state.connect.busy}
+                  onClick={() => void props.store.cancelTicket()}
+                >
+                  {t("settings.mobileConnect.code.cancel")}
+                </Button>
+              </Show>
             </Match>
           </Switch>
         </footer>

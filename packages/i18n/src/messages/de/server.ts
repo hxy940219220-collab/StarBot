@@ -157,7 +157,7 @@ export const messages = {
   "server.install.offline": "{name} ist offline.",
   "server.install.expired": "Dieser Befehl ist abgelaufen. Erstelle einen neuen.",
   "server.install.agentPrompt":
-    'Installiere OpenBot auf diesem Linux-Server und melde ihn bei meinem OpenBot-Konto an.\nFühre diesen Befehl als root aus. Er stellt keine Fragen und dauert einige Minuten:\n\n{command}\n\nEr endet mit der Zeile "OpenBot is connected to your account." und dem Exit-Code 0.\nDer Befehl funktioniert einmal, 15 Minuten lang. Speichere ihn nirgends.',
+    'Installiere OpenBot auf diesem Linux-Server und melde ihn bei meinem OpenBot-Konto an.\nFühre diesen Befehl als root aus. Er stellt keine Fragen und dauert einige Minuten:\n\n{command}\n\nEr endet mit der Zeile "StarBot is connected to your account." und dem Exit-Code 0.\nDer Befehl funktioniert einmal, 15 Minuten lang. Speichere ihn nirgends.',
   "server.install.setUpWithAgent": "Mit einem Agenten einrichten",
   "server.install.sshAgentPrompt":
     "Verbinde dich per SSH mit meinem Linux-Server und installiere dort StarBot als Server.\n\nSSH-Adresse (user@host):",

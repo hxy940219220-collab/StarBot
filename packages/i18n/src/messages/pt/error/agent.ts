@@ -154,9 +154,9 @@ export const messages = {
   "error.agent.saveOtherAgent": "Este registro salvo pertence a outro agente.",
   "error.agent.savedGone": "O agente salvo não existe mais.",
   "error.agent.storedProfileUnreadable":
-    'Um perfil de agente salvo tem um valor "{field}" ilegível; atualize os dados antes de iniciar o OpenBot.',
+    'Um perfil de agente salvo tem um valor "{field}" ilegível; atualize os dados antes de iniciar o StarBot.',
   "error.agent.storedProfileUnreadableId":
-    'O perfil de agente salvo {id} tem um valor "{field}" ilegível; atualize os dados antes de iniciar o OpenBot.',
+    'O perfil de agente salvo {id} tem um valor "{field}" ilegível; atualize os dados antes de iniciar o StarBot.',
   "error.agent.queueEditRejected": "Edição da fila rejeitada: {reason}",
   "error.agent.computerUseLocalOnly": "Uso do computador só pode ser alterado no computador que executa o agente.",
   "error.agent.automationLocalOnly": "Scripts locais só podem ser permitidos no computador que executa o agente.",

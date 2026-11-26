@@ -41,10 +41,9 @@ export const messages = {
   "startup.recoveryTitle": "StarBot açılmadı",
 
   "startup.recoveryBody": {
-    one: "OpenBot {version}, açılmadan önce art arda {count} kez durdu. Yerel verileriniz sıfırlanmadı veya üzerine yazılmadı.",
+    one: "StarBot {version}, açılmadan önce art arda {count} kez durdu. Yerel verileriniz sıfırlanmadı veya üzerine yazılmadı.",
     other:
       "StarBot {version}, açılmadan önce art arda {count} kez durdu. Yerel verileriniz sıfırlanmadı veya üzerine yazılmadı.",
-
   },
   "startup.recoveryHint":
     "Yeniden deneyin veya açılan son sürümü yükleyin. Yardım almak için tanılamayı dışa aktarın ve dosyayı raporunuzla gönderin.",
@@ -59,5 +58,4 @@ export const messages = {
   "startup.recoveryQuit": "Çık",
   "startup.recoveryDiagnosticsSaved": "Tanılama dosyası kaydedildi.",
   "startup.recoveryActionFailed": "StarBot bu işlemi yapamadı.",
-
 } as const satisfies PartialTranslation<typeof source>;

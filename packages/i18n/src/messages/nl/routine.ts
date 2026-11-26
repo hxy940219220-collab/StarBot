@@ -104,12 +104,12 @@ export const messages = {
   "routine.history.ignored.filter": "Genegeerd: filters kwamen niet overeen",
   "routine.history.ignored.inactive": "Genegeerd: routine gepauzeerd",
   "routine.history.skipped": {
-    one: "Overgeslagen: OpenBot was gesloten",
-    other: "{count} overgeslagen: OpenBot was gesloten",
+    one: "Overgeslagen: StarBot was gesloten",
+    other: "{count} overgeslagen: StarBot was gesloten",
   },
   "routine.history.skippedMore": {
-    one: "Meer dan {count} overgeslagen: OpenBot was gesloten",
-    other: "Meer dan {count} overgeslagen: OpenBot was gesloten",
+    one: "Meer dan {count} overgeslagen: StarBot was gesloten",
+    other: "Meer dan {count} overgeslagen: StarBot was gesloten",
   },
   "routine.history.ranLate": "Te laat uitgevoerd om {time}",
   "routine.history.range": "{from} – {until}",

@@ -32,8 +32,8 @@ const LIST_BODY_LIMIT = 1024 * 1024;
 const SPEECH_BODY_LIMIT = 32 * 1024 * 1024;
 const VOICE_SERVER_CAPTURE_RATE = 16_000;
 
-const SERVER_KEY = "openbot.mobile.voice-server.v1";
-const API_KEY_KEY = "openbot.mobile.voice-server-key.v1";
+const SERVER_KEY = "starbot.mobile.voice-server.v1";
+const API_KEY_KEY = "starbot.mobile.voice-server-key.v1";
 
 export interface VoiceServer {
   address: string;

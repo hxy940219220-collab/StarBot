@@ -10,7 +10,7 @@ export const messages = {
   "error.team.alreadyConfigured": "팀 서버가 이미 설정되어 있어요.",
   "error.team.identityCreateFailed": "팀 ID를 만들 수 없어요.",
   "error.team.accountChangedDuringCreate": "서버를 만드는 동안 로그인한 계정이 바뀌었어요.",
-  "error.team.notConfigured": "이 OpenBot은 아직 설정되지 않았어요.",
+  "error.team.notConfigured": "이 StarBot은 아직 설정되지 않았어요.",
   "error.team.keyRotationMissing": "대기 중인 서버 키 변경이 없어요.",
   "error.team.serverNotActive": "이 서버는 더 이상 로그인한 계정의 활성 서버가 아니에요.",
   "error.team.logoInvalid": "512 KB 이하의 올바른 PNG, JPEG 또는 WebP 이미지를 선택해 주세요.",
@@ -57,8 +57,8 @@ export const messages = {
   "error.team.tooManySignInAttempts": "로그인 시도가 너무 많아요. 나중에 다시 시도해 주세요.",
   "error.team.clientUpdateRequired": "이 호스트에 연결하기 전에 이 StarBot 클라이언트를 업데이트해 주세요.",
 
-  "error.team.hostUpdateRequired": "연결하기 전에 호스트의 OpenBot을 업데이트해 주세요.",
-  "error.team.serverSafeMode": "이 서버에서 OpenBot이 시작되지 않아 안전 모드로 실행 중입니다.",
+  "error.team.hostUpdateRequired": "연결하기 전에 호스트의 StarBot을 업데이트해 주세요.",
+  "error.team.serverSafeMode": "이 서버에서 StarBot이 시작되지 않아 안전 모드로 실행 중입니다.",
   "error.team.serverSafeModeNewerDatabase":
     "이 서버의 StarBot {version}은(는) 데이터를 열 수 없습니다. 더 새로운 StarBot 버전이 데이터를 저장했기 때문입니다. 서버에 더 새로운 StarBot 릴리스를 설치하면 해결됩니다.",
 
@@ -67,7 +67,7 @@ export const messages = {
 
   "error.team.sidebarLayoutUnavailable": "사이드바 레이아웃을 사용할 수 없어요.",
   "error.team.providersUnsupported": "이 연결에서는 제공자 설정을 지원하지 않아요.",
-  "error.team.providerNotManaged": "OpenBot은 이 제공자의 CLI를 관리하지 않아요.",
+  "error.team.providerNotManaged": "StarBot은 이 제공자의 CLI를 관리하지 않아요.",
   "error.team.channelsUnsupported": "이 연결에서는 채널 채팅을 지원하지 않아요.",
   "error.team.channelContextUnsupported": "이 연결은 채널의 새 대화나 압축을 지원하지 않습니다.",
   "error.team.channelPictureUnsupported": "이 연결에서는 채널 사진을 지원하지 않아요.",
@@ -101,9 +101,9 @@ export const messages = {
   "error.team.libraryFoldersUnsupported": "이 연결에서는 라이브러리 폴더를 지원하지 않아요.",
   "error.team.workflowFoldersUnsupported": "이 연결은 워크플로 폴더를 지원하지 않아요.",
   "error.team.agentNotificationLevelsUnsupported":
-    "이 서버는 에이전트별 알림 수준을 저장할 수 없어요. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트하세요.",
+    "이 서버는 에이전트별 알림 수준을 저장할 수 없어요. 서버를 실행하는 컴퓨터에서 StarBot을 업데이트하세요.",
   "error.team.sidebarPinsUnsupported":
-    "이 서버는 고정한 채팅을 모든 기기에서 유지할 수 없습니다. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트하세요.",
+    "이 서버는 고정한 채팅을 모든 기기에서 유지할 수 없습니다. 서버를 실행하는 컴퓨터에서 StarBot을 업데이트하세요.",
   "error.team.agentInstructionsUnsupported": "이 연결에서는 에이전트 지침 편집을 지원하지 않아요.",
   "error.team.agentPublishUnsupported": "이 연결에서는 에이전트 게시를 지원하지 않아요.",
   "error.team.agentUpdateUnsupported": "이 연결에서는 에이전트 업데이트를 지원하지 않아요.",
@@ -115,9 +115,9 @@ export const messages = {
   "error.team.threadMessageSearchUnsupported": "이 연결에서는 사이드 스레드 검색을 지원하지 않아요.",
   "error.team.sideQuestionUnsupported": "이 연결에서는 사이드 질문을 지원하지 않아요.",
   "error.team.liveVoiceUnsupported":
-    "이 서버는 Codex 라이브 음성을 지원하지 않아요. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트해 주세요.",
+    "이 서버는 Codex 라이브 음성을 지원하지 않아요. 서버를 실행하는 컴퓨터에서 StarBot을 업데이트해 주세요.",
   "error.team.routineFlowsUnsupported":
-    "이 서버는 루틴 플로우를 지원하지 않아요. 서버를 실행하는 컴퓨터에서 OpenBot을 업데이트해 주세요.",
+    "이 서버는 루틴 플로우를 지원하지 않아요. 서버를 실행하는 컴퓨터에서 StarBot을 업데이트해 주세요.",
   "error.team.routineCanvasTooLarge":
     "이 루틴 캔버스는 너무 커서 이 기기로 보낼 수 없어요. 서버를 실행하는 컴퓨터에서 루틴 지침을 줄여 주세요.",
   "error.team.conversationPageTooLarge":
@@ -165,14 +165,14 @@ export const messages = {
   "error.team.browserSessionNotFound": "브라우저 화면 세션을 찾을 수 없어요.",
   "error.team.mcpUnsupported": "이 연결에서는 MCP 서버를 지원하지 않아요.",
   "error.team.mcpServerListNeedsUpdate":
-    "이 서버에서 MCP 서버를 {limit}개보다 많이 사용하려면 이 기기의 OpenBot을 업데이트하세요.",
+    "이 서버에서 MCP 서버를 {limit}개보다 많이 사용하려면 이 기기의 StarBot을 업데이트하세요.",
   "error.team.providerAccountListNeedsUpdate":
-    "이 서버에서 한 제공자의 계정을 {limit}개보다 많이 사용하려면 이 기기의 OpenBot을 업데이트하세요.",
+    "이 서버에서 한 제공자의 계정을 {limit}개보다 많이 사용하려면 이 기기의 StarBot을 업데이트하세요.",
   "error.team.storageUnsupported": "이 연결에서는 스토리지를 지원하지 않아요.",
   "error.team.machineResourcesUnsupported": "이 연결에서는 머신 사용량을 지원하지 않아요.",
   "error.team.machineAlertMemberInvalid": "이 서버의 소유자나 관리자만 머신 알림을 받을 수 있어요.",
   "error.team.hostedSitesUnsupported": "이 연결에서는 사이트를 지원하지 않아요.",
-  "error.team.hostedSitesUnregistered": "이 서버는 OpenBot에 등록되어 있지 않아서 사이트가 없어요.",
+  "error.team.hostedSitesUnregistered": "이 서버는 StarBot에 등록되어 있지 않아서 사이트가 없어요.",
   "error.team.hostedSiteNotFound": "사이트를 찾을 수 없어요.",
   "error.team.markUnreadUnsupported": "이 클라이언트는 대화를 읽지 않음으로 표시하는 기능을 지원하지 않아요.",
   "error.team.inviteServiceUnavailable": "초대 서비스를 사용할 수 없어요.",
@@ -196,10 +196,10 @@ export const messages = {
   "error.team.mcpServerNotYours": "이 MCP 서버는 추가한 사람이나 관리자만 변경할 수 있어요.",
   "error.team.ownerRequired": "이 서버의 소유자만 할 수 있어요.",
   "error.team.requestTooLarge": "요청 본문이 너무 커요.",
-  "error.team.signInRelayUnsupported": "이 서버는 로그인을 중계할 수 없어요. 호스트의 OpenBot을 업데이트해 주세요.",
-  "error.team.connectorsUnsupported": "이 서버는 여기서 연결을 관리할 수 없어요. 호스트의 OpenBot을 업데이트해 주세요.",
-  "error.team.discordAccessUnsupported": "이 서버는 Discord 역할을 설정할 수 없어요. OpenBot을 업데이트해 주세요.",
-  "error.team.connectorPageRefused": "서버가 OpenBot에서 열 수 없는 페이지를 보냈어요.",
+  "error.team.signInRelayUnsupported": "이 서버는 로그인을 중계할 수 없어요. 호스트의 StarBot을 업데이트해 주세요.",
+  "error.team.connectorsUnsupported": "이 서버는 여기서 연결을 관리할 수 없어요. 호스트의 StarBot을 업데이트해 주세요.",
+  "error.team.discordAccessUnsupported": "이 서버는 Discord 역할을 설정할 수 없어요. StarBot을 업데이트해 주세요.",
+  "error.team.connectorPageRefused": "서버가 StarBot에서 열 수 없는 페이지를 보냈어요.",
   "error.team.signInRelayUnknown": "이 로그인은 종료되었거나 존재하지 않아요.",
   "error.team.signInRelayUsed": "이 로그인은 이미 전송되었어요.",
   "error.team.signInRelayMismatch": "이 주소는 이 로그인에서 만든 주소가 아니에요.",

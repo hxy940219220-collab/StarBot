@@ -157,7 +157,7 @@ export const messages = {
   "server.install.offline": "{name} çevrimdışı.",
   "server.install.expired": "Bu komutun süresi doldu. Yeni bir komut oluşturun.",
   "server.install.agentPrompt":
-    'OpenBot\'u bu Linux sunucuya kur ve OpenBot hesabımda oturum aç.\nBu komutu root olarak çalıştır. Soru sormaz ve birkaç dakika sürer:\n\n{command}\n\n"OpenBot is connected to your account." satırı ve 0 çıkış koduyla biter.\nKomut 15 dakika boyunca bir kez çalışır. Hiçbir yere kaydetme.',
+    'OpenBot\'u bu Linux sunucuya kur ve OpenBot hesabımda oturum aç.\nBu komutu root olarak çalıştır. Soru sormaz ve birkaç dakika sürer:\n\n{command}\n\n"StarBot is connected to your account." satırı ve 0 çıkış koduyla biter.\nKomut 15 dakika boyunca bir kez çalışır. Hiçbir yere kaydetme.',
   "server.install.setUpWithAgent": "Bir ajanla kur",
   "server.install.sshAgentPrompt":
     "Linux sunucuma SSH ile bağlan ve StarBot'u sunucu olarak oraya kur.\n\nSSH adresi (user@host):",

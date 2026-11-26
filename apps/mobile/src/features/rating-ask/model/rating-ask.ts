@@ -1,21 +1,12 @@
 import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
 import * as SecureStore from "expo-secure-store";
-import { Linking } from "react-native";
 import { create } from "zustand";
 
 import { openStorePage } from "@/features/app-update/model/app-update";
-import { devShowRatingAsk } from "@/shared/lib/dev-feature-overrides";
 import { localDay } from "@/shared/lib/local-day";
 
-const key = "openbot.mobile.ratingAsk.v1";
+const key = "starbot.mobile.ratingAsk.v1";
 const MIN_USE_DAYS = 5;
-const DAY_MS = 24 * 60 * 60_000;
-const MIN_AGE_MS = 7 * DAY_MS;
-const COOLDOWN_MS = 60 * DAY_MS;
-
-const X_POST_TEXT = "Feedback for OpenBot @norbertbodziony: ";
-const X_APP_POST_URL = `twitter://post?message=${encodeURIComponent(X_POST_TEXT)}`;
-const X_WEB_POST_URL = `https://x.com/intent/post?text=${encodeURIComponent(X_POST_TEXT)}`;
 
 interface RatingAskRecord {
   days: readonly string[];
@@ -69,21 +60,15 @@ export function recordRatingAskUse(now = Date.now()): void {
   void save({ days: [...state.days, today].slice(-MIN_USE_DAYS), firstUse: state.firstUse ?? now });
 }
 
-export function ratingAskDue(now = Date.now()): boolean {
-  if (devShowRatingAsk()) return true;
-  const { ready, done, days, firstUse, lastAsked } = useRatingAsk.getState();
-  if (!ready || done || days.length < MIN_USE_DAYS || firstUse === null) return false;
-  if (now - firstUse < MIN_AGE_MS) return false;
-  return lastAsked === null || now - lastAsked >= COOLDOWN_MS;
+export function ratingAskDue(_now = Date.now()): boolean {
+  return false;
 }
 
 export function markRatingAskShown(now = Date.now()): void {
-  if (devShowRatingAsk()) return;
   void save({ lastAsked: now });
 }
 
 export function finishRatingAsk(): void {
-  if (devShowRatingAsk()) return;
   void save({ done: true });
 }
 
@@ -92,5 +77,5 @@ export function openStoreReview(): Promise<void> {
 }
 
 export async function openXPost(): Promise<void> {
-  await Linking.openURL(X_APP_POST_URL).catch(() => Linking.openURL(X_WEB_POST_URL));
+  return undefined;
 }

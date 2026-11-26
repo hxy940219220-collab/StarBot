@@ -25,9 +25,9 @@ import * as LockedKeychain from "../../../shared/lib/locked-keychain";
 import { fetch } from "../../support/model/logged-fetch";
 import { companySignInReturnParams } from "../model/company-sign-in-return";
 
-const MOBILE_SESSION_KEY = "openbot.mobile.session.v1";
-const MOBILE_REVOCATIONS_KEY = "openbot.mobile.pending-revocations.v1";
-const MOBILE_DEVICE_ID_KEY = "openbot.mobile.device-id.v1";
+const MOBILE_SESSION_KEY = "starbot.mobile.session.v1";
+const MOBILE_REVOCATIONS_KEY = "starbot.mobile.pending-revocations.v1";
+const MOBILE_DEVICE_ID_KEY = "starbot.mobile.device-id.v1";
 const MOBILE_AUTH_REQUEST_TIMEOUT_MS = 10_000;
 const MOBILE_EMAIL_CODE_REQUEST_TIMEOUT_MS = 35_000;
 const MOBILE_COMPANY_START_TIMEOUT_MS = 20_000;
@@ -775,7 +775,7 @@ function decodeStoredMobileCredential(value: unknown): MobileCredential {
 
 function normalizeAccountApiUrl(value: string): string | null {
   return (
-    parseMobileConnectUrl(`openbot://mobile-connect?api=${encodeURIComponent(value)}&ticket=${"x".repeat(32)}`)
+    parseMobileConnectUrl(`starbot://mobile-connect?api=${encodeURIComponent(value)}&ticket=${"x".repeat(32)}`)
       ?.apiUrl ?? null
   );
 }

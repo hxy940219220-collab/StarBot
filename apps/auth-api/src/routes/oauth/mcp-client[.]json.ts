@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/solid-router";
 
-const CLIENT_ID = "https://openbot.run/oauth/mcp-client.json";
+const CLIENT_ID = "https://starbot.local/oauth/mcp-client.json";
 
 function mcpClientMetadataResponse(): Response {
   return Response.json(
     {
       client_id: CLIENT_ID,
-      client_name: "OpenBot",
-      client_uri: "https://openbot.run",
-      logo_uri: "https://openbot.run/icon-512x512.png",
+      client_name: "StarBot",
+      client_uri: "https://starbot.local",
+      logo_uri: "https://starbot.local/icon-512x512.png",
       redirect_uris: ["http://127.0.0.1:28417/mcp-auth"],
       application_type: "native",
       grant_types: ["authorization_code", "refresh_token"],

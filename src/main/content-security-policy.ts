@@ -31,8 +31,13 @@ export function readSelfHostedSignalOrigin(
 ): string | null {
   if (!signalUrl) return null;
   if (!authApiUrl) throw new Error("OPENBOT_REMOTE_SIGNAL_URL needs OPENBOT_AUTH_API_URL.");
+  const api = new URL(authApiUrl);
   const url = new URL(signalUrl);
-  if (url.protocol !== "wss:" || url.username !== "" || url.password !== "") {
+  const localDevPair =
+    url.protocol === "ws:" &&
+    isMobileConnectDevelopmentHost(api.hostname) &&
+    isMobileConnectDevelopmentHost(url.hostname);
+  if ((url.protocol !== "wss:" && !localDevPair) || url.username !== "" || url.password !== "") {
     throw new Error("OPENBOT_REMOTE_SIGNAL_URL must be a wss: URL without credentials.");
   }
   return url.origin;

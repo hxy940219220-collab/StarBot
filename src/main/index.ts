@@ -130,7 +130,6 @@ import { vaultIpcHandlers } from "./ipc/vault-handlers";
 import { voiceIpcHandlers } from "./ipc/voice-handlers";
 import { workflowIpcHandlers } from "./ipc/workflow-handlers";
 import { KeepAwake } from "./keep-awake";
-import { ensureStarBotConnectorBridge } from "./starbot-connector-bridge";
 import { stopAppImageCrashpadHandlerAtExit } from "./linux-appimage-crashpad";
 import { relaunchApp } from "./linux-appimage-relaunch";
 import { installLinuxDesktopEntry } from "./linux-desktop-entry";
@@ -181,6 +180,7 @@ import { applyServerTimezone, SERVER_TIMEZONE_PREFERENCE_FILE } from "./server-t
 import { configureContentSecurityPolicy, configureRendererPermissions } from "./session-configuration";
 import { OWNER_PIN_KEY } from "./sidebar-pin-store";
 import { singleInstanceExitMessage, singleInstanceOwnerPid } from "./single-instance-owner";
+import { ensureStarBotConnectorBridge } from "./starbot-connector-bridge";
 import { StartAttempts, takeForcedStartFailure } from "./start-attempts";
 import { compatiblePreviousRelease, readDatabaseSchemaVersion } from "./start-recovery-release";
 import { openStartRecoveryWindow, type StartRecovery } from "./start-recovery-window";
@@ -1212,8 +1212,8 @@ async function presentApplication(): Promise<void> {
     process.platform === "linux" ||
     ((process.platform === "darwin" || process.platform === "win32") && app.isPackaged)
   ) {
-    if (!app.setAsDefaultProtocolClient("openbot")) {
-      logger.warn("Unable to register the openbot:// scheme. Invitation links will not open StarBot.");
+    if (!app.setAsDefaultProtocolClient("starbot")) {
+      logger.warn("Unable to register the starbot:// scheme. Invitation links will not open StarBot.");
     }
   }
 }

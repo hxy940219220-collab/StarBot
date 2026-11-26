@@ -41,10 +41,9 @@ export const messages = {
   "startup.recoveryTitle": "O StarBot não abriu",
 
   "startup.recoveryBody": {
-    one: "O OpenBot {version} parou antes de abrir, {count} vez seguida. Seus dados locais não foram redefinidos nem substituídos.",
+    one: "O StarBot {version} parou antes de abrir, {count} vez seguida. Seus dados locais não foram redefinidos nem substituídos.",
     other:
       "O StarBot {version} parou antes de abrir, {count} vezes seguidas. Seus dados locais não foram redefinidos nem substituídos.",
-
   },
   "startup.recoveryHint":
     "Tente novamente ou instale a última versão que abriu. Para obter ajuda, exporte o diagnóstico e envie o arquivo com seu relato.",
@@ -59,5 +58,4 @@ export const messages = {
   "startup.recoveryQuit": "Sair",
   "startup.recoveryDiagnosticsSaved": "O arquivo de diagnóstico foi salvo.",
   "startup.recoveryActionFailed": "O StarBot não conseguiu fazer esta ação.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -41,9 +41,9 @@ export const messages = {
   "startup.recoveryTitle": "StarBot לא נפתח",
 
   "startup.recoveryBody": {
-    one: "OpenBot {version} נעצר לפני שנפתח, פעם אחת ({count}). הנתונים המקומיים שלך לא אופסו ולא נדרסו.",
-    two: "OpenBot {version} נעצר לפני שנפתח, פעמיים ברצף ({count}). הנתונים המקומיים שלך לא אופסו ולא נדרסו.",
-    other: "OpenBot {version} נעצר לפני שנפתח, {count} פעמים ברצף. הנתונים המקומיים שלך לא אופסו ולא נדרסו.",
+    one: "StarBot {version} נעצר לפני שנפתח, פעם אחת ({count}). הנתונים המקומיים שלך לא אופסו ולא נדרסו.",
+    two: "StarBot {version} נעצר לפני שנפתח, פעמיים ברצף ({count}). הנתונים המקומיים שלך לא אופסו ולא נדרסו.",
+    other: "StarBot {version} נעצר לפני שנפתח, {count} פעמים ברצף. הנתונים המקומיים שלך לא אופסו ולא נדרסו.",
   },
   "startup.recoveryHint":
     "נסה שוב, או התקן את הגרסה האחרונה שנפתחה. לקבלת עזרה, ייצא את נתוני האבחון ושלח את הקובץ עם הדיווח שלך.",
@@ -58,5 +58,4 @@ export const messages = {
   "startup.recoveryQuit": "יציאה",
   "startup.recoveryDiagnosticsSaved": "קובץ האבחון נשמר.",
   "startup.recoveryActionFailed": "StarBot לא הצליח לבצע את הפעולה הזו.",
-
 } as const satisfies PartialTranslation<typeof source>;

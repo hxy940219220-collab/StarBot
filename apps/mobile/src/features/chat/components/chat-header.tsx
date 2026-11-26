@@ -124,19 +124,19 @@ export const ChatHeader = memo(function ChatHeader({
       <ChannelAvatar
         channel={channelPicture}
         agents={members}
-        size={32}
+        size={40}
         serverId={target.serverId}
         disconnected={disconnected}
       />
     ) : (
-      <AgentPinAvatar agentId={target.id} location="chat" size={32}>
+      <AgentPinAvatar agentId={target.id} location="chat" size={40}>
         <BloubAvatar
           agentId={target.id}
           serverId={target.serverId}
           hue={target.avatarHue}
           color={target.avatarColor}
           seed={target.avatarSeed}
-          size={32}
+          size={40}
         />
       </AgentPinAvatar>
     );

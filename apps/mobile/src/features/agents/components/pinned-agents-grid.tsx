@@ -48,8 +48,8 @@ const PINNED_ITEM_LAYOUT = CurvedTransition.duration(240)
   .reduceMotion(ReduceMotion.System);
 const PINNED_ENTER = FadeIn.duration(180).easing(EASE_OUT).reduceMotion(ReduceMotion.System);
 const PINNED_EXIT = FadeOut.duration(140).easing(EASE_OUT).reduceMotion(ReduceMotion.System);
-const PINNED_COLUMNS = 4;
-const PINNED_PADDING_X = 12;
+const PINNED_COLUMNS = 3;
+const PINNED_PADDING_X = 16;
 const TILE_REVEAL_STYLE = { width: "100%", alignItems: "center" } as const;
 
 const PinnedRevealContext = createContext<{ reveal: AgentListRevealState; index: number } | null>(null);
@@ -78,6 +78,7 @@ export function PinnedAgentsGrid({
   revealOffset?: number;
 }>) {
   const dropTarget = useChatDropTarget(PIN_AREA_KEY);
+  const singleHero = agents.length === 1 && !children;
   return (
     <Animated.View layout={animateLayout ? PINNED_LAYOUT : undefined}>
       {agents.length > 0 || children ? (
@@ -88,15 +89,16 @@ export function PinnedAgentsGrid({
             style={{
               flexDirection: "row",
               flexWrap: "wrap",
+              justifyContent: singleHero ? "center" : "flex-start",
               rowGap: 18,
               paddingHorizontal: PINNED_PADDING_X,
-              paddingTop: 14,
-              paddingBottom: 18,
+              paddingTop: singleHero ? 18 : 14,
+              paddingBottom: singleHero ? 24 : 18,
             }}
           >
             {agents.map((agent, index) => (
               <PinnedReveal key={agent.id} reveal={reveal} index={revealOffset + index}>
-                <PinnedAgentItem agent={agent} />
+                <PinnedAgentItem agent={agent} hero={singleHero} />
               </PinnedReveal>
             ))}
             {Children.map(children, (child, index) => (
@@ -132,8 +134,9 @@ function PinDropZone({ dropTarget }: { dropTarget: ReturnType<typeof useChatDrop
   );
 }
 
-const PinnedAgentItem = memo(function PinnedAgentItem({ agent }: { agent: MobileAgent }) {
+const PinnedAgentItem = memo(function PinnedAgentItem({ agent, hero = false }: { agent: MobileAgent; hero?: boolean }) {
   const { t } = useText();
+  const avatarSize = hero ? 102 : 76;
   const agentChatPreview = useAgentChatPreview(agent);
   const [menuKey, setMenuKey] = useState(0);
   const drag = useChatDrag("pin", () => ({
@@ -163,7 +166,7 @@ const PinnedAgentItem = memo(function PinnedAgentItem({ agent }: { agent: Mobile
       onPressOut={holdMenu.onPressOut}
       style={({ pressed }) => ({ opacity: pressed ? 0.58 : 1 })}
     >
-      <AgentPinAvatar agentId={agent.id} location="pinned" size={64}>
+      <AgentPinAvatar agentId={agent.id} location="pinned" size={avatarSize}>
         <BloubAvatar
           agentId={agent.id}
           serverId={agent.serverId}
@@ -171,23 +174,23 @@ const PinnedAgentItem = memo(function PinnedAgentItem({ agent }: { agent: Mobile
           color={agent.avatarColor}
           seed={agent.avatarSeed}
           avatarUrl={agent.avatarUrl}
-          size={64}
-          animateIdle={false}
+          size={avatarSize}
+          animateIdle={hero}
           rings
           activityMood={agentActivityMood(activity)}
         />
         {waitReason ? (
-          <AgentWaitBadge reason={waitReason} size={22} />
+          <AgentWaitBadge reason={waitReason} size={24} />
         ) : unreadCount > 0 || unreadThreads ? (
-          <AgentUnreadBadge count={unreadCount} avatarSize={64} />
+          <AgentUnreadBadge count={unreadCount} avatarSize={avatarSize} />
         ) : null}
       </AgentPinAvatar>
       <View className="w-full gap-0.5">
         <Typography.Paragraph
           align="center"
-          className="w-full text-text-secondary"
+          className={hero ? "w-full font-semibold text-foreground" : "w-full text-text-secondary"}
           numberOfLines={1}
-          style={typeScale.small}
+          style={hero ? typeScale.rowTitle : typeScale.caption}
         >
           {agent.name}
         </Typography.Paragraph>

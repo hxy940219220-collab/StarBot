@@ -1,7 +1,7 @@
 import { faqStructuredData, type LandingQuestion } from "./landing-faq";
 import { OPENBOT_ALTERNATE_DOWNLOAD_LINKS, OPENBOT_DOWNLOAD_LINKS, OPENBOT_LINKS } from "./landing-links";
 
-export const OPENBOT_SITE_URL = "https://openbot.run/";
+export const OPENBOT_SITE_URL = "https://starbot.app/";
 export const OPENBOT_SITE_TITLE = "OpenBot: Run a team of AI agents on your computer";
 export const OPENBOT_SITE_DESCRIPTION =
   "A free desktop app that runs AI agents as a team on your own computer, with the ChatGPT, Claude, Gemini or Grok plan you already pay for, or your own model.";
@@ -60,7 +60,7 @@ export function pageSocialImageMeta(image: PageSocialImage, siteUrl: string) {
   } as const;
 }
 
-const OPENBOT_PRODUCTION_HOSTS = new Set(["openbot.run", "api.openbot.run"]);
+const OPENBOT_PRODUCTION_HOSTS = new Set(["starbot.app", "api.starbot.app"]);
 
 export function siteUrlForPage(pageUrl: URL): string {
   return OPENBOT_PRODUCTION_HOSTS.has(pageUrl.hostname) ? OPENBOT_SITE_URL : `${pageUrl.origin}/`;

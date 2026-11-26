@@ -63,7 +63,7 @@ export function createInviteUrl(payload: InviteLinkPayload, options: InviteLinkO
 
 export function createOpenBotInviteUrl(payload: InviteLinkPayload, options: InviteLinkOptions = {}): string {
   validatePayload(payload, options);
-  const url = new URL("openbot://join");
+  const url = new URL("starbot://join");
   writePayload(url, payload);
   return url.toString();
 }
@@ -113,7 +113,9 @@ export function parseInviteUrl(value: string, options: InviteLinkOptions = {}): 
   const canonical =
     url.protocol === "https:" && url.origin === OPENBOT_INVITE_ORIGIN && url.pathname === OPENBOT_INVITE_PATH;
   const customScheme =
-    url.protocol === "openbot:" && url.hostname === "join" && (url.pathname === "" || url.pathname === "/");
+    (url.protocol === "starbot:" || url.protocol === "openbot:") &&
+    url.hostname === "join" &&
+    (url.pathname === "" || url.pathname === "/");
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||

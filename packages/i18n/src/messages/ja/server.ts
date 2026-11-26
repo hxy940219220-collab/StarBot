@@ -153,7 +153,7 @@ export const messages = {
   "server.install.offline": "{name} はオフラインです。",
   "server.install.expired": "このコマンドは期限切れです。新しいコマンドを作成してください。",
   "server.install.agentPrompt":
-    'この Linux サーバーに OpenBot をインストールし、私の OpenBot アカウントにサインインさせてください。\nこのコマンドを root で実行してください。質問はなく、数分かかります:\n\n{command}\n\n最後に "OpenBot is connected to your account." という行が出力され、終了コード 0 で終わります。\nこのコマンドは 15 分間、1 回だけ使えます。どこにも保存しないでください。',
+    'この Linux サーバーに OpenBot をインストールし、私の OpenBot アカウントにサインインさせてください。\nこのコマンドを root で実行してください。質問はなく、数分かかります:\n\n{command}\n\n最後に "StarBot is connected to your account." という行が出力され、終了コード 0 で終わります。\nこのコマンドは 15 分間、1 回だけ使えます。どこにも保存しないでください。',
   "server.install.setUpWithAgent": "エージェントで設定",
   "server.install.sshAgentPrompt":
     "SSH で私の Linux サーバーに接続し、StarBot をサーバーとしてインストールしてください。\n\nSSH アドレス (user@host):",
@@ -252,7 +252,7 @@ export const messages = {
   "server.plan.deletedOn": "{date}に削除",
   "server.plan.dialogTitle": "エージェントを失わないで",
   "server.plan.dialogDescription":
-    "{name}はプランが終了したため停止しました。{date}に、OpenBotはエージェントとそのすべてのチャットとファイルを削除します。",
+    "{name}はプランが終了したため停止しました。{date}に、StarBotはエージェントとそのすべてのチャットとファイルを削除します。",
   "server.plan.dialogDaysLeft": {
     other: "残り{count}日",
   },

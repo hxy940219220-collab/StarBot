@@ -41,10 +41,9 @@ export const messages = {
   "startup.recoveryTitle": "StarBot no se abrió",
 
   "startup.recoveryBody": {
-    one: "OpenBot {version} se detuvo antes de abrirse, {count} vez seguida. Tus datos locales no se restablecieron ni se sobrescribieron.",
+    one: "StarBot {version} se detuvo antes de abrirse, {count} vez seguida. Tus datos locales no se restablecieron ni se sobrescribieron.",
     other:
       "StarBot {version} se detuvo antes de abrirse, {count} veces seguidas. Tus datos locales no se restablecieron ni se sobrescribieron.",
-
   },
   "startup.recoveryHint":
     "Vuelve a intentarlo o instala la última versión que se abrió. Para obtener ayuda, exporta el diagnóstico y envía el archivo con tu informe.",
@@ -59,5 +58,4 @@ export const messages = {
   "startup.recoveryQuit": "Salir",
   "startup.recoveryDiagnosticsSaved": "El archivo de diagnóstico se guardó.",
   "startup.recoveryActionFailed": "StarBot no pudo realizar esta acción.",
-
 } as const satisfies PartialTranslation<typeof source>;

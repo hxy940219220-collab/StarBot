@@ -139,7 +139,7 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
       color={agent.avatarColor}
       seed={agent.avatarSeed}
       avatarUrl={agent.avatarUrl}
-      size={54}
+      size={62}
       animateIdle={false}
       rings
       activityMood={agentActivityMood(activity)}
@@ -148,10 +148,10 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
   const waitBadge = waitReason ? (
     <AgentWaitBadge reason={waitReason} />
   ) : unreadCount > 0 || unreadThreads ? (
-    <AgentUnreadBadge count={unreadCount} avatarSize={54} ringColor={background} />
+    <AgentUnreadBadge count={unreadCount} avatarSize={62} ringColor={background} />
   ) : null;
   const avatar = (
-    <AgentPinAvatar agentId={agent.id} location="row" size={54}>
+    <AgentPinAvatar agentId={agent.id} location="row" size={62}>
       {bloub}
       {waitBadge}
     </AgentPinAvatar>
@@ -177,7 +177,7 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
     >
       {({ pressed }) => (
         <View
-          className="min-h-20 w-full flex-row items-center gap-3 py-1"
+          className="min-h-22 w-full flex-row items-center gap-4 py-2"
           style={{
             backgroundColor: background,
             opacity: pressed ? 0.58 : 1,

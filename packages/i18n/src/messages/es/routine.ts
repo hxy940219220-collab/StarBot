@@ -116,12 +116,12 @@ export const messages = {
   "routine.history.ignored.filter": "Ignorada: los filtros no coinciden",
   "routine.history.ignored.inactive": "Ignorada: rutina en pausa",
   "routine.history.skipped": {
-    one: "Omitida: OpenBot estaba cerrado",
-    other: "{count} omitidas: OpenBot estaba cerrado",
+    one: "Omitida: StarBot estaba cerrado",
+    other: "{count} omitidas: StarBot estaba cerrado",
   },
   "routine.history.skippedMore": {
-    one: "Más de {count} omitida: OpenBot estaba cerrado",
-    other: "Más de {count} omitidas: OpenBot estaba cerrado",
+    one: "Más de {count} omitida: StarBot estaba cerrado",
+    other: "Más de {count} omitidas: StarBot estaba cerrado",
   },
   "routine.history.ranLate": "Se ejecutó tarde a las {time}",
   "routine.history.range": "{from} – {until}",

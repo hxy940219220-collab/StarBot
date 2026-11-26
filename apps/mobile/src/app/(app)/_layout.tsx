@@ -21,7 +21,7 @@ import { HomeOnboardingProvider, useHomeOnboarding } from "@/features/onboarding
 import type { NotificationTarget } from "@/features/push-notifications/push-notifications-native.types";
 import { useNotificationTaps } from "@/features/push-notifications/use-notification-taps";
 import type { QuickActionTarget } from "@/features/quick-actions/model/quick-action-items";
-import { shareOpenBot } from "@/features/quick-actions/model/share-app";
+import { shareStarBot } from "@/features/quick-actions/model/share-app";
 import { setQuickActionNavigator } from "@/features/quick-actions/quick-actions-native";
 import { requestHomeSearch } from "@/features/search/model/home-search-request";
 import { AppDrawerShell, useAppDrawer } from "@/features/servers/components/app-drawer-shell";
@@ -162,7 +162,7 @@ function AuthenticatedStack() {
       }
       whenUnlocked(() => {
         if (target.type === "share") {
-          shareOpenBot();
+          shareStarBot();
           return;
         }
         closeDrawer();

@@ -41,10 +41,9 @@ export const messages = {
   "startup.recoveryTitle": "StarBot wurde nicht geöffnet",
 
   "startup.recoveryBody": {
-    one: "OpenBot {version} wurde {count} Mal in Folge vor dem Öffnen beendet. Deine lokalen Daten wurden nicht zurückgesetzt oder überschrieben.",
+    one: "StarBot {version} wurde {count} Mal in Folge vor dem Öffnen beendet. Deine lokalen Daten wurden nicht zurückgesetzt oder überschrieben.",
     other:
       "StarBot {version} wurde {count} Mal in Folge vor dem Öffnen beendet. Deine lokalen Daten wurden nicht zurückgesetzt oder überschrieben.",
-
   },
   "startup.recoveryHint":
     "Versuche es erneut oder installiere die letzte Version, die sich geöffnet hat. Für Hilfe exportiere die Diagnosedaten und sende die Datei mit deinem Bericht.",
@@ -59,5 +58,4 @@ export const messages = {
   "startup.recoveryQuit": "Beenden",
   "startup.recoveryDiagnosticsSaved": "Die Diagnosedatei ist gespeichert.",
   "startup.recoveryActionFailed": "StarBot konnte diese Aktion nicht ausführen.",
-
 } as const satisfies PartialTranslation<typeof source>;

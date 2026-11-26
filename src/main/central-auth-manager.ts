@@ -29,6 +29,7 @@ import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
 import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
 import {
   createMobileConnectUrl,
+  isMobileConnectDevelopmentHost,
   isMobileConnectHostBinding,
   type MobileConnectHostBinding,
 } from "@openbot/contracts/mobile-connect";
@@ -1560,6 +1561,24 @@ export class CentralAuthManager extends EventEmitter<CentralAuthEvents> {
 
   retry() {
     return this.initialize();
+  }
+
+  ensureLocalDevelopmentSession(): Effect.Effect<CentralAuthState, CentralAuthOperationError> {
+    return Effect.gen({ self: this }, function* () {
+      if (this.#state.status === "signed_in" && this.#sessionToken) return this.getState();
+      let isLocal = false;
+      try {
+        isLocal = isMobileConnectDevelopmentHost(new URL(this.#options.apiUrl).hostname);
+      } catch {
+        isLocal = false;
+      }
+      if (!isLocal) return this.getState();
+      const started = yield* this.requestEmailCode("local@starbot.local");
+      if (started.status === "code_sent" && started.developmentCode) {
+        return yield* this.verifyEmailCode(started.challengeId, started.developmentCode);
+      }
+      return this.getState();
+    });
   }
 
   #cancelUnavailableRetry(): void {

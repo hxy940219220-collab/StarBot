@@ -60,7 +60,7 @@ export function setLiveActivityNavigator(
 export function isLiveActivityLink(path: string): boolean {
   try {
     const url = new URL(path);
-    return url.protocol === "openbot:" && url.host === "live-activity";
+    return url.protocol === "starbot:" && url.host === "live-activity";
   } catch {
     return false;
   }

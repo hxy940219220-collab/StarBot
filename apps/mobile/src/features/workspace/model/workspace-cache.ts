@@ -42,7 +42,7 @@ export interface WorkspaceCache {
 
 const FORMAT = 1;
 const ROOT = "workspace-cache-v1/";
-const KEY_NAME = "openbot.mobile.workspace-cache-key.v1";
+const KEY_NAME = "starbot.mobile.workspace-cache-key.v1";
 const HOSTS_NAME = "~hosts";
 const MAX_JSON_LENGTH = 3 * 1024 * 1024;
 

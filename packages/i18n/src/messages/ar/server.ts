@@ -156,7 +156,7 @@ export const messages = {
   "server.install.offline": "{name} غير متصل.",
   "server.install.expired": "انتهت صلاحية هذا الأمر. أنشئ أمرًا جديدًا.",
   "server.install.agentPrompt":
-    'ثبّت OpenBot على خادم Linux هذا وسجّل دخوله إلى حسابي في OpenBot.\nشغّل هذا الأمر بصلاحيات root. لا يطرح أسئلة ويستغرق بضع دقائق:\n\n{command}\n\nينتهي بالسطر "OpenBot is connected to your account." ورمز الخروج 0.\nيعمل الأمر مرة واحدة، لمدة 15 دقيقة. لا تحفظه في أي مكان.',
+    'ثبّت OpenBot على خادم Linux هذا وسجّل دخوله إلى حسابي في OpenBot.\nشغّل هذا الأمر بصلاحيات root. لا يطرح أسئلة ويستغرق بضع دقائق:\n\n{command}\n\nينتهي بالسطر "StarBot is connected to your account." ورمز الخروج 0.\nيعمل الأمر مرة واحدة، لمدة 15 دقيقة. لا تحفظه في أي مكان.',
   "server.install.setUpWithAgent": "الإعداد باستخدام وكيل",
   "server.install.sshAgentPrompt":
     "اتصل عبر SSH بخادم Linux الخاص بي وثبّت StarBot عليه كخادم.\n\nعنوان SSH (user@host):",

@@ -599,7 +599,7 @@ export const messages = {
     "Najwięcej wiadomości i uruchomień rutyn, które lokalne skrypty mogą wysłać do każdego agenta w ciągu godziny. Dotyczy wszystkich agentów na tym serwerze.",
   "mobile.settings.agents.processes.title": "Procesy w tle",
   "mobile.settings.agents.processes.description":
-    "Programy, które agenci uruchomili i zostawili włączone, np. serwery deweloperskie. Działają dalej po końcu czatu i po zamknięciu OpenBota.",
+    "Programy, które agenci uruchomili i zostawili włączone, np. serwery deweloperskie. Działają dalej po końcu czatu i po zamknięciu StarBota.",
   "mobile.settings.agents.processes.empty": "Żadne programy agentów nie działają.",
   "mobile.settings.agents.processes.loadFailed": "Nie udało się odczytać procesów w tle.",
   "mobile.settings.agents.processes.noAgent": "Brak agenta",

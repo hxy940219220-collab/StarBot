@@ -5,10 +5,10 @@ import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 import { mobileAnalytics } from "./mobile-analytics";
 
-const key = "openbot.mobile.analytics.v1";
-const accountPendingKey = "openbot.mobile.analytics.account-pending.v1";
-const keepOffKey = "openbot.mobile.analytics.keep-off.v1";
-const installIdKey = "openbot.mobile.analytics.install-id.v1";
+const key = "starbot.mobile.analytics.v1";
+const accountPendingKey = "starbot.mobile.analytics.account-pending.v1";
+const keepOffKey = "starbot.mobile.analytics.keep-off.v1";
+const installIdKey = "starbot.mobile.analytics.install-id.v1";
 const OPT_OUT_EVENT_LIMIT_MS = 2_000;
 export const useAnalyticsPreference = create<{ enabled: boolean; ready: boolean; saving: boolean }>(() => ({
   enabled: false,

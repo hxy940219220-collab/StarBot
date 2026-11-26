@@ -39,7 +39,7 @@ function isInviteLink(value: string): boolean {
   } catch {}
   try {
     const url = new URL(value);
-    if (url.protocol !== "openbot:") return false;
+    if (url.protocol !== "starbot:") return false;
     parseInviteUrl(value, { selfHostedApiOrigin: selfHostedApiOrigin(url.searchParams.get("api") ?? undefined) });
     return true;
   } catch {
@@ -77,10 +77,10 @@ export function pendingSignInLinkId(): string | undefined {
 }
 
 export function redirectIncomingLink(path: string, initial: boolean): string | null {
-  if (path === "openbot://" || path === "openbot:///" || path === "openbot:") return initial ? "/" : null;
+  if (path === "starbot://" || path === "starbot:///" || path === "starbot:") return initial ? "/" : null;
   if (/^exps?:\/\//u.test(path)) return path;
   if (path.startsWith("/") && !path.startsWith("//")) {
-    const url = new URL(path, "https://openbot.run");
+    const url = new URL(path, "https://starbot.local");
     if (
       url.pathname !== "/join" &&
       !url.pathname.startsWith("/plugins/") &&

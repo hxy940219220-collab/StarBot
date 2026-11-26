@@ -147,9 +147,9 @@ export const messages = {
   "error.agent.saveOtherAgent": "Bu kayıt başka bir ajana ait.",
   "error.agent.savedGone": "Kaydedilen ajan artık mevcut değil.",
   "error.agent.storedProfileUnreadable":
-    'Kayıtlı bir ajan profili okunamayan bir "{field}" değerine sahip; OpenBot\'u başlatmadan önce verileri güncelleyin.',
+    'Kayıtlı bir ajan profili okunamayan bir "{field}" değerine sahip; StarBot\'u başlatmadan önce verileri güncelleyin.',
   "error.agent.storedProfileUnreadableId":
-    '{id} kayıtlı ajan profili okunamayan bir "{field}" değerine sahip; OpenBot\'u başlatmadan önce verileri güncelleyin.',
+    '{id} kayıtlı ajan profili okunamayan bir "{field}" değerine sahip; StarBot\'u başlatmadan önce verileri güncelleyin.',
   "error.agent.queueEditRejected": "Kuyruk düzenlemesi reddedildi: {reason}",
   "error.agent.computerUseLocalOnly": "Bilgisayar Kullanımı yalnızca ajanı çalıştıran bilgisayarda değiştirilebilir.",
   "error.agent.automationLocalOnly": "Yerel betiklere yalnızca ajanı çalıştıran bilgisayarda izin verilebilir.",

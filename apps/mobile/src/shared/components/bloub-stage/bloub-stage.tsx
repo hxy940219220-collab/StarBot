@@ -1,3 +1,4 @@
+import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
 import { Typography } from "heroui-native";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -16,11 +17,13 @@ import { type EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-conte
 import { useReducedMotion } from "@/shared/lib/motion";
 import { isAndroid } from "@/shared/lib/platform";
 import { SPLASH_EASE_IN_OUT, SPLASH_EASE_OUT } from "@/shared/lib/splash-motion";
-import { BloubEyes, EYES_HEIGHT, EYES_WIDTH } from "./bloub-eyes";
+import { EYES_HEIGHT } from "./bloub-eyes";
 import { BLOUB_MOVE, BLOUB_MOVE_MS, BLOUB_RADIUS, bloubEyesFrame, bloubGradient, useBloubColors } from "./bloub-look";
 import { useBloubStage } from "./bloub-stage-context";
 import type { BloubMood, BloubStageRequest } from "./bloub-stage-store";
 import { StageBackButton } from "./stage-back-button";
+
+const STARBOT_STAGE_MASCOT = require("../../../../assets/zodiac/starbot-badge.webp");
 
 const CLEAR_DELAY_MS = 300;
 const VEIL = { duration: 360, easing: SPLASH_EASE_OUT };
@@ -131,7 +134,7 @@ function StageBack({
 }
 
 export function BloubStage({ nativeSplashHidden, onLayout }: { nativeSplashHidden: boolean; onLayout?: () => void }) {
-  const { store, lift, gazeX, gazeY, look } = useBloubStage();
+  const { store, lift, look } = useBloubStage();
   const active = useSyncExternalStore(store.subscribe, store.active);
   const request = active?.request ?? null;
   const window = useWindowDimensions();
@@ -288,15 +291,8 @@ export function BloubStage({ nativeSplashHidden, onLayout }: { nativeSplashHidde
             ) : null}
           </View>
         </Animated.View>
-        <Animated.View pointerEvents="none" style={[styles.eyes, { left: (size.width - EYES_WIDTH) / 2 }, eyesStyle]}>
-          <BloubEyes
-            mood={mood}
-            active={request !== null}
-            reduced={reduced}
-            gazeX={gazeX}
-            gazeY={gazeY}
-            eyeColor={eyeColor}
-          />
+        <Animated.View pointerEvents="none" style={[styles.eyes, { left: (size.width - 132) / 2 }, eyesStyle]}>
+          <Image source={STARBOT_STAGE_MASCOT} contentFit="contain" style={styles.mascot} />
         </Animated.View>
       </View>
       {request ? (
@@ -324,5 +320,6 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
   },
   glow: { position: "absolute", left: 0, right: 0, top: 0 },
-  eyes: { position: "absolute", top: 0, width: EYES_WIDTH, height: EYES_HEIGHT },
+  eyes: { position: "absolute", top: 0, width: 132, height: 132 },
+  mascot: { width: 132, height: 132 },
 });

@@ -148,9 +148,10 @@ function readConfig(environment: Record<string, string | undefined>): ReporterCo
   const clientSecret = environment.OPENPANEL_CLIENT_SECRET?.trim();
   const signalMetricsToken = environment.REMOTE_METRICS_TOKEN?.trim();
   const turnHost = environment.TURN_DOMAIN?.trim();
-  if (!clientId || !clientSecret || !signalMetricsToken || !turnHost) return null;
+  const trackUrl = environment.OPENPANEL_TRACK_URL?.trim();
+  if (!clientId || !clientSecret || !signalMetricsToken || !turnHost || !trackUrl) return null;
   return {
-    trackUrl: environment.OPENPANEL_TRACK_URL ?? "https://analytics.openbot.run/api/track",
+    trackUrl,
     clientId,
     clientSecret,
     turnMetricsUrl: environment.TURN_METRICS_URL ?? "http://127.0.0.1:9641/metrics",

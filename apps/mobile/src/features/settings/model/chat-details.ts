@@ -5,9 +5,9 @@ import { type SwitchPreference, switchPreference } from "./secure-preference";
 
 export type ChatDetailPreference = SwitchPreference;
 
-const thinking = switchPreference("openbot.mobile.showThinking.v1", true);
-const subagents = switchPreference("openbot.mobile.showSubagents.v1", true);
-const memoryChanges = switchPreference("openbot.mobile.showMemoryChanges.v1", true);
+const thinking = switchPreference("starbot.mobile.showThinking.v1", true);
+const subagents = switchPreference("starbot.mobile.showSubagents.v1", true);
+const memoryChanges = switchPreference("starbot.mobile.showMemoryChanges.v1", true);
 
 export const useThinkingDisplayPreference = thinking.store;
 export const saveThinkingDisplayPreference = thinking.save;

@@ -80,7 +80,7 @@ export const messages = {
     "A compactação não reduz este chat: após duas compactações, ele ainda usa {percent}% da janela de contexto do modelo, por isso o StarBot para de compactá-lo. Ferramentas e instruções usam a maior parte da janela. Desative os servidores MCP ou o uso do computador de que este agente não precisa, ou escolha um modelo com uma janela maior. Depois, inicie um novo chat.",
 
   "error.backend.contextCompactionStopped":
-    'Duas compactações seguidas deste chat falharam, então o OpenBot para de compactá-lo automaticamente. Cada tentativa envia o chat inteiro ao modelo e consome o limite do seu plano. Selecione "Compactar agora" para tentar de novo ou inicie um novo chat.',
+    'Duas compactações seguidas deste chat falharam, então o StarBot para de compactá-lo automaticamente. Cada tentativa envia o chat inteiro ao modelo e consome o limite do seu plano. Selecione "Compactar agora" para tentar de novo ou inicie um novo chat.',
   "error.backend.providerModelAtCapacity":
     "O modelo está no limite da capacidade. O provedor vai tentar de novo em alguns minutos. Para continuar agora, pare o turno e escolha outro modelo.",
   "error.backend.providerRetrying":
@@ -544,5 +544,4 @@ export const messages = {
     "O StarBot não conseguiu enviar a mensagem para a tarefa. Tente novamente mais tarde.",
 
   "error.backend.taskStartFailed": "O StarBot não conseguiu iniciar a tarefa. Faça o trabalho neste turno.",
-
 } as const satisfies PartialTranslation<typeof source>;

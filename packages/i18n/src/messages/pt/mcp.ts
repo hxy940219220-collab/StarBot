@@ -108,12 +108,12 @@ export const messages = {
   "mcp.panel.useAddress": "Usar este endereço",
   "mcp.panel.signInTo": "Entrar em {name}",
   "mcp.panel.signInWaiting": {
-    one: "Conclua o login no navegador. O OpenBot para de esperar após {count} minuto.",
-    other: "Conclua o login no navegador. O OpenBot para de esperar após {count} minutos.",
+    one: "Conclua o login no navegador. O StarBot para de esperar após {count} minuto.",
+    other: "Conclua o login no navegador. O StarBot para de esperar após {count} minutos.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Abrindo a página de login em {host}. O OpenBot para de esperar após {count} minuto.",
-    other: "Abrindo a página de login em {host}. O OpenBot para de esperar após {count} minutos.",
+    one: "Abrindo a página de login em {host}. O StarBot para de esperar após {count} minuto.",
+    other: "Abrindo a página de login em {host}. O StarBot para de esperar após {count} minutos.",
   },
   "mcp.panel.appTitle": "App de login",
   "mcp.panel.appDescription":
@@ -159,5 +159,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Enviar",
   "mcp.panel.callbackUrlRelayed":
     "A página de login abre no seu navegador, e o StarBot no seu computador envia o login para {host}. Adicione exatamente esta URL às URLs de redirecionamento permitidas do app.",
-
 } as const satisfies PartialTranslation<typeof source>;

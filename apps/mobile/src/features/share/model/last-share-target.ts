@@ -9,7 +9,7 @@ export interface ShareTarget {
 }
 
 function lastShareTargetKey(apiUrl: string, userId: string): string {
-  return `openbot.share-target.v1.${accountScope(apiUrl, userId)}`;
+  return `starbot.share-target.v1.${accountScope(apiUrl, userId)}`;
 }
 
 async function loadLastShareTarget(apiUrl: string, userId: string): Promise<ShareTarget | null> {

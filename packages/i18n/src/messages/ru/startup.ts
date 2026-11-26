@@ -41,12 +41,11 @@ export const messages = {
   "startup.recoveryTitle": "StarBot не открылся",
 
   "startup.recoveryBody": {
-    one: "OpenBot {version} остановился до открытия {count} раз подряд. Ваши локальные данные не сброшены и не перезаписаны.",
-    few: "OpenBot {version} остановился до открытия {count} раза подряд. Ваши локальные данные не сброшены и не перезаписаны.",
-    many: "OpenBot {version} остановился до открытия {count} раз подряд. Ваши локальные данные не сброшены и не перезаписаны.",
+    one: "StarBot {version} остановился до открытия {count} раз подряд. Ваши локальные данные не сброшены и не перезаписаны.",
+    few: "StarBot {version} остановился до открытия {count} раза подряд. Ваши локальные данные не сброшены и не перезаписаны.",
+    many: "StarBot {version} остановился до открытия {count} раз подряд. Ваши локальные данные не сброшены и не перезаписаны.",
     other:
       "StarBot {version} остановился до открытия {count} раза подряд. Ваши локальные данные не сброшены и не перезаписаны.",
-
   },
   "startup.recoveryHint":
     "Попробуйте снова или установите последнюю версию, которая открывалась. Чтобы получить помощь, экспортируйте диагностику и отправьте файл вместе с отчётом.",
@@ -61,5 +60,4 @@ export const messages = {
   "startup.recoveryQuit": "Выйти",
   "startup.recoveryDiagnosticsSaved": "Файл диагностики сохранён.",
   "startup.recoveryActionFailed": "StarBot не удалось выполнить это действие.",
-
 } as const satisfies PartialTranslation<typeof source>;

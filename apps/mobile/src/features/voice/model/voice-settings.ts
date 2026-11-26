@@ -77,8 +77,8 @@ const DEFAULT_SETTINGS: VoiceSettings = {
   gptLiveVoice: null,
 };
 
-const SETTINGS_KEY = "openbot.mobile.voice-settings.v1";
-const ELEVENLABS_KEY = "openbot.mobile.elevenlabs-key.v1";
+const SETTINGS_KEY = "starbot.mobile.voice-settings.v1";
+const ELEVENLABS_KEY = "starbot.mobile.elevenlabs-key.v1";
 
 export const useVoiceSettings = create<VoiceSettings & { ready: boolean; hasElevenLabsKey: boolean }>(() => ({
   ...DEFAULT_SETTINGS,

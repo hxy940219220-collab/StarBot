@@ -116,10 +116,10 @@ export const messages = {
   "routine.history.ignored.eventType": "Ignorata: altro tipo di evento",
   "routine.history.ignored.filter": "Ignorata: i filtri non corrispondono",
   "routine.history.ignored.inactive": "Ignorata: routine in pausa",
-  "routine.history.skipped": { one: "Saltata: OpenBot era chiuso", other: "{count} saltate: OpenBot era chiuso" },
+  "routine.history.skipped": { one: "Saltata: StarBot era chiuso", other: "{count} saltate: StarBot era chiuso" },
   "routine.history.skippedMore": {
-    one: "Più di {count} saltate: OpenBot era chiuso",
-    other: "Più di {count} saltate: OpenBot era chiuso",
+    one: "Più di {count} saltate: StarBot era chiuso",
+    other: "Più di {count} saltate: StarBot era chiuso",
   },
   "routine.history.ranLate": "Eseguita in ritardo, ore {time}",
   "routine.history.range": "{from} – {until}",

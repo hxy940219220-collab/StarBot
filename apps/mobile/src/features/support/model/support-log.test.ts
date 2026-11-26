@@ -25,8 +25,8 @@ describe("support log", () => {
   });
 
   it("keeps only the origin and path of a request URL", () => {
-    expect(supportLogUrl("https://user:secret@api.openbot.run/v1/mobile-auth/session?ticket=abc#frag")).toBe(
-      "https://api.openbot.run/v1/mobile-auth/session",
+    expect(supportLogUrl("https://user:secret@api.starbot.app/v1/mobile-auth/session?ticket=abc#frag")).toBe(
+      "https://api.starbot.app/v1/mobile-auth/session",
     );
   });
 
@@ -75,14 +75,14 @@ describe("support log", () => {
   it("puts no credential, email address or network address in the excerpt of a public report", () => {
     const log = createSupportLog(now, immediately);
     log.add("info", "connection", "host-1 GET /v1/agents -> 200 (12 ms)");
-    log.add("info", "network", "GET https://api.openbot.run/v1/me -> 200 (40 ms)");
+    log.add("info", "network", "GET https://api.starbot.app/v1/me -> 200 (40 ms)");
     log.add("warn", "connection", "host-1 offline (ice_failed): resume token=abcdefghijklmnop for user@example.com");
     log.add(
       "info",
       "connection",
       "host-1 peer candidate: 203.0.113.77 and 192.168.1.20 and 2001:db8:85a3:0:0:8a2e:370:7334 and fe80::1",
     );
-    log.add("warn", "network", "GET https://turn2.openbot.run/ -> failed: Error: resolved to 198.18.0.42. (30 ms)");
+    log.add("warn", "network", "GET https://turn2.starbot.app/ -> failed: Error: resolved to 198.18.0.42. (30 ms)");
     const excerpt = supportLogExcerpt(log.entries(), 6_000);
     expect(excerpt).not.toContain("abcdefghijklmnop");
     expect(excerpt).not.toContain("user@example.com");
@@ -94,7 +94,7 @@ describe("support log", () => {
     expect(excerpt).toContain("peer candidate: [public-ip] and [private-ip] and [ipv6] and [ipv6]");
     expect(excerpt.split("\n")).toHaveLength(3);
     expect(excerpt).toContain("offline (ice_failed)");
-    expect(excerpt).toContain("https://turn2.openbot.run/");
+    expect(excerpt).toContain("https://turn2.starbot.app/");
     expect(excerpt).not.toContain("-> 200");
   });
 
@@ -105,7 +105,7 @@ describe("support log", () => {
     log.add(
       "info",
       "connection",
-      `${server} host OpenBot 1.9.0, protocol 3-9, capabilities: agents-v1 phone-feedback-v1 channels-v2`,
+      `${server} host StarBot 1.9.0, protocol 3-9, capabilities: agents-v1 phone-feedback-v1 channels-v2`,
     );
     log.add("info", "connection", `${server} peer route: host/udp -> relay/udp`);
     log.add("warn", "connection", `${other} attempt 2 failed at signal (5021 ms): Error: ${server} is busy`);
@@ -122,7 +122,7 @@ describe("support log", () => {
     for (const text of [server, other, "Kowalska", "kowalska", "chat text", "4d2a9c1e7b3f5a6088c1d2e3f4a5b6c7"])
       expect(excerpt).not.toContain(text);
     expect(excerpt).not.toContain("console");
-    expect(excerpt).toContain("server-1 host OpenBot 1.9.0, protocol 3-9");
+    expect(excerpt).toContain("server-1 host StarBot 1.9.0, protocol 3-9");
     expect(excerpt).not.toContain("capabilities");
     expect(excerpt).toContain("server-1 peer route: host/udp -> relay/udp");
     expect(excerpt).toContain("server-2 attempt 2 failed at signal (5021 ms): Error: server-1 is busy");

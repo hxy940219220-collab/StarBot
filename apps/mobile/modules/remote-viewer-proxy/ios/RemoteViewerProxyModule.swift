@@ -676,7 +676,7 @@ private func reasonPhrase(_ status: Int) -> String {
 }
 
 public class RemoteViewerProxyModule: Module {
-  private let queue = DispatchQueue(label: "run.openbot.remoteviewerproxy", qos: .userInitiated)
+  private let queue = DispatchQueue(label: "com.think2do.starbot.remoteviewerproxy", qos: .userInitiated)
   /// Only `queue` creates and uses it.
   private lazy var server = RemoteViewerServer(queue: queue) { [weak self] name, body in
     self?.sendEvent(name, body)

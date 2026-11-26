@@ -2,7 +2,7 @@ import * as SecureStore from "expo-secure-store";
 import { z } from "zod";
 import { create } from "zustand";
 
-const key = "openbot.mobile.app-suggestion-dismissals.v1";
+const key = "starbot.mobile.app-suggestion-dismissals.v1";
 const MAX_DISMISSALS = 20;
 
 const dismissalsSchema = z.array(z.string().min(1));

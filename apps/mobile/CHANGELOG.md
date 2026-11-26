@@ -7,6 +7,16 @@ the [root changelog](../../CHANGELOG.md).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-26
+
+### Added
+
+- StarBot (星友) standalone iOS app (`com.think2do.starbot`) with zodiac clay avatars, custom splash screen, and local LAN direct pairing via `starbot://mobile-connect`.
+
+### Changed
+
+- Removed external App Store update prompts, third-party analytics endpoints, and legacy OpenBot branding across mobile and desktop.
+
 ## [1.4.12] - 2026-11-20
 
 ### Added

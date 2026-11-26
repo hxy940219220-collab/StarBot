@@ -72,7 +72,7 @@ export const messages = {
   "error.backend.sunshineNotReadyReason": "Sunshine の準備ができませんでした。{reason}",
   "error.backend.channelLeadModelUnavailable": "チャンネルリードのモデルを使用できません。",
   "error.backend.contextCompactionIneffective":
-    "圧縮してもこのチャットは小さくなりません。2回圧縮しても、モデルのコンテキストウィンドウの{percent}%を使っているため、OpenBotは自動圧縮を止めます。ウィンドウの大部分はツールと指示が使っています。このエージェントに不要なMCPサーバーやコンピューター操作をオフにするか、より大きなウィンドウのモデルを選んでください。その後、新しいチャットを開始してください。",
+    "圧縮してもこのチャットは小さくなりません。2回圧縮しても、モデルのコンテキストウィンドウの{percent}%を使っているため、StarBotは自動圧縮を止めます。ウィンドウの大部分はツールと指示が使っています。このエージェントに不要なMCPサーバーやコンピューター操作をオフにするか、より大きなウィンドウのモデルを選んでください。その後、新しいチャットを開始してください。",
   "error.backend.contextCompactionStopped":
     "このチャットの圧縮が2回続けて失敗したため、StarBot は自動圧縮を停止します。試行のたびにチャット全体がモデルに送信され、プランの上限を消費します。もう一度試すには「今すぐ圧縮」を選択するか、新しいチャットを開始してください。",
 
@@ -81,7 +81,7 @@ export const messages = {
   "error.backend.providerRetrying":
     "プロバイダーでこのリクエストが{attempts}回失敗し、再試行しています。エージェントが続かない場合は、ターンを停止してください。",
   "error.backend.providerRetryingLargeContext":
-    "プロバイダーでこのリクエストが{attempts}回失敗し、再試行しています。このチャットはモデルのコンテキストウィンドウの{percent}%を使っています。エージェントが続かない場合は、ターンを停止してください。OpenBotは次のメッセージの前にチャットを圧縮します。",
+    "プロバイダーでこのリクエストが{attempts}回失敗し、再試行しています。このチャットはモデルのコンテキストウィンドウの{percent}%を使っています。エージェントが続かない場合は、ターンを停止してください。StarBotは次のメッセージの前にチャットを圧縮します。",
   "error.backend.sharedDataUnavailable": "共有データを使用できません。",
   "error.backend.shuttingDown": "StarBot を終了しています。",
 
@@ -530,5 +530,4 @@ export const messages = {
   "error.backend.taskMessageFailed": "StarBot はタスクにメッセージを送信できませんでした。後でもう一度お試しください。",
 
   "error.backend.taskStartFailed": "StarBot はタスクを開始できませんでした。代わりにこのターンで作業してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

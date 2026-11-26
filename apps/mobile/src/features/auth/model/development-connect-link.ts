@@ -10,7 +10,7 @@ let pendingLink: string | null = null;
 const listeners = new Set<Listener>();
 
 function isMobileConnectLink(value: string): boolean {
-  return /^openbot:\/\/mobile-connect(?:[/?#]|$)/iu.test(value.trim());
+  return /^starbot:\/\/mobile-connect(?:[/?#]|$)/iu.test(value.trim());
 }
 
 function readDevelopmentConnectLink(value: string, development: boolean): string | null {

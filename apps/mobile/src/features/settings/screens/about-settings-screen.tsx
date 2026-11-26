@@ -13,7 +13,7 @@ import {
 import { nativeBuildVersion } from "@/shared/lib/native-application";
 import { useText } from "@/shared/lib/text";
 
-const PRODUCT_NAME = "OpenBot";
+const PRODUCT_NAME = "星友 · StarBot";
 
 export function AboutSettingsScreen() {
   const { t } = useText();
@@ -29,11 +29,8 @@ export function AboutSettingsScreen() {
   return (
     <SettingsContent>
       <SettingsSection title={t("mobile.settings.about.resources")}>
-        <SettingsRow onPress={() => open("https://openbot.run")}>
+        <SettingsRow onPress={() => open("https://github.com/hxy940219220-collab/StarBot-Desktop")}>
           <Typography.Paragraph>{t("mobile.settings.about.website")}</Typography.Paragraph>
-        </SettingsRow>
-        <SettingsRow onPress={() => open("https://openbot.run/privacy-policy")}>
-          <Typography.Paragraph>{t("mobile.settings.about.privacy")}</Typography.Paragraph>
         </SettingsRow>
         {error ? <SettingsNote>{error}</SettingsNote> : null}
       </SettingsSection>

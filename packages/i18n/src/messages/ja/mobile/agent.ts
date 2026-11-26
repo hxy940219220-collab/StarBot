@@ -736,7 +736,7 @@ export const messages = {
   "mobile.agent.deleteHistory.footer": "このチャットのメッセージを削除し、エージェントも忘れます。設定は残ります。",
   "mobile.agent.deleteHistory.confirmTitle": "{name} とのチャット履歴を削除しますか？",
   "mobile.agent.deleteHistory.confirmBody":
-    "このチャットのすべてのメッセージとファイルをOpenBotから削除し、エージェントも忘れます。元に戻せません。サイドスレッド、指示、モデル、ツール、メモリー、ワークスペース、ブラウザーは変わりません。",
+    "このチャットのすべてのメッセージとファイルをStarBotから削除し、エージェントも忘れます。元に戻せません。サイドスレッド、指示、モデル、ツール、メモリー、ワークスペース、ブラウザーは変わりません。",
   "mobile.agent.deleteHistory.confirm": "履歴を削除",
   "mobile.agent.deleteHistory.failed": "履歴を削除できませんでした",
   "mobile.agent.deleteHistory.failedBody": "ホストは履歴を削除できませんでした。",

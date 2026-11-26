@@ -1,4 +1,4 @@
-const OPENBOT_SOURCE_QUERY = "utm_source=openbot";
+const OPENBOT_SOURCE_QUERY = "utm_source=starbot";
 const SECRET_QUERY_PARAMETER =
   /signature|sign|token|hmac|hash|^auth|^session|^sig$|^s$|^h$|^md5$|^expires$|^state$|^code$|^ticket$|^otp$|^key$|^sid$|^x-(amz|goog)-/i;
 const PRIVATE_HOST_SUFFIXES = [

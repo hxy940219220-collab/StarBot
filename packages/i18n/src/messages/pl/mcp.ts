@@ -113,16 +113,16 @@ export const messages = {
   "mcp.panel.useAddress": "Użyj tego adresu",
   "mcp.panel.signInTo": "Zaloguj się do {name}",
   "mcp.panel.signInWaiting": {
-    one: "Dokończ logowanie w przeglądarce. OpenBot przestanie czekać po {count} minucie.",
-    few: "Dokończ logowanie w przeglądarce. OpenBot przestanie czekać po {count} minutach.",
-    many: "Dokończ logowanie w przeglądarce. OpenBot przestanie czekać po {count} minutach.",
-    other: "Dokończ logowanie w przeglądarce. OpenBot przestanie czekać po {count} minuty.",
+    one: "Dokończ logowanie w przeglądarce. StarBot przestanie czekać po {count} minucie.",
+    few: "Dokończ logowanie w przeglądarce. StarBot przestanie czekać po {count} minutach.",
+    many: "Dokończ logowanie w przeglądarce. StarBot przestanie czekać po {count} minutach.",
+    other: "Dokończ logowanie w przeglądarce. StarBot przestanie czekać po {count} minuty.",
   },
   "mcp.panel.signInWaitingOn": {
-    one: "Otwieranie strony logowania na: {host}. OpenBot przestanie czekać po {count} minucie.",
-    few: "Otwieranie strony logowania na: {host}. OpenBot przestanie czekać po {count} minutach.",
-    many: "Otwieranie strony logowania na: {host}. OpenBot przestanie czekać po {count} minutach.",
-    other: "Otwieranie strony logowania na: {host}. OpenBot przestanie czekać po {count} minuty.",
+    one: "Otwieranie strony logowania na: {host}. StarBot przestanie czekać po {count} minucie.",
+    few: "Otwieranie strony logowania na: {host}. StarBot przestanie czekać po {count} minutach.",
+    many: "Otwieranie strony logowania na: {host}. StarBot przestanie czekać po {count} minutach.",
+    other: "Otwieranie strony logowania na: {host}. StarBot przestanie czekać po {count} minuty.",
   },
   "mcp.panel.appTitle": "Aplikacja logowania",
   "mcp.panel.appDescription":
@@ -169,5 +169,4 @@ export const messages = {
   "mcp.signIn.relaySend": "Wyślij",
   "mcp.panel.callbackUrlRelayed":
     "Strona logowania otwiera się w twojej przeglądarce, a StarBot na twoim komputerze wysyła logowanie do {host}. Dodaj dokładnie ten adres URL do dozwolonych adresów przekierowania aplikacji.",
-
 } as const satisfies PartialTranslation<typeof source>;

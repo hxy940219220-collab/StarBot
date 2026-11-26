@@ -5,7 +5,7 @@ export const messages = {
   "mobile.search.clear": "清除搜索",
   "mobile.search.close": "关闭搜索",
   "mobile.search.goTo": "前往",
-  "mobile.search.placeholder": "搜索，或输入 @ 发起话题",
+  "mobile.search.placeholder": "搜索",
   "mobile.search.thread.giveTo": "发起话题给",
   "mobile.search.thread.placeholder": "描述要做的事",
   "mobile.search.thread.fieldLabel": "{name} 的新话题",

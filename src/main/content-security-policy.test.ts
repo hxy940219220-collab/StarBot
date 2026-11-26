@@ -5,9 +5,7 @@ describe("buildContentSecurityPolicy", () => {
   it("restricts packaged connect-src to local loopback without external telemetry", () => {
     const policy = buildContentSecurityPolicy(true);
 
-    expect(policy).toContain(
-      "connect-src 'self' openbot-attachment: openbot-remote-attachment: ws://127.0.0.1:*",
-    );
+    expect(policy).toContain("connect-src 'self' openbot-attachment: openbot-remote-attachment: ws://127.0.0.1:*");
     expect(policy).not.toContain("analytics.starbot.app");
     expect(policy).not.toContain("starbot.app");
     expect(policy.split("; ").find((directive) => directive.startsWith("connect-src "))).not.toContain("localhost");
@@ -24,8 +22,12 @@ describe("buildContentSecurityPolicy", () => {
   it("lets the renderer play local app media and attachment recordings without allowing remote https media", () => {
     const policy = buildContentSecurityPolicy(true);
 
-    expect(policy).toContain("media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment:");
-    expect(policy).not.toContain("media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment: https:");
+    expect(policy).toContain(
+      "media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment:",
+    );
+    expect(policy).not.toContain(
+      "media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment: https:",
+    );
   });
 
   it("keeps local development sources", () => {
@@ -54,6 +56,11 @@ describe("buildContentSecurityPolicy", () => {
     expect(origin).toBe("wss://signal.example.com:8443");
     expect(connect).toContain(" wss://signal.example.com:8443");
     expect(readSelfHostedSignalOrigin(undefined, undefined)).toBeNull();
+  });
+
+  it("allows ws: for local development Signal paired with a local Auth API", () => {
+    const origin = readSelfHostedSignalOrigin("http://127.0.0.1:3100", "ws://192.168.1.143:3101/v1/signal");
+    expect(origin).toBe("ws://192.168.1.143:3101");
   });
 
   it.each([

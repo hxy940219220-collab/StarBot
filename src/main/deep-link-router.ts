@@ -12,8 +12,9 @@ export type DeepLink =
   | { kind: "slack-workspace"; nonce: string; grant: string }
   | { kind: "discord-guild"; nonce: string; grant: string };
 
-export const MCP_OAUTH_REDIRECT_URL = "openbot://mcp-auth";
+export const MCP_OAUTH_REDIRECT_URL = "starbot://mcp-auth";
 
+const DEEP_LINK_PROTOCOLS = new Set(["starbot:", "openbot:"]);
 const MCP_OAUTH_HOST = "mcp-auth";
 const SLACK_WORKSPACE_HOST = "slack-workspace";
 const DISCORD_GUILD_HOST = "discord-guild";
@@ -46,7 +47,7 @@ function parseSlackUrl(value: string): DeepLink | null {
   } catch {
     return null;
   }
-  if (url.protocol !== "openbot:") return null;
+  if (!DEEP_LINK_PROTOCOLS.has(url.protocol)) return null;
   if (url.hostname === SLACK_WORKSPACE_HOST) {
     const nonce = url.searchParams.get("nonce");
     const grant = url.searchParams.get("grant");
@@ -67,7 +68,7 @@ function parseMcpAuthUrl(value: string): DeepLink | null {
   } catch {
     return null;
   }
-  if (url.protocol !== "openbot:" || url.hostname !== MCP_OAUTH_HOST) return null;
+  if (!DEEP_LINK_PROTOCOLS.has(url.protocol) || url.hostname !== MCP_OAUTH_HOST) return null;
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
   if (!code || !state) return null;
