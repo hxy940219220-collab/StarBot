@@ -29,6 +29,7 @@ import { isIOS } from "@/shared/lib/platform";
 import { useText } from "@/shared/lib/text";
 import { MIRROR_IN_RTL } from "@/shared/lib/text-direction";
 import { typeScale } from "@/shared/lib/type-scale";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { useVerticalBarShown } from "@/shared/lib/vertical-bar";
 import type { ChatTarget } from "../model/chat-target";
 
@@ -213,7 +214,18 @@ export const ChatHeader = memo(function ChatHeader({
     image: "exclamationmark.triangle",
     imageColor: String(warning),
   };
+  const threadMenuActions: MenuAction[] = useMemo(() => {
+    if (!threadMenu) return [];
+    return threadMenu.actions
+      .map((section) =>
+        section.subactions
+          ? { ...section, subactions: section.subactions.filter((sub) => sub.id !== "info") }
+          : section,
+      )
+      .filter((section) => section.id !== "info" && (!section.subactions || section.subactions.length > 0));
+  }, [threadMenu]);
   const moreActions: MenuAction[] = [
+    ...threadMenuActions,
     ...(browserShown ? [browserAction] : []),
     ...(pinsShown ? [pinsAction] : []),
     ...(sideQuestionShown
@@ -226,6 +238,7 @@ export const ChatHeader = memo(function ChatHeader({
     else if (id === "browser") openBrowser();
     else if (id === "pins") openPins();
     else if (id === "side-question") openSideQuestion();
+    else threadMenu?.onPressAction(id);
   };
   const moreLabel = attention ? t("mobile.chat.header.moreAttention") : t("mobile.chat.header.more");
   const moreHidden = moreActions.length === 0;
@@ -284,50 +297,27 @@ export const ChatHeader = memo(function ChatHeader({
         overflow: "hidden",
       }}
     >
-      {threadMenu ? (
-        <MenuView
-          colorScheme={theme === "dark" ? "dark" : "light"}
-          actions={threadMenu.actions}
-          onPressAction={({ nativeEvent }) => threadMenu.onPressAction(nativeEvent.event)}
-          style={{ alignSelf: "stretch" }}
-        >
-          <View
-            accessible
-            accessibilityRole="button"
-            accessibilityLabel={
-              threadMenu.attention > 0
-                ? t("mobile.chat.threads.menuAttention", { name: target.name, count: threadMenu.attention })
-                : t("mobile.chat.threads.menu", { name: target.name })
-            }
-            className="min-w-0 flex-row items-center gap-2 pr-4 pl-2.5"
-            style={{ height: pillHeight, maxWidth: titleMaxWidth }}
-          >
-            {identity}
-          </View>
-        </MenuView>
-      ) : (
-        <Pressable
-          className="min-w-0 shrink flex-row items-center gap-2 self-stretch pr-4 pl-2.5"
-          accessibilityRole="button"
-          accessibilityLabel={t("mobile.chat.header.info", { name: target.name })}
-          hitSlop={8}
-          onPress={() => {
-            void haptics.impact("soft");
-            if (target.kind === "channel")
-              router.push({
-                pathname: "/channel-info/[channelId]",
-                params: { channelId: target.id, serverId: target.serverId },
-              });
-            else
-              router.push({
-                pathname: "/agent-info/[agentId]",
-                params: { agentId: target.id, serverId: target.serverId },
-              });
-          }}
-        >
-          {identity}
-        </Pressable>
-      )}
+      <Pressable
+        className="min-w-0 shrink flex-row items-center gap-2 self-stretch pr-4 pl-2.5"
+        accessibilityRole="button"
+        accessibilityLabel={t("mobile.chat.header.info", { name: target.name })}
+        hitSlop={8}
+        onPress={() => {
+          uiFeedback.open();
+          if (target.kind === "channel")
+            router.push({
+              pathname: "/channel-info/[channelId]",
+              params: { channelId: target.id, serverId: target.serverId },
+            });
+          else
+            router.push({
+              pathname: "/agent-info/[agentId]",
+              params: { agentId: target.id, serverId: target.serverId },
+            });
+        }}
+      >
+        {identity}
+      </Pressable>
     </GlassView>
   );
 

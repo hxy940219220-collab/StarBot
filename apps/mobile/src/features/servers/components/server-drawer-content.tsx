@@ -13,6 +13,7 @@ import Monitor from "lucide-react-native/icons/monitor";
 import Pin from "lucide-react-native/icons/pin";
 import PinOff from "lucide-react-native/icons/pin-off";
 import Plus from "lucide-react-native/icons/plus";
+import Search from "lucide-react-native/icons/search";
 import Settings from "lucide-react-native/icons/settings";
 import Sparkles from "lucide-react-native/icons/sparkles";
 import Store from "lucide-react-native/icons/store";
@@ -44,6 +45,7 @@ import { useCSSVariable, useUniwind } from "uniwind";
 import { showFailureAlert } from "@/features/analytics/failure-reports";
 import type { MobileSession } from "@/features/auth/api/mobile-auth";
 import { mobileUserName } from "@/features/auth/api/mobile-user-name";
+import { requestHomeSearch } from "@/features/search/model/home-search-request";
 import { hostedServerCalls } from "@/features/servers/api/hosted-servers";
 import {
   type DrawerToolId,
@@ -63,6 +65,7 @@ import { serverRowState } from "@/features/workspace/model/server-row-state";
 import { serverStatusLabel, showsOnline } from "@/features/workspace/model/server-status";
 import { type MenuAction, type MenuComponentRef, MenuView } from "@/shared/components/menu-view";
 import { ProfileAvatar } from "@/shared/components/profile-avatar";
+import { SpringPressable } from "@/shared/components/spring-pressable";
 import { devFeatureOverride } from "@/shared/lib/dev-feature-overrides";
 import { haptics } from "@/shared/lib/haptics";
 import { refreshMobileFeatures, useMobileFeature } from "@/shared/lib/mobile-features";
@@ -71,6 +74,7 @@ import { isAndroid, longPressDelay } from "@/shared/lib/platform";
 import { currentText, useText } from "@/shared/lib/text";
 import { MIRROR_IN_RTL } from "@/shared/lib/text-direction";
 import { typeScale } from "@/shared/lib/type-scale";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { DrawerHeaderBlur } from "./drawer-header-blur";
 import { SERVER_AVATAR_CORNER_RATIO, ServerAvatar } from "./server-avatar";
 import { ServerDrawerIconButton } from "./server-drawer-icon-button";
@@ -99,6 +103,7 @@ interface ServerDrawerContentProps {
   sideInset: number;
   topInset: number;
   onNavigate: (href: Href) => void;
+  onClose?: () => void;
   onLeave: (serverId: string) => Promise<void>;
   onRemove: (serverId: string) => Promise<void>;
   onDelete: (serverId: string) => Promise<void>;
@@ -153,6 +158,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
   sideInset,
   topInset,
   onNavigate,
+  onClose,
   onLeave,
   onRemove,
   onDelete,
@@ -385,7 +391,10 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
     );
   }
 
-  const subtitle = activeServer ? serverDetail(activeServer, t) : null;
+  const drawerHeaderTitle =
+    activeServer && /starbot|星友/i.test(activeServer.name)
+      ? t("mobile.app.drawer.brandTitle")
+      : (activeServer?.name ?? t("mobile.app.drawer.brandTitle"));
 
   return (
     <>
@@ -404,43 +413,35 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
                 accessibilityRole="button"
                 accessibilityHint={t("mobile.server.drawer.serverListHint")}
                 accessibilityState={{ expanded: showsList }}
-                className="min-w-0 shrink flex-row items-center gap-3"
+                className="min-w-0 shrink flex-row items-center gap-3.5"
                 disabled={editing || editingTools}
                 hitSlop={8}
                 style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
                 onPress={() => {
-                  void haptics.selection();
+                  uiFeedback.tick();
                   setListOpen((current) => !current);
                 }}
               >
                 <ServerAvatar server={activeServer} size={HEADER_AVATAR_SIZE} />
-                <View className="min-w-0 shrink">
-                  <View className="min-w-0 flex-row items-center gap-1">
-                    <Typography.Heading className="font-bold shrink" numberOfLines={1} style={typeScale.drawerTitle}>
-                      {activeServer.name}
-                    </Typography.Heading>
-                    <Animated.View
-                      style={{
-                        marginTop: 3,
-                        transform: [{ rotate: showsList ? "180deg" : "0deg" }],
-                        transitionProperty: "transform",
-                        transitionDuration: reducedMotion ? 0 : 240,
-                        transitionTimingFunction: cubicBezier(0.23, 1, 0.32, 1),
-                      }}
-                    >
-                      <ChevronDown color={mutedColor} size={20} strokeWidth={2.4} />
-                    </Animated.View>
-                  </View>
-                  {subtitle ? (
-                    <Typography.Paragraph className="text-text-secondary" numberOfLines={1} style={typeScale.caption}>
-                      {subtitle}
-                    </Typography.Paragraph>
-                  ) : null}
+                <View className="min-w-0 shrink flex-row items-center gap-1.5">
+                  <Typography.Heading className="font-bold shrink" numberOfLines={1} style={typeScale.drawerTitle}>
+                    {drawerHeaderTitle}
+                  </Typography.Heading>
+                  <Animated.View
+                    style={{
+                      transform: [{ rotate: showsList ? "180deg" : "0deg" }],
+                      transitionProperty: "transform",
+                      transitionDuration: reducedMotion ? 0 : 240,
+                      transitionTimingFunction: cubicBezier(0.23, 1, 0.32, 1),
+                    }}
+                  >
+                    <ChevronDown color={mutedColor} size={18} strokeWidth={2.4} />
+                  </Animated.View>
                 </View>
               </Pressable>
             ) : (
               <Typography.Heading className="font-bold shrink" numberOfLines={1} style={typeScale.drawerTitle}>
-                {t("mobile.server.drawer.title")}
+                {t("mobile.app.drawer.brandTitle")}
               </Typography.Heading>
             )}
             {editing || editingTools ? (
@@ -525,6 +526,27 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
           </ServerListCollapse>
 
           {activeServer ? (
+            <View className="px-3 pt-2 pb-1">
+              <SpringPressable
+                feedback="open"
+                scaleTo={0.97}
+                accessibilityRole="button"
+                accessibilityLabel={t("mobile.app.drawer.searchPlaceholder")}
+                onPress={() => {
+                  onClose?.();
+                  setTimeout(() => requestHomeSearch(), 180);
+                }}
+                className="h-11 flex-row items-center gap-2.5 rounded-2xl bg-control px-3.5"
+              >
+                <Search color={mutedColor} size={17} strokeWidth={2} />
+                <Typography.Paragraph className="text-text-secondary" style={typeScale.preview}>
+                  {t("mobile.app.drawer.searchPlaceholder")}
+                </Typography.Paragraph>
+              </SpringPressable>
+            </View>
+          ) : null}
+
+          {activeServer ? (
             <DrawerServerTools
               server={activeServer}
               open={open}
@@ -532,7 +554,10 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
               color={mutedColor}
               onEdit={editTools}
               onDragActive={setDragging}
-              onNavigate={onNavigate}
+              onNavigate={(href) => {
+                uiFeedback.open();
+                onNavigate(href);
+              }}
             />
           ) : null}
         </ScrollView>
@@ -668,7 +693,8 @@ function DrawerServerTools({
         : { icon: Monitor, label: t("mobile.app.route.remoteDesktop"), disabled: remoteDesktop === "disabled" },
     members: { icon: UsersRound, label: t("mobile.app.route.members"), value: values.members },
   };
-  const available = layout.order.filter((id) => id === "routines" && tools[id] !== null);
+  const preferredTools: readonly DrawerToolId[] = ["routines", "marketplace", "library"];
+  const available = preferredTools.filter((id) => tools[id] !== null);
   const shown = available;
   const onToolAction = useCallback(
     (action: string, toolId: DrawerToolId) => {

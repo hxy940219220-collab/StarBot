@@ -1,8 +1,10 @@
 import { APP_INTERFACE_SIZES, type AppInterfaceSize } from "@openbot/contracts/ipc";
 import { Typography } from "heroui-native";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
-import { SettingsContent, SettingsSection } from "@/features/settings/components/settings-content";
+import { useUniwind } from "uniwind";
+import { SettingsContent, SettingsRow, SettingsSection } from "@/features/settings/components/settings-content";
+import { SettingsSwitch } from "@/features/settings/components/settings-controls";
 import { SettingsPictureChoice } from "@/features/settings/components/settings-picture-choice";
 import { ThemePicture } from "@/features/settings/components/settings-pictures";
 import { type Appearance, saveAppearance, useAppearance } from "@/features/settings/model/appearance";
@@ -10,13 +12,44 @@ import { saveTextSize, useTextSize } from "@/features/settings/model/text-size";
 import { PauseSlider } from "@/features/voice/components/pause-slider";
 import { haptics } from "@/shared/lib/haptics";
 import { useText } from "@/shared/lib/text";
+import { loadUiSoundPreference, setUiSoundEnabled, uiFeedback, useUiSoundPreference } from "@/shared/lib/ui-feedback";
 
 export function AppearanceSettingsScreen() {
   return (
     <SettingsContent>
       <ThemeSection />
       <TextSizeSection />
+      <SoundSection />
     </SettingsContent>
+  );
+}
+
+function SoundSection() {
+  const { t } = useText();
+  const { theme } = useUniwind();
+  const enabled = useUiSoundPreference((state) => state.enabled);
+  const ready = useUiSoundPreference((state) => state.ready);
+
+  useEffect(() => {
+    void loadUiSoundPreference();
+  }, []);
+
+  return (
+    <SettingsSection footer={t("mobile.app.uiSoundsFooter")}>
+      <SettingsRow>
+        <SettingsSwitch
+          value={enabled}
+          disabled={!ready}
+          label={t("mobile.app.uiSounds")}
+          dark={theme === "dark"}
+          onValueChange={(next) => {
+            setUiSoundEnabled(next);
+            if (next) uiFeedback.confirm();
+            else void haptics.selection();
+          }}
+        />
+      </SettingsRow>
+    </SettingsSection>
   );
 }
 
@@ -85,7 +118,7 @@ function TextSizeSection() {
             const next = step(index);
             if (next === lastStep.current) return;
             lastStep.current = next;
-            void haptics.selection();
+            uiFeedback.tick();
             setDragged(next);
           }}
           onChangeEnd={(index) => {
@@ -96,7 +129,7 @@ function TextSizeSection() {
             setError(null);
             void saveTextSize(next).catch(() => {
               setError(t("mobile.settings.saveFailed"));
-              void haptics.notification("error");
+              uiFeedback.error();
             });
           }}
         />

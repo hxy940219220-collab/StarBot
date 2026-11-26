@@ -1,3 +1,4 @@
+import { avatarHeadColor } from "@openbot/brand/bloub-avatar";
 import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
 import {
   agentPermissionLevel,
@@ -24,7 +25,7 @@ import SlidersHorizontal from "lucide-react-native/icons/sliders-horizontal";
 import Table2 from "lucide-react-native/icons/table-2";
 import Upload from "lucide-react-native/icons/upload";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 import {
   AgentAccessFields,
   PERMISSION_LABEL,
@@ -42,6 +43,7 @@ import {
   AgentNewChatSection,
   AgentNotificationLevelRow,
 } from "@/features/agents/components/agent-chat-settings";
+import { AgentColorGlow } from "@/features/agents/components/agent-color-glow";
 import { AgentDeleteSection } from "@/features/agents/components/agent-delete-section";
 import { AgentFolderBrowser, AgentFolders, AgentFoldersRow } from "@/features/agents/components/agent-folders";
 import {
@@ -75,6 +77,7 @@ import { SaveError } from "@/shared/components/save-error";
 import { SheetFormField } from "@/shared/components/sheet-form-field";
 import { SheetSaveAction } from "@/shared/components/sheet-save-action";
 import { SheetScrollView } from "@/shared/components/sheet-scroll-view";
+import { SpringPressable } from "@/shared/components/spring-pressable";
 import { haptics } from "@/shared/lib/haptics";
 import { useText } from "@/shared/lib/text";
 import { useDiscardGuard } from "@/shared/lib/use-discard-guard";
@@ -334,18 +337,20 @@ function AgentForm({
       ) : null}
       {page === "info" ? (
         <>
-          <View className="gap-6">
-            <Pressable
+          <View className="items-center gap-3 pt-2 pb-1">
+            <AgentColorGlow color={avatarHeadColor(avatarSeed, avatarHue, avatarColor)} centerY={66} height={220} />
+            <SpringPressable
+              feedback="botTap"
+              scaleTo={0.93}
               className="self-center"
               accessibilityRole="button"
               accessibilityLabel={t("mobile.agent.edit.appearance")}
-              onPress={() => {
-                void haptics.impact("soft");
+              onPress={() =>
                 router.push({
                   pathname: "/agent-info/[agentId]/appearance",
                   params: { agentId: agent.id, serverId: agent.serverId },
-                });
-              }}
+                })
+              }
             >
               <BloubAvatarPreview
                 agentId={agent.id}
@@ -353,14 +358,72 @@ function AgentForm({
                 seed={avatarSeed}
                 hue={avatarHue}
                 color={avatarColor}
-                size={112}
+                size={124}
               />
               <View
-                className={`absolute size-9 items-center justify-center rounded-full border-4 border-sheet bg-grouped ${agent.avatarUrl ? "right-0 bottom-0" : "right-3 bottom-3"}`}
+                className={`absolute size-9 items-center justify-center rounded-full border-4 border-sheet bg-grouped ${agent.avatarUrl ? "right-0 bottom-0" : "right-2 bottom-2"}`}
               >
                 <Pencil color={foreground} size={14} />
               </View>
-            </Pressable>
+            </SpringPressable>
+            <View className="items-center gap-1.5">
+              <Typography className="font-bold text-2xl text-foreground">{name.trim() || agent.name}</Typography>
+              {agent.model ? (
+                <View className="rounded-full bg-grouped px-3 py-1">
+                  <Typography className="font-medium text-xs text-text-secondary">{agent.model}</Typography>
+                </View>
+              ) : null}
+            </View>
+          </View>
+
+          {/* Quick-access capability grid (Memory / Skills / Files) */}
+          <View className="flex-row gap-2.5">
+            {(
+              [
+                {
+                  key: "memories",
+                  icon: BookBookmark,
+                  label: t("mobile.agent.info.memories.title"),
+                  pathname: "/agent-info/[agentId]/memories" as const,
+                },
+                {
+                  key: "skills",
+                  icon: Puzzle,
+                  label: t("mobile.agent.info.skills.title"),
+                  pathname: "/agent-info/[agentId]/skills" as const,
+                },
+                {
+                  key: "files",
+                  icon: Folder,
+                  label: t("mobile.agent.info.files.title"),
+                  pathname: "/agent-info/[agentId]/files" as const,
+                },
+              ] as const
+            ).map((card) => {
+              const CardIcon = card.icon;
+              return (
+                <SpringPressable
+                  key={card.key}
+                  feedback="open"
+                  scaleTo={0.96}
+                  className="flex-1 items-center justify-center gap-2 rounded-2xl bg-grouped py-4"
+                  onPress={() =>
+                    router.push({
+                      pathname: card.pathname,
+                      params: { agentId: agent.id, serverId: agent.serverId },
+                    })
+                  }
+                >
+                  <View className="size-10 items-center justify-center rounded-xl bg-control">
+                    <CardIcon color={foreground} size={20} strokeWidth={1.9} />
+                  </View>
+                  <Typography className="font-medium text-xs text-foreground">{card.label}</Typography>
+                </SpringPressable>
+              );
+            })}
+          </View>
+
+          <View className="gap-4">
             <SheetFormField
               label={t("mobile.agent.form.name")}
               appearance="soft"
@@ -371,26 +434,26 @@ function AgentForm({
               error={triedSave && nameMissing ? t("mobile.agent.add.nameRequired") : undefined}
               onChangeText={(value) => change({ name: value })}
             />
+            <SheetFormField
+              label={t("mobile.agent.edit.title")}
+              appearance="soft"
+              placeholder={t("mobile.agent.edit.titlePlaceholder")}
+              maxLength={INPUT_LIMITS.agentTitle}
+              value={title}
+              editable={!saving}
+              onChangeText={(value) => change({ title: value })}
+            />
+            <SheetFormField
+              label={t("mobile.agent.edit.description")}
+              appearance="soft"
+              placeholder={t("mobile.agent.edit.descriptionPlaceholder")}
+              multiline
+              value={description}
+              editable={!saving}
+              onChangeText={(value) => change({ description: value })}
+            />
+            <InstructionsLimit text={description} />
           </View>
-          <SheetFormField
-            label={t("mobile.agent.edit.title")}
-            appearance="soft"
-            placeholder={t("mobile.agent.edit.titlePlaceholder")}
-            maxLength={INPUT_LIMITS.agentTitle}
-            value={title}
-            editable={!saving}
-            onChangeText={(value) => change({ title: value })}
-          />
-          <SheetFormField
-            label={t("mobile.agent.edit.description")}
-            appearance="soft"
-            placeholder={t("mobile.agent.edit.descriptionPlaceholder")}
-            multiline
-            value={description}
-            editable={!saving}
-            onChangeText={(value) => change({ description: value })}
-          />
-          <InstructionsLimit text={description} />
         </>
       ) : null}
       {page === "appearance" ? (

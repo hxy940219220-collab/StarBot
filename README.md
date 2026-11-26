@@ -13,6 +13,42 @@ messaging in one desktop app.
 
 StarBot is ready for production use. A new release ships almost every day.
 
+## StarBot Mobile（星友手机端 · iOS）
+
+StarBot Mobile 是专为多星友私人 AI 伙伴打造的极简 iOS 客户端，通过 `starbot://` 局域网/远程加密 WebRTC 直连你的电脑桌面端，支持单手语音滑选星友、月历方格任务日程、实时账单排行、群聊协作与轻盈浮窗交互。详情见 [StarBot Mobile 文档](apps/mobile/README.md)。
+
+<p align="center">
+  <img src="docs/images/mobile/hero-overview.jpg" alt="StarBot Mobile 总览：极简首页与底部胶囊栏、按住语音上滑选星友、轻量浮窗消息菜单" width="100%" />
+</p>
+
+### 1. 底部胶囊操作栏 & 单手语音滑选
+
+首页底部集成三槽位磨砂玻璃胶囊：**常用星友头像（左）· 品牌紫语音圆键（中）· 本月账单（右）**。按住语音键 `200ms` 触发原地弹簧变形，支持留在中间发给常用星友、上滑精准悬停切换任意星友（带 `10pt` 滞后防抖与 `1.03×` 提亮阴影）、左滑取消、右滑转可编辑文字；发送后停留在首页静默显示「正在思考…」。
+
+<p align="center">
+  <img src="docs/images/mobile/capsule-voice-flow.jpg" alt="底部胶囊操作栏单手语音交互流" width="100%" />
+</p>
+
+### 2. 任务日程月历方格 & 用量账单排行
+
+- **任务日程**：手机端紧凑 7 列月历方格视图，日期格内以编号彩色圆点（`1`、`2`、`3`）标记排期，点按日期或圆点展开对应星友、任务内容与时间，一键为指定星友新建定时任务。
+- **用量账单**：胶囊右槽实时展示本月累计花费（额度超 80% 提示红点），点按弹出支持拖拽全屏的账单面板，按 `近 7 天 / 本月 / 全部` 统计总花费、总 Token、总轮次及各星友消耗排行。
+
+<p align="center">
+  <img src="docs/images/mobile/schedule-billing-showcase.jpg" alt="任务日程月历方格与用量账单星友消耗排行" width="100%" />
+</p>
+
+### 3. 极简侧边栏 · 星友二级详情页 · 内联新建群聊
+
+- **极简侧边栏**：纯净 `StarBot` 品牌标识 + 顶部搜索栏 + 「任务日程 / 星友市集 / 资料库」三大核心入口。
+- **星友二级详情页**：对话顶部点击星友角色直达独立详情页，集中管理记忆、技能、文件、名称与身份、指令及权限。
+- **新建群聊**：右上角 `+` 优先展示「新建助手 / 新建群聊」，建群面板直接内联平铺全部星友并支持一键全选。
+- **全链路交互音效与动效**：内置零延迟原生合成交互音效（点击、展开、勾选、语音起止、发送）与 Reanimated 弹簧动效，可在「设置 → 外观」自由开关。
+
+<p align="center">
+  <img src="docs/images/mobile/drawer-detail-group-showcase.jpg" alt="极简 StarBot 侧边栏、星友二级详情页与内联新建群聊" width="100%" />
+</p>
+
 > [!WARNING]
 > Agents run with `danger-full-access` and `approvalPolicy: never`. They can read and modify files,
 > run commands, use the network, and control the embedded browser without per-action confirmations

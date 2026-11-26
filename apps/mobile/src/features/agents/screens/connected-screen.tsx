@@ -21,6 +21,7 @@ import Animated, {
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -56,6 +57,7 @@ import { useAppUpdateHeader } from "@/features/app-update/components/app-update-
 import { useAppUpdate } from "@/features/app-update/model/app-update";
 import { ChannelListRow } from "@/features/channels/components/channel-list";
 import { useChannels } from "@/features/channels/components/use-channels";
+import { HOME_CAPSULE_HEIGHT, HomeCapsuleBar } from "@/features/home-capsule/components/home-capsule-bar";
 import { OnboardingFlow } from "@/features/onboarding/components/onboarding-flow";
 import { useHomeOnboarding } from "@/features/onboarding/context/home-onboarding-context";
 import { useRatingAskGate } from "@/features/rating-ask/model/use-rating-ask-gate";
@@ -102,6 +104,7 @@ import { BAR_BUTTON_SIZE, NATIVE_BAR_HEIGHT, useBarTop } from "@/shared/lib/nati
 import { isAndroid, isIOS } from "@/shared/lib/platform";
 import { currentText, useText } from "@/shared/lib/text";
 import { MIRROR_IN_RTL } from "@/shared/lib/text-direction";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { useLiquidGlass } from "@/shared/lib/use-liquid-glass";
 
 const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
@@ -698,6 +701,17 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
   const listRef = useRef<FlatList>(null);
   const dragScroll = useRef({ offset: 0, content: 0, viewport: 0 });
   const scrollRest = scroll.ownsInset ? 0 : -headerHeight;
+  const recordingShift = useSharedValue(0);
+  const handleRecordingShift = useCallback(
+    (shiftY: number) => {
+      recordingShift.set(withSpring(shiftY, { duration: 240, dampingRatio: 0.84, reduceMotion: ReduceMotion.System }));
+    },
+    [recordingShift],
+  );
+  const listShiftStyle = useAnimatedStyle(() => ({
+    flex: 1,
+    transform: [{ translateY: recordingShift.get() }],
+  }));
   const pinCount = pinnedAgentIds.length + pinnedChannelIds.length;
   const dragScreen = useMemo<ChatDragScreen>(
     () => ({
@@ -751,14 +765,15 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
         title: "",
         displayInline: true,
         subactions: [
-          ...(channels.supported ? [{ id: "add-channel", title: t("mobile.agent.home.newChannel") }] : []),
           { id: "add-agent", title: t("mobile.agent.home.addAgent") },
+          ...(channels.supported ? [{ id: "add-channel", title: t("mobile.agent.home.newChannel") }] : []),
         ],
       },
     ];
   }, [channels.supported, t]);
 
   const onPressOption = (event: string) => {
+    uiFeedback.open();
     if (event === "add-agent") router.push("/add-agent");
     if (event === "add-channel") router.push({ pathname: "/add-channel", params: { serverId: activeServer.id } });
   };
@@ -828,163 +843,172 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
             active={focused}
           />
         ) : null}
-        <HomeSearchList search={search} barHeight={searchBarOffset}>
-          {onboarding.active ? null : sceneShows ? (
-            <EmptyAgentsScene
-              onAddAgent={addAgent}
-              style={{ paddingTop: insets.top + CROWD_TOP, paddingBottom: insets.bottom + 12 }}
-              afterWelcome={welcomeHandOff}
-            />
-          ) : listReady ? (
-            <ChatDragProvider screen={dragScreen}>
-              <Animated.FlatList
-                key={activeServer.id}
-                ref={listRef}
-                scrollEnabled={!dragging}
-                onLayout={(event) => {
-                  dragScroll.current.viewport = event.nativeEvent.layout.height;
-                  listReveal.onLayout();
-                }}
-                onContentSizeChange={(_width, height) => {
-                  dragScroll.current.content = height;
-                }}
-                itemLayoutAnimation={
-                  listReveal.finished && sidebar?.layout !== collapseLayout ? LIST_REFLOW : undefined
-                }
-                skipEnteringExitingAnimations
-                removeClippedSubviews={false}
-                className={homeCard ? "flex-1" : "flex-1 bg-background"}
-                style={{ marginLeft: insets.left, marginRight: insets.right }}
-                alwaysBounceVertical={false}
-                contentContainerClassName={items.length > 0 ? undefined : "grow"}
-                contentContainerStyle={{
-                  paddingTop: scroll.ownsInset ? headerHeight : 0,
-                  paddingBottom: insets.bottom + HOME_SEARCH_HEIGHT + 24,
-                }}
-                scrollEventThrottle={16}
-                onScroll={scroll.onScroll}
-                contentInsetAdjustmentBehavior={scroll.ownsInset ? "never" : "always"}
-                data={items}
-                keyExtractor={listItemKey}
-                renderItem={renderItem}
-                initialNumToRender={LIST_BATCH}
-                maxToRenderPerBatch={LIST_BATCH}
-                windowSize={dragging ? LIST_DRAG_WINDOW_SIZE : LIST_WINDOW_SIZE}
-                ListHeaderComponent={
-                  <View onLayout={(event) => layoutStage(event.nativeEvent.layout.height)}>
-                    <AgentListRowReveal index={0} reveal={listReveal}>
-                      {sidebar?.error ? (
-                        <View className="gap-2 px-4">
-                          <Typography.Paragraph className="text-danger-text">
-                            {sourceText(sidebar.error)}
-                          </Typography.Paragraph>
-                          <Button
-                            variant="secondary"
-                            onPress={() =>
-                              void workspace()
-                                .refreshServer(activeServer.id)
-                                .catch(() => undefined)
-                            }
-                          >
-                            <Button.Label>{t("mobile.agent.home.retrySections")}</Button.Label>
-                          </Button>
-                        </View>
-                      ) : null}
-                    </AgentListRowReveal>
-                    <PinnedAgentsGrid
-                      agents={pinnedAgents}
-                      animateLayout={!updateHeader.moving}
-                      dropZone={dragging && !hasPins}
-                      reveal={listReveal}
-                      revealOffset={1}
-                    >
-                      {pinnedChannels.length > 0
-                        ? pinnedChannels.map((channel) => (
-                            <ChannelListRow
-                              key={channel.id}
-                              channel={channel}
-                              serverId={activeServer.id}
-                              agents={channelAgents}
-                              pinned
-                            />
-                          ))
-                        : null}
-                    </PinnedAgentsGrid>
-                    <HomeCardTop
-                      card={homeCard}
-                      background={cardBackground}
-                      serverId={activeServer.id}
-                      cardServer={cardServer}
-                      settled={listReveal.finished}
-                    />
-                  </View>
-                }
-                ListEmptyComponent={
-                  serverDirectoryState === "error" && servers.length === 0 ? (
-                    <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
-                      <View className="size-16 items-center justify-center rounded-3xl bg-control">
-                        <WifiOff color={mutedColor} size={28} strokeWidth={1.6} />
-                      </View>
-                      <View className="items-center gap-1.5">
-                        <Typography.Heading type="h4">{t("mobile.agent.home.serversFailed")}</Typography.Heading>
-                        <Typography.Paragraph align="center" className="text-text-secondary">
-                          {serverDirectoryError
-                            ? sourceText(serverDirectoryError)
-                            : t("mobile.agent.home.serversFailedBody")}
-                        </Typography.Paragraph>
-                      </View>
-                      <Button
-                        size="md"
-                        variant="secondary"
-                        onPress={() =>
-                          void workspace()
-                            .refreshServers()
-                            .catch(() => undefined)
-                        }
-                      >
-                        <Button.Label>{t("common.tryAgain")}</Button.Label>
-                      </Button>
-                    </View>
-                  ) : servers.length === 0 ? (
-                    <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
-                      <View className="size-16 items-center justify-center rounded-3xl bg-control">
-                        <Layers3 color={mutedColor} size={28} strokeWidth={1.6} />
-                      </View>
-                      <View className="items-center gap-1.5">
-                        <Typography.Heading type="h4">{t("mobile.agent.home.noServers")}</Typography.Heading>
-                        <Typography.Paragraph align="center" className="text-text-secondary">
-                          {t("mobile.agent.home.noServersBody")}
-                        </Typography.Paragraph>
-                      </View>
-                      <Button size="md" variant="secondary" onPress={openDrawer}>
-                        <Button.Label>{t("mobile.agent.home.openServers")}</Button.Label>
-                      </Button>
-                    </View>
-                  ) : !hasSelectedServer ? (
-                    <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
-                      <Typography.Heading type="h4">{t("mobile.agent.home.chooseServer")}</Typography.Heading>
-                      <Button size="md" variant="secondary" onPress={openDrawer}>
-                        <Button.Label>{t("mobile.agent.home.openServers")}</Button.Label>
-                      </Button>
-                    </View>
-                  ) : activeAgents.length === 0 && !activeServerOnline ? (
-                    <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
-                      <WifiOff color={mutedColor} size={28} strokeWidth={1.6} />
-                      <View className="items-center gap-1.5">
-                        <Typography.Heading type="h4">{t("mobile.agent.home.waiting")}</Typography.Heading>
-                        <Typography.Paragraph align="center" className="text-text-secondary">
-                          {t("mobile.agent.home.waitingBody")}
-                        </Typography.Paragraph>
-                      </View>
-                    </View>
-                  ) : activeAgents.length === 0 ? (
-                    <EmptyAgentsScene onAddAgent={addAgent} />
-                  ) : undefined
-                }
+        <Animated.View style={listShiftStyle}>
+          <HomeSearchList search={search} barHeight={searchBarOffset}>
+            {onboarding.active ? null : sceneShows ? (
+              <EmptyAgentsScene
+                onAddAgent={addAgent}
+                style={{ paddingTop: insets.top + CROWD_TOP, paddingBottom: insets.bottom + 12 }}
+                afterWelcome={welcomeHandOff}
               />
-            </ChatDragProvider>
-          ) : null}
-        </HomeSearchList>
+            ) : listReady ? (
+              <ChatDragProvider screen={dragScreen}>
+                <Animated.FlatList
+                  key={activeServer.id}
+                  ref={listRef}
+                  scrollEnabled={!dragging}
+                  onLayout={(event) => {
+                    dragScroll.current.viewport = event.nativeEvent.layout.height;
+                    listReveal.onLayout();
+                  }}
+                  onContentSizeChange={(_width, height) => {
+                    dragScroll.current.content = height;
+                  }}
+                  itemLayoutAnimation={
+                    listReveal.finished && sidebar?.layout !== collapseLayout ? LIST_REFLOW : undefined
+                  }
+                  skipEnteringExitingAnimations
+                  removeClippedSubviews={false}
+                  className={homeCard ? "flex-1" : "flex-1 bg-background"}
+                  style={{ marginLeft: insets.left, marginRight: insets.right }}
+                  alwaysBounceVertical
+                  contentContainerClassName={items.length > 0 ? undefined : "grow"}
+                  contentContainerStyle={{
+                    paddingTop: scroll.ownsInset ? headerHeight : 0,
+                    paddingBottom: insets.bottom + HOME_CAPSULE_HEIGHT + 28,
+                  }}
+                  scrollEventThrottle={16}
+                  onScroll={scroll.onScroll}
+                  onScrollEndDrag={(event) => {
+                    const pullOffset = event.nativeEvent.contentOffset.y - scrollRest;
+                    if (pullOffset < -54 && searchShows && !search.open) {
+                      uiFeedback.open();
+                      search.openSearch();
+                    }
+                  }}
+                  contentInsetAdjustmentBehavior={scroll.ownsInset ? "never" : "always"}
+                  data={items}
+                  keyExtractor={listItemKey}
+                  renderItem={renderItem}
+                  initialNumToRender={LIST_BATCH}
+                  maxToRenderPerBatch={LIST_BATCH}
+                  windowSize={dragging ? LIST_DRAG_WINDOW_SIZE : LIST_WINDOW_SIZE}
+                  ListHeaderComponent={
+                    <View onLayout={(event) => layoutStage(event.nativeEvent.layout.height)}>
+                      <AgentListRowReveal index={0} reveal={listReveal}>
+                        {sidebar?.error ? (
+                          <View className="gap-2 px-4">
+                            <Typography.Paragraph className="text-danger-text">
+                              {sourceText(sidebar.error)}
+                            </Typography.Paragraph>
+                            <Button
+                              variant="secondary"
+                              onPress={() =>
+                                void workspace()
+                                  .refreshServer(activeServer.id)
+                                  .catch(() => undefined)
+                              }
+                            >
+                              <Button.Label>{t("mobile.agent.home.retrySections")}</Button.Label>
+                            </Button>
+                          </View>
+                        ) : null}
+                      </AgentListRowReveal>
+                      <PinnedAgentsGrid
+                        agents={pinnedAgents}
+                        animateLayout={!updateHeader.moving}
+                        dropZone={dragging && !hasPins}
+                        reveal={listReveal}
+                        revealOffset={1}
+                      >
+                        {pinnedChannels.length > 0
+                          ? pinnedChannels.map((channel) => (
+                              <ChannelListRow
+                                key={channel.id}
+                                channel={channel}
+                                serverId={activeServer.id}
+                                agents={channelAgents}
+                                pinned
+                              />
+                            ))
+                          : null}
+                      </PinnedAgentsGrid>
+                      <HomeCardTop
+                        card={homeCard}
+                        background={cardBackground}
+                        serverId={activeServer.id}
+                        cardServer={cardServer}
+                        settled={listReveal.finished}
+                      />
+                    </View>
+                  }
+                  ListEmptyComponent={
+                    serverDirectoryState === "error" && servers.length === 0 ? (
+                      <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
+                        <View className="size-16 items-center justify-center rounded-3xl bg-control">
+                          <WifiOff color={mutedColor} size={28} strokeWidth={1.6} />
+                        </View>
+                        <View className="items-center gap-1.5">
+                          <Typography.Heading type="h4">{t("mobile.agent.home.serversFailed")}</Typography.Heading>
+                          <Typography.Paragraph align="center" className="text-text-secondary">
+                            {serverDirectoryError
+                              ? sourceText(serverDirectoryError)
+                              : t("mobile.agent.home.serversFailedBody")}
+                          </Typography.Paragraph>
+                        </View>
+                        <Button
+                          size="md"
+                          variant="secondary"
+                          onPress={() =>
+                            void workspace()
+                              .refreshServers()
+                              .catch(() => undefined)
+                          }
+                        >
+                          <Button.Label>{t("common.tryAgain")}</Button.Label>
+                        </Button>
+                      </View>
+                    ) : servers.length === 0 ? (
+                      <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
+                        <View className="size-16 items-center justify-center rounded-3xl bg-control">
+                          <Layers3 color={mutedColor} size={28} strokeWidth={1.6} />
+                        </View>
+                        <View className="items-center gap-1.5">
+                          <Typography.Heading type="h4">{t("mobile.agent.home.noServers")}</Typography.Heading>
+                          <Typography.Paragraph align="center" className="text-text-secondary">
+                            {t("mobile.agent.home.noServersBody")}
+                          </Typography.Paragraph>
+                        </View>
+                        <Button size="md" variant="secondary" onPress={openDrawer}>
+                          <Button.Label>{t("mobile.agent.home.openServers")}</Button.Label>
+                        </Button>
+                      </View>
+                    ) : !hasSelectedServer ? (
+                      <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
+                        <Typography.Heading type="h4">{t("mobile.agent.home.chooseServer")}</Typography.Heading>
+                        <Button size="md" variant="secondary" onPress={openDrawer}>
+                          <Button.Label>{t("mobile.agent.home.openServers")}</Button.Label>
+                        </Button>
+                      </View>
+                    ) : activeAgents.length === 0 && !activeServerOnline ? (
+                      <View className="flex-1 items-center justify-center gap-5 px-8 py-16">
+                        <WifiOff color={mutedColor} size={28} strokeWidth={1.6} />
+                        <View className="items-center gap-1.5">
+                          <Typography.Heading type="h4">{t("mobile.agent.home.waiting")}</Typography.Heading>
+                          <Typography.Paragraph align="center" className="text-text-secondary">
+                            {t("mobile.agent.home.waitingBody")}
+                          </Typography.Paragraph>
+                        </View>
+                      </View>
+                    ) : activeAgents.length === 0 ? (
+                      <EmptyAgentsScene onAddAgent={addAgent} />
+                    ) : undefined
+                  }
+                />
+              </ChatDragProvider>
+            ) : null}
+          </HomeSearchList>
+        </Animated.View>
       </AndroidBlurTarget>
 
       {onboarding.active ? null : (
@@ -993,7 +1017,15 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
 
       {searchShows ? <HomeSearchResults search={search} barHeight={searchBarOffset} /> : null}
 
-      {searchShows && !updateHeader.expanded ? <HomeSearchBar search={search} /> : null}
+      {searchShows && !updateHeader.expanded && search.open ? <HomeSearchBar search={search} /> : null}
+
+      {searchShows && !updateHeader.expanded && !search.open && hasSelectedServer ? (
+        <HomeCapsuleBar
+          serverId={activeServer.id}
+          agents={activeAgents}
+          onRecordingShiftChange={handleRecordingShift}
+        />
+      ) : null}
 
       {onboardingReady ? (
         <Animated.View exiting={ONBOARDING_EXIT} style={StyleSheet.absoluteFill}>
@@ -1056,17 +1088,26 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
               hidden={search.open}
             >
               <Stack.Toolbar.Menu inline>
+                <Stack.Toolbar.MenuAction
+                  icon="plus.circle"
+                  onPress={() => {
+                    uiFeedback.open();
+                    openFromMenu("/add-agent");
+                  }}
+                >
+                  {t("mobile.agent.home.addAgent")}
+                </Stack.Toolbar.MenuAction>
                 {channels.supported ? (
                   <Stack.Toolbar.MenuAction
                     icon="bubble.left.and.bubble.right"
-                    onPress={() => openFromMenu({ pathname: "/add-channel", params: { serverId: activeServer.id } })}
+                    onPress={() => {
+                      uiFeedback.open();
+                      openFromMenu({ pathname: "/add-channel", params: { serverId: activeServer.id } });
+                    }}
                   >
                     {t("mobile.agent.home.newChannel")}
                   </Stack.Toolbar.MenuAction>
                 ) : null}
-                <Stack.Toolbar.MenuAction icon="plus.circle" onPress={() => openFromMenu("/add-agent")}>
-                  {t("mobile.agent.home.addAgent")}
-                </Stack.Toolbar.MenuAction>
               </Stack.Toolbar.Menu>
             </Stack.Toolbar.Menu>
           </Stack.Toolbar>

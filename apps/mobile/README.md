@@ -1,6 +1,49 @@
-# StarBot Mobile
+# StarBot Mobile（星友手机端）
 
 React Native app built with Expo SDK 58, Expo Router, TypeScript 7, Biome, and Bun. The app uses Expo Continuous Native Generation, so native `ios/` and `android/` directories are intentionally not committed.
+
+## 产品界面与核心交互演示
+
+<p align="center">
+  <img src="../../docs/images/mobile/hero-overview.jpg" alt="StarBot Mobile 总览" width="100%" />
+</p>
+
+### 核心设计亮点
+
+1. **首页底部胶囊操作栏（`src/features/home-capsule/`）**
+   - **左槽 · 常用星友**：默认展示近 7 天互动最多的星友头像（无冗余文字），执行任务时呈现柔和呼吸紫环；点按直达对话，长按弹出固定/恢复自动选择器。
+   - **中槽 · 按住语音滑选**：短按弹出「按住说话 · 上滑选择星友」提示；按住 `≥200ms` 立即叠加 35% 遮罩、三槽原地弹簧变形（取消 / 7 柱声波 + 计时 / 转文字）、列表平滑下移贴近拇指、手指上方 60pt 浮动标签实时明确松手收件人。支持 5 种松手动作（默认发送 / 左滑取消 / 右滑转文字 / 上滑提亮选中任意星友 / 悬空取消），最短 1 秒、最长 60 秒（最后 10 秒倒计时），切后台自动丢弃。
+   - **右槽 · 实时账单**：展示本月累计花费（额度超 80% 显示红点），点按拉起支持半屏/全屏拖拽的账单面板，查看总花费、总 Token、总轮次与「各星友消耗排行」，点按单行直达该星友用量详情页。
+   - **下拉搜索**：列表顶部下拉或从侧边栏搜索框即可呼出全局搜索。
+
+<p align="center">
+  <img src="../../docs/images/mobile/capsule-voice-flow.jpg" alt="底部胶囊操作栏单手语音交互流" width="100%" />
+</p>
+
+2. **任务日程（月历方格）与用量账单面板**
+   - 「任务日程」采用紧凑 7 列月历方格，格内用彩色编号小圆点（`1`、`2`、`3`）标记排期，点击方格或圆点即可展开查看具体星友、任务名称与时间，或为选定星友新建定时任务。
+
+<p align="center">
+  <img src="../../docs/images/mobile/schedule-billing-showcase.jpg" alt="任务日程与用量账单面板" width="100%" />
+</p>
+
+3. **极简侧边栏 · 星友详情页 · 内联新建群聊 · 轻量浮窗消息菜单**
+   - **侧边栏**：纯净 `StarBot` 标识居中对称，顶部置入搜索框，下方聚合「任务日程 / 星友市集 / 资料库」。
+   - **星友详情页**：在对话页点击顶部星友形象直接展开完整二级页面，一屏直达记忆、技能、文件、身份指令、模型与权限管理。
+   - **新建群聊**：右上角 `+` 依次排列「新建助手 / 新建群聊」，建群直接内联平铺所有星友并支持一键全选。
+   - **轻量浮窗消息菜单**：长按或点按消息以毛玻璃背景悬浮展示单排 Emoji 反应栏、消息预览气泡与紧凑操作卡（引用、置顶、复制、转发、选择文本、删除）。
+   - **交互音效与弹簧动效**（`src/shared/lib/ui-feedback.ts`）：零延迟原生合成 10 组乐器化提示音与触感反馈，可在「设置 → 外观 → 交互音效」开关。
+
+<p align="center">
+  <img src="../../docs/images/mobile/drawer-detail-group-showcase.jpg" alt="极简侧边栏、星友二级详情页与新建群聊" width="100%" />
+</p>
+
+### 扫码配对（`starbot://` 局域网直连）
+
+1. 在 Mac 端打开「星友 StarBot」桌面端 → **设置 → 账号 → 手机连接 → 添加手机**。
+2. 在手机端「星友」App 点击扫码，扫描桌面端生成的 `starbot://mobile-connect?...` 二维码即可建立端到端加密 WebRTC 连接。
+
+---
 
 ## Requirements
 

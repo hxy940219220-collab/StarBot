@@ -28,19 +28,31 @@ import { AgentDragPreview, useChatDrag, useHoldMenu } from "@/features/agents/co
 import { ChatLinkPressable } from "@/features/agents/components/chat-link-pressable";
 import { useChatRowBackground } from "@/features/agents/components/chat-list-pane-context";
 import { useWaitingChannel } from "@/features/channels/components/use-waiting-channel";
+import { registerAgentRowView } from "@/features/home-capsule/model/agent-row-registry";
+import {
+  clearVoiceStatus,
+  markVoiceFailed,
+  markVoiceThinking,
+  useHomeVoiceStatusStore,
+} from "@/features/home-capsule/model/home-voice-status";
 import {
   agentListWaitReason,
   useAgentListActivity,
   useAgentListUnreadCount,
   useAgentListUnreadThreads,
 } from "@/features/workspace/components/use-agent-activity";
-import { type MobileAgent, useMobileWorkspaceSelector } from "@/features/workspace/context/mobile-workspace-context";
+import {
+  type MobileAgent,
+  useMobileWorkspaceReader,
+  useMobileWorkspaceSelector,
+} from "@/features/workspace/context/mobile-workspace-context";
 import { agentActivityMood } from "@/features/workspace/model/agent-activity";
 import { canToggleChatPin } from "@/features/workspace/model/agent-pins";
 import { isAndroid, longPressDelay } from "@/shared/lib/platform";
 import { useText } from "@/shared/lib/text";
 import { END_X, lineDirectionStyle } from "@/shared/lib/text-direction";
 import { typeScale } from "@/shared/lib/type-scale";
+import { playUiSound, uiFeedback } from "@/shared/lib/ui-feedback";
 
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
 const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
@@ -107,6 +119,8 @@ interface AgentListRowProps {
 
 export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, rightInset = 20 }: AgentListRowProps) {
   const { t } = useText();
+  const workspace = useMobileWorkspaceReader();
+  const voiceStatus = useHomeVoiceStatusStore((state) => state.byAgentId[agent.id]);
   const background = useChatRowBackground(agent.id);
   const pinBlocked = useMobileWorkspaceSelector(
     ({ pinnedAgentIds, pinnedChannelIds }) => !canToggleChatPin(pinnedAgentIds, pinnedChannelIds, agent.id),
@@ -124,9 +138,40 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
   const activity = useAgentListActivity(agent.id);
   const waitingChannel = useWaitingChannel(activity, agent.serverId);
   const lastMessage = useMemo(() => markdownPreviewText(agent.preview), [agent.preview]);
-  const previewLine = waitingChannel
-    ? t("mobile.chat.channelWork.waiting", { channel: waitingChannel.name })
-    : lastMessage;
+
+  useEffect(() => {
+    if (voiceStatus?.status !== "thinking") return;
+    if (agent.preview !== voiceStatus.baselinePreview || agent.updatedAt !== voiceStatus.baselineUpdatedAt) {
+      clearVoiceStatus(agent.id);
+    }
+  }, [agent.id, agent.preview, agent.updatedAt, voiceStatus]);
+
+  const retryVoiceSend = () => {
+    if (voiceStatus?.status !== "failed") return;
+    uiFeedback.recSend();
+    const payload = {
+      text: voiceStatus.text,
+      audioUri: voiceStatus.audioUri,
+      baselinePreview: agent.preview,
+      baselineUpdatedAt: agent.updatedAt,
+    };
+    markVoiceThinking(agent.id, payload);
+    void workspace()
+      .sendMessage(agent.id, voiceStatus.text, [], null, agent.serverId)
+      .catch(() => {
+        uiFeedback.error();
+        markVoiceFailed(agent.id, payload);
+      });
+  };
+
+  const previewLine =
+    voiceStatus?.status === "thinking"
+      ? t("mobile.app.capsule.thinking")
+      : voiceStatus?.status === "failed"
+        ? t("mobile.app.capsule.sendFailedRetry")
+        : waitingChannel
+          ? t("mobile.chat.channelWork.waiting", { channel: waitingChannel.name })
+          : lastMessage;
   const unreadCount = useAgentListUnreadCount(agent.id);
   const unreadThreads = useAgentListUnreadThreads(agent.id);
   const waitReason = agentListWaitReason(activity);
@@ -170,6 +215,14 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
         if (event.nativeEvent.actionName === "pin") toggleAgentPinAnimated(agent.id);
       }}
       className="w-full"
+      onPress={(event) => {
+        if (voiceStatus?.status === "failed") {
+          event.preventDefault();
+          retryVoiceSend();
+          return;
+        }
+        playUiSound("botTap");
+      }}
       onPressIn={agentChatPreview.onPressIn}
       delayLongPress={longPressDelay}
       onLongPress={holdMenu.onLongPress}
@@ -177,6 +230,8 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
     >
       {({ pressed }) => (
         <View
+          ref={(node) => registerAgentRowView(agent.id, node)}
+          collapsable={false}
           className="min-h-22 w-full flex-row items-center gap-4 py-2"
           style={{
             backgroundColor: background,
@@ -209,13 +264,28 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
                   {agent.title.trim()}
                 </Typography.Paragraph>
               ) : null}
-              <Typography.Paragraph
-                className="text-text-secondary"
-                numberOfLines={1}
-                style={[typeScale.preview, lineDirectionStyle(previewLine)]}
-              >
-                {previewLine}
-              </Typography.Paragraph>
+              <View className="flex-row items-center gap-1.5">
+                {voiceStatus?.status === "thinking" ? (
+                  <View className="size-2 rounded-full" style={{ backgroundColor: "#7c3aed" }} />
+                ) : null}
+                <Typography.Paragraph
+                  className={
+                    voiceStatus?.status === "failed"
+                      ? "font-medium text-danger-text"
+                      : voiceStatus?.status === "thinking"
+                        ? "font-medium"
+                        : "text-text-secondary"
+                  }
+                  numberOfLines={1}
+                  style={[
+                    typeScale.preview,
+                    lineDirectionStyle(previewLine),
+                    voiceStatus?.status === "thinking" ? { color: "#7c3aed" } : undefined,
+                  ]}
+                >
+                  {previewLine}
+                </Typography.Paragraph>
+              </View>
             </View>
           </AgentRowTextReveal>
           {agentChatPreview.measurer}

@@ -1,45 +1,36 @@
+import { avatarHeadColor } from "@openbot/brand/bloub-avatar";
 import type { RoutineCalendarRoutine, RoutineCalendarRun, RoutineCalendarRunStatus } from "@openbot/contracts/ipc";
 import type { MobileTextKey } from "@openbot/i18n/mobile";
-import {
-  addCalendarDays,
-  type CalendarDay,
-  calendarDayDate,
-  calendarDayOf,
-  calendarDays,
-  calendarWeekStart,
-} from "@openbot/team-client/routine-calendar-dates";
-import { useQueries } from "@tanstack/react-query";
+import { type CalendarDay, calendarDayOf } from "@openbot/team-client/routine-calendar-dates";
+import { useQuery } from "@tanstack/react-query";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
-import Check from "lucide-react-native/icons/check";
-import ChevronDown from "lucide-react-native/icons/chevron-down";
-import CirclePause from "lucide-react-native/icons/circle-pause";
+import { useThemeColor } from "heroui-native/hooks";
+import ChevronLeft from "lucide-react-native/icons/chevron-left";
+import ChevronRight from "lucide-react-native/icons/chevron-right";
+import Clock from "lucide-react-native/icons/clock";
+import Plus from "lucide-react-native/icons/plus";
 import X from "lucide-react-native/icons/x";
-import { useEffect, useState } from "react";
-import { View } from "react-native";
-import { useCSSVariable, useUniwind } from "uniwind";
+import { useEffect, useMemo, useState } from "react";
+import { Modal, Pressable, ScrollView, View } from "react-native";
+import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useCSSVariable } from "uniwind";
 import { BloubAvatar } from "@/features/agents/components/bloub-avatar";
 import { useQueryScope } from "@/features/auth/context/mobile-session-context";
 import { useChannels } from "@/features/channels/components/use-channels";
-import { DAY_STRIP_LENGTH, DayStrip } from "@/features/servers/components/day-strip";
-import { SettingsNote, SettingsRow, SettingsSection } from "@/features/settings/components/settings-content";
 import { useMobileWorkspace } from "@/features/workspace/context/mobile-workspace-context";
 import { queryKeys } from "@/features/workspace/model/query-keys";
 import type { MobileAgent } from "@/features/workspace/model/workspace-types";
 import { LargeTitleScrollView } from "@/shared/components/large-title";
-import { MenuView } from "@/shared/components/menu-view";
-import { haptics } from "@/shared/lib/haptics";
+import { SpringPressable } from "@/shared/components/spring-pressable";
 import { isAndroid } from "@/shared/lib/platform";
 import { useText } from "@/shared/lib/text";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 
-const DAY = 86_400_000;
-const WEEK_DAY_LIMIT = 4;
-const UPCOMING_LIMIT = 6;
-const AVATAR_LIMIT = 3;
-const AVATAR_SIZE = 26;
-const PAGE_CONTENT = "gap-7 px-4 pt-3";
-
-type CalendarView = "week" | "day";
+const BRAND_PURPLE = "#7c3aed";
+const DOT_PALETTE = ["#7c3aed", "#ec4899", "#f59e0b", "#10b981", "#3b82f6", "#ef4444"] as const;
+const DAY_MS = 86_400_000;
 
 type RunStatus = "active" | "paused" | "failed" | "completed";
 
@@ -50,13 +41,47 @@ const STATUS_LABEL = {
   completed: "mobile.server.routines.status.completed",
 } as const satisfies Record<RunStatus, MobileTextKey>;
 
-interface Entry {
+interface CalendarEntry {
   run: RoutineCalendarRun;
   routine: RoutineCalendarRoutine;
   status: RunStatus;
   day: CalendarDay;
   agents: MobileAgent[];
   owner: string | undefined;
+  dotColor: string;
+}
+
+interface GridCell {
+  iso: CalendarDay;
+  year: number;
+  month: number;
+  day: number;
+  inMonth: boolean;
+}
+
+function formatDayIso(year: number, monthIndex: number, day: number): CalendarDay {
+  return calendarDayOf(new Date(Date.UTC(year, monthIndex, day)), "UTC");
+}
+
+function buildMonthGrid(year: number, monthIndex: number): GridCell[] {
+  const firstOfMonth = new Date(Date.UTC(year, monthIndex, 1));
+  // Monday = 0 ... Sunday = 6
+  const startOffset = (firstOfMonth.getUTCDay() + 6) % 7;
+  const daysInMonth = new Date(Date.UTC(year, monthIndex + 1, 0)).getUTCDate();
+  const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+  const cells: GridCell[] = [];
+  for (let i = 0; i < totalCells; i += 1) {
+    const dayNum = i - startOffset + 1;
+    const d = new Date(Date.UTC(year, monthIndex, dayNum));
+    cells.push({
+      iso: formatDayIso(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()),
+      year: d.getUTCFullYear(),
+      month: d.getUTCMonth() + 1,
+      day: d.getUTCDate(),
+      inMonth: d.getUTCMonth() === monthIndex,
+    });
+  }
+  return cells;
 }
 
 function runStatus(status: RoutineCalendarRunStatus, routineActive: boolean): RunStatus {
@@ -76,82 +101,71 @@ function runStatus(status: RoutineCalendarRunStatus, routineActive: boolean): Ru
   }
 }
 
-function rangeAround(first: CalendarDay, last: CalendarDay) {
-  return {
-    from: new Date(Date.parse(first) - DAY).toISOString(),
-    to: new Date(Date.parse(last) + 2 * DAY).toISOString(),
-  };
-}
-
 export function ServerRoutinesScreen() {
   const { t, format } = useText();
-  const { theme } = useUniwind();
-  const foreground = String(useCSSVariable("--openbot-text-primary"));
+  const insets = useSafeAreaInsets();
   const { serverId } = useLocalSearchParams<{ serverId: string }>();
   const queryScope = useQueryScope();
   const { servers, agents, loadRoutineCalendar } = useMobileWorkspace();
   const { channels } = useChannels(serverId);
   const server = servers.find((item) => item.id === serverId);
+  const serverAgents = useMemo(() => agents.filter((agent) => agent.serverId === serverId), [agents, serverId]);
   const online = server?.state === "online";
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const [now, setNow] = useState(() => new Date());
-  const today = calendarDayOf(now, timeZone);
-  const [view, setView] = useState<CalendarView>("week");
-  const [anchor, setAnchor] = useState(today);
-  const [start, setStart] = useState(() => calendarWeekStart(today, 1));
-  const shownDays = calendarDays(start, DAY_STRIP_LENGTH);
-  const lastDay = shownDays.at(-1) ?? start;
-  const days = view === "week" ? shownDays : [anchor];
+  const [foreground, muted] = useThemeColor(["foreground", "muted"]);
+  const cardBg = String(useCSSVariable("--openbot-bg-grouped") ?? "#ffffff");
+  const borderColor = String(useCSSVariable("--openbot-border-grouped") ?? "rgba(0,0,0,0.08)");
+  const sheetBg = String(useCSSVariable("--openbot-bg-sheet") ?? "#ffffff");
 
-  const firstWeek = calendarWeekStart(start, 1);
-  const lastWeek = calendarWeekStart(lastDay, 1);
-  const neededWeeks = firstWeek === lastWeek ? [firstWeek] : [firstWeek, lastWeek];
-  const loadedWeeks = [addCalendarDays(firstWeek, -7), ...neededWeeks, addCalendarDays(lastWeek, 7)];
-  const weeks = useQueries({
-    queries: loadedWeeks.map((weekStart) => {
-      const range = rangeAround(weekStart, addCalendarDays(weekStart, 6));
-      return {
-        queryKey: queryKeys.serverRoutines(queryScope, serverId, range.from, range.to),
-        enabled: online,
-        retry: false,
-        staleTime: 60_000,
-        queryFn: () => loadRoutineCalendar(range, serverId),
-      };
+  const todayDate = useMemo(() => new Date(), []);
+  const todayIso = calendarDayOf(todayDate, timeZone);
+  const [viewYear, setViewYear] = useState(() => todayDate.getFullYear());
+  const [viewMonth, setViewMonth] = useState(() => todayDate.getMonth());
+  const [selectedIso, setSelectedIso] = useState<CalendarDay>(todayIso);
+  const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
+  const [botPickerOpen, setBotPickerOpen] = useState(false);
+
+  const grid = useMemo(() => buildMonthGrid(viewYear, viewMonth), [viewYear, viewMonth]);
+  const firstCell = grid[0]?.iso ?? todayIso;
+  const lastCell = grid.at(-1)?.iso ?? todayIso;
+
+  const queryRange = useMemo(
+    () => ({
+      from: new Date(Date.parse(firstCell) - DAY_MS).toISOString(),
+      to: new Date(Date.parse(lastCell) + 2 * DAY_MS).toISOString(),
     }),
+    [firstCell, lastCell],
+  );
+
+  const calendarQuery = useQuery({
+    queryKey: queryKeys.serverRoutines(queryScope, serverId, queryRange.from, queryRange.to),
+    enabled: Boolean(serverId && online),
+    retry: false,
+    staleTime: 60_000,
+    queryFn: () => loadRoutineCalendar(queryRange, serverId),
   });
-  const needed = weeks.slice(1, 1 + neededWeeks.length);
-  const neededData = needed.flatMap((week) => (week.data ? [week.data] : []));
-  const ready = neededData.length === needed.length;
 
-  useEffect(() => {
-    const clock = setInterval(() => setNow(new Date()), 60_000);
-    return () => clearInterval(clock);
-  }, []);
-
-  const entries = (() => {
-    const routines = new Map<string, RoutineCalendarRoutine>();
-    const runs: RoutineCalendarRun[] = [];
-    loadedWeeks.forEach((weekStart, index) => {
-      const data = weeks[index]?.data;
-      if (!data) return;
-      for (const routine of data.routines) routines.set(routine.id, routine);
-      const ownDays = new Set(calendarDays(weekStart, 7));
-      for (const run of data.runs) if (ownDays.has(calendarDayOf(new Date(run.at), timeZone))) runs.push(run);
-    });
-    const serverAgents = new Map(
-      agents.filter((agent) => agent.serverId === serverId).map((agent) => [agent.id, agent]),
-    );
+  const entries = useMemo<CalendarEntry[]>(() => {
+    const data = calendarQuery.data;
+    if (!data) return [];
+    const routinesById = new Map(data.routines.map((routine) => [routine.id, routine]));
+    const agentById = new Map(serverAgents.map((agent) => [agent.id, agent]));
     const channelById = new Map(channels.map((channel) => [channel.id, channel]));
-    return runs
-      .flatMap((run): Entry[] => {
-        const routine = routines.get(run.routineId);
+
+    return data.runs
+      .flatMap((run, idx): CalendarEntry[] => {
+        const routine = routinesById.get(run.routineId);
         if (!routine) return [];
         const channel = routine.owner.kind === "channel" ? channelById.get(routine.owner.channelId) : undefined;
-        const agentIds =
+        const ids =
           routine.owner.kind === "agent"
             ? [routine.owner.agentId]
             : (channel?.members.map((member) => member.agentId) ?? []);
-        const runAgents = agentIds.flatMap((id) => serverAgents.get(id) ?? []);
+        const runAgents = ids.flatMap((id) => agentById.get(id) ?? []);
+        const primaryAgent = runAgents[0];
+        const dotColor = primaryAgent
+          ? avatarHeadColor(primaryAgent.avatarSeed, primaryAgent.avatarHue, primaryAgent.avatarColor)
+          : (DOT_PALETTE[idx % DOT_PALETTE.length] ?? BRAND_PURPLE);
         return [
           {
             run,
@@ -159,313 +173,501 @@ export function ServerRoutinesScreen() {
             status: runStatus(run.status, routine.active),
             day: calendarDayOf(new Date(run.at), timeZone),
             agents: runAgents,
-            owner: routine.owner.kind === "agent" ? runAgents[0]?.name : channel?.name,
+            owner: routine.owner.kind === "agent" ? primaryAgent?.name : channel?.name,
+            dotColor,
           },
         ];
       })
-      .sort((left, right) => Date.parse(left.run.at) - Date.parse(right.run.at));
-  })();
+      .sort((a, b) => Date.parse(a.run.at) - Date.parse(b.run.at));
+  }, [calendarQuery.data, serverAgents, channels, timeZone]);
 
-  const entriesByDay = new Map<CalendarDay, Entry[]>();
-  for (const entry of entries) {
-    const list = entriesByDay.get(entry.day);
-    if (list) list.push(entry);
-    else entriesByDay.set(entry.day, [entry]);
-  }
-  const countByDay = new Map([...entriesByDay].map(([day, list]) => [day, list.length]));
-  const upcoming = entries
-    .filter((entry) => entry.status === "active" && Date.parse(entry.run.at) >= now.getTime())
-    .slice(0, UPCOMING_LIMIT);
+  const entriesByDay = useMemo(() => {
+    const map = new Map<CalendarDay, CalendarEntry[]>();
+    for (const entry of entries) {
+      const list = map.get(entry.day);
+      if (list) list.push(entry);
+      else map.set(entry.day, [entry]);
+    }
+    return map;
+  }, [entries]);
 
-  const dayText = (day: CalendarDay, options: Intl.DateTimeFormatOptions) =>
-    format.date(calendarDayDate(day), { ...options, timeZone: "UTC" });
-  const longDay = (day: CalendarDay) => dayText(day, { weekday: "long", month: "long", day: "numeric" });
-  const dayTitle = (day: CalendarDay) =>
-    day === today ? t("mobile.server.routines.todayTitle", { day: longDay(day) }) : longDay(day);
-  const timeText = (at: string) => format.date(new Date(at), { hour: "numeric", minute: "2-digit", timeZone });
-  const upcomingWhen = (entry: Entry) => {
-    const time = timeText(entry.run.at);
-    if (entry.day === today) return t("mobile.server.routines.todayAt", { time });
-    if (entry.day === addCalendarDays(today, 1)) return t("mobile.server.routines.tomorrowAt", { time });
-    return t("mobile.server.routines.dayAt", {
-      day: dayText(entry.day, { weekday: "short", month: "short", day: "numeric" }),
-      time,
+  const dayEntries = entriesByDay.get(selectedIso) ?? [];
+  const activeEntry = useMemo(
+    () => dayEntries.find((entry) => entry.run.id === selectedEntryId) ?? dayEntries[0] ?? null,
+    [dayEntries, selectedEntryId],
+  );
+
+  useEffect(() => {
+    if (dayEntries.length > 0 && !dayEntries.some((item) => item.run.id === selectedEntryId)) {
+      setSelectedEntryId(dayEntries[0]?.run.id ?? null);
+    } else if (dayEntries.length === 0) {
+      setSelectedEntryId(null);
+    }
+  }, [dayEntries, selectedEntryId]);
+
+  const selectedCell = grid.find((cell) => cell.iso === selectedIso);
+  const selectedDayHeading = selectedCell
+    ? t("mobile.app.calendar.daySelectedTitle", { month: selectedCell.month, day: selectedCell.day })
+    : selectedIso;
+
+  const weekdays = [
+    t("mobile.app.calendar.weekdayMon"),
+    t("mobile.app.calendar.weekdayTue"),
+    t("mobile.app.calendar.weekdayWed"),
+    t("mobile.app.calendar.weekdayThu"),
+    t("mobile.app.calendar.weekdayFri"),
+    t("mobile.app.calendar.weekdaySat"),
+    t("mobile.app.calendar.weekdaySun"),
+  ];
+
+  const shiftMonth = (delta: number) => {
+    uiFeedback.tick();
+    const next = new Date(Date.UTC(viewYear, viewMonth + delta, 1));
+    setViewYear(next.getUTCFullYear());
+    setViewMonth(next.getUTCMonth());
+  };
+
+  const jumpToday = () => {
+    uiFeedback.tap();
+    setViewYear(todayDate.getFullYear());
+    setViewMonth(todayDate.getMonth());
+    setSelectedIso(todayIso);
+  };
+
+  const openCreateForAgent = (agent: MobileAgent) => {
+    uiFeedback.open();
+    setBotPickerOpen(false);
+    router.push({
+      pathname: "/server-routines/agent-routine",
+      params: { agentId: agent.id, serverId },
     });
   };
-  const rangeLabel = t("mobile.server.routines.range", {
-    start: dayText(start, { month: "short", day: "numeric" }),
-    end: dayText(lastDay, { month: "short", day: "numeric", year: "numeric" }),
-  });
 
-  function openRoutine(routine: RoutineCalendarRoutine) {
-    if (routine.owner.kind === "agent")
+  const openNewTaskPicker = () => {
+    uiFeedback.open();
+    if (serverAgents.length === 1 && serverAgents[0]) {
+      openCreateForAgent(serverAgents[0]);
+      return;
+    }
+    setBotPickerOpen(true);
+  };
+
+  const openRoutineDetail = (routine: RoutineCalendarRoutine) => {
+    uiFeedback.open();
+    if (routine.owner.kind === "agent") {
       router.push({
         pathname: "/server-routines/agent-routine",
         params: { agentId: routine.owner.agentId, serverId, recordId: routine.id },
       });
-    else
+    } else {
       router.push({
         pathname: "/server-routines/channel-routine",
         params: { channelId: routine.owner.channelId, serverId, recordId: routine.id },
       });
-  }
-
-  function selectDay(day: CalendarDay, nextView: CalendarView = view) {
-    void haptics.selection();
-    setAnchor(day);
-    setView(nextView);
-  }
-
-  function moveStart(next: CalendarDay) {
-    const shift = Math.round((Date.parse(next) - Date.parse(start)) / DAY);
-    setStart(next);
-    setAnchor((day) => addCalendarDays(day, shift));
-  }
-
-  function showToday() {
-    setAnchor(today);
-    if (!shownDays.includes(today)) setStart(calendarWeekStart(today, 1));
-  }
-
-  const renderEntry = (entry: Entry, when: string) => {
-    const status = t(STATUS_LABEL[entry.status]);
-    return (
-      <SettingsRow
-        key={entry.run.id}
-        leading={<StatusMark status={entry.status} />}
-        trailing={entry.agents.length > 0 ? <AgentStack agents={entry.agents} serverId={serverId} /> : undefined}
-        supportingText={
-          entry.owner
-            ? t("mobile.server.routines.entryMeta", { when, owner: entry.owner, status })
-            : t("mobile.server.routines.entryMetaShort", { when, status })
-        }
-        onPress={() => openRoutine(entry.routine)}
-      >
-        <Typography.Paragraph numberOfLines={1}>{entry.routine.name}</Typography.Paragraph>
-      </SettingsRow>
-    );
+    }
   };
 
-  const emptyRow = (key: MobileTextKey) => (
-    <SettingsRow>
-      <Typography.Paragraph className="text-grouped-secondary">{t(key)}</Typography.Paragraph>
-    </SettingsRow>
-  );
+  const timeText = (at: string) => format.date(new Date(at), { hour: "2-digit", minute: "2-digit", timeZone });
 
-  const header = isAndroid ? (
+  const headerButton = isAndroid ? (
     <Stack.Screen
       options={{
         headerRight: () => (
-          <MenuView
-            colorScheme={theme === "dark" ? "dark" : "light"}
-            actions={[
-              {
-                id: "today",
-                title: t("mobile.server.routines.today"),
-                attributes: { disabled: days.includes(today) },
-              },
-              { id: "day", title: t("mobile.server.routines.viewDay"), state: view === "day" ? "on" : "off" },
-              { id: "week", title: t("mobile.server.routines.viewWeek"), state: view === "week" ? "on" : "off" },
-            ]}
-            onPressAction={({ nativeEvent }) => {
-              if (nativeEvent.event === "today") showToday();
-              if (nativeEvent.event === "day") selectDay(anchor, "day");
-              if (nativeEvent.event === "week") selectDay(anchor, "week");
-            }}
+          <SpringPressable
+            feedback="none"
+            onPress={openNewTaskPicker}
+            className="flex-row items-center gap-1 rounded-full px-3 py-1.5"
+            style={{ backgroundColor: BRAND_PURPLE }}
           >
-            <View
-              accessible
-              accessibilityRole="button"
-              accessibilityLabel={t("mobile.server.routines.view")}
-              className="min-h-11 flex-row items-center gap-1 px-2"
-            >
-              <Typography.Paragraph>
-                {t(view === "week" ? "mobile.server.routines.viewWeek" : "mobile.server.routines.viewDay")}
-              </Typography.Paragraph>
-              <ChevronDown color={foreground} size={18} strokeWidth={1.9} />
-            </View>
-          </MenuView>
+            <Plus color="#ffffff" size={15} strokeWidth={2.4} />
+            <Typography className="font-semibold text-xs" style={{ color: "#ffffff" }}>
+              {t("mobile.app.calendar.newTask")}
+            </Typography>
+          </SpringPressable>
         ),
       }}
     />
   ) : (
     <Stack.Toolbar placement="right">
-      <Stack.Toolbar.Menu
-        accessibilityLabel={t("mobile.server.routines.view")}
-        title={t("mobile.server.routines.view")}
-      >
-        <Stack.Toolbar.Label>
-          {t(view === "week" ? "mobile.server.routines.viewWeek" : "mobile.server.routines.viewDay")}
-        </Stack.Toolbar.Label>
-        <Stack.Toolbar.MenuAction icon="calendar.badge.clock" disabled={days.includes(today)} onPress={showToday}>
-          {t("mobile.server.routines.today")}
-        </Stack.Toolbar.MenuAction>
-        <Stack.Toolbar.MenuAction
-          icon="calendar.day.timeline.left"
-          isOn={view === "day"}
-          onPress={() => selectDay(anchor, "day")}
-        >
-          {t("mobile.server.routines.viewDay")}
-        </Stack.Toolbar.MenuAction>
-        <Stack.Toolbar.MenuAction icon="calendar" isOn={view === "week"} onPress={() => selectDay(anchor, "week")}>
-          {t("mobile.server.routines.viewWeek")}
-        </Stack.Toolbar.MenuAction>
-      </Stack.Toolbar.Menu>
+      <Stack.Toolbar.Button icon="plus" onPress={openNewTaskPicker}>
+        {t("mobile.app.calendar.newTask")}
+      </Stack.Toolbar.Button>
     </Stack.Toolbar>
   );
 
-  const title = t("mobile.app.route.schedule");
-  if (!server)
-    return (
-      <LargeTitleScrollView title={title} contentContainerClassName={PAGE_CONTENT}>
-        <SettingsNote>{t("mobile.server.unavailable")}</SettingsNote>
-      </LargeTitleScrollView>
-    );
-
   return (
     <>
-      {header}
-      <LargeTitleScrollView title={title} caption={server.name} contentContainerClassName={PAGE_CONTENT}>
-        <View className="gap-2">
-          <Typography.Paragraph
-            weight="medium"
-            align="center"
-            accessibilityRole="adjustable"
-            accessibilityLiveRegion="polite"
-            accessibilityActions={[
-              { name: "decrement", label: t("mobile.server.routines.previousWeek") },
-              { name: "increment", label: t("mobile.server.routines.nextWeek") },
-            ]}
-            onAccessibilityAction={(event) =>
-              moveStart(addCalendarDays(start, event.nativeEvent.actionName === "increment" ? 7 : -7))
-            }
-          >
-            {rangeLabel}
-          </Typography.Paragraph>
-          <DayStrip
-            start={start}
-            today={today}
-            selected={view === "day" ? anchor : null}
-            counts={countByDay}
-            weekdayText={(day) => dayText(day, { weekday: "narrow" })}
-            dayNumberText={(day) => dayText(day, { day: "numeric" })}
-            dayLabel={(day, count) => t("mobile.server.routines.dayLabel", { day: longDay(day), count })}
-            onSelectDay={(day) => selectDay(day, "day")}
-            onStartChange={moveStart}
-          />
-        </View>
-
-        {!online && !ready ? (
-          <SettingsNote>{t("mobile.server.routines.offline")}</SettingsNote>
-        ) : needed.some((week) => week.isError) ? (
-          <SettingsSection footer={t("mobile.server.routines.loadFailed")}>
-            <SettingsRow
-              disclosure={false}
-              onPress={() => {
-                for (const week of needed) if (week.isError) void week.refetch();
-              }}
+      {headerButton}
+      <LargeTitleScrollView title={t("mobile.app.route.schedule")} contentContainerClassName="gap-4 px-4 pt-2 pb-10">
+        {/* Month Switcher + Today + Add */}
+        <View className="flex-row items-center justify-between gap-2">
+          <View className="flex-row items-center gap-1.5">
+            <SpringPressable
+              feedback="none"
+              accessibilityRole="button"
+              onPress={() => shiftMonth(-1)}
+              className="size-8 items-center justify-center rounded-full bg-control"
             >
-              <Typography.Paragraph>{t("common.retry")}</Typography.Paragraph>
-            </SettingsRow>
-          </SettingsSection>
-        ) : !ready ? (
-          <SettingsNote>{t("mobile.server.routines.loading")}</SettingsNote>
-        ) : neededData.every((data) => data.routines.length === 0) ? (
-          <SettingsNote>{t("mobile.server.routines.empty")}</SettingsNote>
-        ) : (
-          <>
-            {view === "week" ? (
-              shownDays.map((day) => {
-                const dayEntries = entriesByDay.get(day) ?? [];
-                const hidden = dayEntries.length - WEEK_DAY_LIMIT;
-                return (
-                  <SettingsSection key={day} title={dayTitle(day)}>
-                    {dayEntries.length > 0
-                      ? dayEntries.slice(0, WEEK_DAY_LIMIT).map((entry) => renderEntry(entry, timeText(entry.run.at)))
-                      : emptyRow("mobile.server.routines.dayEmpty")}
-                    {hidden > 0 ? (
-                      <SettingsRow
-                        accessibilityLabel={t("mobile.server.routines.showAll", {
-                          count: dayEntries.length,
-                          day: longDay(day),
-                        })}
-                        onPress={() => selectDay(day, "day")}
-                      >
-                        <Typography.Paragraph className="text-accent-text">
-                          {t("mobile.server.routines.more", { count: hidden })}
-                        </Typography.Paragraph>
-                      </SettingsRow>
-                    ) : null}
-                  </SettingsSection>
-                );
-              })
-            ) : (
-              <SettingsSection title={dayTitle(anchor)}>
-                {(entriesByDay.get(anchor) ?? []).length > 0
-                  ? (entriesByDay.get(anchor) ?? []).map((entry) => renderEntry(entry, timeText(entry.run.at)))
-                  : emptyRow("mobile.server.routines.dayEmpty")}
-              </SettingsSection>
-            )}
-            {view === "day" && anchor === today ? (
-              <SettingsSection title={t("mobile.server.routines.upcoming")}>
-                {upcoming.length > 0
-                  ? upcoming.map((entry) => renderEntry(entry, upcomingWhen(entry)))
-                  : emptyRow("mobile.server.routines.upcomingEmpty")}
-              </SettingsSection>
-            ) : null}
-          </>
-        )}
-        <Typography.Paragraph type="body-xs" className="px-4 text-grouped-secondary">
-          {t("mobile.server.routines.timeZone", { zone: timeZone.replaceAll("_", " ") })}
-        </Typography.Paragraph>
-      </LargeTitleScrollView>
-    </>
-  );
-}
+              <ChevronLeft color={String(foreground)} size={18} strokeWidth={2.2} />
+            </SpringPressable>
+            <Typography className="min-w-28 text-center font-bold text-base text-foreground">
+              {t("mobile.app.calendar.monthTitle", { year: viewYear, month: viewMonth + 1 })}
+            </Typography>
+            <SpringPressable
+              feedback="none"
+              accessibilityRole="button"
+              onPress={() => shiftMonth(1)}
+              className="size-8 items-center justify-center rounded-full bg-control"
+            >
+              <ChevronRight color={String(foreground)} size={18} strokeWidth={2.2} />
+            </SpringPressable>
+          </View>
 
-function AgentStack({ agents, serverId }: { agents: MobileAgent[]; serverId: string }) {
-  const shown = agents.slice(0, AVATAR_LIMIT);
-  const hidden = agents.length - shown.length;
-  return (
-    <View className="flex-row items-center" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-      {shown.map((agent, index) => (
-        <View key={agent.id} style={{ marginLeft: index === 0 ? 0 : -AVATAR_SIZE / 3 }}>
-          <BloubAvatar
-            agentId={agent.id}
-            serverId={serverId}
-            hue={agent.avatarHue}
-            color={agent.avatarColor}
-            seed={agent.avatarSeed}
-            size={AVATAR_SIZE}
-            animateIdle={false}
-          />
+          <View className="flex-row items-center gap-2">
+            <SpringPressable feedback="none" onPress={jumpToday} className="rounded-full bg-control px-3 py-1.5">
+              <Typography className="font-medium text-xs text-foreground">{t("mobile.app.calendar.today")}</Typography>
+            </SpringPressable>
+            <SpringPressable
+              feedback="none"
+              onPress={openNewTaskPicker}
+              className="flex-row items-center gap-1 rounded-full px-3 py-1.5"
+              style={{ backgroundColor: BRAND_PURPLE }}
+            >
+              <Plus color="#ffffff" size={14} strokeWidth={2.5} />
+              <Typography className="font-semibold text-xs" style={{ color: "#ffffff" }}>
+                {t("mobile.app.calendar.newTask")}
+              </Typography>
+            </SpringPressable>
+          </View>
         </View>
-      ))}
-      {hidden > 0 ? (
-        <Typography type="body-xs" className="ml-1 text-grouped-secondary">
-          +{hidden}
-        </Typography>
-      ) : null}
-    </View>
-  );
-}
 
-function StatusMark({ status }: { status: RunStatus }) {
-  const muted = String(useCSSVariable("--openbot-text-grouped-secondary"));
-  const accent = String(useCSSVariable("--openbot-accent-text"));
-  const success = String(useCSSVariable("--openbot-success-text"));
-  const danger = String(useCSSVariable("--openbot-danger-text"));
-  return (
-    <View className="size-4 items-center justify-center">
-      {status === "paused" ? (
-        <CirclePause color={muted} size={16} strokeWidth={1.8} />
-      ) : status === "failed" ? (
-        <X color={danger} size={16} strokeWidth={2} />
-      ) : status === "completed" ? (
-        <Check color={success} size={16} strokeWidth={2} />
-      ) : (
-        <View className="size-2 rounded-full" style={{ backgroundColor: accent }} />
-      )}
-    </View>
+        {/* Calendar Grid Card */}
+        <View className="overflow-hidden rounded-2xl" style={{ backgroundColor: cardBg, borderWidth: 1, borderColor }}>
+          {/* Weekday Headers */}
+          <View className="flex-row py-2.5" style={{ borderBottomWidth: 1, borderBottomColor: borderColor }}>
+            {weekdays.map((dayLabel) => (
+              <View key={dayLabel} className="flex-1 items-center">
+                <Typography className="font-medium text-xs text-text-secondary">{dayLabel}</Typography>
+              </View>
+            ))}
+          </View>
+
+          {/* 7-column Square Cells */}
+          <View className="flex-row flex-wrap">
+            {grid.map((cell, index) => {
+              const isToday = cell.iso === todayIso;
+              const isSelected = cell.iso === selectedIso;
+              const list = entriesByDay.get(cell.iso) ?? [];
+              const rowIdx = Math.floor(index / 7);
+              const colIdx = index % 7;
+
+              return (
+                <Pressable
+                  key={cell.iso}
+                  onPress={() => {
+                    uiFeedback.tick();
+                    setSelectedIso(cell.iso);
+                    if (!cell.inMonth) {
+                      setViewYear(cell.year);
+                      setViewMonth(cell.month - 1);
+                    }
+                  }}
+                  style={{
+                    width: `${100 / 7}%`,
+                    minHeight: 60,
+                    paddingTop: 6,
+                    paddingBottom: 6,
+                    paddingHorizontal: 3,
+                    borderTopWidth: rowIdx > 0 ? 1 : 0,
+                    borderLeftWidth: colIdx > 0 ? 1 : 0,
+                    borderColor,
+                    backgroundColor: isSelected ? "rgba(124, 58, 237, 0.08)" : "transparent",
+                    opacity: cell.inMonth ? 1 : 0.36,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View
+                    className="min-w-6 items-center justify-center rounded-full px-1.5 py-0.5"
+                    style={{
+                      backgroundColor: isToday ? BRAND_PURPLE : "transparent",
+                    }}
+                  >
+                    <Typography
+                      className={
+                        isToday
+                          ? "font-bold text-xs"
+                          : isSelected
+                            ? "font-bold text-xs"
+                            : "font-medium text-xs text-foreground"
+                      }
+                      style={isToday ? { color: "#ffffff" } : isSelected ? { color: BRAND_PURPLE } : undefined}
+                    >
+                      {cell.day}
+                    </Typography>
+                  </View>
+
+                  {/* Compact numbered colored dots (1, 2, 3...) */}
+                  <View className="mt-1 flex-row flex-wrap items-center justify-center gap-1">
+                    {list.slice(0, 3).map((entry, dotIdx) => (
+                      <Pressable
+                        key={entry.run.id}
+                        hitSlop={4}
+                        onPress={() => {
+                          uiFeedback.tick();
+                          setSelectedIso(cell.iso);
+                          setSelectedEntryId(entry.run.id);
+                          if (!cell.inMonth) {
+                            setViewYear(cell.year);
+                            setViewMonth(cell.month - 1);
+                          }
+                        }}
+                        className="size-4 items-center justify-center rounded-full"
+                        style={{ backgroundColor: entry.dotColor }}
+                      >
+                        <Typography className="font-bold text-[9px]" style={{ color: "#ffffff", lineHeight: 11 }}>
+                          {dotIdx + 1}
+                        </Typography>
+                      </Pressable>
+                    ))}
+                    {list.length > 3 ? (
+                      <Typography className="font-semibold text-[9px] text-text-secondary">
+                        {`+${list.length - 3}`}
+                      </Typography>
+                    ) : null}
+                  </View>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+
+        {/* Selected Day Schedule Detail Section */}
+        <Animated.View
+          key={selectedIso}
+          entering={FadeInDown.duration(180)}
+          className="gap-3 rounded-2xl p-4"
+          style={{ backgroundColor: cardBg, borderWidth: 1, borderColor }}
+        >
+          <View className="flex-row items-center justify-between">
+            <View className="flex-row items-center gap-2">
+              <Typography className="font-bold text-base text-foreground">{selectedDayHeading}</Typography>
+              {selectedIso === todayIso ? (
+                <View className="rounded-full px-2 py-0.5" style={{ backgroundColor: "rgba(124,58,237,0.14)" }}>
+                  <Typography className="font-semibold text-[11px]" style={{ color: BRAND_PURPLE }}>
+                    {t("mobile.app.calendar.today")}
+                  </Typography>
+                </View>
+              ) : null}
+              {dayEntries.length > 0 ? (
+                <Typography className="text-xs text-text-secondary">
+                  {t("mobile.app.calendar.taskCount", { count: dayEntries.length })}
+                </Typography>
+              ) : null}
+            </View>
+            <SpringPressable
+              feedback="none"
+              onPress={openNewTaskPicker}
+              className="flex-row items-center gap-1 rounded-full bg-control px-3 py-1.5"
+            >
+              <Plus color={BRAND_PURPLE} size={14} strokeWidth={2.4} />
+              <Typography className="font-semibold text-xs" style={{ color: BRAND_PURPLE }}>
+                {t("mobile.app.calendar.addForDay")}
+              </Typography>
+            </SpringPressable>
+          </View>
+
+          {dayEntries.length === 0 ? (
+            <View className="items-center gap-2 py-5">
+              <Typography className="text-sm text-text-secondary">{t("mobile.app.calendar.emptyDay")}</Typography>
+            </View>
+          ) : (
+            <>
+              {/* Numbered dot selector row */}
+              <View className="gap-1.5">
+                <Typography className="text-[11px] text-text-secondary">
+                  {t("mobile.app.calendar.tapDotHint")}
+                </Typography>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+                  {dayEntries.map((entry, idx) => {
+                    const selected = activeEntry?.run.id === entry.run.id;
+                    return (
+                      <SpringPressable
+                        key={entry.run.id}
+                        feedback="tick"
+                        scaleTo={0.95}
+                        onPress={() => setSelectedEntryId(entry.run.id)}
+                        className="flex-row items-center gap-2 rounded-full py-1.5 pr-3 pl-1.5"
+                        style={{
+                          backgroundColor: selected ? "rgba(124,58,237,0.12)" : "transparent",
+                          borderWidth: 1.5,
+                          borderColor: selected ? entry.dotColor : borderColor,
+                        }}
+                      >
+                        <View
+                          className="size-6 items-center justify-center rounded-full"
+                          style={{ backgroundColor: entry.dotColor }}
+                        >
+                          <Typography className="font-bold text-xs" style={{ color: "#ffffff" }}>
+                            {idx + 1}
+                          </Typography>
+                        </View>
+                        <Typography className="font-semibold text-xs text-foreground tabular-nums">
+                          {timeText(entry.run.at)}
+                        </Typography>
+                      </SpringPressable>
+                    );
+                  })}
+                </ScrollView>
+              </View>
+
+              {/* Expanded Task Detail Card */}
+              {activeEntry ? (
+                <Animated.View
+                  key={activeEntry.run.id}
+                  entering={FadeIn.duration(150)}
+                  className="gap-3 rounded-2xl bg-control/60 p-3.5"
+                >
+                  <View className="flex-row items-center gap-3">
+                    {activeEntry.agents[0] ? (
+                      <BloubAvatar
+                        agentId={activeEntry.agents[0].id}
+                        serverId={serverId}
+                        hue={activeEntry.agents[0].avatarHue}
+                        color={activeEntry.agents[0].avatarColor}
+                        seed={activeEntry.agents[0].avatarSeed}
+                        avatarUrl={activeEntry.agents[0].avatarUrl}
+                        size={46}
+                        animateIdle={false}
+                      />
+                    ) : null}
+                    <View className="min-w-0 flex-1 gap-0.5">
+                      <View className="flex-row items-center justify-between gap-2">
+                        <Typography className="min-w-0 flex-1 font-bold text-[15px] text-foreground" numberOfLines={1}>
+                          {activeEntry.routine.name}
+                        </Typography>
+                        <View className="rounded-full bg-background px-2 py-0.5">
+                          <Typography className="font-medium text-[11px] text-text-secondary">
+                            {t(STATUS_LABEL[activeEntry.status])}
+                          </Typography>
+                        </View>
+                      </View>
+                      <View className="flex-row items-center gap-2">
+                        {activeEntry.owner ? (
+                          <Typography className="font-medium text-xs" style={{ color: activeEntry.dotColor }}>
+                            {activeEntry.owner}
+                          </Typography>
+                        ) : null}
+                        <View className="flex-row items-center gap-1">
+                          <Clock color={String(muted)} size={12} />
+                          <Typography className="text-xs text-text-secondary tabular-nums">
+                            {timeText(activeEntry.run.at)}
+                          </Typography>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+
+                  <SpringPressable
+                    feedback="none"
+                    onPress={() => openRoutineDetail(activeEntry.routine)}
+                    className="flex-row items-center justify-center gap-1 rounded-xl bg-background py-2.5"
+                  >
+                    <Typography className="font-semibold text-xs text-foreground">
+                      {t("mobile.app.calendar.editTask")}
+                    </Typography>
+                    <ChevronRight color={String(muted)} size={14} />
+                  </SpringPressable>
+                </Animated.View>
+              ) : null}
+            </>
+          )}
+        </Animated.View>
+
+        <Typography className="text-center text-xs text-text-secondary">
+          {t("mobile.server.routines.timeZone", { zone: timeZone })}
+        </Typography>
+      </LargeTitleScrollView>
+
+      {/* Pick which Bot to create a scheduled task for */}
+      <Modal
+        visible={botPickerOpen}
+        transparent
+        animationType="fade"
+        statusBarTranslucent
+        onRequestClose={() => setBotPickerOpen(false)}
+      >
+        <View className="flex-1 justify-end bg-black/35">
+          <Pressable style={{ flex: 1 }} onPress={() => setBotPickerOpen(false)} />
+          <View
+            style={{
+              backgroundColor: sheetBg,
+              borderTopLeftRadius: 28,
+              borderTopRightRadius: 28,
+              paddingBottom: Math.max(insets.bottom, 16) + 8,
+              maxHeight: "65%",
+            }}
+          >
+            <View className="items-center pt-3 pb-2">
+              <View className="h-1.5 w-10 rounded-full bg-foreground/20" />
+            </View>
+            <View className="flex-row items-center justify-between px-5 pb-1">
+              <Typography className="font-bold text-lg text-foreground">
+                {t("mobile.app.calendar.pickBotTitle")}
+              </Typography>
+              <SpringPressable
+                feedback="close"
+                accessibilityRole="button"
+                accessibilityLabel={t("common.close")}
+                className="size-8 items-center justify-center rounded-full bg-control"
+                onPress={() => setBotPickerOpen(false)}
+              >
+                <X color={String(muted)} size={17} strokeWidth={2.2} />
+              </SpringPressable>
+            </View>
+            <Typography className="px-5 pb-3 text-xs text-text-secondary">
+              {t("mobile.app.calendar.pickBotSubtitle")}
+            </Typography>
+            <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 12 }}>
+              <View
+                className="overflow-hidden rounded-2xl"
+                style={{ backgroundColor: cardBg, borderWidth: 1, borderColor }}
+              >
+                {serverAgents.map((agent, idx) => (
+                  <SpringPressable
+                    key={agent.id}
+                    feedback="none"
+                    scaleTo={0.985}
+                    onPress={() => openCreateForAgent(agent)}
+                    className="flex-row items-center justify-between px-4 py-3"
+                    style={idx > 0 ? { borderTopWidth: 1, borderTopColor: borderColor } : undefined}
+                  >
+                    <View className="min-w-0 flex-1 flex-row items-center gap-3">
+                      <BloubAvatar
+                        agentId={agent.id}
+                        serverId={agent.serverId}
+                        hue={agent.avatarHue}
+                        color={agent.avatarColor}
+                        seed={agent.avatarSeed}
+                        avatarUrl={agent.avatarUrl}
+                        size={42}
+                        animateIdle={false}
+                      />
+                      <Typography
+                        className="min-w-0 flex-1 font-semibold text-[15px] text-foreground"
+                        numberOfLines={1}
+                      >
+                        {agent.name}
+                      </Typography>
+                    </View>
+                    <ChevronRight color={String(muted)} size={17} />
+                  </SpringPressable>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 }

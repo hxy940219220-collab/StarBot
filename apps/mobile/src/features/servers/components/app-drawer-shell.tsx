@@ -354,6 +354,7 @@ export function AppDrawerShell({ children }: PropsWithChildren) {
                 sideInset={drawerSideInset}
                 topInset={insets.top}
                 onNavigate={navigateAfterClosing}
+                onClose={closeDrawer}
                 onLeave={leaveServer}
                 onRemove={removeServer}
                 onDelete={deleteLocalServer}

@@ -7,13 +7,14 @@ import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import BookBookmark from "lucide-react-native/icons/book-bookmark";
 import CalendarClock from "lucide-react-native/icons/calendar-clock";
+import Check from "lucide-react-native/icons/check";
 import Crown from "lucide-react-native/icons/crown";
 import Pencil from "lucide-react-native/icons/pencil";
 import Trash2 from "lucide-react-native/icons/trash";
-import Users from "lucide-react-native/icons/users";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Pressable, View } from "react-native";
 import { useUniwind } from "uniwind";
+import { BloubAvatar } from "@/features/agents/components/bloub-avatar";
 import { ChannelAvatar } from "@/features/channels/components/channel-avatar";
 import { ChannelContextActions } from "@/features/channels/components/channel-context-actions";
 import { ChannelFoldersRow } from "@/features/channels/components/channel-folders";
@@ -30,9 +31,10 @@ import { SheetCloseAction } from "@/shared/components/sheet-close-action";
 import { SheetFormField } from "@/shared/components/sheet-form-field";
 import { SheetSaveAction } from "@/shared/components/sheet-save-action";
 import { SheetScrollView } from "@/shared/components/sheet-scroll-view";
+import { SpringPressable } from "@/shared/components/spring-pressable";
 import { haptics } from "@/shared/lib/haptics";
 import { currentText, useText } from "@/shared/lib/text";
-import { useChannelAgentPicker } from "../model/channel-agent-picker";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { toggleChannelMember } from "../model/channel-draft";
 import type { MobileChannelStore } from "../model/channel-store";
 
@@ -102,7 +104,6 @@ function ChannelForm({
   const canManage = role !== "member";
   const canManageFolders = useMobileWorkspaceSelector((current) => current.canManageChannelFolders(serverId));
   const { theme } = useUniwind();
-  const openAgentPicker = useChannelAgentPicker((state) => state.open);
   const foreground = String(useThemeColor("foreground"));
   const [edits, setEdits] = useState<Partial<ChannelDraft>>({});
   const [saving, setSaving] = useState(false);
@@ -198,6 +199,22 @@ function ChannelForm({
       return { ...current, members: next.members, leadAgentId: next.leadAgentId };
     });
   }, []);
+  const selectedMemberIds = useMemo(() => new Set(draft.members.map((member) => member.agentId)), [draft.members]);
+  const allSelected = choices.length > 0 && choices.every((agent) => selectedMemberIds.has(agent.id));
+  const toggleAllMembers = () => {
+    if (disabled || choices.length === 0) return;
+    uiFeedback.tick();
+    if (allSelected) {
+      setEdits((current) => ({ ...current, members: [], leadAgentId: null }));
+    } else {
+      const nextMembers = choices.map((agent) => ({ agentId: agent.id }));
+      setEdits((current) => ({
+        ...current,
+        members: nextMembers,
+        leadAgentId: draft.leadAgentId ?? nextMembers[0]?.agentId ?? null,
+      }));
+    }
+  };
   return (
     <SheetScrollView
       className="bg-sheet"
@@ -276,43 +293,111 @@ function ChannelForm({
           />
         </>
       ) : null}
-      <SettingsSection>
-        <SettingsRow
-          leading={<RowIcon icon={Users} />}
-          value={String(draft.members.length)}
-          disabled={disabled}
-          onPress={() => {
-            openAgentPicker({ serverId, members: draft.members.map((member) => member.agentId), toggle });
-            router.push(
-              create
-                ? { pathname: "/add-channel/agents" }
-                : { pathname: "/channel-info/[channelId]/agents", params: { channelId, serverId } },
-            );
-          }}
-        >
-          <Typography.Paragraph>{t("mobile.channel.form.agents")}</Typography.Paragraph>
-        </SettingsRow>
-        {leadOptions.length > 0 && draft.leadAgentId ? (
-          <SettingsRow
-            leading={<RowIcon icon={Crown} />}
-            trailing={
-              <SettingsPicker
-                value={draft.leadAgentId}
-                options={leadOptions}
-                enabled={!disabled}
-                dark={theme === "dark"}
-                label={t("mobile.channel.form.lead")}
-                onChange={(leadAgentId) => {
-                  void haptics.selection();
-                  setEdits((current) => ({ ...current, leadAgentId }));
-                }}
-              />
-            }
-          >
-            <Typography.Paragraph>{t("mobile.channel.form.lead")}</Typography.Paragraph>
-          </SettingsRow>
-        ) : null}
-      </SettingsSection>
+      <View className="gap-2">
+        <View className="flex-row items-center justify-between px-1">
+          <View className="flex-row items-center gap-2">
+            <Typography className="font-semibold text-xs text-grouped-secondary">
+              {t("mobile.channel.form.agents")}
+            </Typography>
+            <Typography className="text-xs text-muted">
+              {t("mobile.app.channelSelectedCount", { count: draft.members.length, total: choices.length })}
+            </Typography>
+          </View>
+          {choices.length > 0 ? (
+            <SpringPressable
+              feedback="none"
+              disabled={disabled}
+              onPress={toggleAllMembers}
+              className="rounded-full px-3 py-1"
+              style={{ backgroundColor: "rgba(124,58,237,0.12)", opacity: disabled ? 0.5 : 1 }}
+            >
+              <Typography className="font-semibold text-xs" style={{ color: "#7c3aed" }}>
+                {t(allSelected ? "mobile.channel.form.deselectAll" : "mobile.channel.form.selectAll")}
+              </Typography>
+            </SpringPressable>
+          ) : null}
+        </View>
+
+        <SettingsSection>
+          {choices.length === 0 ? (
+            <SettingsRow>
+              <Typography.Paragraph className="text-grouped-secondary">
+                {t("mobile.channel.form.noAgents")}
+              </Typography.Paragraph>
+            </SettingsRow>
+          ) : (
+            choices.map((agent) => {
+              const checked = selectedMemberIds.has(agent.id);
+              return (
+                <SettingsRow
+                  key={agent.id}
+                  disclosure={false}
+                  disabled={disabled}
+                  leading={
+                    <BloubAvatar
+                      agentId={agent.id}
+                      serverId={agent.serverId}
+                      hue={agent.avatarHue}
+                      color={agent.avatarColor}
+                      seed={agent.avatarSeed}
+                      avatarUrl={agent.avatarUrl}
+                      size={44}
+                      animateIdle={false}
+                    />
+                  }
+                  trailing={
+                    <View
+                      className="size-6 items-center justify-center rounded-full"
+                      style={{
+                        backgroundColor: checked ? "#7c3aed" : "transparent",
+                        borderWidth: checked ? 0 : 1.5,
+                        borderColor: "rgba(128,128,128,0.4)",
+                      }}
+                    >
+                      {checked ? <Check color="#ffffff" size={14} strokeWidth={2.6} /> : null}
+                    </View>
+                  }
+                  onPress={() => {
+                    uiFeedback.tick();
+                    toggle(agent.id);
+                  }}
+                >
+                  <View className="min-w-0">
+                    <Typography.Paragraph className="font-medium" numberOfLines={1}>
+                      {agent.name}
+                    </Typography.Paragraph>
+                    {agent.model ? (
+                      <Typography className="text-xs text-grouped-secondary" numberOfLines={1}>
+                        {agent.model}
+                      </Typography>
+                    ) : null}
+                  </View>
+                </SettingsRow>
+              );
+            })
+          )}
+          {leadOptions.length > 1 && draft.leadAgentId ? (
+            <SettingsRow
+              leading={<RowIcon icon={Crown} />}
+              trailing={
+                <SettingsPicker
+                  value={draft.leadAgentId}
+                  options={leadOptions}
+                  enabled={!disabled}
+                  dark={theme === "dark"}
+                  label={t("mobile.channel.form.lead")}
+                  onChange={(leadAgentId) => {
+                    uiFeedback.tick();
+                    setEdits((current) => ({ ...current, leadAgentId }));
+                  }}
+                />
+              }
+            >
+              <Typography.Paragraph>{t("mobile.channel.form.lead")}</Typography.Paragraph>
+            </SettingsRow>
+          ) : null}
+        </SettingsSection>
+      </View>
       {!create && !channel?.archived ? (
         <SettingsSection>
           <SettingsRow

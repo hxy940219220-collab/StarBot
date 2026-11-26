@@ -65,6 +65,7 @@ import { nativeSplash } from "@/shared/lib/native-splash";
 import { isAndroid, isIOS } from "@/shared/lib/platform";
 import { queryClient } from "@/shared/lib/query-client";
 import { useText } from "@/shared/lib/text";
+import { loadUiSoundPreference } from "@/shared/lib/ui-feedback";
 import { untilForeground } from "@/shared/lib/until-foreground";
 import { SplashContentReadyContext, useSplashGate } from "@/shared/lib/use-splash-gate";
 
@@ -73,6 +74,7 @@ export const unstable_settings = {
 };
 
 installSupportLog();
+void loadUiSoundPreference();
 installQuickActions();
 installShortcuts();
 installAppLock();
