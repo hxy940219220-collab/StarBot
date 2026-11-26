@@ -13,6 +13,7 @@ import { type MessageChannelTargets, type MessageFiles, openMessageActions } fro
 
 export interface MessageActionsInput {
   messageId: string;
+  align?: "start" | "end";
   copyText: string;
   createdAt?: string;
   reactions?: readonly ConversationReaction[];
@@ -23,6 +24,7 @@ export interface MessageActionsInput {
   readAloudId?: string;
   sendToChannel?: MessageChannelTargets;
   onDelete?: () => Promise<void>;
+  onMultiDelete?: () => void;
   onMarkUnread?: () => void;
   pinned?: boolean;
   onTogglePin?: () => Promise<void>;
@@ -86,6 +88,7 @@ export function useMessageActions(input: MessageActionsInput | null) {
     ? () =>
         openMessageActions({
           messageId: input.messageId,
+          align: input.align,
           copyText: input.copyText,
           createdAt: input.createdAt,
           ownReaction: own,
@@ -99,6 +102,7 @@ export function useMessageActions(input: MessageActionsInput | null) {
           onTogglePin: togglePin,
           sendToChannel: input.sendToChannel,
           onDelete: confirmDelete,
+          onMultiDelete: input.onMultiDelete,
           files: input.files,
         })
     : undefined;

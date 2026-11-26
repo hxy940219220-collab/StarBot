@@ -61,7 +61,15 @@ export function useLargeTitleScroll(customBar?: { headerHeight: number }): Large
   return { onScroll, scrolled, titleHeight, headerHeight, barTop, ownsInset, nativeBar: customBar === undefined };
 }
 
-export function LargeTitle({ scroll, title, caption }: { scroll: LargeTitleScroll; title: string; caption?: string }) {
+export function LargeTitle({
+  scroll,
+  title,
+  caption: _caption,
+}: {
+  scroll: LargeTitleScroll;
+  title: string;
+  caption?: string;
+}) {
   const reduced = useReducedMotion();
   const { scrolled, titleHeight } = scroll;
   const titleStyle = useAnimatedStyle(() => {
@@ -87,11 +95,6 @@ export function LargeTitle({ scroll, title, caption }: { scroll: LargeTitleScrol
       style={{ paddingBottom: TITLE_BOTTOM_PADDING }}
       onLayout={(event) => titleHeight.set(event.nativeEvent.layout.height)}
     >
-      {caption ? (
-        <Typography.Paragraph className="text-muted" numberOfLines={1} style={typeScale.caption}>
-          {caption}
-        </Typography.Paragraph>
-      ) : null}
       <View accessible accessibilityRole="header">
         <Animated.View style={[{ transformOrigin: "left center" }, titleStyle]}>
           <Typography.Heading

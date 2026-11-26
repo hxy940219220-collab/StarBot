@@ -14,10 +14,25 @@ import { typeScale } from "@/shared/lib/type-scale";
 import { CATEGORY_LABELS, KIND_SINGULAR_LABELS, type MarketplaceListing } from "../model/marketplace-listings";
 import { ListingGradient } from "./listing-gradient";
 
+const CURATED_BRAND_PALETTE: Readonly<Record<string, { bg: string; fg: string; glyph: string }>> = {
+  canva: { bg: "#00C4CC", fg: "#ffffff", glyph: "C" },
+  notion: { bg: "#191919", fg: "#ffffff", glyph: "N" },
+  figma: { bg: "#F24E1E", fg: "#ffffff", glyph: "F" },
+  vercel: { bg: "#111111", fg: "#ffffff", glyph: "▲" },
+  obsidian: { bg: "#7C3AED", fg: "#ffffff", glyph: "◆" },
+  "apple-apps": { bg: "#1C1C1E", fg: "#ffffff", glyph: "" },
+  gitlab: { bg: "#FC6D26", fg: "#ffffff", glyph: "G" },
+  cloudflare: { bg: "#F38020", fg: "#ffffff", glyph: "☁" },
+  supabase: { bg: "#10B981", fg: "#ffffff", glyph: "⚡" },
+  huggingface: { bg: "#FFD21E", fg: "#18181B", glyph: "🤗" },
+  feishu: { bg: "#3370FF", fg: "#ffffff", glyph: "飞" },
+  linear: { bg: "#5E6AD2", fg: "#ffffff", glyph: "L" },
+};
+
 export function ListingIcon({ listing, size = 44 }: { listing: MarketplaceListing; size?: number }) {
   const [failed, setFailed] = useState(false);
   const [surface, muted] = useThemeColor(["surface-secondary", "muted"]);
-  const radius = listing.kind === "agent" ? size / 2 : Math.round(size * 0.23);
+  const radius = listing.kind === "agent" ? size / 2 : Math.round(size * 0.24);
   if (listing.kind === "app" && listing.source === "connector")
     return <ConnectorLogo id={listing.connector} size={size} />;
   if (listing.imageUrl && !failed)
@@ -33,6 +48,7 @@ export function ListingIcon({ listing, size = 44 }: { listing: MarketplaceListin
     );
   if (listing.kind === "agent")
     return <AvatarThumbnail seed={listing.avatarSeed} hue={listing.avatarHue} size={size} />;
+  const brand = listing.kind === "app" ? CURATED_BRAND_PALETTE[listing.id] : undefined;
   return (
     <View
       className="items-center justify-center"
@@ -41,14 +57,19 @@ export function ListingIcon({ listing, size = 44 }: { listing: MarketplaceListin
         height: size,
         borderRadius: radius,
         borderCurve: "continuous",
-        backgroundColor: String(surface),
+        backgroundColor: brand ? brand.bg : String(surface),
       }}
     >
-      <Typography.Paragraph
-        style={{ ...typeScale.rowTitle, color: String(muted), fontSize: size * 0.4, lineHeight: size * 0.5 }}
+      <Typography
+        className="font-bold"
+        style={{
+          color: brand ? brand.fg : String(muted),
+          fontSize: Math.round(size * 0.42),
+          lineHeight: Math.round(size * 0.52),
+        }}
       >
-        {listing.name.slice(0, 1).toLocaleUpperCase()}
-      </Typography.Paragraph>
+        {brand ? brand.glyph : listing.name.slice(0, 1).toLocaleUpperCase()}
+      </Typography>
     </View>
   );
 }

@@ -17,6 +17,46 @@ export type MarketplaceKind = "agent" | "app" | "skill";
 
 export const MARKETPLACE_KINDS: readonly MarketplaceKind[] = ["agent", "app", "skill"];
 
+/** Curated mainstream apps requested for StarBot Marketplace (removes hundreds of obscure plugins). */
+export const CURATED_PLUGIN_ORDER = [
+  "canva",
+  "notion",
+  "figma",
+  "vercel",
+  "obsidian",
+  "apple-apps",
+  "gitlab",
+  "cloudflare",
+  "supabase",
+  "huggingface",
+  "feishu",
+  "linear",
+] as const;
+
+export const CURATED_CONNECTOR_IDS: ReadonlySet<MobileConnectorId> = new Set([
+  "discord",
+  "github",
+  "slack",
+  "telegram",
+]);
+
+export const CURATED_APP_DESC_KEYS: Readonly<Record<string, MobileTextKey>> = {
+  canva: "mobile.app.market.canvaDesc",
+  notion: "mobile.app.market.notionDesc",
+  figma: "mobile.app.market.figmaDesc",
+  "connector:discord": "mobile.app.market.discordDesc",
+  "connector:github": "mobile.app.market.githubDesc",
+  vercel: "mobile.app.market.vercelDesc",
+  obsidian: "mobile.app.market.obsidianDesc",
+  "apple-apps": "mobile.app.market.appleDesc",
+  gitlab: "mobile.app.market.gitlabDesc",
+  cloudflare: "mobile.app.market.cloudflareDesc",
+  supabase: "mobile.app.market.supabaseDesc",
+  huggingface: "mobile.app.market.hfDesc",
+  feishu: "mobile.app.market.feishuDesc",
+  linear: "mobile.app.market.linearDesc",
+};
+
 interface ListingBase {
   id: string;
   name: string;
@@ -74,21 +114,27 @@ export function skillListing(apiUrl: string, skill: MarketplaceSkillSummary): Ma
   };
 }
 
-export function appListings(apiUrl: string): MarketplaceListing[] {
-  return MOBILE_PLUGINS.map(
-    (plugin): MarketplaceListing => ({
-      kind: "app",
-      id: plugin.slug,
-      name: plugin.name,
-      description: plugin.tagline,
-      category: plugin.category,
-      creatorName: plugin.creatorName,
-      imageUrl: plugin.apps[0] ? pluginIconUrl(apiUrl, plugin.slug, plugin.apps[0].id) : null,
-      featured: plugin.featured,
-      source: "plugin",
-      plugin,
-    }),
-  );
+export function appListings(apiUrl: string, t?: MobileTranslate): MarketplaceListing[] {
+  const bySlug = new Map(MOBILE_PLUGINS.map((plugin) => [plugin.slug, plugin]));
+  return CURATED_PLUGIN_ORDER.flatMap((slug): MarketplaceListing[] => {
+    const plugin = bySlug.get(slug);
+    if (!plugin) return [];
+    const descKey = CURATED_APP_DESC_KEYS[plugin.slug];
+    return [
+      {
+        kind: "app",
+        id: plugin.slug,
+        name: plugin.slug === "apple-apps" ? "Apple Apps" : plugin.name,
+        description: descKey && t ? t(descKey) : plugin.tagline,
+        category: plugin.category,
+        creatorName: plugin.creatorName,
+        imageUrl: plugin.apps[0] ? pluginIconUrl(apiUrl, plugin.slug, plugin.apps[0].id) : null,
+        featured: true,
+        source: "plugin",
+        plugin,
+      },
+    ];
+  });
 }
 
 const CONNECTOR_CATEGORY = {
@@ -104,17 +150,17 @@ const CONNECTOR_CATEGORY = {
 
 export const CONNECTOR_TAGLINES = {
   slack: "mobile.marketplace.app.slackTagline",
-  discord: "mobile.marketplace.app.discordTagline",
+  discord: "mobile.app.market.discordDesc",
   telegram: "mobile.marketplace.app.telegramTagline",
   whatsapp: "mobile.marketplace.app.whatsappTagline",
-  github: "mobile.marketplace.app.githubTagline",
+  github: "mobile.app.market.githubDesc",
   onepassword: "mobile.marketplace.app.onePasswordTagline",
   bitwarden: "mobile.marketplace.app.bitwardenTagline",
   protonpass: "mobile.marketplace.app.protonPassTagline",
 } as const satisfies Record<MobileConnectorId, MobileTextKey>;
 
 export function connectorListing(row: ConnectorRow, name: string, tagline: string): MarketplaceListing | null {
-  if (row.status === "unavailable") return null;
+  if (row.status === "unavailable" || !CURATED_CONNECTOR_IDS.has(row.id)) return null;
   return {
     kind: "app",
     source: "connector",
@@ -124,10 +170,18 @@ export function connectorListing(row: ConnectorRow, name: string, tagline: strin
     category: CONNECTOR_CATEGORY[row.id],
     creatorName: "",
     imageUrl: null,
-    featured: false,
+    featured: true,
     connector: row.id,
     connected: row.status !== "idle" && row.status !== "unknown",
   };
+}
+
+export function isInternalConnectorMcp(server: McpServerConfig): boolean {
+  const detail = mcpServerDetail(server).toLowerCase();
+  const name = server.name.toLowerCase();
+  return (
+    detail.includes(".starbot-connectors") || detail.includes("starbot-cli-mcp-") || name.startsWith("starbot-cli-mcp-")
+  );
 }
 
 export function customListing(server: McpServerConfig): MarketplaceListing {

@@ -1,17 +1,46 @@
+import { router } from "expo-router";
 import { Stack } from "expo-router/stack";
-import { useCSSVariable } from "uniwind";
+import { useThemeColor } from "heroui-native/hooks";
+import ChevronLeft from "lucide-react-native/icons/chevron-left";
+import { Pressable } from "react-native";
+import { useCSSVariable, useUniwind } from "uniwind";
 import { sheetStackOptions } from "@/shared/components/sheet-page-stack";
+import { isIOS } from "@/shared/lib/platform";
 import { sheetBackHaptics } from "@/shared/lib/sheet-back-haptics";
 import { useText } from "@/shared/lib/text";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 
 export const unstable_settings = { anchor: "index" };
 
 export default function AgentInfoLayout() {
   const { t } = useText();
-  const background = String(useCSSVariable("--openbot-bg-sheet"));
+  const { theme } = useUniwind();
+  const sheetBg = String(useCSSVariable("--openbot-bg-sheet"));
+  const background = theme === "dark" ? sheetBg : "#f6f7fb";
+  const foreground = useThemeColor("foreground");
+
   return (
-    <Stack screenListeners={sheetBackHaptics} screenOptions={sheetStackOptions(background)}>
-      <Stack.Screen name="index" options={{ title: t("mobile.agent.menu.info") }} />
+    <Stack screenListeners={sheetBackHaptics} screenOptions={sheetStackOptions(background, { insets: false })}>
+      <Stack.Screen
+        name="index"
+        options={{
+          title: t("mobile.app.profile.title"),
+          headerLeft: () => (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t("common.back")}
+              hitSlop={10}
+              onPress={() => {
+                uiFeedback.close();
+                router.back();
+              }}
+              className="size-9 items-center justify-center rounded-full"
+            >
+              <ChevronLeft color={String(foreground)} size={isIOS ? 24 : 22} strokeWidth={2.2} />
+            </Pressable>
+          ),
+        }}
+      />
       <Stack.Screen name="appearance" options={{ title: t("mobile.agent.route.appearance") }} />
       <Stack.Screen name="usage" options={{ title: t("mobile.agent.info.usage.title") }} />
       <Stack.Screen name="memories" options={{ title: t("mobile.agent.info.memories.title") }} />

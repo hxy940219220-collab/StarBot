@@ -1,23 +1,19 @@
 import { type AttachmentSummary, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@openbot/contracts/ipc";
 import { BlurView } from "expo-blur";
-import { router } from "expo-router";
 import { Typography } from "heroui-native";
-import { useThemeColor } from "heroui-native/hooks";
 import Copy from "lucide-react-native/icons/copy";
 import SmilePlus from "lucide-react-native/icons/face-slightly-smiling-plus";
 import Forward from "lucide-react-native/icons/forward";
 import GitFork from "lucide-react-native/icons/git-fork";
 import Hash from "lucide-react-native/icons/hash";
-import Pin from "lucide-react-native/icons/pin";
-import PinOff from "lucide-react-native/icons/pin-off";
 import Reply from "lucide-react-native/icons/reply";
 import Square from "lucide-react-native/icons/square";
 import TextCursor from "lucide-react-native/icons/text-cursor";
 import Trash2 from "lucide-react-native/icons/trash";
 import Volume2 from "lucide-react-native/icons/volume-2";
-import { useEffect, useRef, useState } from "react";
-import { Pressable, ScrollView, Share, StyleSheet, View } from "react-native";
-import Animated, { FadeIn, ReduceMotion, ZoomIn } from "react-native-reanimated";
+import { useEffect, useState } from "react";
+import { BackHandler, Pressable, Share, StyleSheet, View } from "react-native";
+import Animated, { FadeIn, FadeInDown, FadeOut, ReduceMotion, ZoomIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useCSSVariable, useUniwind } from "uniwind";
 import { canReadAloud, toggleReadAloud, useReadingAloud } from "@/features/voice/model/message-reading";
@@ -29,196 +25,281 @@ import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { MessageFileActions } from "../components/message-file-actions";
 import { copyToClipboard } from "../components/use-copy-message";
 import { MOBILE_LARGE_FILE_BYTES } from "../model/large-files";
-import { releaseMessageActions, useMessageActionsRequest } from "../model/message-actions-sheet";
+import { closeMessageActions, useMessageActionsRequest } from "../model/message-actions-sheet";
 
-const ICON_SIZE = 19;
+const ICON_SIZE = 17;
 const NO_FILES: readonly AttachmentSummary[] = [];
 const QUICK_EMOJIS = ["👍", "❤️", "😂", "😮", "😢", "🙏"] as const;
 
-export function MessageActionsScreen() {
+function pad2(num: number): string {
+  return String(num).padStart(2, "0");
+}
+
+export function MessageActionsOverlay() {
   const { t, format } = useText();
   const insets = useSafeAreaInsets();
   const { theme } = useUniwind();
+  const dark = theme === "dark";
   const request = useMessageActionsRequest();
-  const [foreground, muted] = useThemeColor(["foreground", "muted"]);
-  const danger = String(useCSSVariable("--openbot-danger-text"));
-  const surfaceBg = String(useCSSVariable("--openbot-bg-grouped") ?? "#ffffff");
-  const borderColor = String(useCSSVariable("--openbot-border-grouped") ?? "rgba(0,0,0,0.08)");
+  const danger = String(useCSSVariable("--openbot-danger-text") ?? "#ef4444");
+
+  // Crisp pure card surface + defined edge border & multi-layer elevation shadow (matching Cue reference!)
+  const cardSurface = dark ? "#24242c" : "#ffffff";
+  const cardBorder = dark ? "rgba(255, 255, 255, 0.14)" : "rgba(15, 23, 42, 0.09)";
+  const dividerColor = dark ? "rgba(255, 255, 255, 0.08)" : "rgba(15, 23, 42, 0.06)";
+  const iconColor = dark ? "#f4f4f5" : "#18181b";
+  const mutedText = dark ? "#a1a1aa" : "#8e8e93";
+
   const [moreEmoji, setMoreEmoji] = useState(false);
   const reading = useReadingAloud(request?.readAloudId ?? "");
-  const attachments = (request?.files?.attachments ?? NO_FILES).filter(
-    (attachment) => attachment.size <= MOBILE_LARGE_FILE_BYTES,
-  );
-  const afterClose = useRef<(() => void) | undefined>(undefined);
 
   useEffect(() => {
+    if (!request) {
+      setMoreEmoji(false);
+      return;
+    }
     uiFeedback.open();
-  }, []);
-
-  useEffect(
-    () => () => {
-      releaseMessageActions(request);
-      afterClose.current?.();
-      afterClose.current = undefined;
-    },
-    [request],
-  );
+    const sub = BackHandler.addEventListener("hardwareBackPress", () => {
+      uiFeedback.close();
+      closeMessageActions();
+      return true;
+    });
+    return () => sub.remove();
+  }, [request]);
 
   if (!request) return null;
 
+  const attachments = (request.files?.attachments ?? NO_FILES).filter(
+    (attachment) => attachment.size <= MOBILE_LARGE_FILE_BYTES,
+  );
+
   const close = () => {
     uiFeedback.close();
-    router.back();
+    closeMessageActions();
   };
 
-  const run = (action: () => void) => {
-    uiFeedback.confirm();
-    action();
-    router.back();
+  const runAfterClose = (action: () => void, feedback: "confirm" | "tap" | "cancel" = "confirm") => {
+    if (feedback === "confirm") uiFeedback.confirm();
+    else if (feedback === "cancel") uiFeedback.recCancel();
+    else uiFeedback.tap();
+    closeMessageActions();
+    setTimeout(action, 40);
   };
 
-  const iconColor = String(foreground);
   const readAloudId = request.copyText ? request.readAloudId : undefined;
   const sendToChannel = request.sendToChannel?.channels.length ? request.sendToChannel : undefined;
-  const afterSheet = (action: () => void) => {
-    afterClose.current = action;
-    router.back();
-  };
-  const sent = request.createdAt
-    ? format.date(new Date(request.createdAt), { dateStyle: "short", timeStyle: "short" })
-    : undefined;
 
-  const reactionList = moreEmoji
-    ? [...new Set([...QUICK_EMOJIS, ...MESSAGE_REACTIONS, ...MORE_MESSAGE_REACTIONS])]
-    : [...QUICK_EMOJIS];
+  // Smart human-friendly relative timestamp ("今天, 08:44" / "昨天, 21:43")
+  const sentLabel = (() => {
+    if (!request.createdAt) return undefined;
+    const d = new Date(request.createdAt);
+    if (Number.isNaN(d.getTime())) return undefined;
+    const hhmm = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+    const now = new Date();
+    const isToday =
+      d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
+    if (isToday) return t("mobile.app.chatTimeToday", { time: hhmm });
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    const isYesterday =
+      d.getFullYear() === yesterday.getFullYear() &&
+      d.getMonth() === yesterday.getMonth() &&
+      d.getDate() === yesterday.getDate();
+    if (isYesterday) return t("mobile.app.chatTimeYesterday", { time: hhmm });
+    return `${format.date(d, { month: "short", day: "numeric" })}, ${hhmm}`;
+  })();
+
+  const expandedEmojis = [...new Set([...QUICK_EMOJIS, ...MESSAGE_REACTIONS, ...MORE_MESSAGE_REACTIONS])].slice(0, 18);
+  const isEnd = request.align === "end";
 
   const handleForward = () => {
     const shareText = request.copyText?.trim();
     if (!shareText) return;
-    afterSheet(() => {
+    runAfterClose(() => {
       void Share.share({ message: shareText }).catch(() => undefined);
-    });
+    }, "tap");
   };
 
   return (
-    <View className="flex-1">
-      <Animated.View entering={FadeIn.duration(150)} style={StyleSheet.absoluteFill}>
+    <Animated.View
+      entering={FadeIn.duration(140)}
+      exiting={FadeOut.duration(120)}
+      style={[StyleSheet.absoluteFill, { zIndex: 999 }]}
+      pointerEvents="box-none"
+    >
+      {/* Crisp Frosted Backdrop */}
+      <View style={StyleSheet.absoluteFill}>
         <BlurView
-          intensity={52}
-          tint={theme === "dark" ? "systemChromeMaterialDark" : "systemChromeMaterialLight"}
+          intensity={50}
+          tint={dark ? "systemChromeMaterialDark" : "systemChromeMaterialLight"}
           style={StyleSheet.absoluteFill}
         />
         <Pressable
           style={[
             StyleSheet.absoluteFill,
-            { backgroundColor: theme === "dark" ? "rgba(0,0,0,0.34)" : "rgba(0,0,0,0.14)" },
+            {
+              backgroundColor: dark ? "rgba(0, 0, 0, 0.42)" : "rgba(241, 243, 249, 0.42)",
+            },
           ]}
           onPress={close}
         />
-      </Animated.View>
+      </View>
 
       <View
         pointerEvents="box-none"
-        className="flex-1 justify-center px-5"
-        style={{ paddingTop: insets.top + 24, paddingBottom: insets.bottom + 24 }}
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          paddingHorizontal: 18,
+          paddingTop: insets.top + 20,
+          paddingBottom: insets.bottom + 24,
+        }}
       >
-        <Animated.View
-          entering={ZoomIn.duration(180).reduceMotion(ReduceMotion.System)}
-          className="gap-3"
+        <View
           pointerEvents="box-none"
+          style={{
+            gap: 8,
+            alignItems: isEnd ? "flex-end" : "flex-start",
+          }}
         >
-          {/* Floating single-row Emoji Reaction Pill */}
+          {/* 1. Crisp Elevated Emoji Reaction Pill */}
           {request.onReact ? (
-            <View
+            <Animated.View
+              entering={ZoomIn.springify().damping(19).stiffness(280).reduceMotion(ReduceMotion.System)}
               accessibilityRole="toolbar"
               accessibilityLabel={t("mobile.chat.message.addReaction")}
-              className="self-start rounded-full px-2 py-1.5"
               style={{
-                backgroundColor: surfaceBg,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 6 },
-                shadowOpacity: 0.14,
-                shadowRadius: 16,
-                maxWidth: "100%",
+                backgroundColor: cardSurface,
+                borderRadius: moreEmoji ? 24 : 26,
+                paddingHorizontal: 9,
+                paddingVertical: 5,
+                maxWidth: 320,
+                borderWidth: 1,
+                borderColor: cardBorder,
+                shadowColor: "#0f172a",
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: dark ? 0.36 : 0.12,
+                shadowRadius: 20,
+                elevation: 10,
               }}
             >
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ alignItems: "center", gap: 4 }}
-              >
-                {reactionList.map((emoji) => {
-                  const selected = emoji === request.ownReaction;
-                  return (
-                    <SpringPressable
-                      key={emoji}
-                      feedback="tick"
-                      scaleTo={0.86}
-                      accessibilityRole="button"
-                      accessibilityLabel={
-                        selected
-                          ? t("mobile.chat.message.removeReaction", { emoji })
-                          : t("mobile.chat.message.react", { emoji })
-                      }
-                      accessibilityState={{ selected }}
-                      onPress={() => run(() => request.onReact?.(selected ? null : emoji))}
-                      className="size-10 items-center justify-center rounded-full"
-                      style={{
-                        backgroundColor: selected ? "rgba(124,58,237,0.16)" : "transparent",
-                      }}
-                    >
-                      <Typography className="text-[22px]">{emoji}</Typography>
-                    </SpringPressable>
-                  );
-                })}
-                {!moreEmoji ? (
+              {!moreEmoji ? (
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 3, height: 38 }}>
+                  {QUICK_EMOJIS.map((emoji) => {
+                    const selected = emoji === request.ownReaction;
+                    return (
+                      <SpringPressable
+                        key={emoji}
+                        feedback="tick"
+                        scaleTo={0.82}
+                        accessibilityRole="button"
+                        accessibilityLabel={
+                          selected
+                            ? t("mobile.chat.message.removeReaction", { emoji })
+                            : t("mobile.chat.message.react", { emoji })
+                        }
+                        accessibilityState={{ selected }}
+                        onPress={() => runAfterClose(() => request.onReact?.(selected ? null : emoji))}
+                        style={{
+                          width: 38,
+                          height: 38,
+                          borderRadius: 19,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          backgroundColor: selected ? "rgba(124,58,237,0.15)" : "transparent",
+                        }}
+                      >
+                        <Typography className="text-[23px]">{emoji}</Typography>
+                      </SpringPressable>
+                    );
+                  })}
                   <SpringPressable
                     feedback="tick"
-                    scaleTo={0.88}
+                    scaleTo={0.86}
                     accessibilityRole="button"
                     accessibilityLabel={t("mobile.chat.message.moreEmoji")}
                     onPress={() => setMoreEmoji(true)}
-                    className="size-9 items-center justify-center rounded-full bg-control"
+                    style={{
+                      width: 34,
+                      height: 34,
+                      borderRadius: 17,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginLeft: 2,
+                      backgroundColor: dark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.05)",
+                      borderWidth: StyleSheet.hairlineWidth,
+                      borderColor: cardBorder,
+                    }}
                   >
-                    <SmilePlus size={19} color={String(muted)} />
+                    <SmilePlus size={18} color={iconColor} />
                   </SpringPressable>
-                ) : null}
-              </ScrollView>
-            </View>
+                </View>
+              ) : (
+                <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 4, width: 276, justifyContent: "center" }}>
+                  {expandedEmojis.map((emoji) => {
+                    const selected = emoji === request.ownReaction;
+                    return (
+                      <SpringPressable
+                        key={emoji}
+                        feedback="tick"
+                        scaleTo={0.85}
+                        accessibilityRole="button"
+                        onPress={() => runAfterClose(() => request.onReact?.(selected ? null : emoji))}
+                        style={{
+                          width: 42,
+                          height: 42,
+                          borderRadius: 21,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          backgroundColor: selected ? "rgba(124,58,237,0.16)" : "transparent",
+                        }}
+                      >
+                        <Typography className="text-[22px]">{emoji}</Typography>
+                      </SpringPressable>
+                    );
+                  })}
+                </View>
+              )}
+            </Animated.View>
           ) : null}
 
-          {/* Highlighted Message Preview Bubble */}
+          {/* 2. Highlighted Message Preview Bubble with Crisp Rim & Shadow */}
           {request.copyText?.trim() ? (
-            <View
-              className="max-w-[88%] self-start rounded-2xl px-4 py-3"
+            <Animated.View
+              entering={ZoomIn.springify().damping(21).stiffness(300).reduceMotion(ReduceMotion.System)}
               style={{
-                backgroundColor: surfaceBg,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 6 },
-                shadowOpacity: 0.12,
-                shadowRadius: 14,
+                maxWidth: "88%",
+                backgroundColor: cardSurface,
+                borderRadius: 20,
+                paddingHorizontal: 15,
+                paddingVertical: 11,
+                borderWidth: 1,
+                borderColor: cardBorder,
+                shadowColor: "#0f172a",
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: dark ? 0.34 : 0.11,
+                shadowRadius: 18,
+                elevation: 8,
               }}
             >
-              <Typography className="text-[15px] leading-5 text-foreground" numberOfLines={5}>
+              <Typography className="text-[15px] leading-5.5 text-foreground" numberOfLines={6}>
                 {request.copyText.trim()}
               </Typography>
-            </View>
+            </Animated.View>
           ) : null}
 
           {attachments.length > 0 && request.files ? (
             <View
-              className="w-64 overflow-hidden rounded-2xl"
               style={{
-                backgroundColor: surfaceBg,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 8 },
-                shadowOpacity: 0.15,
+                width: 224,
+                overflow: "hidden",
+                borderRadius: 20,
+                backgroundColor: cardSurface,
+                borderWidth: 1,
+                borderColor: cardBorder,
+                shadowColor: "#0f172a",
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: dark ? 0.34 : 0.12,
                 shadowRadius: 18,
               }}
             >
@@ -226,27 +307,34 @@ export function MessageActionsScreen() {
                 serverId={request.files.serverId}
                 attachments={attachments}
                 iconColor={iconColor}
-                afterSheet={afterSheet}
+                afterSheet={(action) => runAfterClose(action, "tap")}
               />
             </View>
           ) : null}
 
-          {/* Compact Floating Action Popover Card */}
-          <View
-            className="w-60 self-start overflow-hidden rounded-2xl"
+          {/* 3. Compact, Crisp Action Menu Card (Cue-style rounded card + subtle border + shadow) */}
+          <Animated.View
+            entering={FadeInDown.springify().damping(20).stiffness(290).reduceMotion(ReduceMotion.System)}
             style={{
-              backgroundColor: surfaceBg,
-              borderWidth: StyleSheet.hairlineWidth,
-              borderColor,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 10 },
-              shadowOpacity: 0.16,
-              shadowRadius: 20,
+              width: 196,
+              overflow: "hidden",
+              borderRadius: 22,
+              backgroundColor: cardSurface,
+              borderWidth: 1,
+              borderColor: cardBorder,
+              paddingVertical: 4,
+              shadowColor: "#0f172a",
+              shadowOffset: { width: 0, height: 14 },
+              shadowOpacity: dark ? 0.4 : 0.14,
+              shadowRadius: 24,
+              elevation: 11,
             }}
           >
-            {sent ? (
-              <View className="px-4 pt-3 pb-1.5">
-                <Typography className="text-xs text-muted">{sent}</Typography>
+            {sentLabel ? (
+              <View className="px-4 pt-2.5 pb-1.5">
+                <Typography className="font-medium text-[12px]" style={{ color: mutedText }}>
+                  {sentLabel}
+                </Typography>
               </View>
             ) : null}
 
@@ -254,29 +342,7 @@ export function MessageActionsScreen() {
               <PopoverRow
                 icon={<Reply size={ICON_SIZE} color={iconColor} style={MIRROR_IN_RTL} />}
                 label={t("mobile.app.chatQuote")}
-                onPress={() => run(() => request.onReply?.())}
-              />
-            ) : null}
-
-            {request.onTogglePin ? (
-              <PopoverRow
-                icon={
-                  request.pinned ? (
-                    <PinOff size={ICON_SIZE} color={iconColor} />
-                  ) : (
-                    <Pin size={ICON_SIZE} color={iconColor} />
-                  )
-                }
-                label={request.pinned ? t("mobile.chat.pins.unpin") : t("mobile.chat.pins.pin")}
-                onPress={() => run(() => request.onTogglePin?.())}
-              />
-            ) : null}
-
-            {request.copyText ? (
-              <PopoverRow
-                icon={<Copy size={ICON_SIZE} color={iconColor} />}
-                label={t("mobile.chat.message.copy")}
-                onPress={() => run(() => void copyToClipboard(request.copyText, "mobile.chat.message.copyFailed", t))}
+                onPress={() => runAfterClose(() => request.onReply?.())}
               />
             ) : null}
 
@@ -288,6 +354,16 @@ export function MessageActionsScreen() {
               />
             ) : null}
 
+            {request.copyText ? (
+              <PopoverRow
+                icon={<Copy size={ICON_SIZE} color={iconColor} />}
+                label={t("mobile.app.chatCopyMessage")}
+                onPress={() =>
+                  runAfterClose(() => void copyToClipboard(request.copyText, "mobile.chat.message.copyFailed", t))
+                }
+              />
+            ) : null}
+
             {sendToChannel ? (
               <CoveringMenuView
                 accessibilityLabel={t("mobile.chat.message.sendToChannel")}
@@ -296,12 +372,10 @@ export function MessageActionsScreen() {
                 onPressAction={({ nativeEvent }) => {
                   const channelId = nativeEvent.event;
                   if (!sendToChannel.channels.some((channel) => channel.id === channelId)) return;
-                  uiFeedback.confirm();
-                  afterClose.current = () => sendToChannel.onSend(channelId);
-                  router.back();
+                  runAfterClose(() => sendToChannel.onSend(channelId));
                 }}
               >
-                <View className="flex-row items-center gap-3 px-4 py-3">
+                <View className="flex-row items-center gap-3 px-4 py-2.5">
                   <Hash size={ICON_SIZE} color={iconColor} />
                   <Typography className="text-[15px] text-foreground">
                     {t("mobile.chat.message.sendToChannel")}
@@ -314,11 +388,7 @@ export function MessageActionsScreen() {
               <PopoverRow
                 icon={<TextCursor size={ICON_SIZE} color={iconColor} />}
                 label={t("mobile.chat.message.selectText")}
-                onPress={() => {
-                  uiFeedback.tap();
-                  afterClose.current = request.onSelectText;
-                  router.back();
-                }}
+                onPress={() => runAfterClose(() => request.onSelectText?.(), "tap")}
               />
             ) : null}
 
@@ -326,7 +396,7 @@ export function MessageActionsScreen() {
               <PopoverRow
                 icon={<GitFork size={ICON_SIZE} color={iconColor} />}
                 label={t("mobile.chat.message.branch")}
-                onPress={() => run(() => request.onBranch?.())}
+                onPress={() => runAfterClose(() => request.onBranch?.())}
               />
             ) : null}
 
@@ -340,29 +410,44 @@ export function MessageActionsScreen() {
                   )
                 }
                 label={reading ? t("mobile.chat.message.stopReading") : t("mobile.chat.message.readAloud")}
-                onPress={() => run(() => toggleReadAloud(readAloudId, request.copyText))}
+                onPress={() => runAfterClose(() => toggleReadAloud(readAloudId, request.copyText))}
               />
             ) : null}
 
-            {request.onDelete ? (
-              <View style={{ borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: borderColor }}>
+            {request.onMultiDelete || request.onDelete ? (
+              <View
+                style={{
+                  marginTop: 2,
+                  paddingTop: 2,
+                  borderTopWidth: StyleSheet.hairlineWidth,
+                  borderTopColor: dividerColor,
+                }}
+              >
                 <PopoverRow
                   icon={<Trash2 size={ICON_SIZE} color={danger} />}
-                  label={t("common.delete")}
+                  label={t(request.onMultiDelete ? "mobile.app.chatMultiDelete" : "common.delete")}
                   danger
-                  onPress={() => {
-                    uiFeedback.recCancel();
-                    afterClose.current = request.onDelete;
-                    router.back();
-                  }}
+                  onPress={() =>
+                    runAfterClose(
+                      () => {
+                        if (request.onMultiDelete) request.onMultiDelete();
+                        else request.onDelete?.();
+                      },
+                      request.onMultiDelete ? "tap" : "cancel",
+                    )
+                  }
                 />
               </View>
             ) : null}
-          </View>
-        </Animated.View>
+          </Animated.View>
+        </View>
       </View>
-    </View>
+    </Animated.View>
   );
+}
+
+export function MessageActionsScreen() {
+  return <MessageActionsOverlay />;
 }
 
 function PopoverRow({
@@ -380,13 +465,15 @@ function PopoverRow({
     <Pressable
       accessibilityRole="button"
       onPress={onPress}
-      className="flex-row items-center gap-3 px-4 py-3"
+      className="mx-1.5 flex-row items-center gap-3 rounded-xl px-2.5 py-2"
       style={({ pressed }) => ({
         backgroundColor: pressed ? "rgba(128,128,128,0.12)" : "transparent",
       })}
     >
       {icon}
-      <Typography className={danger ? "text-[15px] text-danger-text" : "text-[15px] text-foreground"}>
+      <Typography
+        className={danger ? "font-medium text-[15px] text-danger-text" : "font-medium text-[15px] text-foreground"}
+      >
         {label}
       </Typography>
     </Pressable>

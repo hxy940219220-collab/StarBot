@@ -12,8 +12,9 @@ import { type ParamListBase, useNavigation } from "expo-router/react-navigation"
 import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import ArrowDown from "lucide-react-native/icons/arrow-down";
+import Trash2 from "lucide-react-native/icons/trash";
 import { type ReactNode, type SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Keyboard, useColorScheme, View } from "react-native";
+import { Alert, Keyboard, Pressable, useColorScheme, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { KeyboardGestureArea } from "react-native-keyboard-controller";
 import Animated, { useSharedValue } from "react-native-reanimated";
@@ -71,10 +72,12 @@ import { haptics } from "@/shared/lib/haptics";
 import { isAndroid, isIOS } from "@/shared/lib/platform";
 import { useText } from "@/shared/lib/text";
 import { END_X } from "@/shared/lib/text-direction";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { useAppActive } from "@/shared/lib/use-app-active";
 import { useAppForeground } from "@/shared/lib/use-app-foreground";
 import { useReducedTransparency } from "@/shared/lib/use-reduced-transparency";
 import { mentionDraft } from "../model/chat-mentions";
+import { clearChatMultiSelect, useChatMultiSelectState } from "../model/chat-multi-select";
 import type { ChatTarget } from "../model/chat-target";
 import { getComposerDraft, useComposerDraft } from "../model/composer-drafts";
 import {
@@ -1091,6 +1094,37 @@ export function ChatView({
     async (message: ChatBubbleMessage) => deleteMessage?.(hostMessageIds.get(message.id) ?? message.id),
     [deleteMessage, hostMessageIds],
   );
+  const chatMultiKey = useMemo(
+    () => JSON.stringify([target.serverId, target.kind, target.id]),
+    [target.serverId, target.kind, target.id],
+  );
+  const multiSelect = useChatMultiSelectState();
+  const multiSelectActive = multiSelect.active && multiSelect.chatKey === chatMultiKey;
+  useEffect(() => {
+    if (!chatMultiKey) return;
+    return () => clearChatMultiSelect();
+  }, [chatMultiKey]);
+
+  const handleBatchDeleteSelected = useCallback(() => {
+    const ids = [...multiSelect.selectedIds];
+    if (ids.length === 0 || !deleteMessage) return;
+    Alert.alert(t("mobile.app.chatMultiDelete"), t("mobile.app.multiSelectDeleteConfirm", { count: ids.length }), [
+      { text: t("common.cancel"), style: "cancel" },
+      {
+        text: t("common.delete"),
+        style: "destructive",
+        onPress: () => {
+          uiFeedback.recCancel();
+          clearChatMultiSelect();
+          void (async () => {
+            for (const rowId of ids) {
+              await deleteMessage(hostMessageIds.get(rowId) ?? rowId).catch(() => undefined);
+            }
+          })();
+        },
+      },
+    ]);
+  }, [deleteMessage, hostMessageIds, multiSelect.selectedIds, t]);
   const markListMessageUnread = useCallback(
     (message: ChatBubbleMessage) => markUnread?.(hostMessageIds.get(message.id) ?? message.id),
     [markUnread, hostMessageIds],
@@ -1401,6 +1435,59 @@ export function ChatView({
                     action={action}
                     actionForeground={actionForeground}
                   />
+                ) : multiSelectActive ? (
+                  <View
+                    style={{
+                      paddingHorizontal: insets.left + 16,
+                      paddingBottom: Math.max(insets.bottom, 12) + 6,
+                      paddingTop: 8,
+                    }}
+                  >
+                    <View
+                      className="flex-row items-center justify-between rounded-full px-4 py-2.5"
+                      style={{
+                        backgroundColor: String(fieldBackground),
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 6 },
+                        shadowOpacity: 0.12,
+                        shadowRadius: 16,
+                        elevation: 6,
+                      }}
+                    >
+                      <Pressable
+                        accessibilityRole="button"
+                        onPress={() => {
+                          uiFeedback.close();
+                          clearChatMultiSelect();
+                        }}
+                        className="px-3 py-1.5"
+                      >
+                        <Typography className="font-semibold text-[15px] text-foreground">
+                          {t("common.cancel")}
+                        </Typography>
+                      </Pressable>
+
+                      <Typography className="font-medium text-sm text-text-secondary">
+                        {t("mobile.app.multiSelectCount", { count: multiSelect.selectedIds.size })}
+                      </Typography>
+
+                      <Pressable
+                        accessibilityRole="button"
+                        disabled={multiSelect.selectedIds.size === 0}
+                        onPress={handleBatchDeleteSelected}
+                        className="flex-row items-center gap-1.5 rounded-full px-4 py-2"
+                        style={{
+                          backgroundColor: "#ef4444",
+                          opacity: multiSelect.selectedIds.size > 0 ? 1 : 0.4,
+                        }}
+                      >
+                        <Trash2 size={15} color="#ffffff" />
+                        <Typography className="font-semibold text-xs" style={{ color: "#ffffff" }}>
+                          {t("common.delete")}
+                        </Typography>
+                      </Pressable>
+                    </View>
+                  </View>
                 ) : (
                   <ChatComposer
                     sendRetryVersion={sendRetryVersion}

@@ -282,7 +282,7 @@ export const messages = {
   "mobile.agent.record.deleteRoutineBody": "该自动化任务将被移除。",
   "mobile.agent.record.deleteRoutine": "删除自动化任务",
   "mobile.agent.record.testStarted": "测试运行已启动，结果会显示在对话中。",
-  "mobile.agent.groups.brain": "大脑",
+  "mobile.agent.groups.brain": "供应商模型",
   "mobile.agent.groups.knows": "知识",
   "mobile.agent.groups.does": "行为",
   "mobile.agent.groups.rules": "规则",

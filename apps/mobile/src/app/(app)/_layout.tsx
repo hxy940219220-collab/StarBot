@@ -16,6 +16,7 @@ import { MermaidRendererHost } from "@/features/chat/components/mermaid-renderer
 import { OutboxProvider } from "@/features/chat/context/outbox-context";
 import { QueuedMessagesProvider } from "@/features/chat/context/queued-messages-context";
 import { requestComposerText } from "@/features/chat/model/composer-requests";
+import { MessageActionsOverlay } from "@/features/chat/screens/message-actions-screen";
 import { setLiveActivityNavigator } from "@/features/live-activity/model/live-activity-link";
 import { HomeOnboardingProvider, useHomeOnboarding } from "@/features/onboarding/context/home-onboarding-context";
 import type { NotificationTarget } from "@/features/push-notifications/push-notifications-native.types";
@@ -353,7 +354,18 @@ function AuthenticatedStack() {
       <Stack.Screen name="channel-actions/[channelId]" options={formSheet([0.6])} />
       <Stack.Screen name="add-channel" options={formSheet([0.85])} />
       <Stack.Screen name="add-agent" options={formSheet([0.85])} />
-      <Stack.Screen name="agent-info/[agentId]" options={formSheet([0.85])} />
+      <Stack.Screen
+        name="agent-info/[agentId]"
+        options={{
+          animation: pushAnimation,
+          contentStyle: { backgroundColor: sheetBackground },
+          fullScreenGestureEnabled: true,
+          gestureEnabled: true,
+          headerShown: false,
+          presentation: "card",
+        }}
+      />
+      <Stack.Screen name="memory-vault" options={largeTitlePage} />
       <Stack.Screen
         name="install-agent"
         options={{
@@ -455,6 +467,7 @@ export default function AuthenticatedLayout() {
                 <AuthenticatedSplit>
                   <AuthenticatedStack />
                 </AuthenticatedSplit>
+                <MessageActionsOverlay />
                 <MermaidRendererHost />
                 <AudioWaveformHost />
               </QueuedMessagesProvider>

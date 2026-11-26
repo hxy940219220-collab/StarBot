@@ -82,7 +82,7 @@ export function AddAgentScreen() {
   return (
     <SheetScrollView
       className="bg-sheet"
-      contentContainerClassName="gap-5 px-5 pb-safe-offset-5 pt-5"
+      contentContainerClassName="gap-5 px-5 pb-safe-offset-6 pt-5"
       contentInsetAdjustmentBehavior="automatic"
       keyboardDismissMode="interactive"
       keyboardShouldPersistTaps="handled"
@@ -102,47 +102,52 @@ export function AddAgentScreen() {
         pendingLabel={t("mobile.agent.add.creating")}
         onSave={() => void submit()}
       />
+
+      {/* Step 1: Choose Character & Color */}
       <AgentAppearancePicker
         seed={avatarSeed}
         hue={avatarColor.hue}
         color={avatarColor.color}
         name={name}
         colorGlow
-        nameField={
-          <SheetFormField
-            editable={!saving}
-            autoCapitalize="words"
-            label={t("mobile.agent.form.name")}
-            appearance="soft"
-            maxLength={INPUT_LIMITS.agentName}
-            placeholder={t("mobile.agent.add.namePlaceholder")}
-            value={name}
-            error={triedCreate && nameMissing ? t("mobile.agent.add.nameRequired") : undefined}
-            onChangeText={setName}
-          />
-        }
+        nameField={null}
         disabled={saving}
         onSeedChange={setAvatarSeed}
         onColorChange={setAvatarColor}
       />
 
+      {/* Step 2: Name */}
       <SheetFormField
         editable={!saving}
-        label={t("mobile.agent.add.descriptionLabel")}
+        autoCapitalize="words"
+        label={t("mobile.agent.form.name")}
         appearance="soft"
-        multiline
-        placeholder={t("mobile.agent.add.descriptionPlaceholder")}
-        value={description}
-        onChangeText={setDescription}
+        maxLength={INPUT_LIMITS.agentName}
+        placeholder={t("mobile.agent.add.namePlaceholder")}
+        value={name}
+        error={triedCreate && nameMissing ? t("mobile.agent.add.nameRequired") : undefined}
+        onChangeText={setName}
       />
-      <InstructionsLimit text={description} />
 
+      {/* Step 3: Set Provider & Model (promoted before persona) */}
       <NewAgentRuntimeFields
         serverId={serverId}
         saving={saving}
         value={runtime}
         onChange={(value) => setRuntime((current) => ({ ...current, ...value }))}
       />
+
+      {/* Step 4: Simplified Optional Persona at the very end */}
+      <SheetFormField
+        editable={!saving}
+        label={t("mobile.app.create.personaLabel")}
+        appearance="soft"
+        multiline
+        placeholder={t("mobile.app.create.personaPlaceholder")}
+        value={description}
+        onChangeText={setDescription}
+      />
+      <InstructionsLimit text={description} />
 
       {error ? (
         <Typography.Paragraph accessibilityRole="alert" align="center" className="text-danger-text">
@@ -175,7 +180,7 @@ function NewAgentRuntimeFields({
       available={showsOnline(server)}
       saving={saving}
       hostDefault
-      title={t("mobile.agent.groups.brain")}
+      title={t("mobile.app.create.modelSection")}
       provider={value.provider}
       model={value.model}
       reasoningEffort={value.reasoningEffort}

@@ -21,6 +21,7 @@ const StyledKeyboardAwareScrollView = withUniwind(KeyboardAwareScrollView);
 
 interface SheetScrollViewProps extends PropsWithChildren {
   className?: string;
+  style?: ScrollViewProps["style"];
   contentContainerClassName?: string;
   contentInsetAdjustmentBehavior?: ScrollViewProps["contentInsetAdjustmentBehavior"];
   header?: ReactNode;
@@ -39,6 +40,7 @@ interface SheetScrollViewProps extends PropsWithChildren {
 export function SheetScrollView({
   children,
   className = "bg-sheet",
+  style,
   contentContainerClassName,
   contentInsetAdjustmentBehavior = "automatic",
   header,
@@ -102,7 +104,7 @@ export function SheetScrollView({
           disableScrollOnKeyboardHide
           mode="insets"
           automaticallyAdjustKeyboardInsets={false}
-          style={{ flex: 1 }}
+          style={[{ flex: 1 }, style]}
           alwaysBounceVertical={false}
           {...androidScrollProps}
           overScrollMode="auto"

@@ -11,11 +11,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUniwind } from "uniwind";
 import { AgentPinAvatar } from "@/features/agents/components/agent-pin-avatar";
 import { BloubAvatar } from "@/features/agents/components/bloub-avatar";
-import { useBrowserFeature } from "@/features/browser/components/use-browser-feature";
 import { ChannelAvatar } from "@/features/channels/components/channel-avatar";
 import { ChatGlassIconButton } from "@/features/chat/components/chat-glass-icon-button";
 import type { ChatThreadMenu } from "@/features/chat/components/chat-thread-menu";
-import { useMessagePinsEnabled } from "@/features/chat/components/use-message-pins";
 import { useSplitDetailRoot } from "@/features/chat/components/use-split-detail-root";
 import { useMobileWorkspaceSelector } from "@/features/workspace/context/mobile-workspace-context";
 import { showsOnline } from "@/features/workspace/model/server-status";
@@ -60,7 +58,7 @@ export const ChatHeader = memo(function ChatHeader({
   topInset,
   onBack,
   needsAction = false,
-  channelBrowser = null,
+  channelBrowser: _channelBrowser = null,
   accessibilityHidden = false,
   title,
   kicker,
@@ -80,17 +78,8 @@ export const ChatHeader = memo(function ChatHeader({
   const disconnected = useMobileWorkspaceSelector(
     (current) => !current.servers.some((server) => server.id === target.serverId && showsOnline(server)),
   );
-  const browserView = useMobileWorkspaceSelector((current) => current.browserViewSupport(target.serverId).view);
-  const browserAllowed = useBrowserFeature();
-  const browserAgent =
-    target.kind === "agent" ? { agentId: target.id, agentIds: [], tabId: undefined } : channelBrowser;
   const plainChat = actionsMenu === undefined && deleteAction === undefined;
-  const browserShown = plainChat && browserAllowed && !disconnected && browserView && Boolean(browserAgent);
-  const pinsEnabled = useMessagePinsEnabled(target.serverId);
-  const pinsShown = plainChat && target.kind === "agent" && pinsEnabled;
   const attention = plainChat && target.kind === "channel" && needsAction;
-  const sideQuestionEnabled = useMobileWorkspaceSelector((current) => current.canAskSideQuestion(target.serverId));
-  const sideQuestionShown = plainChat && target.kind === "agent" && sideQuestionEnabled;
   const members = useMemo(
     () => new Map(target.kind === "channel" ? target.members.map((member) => [member.id, member]) : []),
     [target],
@@ -168,19 +157,6 @@ export const ChatHeader = memo(function ChatHeader({
       </>
     );
 
-  const openBrowser = () => {
-    if (!browserAgent) return;
-    void haptics.impact("soft");
-    router.push({
-      pathname: "/browser/[agentId]",
-      params: {
-        agentId: browserAgent.agentId,
-        serverId: target.serverId,
-        ...(browserAgent.tabId ? { tabId: browserAgent.tabId } : {}),
-        ...(browserAgent.agentIds.length > 1 ? { agentIds: browserAgent.agentIds.join(",") } : {}),
-      },
-    });
-  };
   const openChannelActions = () => {
     void haptics.impact("soft");
     router.push({
@@ -188,24 +164,9 @@ export const ChatHeader = memo(function ChatHeader({
       params: { channelId: target.id, serverId: target.serverId },
     });
   };
-  const openSideQuestion = () => {
-    void haptics.impact("soft");
-    router.push({ pathname: "/side-question/[agentId]", params: { agentId: target.id, serverId: target.serverId } });
-  };
-  const openPins = () => {
-    void haptics.impact("soft");
-    router.push({ pathname: "/pinned-messages", params: { agentId: target.id, serverId: target.serverId } });
-  };
   const goBack = () => {
     void haptics.impact("soft");
     onBack();
-  };
-  const browserAction: MenuAction = { id: "browser", title: t("mobile.browser.open"), image: "globe" };
-  const pinsAction: MenuAction = { id: "pins", title: t("mobile.chat.pins.title"), image: "pin" };
-  const sideQuestionAction: MenuAction = {
-    id: "side-question",
-    title: t("mobile.chat.sideQuestion.title"),
-    image: "questionmark.bubble",
   };
   const attentionAction: MenuAction = {
     id: "attention",
@@ -226,18 +187,10 @@ export const ChatHeader = memo(function ChatHeader({
   }, [threadMenu]);
   const moreActions: MenuAction[] = [
     ...threadMenuActions,
-    ...(browserShown ? [browserAction] : []),
-    ...(pinsShown ? [pinsAction] : []),
-    ...(sideQuestionShown
-      ? [{ id: "side-question-section", title: "", displayInline: true, subactions: [sideQuestionAction] }]
-      : []),
     ...(attention ? [{ id: "attention-section", title: "", displayInline: true, subactions: [attentionAction] }] : []),
   ];
   const onMoreAction = (id: string) => {
     if (id === "attention") openChannelActions();
-    else if (id === "browser") openBrowser();
-    else if (id === "pins") openPins();
-    else if (id === "side-question") openSideQuestion();
     else threadMenu?.onPressAction(id);
   };
   const moreLabel = attention ? t("mobile.chat.header.moreAttention") : t("mobile.chat.header.more");

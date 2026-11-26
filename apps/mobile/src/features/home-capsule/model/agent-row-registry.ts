@@ -39,27 +39,28 @@ export function measureRegisteredAgentRows(): Promise<MeasuredAgentRow[]> {
   ).then((list) => list.filter((item): item is MeasuredAgentRow => item !== null).sort((a, b) => a.top - b.top));
 }
 
-const HYSTERESIS_PT = 10;
+const ROW_GAP_TOLERANCE_PT = 2;
 
 export function hitTestAgentRow(
   rows: readonly MeasuredAgentRow[],
   fingerY: number,
-  shiftY: number,
-  currentAgentId: string | null,
+  safeTop = 0,
+  safeBottom = Number.POSITIVE_INFINITY,
 ): MeasuredAgentRow | null {
   if (rows.length === 0) return null;
-  if (currentAgentId) {
-    const current = rows.find((row) => row.agentId === currentAgentId);
-    if (current) {
-      const top = current.top + shiftY - HYSTERESIS_PT;
-      const bottom = current.bottom + shiftY + HYSTERESIS_PT;
-      if (fingerY >= top && fingerY <= bottom) return current;
-    }
+  if (fingerY < safeTop || fingerY > safeBottom) return null;
+
+  for (const row of rows) {
+    const visibleTop = Math.max(safeTop, row.top);
+    const visibleBottom = Math.min(safeBottom, row.bottom);
+    if (visibleBottom - visibleTop < 16) continue;
+    if (fingerY >= visibleTop && fingerY <= visibleBottom) return row;
   }
   for (const row of rows) {
-    const top = row.top + shiftY;
-    const bottom = row.bottom + shiftY;
-    if (fingerY >= top && fingerY <= bottom) return row;
+    const visibleTop = Math.max(safeTop, row.top - ROW_GAP_TOLERANCE_PT);
+    const visibleBottom = Math.min(safeBottom, row.bottom + ROW_GAP_TOLERANCE_PT);
+    if (visibleBottom - visibleTop < 16) continue;
+    if (fingerY >= visibleTop && fingerY <= visibleBottom) return row;
   }
   return null;
 }

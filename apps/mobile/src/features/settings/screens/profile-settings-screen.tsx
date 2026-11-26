@@ -3,6 +3,7 @@ import { useFonts } from "@shopify/react-native-skia";
 import { router } from "expo-router";
 import * as Sharing from "expo-sharing";
 import { Typography } from "heroui-native";
+import LogOut from "lucide-react-native/icons/log-out";
 import MonitorSmartphone from "lucide-react-native/icons/monitor-smartphone";
 import { useRef, useState } from "react";
 import { Alert, Keyboard } from "react-native";
@@ -201,6 +202,18 @@ export function ProfileSettingsScreen() {
           onPress={() => router.push("/settings/sessions")}
         >
           <Typography.Paragraph>{t("mobile.settings.profile.accountSessions")}</Typography.Paragraph>
+        </SettingsRow>
+      </SettingsSection>
+      <SettingsSection>
+        <SettingsRow
+          leading={<LogOut color="#ef4444" size={20} strokeWidth={2} />}
+          disclosure={false}
+          disabled={busy}
+          onPress={confirmSignOut}
+        >
+          <Typography.Paragraph className="font-medium text-danger-text">
+            {t("mobile.settings.profile.signOut")}
+          </Typography.Paragraph>
         </SettingsRow>
       </SettingsSection>
     </SettingsContent>

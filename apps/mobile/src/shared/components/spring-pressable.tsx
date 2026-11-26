@@ -4,6 +4,7 @@ import Animated, { ReduceMotion, useAnimatedStyle, useSharedValue, withSpring } 
 import { type UiSoundKind, uiFeedback } from "@/shared/lib/ui-feedback";
 
 const PRESS_SPRING = { duration: 220, dampingRatio: 0.72, reduceMotion: ReduceMotion.System } as const;
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export interface SpringPressableProps extends Omit<PressableProps, "style"> {
   style?: StyleProp<ViewStyle>;
@@ -30,9 +31,11 @@ export function SpringPressable({
   }));
 
   return (
-    <Pressable
+    <AnimatedPressable
       {...rest}
       disabled={disabled}
+      className={className}
+      style={[style, animatedStyle]}
       onPressIn={(event) => {
         scale.set(withSpring(scaleTo, PRESS_SPRING));
         onPressIn?.(event);
@@ -48,9 +51,7 @@ export function SpringPressable({
         onPress?.(event);
       }}
     >
-      <Animated.View className={className} style={[style, animatedStyle]}>
-        {children}
-      </Animated.View>
-    </Pressable>
+      {children}
+    </AnimatedPressable>
   );
 }

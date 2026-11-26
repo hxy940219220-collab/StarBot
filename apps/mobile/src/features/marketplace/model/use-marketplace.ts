@@ -19,6 +19,7 @@ import {
   CONNECTOR_TAGLINES,
   connectorListing,
   customListing,
+  isInternalConnectorMcp,
   type MarketplaceFilter,
   type MarketplaceListing,
   matchesQuery,
@@ -49,7 +50,10 @@ function useServerApps(serverId: string) {
         (row) => connectorListing(row, t(CONNECTOR_TITLE_KEYS[row.id]), t(CONNECTOR_TAGLINES[row.id])) ?? [],
       ),
       ...(mcpServers.data ?? [])
-        .filter((server) => !MOBILE_PLUGINS.some((plugin) => claimedByPlugin(server, plugin)))
+        .filter(
+          (server) =>
+            !isInternalConnectorMcp(server) && !MOBILE_PLUGINS.some((plugin) => claimedByPlugin(server, plugin)),
+        )
         .map(customListing),
     ],
     [rows, mcpServers.data, t],
@@ -66,6 +70,7 @@ export function useMarketplaceCatalog({
   query: string;
   filter: MarketplaceFilter;
 }) {
+  const { t } = useText();
   const { session } = useMobileSession();
   const { apps: serverApps, mcpServers } = useServerApps(serverId);
   const apiUrl = session?.apiUrl ?? null;
@@ -98,13 +103,27 @@ export function useMarketplaceCatalog({
     getNextPageParam: (page) => page.nextCursor ?? undefined,
   });
   const listings = useMemo(() => {
-    if (!apiUrl) return [];
+    const effectiveApiUrl = apiUrl ?? "";
+    const orderedCuratedApps = (() => {
+      const plugins = appListings(effectiveApiUrl, t);
+      const github = serverApps.find((item) => item.id === "connector:github");
+      const discord = serverApps.find((item) => item.id === "connector:discord");
+      const restServer = serverApps.filter((item) => item.id !== "connector:github" && item.id !== "connector:discord");
+      // Interleave Canva, Notion, Figma, Discord, GitHub, Vercel, Obsidian, Apple Apps, GitLab, Cloudflare, Supabase, Hugging Face...
+      const top3 = plugins.slice(0, 3);
+      const tail = plugins.slice(3);
+      return [...top3, ...(discord ? [discord] : []), ...(github ? [github] : []), ...tail, ...restServer];
+    })();
     return [
-      ...(agents.data?.pages ?? []).flatMap((page) => page.agents.map((agent) => agentListing(apiUrl, agent))),
-      ...[...serverApps, ...appListings(apiUrl)].filter((app) => matchesQuery(app, search)),
-      ...(skills.data?.pages ?? []).flatMap((page) => page.skills.map((skill) => skillListing(apiUrl, skill))),
+      ...(apiUrl
+        ? (agents.data?.pages ?? []).flatMap((page) => page.agents.map((agent) => agentListing(apiUrl, agent)))
+        : []),
+      ...orderedCuratedApps.filter((app) => matchesQuery(app, search)),
+      ...(apiUrl
+        ? (skills.data?.pages ?? []).flatMap((page) => page.skills.map((skill) => skillListing(apiUrl, skill)))
+        : []),
     ];
-  }, [apiUrl, agents.data, skills.data, search, serverApps]);
+  }, [apiUrl, agents.data, skills.data, search, serverApps, t]);
   const pending =
     (agents.isPending && agents.fetchStatus !== "idle") || (skills.isPending && skills.fetchStatus !== "idle");
   const { fetchNextPage: moreAgents } = agents;

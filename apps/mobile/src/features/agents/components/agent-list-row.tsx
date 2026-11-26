@@ -166,7 +166,9 @@ export const AgentListRow = memo(function AgentListRow({ agent, leftInset = 20, 
 
   const previewLine =
     voiceStatus?.status === "thinking"
-      ? t("mobile.app.capsule.thinking")
+      ? t("mobile.app.capsule.rowSendingText", {
+          text: voiceStatus.text.length > 16 ? `${voiceStatus.text.slice(0, 16)}…` : voiceStatus.text,
+        })
       : voiceStatus?.status === "failed"
         ? t("mobile.app.capsule.sendFailedRetry")
         : waitingChannel

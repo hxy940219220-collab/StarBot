@@ -1,7 +1,6 @@
 import type { ExpressionId } from "@norbert_bodziony/bloub";
 import {
   AVATAR_COLOR_CHOICES,
-  AVATAR_EXPRESSIONS,
   type AvatarColorChoice,
   type AvatarColorPresetId,
   type AvatarStyle,
@@ -30,7 +29,7 @@ import { isAndroid } from "@/shared/lib/platform";
 import { useText } from "@/shared/lib/text";
 import type { AgentPhotoProps } from "./agent-photo";
 
-const PREVIEW_SIZE = 144;
+const PREVIEW_SIZE = 148;
 const GLOW_HEIGHT = 340;
 
 export const HUE_LABELS = {
@@ -80,8 +79,7 @@ interface AgentAppearancePickerProps extends AgentPhotoProps {
 }
 
 const SHAPE_COLUMNS = 4;
-const EYES_COLUMNS = 8;
-const COLOR_COLUMNS = 9;
+const COLOR_COLUMNS = 7;
 
 export function AgentAppearancePicker({
   agentId,
@@ -122,10 +120,10 @@ export function AgentAppearancePicker({
   );
   const selectFace = useCallback(
     (change: Partial<AvatarFace> & { style?: AvatarStyle }) => {
-      const face = { shape: change.shape ?? shape, expression: change.expression ?? expression };
+      const face = { shape: change.shape ?? shape, expression: change.expression ?? "neutre" };
       selectSeed(avatarSeedForStyledFace(faceKey, face, change.style ?? style));
     },
-    [expression, faceKey, selectSeed, shape, style],
+    [faceKey, selectSeed, shape, style],
   );
   const resetFace = useCallback(() => selectSeed(resetSeed), [resetSeed, selectSeed]);
   const shuffleFace = useCallback(
@@ -166,7 +164,7 @@ export function AgentAppearancePicker({
             faceKey={faceKey}
             style={style}
             shape={shape}
-            expression={expression}
+            expression="neutre"
             hue={hue}
             color={color}
             shownColor={targetColor}
@@ -175,17 +173,6 @@ export function AgentAppearancePicker({
             canReset={seed !== resetSeed}
             onReset={resetFace}
             onShuffle={shuffleFace}
-          />
-          <AvatarEyesOptions
-            faceKey={faceKey}
-            style={style}
-            shape={shape}
-            expression={expression}
-            hue={hue}
-            color={color}
-            shownColor={targetColor}
-            disabled={disabled}
-            onSelect={selectFace}
           />
           <AvatarColorOptions hue={hue} color={color} disabled={disabled} onColorChange={onColorChange} />
         </>
@@ -309,7 +296,6 @@ const AvatarShapeOptions = memo(function AvatarShapeOptions({
   faceKey,
   style,
   shape,
-  expression,
   hue,
   color,
   shownColor,
@@ -341,9 +327,9 @@ const AvatarShapeOptions = memo(function AvatarShapeOptions({
   const seeds = useMemo(
     () =>
       SUPPORTED_AVATAR_SILHOUETTES.map((option) =>
-        avatarSeedForStyledFace(faceKey, { shape: option, expression }, style),
+        avatarSeedForStyledFace(faceKey, { shape: option, expression: "neutre" }, style),
       ),
-    [expression, faceKey, style],
+    [faceKey, style],
   );
   const thumbnailHue = choiceHue(hue, color, shownColor);
   return (
@@ -360,60 +346,13 @@ const AvatarShapeOptions = memo(function AvatarShapeOptions({
             label={t("mobile.agent.appearance.shapeOption", { number: index + 1 })}
             checked={option === shape}
             disabled={disabled}
-            onPress={() => onSelect({ shape: option })}
+            onPress={() => onSelect({ shape: option, expression: "neutre" })}
           >
             <AvatarThumbnail
               seed={seeds[index] ?? faceKey}
               hue={thumbnailHue}
               color={color}
-              size={52}
-              animateColor={!isAndroid}
-            />
-          </ChoiceCell>
-        ))}
-      </View>
-    </AppearanceSection>
-  );
-});
-
-const AvatarEyesOptions = memo(function AvatarEyesOptions({
-  faceKey,
-  style,
-  shape,
-  expression,
-  hue,
-  color,
-  shownColor,
-  disabled,
-  onSelect,
-}: FaceOptionsProps) {
-  const { t } = useText();
-  const seeds = useMemo(
-    () => AVATAR_EXPRESSIONS.map((option) => avatarSeedForStyledFace(faceKey, { shape, expression: option }, style)),
-    [faceKey, shape, style],
-  );
-  const thumbnailHue = choiceHue(hue, color, shownColor);
-  return (
-    <AppearanceSection title={t("mobile.agent.appearance.eyes")}>
-      <View
-        className="flex-row flex-wrap"
-        accessibilityRole="radiogroup"
-        accessibilityLabel={t("mobile.agent.appearance.eyes")}
-      >
-        {AVATAR_EXPRESSIONS.map((option, index) => (
-          <ChoiceCell
-            key={option}
-            columns={EYES_COLUMNS}
-            label={t("mobile.agent.appearance.eyesOption", { number: index + 1 })}
-            checked={option === expression}
-            disabled={disabled}
-            onPress={() => onSelect({ expression: option })}
-          >
-            <AvatarThumbnail
-              seed={seeds[index] ?? faceKey}
-              hue={thumbnailHue}
-              color={color}
-              size={30}
+              size={56}
               animateColor={!isAndroid}
             />
           </ChoiceCell>
@@ -434,12 +373,11 @@ const AvatarColorOptions = memo(function AvatarColorOptions({
   disabled: boolean;
   onColorChange: (value: AgentColorValue) => void;
 }) {
-  const automatic = hue === null && color === null;
   const { t } = useText();
   return (
     <AppearanceSection title={t("mobile.agent.appearance.colorHeading")}>
       <View
-        className="flex-row flex-wrap"
+        className="flex-row flex-wrap items-center justify-center py-1"
         accessibilityRole="radiogroup"
         accessibilityLabel={t("mobile.agent.appearance.color")}
       >
@@ -454,23 +392,10 @@ const AvatarColorOptions = memo(function AvatarColorOptions({
               disabled={disabled}
               onPress={() => onColorChange({ hue: choice.hue, color: choice.color })}
             >
-              <View className="size-6 rounded-full" style={{ backgroundColor: choice.swatch }} />
+              <View className="size-7 rounded-full" style={{ backgroundColor: choice.swatch }} />
             </ChoiceCell>
           );
         })}
-        <ChoiceCell
-          columns={COLOR_COLUMNS}
-          label={t("mobile.agent.appearance.automatic")}
-          checked={automatic}
-          disabled={disabled}
-          onPress={() => onColorChange({ hue: null, color: null })}
-        >
-          <View className="size-6 items-center justify-center rounded-full border border-grouped-border">
-            <Typography type="body-xs" className="font-semibold text-foreground">
-              {t("mobile.agent.appearance.automaticShort")}
-            </Typography>
-          </View>
-        </ChoiceCell>
       </View>
     </AppearanceSection>
   );

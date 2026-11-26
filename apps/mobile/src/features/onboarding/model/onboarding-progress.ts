@@ -42,3 +42,9 @@ export function finishOnboarding(userId: string): Promise<void> {
   writes = write(() => JSON.stringify(finished)).catch(() => undefined);
   return writes;
 }
+
+export function resetOnboardingProgress(): Promise<void> {
+  useOnboardingProgress.setState({ finished: [] });
+  writes = SecureStore.deleteItemAsync(key).catch(() => undefined);
+  return writes;
+}

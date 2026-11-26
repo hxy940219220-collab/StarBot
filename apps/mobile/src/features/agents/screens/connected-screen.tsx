@@ -4,7 +4,6 @@ import { GlassView } from "expo-glass-effect";
 import { type Href, router, Stack, useIsFocused } from "expo-router";
 import { Button, Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
-import CalendarClock from "lucide-react-native/icons/calendar-clock";
 import Layers3 from "lucide-react-native/icons/layers";
 import MessagesSquare from "lucide-react-native/icons/messages-square";
 import PanelLeft from "lucide-react-native/icons/panel-left";
@@ -21,7 +20,6 @@ import Animated, {
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -700,18 +698,27 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
   );
   const listRef = useRef<FlatList>(null);
   const dragScroll = useRef({ offset: 0, content: 0, viewport: 0 });
+  const voiceScrollRef = useRef({ offset: 0, lastAt: 0 });
   const scrollRest = scroll.ownsInset ? 0 : -headerHeight;
-  const recordingShift = useSharedValue(0);
-  const handleRecordingShift = useCallback(
-    (shiftY: number) => {
-      recordingShift.set(withSpring(shiftY, { duration: 240, dampingRatio: 0.84, reduceMotion: ReduceMotion.System }));
+  const handleVoiceAutoScroll = useCallback(
+    (deltaY: number) => {
+      const state = dragScroll.current;
+      // Only auto-scroll if the list actually overflows the viewport (never push top bots under Dynamic Island!)
+      const visibleViewport = state.viewport - (scroll.ownsInset ? 0 : headerHeight + insets.bottom);
+      const overflow = state.content - visibleViewport;
+      if (overflow <= 8) return false;
+      const now = Date.now();
+      const baseOffset =
+        now - voiceScrollRef.current.lastAt < 140 ? voiceScrollRef.current.offset : scroll.scrolled.get() + scrollRest;
+      const maxOffset = scrollRest + overflow;
+      const nextOffset = Math.min(maxOffset, Math.max(scrollRest, baseOffset + deltaY));
+      if (Math.abs(nextOffset - baseOffset) < 0.4) return false;
+      voiceScrollRef.current = { offset: nextOffset, lastAt: now };
+      listRef.current?.scrollToOffset({ offset: nextOffset, animated: false });
+      return true;
     },
-    [recordingShift],
+    [headerHeight, insets.bottom, scroll.ownsInset, scroll.scrolled, scrollRest],
   );
-  const listShiftStyle = useAnimatedStyle(() => ({
-    flex: 1,
-    transform: [{ translateY: recordingShift.get() }],
-  }));
   const pinCount = pinnedAgentIds.length + pinnedChannelIds.length;
   const dragScreen = useMemo<ChatDragScreen>(
     () => ({
@@ -790,15 +797,6 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
   );
   const headerTrailing = (
     <View className="shrink-0 flex-row items-center gap-1">
-      {hasSelectedServer ? (
-        <HeaderIconButton
-          accessibilityLabel={t("mobile.app.route.schedule")}
-          glass={buttonGlass}
-          onPress={() => router.push({ pathname: "/server-routines", params: { serverId: activeServer.id } })}
-        >
-          <CalendarClock color={iconColor} size={21} strokeWidth={2} />
-        </HeaderIconButton>
-      ) : null}
       <MenuView
         actions={optionsActions}
         onPressAction={(event) => onPressOption(event.nativeEvent.event)}
@@ -843,7 +841,7 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
             active={focused}
           />
         ) : null}
-        <Animated.View style={listShiftStyle}>
+        <View style={{ flex: 1 }}>
           <HomeSearchList search={search} barHeight={searchBarOffset}>
             {onboarding.active ? null : sceneShows ? (
               <EmptyAgentsScene
@@ -1008,7 +1006,7 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
               </ChatDragProvider>
             ) : null}
           </HomeSearchList>
-        </Animated.View>
+        </View>
       </AndroidBlurTarget>
 
       {onboarding.active ? null : (
@@ -1023,7 +1021,8 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
         <HomeCapsuleBar
           serverId={activeServer.id}
           agents={activeAgents}
-          onRecordingShiftChange={handleRecordingShift}
+          topSafeInset={Math.max(headerHeight, insets.top + 58)}
+          onVoiceAutoScroll={handleVoiceAutoScroll}
         />
       ) : null}
 
@@ -1074,13 +1073,6 @@ export function ConnectedScreen({ variant = "screen" }: { variant?: "screen" | "
             </Stack.Toolbar.View>
           </Stack.Toolbar>
           <Stack.Toolbar placement="right">
-            {hasSelectedServer ? (
-              <Stack.Toolbar.Button
-                icon="calendar.badge.clock"
-                hidden={search.open}
-                onPress={() => openFromMenu({ pathname: "/server-routines", params: { serverId: activeServer.id } })}
-              />
-            ) : null}
             <Stack.Toolbar.Menu
               icon="plus"
               accessibilityLabel={t("mobile.agent.home.chatOptions")}

@@ -1,6 +1,5 @@
 import type { ExpressionId } from "@norbert_bodziony/bloub";
 import {
-  AVATAR_EXPRESSIONS,
   type AvatarStyle,
   avatarCandidateSeeds,
   avatarSeedForFace,
@@ -35,7 +34,7 @@ export function avatarSeedForStyledFace(faceKey: string, face: AvatarFace, style
 export function randomAvatarFace(current: AvatarFace): AvatarFace {
   return {
     shape: randomOther(SUPPORTED_AVATAR_SILHOUETTES, current.shape),
-    expression: randomOther(AVATAR_EXPRESSIONS, current.expression),
+    expression: "neutre",
   };
 }
 
@@ -45,5 +44,7 @@ function randomOther<T>(items: readonly T[], current: T): T {
 }
 
 export function newAvatarSeed(): string {
-  return `mobile:${Crypto.randomUUID().replaceAll("-", "")}`;
+  const rawKey = `mobile:${Crypto.randomUUID().replaceAll("-", "")}`;
+  const profile = bloubAvatarProfile(rawKey, null);
+  return avatarSeedForFace(rawKey, { shape: profile.shape, expression: "neutre" }, "plush");
 }

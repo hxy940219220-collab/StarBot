@@ -7,6 +7,7 @@ import type { AttachmentSummary, BrowserTakeoverRequest } from "@openbot/contrac
 import { markdownInlinePlainText, markdownPlainText } from "@openbot/contracts/markdown-preview-text";
 import { useIsFocused } from "expo-router";
 import { Button, Spinner, Typography } from "heroui-native";
+import Check from "lucide-react-native/icons/check";
 import CircleX from "lucide-react-native/icons/circle-x";
 import CornerUpRight from "lucide-react-native/icons/corner-up-right";
 import GitFork from "lucide-react-native/icons/git-fork";
@@ -107,9 +108,15 @@ import { useMotionPreference, useReducedMotion } from "@/shared/lib/motion";
 import { isAndroid } from "@/shared/lib/platform";
 import { useText } from "@/shared/lib/text";
 import { END_X, lineDirectionStyle, MIRROR_IN_RTL } from "@/shared/lib/text-direction";
+import { uiFeedback } from "@/shared/lib/ui-feedback";
 import { type BubbleTone, bubbleTone } from "../model/bubble-tone";
 import { chatDayLabels } from "../model/chat-day-markers";
 import { mentionDraft } from "../model/chat-mentions";
+import {
+  enterChatMultiSelect,
+  toggleChatMultiSelectMessage,
+  useChatMultiSelectState,
+} from "../model/chat-multi-select";
 import type { ChatTarget } from "../model/chat-target";
 import {
   type MessageFileTarget,
@@ -215,10 +222,23 @@ function ChatBubble({
       height: measured ? withTiming(height, REPLY_SIZE) : height,
     };
   });
+  const bubbleElevation = agent
+    ? {
+        shadowColor: "#0f172a",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.055,
+        shadowRadius: 8,
+      }
+    : {
+        shadowColor: "#0f172a",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+      };
   return (
     <Animated.View
       className={className}
-      style={[style, BUBBLE_CORNER]}
+      style={[style, BUBBLE_CORNER, bubbleElevation]}
       onLayout={
         sized
           ? ({ nativeEvent }) => {
@@ -236,11 +256,15 @@ function ChatBubble({
         <Animated.View
           key={sized ? "sized" : "filled"}
           pointerEvents="none"
-          className={fill ? "absolute left-0 top-0" : "absolute left-0 top-0 bg-control/60"}
+          className={fill ? "absolute left-0 top-0" : "absolute left-0 top-0 bg-control/75"}
           style={[
             BUBBLE_CORNER,
             sized ? null : StyleSheet.absoluteFill,
             fill ? { backgroundColor: fill } : null,
+            {
+              borderWidth: 1,
+              borderColor: "rgba(15, 23, 42, 0.075)",
+            },
             background,
           ]}
         />
@@ -331,6 +355,7 @@ interface ChatMessageListProps {
 type ChatUpload = NonNullable<ChatMessageListProps["upload"]>;
 
 interface MessageRowShared {
+  chatKey: string;
   agents: MobileAgent[];
   agentsById: ReadonlyMap<string, MobileAgent>;
   serverId: string;
@@ -561,11 +586,16 @@ const MessageRow = memo(function MessageRow({
   const waiting = awaitingFirstWord(message, shared, arriving, revealed);
   const bubble = message.kind === "message" && !outbox && !message.streaming && !waiting ? message : null;
   const selectable = Boolean(bubble?.body.trim()) && shared.canSelectText;
+  const canDeleteBubble = Boolean(bubble && shared.canDelete && (shared.deletesAny || bubble.mine));
+  const multiSelect = useChatMultiSelectState();
+  const multiSelectMode = multiSelect.active && multiSelect.chatKey === shared.chatKey;
+  const multiChecked = multiSelectMode && multiSelect.selectedIds.has(message.id);
   const messageActions = useMessageActions(
     bubble?.progress
       ? // A progress update is a step of its turn, as on desktop: no reply, reaction or delete.
         {
           messageId: bubble.id,
+          align: bubble.author === "user" ? "end" : "start",
           copyText: messageCopyText(bubble),
           createdAt: bubble.createdAt,
           onSelectText: selectable ? () => shared.actions.selectText(bubble) : undefined,
@@ -574,6 +604,7 @@ const MessageRow = memo(function MessageRow({
       : bubble
         ? {
             messageId: bubble.id,
+            align: bubble.author === "user" ? "end" : "start",
             copyText: messageCopyText(bubble),
             createdAt: bubble.createdAt,
             reactions: bubble.reactions,
@@ -581,8 +612,8 @@ const MessageRow = memo(function MessageRow({
             onReply: shared.canReply ? () => shared.actions.reply(bubble) : undefined,
             onBranch: shared.branchPoints.has(bubble.id) ? () => shared.actions.branch(bubble) : undefined,
             onSelectText: selectable ? () => shared.actions.selectText(bubble) : undefined,
-            onDelete:
-              shared.canDelete && (shared.deletesAny || bubble.mine) ? () => shared.actions.delete(bubble) : undefined,
+            onDelete: canDeleteBubble ? () => shared.actions.delete(bubble) : undefined,
+            onMultiDelete: canDeleteBubble ? () => enterChatMultiSelect(shared.chatKey, bubble.id) : undefined,
             onMarkUnread:
               shared.canMarkUnread && bubble.author === "agent" && shared.actions.marksUnread(bubble)
                 ? () => shared.actions.markUnread(bubble)
@@ -934,7 +965,7 @@ const MessageRow = memo(function MessageRow({
     source?.kind === "message"
       ? mentionDraft(source.body).text || t("mobile.chat.reply.attachment")
       : t("mobile.chat.reply.unavailable");
-  return (
+  const rowContent = (
     <View
       key={message.id}
       ref={selecting ? actions.selectionArea : undefined}
@@ -960,7 +991,9 @@ const MessageRow = memo(function MessageRow({
           </Typography.Paragraph>
         </View>
       ) : null}
-      {message.author === "agent" ? (
+      {multiSelectMode ? (
+        withReactions
+      ) : message.author === "agent" ? (
         <ChatMessageGesture
           selecting={selecting}
           onReply={shared.canReply && !message.progress ? () => actions.reply(message) : undefined}
@@ -987,11 +1020,47 @@ const MessageRow = memo(function MessageRow({
       )}
       {message.author === "user" && message.status === "failed" ? <TurnFailure reason={message.failureReason} /> : null}
       {outbox ? <ChatOutboxStatus status={outbox} /> : null}
-      {messageActions.open && shared.screenReaderEnabled ? (
+      {!multiSelectMode && messageActions.open && shared.screenReaderEnabled ? (
         <ChatMessageActionsButton align={message.author === "user" ? "end" : "start"} onOpen={messageActions.open} />
       ) : null}
     </View>
   );
+
+  if (multiSelectMode && !outbox) {
+    return (
+      <Pressable
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: multiChecked, disabled: !canDeleteBubble }}
+        disabled={!canDeleteBubble}
+        onPress={() => {
+          uiFeedback.tick();
+          toggleChatMultiSelectMessage(message.id);
+        }}
+        className="w-full flex-row items-center gap-3"
+        style={{ opacity: canDeleteBubble ? 1 : 0.48 }}
+      >
+        <View
+          style={{
+            width: 22,
+            height: 22,
+            borderRadius: 11,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: multiChecked ? "#7c3aed" : "transparent",
+            borderWidth: multiChecked ? 0 : 1.8,
+            borderColor: String(themeMuted),
+          }}
+        >
+          {multiChecked ? <Check size={13} color="#ffffff" strokeWidth={2.8} /> : null}
+        </View>
+        <View pointerEvents="none" className="min-w-0 flex-1">
+          {rowContent}
+        </View>
+      </Pressable>
+    );
+  }
+
+  return rowContent;
 });
 
 interface RowContextValue {
@@ -1176,9 +1245,15 @@ const ChatRowBody = memo(function ChatRowBody({
     >
       {highlight ? <FocusHighlight rowId={message.id} color={highlight.color} shown={highlight.shown} /> : null}
       {day ? (
-        <Typography.Paragraph type="body-xs" align="center" className="pb-3 pt-1 text-muted">
-          {day}
-        </Typography.Paragraph>
+        <View
+          className="mb-3 mt-1.5 self-center rounded-full bg-control/70 px-3 py-1"
+          style={{
+            borderWidth: StyleSheet.hairlineWidth,
+            borderColor: "rgba(128, 128, 128, 0.16)",
+          }}
+        >
+          <Typography className="font-medium text-[11px] text-muted">{day}</Typography>
+        </View>
       ) : null}
       {unreadLine ? <UnreadLineRow rowId={message.id} color={unreadLine.color} animated={unreadLine.animated} /> : null}
       {turn ? <ChatTurnStepsRow summary={turn} muted={shared.themeMuted} onPress={openTurn} /> : null}
@@ -1708,6 +1783,7 @@ export const ChatMessageList = memo(function ChatMessageList({
   const messageFiles = useMessageFileOpener(target.serverId);
   const shared = useMemo<MessageRowShared>(
     () => ({
+      chatKey: conversationKey,
       agents,
       agentsById,
       serverId: target.serverId,
@@ -1748,6 +1824,7 @@ export const ChatMessageList = memo(function ChatMessageList({
       actions,
     }),
     [
+      conversationKey,
       agents,
       agentsById,
       target.kind,

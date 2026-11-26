@@ -1,9 +1,9 @@
 import type { AttachmentSummary } from "@openbot/contracts/ipc";
-import { router } from "expo-router";
 import { useSyncExternalStore } from "react";
 
 export interface MessageActionsRequest {
   messageId: string;
+  align?: "start" | "end";
   copyText: string;
   createdAt?: string;
   ownReaction: string | null;
@@ -17,6 +17,7 @@ export interface MessageActionsRequest {
   onTogglePin?: () => void;
   sendToChannel?: MessageChannelTargets;
   onDelete?: () => void;
+  onMultiDelete?: () => void;
   files?: MessageFiles;
 }
 
@@ -41,7 +42,12 @@ function subscribe(listener: () => void) {
 export function openMessageActions(request: MessageActionsRequest) {
   current = request;
   for (const listener of listeners) listener();
-  router.push("/message-actions");
+}
+
+export function closeMessageActions() {
+  if (current === null) return;
+  current = null;
+  for (const listener of listeners) listener();
 }
 
 export function messageActionsOpen(): boolean {
