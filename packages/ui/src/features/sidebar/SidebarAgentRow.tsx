@@ -1,4 +1,4 @@
-import { AppWindow, Badge, buttonVariants, Clock3, ContextMenu, Lock } from "@openbot/ui";
+import { AppWindow, buttonVariants, Clock3, ContextMenu, Lock } from "@openbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, Show } from "solid-js";
 import type { AgentProfile } from "../../data";
@@ -98,26 +98,22 @@ export function SidebarAgentRow(rowProps: { agent: AgentProfile; waiting?: boole
                 <strong dir="auto">{rowProps.agent.name}</strong>
                 <Show when={isChiefStarBot(rowProps.agent.id)}>
                   <span
-                    class="starbot-chief-crown-badge"
-                    title="主星友（聊得最多 / 消耗 Token 最高，负责每晚星夜梦境总结）"
+                    class="starbot-chief-crown-icon"
+                    title="主星友"
                     aria-label="主星友"
                     style={{
                       display: "inline-flex",
                       "align-items": "center",
-                      gap: "2px",
-                      padding: "1px 5px",
+                      "justify-content": "center",
                       "margin-left": "4px",
-                      "border-radius": "999px",
-                      "font-size": "10px",
-                      "font-weight": "700",
-                      "line-height": "1.3",
-                      background: "linear-gradient(135deg, rgba(251, 191, 36, 0.24), rgba(245, 158, 11, 0.16))",
-                      border: "1px solid rgba(245, 158, 11, 0.42)",
-                      color: "#b45309",
+                      color: "#fbbf24",
+                      filter: "drop-shadow(0 1px 2px rgba(245, 158, 11, 0.35))",
                       "flex-shrink": "0",
                     }}
                   >
-                    👑 主星友
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M3.5 18.5h17a1 1 0 0 1 0 2h-17a1 1 0 0 1 0-2Zm-.7-11.2a1 1 0 0 1 1.54-.23l4.16 3.74 2.66-5.32a1 1 0 0 1 1.68 0l2.66 5.32 4.16-3.74a1 1 0 0 1 1.65.93l-1.82 8.5H4.51l-1.82-8.5a1 1 0 0 1 .11-.7Z" />
+                    </svg>
                   </span>
                 </Show>
                 <Show when={lockLabel()}>
@@ -131,13 +127,6 @@ export function SidebarAgentRow(rowProps: { agent: AgentProfile; waiting?: boole
                   </span>
                 </Show>
               </span>
-              <Show when={title()}>
-                {(label) => (
-                  <Badge class="agent-role-badge" title={label()}>
-                    <span dir="auto">{label()}</span>
-                  </Badge>
-                )}
-              </Show>
             </span>
             <Show
               when={wait()}

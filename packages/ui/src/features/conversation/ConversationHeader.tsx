@@ -1,21 +1,24 @@
-import { Badge, Button, Clock3, Lock } from "@openbot/ui";
+import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { Badge, Button, Clock3, Input } from "@openbot/ui";
 import { ProviderModelPicker } from "@openbot/ui/components/ProviderModelPicker";
 import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "../agents/AgentAvatar";
-import { agentAccessLockLabel } from "../agents/agent-access";
-import { isChiefStarBot } from "../agents/chief-starbot";
 import { RemoteDesktopIcon } from "@openbot/ui/features/conversation/ConversationIcons";
 import { PinnedMessages, type PinnedMessagesProps } from "@openbot/ui/features/conversation/PinnedMessages";
 import { SidePanelToggle, type SidePanelToggleProps } from "@openbot/ui/features/conversation/SidePanel";
 import { TabShape } from "@openbot/ui/features/conversation/TabShape";
 import { useText } from "@openbot/ui/text";
 import type { ComponentProps, JSX } from "@solidjs/web";
-import { createEffect, onSettled, Show } from "solid-js";
+import { createSignal, onSettled, Show } from "solid-js";
+import { formatShortSessionTabTitle, getStoredMainSessionTitle, setStoredMainSessionTitle } from "./main-session-title";
 import { modelPickerFit } from "./model-picker-fit";
+
+export { formatShortSessionTabTitle, getStoredMainSessionTitle, setStoredMainSessionTitle };
 
 export interface ConversationHeaderProps {
   agent: AgentProfile | null | undefined;
   title?: JSX.Element | undefined;
+  sessionTitle?: string | undefined;
+  onRenameSessionTitle?: ((title: string) => void) | undefined;
   modelPicker: ComponentProps<typeof ProviderModelPicker>;
   pendingModel?: ConversationHeaderPendingModel | undefined;
   onSettingsIntent: () => void;
@@ -41,59 +44,7 @@ export interface ConversationHeaderRemoteControl {
   onOpen: (trigger: HTMLButtonElement) => void;
 }
 
-const AGENT_TITLE_MIN_EM = 4;
-
-function AgentTitle(props: { title: string }) {
-  let room: HTMLSpanElement | undefined;
-  let title: HTMLSpanElement | undefined;
-  let schedule: (() => void) | undefined;
-  createEffect(
-    () => props.title,
-    () => schedule?.(),
-  );
-  onSettled(() => {
-    const header = room?.closest(".conversation-header");
-    if (!room || !header) return;
-    let frame = 0;
-    schedule = () => {
-      if (frame === 0)
-        frame = requestAnimationFrame(() => {
-          frame = 0;
-          measure();
-        });
-    };
-    const observer = new ResizeObserver(schedule);
-    const measure = () => {
-      if (!room) return;
-      for (const part of header.querySelectorAll(
-        ".conversation-title, .conversation-heading-group, .conversation-header-actions, .agent-threads-header",
-      )) {
-        observer.observe(part);
-      }
-      room.removeAttribute("data-hidden");
-      const style = getComputedStyle(room);
-      if (style.display === "none") return;
-      const minimum = AGENT_TITLE_MIN_EM * (Number.parseFloat(style.fontSize) || 12);
-      const cut = title ? title.scrollWidth > title.clientWidth : false;
-      room.toggleAttribute("data-hidden", cut && room.getBoundingClientRect().width < minimum);
-    };
-    observer.observe(room);
-    observer.observe(header);
-    measure();
-    return () => {
-      schedule = undefined;
-      observer.disconnect();
-      cancelAnimationFrame(frame);
-    };
-  });
-  return (
-    <span ref={room} class="conversation-agent-title-room">
-      <span ref={title} class="conversation-agent-title" dir="auto">
-        {props.title}
-      </span>
-    </span>
-  );
-}
+const RENAME_FOCUS_GUARD_MS = 280;
 
 function fitHeaderPicker(header: HTMLElement) {
   const parts = () =>
@@ -123,58 +74,104 @@ export function ConversationHeader(props: ConversationHeaderProps) {
   const { t } = useText();
   const titleTab = () => (props.titleSelected === undefined ? undefined : "");
   const titleSelected = () => (props.titleSelected ? "" : undefined);
+  const fullSessionTitle = () => props.sessionTitle?.trim() || "新对话";
+  const shortSessionTitle = () => formatShortSessionTabTitle(fullSessionTitle(), 6);
+  const [renaming, setRenaming] = createSignal(false);
+  let renameStartedAt = Number.NEGATIVE_INFINITY;
   let header: HTMLElement | undefined;
+
+  const startMainRename = () => {
+    if (!props.onRenameSessionTitle) return;
+    renameStartedAt = performance.now();
+    setRenaming(true);
+  };
+
+  const commitMainRename = (value: string | null) => {
+    if (!renaming()) return;
+    setRenaming(false);
+    if (value === null) return;
+    const trimmed = value.trim();
+    if (trimmed && trimmed !== fullSessionTitle()) {
+      props.onRenameSessionTitle?.(trimmed);
+    }
+  };
+
   onSettled(() => (header ? fitHeaderPicker(header) : undefined));
   return (
     <header ref={header} class="window-drag conversation-header">
       <div class="conversation-heading-group">
         <Show when={props.agent} fallback={props.title}>
-          {(agent) => (
-            <Button
-              variant="ghost"
-              size="sm"
-              type="button"
-              class="conversation-title no-drag"
-              data-tab={titleTab()}
-              data-selected={titleSelected()}
-              aria-label={props.onOpenChat ? t("conversation.header.mainChat") : t("conversation.header.settings")}
-              onPointerEnter={() => props.onOpenChat || props.onSettingsIntent()}
-              onFocus={() => props.onOpenChat || props.onSettingsIntent()}
-              onClick={() => (props.onOpenChat ?? props.onOpenSettings)()}
+          {() => (
+            <Show
+              when={renaming()}
+              fallback={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  type="button"
+                  class="conversation-title conversation-session-tab no-drag"
+                  data-tab={titleTab()}
+                  data-selected={titleSelected()}
+                  aria-label={fullSessionTitle()}
+                  title={`${fullSessionTitle()}（双击修改标题）`}
+                  onClick={() => props.onOpenChat?.()}
+                  onDblClick={(event: MouseEvent) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    startMainRename();
+                  }}
+                  onKeyDown={(event: KeyboardEvent) => {
+                    if (event.key === "F2") {
+                      event.preventDefault();
+                      startMainRename();
+                    }
+                  }}
+                >
+                  <h1 class="conversation-session-tab-label" dir="auto">
+                    {shortSessionTitle()}
+                  </h1>
+                </Button>
+              }
             >
-              <AgentAvatar agent={agent()} />
-              <h1 class="conversation-agent-heading" dir="auto">
-                <span class="conversation-agent-name">{agent().name}</span>
-                <Show when={isChiefStarBot(agent().id)}>
-                  <span
-                    title="主星友 · 负责夜间星夜梦境记忆沉淀"
-                    style={{
-                      display: "inline-flex",
-                      "align-items": "center",
-                      gap: "2px",
-                      padding: "1px 6px",
-                      "margin-left": "6px",
-                      "border-radius": "999px",
-                      "font-size": "11px",
-                      "font-weight": "700",
-                      background: "linear-gradient(135deg, rgba(251, 191, 36, 0.24), rgba(245, 158, 11, 0.14))",
-                      border: "1px solid rgba(245, 158, 11, 0.42)",
-                      color: "#b45309",
-                    }}
-                  >
-                    👑 主星友
-                  </span>
-                </Show>
-                <Show when={agent().title.trim()}>{(title) => <AgentTitle title={title()} />}</Show>
-              </h1>
-            </Button>
-          )}
-        </Show>
-        <Show when={props.agent && agentAccessLockLabel(props.agent, t)}>
-          {(label) => (
-            <span class="conversation-access-lock" role="img" aria-label={label()} title={label()}>
-              <Lock aria-hidden="true" />
-            </span>
+              <div
+                class="conversation-title conversation-session-tab conversation-session-tab-editing no-drag"
+                data-tab={titleTab()}
+                data-selected={titleSelected()}
+              >
+                <Input
+                  ref={(field: HTMLInputElement) =>
+                    requestAnimationFrame(() => {
+                      field.focus();
+                      field.select();
+                    })
+                  }
+                  class="conversation-session-tab-input"
+                  size="sm"
+                  dir="auto"
+                  aria-label="修改会话标题"
+                  maxlength={INPUT_LIMITS.agentTaskTitle}
+                  defaultValue={fullSessionTitle()}
+                  onKeyDown={(event: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      commitMainRename(event.currentTarget.value);
+                    } else if (event.key === "Escape") {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      commitMainRename(null);
+                    }
+                  }}
+                  onBlur={(event: FocusEvent & { currentTarget: HTMLInputElement }) => {
+                    const field = event.currentTarget;
+                    if (performance.now() - renameStartedAt < RENAME_FOCUS_GUARD_MS) {
+                      requestAnimationFrame(() => field.focus());
+                      return;
+                    }
+                    commitMainRename(field.value);
+                  }}
+                />
+              </div>
+            </Show>
           )}
         </Show>
         {props.threads}

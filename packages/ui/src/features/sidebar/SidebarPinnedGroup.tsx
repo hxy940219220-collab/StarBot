@@ -2,6 +2,7 @@ import { coordinatorText } from "@openbot/contracts/coordinator-text";
 import { Badge, buttonVariants, ContextMenu } from "@openbot/ui";
 import { createMemo, createSignal, For, Match, Show, Switch } from "solid-js";
 import { useText } from "../../text";
+import { isChiefStarBot } from "../agents/chief-starbot";
 import { ChannelAvatar } from "../channels/ChannelAvatar";
 import { SidebarAgentContextMenu } from "./SidebarAgentContextMenu";
 import { SidebarAgentIndicator, SidebarPinnedAvatar } from "./SidebarAgentIndicator";
@@ -148,16 +149,45 @@ export function SidebarPinnedGroup() {
                                   agentState={() => props.agentStates[agent().id]}
                                 />
                                 <span class="agent-row-copy sidebar-pinned-copy">
-                                  <strong class="sidebar-pinned-name" title={name()}>
-                                    {name()}
-                                  </strong>
-                                  <Show when={agent().title.trim()}>
-                                    {(label) => (
-                                      <Badge class="sidebar-pinned-title" title={label()}>
-                                        <span>{label()}</span>
-                                      </Badge>
-                                    )}
-                                  </Show>
+                                  <span
+                                    style={{
+                                      display: "inline-flex",
+                                      "align-items": "center",
+                                      "justify-content": "center",
+                                      "max-width": "100%",
+                                      "min-width": "0",
+                                    }}
+                                  >
+                                    <strong class="sidebar-pinned-name" title={name()} style={{ width: "auto" }}>
+                                      {name()}
+                                    </strong>
+                                    <Show when={isChiefStarBot(agent().id)}>
+                                      <span
+                                        class="starbot-chief-crown-icon"
+                                        title="主星友"
+                                        aria-label="主星友"
+                                        style={{
+                                          display: "inline-flex",
+                                          "align-items": "center",
+                                          "justify-content": "center",
+                                          "margin-left": "3px",
+                                          color: "#fbbf24",
+                                          filter: "drop-shadow(0 1px 2px rgba(245, 158, 11, 0.35))",
+                                          "flex-shrink": "0",
+                                        }}
+                                      >
+                                        <svg
+                                          width="12"
+                                          height="12"
+                                          viewBox="0 0 24 24"
+                                          fill="currentColor"
+                                          aria-hidden="true"
+                                        >
+                                          <path d="M3.5 18.5h17a1 1 0 0 1 0 2h-17a1 1 0 0 1 0-2Zm-.7-11.2a1 1 0 0 1 1.54-.23l4.16 3.74 2.66-5.32a1 1 0 0 1 1.68 0l2.66 5.32 4.16-3.74a1 1 0 0 1 1.65.93l-1.82 8.5H4.51l-1.82-8.5a1 1 0 0 1 .11-.7Z" />
+                                        </svg>
+                                      </span>
+                                    </Show>
+                                  </span>
                                 </span>
                                 <Show when={props.agentStates[agent().id]}>
                                   {(state) => <span class="sr-only">{sidebarAgentStateLabel(state(), t, format)}</span>}

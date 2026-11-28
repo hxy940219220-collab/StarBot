@@ -14,6 +14,7 @@ import {
 import { useText } from "@openbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, flush, onSettled, Show } from "solid-js";
+import { formatShortSessionTabTitle } from "../main-session-title";
 import { modelPickerFit } from "../model-picker-fit";
 import { ThreadStatusText, ThreadTabIcon, threadAttention } from "./ThreadStatusMark";
 import { ThreadTabGhost } from "./ThreadTabGhost";
@@ -70,6 +71,7 @@ function ThreadTab(props: {
   const renameMark = () => (props.renaming ? "" : undefined);
   let closePressed = false;
   const closeLabel = () => t("conversation.threads.closeTab");
+  const shortTitle = () => formatShortSessionTabTitle(props.thread.title, 6);
   return (
     <SlidingTabs.Trigger
       value={props.thread.id}
@@ -78,7 +80,7 @@ function ThreadTab(props: {
       data-attention={threadAttention(props.thread.status)}
       data-menu-open={menuMark()}
       data-renaming={renameMark()}
-      title={props.thread.title}
+      title={`${props.thread.title}（双击修改标题）`}
       onDblClick={(event: MouseEvent) => {
         if (event.target instanceof Element && event.target.closest(".agent-threads-tab-close")) return;
         props.onRename();
@@ -99,8 +101,9 @@ function ThreadTab(props: {
         }
       }}
     >
+      <ThreadTitle class="agent-threads-tab-title" title={shortTitle()} />
       <span
-        class="agent-threads-tab-close"
+        class="agent-threads-tab-close agent-threads-tab-close-trailing"
         aria-hidden="true"
         title={closeLabel()}
         onPointerDown={(event) => {
@@ -114,12 +117,13 @@ function ThreadTab(props: {
           closePressed = false;
         }}
       >
-        <span class="agent-threads-tab-icon">
-          <ThreadTabIcon status={props.thread.status} unread={props.thread.unread} idle={props.icon} />
-        </span>
+        <Show when={props.thread.status.kind !== "idle" || (props.thread.unread ?? 0) > 0}>
+          <span class="agent-threads-tab-icon">
+            <ThreadTabIcon status={props.thread.status} unread={props.thread.unread} idle={props.icon} />
+          </span>
+        </Show>
         <X class="agent-threads-tab-x" />
       </span>
-      <ThreadTitle class="agent-threads-tab-title" title={props.thread.title} />
       <ThreadStatusText status={props.thread.status} unread={props.thread.unread} />
     </SlidingTabs.Trigger>
   );
@@ -418,14 +422,17 @@ export function ThreadTabs(props: ThreadHeaderProps) {
   const startRename = (id: string) => {
     const tab = tabOf(id);
     const thread = threadOf(id);
-    const title = tab?.querySelector(".agent-threads-tab-title");
-    if (!tab || !title || !area || !thread || !renamable(props, thread)) return;
+    if (!tab || !area || !thread || !renamable(props, thread)) return;
     tab.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
     const box = tab.getBoundingClientRect();
-    const start = title.getBoundingClientRect().left;
-    const end = box.right - (Number.parseFloat(getComputedStyle(tab).paddingRight) || 0);
+    const areaBox = area.getBoundingClientRect();
     renameAt = performance.now();
-    setRenaming({ id, title: thread.title, width: end - start, left: start - area.getBoundingClientRect().left });
+    setRenaming({
+      id,
+      title: thread.title,
+      width: Math.max(box.width, 120),
+      left: Math.max(0, box.left - areaBox.left),
+    });
   };
   const finishRename = (value: string | null, refocus: boolean) => {
     const edit = renaming();

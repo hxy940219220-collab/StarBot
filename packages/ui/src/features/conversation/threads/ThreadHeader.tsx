@@ -17,10 +17,11 @@ function rowFold(
   start: number,
   avatarEnd: number,
   button: number,
+  hasAvatar: boolean,
 ): RowFold | undefined {
   const pair = 2 * button + 3;
   if (width - start >= pair) return undefined;
-  if (width - avatarEnd >= pair) return "name";
+  if (hasAvatar && width - avatarEnd >= pair) return "name";
   if (width + chevron - avatarEnd >= button) return "new";
   if (width + chevron - avatarEnd >= -1) return "list";
   return "all";
@@ -100,7 +101,7 @@ function ThreadRow(props: ThreadHeaderProps) {
       const avatar = title?.querySelector(".agent-avatar")?.getBoundingClientRect();
       const padding = title ? Number.parseFloat(getComputedStyle(title).paddingInlineStart) || 0 : 0;
       const avatarEnd = avatar ? toEnd(avatar) + padding + 1 : start;
-      setFold(rowFold(width, chevronRoom, start, avatarEnd, button));
+      setFold(rowFold(width, chevronRoom, start, avatarEnd, button, avatar !== undefined));
     };
     const observer = new ResizeObserver(measure);
     observer.observe(group);

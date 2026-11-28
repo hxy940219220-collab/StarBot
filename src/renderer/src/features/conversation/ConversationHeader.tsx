@@ -20,7 +20,11 @@ import {
 import { reasoningLabel } from "@openbot/ui/components/ProviderModelPicker";
 import { findModelOption, providerAccountName } from "@openbot/ui/components/provider-accounts";
 import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import { ConversationHeader as SharedConversationHeader } from "@openbot/ui/features/conversation/ConversationHeader";
+import {
+  getStoredMainSessionTitle,
+  setStoredMainSessionTitle,
+  ConversationHeader as SharedConversationHeader,
+} from "@openbot/ui/features/conversation/ConversationHeader";
 import { ThreadHeader } from "@openbot/ui/features/conversation/threads/ThreadHeader";
 import {
   DRAFT_THREAD_ID,
@@ -138,6 +142,20 @@ export function ConversationHeader() {
     },
   );
 
+  const mainSessionTitle = createMemo<string>(() => {
+    const agent = props.agent;
+    if (!agent) return "新对话";
+    const custom = getStoredMainSessionTitle(props.server?.id, agent.id);
+    if (custom) return custom;
+    for (const msg of props.messages) {
+      if (msg.author === "user" && msg.kind === "text") {
+        const cleaned = msg.text.replace(/\s+/gu, " ").trim();
+        if (cleaned) return cleaned;
+      }
+    }
+    return "新对话";
+  });
+
   const allBotSessions = createMemo<FlyoutSessionEntry[]>(() => {
     const agent = props.agent;
     if (!agent) return [];
@@ -145,7 +163,7 @@ export function ConversationHeader() {
     const list: FlyoutSessionEntry[] = [
       {
         id: MAIN_THREAD_ID,
-        title: "主对话",
+        title: mainSessionTitle(),
         updatedAt: agent.updatedAt,
         archived: false,
         isMain: true,
@@ -229,6 +247,14 @@ export function ConversationHeader() {
       <SharedConversationHeader
         agent={props.agent}
         title={channel ? <channel.HeaderTitle onOpenSettings={() => setActiveRightPanel("settings")} /> : undefined}
+        sessionTitle={props.agent ? mainSessionTitle() : undefined}
+        onRenameSessionTitle={
+          props.agent
+            ? (nextTitle) => {
+                if (props.agent) setStoredMainSessionTitle(props.server?.id, props.agent.id, nextTitle);
+              }
+            : undefined
+        }
         onSettingsIntent={() => {
           if (channel) void loadAgentSettingsPanel();
         }}
