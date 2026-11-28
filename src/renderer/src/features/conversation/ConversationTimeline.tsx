@@ -59,7 +59,9 @@ import { speechModelReady } from "../speech/speech-model";
 import { recordingGone, speechReading, spokenReply } from "../speech/speech-playback";
 import {
   isNativeTtsSupported,
+  nativeLoadingMessageId,
   nativeReadingMessageId,
+  prefetchNativeReadAloud,
   stopNativeReadAloud,
   toggleNativeReadAloud,
 } from "../speech/starbot-native-tts";
@@ -243,7 +245,9 @@ export function ConversationTimeline() {
     if (isNativeTtsSupported()) {
       return {
         reading: nativeReadingMessageId() === message.id,
+        loading: nativeLoadingMessageId() === message.id,
         onToggle: () => toggleNativeReadAloud(message.id, message.body),
+        onPrefetch: () => prefetchNativeReadAloud(message.body),
       };
     }
     if (!speechModelReady()) return;
@@ -253,11 +257,25 @@ export function ConversationTimeline() {
         toggleReadAloud({ serverId: props.server?.id ?? "local", agentId, messageId: message.id }, message.body),
     };
   };
-  const markUnreadAction = (message: AgentMessage) => {
-    const onMarkUnread = props.onMarkUnread;
-    if (channel || !onMarkUnread || !isIncomingAgentMessage(message) || message.streaming) return;
-    return () => void onMarkUnread(message.id);
-  };
+  // Quietly pre-synthesize the first short clause of the latest completed assistant reply so clicking 🔊 starts immediately
+  let lastAutoPrefetchedId: string | null = null;
+  createEffect(() => {
+    if (props.runtime || !isNativeTtsSupported()) return;
+    const msgs = props.messages;
+    for (let i = msgs.length - 1; i >= 0; i -= 1) {
+      const m = msgs[i];
+      if (!m || m.author !== "agent") continue;
+      if (m.streaming || !m.body.trim()) return;
+      if (m.id === lastAutoPrefetchedId) return;
+      lastAutoPrefetchedId = m.id;
+      const body = m.body;
+      const timer = window.setTimeout(() => {
+        if (nativeReadingMessageId() === null) prefetchNativeReadAloud(body);
+      }, 450);
+      onCleanup(() => window.clearTimeout(timer));
+      return;
+    }
+  });
   const [deleteTargetId, setDeleteTargetId] = createSignal<string | null>(null);
   const canDeleteTimelineMessage = (message: AgentMessage): boolean => {
     if (!props.onDeleteMessage || message.streaming || message.id.startsWith(PENDING_SEND_ID_PREFIX)) return false;
@@ -1555,8 +1573,8 @@ export function ConversationTimeline() {
                   showCopyInMenu: isUserRow() || Boolean(channel),
                   ...messageActions,
                   onForward: forwardAction(currentRowMsg()),
-                  readAloud: messageReadAloud(),
-                  onMarkUnread: markUnreadAction(currentRowMsg()),
+                  readAloud: undefined,
+                  onMarkUnread: undefined,
                   sendToChannel: sendToChannelAction(currentRowMsg()),
                   onBranch: undefined,
                   branchDisabled: Boolean(props.activeTurnId),
@@ -1574,12 +1592,7 @@ export function ConversationTimeline() {
                       ? undefined
                       : messageActions.onCopy;
                 const rowCopied = () => copiedMessageId() === currentRowMsg().id;
-                const rowReadAloud = () =>
-                  !isUserRow() && nativeReadingMessageId() === currentRowMsg().id
-                    ? messageReadAloud()
-                    : compactActions()
-                      ? undefined
-                      : messageReadAloud();
+                const rowReadAloud = () => messageReadAloud();
                 const rowBranch = () => undefined;
                 const rowActionTime = () => Boolean(channel) || !compactActions();
                 const rowSelectable = () => canDeleteTimelineMessage(message() ?? initialMessage);

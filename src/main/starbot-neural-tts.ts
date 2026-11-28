@@ -189,6 +189,13 @@ export class StarBotNeuralTts {
     });
   }
 
+  warm(): void {
+    try {
+      this.#ensureWorker();
+      this.#scheduleIdleTimer();
+    } catch {}
+  }
+
   shutdown(): void {
     this.#stopWorker(new Error("Neural TTS service shut down."));
     this.#cache.clear();

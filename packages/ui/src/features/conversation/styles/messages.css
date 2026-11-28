@@ -280,6 +280,23 @@
   order: -1;
 }
 
+.message-action-button.is-read-aloud-loading {
+  color: var(--openbot-accent);
+  animation: message-read-aloud-pulse 900ms ease-in-out infinite;
+}
+
+@keyframes message-read-aloud-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
 .ui-bubble.message-bubble-member {
   --message-bubble-tint: var(--message-author-color, var(--openbot-accent));
   --message-bubble-tint-amount: 22%;

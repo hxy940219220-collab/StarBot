@@ -93,6 +93,11 @@ export class VoiceSpeechService extends EventEmitter<VoiceSpeechEvents> {
     this.#model.on("status", (status) => {
       if (this.#preferences.get().modelId === SPEECH_MODEL_ID) this.emit("modelStatus", status);
     });
+    // Pre-warm the neural TTS Python worker shortly after launch so first read-aloud has zero cold-start lag
+    const warmTimer = setTimeout(() => {
+      this.#neuralTts.warm();
+    }, 2_500);
+    warmTimer.unref();
   }
 
   getSettings(): SpeechSettings {

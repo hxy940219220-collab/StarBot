@@ -133,3 +133,67 @@
 .voice-server-dialog .voice-server-line .settings-modal-select {
   width: 100%;
 }
+
+.settings-appearance-preview {
+  position: relative;
+  margin: 10px 14px 4px;
+  border-radius: 14px;
+  border: 1px solid var(--openbot-border);
+  background: var(--openbot-bg-canvas);
+  overflow: hidden;
+  transition: background 180ms ease;
+}
+
+.settings-appearance-preview-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.settings-appearance-preview-backdrop .chat-backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+}
+
+.settings-appearance-preview-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+}
+
+.settings-appearance-preview-row {
+  display: flex;
+}
+
+.settings-appearance-preview-row.is-agent {
+  justify-content: flex-start;
+}
+
+.settings-appearance-preview-row.is-user {
+  justify-content: flex-end;
+}
+
+.settings-appearance-preview-bubble {
+  max-width: 82%;
+  padding: 7px 12px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  border: 1px solid var(--openbot-border);
+  background: var(--openbot-bg-surface);
+  color: var(--openbot-text-primary);
+  backdrop-filter: blur(10px);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.settings-appearance-preview-bubble.is-user {
+  background: var(--openbot-bg-surface-raised);
+}

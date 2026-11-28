@@ -921,7 +921,7 @@ export function MessageActions(props: {
   onReply?: (() => void) | undefined;
   onCopy?: (() => void) | undefined;
   copied?: boolean | undefined;
-  readAloud?: { reading: boolean; onToggle: () => void } | undefined;
+  readAloud?: { reading: boolean; loading?: boolean | undefined; onToggle: () => void; onPrefetch?: (() => void) | undefined } | undefined;
   onBranch?: (() => void) | undefined;
   branchDisabled?: boolean | undefined;
   menu?: (() => JSX.Element) | undefined;
@@ -1001,6 +1001,28 @@ export function MessageActions(props: {
           </DropdownMenu.Root>
         </div>
       </Show>
+      <Show when={props.readAloud}>
+        {(readAloud) => (
+          <Button
+            variant="ghost"
+            type="button"
+            class={["message-action-button", { "is-read-aloud-loading": readAloud().loading === true }]}
+            title={
+              readAloud().loading
+                ? "正在生成自然语音…"
+                : readAloud().reading
+                  ? t("chat.actions.stopReading")
+                  : t("chat.actions.readAloud")
+            }
+            aria-label={readAloud().reading ? t("chat.actions.stopReading") : t("chat.actions.readAloud")}
+            onMouseEnter={() => readAloud().onPrefetch?.()}
+            onFocus={() => readAloud().onPrefetch?.()}
+            onClick={() => readAloud().onToggle()}
+          >
+            {readAloud().reading ? <StopIcon /> : <AudioLines aria-hidden="true" />}
+          </Button>
+        )}
+      </Show>
       <Show when={props.onReply}>
         <Button
           variant="ghost"
@@ -1027,20 +1049,6 @@ export function MessageActions(props: {
             onClick={() => onCopy()()}
           >
             {props.copied ? <CheckIcon /> : <CopyIcon />}
-          </Button>
-        )}
-      </Show>
-      <Show when={props.readAloud}>
-        {(readAloud) => (
-          <Button
-            variant="ghost"
-            type="button"
-            class="message-action-button"
-            title={readAloud().reading ? t("chat.actions.stopReading") : t("chat.actions.readAloud")}
-            aria-label={readAloud().reading ? t("chat.actions.stopReading") : t("chat.actions.readAloud")}
-            onClick={() => readAloud().onToggle()}
-          >
-            {readAloud().reading ? <StopIcon /> : <AudioLines aria-hidden="true" />}
           </Button>
         )}
       </Show>
@@ -1180,14 +1188,6 @@ export function MessageMenuItems(props: MessageMenuItemsProps) {
           </ContextMenu.Portal>
         </ContextMenu.Sub>
       </Show>
-      <Show when={props.readAloud}>
-        {(readAloud) => (
-          <ContextMenu.Item onSelect={() => readAloud().onToggle()}>
-            {readAloud().reading ? <StopIcon /> : <AudioLines aria-hidden="true" />}
-            <span>{readAloud().reading ? t("chat.actions.stopReading") : t("chat.actions.readAloud")}</span>
-          </ContextMenu.Item>
-        )}
-      </Show>
       <Show when={sendToChannel()}>
         {(sendToChannel) => (
           <ContextMenu.Sub>
@@ -1219,7 +1219,7 @@ export function MessageMenuItems(props: MessageMenuItemsProps) {
           </ContextMenu.Item>
         )}
       </Show>
-      <Show when={props.onBranch || props.onMarkUnread || props.pin}>
+      <Show when={props.onBranch || props.pin}>
         <ContextMenu.Separator />
       </Show>
       <Show when={props.pin}>
@@ -1235,14 +1235,6 @@ export function MessageMenuItems(props: MessageMenuItemsProps) {
           <ContextMenu.Item disabled={props.branchDisabled === true} onSelectAfterClose={onBranch()}>
             <BranchIcon />
             <span>{t("chat.menu.branch")}</span>
-          </ContextMenu.Item>
-        )}
-      </Show>
-      <Show when={props.onMarkUnread}>
-        {(onMarkUnread) => (
-          <ContextMenu.Item onSelect={onMarkUnread()}>
-            <CircleDot aria-hidden="true" />
-            <span>{t("chat.menu.markUnread")}</span>
           </ContextMenu.Item>
         )}
       </Show>

@@ -118,11 +118,14 @@
   --openbot-bg-surface: var(--window-solid-surface);
 }
 
+:root[data-openbot-window-glass],
 :root[data-openbot-window-glass] body {
   background: transparent;
 }
 
 :root[data-openbot-window-glass] .app-window {
+  position: relative;
+  z-index: 1;
   --window-frame: var(--window-glass-frame);
 }
 

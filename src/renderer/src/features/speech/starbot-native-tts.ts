@@ -5,12 +5,14 @@ import { speechPort } from "./speech-port";
 import { speechSpeed } from "./speech-speed";
 
 const [readingIdSignal, setReadingIdSignal] = createSignal<string | null>(null);
+const [loadingIdSignal, setLoadingIdSignal] = createSignal<string | null>(null);
 let currentSessionToken = 0;
 let activeAudioElement: HTMLAudioElement | null = null;
 let activeAudioUrl: string | null = null;
 
-const MAX_WAV_CACHE_ENTRIES = 40;
+const MAX_WAV_CACHE_ENTRIES = 48;
 const wavCache = new Map<string, ArrayBuffer>();
+const inFlightSyntheses = new Map<string, Promise<ArrayBuffer>>();
 
 const CJK_REGEX = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
 
@@ -23,6 +25,10 @@ export function isNativeTtsSupported(): boolean {
 
 export function nativeReadingMessageId(): string | null {
   return readingIdSignal();
+}
+
+export function nativeLoadingMessageId(): string | null {
+  return loadingIdSignal();
 }
 
 function normalizeNaturalText(markdown: string): string {
@@ -68,13 +74,13 @@ function cleanSpeechChunks(markdown: string): string[] {
   let buffer = "";
 
   for (const sentence of rawSentences) {
-    // Keep the very first chunk short (~65 chars) so natural neural audio begins speaking quickly
-    const limit = chunks.length === 0 ? 68 : 175;
+    // Keep the very first chunk ultra-short (~44 chars) for the fastest possible playback start
+    const limit = chunks.length === 0 ? 44 : 165;
     if ((buffer + sentence).length <= limit) {
       buffer = buffer ? `${buffer} ${sentence}` : sentence;
     } else {
       if (buffer) chunks.push(buffer);
-      const nextLimit = chunks.length === 0 ? 68 : 175;
+      const nextLimit = chunks.length === 0 ? 44 : 165;
       if (sentence.length <= nextLimit) {
         buffer = sentence;
       } else {
@@ -102,8 +108,8 @@ function encodePcm16Wav(pcm: Uint8Array, sampleRate: number): ArrayBuffer {
   ascii(8, "WAVE");
   ascii(12, "fmt ");
   view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true); // PCM
-  view.setUint16(22, 1, true); // mono
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
   view.setUint32(24, sampleRate, true);
   view.setUint32(28, sampleRate * 2, true);
   view.setUint16(32, 2, true);
@@ -124,17 +130,42 @@ function rememberWav(key: string, wav: ArrayBuffer): void {
   }
 }
 
-async function synthesizeNeuralWav(text: string): Promise<ArrayBuffer> {
+function synthesizeNeuralWav(text: string): Promise<ArrayBuffer> {
   const cached = wavCache.get(text);
   if (cached) {
     wavCache.delete(text);
     wavCache.set(text, cached);
-    return cached;
+    return Promise.resolve(cached);
   }
-  const audio = await speechPort().voice.speak({ text, language: null });
-  const wav = encodePcm16Wav(audio.pcm, audio.sampleRate);
-  rememberWav(text, wav);
-  return wav;
+  const existing = inFlightSyntheses.get(text);
+  if (existing) return existing;
+
+  const task = speechPort()
+    .voice.speak({ text, language: null })
+    .then((audio) => {
+      const wav = encodePcm16Wav(audio.pcm, audio.sampleRate);
+      rememberWav(text, wav);
+      return wav;
+    })
+    .finally(() => {
+      if (inFlightSyntheses.get(text) === task) inFlightSyntheses.delete(text);
+    });
+  inFlightSyntheses.set(text, task);
+  return task;
+}
+
+/**
+ * Quietly pre-synthesizes the first short chunk of a message (on hover or after reply completes)
+ * so clicking the read-aloud button starts playing immediately with near-zero latency.
+ */
+export function prefetchNativeReadAloud(markdown: string): void {
+  if (!isNativeTtsSupported()) return;
+  const chunks = cleanSpeechChunks(markdown);
+  const first = chunks[0];
+  if (!first || wavCache.has(first) || inFlightSyntheses.has(first)) return;
+  // Cap concurrent background prefetches to keep the TTS worker responsive
+  if (inFlightSyntheses.size >= 2) return;
+  void synthesizeNeuralWav(first).catch(() => undefined);
 }
 
 function clearActiveAudio(): void {
@@ -243,6 +274,7 @@ function speakFallbackChunk(text: string, isChinese: boolean, rate: number, toke
 export function stopNativeReadAloud(): void {
   currentSessionToken += 1;
   setReadingIdSignal(null);
+  setLoadingIdSignal(null);
   clearActiveAudio();
   if (typeof window !== "undefined" && "speechSynthesis" in window) {
     try {
@@ -277,22 +309,14 @@ export function toggleNativeReadAloud(messageId: string, markdown: string): void
     } catch {}
   }
   setReadingIdSignal(messageId);
+  const firstCached = chunks[0] ? wavCache.has(chunks[0]) : false;
+  setLoadingIdSignal(firstCached ? null : messageId);
 
   const isChinese = CJK_REGEX.test(chunks.join(""));
   const rate = Math.min(2, Math.max(0.75, speechSpeed() || 1));
 
   void (async () => {
     let neuralAvailable = true;
-    let prefetched: { index: number; promise: Promise<ArrayBuffer> } | null = null;
-
-    const getChunkWav = (index: number): Promise<ArrayBuffer> => {
-      if (prefetched && prefetched.index === index) {
-        const hit = prefetched.promise;
-        prefetched = null;
-        return hit;
-      }
-      return synthesizeNeuralWav(chunks[index]!);
-    };
 
     try {
       for (let i = 0; i < chunks.length; i += 1) {
@@ -301,22 +325,23 @@ export function toggleNativeReadAloud(messageId: string, markdown: string): void
 
         if (neuralAvailable) {
           try {
-            const wav = await getChunkWav(i);
+            // Immediately kick off chunk 1 synthesis in parallel with chunk 0 if chunk 0 is already cached
+            if (i === 0 && chunks.length > 1) {
+              void synthesizeNeuralWav(chunks[1]!).catch(() => undefined);
+            }
+            const wav = await synthesizeNeuralWav(text);
             if (token !== currentSessionToken) return;
-            // Prefetch next chunk in parallel while this chunk plays so sentences flow seamlessly
-            if (i + 1 < chunks.length && !prefetched) {
-              const nextText = chunks[i + 1]!;
-              const nextPromise = synthesizeNeuralWav(nextText);
-              nextPromise.catch(() => undefined);
-              prefetched = { index: i + 1, promise: nextPromise };
+            if (loadingIdSignal() === messageId) setLoadingIdSignal(null);
+            // Prefetch next chunk in parallel while current chunk plays so sentences flow seamlessly
+            if (i + 1 < chunks.length) {
+              void synthesizeNeuralWav(chunks[i + 1]!).catch(() => undefined);
             }
             const ok = await playWavBuffer(wav, token, rate);
             if (token !== currentSessionToken) return;
             if (ok) continue;
           } catch {
-            // Network offline or neural TTS unavailable -> seamlessly fall back to system TTS
             neuralAvailable = false;
-            prefetched = null;
+            if (loadingIdSignal() === messageId) setLoadingIdSignal(null);
           }
         }
 
@@ -332,6 +357,7 @@ export function toggleNativeReadAloud(messageId: string, markdown: string): void
       if (token === currentSessionToken) {
         clearActiveAudio();
         setReadingIdSignal(null);
+        setLoadingIdSignal(null);
       }
     }
   })();

@@ -38,7 +38,11 @@ import { useText } from "@openbot/ui/text";
 import { createUniqueId, Show } from "solid-js";
 import { useInstalledFonts } from "../../app-fonts";
 import { useAppearanceChoice } from "../../appearance-choice";
+import { useChatBackdrop } from "../../chat-backdrop-preference";
 import { setChatBubbleStyle, useChatBubbleStyle } from "../../chat-bubble-style-preference";
+import { ChatBackdrop } from "@openbot/ui/features/conversation/ChatBackdrop";
+import { isChatBackdropScene } from "@openbot/ui/features/conversation/chat-backdrop";
+import { solidBubbleTakesDarkText } from "@openbot/ui/features/conversation/own-bubble";
 import { useI18n } from "../../i18n-context";
 import { useInterfaceSizeChoice } from "../../interface-size";
 import { useLayout } from "../../layout";
@@ -257,6 +261,7 @@ function AppearanceRows(props: SettingsGeneralTabProps) {
   const appearance = useAppearanceChoice();
   const logoColor = useLogoColorChoice();
   const bubbleStyle = useChatBubbleStyle();
+  const chatBackdrop = useChatBackdrop();
   const interfaceSize = useInterfaceSizeChoice();
   const installedFonts = useInstalledFonts();
   const interfaceFontTitleId = `settings-interface-font-${createUniqueId()}`;
@@ -268,6 +273,43 @@ function AppearanceRows(props: SettingsGeneralTabProps) {
       .catch((error: unknown) =>
         toast.error(errorMessage(error, i18n.t("settings.preferences.saveFailed")), { error }),
       );
+  const previewBackdropScene = () => {
+    const choice = chatBackdrop();
+    return isChatBackdropScene(choice) ? choice : null;
+  };
+  const previewChatBg = () =>
+    documentColorScheme() === "dark" ? appearance.chatBackgroundDark() : appearance.chatBackgroundLight();
+  const previewBubbleAccent = () => props.chatColor ?? ("#7c3aed" as AvatarColor);
+  const previewBubbleStyle = () => {
+    const style = bubbleStyle();
+    const color = previewBubbleAccent();
+    if (style === "classic") {
+      return undefined;
+    }
+    if (style === "solid") {
+      const darkText = solidBubbleTakesDarkText(color);
+      return {
+        background: color,
+        color: darkText ? "#18181b" : "#ffffff",
+        "border-color": "transparent",
+      };
+    }
+    return {
+      background: `color-mix(in srgb, ${color} 26%, var(--openbot-bg-surface-raised))`,
+      "border-color": `color-mix(in srgb, ${color} 46%, transparent)`,
+    };
+  };
+  const previewCanvasStyle = () => {
+    if (chatBackdrop() !== null) return undefined;
+    const bg = previewChatBg();
+    if (!bg) return undefined;
+    const isDark = documentColorScheme() === "dark";
+    return {
+      background: isDark
+        ? `oklch(from ${bg} clamp(0.16, l, 0.28) clamp(0.045, c, 0.11) h)`
+        : `oklch(from ${bg} clamp(0.86, l, 0.93) clamp(0.035, c, 0.085) h)`,
+    };
+  };
   const interfaceSizeLabel = (value: AppInterfaceSize | undefined) =>
     value === undefined ? "" : format.percent(value / 100);
   return (
@@ -316,6 +358,27 @@ function AppearanceRows(props: SettingsGeneralTabProps) {
               <OwnChatColorTrigger value={props.chatColor} onChange={saveChatColor} />
             </ItemActions>
           </Item>
+          <div class="settings-appearance-preview" style={previewCanvasStyle()} aria-label="外观实时预览">
+            <Show when={previewBackdropScene()}>
+              {(scene) => (
+                <div class="settings-appearance-preview-backdrop">
+                  <ChatBackdrop scene={scene()} />
+                </div>
+              )}
+            </Show>
+            <div class="settings-appearance-preview-inner">
+              <div class="settings-appearance-preview-row is-agent">
+                <span class="settings-appearance-preview-bubble is-agent">
+                  切换配色、气泡或背景后，这里和聊天窗口会立即同步生效 ✨
+                </span>
+              </div>
+              <div class="settings-appearance-preview-row is-user">
+                <span class="settings-appearance-preview-bubble is-user" style={previewBubbleStyle()}>
+                  太棒了，一眼就能看出区别！
+                </span>
+              </div>
+            </div>
+          </div>
           <Item data-settings-row="settings.bubbleStyle.title" class="settings-modal-row">
             <ItemContent>
               <ItemTitle>{i18n.t("settings.bubbleStyle.title")}</ItemTitle>

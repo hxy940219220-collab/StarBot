@@ -18,8 +18,9 @@ export function isChatBubbleStyle(value: unknown): value is ChatBubbleStyle {
   return CHAT_BUBBLE_STYLES.some((style) => style === value);
 }
 
+const DEFAULT_USER_BUBBLE_ACCENT: AvatarColor = "#7c3aed";
+
 function agentFaceColor(agent: AgentProfile): AvatarColor | undefined {
-  if (agent.avatarUrl !== null) return undefined;
   const color = avatarHeadColor(agent.avatarSeed, agent.avatarHue, agent.avatarColor ?? null).toLowerCase();
   return isAvatarColor(color) ? color : undefined;
 }
@@ -30,8 +31,11 @@ export function ownMessageAuthor(input: {
   agent: AgentProfile | undefined;
   chatColor: AvatarColor | undefined;
 }): ChatMessageAuthor {
-  const color = input.style === "classic" || input.agent === undefined ? undefined : agentFaceColor(input.agent);
-  if (color === undefined) return { kind: "you", name: input.name, chatColor: input.chatColor };
+  if (input.style === "classic") {
+    return { kind: "you", name: input.name, chatColor: undefined, solidBubble: false };
+  }
+  const color =
+    input.chatColor ?? (input.agent ? agentFaceColor(input.agent) : undefined) ?? DEFAULT_USER_BUBBLE_ACCENT;
   return { kind: "you", name: input.name, chatColor: color, solidBubble: input.style === "solid" };
 }
 

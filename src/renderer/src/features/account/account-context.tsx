@@ -10,6 +10,7 @@ import {
 import { currentText } from "@openbot/ui/text";
 import { createMemo, createSignal, createStore, flush, onCleanup, onSettled } from "solid-js";
 import { type DesktopAnalyticsProperties, desktopAnalytics } from "../../analytics";
+import { setLocalChatColor, useLocalChatColor } from "../../chat-color-preference";
 import { createSimpleContext } from "../../simple-context";
 import { accountPort } from "./account-port";
 
@@ -168,7 +169,12 @@ const Auth = createSimpleContext({
     }
 
     async function setChatColor(color: AvatarColor | null): Promise<void> {
-      applyCentralAuthState(await accountPort().auth.updateChatColor(color));
+      setLocalChatColor(color);
+      try {
+        applyCentralAuthState(await accountPort().auth.updateChatColor(color));
+      } catch {
+        // Local account service may not support remote chat color sync; local color preference is already applied.
+      }
     }
 
     const accountUsage = () => accountUsageState.data;
@@ -263,9 +269,12 @@ const Auth = createSimpleContext({
       return trackMobileConnect("revoked", () => accountPort().auth.revokeMobileConnectedDevice(sessionId));
     }
 
+    const localChatColor = useLocalChatColor();
     const signedInAccount = createMemo(() => {
       const state = centralAuth();
-      return state.status === "signed_in" ? state.user : null;
+      if (state.status !== "signed_in") return null;
+      const local = localChatColor();
+      return local === undefined ? state.user : { ...state.user, chatColor: local };
     });
     const visibleSignedInAccount = createMemo(() => (authSuccessVisible() ? null : signedInAccount()));
 
