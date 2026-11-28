@@ -58,15 +58,6 @@ import {
 import { speechModelReady } from "../speech/speech-model";
 import { recordingGone, speechReading, spokenReply } from "../speech/speech-playback";
 import {
-  isNativeTtsSupported,
-  nativeLoadingMessageId,
-  nativeReadingMessageId,
-  prefetchNativeReadAloud,
-  stopNativeReadAloud,
-  toggleNativeReadAloud,
-} from "../speech/starbot-native-tts";
-import { StarBotForwardModal, type ForwardModalRequest, type ForwardMode } from "./StarBotForwardModal";
-import {
   recordingWaveform,
   seekRecording,
   seekSpokenReply,
@@ -75,6 +66,14 @@ import {
   toggleSpokenReply,
 } from "../speech/speech-replies";
 import { cycleSpeechSpeed, speechSpeed } from "../speech/speech-speed";
+import {
+  isNativeTtsSupported,
+  nativeLoadingMessageId,
+  nativeReadingMessageId,
+  prefetchNativeReadAloud,
+  stopNativeReadAloud,
+  toggleNativeReadAloud,
+} from "../speech/starbot-native-tts";
 import { groupedMessageIds } from "./agent-message-timeline";
 import { ChatVisualReply, shownVisualReply } from "./ChatVisualReply";
 import { ConversationBrowserTakeover } from "./ConversationBrowserTakeover";
@@ -97,6 +96,7 @@ import { desktopChatEventRoutinesApi } from "./routine-webhooks-api";
 import { ServerInstallChatCard } from "./ServerInstallChatCard";
 import { SettingLinkChatCard } from "./SettingLinkChatCard";
 import { SkillSuggestionChatCard, skillSuggestionOutcome } from "./SkillSuggestionChatCard";
+import { type ForwardModalRequest, type ForwardMode, StarBotForwardModal } from "./StarBotForwardModal";
 import { PENDING_SEND_ID_PREFIX, pendingSendRetrySafe } from "./stores/pending-send-store";
 import { createSubagentDock } from "./subagent-dock";
 import { createTurnSteps, SUBAGENT_SPAN_PREFIX } from "./turn-steps";
@@ -259,23 +259,27 @@ export function ConversationTimeline() {
   };
   // Quietly pre-synthesize the first short clause of the latest completed assistant reply so clicking 🔊 starts immediately
   let lastAutoPrefetchedId: string | null = null;
-  createEffect(() => {
-    if (props.runtime || !isNativeTtsSupported()) return;
-    const msgs = props.messages;
-    for (let i = msgs.length - 1; i >= 0; i -= 1) {
-      const m = msgs[i];
-      if (!m || m.author !== "agent") continue;
-      if (m.streaming || !m.body.trim()) return;
-      if (m.id === lastAutoPrefetchedId) return;
-      lastAutoPrefetchedId = m.id;
-      const body = m.body;
+  createEffect(
+    () => {
+      if (props.runtime || !isNativeTtsSupported()) return null;
+      const msgs = props.messages;
+      for (let i = msgs.length - 1; i >= 0; i -= 1) {
+        const m = msgs[i];
+        if (m?.author !== "agent") continue;
+        if (m.streaming || !m.body.trim()) return null;
+        return { id: m.id, body: m.body };
+      }
+      return null;
+    },
+    (latest) => {
+      if (!latest || latest.id === lastAutoPrefetchedId) return;
+      lastAutoPrefetchedId = latest.id;
       const timer = window.setTimeout(() => {
-        if (nativeReadingMessageId() === null) prefetchNativeReadAloud(body);
+        if (nativeReadingMessageId() === null) prefetchNativeReadAloud(latest.body);
       }, 450);
-      onCleanup(() => window.clearTimeout(timer));
-      return;
-    }
-  });
+      return () => window.clearTimeout(timer);
+    },
+  );
   const [deleteTargetId, setDeleteTargetId] = createSignal<string | null>(null);
   const canDeleteTimelineMessage = (message: AgentMessage): boolean => {
     if (!props.onDeleteMessage || message.streaming || message.id.startsWith(PENDING_SEND_ID_PREFIX)) return false;
