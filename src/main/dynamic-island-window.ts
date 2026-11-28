@@ -175,8 +175,13 @@ export class DynamicIslandWindowController {
     );
     if (!entry) return;
     const [displayId, window] = entry;
-    if (interactive) this.#interactiveDisplays.add(displayId);
-    else this.#interactiveDisplays.delete(displayId);
+    if (interactive) {
+      this.#interactiveDisplays.add(displayId);
+    } else {
+      this.#interactiveDisplays.delete(displayId);
+      // Reset hover gate so the very next cursor approach re-triggers peek reliably
+      this.#hoverGateActive.delete(displayId);
+    }
     const display = this.#options.getDisplays().find((candidate) => candidate.id === displayId);
     const bounds = display ? this.#islandBounds(display) : undefined;
     this.#cancelCollapse(displayId);
@@ -288,7 +293,11 @@ export class DynamicIslandWindowController {
       }
       return Effect.gen({ self: this }, function* () {
         const window = yield* this.#ensureMainWindow();
-        if (action.type !== "dismiss-failure" && action.type !== "select-agent") {
+        if (
+          action.type !== "dismiss-failure" &&
+          action.type !== "select-agent" &&
+          action.type !== "acknowledge-message"
+        ) {
           this.#options.presentMainWindow(window);
         }
         if (action.type !== "open-app" && !sendToRenderer(window, IPC_ENDPOINTS.dynamicIsland.action, action)) {
@@ -412,7 +421,7 @@ export class DynamicIslandWindowController {
       Boolean(this.#options.getCursorScreenPoint) &&
       this.#windows.size > 0;
     if (shouldRun && this.#hoverGateTimer === undefined) {
-      this.#hoverGateTimer = setInterval(() => this.#pollNotchHoverGate(), 100);
+      this.#hoverGateTimer = setInterval(() => this.#pollNotchHoverGate(), 50);
     } else if (!shouldRun && this.#hoverGateTimer !== undefined) {
       clearInterval(this.#hoverGateTimer);
       this.#hoverGateTimer = undefined;
@@ -425,19 +434,20 @@ export class DynamicIslandWindowController {
     const getCursor = this.#options.getCursorScreenPoint;
     if (!getCursor) return;
     const cursor = getCursor();
+    const isIdleMode = this.#presentation.mode === "idle" && !this.#presentation.recording;
     for (const [displayId, window] of this.#windows) {
       if (window.isDestroyed()) continue;
       const display = this.#options.getDisplays().find((d) => d.id === displayId);
       if (!display) continue;
       const cx = display.bounds.x + display.bounds.width / 2;
       const topY = display.bounds.y;
-      const notchHeight = this.#notchSize(display)?.height ?? 28;
       const wasOver = this.#hoverGateActive.has(displayId);
-      // Wake only inside the top notch/menu-bar strip so browser tabs below y=34 are never blocked;
-      // hold slightly wider while already peeking so compact hover never flickers.
+      // Generous wake/hold zone covering both sides of the notch and the strip right below the physical camera housing
       const overCenterNotch = wasOver
-        ? Math.abs(cursor.x - cx) <= 175 && cursor.y >= topY && cursor.y <= topY + 42
-        : Math.abs(cursor.x - cx) <= 125 && cursor.y >= topY && cursor.y <= topY + Math.min(34, notchHeight + 2);
+        ? Math.abs(cursor.x - cx) <= 248 && cursor.y >= topY && cursor.y <= topY + 56
+        : Math.abs(cursor.x - cx) <= 238 && cursor.y >= topY && cursor.y <= topY + 46;
+      const pillHalfWidth = isIdleMode ? 152 : 246;
+      const overCompactPill = Math.abs(cursor.x - cx) <= pillHalfWidth && cursor.y >= topY && cursor.y <= topY + 38;
 
       if (this.#interactiveDisplays.has(displayId)) {
         if (overCenterNotch) this.#hoverGateActive.add(displayId);
@@ -451,7 +461,7 @@ export class DynamicIslandWindowController {
             cursor.y <= b.y + b.height + 12;
           if (!insideWindow) {
             const ticks = (this.#outsideInteractiveTicks.get(displayId) ?? 0) + 1;
-            if (ticks >= 2) {
+            if (ticks >= 3) {
               this.#outsideInteractiveTicks.delete(displayId);
               this.#hoverGateActive.delete(displayId);
               void window.webContents
@@ -470,23 +480,40 @@ export class DynamicIslandWindowController {
       }
 
       this.#outsideInteractiveTicks.delete(displayId);
-      if (overCenterNotch !== wasOver) {
-        if (overCenterNotch) {
+      if (overCenterNotch) {
+        this.#cancelCollapse(displayId);
+        const targetBounds = this.#islandBounds(display);
+        const curBounds = window.getBounds();
+        if (curBounds.height < targetBounds.height || curBounds.width !== targetBounds.width) {
+          window.setBounds(targetBounds, false);
+        }
+        // Only capture clicks directly over the 38px compact pill band so browser tabs below y=38 are never blocked
+        letPointerThrough(this.#options.pointerForwarding, window, !overCompactPill);
+        if (!wasOver) {
           this.#hoverGateActive.add(displayId);
-          this.#cancelCollapse(displayId);
-          window.setBounds(this.#islandBounds(display), false);
-          letPointerThrough(this.#options.pointerForwarding, window, false);
           void window.webContents
             .executeJavaScript("window.dispatchEvent(new CustomEvent('starbot-notch-peek', { detail: true }))")
+            .then(() => {
+              if (window.isDestroyed()) return;
+              const c = getCursor();
+              const b = window.getBounds();
+              if (c.x >= b.x && c.x < b.x + b.width && c.y >= b.y && c.y < b.y + b.height) {
+                window.webContents.sendInputEvent({
+                  type: "mouseMove",
+                  x: Math.round(c.x - b.x),
+                  y: Math.round(c.y - b.y),
+                });
+              }
+            })
             .catch(() => undefined);
-        } else {
-          this.#hoverGateActive.delete(displayId);
-          void window.webContents
-            .executeJavaScript("window.dispatchEvent(new CustomEvent('starbot-notch-peek', { detail: false }))")
-            .catch(() => undefined);
-          letPointerThrough(this.#options.pointerForwarding, window, true);
-          this.#scheduleCollapse(displayId, window);
         }
+      } else if (wasOver) {
+        this.#hoverGateActive.delete(displayId);
+        void window.webContents
+          .executeJavaScript("window.dispatchEvent(new CustomEvent('starbot-notch-peek', { detail: false }))")
+          .catch(() => undefined);
+        letPointerThrough(this.#options.pointerForwarding, window, true);
+        this.#scheduleCollapse(displayId, window);
       }
     }
   }

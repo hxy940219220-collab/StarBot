@@ -62,7 +62,7 @@ export function DynamicIslandBridge() {
     failedTurns,
     setFailedTurns,
   } = useTurns();
-  const { unreadReplies, conversations } = useConversation();
+  const { unreadReplies, conversations, markAgentChatRead, clearRecentReply } = useConversation();
   const { selectAgent, openAgentMessage } = useNavigation();
   const { setBrowserTakeoverPageRequest } = useConversationController();
   let publishedAction: DynamicIslandAction | null = null;
@@ -191,6 +191,14 @@ export function DynamicIslandBridge() {
     }
     if (action.type === "dismiss-failure") {
       dynamicIslandCoordinator.resolveAction(action);
+      publishDynamicIslandPresentation();
+      return;
+    }
+    if (action.type === "acknowledge-message") {
+      dynamicIslandCoordinator.resolveAction(action);
+      clearRecentReply(action.agentId);
+      publishDynamicIslandPresentation();
+      await markAgentChatRead(action.agentId, action.serverId);
       publishDynamicIslandPresentation();
       return;
     }

@@ -36,7 +36,7 @@ const DEFAULT_PREFERENCE: AgentDockPreference = {
   sizePercent: AGENT_DOCK_SIZE_LIMITS.default,
   results: true,
   activeSeats: false,
-  shortcut: "Alt+Shift+S",
+  shortcut: "DoubleTap:Alt",
   offsets: [],
 };
 
@@ -118,11 +118,21 @@ function uniqueSeats(seats: readonly AgentDockSeatRef[]): AgentDockSeatRef[] {
 let unsavedPreference: AgentDockPreference | undefined;
 const unsavedSeats = new Map<string, AgentDockSeatRef[]>();
 
+function normalizeShortcut(shortcut: string | null): string | null {
+  if (!shortcut) return null;
+  // Upgrade old 3-key default to clean 2-tap / 2-key shortcut
+  if (shortcut === "Alt+Shift+S") return "DoubleTap:Alt";
+  if (shortcut === "CommandOrControl+Shift+B") return "Alt+S";
+  return shortcut;
+}
+
 function readPreference(): AgentDockPreference {
   if (unsavedPreference) return unsavedPreference;
   try {
     const raw = window.localStorage.getItem(PREFERENCE_KEY);
-    return raw === null ? DEFAULT_PREFERENCE : preferenceSchema.parse(JSON.parse(raw));
+    if (raw === null) return DEFAULT_PREFERENCE;
+    const parsed = preferenceSchema.parse(JSON.parse(raw));
+    return { ...parsed, shortcut: normalizeShortcut(parsed.shortcut) };
   } catch {
     return DEFAULT_PREFERENCE;
   }

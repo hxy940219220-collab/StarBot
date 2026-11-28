@@ -172,21 +172,6 @@ interface OpenBotIslandModeConfig {
   };
 }
 
-const WORKING_SHARED_LEADING: SharedLeadingMotion = {
-  notch: { x: 29, y: 52, scale: 32 / COMPACT_LEADING_SIZE },
-  island: { x: -52, y: 52, scale: 32 / COMPACT_LEADING_SIZE },
-};
-
-const QUESTION_SHARED_LEADING: SharedLeadingMotion = {
-  notch: { x: -54.5, y: 49.5, scale: 35 / COMPACT_LEADING_SIZE },
-  island: { x: -115, y: 51, scale: 38 / COMPACT_LEADING_SIZE },
-};
-
-const STATUS_SHARED_TRAILING: SharedLeadingMotion = {
-  notch: { x: 33.75, y: 49.5, scale: 1.08 },
-  island: { x: 124, y: 51, scale: 1.08 },
-};
-
 const OPENBOT_ISLAND_MODE_CONFIG: Record<DynamicIslandPresentation["mode"], OpenBotIslandModeConfig> = {
   idle: {
     label: "island.label.idle",
@@ -334,24 +319,6 @@ function compactStatusGeometry(
   };
 }
 
-function adjustSharedMotion(
-  motion: SharedLeadingMotion,
-  geometry: StatusCompactGeometry,
-  side: "leading" | "trailing",
-): SharedLeadingMotion {
-  const direction = side === "leading" ? -1 : 1;
-  return {
-    notch: {
-      ...motion.notch,
-      x: motion.notch.x + direction * ((STATUS_COMPACT_BASE_WIDTH.notch - geometry.notch.width) / 2),
-    },
-    island: {
-      ...motion.island,
-      x: motion.island.x + direction * ((STATUS_COMPACT_BASE_WIDTH.island - geometry.island.width) / 2),
-    },
-  };
-}
-
 function scaleCompactWidth(width: number, floor: number, percent: number, minimum = 0): number {
   return Math.max(Math.min(minimum, width), Math.ceil((floor + ((width - floor) * percent) / 100) / 2) * 2);
 }
@@ -476,18 +443,40 @@ export function OpenBotDynamicIsland(props: OpenBotDynamicIslandProps): JSX.Elem
     if (percent === DEFAULT_DYNAMIC_ISLAND_PREFERENCE.heightPercent) return undefined;
     return dynamicIslandCompactHeight(props.displayMode === "island" ? undefined : props.notchSize?.height, percent);
   };
-  const sharedLeading = createMemo(() => {
+  const sharedLeading = createMemo<SharedLeadingMotion | undefined>(() => {
     const mode = statusMode(visiblePresentation().mode);
-    const motion = mode === "working" ? WORKING_SHARED_LEADING : mode ? QUESTION_SHARED_LEADING : undefined;
+    if (!mode) return undefined;
     const geometry = compactGeometry();
-    if (!motion || !geometry) return motion;
-    return adjustSharedMotion(motion, geometry, "leading");
+    const notchW = geometry?.notch.width ?? physicalNotchWidth() + DYNAMIC_ISLAND_COMPACT_EAR_TRACK_WIDTH * 2;
+    const islandW = geometry?.island.width ?? STATUS_COMPACT_ISLAND_MIN_WIDTH;
+    const notchH = compactHeight() ?? props.notchSize?.height ?? DYNAMIC_ISLAND_DEFAULT_COMPACT_HEIGHT;
+    const islandH = compactHeight() ?? DYNAMIC_ISLAND_DEFAULT_COMPACT_HEIGHT;
+    if (mode === "working") {
+      // Compact leading center: -notchW/2 + 18 (ear pad) + 10 = -notchW/2 + 28
+      // Expanded working card (420px wide, 39px left pad, 32px slot) center: -210 + 39 + 16 = -155
+      return {
+        notch: { x: notchW / 2 - 183, y: notchH / 2 + 36, scale: 32 / COMPACT_LEADING_SIZE },
+        island: { x: islandW / 2 - 190, y: islandH / 2 + 36, scale: 32 / COMPACT_LEADING_SIZE },
+      };
+    }
+    // Expanded wide card (590px notch / 552px island, 39px/20px left pad, 35px/38px avatar slot):
+    // Notch target center: -295 + 39 + 17.5 = -238.5 -> delta = -238.5 - (-notchW/2 + 28) = notchW/2 - 266.5
+    return {
+      notch: { x: notchW / 2 - 266.5, y: notchH / 2 + 33.5, scale: 35 / COMPACT_LEADING_SIZE },
+      island: { x: islandW / 2 - 253, y: islandH / 2 + 35, scale: 38 / COMPACT_LEADING_SIZE },
+    };
   });
-  const sharedTrailing = createMemo(() => {
-    const motion = statusMode(visiblePresentation().mode) ? STATUS_SHARED_TRAILING : undefined;
+  const sharedTrailing = createMemo<SharedLeadingMotion | undefined>(() => {
+    if (!statusMode(visiblePresentation().mode)) return undefined;
     const geometry = compactGeometry();
-    if (!motion || !geometry) return motion;
-    return adjustSharedMotion(motion, geometry, "trailing");
+    const notchW = geometry?.notch.width ?? physicalNotchWidth() + DYNAMIC_ISLAND_COMPACT_EAR_TRACK_WIDTH * 2;
+    const islandW = geometry?.island.width ?? STATUS_COMPACT_ISLAND_MIN_WIDTH;
+    const notchH = compactHeight() ?? props.notchSize?.height ?? DYNAMIC_ISLAND_DEFAULT_COMPACT_HEIGHT;
+    const islandH = compactHeight() ?? DYNAMIC_ISLAND_DEFAULT_COMPACT_HEIGHT;
+    return {
+      notch: { x: 240 - notchW / 2, y: notchH / 2 + 33.5, scale: 1.08 },
+      island: { x: 264 - islandW / 2, y: islandH / 2 + 35, scale: 1.08 },
+    };
   });
 
   createEffect(

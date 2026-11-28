@@ -158,6 +158,7 @@ export type DynamicIslandAction =
   | { type: "open-agent"; serverId: string; agentId: string }
   | { type: "select-agent"; serverId: string; agentId: string }
   | { type: "open-message"; serverId: string; agentId: string; messageId: string }
+  | { type: "acknowledge-message"; serverId: string; agentId: string; messageId: string }
   | {
       type: "send-message";
       serverId: string;
@@ -311,7 +312,7 @@ export function isDynamicIslandAction(value: unknown): value is DynamicIslandAct
   if (value.type === "open-app") return true;
   if (!isShortString(value.serverId, 160) || !isShortString(value.agentId, 160)) return false;
   if (value.type === "open-agent" || value.type === "select-agent") return true;
-  if (value.type === "open-message") return isShortString(value.messageId, 160);
+  if (value.type === "open-message" || value.type === "acknowledge-message") return isShortString(value.messageId, 160);
   if (value.type === "send-message") {
     return (
       isShortString(value.text, INPUT_LIMITS.directMessageText) &&

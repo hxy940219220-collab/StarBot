@@ -299,6 +299,11 @@ export class DynamicIslandCoordinator {
     if (action.type === "dismiss-failure" && runtime.failedTurns[action.agentId] === action.turnId) {
       runtime.dismissedFailures.set(action.agentId, action.turnId);
     }
+    if (action.type === "acknowledge-message" || action.type === "open-message") {
+      runtime.unreadReplies[action.agentId] = 0;
+      if (runtime.unreadMessageIds) delete runtime.unreadMessageIds[action.agentId];
+      runtime.completedAgents.delete(action.agentId);
+    }
   }
 
   requestThreadId(presentation: DynamicIslandPresentation): string | null {

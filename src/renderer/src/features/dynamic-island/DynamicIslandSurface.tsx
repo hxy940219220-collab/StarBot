@@ -66,6 +66,8 @@ export function DynamicIslandSurface() {
   let toastTimer: ReturnType<typeof setTimeout> | undefined;
   let peekHideTimer: ReturnType<typeof setTimeout> | undefined;
   let panelCloseTimer: ReturnType<typeof setTimeout> | undefined;
+  let readAckTimer: ReturnType<typeof setTimeout> | undefined;
+  let lastAckedMessageKey = "";
   let actionGeneration = 0;
   let pointerInside = false;
   let focusInside = false;
@@ -158,6 +160,38 @@ export function DynamicIslandSurface() {
     queueMicrotask(followShape);
   }
   createEffect(visible, () => queueMicrotask(followShape));
+
+  // Auto-mark bot reply as read once the user expands the Dynamic Island to view the message
+  createEffect(
+    () => {
+      const current = presentation();
+      if (viewState() !== "expanded" || current.mode !== "message") return null;
+      return {
+        key: `${current.serverId}:${current.message.agent.id}:${current.message.messageId}`,
+        serverId: current.serverId,
+        agentId: current.message.agent.id,
+        messageId: current.message.messageId,
+      };
+    },
+    (target) => {
+      clearTimeout(readAckTimer);
+      if (!target || target.key === lastAckedMessageKey) return;
+      readAckTimer = setTimeout(() => {
+        if (viewState() !== "expanded") return;
+        const latest = presentation();
+        if (latest.mode !== "message" || latest.message.messageId !== target.messageId) return;
+        lastAckedMessageKey = target.key;
+        void dynamicIslandPort()
+          .dynamicIsland.performAction({
+            type: "acknowledge-message",
+            serverId: target.serverId,
+            agentId: target.agentId,
+            messageId: target.messageId,
+          })
+          .catch(() => undefined);
+      }, 180);
+    },
+  );
 
   function applyPresentation(next: DynamicIslandPresentation): void {
     if (
@@ -503,6 +537,7 @@ export function DynamicIslandSurface() {
       clearTimeout(toastTimer);
       clearTimeout(peekHideTimer);
       clearTimeout(panelCloseTimer);
+      clearTimeout(readAckTimer);
       window.removeEventListener("pointerdown", onPointerDownOutside, true);
       window.removeEventListener("keydown", onGlobalKeyDown, true);
       window.removeEventListener("starbot-cursor-left-window", onCursorLeftWindow);
@@ -639,6 +674,7 @@ function interactionLocksPresentation(
 
 function isCriticalPresentation(presentation: DynamicIslandPresentation): boolean {
   return (
+    presentation.mode === "message" ||
     presentation.mode === "approval" ||
     presentation.mode === "question" ||
     presentation.mode === "takeover" ||

@@ -176,6 +176,7 @@ import { AnalyticsPreferenceService } from "./analytics-preference-service";
 import { readAnalyticsPreference, saveAnalyticsDefault } from "./analytics-preference-store";
 import { providerAuthKind } from "./analytics-provider-auth";
 import { AppBehaviorService } from "./app-behavior-service";
+import { DoubleTapShortcutController } from "./double-tap-shortcut";
 import { AppearanceService } from "./appearance-service";
 import { ApprovalAutomation, readApprovalAutomation } from "./approval-automation-store";
 import { AttachmentPreviews } from "./attachment-previews";
@@ -1124,6 +1125,7 @@ export async function createApplicationServices({
       }),
   });
   teardown.push(TEARDOWN_ORDER.dynamicIsland, "the Dynamic Island", () => dynamicIsland.destroy());
+  const dockDoubleTapShortcut = new DoubleTapShortcutController();
   const agentDock = new AgentDockWindowController({
     windowKind,
     createWindow: createAgentDockWindow,
@@ -1134,8 +1136,17 @@ export async function createApplicationServices({
     presentMainWindow: showMainWindow,
     pointerForwarding,
     topmost,
-    registerShortcut: (accelerator, onTrigger) => globalShortcut.register(accelerator, onTrigger),
-    unregisterShortcut: (accelerator) => globalShortcut.unregister(accelerator),
+    registerShortcut: (accelerator, onTrigger) =>
+      accelerator.startsWith("DoubleTap:")
+        ? dockDoubleTapShortcut.register(accelerator, onTrigger, (acc, cb) => globalShortcut.register(acc, cb))
+        : globalShortcut.register(accelerator, onTrigger),
+    unregisterShortcut: (accelerator) => {
+      if (accelerator.startsWith("DoubleTap:")) {
+        dockDoubleTapShortcut.unregister((acc) => globalShortcut.unregister(acc));
+      } else {
+        globalShortcut.unregister(accelerator);
+      }
+    },
     sendMessage: (action) =>
       Effect.suspend(() => {
         if (!criticalActionTargets) {
