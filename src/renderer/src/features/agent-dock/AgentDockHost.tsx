@@ -733,7 +733,13 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
         let latestReplyText: string | null = null;
         for (let i = msgs.length - 1; i >= 0; i -= 1) {
           const m = msgs[i];
-          if (m && m.author === "agent" && m.kind === "text" && m.body.trim().length > 0) {
+          if (
+            m &&
+            m.author === "agent" &&
+            (m.kind === undefined || m.kind === "text") &&
+            m.itemType !== "commentary" &&
+            m.body.trim().length > 0
+          ) {
             latestReplyId = m.id.slice(0, INPUT_LIMITS.identifier);
             latestReplyText = markdownPlainText(m.body).trim().slice(0, 1_200) || m.body.trim().slice(0, 1_200);
             break;
@@ -744,7 +750,9 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
         const contextUsedTokens = ctx ? ctx.usedTokens : Math.round(estimatedChars * 0.6);
         const contextWindowTokens = ctx && ctx.windowTokens > 0 ? ctx.windowTokens : 128_000;
         const contextEstimated = ctx ? Boolean(ctx.estimated) : true;
-        const turnCount = msgs.filter((m) => m.author === "agent" && m.kind === "text").length;
+        const turnCount = msgs.filter(
+          (m) => m.author === "agent" && (m.kind === undefined || m.kind === "text") && m.itemType !== "commentary",
+        ).length;
         const acctId = agent.providerAccountId ?? DEFAULT_PROVIDER_ACCOUNT_ID;
         const matchedLimit = acctLimits.find(
           (lim) => lim.id === String(agent.provider) && (lim.accountId ?? DEFAULT_PROVIDER_ACCOUNT_ID) === acctId,

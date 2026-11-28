@@ -71,8 +71,10 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     replyId: string | null;
     text: string;
     streaming: boolean;
+    completedNotice?: boolean;
   } | null>(null);
   const [dismissedReplyKey, setDismissedReplyKey] = createSignal<string | null>(null);
+  const [replyBubbleHovered, setReplyBubbleHovered] = createSignal(false);
   const [windowPos, setWindowPos] = createSignal({ x: 32, y: 80 });
   const [inWindowDockedEdge, setInWindowDockedEdge] = createSignal<AgentDockSnapEdge | null>(null);
   const [draggingNow, setDraggingNow] = createSignal(false);
@@ -80,12 +82,17 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
   const [voiceDraftText, setVoiceDraftText] = createSignal("");
   const [voiceError, setVoiceError] = createSignal<string | null>(null);
   const [dragDizzy, setDragDizzy] = createSignal(false);
-  const [celebrateStarry, setCelebrateStarry] = createSignal(false);
+  const [celebratePhase, setCelebratePhase] = createSignal<"burst" | "starry" | null>(null);
 
   let hoverLeaveTimer: ReturnType<typeof setTimeout> | undefined;
   let errorTimer: ReturnType<typeof setTimeout> | undefined;
   let dizzyTimer: ReturnType<typeof setTimeout> | undefined;
-  let starryTimer: ReturnType<typeof setTimeout> | undefined;
+  let celebrateBurstTimer: ReturnType<typeof setTimeout> | undefined;
+  let celebrateEndTimer: ReturnType<typeof setTimeout> | undefined;
+  let replyAutoDismissTimer: ReturnType<typeof setTimeout> | undefined;
+  let prevTrackedBotId: string | null = null;
+  let prevBotWorking = false;
+  let prevBotReplyId: string | null = null;
   let dragPointerId: number | null = null;
   let dragStartX = 0;
   let dragStartY = 0;
@@ -101,8 +108,34 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     clearTimeout(hoverLeaveTimer);
     clearTimeout(errorTimer);
     clearTimeout(dizzyTimer);
-    clearTimeout(starryTimer);
+    clearTimeout(celebrateBurstTimer);
+    clearTimeout(celebrateEndTimer);
+    clearTimeout(replyAutoDismissTimer);
   });
+
+  function triggerCompletionCelebration(): void {
+    clearTimeout(celebrateBurstTimer);
+    clearTimeout(celebrateEndTimer);
+    setCelebratePhase("burst");
+    void playKawaiiCue("mascot-happy", { subtle: true });
+    celebrateBurstTimer = setTimeout(() => {
+      setCelebratePhase("starry");
+    }, 2_400);
+    celebrateEndTimer = setTimeout(() => {
+      setCelebratePhase(null);
+    }, 6_600);
+  }
+
+  function scheduleReplyAutoDismiss(): void {
+    clearTimeout(replyAutoDismissTimer);
+    replyAutoDismissTimer = setTimeout(() => {
+      if (replyBubbleHovered()) return;
+      const cur = shownReply();
+      if (cur && !cur.streaming) {
+        setShownReply(null);
+      }
+    }, 12_000);
+  }
 
   const currentBot = createMemo<StarBotCompanionInfo | null>(() => {
     const all = props.bots;
@@ -148,7 +181,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     },
   );
 
-  // Watch for incoming/streaming reply on the active companion bot after voice send (or live updates)
+  // Watch working -> completed transitions AND incoming/streaming replies on the active companion bot
   createEffect(
     () => {
       const bot = currentBot();
@@ -166,9 +199,28 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     (state) => {
       if (!state) return;
       const { botId, botName, working, replyId, replyText, waitingId, baseId } = state;
-      if (waitingId === botId) {
-        const hasNewReply = Boolean(replyText && replyId && replyId !== baseId);
-        if (hasNewReply && replyText) {
+      const sameBot = prevTrackedBotId === botId;
+      const wasWorking = sameBot && prevBotWorking;
+      const hadNewReplySincePrev = sameBot && Boolean(replyId && replyId !== prevBotReplyId && replyText);
+
+      // Update tracked state immediately
+      prevTrackedBotId = botId;
+      prevBotWorking = working;
+      prevBotReplyId = replyId;
+
+      // While actively working, stop any old celebration and clear stale completed bubble from a previous turn
+      if (working) {
+        if (!wasWorking) {
+          clearTimeout(celebrateBurstTimer);
+          clearTimeout(celebrateEndTimer);
+          clearTimeout(replyAutoDismissTimer);
+          setCelebratePhase(null);
+          if (shownReply()?.agentId === botId && !shownReply()?.streaming) {
+            setShownReply(null);
+          }
+        }
+        // If triggered via companion voice send and live text is already streaming, show streaming preview
+        if (waitingId === botId && replyText && replyId && replyId !== baseId) {
           const key = `${botId}:${replyId}`;
           if (dismissedReplyKey() !== key) {
             setShownReply({
@@ -176,24 +228,47 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
               agentName: botName,
               replyId,
               text: replyText,
-              streaming: working,
+              streaming: true,
+              completedNotice: false,
             });
           }
-          if (!working) {
-            setWaitingReplyForBotId(null);
-            clearTimeout(starryTimer);
-            setCelebrateStarry(true);
-            starryTimer = setTimeout(() => setCelebrateStarry(false), 3_200);
-          }
         }
-      } else if (shownReply()?.agentId === botId && shownReply()?.replyId === replyId && replyText) {
-        setShownReply({
-          agentId: botId,
-          agentName: botName,
-          replyId,
-          text: replyText,
-          streaming: working,
-        });
+        return;
+      }
+
+      // Transitioned from working -> finished (whether triggered from desktop chat, mobile, script, or voice!)
+      const finishedFromVoice = waitingId === botId && Boolean(replyText && replyId && replyId !== baseId);
+      const finishedTask = wasWorking || finishedFromVoice || (hadNewReplySincePrev && !working);
+      if (finishedTask) {
+        if (waitingId === botId) setWaitingReplyForBotId(null);
+        const key = `${botId}:${replyId ?? "done"}`;
+        if (dismissedReplyKey() !== key) {
+          setShownReply({
+            agentId: botId,
+            agentName: botName,
+            replyId,
+            text: replyText || "新回复已生成，点击前往对话查看完整内容。",
+            streaming: false,
+            completedNotice: true,
+          });
+          scheduleReplyAutoDismiss();
+        }
+        triggerCompletionCelebration();
+        return;
+      }
+
+      // Keep already-shown reply bubble in sync if its final text settles slightly after completion
+      const currentShown = shownReply();
+      if (currentShown && currentShown.agentId === botId && replyText) {
+        if (currentShown.replyId === replyId || currentShown.replyId === null) {
+          setShownReply({
+            ...currentShown,
+            agentName: botName,
+            replyId,
+            text: replyText,
+            streaming: false,
+          });
+        }
       }
     },
   );
@@ -367,6 +442,34 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     const maxCardCenter = Math.max(minCardCenter, h - 166);
     if (y < minCardCenter) return Math.round(minCardCenter - y);
     if (y > maxCardCenter) return Math.round(maxCardCenter - y);
+    return 0;
+  });
+
+  // Top-centered status/reply bubbles sit symmetrically right above the mascot; flip below only near top edge
+  const topBubbleBelow = createMemo(() => {
+    if (currentDockedEdge() === "top") return true;
+    if (props.inWindow) {
+      const vh = typeof window !== "undefined" ? window.innerHeight : 720;
+      return vh - windowPos().y - botDiameter() < 120;
+    }
+    return effectiveAnchor().y < botRadius() + 124;
+  });
+
+  // Keep centered top bubbles 100% inside helper window horizontally when mascot rests near screen left/right edge
+  const topBubbleShiftX = createMemo(() => {
+    const halfWidth = shownReply()?.agentId === currentBot()?.agent.id ? 132 : 108;
+    const margin = 12;
+    if (props.inWindow) {
+      const vw = typeof window !== "undefined" ? window.innerWidth : 1200;
+      const centerX = vw - windowPos().x - botRadius();
+      if (centerX - halfWidth < margin) return Math.round(margin - (centerX - halfWidth));
+      if (centerX + halfWidth > vw - margin) return Math.round(vw - margin - (centerX + halfWidth));
+      return 0;
+    }
+    const x = effectiveAnchor().x;
+    const w = stageW();
+    if (x - halfWidth < margin) return Math.round(margin - (x - halfWidth));
+    if (x + halfWidth > w - margin) return Math.round(w - margin - (x + halfWidth));
     return 0;
   });
 
@@ -615,10 +718,11 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
               "--bot-size": `${botDiameter()}px`,
               "--card-offset": `${sideCardOffset()}px`,
               "--card-shift-y": `${cardShiftY()}px`,
+              "--bubble-shift-x": `${topBubbleShiftX()}px`,
             }}
           >
             <div
-              class={`starbot-companion-anchor is-side-${expandLeft() ? "left" : "right"}${isHalfHiddenResting() ? ` is-edge-half is-edge-${currentDockedEdge()}` : ""}`}
+              class={`starbot-companion-anchor is-side-${expandLeft() ? "left" : "right"}${topBubbleBelow() ? " is-bubble-below" : ""}${isHalfHiddenResting() ? ` is-edge-half is-edge-${currentDockedEdge()}` : ""}`}
               style={
                 props.inWindow
                   ? undefined
@@ -960,13 +1064,29 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 </button>
               </Show>
 
-              {/* Thinking Pill when waiting for reply before text streams */}
+              {/* Top-Centered Thinking Pill while executing task */}
               <Show
                 when={
                   !isRecording() && activePanel() === null && isThinking() && shownReply()?.agentId !== bot().agent.id
                 }
               >
-                <div class="starbot-companion-thinking-pill" data-companion-hit="true">
+                <div
+                  role="button"
+                  tabIndex={0}
+                  class="starbot-companion-thinking-pill"
+                  data-companion-hit="true"
+                  title="点击查看实时对话进度"
+                  onClick={() => {
+                    void playKawaiiCue("tab-switch", { subtle: true });
+                    props.onOpenBotChat(bot().agent.id);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      props.onOpenBotChat(bot().agent.id);
+                    }
+                  }}
+                >
                   <span class="starbot-thinking-dots" aria-hidden="true">
                     <i />
                     <i />
@@ -976,7 +1096,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 </div>
               </Show>
 
-              {/* Bounded Reply Output Bubble (Click to open full desktop conversation!) */}
+              {/* Top-Centered Completion & Reply Preview Bubble (Click to jump straight into chat!) */}
               <Show
                 when={
                   !isRecording() &&
@@ -989,29 +1109,54 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                     role="button"
                     tabIndex={0}
                     data-companion-hit="true"
-                    class="starbot-companion-reply-bubble"
+                    class={`starbot-companion-reply-bubble${reply().completedNotice && !reply().streaming ? " is-completed-notice" : ""}`}
+                    onMouseEnter={() => {
+                      setReplyBubbleHovered(true);
+                      clearTimeout(replyAutoDismissTimer);
+                    }}
+                    onMouseLeave={() => {
+                      setReplyBubbleHovered(false);
+                      if (!reply().streaming) scheduleReplyAutoDismiss();
+                    }}
                     onClick={() => {
                       void playKawaiiCue("tab-switch", { subtle: true });
+                      if (reply().replyId) {
+                        setDismissedReplyKey(`${reply().agentId}:${reply().replyId}`);
+                      }
+                      setShownReply(null);
                       props.onOpenBotChat(reply().agentId);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
+                        setShownReply(null);
                         props.onOpenBotChat(reply().agentId);
                       }
                     }}
                   >
                     <div class="starbot-companion-reply-head">
                       <span class="starbot-companion-reply-author">
-                        {reply().agentName}
-                        <Show when={reply().streaming}>
-                          <em> · 输出中…</em>
+                        <Show
+                          when={reply().completedNotice && !reply().streaming}
+                          fallback={
+                            <>
+                              {reply().agentName}
+                              <Show when={reply().streaming}>
+                                <em> · 输出中…</em>
+                              </Show>
+                            </>
+                          }
+                        >
+                          <span class="starbot-reply-done-badge" aria-hidden="true">
+                            ✦
+                          </span>
+                          <span>思考已完成，已发送到对话</span>
                         </Show>
                       </span>
                       <button
                         type="button"
                         class="starbot-companion-reply-dismiss"
-                        aria-label="收起回复"
+                        aria-label="收起提示"
                         onClick={(e) => {
                           e.stopPropagation();
                           if (reply().replyId) {
@@ -1025,7 +1170,10 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                       </button>
                     </div>
                     <p class="starbot-companion-reply-body">{reply().text}</p>
-                    <div class="starbot-companion-reply-foot">点击打开桌面端完整对话 ↗</div>
+                    <div class="starbot-companion-reply-foot">
+                      <span>{reply().agentName}</span>
+                      <span>点击查看完整对话 ↗</span>
+                    </div>
                   </div>
                 )}
               </Show>
@@ -1042,7 +1190,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
               {/* Single Floating Bot Avatar Character */}
               <div
                 data-companion-hit="true"
-                class={`starbot-companion-orb${isRecording() ? " is-recording" : ""}${isThinking() ? " is-thinking" : ""}`}
+                class={`starbot-companion-orb${isRecording() ? " is-recording" : ""}${isThinking() ? " is-thinking" : ""}${!isThinking() && celebratePhase() !== null ? " is-completed" : ""}`}
                 onPointerDown={handleOrbPointerDown}
                 onPointerMove={handleOrbPointerMove}
                 onPointerUp={handleOrbPointerUp}
@@ -1058,7 +1206,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                     agent={bot().agent}
                     motion="hover"
                     followPointer
-                    mood={isThinking() ? "working" : bot().mood}
+                    mood={isThinking() ? "working" : celebratePhase() !== null ? "responded" : bot().mood}
                     cuteEmote={
                       (isRecording()
                         ? "music-groove"
@@ -1066,9 +1214,11 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                           ? "dizzy-swirl"
                           : isThinking()
                             ? "curious-peek"
-                            : celebrateStarry()
-                              ? "starry-eyes"
-                              : null) satisfies ZodiacCuteEmote | null
+                            : celebratePhase() === "burst"
+                              ? "combo-hearts"
+                              : celebratePhase() === "starry"
+                                ? "starry-eyes"
+                                : null) satisfies ZodiacCuteEmote | null
                     }
                   />
                 </span>

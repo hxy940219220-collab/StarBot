@@ -208,6 +208,56 @@
   animation: starbot-aura-spin 1.15s linear infinite;
 }
 
+/* Completed Joyful Celebration Bounce & Golden-Emerald Aura */
+.starbot-companion-orb.is-completed {
+  animation:
+    starbot-companion-celebrate-hop 920ms cubic-bezier(0.34, 1.56, 0.64, 1) 2,
+    starbot-companion-float 2.6s ease-in-out 1.84s infinite;
+  filter: drop-shadow(0 8px 22px rgba(251, 191, 36, 0.56));
+}
+
+.starbot-companion-orb.is-completed .starbot-companion-aura {
+  opacity: 1;
+  border-style: solid;
+  border-color: rgba(52, 211, 153, 0.72);
+  box-shadow:
+    0 0 14px rgba(251, 191, 36, 0.45),
+    inset 0 0 10px rgba(52, 211, 153, 0.25);
+  animation: starbot-done-halo 1.6s ease-in-out infinite;
+}
+
+@keyframes starbot-companion-celebrate-hop {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1 1;
+  }
+  28% {
+    translate: 0 -10px;
+    scale: 0.96 1.07;
+  }
+  58% {
+    translate: 0 1px;
+    scale: 1.06 0.94;
+  }
+  78% {
+    translate: 0 -4px;
+    scale: 0.99 1.02;
+  }
+}
+
+@keyframes starbot-done-halo {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+}
+
 /* Recording Rose-Pink Pulse Animation */
 .starbot-companion-orb.is-recording {
   filter: drop-shadow(0 8px 22px rgba(244, 114, 182, 0.62));
@@ -717,34 +767,41 @@
   color: rgba(182, 174, 218, 0.78);
 }
 
-/* Recording Status Pill, Thinking Pill & Bounded Reply Dialog Box */
+/* Top-Centered Symmetric Recording Pill, Thinking Pill, Error Pill & Completion/Reply Bubble */
 .starbot-companion-rec-pill,
 .starbot-companion-thinking-pill,
 .starbot-companion-error-pill {
   position: absolute;
-  top: 50%;
-  transform: translateY(calc(-50% + var(--card-shift-y, 0px)));
+  left: 50%;
+  bottom: calc(100% + 14px);
+  transform: translateX(calc(-50% + var(--bubble-shift-x, 0px)));
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 13px;
+  padding: 8px 14px;
   border-radius: 16px;
   background: rgba(22, 18, 44, 0.96);
+  backdrop-filter: blur(16px);
   border: 1px solid rgba(244, 114, 182, 0.55);
   box-shadow: 0 10px 26px rgba(10, 8, 26, 0.55);
   color: #fff0f8;
   font-size: 12px;
   pointer-events: auto;
-  z-index: 20;
-  max-width: 236px;
+  z-index: 22;
+  max-width: 244px;
   cursor: pointer;
+  animation: starbot-top-bubble-pop 220ms cubic-bezier(0.34, 1.48, 0.64, 1);
 }
 
 .starbot-companion-thinking-pill {
-  border-color: rgba(110, 243, 223, 0.46);
+  border-color: rgba(110, 243, 223, 0.52);
   color: #e2fff9;
-  cursor: default;
+  cursor: pointer;
   white-space: nowrap;
+}
+
+.starbot-companion-thinking-pill:hover {
+  border-color: rgba(110, 243, 223, 0.88);
 }
 
 .starbot-companion-error-pill {
@@ -753,24 +810,84 @@
   cursor: default;
 }
 
-.starbot-companion-anchor.is-side-left
-  :is(
-    .starbot-companion-rec-pill,
-    .starbot-companion-thinking-pill,
-    .starbot-companion-error-pill,
-    .starbot-companion-reply-bubble
-  ) {
-  right: calc(50% + var(--card-offset, 84px));
+/* Symmetric speech-bubble pointer pointing straight to mascot center */
+.starbot-companion-rec-pill::after,
+.starbot-companion-thinking-pill::after,
+.starbot-companion-error-pill::after,
+.starbot-companion-reply-bubble::after {
+  content: "";
+  position: absolute;
+  left: clamp(22px, calc(50% - var(--bubble-shift-x, 0px)), calc(100% - 22px));
+  bottom: -6px;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%) rotate(45deg);
+  background: rgba(22, 18, 44, 0.96);
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  pointer-events: none;
 }
 
-.starbot-companion-anchor.is-side-right
+.starbot-companion-thinking-pill::after {
+  border-right-color: rgba(110, 243, 223, 0.52);
+  border-bottom-color: rgba(110, 243, 223, 0.52);
+}
+
+.starbot-companion-rec-pill::after {
+  border-right-color: rgba(244, 114, 182, 0.55);
+  border-bottom-color: rgba(244, 114, 182, 0.55);
+}
+
+.starbot-companion-error-pill::after {
+  border-right-color: rgba(248, 113, 113, 0.55);
+  border-bottom-color: rgba(248, 113, 113, 0.55);
+}
+
+.starbot-companion-reply-bubble::after {
+  border-right-color: rgba(176, 150, 255, 0.46);
+  border-bottom-color: rgba(176, 150, 255, 0.46);
+}
+
+.starbot-companion-reply-bubble.is-completed-notice::after {
+  border-right-color: rgba(52, 211, 153, 0.56);
+  border-bottom-color: rgba(52, 211, 153, 0.56);
+}
+
+/* Flip top-centered bubbles smoothly below mascot when mascot sits near top screen edge */
+.starbot-companion-anchor.is-bubble-below
+:is(
+  .starbot-companion-rec-pill,
+  .starbot-companion-thinking-pill,
+  .starbot-companion-error-pill,
+  .starbot-companion-reply-bubble
+) {
+  bottom: auto;
+  top: calc(100% + 14px);
+}
+
+.starbot-companion-anchor.is-bubble-below
   :is(
     .starbot-companion-rec-pill,
     .starbot-companion-thinking-pill,
     .starbot-companion-error-pill,
     .starbot-companion-reply-bubble
-  ) {
-  left: calc(50% + var(--card-offset, 84px));
+  )::after {
+  bottom: auto;
+  top: -6px;
+  transform: translateX(-50%) rotate(225deg);
+}
+
+@keyframes starbot-top-bubble-pop {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
 }
 
 .starbot-companion-rec-dot {
@@ -839,12 +956,13 @@
   }
 }
 
-/* Bounded Reply Bubble - Click anywhere to jump straight into desktop chat */
+/* Top-Centered Symmetric Completion & Reply Output Bubble */
 .starbot-companion-reply-bubble {
   position: absolute;
-  top: 50%;
-  transform: translateY(calc(-50% + var(--card-shift-y, 0px)));
-  width: 248px;
+  left: 50%;
+  bottom: calc(100% + 14px);
+  transform: translateX(calc(-50% + var(--bubble-shift-x, 0px)));
+  width: 256px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -858,14 +976,25 @@
   pointer-events: auto;
   cursor: pointer;
   z-index: 25;
-  animation: starbot-card-pop 240ms cubic-bezier(0.34, 1.45, 0.64, 1);
+  animation: starbot-top-bubble-pop 260ms cubic-bezier(0.34, 1.5, 0.64, 1);
   transition:
     border-color 150ms ease,
-    transform 160ms ease;
+    box-shadow 160ms ease;
+}
+
+.starbot-companion-reply-bubble.is-completed-notice {
+  border-color: rgba(52, 211, 153, 0.56);
+  box-shadow:
+    0 14px 36px rgba(8, 5, 24, 0.62),
+    0 0 20px rgba(52, 211, 153, 0.16);
 }
 
 .starbot-companion-reply-bubble:hover {
   border-color: rgba(216, 196, 255, 0.88);
+}
+
+.starbot-companion-reply-bubble.is-completed-notice:hover {
+  border-color: rgba(110, 231, 183, 0.92);
 }
 
 .starbot-companion-reply-head {
@@ -876,9 +1005,22 @@
 }
 
 .starbot-companion-reply-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 11.5px;
   font-weight: 600;
   color: #d6c6ff;
+}
+
+.starbot-companion-reply-bubble.is-completed-notice .starbot-companion-reply-author {
+  color: #a7f3d0;
+}
+
+.starbot-reply-done-badge {
+  color: #fbbf24;
+  font-size: 12px;
+  line-height: 1;
 }
 
 .starbot-companion-reply-author em {
@@ -918,13 +1060,21 @@
   color: rgba(246, 243, 255, 0.95);
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 4;
   overflow: hidden;
   word-break: break-word;
 }
 
 .starbot-companion-reply-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   font-size: 10.5px;
   font-weight: 500;
   color: rgba(176, 152, 255, 0.88);
+}
+
+.starbot-companion-reply-bubble.is-completed-notice .starbot-companion-reply-foot {
+  color: rgba(110, 231, 183, 0.9);
 }

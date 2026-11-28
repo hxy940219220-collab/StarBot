@@ -89,10 +89,12 @@ export function AgentActivityIndicator(props: {
       ? t("chat.activity.waitingStatus", { name, provider })
       : t("chat.activity.status", { name, label: label() });
   };
-  const mood = () => (props.waitingFor ? "connecting" : "working");
+  const isExiting = () => props.phase === "exiting";
+  const mood = () => (isExiting() ? "responded" : props.waitingFor ? "connecting" : "working");
   const waiting = () => (props.waitingFor ? "true" : undefined);
   const plain = () => (props.plain ? "true" : undefined);
-  const avatarActivity = () => (props.plain && !props.waitingFor ? (props.activity ?? null) : undefined);
+  const avatarActivity = () =>
+    props.plain && !props.waitingFor && !isExiting() ? (props.activity ?? null) : undefined;
   const shownSteps = () => (props.plain && !props.stepsOpenByDefault ? undefined : props.steps);
   const elapsedMs = createElapsed(() => (props.phase === "exiting" ? undefined : props.since));
   const elapsed = createMemo(() => {
