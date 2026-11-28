@@ -4759,9 +4759,14 @@ function callsBridgeTool(
         namespace.name === input.ServerName && namespace.tools.some((tool) => tool.name === input.ToolName),
     );
   if (kind !== "permissions") return false;
+  const deferredTool = input && isString(input.toolName) ? input.toolName.trim() : undefined;
   const title = toolCall.title?.trim().replace(/\?$/u, "");
   return thread.dynamicTools.some((namespace) =>
-    namespace.tools.some((tool) => title !== undefined && namesBridgeTool(title, namespace.name, tool.name)),
+    namespace.tools.some(
+      (tool) =>
+        (title !== undefined && namesBridgeTool(title, namespace.name, tool.name)) ||
+        (deferredTool !== undefined && namesBridgeTool(deferredTool, namespace.name, tool.name)),
+    ),
   );
 }
 

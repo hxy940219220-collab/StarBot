@@ -405,13 +405,14 @@ const ACP_MCP_TITLE = /^Run mcp_(.+?)\??$/u;
 function acpBridgedTool(item: ThreadItem) {
   if (item.type !== "toolCall" || getString(item, "toolKind") === null) return undefined;
   const args = getRecord(item, "arguments");
-  const server = getString(args, "ServerName");
-  const tool = getString(args, "ToolName");
+  const deferred = /^mcp__(.+?)__(.+)$/u.exec(getString(args, "toolName") ?? "");
+  const server = getString(args, "ServerName") ?? deferred?.[1] ?? null;
+  const tool = getString(args, "ToolName") ?? deferred?.[2] ?? null;
   const title = ACP_MCP_TITLE.exec(getString(item, "name") ?? "")?.[1];
   const named = server && tool ? `${server}_${tool}` : title;
   if (!named) return undefined;
   if (named === "openbot_tool_call") {
-    const input = server && tool ? getRecord(args, "Arguments") : args;
+    const input = deferred !== null ? getRecord(args, "params") : server && tool ? getRecord(args, "Arguments") : args;
     const called = getString(input, "name") ?? getString(input, "tool");
     return called ? BUILTIN_TOOL_CATALOG.find((entry) => entry.name === qualifiedToolName(called)) : undefined;
   }

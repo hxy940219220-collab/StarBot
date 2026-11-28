@@ -572,6 +572,28 @@ export const OPENCLAW_ACP_FLAVOR: AcpFlavor = {
 export const WORKBUDDY_ACP_FLAVOR: AcpFlavor = {
   ...CUSTOM_ACP_FLAVOR,
   setsConfigOnlyOnChange: true,
+  // WorkBuddy's ACP server tracks a single active `currentSession` per connection and clears
+  // `session.meta.acpConnectionId` whenever `newSession` (such as a `model/list` probe) runs on
+  // the same connection, causing `handlePendingApprovalView` to silently drop tool approvals mid-turn.
+  sessionProcesses: true,
+  bridgeToolsWithoutCard: true,
+  userQuestions: {
+    method: "codebuddy.ai/question",
+    questions: (params) => {
+      const schema = isRecord(params.schema) ? params.schema : null;
+      const list = Array.isArray(schema?.questions) ? schema.questions : [];
+      return list.filter(isRecord);
+    },
+    reply: (questions, answers) => {
+      const given = questions.flatMap((question, index): [string, string | readonly string[]][] => {
+        const [first, ...more] = answers[question.id] ?? [];
+        if (first === undefined) return [];
+        const rawId = `q_${index}`;
+        return [[rawId, more.length > 0 ? [first, ...more] : first]];
+      });
+      return given.length > 0 ? { outcome: "submitted", answers: Object.fromEntries(given) } : { outcome: "cancelled" };
+    },
+  },
   turnFailure: (...args) => {
     const [error, detail] = args;
     const raw = `${String(error)} ${detail ?? ""}`;

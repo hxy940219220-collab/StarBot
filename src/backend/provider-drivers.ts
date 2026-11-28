@@ -497,6 +497,9 @@ function makeWorkBuddyAcpModel(id: string, name: string, description: string): A
     reasoningEffortConfigurable: false,
     reasoningEffortWireValues: new Map(),
     usesModelReasoningEffort: null,
+    // WorkBuddy's initial session snapshot only exposes a subset of built-in models in `configOptions[model]`,
+    // while `setSessionConfigOption(model)` accepts all cloud-provisioned model IDs (e.g. `hy4flash-free`).
+    unlisted: { config: {} },
   };
 }
 

@@ -148,8 +148,8 @@ export function ConversationHeader() {
     const custom = getStoredMainSessionTitle(props.server?.id, agent.id);
     if (custom) return custom;
     for (const msg of props.messages) {
-      if (msg.author === "user" && msg.kind === "text") {
-        const cleaned = msg.text.replace(/\s+/gu, " ").trim();
+      if (msg.author === "you" && !msg.senderAgentId) {
+        const cleaned = msg.body.replace(/\s+/gu, " ").trim();
         if (cleaned) return cleaned;
       }
     }
