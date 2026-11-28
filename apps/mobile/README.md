@@ -2,11 +2,7 @@
 
 React Native app built with Expo SDK 58, Expo Router, TypeScript 7, Biome, and Bun. The app uses Expo Continuous Native Generation, so native `ios/` and `android/` directories are intentionally not committed.
 
-## 产品界面与核心交互演示
-
-<p align="center">
-  <img src="../../docs/images/mobile/hero-overview.jpg" alt="StarBot Mobile 总览" width="100%" />
-</p>
+## 产品界面与核心交互说明
 
 ### 核心设计亮点
 
@@ -17,28 +13,16 @@ React Native app built with Expo SDK 58, Expo Router, TypeScript 7, Biome, and B
    - **个人记忆库（`src/features/memory-vault/`）**：按「基础信息 / 习惯 / 近况 / 经历 / 偏好 / 社交 / 热爱与兴趣」7 大维度呈现用户自填与星友总结的个人画像气泡，支持打字与语音听写校准。
    - **数据用量（全屏用量账单）**：柱状数据图标直达全屏账单页，支持 `今日 / 近 7 天 / 近 30 天 / 本月` 与单星友筛选，完整展示厂商汇总、单模型明细与星友消耗排行。
 
-<p align="center">
-  <img src="../../docs/images/mobile/capsule-voice-flow.jpg" alt="底部胶囊操作栏单手语音交互流" width="100%" />
-</p>
-
 2. **任务日程（月历方格）与全屏用量账单**
    - 「任务日程」采用紧凑 7 列月历方格，格内用彩色编号小圆点标记排期，点击方格或圆点展开详情并一键新建定时任务。
    - 「用量账单」完整统计每一类模型与厂商的消耗占比，支持按星友自由筛选。
 
-<p align="center">
-  <img src="../../docs/images/mobile/schedule-billing-showcase.jpg" alt="任务日程与用量账单面板" width="100%" />
-</p>
-
 3. **极简侧边栏 · 桌面级星友档案 · 精选市集 · 轻量浮窗消息菜单 · 一键退出**
    - **侧边栏 & 退出重连**：纯净 `StarBot` 标识居中对称，顶部搜索框 + 下方聚合「任务日程 / 星友市集 / 资料库」；点击底部账号进入「设置」即可一键「退出登录」，回到从零扫码配对界面。
    - **星友档案**：点击对话顶栏星友形象直达全屏星友档案，纯白立体卡片搭配单行右对齐布局，集中管理昵称、灵魂人设、驱动模型、性格腔调、专属记忆、装备技能、文件、定时叮嘱、算力足迹与权限边界。
-   - **精选星友市集 & 新建群聊**：精选 Canva、Notion、Figma、Discord、GitHub、Vercel、Obsidian、Apple Apps、GitLab、Cloudflare、Supabase、Hugging Face 等高频生态应用；建群内联平铺所有星友并支持全选。
+   - **精选星友市集 & 新建群聊**：精选高频生态应用一键查看连接；建群内联平铺所有星友并支持全选。
    - **轻量浮窗消息菜单与批量删除**：长按消息以毛玻璃背景悬浮展示单排 Emoji 反应栏与紧凑操作卡（引用、转发、复制、批量删除）。
    - **交互音效与弹簧动效**（`src/shared/lib/ui-feedback.ts`）：零延迟原生合成交互音效与 Reanimated 弹簧动效，可在「设置 → 外观 → 交互音效」开关。
-
-<p align="center">
-  <img src="../../docs/images/mobile/drawer-detail-group-showcase.jpg" alt="极简侧边栏、星友二级详情页与新建群聊" width="100%" />
-</p>
 
 ### 扫码配对（`starbot://` 局域网直连）
 

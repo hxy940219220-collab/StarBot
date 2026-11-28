@@ -15,66 +15,47 @@ StarBot is ready for production use. A new release ships almost every day.
 
 ## StarBot Desktop（星友桌面端 · macOS / Windows / Linux）
 
-StarBot Desktop 是专为十二星座私人 AI 伙伴打造的本地优先桌面工作台，深度融合 **顶部刘海灵动岛、无背景全屏悬浮星友、十二星座 3D 软陶互动动效、一键语音转文字与提炼记忆**，让每一位星友随时随地在桌面上陪伴协作。
+StarBot Desktop 是本地优先的多星友 AI 协作桌面工作台，支持多位十二星座软陶星友与群聊并行协作、多步工具调用轨迹展示、自然女声神经语音朗读、全屏无背景悬浮星友与顶部刘海灵动岛联动。
 
 <p align="center">
-  <img src="docs/images/desktop/hero-workspace.jpg" alt="StarBot Desktop 总览：主星友自动置顶、全量对话侧滑菜单、记忆提炼与直接语音转文字输入" width="100%" />
+  <img src="docs/images/desktop/hero-workspace.png" alt="StarBot Desktop 主工作台实拍：星友与群聊列表、多步任务执行对话、右侧星友档案面板" width="100%" />
 </p>
 
-### 1. 顶部刘海灵动岛 & 全屏无背景悬浮星友
+### 1. 全屏无背景悬浮星友 & 顶部刘海灵动岛
 
-- **顶部刘海灵动岛**：默认空闲自动隐身，鼠标靠近刘海顺滑弹出星友胶囊并支持点击下拉切换当前星友、点击外部任意区域自动收起；录音时实时联动声波计时，思考与新回复时呈现星轨徽章动效，并支持文件/文本重力拖拽投喂。
-- **全屏无背景悬浮星友**：纯粹 3D 星座软陶角色桌面自由悬浮（支持快捷键一键呼出/隐藏与尺寸调节），鼠标靠近顺滑展开五颗圆弧功能键（隐藏悬浮窗、模型与上下文用量、按「本机模型 / API 模型」与服务商两级筛选切换模型、语音直发对话气泡、快速切换星友），点击面板外任意位置自动收起。
+- **全屏无背景悬浮星友**：3D 星座软陶角色支持全屏自由拖拽与屏幕边缘半隐藏贴靠；鼠标靠近展开四颗零遮挡圆弧功能键（模型与上下文用量、按「本机模型 / API 模型」两级切换模型、语音快聊、展开或切换星友）；右键呼出快捷菜单支持 `70%–140%` 实时尺寸缩放与一键隐藏；执行任务时在角色正上方居中展示思考与完成预览提示。
+- **顶部刘海灵动岛**：默认空闲自动隐身，鼠标移近刘海呼出星友状态胶囊，实时联动录音计时、思考状态与最新回复预览。
 
 <p align="center">
-  <img src="docs/images/desktop/floating-and-island.jpg" alt="灵动岛靠近呼出、语音声波联动与无背景全屏悬浮星友圆弧菜单、本机与 API 模型筛选" width="100%" />
+  <img src="docs/images/desktop/floating-companion.png" alt="全屏无背景悬浮星友实拍：圆弧功能键两级模型切换与右键比例缩放快捷菜单" width="100%" />
 </p>
 
-### 2. 8 款星座软陶可爱互动动效 & 极简设置中心
+### 2. 叮嘱日程（月历视图）& 算力与消耗看板
 
-- **8 款软陶角色专属动效**：桌面端与手机端共用零分配 SVG 软陶引擎，内置 **Q 弹麻薯歪头杀、星星眼崇拜闪耀、害羞脸红躲猫猫、犯困吹泡泡（靠近戳破惊醒）、晕乎乎蚊香眼（快速晃动触发）、节拍摇摆听歌（录音联动）、好奇放大镜侦查（工具检索中）、连戳暴走爱心喷泉** 及配套软萌合成音效。
-- **极简设置中心**：「账号管理」置顶直达个人资料与手机配对，「应用行为」与「通用」合二为一，「更新」归入「通用与偏好」，全站界面层级清爽统一。
+- **叮嘱日程**：按标准月历网格直观管理每位星友的定时叮嘱与周期例程，点按日期格即可快速新建定时任务。
+- **算力与消耗看板**：支持按「全部星友总览」或单个星友、按 `近 7 天 / 近 30 天 / 近 90 天 / 近 1 年` 统计总 Token 消耗、预估模型开销、对话轮次、上下文缓存命中率及各模型调用占比明细。
 
 <p align="center">
-  <img src="docs/images/desktop/emotes-and-settings.jpg" alt="8 款十二星座软陶可爱动效与全新极简设置导航" width="100%" />
+  <img src="docs/images/desktop/schedule-and-usage.png" alt="叮嘱日程月历视图与算力消耗看板实拍" width="100%" />
+</p>
+
+### 3. 外观实时预览 · 模型中心 · 星友市集
+
+- **外观与实时预览**：支持浅色/深色/跟随系统主题、透明毛玻璃窗口、`App 图标颜色`、聊天气泡主题色与气泡样式（纯色 / 柔光 / 经典）、聊天画布底色及自定义窗口背景，并在设置页内实时预览切换效果。
+- **本地与 API 模型中心**：一键扫描并接入本机已安装或已订阅的 CLI Agent（ChatGPT、Grok、Claude、Gemini、WorkBuddy、OpenCode、OpenClaw、Pi、Hermes 等），同时支持配置 OpenAI / Anthropic 兼容第三方 API Key。
+- **星友市集与生态连接**：支持自定义 MCP 服务接入，内置飞书、即梦 AI、WPS 金山文档、钉钉、企业微信、腾讯文档、可灵 AI、美图设计室、小红书创作服务、百度网盘等常用工具一键连接。
+
+<p align="center">
+  <img src="docs/images/desktop/appearance-and-models.png" alt="外观实时预览设置与本地模型中心实拍" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/images/desktop/marketplace.png" alt="星友市集与自定义 MCP 生态连接实拍" width="100%" />
 </p>
 
 ## StarBot Mobile（星友手机端 · iOS）
 
-StarBot Mobile 是专为多星友私人 AI 伙伴打造的极简 iOS 客户端，通过 `starbot://` 局域网/远程加密 WebRTC 直连你的电脑桌面端，支持单手语音滑选星友、月历方格任务日程、实时账单排行、群聊协作与轻盈浮窗交互。详情见 [StarBot Mobile 文档](apps/mobile/README.md)。
-
-<p align="center">
-  <img src="docs/images/mobile/hero-overview.jpg" alt="StarBot Mobile 总览：极简首页与底部胶囊栏、按住语音上滑选星友、轻量浮窗消息菜单" width="100%" />
-</p>
-
-### 1. 五槽位液态玻璃胶囊栏 & 可拖动语音圆球
-
-首页底部集成五槽位液态玻璃胶囊：**常用星友头像 · 任务日程 · 凸出可拖动紫色语音圆球 · 个人记忆库 · 数据用量**。按住中央语音圆球即可实时声波律动并自由拖动：支持直接留在下方发给常用星友、上拖精准点选任意星友（带安全区边界保护与长列表边缘流畅跟滑）、拖入底部弧形翼片「取消」或「转文字」，并全程语音转纯文字发送附带明确送达反馈条。
-
-<p align="center">
-  <img src="docs/images/mobile/capsule-voice-flow.jpg" alt="底部胶囊操作栏单手语音交互流" width="100%" />
-</p>
-
-### 2. 任务日程月历方格 · 个人记忆库 · 全屏用量账单
-
-- **任务日程**：手机端紧凑 7 列月历方格视图，日期格内以编号彩色圆点标记排期，点按日期或圆点展开对应星友、任务内容与时间，一键新建定时任务。
-- **个人记忆库**：聚合用户手动录入与星友自动总结的个人画像气泡（基础信息 / 习惯 / 近况 / 经历 / 偏好 / 社交 / 热爱与兴趣），支持打字与语音听写实时同步至全部星友。
-- **全屏用量账单**：独立二级页面支持按 `今日 / 近 7 天 / 近 30 天 / 本月` 与单星友筛选，完整展示总花费、总算力、总调用、各厂商汇总、单模型消耗明细与各星友消耗排行。
-
-<p align="center">
-  <img src="docs/images/mobile/schedule-billing-showcase.jpg" alt="任务日程月历方格与用量账单星友消耗排行" width="100%" />
-</p>
-
-### 3. 极简侧边栏 · 桌面级星友档案 · 精选星友市集 · 一键退出重连
-
-- **极简侧边栏**：纯净 `StarBot` 品牌标识 + 顶部搜索栏 + 「任务日程 / 星友市集 / 资料库」，底部账号直达「设置」与一键「退出登录」重新扫码配对。
-- **星友档案**：对话顶部点击星友形象直达全屏星友档案，纯白立体卡片搭配单行右对齐排布，一屏管理外观、昵称、灵魂人设、驱动模型、性格腔调、专属记忆、装备技能、定时叮嘱、算力足迹与权限边界。
-- **精选星友市集与新建群聊**：精选 Canva、Notion、Figma、Discord、GitHub、Vercel、Obsidian、Apple Apps、GitLab、Cloudflare、Supabase、Hugging Face 等高频生态应用；建群面板内联平铺所有星友一键全选。
-- **全链路交互音效与动效**：内置零延迟原生合成交互音效与 Reanimated 弹簧动效，聊天气泡支持带阴影边线的轻盈质感与浮窗操作（引用、转发、复制、批量删除）。
-
-<p align="center">
-  <img src="docs/images/mobile/drawer-detail-group-showcase.jpg" alt="极简 StarBot 侧边栏、星友二级详情页与内联新建群聊" width="100%" />
-</p>
+StarBot Mobile 是与桌面端配套的 iOS 客户端，通过 `starbot://` 局域网/远程加密 WebRTC 直连你的电脑桌面端（桌面端唤醒解锁自动恢复信令主机，手机端重连达上限自动停止循环并提示），支持底部五槽位胶囊快捷操作、单手按住语音滑选星友、任务日程月历、个人记忆库、全屏算力账单与群聊协作。详情见 [StarBot Mobile 文档](apps/mobile/README.md)。
 
 > [!WARNING]
 > Agents run with `danger-full-access` and `approvalPolicy: never`. They can read and modify files,

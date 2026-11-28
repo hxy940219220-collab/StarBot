@@ -18,8 +18,6 @@ import {
   Hash,
   Info,
   LoaderCircle,
-  Pin,
-  PinOff,
   Trash2,
   Wallpaper,
 } from "@starbot/ui";
@@ -921,7 +919,9 @@ export function MessageActions(props: {
   onReply?: (() => void) | undefined;
   onCopy?: (() => void) | undefined;
   copied?: boolean | undefined;
-  readAloud?: { reading: boolean; loading?: boolean | undefined; onToggle: () => void; onPrefetch?: (() => void) | undefined } | undefined;
+  readAloud?:
+    | { reading: boolean; loading?: boolean | undefined; onToggle: () => void; onPrefetch?: (() => void) | undefined }
+    | undefined;
   onBranch?: (() => void) | undefined;
   branchDisabled?: boolean | undefined;
   menu?: (() => JSX.Element) | undefined;
@@ -1219,16 +1219,8 @@ export function MessageMenuItems(props: MessageMenuItemsProps) {
           </ContextMenu.Item>
         )}
       </Show>
-      <Show when={props.onBranch || props.pin}>
+      <Show when={props.onBranch}>
         <ContextMenu.Separator />
-      </Show>
-      <Show when={props.pin}>
-        {(pin) => (
-          <ContextMenu.Item onSelect={() => pin().onToggle()}>
-            {pin().pinned ? <PinOff aria-hidden="true" /> : <Pin aria-hidden="true" />}
-            <span>{pin().pinned ? t("chat.menu.unpin") : t("chat.menu.pin")}</span>
-          </ContextMenu.Item>
-        )}
       </Show>
       <Show when={props.onBranch}>
         {(onBranch) => (

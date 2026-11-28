@@ -230,7 +230,6 @@ export function ConversationTimeline() {
     shownSubagentId,
     toggleSubagentPanel,
     sideThreadOpen,
-    messagePins,
   } = useConversationViewScope();
   const { t, format } = useText();
   const controller = useConversationController();
@@ -407,12 +406,6 @@ export function ConversationTimeline() {
   const batchSelectAction = (message: AgentMessage) => {
     if (!canDeleteTimelineMessage(message)) return undefined;
     return () => startBatchSelectFrom(message.id);
-  };
-  const pinAction = (message: AgentMessage) => {
-    if (!messagePins.available() || message.streaming || message.id.startsWith(PENDING_SEND_ID_PREFIX)) return;
-    if (message.actionMarker) return;
-    const pinned = messagePins.isPinned(undefined, message.id);
-    return { pinned, onToggle: () => messagePins.set(undefined, message.id, !pinned) };
   };
   const sendToChannelAction = (message: AgentMessage) => {
     const target = props.sendToChannel;
@@ -1582,7 +1575,6 @@ export function ConversationTimeline() {
                   sendToChannel: sendToChannelAction(currentRowMsg()),
                   onBranch: undefined,
                   branchDisabled: Boolean(props.activeTurnId),
-                  pin: pinAction(currentRowMsg()),
                   onUseAsBackdrop: backdropAction(currentRowMsg()),
                   onBatchSelect: batchSelectAction(currentRowMsg()),
                   batchSelectLabel: isUserRow() ? "多选" : "批量删除",

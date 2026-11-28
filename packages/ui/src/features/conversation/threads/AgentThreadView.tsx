@@ -620,12 +620,6 @@ export function AgentThreadView(props: AgentThreadViewProps) {
       </Show>
     );
   };
-  function pinAction(message: AgentMessage) {
-    const pins = props.messagePins;
-    if (!pins || message.streaming) return undefined;
-    const pinned = pins.isPinned(message.id);
-    return { pinned, onToggle: () => pins.onToggle(message.id, !pinned) };
-  }
   function menuItems(message: AgentMessage, onCopy: (message: AgentMessage) => void): MessageMenuItemsProps {
     return {
       message,
@@ -635,7 +629,6 @@ export function AgentThreadView(props: AgentThreadViewProps) {
       onCopy: () => onCopy(message),
       onBranch: branchAction(message),
       branchDisabled: branchBusy(),
-      pin: pinAction(message),
       onUseAsBackdrop: props.backdropAction?.(message),
       onBatchSelect: batchSelectAction(message),
       onDelete: deleteAction(message),
