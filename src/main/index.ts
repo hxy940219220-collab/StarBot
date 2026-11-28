@@ -296,7 +296,11 @@ const developmentRemoteDebuggingPort = !app.isPackaged
   ? readDevelopmentRemoteDebuggingPort(process.env.OPENBOT_DEV_REMOTE_DEBUGGING_PORT)
   : null;
 const analyticsCaptureUrl = !app.isPackaged ? readAnalyticsCaptureUrl(process.env.OPENBOT_ANALYTICS_CAPTURE_URL) : null;
-app.commandLine.appendSwitch("disable-features", "FedCm");
+app.commandLine.appendSwitch("disable-features", "FedCm,WebRtcHideLocalIpsWithMdns");
+app.commandLine.appendSwitch(
+  "proxy-bypass-list",
+  "<-loopback>,127.0.0.1,localhost,[::1],192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,*.local",
+);
 app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
 if (developmentRemoteDebuggingPort) {
   app.commandLine.appendSwitch("remote-debugging-port", developmentRemoteDebuggingPort);

@@ -467,8 +467,11 @@ export function requestOwnerTransferEmailDelivery(): OwnerTransferEmailDelivery 
   return createOwnerTransferEmailDelivery(bindings, accountAnalytics(bindings));
 }
 
-export function requestRemoteControlPlane(): RemoteControlPlane {
-  return new RemoteControlPlane(requireWorkerBindings(env), { schedule });
+export function requestRemoteControlPlane(request?: Request): RemoteControlPlane {
+  return new RemoteControlPlane(requireWorkerBindings(env), {
+    schedule,
+    ...(request ? { requestUrl: request.url } : {}),
+  });
 }
 
 export function requestHostedServerService(request?: Request): HostedServerService {

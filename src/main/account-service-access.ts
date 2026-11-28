@@ -29,7 +29,24 @@ export function safeStorageCipher(
   return secretStorage().cipher(() => sourceText(unavailableKey));
 }
 
+function isDirectLocalAccountRequest(input: string | URL | Request): boolean {
+  try {
+    const raw = input instanceof URL ? input.href : typeof input === "string" ? input : input.url;
+    const parsed = new URL(raw);
+    return parsed.protocol === "http:" && isMobileConnectDevelopmentHost(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
+
 async function accountServiceFetch(input: string | URL | Request, init?: RequestInit): Promise<Response> {
+  if (isDirectLocalAccountRequest(input)) {
+    return globalThis.fetch(input, {
+      ...init,
+      credentials: "omit",
+      cache: "no-store",
+    });
+  }
   try {
     return await net.fetch(input instanceof URL ? input.href : input, {
       ...init,
@@ -85,7 +102,15 @@ export function resolveMobileConnectApiUrl(configuredMobileApiUrl: string | unde
   const trimmed = configuredMobileApiUrl?.trim();
   if (trimmed) {
     try {
-      if (!isLoopbackHostname(new URL(trimmed).hostname)) {
+      const parsedConfigured = new URL(trimmed);
+      if (!isLoopbackHostname(parsedConfigured.hostname)) {
+        if (parsedConfigured.protocol === "http:" && isMobileConnectDevelopmentHost(parsedConfigured.hostname)) {
+          const liveLanIps = detectLocalLanIpv4Addresses();
+          if (liveLanIps.length > 0 && !liveLanIps.includes(parsedConfigured.hostname)) {
+            parsedConfigured.hostname = liveLanIps[0]!;
+            return readMobileConnectApiUrl(parsedConfigured.toString(), apiUrl);
+          }
+        }
         return readMobileConnectApiUrl(trimmed, apiUrl);
       }
     } catch {
@@ -115,6 +140,7 @@ export function createCentralAuthManager(options: {
   return new CentralAuthManager({
     apiUrl,
     mobileConnectApiUrl: resolveMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, apiUrl),
+    resolveMobileConnectApiUrl: () => resolveMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, apiUrl),
     storagePath: join(app.getPath("userData"), CENTRAL_AUTH_FILE),
     fetch: accountServiceFetch,
     ...safeStorageCipher("error.app.macSecureStorageUnavailable"),

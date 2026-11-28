@@ -102,6 +102,7 @@ type AuthFetcher = (input: string | URL | Request, init?: RequestInit) => Promis
 interface CentralAuthManagerOptions {
   apiUrl: string;
   mobileConnectApiUrl?: string;
+  resolveMobileConnectApiUrl?: () => string;
   storagePath: string;
   encrypt: (value: string) => Buffer;
   decrypt: (value: Buffer) => string;
@@ -239,9 +240,11 @@ export class CentralAuthManager extends EventEmitter<CentralAuthEvents> {
     super();
     const fetcher = detectBlockingNetwork(options.fetch ?? fetch, options.apiUrl);
     this.#transport = CentralAuthTransport.layer(fetcher);
+    const mobileConnectApiUrl = options.mobileConnectApiUrl ?? options.apiUrl;
     this.#options = {
       ...options,
-      mobileConnectApiUrl: options.mobileConnectApiUrl ?? options.apiUrl,
+      mobileConnectApiUrl,
+      resolveMobileConnectApiUrl: options.resolveMobileConnectApiUrl ?? (() => mobileConnectApiUrl),
       canPersist: options.canPersist ?? (() => true),
       keyringChanged: options.keyringChanged ?? (() => false),
       fetch: fetcher,
@@ -432,7 +435,11 @@ export class CentralAuthManager extends EventEmitter<CentralAuthEvents> {
         });
       }
       return {
-        qrData: createMobileConnectUrl({ apiUrl: this.#options.mobileConnectApiUrl, ticket: result.ticket, host }),
+        qrData: createMobileConnectUrl({
+          apiUrl: this.#options.resolveMobileConnectApiUrl(),
+          ticket: result.ticket,
+          host,
+        }),
         expiresAt,
       };
     },
@@ -519,7 +526,7 @@ export class CentralAuthManager extends EventEmitter<CentralAuthEvents> {
   #mobileConnectLinkView(stored: StoredMobileConnectLink): MobileConnectLink {
     return {
       url: createMobileConnectUrl({
-        apiUrl: this.#options.mobileConnectApiUrl,
+        apiUrl: this.#options.resolveMobileConnectApiUrl(),
         ticket: stored.token,
         host: stored.host,
       }),

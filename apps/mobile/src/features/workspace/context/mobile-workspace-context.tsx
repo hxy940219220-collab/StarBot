@@ -395,7 +395,7 @@ function withoutKeys<T>(record: Record<string, T>, keys: ReadonlySet<string>): R
 }
 
 export function MobileWorkspaceProvider({ children }: PropsWithChildren) {
-  const { session, sessionScope } = useMobileSession();
+  const { session, sessionScope, refreshProfile } = useMobileSession();
   const queryClient = useQueryClient();
   useEffect(() => () => queryClient.removeQueries({ queryKey: queryKeys.chatQueue() }), [queryClient]);
   const presenceSignatures = useRef(new Map<string, string>());
@@ -1503,9 +1503,20 @@ export function MobileWorkspaceProvider({ children }: PropsWithChildren) {
       if (!foregroundRef.current) return;
       if (wakeAttempts.current.get(hostId) === status.attempt) return;
       wakeAttempts.current.set(hostId, status.attempt);
+      if (session.apiUrl.startsWith("http://")) {
+        void refreshProfile();
+      }
       wakeSelectedServer(hostId);
     },
-    [recoveryCountdowns, wakeSelectedServer, connectionWaits, limitFirstConnection, backgroundRefreshStatus],
+    [
+      recoveryCountdowns,
+      wakeSelectedServer,
+      connectionWaits,
+      limitFirstConnection,
+      backgroundRefreshStatus,
+      session.apiUrl,
+      refreshProfile,
+    ],
   );
   useEffect(() => {
     if (!foreground || !activeServerId) return;

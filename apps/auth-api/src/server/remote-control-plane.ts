@@ -8,7 +8,7 @@ import {
 import { DEFAULT_TEAM_MEMBER_LIMIT } from "@openbot/contracts/input-limits";
 import { isAvatarColor } from "@openbot/contracts/ipc";
 import { isSignalHomeId } from "@openbot/contracts/ipc-host-signal-home";
-import type { MobileConnectHostBinding } from "@openbot/contracts/mobile-connect";
+import { isMobileConnectDevelopmentHost, type MobileConnectHostBinding } from "@openbot/contracts/mobile-connect";
 import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
 import type { RemoteAuthEvent } from "@openbot/contracts/signal-protocol/auth-events";
 import {
@@ -571,6 +571,7 @@ export class RemoteControlPlane {
       fetch?: RemoteFetch;
       now?: () => number;
       schedule?: (delivery: Effect.Effect<void, RemoteFailure>) => void;
+      requestUrl?: string;
     } = {},
   ) {
     if (!bindings.REMOTE_TICKET_PRIVATE_JWK || !bindings.REMOTE_TICKET_PUBLIC_JWKS || !bindings.REMOTE_TICKET_KEY_ID) {
@@ -618,7 +619,7 @@ export class RemoteControlPlane {
       now,
       schedule,
       fetch: fetcher,
-      signal: remoteSignalPlan(bindings),
+      signal: remoteSignalPlan(bindings, options.requestUrl),
       webhookUrls,
       webhookSecret,
     });
@@ -3681,14 +3682,34 @@ function remoteSignalNotConfigured(): RemoteControlPlaneError {
   return new RemoteControlPlaneError(503, "remote_not_configured", "The Remote Signal URL is not configured.");
 }
 
+function adaptDevelopmentSignalEntryUrl(entryUrl: string, requestUrl?: string): string {
+  if (!requestUrl) return entryUrl;
+  try {
+    const parsedEntry = new URL(entryUrl);
+    if (parsedEntry.protocol !== "ws:" || !isMobileConnectDevelopmentHost(parsedEntry.hostname)) {
+      return entryUrl;
+    }
+    const parsedRequest = new URL(requestUrl);
+    if (!isMobileConnectDevelopmentHost(parsedRequest.hostname)) {
+      return entryUrl;
+    }
+    parsedEntry.hostname = parsedRequest.hostname;
+    return parsedEntry.toString();
+  } catch {
+    return entryUrl;
+  }
+}
+
 export function remoteSignalPlan(
   bindings: Pick<
     WorkerBindings,
     "REMOTE_SIGNAL_URL" | "REMOTE_SIGNAL_HOMES" | "REMOTE_SIGNAL_HOME_LOCATIONS" | "REMOTE_SIGNAL_HOME_COUNTRIES"
   >,
+  requestUrl?: string,
 ): RemoteSignalPlan | null {
-  const entryUrl = bindings.REMOTE_SIGNAL_URL?.trim();
-  if (!entryUrl) return null;
+  const rawEntryUrl = bindings.REMOTE_SIGNAL_URL?.trim();
+  if (!rawEntryUrl) return null;
+  const entryUrl = adaptDevelopmentSignalEntryUrl(rawEntryUrl, requestUrl);
   const entryProtocol = urlProtocol(entryUrl);
   if (entryProtocol !== "wss:" && entryProtocol !== "ws:") return null;
   const permitsWs = entryProtocol === "ws:";

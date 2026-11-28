@@ -38,12 +38,14 @@ function resolveLocalSignalOrigins(authApiUrl: string, signalPort: string): stri
 }
 
 export function configureContentSecurityPolicy(): void {
-  const authApiUrl = process.env.OPENBOT_AUTH_API_URL ?? centralAuthApiUrl();
-  const explicitSelfHostedOrigin = readSelfHostedSignalOrigin(authApiUrl, process.env.OPENBOT_REMOTE_SIGNAL_URL);
-  const localOrigins = resolveLocalSignalOrigins(authApiUrl, process.env.REMOTE_SIGNAL_PORT ?? "3101");
-  const combinedSignalOrigin =
-    [explicitSelfHostedOrigin, localOrigins].filter((value): value is string => Boolean(value)).join(" ") || null;
-  const policy = buildContentSecurityPolicy(app.isPackaged, process.env.REMOTE_SIGNAL_URL, combinedSignalOrigin);
+  const buildPolicy = (): string => {
+    const authApiUrl = process.env.OPENBOT_AUTH_API_URL ?? centralAuthApiUrl();
+    const explicitSelfHostedOrigin = readSelfHostedSignalOrigin(authApiUrl, process.env.OPENBOT_REMOTE_SIGNAL_URL);
+    const localOrigins = resolveLocalSignalOrigins(authApiUrl, process.env.REMOTE_SIGNAL_PORT ?? "3101");
+    const combinedSignalOrigin =
+      [explicitSelfHostedOrigin, localOrigins].filter((value): value is string => Boolean(value)).join(" ") || null;
+    return buildContentSecurityPolicy(app.isPackaged, process.env.REMOTE_SIGNAL_URL, combinedSignalOrigin);
+  };
 
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     if (details.resourceType !== "mainFrame" || !isTrustedRendererUrl(details.url)) {
@@ -53,7 +55,7 @@ export function configureContentSecurityPolicy(): void {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        "Content-Security-Policy": [policy],
+        "Content-Security-Policy": [buildPolicy()],
       },
     });
   });

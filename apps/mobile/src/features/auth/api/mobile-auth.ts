@@ -14,6 +14,7 @@ import { type DynamicRecord, isBoolean, isDynamicRecord, isString } from "@openb
 import { normalizeEmailAddress, normalizeOneTimeCode, validateProfileName } from "@openbot/contracts/validation";
 import type { MobileTextKey } from "@openbot/i18n/mobile";
 import { bytesToBase64Url } from "@openbot/team-client/base64";
+import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import * as Device from "expo-device";
 import * as SecureStore from "expo-secure-store";
@@ -75,8 +76,13 @@ async function redeemMobileConnectSession(value: string): Promise<MobileSession>
   }
   if (!payload.host) throw new Error(currentText().t("mobile.auth.error.codeOutdated"));
 
-  const current = await serializeMobileSessionStorage(() => readStoredSessionAndRevokeInvalid(true));
-  if (current) throw new Error(currentText().t("mobile.auth.error.alreadySignedIn"));
+  const current = await serializeMobileSessionStorage(() => readStoredSessionAndRevokeInvalid(false));
+  const replacingSameHost =
+    current !== null &&
+    current.host !== undefined &&
+    current.host.hostId === payload.host.hostId &&
+    current.host.fingerprint === payload.host.fingerprint;
+  if (current && !replacingSameHost) throw new Error(currentText().t("mobile.auth.error.alreadySignedIn"));
 
   let response: Response;
   let body: unknown;
@@ -111,6 +117,16 @@ async function redeemMobileConnectSession(value: string): Promise<MobileSession>
 
   const session = decodeMobileSession(body, payload.apiUrl, null);
   session.host = validateMobileConnectHostBinding(payload.host, session.host);
+  if (current && replacingSameHost && !sameCredential(current, session)) {
+    await serializeMobileSessionStorage(async () => {
+      const pending = await readPendingRevocations();
+      if (!pending.some((item) => sameCredential(item, current))) {
+        pending.push({ apiUrl: current.apiUrl, sessionToken: current.sessionToken });
+        await LockedKeychain.setItemAsync(MOBILE_REVOCATIONS_KEY, JSON.stringify(pending));
+        revocationRetryRequested = true;
+      }
+    });
+  }
   await saveMobileSession(session);
   return session;
 }
@@ -365,24 +381,70 @@ export function validateMobileSession(
   });
 }
 
-async function refreshMobileProfile(session: MobileSession): Promise<MobileSession | null> {
-  const { response, body } = await withMobileAuthRequestTimeout(async (signal) => {
-    const request = await fetch(new URL("/v1/mobile-auth/session", session.apiUrl).toString(), {
-      headers: { Authorization: `Bearer ${session.sessionToken}` },
+function discoverDevelopmentApiUrl(currentApiUrl: string): string | null {
+  try {
+    const parsed = new URL(currentApiUrl);
+    if (parsed.protocol !== "http:" || !isMobileConnectDevelopmentHost(parsed.hostname)) return null;
+    const hostUri = Constants.expoConfig?.hostUri?.trim();
+    if (!hostUri) return null;
+    const metroHost = hostUri.split(":")[0]?.trim();
+    if (
+      !metroHost ||
+      metroHost === "127.0.0.1" ||
+      metroHost === "localhost" ||
+      metroHost === parsed.hostname ||
+      !isMobileConnectDevelopmentHost(metroHost)
+    ) {
+      return null;
+    }
+    parsed.hostname = metroHost;
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchMobileProfileAt(
+  apiUrl: string,
+  sessionToken: string,
+): Promise<{ response: Response; body: DynamicRecord | null }> {
+  return withMobileAuthRequestTimeout(async (signal) => {
+    const request = await fetch(new URL("/v1/mobile-auth/session", apiUrl).toString(), {
+      headers: { Authorization: `Bearer ${sessionToken}` },
       signal,
     });
     return { response: request, body: await readResponseBody(request, signal) };
   });
+}
+
+async function refreshMobileProfile(session: MobileSession): Promise<MobileSession | null> {
+  let effectiveApiUrl = session.apiUrl;
+  let response: Response;
+  let body: DynamicRecord | null;
+  try {
+    ({ response, body } = await fetchMobileProfileAt(effectiveApiUrl, session.sessionToken));
+  } catch (error) {
+    const candidateApiUrl = discoverDevelopmentApiUrl(session.apiUrl);
+    if (!candidateApiUrl) throw error;
+    ({ response, body } = await fetchMobileProfileAt(candidateApiUrl, session.sessionToken));
+    effectiveApiUrl = candidateApiUrl;
+  }
   if (response.status === 401) {
-    await deleteMobileSessionIfCurrent(session.sessionToken);
-    return null;
+    if (effectiveApiUrl === session.apiUrl) {
+      await deleteMobileSessionIfCurrent(session.sessionToken);
+      return null;
+    }
+    throw new Error(currentText().t("mobile.auth.error.verifyFailed"));
   }
   if (!response.ok) {
     throw new Error(apiErrorMessage(body) ?? currentText().t("mobile.auth.error.verifyFailed"));
   }
   const user = decodeUser(body);
   if (user.id !== session.user.id) throw new Error("The account service returned an invalid user.");
-  const updated = sameUser(user, session.user) ? session : { ...session, user };
+  const updated =
+    effectiveApiUrl === session.apiUrl && sameUser(user, session.user)
+      ? session
+      : { ...session, apiUrl: effectiveApiUrl, user };
   await saveMobileSessionIfCurrent(updated);
   return updated;
 }
