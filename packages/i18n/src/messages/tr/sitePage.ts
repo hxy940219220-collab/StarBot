@@ -256,7 +256,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "“{query}” ile eşleşen beceri yok.",
   "sitePage.marketplace.emptyApps": "Eşleşen uygulama yok.",
   "sitePage.marketplace.breadcrumb": "İçerik haritası",
-  "sitePage.marketplace.addToOpenBot": "StarBot'a ekle",
+  "sitePage.marketplace.addToStarBot": "StarBot'a ekle",
 
   "sitePage.marketplace.addFromApp":
     "{name} StarBot'un içinden eklenir. Uygulamayı indir, sonra bu bağlantıyı yeniden aç.",
@@ -539,7 +539,7 @@ export const messages = {
   "sitePage.site.cta.title": "İlk ekip arkadaşınızla tanışın",
   "sitePage.site.cta.description":
     "Codex, Claude, Gemini, Grok veya kendi modelinizi zaten ödediğiniz planlarla çalıştırın; her birinin kendi çalışma alanı ve bağlamı olsun. İşiniz bilgisayarınızda kalır.",
-  "sitePage.site.downloadOpenBot": "StarBot'u indir",
+  "sitePage.site.downloadStarBot": "StarBot'u indir",
 
   "sitePage.site.contact": "İletişim",
   "sitePage.site.footer.description":

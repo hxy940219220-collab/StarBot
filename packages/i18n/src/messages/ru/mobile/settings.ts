@@ -243,7 +243,7 @@ export const messages = {
     "Ответы в ветках сообщают, когда агент заканчивает работу или останавливается с ошибкой в ветке. Без них ветка всё равно сообщает, когда ждёт вашего ответа или подтверждения.",
   "mobile.settings.notifications.sound": "Звук",
   "mobile.settings.notifications.playSound": "Воспроизводить звук",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Тёплая",
   "mobile.settings.notifications.sound.mech": "Механическая",
@@ -393,7 +393,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Мои последние полгода с StarBot",
 
   "mobile.settings.profile.share.createFailed": "Не удалось создать изображение.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Голос",
   "mobile.settings.voice.sample": "Привет. Так я буду читать вам свои ответы.",
   "mobile.settings.voice.voice": "Голос",

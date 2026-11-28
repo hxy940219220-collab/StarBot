@@ -223,7 +223,7 @@ export const messages = {
     "스레드 답변을 켜면 에이전트가 스레드에서 작업을 마치거나 오류로 멈출 때 알려 줘요. 꺼도 스레드에서 입력이나 승인이 필요할 때는 알려 줘요.",
   "mobile.settings.notifications.sound": "소리",
   "mobile.settings.notifications.playSound": "소리 재생",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "따뜻한 소리",
   "mobile.settings.notifications.sound.mech": "기계음",
@@ -354,7 +354,7 @@ export const messages = {
   "mobile.settings.profile.shareTitle": "내 활동 공유",
   "mobile.settings.profile.share.caption": "StarBot과 함께한 지난 6개월",
   "mobile.settings.profile.share.createFailed": "이미지를 만들 수 없어요.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "음성",
   "mobile.settings.voice.sample": "안녕하세요. 이렇게 답변을 읽어 드릴게요.",
   "mobile.settings.voice.voice": "목소리",

@@ -1,0 +1,8 @@
+[Unit]
+Description=Update StarBot instance %i
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/starbot-docker/instances/starbot-instance update-request %i
+TimeoutStartSec=45min

@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { isCauseCode } from "@openbot/telemetry";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { isCauseCode } from "@starbot/telemetry";
 import { visibleDynamicTools } from "../src/backend/agent/tool-catalog";
 import { FAILOVER_CAUSES } from "../src/backend/agent/turn-lifecycle";
 import type { AgentClient } from "../src/backend/agent-client";
@@ -15,7 +15,7 @@ import { getRecord, getString } from "../src/backend/protocol";
 import { requireProviderDriver } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, runTurn, startThread, stopClients, type TurnResult } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/antigravity-mcp-load-failure-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/antigravity-mcp-load-failure-e2e");
 
 interface LogEntry {
   method: string;
@@ -47,7 +47,7 @@ interface Report {
   error?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-antigravity-mcp-load-failure-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-antigravity-mcp-load-failure-e2e-"));
 const report: Report = { passed: false, turns: {} };
 const clients: AgentClient[] = [];
 process.env.GEMINI_HOME = join(root, "gemini");
@@ -212,7 +212,7 @@ try {
   assert.equal(ownTurn.reply, "OK", "The turn answers.");
   const ownNames = (await readJsonl<LogEntry>(ownLog)).find((request) => request.names?.includes("wiki"))?.names;
   report.ownNames = ownNames;
-  for (const name of ["openbot_docs", "openbot_notes", "wiki"]) {
+  for (const name of ["starbot_docs", "starbot_notes", "wiki"]) {
     assert.ok(ownNames?.includes(name), `The session gets ${name}.`);
   }
   assert.ok(!ownNames?.includes("docs") && !ownNames?.includes("notes"), "No server has a name from the CLI's files.");

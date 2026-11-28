@@ -7,8 +7,8 @@ import {
   type ReferralFriendStatus,
   type ReferralMoney,
   type ReferralState,
-} from "@openbot/contracts/referral";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/referral";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Alert,
   AlertActions,
@@ -37,8 +37,8 @@ import {
   TriangleAlert,
   toast,
   UserRound,
-} from "@openbot/ui";
-import { PlushMascot } from "@openbot/ui/plush-loader";
+} from "@starbot/ui";
+import { PlushMascot } from "@starbot/ui/plush-loader";
 import type { JSX } from "@solidjs/web";
 import { For, Match, Show, Switch } from "solid-js";
 import { useText } from "../../text";

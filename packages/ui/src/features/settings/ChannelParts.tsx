@@ -8,8 +8,8 @@ import type {
   CustomProviderSummary,
   MessagingConnection,
   MessagingPlatform,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Alert,
   AlertContent,
@@ -31,7 +31,7 @@ import {
   Text,
   Trash2,
   TriangleAlert,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { For, Match, Show, Switch } from "solid-js";
 import { ProviderModelPicker } from "../../components/ProviderModelPicker";

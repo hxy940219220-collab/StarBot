@@ -1,8 +1,8 @@
 import { chmod } from "node:fs/promises";
 import { connect, createServer, type Server, type Socket } from "node:net";
 import { Transform, type TransformCallback } from "node:stream";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, type Logger } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, type Logger } from "@starbot/logging";
 import { Effect, Result } from "effect";
 import { CuaDriverFailure, cuaIO } from "./cua-driver-effects";
 import { parseAnswerLine, rewriteCallAnswer } from "./cua-driver-structured-text";
@@ -16,7 +16,7 @@ const SLOW_CALL_MS = 5_000;
 
 const MAX_SCREENSHOT_WINDOWS = 32;
 
-const defaultLogger = createOpenBotLogger("cua-driver-tap");
+const defaultLogger = createStarBotLogger("cua-driver-tap");
 
 export interface ObservedAction {
   tool: string;

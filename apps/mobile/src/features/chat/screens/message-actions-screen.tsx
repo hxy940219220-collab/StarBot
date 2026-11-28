@@ -1,4 +1,4 @@
-import { type AttachmentSummary, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@openbot/contracts/ipc";
+import { type AttachmentSummary, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@starbot/contracts/ipc";
 import { BlurView } from "expo-blur";
 import { Typography } from "heroui-native";
 import Copy from "lucide-react-native/icons/copy";
@@ -41,7 +41,7 @@ export function MessageActionsOverlay() {
   const { theme } = useUniwind();
   const dark = theme === "dark";
   const request = useMessageActionsRequest();
-  const danger = String(useCSSVariable("--openbot-danger-text") ?? "#ef4444");
+  const danger = String(useCSSVariable("--starbot-danger-text") ?? "#ef4444");
 
   // Crisp pure card surface + defined edge border & multi-layer elevation shadow (matching Cue reference!)
   const cardSurface = dark ? "#24242c" : "#ffffff";

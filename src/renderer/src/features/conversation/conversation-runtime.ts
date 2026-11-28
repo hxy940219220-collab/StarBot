@@ -4,15 +4,15 @@ import type {
   AskSideQuestionInput,
   AttachmentSummary,
   FilePreview,
-  OpenBotDesktopApi,
+  StarBotDesktopApi,
   ResetAgentSessionSettingInput,
   SaveSkillSuggestionInput,
   SaveSkillSuggestionResult,
   SetAgentSessionSettingInput,
   TestRoutineInput,
   WithdrawFeedbackResult,
-} from "@openbot/contracts/ipc";
-import type { AttachmentMediaSource } from "@openbot/ui/features/conversation/AttachmentCards";
+} from "@starbot/contracts/ipc";
+import type { AttachmentMediaSource } from "@starbot/ui/features/conversation/AttachmentCards";
 import type { AgentSkillCalls, SkillCatalogCalls } from "../../skills-port";
 import type { AgentTemplatePublishCalls } from "../agent-templates/agent-templates-port";
 import type { BrowserProfileCalls } from "../browser/browser-profiles-port";
@@ -27,7 +27,7 @@ import type { CodexLivePort } from "./stores/codex-live-conversation-store";
 
 export interface ConversationRuntime {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "discardDraftAttachment"
     | "importAttachmentData"
     | "downloadAttachments"
@@ -44,12 +44,12 @@ export interface ConversationRuntime {
     | "respondToBrowserSecret"
     | "setMessageReaction"
   > &
-    Partial<Pick<OpenBotDesktopApi["agent"], "openMessageLink" | "pasteMessageLink" | "cancelMessageLink">> &
-    Partial<Pick<OpenBotDesktopApi["agent"], "stopAttachmentDownload" | "onAttachmentDownload">> &
-    Partial<Pick<OpenBotDesktopApi["agent"], "retryAttachmentImport" | "discardAttachmentImport">> &
-    Partial<Pick<OpenBotDesktopApi["agent"], "testMcpServer">>;
+    Partial<Pick<StarBotDesktopApi["agent"], "openMessageLink" | "pasteMessageLink" | "cancelMessageLink">> &
+    Partial<Pick<StarBotDesktopApi["agent"], "stopAttachmentDownload" | "onAttachmentDownload">> &
+    Partial<Pick<StarBotDesktopApi["agent"], "retryAttachmentImport" | "discardAttachmentImport">> &
+    Partial<Pick<StarBotDesktopApi["agent"], "testMcpServer">>;
   browser: Pick<
-    OpenBotDesktopApi["browser"],
+    StarBotDesktopApi["browser"],
     | "capturePreview"
     | "closePictureInPicture"
     | "closeWindow"
@@ -70,7 +70,7 @@ export interface ConversationRuntime {
     | "takeControl"
   >;
   voice: Pick<
-    OpenBotDesktopApi["voice"],
+    StarBotDesktopApi["voice"],
     | "getSettings"
     | "getServer"
     | "onModelStatus"
@@ -82,7 +82,7 @@ export interface ConversationRuntime {
     | "cancelStream"
     | "onStreamTranscript"
   >;
-  openUrl: OpenBotDesktopApi["openUrl"];
+  openUrl: StarBotDesktopApi["openUrl"];
   askSideQuestion?: ((input: AskSideQuestionInput) => Promise<string>) | undefined;
   sideQuestionThreads?: boolean | undefined;
   liveVoice?: CodexLivePort | undefined;
@@ -128,5 +128,5 @@ export interface AgentNotificationLevelCalls {
 }
 
 export function conversationRuntime(props: Pick<ConversationProps, "runtime">): ConversationRuntime {
-  return props.runtime ?? window.openbot;
+  return props.runtime ?? window.starbot;
 }

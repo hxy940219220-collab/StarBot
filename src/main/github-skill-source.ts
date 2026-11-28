@@ -13,9 +13,9 @@ import {
   isGithubRepo,
   isGithubSkillPath,
   type MarketplaceSkillDetail,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { zipSync } from "fflate";
 import { causeHelpers } from "../backend/effect-boundary";

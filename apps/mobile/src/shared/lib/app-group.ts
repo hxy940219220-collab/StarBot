@@ -1,4 +1,4 @@
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 import { Directory, File, Paths } from "expo-file-system";
 
 const APP_GROUP = "group.com.think2do.starbot";

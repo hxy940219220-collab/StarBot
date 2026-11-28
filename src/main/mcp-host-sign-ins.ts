@@ -7,8 +7,8 @@ import type {
   SaveMcpSignInAppInput,
   SignOutMcpServerInput,
   TestMcpServerInput,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Cause, Effect, Exit, Option } from "effect";
 import type { AgentService } from "../backend/agent-service";
 import type { BrowserHost } from "../backend/browser-host";

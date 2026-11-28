@@ -1,6 +1,6 @@
-import type { BillingCurrency, BillingPlanId } from "@openbot/contracts/billing";
-import { LICENSE_DEVICES_PER_USER, type LicensePlan, type LicenseTier } from "@openbot/contracts/license";
-import { OPENBOT_DOWNLOAD_PAGE_LINKS, OPENBOT_LINKS } from "../lib/landing-links";
+import type { BillingCurrency, BillingPlanId } from "@starbot/contracts/billing";
+import { LICENSE_DEVICES_PER_USER, type LicensePlan, type LicenseTier } from "@starbot/contracts/license";
+import { STARBOT_DOWNLOAD_PAGE_LINKS, STARBOT_LINKS } from "../lib/landing-links";
 
 export interface RenderedEmail {
   subject: string;
@@ -70,15 +70,15 @@ export type LicenseEmailInput =
 
 const SITE_URL = "https://starbot.app";
 const WEB_APP_URL = `${SITE_URL}/app`;
-const DOWNLOAD_URL = `${SITE_URL}${OPENBOT_DOWNLOAD_PAGE_LINKS.hub}`;
+const DOWNLOAD_URL = `${SITE_URL}${STARBOT_DOWNLOAD_PAGE_LINKS.hub}`;
 const PRICING_URL = `${SITE_URL}/pricing`;
 const PLAN_NAMES: Record<BillingPlanId, string> = { starter: "Starter", standard: "Standard", pro: "Pro" };
 const LICENSE_TIER_NAMES: Record<LicenseTier, string> = { starter: "Starter", team: "Team" };
 const LOGO_URL = `${SITE_URL}/icon-192x192.png`;
 const FOOTER_LINKS = [
   { label: "starbot.app", href: SITE_URL },
-  { label: "X", href: OPENBOT_LINKS.x },
-  { label: "GitHub", href: OPENBOT_LINKS.repository },
+  { label: "X", href: STARBOT_LINKS.x },
+  { label: "GitHub", href: STARBOT_LINKS.repository },
 ] as const;
 const FONT_STACK = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif";
 const MONO_STACK = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace";

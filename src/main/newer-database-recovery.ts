@@ -1,9 +1,9 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import type { UpdateStatus } from "@openbot/contracts/ipc";
-import { isNewerRelease, isValidSemver } from "@openbot/contracts/release-version";
-import type { AppTranslate } from "@openbot/i18n";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import type { UpdateStatus } from "@starbot/contracts/ipc";
+import { isNewerRelease, isValidSemver } from "@starbot/contracts/release-version";
+import type { AppTranslate } from "@starbot/i18n";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { app, type BrowserWindow, dialog, shell } from "electron";
 import { runCauseEffect } from "../backend/effect-boundary";
@@ -18,12 +18,12 @@ import {
   UPDATE_INSTALL_TIMEOUT_MS,
   UpdateService,
 } from "./update-service";
-import { listSiblingOpenBotInstances } from "./update-sibling-instances";
+import { listSiblingStarBotInstances } from "./update-sibling-instances";
 
-const logger = createOpenBotLogger("update");
+const logger = createStarBotLogger("update");
 const STALLED_INSTALL_DIALOG_MS = 10 * 60_000;
 const GUIDE_URL =
-  "https://github.com/hxy940219220-collab/StarBot-Desktop/blob/main/docs/TROUBLESHOOTING.md#openbot-says-a-newer-version-saved-your-data";
+  "https://github.com/hxy940219220-collab/StarBot-Desktop/blob/main/docs/TROUBLESHOOTING.md#starbot-says-a-newer-version-saved-your-data";
 
 interface NewerDatabaseRecoveryOptions {
   window: BrowserWindow | null;
@@ -81,7 +81,7 @@ async function createRecoveryUpdater(
     autoDownload: true,
     beforeInstall: () => beforeInstall(UPDATE_INSTALL_TIMEOUT_MS + STALLED_INSTALL_DIALOG_MS),
     checkSiblingInstances: () =>
-      listSiblingOpenBotInstances({
+      listSiblingStarBotInstances({
         executablePath: app.getPath("exe"),
         currentPid: process.pid,
         platform: process.platform,

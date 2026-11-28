@@ -121,7 +121,7 @@ export const messages = {
   "settings.externalLinks.title": "Otwieraj linki zewnętrzne w",
   "settings.externalLinks.description": "Tu otwierają się linki z czatów, stron logowania i płatności.",
   "settings.externalLinks.defaultBrowser": "Przeglądarka",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
 
   "settings.externalLinks.defaultBrowserNamed": "Przeglądarka ({name})",
   "settings.externalLinks.otherApp": "Inna aplikacja…",
@@ -469,10 +469,10 @@ export const messages = {
   "settings.mobileConnect.route.description":
     "Dla telefonów, innych komputerów i członków zespołu, którzy łączą się z tym komputerem.",
   "settings.mobileConnect.route.chipLabel": "Jak łączą się urządzenia: {route}",
-  "settings.mobileConnect.route.openbot.title": "Przez StarBot",
+  "settings.mobileConnect.route.starbot.title": "Przez StarBot",
 
-  "settings.mobileConnect.route.openbot.badge": "Zalecane",
-  "settings.mobileConnect.route.openbot.description":
+  "settings.mobileConnect.route.starbot.badge": "Zalecane",
+  "settings.mobileConnect.route.starbot.description":
     "Działa w każdej sieci. Czaty i pliki są szyfrowane między Twoimi urządzeniami.",
   "settings.mobileConnect.route.private.title": "Sieć prywatna",
   "settings.mobileConnect.route.private.tailscale": "Wykryto Tailscale",
@@ -521,7 +521,7 @@ export const messages = {
   "settings.profile.share.copied": "Skopiowano obraz",
   "settings.profile.share.copyFailed": "Nie udało się skopiować obrazu.",
   "settings.profile.share.createFailed": "Nie udało się utworzyć obrazu.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "starbot-activity.png",
   "settings.profile.share.caption": "Moje ostatnie pół roku z StarBot",
 
   "settings.profile.activity.title": "Aktywność na tym komputerze",

@@ -1,5 +1,5 @@
-import { type ChatBackgroundScheme, readableChatBackground } from "@openbot/brand/chat-colors";
-import { type AvatarColor, isAvatarColor } from "@openbot/contracts/ipc";
+import { type ChatBackgroundScheme, readableChatBackground } from "@starbot/brand/chat-colors";
+import { type AvatarColor, isAvatarColor } from "@starbot/contracts/ipc";
 import * as SecureStore from "expo-secure-store";
 import { useUniwind } from "uniwind";
 import { create } from "zustand";

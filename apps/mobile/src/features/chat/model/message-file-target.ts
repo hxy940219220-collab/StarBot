@@ -1,4 +1,4 @@
-import { fileReferenceName, isFileReference } from "@openbot/brand/file-reference";
+import { fileReferenceName, isFileReference } from "@starbot/brand/file-reference";
 import { parseFinishedChatMarkdown, walkChatMarkdown } from "./chat-markdown-parser";
 
 export type MessageFileTarget = { kind: "shared"; path: string } | { kind: "workspace"; agentId: string; path: string };
@@ -20,9 +20,9 @@ export function webLink(href: string): string | null {
 function isSharedPath(path: string): boolean {
   const normalized = path.replaceAll("\\", "/");
   return (
-    normalized.startsWith("~/OpenBot/Shared/") ||
-    normalized.startsWith("OpenBot/Shared/") ||
-    normalized.includes("/OpenBot/Shared/")
+    normalized.startsWith("~/StarBot/Shared/") ||
+    normalized.startsWith("StarBot/Shared/") ||
+    normalized.includes("/StarBot/Shared/")
   );
 }
 

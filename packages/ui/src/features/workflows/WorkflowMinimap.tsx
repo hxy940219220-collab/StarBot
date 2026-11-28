@@ -1,4 +1,4 @@
-import type { WorkflowNodeKind } from "@openbot/contracts/ipc";
+import type { WorkflowNodeKind } from "@starbot/contracts/ipc";
 import { For } from "solid-js";
 import type { WfnPoint } from "./workflow-board";
 import { type Box, inkPath, type Stroke, strokeBox } from "./workflow-ink";

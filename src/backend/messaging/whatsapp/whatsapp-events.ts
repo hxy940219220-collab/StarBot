@@ -10,10 +10,10 @@ import {
   normalizeMessageContent,
   proto,
   type WAMessage,
-} from "@openbot/whatsapp/baileys";
+} from "@starbot/whatsapp/baileys";
 import type { InboundAction, InboundFile, InboundMessage, MessageTarget } from "../messaging-types";
 import type { WhatsAppChatState } from "./whatsapp-chats";
-import { isOtherOpenBotPost } from "./whatsapp-loop-guard";
+import { isOtherStarBotPost } from "./whatsapp-loop-guard";
 import { type SenderDecision, senderDecision, type WhatsAppSenderRules } from "./whatsapp-senders";
 
 export const WHATSAPP_DIRECT_THREAD = "dm";
@@ -47,7 +47,7 @@ export type WhatsAppEvent =
   | { type: "message"; message: InboundMessage; chatJid: string; isGroup: boolean }
   | { type: "action"; action: InboundAction }
   | { type: "pairing"; chatJid: string; senderId: string; name: string }
-  | { type: "otherOpenBot"; chatJid: string };
+  | { type: "otherStarBot"; chatJid: string };
 
 export interface WhatsAppUpsertWindow {
   openedAt: number;
@@ -133,7 +133,7 @@ export async function whatsAppInbound(
     (repliesToPost ||
       (contextInfo?.participant ? isMe(jidNormalizedUser(contextInfo.participant), context.me) : false));
   const text = textOf(content);
-  if (isSelfChat && isOtherOpenBotPost(text)) return historyOnly ? null : { type: "otherOpenBot", chatJid };
+  if (isSelfChat && isOtherStarBotPost(text)) return historyOnly ? null : { type: "otherStarBot", chatJid };
   const files = filesOf(content, chatJid, id);
   context.chats.rememberKey(id, { fromMe: Boolean(key.fromMe), participant: key.participant ?? null, text });
   if (files[0]) context.chats.rememberMedia(files[0].id, message);

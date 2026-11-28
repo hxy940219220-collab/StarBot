@@ -3,20 +3,20 @@ import {
   type FeedbackFacts,
   type FeedbackHost,
   type SimilarFeedbackIssue,
-} from "@openbot/contracts/feedback";
-import type { CentralAuthState } from "@openbot/contracts/ipc";
-import { decodeRecord, requiredNumber, requiredString } from "@openbot/contracts/ipc-decoding";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/feedback";
+import type { CentralAuthState } from "@starbot/contracts/ipc";
+import { decodeRecord, requiredNumber, requiredString } from "@starbot/contracts/ipc-decoding";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { app } from "electron";
 import { version as developmentVersion } from "../../package.json";
-import type { AgentFeedback, FeedbackSendResult, FeedbackWithdrawResult } from "../backend/agent/openbot-tool-router";
+import type { AgentFeedback, FeedbackSendResult, FeedbackWithdrawResult } from "../backend/agent/starbot-tool-router";
 import { type ToolOperationFailed, toToolOperationFailed } from "../backend/agent/tool-operation";
 import type { CentralAuthOperationError } from "./central-auth-effects";
 import { authApiErrorCode, authApiRateLimit } from "./central-auth-manager";
 
-const logger = createOpenBotLogger("feedback");
+const logger = createStarBotLogger("feedback");
 
 export function feedbackFacts(host?: FeedbackHost): FeedbackFacts {
   const platform = bugReportPlatform(process.platform);

@@ -88,7 +88,7 @@ export const messages = {
   "connector.slack.disconnectAllSummaryOrchestrator":
     "모든 워크스페이스의 연결이 해제돼요. Slack 오케스트레이터와 그 대화가 StarBot에서 삭제돼요.",
   "connector.slack.missingScopes":
-    "OpenBot에 Slack에서 다음 권한이 없어요: {scopes}. 워크스페이스 연결을 해제한 뒤 다시 연결해 주세요.",
+    "StarBot에 Slack에서 다음 권한이 없어요: {scopes}. 워크스페이스 연결을 해제한 뒤 다시 연결해 주세요.",
   "connector.slack.retryAt": "Slack이 StarBot에 기다리라고 요청했어요. {time}에 다시 시도해요.",
   "connector.slack.reconnect": "다시 연결",
   "connector.slack.pause": "일시 정지",
@@ -158,7 +158,7 @@ export const messages = {
   "connector.discord.disconnectAllSummaryOrchestrator":
     "모든 서버의 연결이 해제돼요. Discord 오케스트레이터와 그 대화가 StarBot에서 삭제돼요.",
   "connector.discord.missingScopes":
-    "OpenBot에 Discord에서 다음 권한이 없어요: {scopes}. Discord 서버 연결을 해제한 뒤 다시 연결해 주세요.",
+    "StarBot에 Discord에서 다음 권한이 없어요: {scopes}. Discord 서버 연결을 해제한 뒤 다시 연결해 주세요.",
   "connector.discord.retryAt": "Discord가 StarBot에 기다리라고 요청했어요. {time}에 다시 시도해요.",
   "connector.discord.reconnect": "다시 연결",
   "connector.discord.pause": "일시 정지",

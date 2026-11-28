@@ -97,7 +97,7 @@ const config: KnipConfig = {
       ],
       project: ["src/**/*.{ts,tsx}", "plugins/**/*.{js,ts}"],
       ignoreDependencies: [
-        "openbot-original-react-native",
+        "starbot-original-react-native",
         "@expo/config-plugins",
         "expo-device-hub",
         "@expo/plist",

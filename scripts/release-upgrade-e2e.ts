@@ -19,30 +19,30 @@ import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { setTimeout as sleep } from "node:timers/promises";
-import { LOCAL_SERVER_ID, type OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import { isNumber } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { LOCAL_SERVER_ID, type StarBotDesktopApi } from "@starbot/contracts/ipc";
+import { isNumber } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { z } from "zod";
-import { migrateOpenBotDatabase } from "../src/backend/openbot-database-schema";
+import { migrateStarBotDatabase } from "../src/backend/starbot-database-schema";
 import { RUN_MARKER_FILE } from "../src/main/run-marker";
 
 declare global {
   interface Window {
-    openbot: OpenBotDesktopApi;
+    starbot: StarBotDesktopApi;
   }
 }
 
-const logger = createOpenBotLogger("release-upgrade-e2e");
+const logger = createStarBotLogger("release-upgrade-e2e");
 const REPOSITORY = "hxy940219220-collab/StarBot-Desktop";
-const OUT = resolve(import.meta.dirname, "../.openbot-build/release-upgrade-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/release-upgrade-e2e");
 const LAUNCH_LIMIT_MS = 5 * 60_000;
 const TURN_LIMIT_MS = 2 * 60_000;
 const QUIT_LIMIT_MS = 2 * 60_000;
 const INSTALLER_LIMIT_MS = 5 * 60_000;
 const POLL_MS = 250;
 const CUSTOM_AGENT_ID = "upgradecheck";
-const MAIN_PAGE_URL = "openbot-app://app/index.html";
+const MAIN_PAGE_URL = "starbot-app://app/index.html";
 
 type Target = "macos" | "windows" | "linux" | "linux-arm64";
 
@@ -122,7 +122,7 @@ interface QuitResult {
 const runMarkerFile = z.object({ state: z.string() });
 
 const report: Report = { passed: false, target, arch: process.arch, history, newVersion };
-const root = await mkdtemp(join(tmpdir(), "openbot-upgrade-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-upgrade-"));
 const userDataPath = join(root, "user-data");
 const homePath = join(root, "home");
 await mkdir(userDataPath);
@@ -337,9 +337,9 @@ function launchEnvironment(): NodeJS.ProcessEnv {
     ...(target === "windows" ? {} : { USERPROFILE: homePath }),
     CODEX_HOME: join(userDataPath, "codex-home"),
     CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-    OPENBOT_CODEX_PATH: join(userDataPath, target === "windows" ? "missing-codex.exe" : "missing-codex"),
-    OPENBOT_CLAUDE_PATH: join(userDataPath, target === "windows" ? "missing-claude.exe" : "missing-claude"),
-    OPENBOT_GROK_PATH: join(userDataPath, target === "windows" ? "missing-grok.exe" : "missing-grok"),
+    STARBOT_CODEX_PATH: join(userDataPath, target === "windows" ? "missing-codex.exe" : "missing-codex"),
+    STARBOT_CLAUDE_PATH: join(userDataPath, target === "windows" ? "missing-claude.exe" : "missing-claude"),
+    STARBOT_GROK_PATH: join(userDataPath, target === "windows" ? "missing-grok.exe" : "missing-grok"),
   };
 }
 
@@ -433,10 +433,10 @@ async function launch(): Promise<RunningApp> {
     async () => {
       try {
         return await page.evaluate(async () => {
-          if (typeof window.openbot === "undefined") return null;
-          if ("agent" in window.openbot && "listAgents" in window.openbot.agent)
-            await window.openbot.agent.listAgents();
-          else await window.openbot.getAppInfo();
+          if (typeof window.starbot === "undefined") return null;
+          if ("agent" in window.starbot && "listAgents" in window.starbot.agent)
+            await window.starbot.agent.listAgents();
+          else await window.starbot.getAppInfo();
           return true;
         });
       } catch {
@@ -574,10 +574,10 @@ interface Seed {
 
 async function readSeedApi(page: Page): Promise<SeedApi> {
   return page.evaluate(() => {
-    const agent = "agent" in window.openbot ? window.openbot.agent : null;
+    const agent = "agent" in window.starbot ? window.starbot.agent : null;
     return {
-      updatePreference: "update" in window.openbot && "setPreference" in window.openbot.update,
-      customAgents: "customAgents" in window.openbot && agent !== null && "createAgent" in agent,
+      updatePreference: "update" in window.starbot && "setPreference" in window.starbot.update,
+      customAgents: "customAgents" in window.starbot && agent !== null && "createAgent" in agent,
       memories: agent !== null && "createMemory" in agent && "listMemories" in agent,
       channels: agent !== null && "channelCommand" in agent && "listChannels" in agent && "readChannel" in agent,
     };
@@ -601,7 +601,7 @@ async function seed(page: Page): Promise<Seed> {
   };
 
   if (api.updatePreference) {
-    await page.evaluate(() => window.openbot.update.setPreference({ autoDownload: false, autoInstall: false }));
+    await page.evaluate(() => window.starbot.update.setPreference({ autoDownload: false, autoInstall: false }));
   }
   if (!api.customAgents) return seeded;
 
@@ -609,7 +609,7 @@ async function seed(page: Page): Promise<Seed> {
   await writeFile(fakeAgentPath, FAKE_AGENT);
   await page.evaluate(
     ({ id, command, script, server }) =>
-      window.openbot.customAgents.save(
+      window.starbot.customAgents.save(
         { id, name: "Upgrade check", command, args: [script], env: [], usagePrompt: null },
         server,
       ),
@@ -621,7 +621,7 @@ async function seed(page: Page): Promise<Seed> {
       try {
         return await page.evaluate(
           ({ name, model }) =>
-            window.openbot.agent.createAgent({
+            window.starbot.agent.createAgent({
               name,
               description: "Made by the release upgrade check.",
               avatarSeed: name.toLowerCase().replaceAll(" ", "-"),
@@ -656,7 +656,7 @@ async function seed(page: Page): Promise<Seed> {
 
   for (const agentId of api.memories ? agentIds : []) {
     const memory = await page.evaluate(
-      (id) => window.openbot.agent.createMemory({ agentId: id, text: "The release upgrade check made this memory." }),
+      (id) => window.starbot.agent.createMemory({ agentId: id, text: "The release upgrade check made this memory." }),
       agentId,
     );
     seeded.memoryIds.push(memory.id);
@@ -666,7 +666,7 @@ async function seed(page: Page): Promise<Seed> {
   const channelId = randomUUID();
   await page.evaluate(
     ({ channelId, agentIds }) =>
-      window.openbot.agent.channelCommand({
+      window.starbot.agent.channelCommand({
         type: "save",
         operationId: crypto.randomUUID(),
         channelId,
@@ -682,7 +682,7 @@ async function seed(page: Page): Promise<Seed> {
   );
   await page.evaluate(
     ({ channelId, recipient }) =>
-      window.openbot.agent.channelCommand({
+      window.starbot.agent.channelCommand({
         type: "send",
         operationId: crypto.randomUUID(),
         channelId,
@@ -694,7 +694,7 @@ async function seed(page: Page): Promise<Seed> {
     { channelId, recipient: agentIds[0] ?? null },
   );
   const channelMessages = await waitFor("the answer in the channel", TURN_LIMIT_MS, async () => {
-    const channelPage = await page.evaluate((id) => window.openbot.agent.readChannel({ channelId: id }), channelId);
+    const channelPage = await page.evaluate((id) => window.starbot.agent.readChannel({ channelId: id }), channelId);
     const answered = channelPage.messages.some(
       (entry) => entry.author.kind === "agent" && entry.message.status === "completed" && entry.message.text.length > 0,
     );
@@ -709,7 +709,7 @@ async function seed(page: Page): Promise<Seed> {
 
 async function searchSeedMessages(page: Page, agentId: string) {
   const found = await page.evaluate(
-    (id) => window.openbot.agent.searchConversationMessages({ query: "upgradecheck", agentId: id, limit: 100 }),
+    (id) => window.starbot.agent.searchConversationMessages({ query: "upgradecheck", agentId: id, limit: 100 }),
     agentId,
   );
   return found.results.filter((result) => result.agentId === agentId).map((result) => result.message);
@@ -717,7 +717,7 @@ async function searchSeedMessages(page: Page, agentId: string) {
 
 async function readSeed(page: Page, seeded: Seed): Promise<Counts> {
   const { api } = seeded;
-  const agents = seeded.agentIds.length > 0 ? await page.evaluate(() => window.openbot.agent.listAgents()) : [];
+  const agents = seeded.agentIds.length > 0 ? await page.evaluate(() => window.starbot.agent.listAgents()) : [];
   const agentIds = new Set(agents.map((agent) => agent.id));
   let agentMessages = 0;
   let memories = 0;
@@ -726,21 +726,21 @@ async function readSeed(page: Page, seeded: Seed): Promise<Counts> {
     const messageIds = new Set((await searchSeedMessages(page, agentId)).map((message) => message.id));
     agentMessages += seeded.agentMessageIds.filter((id) => messageIds.has(id)).length;
     if (!api.memories) continue;
-    const memoryList = await page.evaluate((id) => window.openbot.agent.listMemories(id), agentId);
+    const memoryList = await page.evaluate((id) => window.starbot.agent.listMemories(id), agentId);
     const memoryIds = new Set(memoryList.map((memory) => memory.id));
     memories += seeded.memoryIds.filter((id) => memoryIds.has(id)).length;
   }
   const { channelId } = seeded;
-  const channels = channelId ? await page.evaluate(() => window.openbot.agent.listChannels()) : [];
+  const channels = channelId ? await page.evaluate(() => window.starbot.agent.listChannels()) : [];
   const channelFound = channels.some((channel) => channel.id === channelId);
   let channelMessages = 0;
   if (channelId && channelFound) {
-    const channelPage = await page.evaluate((id) => window.openbot.agent.readChannel({ channelId: id }), channelId);
+    const channelPage = await page.evaluate((id) => window.starbot.agent.readChannel({ channelId: id }), channelId);
     const messageIds = new Set(channelPage.messages.map((entry) => entry.id));
     channelMessages = seeded.channelMessageIds.filter((id) => messageIds.has(id)).length;
   }
   const customAgents = api.customAgents
-    ? await page.evaluate((server) => window.openbot.customAgents.list(server), LOCAL_SERVER_ID)
+    ? await page.evaluate((server) => window.starbot.customAgents.list(server), LOCAL_SERVER_ID)
     : [];
   const workspaceFolders = (await listWorkspaces()).filter((name) => !earlierWorkspaces.has(name)).length;
   return {
@@ -759,18 +759,18 @@ async function listWorkspaces(): Promise<string[]> {
 }
 
 async function readAppVersion(page: Page): Promise<string> {
-  return (await page.evaluate(() => window.openbot.getAppInfo())).version;
+  return (await page.evaluate(() => window.starbot.getAppInfo())).version;
 }
 
 async function openDatabaseCopy(name: string): Promise<DatabaseSync> {
   const directory = join(root, name);
   await mkdir(directory);
   for (const suffix of ["", "-wal", "-shm"]) {
-    const source = join(userDataPath, `openbot.db${suffix}`);
-    if (existsSync(source)) await copyFile(source, join(directory, `openbot.db${suffix}`));
+    const source = join(userDataPath, `starbot.db${suffix}`);
+    if (existsSync(source)) await copyFile(source, join(directory, `starbot.db${suffix}`));
   }
-  check(existsSync(join(directory, "openbot.db")), "The user data folder has no openbot.db.");
-  return new DatabaseSync(join(directory, "openbot.db"));
+  check(existsSync(join(directory, "starbot.db")), "The user data folder has no starbot.db.");
+  return new DatabaseSync(join(directory, "starbot.db"));
 }
 
 function rows(db: DatabaseSync, sql: string) {
@@ -815,7 +815,7 @@ async function checkDatabase(
   previousRowCounts: ReadonlyMap<string, number>,
 ): Promise<DatabaseReport> {
   const fresh = new DatabaseSync(":memory:");
-  migrateOpenBotDatabase(fresh);
+  migrateStarBotDatabase(fresh);
   const expectedVersions = appliedVersions(fresh);
   const expectedTables = tableColumns(fresh);
   fresh.close();

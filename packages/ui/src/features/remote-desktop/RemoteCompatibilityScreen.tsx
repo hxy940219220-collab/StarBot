@@ -1,6 +1,6 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { Alert, AlertContent, AlertDescription, Button } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { Alert, AlertContent, AlertDescription, Button } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { For, Show } from "solid-js";
 
 export function RemoteCompatibilityScreen(props: { server: ServerSummary; onRetry: () => Promise<void> }) {

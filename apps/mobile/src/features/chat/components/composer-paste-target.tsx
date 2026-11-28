@@ -1,5 +1,5 @@
-import { ATTACHMENT_FILE_EXTENSIONS } from "@openbot/contracts/attachment-files";
-import { MOBILE_ATTACHMENT_BYTES } from "@openbot/team-client/remote-peer";
+import { ATTACHMENT_FILE_EXTENSIONS } from "@starbot/contracts/attachment-files";
+import { MOBILE_ATTACHMENT_BYTES } from "@starbot/team-client/remote-peer";
 import { requireNativeView, requireOptionalNativeModule } from "expo";
 import type { ReactNode } from "react";
 import type { NativeSyntheticEvent, ViewProps } from "react-native";
@@ -21,8 +21,8 @@ interface NativeProps extends ViewProps {
   onSubmitKey: (event: NativeSyntheticEvent<{ text: string }>) => void;
 }
 
-const nativeModule = requireOptionalNativeModule<{ chatDrop?: boolean }>("OpenBotComposerPaste");
-const NativePasteTarget = nativeModule ? requireNativeView<NativeProps>("OpenBotComposerPaste") : null;
+const nativeModule = requireOptionalNativeModule<{ chatDrop?: boolean }>("StarBotComposerPaste");
+const NativePasteTarget = nativeModule ? requireNativeView<NativeProps>("StarBotComposerPaste") : null;
 
 interface NativeDropProps extends ViewProps {
   enabled: boolean;
@@ -32,7 +32,7 @@ interface NativeDropProps extends ViewProps {
 }
 
 const NativeDropTarget = nativeModule?.chatDrop
-  ? requireNativeView<NativeDropProps>("OpenBotComposerPaste", "ChatDrop")
+  ? requireNativeView<NativeDropProps>("StarBotComposerPaste", "ChatDrop")
   : null;
 
 export function addPastedFiles(attachments: ChatAttachments | undefined, { files, failed }: PastedFiles): void {

@@ -1,9 +1,9 @@
-import { AppLogo, type AppLogoVariant, ProviderLogo } from "@openbot/brand";
-import { usageTone } from "@openbot/team-client/plan-limits";
-import { BriefcaseBusiness, Button, buttonVariants, ContextMenu, MotionTooltip, Plug, Waypoints } from "@openbot/ui";
-import { AccountUsageDetails, AccountUsageWindowList } from "@openbot/ui/features/account/AccountUsageDetails";
-import { type AccountUsageProviderRow, accountUsageRowKey } from "@openbot/ui/features/account/account-usage-view";
-import { useText } from "@openbot/ui/text";
+import { AppLogo, type AppLogoVariant, ProviderLogo } from "@starbot/brand";
+import { usageTone } from "@starbot/team-client/plan-limits";
+import { BriefcaseBusiness, Button, buttonVariants, ContextMenu, MotionTooltip, Plug, Waypoints } from "@starbot/ui";
+import { AccountUsageDetails, AccountUsageWindowList } from "@starbot/ui/features/account/AccountUsageDetails";
+import { type AccountUsageProviderRow, accountUsageRowKey } from "@starbot/ui/features/account/account-usage-view";
+import { useText } from "@starbot/ui/text";
 import { Dynamic, type JSX } from "@solidjs/web";
 import { createMemo, createSignal, For, onSettled, Show } from "solid-js";
 import { CreditIcon } from "../credits/CreditIcon";

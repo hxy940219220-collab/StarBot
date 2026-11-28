@@ -157,7 +157,7 @@ export const messages = {
   "server.install.offline": "{name} çevrimdışı.",
   "server.install.expired": "Bu komutun süresi doldu. Yeni bir komut oluşturun.",
   "server.install.agentPrompt":
-    'OpenBot\'u bu Linux sunucuya kur ve OpenBot hesabımda oturum aç.\nBu komutu root olarak çalıştır. Soru sormaz ve birkaç dakika sürer:\n\n{command}\n\n"StarBot is connected to your account." satırı ve 0 çıkış koduyla biter.\nKomut 15 dakika boyunca bir kez çalışır. Hiçbir yere kaydetme.',
+    'StarBot\'u bu Linux sunucuya kur ve StarBot hesabımda oturum aç.\nBu komutu root olarak çalıştır. Soru sormaz ve birkaç dakika sürer:\n\n{command}\n\n"StarBot is connected to your account." satırı ve 0 çıkış koduyla biter.\nKomut 15 dakika boyunca bir kez çalışır. Hiçbir yere kaydetme.',
   "server.install.setUpWithAgent": "Bir ajanla kur",
   "server.install.sshAgentPrompt":
     "Linux sunucuma SSH ile bağlan ve StarBot'u sunucu olarak oraya kur.\n\nSSH adresi (user@host):",
@@ -676,7 +676,7 @@ export const messages = {
   "server.update.path.hosted":
     "Barındırılan hizmet güncellemeleri arka planda indirir. İndirilen bir güncelleme, sunucu bir sonraki başlatılışında başlar. Sunucuyu durdurup sürdürmeden önce etkin çalışmanın bitmesini bekleyin. Sunucu eski bir sürümde kalırsa ana makine yöneticisiyle iletişime geçin.",
   "server.update.path.system":
-    "En son sürümü yüklemek için ana makinede sudo openbot update komutunu çalıştırın. Bu komut StarBot'u durdurur. Önce etkin çalışmanın bitmesini bekleyin. Otomatik indirmeler bir sonraki önyüklemede yüklenir.",
+    "En son sürümü yüklemek için ana makinede sudo starbot update komutunu çalıştırın. Bu komut StarBot'u durdurur. Önce etkin çalışmanın bitmesini bekleyin. Otomatik indirmeler bir sonraki önyüklemede yüklenir.",
 
   "server.update.path.container":
     "Docker ana makinesinde yeni StarBot görüntüsünü çekin ve kapsayıcıyı aynı veri birimleriyle yeniden oluşturun. Önce etkin çalışmanın bitmesini bekleyin. Verilerinizi korumak için mevcut birimleri saklayın.",

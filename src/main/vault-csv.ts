@@ -1,4 +1,4 @@
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 
 export interface CsvLogin {
   website: string;

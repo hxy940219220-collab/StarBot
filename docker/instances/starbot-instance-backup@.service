@@ -1,0 +1,8 @@
+[Unit]
+Description=Back up StarBot instance %i
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/starbot-docker/instances/starbot-instance backup %i --verify
+TimeoutStartSec=6h

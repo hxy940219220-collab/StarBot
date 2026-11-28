@@ -1,10 +1,10 @@
-import { isManagedRuntimeProvider, type ManagedProviderId } from "@openbot/contracts/agent-providers";
+import { isManagedRuntimeProvider, type ManagedProviderId } from "@starbot/contracts/agent-providers";
 import type {
   AgentProviderId,
-  OpenBotDesktopApi,
+  StarBotDesktopApi,
   ProviderRuntimeSnapshot,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { clone, type Listener, type MockRuntime } from "./mock-support";
 
 export interface MockProviderRuntimeOptions {
@@ -45,7 +45,7 @@ export function createMockProviderRuntimes(options: MockProviderRuntimeOptions, 
     for (const listener of runtimeListeners) listener(clone(runtimeSnapshot));
   };
 
-  const providerRuntimes: OpenBotDesktopApi["providerRuntimes"] = {
+  const providerRuntimes: StarBotDesktopApi["providerRuntimes"] = {
     getStatus: async () => clone(runtimeSnapshot),
     checkForUpdates: async () => clone(runtimeSnapshot),
     download: async (provider) => {

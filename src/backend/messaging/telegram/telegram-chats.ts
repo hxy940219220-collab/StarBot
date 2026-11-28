@@ -1,8 +1,8 @@
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { type MessagingHistoryStore, matchesHistoryFilter, type ThreadedEntry } from "../messaging-history-store";
 import type { ContextEntry, HistoryFilter } from "../messaging-types";
 
-const logger = createOpenBotLogger("telegram");
+const logger = createStarBotLogger("telegram");
 
 const RECENT_MESSAGES = 200;
 const THREAD_ENTRIES = 2_000;

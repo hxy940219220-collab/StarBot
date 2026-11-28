@@ -4,12 +4,12 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { AGENT_PROVIDERS, type RoutineRun } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS, type RoutineRun } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/routine-restart-retry-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-routine-restart-retry-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/routine-restart-retry-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-routine-restart-retry-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -18,14 +18,14 @@ const fakeHold = join(root, "hold");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_CODEX = `#!/usr/bin/env node
 const { appendFileSync, existsSync } = require("node:fs");
@@ -204,7 +204,7 @@ function pass(name: string, condition: boolean, detail?: string) {
 }
 
 function open() {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const agents = new AgentService({

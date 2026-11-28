@@ -1,9 +1,9 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface AccountPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "getUsage">;
+  agent: Pick<StarBotDesktopApi["agent"], "getUsage">;
   auth: Pick<
-    OpenBotDesktopApi["auth"],
+    StarBotDesktopApi["auth"],
     | "cancelMobileConnect"
     | "createMobileConnect"
     | "createMobileConnectLink"
@@ -27,5 +27,5 @@ export interface AccountPort {
 }
 
 export function accountPort(): AccountPort {
-  return window.openbot;
+  return window.starbot;
 }

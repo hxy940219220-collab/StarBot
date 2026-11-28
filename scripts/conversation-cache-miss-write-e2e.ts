@@ -3,13 +3,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { ConversationMessage, ConversationSnapshot } from "@openbot/contracts/ipc";
+import type { ConversationMessage, ConversationSnapshot } from "@starbot/contracts/ipc";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/conversation-cache-miss-write-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/conversation-cache-miss-write-e2e");
 const SEEDED_MESSAGES = 150;
 const IDLE_LATER_MS = 24 * 60 * 60 * 1000;
 
@@ -39,8 +39,8 @@ function answer(index: number): ConversationMessage {
 }
 
 async function runCase(name: CaseName, result: CaseReport): Promise<void> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-cache-miss-write-"));
-  const database = new OpenBotDatabase(join(root, "state"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-cache-miss-write-"));
+  const database = new StarBotDatabase(join(root, "state"));
   const store = new AgentStore(join(root, "state"), join(root, "home"), database);
   const conversation = new ConversationRuntime(
     store,

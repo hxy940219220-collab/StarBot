@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 import type { AgentClient } from "../src/backend/agent-client";
 import type { AgentCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -11,7 +11,7 @@ import type { CustomProviderConfig } from "../src/backend/opencode-config";
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, runTurn, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-expired-key-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-expired-key-e2e");
 
 interface LogEntry {
   event: "spawn" | "load" | "prompt";
@@ -34,7 +34,7 @@ interface Report {
   providerRefused?: { error: string };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-expired-key-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-opencode-expired-key-e2e-"));
 const log = join(root, "opencode.jsonl");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];

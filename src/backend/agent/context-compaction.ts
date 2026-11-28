@@ -1,12 +1,12 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentContextCategoryUsage,
   AgentContextCompactionReason,
   AgentContextState,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Schema } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -31,7 +31,7 @@ interface ThreadContextBudget {
   repeatedCompactions: number;
 }
 
-const logger = createOpenBotLogger("context-compaction");
+const logger = createStarBotLogger("context-compaction");
 
 export const CONTEXT_COMPACTION_THRESHOLD = 0.8;
 const INEFFECTIVE_COMPACTION_SHARE = CONTEXT_COMPACTION_THRESHOLD - 0.1;

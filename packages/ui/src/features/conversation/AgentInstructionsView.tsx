@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentInstructionsFile } from "@openbot/contracts/ipc";
-import { Button, FileText, FolderOpen, IconButton, Textarea } from "@openbot/ui";
-import { SettingsPanelContent, SettingsPanelHeader } from "@openbot/ui/components/SettingsPanel";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { AgentInstructionsFile } from "@starbot/contracts/ipc";
+import { Button, FileText, FolderOpen, IconButton, Textarea } from "@starbot/ui";
+import { SettingsPanelContent, SettingsPanelHeader } from "@starbot/ui/components/SettingsPanel";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createSignal, onSettled, Show, untrack } from "solid-js";
 import { useText } from "../../text";

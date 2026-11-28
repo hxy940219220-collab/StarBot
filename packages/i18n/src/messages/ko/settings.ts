@@ -115,7 +115,7 @@ export const messages = {
   "settings.externalLinks.title": "외부 링크 열기",
   "settings.externalLinks.description": "채팅, 로그인 페이지, 결제 페이지의 링크가 여기에서 열려요.",
   "settings.externalLinks.defaultBrowser": "기본 브라우저",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
 
   "settings.externalLinks.defaultBrowserNamed": "기본 브라우저({name})",
   "settings.externalLinks.otherApp": "다른 앱…",
@@ -436,9 +436,9 @@ export const messages = {
   "settings.mobileConnect.route.title": "기기 연결 방식",
   "settings.mobileConnect.route.description": "이 컴퓨터에 연결하는 휴대폰, 다른 컴퓨터, 팀 멤버에게 적용돼요.",
   "settings.mobileConnect.route.chipLabel": "기기 연결 방식: {route}",
-  "settings.mobileConnect.route.openbot.title": "StarBot을 통해 연결",
-  "settings.mobileConnect.route.openbot.badge": "추천",
-  "settings.mobileConnect.route.openbot.description":
+  "settings.mobileConnect.route.starbot.title": "StarBot을 통해 연결",
+  "settings.mobileConnect.route.starbot.badge": "추천",
+  "settings.mobileConnect.route.starbot.description":
     "어떤 네트워크에서나 작동해요. 채팅과 파일은 내 기기 사이에서 암호화돼요.",
   "settings.mobileConnect.route.private.title": "사설 네트워크",
   "settings.mobileConnect.route.private.tailscale": "Tailscale 감지됨",
@@ -486,7 +486,7 @@ export const messages = {
   "settings.profile.share.copied": "이미지를 복사했어요",
   "settings.profile.share.copyFailed": "이미지를 복사할 수 없어요.",
   "settings.profile.share.createFailed": "이미지를 만들 수 없어요.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "starbot-activity.png",
   "settings.profile.share.caption": "StarBot과 함께한 지난 6개월",
   "settings.profile.activity.title": "이 컴퓨터의 활동",
   "settings.profile.activity.activeDays": {

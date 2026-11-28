@@ -1,5 +1,5 @@
-import { GITHUB_SKILLS_CAPABILITY, GITHUB_SKILLS_ROUTES } from "@openbot/contracts/team-protocol/github-skills-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { GITHUB_SKILLS_CAPABILITY, GITHUB_SKILLS_ROUTES } from "@starbot/contracts/team-protocol/github-skills-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAdmin } from "./dependencies";
 import { HttpError } from "./http-error";

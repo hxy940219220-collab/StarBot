@@ -5,7 +5,7 @@ import type {
   MarketplaceSkillQuery,
   MarketplaceSkillSummary,
   SkillCategory,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { zipSync } from "fflate";
 
 interface CuratedSkillSpec {

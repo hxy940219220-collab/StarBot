@@ -1,6 +1,6 @@
-import { createOpenBotAgentTemplateUrl, createWebAppAgentTemplatePath } from "@openbot/contracts/agent-template-links";
-import type { AgentTemplateDetail } from "@openbot/contracts/ipc";
-import { markdownPlainText, markdownPreviewText } from "@openbot/contracts/markdown-preview-text";
+import { createStarBotAgentTemplateUrl, createWebAppAgentTemplatePath } from "@starbot/contracts/agent-template-links";
+import type { AgentTemplateDetail } from "@starbot/contracts/ipc";
+import { markdownPlainText, markdownPreviewText } from "@starbot/contracts/markdown-preview-text";
 import { Link } from "@tanstack/solid-router";
 import { createMemo, createSignal, For, Loading, lazy, onSettled, Show } from "solid-js";
 import { agentTemplatePath } from "../../lib/agent-template-path";
@@ -10,10 +10,10 @@ import { SiteHeader } from "../landing/SiteHeader";
 import { PluginOpenButtons } from "../plugins/PluginOpenButtons";
 
 const AgentAvatar = lazy(() =>
-  import("@openbot/ui/features/agents/AgentAvatar").then((module) => ({ default: module.AgentAvatar })),
+  import("@starbot/ui/features/agents/AgentAvatar").then((module) => ({ default: module.AgentAvatar })),
 );
 const MarkdownMessageText = lazy(() =>
-  import("@openbot/ui/features/conversation/MarkdownMessageText").then((module) => ({
+  import("@starbot/ui/features/conversation/MarkdownMessageText").then((module) => ({
     default: module.MarkdownMessageText,
   })),
 );
@@ -30,7 +30,7 @@ export function AgentTemplatePage(props: AgentTemplatePageProps) {
   let description: HTMLParagraphElement | undefined;
   onSettled(() => {
     setMounted(true);
-    void import("@openbot/brand/bloub-avatar").then(({ avatarHeadColor }) =>
+    void import("@starbot/brand/bloub-avatar").then(({ avatarHeadColor }) =>
       setAccent(avatarHeadColor(props.template.avatarSeed, props.template.avatarHue)),
     );
     if (description) setClamped(description.scrollHeight > description.clientHeight + 1);
@@ -39,7 +39,7 @@ export function AgentTemplatePage(props: AgentTemplatePageProps) {
 
   const preview = createMemo(() => markdownPreviewText(props.template.description));
   const hasMore = () => clamped() || preview() !== props.template.description.replace(/\s+/gu, " ").trim();
-  const openUrl = () => createOpenBotAgentTemplateUrl(props.template.id);
+  const openUrl = () => createStarBotAgentTemplateUrl(props.template.id);
   const counts = () =>
     [countLabel(props.template.skills.length, "skill"), countLabel(props.template.routines.length, "routine")].filter(
       (label): label is string => label !== null,
@@ -113,19 +113,19 @@ export function AgentTemplatePage(props: AgentTemplatePageProps) {
             </Show>
 
             <hr class="agent-share-divider" />
-            <p class="agent-share-notice">Made by another OpenBot user. It can act on your behalf once added.</p>
+            <p class="agent-share-notice">Made by another StarBot user. It can act on your behalf once added.</p>
             <div class="agent-share-action">
               <PluginOpenButtons
                 href={openUrl()}
-                label="Add to OpenBot"
-                downloadCopy={`${props.template.name} is added from inside OpenBot. Get the app, then open this link again.`}
+                label="Add to StarBot"
+                downloadCopy={`${props.template.name} is added from inside StarBot. Get the app, then open this link again.`}
               />
             </div>
           </div>
         </article>
 
         <p class="agent-share-fallback">
-          OpenBot didn't open? <Link to="/download">Download it</Link>, <a href={openUrl()}>open the app</a>, or{" "}
+          StarBot didn't open? <Link to="/download">Download it</Link>, <a href={openUrl()}>open the app</a>, or{" "}
           <a href={createWebAppAgentTemplatePath(props.template.id)}>open in browser</a>.
         </p>
       </main>

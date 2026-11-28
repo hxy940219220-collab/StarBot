@@ -2,13 +2,13 @@ import { execFile } from "node:child_process";
 import { homedir } from "node:os";
 import { basename, join } from "node:path";
 import { promisify } from "node:util";
-import { isNewerRelease } from "@openbot/contracts/release-version";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { isNewerRelease } from "@starbot/contracts/release-version";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Schema } from "effect";
 import type { App } from "electron";
 import { causeHelpers } from "../backend/effect-boundary";
 
-const logger = createOpenBotLogger("mac-installed-copy");
+const logger = createStarBotLogger("mac-installed-copy");
 
 const TOOL_TIMEOUT_MS = 60_000;
 const QUARANTINE_ATTRIBUTE = "com.apple.quarantine";

@@ -3,11 +3,11 @@ import {
   type ConversationMessage,
   latestTurnAnswer,
   type SpeechLanguage,
-} from "@openbot/contracts/ipc";
-import { speechLanguageOf } from "@openbot/contracts/speech-language";
-import { speechTextFromMarkdown } from "@openbot/contracts/speech-text";
-import { toast } from "@openbot/ui";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { speechLanguageOf } from "@starbot/contracts/speech-language";
+import { speechTextFromMarkdown } from "@starbot/contracts/speech-text";
+import { toast } from "@starbot/ui";
+import { currentText } from "@starbot/ui/text";
 import { desktopAnalytics } from "../../analytics";
 import { followSpeechModel, speechModelFindsLanguage } from "./speech-model";
 import {

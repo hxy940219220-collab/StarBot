@@ -6,8 +6,8 @@ import {
   localizeSourceText,
   type TranslatedLocale,
   translateFor,
-} from "@openbot/i18n";
-import { type UserErrorDetails, userErrorDetails, userErrorMessage } from "@openbot/user-errors";
+} from "@starbot/i18n";
+import { type UserErrorDetails, userErrorDetails, userErrorMessage } from "@starbot/user-errors";
 import type { JSX } from "@solidjs/web";
 import { createContext, createEffect, createSignal, type ParentProps, useContext } from "solid-js";
 

@@ -1,8 +1,8 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface BrowserPort {
   browser: Pick<
-    OpenBotDesktopApi["browser"],
+    StarBotDesktopApi["browser"],
     | "activate"
     | "close"
     | "dockPictureInPicture"
@@ -29,5 +29,5 @@ export interface BrowserPort {
 }
 
 export function browserPort(): BrowserPort {
-  return window.openbot;
+  return window.starbot;
 }

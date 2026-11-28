@@ -3,12 +3,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { lastJsonObject, type WorkflowGraph, type WorkflowNode, type WorkflowRunDetail } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { lastJsonObject, type WorkflowGraph, type WorkflowNode, type WorkflowRunDetail } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { WorkflowGitHubStore } from "../src/backend/workflows/workflow-github-store";
 import { WorkflowRunStore } from "../src/backend/workflows/workflow-run-store";
 import { WorkflowStore } from "../src/backend/workflows/workflow-store";
@@ -16,7 +16,7 @@ import { handleWorkflowAnswerTool, handleWorkflowTool } from "../src/backend/wor
 import { workflowScheduleDueAt } from "../src/backend/workflows/workflow-triggers";
 import { createWorkflows, type WorkflowsHandle } from "../src/backend/workflows/workflows";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/workflow-answers-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/workflow-answers-e2e");
 const WAIT_MS = 5_000;
 const AGENT = "agent-support";
 const TRIAGE = "priority: high|normal|low\ncount: number";
@@ -86,8 +86,8 @@ const triageGraph = (check: string, agentAnswer: string): WorkflowGraph => ({
   strokes: [],
 });
 
-const directory = await mkdtemp(join(tmpdir(), "openbot-workflow-answers-"));
-const database = new OpenBotDatabase(directory);
+const directory = await mkdtemp(join(tmpdir(), "starbot-workflow-answers-"));
+const database = new StarBotDatabase(directory);
 let service: WorkflowsHandle | null = null;
 
 async function runUntil(
@@ -232,7 +232,7 @@ try {
   check(
     "the agent task gets the answer values and the answer request",
     handoff?.text.includes("Handle the high ticket for 3 users.") === true &&
-      handoff.text.includes("openbot.workflow_answer") &&
+      handoff.text.includes("starbot.workflow_answer") &&
       handoff.text.includes("end your reply with the same JSON object") &&
       handoff.text.includes("- done: true or false"),
     handoff?.text,

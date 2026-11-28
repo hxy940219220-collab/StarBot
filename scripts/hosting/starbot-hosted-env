@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+
+[[ ${STARBOT_HOSTED_HOST_ID:-} =~ ^[0-9a-fA-F-]{36}$ ]] || { echo "STARBOT_HOSTED_HOST_ID is missing." >&2; exit 1; }
+[ -n "${STARBOT_HOSTED_CLAIM:-}" ] || { echo "STARBOT_HOSTED_CLAIM is missing." >&2; exit 1; }
+[[ $STARBOT_HOSTED_CLAIM =~ ^[A-Za-z0-9_-]+$ ]] || { echo "STARBOT_HOSTED_CLAIM is not valid." >&2; exit 1; }
+
+directory="$HOME/.config/starbot-hosted"
+mkdir -p "$directory"
+chmod 0700 "$directory"
+temporary=$(mktemp "$directory/env.XXXXXX")
+printf 'STARBOT_HOSTED_HOST_ID=%s\nSTARBOT_HOSTED_CLAIM=%s\n' "$STARBOT_HOSTED_HOST_ID" "$STARBOT_HOSTED_CLAIM" >"$temporary"
+mv -f "$temporary" "$directory/env"

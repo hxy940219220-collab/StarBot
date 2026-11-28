@@ -175,7 +175,7 @@ export const messages = {
 
   "error.backend.recipientDeleting": "הנמען נמחק. יש לנסות שוב אחרי שהמחיקה תסתיים.",
   "error.backend.recipientHidden": "הסוכן הזה מוסתר. יש לשחזר אותו כדי לשלוח הודעות.",
-  "error.backend.agentIdUnknown": "לאף סוכן אין את המזהה {id}. יש לקבל את המזהים מ-openbot.list_agents ולנסות שוב.",
+  "error.backend.agentIdUnknown": "לאף סוכן אין את המזהה {id}. יש לקבל את המזהים מ-starbot.list_agents ולנסות שוב.",
   "error.backend.agentIdNear":
     "לאף סוכן אין את המזהה {id}. לסוכן {name} יש את המזהה {nearId}, שהוא כמעט זהה. אם הכוונה לסוכן הזה, יש לנסות שוב עם המזהה שלו.",
   "error.backend.replyReferenceUnknown":
@@ -232,7 +232,7 @@ export const messages = {
   "error.backend.routineFlowCycle": "החיבור הזה ייצור לולאה.",
   "error.backend.routineFlowLinkLimit": "בשגרה יכולים להיות לכל היותר {limit} חיבורים.",
   "error.backend.agentWaitLimit":
-    "לסוכן הזה כבר יש {count} המתנות פתוחות. יש לסגור המתנה עם openbot.close_wait לפני שפותחים אחרת.",
+    "לסוכן הזה כבר יש {count} המתנות פתוחות. יש לסגור המתנה עם starbot.close_wait לפני שפותחים אחרת.",
   "error.backend.agentWaitGone": "ההמתנה הזו אינה פתוחה. הסוכן סגר אותה, או שמישהו ביטל אותה.",
   "error.backend.agentWaitNoRequest": "המתנה צריכה הודעה כדי להמשיך. לתור הזה אין הודעה.",
   "error.backend.agentWaitOwnChatOnly":
@@ -240,7 +240,7 @@ export const messages = {
   "error.backend.agentWaitNoteRequired": "יש לכתוב הערה קצרה שאומרת בשביל מה ההמתנה.",
   "error.backend.agentWaitRoutineGone": "לסוכן הזה אין שגרה עם המזהה הזה.",
   "error.backend.agentWaitNoRoutine":
-    "רק הרצה של אחת השגרות שלך מעירה המתנה, ואין לך שגרה. יש ליצור אחת עם openbot.create_routine ואז לפתוח את ההמתנה.",
+    "רק הרצה של אחת השגרות שלך מעירה המתנה, ואין לך שגרה. יש ליצור אחת עם starbot.create_routine ואז לפתוח את ההמתנה.",
   "error.backend.markUnreadRemoteUnsupported": "סימון הודעה כלא נקראה זמין רק לסוכנים שנמצאים במחשב הזה.",
   "error.backend.messageDeleteUnsupported": "השרת הזה אינו תומך במחיקת הודעות.",
   "error.backend.messageDeleteNotFound": "ההודעה הזו אינה בצ'אט.",

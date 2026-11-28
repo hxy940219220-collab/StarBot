@@ -8,7 +8,7 @@ export const messages = defineMessages("remoteDesktop", {
   "remoteDesktop.workspaceLabel": "Remote control",
   "remoteDesktop.displayLabel": "Remote display",
   "remoteDesktop.selectDisplay": "Select display",
-  "remoteDesktop.backToOpenBot": "Back to StarBot",
+  "remoteDesktop.backToStarBot": "Back to StarBot",
   "remoteDesktop.disconnect": "Disconnect",
   "remoteDesktop.viewerTitle": "Sunshine remote desktop",
   "remoteDesktop.viewerLoadFailed": "The Moonlight viewer could not load.",

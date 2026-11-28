@@ -2,12 +2,12 @@ import {
   parseDeleteBrowserProxyInput,
   parseSaveBrowserProxyInput,
   parseSetBrowserProfileProxyInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   BROWSER_PROXIES_CAPABILITY,
   BROWSER_PROXIES_ROUTES,
-} from "@openbot/contracts/team-protocol/browser-proxies-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/browser-proxies-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { BrowserProfileRejectedError } from "../browser-profile-service";
 import type { TeamApiBrowserProfiles } from "./dependencies";

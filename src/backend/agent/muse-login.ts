@@ -1,5 +1,5 @@
 import { type SpawnedMspConnection, spawnMspConnection } from "@muse-code/sdk";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Option, Schema } from "effect";
 import { type AgentCliInfo, cliPathEnvironment, cliSpawnTarget } from "../cli";
 import {
@@ -52,7 +52,7 @@ export const startMuseDeviceLogin = Effect.fn("MuseLogin.start")(function* (opti
     Effect.tryPromise({
       try: () =>
         handshake.initialize({
-          clientInfo: { name: "openbot", version: "1" },
+          clientInfo: { name: "starbot", version: "1" },
           capabilities: { experimentalApi: true },
         }),
       catch: (cause) => new CliCodeLoginFailed({ cause }),
@@ -131,7 +131,7 @@ export const readMuseAccount = Effect.fn("MuseLogin.readAccount")(
     );
     const host = yield* providerCall(() =>
       handshake.initialize({
-        clientInfo: { name: "openbot", version: "1" },
+        clientInfo: { name: "starbot", version: "1" },
         capabilities: { experimentalApi: true },
       }),
     );

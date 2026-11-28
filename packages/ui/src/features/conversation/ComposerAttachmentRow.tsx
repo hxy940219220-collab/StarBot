@@ -1,5 +1,5 @@
-import type { DraftAttachment } from "@openbot/contracts/ipc";
-import { Button, CircleAlert, ImageRemoveButton, RadialProgress, RotateCcw, Spinner } from "@openbot/ui";
+import type { DraftAttachment } from "@starbot/contracts/ipc";
+import { Button, CircleAlert, ImageRemoveButton, RadialProgress, RotateCcw, Spinner } from "@starbot/ui";
 import { createSignal, For, Show } from "solid-js";
 import { useText } from "../../text";
 import { fileBadge } from "./AttachmentCards";

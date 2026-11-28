@@ -46,8 +46,8 @@ const RULE_WORD =
   /password|passwd|passphrase|secret|token|credential|authorization|cookie|api[_-]?key|private[_-]?key|signing[_-]?key|bearer|basic|digest|headers|keys?/iu;
 const TOKEN_CHARACTER = /[A-Za-z0-9._~+/@%-]/u;
 const URL_HOST = /(?<![A-Za-z0-9+.-])(https?:\/\/(?:[^\s/?#@]*@)?)([\p{L}\p{N}.-]+)/giu;
-const VALUE_MARKER = "__openbot_registered_value__";
-const LABEL_MARKER = "__openbot_registered_secret_authorization";
+const VALUE_MARKER = "__starbot_registered_value__";
+const LABEL_MARKER = "__starbot_registered_secret_authorization";
 const MARKERS = new RegExp(`${VALUE_MARKER}|${LABEL_MARKER}`, "gu");
 const registeredSecrets = new Set<string>();
 let registeredSecretPattern: RegExp | null = null;
@@ -510,8 +510,8 @@ function writeTees(prefix: string, line: string): void {
   }
 }
 
-export function createOpenBotLogger(prefix: string, sink?: (line: string) => void, level?: LogLevel): Logger {
-  const threshold = LEVEL_RANK[level ?? resolveLogLevel(process.env.OPENBOT_LOG_LEVEL)];
+export function createStarBotLogger(prefix: string, sink?: (line: string) => void, level?: LogLevel): Logger {
+  const threshold = LEVEL_RANK[level ?? resolveLogLevel(process.env.STARBOT_LOG_LEVEL)];
   const out = sink ?? ((line: string) => process.stdout.write(`${line}\n`));
   const err = sink ?? ((line: string) => process.stderr.write(`${line}\n`));
   const write = (

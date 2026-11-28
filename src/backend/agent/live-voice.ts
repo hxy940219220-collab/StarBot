@@ -8,10 +8,10 @@ import type {
   VoiceLiveEvent,
   VoiceLiveSession,
   VoiceLiveStart,
-} from "@openbot/contracts/ipc";
-import { speechTextFromMarkdown } from "@openbot/contracts/speech-text";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { speechTextFromMarkdown } from "@starbot/contracts/speech-text";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Deferred, Effect, Fiber, Schema, Semaphore } from "effect";
 import type { AgentClient } from "../agent-client";
 import {
@@ -36,7 +36,7 @@ const UNAUTHORIZED = /\bstatus 401\b|\b401 Unauthorized\b/;
 const CALL_NOT_FOUND = /\bstatus 404\b[\s\S]*\/realtime\/calls\b/;
 const FORBIDDEN = /^(?=[\s\S]*\brealtime\b)[\s\S]*(?:\bstatus 403\b|\b403 Forbidden\b)/;
 const ASK_TOOL = "ask_agent";
-const ASK_NAMESPACE = "openbot";
+const ASK_NAMESPACE = "starbot";
 const RELAY_VERBATIM_BYTES = 600;
 const RELAY_SUMMARY_WORDS = 150;
 const LONG_ANSWER_MARK = "[long answer]";
@@ -93,7 +93,7 @@ function relayRequest(text: string): string {
 const HEARD_LINE_LIMIT = 20;
 const oneLine = (text: string) => text.replace(/\s+/gu, " ").trim();
 
-const logger = createOpenBotLogger("live-voice");
+const logger = createStarBotLogger("live-voice");
 
 class LiveVoiceFailed extends Schema.TaggedError<LiveVoiceFailed>()("LiveVoiceFailed", {
   cause: Schema.Defect(),

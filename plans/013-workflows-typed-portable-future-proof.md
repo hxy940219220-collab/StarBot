@@ -39,7 +39,7 @@ On 2026-11-22 the developer accepted the defaults below ("do all as you see fit"
 | D2 | One workflow format version that the host advertises, in place of one capability for each new field? | Yes (item 9). New rule changes then raise the version. |
 | D3 | Export with a secret in a text field: refuse and list the fields, or redact? | Refuse, as `assertNoSecrets` does for agent templates. |
 | D4 | Put asset files in the workflow file? | Yes, base64, cap at `ATTACHMENT_LIMITS.fileBytes` per file. |
-| D5 | A public workflow gallery on openbot.run? | Out of scope. It would put workflow text on Cloudflare; product constraints say Cloudflare holds no chats or files. |
+| D5 | A public workflow gallery on starbot.run? | Out of scope. It would put workflow text on Cloudflare; product constraints say Cloudflare holds no chats or files. |
 
 ## Phase 1: fix what is wrong now
 
@@ -269,18 +269,18 @@ STOP: none.
 
 | # | Item | State |
 |---|---|---|
-| 16 | The `openbot.workflow` file: codec, sanitizer, assets | DONE (#14875) |
+| 16 | The `starbot.workflow` file: codec, sanitizer, assets | DONE (#14875) |
 | 17 | Export and import on desktop, web client and joined servers | DONE (#14875) |
 | 18 | Paste between servers and instance transfer use the codec | DONE (#14875) |
 
-### 16. The `openbot.workflow` file
+### 16. The `starbot.workflow` file
 
 Evidence: no per-workflow file. Patterns to reuse: `src/main/instance-transfer-manifest.ts:22-23`
 (`format`, `version`, Effect `Schema`, "newer" error at `:229`), `packages/contracts/src/ipc-agent-templates.ts`
 (1 MB cap, `Problem` type), `src/main/agent-template-service.ts:400-417` (`assertNoSecrets`).
 `redactText` catches only known patterns (`packages/logging/src/index.ts:14-33`).
 
-Change: pure codec in `packages/contracts`: `format: "openbot.workflow"`, `version`, the graph
+Change: pure codec in `packages/contracts`: `format: "starbot.workflow"`, `version`, the graph
 format, `minAppVersion`. Portable references from the registry (item 7): agents and channels by name
 and key, connections as "needs link", `account` cleared, the resolved timezone written. Assets as
 base64 (D4). Export refuses a secret in a text field and lists the fields (D3). Import never trusts
@@ -326,7 +326,7 @@ table opens, saves and runs on the current host with no loss. A newer graph roun
 older-format client with no loss. Export, import on a second dev host, export again: same file.
 Extend `scripts/workflow-answers-e2e.ts` with branches, joins, loops, skipped sources, retries after
 a spec change, one-step runs, number and list edges, and the Team API path. Writes a JSON report
-under `.openbot-build/`.
+under `.starbot-build/`.
 
 ## Format history (input for item 19)
 

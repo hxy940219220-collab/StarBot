@@ -1,7 +1,7 @@
 import { networkInterfaces } from "node:os";
 import { join } from "node:path";
-import { isMobileConnectDevelopmentHost } from "@openbot/contracts/mobile-connect";
-import { sourceText } from "@openbot/i18n/source";
+import { isMobileConnectDevelopmentHost } from "@starbot/contracts/mobile-connect";
+import { sourceText } from "@starbot/i18n/source";
 import { app, net } from "electron";
 import { CentralAuthManager, readCentralAuthApiUrl, readMobileConnectApiUrl } from "./central-auth-manager";
 import type { CompanySignInBrowser } from "./company-sign-in-browser";
@@ -12,7 +12,7 @@ import {
   type SecretStorageCipher,
 } from "./secret-storage-cipher";
 
-const CENTRAL_AUTH_FILE = "openbot-central-auth-v1.bin";
+const CENTRAL_AUTH_FILE = "starbot-central-auth-v1.bin";
 
 let userDataSecretStorage: SecretStorage | null = null;
 
@@ -63,7 +63,7 @@ async function accountServiceFetch(input: string | URL | Request, init?: Request
 
 export function centralAuthApiUrl(): string {
   return readCentralAuthApiUrl(
-    process.env.OPENBOT_AUTH_API_URL,
+    process.env.STARBOT_AUTH_API_URL,
     app.isPackaged ? "https://api.starbot.app" : "http://127.0.0.1:3100",
   );
 }
@@ -139,8 +139,8 @@ export function createCentralAuthManager(options: {
   const apiUrl = centralAuthApiUrl();
   return new CentralAuthManager({
     apiUrl,
-    mobileConnectApiUrl: resolveMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, apiUrl),
-    resolveMobileConnectApiUrl: () => resolveMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, apiUrl),
+    mobileConnectApiUrl: resolveMobileConnectApiUrl(process.env.STARBOT_MOBILE_AUTH_API_URL, apiUrl),
+    resolveMobileConnectApiUrl: () => resolveMobileConnectApiUrl(process.env.STARBOT_MOBILE_AUTH_API_URL, apiUrl),
     storagePath: join(app.getPath("userData"), CENTRAL_AUTH_FILE),
     fetch: accountServiceFetch,
     ...safeStorageCipher("error.app.macSecureStorageUnavailable"),

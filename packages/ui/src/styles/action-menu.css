@@ -1,40 +1,40 @@
 :root {
-  --ui-menu-radius: var(--openbot-radius-card);
-  --ui-menu-padding: var(--openbot-space-1-5);
-  --ui-menu-item-radius: calc(var(--ui-menu-radius) - var(--ui-menu-padding) + var(--openbot-space-0-5));
-  --ui-menu-inset: calc(var(--openbot-space-2) + var(--openbot-space-0-5));
-  --ui-menu-bg: var(--openbot-bg-sheet);
-  --ui-menu-edge: color-mix(in srgb, var(--openbot-text-primary) 11%, transparent);
-  --ui-menu-highlight: color-mix(in srgb, var(--openbot-text-primary) 5%, transparent);
-  --ui-menu-shadow: var(--openbot-shadow-menu);
-  --ui-menu-item-hover: color-mix(in srgb, var(--openbot-text-primary) 6%, transparent);
+  --ui-menu-radius: var(--starbot-radius-card);
+  --ui-menu-padding: var(--starbot-space-1-5);
+  --ui-menu-item-radius: calc(var(--ui-menu-radius) - var(--ui-menu-padding) + var(--starbot-space-0-5));
+  --ui-menu-inset: calc(var(--starbot-space-2) + var(--starbot-space-0-5));
+  --ui-menu-bg: var(--starbot-bg-sheet);
+  --ui-menu-edge: color-mix(in srgb, var(--starbot-text-primary) 11%, transparent);
+  --ui-menu-highlight: color-mix(in srgb, var(--starbot-text-primary) 5%, transparent);
+  --ui-menu-shadow: var(--starbot-shadow-menu);
+  --ui-menu-item-hover: color-mix(in srgb, var(--starbot-text-primary) 6%, transparent);
   --ui-menu-panel-shadow:
     inset 0 1px 0 var(--ui-menu-highlight), 0 0 0 1px var(--ui-menu-edge), 0 4px 6px -1px var(--ui-menu-shadow),
     0 2px 4px -2px var(--ui-menu-shadow);
   --ui-menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ui-menu-duration: 150ms;
   --ui-submenu-ease: cubic-bezier(0.32, 0.72, 0, 1);
-  --ui-submenu-duration: var(--openbot-duration-slow);
+  --ui-submenu-duration: var(--starbot-duration-slow);
 }
 
 .ui-popover-menu-surface {
   border: 0;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--starbot-radius-md);
   outline: 0;
-  background: var(--openbot-bg-control);
+  background: var(--starbot-bg-control);
   box-shadow:
-    0 0 0 1px var(--openbot-border),
-    0 4px 6px -1px var(--openbot-shadow-popover-ambient),
-    0 2px 4px -2px var(--openbot-shadow-popover-ambient);
-  color: var(--openbot-text-primary);
+    0 0 0 1px var(--starbot-border),
+    0 4px 6px -1px var(--starbot-shadow-popover-ambient),
+    0 2px 4px -2px var(--starbot-shadow-popover-ambient);
+  color: var(--starbot-text-primary);
 }
 
 .ui-action-menu {
   position: relative;
-  z-index: var(--openbot-layer-popover);
+  z-index: var(--starbot-layer-popover);
   width: max-content;
   min-width: 192px;
-  max-width: min(288px, calc(100vw - var(--openbot-space-4)));
+  max-width: min(288px, calc(100vw - var(--starbot-space-4)));
   overflow: hidden;
   border: 0;
   border-radius: var(--ui-menu-radius);
@@ -42,7 +42,7 @@
   background: var(--ui-menu-bg);
   box-shadow: var(--ui-menu-panel-shadow);
   padding: var(--ui-menu-padding);
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   transform-origin: var(--kb-menu-content-transform-origin, var(--kb-popover-content-transform-origin));
   animation: ui-menu-in var(--ui-menu-duration) var(--ui-menu-ease) both;
 }
@@ -60,25 +60,25 @@
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]) {
   display: flex;
   width: 100%;
-  height: var(--openbot-control-md);
-  min-height: var(--openbot-control-md);
+  height: var(--starbot-control-md);
+  min-height: var(--starbot-control-md);
   align-items: center;
   justify-content: flex-start;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   border: 0;
   border-radius: var(--ui-menu-item-radius);
   outline: 0;
   background: transparent;
-  padding: var(--openbot-space-1-5) var(--ui-menu-inset);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-regular);
-  line-height: var(--openbot-leading-lg);
+  padding: var(--starbot-space-1-5) var(--ui-menu-inset);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-regular);
+  line-height: var(--starbot-leading-lg);
   text-align: start;
   white-space: nowrap;
   transition:
-    background-color var(--openbot-duration-hover) var(--openbot-ease-out),
-    color var(--openbot-duration-hover) var(--openbot-ease-out);
+    background-color var(--starbot-duration-hover) var(--starbot-ease-out),
+    color var(--starbot-duration-hover) var(--starbot-ease-out);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
@@ -97,12 +97,12 @@
     [aria-expanded="true"]
   ) {
   background: var(--ui-menu-item-hover);
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])[data-disabled] {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   cursor: default;
   opacity: 0.45;
 }
@@ -110,13 +110,13 @@
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])
   > svg {
-  width: var(--openbot-icon-md);
-  height: var(--openbot-icon-md);
+  width: var(--starbot-icon-md);
+  height: var(--starbot-icon-md);
   flex: 0 0 auto;
 
   fill: none;
   stroke: currentColor;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -129,19 +129,19 @@
     [aria-expanded="true"]
   )
   > svg {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])[data-disabled]
   > svg {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])
   > svg:not(.ui-glyph-20, .ui-glyph-16) {
-  stroke-width: var(--openbot-icon-stroke);
+  stroke-width: var(--starbot-icon-stroke);
 }
 
 .ui-action-menu > hr,
@@ -149,7 +149,7 @@
   height: 1px;
   margin: var(--ui-menu-padding) calc(var(--ui-menu-padding) * -1);
   border: 0;
-  background: var(--openbot-border);
+  background: var(--starbot-border);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
@@ -157,7 +157,7 @@
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]).ui-action-menu-danger
   > svg {
-  color: var(--openbot-danger);
+  color: var(--starbot-danger);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
@@ -166,25 +166,25 @@
     :focus-visible,
     [data-highlighted]
   ) {
-  background: var(--openbot-danger-soft);
-  color: var(--openbot-danger);
+  background: var(--starbot-danger-soft);
+  color: var(--starbot-danger);
 }
 
 .ui-menu-label {
-  padding: var(--openbot-space-1-5) var(--ui-menu-inset);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  padding: var(--starbot-space-1-5) var(--ui-menu-inset);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
 }
 
 .ui-menu-check {
   display: grid;
-  width: var(--openbot-icon-md);
-  height: var(--openbot-icon-md);
+  width: var(--starbot-icon-md);
+  height: var(--starbot-icon-md);
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--openbot-text-primary) 22%, transparent);
-  border-radius: var(--openbot-radius-pill);
+  border: 1px solid color-mix(in srgb, var(--starbot-text-primary) 22%, transparent);
+  border-radius: var(--starbot-radius-pill);
   transition:
     background-color var(--ui-menu-duration) ease-out,
     border-color var(--ui-menu-duration) ease-out;
@@ -192,29 +192,29 @@
 
 .ui-menu-check[data-checked] {
   border-color: transparent;
-  background: var(--openbot-text-primary);
+  background: var(--starbot-text-primary);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])
   > .ui-menu-check
   > svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
   stroke: var(--ui-menu-bg);
   stroke-width: 2.5;
 }
 
 .ui-menu-trailing {
   margin-inline-start: auto;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
 }
 
 .ui-action-menu:not([data-menu-layout="grid"])
   :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])
   > svg.ui-menu-trailing {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .ui-motion-tooltip-trigger {
@@ -222,7 +222,7 @@
 }
 
 .ui-motion-tooltip {
-  z-index: var(--openbot-layer-tooltip);
+  z-index: var(--starbot-layer-tooltip);
   transform-origin: var(--kb-tooltip-content-transform-origin);
   animation: ui-menu-in var(--ui-submenu-duration) var(--ui-submenu-ease) both;
 }
@@ -237,15 +237,15 @@
 
 .ui-motion-tooltip-label {
   overflow: hidden;
-  max-width: min(240px, calc(100vw - var(--openbot-space-4)));
-  border-radius: var(--openbot-radius-md);
+  max-width: min(240px, calc(100vw - var(--starbot-space-4)));
+  border-radius: var(--starbot-radius-md);
   background: var(--ui-menu-bg);
   box-shadow: var(--ui-menu-panel-shadow);
-  padding: var(--openbot-space-1-5) var(--openbot-space-2);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
-  line-height: var(--openbot-leading-sm);
+  padding: var(--starbot-space-1-5) var(--starbot-space-2);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-medium);
+  line-height: var(--starbot-leading-sm);
   overflow-wrap: anywhere;
   pointer-events: none;
 }

@@ -332,7 +332,7 @@ export const messages = {
 
   "workflow.output.title": "المخرج",
   "workflow.output.name": "مخرج",
-  "workflow.output.channel.openbot": "StarBot",
+  "workflow.output.channel.starbot": "StarBot",
 
   "workflow.output.channel.search": "ابحث في القنوات",
   "workflow.output.postsAs": "يُنشر بصفته",
@@ -425,8 +425,8 @@ export const messages = {
   "workflow.github.event.pr.checksFailed": "فشلت الفحوصات",
   "workflow.github.event.pr.merged": "دُمج طلب سحب",
   "workflow.github.event.comment": "تعليق جديد",
-  "workflow.github.event.mention": "تمت الإشارة إلى @openbotgit",
-  "workflow.github.event.assigned": "أُسند إلى @openbotgit",
+  "workflow.github.event.mention": "تمت الإشارة إلى @starbotgit",
+  "workflow.github.event.assigned": "أُسند إلى @starbotgit",
   "workflow.github.trigger.event": "الحدث",
   "workflow.github.trigger.labelAdded": "أُضيفت تسمية",
   "workflow.github.trigger.hasLabel": "لديه تسمية",

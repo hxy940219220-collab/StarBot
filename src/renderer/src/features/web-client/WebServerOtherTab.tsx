@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { Button, Heading, Text } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { AppLogo } from "@starbot/brand";
+import { Button, Heading, Text } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 
 export function WebServerOtherTab(props: { name: string; busy: boolean; onUseHere: () => void }) {
   const { t } = useText();

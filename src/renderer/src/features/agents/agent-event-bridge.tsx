@@ -1,20 +1,20 @@
-import { providerDisplayName } from "@openbot/contracts/agent-providers";
+import { providerDisplayName } from "@starbot/contracts/agent-providers";
 import {
   type AgentEvent,
   type AgentRuntimeSnapshot,
   type AttachmentSummary,
   type ConversationMessage,
   LOCAL_SERVER_ID,
-} from "@openbot/contracts/ipc";
-import { cleanAgentMessageText } from "@openbot/team-client/agent-message-text";
-import { agentNotificationLevel } from "@openbot/team-client/agent-notifications";
-import { reconcileQueuesWithRuntimeWork } from "@openbot/team-client/dynamic-island-coordinator";
-import { approvalIsCut } from "@openbot/team-client/runtime-attention";
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import { currentText } from "@openbot/ui/text";
-import { classifyUserError } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { cleanAgentMessageText } from "@starbot/team-client/agent-message-text";
+import { agentNotificationLevel } from "@starbot/team-client/agent-notifications";
+import { reconcileQueuesWithRuntimeWork } from "@starbot/team-client/dynamic-island-coordinator";
+import { approvalIsCut } from "@starbot/team-client/runtime-attention";
+import { classifyFailure } from "@starbot/telemetry";
+import { toast } from "@starbot/ui";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
+import { currentText } from "@starbot/ui/text";
+import { classifyUserError } from "@starbot/user-errors";
 import { flush, onSettled } from "solid-js";
 import { showNewAgentBackdrop } from "../../agent-backdrops";
 import { withoutAgent } from "../../app-message-projection";

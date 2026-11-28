@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { MESSAGING_PLATFORMS, type MessagingPlatform } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { MESSAGING_PLATFORMS, type MessagingPlatform } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
 import { deleteAggregateHistory, deleteThreadAttachments } from "../database/database-core";
 import {
   databaseRow,
@@ -11,7 +11,7 @@ import {
 } from "../database/database-rows";
 import { withTransaction } from "../database/sqlite-transaction";
 import { cachedStatement } from "../database/statement-cache";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 
 export interface MessagingConnectionRecord {
   connectionId: string;
@@ -78,9 +78,9 @@ export interface MessagingLinkInput {
 const LINK_LIST_LIMIT = 200;
 
 export class MessagingStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
 
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     this.#database = database;
   }
 
@@ -314,7 +314,7 @@ export class MessagingStore {
     const existing = this.linkByKey(input.connectionId, input.platformChannelId, input.threadKey);
     if (existing) return existing;
     const linkId = `messaging-link-${randomUUID()}`;
-    const threadId = `openbot-thread-${randomUUID()}`;
+    const threadId = `starbot-thread-${randomUUID()}`;
     this.#database.dispatch(
       `messaging-thread:${linkId}`,
       [

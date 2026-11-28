@@ -14,7 +14,7 @@ export function lazyLanguageCatalogs(options?: {
   readonly applyToEnvironment?: (environment: { readonly name: string }) => boolean;
 }): LazyLanguageCatalogsPlugin {
   return {
-    name: "openbot-lazy-language-catalogs",
+    name: "starbot-lazy-language-catalogs",
     enforce: "pre",
     ...(options?.applyToEnvironment ? { applyToEnvironment: options.applyToEnvironment } : {}),
     resolveId(source, importer) {

@@ -1,4 +1,4 @@
-import { type AgentProviderId, isKeyOnlyProvider, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
+import { type AgentProviderId, isKeyOnlyProvider, isKnownAgentProvider } from "@starbot/contracts/agent-providers";
 import {
   type AgentModelChoice,
   agentPermissionLevel,
@@ -8,17 +8,17 @@ import {
   sameAgentModelChoice,
   type UpdateAgentAdminSettingsInput,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { BROWSER_PROFILES_CAPABILITY } from "@openbot/contracts/team-protocol/browser-profiles-v1";
-import { CONVERSATION_UNREAD_FROM_CAPABILITY } from "@openbot/contracts/team-protocol/conversation-unread-from-v1";
-import { MESSAGE_DELETE_CAPABILITY } from "@openbot/contracts/team-protocol/message-delete-v1";
-import { MESSAGE_PINS_CAPABILITY } from "@openbot/contracts/team-protocol/message-pins-v1";
-import { THREAD_MESSAGE_SEARCH_CAPABILITY } from "@openbot/contracts/team-protocol/thread-message-search-v1";
-import type { AgentMessage } from "@openbot/ui/data";
-import type { UsageLimitAskCardProps } from "@openbot/ui/features/conversation/BackupModels";
-import { unloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
-import { sidebarAgentWaits } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { BROWSER_PROFILES_CAPABILITY } from "@starbot/contracts/team-protocol/browser-profiles-v1";
+import { CONVERSATION_UNREAD_FROM_CAPABILITY } from "@starbot/contracts/team-protocol/conversation-unread-from-v1";
+import { MESSAGE_DELETE_CAPABILITY } from "@starbot/contracts/team-protocol/message-delete-v1";
+import { MESSAGE_PINS_CAPABILITY } from "@starbot/contracts/team-protocol/message-pins-v1";
+import { THREAD_MESSAGE_SEARCH_CAPABILITY } from "@starbot/contracts/team-protocol/thread-message-search-v1";
+import type { AgentMessage } from "@starbot/ui/data";
+import type { UsageLimitAskCardProps } from "@starbot/ui/features/conversation/BackupModels";
+import { unloadedHistory } from "@starbot/ui/features/conversation/ChatScrollRail";
+import { sidebarAgentWaits } from "@starbot/ui/features/sidebar/sidebar-agent-states";
+import { useText } from "@starbot/ui/text";
 import { createMemo } from "solid-js";
 import { ProviderSignInDialogs } from "../../components/ProviderSignInDialogs";
 import { useNavigation } from "../../navigation";
@@ -108,7 +108,7 @@ export function WorkspaceConversation(props: { account: () => CentralAuthUser })
     else await connection.connect(provider, "composer");
   };
   const signInWithCode = (provider: AgentProviderId) => connection.alternative(provider, "composer");
-  const responseStyle = createServerResponseStyle(activeServer, window.openbot.hostAdmin);
+  const responseStyle = createServerResponseStyle(activeServer, window.starbot.hostAdmin);
   const { customAgents } = useCustomAgents();
   const localEndpoints = useCustomProviders();
   const {
@@ -561,7 +561,7 @@ export function WorkspaceConversation(props: { account: () => CentralAuthUser })
         browserEnabled={
           !platform.landingPreview && !platform.chatWindow && activeServerSupportsCapability("browser-control")
         }
-        openLinksInBrowser={generalSettings().externalLinkTarget.kind === "openbot"}
+        openLinksInBrowser={generalSettings().externalLinkTarget.kind === "starbot"}
         remoteDesktopSessionActive={Boolean(activeRemoteDesktopSession())}
         remoteDesktopVisible={remoteDesktopWorkspaceVisible()}
         remoteDesktopEnabled={

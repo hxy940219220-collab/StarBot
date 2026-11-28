@@ -1,10 +1,10 @@
-import { avatarHueSwatch } from "@openbot/brand/bloub-avatar";
-import type { AvatarHue } from "@openbot/contracts/ipc";
+import { avatarHueSwatch } from "@starbot/brand/bloub-avatar";
+import type { AvatarHue } from "@starbot/contracts/ipc";
 import { View } from "react-native";
 import { useCSSVariable } from "uniwind";
 
 export function BrowserProfileDot({ hue, size = 12 }: { hue: AvatarHue | "shared" | null; size?: number }) {
-  const muted = String(useCSSVariable("--openbot-text-grouped-secondary"));
+  const muted = String(useCSSVariable("--starbot-text-grouped-secondary"));
   return (
     <View
       accessibilityElementsHidden

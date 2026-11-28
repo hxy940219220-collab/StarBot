@@ -9,11 +9,11 @@ and team authentication tickets.
 ## Local development
 
 `.env.dev` is the committed encrypted development file. Local identity keys and saved overrides
-stay in ignored `.openbot/dev-state.json`. A checkout without a development key starts with stable
+stay in ignored `.starbot/dev-state.json`. A checkout without a development key starts with stable
 generated local defaults. Existing state files remain valid.
 
 The update resets values that exist only in the old generated `.env.dev`; it does not import them.
-Local identity and custom settings already saved in `.openbot/dev-state.json` stay unchanged.
+Local identity and custom settings already saved in `.starbot/dev-state.json` stay unchanged.
 Set new manual overrides in the shell. The load order is shell values, saved local overrides,
 decrypted development settings, then generated defaults. An explicit empty value is an override.
 Shared settings do not replace the local ticket keys, auth webhook secret, report hash secret, or
@@ -33,8 +33,8 @@ commands continue to use that file.
 
 ### Stripe sandbox
 
-`bun run api:stripe:bootstrap` creates the six plan Prices (lookup keys `openbot_{plan}_{month|year}`),
-the twelve storage add-on Prices (`openbot_storage_{plan}_{1|2}_{month|year}`, one Product for each
+`bun run api:stripe:bootstrap` creates the six plan Prices (lookup keys `starbot_{plan}_{month|year}`),
+the twelve storage add-on Prices (`starbot_storage_{plan}_{1|2}_{month|year}`, one Product for each
 plan), the license Prices, the Polish VAT Tax Rate and the Customer Portal settings in the Stripe account of
 `STRIPE_SECRET_KEY`.
 It is safe to run again: a changed amount makes a new Price and moves the lookup key to it. The Portal
@@ -42,8 +42,8 @@ has no plan change (`subscription_update` is off); it cancels plans and updates 
 `POST /v1/me/billing/storage` (and `/api/browser/v1/me/billing/storage`) with
 `{subscriptionId, tier}` buys a storage tier for a server on a VPS of the operator. See
 [Hosted servers](../../docs/hosted-servers.md#storage-tiers).
-The bootstrap also creates the `openbot_credits` Product and one Price for each credit amount
-(`openbot_credits_<n>`). `GET /v1/me/credits` returns the balance of the account and of its servers,
+The bootstrap also creates the `starbot_credits` Product and one Price for each credit amount
+(`starbot_credits_<n>`). `GET /v1/me/credits` returns the balance of the account and of its servers,
 `POST /v1/me/credits/checkout` with `{credits, currency, serverId?}` opens a Checkout, and
 `POST /v1/me/credits/transfer` with `{serverId, direction, credits}` moves credits between the account
 and a server that it owns. The web client uses the same routes under `/api/browser`.
@@ -105,7 +105,7 @@ first and then the sent credit. The scenario moves `ready_at` in D1, because the
 not the Stripe test clock.
 
 The `portal` scenario prints a Customer Portal cancel page and waits until you use it. Then it checks
-that the plan change flow of an old app opens the Portal home, and that the Portal has no plan change. The report goes to `.openbot-build/stripe-flows-e2e.json`.
+that the plan change flow of an old app opens the Portal home, and that the Portal has no plan change. The report goes to `.starbot-build/stripe-flows-e2e.json`.
 
 The `boat` scenario runs only when you name it. It pays for a server, waits until StarBot in the VM
 signs in and publishes the host, restarts the service to check the stored session, and deletes the
@@ -139,7 +139,7 @@ bun run env:validate:prod
 ```
 
 Commit the encrypted `.env.production` and `.env.dev` files. Never commit `.env.keys` or local
-state from `.openbot/`.
+state from `.starbot/`.
 
 ## Article artwork
 
@@ -213,13 +213,13 @@ license sender when it is empty.
 
 Production does not open the SMTP socket itself. From some Cloudflare locations, such as FSD, a
 socket to the mail host fails at once (#4578). The production Worker sends each email through the
-`openbot-email-relay` Worker (`wrangler.email-relay.jsonc`) over the `EMAIL_RELAY` service binding.
+`starbot-email-relay` Worker (`wrangler.email-relay.jsonc`) over the `EMAIL_RELAY` service binding.
 Cloudflare places that Worker near the mail host. The relay has no route and keeps no secret: the
 binding request carries the SMTP settings and the message. CI and `bun run api:deploy` deploy the
 relay before the production Worker. When you change `EMAIL_SMTP_HOST` or `EMAIL_SMTP_PORT`, also
 change `placement.host` in `wrangler.email-relay.jsonc`. The test Worker and local `vite dev` send
 from their own socket. Workers Logs are off. To see where the relay runs, read the `colo` of its events in
-`bunx wrangler tail openbot-email-relay`.
+`bunx wrangler tail starbot-email-relay`.
 
 For a deployed Worker, `bun run api:deploy` decrypts `.env.production`. It sends
 `EMAIL_SMTP_PASSWORD`, `SKILLS_ADMIN_TOKEN`, `REMOTE_TICKET_PRIVATE_JWK`,
@@ -235,7 +235,7 @@ before remote changes. Test deployments do not send account analytics.
 
 `GITHUB_APP_PRIVATE_KEY` is the StarBot GitHub App's private key as a PKCS #8 PEM. GitHub gives a
 PKCS #1 key; convert it with `openssl pkcs8 -topk8 -nocrypt -in <key>.pem`. With the key, the
-Worker gives the desktop installation tokens, so GitHub shows `openbotgit[bot]` as the author of an
+Worker gives the desktop installation tokens, so GitHub shows `starbotgit[bot]` as the author of an
 agent's work. The key also lets `POST /v1/feedback` open an approved bug report or feature idea from the app as
 an issue in `hxy940219220-collab/StarBot-Desktop`, for any signed-in account, three times a minute (`FEEDBACK_RATE_LIMITER`) and 10 times a UTC day (`feedback_daily_counts` in D1). The Worker does not store or log the text. With `sameAs`, the report is a comment on that open app issue. Before the card, `POST /v1/feedback/similar` finds open app issues with a similar title, three times a minute for each account (the same limiter, with its own key); the title is in the body, so request logs do not keep it. Each report ends with a hidden owner mark
 (`feedback-owner.ts`): a random value and an HMAC of it and the account ID, with a key that HKDF derives
@@ -246,7 +246,7 @@ edited text, so the route never edits. Without that variable, an issue answers 5
 `feedback_withdraw_unavailable`; a comment can still go. A new app key makes the earlier marks invalid.
 With no key, the route answers 503, the app gives the GitHub form link instead, and the desktop acts
 as the signed-in user. In GitHub Actions the secret is
-`OPENBOT_GITHUB_APP_PRIVATE_KEY`, because GitHub refuses secret names that start with `GITHUB_`.
+`STARBOT_GITHUB_APP_PRIVATE_KEY`, because GitHub refuses secret names that start with `GITHUB_`.
 Secrets are never passed as process arguments. The other values are Worker
 variables. The SMTP connection uses TLS from the start and accepts only port 465.
 
@@ -264,7 +264,7 @@ Environment; a local deployment reads it from the encrypted `.env.production`.
 `B2_WORKER_APPLICATION_KEY_EU` are set together or not at all. They are for the archives of ended
 pool servers ([plan 012](../../plans/012-pool-server-archive.md)). The first encrypts the `age` key
 of each archive in `hosted_server_archives`; with another value, no archive can be restored. The B2
-key reads the `openbot-pool-archive-eu` bucket and nothing else. The encrypted `.env.production` has
+key reads the `starbot-pool-archive-eu` bucket and nothing else. The encrypted `.env.production` has
 all three, and GitHub Actions reads them from the `cloudflare-production` Environment. When you
 change one, change it in both places and deploy the Worker.
 
@@ -274,8 +274,8 @@ The encrypted `.env.production` has it, so `scripts/hosting/leaseweb-pool.ts cus
 server in for its owner. GitHub Actions reads it from the `cloudflare-production` Environment. When you
 change it, change it in both places and deploy the Worker.
 
-Use `bun run api:deploy:test` for the isolated `openbot-auth-api-test` Worker
-and the `openbot-auth-test` D1 database.
+Use `bun run api:deploy:test` for the isolated `starbot-auth-api-test` Worker
+and the `starbot-auth-test` D1 database.
 
 As a fallback, set `EMAIL_DELIVERY_WEBHOOK_URL` to an HTTPS endpoint. StarBot
 sends this JSON:

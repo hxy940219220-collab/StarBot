@@ -4,8 +4,8 @@ import {
   parseCreditMediaBalance,
   parseCreditMediaCatalog,
   parseCreditMediaJob,
-} from "@openbot/contracts/credit-media";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/credit-media";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import {
   type CreditMediaGateway,

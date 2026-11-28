@@ -4,17 +4,17 @@ import {
   type AgentDefaultsAgentValues,
   type AgentDefaultsOverview,
   agentDefaultChoiceValues,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type UpdateAgentDefaultsInput,
-} from "@openbot/contracts/ipc";
-import { Alert, AlertContent, AlertDescription, ItemGroup, SettingsSection } from "@openbot/ui";
-import type { RoleAgent } from "@openbot/ui/features/servers/ServerRoles";
+} from "@starbot/contracts/ipc";
+import { Alert, AlertContent, AlertDescription, ItemGroup, SettingsSection } from "@starbot/ui";
+import type { RoleAgent } from "@starbot/ui/features/servers/ServerRoles";
 import {
   type AgentDefaultsAgent,
   agentDefaultSettingTitle,
   SettingsAgentsTab,
-} from "@openbot/ui/features/settings/SettingsAgentsTab";
-import { currentText, useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/settings/SettingsAgentsTab";
+import { currentText, useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createStore, onSettled, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
@@ -25,7 +25,7 @@ import { serverCanAdminister, serverHasAgentDefaults } from "./server-capabiliti
 import type { ServerSettingsSectionHost } from "./server-settings-section";
 
 export type HostAgentDefaultsCalls = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   "getAgentDefaultsOverview" | "updateAgentDefaultsOverview" | "setAgentDefaultChoice"
 >;
 
@@ -72,7 +72,7 @@ export function createServerAgentsSection(
 ): ServerAgentsSection {
   const { t } = useText();
   const { props, local, actionsAvailable, busy, run } = host;
-  const calls = (): HostAgentDefaultsCalls => props.agentDefaults?.calls ?? window.openbot.agent;
+  const calls = (): HostAgentDefaultsCalls => props.agentDefaults?.calls ?? window.starbot.agent;
   const [state, setState] = createStore<AgentsState>({
     overview: null,
     profiles: [],
@@ -132,7 +132,7 @@ export function createServerAgentsSection(
     const options = props.agentDefaults;
     if (!options) return;
     if (options.onAgentsChanged) return options.onAgentsChanged(listener);
-    return window.openbot.agent.onScopedEvent(({ serverId, event }) => {
+    return window.starbot.agent.onScopedEvent(({ serverId, event }) => {
       if (event.type === "agents-changed") listener(serverId);
     });
   });

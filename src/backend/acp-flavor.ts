@@ -6,11 +6,11 @@ import {
   RequestError,
   type SessionUpdate,
 } from "@agentclientprotocol/sdk";
-import { agentProviderName } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { type CauseCode, classifyFailure } from "@openbot/telemetry";
+import { agentProviderName } from "@starbot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { type CauseCode, classifyFailure } from "@starbot/telemetry";
 import type { GeneratedMediaKind } from "./agent/image-generation";
 import { enableCursorMcpServers } from "./cursor-mcp-disabled";
 import { grokMediaItem, grokMediaKind, grokMediaToolKind } from "./grok-media";

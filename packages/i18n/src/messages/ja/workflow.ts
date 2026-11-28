@@ -292,7 +292,7 @@ export const messages = {
 
   "workflow.output.title": "出力",
   "workflow.output.name": "出力",
-  "workflow.output.channel.openbot": "StarBot",
+  "workflow.output.channel.starbot": "StarBot",
 
   "workflow.output.channel.search": "チャンネルを検索",
   "workflow.output.postsAs": "投稿の形式",
@@ -376,8 +376,8 @@ export const messages = {
   "workflow.github.event.pr.checksFailed": "チェックの失敗",
   "workflow.github.event.pr.merged": "プルリクエストのマージ",
   "workflow.github.event.comment": "新しいコメント",
-  "workflow.github.event.mention": "@openbotgit へのメンション",
-  "workflow.github.event.assigned": "@openbotgit に割り当て",
+  "workflow.github.event.mention": "@starbotgit へのメンション",
+  "workflow.github.event.assigned": "@starbotgit に割り当て",
   "workflow.github.trigger.event": "イベント",
   "workflow.github.trigger.labelAdded": "追加されたラベル",
   "workflow.github.trigger.hasLabel": "ラベルを含む",

@@ -1,4 +1,4 @@
-import { isSkillLearningMode, RESPONSE_STYLES, type ResponseStyle } from "@openbot/contracts/ipc";
+import { isSkillLearningMode, RESPONSE_STYLES, type ResponseStyle } from "@starbot/contracts/ipc";
 import { type QueryKey, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Typography } from "heroui-native";
 import BookOpen from "lucide-react-native/icons/book-open";

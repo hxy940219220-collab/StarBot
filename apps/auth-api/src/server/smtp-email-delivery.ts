@@ -1,6 +1,6 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { isCanonicalInviteUrl } from "@openbot/contracts/invite-links";
-import { isValidHostname as isSharedValidHostname } from "@openbot/contracts/validation";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { isCanonicalInviteUrl } from "@starbot/contracts/invite-links";
+import { isValidHostname as isSharedValidHostname } from "@starbot/contracts/validation";
 import { Effect, Fiber, Option, Result, Schema } from "effect";
 import {
   type ContactMessageEmailInput,
@@ -110,7 +110,7 @@ const SENDER_LIMIT_REPLY = /too many (?:messages|emails|recipients)|(?:sending|s
 const SMTP_TIMEOUT_MS = 7_500;
 const SMTP_CLOSE_TIMEOUT_MS = 250;
 const SMTP_MAX_ATTEMPTS = 3;
-const RELAY_URL = "https://openbot-email-relay.internal/send";
+const RELAY_URL = "https://starbot-email-relay.internal/send";
 const RELAY_TIMEOUT_MS = EMAIL_CODE_DELIVERY_BUDGET_MS + 5_000;
 const EMAIL_PATTERN = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9.-]+$/iu;
 
@@ -487,10 +487,10 @@ class SmtpResponseReader {
 }
 
 function createMimeMessage(from: string, message: PreparedEmailMessage): string {
-  const boundary = `openbot-${crypto.randomUUID()}`;
+  const boundary = `starbot-${crypto.randomUUID()}`;
   return dotStuff(
     [
-      `From: OpenBot <${from}>`,
+      `From: StarBot <${from}>`,
       `To: <${message.email}>`,
       ...(message.replyTo ? [`Reply-To: <${message.replyTo}>`] : []),
       `Subject: ${encodeHeaderValue(message.content.subject)}`,

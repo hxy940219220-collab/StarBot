@@ -6,7 +6,7 @@ import {
   type TelegramCallParams,
   type TelegramCallResult,
   type TelegramUploadAnswer,
-} from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@starbot/contracts/signal-protocol/telegram-route";
 import { Effect, Schema } from "effect";
 import { z } from "zod";
 import type { TelegramConfig } from "./config";

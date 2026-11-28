@@ -1,4 +1,4 @@
-import { redactText } from "@openbot/logging";
+import { redactText } from "@starbot/logging";
 import { Effect, Result, Schema } from "effect";
 import { causeHelpers } from "./effect-boundary";
 import { getString } from "./protocol";

@@ -8,7 +8,7 @@ import { type AppServerNotification, getRecord, getString, isRecord } from "../s
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/devin-steer-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/devin-steer-e2e");
 const TURN_TIMEOUT_MS = 20_000;
 
 interface LogEntry {
@@ -37,7 +37,7 @@ interface Report {
   failure?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-devin-steer-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-devin-steer-e2e-"));
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];
 
@@ -82,7 +82,7 @@ async function startTurn(client: AgentClient, thread: string, log: string, text:
     listener = (notification) => {
       if (getString(notification.params, "threadId") !== thread) return;
       if (notification.method === "turn/started") started += 1;
-      if (notification.method === "openbot/usage") {
+      if (notification.method === "starbot/usage") {
         const tokens = getRecord(notification.params, "usage")?.inputTokens;
         usage.push(typeof tokens === "number" ? tokens : null);
       }

@@ -39,10 +39,10 @@ import {
   type ProviderRuntimeStatus,
   type RemovableRuntimes,
   STARBOT_CORE_PROVIDERS,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, type LogValue, redactText, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { matchingSourceKeys, sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, type LogValue, redactText, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Exit, Fiber, Result, Scope, Stream } from "effect";
 import lockValue from "../../native-runtime.lock.json";
 import { type AgentRuntimeLock, parseAgentRuntimeLock } from "../../scripts/agent-runtime-lock";
@@ -79,7 +79,7 @@ import {
 } from "./provider-runtime-releases";
 
 const execFileAsync = promisify(execFile);
-const logger = createOpenBotLogger("provider-runtimes");
+const logger = createStarBotLogger("provider-runtimes");
 const PROVIDERS = MANAGED_RUNTIME_PROVIDERS;
 const RUNTIMES = [...MANAGED_RUNTIME_PROVIDERS, ...MANAGED_TOOL_RUNTIMES] as const;
 const FREE_SPACE_HEADROOM = 100_000_000;

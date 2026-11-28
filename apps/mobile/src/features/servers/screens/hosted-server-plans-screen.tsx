@@ -1,6 +1,6 @@
-import { siteLimitForPlan } from "@openbot/contracts/billing";
-import type { HostedServerCatalogPlan, HostedServerList, HostedServerSummary } from "@openbot/contracts/hosted-servers";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import { siteLimitForPlan } from "@starbot/contracts/billing";
+import type { HostedServerCatalogPlan, HostedServerList, HostedServerSummary } from "@starbot/contracts/hosted-servers";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
 import { Button, Chip, Skeleton, Typography } from "heroui-native";
@@ -352,7 +352,7 @@ const COMPUTER_STEPS = [
 
 function ComputerSteps({ showChangePlan }: { showChangePlan: boolean }) {
   const { t, format } = useText();
-  const accent = String(useCSSVariable("--openbot-accent-text"));
+  const accent = String(useCSSVariable("--starbot-accent-text"));
   return (
     <View className="gap-4 rounded-grouped bg-grouped p-4">
       <View className="flex-row items-center gap-3">

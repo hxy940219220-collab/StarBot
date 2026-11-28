@@ -4,7 +4,7 @@ import {
   libraryFolderHeight,
   libraryFolderPath,
   type StoredFileRow,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export type LibraryLocation =
   | { kind: "all" }

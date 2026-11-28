@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { ROUTINE_LIMIT_POLICIES, ROUTINE_MISSED_POLICIES, ROUTINE_RUN_PLACES } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { ROUTINE_LIMIT_POLICIES, ROUTINE_MISSED_POLICIES, ROUTINE_RUN_PLACES } from "@starbot/contracts/ipc";
 import { z } from "zod";
 import { WEBHOOK_EVENT_TYPE_MAX_LENGTH, WEBHOOK_FILTERS_LIMIT } from "./webhook-trigger";
 
@@ -63,7 +63,7 @@ export const routineScheduleZodSchema = z
   .describe("Routine schedule. Weekdays use 0 for Sunday through 6 for Saturday; clock values use HH:mm local time.");
 
 export const ROUTINE_INSTRUCTION_RULE =
-  "Each run starts a new session that sees only the newest chat messages, so write an instruction that a reader with no chat can follow. Name the service and the tool to use, such as openbot_browser for a website with the site and its signed-in tab, or the MCP tool or teammate. Also name the account, the steps, what to report and where, and when to report nothing. Do not write 'as before' or refer to the chat.";
+  "Each run starts a new session that sees only the newest chat messages, so write an instruction that a reader with no chat can follow. Name the service and the tool to use, such as starbot_browser for a website with the site and its signed-in tab, or the MCP tool or teammate. Also name the account, the steps, what to report and where, and when to report nothing. Do not write 'as before' or refer to the chat.";
 
 export const routineInstructionZodSchema = z
   .string()

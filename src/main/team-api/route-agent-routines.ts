@@ -1,5 +1,5 @@
-import { isReleasedRoutineSchedule } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { isReleasedRoutineSchedule } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { parseCreateRoutine, parseListRoutineRuns, parseUpdateRoutine } from "../ipc/agent-inputs";
 import type { TeamApiAgents } from "./dependencies";

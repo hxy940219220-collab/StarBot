@@ -10,9 +10,9 @@ import {
   workflowAnswerProblems,
   workflowAnswerSources,
   workflowInputAnswerFields,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
-import { Button, Kbd, LabelTooltip, Repeat, X } from "@openbot/ui";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@starbot/i18n";
+import { Button, Kbd, LabelTooltip, Repeat, X } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import {
   createContext,

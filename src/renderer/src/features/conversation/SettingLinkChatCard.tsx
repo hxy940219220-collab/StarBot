@@ -1,12 +1,12 @@
-import type { SettingLinkId } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
+import type { SettingLinkId } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
 import {
   AGENT_SETTING_LINK_ROWS,
   type AgentSettingLinkId,
   isAgentSettingLinkId,
-} from "@openbot/ui/features/conversation/agent-setting-links";
-import { SettingLinkCard } from "@openbot/ui/features/conversation/SettingLinkCard";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/agent-setting-links";
+import { SettingLinkCard } from "@starbot/ui/features/conversation/SettingLinkCard";
+import { useText } from "@starbot/ui/text";
 import { usePlatform } from "../../platform";
 import { appSettingLinkTarget } from "../settings/setting-link-targets";
 import { navItem } from "../settings/settings-tabs";

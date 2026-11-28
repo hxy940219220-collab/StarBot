@@ -1,6 +1,6 @@
 import { isDynamicRecord, isString } from "../runtime-values";
 
-export const REMOTE_TICKET_AUDIENCE = "openbot-remote";
+export const REMOTE_TICKET_AUDIENCE = "starbot-remote";
 
 export const REMOTE_TICKET_PROTOCOL_VERSION = 2;
 

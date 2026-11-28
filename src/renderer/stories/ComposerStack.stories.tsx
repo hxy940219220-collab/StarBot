@@ -1,20 +1,20 @@
-import type { QueueDelivery } from "@openbot/contracts/ipc";
-import { Button } from "@openbot/ui";
-import { ComposerErrorBanner } from "@openbot/ui/features/conversation/ComposerErrorBanner";
+import type { QueueDelivery } from "@starbot/contracts/ipc";
+import { Button } from "@starbot/ui";
+import { ComposerErrorBanner } from "@starbot/ui/features/conversation/ComposerErrorBanner";
 import {
   ComposerNotice,
   ComposerSignInNotice,
   ComposerUpdateNotice,
   ComposerUsageLimitNotice,
-} from "@openbot/ui/features/conversation/ComposerNotice";
-import { ComposerStackCard } from "@openbot/ui/features/conversation/ComposerStackCard";
-import { ComposerCompactionNotice } from "@openbot/ui/features/conversation/ContextUsage";
-import { type OpenWaitItem, OpenWaits } from "@openbot/ui/features/conversation/OpenWaits";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/ComposerNotice";
+import { ComposerStackCard } from "@starbot/ui/features/conversation/ComposerStackCard";
+import { ComposerCompactionNotice } from "@starbot/ui/features/conversation/ContextUsage";
+import { type OpenWaitItem, OpenWaits } from "@starbot/ui/features/conversation/OpenWaits";
+import { useText } from "@starbot/ui/text";
 import { type JSX, Portal } from "@solidjs/web";
 import { createSignal, createStore, For, onSettled, Show } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
-import type { MockOpenBotControls } from "../src/preview/mock-openbot";
+import type { MockStarBotControls } from "../src/preview/mock-starbot";
 import { openChat, PrototypeApp } from "./prototype-support";
 
 const meta = {
@@ -156,7 +156,7 @@ function CaseCard(props: { name: Case; onClose: () => void }): JSX.Element {
 
 function ComposerStackPlayground() {
   let root: HTMLDivElement | undefined;
-  let mock: MockOpenBotControls | undefined;
+  let mock: MockStarBotControls | undefined;
   const [queueShown, setQueueShown] = createSignal(false);
   const [stack, setStack] = createSignal<Element | null>(null);
   const [shown, setShown] = createStore<Partial<Record<Case, boolean>>>({});

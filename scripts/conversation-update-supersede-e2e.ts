@@ -3,13 +3,13 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { isDeepStrictEqual } from "node:util";
-import type { ConversationMessage } from "@openbot/contracts/ipc";
+import type { ConversationMessage } from "@starbot/contracts/ipc";
 import { AgentStore } from "../src/backend/agent-store";
 import { databaseRows, requiredNumberColumn } from "../src/backend/database/database-rows";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/conversation-update-supersede-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/conversation-update-supersede-e2e");
 const UPDATED = "conversation.snapshot-updated";
 
 interface CaseReport {
@@ -132,8 +132,8 @@ const cases: Array<{ name: string; expectedUpdateEvents: number; run: (write: Wr
 ];
 
 async function runCase(name: string, expectedUpdateEvents: number, run: (write: Write) => void): Promise<CaseReport> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-update-supersede-"));
-  const database = new OpenBotDatabase(join(root, "state"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-update-supersede-"));
+  const database = new StarBotDatabase(join(root, "state"));
   const store = new AgentStore(join(root, "state"), join(root, "home"), database);
   try {
     await runCauseEffect(store.initialize());

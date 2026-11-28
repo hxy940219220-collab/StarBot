@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { AgentSummary } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { AgentSummary } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result } from "effect";
 import { zipSync } from "fflate";
 import { CentralAuthManager } from "../src/main/central-auth-manager";
@@ -52,7 +52,7 @@ async function reviseFrom(context: Context, expectedRevision: number, sourcePath
 const report: Array<{ name: string; passed: boolean; result?: Record<string, string | null>; error?: string }> = [];
 
 async function scenario(name: string, run: (context: Context) => Promise<Record<string, string | null>>) {
-  const root = await mkdtemp(join(tmpdir(), "openbot-skill-7072-"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-skill-7072-"));
   try {
     const workspace = join(root, "workspace");
     await mkdir(join(workspace, "source"), { recursive: true });
@@ -233,6 +233,6 @@ await scenario("J An edit next to Python cache folders still refuses", async (co
   return { revise };
 });
 
-await mkdir(".openbot-build", { recursive: true });
-await writeFile(".openbot-build/skill-install-local-changes-e2e.json", `${JSON.stringify(report, null, 2)}\n`);
+await mkdir(".starbot-build", { recursive: true });
+await writeFile(".starbot-build/skill-install-local-changes-e2e.json", `${JSON.stringify(report, null, 2)}\n`);
 if (report.some((entry) => !entry.passed)) process.exitCode = 1;

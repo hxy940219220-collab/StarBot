@@ -5,7 +5,7 @@ import {
   isDownloadableProvider,
   isManagedRuntimeProvider,
   type ManagedProviderId,
-} from "@openbot/contracts/agent-providers";
+} from "@starbot/contracts/agent-providers";
 import {
   type AgentProviderId,
   type ConnectProviderAccountInput,
@@ -19,11 +19,11 @@ import {
   type SetLiveVoiceAccountInput,
   type SetProviderAccountPoolInput,
   type SetProviderApiKeyInput,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { decodeLiveVoiceAccount } from "@openbot/contracts/team-protocol/live-voice-account-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { registerSecretValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { decodeLiveVoiceAccount } from "@starbot/contracts/team-protocol/live-voice-account-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { registerSecretValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { AgentLifecycleFailed, type AgentService } from "../../backend/agent-service";
 import { runCauseEffect } from "../../backend/effect-boundary";

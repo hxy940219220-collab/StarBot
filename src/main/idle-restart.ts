@@ -1,5 +1,5 @@
-import type { IdleRestart as IdleRestartStatus, IdleRestartTarget, UpdateStatus } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { IdleRestart as IdleRestartStatus, IdleRestartTarget, UpdateStatus } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result } from "effect";
 import type { RoutineHoldWindow } from "../backend/routine-store";
 import type { RestartReadiness } from "./update-readiness";

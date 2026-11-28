@@ -3,15 +3,15 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { teeLogLines } from "@openbot/logging";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { teeLogLines } from "@starbot/logging";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { getString, isRecord } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-capacity-retry-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-capacity-retry-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-capacity-retry-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-capacity-retry-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const logPath = join(root, "protocol.jsonl");
@@ -31,16 +31,16 @@ const reset: Retry = { info: "disconnected", details: DISCONNECTED };
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
-process.env.OPENBOT_FAKE_CODEX_LOG = logPath;
-process.env.OPENBOT_FAKE_CODEX_CONTROL = controlPath;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_FAKE_CODEX_LOG = logPath;
+process.env.STARBOT_FAKE_CODEX_CONTROL = controlPath;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_CODEX = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -48,8 +48,8 @@ if (process.argv.includes("--version")) {
   process.stdout.write("codex-cli 0.167.2\\n");
   process.exit(0);
 }
-const log = (entry) => fs.appendFileSync(process.env.OPENBOT_FAKE_CODEX_LOG, JSON.stringify(entry) + "\\n");
-const control = () => JSON.parse(fs.readFileSync(process.env.OPENBOT_FAKE_CODEX_CONTROL, "utf8"));
+const log = (entry) => fs.appendFileSync(process.env.STARBOT_FAKE_CODEX_LOG, JSON.stringify(entry) + "\\n");
+const control = () => JSON.parse(fs.readFileSync(process.env.STARBOT_FAKE_CODEX_CONTROL, "utf8"));
 const config = { config: { mcp_servers: {} }, layers: [{ name: { type: "user", file: "/fake/.codex/config.toml", profile: null }, version: "1", config: { mcp_servers: {} } }] };
 let buffer = "";
 let threads = 0;
@@ -191,7 +191,7 @@ async function waitFor<T>(label: string, read: () => T | null | undefined | fals
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

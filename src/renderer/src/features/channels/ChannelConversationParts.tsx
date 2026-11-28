@@ -1,15 +1,15 @@
-import type { ChannelPage } from "@openbot/contracts/ipc";
-import { Button, ErrorReference } from "@openbot/ui";
-import { SettingsPanel, SettingsPanelContent, SettingsPanelHeader } from "@openbot/ui/components/SettingsPanel";
-import { ChannelAvatar } from "@openbot/ui/features/channels/ChannelAvatar";
+import type { ChannelPage } from "@starbot/contracts/ipc";
+import { Button, ErrorReference } from "@starbot/ui";
+import { SettingsPanel, SettingsPanelContent, SettingsPanelHeader } from "@starbot/ui/components/SettingsPanel";
+import { ChannelAvatar } from "@starbot/ui/features/channels/ChannelAvatar";
 import {
   type ChannelFolderCalls,
   ChannelFoldersPage,
   createChannelFolders,
-} from "@openbot/ui/features/channels/ChannelFolders";
-import { ChannelStoppedTasks } from "@openbot/ui/features/channels/ChannelStoppedTasks";
-import { type HostFolderPick, HostFolderPicker } from "@openbot/ui/features/conversation/HostFolderPicker";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/channels/ChannelFolders";
+import { ChannelStoppedTasks } from "@starbot/ui/features/channels/ChannelStoppedTasks";
+import { type HostFolderPick, HostFolderPicker } from "@starbot/ui/features/conversation/HostFolderPicker";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, createStore, For, Show, untrack } from "solid-js";
 import { createSidePanelWidth, readSidePanelWidth, saveSidePanelWidth } from "../../components/side-panel-width";
 import { AgentMemoriesSettings } from "../conversation/AgentMemoriesSettings";

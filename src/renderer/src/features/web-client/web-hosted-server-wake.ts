@@ -1,5 +1,5 @@
-import { parseHostedServerStatus } from "@openbot/contracts/hosted-servers";
-import { createHostedServerStatusCheck, createHostedServerWake } from "@openbot/team-client/hosted-server-wake";
+import { parseHostedServerStatus } from "@starbot/contracts/hosted-servers";
+import { createHostedServerStatusCheck, createHostedServerWake } from "@starbot/team-client/hosted-server-wake";
 import { Effect } from "effect";
 
 export function createWebHostedServerWake(accountFetch: typeof fetch, now: () => number = Date.now) {

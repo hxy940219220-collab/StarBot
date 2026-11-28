@@ -1,4 +1,4 @@
-import type { ConversationPage } from "@openbot/contracts/ipc";
+import type { ConversationPage } from "@starbot/contracts/ipc";
 
 export type ConversationPageMerge = "replace" | "older" | "latest";
 

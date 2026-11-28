@@ -1,4 +1,4 @@
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 import * as SecureStore from "expo-secure-store";
 import { useEffect, useMemo } from "react";
 import { create } from "zustand";

@@ -1,5 +1,5 @@
-import { isCreditMediaJobId } from "@openbot/contracts/credit-media";
-import { sourceText } from "@openbot/i18n/source";
+import { isCreditMediaJobId } from "@starbot/contracts/credit-media";
+import { sourceText } from "@starbot/i18n/source";
 import { createFileRoute } from "@tanstack/solid-router";
 import { Effect } from "effect";
 import { runApiResponse } from "../../../../../server/effect-runtime";

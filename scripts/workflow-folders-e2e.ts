@@ -10,25 +10,25 @@ import {
   type WorkflowFolderAction,
   type WorkflowFoldersSnapshot,
   type WorkflowGraph,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_PROTOCOL_V1_WEBSOCKET,
   TEAM_PROTOCOL_VERSION_HEADER,
-} from "@openbot/contracts/team-protocol";
-import { AGENT_ACCESS_CODECS, AGENT_ACCESS_ROUTES } from "@openbot/contracts/team-protocol/agent-access-v1";
-import { teamCapabilitiesForProtocol, teamCapabilityHeaders } from "@openbot/contracts/team-protocol/current";
-import { TEAM_PROTOCOL_V9 } from "@openbot/contracts/team-protocol/v9";
-import { TEAM_PROTOCOL_V10 } from "@openbot/contracts/team-protocol/v10";
+} from "@starbot/contracts/team-protocol";
+import { AGENT_ACCESS_CODECS, AGENT_ACCESS_ROUTES } from "@starbot/contracts/team-protocol/agent-access-v1";
+import { teamCapabilitiesForProtocol, teamCapabilityHeaders } from "@starbot/contracts/team-protocol/current";
+import { TEAM_PROTOCOL_V9 } from "@starbot/contracts/team-protocol/v9";
+import { TEAM_PROTOCOL_V10 } from "@starbot/contracts/team-protocol/v10";
 import {
   WORKFLOW_FOLDERS_CAPABILITY,
   WORKFLOW_FOLDERS_CODECS,
   WORKFLOW_FOLDERS_ROUTES,
-} from "@openbot/contracts/team-protocol/workflow-folders-v1";
-import { WORKFLOWS_CAPABILITY, WORKFLOWS_ROUTES } from "@openbot/contracts/team-protocol/workflows-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/workflow-folders-v1";
+import { WORKFLOWS_CAPABILITY, WORKFLOWS_ROUTES } from "@starbot/contracts/team-protocol/workflows-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { plugin } from "bun";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -36,7 +36,7 @@ import { AgentService } from "../src/backend/agent-service";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { WORKFLOW_FOLDERS_FILE, WorkflowFoldersStore } from "../src/backend/workflow-folders-store";
 import { WorkflowGitHubStore } from "../src/backend/workflows/workflow-github-store";
@@ -47,7 +47,7 @@ import { createWorkflows, type WorkflowsHandle } from "../src/backend/workflows/
 import type { TeamApiBrowser } from "../src/main/team-api/dependencies";
 import { WorkflowFoldersService } from "../src/main/workflow-folders-service";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/workflow-folders-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/workflow-folders-e2e");
 const HOST_VERSION = "0.0.0-e2e";
 const OWNER = { username: "owner-user", password: "owner-password-123" };
 const MEMBER = { username: "member-user", password: "member-password-123" };
@@ -178,13 +178,13 @@ const teamBrowser: TeamApiBrowser = {
   importSignIn: unused,
 };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-workflow-folders-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-workflow-folders-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const foldersPath = join(userData, WORKFLOW_FOLDERS_FILE);
 
 interface Host {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   agents: AgentService;
   workflows: WorkflowsHandle;
   server: InstanceType<typeof TeamApiServer>;
@@ -196,11 +196,11 @@ let host: Host | null = null;
 const sockets: WebSocket[] = [];
 
 async function startHost(): Promise<Host> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const agentStore = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
-  const team = new TeamStore(join(userData, "openbot-team-server-v2.json"));
+  const team = new TeamStore(join(userData, "starbot-team-server-v2.json"));
   const access = new AgentAccessStore(join(userData, AGENT_ACCESS_FILE));
   const folders = new WorkflowFoldersStore(foldersPath);
   await runCauseEffect(sidebar.initialize());
@@ -342,7 +342,7 @@ interface EventSocket {
 async function openEvents(token: string, capabilities: readonly string[]): Promise<EventSocket> {
   const socket = new WebSocket(`ws://127.0.0.1:${current().port}${TEAM_API_ROUTES.events}`, [
     TEAM_PROTOCOL_V1_WEBSOCKET,
-    `openbot-token.${token}`,
+    `starbot-token.${token}`,
   ]);
   sockets.push(socket);
   const types: string[] = [];

@@ -683,7 +683,7 @@ public class RemoteViewerProxyModule: Module {
   }
 
   public func definition() -> ModuleDefinition {
-    Name("OpenBotRemoteViewerProxy")
+    Name("StarBotRemoteViewerProxy")
 
     Events("onRequest", "onSocketOpen", "onSocketMessage", "onSocketClose")
 

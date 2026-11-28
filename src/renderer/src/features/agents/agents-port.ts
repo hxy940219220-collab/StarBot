@@ -1,8 +1,8 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface AgentsPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "createAgent"
     | "deleteAgent"
     | "duplicateAgent"
@@ -31,9 +31,9 @@ export interface AgentsPort {
     | "updateAgent"
     | "updateAgentAdminSettings"
   >;
-  providerAdmin: Pick<OpenBotDesktopApi["providerAdmin"], "accounts" | "accountUsage">;
+  providerAdmin: Pick<StarBotDesktopApi["providerAdmin"], "accounts" | "accountUsage">;
 }
 
 export function agentsPort(): AgentsPort {
-  return window.openbot;
+  return window.starbot;
 }

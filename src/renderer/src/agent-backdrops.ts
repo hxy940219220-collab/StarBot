@@ -1,11 +1,11 @@
-import { chatBackdropPage, chatBackdropRequesters } from "@openbot/contracts/chat-visual";
-import { toast } from "@openbot/ui";
-import { type ChatBackdropChoice, customBackdropChoice } from "@openbot/ui/features/conversation/chat-backdrop";
-import { currentText } from "@openbot/ui/text";
+import { chatBackdropPage, chatBackdropRequesters } from "@starbot/contracts/chat-visual";
+import { toast } from "@starbot/ui";
+import { type ChatBackdropChoice, customBackdropChoice } from "@starbot/ui/features/conversation/chat-backdrop";
+import { currentText } from "@starbot/ui/text";
 import { setChatBackdrop, useChatBackdrop } from "./chat-backdrop-preference";
 import { addCustomBackdrop, readCustomBackdrop } from "./custom-backdrops";
 
-const MARK_STORAGE_KEY = "openbot:agent-backdrop-mark";
+const MARK_STORAGE_KEY = "starbot:agent-backdrop-mark";
 
 let unsavedMark: number | undefined;
 

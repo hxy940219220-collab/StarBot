@@ -1,4 +1,4 @@
-import type { MobileTextKey, MobileTranslate } from "@openbot/i18n/mobile";
+import type { MobileTextKey, MobileTranslate } from "@starbot/i18n/mobile";
 import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import type { LucideIcon } from "lucide-react-native";
@@ -48,7 +48,7 @@ export function agentListStateLabel(
 
 export function AgentWaitBadge({ reason, size = 20 }: { reason: MobileAgentWaitReason; size?: number }) {
   const [background] = useThemeColor(["background"]);
-  const [warning] = useCSSVariable(["--openbot-warning"]);
+  const [warning] = useCSSVariable(["--starbot-warning"]);
   const Icon = WAIT_ICON[reason];
   return (
     <View
@@ -70,7 +70,7 @@ export function AgentWaitBadge({ reason, size = 20 }: { reason: MobileAgentWaitR
 
 export function AgentWaitChip({ reason }: { reason: MobileAgentWaitReason }) {
   const { t } = useText();
-  const [warningSoft, warning] = useCSSVariable(["--openbot-warning-soft", "--openbot-warning"]);
+  const [warningSoft, warning] = useCSSVariable(["--starbot-warning-soft", "--starbot-warning"]);
   const Icon = WAIT_ICON[reason];
   return (
     <View
@@ -92,7 +92,7 @@ export function AgentWaitChip({ reason }: { reason: MobileAgentWaitReason }) {
 export function AgentWaitingGroupHeader({ count }: { count: number }) {
   const { t, format } = useText();
   const [background] = useThemeColor(["background"]);
-  const [warning] = useCSSVariable(["--openbot-warning"]);
+  const [warning] = useCSSVariable(["--starbot-warning"]);
   return (
     <View
       accessible

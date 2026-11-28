@@ -1,8 +1,8 @@
-import { isDeleteSharedTableInput, isSharedTable, type SharedTable } from "@openbot/contracts/ipc";
-import { guardedDecoder, guardedListDecoder } from "@openbot/contracts/ipc-decoding";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { SHARED_TABLES_CAPABILITY, SHARED_TABLES_ROUTES } from "@openbot/contracts/team-protocol/shared-tables-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { isDeleteSharedTableInput, isSharedTable, type SharedTable } from "@starbot/contracts/ipc";
+import { guardedDecoder, guardedListDecoder } from "@starbot/contracts/ipc-decoding";
+import type { TeamCurrentCapability } from "@starbot/contracts/team-protocol/current";
+import { SHARED_TABLES_CAPABILITY, SHARED_TABLES_ROUTES } from "@starbot/contracts/team-protocol/shared-tables-v1";
+import { sourceText } from "@starbot/i18n/source";
 import type { Effect } from "effect";
 import type { AgentService } from "../../backend/agent-service";
 import { runCauseEffect } from "../../backend/effect-boundary";

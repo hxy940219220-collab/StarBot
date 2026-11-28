@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { canAdministerServer } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { canAdministerServer } from "@starbot/contracts/ipc";
 import { router, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
 import LogOut from "lucide-react-native/icons/log-out";

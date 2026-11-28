@@ -1,7 +1,7 @@
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { CONVERSATION_UNREAD_FROM_ROUTE } from "@openbot/contracts/team-protocol/conversation-unread-from-v1";
-import { TEAM_CONVERSATION_UNREAD_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { type createRemoteReadRefresh, mergeRemoteUnreadIds, runTeamEffect } from "@openbot/team-client";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { CONVERSATION_UNREAD_FROM_ROUTE } from "@starbot/contracts/team-protocol/conversation-unread-from-v1";
+import { TEAM_CONVERSATION_UNREAD_CAPABILITY } from "@starbot/contracts/team-protocol/current";
+import { type createRemoteReadRefresh, mergeRemoteUnreadIds, runTeamEffect } from "@starbot/team-client";
 import { Effect } from "effect";
 import { type RefObject, useCallback, useRef } from "react";
 import { showFailureAlert, showWarningAlert } from "@/features/analytics/failure-reports";

@@ -1,12 +1,12 @@
-import { providerLogoShape } from "@openbot/brand/provider-logo-shape";
-import type { AgentProviderId } from "@openbot/contracts/ipc";
+import { providerLogoShape } from "@starbot/brand/provider-logo-shape";
+import type { AgentProviderId } from "@starbot/contracts/ipc";
 import { useThemeColor } from "heroui-native/hooks";
 import Svg, { Path } from "react-native-svg";
 import { useCSSVariable } from "uniwind";
 
 function useProviderColor(provider: AgentProviderId): string {
   const foreground = String(useThemeColor("foreground"));
-  const [claude, gemini] = useCSSVariable(["--openbot-provider-claude", "--openbot-provider-antigravity"]);
+  const [claude, gemini] = useCSSVariable(["--starbot-provider-claude", "--starbot-provider-antigravity"]);
   if (provider === "claude" && claude) return String(claude);
   if (provider === "antigravity" && gemini) return String(gemini);
   return foreground;

@@ -1,8 +1,8 @@
 import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
-import { MANAGED_SKILL_FOLDERS } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { MANAGED_SKILL_FOLDERS } from "@starbot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentSummary,
   AgentTemplateSkill,
@@ -18,7 +18,7 @@ import type {
   SkillSubmission,
   SubmitSkillInput,
   UninstallSkillInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_TEMPLATE_LIMITS,
   decodeMarketplaceSkillDetail,
@@ -29,9 +29,9 @@ import {
   marketplaceQueryParams,
   parseGithubSkillId,
   SKILL_DESCRIPTION_MAX_LENGTH,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Cache, Effect, Exit, Result, Schema, Semaphore } from "effect";
 import { parse as parseYaml } from "yaml";
 import type { AgentLifecycleFailed } from "../backend/agent-service";
@@ -809,7 +809,7 @@ function targetDirectories(workspace: string, slug: string): [string, string] {
 }
 
 function disabledDirectory(workspace: string, slug: string): string {
-  return join(workspace, ".openbot", "skills-disabled", slug);
+  return join(workspace, ".starbot", "skills-disabled", slug);
 }
 
 function packChildren(slug: string, files: Record<string, Uint8Array>): string[] {
@@ -988,8 +988,8 @@ const replaceTargets = Effect.fn("SkillMarketplace.replaceTargets")(function* (
       for (const write of writes) {
         const { target, files, executable } = write;
         yield* skillIO(() => mkdir(dirname(target), { recursive: true, mode: 0o700 }));
-        const stage = `${target}.openbot-stage-${randomUUID()}`;
-        const backup = (yield* pathExists(target)) ? `${target}.openbot-backup-${randomUUID()}` : null;
+        const stage = `${target}.starbot-stage-${randomUUID()}`;
+        const backup = (yield* pathExists(target)) ? `${target}.starbot-backup-${randomUUID()}` : null;
         const previous = yield* Effect.gen(function* () {
           yield* writeFiles(stage, files, executable);
           if (backup) {
@@ -1192,7 +1192,7 @@ function lockedSlugs(lock: SkillsLock): Set<string> {
 }
 
 function lockPath(workspace: string): string {
-  return join(workspace, ".openbot", "skills-lock.json");
+  return join(workspace, ".starbot", "skills-lock.json");
 }
 const readLock = Effect.fn("SkillMarketplace.readLock")(function* (
   workspace: string,

@@ -1,4 +1,4 @@
-import type { VoiceServerSettings } from "@openbot/contracts/ipc";
+import type { VoiceServerSettings } from "@starbot/contracts/ipc";
 import { createSignal } from "solid-js";
 import { speechPort } from "./speech-port";
 

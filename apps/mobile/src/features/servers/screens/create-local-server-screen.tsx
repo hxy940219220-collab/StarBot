@@ -1,6 +1,6 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { HostLocalServer } from "@openbot/team-client/team-admin-requests";
-import type { UserErrorDetails } from "@openbot/user-errors";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { HostLocalServer } from "@starbot/team-client/team-admin-requests";
+import type { UserErrorDetails } from "@starbot/user-errors";
 import { useQuery } from "@tanstack/react-query";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { usePreventRemove } from "expo-router/react-navigation";

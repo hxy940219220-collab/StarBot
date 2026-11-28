@@ -4,25 +4,25 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { CrmChange, CrmSource, CrmSourceKind } from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+import type { CrmChange, CrmSource, CrmSourceKind } from "@starbot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_CAPABILITIES_HEADER,
   TEAM_PROTOCOL_VERSION_HEADER,
-} from "@openbot/contracts/team-protocol";
-import { CRM_CODECS, CRM_ROUTES } from "@openbot/contracts/team-protocol/crm-v1";
-import { teamCapabilitiesForProtocol } from "@openbot/contracts/team-protocol/current";
-import { TEAM_PROTOCOL_V9 } from "@openbot/contracts/team-protocol/v9";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText, teeLogLines } from "@openbot/logging";
+} from "@starbot/contracts/team-protocol";
+import { CRM_CODECS, CRM_ROUTES } from "@starbot/contracts/team-protocol/crm-v1";
+import { teamCapabilitiesForProtocol } from "@starbot/contracts/team-protocol/current";
+import { TEAM_PROTOCOL_V9 } from "@starbot/contracts/team-protocol/v9";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText, teeLogLines } from "@starbot/logging";
 import {
   decodeRemoteCrmActivityPage,
   decodeRemoteCrmApplyResult,
   decodeRemoteCrmCustomerPage,
   decodeRemoteCrmOverview,
   decodeRemoteCrmPaymentPage,
-} from "@openbot/team-client/crm-decoding";
+} from "@starbot/team-client/crm-decoding";
 import { plugin } from "bun";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -33,11 +33,11 @@ import { CrmError } from "../src/backend/crm/crm-handle";
 import { stripeSource } from "../src/backend/crm/crm-stripe";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import type { TeamApiBrowser } from "../src/main/team-api/dependencies";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/crm-stripe-sync-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/crm-stripe-sync-e2e");
 const HOST_VERSION = "0.0.0-e2e";
 const OWNER = { username: "owner-user", password: "owner-password-123" };
 const STEP_DEADLINE_MS = 30_000;
@@ -76,7 +76,7 @@ plugin({
   },
 });
 
-process.env.OPENBOT_LOG_LEVEL = "trace";
+process.env.STARBOT_LOG_LEVEL = "trace";
 const { TeamApiServer } = await import("../src/main/team-api-server");
 const { AGENT_ACCESS_FILE, AgentAccessStore } = await import("../src/main/agent-access-store");
 const { TeamStore } = await import("../src/main/team-store");
@@ -413,7 +413,7 @@ const teamBrowser: TeamApiBrowser = {
   importSignIn: unused,
 };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-crm-stripe-sync-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-crm-stripe-sync-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 
@@ -425,7 +425,7 @@ function nextChange(): Promise<void> {
 }
 
 interface Host {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   agents: AgentService;
   crm: CrmHandle;
   server: InstanceType<typeof TeamApiServer>;
@@ -435,11 +435,11 @@ interface Host {
 let host: Host | null = null;
 
 async function startHost(): Promise<Host> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const agentStore = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
-  const team = new TeamStore(join(userData, "openbot-team-server-v2.json"));
+  const team = new TeamStore(join(userData, "starbot-team-server-v2.json"));
   const access = new AgentAccessStore(join(userData, AGENT_ACCESS_FILE));
   await runCauseEffect(sidebar.initialize());
   await runCauseEffect(agentStore.initialize());

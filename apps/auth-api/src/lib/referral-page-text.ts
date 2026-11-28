@@ -1,7 +1,7 @@
-import { type BillingPlanId, memberLimitForPlan } from "@openbot/contracts/billing";
-import { LICENSE_INCLUDED_USERS } from "@openbot/contracts/license";
-import { REFERRAL_CODE_MAX_AGE_DAYS } from "@openbot/contracts/referral";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
+import { type BillingPlanId, memberLimitForPlan } from "@starbot/contracts/billing";
+import { LICENSE_INCLUDED_USERS } from "@starbot/contracts/license";
+import { REFERRAL_CODE_MAX_AGE_DAYS } from "@starbot/contracts/referral";
+import type { AppTextKey, AppTranslate } from "@starbot/i18n";
 import { slot } from "./text-slots";
 
 const REFERRAL_SLOTS = {
@@ -33,7 +33,7 @@ export function referralPageText(t: AppTranslate) {
     offer: t("sitePage.referral.offer", { percent }),
     offerDetail: t("sitePage.referral.offerDetail"),
     lead: t("sitePage.referral.lead"),
-    download: t("sitePage.site.downloadOpenBot"),
+    download: t("sitePage.site.downloadStarBot"),
     browser: t("sitePage.join.browser"),
     card: {
       from: t("sitePage.referral.card.from", { name }),

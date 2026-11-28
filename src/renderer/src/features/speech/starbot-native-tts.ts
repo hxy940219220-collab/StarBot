@@ -1,4 +1,4 @@
-import { speechTextFromMarkdown } from "@openbot/contracts/speech-text";
+import { speechTextFromMarkdown } from "@starbot/contracts/speech-text";
 import { createSignal } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { speechPort } from "./speech-port";

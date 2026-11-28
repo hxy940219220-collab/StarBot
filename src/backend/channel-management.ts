@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentAccessLevel,
   type AgentSummary,
@@ -12,10 +12,10 @@ import {
   type DeleteChannelRoutineInput,
   isReleasedRoutineSchedule,
   type UpdateChannelRoutineInput,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isBoolean, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { RoutineInputError } from "@starbot/team-client/routine-schedule";
 import {
   routineToolArguments,
   routineToolPolicies,
@@ -119,7 +119,7 @@ export function channelDraftChange(
   if (tool === "channel_add_member") {
     if (member) throw new Error(`${name} is already a member of this channel.`);
     if (!agents.some((agent) => agent.id === agentId))
-      throw new Error("No agent has that id. Get the id from openbot.list_agents.");
+      throw new Error("No agent has that id. Get the id from starbot.list_agents.");
     if (agentAccessRank(access.level(agentId)) < agentAccessRank("chat"))
       throw new Error(`The person who asked cannot chat with ${name}, so it stays out.`);
     if (channel.members.length >= INPUT_LIMITS.agents)

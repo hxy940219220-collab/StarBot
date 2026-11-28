@@ -3,8 +3,8 @@ import {
   isAgentProvider,
   PROVIDER_USAGE_RESET_OUTCOMES,
   type ProviderUsageResetOutcome,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
+} from "@starbot/contracts/ipc";
+import { decodeRecord, requiredString } from "@starbot/contracts/ipc-decoding";
 import {
   type DynamicRecord,
   isBoolean,
@@ -12,7 +12,7 @@ import {
   isNumber,
   isOneOf,
   isString,
-} from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/runtime-values";
 
 export type RequestId = string | number;
 
@@ -542,7 +542,7 @@ export function getRecord(record: unknown, key: string): DynamicRecord | null {
 
 export function bridgedToolName(item: ThreadItem): string | null {
   const tool = getString(item, "tool") ?? getString(item, "name");
-  if (tool !== "tool_call" && tool !== "mcp__openbot__tool_call") return null;
+  if (tool !== "tool_call" && tool !== "mcp__starbot__tool_call") return null;
   const args = getRecord(item, "arguments");
   const name = getString(args, "name") ?? getString(args, "tool");
   return name === null ? null : qualifiedToolName(name);

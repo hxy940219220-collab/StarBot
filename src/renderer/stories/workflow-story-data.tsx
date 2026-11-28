@@ -8,11 +8,11 @@ import {
   type WorkflowRunDetail,
   type WorkflowStep,
   type WorkflowVersion,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { EMPTY_GITHUB_HISTORY, type WorkflowGitHubCanvas } from "@openbot/ui/features/workflows/workflow-github";
-import type { WorkflowCatalogs, WorkflowImageModel } from "@openbot/ui/features/workflows/workflow-model";
-import type { WorkflowRunView } from "@openbot/ui/features/workflows/workflow-run-view";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { EMPTY_GITHUB_HISTORY, type WorkflowGitHubCanvas } from "@starbot/ui/features/workflows/workflow-github";
+import type { WorkflowCatalogs, WorkflowImageModel } from "@starbot/ui/features/workflows/workflow-model";
+import type { WorkflowRunView } from "@starbot/ui/features/workflows/workflow-run-view";
 import { FILES_ROWS } from "./files-fixtures";
 import { STORY_AGENT_STATUS, STORY_AGENTS, STORY_MODELS, STORY_TEAM_MEMBERS } from "./fixtures";
 
@@ -556,7 +556,7 @@ export const higgsfieldVideo = (): StoryWorkflow => ({
   },
 });
 
-const TRIAGE_REPOSITORY = "openbot-preview/app";
+const TRIAGE_REPOSITORY = "starbot-preview/app";
 
 const GITHUB_TRIAGE: WorkflowGraph = {
   nodes: [
@@ -692,14 +692,14 @@ export const STORY_GITHUB: WorkflowGitHubCanvas = {
     connected: true,
     repositories: [
       { fullName: TRIAGE_REPOSITORY, private: false, canWrite: true, events: true },
-      { fullName: "openbot-preview/docs", private: true, canWrite: false, events: true },
+      { fullName: "starbot-preview/docs", private: true, canWrite: false, events: true },
       {
-        fullName: "openbot-preview/desktop-release-pipeline-and-installers",
+        fullName: "starbot-preview/desktop-release-pipeline-and-installers",
         private: true,
         canWrite: true,
         events: true,
       },
-      { fullName: "openbot-preview-labs/team-api-gateway", private: true, canWrite: true, events: false },
+      { fullName: "starbot-preview-labs/team-api-gateway", private: true, canWrite: true, events: false },
     ],
   }),
   history: () => EMPTY_GITHUB_HISTORY,

@@ -229,7 +229,7 @@ function rendererRole(contents: WebContents): string {
   try {
     const url = new URL(contents.getURL());
     const page = url.pathname.slice(url.pathname.lastIndexOf("/") + 1).replace(/\.html$/u, "");
-    if (url.protocol === "openbot-app:" || url.hostname === "localhost") {
+    if (url.protocol === "starbot-app:" || url.hostname === "localhost") {
       role = url.searchParams.get("window") === "chat" ? "chat" : page || "app";
       if (role === "index") role = "app";
     } else {
@@ -422,5 +422,5 @@ export function installPerfProbes(): void {
   patchTimers();
   loopDelay.enable();
   setPerfProbeSink(sink);
-  Object.assign(globalThis, { __openbotPerfProbes: { reset, snapshot, explain, processKinds } });
+  Object.assign(globalThis, { __starbotPerfProbes: { reset, snapshot, explain, processKinds } });
 }

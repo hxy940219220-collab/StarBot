@@ -3,18 +3,18 @@ import type {
   AgentRuntimeSnapshot,
   ClientAgentSummary,
   ServerNotificationLevel,
-} from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTranslate } from "@starbot/i18n";
 import {
   type AgentNotificationChannel,
   notificationForAgentEvent,
   notificationRequestKey,
   settledRequestKeys,
-} from "@openbot/team-client/agent-notifications";
-import type { ChannelNotificationContent } from "@openbot/team-client/channel-notifications";
+} from "@starbot/team-client/agent-notifications";
+import type { ChannelNotificationContent } from "@starbot/team-client/channel-notifications";
 
-const PERMISSION_ASKED_KEY = "openbot.web.notification-permission-asked";
-const FOCUSED_TAB_KEY = "openbot.web.focused-tab";
+const PERMISSION_ASKED_KEY = "starbot.web.notification-permission-asked";
+const FOCUSED_TAB_KEY = "starbot.web.focused-tab";
 const TAB_ID = crypto.randomUUID();
 
 export function requestWebNotificationPermission(again = false): void {

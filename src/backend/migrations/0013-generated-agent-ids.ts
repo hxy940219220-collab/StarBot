@@ -1,8 +1,8 @@
 import type { DatabaseSync } from "node:sqlite";
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 import { isDynamicRecord, isString } from "./runtime-values";
 
-// A copy of `isGeneratedAgentId` and `isUuidV4` in `@openbot/contracts/validation` as this migration
+// A copy of `isGeneratedAgentId` and `isUuidV4` in `@starbot/contracts/validation` as this migration
 // shipped. The copy keeps the migration the same when the live check changes.
 const UUID_V4_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
 
@@ -98,7 +98,7 @@ function seedLiteral(seed: string): string {
 }
 
 function seedSentinel(index: number): string {
-  return String.raw`"avatarSeed":"\u0000openbot-avatar-seed-` + index + String.raw`\u0000"`;
+  return String.raw`"avatarSeed":"\u0000starbot-avatar-seed-` + index + String.raw`\u0000"`;
 }
 
 function readAgentIdRenames(db: DatabaseSync): readonly AgentIdRename[] {
@@ -294,7 +294,7 @@ function quoteSqlIdentifier(identifier: string): string {
   return `"${identifier.replaceAll('"', '""')}"`;
 }
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 13,
   name: "generated-agent-ids",
   disableForeignKeys: true,

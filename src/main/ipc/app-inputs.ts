@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentDefaults,
   AgentDockAction,
@@ -57,7 +57,7 @@ import type {
   UninstallSkillInput,
   UpdatePreferenceChange,
   VerifyEmailCodeInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   decodeExternalLinkTarget,
   GITHUB_SKILL_ID_MAX_LENGTH,
@@ -97,8 +97,8 @@ import {
   MAC_AUTOMATION_TARGETS,
   QUIT_GUARDS,
   RENDERER_TIMING_LIMITS,
-} from "@openbot/contracts/ipc";
-import { isReferralCode } from "@openbot/contracts/referral";
+} from "@starbot/contracts/ipc";
+import { isReferralCode } from "@starbot/contracts/referral";
 import {
   type DynamicRecord,
   isBoolean,
@@ -106,8 +106,8 @@ import {
   isNumber,
   isOneOf,
   isString,
-} from "@openbot/contracts/runtime-values";
-import { validateProfileName } from "@openbot/contracts/validation";
+} from "@starbot/contracts/runtime-values";
+import { validateProfileName } from "@starbot/contracts/validation";
 import { parseAvatarImage } from "./avatar-inputs";
 import { isObject, optionalBoolean, requireString } from "./validation";
 

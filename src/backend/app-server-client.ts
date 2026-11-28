@@ -1,10 +1,10 @@
 import { type ChildProcessWithoutNullStreams, spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
-import { agentProviderName } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { agentProviderName } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Fiber, Result, Schema } from "effect";
 import { isTurnContextBlock } from "./agent/developer-instructions";
 import { LOG_TIMESTAMP_PREFIX } from "./agent/provider-diagnostics";
@@ -69,7 +69,7 @@ const CODEX_TOOL_STALL_MS = 60 * 60_000;
 const CODEX_STALL_CHECK_MS = 60_000;
 const OUTPUT_ITEM_TYPES: ReadonlySet<unknown> = new Set(["agentMessage", "reasoning", "userMessage", "plan"]);
 
-const logger = createOpenBotLogger("codex-app-server");
+const logger = createStarBotLogger("codex-app-server");
 
 interface TurnClock {
   threadId: string;

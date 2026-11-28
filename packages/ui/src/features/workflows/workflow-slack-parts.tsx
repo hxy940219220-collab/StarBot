@@ -7,9 +7,9 @@ import {
   type WorkflowSlackAction,
   type WorkflowSlackEmoji,
   type WorkflowSlackEvent,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { AtSign, CirclePlus, Hash, Megaphone, MessageSquare, MessageSquareReply, Zap } from "@openbot/ui";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { AtSign, CirclePlus, Hash, Megaphone, MessageSquare, MessageSquareReply, Zap } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { Show } from "solid-js";
 import { useText } from "../../text";

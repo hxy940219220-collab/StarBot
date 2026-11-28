@@ -72,7 +72,7 @@ export const messages = {
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *StarBot が接続しました*\n\nStarBot で許可した人がこの番号に書けるようになりました。新しい人にはコードが届きます。StarBot の「リクエスト」で承認してください。\n\n依頼を止めるには *stop* と送ってください。",
 
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "この WhatsApp 番号には別の StarBot もリンクされているため、回答が 2 件届くことがあります。直すには、スマートフォンの WhatsApp で「リンク済みデバイス」を開き、使っていない StarBot をログアウトしてください。",
 
   "status.messaging.whatsappPaused":

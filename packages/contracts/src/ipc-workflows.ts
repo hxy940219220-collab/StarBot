@@ -94,7 +94,7 @@ export interface WorkflowMediaSize {
   height: number;
 }
 
-export type WorkflowMediaProvider = "codex" | "grok" | "sunra" | "higgsfield" | "openbot";
+export type WorkflowMediaProvider = "codex" | "grok" | "sunra" | "higgsfield" | "starbot";
 
 export interface WorkflowMediaModel {
   id: string;
@@ -1122,7 +1122,7 @@ export interface WorkflowMediaProviders {
   sunra: boolean;
   higgsfield: boolean;
   accounts: readonly WorkflowMediaServiceAccount[] | null;
-  openbot?: boolean;
+  starbot?: boolean;
 }
 
 export const WORKFLOW_MEDIA_SERVICE_ACCOUNT_MAX = 32;
@@ -1152,7 +1152,7 @@ export function isWorkflowMediaProviders(value: unknown): value is WorkflowMedia
     isBoolean(value.sunra) &&
     isBoolean(value.higgsfield) &&
     isNullableListOf(value.accounts, isWorkflowMediaServiceAccount) &&
-    (value.openbot === undefined || isBoolean(value.openbot))
+    (value.starbot === undefined || isBoolean(value.starbot))
   );
 }
 
@@ -1165,7 +1165,7 @@ export interface WorkflowMediaCredits {
   sunra: WorkflowMediaCreditBalance | null;
   higgsfield: WorkflowMediaCreditBalance | null;
   accounts: readonly WorkflowMediaAccountCredits[] | null;
-  openbot?: WorkflowMediaCreditBalance | null;
+  starbot?: WorkflowMediaCreditBalance | null;
 }
 
 export interface WorkflowMediaAccountCredits extends WorkflowMediaServiceAccount {
@@ -1181,7 +1181,7 @@ export function isWorkflowMediaCreditBalance(value: unknown): value is WorkflowM
   );
 }
 
-function isOpenBotCreditBalance(value: unknown): value is WorkflowMediaCreditBalance {
+function isStarBotCreditBalance(value: unknown): value is WorkflowMediaCreditBalance {
   return (
     isDynamicRecord(value) && isCreditAmount(value.available) && (value.quota === null || isCreditAmount(value.quota))
   );
@@ -1193,7 +1193,7 @@ export function isWorkflowMediaCredits(value: unknown): value is WorkflowMediaCr
     (value.sunra === null || isWorkflowMediaCreditBalance(value.sunra)) &&
     (value.higgsfield === null || isWorkflowMediaCreditBalance(value.higgsfield)) &&
     isNullableListOf(value.accounts, isWorkflowMediaAccountCredits) &&
-    (value.openbot === undefined || value.openbot === null || isOpenBotCreditBalance(value.openbot))
+    (value.starbot === undefined || value.starbot === null || isStarBotCreditBalance(value.starbot))
   );
 }
 
@@ -1207,16 +1207,16 @@ export function isWorkflowMediaAccountCredits(value: unknown): value is Workflow
 
 export type WorkflowCatalogProvider = "sunra" | "higgsfield";
 export const WORKFLOW_CATALOG_PROVIDERS: readonly WorkflowCatalogProvider[] = ["sunra", "higgsfield"];
-export type WorkflowCatalogSource = WorkflowCatalogProvider | "openbot";
-export const WORKFLOW_CATALOG_SOURCES: readonly WorkflowCatalogSource[] = [...WORKFLOW_CATALOG_PROVIDERS, "openbot"];
+export type WorkflowCatalogSource = WorkflowCatalogProvider | "starbot";
+export const WORKFLOW_CATALOG_SOURCES: readonly WorkflowCatalogSource[] = [...WORKFLOW_CATALOG_PROVIDERS, "starbot"];
 export const WORKFLOW_MEDIA_CATALOG_MAX = 1000;
-export const WORKFLOW_CREDIT_MODEL_PREFIX = "openbot-";
+export const WORKFLOW_CREDIT_MODEL_PREFIX = "starbot-";
 
 export const workflowCatalogProvider = (id: string): WorkflowCatalogProvider | null =>
   id.startsWith("sunra-") ? "sunra" : id.startsWith("higgsfield-") ? "higgsfield" : null;
 
 export const workflowCatalogSource = (id: string): WorkflowCatalogSource | null =>
-  id.startsWith(WORKFLOW_CREDIT_MODEL_PREFIX) ? "openbot" : workflowCatalogProvider(id);
+  id.startsWith(WORKFLOW_CREDIT_MODEL_PREFIX) ? "starbot" : workflowCatalogProvider(id);
 const WORKFLOW_MEDIA_NAME_MAX = 160;
 const WORKFLOW_MEDIA_MAKER_MAX = 120;
 const WORKFLOW_MEDIA_RESOLUTION_MAX = 16;
@@ -1329,7 +1329,7 @@ export function isWorkflowMediaCatalog(value: unknown): value is WorkflowMediaCa
 const WORKFLOW_CATALOG_SOURCE_NAMES: Readonly<Record<WorkflowCatalogSource, string>> = {
   sunra: "Sunra",
   higgsfield: "Higgsfield",
-  openbot: "StarBot",
+  starbot: "StarBot",
 };
 
 export function workflowCatalogMediaModel(entry: WorkflowMediaCatalogModel): WorkflowMediaModel | null {

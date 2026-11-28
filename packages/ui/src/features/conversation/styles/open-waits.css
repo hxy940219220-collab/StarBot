@@ -1,10 +1,10 @@
 .open-waits .task-list-title-name {
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .open-waits .task-list-count {
-  color: var(--openbot-warning-text);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-warning-text);
+  font-size: var(--starbot-text-sm);
 }
 
 .open-waits .task-list-items:has(> :nth-child(7)) {
@@ -22,14 +22,14 @@
   display: grid;
   min-width: 0;
   flex: 1;
-  gap: var(--openbot-space-0-5);
+  gap: var(--starbot-space-0-5);
 }
 
 .open-waits-row-note {
   overflow: hidden;
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-md);
-  line-height: var(--openbot-leading-md);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-md);
+  line-height: var(--starbot-leading-md);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -37,22 +37,22 @@
 .open-waits-row-meta {
   display: flex;
   min-width: 0;
-  gap: var(--openbot-space-1);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  gap: var(--starbot-space-1);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
   white-space: nowrap;
 }
 
 .open-waits-row-request {
   overflow: hidden;
   min-width: 0;
-  color: var(--openbot-text-dim);
+  color: var(--starbot-text-dim);
   text-overflow: ellipsis;
 }
 
 [data-wait-state="resuming"] .open-waits-row-state {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   animation: task-list-pulse 1.6s ease-in-out infinite;
   animation-play-state: var(--task-list-play-state, running);
 }
@@ -66,5 +66,5 @@
 .open-waits-menu {
   flex: 0 0 auto;
   align-self: flex-start;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }

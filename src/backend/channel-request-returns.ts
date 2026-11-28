@@ -1,4 +1,4 @@
-import type { ChannelMessage, ChannelTask, ChannelTaskState } from "@openbot/contracts/ipc";
+import type { ChannelMessage, ChannelTask, ChannelTaskState } from "@starbot/contracts/ipc";
 import { Cause, Effect } from "effect";
 import { isTaskAnswer } from "./channel-history";
 import { type ChannelService, channelHandoffSenderAgentId, channelResultId } from "./channel-service";
@@ -169,7 +169,7 @@ function returnKey(task: ChannelTask): string {
 }
 
 function returnText(task: ChannelTask, channelId: string, channelName: string, answer: ChannelMessage | null): string {
-  const origin = `Channel: ${channelName} (${channelId}). This answers your openbot.send_to_channel request.`;
+  const origin = `Channel: ${channelName} (${channelId}). This answers your starbot.send_to_channel request.`;
   if (task.state === "completed")
     return [
       origin,

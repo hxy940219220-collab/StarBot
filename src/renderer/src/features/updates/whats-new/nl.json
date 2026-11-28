@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Start een workflow vanuit GitHub: een GitHub-trigger draait bij nieuwe issues, reacties, pull requests, reviews, mislukte checks of een vermelding van @openbotgit.",
+          "Start een workflow vanuit GitHub: een GitHub-trigger draait bij nieuwe issues, reacties, pull requests, reviews, mislukte checks of een vermelding van @starbotgit.",
           "Wijzig GitHub vanuit een workflow: reageer, label, wijs toe, review, sluit of maak een issue als de StarBot GitHub App.",
           "De Marktplaats heeft 17 nieuwe StarBot-agents, zoals QA Tester, PR Shepherd en Chief of Staff, en 15 nieuwe vaardigheden voor ze.",
           "Gebruik toont de maandlimiet van OpenCode Go als derde balk."

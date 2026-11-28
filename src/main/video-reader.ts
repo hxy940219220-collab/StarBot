@@ -4,8 +4,8 @@ import { chmod, mkdir, mkdtemp, readdir, readFile, rename, rm, stat, writeFile }
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
-import { VOICE_AUDIO_LIMITS } from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+import { VOICE_AUDIO_LIMITS } from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Option, Schema, Semaphore } from "effect";
 import { BrowserWindow, session as electronSession, net, type Session } from "electron";
 import {
@@ -20,7 +20,7 @@ import { fileResponse } from "./file-response";
 import { downloadArchive } from "./onepassword-cli-installer";
 import type { RuntimeTarget } from "./provider-runtime-descriptors";
 
-const logger = createOpenBotLogger("video-reader");
+const logger = createStarBotLogger("video-reader");
 const execFileAsync = promisify(execFile);
 
 const YT_DLP_VERSION = "2026.10.26";
@@ -35,8 +35,8 @@ const YT_DLP_RELEASES: Record<RuntimeTarget, { name: string; sha256: string }> =
   "win32-x64": { name: "yt-dlp.exe", sha256: "f5389d3698ecde4ef06f4e6b1ce0294fe9ac1396228c8990b8d3416d6d177a7d" },
 };
 
-const VIDEO_PARTITION = "openbot-video-reader";
-const VIDEO_SCHEME = "openbot-video";
+const VIDEO_PARTITION = "starbot-video-reader";
+const VIDEO_SCHEME = "starbot-video";
 const READ_TIMEOUT = "15 minutes";
 const INFO_TIMEOUT_MS = 2 * 60_000;
 const DOWNLOAD_TIMEOUT_MS = 8 * 60_000;
@@ -52,7 +52,7 @@ const MAX_DESCRIPTION_LENGTH = 4_000;
 const MAX_REASON_LENGTH = 300;
 const SAMPLE_RATE = VOICE_AUDIO_LIMITS.sampleRate;
 
-const DECODER_SCRIPT = `window.openbotVideo = {
+const DECODER_SCRIPT = `window.starbotVideo = {
   async frames(url, count, knownDuration, longSide) {
     const response = await fetch(url);
     if (!response.ok) throw new Error("The video file did not load.");
@@ -164,7 +164,7 @@ function ytDlpReason(error: unknown): string {
     .find((entry) => entry.startsWith("ERROR:"));
   if (!line) return "StarBot could not get the video from this link.";
   if (YOUTUBE_BOT_CHECK.test(line)) {
-    return "YouTube does not let this computer download its videos: it asks for a sign-in to show that this is not a bot. This often happens on a server. Open the video page with openbot_browser to read it.";
+    return "YouTube does not let this computer download its videos: it asks for a sign-in to show that this is not a bot. This often happens on a server. Open the video page with starbot_browser to read it.";
   }
   const message = line.replace(/^ERROR:\s*(\[[^\]]*\]\s*)?([^:\s]+:\s+)?/u, "").trim();
   return `StarBot could not get the video: ${message}`;
@@ -377,7 +377,7 @@ export class VideoReader implements VideoReaderHost {
     return yield* this.#lock.withPermit(
       Effect.acquireUseRelease(
         Effect.tryPromise({
-          try: () => mkdtemp(join(tmpdir(), "openbot-video-")),
+          try: () => mkdtemp(join(tmpdir(), "starbot-video-")),
           catch: () => failure("StarBot could not make a temporary folder for the video."),
         }),
         (directory) => this.#readInto(directory, request),
@@ -681,7 +681,7 @@ export class VideoReader implements VideoReaderHost {
     let framesNote: string | null = null;
     if (media.video && frameCount > 0) {
       const result = yield* script(
-        `openbotVideo.frames(${JSON.stringify(`${origin}/video`)}, ${frameCount}, ${knownDuration ?? 0}, ${FRAME_LONG_SIDE})`,
+        `starbotVideo.frames(${JSON.stringify(`${origin}/video`)}, ${frameCount}, ${knownDuration ?? 0}, ${FRAME_LONG_SIDE})`,
         FramesResult,
         "StarBot cannot decode the picture of this video.",
       ).pipe(Effect.catchTag("VideoReadFailed", (error) => Effect.succeed(error)));
@@ -698,7 +698,7 @@ export class VideoReader implements VideoReaderHost {
       transcriptNote = "The video has no sound.";
     } else {
       const decoded = yield* script(
-        `openbotVideo.sound(${JSON.stringify(`${origin}/audio`)}, ${SAMPLE_RATE}, ${MAX_TRANSCRIPT_SECONDS})`,
+        `starbotVideo.sound(${JSON.stringify(`${origin}/audio`)}, ${SAMPLE_RATE}, ${MAX_TRANSCRIPT_SECONDS})`,
         Schema.Number,
         "StarBot cannot decode the sound of this video.",
       ).pipe(Effect.catchTag("VideoReadFailed", (error) => Effect.succeed(error)));
@@ -713,7 +713,7 @@ export class VideoReader implements VideoReaderHost {
       const partLength = TRANSCRIPT_PART_SECONDS * SAMPLE_RATE;
       for (let start = 0; start < heard; start += partLength) {
         const encoded = yield* script(
-          `openbotVideo.part(${start}, ${partLength})`,
+          `starbotVideo.part(${start}, ${partLength})`,
           Schema.String,
           "StarBot cannot decode the sound of this video.",
         ).pipe(Effect.catchTag("VideoReadFailed", (error) => Effect.succeed(error)));

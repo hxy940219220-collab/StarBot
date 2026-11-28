@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch for an StarBot update request
+
+[Path]
+PathExists=/run/starbot/update-stage
+PathExists=/run/starbot/update-install
+
+[Install]
+WantedBy=paths.target

@@ -239,7 +239,7 @@ export const messages = {
     "Las respuestas en hilos te avisan cuando un agente termina o se detiene con un error en un hilo. Sin ellas, un hilo te sigue avisando cuando necesita tu respuesta o una aprobación.",
   "mobile.settings.notifications.sound": "Sonido",
   "mobile.settings.notifications.playSound": "Reproducir sonido",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Cálido",
   "mobile.settings.notifications.sound.mech": "Mecánico",
@@ -380,7 +380,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Mis últimos seis meses con StarBot",
 
   "mobile.settings.profile.share.createFailed": "No se pudo crear la imagen.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Voz",
   "mobile.settings.voice.sample": "Hola. Así te leeré mis respuestas.",
   "mobile.settings.voice.voice": "Voz",

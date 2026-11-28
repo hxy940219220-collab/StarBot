@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { z } from "zod";
 import { createRemoteDesktopInputDigest, loadNativeRuntimeLock, type NativeRuntimeLock } from "./native-runtime-lock";
 import {
@@ -26,7 +26,7 @@ const githubReleaseSchema = z.object({
 type GitHubRelease = z.infer<typeof githubReleaseSchema>;
 type GitHubReleaseAsset = GitHubRelease["assets"][number];
 
-const logger = createOpenBotLogger("install-remote-desktop-runtime");
+const logger = createStarBotLogger("install-remote-desktop-runtime");
 
 export async function installRemoteDesktopRuntime(
   input: {
@@ -77,7 +77,7 @@ export async function installRemoteDesktopRuntime(
   const archiveBytes = await download(fetchImpl, archiveAsset.browser_download_url, "Runtime asset");
   if (sha256(archiveBytes) !== artifact.sha256) throw new Error(`The ${target} runtime archive checksum is invalid.`);
 
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-runtime-install-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "starbot-runtime-install-"));
   try {
     const archive = join(temporaryRoot, artifact.asset);
     const extracted = join(temporaryRoot, "extracted");

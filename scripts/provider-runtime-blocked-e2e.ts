@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
-import type { ProviderRuntimeSnapshot } from "@openbot/contracts/ipc";
+import type { ProviderRuntimeSnapshot } from "@starbot/contracts/ipc";
 import lockValue from "../native-runtime.lock.json";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { ProviderRuntimeManager } from "../src/main/provider-runtime-manager";
 import { parseAgentRuntimeLock } from "./agent-runtime-lock";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-runtime-blocked-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-runtime-blocked-e2e");
 const WAIT_MS = 15_000;
 const BLOCKED_VERSION = "2.3.2";
 const BLOCKLIST_URL = "https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/provider-runtime-blocklist.json";
@@ -33,7 +33,7 @@ interface Report {
   userCli?: Scenario;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-runtime-blocked-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-provider-runtime-blocked-e2e-"));
 const report: Report = { passed: false };
 const baseLock = parseAgentRuntimeLock(lockValue);
 const pinnedVersion = baseLock.opencode.version;
@@ -80,7 +80,7 @@ async function writeCopy(versionRoot: string, version: string, executable: strin
     target,
     files: { [`bin/${executable}`]: sha256(text), LICENSE: sha256(LICENSE) },
   };
-  await writeFile(join(versionRoot, "openbot-install.json"), `${JSON.stringify(record)}\n`);
+  await writeFile(join(versionRoot, "starbot-install.json"), `${JSON.stringify(record)}\n`);
 }
 
 function nextStatus(

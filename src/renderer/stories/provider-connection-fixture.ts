@@ -1,6 +1,6 @@
-import { type AgentProviderId, agentProviderDescriptor } from "@openbot/contracts/ipc";
-import { toast } from "@openbot/ui";
-import type { ProviderCodeLoginState } from "@openbot/ui/components/ProviderCodeLoginDialog";
+import { type AgentProviderId, agentProviderDescriptor } from "@starbot/contracts/ipc";
+import { toast } from "@starbot/ui";
+import type { ProviderCodeLoginState } from "@starbot/ui/components/ProviderCodeLoginDialog";
 import { createSignal } from "solid-js";
 import type { ProviderConnectionApi, ProviderUseApp } from "../src/components/provider-connection-api";
 

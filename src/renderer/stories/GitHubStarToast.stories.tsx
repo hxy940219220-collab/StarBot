@@ -1,5 +1,5 @@
-import { Button, Toaster, toast } from "@openbot/ui";
-import { GitHubStarToast } from "@openbot/ui/features/github-star/GitHubStarToast";
+import { Button, Toaster, toast } from "@starbot/ui";
+import { GitHubStarToast } from "@starbot/ui/features/github-star/GitHubStarToast";
 import { createSignal, onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

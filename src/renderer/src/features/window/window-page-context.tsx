@@ -1,5 +1,5 @@
-import { type CreditsMenu, createCreditsSummary } from "@openbot/ui/features/credits/credits-store";
-import type { SettingsPageBack, SettingsPagePlacement } from "@openbot/ui/features/settings/SettingsDialogShell";
+import { type CreditsMenu, createCreditsSummary } from "@starbot/ui/features/credits/credits-store";
+import type { SettingsPageBack, SettingsPagePlacement } from "@starbot/ui/features/settings/SettingsDialogShell";
 import { createEffect, createMemo, createSignal, untrack } from "solid-js";
 import { appPort } from "../../app-port";
 import { createSimpleContext } from "../../simple-context";

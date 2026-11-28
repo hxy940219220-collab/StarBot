@@ -1,5 +1,5 @@
 {
-  "name": "@openbot/brand",
+  "name": "@starbot/brand",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@norbert_bodziony/bloub": "catalog:",
-    "@openbot/contracts": "workspace:*"
+    "@starbot/contracts": "workspace:*"
   },
   "peerDependencies": {
     "@solidjs/web": "catalog:",

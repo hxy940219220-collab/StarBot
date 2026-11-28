@@ -2,7 +2,7 @@ import {
   isKeyOnlyProvider,
   type ManagedProviderId,
   pasteCodeSignInSupported,
-} from "@openbot/contracts/agent-providers";
+} from "@starbot/contracts/agent-providers";
 import {
   type AgentProviderId,
   type AgentStatus,
@@ -11,31 +11,31 @@ import {
   isManagedRuntimeProvider,
   LOCAL_SERVER_ID,
   type ProviderRuntimeDownload,
-} from "@openbot/contracts/ipc";
-import { CLAUDE_API_KEY_CAPABILITY } from "@openbot/contracts/team-protocol/claude-api-key-v1";
-import { CODEX_API_KEY_CAPABILITY } from "@openbot/contracts/team-protocol/codex-api-key-v1";
-import { CUSTOM_PROVIDER_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/custom-provider-edit-v1";
-import { LIVE_VOICE_ACCOUNT_CAPABILITY } from "@openbot/contracts/team-protocol/live-voice-account-v1";
-import { PROVIDER_ACCOUNT_CODE_CAPABILITY } from "@openbot/contracts/team-protocol/provider-account-code-v1";
-import { PROVIDER_ACCOUNT_KEYS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-account-keys-v1";
-import { PROVIDER_ACCOUNT_POOL_CAPABILITY } from "@openbot/contracts/team-protocol/provider-account-pool-v1";
+} from "@starbot/contracts/ipc";
+import { CLAUDE_API_KEY_CAPABILITY } from "@starbot/contracts/team-protocol/claude-api-key-v1";
+import { CODEX_API_KEY_CAPABILITY } from "@starbot/contracts/team-protocol/codex-api-key-v1";
+import { CUSTOM_PROVIDER_EDIT_CAPABILITY } from "@starbot/contracts/team-protocol/custom-provider-edit-v1";
+import { LIVE_VOICE_ACCOUNT_CAPABILITY } from "@starbot/contracts/team-protocol/live-voice-account-v1";
+import { PROVIDER_ACCOUNT_CODE_CAPABILITY } from "@starbot/contracts/team-protocol/provider-account-code-v1";
+import { PROVIDER_ACCOUNT_KEYS_CAPABILITY } from "@starbot/contracts/team-protocol/provider-account-keys-v1";
+import { PROVIDER_ACCOUNT_POOL_CAPABILITY } from "@starbot/contracts/team-protocol/provider-account-pool-v1";
 import {
   type ProviderAccountRelay,
   providerAccountRelay,
-} from "@openbot/contracts/team-protocol/provider-account-relays";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
+} from "@starbot/contracts/team-protocol/provider-account-relays";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@starbot/contracts/team-protocol/provider-accounts-v1";
 import {
   PROVIDER_FROZEN_ACCOUNTS_LIMIT,
   PROVIDER_MANY_ACCOUNTS_CAPABILITY,
   PROVIDER_MANY_ACCOUNTS_LIMIT,
-} from "@openbot/contracts/team-protocol/provider-many-accounts-v1";
-import { PROVIDER_SIGN_OUT_CAPABILITY } from "@openbot/contracts/team-protocol/provider-sign-out-v1";
-import { PROVIDER_USAGE_RESET_CAPABILITY } from "@openbot/contracts/team-protocol/provider-usage-reset-v1";
-import { PROVIDER_USE_CAPABILITY } from "@openbot/contracts/team-protocol/provider-use-v1";
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import type { ProviderAccountActions } from "@openbot/ui/components/provider-accounts";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/team-protocol/provider-many-accounts-v1";
+import { PROVIDER_SIGN_OUT_CAPABILITY } from "@starbot/contracts/team-protocol/provider-sign-out-v1";
+import { PROVIDER_USAGE_RESET_CAPABILITY } from "@starbot/contracts/team-protocol/provider-usage-reset-v1";
+import { PROVIDER_USE_CAPABILITY } from "@starbot/contracts/team-protocol/provider-use-v1";
+import { classifyFailure } from "@starbot/telemetry";
+import { toast } from "@starbot/ui";
+import type { ProviderAccountActions } from "@starbot/ui/components/provider-accounts";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, flush, onSettled, untrack } from "solid-js";
 import { type DesktopAnalyticsProperties, desktopAnalytics } from "./analytics";
 import { appPort } from "./app-port";

@@ -1,25 +1,25 @@
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { loopbackCallback } from "@openbot/contracts/ipc";
+import { loopbackCallback } from "@starbot/contracts/ipc";
 import {
   legacyTeamCapabilities,
   teamCapabilitiesForProtocol,
   teamCapabilitiesVisibleToProtocol,
-} from "@openbot/contracts/team-protocol/current";
-import { optionalRouteCodec } from "@openbot/contracts/team-protocol/optional-routes";
+} from "@starbot/contracts/team-protocol/current";
+import { optionalRouteCodec } from "@starbot/contracts/team-protocol/optional-routes";
 import {
   PROVIDER_SIGN_IN_RELAY_V2_CAPABILITY,
   PROVIDER_SIGN_IN_RELAY_V2_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-sign-in-relay-v2";
-import { providerSignInRelay } from "@openbot/contracts/team-protocol/provider-sign-in-relays";
-import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/provider-sign-in-relay-v2";
+import { providerSignInRelay } from "@starbot/contracts/team-protocol/provider-sign-in-relays";
+import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@starbot/contracts/team-protocol/sign-in-relay-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { startAcpAuthentication } from "../src/backend/acp-sign-in";
 import { SignInRelayHost } from "../src/main/sign-in-relay-host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/devin-sign-in-relay-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/devin-sign-in-relay-e2e");
 const MEMBER = "member-1";
 
 const FAKE_AGENT = `

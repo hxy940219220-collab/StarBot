@@ -1,6 +1,6 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import { type IngressRoute, ROUTE_HOST_STATES } from "@openbot/contracts/signal-protocol/ingress-queue";
+import { type IngressRoute, ROUTE_HOST_STATES } from "@starbot/contracts/signal-protocol/ingress-queue";
 import { Context, Effect, Layer, ManagedRuntime, Schema, Semaphore } from "effect";
 import { createRemoteApiApp, prometheusMetrics } from "./app";
 import { readRemoteApiConfig } from "./config";
@@ -51,13 +51,13 @@ class ControlPlane extends Context.Service<
     validateResume(claims: import("./protocol").RemoteTicketClaims): Effect.Effect<boolean, ControlPlaneError>;
     validateSlackRoute(
       hostId: string,
-      teams: import("@openbot/contracts/signal-protocol/slack-route").SlackRouteTeam[],
+      teams: import("@starbot/contracts/signal-protocol/slack-route").SlackRouteTeam[],
     ): Effect.Effect<string[], ControlPlaneError>;
     validateTelegramRoute(
       hostId: string,
-      chats: import("@openbot/contracts/signal-protocol/telegram-route").TelegramRouteChat[],
+      chats: import("@starbot/contracts/signal-protocol/telegram-route").TelegramRouteChat[],
     ): Effect.Effect<
-      import("@openbot/contracts/signal-protocol/telegram-route").TelegramRouteChat[],
+      import("@starbot/contracts/signal-protocol/telegram-route").TelegramRouteChat[],
       ControlPlaneError
     >;
     linkTelegramChat(
@@ -67,18 +67,18 @@ class ControlPlane extends Context.Service<
     ): Effect.Effect<TelegramChatLink | null, ControlPlaneError>;
     validateDiscordRoute(
       hostId: string,
-      guilds: import("@openbot/contracts/signal-protocol/discord-route").DiscordRouteGuild[],
+      guilds: import("@starbot/contracts/signal-protocol/discord-route").DiscordRouteGuild[],
     ): Effect.Effect<string[], ControlPlaneError>;
     validateWebhookRoute(
       hostId: string,
-      routes: import("@openbot/contracts/signal-protocol/webhook-route").WebhookRoute[],
+      routes: import("@starbot/contracts/signal-protocol/webhook-route").WebhookRoute[],
     ): Effect.Effect<string[], ControlPlaneError>;
     discordGuildRemoved(guildId: string): Effect.Effect<void, ControlPlaneError>;
     routeWake(route: IngressRoute, wake: boolean): Effect.Effect<RouteWake, ControlPlaneError>;
     supportsRouteWake(): Effect.Effect<boolean>;
     reconcileDiscordGuilds(guildIds: string[], before: number): Effect.Effect<void, ControlPlaneError>;
   }
->()("@openbot/remote-api/ControlPlane") {
+>()("@starbot/remote-api/ControlPlane") {
   static layer = Layer.sync(ControlPlane, () => {
     const ask = Effect.fn("ControlPlane.request")((path: string, payload: unknown, timeoutMilliseconds = 5_000) =>
       Effect.tryPromise({
@@ -89,8 +89,8 @@ class ControlPlane extends Context.Service<
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "OpenBot-Timestamp": timestamp,
-              "OpenBot-Signature": signServiceRequest(body, timestamp, config.authWebhookSecret),
+              "StarBot-Timestamp": timestamp,
+              "StarBot-Signature": signServiceRequest(body, timestamp, config.authWebhookSecret),
             },
             body,
             signal: AbortSignal.any([signal, AbortSignal.timeout(timeoutMilliseconds)]),
@@ -346,7 +346,7 @@ const tlsPaths =
 const signalRuntime = ManagedRuntime.make(signal.dependencies);
 const discordConfig = config.discord;
 if (!discordConfig) {
-  console.log("OpenBot Discord is off: DISCORD_BOT_TOKEN and DISCORD_APPLICATION_ID are not both set and valid.");
+  console.log("StarBot Discord is off: DISCORD_BOT_TOKEN and DISCORD_APPLICATION_ID are not both set and valid.");
 }
 let discordApi: DiscordApi | null = null;
 const discordWhileEntry: Effect.Effect<void> = discordConfig

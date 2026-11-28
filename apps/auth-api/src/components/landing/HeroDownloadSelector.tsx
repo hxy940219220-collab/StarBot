@@ -1,4 +1,4 @@
-import { PlatformLogo } from "@openbot/brand";
+import { PlatformLogo } from "@starbot/brand";
 import { createSignal, createUniqueId, For, onSettled, Show } from "solid-js";
 import { landingAnalytics } from "../../lib/analytics";
 import { ANDROID_APK_AVAILABLE } from "../../lib/android-apk";
@@ -8,7 +8,7 @@ import {
   type DownloadPlatform,
   detectDownloadPlatform,
 } from "../../lib/download-platforms";
-import { EXTERNAL_LINK_REL, OPENBOT_ALTERNATE_DOWNLOAD_LINKS, OPENBOT_ANDROID_APK_LINK } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, STARBOT_ALTERNATE_DOWNLOAD_LINKS, STARBOT_ANDROID_APK_LINK } from "../../lib/landing-links";
 import type { LandingPageText } from "../../lib/landing-page-text";
 import { detectMobilePlatform, MOBILE_APP_ORDER, MOBILE_APPS, type MobilePlatform } from "../../lib/mobile-apps";
 import { LandingIcon } from "./LandingIcon";
@@ -52,7 +52,7 @@ function heroOffer(platform: HeroPlatform, text: LandingPageText): HeroOffer {
     return {
       label: MAC_INTEL_LABEL,
       action: intelMac,
-      href: OPENBOT_ALTERNATE_DOWNLOAD_LINKS.macos,
+      href: STARBOT_ALTERNATE_DOWNLOAD_LINKS.macos,
       status: available,
       external: false,
     };
@@ -60,7 +60,7 @@ function heroOffer(platform: HeroPlatform, text: LandingPageText): HeroOffer {
     return {
       label: ANDROID_APK_LABEL,
       action: apk,
-      href: OPENBOT_ANDROID_APK_LINK,
+      href: STARBOT_ANDROID_APK_LINK,
       status: available,
       external: false,
     };

@@ -3,7 +3,7 @@ import {
   chatVisualAppTheme,
   chatVisualDocument,
   chatVisualFrameUrl,
-} from "@openbot/contracts/chat-visual";
+} from "@starbot/contracts/chat-visual";
 import { Match, onSettled, Switch } from "solid-js";
 import { documentColorScheme } from "../../document-color-scheme";
 import { REDUCED_MOTION_QUERY } from "../../utils";

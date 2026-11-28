@@ -1,5 +1,5 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   AppWindow,
   BellOff,
@@ -15,8 +15,8 @@ import {
   PanelLeft,
   Plus,
   Server,
-} from "@openbot/ui";
-import { SwapLabel } from "@openbot/ui/components/SwapLabel";
+} from "@starbot/ui";
+import { SwapLabel } from "@starbot/ui/components/SwapLabel";
 import { createEffect, createSignal, For, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import { CreditAmount, CreditIcon } from "../credits/CreditIcon";

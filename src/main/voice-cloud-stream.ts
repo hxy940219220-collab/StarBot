@@ -1,11 +1,11 @@
-import { AUTOMATIC_VOICE_LANGUAGE, VOICE_KEY_PROVIDER_NAMES, type VoiceLanguage } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { AUTOMATIC_VOICE_LANGUAGE, VOICE_KEY_PROVIDER_NAMES, type VoiceLanguage } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import WebSocket from "ws";
 import { rawDataText } from "./ws-raw-data";
 
-const logger = createOpenBotLogger("voice-cloud-stream");
+const logger = createStarBotLogger("voice-cloud-stream");
 
 const SCRIBE_REALTIME_URL = "wss://api.elevenlabs.io/v1/speech-to-text/realtime";
 const SAMPLE_RATE = 16_000;

@@ -1,6 +1,6 @@
-import { CHAT_BACKGROUND_PRESETS, type ChatBackgroundScheme } from "@openbot/brand/chat-colors";
-import type { AvatarColor } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import { CHAT_BACKGROUND_PRESETS, type ChatBackgroundScheme } from "@starbot/brand/chat-colors";
+import type { AvatarColor } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import { createMemo, Show } from "solid-js";
 import { ColorPicker, ColorPickerTrigger } from "../../color-picker";
 import { useText } from "../../text";

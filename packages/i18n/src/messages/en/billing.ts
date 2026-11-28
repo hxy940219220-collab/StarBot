@@ -328,7 +328,7 @@ export const messages = defineMessages("billing", {
   "billing.credits.activity.ownerCredits": "the owner's credits",
   "billing.credits.activity.someServer": "a server",
   "billing.credits.activity.member": "A member",
-  "billing.credits.activity.openbot": "StarBot",
+  "billing.credits.activity.starbot": "StarBot",
   "billing.credits.activity.line": "{actor} · {wallet} · {time}",
   "billing.credits.activity.running": "Running",
   "billing.credits.activity.failed": "Failed · not charged",

@@ -1,11 +1,11 @@
-import type { BrowserControlSession, BrowserTab, BrowserTabAgent, BrowserTabLabel } from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+import type { BrowserControlSession, BrowserTab, BrowserTabAgent, BrowserTabLabel } from "@starbot/contracts/ipc";
+import type { AppTranslate } from "@starbot/i18n";
 import type { JSX } from "@solidjs/web";
 import type { BrowserViewRuntime } from "./BrowserLiveView";
 import type { BrowserHistoryEntry } from "./browser-suggestions";
 import type { BrowserShortcutPlatform } from "./browser-view-shortcuts";
 
-export type { BrowserTabLabel } from "@openbot/contracts/ipc";
+export type { BrowserTabLabel } from "@starbot/contracts/ipc";
 
 export interface BrowserTeachBarProps {
   agentName: string;

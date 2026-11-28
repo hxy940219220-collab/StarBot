@@ -6,9 +6,9 @@ import {
   relayCallbackQuery,
   relayPageUrl,
   type SignInRelayStatus,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { runTeamEffect } from "@starbot/team-client";
 import {
   cancelSignInRelay,
   completeSignInRelay,
@@ -16,8 +16,8 @@ import {
   startLinkSignInRelay,
   startMcpSignInRelay,
   type TeamAdminRequestError,
-} from "@openbot/team-client/team-admin-requests";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
+} from "@starbot/team-client/team-admin-requests";
+import type { TeamApiRequest } from "@starbot/team-client/team-api-requests";
 import { Effect } from "effect";
 
 const POLL_MS = 1_000;

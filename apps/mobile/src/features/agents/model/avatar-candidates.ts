@@ -6,7 +6,7 @@ import {
   bloubAvatarProfile,
   SUPPORTED_AVATAR_SILHOUETTES,
   type SupportedAvatarSilhouetteId,
-} from "@openbot/brand/bloub-avatar";
+} from "@starbot/brand/bloub-avatar";
 import * as Crypto from "expo-crypto";
 
 interface AvatarCandidates {

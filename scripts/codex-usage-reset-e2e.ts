@@ -3,12 +3,12 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS, type AgentEvent, DEFAULT_PROVIDER_ACCOUNT_ID } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS, type AgentEvent, DEFAULT_PROVIDER_ACCOUNT_ID } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-usage-reset-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-usage-reset-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-usage-reset-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-usage-reset-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -20,14 +20,14 @@ const switchedFlag = join(root, "switched");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_CODEX = `#!/usr/bin/env node
 const { appendFileSync, existsSync, readFileSync, rmSync } = require("node:fs");
@@ -196,7 +196,7 @@ function consumed(): { idempotencyKey: unknown; outcome: string }[] {
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

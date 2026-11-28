@@ -12,7 +12,7 @@ import type {
   CrmSettings,
   CrmSourceConnectInput,
   CrmSourceInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { type Effect, Schema } from "effect";
 
 export class CrmError extends Schema.TaggedError<CrmError>()("CrmError", {

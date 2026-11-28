@@ -5,7 +5,7 @@ import {
   type ChannelSummary,
   type ClientAgentSummary,
   type ServerNotificationLevel,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   type AgentNotificationChannel,
   agentEventAgentId,
@@ -14,9 +14,9 @@ import {
   notificationRequestKey,
   settledRequestKeys,
   teammateTurnCompleted,
-} from "@openbot/team-client/agent-notifications";
-import { channelReplyNotifications } from "@openbot/team-client/channel-notifications";
-import type { TextValue } from "@openbot/ui/text";
+} from "@starbot/team-client/agent-notifications";
+import { channelReplyNotifications } from "@starbot/team-client/channel-notifications";
+import type { TextValue } from "@starbot/ui/text";
 import { createSignal, onCleanup, untrack } from "solid-js";
 import { startActionSounds } from "../../action-sounds";
 import { playCompletionSoundForAgentEvent, unlockCompletionSound } from "../../completion-sound";

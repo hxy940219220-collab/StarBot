@@ -1,34 +1,34 @@
 .profile-panel {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-6);
+  gap: var(--starbot-space-6);
 }
 
 .profile-hero {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .profile-hero-avatar {
   display: grid;
   place-items: center;
   flex: none;
-  width: calc(var(--openbot-space-8) * 1.75);
+  width: calc(var(--starbot-space-8) * 1.75);
   aspect-ratio: 1;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--starbot-radius-pill);
   overflow: hidden;
-  background: var(--openbot-accent-soft);
-  color: var(--openbot-accent-hover);
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-semibold);
+  background: var(--starbot-accent-soft);
+  color: var(--starbot-accent-hover);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .profile-hero-avatar > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  outline: 1px solid var(--openbot-image-outline);
+  outline: 1px solid var(--starbot-image-outline);
   outline-offset: -1px;
   border-radius: inherit;
 }
@@ -42,9 +42,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: var(--openbot-text-xl);
-  font-weight: var(--openbot-weight-semibold);
-  color: var(--openbot-text-primary);
+  font-size: var(--starbot-text-xl);
+  font-weight: var(--starbot-weight-semibold);
+  color: var(--starbot-text-primary);
 }
 
 .profile-hero-text p {
@@ -52,32 +52,32 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-secondary);
+  font-size: var(--starbot-text-sm);
+  color: var(--starbot-text-secondary);
 }
 
 .profile-hero-actions {
   display: flex;
   flex: none;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   margin-inline-start: auto;
 }
 
 .profile-card {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
   margin: 0;
-  padding: var(--openbot-space-4);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-surface);
+  padding: var(--starbot-space-4);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-surface);
 }
 
 .profile-card.profile-facts,
 .profile-card.profile-ranking,
 .profile-card.profile-bars {
   row-gap: 0;
-  padding: var(--openbot-space-1) var(--openbot-space-4);
+  padding: var(--starbot-space-1) var(--starbot-space-4);
 }
 
 .profile-activity-placeholder {
@@ -87,7 +87,7 @@
 .profile-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
   align-items: start;
 }
 
@@ -107,10 +107,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-3);
-  min-height: calc(var(--openbot-space-8) + var(--openbot-space-3));
-  border-top: 1px solid var(--openbot-border);
-  font-size: var(--openbot-text-sm);
+  gap: var(--starbot-space-3);
+  min-height: calc(var(--starbot-space-8) + var(--starbot-space-3));
+  border-top: 1px solid var(--starbot-border);
+  font-size: var(--starbot-text-sm);
 }
 
 .profile-facts > div:first-child,
@@ -120,20 +120,20 @@
 
 .profile-facts dt {
   flex: none;
-  color: var(--openbot-text-secondary);
-  transition: color var(--openbot-duration-normal) var(--openbot-ease-out);
+  color: var(--starbot-text-secondary);
+  transition: color var(--starbot-duration-normal) var(--starbot-ease-out);
 }
 
 .profile-facts dd {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-1-5);
+  gap: var(--starbot-space-1-5);
   min-width: 0;
   margin: 0;
   overflow: hidden;
   white-space: nowrap;
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-text-primary);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .profile-ranking {
@@ -142,13 +142,13 @@
 
 .profile-ranking li {
   justify-content: flex-start;
-  color: var(--openbot-text-primary);
-  transition: opacity var(--openbot-duration-normal) var(--openbot-ease-out);
+  color: var(--starbot-text-primary);
+  transition: opacity var(--starbot-duration-normal) var(--starbot-ease-out);
 }
 
 .profile-ranking-avatar {
-  width: var(--openbot-space-6);
-  height: var(--openbot-space-6);
+  width: var(--starbot-space-6);
+  height: var(--starbot-space-6);
   flex: none;
 }
 
@@ -163,13 +163,13 @@
 .profile-ranking strong,
 .profile-bar-value {
   font-variant-numeric: tabular-nums;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .profile-bars {
   display: grid;
   grid-template-columns: fit-content(45%) 1fr auto;
-  column-gap: var(--openbot-space-4);
+  column-gap: var(--starbot-space-4);
   margin: 0;
   list-style: none;
 }
@@ -179,16 +179,16 @@
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
   align-items: center;
-  min-height: calc(var(--openbot-space-8) + var(--openbot-space-1));
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-primary);
-  transition: opacity var(--openbot-duration-normal) var(--openbot-ease-out);
+  min-height: calc(var(--starbot-space-8) + var(--starbot-space-1));
+  font-size: var(--starbot-text-sm);
+  color: var(--starbot-text-primary);
+  transition: opacity var(--starbot-duration-normal) var(--starbot-ease-out);
 }
 
 .profile-bar-label {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-1-5);
+  gap: var(--starbot-space-1-5);
   min-width: 0;
   white-space: nowrap;
 }
@@ -199,9 +199,9 @@
 }
 
 .profile-bar-track {
-  height: var(--openbot-space-2);
-  border-radius: var(--openbot-radius-pill);
-  background: color-mix(in srgb, var(--openbot-text-primary) 7%, var(--openbot-transparent));
+  height: var(--starbot-space-2);
+  border-radius: var(--starbot-radius-pill);
+  background: color-mix(in srgb, var(--starbot-text-primary) 7%, var(--starbot-transparent));
   overflow: hidden;
 }
 
@@ -213,13 +213,13 @@
 
 .profile-bar-value {
   text-align: end;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .profile-heatmap {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-1-5);
+  gap: var(--starbot-space-1-5);
   min-width: 0;
 }
 
@@ -228,12 +228,12 @@
   direction: ltr;
   display: grid;
   grid-template-columns: repeat(var(--profile-columns), minmax(0, 1fr));
-  column-gap: var(--openbot-space-0-5);
+  column-gap: var(--starbot-space-0-5);
 }
 
 .profile-heatmap-months {
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  color: var(--starbot-text-muted);
 }
 
 .profile-heatmap-months span {
@@ -243,76 +243,76 @@
 .profile-heatmap-grid {
   grid-template-rows: repeat(7, auto);
   grid-auto-flow: column;
-  row-gap: var(--openbot-space-0-5);
+  row-gap: var(--starbot-space-0-5);
 }
 
 .profile-heat-cell {
   display: block;
   aspect-ratio: 1;
-  border-radius: var(--openbot-radius-xs);
-  background: color-mix(in srgb, var(--openbot-text-primary) 7%, var(--openbot-transparent));
+  border-radius: var(--starbot-radius-xs);
+  background: color-mix(in srgb, var(--starbot-text-primary) 7%, var(--starbot-transparent));
 }
 
 .profile-heat-cell[data-empty] {
-  background: var(--openbot-transparent);
+  background: var(--starbot-transparent);
 }
 
 .profile-heat-cell[data-level="1"] {
-  background: color-mix(in srgb, var(--openbot-accent) 32%, var(--openbot-transparent));
+  background: color-mix(in srgb, var(--starbot-accent) 32%, var(--starbot-transparent));
 }
 
 .profile-heat-cell[data-level="2"] {
-  background: color-mix(in srgb, var(--openbot-accent) 55%, var(--openbot-transparent));
+  background: color-mix(in srgb, var(--starbot-accent) 55%, var(--starbot-transparent));
 }
 
 .profile-heat-cell[data-level="3"] {
-  background: color-mix(in srgb, var(--openbot-accent) 78%, var(--openbot-transparent));
+  background: color-mix(in srgb, var(--starbot-accent) 78%, var(--starbot-transparent));
 }
 
 .profile-heat-cell[data-level="4"] {
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
 }
 
 .profile-heatmap-grid .profile-heat-cell[data-active] {
-  outline: 1px solid var(--openbot-text-primary);
+  outline: 1px solid var(--starbot-text-primary);
   outline-offset: 1px;
 }
 
 .profile-heat-tooltip {
   position: fixed;
-  z-index: var(--openbot-layer-toast);
-  transform: translate(-50%, calc(-100% - var(--openbot-space-2)));
+  z-index: var(--starbot-layer-toast);
+  transform: translate(-50%, calc(-100% - var(--starbot-space-2)));
   pointer-events: none;
   white-space: nowrap;
-  box-shadow: var(--openbot-shadow-raised);
+  box-shadow: var(--starbot-shadow-raised);
 }
 
 .profile-heatmap-legend {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--openbot-space-1);
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-muted);
+  gap: var(--starbot-space-1);
+  font-size: var(--starbot-text-sm);
+  color: var(--starbot-text-muted);
 }
 
 .profile-heatmap-legend .profile-heat-cell {
-  width: var(--openbot-space-3);
+  width: var(--starbot-space-3);
 }
 
 .profile-dialog {
   width: min(880px, 100%);
-  max-height: calc(100dvh - 2 * var(--openbot-space-6));
+  max-height: calc(100dvh - 2 * var(--starbot-space-6));
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
   overflow: auto;
-  padding: var(--openbot-space-6);
+  padding: var(--starbot-space-6);
   outline: 0;
-  border-radius: var(--openbot-radius-xl);
-  border: 1px solid var(--openbot-dialog-ring);
-  background: var(--openbot-bg-sidebar);
-  color: var(--openbot-text-primary);
+  border-radius: var(--starbot-radius-xl);
+  border: 1px solid var(--starbot-dialog-ring);
+  background: var(--starbot-bg-sidebar);
+  color: var(--starbot-text-primary);
 }
 
 .profile-dialog-header,
@@ -320,7 +320,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .profile-dialog-footer {
@@ -329,24 +329,24 @@
 
 .profile-dialog-title {
   margin: 0;
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-semibold);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .profile-share-image {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--openbot-radius-card);
-  box-shadow: var(--openbot-shadow-card);
+  border-radius: var(--starbot-radius-card);
+  box-shadow: var(--starbot-shadow-card);
 }
 
 .profile-share-placeholder {
   display: grid;
   place-items: center;
   aspect-ratio: 1200 / 690;
-  border-radius: var(--openbot-radius-card);
-  background: var(--openbot-bg-surface);
+  border-radius: var(--starbot-radius-card);
+  background: var(--starbot-bg-surface);
 }
 
 .profile-edit {
@@ -356,24 +356,24 @@
 .profile-edit-form {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
 }
 
 .profile-edit-photo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .profile-edit-photo .profile-edit-photo-trigger {
-  width: calc(var(--openbot-space-8) * 2.5);
-  height: calc(var(--openbot-space-8) * 2.5);
+  width: calc(var(--starbot-space-8) * 2.5);
+  height: calc(var(--starbot-space-8) * 2.5);
   overflow: visible;
 }
 
 .profile-edit-photo .profile-edit-avatar {
-  font-size: var(--openbot-text-xl);
+  font-size: var(--starbot-text-xl);
 }
 
 .profile-edit-photo-badge {
@@ -382,63 +382,63 @@
   inset-inline-end: 0;
   display: grid;
   place-items: center;
-  width: var(--openbot-space-6);
-  height: var(--openbot-space-6);
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-secondary);
+  width: var(--starbot-space-6);
+  height: var(--starbot-space-6);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-pill);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-secondary);
 }
 
 .profile-edit-photo-badge > svg {
-  width: var(--openbot-space-3);
-  height: var(--openbot-space-3);
+  width: var(--starbot-space-3);
+  height: var(--starbot-space-3);
 }
 
 .profile-tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   margin: 0;
 }
 
 .profile-tile {
-  --profile-step: calc(var(--openbot-duration-fast) / 3);
+  --profile-step: calc(var(--starbot-duration-fast) / 3);
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-1);
-  padding: var(--openbot-space-3);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-surface);
-  transition: background-color var(--openbot-duration-normal) var(--openbot-ease-out);
+  gap: var(--starbot-space-1);
+  padding: var(--starbot-space-3);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-surface);
+  transition: background-color var(--starbot-duration-normal) var(--starbot-ease-out);
 }
 
 .profile-tile dt {
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-secondary);
+  font-size: var(--starbot-text-sm);
+  color: var(--starbot-text-secondary);
 }
 
 .profile-tile dd {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-0-5);
+  gap: var(--starbot-space-0-5);
   margin: 0;
 }
 
 .profile-tile strong {
-  font-size: var(--openbot-text-2xl);
-  font-weight: var(--openbot-weight-semibold);
+  font-size: var(--starbot-text-2xl);
+  font-weight: var(--starbot-weight-semibold);
   font-variant-numeric: tabular-nums;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .profile-tile dd > span {
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  color: var(--starbot-text-muted);
 }
 
 .profile-tile:hover {
-  background: linear-gradient(var(--openbot-hover), var(--openbot-hover)), var(--openbot-bg-surface);
+  background: linear-gradient(var(--starbot-hover), var(--starbot-hover)), var(--starbot-bg-surface);
 }
 
 .profile-tile-value {
@@ -457,7 +457,7 @@
 }
 
 .profile-facts > div:hover dt {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .profile-ranking:hover li:not(:hover),
@@ -466,28 +466,28 @@
 }
 
 .profile-bars li:hover .profile-bar-value {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .profile-panel {
-    --profile-step: calc(var(--openbot-duration-fast) / 3);
+    --profile-step: calc(var(--starbot-duration-fast) / 3);
   }
 
   .profile-tile {
     transition:
-      background-color var(--openbot-duration-normal) var(--openbot-ease-out),
-      transform var(--openbot-duration-normal) var(--openbot-ease-out);
+      background-color var(--starbot-duration-normal) var(--starbot-ease-out),
+      transform var(--starbot-duration-normal) var(--starbot-ease-out);
   }
 
   .profile-tile:hover {
-    transform: translateY(calc(var(--openbot-space-0-5) * -1));
+    transform: translateY(calc(var(--starbot-space-0-5) * -1));
   }
 
   .profile-heatmap-grid .profile-heat-cell {
-    animation: profile-cell-in var(--openbot-duration-overlay) var(--openbot-ease-out) backwards;
-    animation-delay: calc(var(--profile-col, 0) * var(--openbot-duration-fast) / 15);
-    transition: transform var(--openbot-duration-fast) var(--openbot-ease-out);
+    animation: profile-cell-in var(--starbot-duration-overlay) var(--starbot-ease-out) backwards;
+    animation-delay: calc(var(--profile-col, 0) * var(--starbot-duration-fast) / 15);
+    transition: transform var(--starbot-duration-fast) var(--starbot-ease-out);
   }
 
   .profile-heatmap-grid .profile-heat-cell[data-active] {
@@ -497,19 +497,19 @@
   }
 
   .profile-heat-tooltip {
-    animation: profile-tip-in var(--openbot-duration-normal) var(--openbot-ease-out) backwards;
+    animation: profile-tip-in var(--starbot-duration-normal) var(--starbot-ease-out) backwards;
     transition:
-      left var(--openbot-duration-fast) var(--openbot-ease-out),
-      top var(--openbot-duration-fast) var(--openbot-ease-out);
+      left var(--starbot-duration-fast) var(--starbot-ease-out),
+      top var(--starbot-duration-fast) var(--starbot-ease-out);
   }
 
   .profile-ranking li {
-    animation: profile-slide-in var(--openbot-duration-toast-enter) var(--openbot-ease-out) backwards;
-    animation-delay: calc(var(--openbot-duration-slow) + var(--profile-i, 0) * var(--profile-step));
+    animation: profile-slide-in var(--starbot-duration-toast-enter) var(--starbot-ease-out) backwards;
+    animation-delay: calc(var(--starbot-duration-slow) + var(--profile-i, 0) * var(--profile-step));
   }
 
   .profile-ranking-avatar {
-    transition: transform var(--openbot-duration-normal) var(--openbot-ease-out);
+    transition: transform var(--starbot-duration-normal) var(--starbot-ease-out);
   }
 
   .profile-ranking li:hover .profile-ranking-avatar {
@@ -518,8 +518,8 @@
 
   .profile-bar-fill {
     transform-origin: left center;
-    animation: profile-grow calc(var(--openbot-duration-overlay) * 2.5) var(--openbot-ease-out) backwards;
-    animation-delay: calc(var(--openbot-duration-overlay) + var(--profile-i, 0) * var(--profile-step) * 2);
+    animation: profile-grow calc(var(--starbot-duration-overlay) * 2.5) var(--starbot-ease-out) backwards;
+    animation-delay: calc(var(--starbot-duration-overlay) + var(--profile-i, 0) * var(--profile-step) * 2);
   }
 
   .profile-bar-fill:dir(rtl) {
@@ -527,11 +527,11 @@
   }
 
   .profile-hero-actions svg {
-    transition: transform var(--openbot-duration-normal) var(--openbot-ease-out);
+    transition: transform var(--starbot-duration-normal) var(--starbot-ease-out);
   }
 
   .profile-hero-actions button:hover .profile-icon-share {
-    transform: translateY(calc(var(--openbot-space-0-5) * -1));
+    transform: translateY(calc(var(--starbot-space-0-5) * -1));
   }
 
   .profile-hero-actions button:hover .profile-icon-edit {
@@ -549,14 +549,14 @@
 @keyframes profile-tip-in {
   from {
     opacity: 0;
-    transform: translate(-50%, calc(-100% - var(--openbot-space-1)));
+    transform: translate(-50%, calc(-100% - var(--starbot-space-1)));
   }
 }
 
 @keyframes profile-slide-in {
   from {
     opacity: 0;
-    transform: translateX(calc(var(--openbot-space-2) * -1));
+    transform: translateX(calc(var(--starbot-space-2) * -1));
   }
 }
 

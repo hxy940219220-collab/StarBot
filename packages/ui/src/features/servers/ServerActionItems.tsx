@@ -1,6 +1,6 @@
-import { canAdministerServer, type ServerNotificationLevel, type ServerSummary } from "@openbot/contracts/ipc";
-import type { AppFormat, AppTextKey, AppTranslate } from "@openbot/i18n";
-import { Bell, BellOff, ChevronRight, type ContextMenu, EyeOff, LogOut, RotateCcw, Trash2 } from "@openbot/ui";
+import { canAdministerServer, type ServerNotificationLevel, type ServerSummary } from "@starbot/contracts/ipc";
+import type { AppFormat, AppTextKey, AppTranslate } from "@starbot/i18n";
+import { Bell, BellOff, ChevronRight, type ContextMenu, EyeOff, LogOut, RotateCcw, Trash2 } from "@starbot/ui";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
 
@@ -80,7 +80,7 @@ export function ServerActionItems(
     props.server.kind === "remote" &&
     canAdministerServer(props.server.role) &&
     props.server.restartAvailable !== false &&
-    !(props.server.hostedSleep === "waking" && props.server.hostedStart?.step !== "openbot") &&
+    !(props.server.hostedSleep === "waking" && props.server.hostedStart?.step !== "starbot") &&
     (props.server.hosted === true || Boolean(props.canRestart?.(props.server.id)));
   const canHide = () =>
     Boolean(props.onHide) && props.server.kind === "local" && Boolean(props.canHide?.(props.server.id));

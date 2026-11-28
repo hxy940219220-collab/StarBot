@@ -5,12 +5,12 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { parse as parseYaml } from "yaml";
 import { isMissingFileError } from "../src/backend/file-errors";
 
-const logger = createOpenBotLogger("verify-windows-package");
+const logger = createStarBotLogger("verify-windows-package");
 
 const FUSE_DISABLED = 48;
 const FUSE_ENABLED = 49;
@@ -61,9 +61,9 @@ await Promise.all([
   access(resolve(resourcesPath, "remote-desktop-runtime/source-manifest.json")),
   access(resolve(resourcesPath, "remote-desktop-runtime/DISTRIBUTION-SHA256SUMS.txt")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/Sunshine-v2026.516.143833-source.tar.gz")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/sunshine-v2026.516.143833-openbot.patch")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot-source.tar.gz")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot.patch")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/sunshine-v2026.516.143833-starbot.patch")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-starbot-source.tar.gz")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-starbot.patch")),
   access(resolve(resourcesPath, "remote-desktop-runtime/win32/x64/sunshine.exe")),
   access(resolve(resourcesPath, "remote-desktop-runtime/win32/x64/web-server.exe")),
   access(resolve(resourcesPath, "remote-desktop-runtime/win32/x64/streamer.exe")),
@@ -232,15 +232,15 @@ function verifyAuthenticode(path: string, expectedStatus: "NotSigned" | "Valid",
 }
 
 async function verifyLaunch(executable: string): Promise<void> {
-  const userDataPath = await mkdtemp(join(tmpdir(), "openbot-package-smoke-"));
+  const userDataPath = await mkdtemp(join(tmpdir(), "starbot-package-smoke-"));
   const child = spawn(executable, [`--user-data-dir=${userDataPath}`], {
     env: {
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
+      STARBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
+      STARBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
+      STARBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
     },
     stdio: ["ignore", "ignore", "pipe"],
     windowsHide: true,
@@ -351,9 +351,9 @@ async function verifySecondInstanceExits(
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
+      STARBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
+      STARBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
+      STARBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
     },
     stdio: ["ignore", "ignore", "pipe"],
     windowsHide: true,

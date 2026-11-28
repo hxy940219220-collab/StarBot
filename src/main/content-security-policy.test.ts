@@ -5,7 +5,7 @@ describe("buildContentSecurityPolicy", () => {
   it("restricts packaged connect-src to local loopback without external telemetry", () => {
     const policy = buildContentSecurityPolicy(true);
 
-    expect(policy).toContain("connect-src 'self' openbot-attachment: openbot-remote-attachment: ws://127.0.0.1:*");
+    expect(policy).toContain("connect-src 'self' starbot-attachment: starbot-remote-attachment: ws://127.0.0.1:*");
     expect(policy).not.toContain("analytics.starbot.app");
     expect(policy).not.toContain("starbot.app");
     expect(policy.split("; ").find((directive) => directive.startsWith("connect-src "))).not.toContain("localhost");
@@ -14,7 +14,7 @@ describe("buildContentSecurityPolicy", () => {
   it.each([true, false])("allows loopback viewer frames when packaged=%s", (packaged) => {
     const directives = buildContentSecurityPolicy(packaged).split("; ");
     expect(directives.find((directive) => directive.startsWith("frame-src "))).toBe(
-      "frame-src 'self' openbot-attachment: openbot-remote-attachment: openbot-visual: openbot-remote-visual: http://127.0.0.1:* http://localhost:*",
+      "frame-src 'self' starbot-attachment: starbot-remote-attachment: starbot-visual: starbot-remote-visual: http://127.0.0.1:* http://localhost:*",
     );
     expect(directives.find((directive) => directive.startsWith("script-src "))).toBe("script-src 'self'");
   });
@@ -23,10 +23,10 @@ describe("buildContentSecurityPolicy", () => {
     const policy = buildContentSecurityPolicy(true);
 
     expect(policy).toContain(
-      "media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment:",
+      "media-src 'self' blob: data: starbot-app: starbot-attachment: starbot-remote-attachment:",
     );
     expect(policy).not.toContain(
-      "media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment: https:",
+      "media-src 'self' blob: data: starbot-app: starbot-attachment: starbot-remote-attachment: https:",
     );
   });
 
@@ -64,7 +64,7 @@ describe("buildContentSecurityPolicy", () => {
   });
 
   it.each([
-    [undefined, "wss://signal.example.com/v1/signal", "OPENBOT_REMOTE_SIGNAL_URL needs OPENBOT_AUTH_API_URL."],
+    [undefined, "wss://signal.example.com/v1/signal", "STARBOT_REMOTE_SIGNAL_URL needs STARBOT_AUTH_API_URL."],
     ["https://api.example.com", "ws://signal.example.com/v1/signal", "must be a wss: URL"],
     ["https://api.example.com", "https://signal.example.com/v1/signal", "must be a wss: URL"],
     ["https://api.example.com", "wss://user:pass@signal.example.com/v1/signal", "must be a wss: URL"],

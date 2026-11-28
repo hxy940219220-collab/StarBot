@@ -11,7 +11,7 @@ import {
   writeSync,
 } from "node:fs";
 import { dirname } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { app, safeStorage } from "electron";
 import { isMissingFileError } from "../backend/file-errors";
 
@@ -22,7 +22,7 @@ const KEY_BYTES = 32;
 const IV_BYTES = 12;
 const TAG_BYTES = 16;
 
-const logger = createOpenBotLogger("secret-storage");
+const logger = createStarBotLogger("secret-storage");
 
 export interface SecretStorageCipher {
   canPersist: () => boolean;

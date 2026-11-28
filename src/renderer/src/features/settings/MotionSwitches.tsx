@@ -1,6 +1,6 @@
-import { Button, Play, SwitchField } from "@openbot/ui";
-import { unlockKawaiiAudio } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import { useText } from "@openbot/ui/text";
+import { Button, Play, SwitchField } from "@starbot/ui";
+import { unlockKawaiiAudio } from "@starbot/ui/features/agents/starbot-kawaii-audio";
+import { useText } from "@starbot/ui/text";
 import { For, Show } from "solid-js";
 import { setMotionEffect, useMotionEffect } from "../../motion-preference";
 import {
@@ -53,7 +53,7 @@ export function MotionSwitches() {
           "align-items": "stretch",
           gap: "14px",
           padding: "16px 18px 18px",
-          "border-top": "1px solid var(--openbot-border)",
+          "border-top": "1px solid var(--starbot-border)",
         }}
       >
         <div
@@ -68,17 +68,17 @@ export function MotionSwitches() {
           <div style={{ display: "flex", "flex-direction": "column", gap: "4px", "min-width": "0", flex: "1" }}>
             <strong
               style={{
-                "font-size": "var(--openbot-text-md, 13.5px)",
-                "font-weight": "var(--openbot-weight-medium, 500)",
-                color: "var(--openbot-text-primary)",
+                "font-size": "var(--starbot-text-md, 13.5px)",
+                "font-weight": "var(--starbot-weight-medium, 500)",
+                color: "var(--starbot-text-primary)",
               }}
             >
               开屏盲盒动画（礼物盒蹦出星友）
             </strong>
             <span
               style={{
-                "font-size": "var(--openbot-text-sm, 12px)",
-                color: "var(--openbot-text-muted)",
+                "font-size": "var(--starbot-text-sm, 12px)",
+                color: "var(--starbot-text-muted)",
                 "line-height": "1.45",
               }}
             >
@@ -128,10 +128,10 @@ export function MotionSwitches() {
                     "border-radius": "12px",
                     "text-align": "left",
                     cursor: "pointer",
-                    border: active() ? "1.5px solid var(--openbot-accent)" : "1px solid var(--openbot-border-strong)",
+                    border: active() ? "1.5px solid var(--starbot-accent)" : "1px solid var(--starbot-border-strong)",
                     background: active()
-                      ? "color-mix(in srgb, var(--openbot-accent) 10%, var(--openbot-bg-surface))"
-                      : "var(--openbot-bg-canvas)",
+                      ? "color-mix(in srgb, var(--starbot-accent) 10%, var(--starbot-bg-surface))"
+                      : "var(--starbot-bg-canvas)",
                     transition: "border-color 140ms ease, background-color 140ms ease",
                   }}
                 >
@@ -139,12 +139,12 @@ export function MotionSwitches() {
                     style={{
                       "font-size": "12.5px",
                       "font-weight": "600",
-                      color: active() ? "var(--openbot-accent-text)" : "var(--openbot-text-primary)",
+                      color: active() ? "var(--starbot-accent-text)" : "var(--starbot-text-primary)",
                     }}
                   >
                     {opt.label}
                   </span>
-                  <span style={{ "font-size": "11.5px", color: "var(--openbot-text-muted)", "line-height": "1.4" }}>
+                  <span style={{ "font-size": "11.5px", color: "var(--starbot-text-muted)", "line-height": "1.4" }}>
                     {opt.desc}
                   </span>
                 </button>
@@ -161,10 +161,10 @@ export function MotionSwitches() {
               gap: "8px",
               padding: "10px 14px",
               "border-radius": "10px",
-              border: "1px solid color-mix(in srgb, var(--openbot-accent) 28%, var(--openbot-border))",
-              background: "color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-canvas))",
+              border: "1px solid color-mix(in srgb, var(--starbot-accent) 28%, var(--starbot-border))",
+              background: "color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-canvas))",
               "font-size": "12.5px",
-              color: "var(--openbot-text-primary)",
+              color: "var(--starbot-text-primary)",
             }}
           >
             <span>每隔</span>
@@ -183,9 +183,9 @@ export function MotionSwitches() {
                 width: "64px",
                 padding: "4px 8px",
                 "border-radius": "7px",
-                border: "1px solid var(--openbot-border-strong)",
-                background: "var(--openbot-bg-surface)",
-                color: "var(--openbot-text-primary)",
+                border: "1px solid var(--starbot-border-strong)",
+                background: "var(--starbot-bg-surface)",
+                color: "var(--starbot-text-primary)",
                 "text-align": "center",
                 "font-weight": "600",
               }}

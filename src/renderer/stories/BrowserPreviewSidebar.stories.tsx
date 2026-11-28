@@ -3,13 +3,13 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import BrowserPreviewSidebar from "../src/features/conversation/BrowserPreviewSidebar";
 import browserPreviewUrl from "./assets/browser-takeover-preview.svg";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockStarBot } from "./mock-starbot";
 
 const tabs = [
   {
     id: "docs",
-    title: "OpenBot documentation",
-    url: "https://openbot.run/docs",
+    title: "StarBot documentation",
+    url: "https://starbot.run/docs",
     loading: false,
     ownerThreadId: "chief",
     ownerAgentId: "chief",
@@ -40,15 +40,15 @@ const meta = {
   },
   decorators: [
     (Story) => {
-      const previous = window.openbot;
-      window.openbot = createMockOpenBot({
+      const previous = window.starbot;
+      window.starbot = createMockStarBot({
         browserPreviews: {
           docs: { dataUrl: browserPreviewUrl, width: 960, height: 600 },
           settings: null,
         },
       }).api;
       onSettled(() => () => {
-        window.openbot = previous;
+        window.starbot = previous;
       });
       return (
         <div style="--browser-panel-width: 320px">

@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { AgentService } from "../src/backend/agent-service";
@@ -18,12 +18,12 @@ import type {
   TransportSink,
 } from "../src/backend/messaging/messaging-types";
 import { slackInboundMessage } from "../src/backend/messaging/slack/slack-events";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-slack-ping-reply-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/messaging-slack-ping-reply-e2e");
 const REPORT = join(OUT, "report.json");
-const root = await mkdtemp(join(tmpdir(), "openbot-slack-ping-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-slack-ping-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const WORKSPACE = "T-ping-e2e";
@@ -192,7 +192,7 @@ function deliver(message: ReturnType<typeof event>): string {
 }
 
 const credentials = memoryCredentials();
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));

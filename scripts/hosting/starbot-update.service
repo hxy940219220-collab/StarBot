@@ -1,0 +1,12 @@
+[Unit]
+Description=Stage an StarBot update
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/StarBot/hosted/starbot-hosted-update check
+Nice=19
+IOSchedulingClass=idle
+CPUWeight=idle
+TimeoutStartSec=30min

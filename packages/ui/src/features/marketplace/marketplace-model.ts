@@ -11,9 +11,9 @@ import type {
   McpServerConfig,
   SkillCategory,
   SkillPackagePreview,
-} from "@openbot/contracts/ipc";
-import type { MarketplaceListingLink } from "@openbot/contracts/marketplace-links";
-import type { McpConnectFlow } from "@openbot/contracts/mcp-connect-flows";
+} from "@starbot/contracts/ipc";
+import type { MarketplaceListingLink } from "@starbot/contracts/marketplace-links";
+import type { McpConnectFlow } from "@starbot/contracts/mcp-connect-flows";
 import type { JSX } from "@solidjs/web";
 import type { ConnectorDetail } from "../connectors/ConnectorDetailPanel";
 import type { ConnectorId } from "../connectors/connectors";

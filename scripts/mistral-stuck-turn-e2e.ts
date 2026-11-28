@@ -3,12 +3,12 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mistral-stuck-turn-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-mistral-stuck-turn-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/mistral-stuck-turn-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-mistral-stuck-turn-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const install = join(root, "vibe", "bin");
@@ -18,7 +18,7 @@ const statePath = join(root, "stuck-sessions.json");
 
 process.env.HOME = home;
 process.env.VIBE_HOME = join(home, ".vibe");
-process.env.OPENBOT_MISTRAL_PATH = fakeVibe;
+process.env.STARBOT_MISTRAL_PATH = fakeVibe;
 process.env.FAKE_VIBE_LOG = logPath;
 process.env.FAKE_VIBE_STATE = statePath;
 mkdirSync(home, { recursive: true });
@@ -27,7 +27,7 @@ const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_VIBE = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -153,7 +153,7 @@ function prompts(): Prompt[] {
 
 await mkdir(install, { recursive: true });
 await writeFile(fakeVibe, FAKE_VIBE, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

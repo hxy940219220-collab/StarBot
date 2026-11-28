@@ -1,4 +1,4 @@
-import { coordinatorText } from "@openbot/contracts/coordinator-text";
+import { coordinatorText } from "@starbot/contracts/coordinator-text";
 import {
   type AgentApproval,
   type BrowserTakeoverRequest,
@@ -9,9 +9,9 @@ import {
   type ConversationQuestionPrompt,
   channelRoutineRequest,
   channelRoutingConversationEvent,
-} from "@openbot/contracts/ipc";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import type { ChannelWorker } from "@openbot/ui/features/channels/ChannelActivityIndicator";
+} from "@starbot/contracts/ipc";
+import type { AgentMessage, AgentProfile } from "@starbot/ui/data";
+import type { ChannelWorker } from "@starbot/ui/features/channels/ChannelActivityIndicator";
 import { toAgentMessage, toAgentMessages } from "../../app-message-projection";
 
 export function channelMessageHasContent(entry: ChannelMessage): boolean {

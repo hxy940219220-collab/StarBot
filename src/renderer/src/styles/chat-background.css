@@ -1,50 +1,50 @@
-:root[data-openbot-color-scheme="dark"][data-openbot-chat-background-dark] {
-  --chat-background: oklch(from var(--openbot-chat-background-dark) clamp(0.16, l, 0.28) clamp(0.045, c, 0.11) h);
+:root[data-starbot-color-scheme="dark"][data-starbot-chat-background-dark] {
+  --chat-background: oklch(from var(--starbot-chat-background-dark) clamp(0.16, l, 0.28) clamp(0.045, c, 0.11) h);
 }
 
-:root[data-openbot-color-scheme="light"][data-openbot-chat-background-light] {
-  --chat-background: oklch(from var(--openbot-chat-background-light) clamp(0.86, l, 0.93) clamp(0.035, c, 0.085) h);
+:root[data-starbot-color-scheme="light"][data-starbot-chat-background-light] {
+  --chat-background: oklch(from var(--starbot-chat-background-light) clamp(0.86, l, 0.93) clamp(0.035, c, 0.085) h);
 }
 
-:root[data-openbot-color-scheme="dark"][data-openbot-chat-background-dark]
+:root[data-starbot-color-scheme="dark"][data-starbot-chat-background-dark]
   :is(.conversation-panel:not(.window-page), .direct-conversation),
-:root[data-openbot-color-scheme="light"][data-openbot-chat-background-light]
+:root[data-starbot-color-scheme="light"][data-starbot-chat-background-light]
   :is(.conversation-panel:not(.window-page), .direct-conversation) {
-  --openbot-bg-canvas: var(--chat-background);
-  --openbot-bg-canvas-clear: oklch(from var(--chat-background) l c h / 0);
-  background: var(--openbot-bg-canvas);
+  --starbot-bg-canvas: var(--chat-background);
+  --starbot-bg-canvas-clear: oklch(from var(--chat-background) l c h / 0);
+  background: var(--starbot-bg-canvas);
 }
 
-:root[data-openbot-color-scheme="light"][data-openbot-chat-background-light]
+:root[data-starbot-color-scheme="light"][data-starbot-chat-background-light]
   :is(.conversation-panel:not(.window-page), .direct-conversation) {
-  --openbot-scroll-edge-overlay: oklch(from var(--chat-background) l c h / 0.72);
+  --starbot-scroll-edge-overlay: oklch(from var(--chat-background) l c h / 0.72);
 }
 
-:root[data-openbot-window-glass][data-openbot-color-scheme="dark"][data-openbot-chat-background-dark]
+:root[data-starbot-window-glass][data-starbot-color-scheme="dark"][data-starbot-chat-background-dark]
   .app-window
   :is(.conversation-panel:not(.window-page), .direct-conversation),
-:root[data-openbot-window-glass][data-openbot-color-scheme="light"][data-openbot-chat-background-light]
+:root[data-starbot-window-glass][data-starbot-color-scheme="light"][data-starbot-chat-background-light]
   .app-window
   :is(.conversation-panel:not(.window-page), .direct-conversation) {
-  --openbot-bg-canvas: color-mix(in srgb, var(--chat-background) 68%, transparent);
-  background: var(--openbot-bg-canvas);
+  --starbot-bg-canvas: color-mix(in srgb, var(--chat-background) 68%, transparent);
+  background: var(--starbot-bg-canvas);
 }
 
 @media (min-width: 721px) {
-  :root[data-openbot-color-scheme="dark"][data-openbot-chat-background-dark]
+  :root[data-starbot-color-scheme="dark"][data-starbot-chat-background-dark]
     .app-window
     > .app-frame-edge
     :is(.conversation-panel:not(.window-page), .direct-conversation)::before,
-  :root[data-openbot-color-scheme="light"][data-openbot-chat-background-light]
+  :root[data-starbot-color-scheme="light"][data-starbot-chat-background-light]
     .app-window
     > .app-frame-edge
     :is(.conversation-panel:not(.window-page), .direct-conversation)::before {
     position: absolute;
     z-index: -1;
     inset: var(--left-header-height) 0 0;
-    border-start-end-radius: calc(var(--openbot-radius-card) - 1px);
-    border-end-end-radius: calc(var(--openbot-radius-card) - 1px);
-    background: var(--openbot-bg-canvas);
+    border-start-end-radius: calc(var(--starbot-radius-card) - 1px);
+    border-end-end-radius: calc(var(--starbot-radius-card) - 1px);
+    background: var(--starbot-bg-canvas);
     content: "";
     pointer-events: none;
   }

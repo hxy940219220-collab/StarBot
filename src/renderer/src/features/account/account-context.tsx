@@ -6,8 +6,8 @@ import {
   type CentralAuthState,
   keepUsageCredits,
   withReadCredits,
-} from "@openbot/contracts/ipc";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { currentText } from "@starbot/ui/text";
 import { createMemo, createSignal, createStore, flush, onCleanup, onSettled } from "solid-js";
 import { type DesktopAnalyticsProperties, desktopAnalytics } from "../../analytics";
 import { setLocalChatColor, useLocalChatColor } from "../../chat-color-preference";

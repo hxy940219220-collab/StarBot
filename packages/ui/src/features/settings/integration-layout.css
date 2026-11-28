@@ -5,21 +5,21 @@
   width: var(--integration-tile);
   height: var(--integration-tile);
   place-items: center;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-bg-surface-raised);
-  color: var(--openbot-text-primary);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-md);
+  background: var(--starbot-bg-surface-raised);
+  color: var(--starbot-text-primary);
 }
 
 .integration-logo-tile[data-size="lg"] {
   --integration-tile: 48px;
-  border-radius: var(--openbot-radius-lg);
+  border-radius: var(--starbot-radius-lg);
 }
 
 .integration-logo-tile > svg {
   width: 55%;
   height: 55%;
-  stroke-width: var(--openbot-icon-stroke-lg);
+  stroke-width: var(--starbot-icon-stroke-lg);
 }
 
 .integration-logo-tile > img {
@@ -36,64 +36,64 @@
 }
 
 .integration-status {
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
 }
 
 .integration-status-dot {
   width: 6px;
   height: 6px;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--starbot-radius-pill);
   background: currentColor;
 }
 
 .integration-status[data-status="unavailable"] .integration-status-dot {
-  background: var(--openbot-transparent);
+  background: var(--starbot-transparent);
   box-shadow: inset 0 0 0 1px currentColor;
 }
 
 .integration-page {
   display: grid;
-  gap: var(--openbot-space-6);
+  gap: var(--starbot-space-6);
 }
 
 .integration-detail-header {
   display: flex;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
   align-items: center;
 }
 
 .integration-detail-copy {
   display: grid;
   flex: 1;
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
   min-width: 0;
 }
 
 .integration-detail-title {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   align-items: center;
 }
 
 .integration-detail-name {
   display: inline-flex;
-  gap: var(--openbot-space-1-5);
+  gap: var(--starbot-space-1-5);
   align-items: center;
 }
 
 .integration-detail-actions {
   display: flex;
   flex: none;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .integration-wizard {
   display: grid;
   gap: 18px;
   padding: 26px 26px 22px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 24px;
-  background: var(--openbot-bg-sheet);
+  background: var(--starbot-bg-sheet);
   box-shadow: 0 28px 72px rgba(24, 16, 52, 0.26);
 }
 
@@ -133,9 +133,9 @@
 .integration-wizard-link {
   width: 44px;
   height: 2px;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--starbot-radius-pill);
   background:
-    radial-gradient(circle, var(--openbot-accent) 0 1.5px, var(--openbot-transparent) 2px) 0 50% / 9px 3px repeat-x;
+    radial-gradient(circle, var(--starbot-accent) 0 1.5px, var(--starbot-transparent) 2px) 0 50% / 9px 3px repeat-x;
   animation: integration-wizard-flow 0.6s linear infinite;
 }
 
@@ -146,36 +146,36 @@
 }
 
 .integration-wizard-logos[data-link="connected"] .integration-wizard-link {
-  background: var(--openbot-success);
+  background: var(--starbot-success);
   animation: none;
 }
 
 .integration-wizard-logos[data-link="broken"] .integration-wizard-link {
   background:
-    radial-gradient(circle, var(--openbot-border-strong) 0 1px, var(--openbot-transparent) 1.5px) 0 50% / 8px 2px
+    radial-gradient(circle, var(--starbot-border-strong) 0 1px, var(--starbot-transparent) 1.5px) 0 50% / 8px 2px
     repeat-x;
   animation: none;
 }
 
 .integration-wizard-target {
   display: inline-grid;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--starbot-radius-md);
 }
 
 .integration-wizard-logos[data-link="connecting"] .integration-wizard-target {
-  animation: integration-wizard-pulse 1.8s var(--openbot-ease-out) infinite;
+  animation: integration-wizard-pulse 1.8s var(--starbot-ease-out) infinite;
 }
 
 .integration-wizard-logos[data-link="connected"] .integration-wizard-target {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--openbot-success) 30%, var(--openbot-transparent));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--starbot-success) 30%, var(--starbot-transparent));
 }
 
 @keyframes integration-wizard-pulse {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--openbot-accent) 45%, var(--openbot-transparent));
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--starbot-accent) 45%, var(--starbot-transparent));
   }
   100% {
-    box-shadow: 0 0 0 8px var(--openbot-transparent);
+    box-shadow: 0 0 0 8px var(--starbot-transparent);
   }
 }
 
@@ -188,7 +188,7 @@
 
 .integration-wizard-body {
   display: grid;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .integration-wizard-body:empty {
@@ -197,42 +197,42 @@
 
 .integration-wizard-form {
   display: grid;
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
 }
 
 .integration-wizard-foot {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   justify-content: flex-end;
 }
 
 .integration-wizard-foot .ui-button > svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
 }
 
 .integration-dialog-backdrop {
-  z-index: calc(var(--openbot-layer-dialog) + 1);
+  z-index: calc(var(--starbot-layer-dialog) + 1);
 }
 
 .integration-wizard-dialog {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: calc(var(--openbot-layer-dialog) + 1);
-  width: min(440px, calc(100vw - var(--openbot-space-6) * 2));
-  max-height: calc(100dvh - var(--openbot-space-6) * 2);
+  z-index: calc(var(--starbot-layer-dialog) + 1);
+  width: min(440px, calc(100vw - var(--starbot-space-6) * 2));
+  max-height: calc(100dvh - var(--starbot-space-6) * 2);
   overflow-y: auto;
   outline: 0;
   transform: translate(-50%, -50%);
 }
 
 .integration-wizard-dialog[data-wide] {
-  width: min(720px, calc(100vw - var(--openbot-space-6) * 2));
+  width: min(720px, calc(100vw - var(--starbot-space-6) * 2));
 }
 
 :is(.integration-dialog-backdrop, .integration-wizard-dialog)[data-nested] {
-  z-index: calc(var(--openbot-layer-dialog-host) + 2);
+  z-index: calc(var(--starbot-layer-dialog-host) + 2);
 }
 
 .integration-wizard-dialog h2 {
@@ -241,14 +241,14 @@
 
 .integration-dialog-close {
   position: absolute;
-  top: var(--openbot-space-3);
-  inset-inline-end: var(--openbot-space-3);
+  top: var(--starbot-space-3);
+  inset-inline-end: var(--starbot-space-3);
 }
 
 .integration-stepper {
   display: flex;
   align-items: center;
-  margin: 0 0 var(--openbot-space-2);
+  margin: 0 0 var(--starbot-space-2);
   padding: 0;
   list-style: none;
 }
@@ -256,19 +256,19 @@
 .integration-step {
   display: flex;
   align-items: center;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
 }
 
 .integration-step + .integration-step::before {
   display: block;
   width: 24px;
   height: 2px;
-  margin-inline: var(--openbot-space-1);
-  border-radius: var(--openbot-radius-pill);
+  margin-inline: var(--starbot-space-1);
+  border-radius: var(--starbot-radius-pill);
   background:
-    linear-gradient(to right, var(--openbot-success), var(--openbot-accent)) no-repeat,
-    var(--openbot-border-strong);
+    linear-gradient(to right, var(--starbot-success), var(--starbot-accent)) no-repeat,
+    var(--starbot-border-strong);
   background-size:
     0% 100%,
     auto;
@@ -279,17 +279,17 @@
   background-size:
     100% 100%,
     auto;
-  animation: integration-step-fill 0.4s var(--openbot-ease-out);
+  animation: integration-step-fill 0.4s var(--starbot-ease-out);
 }
 
 .integration-step + .integration-step[data-state="done"]::before {
   background:
-    linear-gradient(var(--openbot-success), var(--openbot-success)) no-repeat,
-    var(--openbot-border-strong);
+    linear-gradient(var(--starbot-success), var(--starbot-success)) no-repeat,
+    var(--starbot-border-strong);
   background-size:
     100% 100%,
     auto;
-  animation: integration-step-fill 0.4s var(--openbot-ease-out);
+  animation: integration-step-fill 0.4s var(--starbot-ease-out);
 }
 
 @keyframes integration-step-fill {
@@ -313,68 +313,68 @@
   width: 20px;
   height: 20px;
   place-items: center;
-  border: 1px solid var(--openbot-border-strong);
-  border-radius: var(--openbot-radius-pill);
-  font-size: var(--openbot-text-sm);
+  border: 1px solid var(--starbot-border-strong);
+  border-radius: var(--starbot-radius-pill);
+  font-size: var(--starbot-text-sm);
   font-variant-numeric: tabular-nums;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   line-height: 1;
 }
 
 .integration-step[data-state="current"] {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .integration-step[data-state="current"] .integration-step-index {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
-  color: var(--openbot-text-on-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
+  color: var(--starbot-text-on-accent);
 }
 
 .integration-step[data-state="done"] .integration-step-index {
-  border-color: var(--openbot-success);
-  color: var(--openbot-success);
+  border-color: var(--starbot-success);
+  color: var(--starbot-success);
 }
 
 .integration-card-body {
   display: grid;
-  gap: var(--openbot-space-3);
-  padding: var(--openbot-space-3) var(--openbot-space-4);
+  gap: var(--starbot-space-3);
+  padding: var(--starbot-space-3) var(--starbot-space-4);
 }
 
 .integration-card-body :where(.ui-input) {
-  font-size: var(--openbot-text-lg);
-  line-height: var(--openbot-leading-lg);
+  font-size: var(--starbot-text-lg);
+  line-height: var(--starbot-leading-lg);
 }
 
 .integration-card-note {
-  padding: var(--openbot-space-3) var(--openbot-space-4);
+  padding: var(--starbot-space-3) var(--starbot-space-4);
 }
 
 .integration-card-note[data-tone="danger"] {
-  color: var(--openbot-danger-text);
+  color: var(--starbot-danger-text);
 }
 
 .integration-effects {
   display: grid;
   margin: 0;
-  padding: var(--openbot-space-1);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-surface);
+  padding: var(--starbot-space-1);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-surface);
   list-style: none;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
 }
 
 .integration-effects li {
   display: flex;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
   align-items: center;
-  padding: var(--openbot-space-2);
+  padding: var(--starbot-space-2);
 }
 
 .integration-effects li + li {
-  border-top: 1px solid var(--openbot-border);
+  border-top: 1px solid var(--starbot-border);
 }
 
 .integration-effect-icon {
@@ -383,38 +383,38 @@
   width: 28px;
   height: 28px;
   place-items: center;
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-bg-surface-raised);
-  color: var(--openbot-text-muted);
+  border-radius: var(--starbot-radius-md);
+  background: var(--starbot-bg-surface-raised);
+  color: var(--starbot-text-muted);
 }
 
 .integration-effects .integration-effect-icon > svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
 }
 
 .integration-effects li[data-tone="danger"] .integration-effect-icon {
-  background: var(--openbot-danger-soft);
-  color: var(--openbot-danger-text);
+  background: var(--starbot-danger-soft);
+  color: var(--starbot-danger-text);
 }
 
 .integration-effects li[data-tone="success"] .integration-effect-icon {
-  background: var(--openbot-success-soft);
-  color: var(--openbot-success);
+  background: var(--starbot-success-soft);
+  color: var(--starbot-success);
 }
 
 .integration-confirm.ui-button-variant-destructive {
-  color: var(--openbot-danger-text);
+  color: var(--starbot-danger-text);
 }
 
 .integrations-hub-row {
   position: relative;
-  border-radius: var(--openbot-radius-md);
-  transition: background-color var(--openbot-duration-hover) var(--openbot-ease-out);
+  border-radius: var(--starbot-radius-md);
+  transition: background-color var(--starbot-duration-hover) var(--starbot-ease-out);
 }
 
 .integrations-hub-row:has(> .integrations-hub-hitarea:hover) {
-  background: var(--openbot-hover);
+  background: var(--starbot-hover);
 }
 
 .integrations-hub-hitarea {
@@ -426,22 +426,22 @@
   padding: 0;
   border: 0;
   border-radius: inherit;
-  background: var(--openbot-transparent);
+  background: var(--starbot-transparent);
   cursor: pointer;
   transition: none;
 }
 
 .integrations-hub-hitarea:hover:not(:disabled):not([data-disabled]) {
-  background: var(--openbot-transparent);
+  background: var(--starbot-transparent);
 }
 
 .integrations-hub-hitarea:focus-visible {
-  outline: 2px solid var(--openbot-border-focus);
+  outline: 2px solid var(--starbot-border-focus);
   outline-offset: -2px;
 }
 
 .integrations-hub-actions {
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .integrations-hub-actions .ui-button {
@@ -450,10 +450,10 @@
 }
 
 .integrations-hub-chevron {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
-  margin: 0 var(--openbot-space-1-5);
-  color: var(--openbot-text-muted);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
+  margin: 0 var(--starbot-space-1-5);
+  color: var(--starbot-text-muted);
 }
 
 .integrations-hub-chevron:dir(rtl) {
@@ -462,7 +462,7 @@
 
 .integrations-face-stack {
   display: inline-flex;
-  gap: var(--openbot-space-0-5);
+  gap: var(--starbot-space-0-5);
   align-items: center;
 }
 
@@ -470,12 +470,12 @@
   display: inline-grid;
   min-width: 24px;
   height: 24px;
-  padding: 0 var(--openbot-space-1);
+  padding: 0 var(--starbot-space-1);
   place-items: center;
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-control);
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  border-radius: var(--starbot-radius-pill);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
 }
 
 .integrations-agent-face {
@@ -491,7 +491,7 @@
 }
 
 .ui-item-group:has(.integrations-agent-face:not([data-size="sm"])) .ui-item-media > svg {
-  margin-inline: calc((32px - var(--openbot-icon-lg)) / 2);
+  margin-inline: calc((32px - var(--starbot-icon-lg)) / 2);
 }
 
 .integrations-agent-face > * {

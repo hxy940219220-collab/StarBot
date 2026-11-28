@@ -1,6 +1,6 @@
-import { agentAccessRank, CHANNEL_CHATS_CAPABILITY, canAdministerServer } from "@openbot/contracts/ipc";
-import { MESSAGE_DELETE_CAPABILITY, MESSAGE_DELETE_ROUTES } from "@openbot/contracts/team-protocol/message-delete-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { agentAccessRank, CHANNEL_CHATS_CAPABILITY, canAdministerServer } from "@starbot/contracts/ipc";
+import { MESSAGE_DELETE_CAPABILITY, MESSAGE_DELETE_ROUTES } from "@starbot/contracts/team-protocol/message-delete-v1";
+import { sourceText } from "@starbot/i18n/source";
 import type { ChannelService } from "../../backend/channel-service";
 import { MessageDeleteRefusedError, runMessageDelete } from "../message-delete-refusal";
 import type { TeamApiAgents } from "./dependencies";

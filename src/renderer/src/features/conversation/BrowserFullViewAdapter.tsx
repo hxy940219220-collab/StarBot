@@ -1,6 +1,6 @@
-import BrowserFullView from "@openbot/ui/features/browser/BrowserFullView";
-import BrowserLocalSignInDialog from "@openbot/ui/features/browser/BrowserLocalSignInDialog";
-import { useText } from "@openbot/ui/text";
+import BrowserFullView from "@starbot/ui/features/browser/BrowserFullView";
+import BrowserLocalSignInDialog from "@starbot/ui/features/browser/BrowserLocalSignInDialog";
+import { useText } from "@starbot/ui/text";
 import { createMemo, onCleanup, Show } from "solid-js";
 import { browserSessionHistory, canReopenBrowserTab } from "../browser/browser-tab-session";
 import { serverSupportsCapability } from "../servers/server-capabilities";

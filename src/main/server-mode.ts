@@ -2,10 +2,10 @@ import { chmod, lstat, unlink } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import type { Socket } from "node:net";
 import { dirname, isAbsolute, join } from "node:path";
-import { parseHostedServerName } from "@openbot/contracts/hosted-servers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { CentralAuthState } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { parseHostedServerName } from "@starbot/contracts/hosted-servers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { CentralAuthState } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Deferred, Effect } from "effect";
 import QRCode from "qrcode";
 import { runCauseEffect } from "../backend/effect-boundary";
@@ -33,13 +33,13 @@ export function takeServerModeEnvironment(
   isPackaged: boolean,
   platform: NodeJS.Platform,
 ): ServerModeEnvironment | null {
-  if (!isPackaged || platform !== "linux" || environment.OPENBOT_SERVER !== "1") return null;
-  if (environment.OPENBOT_HOSTED_SERVER === "1") return null;
+  if (!isPackaged || platform !== "linux" || environment.STARBOT_SERVER !== "1") return null;
+  if (environment.STARBOT_HOSTED_SERVER === "1") return null;
   const runtimeDirectory = environment.XDG_RUNTIME_DIR?.trim() ?? "";
   if (!isAbsolute(runtimeDirectory)) return null;
   return {
     controlSocketPath: join(runtimeDirectory, CONTROL_SOCKET_FILE),
-    setupPagePort: parseSetupPagePort(environment.OPENBOT_SETUP_PAGE_PORT),
+    setupPagePort: parseSetupPagePort(environment.STARBOT_SETUP_PAGE_PORT),
   };
 }
 

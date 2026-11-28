@@ -5,7 +5,7 @@ import {
   workflowMediaResolutions,
   workflowVideoDurations,
   workflowVideoLengthChoices,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Typography } from "heroui-native";
 import { useUniwind } from "uniwind";
 import { SettingsRow, SettingsSection } from "@/features/settings/components/settings-content";

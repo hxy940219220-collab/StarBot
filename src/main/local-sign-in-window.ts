@@ -1,16 +1,16 @@
 import { randomUUID } from "node:crypto";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import {
   BROWSER_SIGN_IN_STORAGE_ENTRY_LIMIT,
   BROWSER_SIGN_IN_STORAGE_TEXT_LIMIT,
   type BrowserSignInStorage,
   isBrowserSignInOrigin,
-} from "@openbot/contracts/team-protocol/browser-sign-in-storage-v1";
+} from "@starbot/contracts/team-protocol/browser-sign-in-storage-v1";
 import {
   type BrowserSignInCookie,
   browserSignInCookieFitsHost,
-} from "@openbot/contracts/team-protocol/browser-sign-in-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/browser-sign-in-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Deferred, Effect, Exit, Schema } from "effect";
 import {
   BrowserWindow,
@@ -182,7 +182,7 @@ export class LocalSignInWindows {
   });
 
   #start(target: LocalSignInTarget, host: string): PendingSignIn {
-    const session = electronSession.fromPartition(`openbot-sign-in-${randomUUID()}`, { cache: false });
+    const session = electronSession.fromPartition(`starbot-sign-in-${randomUUID()}`, { cache: false });
     session.setUserAgent(sessionBrowserUserAgent(session.getUserAgent()), preferredBrowserLanguageCodes());
     session.webRequest.onBeforeSendHeaders((details, callback) => {
       callback({ requestHeaders: browserRequestHeaders(details.url, details.requestHeaders) });

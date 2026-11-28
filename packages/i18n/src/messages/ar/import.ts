@@ -94,7 +94,7 @@ export const messages = {
   "import.guide.commandNote":
     "اكتبه في دردشة Hermes. في الطرفية، شغّل hermes skills install بالاسم نفسه. يفحص Hermes المهارة قبل تثبيتها.",
   "import.guide.hermesSkillNote":
-    "احفظها باسم ~/.hermes/skills/openbot-export/SKILL.md. يجدها Hermes في الدردشة التالية. يستبعدها التصدير.",
+    "احفظها باسم ~/.hermes/skills/starbot-export/SKILL.md. يجدها Hermes في الدردشة التالية. يستبعدها التصدير.",
   "import.guide.hermesMessageNote":
     "يسأل عن ملفات التعريف التي يصدّرها، ثم يحفظ ملف .zip في التنزيلات. تبقى المفاتيح وخوادم MCP في Hermes.",
   "import.review.title": "تصدير {source}",

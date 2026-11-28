@@ -8,11 +8,11 @@ import type {
   BrowserJsonValue,
   BrowserSnapshot,
   BrowserTarget,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { BROWSER_VIEW_MAX_CLIPBOARD_TEXT } from "@openbot/contracts/team-protocol/browser-view-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { BROWSER_VIEW_MAX_CLIPBOARD_TEXT } from "@starbot/contracts/team-protocol/browser-view-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { Deferred, Effect, Exit, Fiber, Option, Scope } from "effect";
 import type { NativeImage, WebContents } from "electron";
 import {
@@ -111,7 +111,7 @@ const WAIT_TIMEOUT_MS = 30_000;
 const PAGE_ANSWER_WAIT_MS = 2_000;
 const PAGE_ANSWER_RETRY_MS = 100;
 const MAX_RESULT_BYTES = 64 * 1024;
-const DOCUMENT_ID_PROPERTY = "__openbot_browser_document_id__";
+const DOCUMENT_ID_PROPERTY = "__starbot_browser_document_id__";
 const MAX_SNAPSHOT_FRAMES = 12;
 const DOM_QUIET_MS = 250;
 const CHOOSER_WAIT_MS = 5_000;
@@ -229,23 +229,23 @@ const MAX_FOCUSED_FRAME_DEPTH = 8;
 const CLICK_PRESS_ATTEMPTS = 3;
 
 const COUNT_TYPED_KEYS = `
-  globalThis.openbotTypedKeys?.view.removeEventListener('keydown', globalThis.openbotTypedKeys.listener, true);
+  globalThis.starbotTypedKeys?.view.removeEventListener('keydown', globalThis.starbotTypedKeys.listener, true);
   const typedKeys = {
     view: this.ownerDocument.defaultView, count: 0, text: 'value' in this ? String(this.value) : this.textContent,
     listener: () => { typedKeys.count += 1; },
   };
   typedKeys.view.addEventListener('keydown', typedKeys.listener, true);
-  globalThis.openbotTypedKeys = typedKeys;`;
+  globalThis.starbotTypedKeys = typedKeys;`;
 const TYPED_KEY_ARRIVED_FUNCTION = `function(expected) {
-  const typedKeys = globalThis.openbotTypedKeys;
+  const typedKeys = globalThis.starbotTypedKeys;
   if (!typedKeys) return true;
   typedKeys.view.removeEventListener('keydown', typedKeys.listener, true);
-  globalThis.openbotTypedKeys = undefined;
+  globalThis.starbotTypedKeys = undefined;
   const text = 'value' in this ? String(this.value) : this.textContent;
   return typedKeys.count >= expected || text !== typedKeys.text;
 }`;
 const SAVE_TYPED_TEXT_FUNCTION = `function() {
-  if (globalThis.openbotTypedKeys) globalThis.openbotTypedKeys.text = 'value' in this ? String(this.value) : this.textContent;
+  if (globalThis.starbotTypedKeys) globalThis.starbotTypedKeys.text = 'value' in this ? String(this.value) : this.textContent;
 }`;
 const PASTE_APPLY_WAIT_MS = 1000;
 const PASTE_HANDLER_WAIT_MS = 50;
@@ -320,7 +320,7 @@ const PASTE_EVENT_SCRIPT = `(text) => {${FOCUSED_SELECTION}
 
 const PAGE_COPY_RETRY_MS = 500;
 const PAGE_COPY_SCRIPT = `(() => {
-  const key = Symbol.for("openbot.pageCopy");
+  const key = Symbol.for("starbot.pageCopy");
   let state = globalThis[key];
   if (!state) {
     state = { waits: [] };

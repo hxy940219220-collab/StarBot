@@ -3,7 +3,7 @@ import type {
   AgentDockOffset,
   AgentDockPresentation,
   StarBotCompanionInfo,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { currentDevicePlatform } from "../../send-shortcut-preference";
 import { windowShape } from "../../window-shape";
@@ -197,7 +197,7 @@ export function AgentDockSurface() {
           onSwitchModel={(agentId, provider, model) => {
             void perform({ type: "switch-model", serverId: server, agentId, provider, model }).catch(() => undefined);
           }}
-          onOpenBotChat={(agentId) => {
+          onStarBotChat={(agentId) => {
             void perform({ type: "open-agent", serverId: server, agentId }).catch(() => undefined);
           }}
           onResizeSizePercent={(sizePercent) => {

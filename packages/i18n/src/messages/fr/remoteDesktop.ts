@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "Contrôle à distance",
   "remoteDesktop.displayLabel": "Écran distant",
   "remoteDesktop.selectDisplay": "Choisir l’écran",
-  "remoteDesktop.backToOpenBot": "Retour à StarBot",
+  "remoteDesktop.backToStarBot": "Retour à StarBot",
 
   "remoteDesktop.disconnect": "Déconnecter",
   "remoteDesktop.viewerTitle": "Bureau à distance Sunshine",

@@ -1,4 +1,4 @@
-import { analyticsTokens, type HostAnalytics } from "@openbot/contracts/ipc";
+import { analyticsTokens, type HostAnalytics } from "@starbot/contracts/ipc";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useQueryScope } from "@/features/auth/context/mobile-session-context";

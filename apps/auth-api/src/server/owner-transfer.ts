@@ -1,5 +1,5 @@
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { isString } from "@openbot/contracts/runtime-values";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
+import { isString } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import { type AuthService, AuthServiceError, normalizeEmail } from "./auth-service";
 import type { RemoteControlPlane } from "./remote-control-plane";

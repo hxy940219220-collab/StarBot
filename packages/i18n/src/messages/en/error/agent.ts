@@ -4,27 +4,27 @@ export const messages = defineMessages("error.agent", {
   "error.agent.historyUnavailable":
     "History is unavailable for this request. Read recent history again, or use channel_history for channel work.",
   "error.agent.historyArgumentsInvalid":
-    "Incorrect history arguments: {detail} Correct the arguments and try again. openbot.tool_describe gives the schema.",
+    "Incorrect history arguments: {detail} Correct the arguments and try again. starbot.tool_describe gives the schema.",
   "error.agent.toolRequestInvalid":
     "Invalid tool discovery arguments. Use the declared schema and an original qualified tool name.",
   "error.agent.toolCallArgumentsNotObject":
     "The tool did not run. In tool_call, arguments must be a JSON object, not text. Send the call again with arguments as an object.",
   "error.agent.toolCallDiscoveryTool":
-    "The tool did not run. tool_call cannot run openbot.tool_search or openbot.tool_describe. Call them directly, with the same arguments.",
+    "The tool did not run. tool_call cannot run starbot.tool_search or starbot.tool_describe. Call them directly, with the same arguments.",
   "error.agent.toolCallEnvelopeKeys":
     "The tool did not run. tool_call takes only name and arguments. Put the arguments of the tool in arguments, as an object, and send the call again.",
   "error.agent.toolCallMissingName":
-    "The tool did not run. The tool_call has no name. Put the qualified name that tool_search gives in name, such as openbot.history_read, and send the call again.",
+    "The tool did not run. The tool_call has no name. Put the qualified name that tool_search gives in name, such as starbot.history_read, and send the call again.",
   "error.agent.toolCallUnknownTool":
-    "The tool did not run. tool_call found no tool with this name. Use the exact qualified name that tool_search gives, such as openbot_browser.snapshot.",
+    "The tool did not run. tool_call found no tool with this name. Use the exact qualified name that tool_search gives, such as starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "The tool did not run. tool_call found no tool with this name. The qualified name is possibly {name}. If it is, send the call again with that name.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe found no StarBot tool named {names}. It describes only the StarBot and browser tools that openbot.tool_search lists, not MCP tools.",
+    "tool_describe found no StarBot tool named {names}. It describes only the StarBot and browser tools that starbot.tool_search lists, not MCP tools.",
   "error.agent.toolDescribeDiscoveryNames":
     "Call {names} directly. tool_describe does not describe the discovery tools.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "The routine schedule is invalid: {detail} Correct the schedule and try again. openbot.tool_describe gives the schema.",
+    "The routine schedule is invalid: {detail} Correct the schedule and try again. starbot.tool_describe gives the schema.",
   "error.agent.approvalWhileDeleting": "Cannot grant approval while the agent is being deleted.",
   "error.agent.accessLocalOnly": "Agent access can only be changed on the computer that runs the agent.",
   "error.agent.duplicateCleanupFailed": "Agent duplication failed and the incomplete copy could not be removed.",

@@ -5,15 +5,15 @@ import type {
   DynamicIslandNotchSize,
   DynamicIslandPreference,
   DynamicIslandPresentation,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   DEFAULT_DYNAMIC_ISLAND_PREFERENCE,
   dynamicIslandCompactHeight,
   IDLE_DYNAMIC_ISLAND_PRESENTATION,
   IPC_ENDPOINTS,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, type Logger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, type Logger, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Schema, Semaphore } from "effect";
 import type { BrowserWindow, Display, Rectangle } from "electron";
 import { causeHelpers } from "../backend/effect-boundary";
@@ -24,7 +24,7 @@ import { letPointerThrough, type PointerForwardingGate } from "./pointer-forward
 import { sendToRenderer } from "./renderer-ipc";
 import type { WindowsTopmostKeeper } from "./windows-topmost-keeper";
 
-const logger = createOpenBotLogger("dynamic-island-window");
+const logger = createStarBotLogger("dynamic-island-window");
 
 const DYNAMIC_ISLAND_WINDOW_SIZE = { width: 620, height: 480 } as const;
 const DYNAMIC_ISLAND_COMPACT_WINDOW_HEIGHT = 50;

@@ -1,27 +1,27 @@
 import { createHash, randomBytes } from "node:crypto";
-import type { DiscordDelivery } from "@openbot/contracts/signal-protocol/discord-api";
-import { DISCORD_ROUTE_TTL_SECONDS, type DiscordRouteGuild } from "@openbot/contracts/signal-protocol/discord-route";
-import type { GitHubRouteRepository } from "@openbot/contracts/signal-protocol/github-route";
+import type { DiscordDelivery } from "@starbot/contracts/signal-protocol/discord-api";
+import { DISCORD_ROUTE_TTL_SECONDS, type DiscordRouteGuild } from "@starbot/contracts/signal-protocol/discord-route";
+import type { GitHubRouteRepository } from "@starbot/contracts/signal-protocol/github-route";
 import {
   INGRESS_QUEUE_CAPABILITY,
   type IngressRoute,
   isIngressQueueKey,
   type QueuedSignalMessage,
-} from "@openbot/contracts/signal-protocol/ingress-queue";
-import { SLACK_ROUTE_TTL_SECONDS, type SlackRouteTeam } from "@openbot/contracts/signal-protocol/slack-route";
+} from "@starbot/contracts/signal-protocol/ingress-queue";
+import { SLACK_ROUTE_TTL_SECONDS, type SlackRouteTeam } from "@starbot/contracts/signal-protocol/slack-route";
 import {
   TELEGRAM_CAPABILITY,
   TELEGRAM_ROUTE_TTL_SECONDS,
   type TelegramCallResult,
   type TelegramRouteChat,
   telegramRouteChatKey,
-} from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@starbot/contracts/signal-protocol/telegram-route";
 import {
   WEBHOOK_ROUTE_TTL_SECONDS,
   type WebhookRoute,
   type WebhookSignatureFormat,
-} from "@openbot/contracts/signal-protocol/webhook-route";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/signal-protocol/webhook-route";
+import { sourceText } from "@starbot/i18n/source";
 import { Context, Effect, Fiber, Layer, Result, Schema } from "effect";
 import { IngressQueue, queueRouteKey, type RouteWaker } from "./ingress-queue";
 import {
@@ -92,7 +92,7 @@ export interface RemoteTokenProvider {
 }
 
 export class SignalTokens extends Context.Service<SignalTokens, RemoteTokenProvider>()(
-  "@openbot/remote-api/SignalTokens",
+  "@starbot/remote-api/SignalTokens",
 ) {
   static layer(provider: RemoteTokenProvider) {
     return Layer.succeed(SignalTokens, provider);

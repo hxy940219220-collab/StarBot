@@ -1,8 +1,8 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { isMessageReaction } from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
-import { TEAM_PROTOCOL_V3 } from "@openbot/contracts/team-protocol/v3";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { isMessageReaction } from "@starbot/contracts/ipc";
+import { isString } from "@starbot/contracts/runtime-values";
+import { TEAM_PROTOCOL_V3 } from "@starbot/contracts/team-protocol/v3";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAgents } from "./dependencies";
 import { HttpError } from "./http-error";

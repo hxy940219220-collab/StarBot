@@ -1,9 +1,9 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { SidebarLayoutAction } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { SidebarLayoutAction } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { SidebarLayoutStore } from "../sidebar-layout-store";
-import { openBotToolFailure, openBotToolResult } from "./routine-tools";
+import { starBotToolFailure, starBotToolResult } from "./routine-tools";
 import { ToolOperationFailed, toolStep, toToolOperationFailed } from "./tool-operation";
 
 const sectionId = z.string().min(1).max(INPUT_LIMITS.identifier);
@@ -52,8 +52,8 @@ export const handleSidebarTool = Effect.fn("SidebarTools.handle")(function* (
     case "assign_agent_section": {
       const assignment = yield* toolStep(() => assignAgentSectionToolSchema.parse(args));
       if (!agentIds().has(assignment.agentId) && !channelIds().has(assignment.agentId))
-        return openBotToolFailure(
-          "Unknown agent or channel. Use an id from openbot.list_agents or openbot.list_channels.",
+        return starBotToolFailure(
+          "Unknown agent or channel. Use an id from starbot.list_agents or starbot.list_channels.",
         );
       action = { type: "assign", ...assignment };
       break;
@@ -64,11 +64,11 @@ export const handleSidebarTool = Effect.fn("SidebarTools.handle")(function* (
   if (!sidebar) return yield* new ToolOperationFailed({ cause: new Error("Sidebar sections are unavailable.") });
   const targetSectionId = action && "sectionId" in action ? action.sectionId : null;
   if (targetSectionId !== null && !sidebar.getSnapshot().sections.some((section) => section.id === targetSectionId))
-    return openBotToolFailure(
-      `Unknown sidebar section "${targetSectionId}". Use a sectionId from openbot.list_sections, not a section name.`,
+    return starBotToolFailure(
+      `Unknown sidebar section "${targetSectionId}". Use a sectionId from starbot.list_sections, not a section name.`,
     );
   const layout = action
     ? yield* sidebar.mutate(action, new Set([...agentIds(), ...channelIds()])).pipe(toToolOperationFailed)
     : sidebar.getSnapshot();
-  return openBotToolResult(layout);
+  return starBotToolResult(layout);
 });

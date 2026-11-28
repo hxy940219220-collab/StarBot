@@ -1,7 +1,7 @@
-import { DEFAULT_TEAM_MEMBER_LIMIT } from "@openbot/contracts/input-limits";
-import { canAdministerServer } from "@openbot/contracts/ipc";
-import type { RemoteTeamInvite } from "@openbot/team-client";
-import { runTeamEffect } from "@openbot/team-client";
+import { DEFAULT_TEAM_MEMBER_LIMIT } from "@starbot/contracts/input-limits";
+import { canAdministerServer } from "@starbot/contracts/ipc";
+import type { RemoteTeamInvite } from "@starbot/team-client";
+import { runTeamEffect } from "@starbot/team-client";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryScope } from "@/features/auth/context/mobile-session-context";
 import { useLockedMutation } from "@/features/servers/model/use-locked-action";

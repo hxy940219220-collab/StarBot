@@ -138,10 +138,10 @@ export const messages = {
   "server.install.offline": "{name}이(가) 오프라인이에요.",
   "server.install.expired": "이 명령은 만료됐어요. 새 명령을 만드세요.",
   "server.install.agentPrompt":
-    '이 Linux 서버에 OpenBot을 설치하고 내 OpenBot 계정에 로그인시켜 줘.\n이 명령을 root로 실행해. 질문은 없고 몇 분 걸려:\n\n{command}\n\n"StarBot is connected to your account." 줄과 종료 코드 0으로 끝나.\n이 명령은 15분 동안 한 번만 작동해. 어디에도 저장하지 마.',
+    '이 Linux 서버에 StarBot을 설치하고 내 StarBot 계정에 로그인시켜 줘.\n이 명령을 root로 실행해. 질문은 없고 몇 분 걸려:\n\n{command}\n\n"StarBot is connected to your account." 줄과 종료 코드 0으로 끝나.\n이 명령은 15분 동안 한 번만 작동해. 어디에도 저장하지 마.',
   "server.install.setUpWithAgent": "에이전트로 설정",
   "server.install.sshAgentPrompt":
-    "SSH로 내 Linux 서버에 연결하고 OpenBot을 서버로 설치해 주세요.\n\nSSH 주소 (user@host):",
+    "SSH로 내 Linux 서버에 연결하고 StarBot을 서버로 설치해 주세요.\n\nSSH 주소 (user@host):",
   "server.add.limit.title": "이 계정은 서버를 최대 개수까지 만들었어요",
   "server.add.limit.description": {
     other: "계정당 유료 서버를 {count}개까지 둘 수 있어요. 서버를 추가하려면 먼저 하나를 삭제하세요.",
@@ -693,7 +693,7 @@ export const messages = {
   "server.update.path.hosted":
     "호스팅 서비스가 백그라운드에서 업데이트를 다운로드해요. 다운로드한 업데이트는 서버가 다음에 시작될 때 적용돼요. 서버를 중지했다가 재개하기 전에 진행 중인 작업이 끝나기를 기다려 주세요. 계속 예전 버전이면 호스트 관리자에게 문의하세요.",
   "server.update.path.system":
-    "호스트에서 sudo openbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 StarBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다려 주세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
+    "호스트에서 sudo starbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 StarBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다려 주세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
   "server.update.path.container":
     "Docker 호스트에서 새 StarBot 이미지를 가져온 후 같은 데이터 볼륨으로 컨테이너를 다시 만드세요. 먼저 진행 중인 작업이 끝나기를 기다려 주세요. 데이터를 보존하려면 기존 볼륨을 유지하세요.",
 

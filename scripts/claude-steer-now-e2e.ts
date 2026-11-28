@@ -5,7 +5,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { AGENT_PROVIDERS, defaultProviderModel } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS, defaultProviderModel } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import type { AgentClient, DiagnosticOrigin } from "../src/backend/agent-client";
@@ -14,8 +14,8 @@ import type { AppServerNotification, AppServerRequest, RequestId, ResponseDecode
 import { providerSync } from "../src/backend/provider-client-effects";
 import type { ReadProviderHistory } from "../src/backend/provider-history";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/claude-steer-now-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-claude-steer-now-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/claude-steer-now-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-claude-steer-now-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const claudeConfig = join(home, ".claude");
@@ -45,7 +45,7 @@ function recordHeldTool(notification: AppServerNotification): void {
 }
 
 process.env.HOME = home;
-process.env.OPENBOT_CLAUDE_PATH = claudeExecutable;
+process.env.STARBOT_CLAUDE_PATH = claudeExecutable;
 process.env.CLAUDE_CONFIG_DIR = claudeConfig;
 mkdirSync(projectsDir, { recursive: true });
 
@@ -54,7 +54,7 @@ const { AgentStore } = await import("../src/backend/agent-store");
 const { ClaudeAgentClient } = await import("../src/backend/claude-client");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const STAND_IN_CLAUDE = `#!${process.execPath}
 const fs = require("node:fs");
@@ -116,7 +116,7 @@ const turn = (message) => {
     begin(message, ${JSON.stringify(WORKING_TEXT)});
     assistant(message, [{ type: "text", text: ${JSON.stringify(WORKING_TEXT)} },
       { type: "tool_use", id: ${JSON.stringify(HELD_TOOL_ID)}, name: "Bash", input: { command: "sleep 600" } }], "tool_use");
-    write({ type: "control_request", request_id: "req_held_host_tool", request: { subtype: "mcp_message", server_name: "openbot",
+    write({ type: "control_request", request_id: "req_held_host_tool", request: { subtype: "mcp_message", server_name: "starbot",
       message: { jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: ${JSON.stringify(HELD_HOST_TOOL)}, arguments: {} } } } });
     held = message;
     fs.writeFileSync(${JSON.stringify(holdMarker)}, message.uuid);
@@ -283,7 +283,7 @@ async function waitFor<T>(label: string, read: () => T | null | undefined | fals
 }
 
 function startService() {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const agents = new AgentService({

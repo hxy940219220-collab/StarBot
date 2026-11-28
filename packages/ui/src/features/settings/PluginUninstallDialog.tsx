@@ -1,5 +1,5 @@
-import { ConfirmDialog, Text } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { ConfirmDialog, Text } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { For, Show } from "solid-js";
 
 export interface PluginUninstallPlan {

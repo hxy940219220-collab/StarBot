@@ -5,7 +5,7 @@ private let openEvent = "onShortcutOpen"
 /// Gives JavaScript the screen that a button of a shortcut card opens.
 public class ShortcutsModule: Module {
   public func definition() -> ModuleDefinition {
-    Name("OpenBotShortcuts")
+    Name("StarBotShortcuts")
 
     Events(openEvent)
 

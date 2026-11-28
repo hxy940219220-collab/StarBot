@@ -1,6 +1,6 @@
-import { computeAgentAvatarMoods } from "@openbot/ui/features/agents/agent-avatar-mood";
-import { computeSidebarAgentStates } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import type { SidebarAgentState } from "@openbot/ui/features/sidebar/sidebar-types";
+import { computeAgentAvatarMoods } from "@starbot/ui/features/agents/agent-avatar-mood";
+import { computeSidebarAgentStates } from "@starbot/ui/features/sidebar/sidebar-agent-states";
+import type { SidebarAgentState } from "@starbot/ui/features/sidebar/sidebar-types";
 import { createMemo } from "solid-js";
 import { useTurns } from "../../turns";
 import { useAgentTasks } from "../agent-tasks/agent-tasks-context";

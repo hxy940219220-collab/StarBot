@@ -1,4 +1,4 @@
-# OpenBot Contributor License Agreement
+# StarBot Contributor License Agreement
 
 Version: 2.0
 
@@ -6,14 +6,14 @@ Date: 2026-11-04
 
 ## How to sign
 
-1. Download the agreement as a PDF from [openbot.run/cla](https://openbot.run/cla).
+1. Download the agreement as a PDF from [starbot.run/cla](https://starbot.run/cla).
 2. Fill in the contributor type and the contributor details, then sign and date it.
-3. Send the signed PDF to licenses@openbot.run. In the email, write your GitHub login and the link
+3. Send the signed PDF to licenses@starbot.run. In the email, write your GitHub login and the link
    to your pull request.
 4. A maintainer records your signature on the `cla-signatures` branch and the `CLA` check runs again.
 
-You sign one time. The signature applies to all your contributions to OpenBot. If you signed the
-OpenBot Contributor Assignment Agreement 1.0, you do not sign again: that agreement continues to
+You sign one time. The signature applies to all your contributions to StarBot. If you signed the
+StarBot Contributor Assignment Agreement 1.0, you do not sign again: that agreement continues to
 apply to your contributions.
 
 The text of the agreement follows. It is the same text as the PDF.
@@ -24,20 +24,20 @@ The text of the agreement follows. It is the same text as the PDF.
 
 This Contributor License Agreement ("Agreement" or "CLA") is entered into between Synthetify Labs
 sp. z o.o., with its registered address at Trzebunia 513, 32-438 Trzebunia, Poland, operating the
-OpenBot project ("OpenBot"), and the individual or legal entity identified below (the
+StarBot project ("StarBot"), and the individual or legal entity identified below (the
 "Contributor").
 
-The purpose of this Agreement is to clarify the intellectual property rights granted to OpenBot in
-connection with Contributions made to the OpenBot project.
+The purpose of this Agreement is to clarify the intellectual property rights granted to StarBot in
+connection with Contributions made to the StarBot project.
 
 This Agreement applies to Contributions specifically identified and voluntarily submitted by the
-Contributor to OpenBot, including Contributions submitted after the execution of this Agreement.
+Contributor to StarBot, including Contributions submitted after the execution of this Agreement.
 Each Contribution becomes subject to this Agreement upon its submission.
 
 Except for the licenses expressly granted under this Agreement, the Contributor retains all rights,
 title, and interest in their Contributions.
 
-Please complete and sign this Agreement, and then email a pdf copy to licenses@openbot.run only.
+Please complete and sign this Agreement, and then email a pdf copy to licenses@starbot.run only.
 Read this document carefully before signing and keep a copy for your records.
 
 ## Contributor Type (select one)
@@ -65,22 +65,22 @@ Agreement and granting the licenses specified herein.
 
 **"Contribution"** means any original work of authorship, including source code, software
 modifications, documentation, fixes, improvements, and other materials intentionally submitted by
-the Contributor to OpenBot for inclusion in, or use in connection with, the OpenBot project.
+the Contributor to StarBot for inclusion in, or use in connection with, the StarBot project.
 
-**"Submitted"** means communicated to OpenBot or its authorised representatives through source code
+**"Submitted"** means communicated to StarBot or its authorised representatives through source code
 repositories, pull requests, issue tracking systems, electronic communications, or other
-contribution channels designated or accepted by OpenBot for the purpose of improving the project.
+contribution channels designated or accepted by StarBot for the purpose of improving the project.
 
-**"Work"** means the OpenBot software project and associated materials maintained or managed by
-OpenBot, including modifications, extensions, and derivative works.
+**"Work"** means the StarBot software project and associated materials maintained or managed by
+StarBot, including modifications, extensions, and derivative works.
 
 **"Corporate Contributor"** means a legal entity that owns or is otherwise legally authorised to
 license the intellectual property rights in Contributions submitted on its behalf.
 
 ## Grant of Copyright License
 
-Subject to the terms and conditions of this Agreement, You hereby grant to OpenBot and recipients
-of software distributed by OpenBot a worldwide, non-exclusive, no-charge, royalty-free copyright
+Subject to the terms and conditions of this Agreement, You hereby grant to StarBot and recipients
+of software distributed by StarBot a worldwide, non-exclusive, no-charge, royalty-free copyright
 license, granted for an indefinite period, with the right to grant an unlimited number of
 non-exclusive sublicenses, including for commercial purposes, to:
 
@@ -92,7 +92,7 @@ non-exclusive sublicenses, including for commercial purposes, to:
 - distribute, license, sublicense, and commercially exploit Your Contributions and derivative
   works, including as part of open-source, source-available, or proprietary software products.
 
-You expressly authorise OpenBot to exercise and authorise third parties to exercise the rights
+You expressly authorise StarBot to exercise and authorise third parties to exercise the rights
 necessary to use and exploit modifications and derivative works of Your Contributions within the
 scope of this Agreement.
 
@@ -106,18 +106,18 @@ rights are recognised and cannot be waived under applicable law.
 
 You retain ownership of the copyright in Your Contributions and remain free to use and license them
 independently, subject to any applicable third-party rights. Nothing in this Agreement transfers
-copyright ownership to OpenBot.
+copyright ownership to StarBot.
 
 ## Grant of Patent License
 
-Subject to the terms and conditions of this Agreement, You hereby grant to OpenBot and recipients
-of software distributed by OpenBot a worldwide, non-exclusive, royalty-free patent license,
+Subject to the terms and conditions of this Agreement, You hereby grant to StarBot and recipients
+of software distributed by StarBot a worldwide, non-exclusive, royalty-free patent license,
 effective for the duration of the applicable patent rights and irrevocable (except as stated
 below), to make, have made, use, sell, offer for sale, import, and otherwise transfer Your
 Contributions, whether independently or in combination with the Work, including portions of such
 combinations.
 
-You expressly authorise OpenBot to grant non-exclusive patent sublicenses to third parties,
+You expressly authorise StarBot to grant non-exclusive patent sublicenses to third parties,
 including for commercial purposes. The recipients of such sublicenses shall not be authorised to
 grant further patent sublicenses.
 
@@ -145,7 +145,7 @@ authorised to make such submissions, and that You own or otherwise hold the righ
 grant the licenses specified herein.
 
 If You are a Corporate Contributor, You agree to ensure that Contributions submitted on Your behalf
-are identifiable as such and to notify OpenBot of any changes affecting the authorisation of
+are identifiable as such and to notify StarBot of any changes affecting the authorisation of
 individuals submitting Contributions on Your behalf.
 
 ## Original Contributions and Third-Party Rights
@@ -154,7 +154,7 @@ You represent that each of Your Contributions is Your original creation or that 
 possess the rights and authorisations necessary to submit and license it.
 
 You further represent that You have disclosed all third-party licenses, patents, trademarks, or
-other restrictions known to You that may affect OpenBot's use, modification, licensing, or
+other restrictions known to You that may affect StarBot's use, modification, licensing, or
 distribution of Your Contributions.
 
 ## No Obligation to Provide Support
@@ -177,8 +177,8 @@ and any applicable licenses, intellectual property rights, or restrictions.
 
 Such materials must be clearly identified as third-party materials.
 
-OpenBot may determine whether the submitted materials can be legally incorporated into the Work.
-Submission of third-party materials does not grant OpenBot rights that You are not legally entitled
+StarBot may determine whether the submitted materials can be legally incorporated into the Work.
+Submission of third-party materials does not grant StarBot rights that You are not legally entitled
 to license.
 
 ## Miscellaneous
@@ -190,11 +190,11 @@ This Agreement shall be governed by and construed in accordance with the laws of
 disputes arising out of or in connection with this Agreement shall be subject to the exclusive
 jurisdiction of the competent courts of Poland, to the extent permitted by applicable law.
 
-This Agreement constitutes the entire agreement between You and OpenBot concerning the licenses
+This Agreement constitutes the entire agreement between You and StarBot concerning the licenses
 granted for Your Contributions under this CLA and supersedes any prior agreements or understandings
 relating specifically to those licenses, unless otherwise expressly agreed in writing.
 
-You agree to notify OpenBot of any facts or circumstances of which you become aware that would make
+You agree to notify StarBot of any facts or circumstances of which you become aware that would make
 this Agreement inaccurate in any respect. If You are a Corporate Contributor, this obligation also
 includes changes concerning the authority of individuals submitting Contributions on Your behalf.
 
@@ -204,4 +204,4 @@ includes changes concerning the authority of individuals submitting Contribution
 - Date
 
 This is a legal contract containing Personally Identifiable Information. Please refer to
-https://openbot.run/privacy for the policy governing how this information is used and shared.
+https://starbot.run/privacy for the policy governing how this information is used and shared.

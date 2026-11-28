@@ -3,13 +3,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { installFakeAgent, readJsonl } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/grok-partial-model-list-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-grok-partial-list-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/grok-partial-model-list-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-grok-partial-list-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeGrok = join(root, "grok");
@@ -19,14 +19,14 @@ const MODEL = "grok-4.7";
 const FALLBACK = "grok-4.6";
 
 process.env.HOME = home;
-process.env.OPENBOT_GROK_PATH = fakeGrok;
+process.env.STARBOT_GROK_PATH = fakeGrok;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 interface SetupLine {
   event: string;
@@ -77,7 +77,7 @@ const report: {
 
 writeFileSync(controlPath, JSON.stringify({ partial: 0 }));
 await installFakeAgent(fakeGrok, "grok-partial-list", { FAKE_LOG: logPath, FAKE_CONTROL: controlPath });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

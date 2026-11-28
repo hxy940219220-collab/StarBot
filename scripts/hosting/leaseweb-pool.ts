@@ -4,15 +4,15 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
-import { BILLING_PLAN_IDS, type BillingPlanId } from "@openbot/contracts/billing";
+import { BILLING_PLAN_IDS, type BillingPlanId } from "@starbot/contracts/billing";
 import {
   CUSTOM_SERVER_PAID_STATUSES,
   type CustomServerPlan,
   parseCustomServerPlan,
-} from "@openbot/contracts/custom-server-plans";
-import { HOSTED_PLAN_SIZE, HOSTED_SERVER_SIZE_NAMES } from "@openbot/contracts/hosted-servers";
-import { isOneOf } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/custom-server-plans";
+import { HOSTED_PLAN_SIZE, HOSTED_SERVER_SIZE_NAMES } from "@starbot/contracts/hosted-servers";
+import { isOneOf } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { z } from "zod";
 import {
   ARCHIVE_REGION,
@@ -35,7 +35,7 @@ import {
 } from "./pool-archive";
 import { hostingCopy, MACHINE_HOSTING, prepareScript, upgradeScript } from "./pool-machine";
 
-const logger = createOpenBotLogger("leaseweb-pool");
+const logger = createStarBotLogger("leaseweb-pool");
 const AUTH_API = resolve(import.meta.dirname, "../../apps/auth-api");
 const LEASEWEB_API = "https://api.leaseweb.com/publicCloud/v1/vps";
 const POOL_REFERENCE = "pool";
@@ -71,10 +71,10 @@ const VERSION_PATTERN = /^\d+\.\d+\.\d+$/u;
 const PRODUCT_OF_PLAN: Record<BillingPlanId, string> = { starter: "VPS01", standard: "VPS02", pro: "VPS03" };
 const AUTH_API_URL = {
   production: "https://api.starbot.app",
-  test: "https://openbot-auth-api-test.internal9671.workers.dev",
+  test: "https://starbot-auth-api-test.internal9671.workers.dev",
 };
-const SANDBOX_MOVE = "/root/openbot-move";
-const MACHINE_ARCHIVE = "/root/openbot-move.tar";
+const SANDBOX_MOVE = "/root/starbot-move";
+const MACHINE_ARCHIVE = "/root/starbot-move.tar";
 const EXPORT_WAIT_MS = 3 * 60 * 60_000;
 const RESTORE_WAIT_MS = 30 * 60_000;
 const LEASEWEB_ACCOUNTS = ["NL", "DE", "US", "AU", "SG"];
@@ -124,9 +124,9 @@ const wranglerErrorSchema = z.object({
 type D1Target = "production" | "test" | "local";
 
 const D1_TARGET_ARGS: Record<D1Target, string[]> = {
-  production: ["openbot-auth", "--remote"],
-  test: ["openbot-auth-test", "--env", "test", "--remote"],
-  local: ["openbot-auth", "--local"],
+  production: ["starbot-auth", "--remote"],
+  test: ["starbot-auth-test", "--env", "test", "--remote"],
+  local: ["starbot-auth", "--local"],
 };
 
 function d1Statement(sql: string, database: D1Target) {
@@ -218,21 +218,21 @@ const MACHINE_STATE = `v=$(sed -n 's/^X-AppImage-Version=//p' /opt/StarBot/app/*
 echo "version=$v"
 echo "user=$(cat /opt/StarBot/hosted/service-user 2>/dev/null || true)"
 echo "ids=$(id -u user 2>/dev/null || true):$(id -g user 2>/dev/null || true)"
-echo "enabled=$(systemctl is-enabled openbot.service 2>/dev/null || true)"
-if [ -e /home/user/.config/StarBot ] || [ -e /home/user/.config/openbot-hosted ] || [ -e /srv/openbot-hosted/keyrings ]; then echo data=yes; else echo data=no; fi
+echo "enabled=$(systemctl is-enabled starbot.service 2>/dev/null || true)"
+if [ -e /home/user/.config/StarBot ] || [ -e /home/user/.config/starbot-hosted ] || [ -e /srv/starbot-hosted/keyrings ]; then echo data=yes; else echo data=no; fi
 echo "hostkey=$(cut -d' ' -f1,2 /etc/ssh/ssh_host_ed25519_key.pub)"`;
 
 const CUSTOM_STATE = `export LC_ALL=C
 echo "hostname=$(hostname)"
-if [ -s /etc/ssh/openbot-operator-keys/root ]; then echo bootstrap=yes; else echo bootstrap=no; fi
+if [ -s /etc/ssh/starbot-operator-keys/root ]; then echo bootstrap=yes; else echo bootstrap=no; fi
 user=$(cat /opt/StarBot/hosted/service-user 2>/dev/null || true)
-if [ -n "$user" ] && command -v openbot >/dev/null && systemctl is-active --quiet openbot.service; then
-  status=$(runuser -u "$user" -- openbot status 2>/dev/null || true)
+if [ -n "$user" ] && command -v starbot >/dev/null && systemctl is-active --quiet starbot.service; then
+  status=$(runuser -u "$user" -- starbot status 2>/dev/null || true)
   echo "version=$(sed -n 's/^StarBot //p' <<<"$status" | head -n 1)"
   echo "account=$(sed -n 's/^Account: //p' <<<"$status" | head -n 1)"
   echo "server=$(sed -n 's/^Server: //p' <<<"$status" | head -n 1)"
   home=$(getent passwd "$user" | cut -d: -f6)
-  echo "hosts=$(grep -o '"serverId": *"[^"]*"' "$home/.config/StarBot/openbot-team-server-v2.json" 2>/dev/null |
+  echo "hosts=$(grep -o '"serverId": *"[^"]*"' "$home/.config/StarBot/starbot-team-server-v2.json" 2>/dev/null |
     sed 's/.*"\\([^"]*\\)"$/\\1/' | paste -sd, -)"
 fi`;
 
@@ -364,7 +364,7 @@ const SANDBOX_SSH = `ssh -i "$d/key" -o IdentitiesOnly=yes -o BatchMode=yes -o S
 function movableFolder(folder: string) {
   return (
     /^\/(?:srv\/|mnt\/|media\/)?[A-Za-z0-9_@+-][A-Za-z0-9._@+-]*$/u.test(folder) &&
-    folder !== "/srv/openbot-hosted" &&
+    folder !== "/srv/starbot-hosted" &&
     !/^\/(?:bin|boot|cdrom|dev|etc|gnu|home|initrd.*|lib.*|lost\+found|media|mnt|nix|opt|proc|root|run|sbin|snap|srv|swap.*|sys|tmp|usr|var)$/u.test(
       folder,
     )
@@ -397,7 +397,7 @@ function isOlder(a: string, b: string) {
 }
 
 function writeFileCommand(path: string, content: string) {
-  return `base64 -d >'${path}' <<'OPENBOT_FILE'\n${Buffer.from(content).toString("base64")}\nOPENBOT_FILE\n`;
+  return `base64 -d >'${path}' <<'STARBOT_FILE'\n${Buffer.from(content).toString("base64")}\nSTARBOT_FILE\n`;
 }
 
 function scriptOutput(stdout: string, marker: string, sandbox: string) {
@@ -807,8 +807,8 @@ class Pool {
     this.#remote(
       machine,
       state === "stopped"
-        ? "systemctl disable --now openbot.service"
-        : "rm -f /run/openbot-pre-stop && systemctl enable --now openbot.service",
+        ? "systemctl disable --now starbot.service"
+        : "rm -f /run/starbot-pre-stop && systemctl enable --now starbot.service",
     );
     const changes = this.#write(
       `UPDATE hosted_servers SET observed_state = '${state}', updated_at = ${literal(Date.now())}
@@ -1057,7 +1057,7 @@ command -v age >/dev/null || DEBIAN_FRONTEND=noninteractive apt-get install -y -
     const args = ["-o", "StrictHostKeyChecking=accept-new", "-o", "ConnectTimeout=20", "-o", "ConnectionAttempts=3"];
     args.push("-o", "ServerAliveInterval=15");
     const env = { ...process.env };
-    const askpass = options.password === undefined ? undefined : mkdtempSync(join(tmpdir(), "openbot-askpass-"));
+    const askpass = options.password === undefined ? undefined : mkdtempSync(join(tmpdir(), "starbot-askpass-"));
     if (askpass && options.password !== undefined) {
       writeFileSync(join(askpass, "password"), options.password, { mode: 0o600 });
       writeFileSync(join(askpass, "askpass"), `#!/bin/sh\nexec cat '${join(askpass, "password")}'\n`, { mode: 0o700 });
@@ -1605,7 +1605,7 @@ hostnamectl set-hostname ${hostname}
 ${
   install
     ? `${writeFileCommand(`${MACHINE_HOSTING}/install-server.sh`, readFileSync(join(ROOT, "scripts/install-server.sh"), "utf8"))}
-{ printf 'OPENBOT_CLAIM=%s\\n' '${claim}'; cat ${MACHINE_HOSTING}/install-server.sh; } | bash -s -- --name '${options.name}'${authApi} 2>&1 |
+{ printf 'STARBOT_CLAIM=%s\\n' '${claim}'; cat ${MACHINE_HOSTING}/install-server.sh; } | bash -s -- --name '${options.name}'${authApi} 2>&1 |
   sed -u 's/[^[:space:]]*@[^[:space:]]*/<email>/g'`
     : ""
 }
@@ -1786,7 +1786,7 @@ bash ${MACHINE_HOSTING}/leaseweb-bootstrap.sh '${keys}'
   }
 
   async #sandboxRun(sandbox: string, script: string, timeoutSeconds = 120) {
-    const marker = `OPENBOT_OUTPUT_${randomBytes(12).toString("hex")}`;
+    const marker = `STARBOT_OUTPUT_${randomBytes(12).toString("hex")}`;
     const command = `f=$(mktemp)
 ${writeFileCommand("$f", script).replace("'$f'", '"$f"')}printf '%s\\n' '${marker}'
 sudo -n bash "$f"
@@ -1983,10 +1983,10 @@ install -d -m 0700 "$d"
 ${writeFileCommand(`${SANDBOX_MOVE}/move-from-boat.sh`, readFileSync(join(HOSTING, "move-from-boat.sh"), "utf8"))}
 ${writeFileCommand(`${SANDBOX_MOVE}/run-export.sh`, RUN_EXPORT)}
 ${writeFileCommand(`${SANDBOX_MOVE}/known-hosts`, `${machine.address} ${machineState.hostKey}\n`)}
-ssh-keygen -q -t ed25519 -N '' -C openbot-move -f "$d/key" </dev/null
+ssh-keygen -q -t ed25519 -N '' -C starbot-move -f "$d/key" </dev/null
 echo "key=$(cat "$d/key.pub")"
 echo "ids=$(id -u user):$(id -g user)"
-echo "version=$(sed -n 's/^X-AppImage-Version=//p' /opt/OpenBot/app/*.desktop | head -n 1)"
+echo "version=$(sed -n 's/^X-AppImage-Version=//p' /opt/StarBot/app/*.desktop | head -n 1)"
 echo "containers=$(find /var/lib/docker/containers -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l)"
 if ids=$(docker ps -aq 2>/dev/null); then
   echo "docker_running=$(docker ps -q | wc -l)"
@@ -2059,7 +2059,7 @@ bash "$d/move-from-boat.sh" packages`,
         throw new Error(`The machine has StarBot ${machineState.version}, and the sandbox has ${sandboxVersion}.`);
       }
       const key = values.get("key") ?? "";
-      if (!/^ssh-ed25519 [A-Za-z0-9+/]+=* openbot-move$/u.test(key))
+      if (!/^ssh-ed25519 [A-Za-z0-9+/]+=* starbot-move$/u.test(key))
         throw new Error("The sandbox made no key for the move.");
       lap(`Sandbox ready (StarBot ${sandboxVersion}, ${packages.length} apt packages)`);
       if (packages.length > 0) {
@@ -2070,7 +2070,7 @@ bash "$d/move-from-boat.sh" packages`,
       }
       this.#remote(
         machine,
-        "install -d -m 0700 /root/.ssh && touch /root/.ssh/authorized_keys && sed -i '/ openbot-move$/d' /root/.ssh/authorized_keys && cat >>/root/.ssh/authorized_keys",
+        "install -d -m 0700 /root/.ssh && touch /root/.ssh/authorized_keys && sed -i '/ starbot-move$/d' /root/.ssh/authorized_keys && cat >>/root/.ssh/authorized_keys",
         { input: `restrict,command="umask 077; cat >${MACHINE_ARCHIVE}" ${key}\n` },
       );
       await this.#sandboxRun(sandbox, `d=${SANDBOX_MOVE}\n${SANDBOX_SSH} "root@${machine.address}" </dev/null`);
@@ -2084,8 +2084,8 @@ bash "$d/move-from-boat.sh" packages`,
     try {
       await this.#sandboxRun(
         sandbox,
-        `systemctl reset-failed openbot-move-export.service 2>/dev/null || true
-systemd-run --quiet --collect --unit=openbot-move-export bash ${SANDBOX_MOVE}/run-export.sh ${machine.address} ${folderArgs}`,
+        `systemctl reset-failed starbot-move-export.service 2>/dev/null || true
+systemd-run --quiet --collect --unit=starbot-move-export bash ${SANDBOX_MOVE}/run-export.sh ${machine.address} ${folderArgs}`,
       );
       const deadline = Date.now() + EXPORT_WAIT_MS;
       let status = "";
@@ -2124,7 +2124,7 @@ systemd-run --quiet --collect --unit=openbot-move-export bash ${SANDBOX_MOVE}/ru
       for (const line of log.split("\n").filter((item) => item !== "")) logger.info(`export: ${line}`);
       if (status !== "0")
         throw new Error(status === "" ? "The export did not end in 3 hours." : `The export failed with ${status}.`);
-      this.#remote(machine, "sed -i '/ openbot-move$/d' /root/.ssh/authorized_keys");
+      this.#remote(machine, "sed -i '/ starbot-move$/d' /root/.ssh/authorized_keys");
       await this.#sandboxRun(sandbox, `rm -rf ${SANDBOX_MOVE}`);
       lap("Export and copy");
 
@@ -2145,17 +2145,17 @@ systemd-run --quiet --collect --unit=openbot-move-export bash ${SANDBOX_MOVE}/ru
       let active = "";
       for (let attempt = 0; attempt < 30 && active !== "active"; attempt += 1) {
         if (attempt > 0) await delay(2_000);
-        active = this.#remote(machine, "systemctl is-active openbot.service || true", { capture: true }).trim();
+        active = this.#remote(machine, "systemctl is-active starbot.service || true", { capture: true }).trim();
       }
-      if (active !== "active") throw new Error(`openbot.service is ${active} on VPS ${vpsId} after 60 s.`);
+      if (active !== "active") throw new Error(`starbot.service is ${active} on VPS ${vpsId} after 60 s.`);
       lap("StarBot started");
     } catch (error) {
       try {
-        this.#remote(machine, "sed -i '/ openbot-move$/d' /root/.ssh/authorized_keys 2>/dev/null || true", {
+        this.#remote(machine, "sed -i '/ starbot-move$/d' /root/.ssh/authorized_keys 2>/dev/null || true", {
           quiet: true,
         });
       } catch {
-        logger.warn(`Remove the openbot-move line of /root/.ssh/authorized_keys on VPS ${vpsId} by hand.`);
+        logger.warn(`Remove the starbot-move line of /root/.ssh/authorized_keys on VPS ${vpsId} by hand.`);
       }
       logger.error(
         `The move of server ${serverId} stopped after the export started. StarBot is stopped in sandbox ${sandbox}, and the row names VPS ${vpsId}. ` +
@@ -2173,7 +2173,7 @@ systemd-run --quiet --collect --unit=openbot-move-export bash ${SANDBOX_MOVE}/ru
 
   async #undoRow(serverId: string, vpsId: string, sandbox: string, row: z.infer<typeof moveRowSchema>, machine: Vps) {
     try {
-      this.#remote(machine, "sed -i '/ openbot-move$/d' /root/.ssh/authorized_keys 2>/dev/null || true", {
+      this.#remote(machine, "sed -i '/ starbot-move$/d' /root/.ssh/authorized_keys 2>/dev/null || true", {
         quiet: true,
       });
       await this.#sandboxRun(sandbox, `rm -rf ${SANDBOX_MOVE}`);

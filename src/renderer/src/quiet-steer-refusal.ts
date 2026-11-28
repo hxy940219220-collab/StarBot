@@ -1,5 +1,5 @@
-import { matchingSourceKeys } from "@openbot/i18n";
-import { normalizeMessage } from "@openbot/user-errors/reference";
+import { matchingSourceKeys } from "@starbot/i18n";
+import { normalizeMessage } from "@starbot/user-errors/reference";
 
 const QUIET_STEER_REFUSALS: ReadonlySet<string> = new Set([
   "error.backend.steerRoutineRun",

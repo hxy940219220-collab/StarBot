@@ -34,17 +34,17 @@ import type {
   TeamPresenceSnapshot,
   TeamSessionSummary,
   UpdateStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   CONVERSATION_PLAN_ITEM_TYPE,
   conversationPlanText,
   isAgentStatus,
   isForeignProviderId,
   isKnownAgentProvider,
-} from "@openbot/contracts/ipc";
-import type { AgentProfile } from "@openbot/ui/data";
-import type { AgentRuntimeSettings } from "@openbot/ui/features/conversation/AgentSettingsPanel";
-import type { MarketplacePluginDetail } from "@openbot/ui/features/settings/marketplace-plugins";
+} from "@starbot/contracts/ipc";
+import type { AgentProfile } from "@starbot/ui/data";
+import type { AgentRuntimeSettings } from "@starbot/ui/features/conversation/AgentSettingsPanel";
+import type { MarketplacePluginDetail } from "@starbot/ui/features/settings/marketplace-plugins";
 import type { McpServerConfig } from "../features/servers/mcp-servers";
 
 const STORY_NOW = "2026-08-19T10:00:00.000Z";
@@ -1019,9 +1019,9 @@ export const STORY_MARKETPLACE_SKILL_DETAILS: Record<string, MarketplaceSkillDet
 export const STORY_INSTALLED_SKILLS: Record<string, InstalledSkill[]> = {
   chief: [
     {
-      skillId: "openbot-skill-creator",
-      slug: "openbot-skill-creator",
-      name: "openbot-skill-creator",
+      skillId: "starbot-skill-creator",
+      slug: "starbot-skill-creator",
+      name: "starbot-skill-creator",
       description: "Create or revise a reusable local StarBot skill.",
       installedVersion: 1,
       availableVersion: 1,
@@ -1030,9 +1030,9 @@ export const STORY_INSTALLED_SKILLS: Record<string, InstalledSkill[]> = {
       origin: "managed",
     },
     {
-      skillId: "openbot-site-hosting",
-      slug: "openbot-site-hosting",
-      name: "openbot-site-hosting",
+      skillId: "starbot-site-hosting",
+      slug: "starbot-site-hosting",
+      name: "starbot-site-hosting",
       installedVersion: 1,
       availableVersion: 1,
       state: "installed",
@@ -1093,7 +1093,7 @@ export const STORY_MCP_SERVERS: McpServerConfig[] = [
     transport: "stdio",
     enabled: true,
     command: "openai-dev-mcp",
-    args: ["serve-sqlite", "--database", "./openbot.db"],
+    args: ["serve-sqlite", "--database", "./starbot.db"],
     env: [{ key: "SQLITE_READONLY", value: "1" }],
     envPassthrough: ["HOME"],
     workingDirectory: "~/code",

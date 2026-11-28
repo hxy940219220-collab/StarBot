@@ -1,5 +1,5 @@
-import { CHAT_COLOR_PRESETS } from "@openbot/brand/chat-colors";
-import { type AvatarColor, isAvatarColor } from "@openbot/contracts/ipc";
+import { CHAT_COLOR_PRESETS } from "@starbot/brand/chat-colors";
+import { type AvatarColor, isAvatarColor } from "@starbot/contracts/ipc";
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 import { storedFields } from "./stored-fields";

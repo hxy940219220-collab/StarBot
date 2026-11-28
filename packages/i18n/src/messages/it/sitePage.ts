@@ -258,7 +258,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "Nessuna skill corrisponde a «{query}».",
   "sitePage.marketplace.emptyApps": "Nessuna app corrisponde.",
   "sitePage.marketplace.breadcrumb": "Percorso",
-  "sitePage.marketplace.addToOpenBot": "Aggiungi a StarBot",
+  "sitePage.marketplace.addToStarBot": "Aggiungi a StarBot",
 
   "sitePage.marketplace.addFromApp": "{name} si aggiunge da StarBot. Scarica l’app, poi apri di nuovo questo link.",
 
@@ -537,7 +537,7 @@ export const messages = {
   "sitePage.site.cta.title": "Conosci il tuo primo collega",
   "sitePage.site.cta.description":
     "Esegui Codex, Claude, Gemini, Grok o il tuo modello con i piani che paghi già, ognuno con il proprio workspace e contesto. Il tuo lavoro resta sul tuo computer.",
-  "sitePage.site.downloadOpenBot": "Scarica StarBot",
+  "sitePage.site.downloadStarBot": "Scarica StarBot",
 
   "sitePage.site.contact": "Contatti",
   "sitePage.site.footer.description":

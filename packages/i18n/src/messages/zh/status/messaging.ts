@@ -50,7 +50,7 @@ export const messages = {
     "👋 *星友已连接*\n\n在这里写下内容即可向你的智能体提问。WhatsApp Orchestrator 会直接回答，或把工作交给合适的智能体。\n\n发送 *stop* 可停止请求。",
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *星友已连接*\n\n你在星友中允许的人现在可以给这个号码发消息。新的联系人会收到一个代码：请在星友的“请求”中批准。\n\n发送 *stop* 可停止请求。",
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "此 WhatsApp 号码还关联了另一个星友，所以你可能会收到两条回复。要解决此问题，请在手机上的 WhatsApp 中打开“已关联设备”，然后退出你不用的星友。",
   "status.messaging.whatsappPaused":
     "短时间内收到的消息太多，星友已在此暂停回复 10 分钟。如果此号码还关联了另一个星友，请在手机上的 WhatsApp 中打开“已关联设备”，然后退出你不用的星友。",

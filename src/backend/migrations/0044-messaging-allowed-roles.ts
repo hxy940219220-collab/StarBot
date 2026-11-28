@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Shared by migration v44 and the separate new-database schema. IF NOT EXISTS throughout.
 //
@@ -15,7 +15,7 @@ export const MESSAGING_ALLOWED_ROLES_SCHEMA_SQL = `
   );
 `;
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 44,
   name: "messaging-allowed-roles",
   // Only creates a table, so no foreign-key pause and no vacuum. No connection has a role list yet, so

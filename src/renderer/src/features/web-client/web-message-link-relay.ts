@@ -1,22 +1,22 @@
 import {
   type McpSignInRelayPage,
   type McpTestResult,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   relayableSignInLink,
-  withOpenBotSource,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
+  withStarBotSource,
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import type { TeamApiRequest } from "@starbot/team-client/team-api-requests";
 import { openWebLink } from "./web-attachments";
 import { webMcpRelay } from "./web-mcp-relay";
 
 export type WebMessageLinks = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   "openMessageLink" | "pasteMessageLink" | "cancelMessageLink"
 >;
 
 export function openWebMessageLink(url: string): Promise<void> {
-  return openWebLink(withOpenBotSource(url));
+  return openWebLink(withStarBotSource(url));
 }
 
 export function webMessageLinks(request: () => TeamApiRequest, enabled: () => boolean): WebMessageLinks {

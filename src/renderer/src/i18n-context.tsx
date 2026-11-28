@@ -1,5 +1,5 @@
-import { type AppLanguage, DEFAULT_APP_LANGUAGE } from "@openbot/contracts/app-language";
-import type { HourCycle } from "@openbot/contracts/ipc";
+import { type AppLanguage, DEFAULT_APP_LANGUAGE } from "@starbot/contracts/app-language";
+import type { HourCycle } from "@starbot/contracts/ipc";
 import {
   type AppTranslate,
   formatLocale,
@@ -9,8 +9,8 @@ import {
   resolveLocale,
   type TranslatedLocale,
   translateFor,
-} from "@openbot/i18n";
-import { TextProvider } from "@openbot/ui/text";
+} from "@starbot/i18n";
+import { TextProvider } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import {
   createContext,

@@ -1,15 +1,15 @@
-import type { AvatarColor } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import { ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { CHAT_BUBBLE_STYLES, ownMessageAuthor } from "@openbot/ui/features/conversation/own-bubble";
-import { CHAT_COLOR_PRESETS } from "@openbot/ui/features/settings/ChatColorPicker";
+import type { AvatarColor } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
+import { ChatMessageRow } from "@starbot/ui/features/conversation/ChatMessageRow";
+import { CHAT_BUBBLE_STYLES, ownMessageAuthor } from "@starbot/ui/features/conversation/own-bubble";
+import { CHAT_COLOR_PRESETS } from "@starbot/ui/features/settings/ChatColorPicker";
 import { For } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { STORY_AGENTS, STORY_ATTACHMENTS } from "./fixtures";
 
 const AGENT_BODY = [
-  "I ran `bun run check` and read [the release guide](https://openbot.run/docs).",
+  "I ran `bun run check` and read [the release guide](https://starbot.run/docs).",
   "",
   "> The tag waits for a green build.",
   "",

@@ -1,5 +1,5 @@
-import type { AppLanguage } from "@openbot/contracts/app-language";
-import type { HourCycle } from "@openbot/contracts/ipc";
+import type { AppLanguage } from "@starbot/contracts/app-language";
+import type { HourCycle } from "@starbot/contracts/ipc";
 
 export const TRANSLATED_LOCALES = [
   "en",

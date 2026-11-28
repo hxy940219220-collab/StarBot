@@ -1,19 +1,19 @@
-import { type AvatarMimeType, isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { companySignInErrorKey, MOBILE_COMPANY_SIGN_IN_RETURN } from "@openbot/contracts/company-sign-in";
-import { AVATAR_IMAGE_LIMITS } from "@openbot/contracts/input-limits";
-import { OPENBOT_CONTROL_PLANE_ORIGIN } from "@openbot/contracts/invite-links";
-import type { CentralAuthUser } from "@openbot/contracts/ipc";
+import { type AvatarMimeType, isValidAvatarImage } from "@starbot/contracts/avatar-images";
+import { companySignInErrorKey, MOBILE_COMPANY_SIGN_IN_RETURN } from "@starbot/contracts/company-sign-in";
+import { AVATAR_IMAGE_LIMITS } from "@starbot/contracts/input-limits";
+import { STARBOT_CONTROL_PLANE_ORIGIN } from "@starbot/contracts/invite-links";
+import type { CentralAuthUser } from "@starbot/contracts/ipc";
 import {
   isMobileConnectDevelopmentHost,
   isMobileConnectHostBinding,
   type MobileConnectHostBinding,
   parseMobileConnectUrl,
   validateMobileConnectHostBinding,
-} from "@openbot/contracts/mobile-connect";
-import { type DynamicRecord, isBoolean, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress, normalizeOneTimeCode, validateProfileName } from "@openbot/contracts/validation";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
-import { bytesToBase64Url } from "@openbot/team-client/base64";
+} from "@starbot/contracts/mobile-connect";
+import { type DynamicRecord, isBoolean, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { normalizeEmailAddress, normalizeOneTimeCode, validateProfileName } from "@starbot/contracts/validation";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
+import { bytesToBase64Url } from "@starbot/team-client/base64";
 import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import * as Device from "expo-device";
@@ -132,8 +132,8 @@ async function redeemMobileConnectSession(value: string): Promise<MobileSession>
 }
 
 function mobileAccountApiUrl(): string {
-  const override = process.env.EXPO_PUBLIC_OPENBOT_API_URL;
-  return (override && __DEV__ && normalizeAccountApiUrl(override)) || OPENBOT_CONTROL_PLANE_ORIGIN;
+  const override = process.env.EXPO_PUBLIC_STARBOT_API_URL;
+  return (override && __DEV__ && normalizeAccountApiUrl(override)) || STARBOT_CONTROL_PLANE_ORIGIN;
 }
 
 export interface MobileEmailChallenge {

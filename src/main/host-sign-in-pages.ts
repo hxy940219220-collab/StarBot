@@ -1,9 +1,9 @@
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Duration, Effect, Exit, Fiber, Scope } from "effect";
 import type { BrowserHost } from "../backend/browser-host";
 import { runCauseEffect } from "../backend/effect-boundary";
 
-const logger = createOpenBotLogger("host-sign-in-pages");
+const logger = createStarBotLogger("host-sign-in-pages");
 
 const RESULT_KEPT_MS = 60_000;
 

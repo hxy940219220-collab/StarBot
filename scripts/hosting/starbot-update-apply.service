@@ -1,0 +1,12 @@
+[Unit]
+Description=Apply a staged StarBot update
+Before=starbot.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/opt/StarBot/hosted/starbot-hosted-update boot
+TimeoutStartSec=15min
+
+[Install]
+WantedBy=multi-user.target

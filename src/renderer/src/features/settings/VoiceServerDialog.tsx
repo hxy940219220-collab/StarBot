@@ -8,9 +8,9 @@ import {
   type VoiceServerProbeField,
   type VoiceServerRoutes,
   type VoiceServerSettings,
-} from "@openbot/contracts/ipc";
-import { fitVoiceServerRoutes, shortVoiceServerModel } from "@openbot/contracts/voice-server";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import { fitVoiceServerRoutes, shortVoiceServerModel } from "@starbot/contracts/voice-server";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Button,
   Dialog,
@@ -28,8 +28,8 @@ import {
   Switch,
   Text,
   X,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createSignal, createStore, For, onSettled, Show, untrack } from "solid-js";
 
 const NO_ROUTES: VoiceServerRoutes = {

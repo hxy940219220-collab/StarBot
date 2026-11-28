@@ -1,4 +1,4 @@
-import { isOpenableAttachmentName } from "@openbot/contracts/attachment-files";
+import { isOpenableAttachmentName } from "@starbot/contracts/attachment-files";
 import {
   type AttachmentSummary,
   type BrowserBounds,
@@ -6,13 +6,13 @@ import {
   type FileAction,
   type FilePreview,
   type WorkspaceDirectory,
-} from "@openbot/contracts/ipc";
-import { matchingSourceKeys } from "@openbot/i18n";
-import type { AgentSettingLinkId, AgentSettingReveal } from "@openbot/ui/features/conversation/agent-setting-links";
-import type { MessageImageFile } from "@openbot/ui/features/conversation/MarkdownMessageText";
-import { isSidePanelPane } from "@openbot/ui/features/conversation/SidePanel";
-import { currentText } from "@openbot/ui/text";
-import { normalizeMessage } from "@openbot/user-errors/reference";
+} from "@starbot/contracts/ipc";
+import { matchingSourceKeys } from "@starbot/i18n";
+import type { AgentSettingLinkId, AgentSettingReveal } from "@starbot/ui/features/conversation/agent-setting-links";
+import type { MessageImageFile } from "@starbot/ui/features/conversation/MarkdownMessageText";
+import { isSidePanelPane } from "@starbot/ui/features/conversation/SidePanel";
+import { currentText } from "@starbot/ui/text";
+import { normalizeMessage } from "@starbot/user-errors/reference";
 import { createEffect, createMemo, createSignal, onCleanup, type Store, type StoreSetter, untrack } from "solid-js";
 import { createScopeGuard } from "../../../scope-lifetime";
 import { createAttachmentDownloads } from "../attachment-downloads";
@@ -110,9 +110,9 @@ export interface PanelsStoreDeps {
   setRightPanels: (update: (current: Record<string, RightPanelMode>) => Record<string, RightPanelMode>) => void;
   panels: Store<SidePanelsState>;
   setPanels: StoreSetter<SidePanelsState>;
-  settingsProvider: () => import("@openbot/contracts/ipc").AgentProviderId;
-  settingsModel: () => import("@openbot/contracts/ipc").AgentModelId;
-  settingsReasoning: () => import("@openbot/contracts/ipc").AgentReasoningEffort;
+  settingsProvider: () => import("@starbot/contracts/ipc").AgentProviderId;
+  settingsModel: () => import("@starbot/contracts/ipc").AgentModelId;
+  settingsReasoning: () => import("@starbot/contracts/ipc").AgentReasoningEffort;
   setBrowserPipBounds: (bounds: BrowserBounds | null) => void;
   browserWindowOpen: () => boolean;
   setBrowserWindowOpen: (open: boolean) => void;

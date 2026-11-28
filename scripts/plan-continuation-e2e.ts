@@ -4,12 +4,12 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS, type AgentEvent, PLAN_CONTINUATION_ITEM_TYPE } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS, type AgentEvent, PLAN_CONTINUATION_ITEM_TYPE } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/plan-continuation-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-plan-continuation-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/plan-continuation-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-plan-continuation-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -19,14 +19,14 @@ const CHECK_MARKER = "StarBot finish check";
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 type StepStatus = "pending" | "inProgress" | "completed";
 
@@ -82,7 +82,7 @@ const finish = (turn) => {
     write({ method: "item/completed", params: { threadId: turn.threadId, turnId: turn.turnId, item: step } });
   });
   const item = { type: "agentMessage", id: "message-" + turn.turnId, text: turn.script.answer || "Done.", phase: "final_answer" };
-  if (turn.script.background) write({ method: "openbot/background-work", params: { threadId: turn.threadId, running: true } });
+  if (turn.script.background) write({ method: "starbot/background-work", params: { threadId: turn.threadId, running: true } });
   if (!turn.script.noAnswer) write({ method: "item/completed", params: { threadId: turn.threadId, turnId: turn.turnId, item } });
   write({ method: "turn/completed", params: { threadId: turn.threadId, turn: { id: turn.turnId, status: "completed" } } });
   if (turn.script.background) finishBackground(turn.threadId, turn.script);
@@ -93,7 +93,7 @@ const finishBackground = (threadId, script) => {
   write({ method: "turn/started", params: { threadId, turn: { id: turnId }, unprompted: true } });
   write({ method: "item/completed", params: { threadId, turnId, item: { type: "agentMessage", id: "message-" + turnId, text: script.later || "Done.", phase: "final_answer" } } });
   write({ method: "turn/completed", params: { threadId, turn: { id: turnId, status: "completed" } } });
-  write({ method: "openbot/background-work", params: { threadId, running: false } });
+  write({ method: "starbot/background-work", params: { threadId, running: false } });
 };
 const callNext = (turn) => {
   const call = turn.calls.shift();
@@ -105,7 +105,7 @@ const callNext = (turn) => {
   }
   const id = "tool-" + turn.turnId + "-" + turn.calls.length;
   waiting.set(id, turn);
-  write({ id, method: "item/tool/call", params: { threadId: turn.threadId, turnId: turn.turnId, callId: "call-" + id, namespace: "openbot", tool: call.tool, arguments: call.arguments } });
+  write({ id, method: "item/tool/call", params: { threadId: turn.threadId, turnId: turn.turnId, callId: "call-" + id, namespace: "starbot", tool: call.tool, arguments: call.arguments } });
 };
 const answer = (message) => {
   const params = message.params || {};
@@ -272,7 +272,7 @@ async function check(name: string, run: () => Promise<unknown>) {
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
 
 function openService() {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const service = new AgentService({

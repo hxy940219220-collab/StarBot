@@ -24,14 +24,14 @@ import {
   type SessionUpdate,
   type ToolCallLocation,
 } from "@agentclientprotocol/sdk";
-import { agentProviderName } from "@openbot/contracts/agent-providers";
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import type { AgentSessionSettingsSnapshot, AgentSessionSettingValue, McpServerConfig } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean, isString } from "@openbot/contracts/runtime-values";
-import { type SourceMessages, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText } from "@openbot/logging";
-import { type CauseCode, classifyFailure, httpStatusCause, structuredCause } from "@openbot/telemetry";
-import { classifyUserError } from "@openbot/user-errors";
+import { agentProviderName } from "@starbot/contracts/agent-providers";
+import { attachmentMimeTypeForName } from "@starbot/contracts/attachment-files";
+import type { AgentSessionSettingsSnapshot, AgentSessionSettingValue, McpServerConfig } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isBoolean, isString } from "@starbot/contracts/runtime-values";
+import { type SourceMessages, sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText } from "@starbot/logging";
+import { type CauseCode, classifyFailure, httpStatusCause, structuredCause } from "@starbot/telemetry";
+import { classifyUserError } from "@starbot/user-errors";
 import { Deferred, Effect, Exit, Fiber, Option, Result, Scope, Semaphore } from "effect";
 import {
   AcpConfiguration,
@@ -137,7 +137,7 @@ import type {
 } from "./provider-history";
 import { TimeoutError } from "./with-timeout";
 
-const logger = createOpenBotLogger("acp-client");
+const logger = createStarBotLogger("acp-client");
 
 const RESTORE_LIST_RETRY_MS = 500;
 
@@ -388,16 +388,16 @@ interface HistoryReplay {
   error: unknown;
 }
 
-export const OPENBOT_ACP_CLIENT_CAPABILITIES = {
+export const STARBOT_ACP_CLIENT_CAPABILITIES = {
   fs: { readTextFile: false, writeTextFile: false },
   terminal: false,
   elicitation: { form: {} },
   session: { configOptions: { boolean: {} } },
 } as const;
 
-export const OPENBOT_ACP_CLIENT_INFO = { name: "openbot", title: "StarBot", version: "0.1.0" } as const;
+export const STARBOT_ACP_CLIENT_INFO = { name: "starbot", title: "StarBot", version: "0.1.0" } as const;
 
-const START_MODELS_PARAM = "openbotStartModels";
+const START_MODELS_PARAM = "starbotStartModels";
 
 export function withStartModels(params: unknown): DynamicRecord {
   return { ...(isRecord(params) ? params : {}), [START_MODELS_PARAM]: true };
@@ -539,7 +539,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
           dynamicTools: released.dynamicTools,
           runtimeWorkspaceRoots: released.workspaceRoots,
           computerUse: released.computerUse,
-          openbotAgentId: released.agentId ?? undefined,
+          starbotAgentId: released.agentId ?? undefined,
         },
         true,
       ),
@@ -901,7 +901,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
 
   #publishSessionSettings(thread: AcpThread): void {
     this.emit("notification", {
-      method: "openbot/sessionSettings/updated",
+      method: "starbot/sessionSettings/updated",
       params: { threadId: thread.id, ...this.#configuration.sessionSettings(thread.configOptions) },
     });
   }
@@ -914,7 +914,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
     thread.instructionsSent = null;
     this.#turnContext.resend(thread.id);
     this.emit("notification", {
-      method: "openbot/context-compaction",
+      method: "starbot/context-compaction",
       params: { threadId: thread.id, status: "completed" },
     });
   }
@@ -1474,11 +1474,11 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
       connection.initialize({
         protocolVersion: 1,
         clientCapabilities: this.#flavor.childSessionUpdates
-          ? { ...OPENBOT_ACP_CLIENT_CAPABILITIES, _meta: { [OPENCODE_CHILD_SESSION_UPDATES]: true } }
+          ? { ...STARBOT_ACP_CLIENT_CAPABILITIES, _meta: { [OPENCODE_CHILD_SESSION_UPDATES]: true } }
           : this.#flavor.clientMeta
-            ? { ...OPENBOT_ACP_CLIENT_CAPABILITIES, _meta: this.#flavor.clientMeta }
-            : OPENBOT_ACP_CLIENT_CAPABILITIES,
-        clientInfo: this.#flavor.clientInfo ?? OPENBOT_ACP_CLIENT_INFO,
+            ? { ...STARBOT_ACP_CLIENT_CAPABILITIES, _meta: this.#flavor.clientMeta }
+            : STARBOT_ACP_CLIENT_CAPABILITIES,
+        clientInfo: this.#flavor.clientInfo ?? STARBOT_ACP_CLIENT_INFO,
       }),
     );
   }
@@ -1530,7 +1530,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
         dynamicTools: thread.dynamicTools,
         runtimeWorkspaceRoots: thread.workspaceRoots,
         computerUse: thread.computerUse,
-        openbotAgentId: thread.agentId ?? undefined,
+        starbotAgentId: thread.agentId ?? undefined,
         model: thread.currentModelId,
       },
       true,
@@ -2417,7 +2417,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
     if (sendInstructions) {
       blocks.unshift({
         type: "text",
-        text: `<openbot-developer-instructions>\n${thread.developerInstructions}\n</openbot-developer-instructions>`,
+        text: `<starbot-developer-instructions>\n${thread.developerInstructions}\n</starbot-developer-instructions>`,
       });
       thread.instructionsSent = thread.developerInstructions;
       thread.promptsSinceInstructions = 1;
@@ -2818,7 +2818,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
     const usage = this.#flavor.promptUsage ? this.#flavor.promptUsage(response) : response.usage;
     if (!usage) return;
     this.emit("notification", {
-      method: "openbot/usage",
+      method: "starbot/usage",
       params: {
         threadId: thread.id,
         turnId: turn.id,
@@ -3339,7 +3339,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
 
   #emitTurnProgress(thread: AcpThread, turn: AcpTurn, detail: string): void {
     this.emit("notification", {
-      method: "openbot/turn-progress",
+      method: "starbot/turn-progress",
       params: { threadId: thread.id, turnId: turn.id, detail },
     });
   }

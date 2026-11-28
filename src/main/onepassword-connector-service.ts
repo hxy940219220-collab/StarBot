@@ -8,9 +8,9 @@ import {
   type OnePasswordConnectInput,
   type OnePasswordConnectorStatus,
   type OnePasswordSetup,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText, registerSecretValue, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Exit, Schedule, Scope, Semaphore } from "effect";
 import { z } from "zod";
 import {
@@ -26,7 +26,7 @@ import type { OnePasswordConnectorRecord, OnePasswordConnectorStore } from "./on
 import { OnePasswordOperationError, onePasswordCall, onePasswordDecode } from "./onepassword-effects";
 import type { RuntimeTarget } from "./provider-runtime-descriptors";
 
-const logger = createOpenBotLogger("onepassword-connector");
+const logger = createStarBotLogger("onepassword-connector");
 
 const ONEPASSWORD_SHARED_VAULT = "Shared with StarBot";
 const MIN_CLI_VERSION = [2, 18] as const;

@@ -17,10 +17,10 @@ import {
   type McpServerConfig,
   type ResponseStyle,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Deferred, Effect, Result, Schema, Semaphore } from "effect";
 import { type AgentClient, type AgentProvider, ProviderStoppedError } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -134,7 +134,7 @@ import {
   workspaceWritableRoots,
 } from "./workspace-sandbox";
 
-const logger = createOpenBotLogger("thread-lifecycle");
+const logger = createStarBotLogger("thread-lifecycle");
 
 const CODEX_MCP_ADAPTER_VERSION = 10;
 
@@ -699,7 +699,7 @@ export class ThreadLifecycle {
         instructionsFile,
         yield* this.#workspaceSkills(agent, client),
       ),
-      serviceName: "openbot",
+      serviceName: "starbot",
       dynamicTools: visibleDynamicTools(client.provider),
     };
     return { agent, mcpServers, toolRuntimes, own, environment, proxy, instructionsFile, params };
@@ -1084,8 +1084,8 @@ export class ThreadLifecycle {
     return client.provider === "codex" || agentComputerUseEnabled(agent) ? {} : { computerUse: false };
   }
 
-  #mcpAgentParam(agent: AgentSummary, client: AgentClient): { openbotAgentId?: string } {
-    return client.provider === "codex" ? {} : { openbotAgentId: agent.id };
+  #mcpAgentParam(agent: AgentSummary, client: AgentClient): { starbotAgentId?: string } {
+    return client.provider === "codex" ? {} : { starbotAgentId: agent.id };
   }
 
   #channelToolsParam(client: AgentClient, publicThreadId: string): { channelTools?: true } {

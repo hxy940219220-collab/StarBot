@@ -1,7 +1,7 @@
-import { avatarHeadColor } from "@openbot/brand/bloub-avatar";
-import type { RoutineCalendarRoutine, RoutineCalendarRun, RoutineCalendarRunStatus } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
-import { type CalendarDay, calendarDayOf } from "@openbot/team-client/routine-calendar-dates";
+import { avatarHeadColor } from "@starbot/brand/bloub-avatar";
+import type { RoutineCalendarRoutine, RoutineCalendarRun, RoutineCalendarRunStatus } from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
+import { type CalendarDay, calendarDayOf } from "@starbot/team-client/routine-calendar-dates";
 import { useQuery } from "@tanstack/react-query";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
@@ -113,9 +113,9 @@ export function ServerRoutinesScreen() {
   const online = server?.state === "online";
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const [foreground, muted] = useThemeColor(["foreground", "muted"]);
-  const cardBg = String(useCSSVariable("--openbot-bg-grouped") ?? "#ffffff");
-  const borderColor = String(useCSSVariable("--openbot-border-grouped") ?? "rgba(0,0,0,0.08)");
-  const sheetBg = String(useCSSVariable("--openbot-bg-sheet") ?? "#ffffff");
+  const cardBg = String(useCSSVariable("--starbot-bg-grouped") ?? "#ffffff");
+  const borderColor = String(useCSSVariable("--starbot-border-grouped") ?? "rgba(0,0,0,0.08)");
+  const sheetBg = String(useCSSVariable("--starbot-bg-sheet") ?? "#ffffff");
 
   const todayDate = useMemo(() => new Date(), []);
   const todayIso = calendarDayOf(todayDate, timeZone);

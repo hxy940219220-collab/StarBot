@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { createStarBotLogger, registerSecretValue } from "@starbot/logging";
 import { Schema } from "effect";
 import {
   type CheckDay,
@@ -22,7 +22,7 @@ import {
   statusDates,
 } from "../src/model";
 
-const logger = createOpenBotLogger("status-update");
+const logger = createStarBotLogger("status-update");
 
 const { values: args } = parseArgs({
   options: {
@@ -49,12 +49,12 @@ const NOW = args.now ?? new Date().toISOString();
 if (Number.isNaN(Date.parse(NOW))) throw new Error(`--now: "${NOW}" is not a time.`);
 const RETRY_DELAY_MS = Number(args["retry-delay"] ?? 10_000);
 
-const REPOSITORY = process.env.GITHUB_REPOSITORY ?? "nightly-labs/openbot";
+const REPOSITORY = process.env.GITHUB_REPOSITORY ?? "nightly-labs/starbot";
 const TOKEN = process.env.GITHUB_TOKEN?.trim() || null;
 if (TOKEN) registerSecretValue(TOKEN);
 if (!DRY_RUN && !TOKEN && !args["issues-file"]) throw new Error("GITHUB_TOKEN is necessary to write issues.");
 
-const SITE_URL = "https://status.openbot.run";
+const SITE_URL = "https://status.starbot.run";
 const BOT_LOGIN = "github-actions[bot]";
 const TIMEOUT_MS = 10_000;
 const SLOW_MS = 5_000;
@@ -65,8 +65,8 @@ const FIRST_CHECK_MINUTES = 5;
 const MAX_TEXT = 2_000;
 
 const ORIGINS = {
-  api: "https://api.openbot.run",
-  signal: "https://signal.openbot.run",
+  api: "https://api.starbot.run",
+  signal: "https://signal.starbot.run",
   github: "https://github.com",
 } as const;
 
@@ -88,7 +88,7 @@ const jsonBody = (body: string, test: (value: unknown) => boolean) => {
   }
 };
 
-const RELEASE_PATH = "/nightly-labs/openbot/releases/latest/download";
+const RELEASE_PATH = "/nightly-labs/starbot/releases/latest/download";
 const PROBES: Record<ServiceId, Probe> = {
   accounts: { origin: "api", paths: ["/health/ready"], healthy: (b) => jsonBody(b, isReady) },
   connections: {
@@ -126,7 +126,7 @@ async function attempt(probe: Probe): Promise<Attempt> {
     probe.paths.map(async (path): Promise<string | null> => {
       try {
         const response = await fetch(probeUrl(probe, path), {
-          headers: { "User-Agent": "openbot-status-check" },
+          headers: { "User-Agent": "starbot-status-check" },
           signal: AbortSignal.timeout(TIMEOUT_MS),
         });
         const body = await response.text();
@@ -269,7 +269,7 @@ async function github<A>(method: string, path: string, decode: (value: unknown) 
     method,
     headers: {
       Accept: "application/vnd.github+json",
-      "User-Agent": "openbot-status-check",
+      "User-Agent": "starbot-status-check",
       "X-GitHub-Api-Version": "2022-11-28",
       ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
       ...(body === undefined ? {} : { "Content-Type": "application/json" }),
@@ -539,12 +539,12 @@ function atomFeed(incidents: readonly Incident[]): string {
   const lines = [
     '<?xml version="1.0" encoding="utf-8"?>',
     '<feed xmlns="http://www.w3.org/2005/Atom">',
-    "  <title>OpenBot status</title>",
+    "  <title>StarBot status</title>",
     `  <id>${SITE_URL}/</id>`,
     `  <link href="${SITE_URL}/"/>`,
     `  <link rel="self" href="${SITE_URL}/feed.xml"/>`,
     `  <updated>${updated}</updated>`,
-    "  <author><name>OpenBot</name></author>",
+    "  <author><name>StarBot</name></author>",
   ];
   for (const { incident, update } of entries) {
     const stage = update.stage.charAt(0).toUpperCase() + update.stage.slice(1);

@@ -1,5 +1,5 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { Button, Check, CircleAlert, LoaderCircle, PlushLoader } from "@openbot/ui";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { Button, Check, CircleAlert, LoaderCircle, PlushLoader } from "@starbot/ui";
 import { createSignal, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import { ServerMark } from "../servers/ServerRail";

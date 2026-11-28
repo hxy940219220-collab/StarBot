@@ -1,5 +1,5 @@
-import type { ComputerUseCoveredArea } from "@openbot/contracts/ipc";
-import { useText } from "@openbot/ui/text";
+import type { ComputerUseCoveredArea } from "@starbot/contracts/ipc";
+import { useText } from "@starbot/ui/text";
 
 export interface ComputerUseWindowHighlightProps {
   windowTitle: string;

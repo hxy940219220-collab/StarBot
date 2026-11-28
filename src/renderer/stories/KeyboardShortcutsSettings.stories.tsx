@@ -1,12 +1,12 @@
-import { Heading } from "@openbot/ui";
-import { KeyboardShortcutsSettings } from "@openbot/ui/features/settings/KeyboardShortcutsSettings";
+import { Heading } from "@starbot/ui";
+import { KeyboardShortcutsSettings } from "@starbot/ui/features/settings/KeyboardShortcutsSettings";
 import type {
   ShortcutChord,
   ShortcutCommand,
   ShortcutEnvironment,
   ShortcutOverrides,
-} from "@openbot/ui/features/settings/keyboard-shortcuts";
-import { withShortcut } from "@openbot/ui/features/settings/keyboard-shortcuts";
+} from "@starbot/ui/features/settings/keyboard-shortcuts";
+import { withShortcut } from "@starbot/ui/features/settings/keyboard-shortcuts";
 import { createSignal } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

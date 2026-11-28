@@ -2050,7 +2050,7 @@ export function teamProtocolProviderAwareHttpRoute(
   method: string,
   path: string,
 ): TeamProtocolProviderAwareHttpRoute | null {
-  const pathname = new URL(path, "http://openbot.invalid").pathname;
+  const pathname = new URL(path, "http://starbot.invalid").pathname;
   const exact: Record<string, TeamProtocolProviderAwareHttpRoute> = {
     "GET /v1/compatibility": "GET compatibility",
     "GET /v1/identity": "GET identity",

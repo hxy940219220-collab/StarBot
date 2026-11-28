@@ -1,12 +1,12 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   AGENT_TASK_OUTCOMES,
   type AgentTaskOutcome,
   type AttachmentSummary,
   type ConversationMessage,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@starbot/contracts/runtime-values";
 import { ORDER_KEY_DESC } from "../database/conversation-queries";
 import { deleteAggregateHistory, deleteThreadAttachments } from "../database/database-core";
 import {
@@ -17,7 +17,7 @@ import {
   requiredStringColumn,
 } from "../database/database-rows";
 import { refreshThreadOrder } from "../database/thread-message-order";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 
 const AGENT_THREAD_ORIGINS = ["user", "agent"] as const;
 export type AgentThreadOrigin = (typeof AGENT_THREAD_ORIGINS)[number];
@@ -73,9 +73,9 @@ export interface AgentThreadInput {
 const SELECT_THREAD = "SELECT *, COALESCE(legacy_task_id, thread_id) AS task_id FROM projection_agent_threads";
 
 export class AgentThreadStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
 
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     this.#database = database;
   }
 
@@ -344,7 +344,7 @@ export class AgentThreadStore {
   }
 
   create(input: AgentThreadInput): AgentThreadRecord {
-    const threadId = `openbot-thread-${randomUUID()}`;
+    const threadId = `starbot-thread-${randomUUID()}`;
     this.#database.dispatch(
       `agent-thread:${threadId}`,
       [
@@ -519,7 +519,7 @@ export function copyBranchMessages(
 
 const BY_TASK_ID = "(legacy_task_id = ? OR (legacy_task_id IS NULL AND thread_id = ?))";
 
-type Connection = OpenBotDatabase["connection"];
+type Connection = StarBotDatabase["connection"];
 
 function deleteThreadRows(db: Connection, threads: readonly AgentThreadRecord[]): void {
   deleteAggregateHistory(

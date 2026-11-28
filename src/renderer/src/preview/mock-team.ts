@@ -11,7 +11,7 @@ import type {
   HostStatus,
   InviteSummary,
   JoinServerInput,
-  OpenBotDesktopApi,
+  StarBotDesktopApi,
   RemoteControlPolicy,
   RemoteDesktopSession,
   SendDirectMessageInput,
@@ -23,10 +23,10 @@ import type {
   TeamPresenceSnapshot,
   TeamSessionSummary,
   UpdateTeamMemberInput,
-} from "@openbot/contracts/ipc";
-import { DEFAULT_REMOTE_CONTROL_POLICY } from "@openbot/contracts/ipc";
-import type { OwnerTransfer } from "@openbot/contracts/owner-transfer";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { DEFAULT_REMOTE_CONTROL_POLICY } from "@starbot/contracts/ipc";
+import type { OwnerTransfer } from "@starbot/contracts/owner-transfer";
+import { sourceText } from "@starbot/i18n/source";
 import {
   STORY_DIRECT_SNAPSHOTS,
   STORY_DIRECT_THREADS,
@@ -139,7 +139,7 @@ export function createMockTeam(
     emit(serverListeners, servers);
   }
 
-  const serversApi: OpenBotDesktopApi["servers"] = {
+  const serversApi: StarBotDesktopApi["servers"] = {
     setMuted: async ({ serverId, muted, durationMs }) => {
       if (!servers.some((server) => server.id === serverId)) throw new Error("Remote server not found.");
       const notificationsMutedUntil = muted && durationMs !== undefined ? Date.now() + durationMs : null;
@@ -374,7 +374,7 @@ export function createMockTeam(
     },
   };
 
-  const host: OpenBotDesktopApi["host"] = {
+  const host: StarBotDesktopApi["host"] = {
     getStatus: async () => clone(hostStatus),
     configure: async (input: ConfigureHostInput) => {
       hostStatus = {
@@ -465,11 +465,11 @@ export function createMockTeam(
     },
   };
 
-  const remoteDesktop: OpenBotDesktopApi["remoteDesktop"] = {
+  const remoteDesktop: StarBotDesktopApi["remoteDesktop"] = {
     checkSetup: async () => ({
       platform: "darwin",
       hostName: "Mac mini",
-      username: "openbot",
+      username: "starbot",
       checkedAt: new Date().toISOString(),
       screenRecording: hostStatus.remoteDesktopScreenRecordingDenied ? "blocked" : "allowed",
       accessibility: "blocked",
@@ -510,7 +510,7 @@ export function createMockTeam(
     },
   };
 
-  const localServersApi: OpenBotDesktopApi["localServers"] = {
+  const localServersApi: StarBotDesktopApi["localServers"] = {
     create: async (name) => {
       const server: ServerSummary = {
         id: `local-server-${servers.length + 1}`,

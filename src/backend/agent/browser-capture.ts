@@ -1,24 +1,24 @@
 import { chmod, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { registerSecretValue } from "@openbot/logging";
+import { registerSecretValue } from "@starbot/logging";
 import { Duration, Effect } from "effect";
 import { CliLoginFailed } from "./cli-login-flow";
 
 const POLL = Duration.millis(250);
 
-export function signInPageByOpenBot(
+export function signInPageByStarBot(
   onHost: boolean,
-  command: { readonly windowsPageByOpenBot?: true },
+  command: { readonly windowsPageByStarBot?: true },
   platform: NodeJS.Platform = process.platform,
 ): boolean {
-  return onHost || (platform === "win32" && command.windowsPageByOpenBot === true);
+  return onHost || (platform === "win32" && command.windowsPageByStarBot === true);
 }
 
 export const captureBrowser = Effect.fn("captureBrowser")(function* (openPage: (url: string) => Promise<void>) {
   const directory = yield* Effect.acquireRelease(
     Effect.tryPromise({
-      try: () => mkdtemp(join(tmpdir(), "openbot-sign-in-")),
+      try: () => mkdtemp(join(tmpdir(), "starbot-sign-in-")),
       catch: (cause) => new CliLoginFailed({ cause }),
     }),
     (path) => Effect.promise(() => rm(path, { recursive: true, force: true })),

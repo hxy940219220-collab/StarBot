@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { type AgentModelOption, analyticsRange, isAgentModel, WORKFLOWS_USAGE_ID } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { type AgentModelOption, analyticsRange, isAgentModel, WORKFLOWS_USAGE_ID } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { ProfileClients } from "../src/backend/agent/profile-clients";
 import { workflowUsageObserver } from "../src/backend/agent/usage-collection";
@@ -12,10 +12,10 @@ import { workflowGenerationError } from "../src/backend/agent/workflow-generatio
 import type { AgentClient } from "../src/backend/agent-client";
 import type { AgentCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/workflow-model-steps-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/workflow-model-steps-e2e");
 
 const FAKE_AGY = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -98,11 +98,11 @@ const check = (name: string, ok: boolean, detail?: unknown) => {
   report.checks.push(name);
 };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-workflow-model-steps-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-workflow-model-steps-e2e-"));
 const log = join(root, "agy.jsonl");
 process.env.FAKE_AGY_LOG = log;
 process.env.GEMINI_HOME = join(root, "gemini");
-const database = new OpenBotDatabase(join(root, "profile"));
+const database = new StarBotDatabase(join(root, "profile"));
 const clients: AgentClient[] = [];
 
 async function readLog(): Promise<LogEntry[]> {

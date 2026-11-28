@@ -9,8 +9,8 @@
   height: 100%;
   min-width: 0;
   min-height: 0;
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   pointer-events: auto;
 }
 
@@ -22,8 +22,8 @@
   gap: 10px 16px;
   min-height: 54px;
   flex: 0 0 auto;
-  border-bottom: 1px solid var(--openbot-border);
-  background: color-mix(in srgb, var(--openbot-bg-surface) 80%, var(--openbot-bg-canvas));
+  border-bottom: 1px solid var(--starbot-border);
+  background: color-mix(in srgb, var(--starbot-bg-surface) 80%, var(--starbot-bg-canvas));
   padding: 8px 20px;
   pointer-events: auto;
   -webkit-app-region: drag;
@@ -68,7 +68,7 @@
 }
 
 .starbot-schedule-month-picker:hover {
-  background: var(--openbot-hover);
+  background: var(--starbot-hover);
 }
 
 .starbot-schedule-month-input {
@@ -83,9 +83,9 @@
 .starbot-schedule-title {
   margin: 0;
   font-size: 18px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
   letter-spacing: -0.01em;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-schedule-nav {
@@ -93,9 +93,9 @@
   align-items: center;
   gap: 4px;
   padding: 2px;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-pill);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-schedule-icon-btn {
@@ -106,30 +106,30 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   cursor: pointer;
 }
 
 .starbot-schedule-icon-btn:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-schedule-today-btn {
   height: 26px;
   padding: 0 10px;
   border: 0;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--starbot-radius-pill);
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
 }
 
 .starbot-schedule-today-btn:hover:not(:disabled) {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-schedule-today-btn:disabled {
@@ -138,7 +138,7 @@
 }
 
 .starbot-schedule-hint {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12px;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .starbot-schedule-tz {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
 }
 
@@ -171,9 +171,9 @@
 
 .starbot-schedule-weekday {
   padding: 0 8px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-schedule-scroll {
@@ -198,18 +198,18 @@
 .starbot-schedule-scroll::-webkit-scrollbar-track {
   margin-block: 6px 20px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-border) 45%, transparent);
+  background: color-mix(in srgb, var(--starbot-border) 45%, transparent);
 }
 
 .starbot-schedule-scroll::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   border-radius: 999px;
   background-clip: padding-box;
-  background-color: color-mix(in srgb, var(--openbot-accent) 42%, var(--openbot-border-strong));
+  background-color: color-mix(in srgb, var(--starbot-accent) 42%, var(--starbot-border-strong));
 }
 
 .starbot-schedule-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: var(--openbot-accent);
+  background-color: var(--starbot-accent);
 }
 
 .starbot-month-section {
@@ -233,13 +233,13 @@
   align-items: center;
   height: 24px;
   padding: 0 11px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 22%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 22%, var(--starbot-border));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-bg-surface) 92%, var(--openbot-accent-soft));
+  background: color-mix(in srgb, var(--starbot-bg-surface) 92%, var(--starbot-accent-soft));
   backdrop-filter: blur(8px);
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
   font-size: 12px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
   box-shadow: 0 2px 8px rgba(48, 36, 92, 0.06);
 }
 
@@ -248,9 +248,9 @@
   grid-template-columns: repeat(7, minmax(0, 1fr));
   grid-template-rows: repeat(var(--starbot-cal-rows, 5), minmax(104px, auto));
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 18px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
   box-shadow: 0 4px 18px rgba(48, 36, 92, 0.05);
 }
 
@@ -260,8 +260,8 @@
   min-width: 0;
   min-height: 0;
   gap: 6px;
-  border-right: 1px solid var(--openbot-border);
-  border-bottom: 1px solid var(--openbot-border);
+  border-right: 1px solid var(--starbot-border);
+  border-bottom: 1px solid var(--starbot-border);
   padding: 8px 8px 6px;
   cursor: pointer;
   transition: background-color 140ms ease;
@@ -272,11 +272,11 @@
 }
 
 .starbot-cal-cell:hover {
-  background: color-mix(in srgb, var(--openbot-accent) 4%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 4%, var(--starbot-bg-surface));
 }
 
 .starbot-cal-cell.is-outside {
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 55%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 55%, var(--starbot-bg-surface));
 }
 
 .starbot-cal-cell.is-outside .starbot-cal-day-num {
@@ -284,7 +284,7 @@
 }
 
 .starbot-cal-cell.is-today {
-  background: color-mix(in srgb, var(--openbot-accent) 6%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 6%, var(--starbot-bg-surface));
 }
 
 .starbot-cal-cell-head {
@@ -299,14 +299,14 @@
   align-items: center;
   height: 22px;
   padding: 0 7px;
-  border-radius: var(--openbot-radius-pill);
-  color: var(--openbot-text-secondary);
+  border-radius: var(--starbot-radius-pill);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-cal-cell.is-today .starbot-cal-day-num {
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
 }
 
@@ -317,8 +317,8 @@
   place-items: center;
   border: 0;
   border-radius: 7px;
-  background: var(--openbot-accent-soft);
-  color: var(--openbot-accent-text);
+  background: var(--starbot-accent-soft);
+  color: var(--starbot-accent-text);
   opacity: 0;
   cursor: pointer;
   transition:
@@ -352,11 +352,11 @@
   min-width: 0;
   height: 25px;
   flex: 0 0 25px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 20%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 20%, var(--starbot-border));
   border-radius: 8px;
-  background: color-mix(in srgb, var(--openbot-accent) 8%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 8%, var(--starbot-bg-surface));
   padding: 0 6px 0 4px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 11.5px;
   text-align: left;
   cursor: pointer;
@@ -367,8 +367,8 @@
 }
 
 .starbot-cal-pill:hover {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent-soft);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent-soft);
   transform: translateY(-1px);
 }
 
@@ -385,10 +385,10 @@
 
 .starbot-cal-pill-time {
   flex: 0 0 auto;
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-cal-pill-title {
@@ -397,7 +397,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .starbot-cal-more-btn {
@@ -405,9 +405,9 @@
   border: 0;
   background: transparent;
   padding: 1px 4px;
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
   font-size: 11px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   cursor: pointer;
 }
 
@@ -433,10 +433,10 @@
   width: min(500px, 100%);
   max-height: calc(100dvh - 48px);
   overflow: hidden;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 22px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
   box-shadow: 0 24px 60px rgba(24, 18, 46, 0.28);
   animation: starbot-cal-modal-pop 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -457,14 +457,14 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  border-bottom: 1px solid var(--openbot-border);
+  border-bottom: 1px solid var(--starbot-border);
   padding: 16px 20px;
 }
 
 .starbot-cal-modal-head h2 {
   margin: 0;
   font-size: 16px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-cal-modal-agent-head {
@@ -475,7 +475,7 @@
 
 .starbot-cal-modal-agent-head small {
   display: block;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
 }
 
@@ -498,13 +498,13 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   cursor: pointer;
 }
 
 .starbot-cal-modal-close:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-cal-modal-body {
@@ -533,9 +533,9 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-cal-agent-chips {
@@ -550,20 +550,20 @@
   gap: 7px;
   height: 34px;
   padding: 0 11px 0 6px;
-  border: 1.5px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-control);
-  color: var(--openbot-text-primary);
+  border: 1.5px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-pill);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
 }
 
 .starbot-cal-agent-chip.is-selected {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent-soft);
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent-soft);
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-cal-chip-avatar {
@@ -581,29 +581,29 @@
 .starbot-cal-repeat-pill {
   height: 32px;
   padding: 0 12px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 10px;
-  background: var(--openbot-bg-control);
-  color: var(--openbot-text-secondary);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
 }
 
 .starbot-cal-repeat-pill.is-active {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
 }
 
 .starbot-cal-time-input,
 .starbot-cal-date-input {
   height: 32px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 10px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
   padding: 0 10px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-family: inherit;
   font-size: 13px;
 }
@@ -622,7 +622,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  border-top: 1px solid var(--openbot-border);
+  border-top: 1px solid var(--starbot-border);
   padding: 14px 20px;
 }
 
@@ -638,16 +638,16 @@
   gap: 6px;
   height: 32px;
   padding: 0 12px;
-  border: 1px solid color-mix(in srgb, var(--openbot-danger) 32%, transparent);
+  border: 1px solid color-mix(in srgb, var(--starbot-danger) 32%, transparent);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--openbot-danger) 8%, transparent);
-  color: var(--openbot-danger);
+  background: color-mix(in srgb, var(--starbot-danger) 8%, transparent);
+  color: var(--starbot-danger);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   cursor: pointer;
 }
 
 .starbot-cal-delete-btn.is-confirm {
-  background: var(--openbot-danger);
+  background: var(--starbot-danger);
   color: #ffffff;
 }

@@ -1,5 +1,5 @@
-import { MAC_AUTOMATION_STATUSES, MAC_AUTOMATION_TARGETS, type MacAutomationResult } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { MAC_AUTOMATION_STATUSES, MAC_AUTOMATION_TARGETS, type MacAutomationResult } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
 
 function decodeMacAutomationResult(value: unknown): MacAutomationResult {
   if (

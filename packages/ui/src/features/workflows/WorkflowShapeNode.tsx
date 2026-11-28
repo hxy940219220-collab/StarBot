@@ -1,5 +1,5 @@
-import type { AppTextKey } from "@openbot/i18n";
-import { Shapes, Textarea } from "@openbot/ui";
+import type { AppTextKey } from "@starbot/i18n";
+import { Shapes, Textarea } from "@starbot/ui";
 import { Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import {

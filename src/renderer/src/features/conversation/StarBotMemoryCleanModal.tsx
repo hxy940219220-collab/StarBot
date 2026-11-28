@@ -1,5 +1,5 @@
-import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { Button, Check, Dialog, Sparkles, Trash2, X } from "@openbot/ui";
+import { LOCAL_SERVER_ID } from "@starbot/contracts/ipc";
+import { Button, Check, Dialog, Sparkles, Trash2, X } from "@starbot/ui";
 import { createEffect, createSignal, For, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
 import type { MemoriesPort } from "./memories-port";
@@ -74,13 +74,13 @@ export function StarBotMemoryCleanModal(props: StarBotMemoryCleanModalProps) {
     const serverId = props.serverId ?? LOCAL_SERVER_ID;
     if (props.onDeleteHistory) {
       await props.onDeleteHistory();
-    } else if (window.openbot?.agent?.deleteHistory) {
-      await window.openbot.agent.deleteHistory(props.agentId, serverId);
+    } else if (window.starbot?.agent?.deleteHistory) {
+      await window.starbot.agent.deleteHistory(props.agentId, serverId);
     }
     if (props.onClearContext) {
       await props.onClearContext().catch(() => undefined);
-    } else if (window.openbot?.agent?.clearContext) {
-      await window.openbot.agent.clearContext(props.agentId, serverId).catch(() => undefined);
+    } else if (window.starbot?.agent?.clearContext) {
+      await window.starbot.agent.clearContext(props.agentId, serverId).catch(() => undefined);
     }
   }
 

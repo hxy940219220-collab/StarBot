@@ -2,8 +2,8 @@ import { lstat, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { developmentInstanceIdForWorktree, developmentUserDataName } from "../../src/main/development-profile";
 import { resolveDevelopmentAppDataRoot } from "../development-state-paths";
@@ -31,12 +31,12 @@ import { writeHeapSnapshot } from "./memory-profile";
 import { readStartupMarks, startRenderRecording } from "./render-metrics";
 import { ResourceSampler } from "./resource-sampler";
 
-const logger = createOpenBotLogger("dev-bench", (line) => process.stderr.write(`${line}\n`), "info");
+const logger = createStarBotLogger("dev-bench", (line) => process.stderr.write(`${line}\n`), "info");
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
-const BENCH_ROOT = join(PROJECT_ROOT, ".openbot-build", "dev-automation", "bench");
+const BENCH_ROOT = join(PROJECT_ROOT, ".starbot-build", "dev-automation", "bench");
 const READY_TIMEOUT_MS = 90_000;
-const CENTRAL_AUTH_FILE = "openbot-central-auth-v1.bin";
+const CENTRAL_AUTH_FILE = "starbot-central-auth-v1.bin";
 
 const INSTANCE_ID = developmentInstanceIdForWorktree(`${PROJECT_ROOT}#bench`);
 
@@ -100,13 +100,13 @@ async function waitFor<T>(what: string, timeoutMs: number, probe: () => Promise<
 }
 
 function isAppWindowUrl(url: string): boolean {
-  return url.startsWith("openbot-app://app/index.html") && !url.includes("surface=");
+  return url.startsWith("starbot-app://app/index.html") && !url.includes("surface=");
 }
 
 async function findAppPage(browser: Browser): Promise<Page | null> {
   for (const page of browser.contexts().flatMap((context) => context.pages())) {
     if (!isAppWindowUrl(page.url())) continue;
-    if ((await page.evaluate("typeof window.openbot").catch(() => "")) === "object") return page;
+    if ((await page.evaluate("typeof window.starbot").catch(() => "")) === "object") return page;
   }
   return null;
 }
@@ -131,7 +131,7 @@ async function connect(app: BenchApp): Promise<{ browser: Browser; page: Page }>
   }
   const page = await waitFor("the app window", READY_TIMEOUT_MS, () => findAppPage(browser));
   const agentCount = await waitFor("the agent list", READY_TIMEOUT_MS, () =>
-    page.evaluate<number>("window.openbot.agent.listAgents().then((agents) => agents.length)"),
+    page.evaluate<number>("window.starbot.agent.listAgents().then((agents) => agents.length)"),
   );
   await signInBenchAccount(page, logger);
   if (agentCount > 0) {
@@ -260,7 +260,7 @@ async function runOnce(
     environment: {
       ...scenarioEnvironment,
       ...(probes ? PROBES_ENVIRONMENT : {}),
-      OPENBOT_AUTH_API_URL: authApiUrl,
+      STARBOT_AUTH_API_URL: authApiUrl,
     },
     logPath: join(BENCH_ROOT, "logs", `${label}-${scenario.id}-${index + 1}.log`),
   });

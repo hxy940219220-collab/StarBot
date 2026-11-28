@@ -1,12 +1,12 @@
-import { fileQuoteId, fileQuoteTarget } from "@openbot/contracts/chat-tag-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { fileQuoteId, fileQuoteTarget } from "@starbot/contracts/chat-tag-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   SELECTION_ACTION_INSTRUCTIONS,
   serializeFileSelectionInstruction,
   serializeSelectionInstruction,
-} from "@openbot/contracts/selection-instruction";
-import { Button, Input, TextQuote } from "@openbot/ui";
-import { clamp } from "@openbot/ui/utils";
+} from "@starbot/contracts/selection-instruction";
+import { Button, Input, TextQuote } from "@starbot/ui";
+import { clamp } from "@starbot/ui/utils";
 import { Portal } from "@solidjs/web";
 import type { Element as SolidElement } from "solid-js";
 import { createEffect, createMemo, createSignal, For, onCleanup, onSettled, Show } from "solid-js";
@@ -18,7 +18,7 @@ const SCOPE_SELECTOR = "[data-selection-scope]";
 const INTERACTIVE_SELECTOR =
   'a, button, input, textarea, select, [contenteditable="true"], [role="button"], .message-citation';
 const FILE_REFERENCE_SELECTOR = ".message-file-reference";
-const HIGHLIGHT_NAME = "openbot-message-selection";
+const HIGHLIGHT_NAME = "starbot-message-selection";
 const VIEWPORT_MARGIN = 12;
 const TOOLBAR_GAP = 8;
 

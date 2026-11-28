@@ -5,14 +5,14 @@ import {
   DEFAULT_PROVIDER_ACCOUNT_ID,
   isAgentProvider,
   STARBOT_CORE_PROVIDERS,
-} from "@openbot/contracts/ipc";
-import { spentUsageWindow, usageTone } from "@openbot/team-client/plan-limits";
+} from "@starbot/contracts/ipc";
+import { spentUsageWindow, usageTone } from "@starbot/team-client/plan-limits";
 import {
   type AccountUsageProviderRow,
   accountUsageProviderRows,
   formatUsageReset,
-} from "@openbot/ui/features/account/account-usage-view";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/account/account-usage-view";
+import { useText } from "@starbot/ui/text";
 import { createMemo } from "solid-js";
 import { useTurns } from "../../turns";
 import { useAuth } from "../account/account-context";

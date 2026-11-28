@@ -1,4 +1,4 @@
-import { STARBOT_CORE_PROVIDERS } from "@openbot/contracts/agent-providers";
+import { STARBOT_CORE_PROVIDERS } from "@starbot/contracts/agent-providers";
 import {
   type AgentModelId,
   type AgentProviderId,
@@ -18,34 +18,34 @@ import {
   type SaveCustomProviderInput,
   savedCustomModelId,
   type UpdateCustomProviderInput,
-} from "@openbot/contracts/ipc";
-import { Text } from "@openbot/ui";
-import type { ProviderAccountActions } from "@openbot/ui/components/provider-accounts";
-import { servesCustomProvider } from "@openbot/ui/components/provider-row";
-import type { AccountUsageProviderRow } from "@openbot/ui/features/account/account-usage-view";
-import type { AcpRegistrySettingsApi } from "@openbot/ui/features/custom-providers/AcpRegistrySettings";
-import type { CustomAgentSettingsApi } from "@openbot/ui/features/custom-providers/CustomAgentSettings";
-import { CustomProviderDialog } from "@openbot/ui/features/custom-providers/CustomProviderDialog";
-import { CustomProviderPresetDialog } from "@openbot/ui/features/custom-providers/CustomProviderPresetDialog";
-import { savedCustomProviderDraft } from "@openbot/ui/features/custom-providers/custom-provider-form";
+} from "@starbot/contracts/ipc";
+import { Text } from "@starbot/ui";
+import type { ProviderAccountActions } from "@starbot/ui/components/provider-accounts";
+import { servesCustomProvider } from "@starbot/ui/components/provider-row";
+import type { AccountUsageProviderRow } from "@starbot/ui/features/account/account-usage-view";
+import type { AcpRegistrySettingsApi } from "@starbot/ui/features/custom-providers/AcpRegistrySettings";
+import type { CustomAgentSettingsApi } from "@starbot/ui/features/custom-providers/CustomAgentSettings";
+import { CustomProviderDialog } from "@starbot/ui/features/custom-providers/CustomProviderDialog";
+import { CustomProviderPresetDialog } from "@starbot/ui/features/custom-providers/CustomProviderPresetDialog";
+import { savedCustomProviderDraft } from "@starbot/ui/features/custom-providers/custom-provider-form";
 import {
   localServerProbes,
   presetSetupProvider,
   type ThirdPartyApiPresetId,
-} from "@openbot/ui/features/custom-providers/custom-provider-presets";
-import { DetectedProviderSetup } from "@openbot/ui/features/custom-providers/DetectedProviderSetup";
+} from "@starbot/ui/features/custom-providers/custom-provider-presets";
+import { DetectedProviderSetup } from "@starbot/ui/features/custom-providers/DetectedProviderSetup";
 import type {
   DetectedProvider,
   DetectedProviderApi,
   ProviderDetection,
-} from "@openbot/ui/features/custom-providers/detected-providers";
-import type { ProviderDetectionSettingsValue } from "@openbot/ui/features/custom-providers/ProviderDetectionSettings";
+} from "@starbot/ui/features/custom-providers/detected-providers";
+import type { ProviderDetectionSettingsValue } from "@starbot/ui/features/custom-providers/ProviderDetectionSettings";
 import {
   isKeyDialogProvider,
   type KeyDialogProvider,
   OpenCodeKeyDialog,
   type ProviderKeyApi,
-} from "@openbot/ui/features/settings/OpenCodeKeyDialog";
+} from "@starbot/ui/features/settings/OpenCodeKeyDialog";
 import {
   type ProviderClaudeCompactWindow,
   type ProviderClaudeUserSetup,
@@ -55,8 +55,8 @@ import {
   type ProviderPromptCache,
   type ProviderSettingsDetail,
   ProviderSettingsPage,
-} from "@openbot/ui/features/settings/ProviderSettingsPage";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/settings/ProviderSettingsPage";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createStore, Show, untrack } from "solid-js";
 import { ProviderSignInDialogs } from "../../components/ProviderSignInDialogs";

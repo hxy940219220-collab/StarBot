@@ -295,7 +295,7 @@ export const messages = {
 
   "workflow.output.title": "Çıktı",
   "workflow.output.name": "çıktı",
-  "workflow.output.channel.openbot": "StarBot",
+  "workflow.output.channel.starbot": "StarBot",
 
   "workflow.output.channel.search": "Kanal ara",
   "workflow.output.postsAs": "Şu şekilde paylaşır",
@@ -379,8 +379,8 @@ export const messages = {
   "workflow.github.event.pr.checksFailed": "Denetimler başarısız",
   "workflow.github.event.pr.merged": "Çekme isteği birleştirildi",
   "workflow.github.event.comment": "Yeni yorum",
-  "workflow.github.event.mention": "Bahsedildi: @openbotgit",
-  "workflow.github.event.assigned": "Atandı: @openbotgit",
+  "workflow.github.event.mention": "Bahsedildi: @starbotgit",
+  "workflow.github.event.assigned": "Atandı: @starbotgit",
   "workflow.github.trigger.event": "Olay",
   "workflow.github.trigger.labelAdded": "Eklenen etiket",
   "workflow.github.trigger.hasLabel": "Etiketi var",

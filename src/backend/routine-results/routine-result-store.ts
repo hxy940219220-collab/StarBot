@@ -5,11 +5,11 @@ import {
   type RoutineResultDelivery,
   type RoutineResultDeliveryReason,
   type RoutineResultDestination,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
 import { databaseRow, databaseRows } from "../database/database-rows";
 import { withTransaction } from "../database/sqlite-transaction";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 
 export interface RoutineResultOutgoing {
   runId: string;
@@ -34,9 +34,9 @@ const ROUTINE_RESULT_EXPIRY_MS = 24 * 60 * 60 * 1000;
 const DELIVERY_LIST_LIMIT = 50;
 
 export class RoutineResultStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
 
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     this.#database = database;
   }
 

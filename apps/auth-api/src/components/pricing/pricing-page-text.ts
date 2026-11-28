@@ -1,6 +1,6 @@
-import { BILLING_PLANS } from "@openbot/contracts/billing";
-import { LICENSE_MAX_USERS } from "@openbot/contracts/license";
-import type { AppTranslate } from "@openbot/i18n";
+import { BILLING_PLANS } from "@starbot/contracts/billing";
+import { LICENSE_MAX_USERS } from "@starbot/contracts/license";
+import type { AppTranslate } from "@starbot/i18n";
 
 const PRICING_MAX_MEMBERS = Math.max(LICENSE_MAX_USERS, ...BILLING_PLANS.map((plan) => plan.memberLimit));
 

@@ -1,9 +1,9 @@
-import { type KawaiiCue, playKawaiiCue, unlockKawaiiAudio } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import { SOUND_THEMES, type SoundChoice, type SoundTheme } from "@openbot/ui/features/settings/app-settings";
+import { type KawaiiCue, playKawaiiCue, unlockKawaiiAudio } from "@starbot/ui/features/agents/starbot-kawaii-audio";
+import { SOUND_THEMES, type SoundChoice, type SoundTheme } from "@starbot/ui/features/settings/app-settings";
 import type { PlayOptions, SoundName } from "cuelume";
 
-const ACTION_SOUNDS_STORAGE_KEY = "openbot:action-sounds-enabled";
-const ACTION_SOUNDS_THEME_STORAGE_KEY = "openbot:action-sounds-theme";
+const ACTION_SOUNDS_STORAGE_KEY = "starbot:action-sounds-enabled";
+const ACTION_SOUNDS_THEME_STORAGE_KEY = "starbot:action-sounds-theme";
 
 type PreferenceStorage = Pick<Storage, "getItem">;
 

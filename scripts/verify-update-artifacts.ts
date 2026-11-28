@@ -2,10 +2,10 @@ import { createHash } from "node:crypto";
 import { createReadStream, existsSync } from "node:fs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { readUpdateManifest } from "./update-rollout";
 
-const logger = createOpenBotLogger("verify-update-artifacts");
+const logger = createStarBotLogger("verify-update-artifacts");
 
 const MIB = 1024 * 1024;
 const platform = process.argv[2];

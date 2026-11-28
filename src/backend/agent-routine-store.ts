@@ -4,8 +4,8 @@ import type {
   RoutineRun,
   RoutineRunStatus,
   UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
-import type { OpenBotDatabase } from "./openbot-database";
+} from "@starbot/contracts/ipc";
+import type { StarBotDatabase } from "./starbot-database";
 import {
   type DueRoutine,
   type ImportedRoutineRun,
@@ -29,7 +29,7 @@ export interface DueRoutineTrigger {
 }
 
 export class AgentRoutineStore extends RoutineStore {
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     super(database, ROUTINE_TABLES.agent);
   }
 

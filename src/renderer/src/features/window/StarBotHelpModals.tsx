@@ -15,10 +15,10 @@ import {
   Sparkles,
   Textarea,
   X,
-} from "@openbot/ui";
-import { avatarSeedForFace, ZODIAC_AVATAR_LIST } from "@openbot/ui/bloub-avatar";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+} from "@starbot/ui";
+import { avatarSeedForFace, ZODIAC_AVATAR_LIST } from "@starbot/ui/bloub-avatar";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import { Portal } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, For, Show } from "solid-js";
 import { actionToast } from "../../action-toast";

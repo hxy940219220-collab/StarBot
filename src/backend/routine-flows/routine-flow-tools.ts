@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import { Effect } from "effect";
 import { z } from "zod";
-import { openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { starBotToolFailure, starBotToolResult } from "../agent/routine-tools";
 import { ToolOperationFailed, toolStep } from "../agent/tool-operation";
 import { RoutineFlowError } from "./routine-flow-store";
 import type { RoutineFlowsShape } from "./routine-flows";
@@ -57,9 +57,9 @@ export const handleRoutineFlowTool = Effect.fn("RoutineFlowTools.handle")(functi
     if (tool === "list_routine_flows") {
       const input = yield* toolStep(() => listSchema.parse(args ?? {}));
       const agentId = input.agentId ?? senderAgentId;
-      if (unknownAgent([agentId])) return openBotToolFailure(`Unknown agent: ${agentId}.`);
+      if (unknownAgent([agentId])) return starBotToolFailure(`Unknown agent: ${agentId}.`);
       const canvas = yield* flows.canvas(agentId);
-      return openBotToolResult({
+      return starBotToolResult({
         routines: canvas.routines.map(({ routine }) => ({
           routineId: routine.id,
           name: routine.name,
@@ -78,23 +78,23 @@ export const handleRoutineFlowTool = Effect.fn("RoutineFlowTools.handle")(functi
     if (tool === "connect_routine_agents") {
       const input = yield* toolStep(() => connectSchema.parse(args));
       const unknown = unknownAgent([input.fromAgentId, input.toAgentId]);
-      if (unknown) return openBotToolFailure(`Unknown agent: ${unknown}.`);
+      if (unknown) return starBotToolFailure(`Unknown agent: ${unknown}.`);
       const link = yield* flows.connect({
         routineId: input.routineId,
         fromAgentId: input.fromAgentId,
         toAgentId: input.toAgentId,
         ...(input.instruction === undefined ? {} : { instruction: input.instruction }),
       });
-      return openBotToolResult({ linkId: link.id });
+      return starBotToolResult({ linkId: link.id });
     }
     const input = yield* toolStep(() => disconnectSchema.parse(args));
     yield* flows.disconnect(input);
-    return openBotToolResult({ removed: input.linkId });
+    return starBotToolResult({ removed: input.linkId });
   });
   return yield* operation.pipe(
     Effect.catchTag("RoutineFlowFailed", (failure) =>
       failure.cause instanceof RoutineFlowError
-        ? Effect.succeed(openBotToolFailure(failure.cause.message))
+        ? Effect.succeed(starBotToolFailure(failure.cause.message))
         : Effect.fail(new ToolOperationFailed({ cause: failure.cause })),
     ),
   );

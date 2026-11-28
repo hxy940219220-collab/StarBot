@@ -12,7 +12,7 @@ import {
   workflowCatalogProvider,
   workflowFixedCatalogModel,
   workflowMediaSpecs,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Deferred, Effect, Exit, Semaphore } from "effect";
 import { type HiggsfieldPlan, higgsfieldFixedPlan } from "./higgsfield-catalog";
 import { readHiggsfieldCatalog, readHiggsfieldPrice } from "./higgsfield-media";

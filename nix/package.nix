@@ -10,20 +10,20 @@
 }:
 
 let
-  pname = "openbot";
+  pname = "starbot";
   inherit (sources) version;
   system = stdenvNoCC.hostPlatform.system;
-  asset = sources.assets.${system} or (throw "OpenBot has no release for ${system}");
+  asset = sources.assets.${system} or (throw "StarBot has no release for ${system}");
 
   src = fetchurl {
-    url = "https://github.com/nightly-labs/openbot/releases/download/v${version}/${asset.name}";
+    url = "https://github.com/nightly-labs/starbot/releases/download/v${version}/${asset.name}";
     inherit (asset) hash;
   };
 
   meta = {
     description = "Local-first multi-agent desktop workspace for Codex, Claude, Grok and other coding agents";
-    homepage = "https://github.com/nightly-labs/openbot";
-    changelog = "https://github.com/nightly-labs/openbot/releases/tag/v${version}";
+    homepage = "https://github.com/nightly-labs/starbot";
+    changelog = "https://github.com/nightly-labs/starbot/releases/tag/v${version}";
     license = {
       shortName = "polyform-nc-10";
       fullName = "PolyForm Noncommercial License 1.0.0";
@@ -34,7 +34,7 @@ let
     };
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
     platforms = builtins.attrNames sources.assets;
-    mainProgram = "openbot";
+    mainProgram = "starbot";
   };
 
   contents = appimageTools.extract {
@@ -49,13 +49,13 @@ let
     // {
       inherit pname version meta;
       targetPkgs = pkgs: appimageTools.defaultFhsEnvArgs.targetPkgs pkgs ++ [ pkgs.libsecret ];
-      runScript = "${contents}/openbot";
+      runScript = "${contents}/starbot";
       extraInstallCommands = ''
-        install -Dm444 ${contents}/openbot.desktop $out/share/applications/openbot.desktop
-        substituteInPlace $out/share/applications/openbot.desktop \
-          --replace-fail 'Exec=AppRun --no-sandbox %U' 'Exec=openbot %U'
+        install -Dm444 ${contents}/starbot.desktop $out/share/applications/starbot.desktop
+        substituteInPlace $out/share/applications/starbot.desktop \
+          --replace-fail 'Exec=AppRun --no-sandbox %U' 'Exec=starbot %U'
         # The AppImage has only a 1600x1600 icon, a size that no icon theme lists.
-        install -Dm444 ${contents}/openbot.png $out/share/pixmaps/openbot.png
+        install -Dm444 ${contents}/starbot.png $out/share/pixmaps/starbot.png
       '';
     }
   );
@@ -82,8 +82,8 @@ let
     installPhase = ''
       runHook preInstall
       mkdir -p $out/Applications
-      cp -R OpenBot.app $out/Applications/
-      makeWrapper $out/Applications/OpenBot.app/Contents/MacOS/OpenBot $out/bin/openbot
+      cp -R StarBot.app $out/Applications/
+      makeWrapper $out/Applications/StarBot.app/Contents/MacOS/StarBot $out/bin/starbot
       runHook postInstall
     '';
   };

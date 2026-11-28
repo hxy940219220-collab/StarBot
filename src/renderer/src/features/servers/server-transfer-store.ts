@@ -2,25 +2,25 @@ import type {
   InstanceTransferPreview,
   InstanceTransferResult,
   InstanceTransferSummary,
-  OpenBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import { toast } from "@openbot/ui";
+  StarBotDesktopApi,
+} from "@starbot/contracts/ipc";
+import { toast } from "@starbot/ui";
 import type {
   InstanceExportOptions,
   InstanceExportPhase,
   InstanceImportPhase,
   InstanceTransferScreen,
   TransferUploadState,
-} from "@openbot/ui/features/transfer/InstanceTransferView";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/transfer/InstanceTransferView";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createStore, onCleanup } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 
 export type ServerTransferCalls = Omit<
-  OpenBotDesktopApi["instanceTransfer"],
+  StarBotDesktopApi["instanceTransfer"],
   "showExport" | "copy" | "onUploadProgress"
 > &
-  Partial<Pick<OpenBotDesktopApi["instanceTransfer"], "showExport" | "onUploadProgress">>;
+  Partial<Pick<StarBotDesktopApi["instanceTransfer"], "showExport" | "onUploadProgress">>;
 
 interface ServerTransferState {
   screen: InstanceTransferScreen;

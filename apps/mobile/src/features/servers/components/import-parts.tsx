@@ -1,4 +1,4 @@
-import type { AppFormat } from "@openbot/i18n/mobile";
+import type { AppFormat } from "@starbot/i18n/mobile";
 import { Typography } from "heroui-native";
 import { useEffect, useRef } from "react";
 import { Alert } from "react-native";

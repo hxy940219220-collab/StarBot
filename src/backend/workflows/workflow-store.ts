@@ -23,9 +23,9 @@ import {
   workflowGraphFormat,
   workflowGraphProblem,
   workflowUnknownFields,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Schema } from "effect";
 import {
   checkedColumn,
@@ -35,7 +35,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "../database/database-rows";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 import { nodeTimezone } from "./workflow-graph";
 import { workflowTransaction } from "./workflow-transaction";
 
@@ -67,13 +67,13 @@ export interface DueWorkflowTrigger {
 }
 
 export interface WorkflowStoreOptions {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   createId?: () => string;
   nextDueAt?: (schedule: RoutineSchedule, timezone: string | null, now: Date) => string | null;
 }
 
 export class WorkflowStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #createId: () => string;
   readonly #nextDueAt: (schedule: RoutineSchedule, timezone: string | null, now: Date) => string | null;
 

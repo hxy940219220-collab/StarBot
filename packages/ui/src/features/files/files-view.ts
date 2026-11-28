@@ -1,6 +1,6 @@
-import type { StorageBreakdown, StorageCategory, StoredFileRow } from "@openbot/contracts/ipc";
-import type { AppFormat, AppTextKey, AppTranslate } from "@openbot/i18n";
-import type { FileSort, FileTypeFilter } from "@openbot/team-client/stored-files";
+import type { StorageBreakdown, StorageCategory, StoredFileRow } from "@starbot/contracts/ipc";
+import type { AppFormat, AppTextKey, AppTranslate } from "@starbot/i18n";
+import type { FileSort, FileTypeFilter } from "@starbot/team-client/stored-files";
 
 export type {
   AgentStorageRow,
@@ -12,7 +12,7 @@ export type {
   StoredFileRow,
   StoredFileSource,
   StoredFileStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export type StoredFileAction = "open" | "reveal" | "download" | "show-in-chat" | "delete" | "retry";
 
@@ -90,7 +90,7 @@ export {
   fileTypeCounts,
   fileTypeOf,
   queryFiles,
-} from "@openbot/team-client/stored-files";
+} from "@starbot/team-client/stored-files";
 
 export const FILE_TYPE_FILTERS: ReadonlyArray<{ value: FileTypeFilter; label: AppTextKey }> = [
   { value: "all", label: "files.type.all" },

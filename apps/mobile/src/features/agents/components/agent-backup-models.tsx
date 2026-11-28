@@ -8,7 +8,7 @@ import {
   DEFAULT_PROVIDER_ACCOUNT_ID,
   type HostProviderAccounts,
   sameAgentModelChoice,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { useQuery } from "@tanstack/react-query";
 import { router, useNavigation } from "expo-router";
 import { Button, Typography } from "heroui-native";
@@ -245,7 +245,7 @@ export function AgentBackupModelsPage(props: BackupModelsProps) {
   const { agent, available } = props;
   const { t } = useText();
   const { theme } = useUniwind();
-  const [muted, danger] = useCSSVariable(["--openbot-text-grouped-secondary", "--openbot-danger-text"]);
+  const [muted, danger] = useCSSVariable(["--starbot-text-grouped-secondary", "--starbot-danger-text"]);
   const { canManage, failed, retry, editor } = useBackupModelEditor(props);
   if (!editor) return <EditorStatus canManage={canManage} available={available} failed={failed} retry={retry} />;
   const { automatic, order, ownModel, entries, addable, enabled, models, error, save } = editor;

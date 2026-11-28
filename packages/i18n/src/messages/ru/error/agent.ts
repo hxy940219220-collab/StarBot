@@ -5,27 +5,27 @@ export const messages = {
   "error.agent.historyUnavailable":
     "История недоступна для этого запроса. Прочитайте недавнюю историю ещё раз или используйте channel_history для работы с каналом.",
   "error.agent.historyArgumentsInvalid":
-    "Неверные аргументы истории: {detail} Исправь аргументы и повтори попытку. openbot.tool_describe возвращает схему.",
+    "Неверные аргументы истории: {detail} Исправь аргументы и повтори попытку. starbot.tool_describe возвращает схему.",
   "error.agent.toolRequestInvalid":
     "Некорректные аргументы поиска инструментов. Используйте объявленную схему и исходное полное имя инструмента.",
   "error.agent.toolCallArgumentsNotObject":
     "Инструмент не запущен. В tool_call параметр arguments должен быть объектом JSON, а не текстом. Отправьте вызов снова, передав arguments как объект.",
   "error.agent.toolCallDiscoveryTool":
-    "Инструмент не запущен. tool_call не может запускать openbot.tool_search и openbot.tool_describe. Вызовите их напрямую с теми же аргументами.",
+    "Инструмент не запущен. tool_call не может запускать starbot.tool_search и starbot.tool_describe. Вызовите их напрямую с теми же аргументами.",
   "error.agent.toolCallEnvelopeKeys":
     "Инструмент не запущен. tool_call принимает только name и arguments. Передайте аргументы инструмента в arguments как объект и отправьте вызов снова.",
   "error.agent.toolCallMissingName":
-    "Инструмент не запущен. В tool_call нет name. Укажите в name полное имя из tool_search, например openbot.history_read, и отправьте вызов снова.",
+    "Инструмент не запущен. В tool_call нет name. Укажите в name полное имя из tool_search, например starbot.history_read, и отправьте вызов снова.",
   "error.agent.toolCallUnknownTool":
-    "Инструмент не запущен. tool_call не нашёл инструмент с таким именем. Используйте точное полное имя из tool_search, например openbot_browser.snapshot.",
+    "Инструмент не запущен. tool_call не нашёл инструмент с таким именем. Используйте точное полное имя из tool_search, например starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "Инструмент не запущен. tool_call не нашёл инструмент с таким именем. Возможно, полное имя — {name}. Если это так, отправьте вызов снова с этим именем.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe не нашёл инструмент StarBot с именем {names}. Он описывает только инструменты StarBot и браузера из списка openbot.tool_search, а не инструменты MCP.",
+    "tool_describe не нашёл инструмент StarBot с именем {names}. Он описывает только инструменты StarBot и браузера из списка starbot.tool_search, а не инструменты MCP.",
 
   "error.agent.toolDescribeDiscoveryNames": "Вызовите {names} напрямую. tool_describe не описывает инструменты поиска.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "Расписание регулярной задачи некорректно: {detail} Исправьте расписание и повторите попытку. openbot.tool_describe возвращает схему.",
+    "Расписание регулярной задачи некорректно: {detail} Исправьте расписание и повторите попытку. starbot.tool_describe возвращает схему.",
   "error.agent.approvalWhileDeleting": "Нельзя дать подтверждение, пока агент удаляется.",
   "error.agent.accessLocalOnly": "Доступ агента можно изменить только на компьютере, где он работает.",
   "error.agent.duplicateCleanupFailed": "Не удалось дублировать агента, а неполную копию удалить не получилось.",

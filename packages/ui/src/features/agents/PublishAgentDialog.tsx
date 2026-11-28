@@ -1,7 +1,7 @@
-import type { AgentTemplatePreview, MarketplaceAgentRoutine } from "@openbot/contracts/ipc";
-import { markdownPreviewText } from "@openbot/contracts/markdown-preview-text";
-import type { AppFormat, AppTranslate } from "@openbot/i18n";
-import { classifyFailure } from "@openbot/telemetry";
+import type { AgentTemplatePreview, MarketplaceAgentRoutine } from "@starbot/contracts/ipc";
+import { markdownPreviewText } from "@starbot/contracts/markdown-preview-text";
+import type { AppFormat, AppTranslate } from "@starbot/i18n";
+import { classifyFailure } from "@starbot/telemetry";
 import {
   ArrowLeft,
   Badge,
@@ -16,7 +16,7 @@ import {
   Text,
   toast,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createSignal, Show } from "solid-js";
 import { useText } from "../../text";
 import { AgentAvatar } from "./AgentAvatar";

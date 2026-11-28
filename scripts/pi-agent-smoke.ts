@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { chmod, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { openBotToolFailure, openBotToolResult } from "../src/backend/agent/routine-tools";
+import { starBotToolFailure, starBotToolResult } from "../src/backend/agent/routine-tools";
 import { discoverTools, resolveDeferredTool, visibleDynamicTools } from "../src/backend/agent/tool-catalog";
 import { resolvePiCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -17,7 +17,7 @@ import {
 import { requireProviderDriver } from "../src/backend/provider-drivers";
 import { stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/pi-agent-smoke");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/pi-agent-smoke");
 const SEARCH_ONLY = ["request_api_key", "suggest_marketplace_app"];
 const TURN_DEADLINE_MS = 10 * 60_000;
 
@@ -57,7 +57,7 @@ const TURNS: Turn[] = [
 
 const MEASURE_EXTENSION = `import { appendFileSync } from "node:fs";
 export default function (pi) {
-  const file = process.env.OPENBOT_SMOKE_MEASURE_FILE;
+  const file = process.env.STARBOT_SMOKE_MEASURE_FILE;
   if (!file) return;
   const write = (record) => appendFileSync(file, JSON.stringify(record) + "\\n");
   pi.on("before_provider_request", (event) => {
@@ -76,12 +76,12 @@ export default function (pi) {
 
 const quote = (value: string) => `'${value.replaceAll("'", `'\\''`)}'`;
 const git = (cwd: string, ...args: string[]) =>
-  execFileSync("git", ["-c", "user.name=StarBot", "-c", "user.email=e2e@openbot.invalid", ...args], {
+  execFileSync("git", ["-c", "user.name=StarBot", "-c", "user.email=e2e@starbot.invalid", ...args], {
     cwd,
     encoding: "utf8",
   });
 
-const root = await realpath(await mkdtemp(join(tmpdir(), "openbot-pi-agent-smoke-")));
+const root = await realpath(await mkdtemp(join(tmpdir(), "starbot-pi-agent-smoke-")));
 const agent = join(root, "agent");
 const workspace = join(root, "workspace");
 await mkdir(agent, { recursive: true });
@@ -104,7 +104,7 @@ await chmod(wrapper, 0o755);
 const smokeCli = await runCauseEffect(resolvePiCli({ bundledExecutable: wrapper }));
 process.env.PI_CODING_AGENT_DIR = agent;
 const MEASURE_FILE = join(root, "measure.jsonl");
-process.env.OPENBOT_SMOKE_MEASURE_FILE = MEASURE_FILE;
+process.env.STARBOT_SMOKE_MEASURE_FILE = MEASURE_FILE;
 
 const client = requireProviderDriver("inception").createClient(smokeCli, 120_000, {
   apiKey: (provider) => (provider === "inception" ? KEY : null),
@@ -155,18 +155,18 @@ client.on("request", (request) => {
   try {
     if (params.tool === "tool_search") {
       hostTools.push("tool_search");
-      return client.respond(request.id, openBotToolResult(discoverTools(params, "pi")));
+      return client.respond(request.id, starBotToolResult(discoverTools(params, "pi")));
     }
     if (params.tool === "tool_call") {
       const resolved = resolveDeferredTool(params, "pi");
       hostTools.push(resolved?.tool ?? "tool_call:invalid");
-      if (!resolved) return client.respond(request.id, openBotToolFailure("Unknown tool."));
-      return client.respond(request.id, openBotToolResult({ shown: true, tool: resolved.tool }));
+      if (!resolved) return client.respond(request.id, starBotToolFailure("Unknown tool."));
+      return client.respond(request.id, starBotToolResult({ shown: true, tool: resolved.tool }));
     }
     hostTools.push(params.tool);
-    return client.respond(request.id, openBotToolFailure("This smoke answers only tool_search and tool_call."));
+    return client.respond(request.id, starBotToolFailure("This smoke answers only tool_search and tool_call."));
   } catch (error) {
-    return client.respond(request.id, openBotToolFailure(error instanceof Error ? error.message : String(error)));
+    return client.respond(request.id, starBotToolFailure(error instanceof Error ? error.message : String(error)));
   }
 });
 client.start();

@@ -93,7 +93,7 @@ jobs:
       - name: Install and verify Android tools
         shell: bash
         run: |
-          echo "AAB_PATH=$RUNNER_TEMP/openbot-play.aab" >> "$GITHUB_ENV"
+          echo "AAB_PATH=$RUNNER_TEMP/starbot-play.aab" >> "$GITHUB_ENV"
           gem install fastlane --version 2.240.1 --no-document
           java -version
           echo "ANDROID_HOME=$ANDROID_HOME"
@@ -188,7 +188,7 @@ jobs:
             echo "Artifact: android-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
             echo 'Manage testers and promote releases in Play Console. This workflow does not publish to production.'
             if [[ "$UPLOADED" == "true" ]]; then
-              echo 'The job "Stage the APK" saves the APK of this build as a draft GitHub release. It is not public. It becomes public, and openbot.run offers it, when the change of `bun run mobile:release:published android` is on main.'
+              echo 'The job "Stage the APK" saves the APK of this build as a draft GitHub release. It is not public. It becomes public, and starbot.run offers it, when the change of `bun run mobile:release:published android` is on main.'
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 

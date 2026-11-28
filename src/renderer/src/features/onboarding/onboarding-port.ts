@@ -1,14 +1,14 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface OnboardingPort {
-  getSetupState: OpenBotDesktopApi["getSetupState"];
-  saveSetup: OpenBotDesktopApi["saveSetup"];
-  onSetupState: OpenBotDesktopApi["onSetupState"];
-  servers: Pick<OpenBotDesktopApi["servers"], "previewInvite">;
-  openUrl: OpenBotDesktopApi["openUrl"];
-  getAnalyticsDefault: OpenBotDesktopApi["getAnalyticsDefault"];
+  getSetupState: StarBotDesktopApi["getSetupState"];
+  saveSetup: StarBotDesktopApi["saveSetup"];
+  onSetupState: StarBotDesktopApi["onSetupState"];
+  servers: Pick<StarBotDesktopApi["servers"], "previewInvite">;
+  openUrl: StarBotDesktopApi["openUrl"];
+  getAnalyticsDefault: StarBotDesktopApi["getAnalyticsDefault"];
 }
 
 export function onboardingPort(): OnboardingPort {
-  return window.openbot;
+  return window.starbot;
 }

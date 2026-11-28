@@ -1,14 +1,14 @@
 import { useCSSVariable } from "uniwind";
 
 export function useSignInColors() {
-  const surface = useCSSVariable("--openbot-bg-control-active");
-  const brand = useCSSVariable("--openbot-logo-production");
-  const onBrand = useCSSVariable("--openbot-logo-eye");
-  const text = useCSSVariable("--openbot-text-primary");
-  const muted = useCSSVariable("--openbot-text-muted");
-  const danger = useCSSVariable("--openbot-danger");
-  const success = useCSSVariable("--openbot-success");
-  const radius = useCSSVariable("--openbot-radius-lg");
+  const surface = useCSSVariable("--starbot-bg-control-active");
+  const brand = useCSSVariable("--starbot-logo-production");
+  const onBrand = useCSSVariable("--starbot-logo-eye");
+  const text = useCSSVariable("--starbot-text-primary");
+  const muted = useCSSVariable("--starbot-text-muted");
+  const danger = useCSSVariable("--starbot-danger");
+  const success = useCSSVariable("--starbot-success");
+  const radius = useCSSVariable("--starbot-radius-lg");
   return {
     surface: String(surface ?? "#2a2a2a"),
     brand: String(brand ?? "#d6adf2"),

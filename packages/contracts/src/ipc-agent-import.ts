@@ -13,7 +13,7 @@ export const HERMES_EXPORT_SKILL_ID = "hxy940219220-collab/StarBot-Desktop/resou
 export const HERMES_SKILL_COMMAND = `/skills install ${HERMES_EXPORT_SKILL_ID}`;
 
 export const AGENT_IMPORT_PROMPT = "Export my agents for StarBot";
-export const HERMES_EXPORT_PROMPT = "/openbot-export";
+export const HERMES_EXPORT_PROMPT = "/starbot-export";
 
 export const AGENT_IMPORT_EXPORT_AGENT_NAME = "StarBot export";
 

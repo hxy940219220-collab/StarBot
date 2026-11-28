@@ -12,7 +12,7 @@ import { createWorkerHandler } from "../src/server/worker-handler";
 import { sqliteD1 } from "./sqlite-d1";
 
 const ROOT = resolve(import.meta.dirname, "../../..");
-const OUT = join(ROOT, ".openbot-build", "hosted-operator-pool-e2e");
+const OUT = join(ROOT, ".starbot-build", "hosted-operator-pool-e2e");
 const MIGRATIONS = join(ROOT, "apps", "auth-api", "migrations");
 const OWNER = { id: "owner", email: "owner@example.test" };
 const MINUTE = 60_000;
@@ -172,7 +172,7 @@ async function run() {
         status: stored.status,
         currency: "eur",
         cancel_at_period_end: false,
-        metadata: { openbot_user_id: OWNER.id, openbot_server_id: String(stored.server_id) },
+        metadata: { starbot_user_id: OWNER.id, starbot_server_id: String(stored.server_id) },
         items: {
           data: [
             {
@@ -180,7 +180,7 @@ async function run() {
               current_period_end: Math.floor((t0 - DAY) / 1000),
               price: {
                 id: "price_standard",
-                lookup_key: "openbot_standard_month",
+                lookup_key: "starbot_standard_month",
                 metadata: {},
                 currency: "eur",
                 unit_amount: 2900,
@@ -488,7 +488,7 @@ async function scheduledSnapshots(database: DatabaseSync, at: number, cron: stri
   const originalFetch = globalThis.fetch;
   const routedFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
     const url = String(input instanceof Request ? input.url : input);
-    if (url !== "https://analytics.openbot.run/api/track") return new Response(null, { status: 404 });
+    if (url !== "https://analytics.starbot.run/api/track") return new Response(null, { status: 404 });
     const body = String(init?.body);
     if (body.includes('"name":"hosted_pool_snapshot"')) snapshots.push(body);
     return new Response(null, { status: 202 });

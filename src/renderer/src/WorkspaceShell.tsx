@@ -1,15 +1,15 @@
-import type { CentralAuthUser } from "@openbot/contracts/ipc";
-import { AGENT_TASKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { CRM_CAPABILITY } from "@openbot/contracts/team-protocol/crm-v1";
+import type { CentralAuthUser } from "@starbot/contracts/ipc";
+import { AGENT_TASKS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-tasks-v1";
+import { CRM_CAPABILITY } from "@starbot/contracts/team-protocol/crm-v1";
 import {
   ConversationLoadNotice,
   ServerConnectionNotice,
   ServerPanelLoadNotice,
   serverWorkspacePhase,
-} from "@openbot/ui/features/servers/ServerConnectionNotice";
-import { createServerPaywall } from "@openbot/ui/features/servers/ServerPaywall";
-import { serverPlanBlocks, serverPlanScreenShown } from "@openbot/ui/features/servers/ServerPlanEnd";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/servers/ServerConnectionNotice";
+import { createServerPaywall } from "@starbot/ui/features/servers/ServerPaywall";
+import { serverPlanBlocks, serverPlanScreenShown } from "@starbot/ui/features/servers/ServerPlanEnd";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, Show } from "solid-js";
 import { appPort } from "./app-port";
 import { useAccountUsagePolling } from "./features/account/account-usage-polling";

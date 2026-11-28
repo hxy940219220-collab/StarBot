@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Shared by migration v37 and the separate new-database schema. IF NOT EXISTS throughout, because
 // this text is both the migration and the tail of the latest schema.
@@ -55,7 +55,7 @@ export const ROUTINE_RESULT_SCHEMA_SQL = `
     ON routine_result_deliveries(status, next_attempt_at);
 `;
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 37,
   name: "routine-results",
   // Only creates tables, so no foreign-key pause and no vacuum. No routine has a destination yet, so every

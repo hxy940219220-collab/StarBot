@@ -1,6 +1,6 @@
-import type { AppInfo, SettingLinkId } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import type { AgentSettingLinkId } from "@openbot/ui/features/conversation/agent-setting-links";
+import type { AppInfo, SettingLinkId } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import type { AgentSettingLinkId } from "@starbot/ui/features/conversation/agent-setting-links";
 import { type SettingsTab, settingsTabShown } from "./settings-tabs";
 
 export type AppSettingLinkId = Exclude<SettingLinkId, AgentSettingLinkId>;

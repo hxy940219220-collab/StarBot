@@ -233,7 +233,7 @@ export const messages = {
     "Antwoorden in threads laten je weten wanneer een agent in een thread klaar is of stopt met een fout. Zonder deze meldingen laat een thread je nog steeds weten wanneer je invoer of een goedkeuring nodig is.",
   "mobile.settings.notifications.sound": "Geluid",
   "mobile.settings.notifications.playSound": "Geluid afspelen",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Warm",
   "mobile.settings.notifications.sound.mech": "Mechanisch",
@@ -375,7 +375,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Mijn laatste zes maanden met StarBot",
 
   "mobile.settings.profile.share.createFailed": "Kan de afbeelding niet maken.",
-  "mobile.settings.profile.share.fileName": "openbot-activiteit.png",
+  "mobile.settings.profile.share.fileName": "starbot-activiteit.png",
   "mobile.settings.voice.elevenLabs.keyPlaceholder": "sk_…",
   "mobile.settings.voice.tab.listening": "Luisteren",
   "mobile.settings.voice.tab.speaking": "Spreken",

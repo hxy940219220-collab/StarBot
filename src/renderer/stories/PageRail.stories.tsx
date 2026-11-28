@@ -1,6 +1,6 @@
-import { accountUsageProviderRows } from "@openbot/ui/features/account/account-usage-view";
-import { ServerMenu } from "@openbot/ui/features/servers/ServerMenu";
-import { HelpMenu } from "@openbot/ui/features/updates/HelpMenu";
+import { accountUsageProviderRows } from "@starbot/ui/features/account/account-usage-view";
+import { ServerMenu } from "@starbot/ui/features/servers/ServerMenu";
+import { HelpMenu } from "@starbot/ui/features/updates/HelpMenu";
 import {
   type CustomAgentUsageRailRow,
   type MediaCreditsRailRow,
@@ -8,8 +8,8 @@ import {
   type PageRailPage,
   type PageRailPinnablePage,
   type PageRailProps,
-} from "@openbot/ui/features/window/PageRail";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/window/PageRail";
+import { useText } from "@starbot/ui/text";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

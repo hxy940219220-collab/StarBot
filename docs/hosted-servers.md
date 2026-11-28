@@ -82,7 +82,7 @@ when a server is idle or boat stops a sandbox; and `error` and `deleted`. The Wo
    `onSubscriptionSynced`. When the plan is open and the row waits for payment, the Worker makes
    the host ID claim (1 hour; it stores only the hash) and creates the sandbox from
    `HOSTED_SERVER_TEMPLATE` with `noEnv: true`, so no operator secret or repository goes into the
-   sandbox. The sandbox env holds only `OPENBOT_HOSTED_HOST_ID` and `OPENBOT_HOSTED_CLAIM`. The cron
+   sandbox. The sandbox env holds only `STARBOT_HOSTED_HOST_ID` and `STARBOT_HOSTED_CLAIM`. The cron
    provisions a paid row when the webhook call failed, and deletes an unpaid row after 24 hours
    (it has no sandbox, so no data is lost). Before that delete it closes the Checkout; a Checkout
    that is paid keeps the row for the webhook. A row that stays in `creating` with no sandbox for 10
@@ -93,14 +93,14 @@ when a server is idle or boat stops a sandbox; and `error` and `deleted`. The Wo
    server starts on that machine ([A new server on a pool machine](#a-new-server-on-a-pool-machine)),
    and steps 3 and 5 to 8 of boat (the setup script, the stop and the resume) do not apply to it.
 
-   The Worker then names the sandbox `openbot-<plan>-<owner email>-<first 8 characters of the host
+   The Worker then names the sandbox `starbot-<plan>-<owner email>-<first 8 characters of the host
    ID>` (`PATCH /sandboxes/:id`), so an operator can find it in the boat dashboard. The email is in
    lowercase, and each group of characters that are not letters or digits becomes one `-`. The name is only a label; a plan change
    renames the sandbox.
 3. **Env handoff.** boat puts the sandbox env in the setup script, not in systemd. The Worker sends
-   `setupScript: exec /opt/StarBot/hosted/openbot-hosted-env`. That helper writes the two values to
-   `~/.config/openbot-hosted/env` (mode 0600). `openbot.service` waits for this file.
-4. **First boot.** StarBot starts with `OPENBOT_HOSTED_SERVER=1`. It redeems the claim at
+   `setupScript: exec /opt/StarBot/hosted/starbot-hosted-env`. That helper writes the two values to
+   `~/.config/starbot-hosted/env` (mode 0600). `starbot.service` waits for this file.
+4. **First boot.** StarBot starts with `STARBOT_HOSTED_SERVER=1`. It redeems the claim at
    `POST /v2/hosting/claims/redeem`, signs in as the owner, keeps the host ID, and publishes the
    host. `registerHost` refuses the host ID for any other account. This claim is not the operator's
    [server claim](self-hosted-server.md#sign-in-with-a-server-claim) of a self-hosted server.
@@ -173,21 +173,21 @@ when a server is idle or boat stops a sandbox; and `error` and `deleted`. The Wo
    gave a damaged database ("StarBot database failed its integrity check"). Thus a hosted server
    stops StarBot before the save. boat runs `/home/user/.boat/pre-stop` as `user` when a stop
    starts, waits for it to end (at most 60 seconds), and then saves the disk. boat supports this
-   hook, but its documentation does not show it yet. `openbot-hosted-update` installs `scripts/hosting/openbot-boat-pre-stop` there
+   hook, but its documentation does not show it yet. `starbot-hosted-update` installs `scripts/hosting/starbot-boat-pre-stop` there
    (`install_hosting`, and `trigger` at each start, so a server that an older release updated gets
-   it). The hook makes `/run/openbot-pre-stop` and runs `systemctl stop openbot.service`: StarBot
-   gets `SIGTERM`, stops its services and closes `openbot.db` last. After 40 seconds the hook kills
+   it). The hook makes `/run/starbot-pre-stop` and runs `systemctl stop starbot.service`: StarBot
+   gets `SIGTERM`, stops its services and closes `starbot.db` last. After 40 seconds the hook kills
    the unit, which leaves a database that SQLite recovers. The file makes the unit condition
-   `ConditionPathExists=!/run/openbot-pre-stop` fail, so `Restart=` and the end of an update request
+   `ConditionPathExists=!/run/starbot-pre-stop` fail, so `Restart=` and the end of an update request
    do not start StarBot during the save. `/run` is empty at each boot. boat can also keep a stopped
    machine in memory and continue it at a resume with no boot: the resume answers `"status":
    "running"`, and the file stays. Then the Worker runs a command on the machine that removes the
-   file and starts `openbot.service` (`HELD_RESUME_START_COMMAND`). With no file the command does
+   file and starts `starbot.service` (`HELD_RESUME_START_COMMAND`). With no file the command does
    nothing. boat can also cancel the stop after the hook, for example when it cannot pause a Docker
    container that restarts ("Final snapshot failed; stop aborted"). The machine then runs with the
    file, and StarBot stays stopped. Two paths start it again, both only for a file older than 5
    minutes: boat runs the hook again before each new try of the stop, so a newer file can belong to a
-   save that still runs. The hook sets a transient systemd timer (`openbot-pre-stop-restart`) that
+   save that still runs. The hook sets a transient systemd timer (`starbot-pre-stop-restart`) that
    fires 15 minutes after the last hook. A client wake or a connector event for a server that boat
    reports as running makes the Worker run `FAILED_STOP_START_COMMAND` after the reply. boat tries
    the stop again every 4 to 10 minutes (seen on 2026-11-05), and each try stops StarBot again. Thus
@@ -205,9 +205,9 @@ when a server is idle or boat stops a sandbox; and `error` and `deleted`. The Wo
    runs no timer. A hook that StarBot did not write stays, and a self-hosted server gets
    no hook.
 
-   **Check at a start.** `PRAGMA quick_check` reads every page of `openbot.db`: on a 15.7 GB file
+   **Check at a start.** `PRAGMA quick_check` reads every page of `starbot.db`: on a 15.7 GB file
    it stopped the main thread for 77 seconds to about 4 minutes. A clean close removes
-   `openbot.db-wal`. Thus StarBot runs the check at a start only when that file is there (a crash,
+   `starbot.db-wal`. Thus StarBot runs the check at a start only when that file is there (a crash,
    a kill, or a save while StarBot ran) or when a migration ran. After a stop that did not close the
    file, the check runs in a separate database host process, so the main thread stays free. When that
    process cannot start or run the check, the main thread runs it as before. The check after a
@@ -360,10 +360,10 @@ self-hosted host that has a plan.
   enterprise customer's, from 1 to 100. The row names the account that owns the server and applies
   only while that account owns it, as a plan does. The key is the server ID, so the row stays when
   the owner deletes the host and registers it again; it stops when the account is deleted. No route
-  writes it; add, change or delete it by hand (`openbot-auth-test` for the test Worker):
+  writes it; add, change or delete it by hand (`starbot-auth-test` for the test Worker):
 
   ```sh
-  bunx wrangler d1 execute openbot-auth --cwd apps/auth-api --remote --command \
+  bunx wrangler d1 execute starbot-auth --cwd apps/auth-api --remote --command \
     "INSERT INTO server_member_limits(server_id, owner_user_id, member_limit, created_at, updated_at)
      SELECT host_id, owner_user_id, 50, unixepoch() * 1000, unixepoch() * 1000
        FROM remote_hosts WHERE host_id = '<server id>'
@@ -394,7 +394,7 @@ value that you set by hand for these four is replaced. Set `DOTENV_PRIVATE_KEY_D
 
 | Name | Value |
 | --- | --- |
-| `HOSTED_SERVER_TEMPLATE` | The named snapshot from the template build, such as `openbot-server-0-9-0`. |
+| `HOSTED_SERVER_TEMPLATE` | The named snapshot from the template build, such as `starbot-server-0-9-0`. |
 | `HOSTED_SERVERS_ALLOWED_USER_IDS` | Comma-separated account IDs or emails that can create servers. `api:deploy:test` sets it from `HOSTED_SERVERS_TEST_ALLOW_LIST` and refuses `*`: the test Worker is public, and it shares its boat account with production. |
 
 The `BOAT_API_KEY` in `.env.dev` is the development key of the boat test account. It also has
@@ -531,20 +531,20 @@ named snapshot access. The script:
 2. uploads `scripts/hosting/` and runs `provision.sh` with `sudo`. It installs the packages in
    `packages.txt` (Xvfb, D-Bus, gnome-keyring, the Electron libraries and the remote desktop runtime
    libraries), checks the AppImage SHA-256, unpacks the AppImage to `/opt/StarBot/app`, adds an
-   AppArmor profile that lets Chromium make user namespaces, and enables `openbot.service` and the
+   AppArmor profile that lets Chromium make user namespaces, and enables `starbot.service` and the
    [update](#updates) units;
 3. checks the installed version, that StarBot did not start, and that no profile or claim exists;
-4. saves the builder as `openbot-server-<version>` (or `--name=<snapshot>`) and deletes the builder.
+4. saves the builder as `starbot-server-<version>` (or `--name=<snapshot>`) and deletes the builder.
 
 The builder never starts StarBot, so the template has no host identity and no session. A retry
 reuses a ready snapshot with the same name or waits for a save in progress. It refuses a failed
 snapshot and never replaces an existing name. Automatic production releases reserve the prefix
-`openbot-server-production-` to avoid test snapshots in the same account. Keep each name tied to
+`starbot-server-production-` to avoid test snapshots in the same account. Keep each name tied to
 one release and account-service origin; do not use that production prefix for manual test builds.
 
 The builder stops before creating an eleventh snapshot. This is our automation limit:
 [boat permits additional paid snapshots](https://docs.boat.dev/api/reference/snapshots/list-named-snapshots).
-Before each production build, the release job removes `openbot-server-production-` snapshots of
+Before each production build, the release job removes `starbot-server-production-` snapshots of
 older releases and keeps the 3 newest releases, including the new one
 ([details](RELEASING.md#hosted-server-snapshots)). It never removes other names. Before removing a
 test snapshot by hand, check both Workers and pending server creation records
@@ -557,30 +557,30 @@ Server Settings > Updates has the same controls as on a computer that updates it
 **Update when idle**, **Restart now**, automatic updates, and the switch that lets members update.
 StarBot runs as the service user from a release that root owns, so it asks root to do the work
 (`src/main/hosted-update-adapter.ts`). It makes an empty file in its runtime directory:
-`/run/openbot/update-stage` to download, and `/run/openbot/update-install` to install.
-`openbot-update-request.path` then starts `openbot-update-request.service`, which runs
-`openbot-hosted-update request` as root. That removes the file without reading it and runs `stage`.
+`/run/starbot/update-stage` to download, and `/run/starbot/update-install` to install.
+`starbot-update-request.path` then starts `starbot-update-request.service`, which runs
+`starbot-hosted-update request` as root. That removes the file without reading it and runs `stage`.
 For an install, it then stops StarBot, runs `apply` and starts StarBot again, also after a failure.
 A request that comes during a timer download waits for it while StarBot runs. While a request runs,
-root writes the step to `/run/openbot-update.state` and changes its time every 5 seconds. StarBot
+root writes the step to `/run/starbot-update.state` and changes its time every 5 seconds. StarBot
 reads each change as download progress, so the download deadline finds a request that root never
 takes or that stops.
 
 The release that an older script moves into place has these units, but that script installs only
-the units it knows. So `openbot.service` runs `openbot-hosted-update trigger` as root before StarBot
+the units it knows. So `starbot.service` runs `starbot-hosted-update trigger` as root before StarBot
 starts; it installs and starts the request units when they are missing. StarBot offers the controls
-only when `/etc/systemd/system/openbot-update-request.path` is there at its start. Otherwise, and on
+only when `/etc/systemd/system/starbot-update-request.path` is there at its start. Otherwise, and on
 hosts older than this release, the panel checks the release (`host-release-v1`) and shows the
 host-managed update path. A container has no request units. A container of `docker/instances` uses
-the same `HostedUpdateAdapter` with folders that the host mounts in `/var/lib/openbot-update`; see
+the same `HostedUpdateAdapter` with folders that the host mounts in `/var/lib/starbot-update`; see
 [Updates from the app](docker.md#updates-from-the-app).
 
 The Linux build contains `scripts/hosting/` (without the TypeScript files) in `resources/hosting`.
-On a server, root runs `openbot-hosted-update`:
+On a server, root runs `starbot-hosted-update`:
 
-1. `openbot-update.timer` runs `check` 5 to 10 minutes after each start of the timer and then
+1. `starbot-update.timer` runs `check` 5 to 10 minutes after each start of the timer and then
    about each hour. `check` runs `stage` when no `stage` of `check` succeeded in the last 6 hours
-   (`/run/openbot-update.staged`, so the first `check` after a boot stages), and then the step that
+   (`/run/starbot-update.staged`, so the first `check` after a boot stages), and then the step that
    [Start loop](#start-loop) describes. `stage` reads the `latest-linux.yml` (`latest-linux-arm64.yml` on arm64) of the
    latest GitHub release, the manifest that the Linux desktop updater reads. When that version is newer than the installed one, it downloads the
    AppImage, checks its SHA-512 against the manifest, unpacks it in `/var/tmp`, checks that it has
@@ -595,8 +595,8 @@ On a server, root runs `openbot-hosted-update`:
 2. `apply` copies `staged` to `app`, and then installs the scripts, AppArmor profile and units of
    the new release. `.applying` and `staged` stay until all of this is complete, so after a stop or
    a failure the next start does it again, and `stage` does nothing until then.
-   `openbot-update-apply.service` runs `boot` before `openbot.service`. `boot` runs `apply` only on
-   a complete disk, or when `.applying` shows an interrupted copy. `openbot.service` does not
+   `starbot-update-apply.service` runs `boot` before `starbot.service`. `boot` runs `apply` only on
+   a complete disk, or when `.applying` shows an interrupted copy. `starbot.service` does not
    require it, so it starts after a failure too: with the old release, or with a partial copy after
    a failed copy, until the next start. On a self-installed server, the new release starts at the
    next boot, or when idle if the automatic update switch is on (it is off by default). A hosted
@@ -618,8 +618,8 @@ StarBot for the restore. `boot` waits only for an interrupted copy, because Star
 it. During a restore it skips a staged release and recovers an incomplete one.
 
 boat starts the desktop (`lightdm`) about 8 s after the resume, and then the enabled units of
-`multi-user.target` again, about 16 s after it. `openbot.service` is also wanted by
-`lightdm.service`, so it starts with the desktop. The second start of `openbot-update-apply.service`
+`multi-user.target` again, about 16 s after it. `starbot.service` is also wanted by
+`lightdm.service`, so it starts with the desktop. The second start of `starbot-update-apply.service`
 does nothing: the unit stays active (`RemainAfterExit`), and `boot` does nothing while StarBot runs
 (after a failed `boot`). [Observed on a boat VM on 2026-10-11; not in boat
 documentation.]
@@ -646,47 +646,47 @@ failed started again each 10 seconds, without an end, in earlier releases. Now m
   (a full disk, a lock). A start that fails with an error stops the loop at once; after a crash,
   the next start stops it. This is the count of the desktop recovery window (`start-attempts.ts`).
 
-Main then writes `openbot-start-halt-v1.json` in its user data folder. The file has the reason
+Main then writes `starbot-start-halt-v1.json` in its user data folder. The file has the reason
 word, the app version and a time only. The journal shows the reason. Then main runs its safe mode
 (`src/main/server-safe-mode.ts`): it keeps a minimal Team API up, so each member's app shows why
 the server does not start and which version it runs. The safe mode opens no database and changes
-no user data. It writes the empty file `/run/openbot/server-safe-mode` while it runs. See
+no user data. It writes the empty file `/run/starbot/server-safe-mode` while it runs. See
 [Team API](architecture/team-api.md#server-safe-mode).
 
 When the safe mode cannot start (no team, or no host credential), main exits with 78 as before.
-`openbot.service` has `RestartPreventExitStatus=78`, so systemd does not start it again.
+`starbot.service` has `RestartPreventExitStatus=78`, so systemd does not start it again.
 
 The next start reads and removes the file, logs the reason, and tries once more. A failure of that
 start stops the loop again. These start StarBot again:
 
-- a restart or a resume of the server, or `sudo openbot restart` or `start`;
-- `sudo openbot update`;
-- `check` of `openbot-update.timer`, about each hour: when `openbot.service` is stopped with
+- a restart or a resume of the server, or `sudo starbot restart` or `start`;
+- `sudo starbot update`;
+- `check` of `starbot-update.timer`, about each hour: when `starbot.service` is stopped with
   status 78, or runs its safe mode, it runs `stage`, stops the safe mode, and starts the service
   again, after `apply` when a newer release is staged. A hosted
   owner has no shell, and a failure can be temporary (a full disk, no network), so each run tries
   once more. It reads only the state of the unit (`ActiveState`, `ExecMainStatus`) and the
   existence of the empty safe-mode file, never the content of a file of the service user.
 
-When StarBot is not running or runs its safe mode, `openbot` commands that need the control socket
-say that the start loop stopped it, and name `openbot logs`, `sudo openbot update` and
-`sudo openbot restart`. The safe mode has no control socket.
+When StarBot is not running or runs its safe mode, `starbot` commands that need the control socket
+say that the start loop stopped it, and name `starbot logs`, `sudo starbot update` and
+`sudo starbot restart`. The safe mode has no control socket.
 
-A Docker container has no systemd and no `openbot-update.timer`. There the safe mode ends after one
+A Docker container has no systemd and no `starbot-update.timer`. There the safe mode ends after one
 hour with exit 78, and the restart policy starts the container again, with the backoff of Docker.
 Each second start after a halt tries again.
 
 There is no install or rollback action in the safe mode: a newer release is the fix, through the
-update paths above. `copy_release` of `openbot-hosted-update` still removes the old copy before it
+update paths above. `copy_release` of `starbot-hosted-update` still removes the old copy before it
 copies (`rm -rf`, then `cp -a`); see plan 011 item 3.
 
 A server that has no updater, such as one made from a template before 0.26.0, needs one upgrade by
 hand. With a boat key that has command and file access: upload `scripts/hosting/` to
-`/tmp/openbot-upgrade`, run `sudo systemctl stop openbot.service`, run `sudo bash /tmp/openbot-upgrade/provision.sh user <AppImage URL> <SHA-256>
+`/tmp/starbot-upgrade`, run `sudo systemctl stop starbot.service`, run `sudo bash /tmp/starbot-upgrade/provision.sh user <AppImage URL> <SHA-256>
 https://api.starbot.app` as a detached command, and start the service again. The data in the home
 folder and in `/srv` stays.
 
-On a server, `openbot-hosted-server` starts a D-Bus session, unlocks a gnome-keyring with a
+On a server, `starbot-hosted-server` starts a D-Bus session, unlocks a gnome-keyring with a
 random password for each server (so `safeStorage` can keep the account session), and runs StarBot
 with `--password-store=gnome-libsecret`. The agents use the boat desktop: the lightdm session of the
 sandbox user on `:0`, with openbox. So boat's desktop viewer and StarBot remote desktop show the same
@@ -694,11 +694,11 @@ screen, and a click moves the keyboard focus to another window. After a resume, 
 to 2 minutes for that session. StarBot shows its own windows on a 1280x800 Xvfb display that
 `xvfb-run` starts. `xvfb-run` adds the key of that display to `~/.Xauthority`, which has the key of
 `:0`, and lightdm keeps the other keys when it writes the file. The script names `:0` in
-`OPENBOT_AGENT_DISPLAY`, so an agent's screenshot and remote desktop do not show the StarBot window
+`STARBOT_AGENT_DISPLAY`, so an agent's screenshot and remote desktop do not show the StarBot window
 (see [Computer Use and remote desktop](architecture/computer-use.md#agent-display-on-a-server)). With
 no desktop session, the server starts two Xvfb displays and Openbox on the agent display, as a
 [self-hosted server](self-hosted-server.md#how-it-works) does. The keyring files are in
-`/srv/openbot-hosted/keyrings`:
+`/srv/starbot-hosted/keyrings`:
 
 - not in `~/.local/share/keyrings`: the boat image has a locked `default` keyring there, and a
   snapshot restore resets that folder after the service starts;
@@ -727,23 +727,23 @@ again with backoff (30 s to 10 min) and then publishes the host.
 
 ## Watchdog
 
-Before it starts StarBot, `openbot-hosted-server` starts itself again with `--watchdog` in the
-background. Main rewrites `~/.config/StarBot/openbot-run-marker-v1.json` every 60 s from its event
+Before it starts StarBot, `starbot-hosted-server` starts itself again with `--watchdog` in the
+background. Main rewrites `~/.config/StarBot/starbot-run-marker-v1.json` every 60 s from its event
 loop (`src/main/run-marker.ts`). The watchdog reads the file every 30 s. When the content does not
 change in 20 reads (10 minutes) after it changed once in this run, the watchdog logs "StarBot did not
 update its heartbeat for 600 seconds" and sends `SIGKILL` to the process in
-`/run/openbot/openbot.pid`. `Restart=always` starts the service again 10 s later. The watchdog does
+`/run/starbot/starbot.pid`. `Restart=always` starts the service again 10 s later. The watchdog does
 nothing:
 
 - before the first change of the file in this run;
-- until the start finishes: `openbot-start-attempts-v1.json` in the same folder has
+- until the start finishes: `starbot-start-attempts-v1.json` in the same folder has
   `"attempt":null` only after the migrations, the services and the renderer load. Migrations and the
   database `quick_check` run on the main thread and can take longer than 10 minutes on a large
   database;
 - while the run marker does not have `"state":"running"`. Quitting and the server safe mode stop the
   heartbeat, and the safe mode stays alive to keep the host reachable;
 - when the folder of the file has less than 1 MB free, because main ignores a failed write;
-- when the process in the pid file is not `openbot` in the cgroup of the service.
+- when the process in the pid file is not `starbot` in the cgroup of the service.
 
 The watchdog counts reads and does not compare clock times, so a boat resume, which moves the clock
 forward, does not stop StarBot. It does not help when the whole machine stops responding; that needs a
@@ -757,7 +757,7 @@ line and used no CPU, and the host stayed off Signal for 24 hours until a restar
 that blocked is not confirmed: the processes were gone after the restart.
 `scripts/hosted-watchdog-e2e.ts` (`bun run test:hosted-watchdog`) runs the watchdog with a 1 s
 interval against fake apps that write, stop writing or never write the file, that did not finish
-their start, that quit, or that are not `openbot`.
+their start, that quit, or that are not `starbot`.
 
 ## Memory
 
@@ -767,7 +767,7 @@ A Starter server has 4 GB. The guards are on a hosted server, a
 [self-hosted server](self-hosted-server.md#memory) and a [container](docker.md#memory); the desktop
 app does not change.
 
-The unit (`openbot.service`):
+The unit (`starbot.service`):
 
 - `MemoryMax=90%`: the unit can use at most 90% of the memory, so 10% stays for the desktop, sshd
   and the boat agent. The limit counts memory only, not swap. The boat image has a 2 GB swap file,
@@ -801,7 +801,7 @@ do not all pass the check before their processes grow. A start that fails counts
 
 Agent processes (`AgentProcesses` in `src/main/server-memory.ts`):
 
-- Each provider process gets `OPENBOT_AGENT_PROCESS=1`, so every program that an agent starts has
+- Each provider process gets `STARBOT_AGENT_PROCESS=1`, so every program that an agent starts has
   it too. A job that an agent detaches (`nohup`, `&`, a routine wake-up job), and the workers of a
   build whose parent the OOM killer stopped, leave main's tree: the kernel gives them to PID 1. The
   variable still finds them. Xvfb, D-Bus and the keyring start before main and do not have it.
@@ -864,7 +864,7 @@ holds it:
    message or thread reply from a person; a Discord mention or button press; a Telegram message or
    button press.
 3. For such an event and a server that starts, Signal keeps the delivery frame, sealed to the host's
-   queue key (`@openbot/contracts/signal-protocol/ingress-queue`), in memory for at most 10 minutes
+   queue key (`@starbot/contracts/signal-protocol/ingress-queue`), in memory for at most 10 minutes
    (64 events and 192 KB for each host). Slack gets 200, so it does not send the event again. Because
    the start runs after the answer and can fail, Signal asks for the start again once a minute while
    the host has kept events. Signal
@@ -881,7 +881,7 @@ holds it:
    sends it again on the host's next hello: the first socket can close before the host handled it. The
    transports drop an event that they already handled.
 
-The host makes its queue key once (`src/main/ingress-queue-key.ts`, `openbot-ingress-queue-key-v1.json`
+The host makes its queue key once (`src/main/ingress-queue-key.ts`, `starbot-ingress-queue-key-v1.json`
 in the user data folder), encrypted by the operating system, and sends the public half in each
 `ingress` hello. An older host sends no key, so Signal keeps nothing for it; a hello with no key
 removes the key that Signal had. A kept delivery that arrives before its connection has started waits
@@ -911,21 +911,21 @@ The `boat` scenario of `scripts/stripe-flows-e2e.ts` (see `apps/auth-api/README.
 
 - the builder user has passwordless `sudo`, and AppArmor is enabled in the boat VM;
 - boat runs `setupScript` for a sandbox created from a named snapshot, and systemd starts
-  `openbot.service` after a create;
+  `starbot.service` after a create;
 - StarBot redeems its claim, publishes the host with the server name, and signs in again from the
   stored session after a restart (`safeStorage` with gnome-keyring under Xvfb);
 - a delete through the Worker removes the sandbox.
 
 A resume test on 2026-09-28 (one sandbox with the 0.24.0 AppImage, 6 resumes, each on another
-machine) confirmed that systemd starts `openbot.service` again after a resume, and that a keyring
+machine) confirmed that systemd starts `starbot.service` again after a resume, and that a keyring
 secret in `/srv` stays. From the resume call to the StarBot start took 7 to 34 s; the keyring start
 took 40 ms. Most of the time is boat: it restores the disk and then starts the enabled units, 5 to
 20 s after the sandbox is `idle`.
 
 A wake test on 2026-10-11 (one hosted server with 0.37.0) measured, from the resume call: boat
-ready at 4 s, `openbot.service` at 17 s and the host register at 22 s. A wake with a staged release
+ready at 4 s, `starbot.service` at 17 s and the host register at 22 s. A wake with a staged release
 took 3 min 35 s, because `apply` waited for the restore. With the start at `lightdm`,
-`openbot.service` started at 8 s and the host registered at about 20 s: Electron starts slowly from
+`starbot.service` started at 8 s and the host registered at about 20 s: Electron starts slowly from
 the lazily restored disk, and the desktop session holds the display until about 12 s.
 
 A resize test on 2026-09-28 (one plain sandbox with `noEnv`, `small → default → small`, each a stop
@@ -935,7 +935,7 @@ and an enabled systemd unit started again after each resume. The stop took 25 to
 sandbox was `idle` 3 to 6 s after the resume call.
 
 A memory test on 2026-09-30 (one `small` sandbox with `noEnv`, the scripts and the Linux AppImage of
-main, and a `ServerMemory` driver in a unit with the same limits as `openbot.service`)
+main, and a `ServerMemory` driver in a unit with the same limits as `starbot.service`)
 confirmed:
 
 - boat VMs use cgroup v2 with the memory controller, and the unit gets `memory.max` = 90% (3.4 GiB);
@@ -976,7 +976,7 @@ sandbox) stopped the sandbox while a writer used SQLite in WAL mode in the home 
 - with an empty WAL and only small appends at the stop, 9 checks were healthy;
 - with no automatic checkpoint, the main file was not damaged, but in 3 of 6 restores the WAL
   header was torn, and SQLite ignored the full WAL. The rows of that run were lost;
-- with `openbot-boat-pre-stop` for the writer unit (`--mode=pre-stop`), each of 4 stops during
+- with `starbot-boat-pre-stop` for the writer unit (`--mode=pre-stop`), each of 4 stops during
   writes gave a healthy database with every committed row, and no `/run` flag after the resume.
 
 A stop-order probe on the same day (a unit that records `SIGTERM` and writes each 200 ms) showed
@@ -985,12 +985,12 @@ that boat saves the disk while the processes run, about 3 seconds after the stop
 call, and the last write that the restore kept was from after the hook ended. Thus boat waits for
 the hook before it saves the disk.
 
-An install test on the same sandbox put the new `openbot-hosted-update`, `openbot.service` and hook
+An install test on the same sandbox put the new `starbot-hosted-update`, `starbot.service` and hook
 in place, as an older release does when it updates. At the next start, `trigger` installed the hook
 as `user` with mode 0755. It did not change a current hook, kept a hook that StarBot did not write
 (a file, a link or a FIFO, with no wait), and replaced a changed StarBot hook. At a stop of the real StarBot, the hook
-stopped `openbot.service` in 0.3 seconds and ended with 0. After the resume (a new boot ID), the
-flag was gone, StarBot ran, and `openbot.db` passed `quick_check`.
+stopped `starbot.service` in 0.3 seconds and ended with 0. After the resume (a new boot ID), the
+flag was gone, StarBot ran, and `starbot.db` passed `quick_check`.
 
 ## Leaseweb VPS
 
@@ -1045,7 +1045,7 @@ server that runs already, see [The plan of a custom server](#the-plan-of-a-custo
 - A run that stops can run again with the same arguments: it continues with the same reference,
   does not install again when the owner is signed in, and stops when another account is signed in.
 - Its output has no email and no key. The report of the checks is in
-  `.openbot-build/leaseweb-bootstrap/`.
+  `.starbot-build/leaseweb-bootstrap/`.
 
 The steps of the command:
 
@@ -1069,13 +1069,13 @@ The bootstrap does not restart StarBot, and a second run gives the same state:
 
 | Part | Result | Files |
 | --- | --- | --- |
-| SSH | Keys only, no forwarding. The operator keys sign in as root, and as no other user. | `/etc/ssh/sshd_config.d/00-openbot-hardening.conf`, `/etc/ssh/openbot-operator-keys/root` |
-| Egress rules | The service user cannot connect to the CloudStack router (the DHCP server, which gives metadata and a reset root password to each process that asks), nor to private, link-local and multicast addresses. No user can connect to TCP port 25. | `/usr/local/sbin/openbot-egress-firewall`, `/etc/openbot/egress-router`, `openbot-egress-firewall.service`, `openbot.service.d/10-egress-firewall.conf` |
-| Updates | Security updates each day. They restart neither the server nor StarBot. Ubuntu (`needrestart`) restarts each other service that uses an updated library. | `/etc/apt/apt.conf.d/20auto-upgrades`, `52openbot-unattended`, `/etc/needrestart/conf.d/50-openbot.conf` |
-| Kernel | A new kernel gets a boot entry: the bootstrap installs `grub-pc` when the image has no `update-grub`. The boot arguments of the image stay. | `/etc/default/grub.d/50-openbot.cfg` |
+| SSH | Keys only, no forwarding. The operator keys sign in as root, and as no other user. | `/etc/ssh/sshd_config.d/00-starbot-hardening.conf`, `/etc/ssh/starbot-operator-keys/root` |
+| Egress rules | The service user cannot connect to the CloudStack router (the DHCP server, which gives metadata and a reset root password to each process that asks), nor to private, link-local and multicast addresses. No user can connect to TCP port 25. | `/usr/local/sbin/starbot-egress-firewall`, `/etc/starbot/egress-router`, `starbot-egress-firewall.service`, `starbot.service.d/10-egress-firewall.conf` |
+| Updates | Security updates each day. They restart neither the server nor StarBot. Ubuntu (`needrestart`) restarts each other service that uses an updated library. | `/etc/apt/apt.conf.d/20auto-upgrades`, `52starbot-unattended`, `/etc/needrestart/conf.d/50-starbot.conf` |
+| Kernel | A new kernel gets a boot entry: the bootstrap installs `grub-pc` when the image has no `update-grub`. The boot arguments of the image stay. | `/etc/default/grub.d/50-starbot.cfg` |
 
 The rules load before the network starts, with the router of the last run, and again before each
-start of StarBot, with the router of the current DHCP lease. `openbot.service` requires the rules
+start of StarBot, with the router of the current DHCP lease. `starbot.service` requires the rules
 unit, so StarBot does not run without them. The rules also refuse the service user a container
 network in 172.16.0.0/12 and a VPN in 100.64.0.0/10; change `PRIVATE4` in the helper for a server
 that needs one. They do not filter incoming connections: a port that an agent opens on all
@@ -1089,7 +1089,7 @@ A server has three names, and each one can change later:
 | Name | Command | Notes |
 | --- | --- | --- |
 | Leaseweb reference | `PUT /publicCloud/v1/vps/{id}` with `{"reference": "<name>"}` | At most 255 characters; `@`, `+`, a space and letters outside ASCII are kept. `GET /publicCloud/v1/vps?reference=<text>` finds each server that has the text in its reference, with no difference between capital and small letters. |
-| StarBot server name | `openbot name <name>` as the service user | 6 to 32 characters. No restart. The customer sees this name. |
+| StarBot server name | `starbot name <name>` as the service user | 6 to 32 characters. No restart. The customer sees this name. |
 | Linux hostname | `hostnamectl set-hostname <name>` | Set it before StarBot starts, or restart StarBot after it. |
 
 The X authorization of the virtual display has the hostname in it. After a hostname change, a new
@@ -1107,7 +1107,7 @@ Leaseweb accounts use one scheme:
 | `pool` | In the hosted pool. It does not tell whether a server has the VPS: a purchase gives a VPS to a server in D1 and does not change the reference. `leaseweb-pool.ts status` shows the free ones. Only `leaseweb-pool.ts` and [Move a server from boat](#move-a-server-from-boat) use a pool VPS. Before 2026-11-13 a free pool VPS had `pool-free`; the script reads it as `pool`. | `pool` |
 | `<owner email> <first 8 characters of the StarBot server ID>` | In the hosted pool, with a hosted server. `move` sets it for a moved server, and `sync` for a server that started on the machine. A label for the Leaseweb panel only: `sync` sets `pool` again on a free pool VPS that still has one. Do not decide from it whether a VPS is free. | `jane@example.com 1a2b3c4d` |
 | `custom-<NN> <customer> <owner email>` | A server for one customer, not in the pool. `<NN>` is the next number after the highest on all accounts; `leaseweb-pool.ts custom` sets it. `<customer>` is one word in small letters. | `custom-01 acme jane@example.com` |
-| `openbot-signal-<home>` | A Signal machine (see `docs/remote-session-deployment.md`). | `openbot-signal-us` |
+| `starbot-signal-<home>` | A Signal machine (see `docs/remote-session-deployment.md`). | `starbot-signal-us` |
 | `pool-test-<NN>` | A test machine of the operator. | `pool-test-01` |
 
 `leaseweb-pool.ts traffic [--from=YYYY-MM-DD] [--to=YYYY-MM-DD]` is read only. It shows the public
@@ -1186,7 +1186,7 @@ that asks them to wait for the owner. A server with no plan has no paywall.
 When the billing country is in the EU, the UK or Turkey and the account has no VAT ID, the paywall
 asks the owner to accept that the service starts during the 14-day withdrawal period, as the hosted
 plans page does. Subscribe stays off until the owner selects the checkbox. The Worker writes the time
-of the request to `openbot_early_start_at` on the Checkout Session and the subscription.
+of the request to `starbot_early_start_at` on the Checkout Session and the subscription.
 
 `custom --plan=...` sets the plan at the setup. `custom-plan` shows, sets, changes or removes the
 plan of a server that runs already. It takes the StarBot server ID, which is the last line of the
@@ -1213,7 +1213,7 @@ $env bun scripts/hosting/leaseweb-pool.ts custom-plan <server ID> --remove --app
 | `--vcpu`, `--memory`, `--storage` | The spec that the paywall shows: vCPU, memory in GB, storage in GB. |
 | `--support` | The paywall shows personalized support. |
 | `--remove` | `custom-plan` only: remove the plan and the paywall. |
-| `--env=test` | Use the test D1 (`openbot-auth-test`). |
+| `--env=test` | Use the test D1 (`starbot-auth-test`). |
 | `--env=local` | `custom-plan` only: use the local D1 of `bun run dev:api` in this worktree. No Cloudflare token is necessary. |
 
 - The plan is a row of the D1 table `custom_server_offers`. `custom` writes it after the D1 owner
@@ -1223,7 +1223,7 @@ $env bun scripts/hosting/leaseweb-pool.ts custom-plan <server ID> --remove --app
   checkout stays open for 35 minutes, and a change in that time could lose the payment. When the
   server pays already, change that subscription in Stripe.
 - Checkout uses a Stripe price made for the session (`price_data`), with the metadata
-  `openbot_kind=custom_server` and the server ID. The webhook stores the subscription and its status.
+  `starbot_kind=custom_server` and the server ID. The webhook stores the subscription and its status.
   The status `active`, `trialing` or `past_due` removes the paywall; any other status shows it again.
 - Each change, from Stripe or from `custom` and `custom-plan`, sends `account-servers-changed` to the
   active members, and the apps read the server list again. The Worker sends the events of the
@@ -1242,8 +1242,8 @@ The Worker cannot connect to a machine, and it has no Leaseweb key. So the machi
    on each free machine, as for a move. Then it offers the machine: it makes a random token, stores the
    SHA-256 of the token in `operator_hosts.assign_token_hash` (migration 0055), and runs
    `move-from-boat.sh offer leaseweb:<VPS ID>` on the machine with the token on standard input. `offer`
-   refuses a machine that has the data of a server. It writes the token to `/etc/openbot-pool/token`
-   (root only) and starts `openbot-pool-wait.service`.
+   refuses a machine that has the data of a server. It writes the token to `/etc/starbot-pool/token`
+   (root only) and starts `starbot-pool-wait.service`.
 2. The unit sends `POST /v2/hosting/pool/assignment` with `{hostId, token}` each 10 seconds. The Worker
    compares the hash, stores the time in `operator_hosts.seen_at` (at most one write each 60 seconds)
    and answers `{"state":"waiting"}`. A wrong token gets `401 hosted_pool_token_invalid`; the unit then
@@ -1261,8 +1261,8 @@ The Worker cannot connect to a machine, and it has no Leaseweb key. So the machi
    claim, and it changes no row when another server has the machine. So two payments in the same second
    never get one machine. After three machines that another payment took, the server starts on boat.
 5. The next request of the machine gets `{"state":"assigned","serverId":…,"claim":…}`. The unit runs
-   `openbot-hosted-env` as the service user with the two values (the same helper as in the boat setup
-   script), enables and starts `openbot.service`, then removes the token and disables itself. The
+   `starbot-hosted-env` as the service user with the two values (the same helper as in the boat setup
+   script), enables and starts `starbot.service`, then removes the token and disables itself. The
    answer is the same until StarBot signs in, so a machine that restarts in this step asks again.
 6. StarBot redeems the claim (`POST /v2/hosting/claims/redeem`). The Worker then sets the row to
    `running` and clears the token hash of the machine. From here the server is the same as a moved server: the tables of
@@ -1339,10 +1339,10 @@ writes `observed_state`:
 | A client or a connector event asks for a start | Nothing. | Nothing. |
 | The server reports its use | Stores `last_active_at` and `next_run_at`. | Nothing. |
 | The plan changes | Sets `size` at once. | Nothing: each pool server has the same size. |
-| The plan ends | Sets `desired_state = 'stopped'`, `observed_error = 'plan_ended'` and `plan_ended_at`. A start request gets `402 plan_required`. | Stop `openbot.service`, then write `observed_state = 'stopped'`. Until then the server still runs. |
-| The owner renews | Sets `desired_state = 'running'` and clears the error. `plan_ended_at` stays. | Start `openbot.service`, then write `observed_state = 'running'`. |
+| The plan ends | Sets `desired_state = 'stopped'`, `observed_error = 'plan_ended'` and `plan_ended_at`. A start request gets `402 plan_required`. | Stop `starbot.service`, then write `observed_state = 'stopped'`. Until then the server still runs. |
+| The owner renews | Sets `desired_state = 'running'` and clears the error. `plan_ended_at` stays. | Start `starbot.service`, then write `observed_state = 'running'`. |
 | 14 days after the plan ended, with no open subscription | Reads the subscription at Stripe, then deletes the server as the owner does. | As for a delete. |
-| The owner or an admin restarts the server | Refuses with `409 hosted_server_restart_unavailable`. | Restart `openbot.service` on a request to support. |
+| The owner or an admin restarts the server | Refuses with `409 hosted_server_restart_unavailable`. | Restart `starbot.service` on a request to support. |
 | The owner deletes the server | Cancels the plan, deletes the sandbox in `retired_sandbox_id`, removes the Remote host, ends the session, and sets `observed_state = 'deleted'`. `operator_host` stays. | Reinstall the VPS, set its reference to `pool`, then set `operator_host = NULL`. |
 | boat sends an event for the old sandbox | Finds no row for it. | Nothing. |
 
@@ -1394,7 +1394,7 @@ still uses the sandbox. The downtime is the export, the copy, the import and the
    `move-from-boat.sh prepare lsw-<VPS ID> <uid> <gid> <appimage-url> <appimage-sha256> <auth-api-url>`.
    The IDs are those of `id user` in the sandbox (1000 and 1000 in the boat image). The release is the
    one that the sandbox has, or a newer one. The command sets the hostname, makes the user `user`
-   with the home `/home/user`, runs `provision.sh`, and disables `openbot.service`, so a restart does
+   with the home `/home/user`, runs `provision.sh`, and disables `starbot.service`, so a restart does
    not start StarBot with no data. `leaseweb-pool.ts prepare <VPS ID>... --apply` does
    steps 2 and 3 on free machines before a move, with the newest release.
 3. Run `leaseweb-bootstrap.sh` with the operator keys. Restart the VPS one time. A new or reinstalled
@@ -1433,10 +1433,10 @@ still uses the sandbox. The downtime is the export, the copy, the import and the
    downtime. Then on the sandbox: `move-from-boat.sh export <archive>`, or `export -`, which writes the
    archive to standard output and each message to standard error. `leaseweb-pool.ts move` sends it
    with `ssh` to a key that the sandbox makes for this move: on the VPS, that key can only run
-   `cat >/root/openbot-move.tar`, and the move removes it after the export. So no archive is on the
+   `cat >/root/starbot-move.tar`, and the move removes it after the export. So no archive is on the
    disk of the sandbox, and the copy has no separate step. The downtime of the customer starts here.
-   The command sets `/run/openbot-pre-stop`, stops `openbot.service`, and archives, with numeric
-   owners, the home of `user` and `/srv/openbot-hosted`. The home has each provider sign-in, API key
+   The command sets `/run/starbot-pre-stop`, stops `starbot.service`, and archives, with numeric
+   owners, the home of `user` and `/srv/starbot-hosted`. The home has each provider sign-in, API key
    and MCP server. The archive does not have the provider CLIs that StarBot downloaded
    (`~/.config/StarBot/provider-runtimes`, but `bun` stays) or the caches: at start, a hosted server
    downloads the CLI of each provider that an agent uses. The archive also has what the customer installed
@@ -1499,7 +1499,7 @@ still uses the sandbox. The downtime is the export, the copy, the import and the
    started StarBot on the VPS while boat cancelled the stop, and the sandbox started StarBot again. It
    was rolled back.
 
-   The archive also has the SHA-256 of `openbot.db`, `agent-data.db`, `login.keyring` and
+   The archive also has the SHA-256 of `starbot.db`, `agent-data.db`, `login.keyring` and
    `keyring-password`, the names of the npm commands and groups of the sandbox, and the Ubuntu
    version. It does not have:
    - `/opt/StarBot`, `~/.boat`, `~/.boatignore`, `~/.ascii`, `~/.config/ascii`, `~/.Xauthority*` and
@@ -1525,7 +1525,7 @@ still uses the sandbox. The downtime is the export, the copy, the import and the
 6. On the VPS: `move-from-boat.sh import <archive>`. The command refuses an StarBot that is older
    than that of the sandbox, restores the archive, and compares the four SHA-256 values. An agent
    of the customer can get root in the sandbox, and the service user has no root on the VPS. So the
-   service user restores the files, and only `/home/user`, `/srv/openbot-hosted` and the moved
+   service user restores the files, and only `/home/user`, `/srv/starbot-hosted` and the moved
    directories. Root makes each moved directory new, owned by `user`; a directory that the VPS has
    already stays as it is, and the report names it. The archive cannot write a file of root, a setuid
    file of root or a device. A file that root or another user owned in the sandbox gets the service
@@ -1554,7 +1554,7 @@ still uses the sandbox. The downtime is the export, the copy, the import and the
    `archived` and stops when the stop becomes `failing`. Do not start the sandbox again while the VPS
    runs: two hosts would have one ID.
 8. On the VPS: `move-from-boat.sh start`. It refuses when the import is not complete or when
-   `openbot.db` changed after the import, then enables and starts `openbot.service`. A machine with
+   `starbot.db` changed after the import, then enables and starts `starbot.service`. A machine with
    no display manager does not wait for the boat desktop: StarBot uses two virtual displays at once.
    Confirm in the web client that the server is online and that an agent answers. Set the Leaseweb
    reference.
@@ -1612,14 +1612,14 @@ The VPS is not the same machine as the sandbox:
 - After the owner deletes the server, StarBot still runs on the VPS with a session that is ended. It
   cannot connect, and it has the data until the operator reinstalls the machine.
 
-Rollback, while the sandbox exists: run `systemctl disable --now openbot.service` on the VPS, so that
+Rollback, while the sandbox exists: run `systemctl disable --now starbot.service` on the VPS, so that
 no restart of the VPS starts a second host. Make sure that the sandbox is stopped at boat. Then give
 the row back to boat. The next client request resumes the sandbox, and the resume starts StarBot
 there. The work that the server did on the VPS is not in the sandbox.
 
 When the export failed before the import, the sandbox still runs with StarBot stopped and
-`/run/openbot-pre-stop` set. Delete `/root/openbot-move` and the marker, and start `openbot.service`
-in the sandbox. Delete `/root/openbot-move.tar` on the VPS. Then give the row back with the statement
+`/run/starbot-pre-stop` set. Delete `/root/starbot-move` and the marker, and start `starbot.service`
+in the sandbox. Delete `/root/starbot-move.tar` on the VPS. Then give the row back with the statement
 below, but with `desired_state` and `observed_state` of before the move. On 2026-11-12 an export of
 24 GB took 9 minutes; a restart timer of boat started StarBot during it, and tar stopped the export.
 The export now stops that timer. On 2026-11-19 the `.bash_logout` of a sandbox wrote `\e[3J` after
@@ -1648,8 +1648,8 @@ tested: a rollback after a plan change.
 A moved server that lost its session cannot get a new claim from a client request. The operator
 makes a claim of 16 to 128 characters from `A-Z a-z 0-9 _ -`, writes its SHA-256 as base64url with no
 padding to `claim_token_hash` and a time at most one hour ahead to `claim_expires_at`, writes
-the claim to `OPENBOT_HOSTED_CLAIM` in `/home/user/.config/openbot-hosted/env`, and restarts
-`openbot.service`. The redeem ends the old session.
+the claim to `STARBOT_HOSTED_CLAIM` in `/home/user/.config/starbot-hosted/env`, and restarts
+`starbot.service`. The redeem ends the old session.
 
 `bun run test:hosted-operator-host` drives the real service with a fake boat and checks each line of
 the table, the claim recovery, the storage of a moved server in each list, and that the servers of
@@ -1693,7 +1693,7 @@ Tested on 2026-11-11 on one VPS (FRA-01, 6 vCPU, 16 GiB, Ubuntu 24.04, StarBot 0
 
 - `bun scripts/hosting/leaseweb-bootstrap-e2e.ts --host=root@<address> --restart=yes` passed its 75
   checks. It runs the bootstrap two times, connects as the service user and as root, stops the rules,
-  and restarts the server. The report is in `.openbot-build/leaseweb-bootstrap/`.
+  and restarts the server. The report is in `.starbot-build/leaseweb-bootstrap/`.
 - Rescue: `attachIso` with `GRML` and then `reboot` started the GRML system. Its console gave a root
   shell with no password, and `mount -o ro,noload /dev/sda2` showed the files of the server. After
   `detachIso` and `reboot`, Ubuntu started 173 seconds after the call, and StarBot was online 55
@@ -1719,7 +1719,7 @@ sales organization (locations FRA-01, FRA-10 and FRA-14), did not order a server
   `leaseweb-bootstrap-e2e.ts --restart=yes` passed its 75 checks. Ubuntu 26.04 has the `install`
   command of uutils, which refuses `/dev/stdin` as the source when the target exists; the bootstrap
   thus writes its files with `cat`. The bootstrap with this change was not run again on Ubuntu 24.04.
-- On Ubuntu 26.04, the server signed in with `openbot login`, and the web client connected to it. An
+- On Ubuntu 26.04, the server signed in with `starbot login`, and the web client connected to it. An
   agent with a free OpenCode model ran a shell command as the service user and read a web page. After
   a restart, the server was online again with no new sign-in, and the agent had its chat. The log
   has `Failed to resolve address for turn.starbot.app` lines when a client connects, although the
@@ -1733,10 +1733,10 @@ sales organization (locations FRA-01, FRA-10 and FRA-14), did not order a server
   from 17:44 to 17:45 UTC. Each has a 1-year term to 2027-11-30 with a bill each month (EUR 8.09),
   and `cancellable: true`. With the key of this account, `GET /ordering/v1/products/vps?location=AMS-01`
   answers `200` with the packages `VPS02_1` to `VPS02_6`. No order was sent through the API.
-- The first daily update on Ubuntu 26.04 restarted `openbot.service`: `needrestart` restarts each
+- The first daily update on Ubuntu 26.04 restarted `starbot.service`: `needrestart` restarts each
   service that uses an updated library. The bootstrap now writes
-  `/etc/needrestart/conf.d/50-openbot.conf`. After that, a reinstall of `libpcre2-8-0` restarted
-  `cron.service`, `ssh.service` and six other services, and listed `openbot.service` as deferred; its
+  `/etc/needrestart/conf.d/50-starbot.conf`. After that, a reinstall of `libpcre2-8-0` restarted
+  `cron.service`, `ssh.service` and six other services, and listed `starbot.service` as deferred; its
   start time did not change. The E2E reads the value that `needrestart` uses for the unit.
 - Operator keys: the E2E adds a temporary key to the list. That key signed in as root and not as the
   service user, a key outside the list did not sign in, a list with a bad line changed nothing, and a
@@ -1752,7 +1752,7 @@ sales organization (locations FRA-01, FRA-10 and FRA-14), did not order a server
   the arguments `ro net.ifnames=0 quiet splash`, SSH answered 23 seconds after the restart command,
   and StarBot was online 5 seconds later.
 - The three names of the test VPS changed: the reference through the API, the server name with
-  `openbot name`, and the hostname, which stayed after a restart of the server.
+  `starbot name`, and the hostname, which stayed after a restart of the server.
 
 Not confirmed for Leaseweb:
 
@@ -1786,8 +1786,8 @@ The sizes and prices are in `packages/contracts/src/billing.ts` (`STORAGE_TIER_G
 times 6.
 
 - **Stripe.** Each tier is a second item on the plan subscription: a Price of the Product
-  `openbot_storage_<plan>` with the lookup key `openbot_storage_<plan>_<tier>_<interval>` and the
-  metadata `openbot_kind: storage`. `bun run api:stripe:bootstrap` makes them. The Worker also knows
+  `starbot_storage_<plan>` with the lookup key `starbot_storage_<plan>_<tier>_<interval>` and the
+  metadata `starbot_kind: storage`. `bun run api:stripe:bootstrap` makes them. The Worker also knows
   an old Price by its metadata after the bootstrap moved a lookup key.
 - **Purchase.** `POST /v1/me/billing/storage` (desktop) or `/api/browser/v1/me/billing/storage`
   (browser) with `{subscriptionId, tier}`. The Worker checks in D1 and in Stripe that the plan is
@@ -1851,7 +1851,7 @@ restored or due archive is deleted.
    subscription and no live archive. It reads the newest subscription at Stripe. It archives only a
    `canceled` or `incomplete_expired` subscription: at once, or 3 days after `plan_ended_at` when
    `cancellation_details.reason` is `payment_failed` (`POOL_UNPAID_ARCHIVE_AFTER_MS`).
-2. `sync` makes a new `age` X25519 key, starts a multipart upload in `openbot-pool-archive-eu` with the
+2. `sync` makes a new `age` X25519 key, starts a multipart upload in `starbot-pool-archive-eu` with the
    operator key, and sends the machine only the `age` recipient and a presigned URL for each 100 MiB
    part. The machine runs `move-from-boat.sh export - | age -r <recipient>`, cuts the result into parts,
    and uploads each part with `curl`. The data does not go through the operator's computer, and the
@@ -1923,7 +1923,7 @@ bunx dotenvx run -f apps/auth-api/.env.production -fk <root>/.env.keys -- \
 operator. One key of the computer that runs `prepare` or `move` must be in the operator keys: the
 bootstrap turns off the password, and the script refuses a list without such a key.
 
-The OpenPanel dashboard "Server pool" (project `openbot`) shows the pool. Each 5 minutes, the
+The OpenPanel dashboard "Server pool" (project `starbot`) shows the pool. Each 5 minutes, the
 production Worker sends one `hosted_pool_snapshot` event for each location and product and one with
 `location = all` (see `ANALYTICS.md`). The test Worker has no OpenPanel keys and sends none. Each
 report is a bar with the largest value of the snapshots in the last 30 minutes. Two local patches of
@@ -2004,8 +2004,8 @@ send no message either. An account that is gone shows as `unknown account`.
 
 The amount of a purchase message is the list amount of one period, before a discount. A license at the
 bundle price adds `bundle`. A claim in `billing_webhook_events` stops a second message for one change:
-`openbot_purchase:<subscription ID>` for the start, `openbot_purchase_end:<subscription ID>` for the
-end, and `openbot_purchase_cancel:<subscription ID>:<canceled_at>` for a cancel. Two Stripe events can
+`starbot_purchase:<subscription ID>` for the start, `starbot_purchase_end:<subscription ID>` for the
+end, and `starbot_purchase_cancel:<subscription ID>:<canceled_at>` for a cancel. Two Stripe events can
 see one cancel at the same time; only the event that adds the claim sends. Stripe sets `canceled_at` to
 the time of each cancel request, so a later cancel of the same subscription has a new claim and sends
 again. A resume has no claim. A cancel or resume message goes out with the sync that stores the change, so a
@@ -2058,13 +2058,13 @@ These were not tested on boat. Test them before a user gets access:
 - whether boat runs the pre-stop hook for a stop that it starts by itself: maintenance (the
   `updating` state) or the end of `ttlSeconds`. A crash of the machine restores the last periodic
   save, which also copies files while they change;
-- that StarBot closes `openbot.db` at a `systemctl stop` on a server. The install test used a release
+- that StarBot closes `starbot.db` at a `systemctl stop` on a server. The install test used a release
   without the `SIGTERM` handler. The `ExecStop` of the unit stops StarBot before its Xvfb displays
   (see [Computer Use](architecture/computer-use.md#agent-display-on-a-server)). This was tested in a
   container with a stand-in for StarBot, not with systemd. When StarBot does not close the database,
   it is as after a crash, which SQLite recovers, because the save starts after the stop;
 - the agent display on boat with a release build. On 2026-10-16 one boat server ran a 0.42.0 build
-  with this change, from `openbot.service`: StarBot was on Xvfb `:99` at 1280x800, and `:0` had no
+  with this change, from `starbot.service`: StarBot was on Xvfb `:99` at 1280x800, and `:0` had no
   StarBot window. In an agent turn, the agent shell and `cua-driver` had `DISPLAY=:0`, and Computer
   Use saw a 1920x1080 screen with only the panel and the dock. A local remote desktop session
   captured `:0`. The session reported the size of the StarBot display, 1280x800. The first start

@@ -1,6 +1,6 @@
-import { canPreviewAttachment, type StoredFileRow } from "@openbot/contracts/ipc";
-import type { AgentPickerAgent } from "@openbot/ui/features/agents/AgentPicker";
-import { ConversationFilesPanel } from "@openbot/ui/features/files/ConversationFilesPanel";
+import { canPreviewAttachment, type StoredFileRow } from "@starbot/contracts/ipc";
+import type { AgentPickerAgent } from "@starbot/ui/features/agents/AgentPicker";
+import { ConversationFilesPanel } from "@starbot/ui/features/files/ConversationFilesPanel";
 import { type FilesPort, filesPort } from "./files-port";
 import { createStorageUsage } from "./storage-usage";
 

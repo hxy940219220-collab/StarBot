@@ -32,19 +32,19 @@ import type {
   UpdateAgentInput,
   UpdateCustomProviderInput,
   WorkspaceDirectory,
-} from "@openbot/contracts/ipc";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
-import type { AgentMessage, AgentProfile, ComposerThreadMessageMatch } from "@openbot/ui/data";
-import type { BrowserViewRuntime } from "@openbot/ui/features/browser/BrowserLiveView";
-import type { ChannelWorker } from "@openbot/ui/features/channels/ChannelActivityIndicator";
-import type { AwaitingReplyItem } from "@openbot/ui/features/conversation/AwaitingReplies";
-import type { UsageLimitAskCardProps } from "@openbot/ui/features/conversation/BackupModels";
-import type { ChatMessageAuthor } from "@openbot/ui/features/conversation/ChatMessageRow";
-import type { UnloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
-import type { SidePanelPane } from "@openbot/ui/features/conversation/SidePanel";
-import type { AgentThreadOlderMessages } from "@openbot/ui/features/conversation/threads/AgentThreadView";
-import type { ThreadHeaderProps, ThreadItem } from "@openbot/ui/features/conversation/threads/thread-types";
-import type { SidebarAgentWait } from "@openbot/ui/features/sidebar/sidebar-agent-states";
+} from "@starbot/contracts/ipc";
+import type { ConversationUiBlock } from "@starbot/contracts/ui-blocks";
+import type { AgentMessage, AgentProfile, ComposerThreadMessageMatch } from "@starbot/ui/data";
+import type { BrowserViewRuntime } from "@starbot/ui/features/browser/BrowserLiveView";
+import type { ChannelWorker } from "@starbot/ui/features/channels/ChannelActivityIndicator";
+import type { AwaitingReplyItem } from "@starbot/ui/features/conversation/AwaitingReplies";
+import type { UsageLimitAskCardProps } from "@starbot/ui/features/conversation/BackupModels";
+import type { ChatMessageAuthor } from "@starbot/ui/features/conversation/ChatMessageRow";
+import type { UnloadedHistory } from "@starbot/ui/features/conversation/ChatScrollRail";
+import type { SidePanelPane } from "@starbot/ui/features/conversation/SidePanel";
+import type { AgentThreadOlderMessages } from "@starbot/ui/features/conversation/threads/AgentThreadView";
+import type { ThreadHeaderProps, ThreadItem } from "@starbot/ui/features/conversation/threads/thread-types";
+import type { SidebarAgentWait } from "@starbot/ui/features/sidebar/sidebar-agent-states";
 import type { JSX } from "@solidjs/web";
 import type { ConnectorRegistry } from "../connectors/connector-registry";
 import type { AppSettingLinkId } from "../settings/setting-link-targets";
@@ -114,7 +114,7 @@ export interface ConversationProps {
   mcpSignedIn?: ((mcpServerId: string) => boolean) | undefined;
   refreshMcpSignIns?: (() => void) | undefined;
   serverInstall?: ServerInstallWatch | undefined;
-  platform?: import("@openbot/contracts/ipc").AppInfo["platform"] | undefined;
+  platform?: import("@starbot/contracts/ipc").AppInfo["platform"] | undefined;
 
   agentStatus: AgentStatus;
   agentsConnecting?: boolean | undefined;
@@ -286,10 +286,10 @@ export type RightPanelMode =
 export type { SidePanelPane };
 
 export interface ConversationMessagePins {
-  list: (agentId: string) => Promise<import("@openbot/contracts/ipc").PinnedMessagesSnapshot>;
+  list: (agentId: string) => Promise<import("@starbot/contracts/ipc").PinnedMessagesSnapshot>;
   set: (
-    input: import("@openbot/contracts/ipc").SetMessagePinnedInput,
-  ) => Promise<import("@openbot/contracts/ipc").PinnedMessagesSnapshot>;
+    input: import("@starbot/contracts/ipc").SetMessagePinnedInput,
+  ) => Promise<import("@starbot/contracts/ipc").PinnedMessagesSnapshot>;
   subscribe: (agentId: string, changed: () => void) => () => void;
 }
 

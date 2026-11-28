@@ -1,6 +1,6 @@
-import type { ManagedProviderId } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import type { ManagedProviderId } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentRuntimeLock } from "../../scripts/agent-runtime-lock";
 import {

@@ -3,22 +3,22 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { buildProductionCatalog } from "./build-production-catalog";
 
-const logger = createOpenBotLogger("publish-production-catalog");
+const logger = createStarBotLogger("publish-production-catalog");
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const authApiRoot = join(projectRoot, "apps", "auth-api");
 const executableSuffix = process.platform === "win32" ? ".exe" : "";
 const wrangler = join(projectRoot, "node_modules", ".bin", `wrangler${executableSuffix}`);
 const productionApiUrl = "https://api.starbot.app";
-const productionDatabase = "openbot-auth";
-const productionBucket = "openbot-skills";
+const productionDatabase = "starbot-auth";
+const productionBucket = "starbot-skills";
 const owner = {
-  id: "openbot-production-catalog",
-  identityKey: "openbot-production-catalog",
+  id: "starbot-production-catalog",
+  identityKey: "starbot-production-catalog",
   email: "catalog@starbot.app",
   name: "StarBot",
   avatarUrl: "https://starbot.app/icon-192x192.png",
@@ -87,7 +87,7 @@ export function createPublicationSql(publication: Publication, publishedAt: numb
 
   for (const slug of publication.retiredAgents) {
     statements.push(
-      `UPDATE marketplace_agents SET approved_version_id = NULL, featured = 0, updated_at = ${publishedAt} WHERE id = ${sql(`openbot-curated-agent-${slug}`)} AND owner_user_id = ${sql(owner.id)};`,
+      `UPDATE marketplace_agents SET approved_version_id = NULL, featured = 0, updated_at = ${publishedAt} WHERE id = ${sql(`starbot-curated-agent-${slug}`)} AND owner_user_id = ${sql(owner.id)};`,
     );
   }
 
@@ -99,8 +99,8 @@ export async function publishProductionCatalog(
   target: "local" | "production" = "production",
 ): Promise<void> {
   const mode = target === "local" ? "--local" : "--remote";
-  const bucket = target === "local" ? "openbot-skills-test" : productionBucket;
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-production-publish-"));
+  const bucket = target === "local" ? "starbot-skills-test" : productionBucket;
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "starbot-production-publish-"));
   try {
     const artifactRoot = join(temporaryRoot, "artifacts");
     await buildProductionCatalog(artifactRoot);
@@ -169,7 +169,7 @@ interface CatalogListing {
 }
 
 export async function unpublishedCatalogEntries(): Promise<string[]> {
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-production-catalog-check-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "starbot-production-catalog-check-"));
   try {
     const artifactRoot = join(temporaryRoot, "artifacts");
     await buildProductionCatalog(artifactRoot);
@@ -181,7 +181,7 @@ export async function unpublishedCatalogEntries(): Promise<string[]> {
         version: skill.version,
       })),
       ...publication.agents.map((agent) => ({
-        label: `agent ${agent.id.replace("openbot-curated-agent-", "")}`,
+        label: `agent ${agent.id.replace("starbot-curated-agent-", "")}`,
         path: `/v1/marketplace/agents/${encodeURIComponent(agent.id)}`,
         version: agent.version,
       })),
@@ -191,7 +191,7 @@ export async function unpublishedCatalogEntries(): Promise<string[]> {
       Promise.all(
         publication.retiredAgents.map(async (slug) => ({
           slug,
-          liveVersion: await fetchLiveVersion(`/v1/marketplace/agents/openbot-curated-agent-${slug}`),
+          liveVersion: await fetchLiveVersion(`/v1/marketplace/agents/starbot-curated-agent-${slug}`),
         })),
       ),
     ]);

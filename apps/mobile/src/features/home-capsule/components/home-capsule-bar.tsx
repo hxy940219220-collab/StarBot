@@ -1,4 +1,4 @@
-import { avatarMoodIsBusy } from "@openbot/brand/bloub-avatar-motion";
+import { avatarMoodIsBusy } from "@starbot/brand/bloub-avatar-motion";
 import { BlurView } from "expo-blur";
 import { router } from "expo-router";
 import { Spinner, Typography } from "heroui-native";
@@ -103,9 +103,9 @@ export function HomeCapsuleBar({ serverId, agents, topSafeInset, onVoiceAutoScro
   const workspace = useMobileWorkspaceReader();
   const [foreground] = useThemeColor(["foreground"]);
   const capsuleBg = String(
-    useCSSVariable("--openbot-bg-chrome-glass") ?? (dark ? "rgba(32,32,38,0.88)" : "rgba(255,255,255,0.88)"),
+    useCSSVariable("--starbot-bg-chrome-glass") ?? (dark ? "rgba(32,32,38,0.88)" : "rgba(255,255,255,0.88)"),
   );
-  const sheetBg = String(useCSSVariable("--openbot-bg-sheet") ?? "#ffffff");
+  const sheetBg = String(useCSSVariable("--starbot-bg-sheet") ?? "#ffffff");
 
   const billingMonth = useHomeBilling(serverId, "month");
   const billing7d = useHomeBilling(serverId, "7d");

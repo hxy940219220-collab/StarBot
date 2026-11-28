@@ -3,30 +3,30 @@ import {
   type BillingInterval,
   type BillingPlanId,
   isOpenBillingStatus,
-} from "@openbot/contracts/billing";
-import { type BillingDetails, isWithdrawalConsumer } from "@openbot/contracts/billing-details";
+} from "@starbot/contracts/billing";
+import { type BillingDetails, isWithdrawalConsumer } from "@starbot/contracts/billing-details";
 import type {
   HostedServerCatalog,
   HostedServerCatalogPlan,
   HostedServerEntryPoint,
   HostedServerList,
   HostedServerSummary,
-} from "@openbot/contracts/hosted-servers";
-import type { HostedServersDesktopApi, LicenseDesktopApi, ServerSummary } from "@openbot/contracts/ipc";
-import type { LicenseOrder, LicenseState, PricingOrder } from "@openbot/contracts/license";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@starbot/contracts/hosted-servers";
+import type { HostedServersDesktopApi, LicenseDesktopApi, ServerSummary } from "@starbot/contracts/ipc";
+import type { LicenseOrder, LicenseState, PricingOrder } from "@starbot/contracts/license";
+import { classifyFailure } from "@starbot/telemetry";
 import {
   type BillingDetailsCalls,
   type BillingDetailsDraft,
   billingDetailsDraft,
   saveBillingDetails,
-} from "@openbot/ui/features/billing/BillingDetailsFields";
+} from "@starbot/ui/features/billing/BillingDetailsFields";
 import type {
   CreatedHostedServer,
   CreateHostedServerInput,
   HostedServerSetupStatus,
-} from "@openbot/ui/features/servers/AddServerDialog";
-import type { OrderConsent } from "@openbot/ui/features/servers/HostedPricingPage";
+} from "@starbot/ui/features/servers/AddServerDialog";
+import type { OrderConsent } from "@starbot/ui/features/servers/HostedPricingPage";
 import {
   guessHostedCurrency,
   HOSTED_BILLING_CURRENCY,
@@ -35,9 +35,9 @@ import {
   type HostedServerPlan,
   hostedCurrencies,
   hostedServerPlansFromCatalog,
-} from "@openbot/ui/features/servers/HostedServerPricing";
-import { currentText, useText } from "@openbot/ui/text";
-import type { UserErrorDetails } from "@openbot/user-errors";
+} from "@starbot/ui/features/servers/HostedServerPricing";
+import { currentText, useText } from "@starbot/ui/text";
+import type { UserErrorDetails } from "@starbot/user-errors";
 import { Portal } from "@solidjs/web";
 import { createEffect, createSignal, createStore, Loading, onSettled, type ParentProps, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";

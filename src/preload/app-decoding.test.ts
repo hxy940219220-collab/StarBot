@@ -10,7 +10,7 @@ import type {
   NotificationOpenedEvent,
   UpdateStatus,
   WorkflowNotificationOpenedEvent,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { describe, expect, it } from "vitest";
 import {
   decodeAccountSessions,
@@ -320,7 +320,7 @@ const valid: [string, (value: unknown) => unknown, unknown][] = [
     decodeCentralAuthState,
     { status: "error", issue: { code: "offline", message: "No network." } } satisfies CentralAuthState,
   ],
-  ["Mobile Connect ticket", decodeMobileConnectTicket, { qrData: "openbot://mobile-connect", expiresAt: 1 }],
+  ["Mobile Connect ticket", decodeMobileConnectTicket, { qrData: "starbot://mobile-connect", expiresAt: 1 }],
   [
     "connected devices",
     decodeMobileConnectedDevices,
@@ -629,7 +629,7 @@ const AGENT_ID = "0f8fad5b-d9cb-469f-a165-70867728950e";
 describe("pending Marketplace listing", () => {
   it.each([
     ["an agent", { kind: "agent", id: AGENT_ID }],
-    ["a curated agent", { kind: "agent", id: "openbot-curated-agent-copy-editor" }],
+    ["a curated agent", { kind: "agent", id: "starbot-curated-agent-copy-editor" }],
     ["a skill", { kind: "skill", id: "release-notes" }],
   ])("keeps %s", (_name, value) => {
     expect(decodePendingMarketplaceListing(value)).toEqual(value);

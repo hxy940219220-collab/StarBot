@@ -2,8 +2,8 @@ import {
   APP_MINIMUM_VERSION_PATH,
   isBelowMinimumVersion,
   parseAppMinimumVersion,
-} from "@openbot/contracts/app-minimum-version";
-import type { UpdateStatus } from "@openbot/contracts/ipc";
+} from "@starbot/contracts/app-minimum-version";
+import type { UpdateStatus } from "@starbot/contracts/ipc";
 import { Effect, Exit, Result, Schema, Scope } from "effect";
 
 const INITIAL_DELAY_MS = 15_000;

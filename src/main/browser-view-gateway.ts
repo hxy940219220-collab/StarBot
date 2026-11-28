@@ -22,9 +22,9 @@ import {
   encodeBrowserViewFrame,
   encodeBrowserViewHostMessage,
   isBrowserViewUserAction,
-} from "@openbot/contracts/team-protocol/browser-view-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+} from "@starbot/contracts/team-protocol/browser-view-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { Context, Deferred, Effect, Layer, Result, Semaphore } from "effect";
 import type * as Ws from "ws";
 import type { BrowserScreencastFrame } from "../backend/browser-cdp";
@@ -74,7 +74,7 @@ class BrowserViewPort extends Context.Service<
     input(...args: Parameters<BrowserHost["dispatchViewInput"]>): Effect.Effect<void, RemoteWorkflowError>;
     copy(...args: Parameters<BrowserHost["copyViewSelection"]>): Effect.Effect<string | null, RemoteWorkflowError>;
   }
->()("openbot/main/BrowserViewPort") {
+>()("starbot/main/BrowserViewPort") {
   static layer(browser: BrowserViewGatewayOptions["browser"]) {
     return Layer.succeed(
       BrowserViewPort,
@@ -251,11 +251,11 @@ export class BrowserViewGateway {
   }
 
   #authorized(request: IncomingMessage, session: ManagedViewSession): boolean {
-    const remoteSession = request.headers["x-openbot-webrtc-session"];
+    const remoteSession = request.headers["x-starbot-webrtc-session"];
     if (remoteSession === session.teamSessionId) return true;
     const protocols = (request.headers["sec-websocket-protocol"] ?? "").split(",").map((value) => value.trim());
-    const encodedToken = protocols.find((value) => value.startsWith("openbot-token."));
-    const token = encodedToken?.slice("openbot-token.".length) ?? "";
+    const encodedToken = protocols.find((value) => value.startsWith("starbot-token."));
+    const token = encodedToken?.slice("starbot-token.".length) ?? "";
     if (!token || token.length > 512) return false;
     return this.#options.authenticate(token)?.id === session.memberId;
   }

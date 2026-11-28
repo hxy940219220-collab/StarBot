@@ -10,7 +10,7 @@ import {
   proto,
   type SignalDataSet,
   type SignalDataTypeMap,
-} from "@openbot/whatsapp/baileys";
+} from "@starbot/whatsapp/baileys";
 import { Schema } from "effect";
 
 const SCHEMA_VERSION = 1;

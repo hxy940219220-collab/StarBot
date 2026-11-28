@@ -3,9 +3,9 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { delimiter, join } from "node:path";
 import { createInterface } from "node:readline";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, registerSecretValue } from "@starbot/logging";
 import { Effect, Fiber } from "effect";
 import { cliSpawnTarget } from "./cli";
 import {
@@ -17,7 +17,7 @@ import {
 import { type ProviderTempOptions, spawnWithProviderTemp } from "./provider-temp";
 import { stopProcessTree } from "./windows-process-tree";
 
-const logger = createOpenBotLogger("acp-sign-in");
+const logger = createStarBotLogger("acp-sign-in");
 
 type AcpMessage =
   | { id: number; method: "initialize" | "logout" | "authenticate" | AcpExtensionMethod; params: DynamicRecord }
@@ -43,7 +43,7 @@ function acpArgv(argv: AcpArgv, env: Readonly<Record<string, string | undefined>
   return typeof argv === "function" ? argv(env) : argv;
 }
 
-export function googleSignInByOpenBot(onHost: boolean): boolean {
+export function googleSignInByStarBot(onHost: boolean): boolean {
   return onHost || process.platform !== "win32";
 }
 
@@ -347,7 +347,7 @@ const SIGN_IN_PAGE_LINKS: Record<SignInPageSite, (url: URL) => string> = {
 };
 
 async function makeOpenerFolder(): Promise<string> {
-  const folder = await mkdtemp(join(tmpdir(), "openbot-sign-in-"));
+  const folder = await mkdtemp(join(tmpdir(), "starbot-sign-in-"));
   const page = join(folder, OPENER_PAGE).replaceAll("'", `'\\''`);
   const script = `#!/bin/sh\nprintf '%s\\n' "$1" >> '${page}'\n`;
   for (const name of ["open", "xdg-open"]) await writeFile(join(folder, name), script, { mode: 0o700 });

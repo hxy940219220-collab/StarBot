@@ -2,13 +2,13 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { getString, isRecord } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-loss-scope-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-loss-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-loss-scope-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-provider-loss-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const logPath = join(root, "protocol.jsonl");
@@ -18,17 +18,17 @@ const fakeCodex = join(root, "codex");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
-process.env.OPENBOT_FAKE_CODEX_LOG = logPath;
-process.env.OPENBOT_FAKE_CODEX_CONTROL = controlPath;
-process.env.OPENBOT_FAKE_CODEX_EXITED = exitedPath;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_FAKE_CODEX_LOG = logPath;
+process.env.STARBOT_FAKE_CODEX_CONTROL = controlPath;
+process.env.STARBOT_FAKE_CODEX_EXITED = exitedPath;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_CODEX = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -36,8 +36,8 @@ if (process.argv.includes("--version")) {
   process.stdout.write("codex-cli 0.160.1\\n");
   process.exit(0);
 }
-const log = (entry) => fs.appendFileSync(process.env.OPENBOT_FAKE_CODEX_LOG, JSON.stringify(entry) + "\\n");
-const control = () => JSON.parse(fs.readFileSync(process.env.OPENBOT_FAKE_CODEX_CONTROL, "utf8"));
+const log = (entry) => fs.appendFileSync(process.env.STARBOT_FAKE_CODEX_LOG, JSON.stringify(entry) + "\\n");
+const control = () => JSON.parse(fs.readFileSync(process.env.STARBOT_FAKE_CODEX_CONTROL, "utf8"));
 const config = { config: { mcp_servers: {} }, layers: [{ name: { type: "user", file: "/fake/.codex/config.toml", profile: null }, version: "1", config: { mcp_servers: {} } }] };
 let buffer = "";
 let threads = 0;
@@ -85,10 +85,10 @@ const answer = (message) => {
       const turnId = "compact-turn-" + (++turns);
       const item = { type: "contextCompaction", id: "compact-item-" + turnId };
       write({ id: message.id, result: {} });
-      if (exitDuringCompaction && !fs.existsSync(process.env.OPENBOT_FAKE_CODEX_EXITED)) {
+      if (exitDuringCompaction && !fs.existsSync(process.env.STARBOT_FAKE_CODEX_EXITED)) {
         write({ method: "turn/started", params: { threadId: params.threadId, turn: { id: turnId } } });
         write({ method: "item/started", params: { threadId: params.threadId, turnId, item } });
-        fs.writeFileSync(process.env.OPENBOT_FAKE_CODEX_EXITED, String(process.pid));
+        fs.writeFileSync(process.env.STARBOT_FAKE_CODEX_EXITED, String(process.pid));
         process.stdout.write("", () => process.exit(1));
         return;
       }
@@ -203,7 +203,7 @@ await writeFile(
   controlPath,
   JSON.stringify({ compactionMs: 60_000, ignoreInterrupt: false, exitDuringCompaction: true }),
 );
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

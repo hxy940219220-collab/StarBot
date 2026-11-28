@@ -1,69 +1,69 @@
 :root {
-  --openbot-provider-current: currentcolor;
+  --starbot-provider-current: currentcolor;
 
-  --openbot-bg-native-canvas: #151126;
-  --openbot-bg-native-sidebar: #18132c;
-  --openbot-bg-sheet: #1b1530;
-  --openbot-bg-grouped: #211b3a;
-  --openbot-text-grouped-secondary: #a298c2;
-  --openbot-border-grouped: #332a54;
-  --openbot-radius-grouped: 18px;
-  --openbot-bg-chrome-glass: rgba(34, 27, 58, 0.94);
-  --openbot-border-chrome-glass: rgba(212, 198, 255, 0.12);
+  --starbot-bg-native-canvas: #151126;
+  --starbot-bg-native-sidebar: #18132c;
+  --starbot-bg-sheet: #1b1530;
+  --starbot-bg-grouped: #211b3a;
+  --starbot-text-grouped-secondary: #a298c2;
+  --starbot-border-grouped: #332a54;
+  --starbot-radius-grouped: 18px;
+  --starbot-bg-chrome-glass: rgba(34, 27, 58, 0.94);
+  --starbot-border-chrome-glass: rgba(212, 198, 255, 0.12);
 
-  --openbot-bg-canvas: #161129;
-  --openbot-bg-frame: #0f0b1e;
-  --openbot-bg-sheet-inset: #120e22;
-  --openbot-bg-canvas-clear: rgba(22, 17, 41, 0);
-  --openbot-bg-sidebar: #19132e;
-  --openbot-marketplace-detail-bg: #130f24;
-  --openbot-bg-surface: #211a3b;
-  --openbot-bg-surface-raised: #271f46;
-  --openbot-bg-control: #231c3f;
-  --openbot-bg-control-hover: #2c244d;
-  --openbot-bg-control-active: #342a5c;
-  --openbot-tabs-bar-bg: #201a38;
-  --openbot-tabs-pill-bg: #2e2552;
-  --openbot-bg-overlay: rgba(22, 17, 41, 0.92);
-  --openbot-dialog-overlay: rgba(8, 5, 18, 0.35);
-  --openbot-dialog-ring: rgba(196, 178, 255, 0.16);
-  --openbot-bg-glass: rgba(33, 26, 59, 0.8);
+  --starbot-bg-canvas: #161129;
+  --starbot-bg-frame: #0f0b1e;
+  --starbot-bg-sheet-inset: #120e22;
+  --starbot-bg-canvas-clear: rgba(22, 17, 41, 0);
+  --starbot-bg-sidebar: #19132e;
+  --starbot-marketplace-detail-bg: #130f24;
+  --starbot-bg-surface: #211a3b;
+  --starbot-bg-surface-raised: #271f46;
+  --starbot-bg-control: #231c3f;
+  --starbot-bg-control-hover: #2c244d;
+  --starbot-bg-control-active: #342a5c;
+  --starbot-tabs-bar-bg: #201a38;
+  --starbot-tabs-pill-bg: #2e2552;
+  --starbot-bg-overlay: rgba(22, 17, 41, 0.92);
+  --starbot-dialog-overlay: rgba(8, 5, 18, 0.35);
+  --starbot-dialog-ring: rgba(196, 178, 255, 0.16);
+  --starbot-bg-glass: rgba(33, 26, 59, 0.8);
 
-  --openbot-glass-surface: rgba(255, 255, 255, 0.07);
-  --openbot-glass-surface-hover: rgba(255, 255, 255, 0.11);
-  --openbot-glass-border: rgba(255, 255, 255, 0.18);
-  --openbot-glass-highlight: rgba(255, 255, 255, 0.12);
-  --openbot-glass-shadow: rgba(0, 0, 0, 0.28);
-  --openbot-hero-grid-line: rgba(214, 173, 242, 0.09);
+  --starbot-glass-surface: rgba(255, 255, 255, 0.07);
+  --starbot-glass-surface-hover: rgba(255, 255, 255, 0.11);
+  --starbot-glass-border: rgba(255, 255, 255, 0.18);
+  --starbot-glass-highlight: rgba(255, 255, 255, 0.12);
+  --starbot-glass-shadow: rgba(0, 0, 0, 0.28);
+  --starbot-hero-grid-line: rgba(214, 173, 242, 0.09);
 
-  --openbot-price-metal-high: #4c4c4c;
-  --openbot-price-metal-core: #1f1f1f;
-  --openbot-price-metal-low: #343434;
-  --openbot-price-sheen-cool: rgba(150, 196, 255, 0.92);
-  --openbot-price-sheen-light: rgba(240, 244, 250, 0.98);
-  --openbot-price-sheen-warm: rgba(255, 184, 132, 0.94);
+  --starbot-price-metal-high: #4c4c4c;
+  --starbot-price-metal-core: #1f1f1f;
+  --starbot-price-metal-low: #343434;
+  --starbot-price-sheen-cool: rgba(150, 196, 255, 0.92);
+  --starbot-price-sheen-light: rgba(240, 244, 250, 0.98);
+  --starbot-price-sheen-warm: rgba(255, 184, 132, 0.94);
 
-  --openbot-price-sheen-cool-soft: rgba(150, 196, 255, 0.26);
-  --openbot-price-sheen-warm-soft: rgba(255, 184, 132, 0.28);
-  --openbot-price-sheen-cool-clear: rgba(150, 196, 255, 0);
-  --openbot-price-sheen-warm-clear: rgba(255, 184, 132, 0);
-  --openbot-price-rim: rgba(255, 255, 255, 0.28);
-  --openbot-price-rim-under: rgba(255, 255, 255, 0.1);
+  --starbot-price-sheen-cool-soft: rgba(150, 196, 255, 0.26);
+  --starbot-price-sheen-warm-soft: rgba(255, 184, 132, 0.28);
+  --starbot-price-sheen-cool-clear: rgba(150, 196, 255, 0);
+  --starbot-price-sheen-warm-clear: rgba(255, 184, 132, 0);
+  --starbot-price-rim: rgba(255, 255, 255, 0.28);
+  --starbot-price-rim-under: rgba(255, 255, 255, 0.1);
 
-  --openbot-price-accent: #ec4899;
-  --openbot-credit-basic: #38a8ff;
-  --openbot-credit-plus: #a46cf5;
-  --openbot-credit-max: #ec4899;
-  --openbot-credit-star: #d0afed;
-  --openbot-credit-star-fill: #d0afed;
-  --openbot-credit-tile-ink: #1c1524;
-  --openbot-price-glow: rgba(180, 200, 255, 0.22);
-  --openbot-bg-host-inset: #101216;
-  --openbot-bg-notch: #000000;
-  --openbot-mask-solid: #000000;
-  --openbot-transparent: rgba(0, 0, 0, 0);
+  --starbot-price-accent: #ec4899;
+  --starbot-credit-basic: #38a8ff;
+  --starbot-credit-plus: #a46cf5;
+  --starbot-credit-max: #ec4899;
+  --starbot-credit-star: #d0afed;
+  --starbot-credit-star-fill: #d0afed;
+  --starbot-credit-tile-ink: #1c1524;
+  --starbot-price-glow: rgba(180, 200, 255, 0.22);
+  --starbot-bg-host-inset: #101216;
+  --starbot-bg-notch: #000000;
+  --starbot-mask-solid: #000000;
+  --starbot-transparent: rgba(0, 0, 0, 0);
 
-  --openbot-wash-front: linear-gradient(
+  --starbot-wash-front: linear-gradient(
     to top,
     rgba(111, 255, 196, 0),
     #6fffc4 20%,
@@ -74,9 +74,9 @@
     rgba(255, 184, 117, 0)
   );
 
-  --openbot-color-picker-light: #ffffff;
-  --openbot-color-picker-dark: #000000;
-  --openbot-color-picker-spectrum: linear-gradient(
+  --starbot-color-picker-light: #ffffff;
+  --starbot-color-picker-dark: #000000;
+  --starbot-color-picker-spectrum: linear-gradient(
     to right,
     #ff0000,
     #ffff00,
@@ -86,328 +86,328 @@
     #ff00ff,
     #ff0000
   );
-  --openbot-drawer-scrim: #000000;
-  --openbot-scroll-edge-overlay: rgba(0, 0, 0, 0.72);
-  --openbot-queue-surface: var(--openbot-bg-surface);
-  --openbot-queue-border: var(--openbot-border-strong);
-  --openbot-queue-text: var(--openbot-text-primary);
-  --openbot-queue-action: var(--openbot-text-muted);
-  --openbot-border: rgba(206, 190, 255, 0.09);
-  --openbot-border-strong: rgba(206, 190, 255, 0.16);
-  --openbot-image-outline: rgba(206, 190, 255, 0.14);
-  --openbot-border-focus: #9a7dff;
-  --openbot-text-primary: #f6f2ff;
-  --openbot-text-on-light: #1e1735;
-  --openbot-surface-light: #f2edff;
+  --starbot-drawer-scrim: #000000;
+  --starbot-scroll-edge-overlay: rgba(0, 0, 0, 0.72);
+  --starbot-queue-surface: var(--starbot-bg-surface);
+  --starbot-queue-border: var(--starbot-border-strong);
+  --starbot-queue-text: var(--starbot-text-primary);
+  --starbot-queue-action: var(--starbot-text-muted);
+  --starbot-border: rgba(206, 190, 255, 0.09);
+  --starbot-border-strong: rgba(206, 190, 255, 0.16);
+  --starbot-image-outline: rgba(206, 190, 255, 0.14);
+  --starbot-border-focus: #9a7dff;
+  --starbot-text-primary: #f6f2ff;
+  --starbot-text-on-light: #1e1735;
+  --starbot-surface-light: #f2edff;
 
-  --openbot-action: #8b6eff;
-  --openbot-action-foreground: #ffffff;
-  --openbot-qr-background: #ffffff;
+  --starbot-action: #8b6eff;
+  --starbot-action-foreground: #ffffff;
+  --starbot-qr-background: #ffffff;
 
-  --openbot-paper: #f0f0f0;
-  --openbot-paper-text: #141414;
-  --openbot-paper-text-muted: rgba(20, 20, 20, 0.52);
-  --openbot-paper-text-dim: rgba(20, 20, 20, 0.36);
-  --openbot-paper-border: rgba(20, 20, 20, 0.14);
-  --openbot-onboarding-desktop-mist: #dbe9ff;
-  --openbot-onboarding-desktop-blue: #7eb4f2;
-  --openbot-onboarding-desktop-indigo: #6f7de8;
-  --openbot-onboarding-window: #f3f5f8;
-  --openbot-text-secondary: #dcdcdc;
-  --openbot-text-muted: #979797;
-  --openbot-text-dim: #6a6a6a;
-  --openbot-text-readable: rgba(255, 255, 255, 0.52);
-  --openbot-text-muted-on-light: rgba(20, 20, 20, 0.52);
-  --openbot-text-dim-on-light: rgba(20, 20, 20, 0.36);
-  --openbot-download-card-muted: rgba(20, 20, 20, 0.68);
-  --openbot-download-card-chip: rgba(20, 20, 20, 0.1);
-  --openbot-download-card-border: rgba(20, 20, 20, 0.16);
-  --openbot-download-card-focus: rgba(242, 242, 242, 0.86);
-  --openbot-text-placeholder: #bfbfbf;
-  --openbot-text-on-accent: #ffffff;
-  --openbot-text-on-status: #07130c;
+  --starbot-paper: #f0f0f0;
+  --starbot-paper-text: #141414;
+  --starbot-paper-text-muted: rgba(20, 20, 20, 0.52);
+  --starbot-paper-text-dim: rgba(20, 20, 20, 0.36);
+  --starbot-paper-border: rgba(20, 20, 20, 0.14);
+  --starbot-onboarding-desktop-mist: #dbe9ff;
+  --starbot-onboarding-desktop-blue: #7eb4f2;
+  --starbot-onboarding-desktop-indigo: #6f7de8;
+  --starbot-onboarding-window: #f3f5f8;
+  --starbot-text-secondary: #dcdcdc;
+  --starbot-text-muted: #979797;
+  --starbot-text-dim: #6a6a6a;
+  --starbot-text-readable: rgba(255, 255, 255, 0.52);
+  --starbot-text-muted-on-light: rgba(20, 20, 20, 0.52);
+  --starbot-text-dim-on-light: rgba(20, 20, 20, 0.36);
+  --starbot-download-card-muted: rgba(20, 20, 20, 0.68);
+  --starbot-download-card-chip: rgba(20, 20, 20, 0.1);
+  --starbot-download-card-border: rgba(20, 20, 20, 0.16);
+  --starbot-download-card-focus: rgba(242, 242, 242, 0.86);
+  --starbot-text-placeholder: #bfbfbf;
+  --starbot-text-on-accent: #ffffff;
+  --starbot-text-on-status: #07130c;
 
-  --openbot-accent: #8b6eff;
-  --openbot-accent-hover: #9f86ff;
-  --openbot-accent-text: #b79eff;
-  --openbot-accent-soft: rgba(139, 110, 255, 0.2);
-  --openbot-accent-strong: rgba(139, 110, 255, 0.38);
-  --openbot-settings-text-muted: rgba(255, 255, 255, 0.59);
-  --openbot-provider-codex: var(--openbot-text-primary);
-  --openbot-provider-claude: #d97757;
-  --openbot-provider-grok: var(--openbot-text-primary);
-  --openbot-provider-antigravity: #8e75b2;
+  --starbot-accent: #8b6eff;
+  --starbot-accent-hover: #9f86ff;
+  --starbot-accent-text: #b79eff;
+  --starbot-accent-soft: rgba(139, 110, 255, 0.2);
+  --starbot-accent-strong: rgba(139, 110, 255, 0.38);
+  --starbot-settings-text-muted: rgba(255, 255, 255, 0.59);
+  --starbot-provider-codex: var(--starbot-text-primary);
+  --starbot-provider-claude: #d97757;
+  --starbot-provider-grok: var(--starbot-text-primary);
+  --starbot-provider-antigravity: #8e75b2;
 
-  --openbot-chart-series-codex: #d6adf2;
-  --openbot-chart-series-claude: var(--openbot-provider-claude);
-  --openbot-chart-series-grok: #6bc7d9;
-  --openbot-chart-series-other: var(--openbot-text-muted);
+  --starbot-chart-series-codex: #d6adf2;
+  --starbot-chart-series-claude: var(--starbot-provider-claude);
+  --starbot-chart-series-grok: #6bc7d9;
+  --starbot-chart-series-other: var(--starbot-text-muted);
 
-  --openbot-chart-storage-workspaces: #3987e5;
-  --openbot-chart-storage-files: #d95926;
-  --openbot-chart-storage-chats: #199e70;
-  --openbot-chart-storage-downloads: #9085e9;
-  --openbot-chart-storage-runtimes: #c98500;
-  --openbot-chart-storage-app: var(--openbot-text-dim);
+  --starbot-chart-storage-workspaces: #3987e5;
+  --starbot-chart-storage-files: #d95926;
+  --starbot-chart-storage-chats: #199e70;
+  --starbot-chart-storage-downloads: #9085e9;
+  --starbot-chart-storage-runtimes: #c98500;
+  --starbot-chart-storage-app: var(--starbot-text-dim);
 
-  --openbot-felt-plum-top: rgb(112 80 131);
-  --openbot-felt-plum-bottom: rgb(74 40 92);
-  --openbot-felt-raspberry-top: rgb(245 32 112);
-  --openbot-felt-raspberry-bottom: rgb(180 6 65);
-  --openbot-felt-amber-top: rgb(255 149 17);
-  --openbot-felt-amber-bottom: rgb(203 104 12);
-  --openbot-felt-cream: #f6efe2;
-  --openbot-felt-cream-stroke: #efe4d2;
-  --openbot-logo-production: #d6adf2;
-  --openbot-logo-eye: #040007;
+  --starbot-felt-plum-top: rgb(112 80 131);
+  --starbot-felt-plum-bottom: rgb(74 40 92);
+  --starbot-felt-raspberry-top: rgb(245 32 112);
+  --starbot-felt-raspberry-bottom: rgb(180 6 65);
+  --starbot-felt-amber-top: rgb(255 149 17);
+  --starbot-felt-amber-bottom: rgb(203 104 12);
+  --starbot-felt-cream: #f6efe2;
+  --starbot-felt-cream-stroke: #efe4d2;
+  --starbot-logo-production: #d6adf2;
+  --starbot-logo-eye: #040007;
 
-  --openbot-logo-production-eye: var(--openbot-logo-eye);
+  --starbot-logo-production-eye: var(--starbot-logo-eye);
 
-  --openbot-logo-dev: #e3b866;
-  --openbot-logo-preview: #61c985;
-  --openbot-unread-surface: #74b9ff;
-  --openbot-unread-text: #07131f;
+  --starbot-logo-dev: #e3b866;
+  --starbot-logo-preview: #61c985;
+  --starbot-unread-surface: #74b9ff;
+  --starbot-unread-text: #07131f;
 
-  --openbot-success: #31cf76;
-  --openbot-success-text: #31cf76;
-  --openbot-warning-text: #ff9412;
-  --openbot-danger-text: #ff6069;
-  --openbot-success-soft: rgba(49, 207, 118, 0.12);
-  --openbot-success-wash: rgba(49, 207, 118, 0.045);
+  --starbot-success: #31cf76;
+  --starbot-success-text: #31cf76;
+  --starbot-warning-text: #ff9412;
+  --starbot-danger-text: #ff6069;
+  --starbot-success-soft: rgba(49, 207, 118, 0.12);
+  --starbot-success-wash: rgba(49, 207, 118, 0.045);
 
-  --openbot-warning: #ff9412;
-  --openbot-warning-soft: rgba(255, 148, 18, 0.12);
-  --openbot-question-option: #6bc7d9;
-  --openbot-question-option-soft: rgba(107, 199, 217, 0.14);
-  --openbot-question-option-hover: rgba(107, 199, 217, 0.2);
-  --openbot-question-option-pressed: rgba(107, 199, 217, 0.26);
-  --openbot-island-identity-name: var(--openbot-text-primary);
-  --openbot-question-badge-text: #8bdee8;
-  --openbot-question-badge-soft: rgba(107, 199, 217, 0.16);
-  --openbot-message-badge-text: #91c8ff;
-  --openbot-message-badge-soft: rgba(116, 185, 255, 0.16);
+  --starbot-warning: #ff9412;
+  --starbot-warning-soft: rgba(255, 148, 18, 0.12);
+  --starbot-question-option: #6bc7d9;
+  --starbot-question-option-soft: rgba(107, 199, 217, 0.14);
+  --starbot-question-option-hover: rgba(107, 199, 217, 0.2);
+  --starbot-question-option-pressed: rgba(107, 199, 217, 0.26);
+  --starbot-island-identity-name: var(--starbot-text-primary);
+  --starbot-question-badge-text: #8bdee8;
+  --starbot-question-badge-soft: rgba(107, 199, 217, 0.16);
+  --starbot-message-badge-text: #91c8ff;
+  --starbot-message-badge-soft: rgba(116, 185, 255, 0.16);
 
-  --openbot-badge-new: #ff1e5e;
-  --openbot-badge-new-soft: rgba(255, 30, 94, 0.16);
+  --starbot-badge-new: #ff1e5e;
+  --starbot-badge-new-soft: rgba(255, 30, 94, 0.16);
 
-  --openbot-star: #facc15;
-  --openbot-star-edge: #ca8a04;
+  --starbot-star: #facc15;
+  --starbot-star-edge: #ca8a04;
 
-  --openbot-media-control-text: #ffffff;
-  --openbot-media-control-muted: rgba(255, 255, 255, 0.78);
-  --openbot-media-control-track: rgba(255, 255, 255, 0.3);
-  --openbot-media-control-hover: rgba(255, 255, 255, 0.16);
-  --openbot-media-control-surface: rgba(0, 0, 0, 0.5);
-  --openbot-media-control-surface-hover: rgba(0, 0, 0, 0.64);
-  --openbot-media-control-scrim: rgba(0, 0, 0, 0.55);
-  --openbot-beam-teal: var(--openbot-file-teal);
-  --openbot-beam-blue: var(--openbot-accent-text);
-  --openbot-beam-pink: var(--openbot-file-pink);
-  --openbot-approval-badge-soft: rgba(255, 148, 18, 0.18);
+  --starbot-media-control-text: #ffffff;
+  --starbot-media-control-muted: rgba(255, 255, 255, 0.78);
+  --starbot-media-control-track: rgba(255, 255, 255, 0.3);
+  --starbot-media-control-hover: rgba(255, 255, 255, 0.16);
+  --starbot-media-control-surface: rgba(0, 0, 0, 0.5);
+  --starbot-media-control-surface-hover: rgba(0, 0, 0, 0.64);
+  --starbot-media-control-scrim: rgba(0, 0, 0, 0.55);
+  --starbot-beam-teal: var(--starbot-file-teal);
+  --starbot-beam-blue: var(--starbot-accent-text);
+  --starbot-beam-pink: var(--starbot-file-pink);
+  --starbot-approval-badge-soft: rgba(255, 148, 18, 0.18);
 
-  --openbot-danger: #fd2f3b;
-  --openbot-danger-hover: #fd5d67;
-  --openbot-danger-soft: rgba(253, 47, 59, 0.16);
-  --openbot-danger-soft-hover: rgba(253, 47, 59, 0.28);
-  --openbot-danger-focus: rgba(253, 47, 59, 0.4);
-  --openbot-danger-border: rgba(253, 47, 59, 0.5);
+  --starbot-danger: #fd2f3b;
+  --starbot-danger-hover: #fd5d67;
+  --starbot-danger-soft: rgba(253, 47, 59, 0.16);
+  --starbot-danger-soft-hover: rgba(253, 47, 59, 0.28);
+  --starbot-danger-focus: rgba(253, 47, 59, 0.4);
+  --starbot-danger-border: rgba(253, 47, 59, 0.5);
 
-  --openbot-file-blue: #74b9ff;
-  --openbot-file-blue-soft: rgba(116, 185, 255, 0.14);
-  --openbot-file-yellow: #ff9412;
-  --openbot-file-yellow-soft: rgba(255, 148, 18, 0.12);
-  --openbot-file-orange: #f0a06a;
-  --openbot-file-orange-soft: rgba(240, 160, 106, 0.14);
-  --openbot-file-teal: #6bc7d9;
-  --openbot-file-teal-soft: rgba(107, 199, 217, 0.14);
-  --openbot-file-green: #31cf76;
-  --openbot-file-green-soft: rgba(49, 207, 118, 0.12);
-  --openbot-file-red: #fd2f3b;
-  --openbot-file-red-soft: rgba(253, 47, 59, 0.16);
-  --openbot-file-pink: #d98ac9;
-  --openbot-file-pink-soft: rgba(217, 138, 201, 0.14);
-  --openbot-file-default: #42a0ff;
-  --openbot-file-default-soft: rgba(0, 124, 247, 0.14);
-  --openbot-data-table-border: #303030;
-  --openbot-data-table-header-text: #a1a1a1;
-  --openbot-data-table-text: #f5f5f5;
-  --openbot-data-table-outer-border: rgba(255, 255, 255, 0);
-  --openbot-data-table-ring: rgba(255, 255, 255, 0.12);
-  --openbot-shadow-popover-ambient: rgba(0, 0, 0, 0.1);
-  --openbot-shadow-dialog: rgba(0, 0, 0, 0.48);
-  --openbot-shadow-menu: rgba(0, 0, 0, 0.45);
-  --openbot-shadow-dynamic-island: rgba(0, 0, 0, 0.6);
-  --openbot-shadow-ring: rgba(228, 228, 228, 0.04);
-  --openbot-border-on-light: rgba(20, 20, 20, 0.14);
-  --openbot-hover: rgba(255, 255, 255, 0.06);
+  --starbot-file-blue: #74b9ff;
+  --starbot-file-blue-soft: rgba(116, 185, 255, 0.14);
+  --starbot-file-yellow: #ff9412;
+  --starbot-file-yellow-soft: rgba(255, 148, 18, 0.12);
+  --starbot-file-orange: #f0a06a;
+  --starbot-file-orange-soft: rgba(240, 160, 106, 0.14);
+  --starbot-file-teal: #6bc7d9;
+  --starbot-file-teal-soft: rgba(107, 199, 217, 0.14);
+  --starbot-file-green: #31cf76;
+  --starbot-file-green-soft: rgba(49, 207, 118, 0.12);
+  --starbot-file-red: #fd2f3b;
+  --starbot-file-red-soft: rgba(253, 47, 59, 0.16);
+  --starbot-file-pink: #d98ac9;
+  --starbot-file-pink-soft: rgba(217, 138, 201, 0.14);
+  --starbot-file-default: #42a0ff;
+  --starbot-file-default-soft: rgba(0, 124, 247, 0.14);
+  --starbot-data-table-border: #303030;
+  --starbot-data-table-header-text: #a1a1a1;
+  --starbot-data-table-text: #f5f5f5;
+  --starbot-data-table-outer-border: rgba(255, 255, 255, 0);
+  --starbot-data-table-ring: rgba(255, 255, 255, 0.12);
+  --starbot-shadow-popover-ambient: rgba(0, 0, 0, 0.1);
+  --starbot-shadow-dialog: rgba(0, 0, 0, 0.48);
+  --starbot-shadow-menu: rgba(0, 0, 0, 0.45);
+  --starbot-shadow-dynamic-island: rgba(0, 0, 0, 0.6);
+  --starbot-shadow-ring: rgba(228, 228, 228, 0.04);
+  --starbot-border-on-light: rgba(20, 20, 20, 0.14);
+  --starbot-hover: rgba(255, 255, 255, 0.06);
 
-  --openbot-font-sans-default:
+  --starbot-font-sans-default:
     -apple-system, BlinkMacSystemFont, "Inter Variable", "Segoe UI", "Noto Sans Arabic", sans-serif;
-  --openbot-font-mono-default: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
-  --openbot-font-sans: var(--openbot-font-sans-default);
-  --openbot-font-mono: var(--openbot-font-mono-default);
+  --starbot-font-mono-default: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  --starbot-font-sans: var(--starbot-font-sans-default);
+  --starbot-font-mono: var(--starbot-font-mono-default);
 
-  --openbot-text-sm: 13px;
-  --openbot-text-md: 14px;
-  --openbot-text-lg: 15px;
-  --openbot-text-xl: 16px;
-  --openbot-text-2xl: 18px;
-  --openbot-text-3xl: 24px;
-  --openbot-leading-sm: 18px;
-  --openbot-leading-md: 20px;
-  --openbot-leading-lg: 22px;
-  --openbot-leading-xl: 22px;
-  --openbot-leading-2xl: 24px;
-  --openbot-leading-3xl: 30px;
+  --starbot-text-sm: 13px;
+  --starbot-text-md: 14px;
+  --starbot-text-lg: 15px;
+  --starbot-text-xl: 16px;
+  --starbot-text-2xl: 18px;
+  --starbot-text-3xl: 24px;
+  --starbot-leading-sm: 18px;
+  --starbot-leading-md: 20px;
+  --starbot-leading-lg: 22px;
+  --starbot-leading-xl: 22px;
+  --starbot-leading-2xl: 24px;
+  --starbot-leading-3xl: 30px;
 
-  --openbot-text-display: 32px;
-  --openbot-text-usage-total: clamp(2rem, 3.5cqi, 2.75rem);
-  --openbot-leading-display: 38px;
-  --openbot-text-hero: clamp(3rem, 8vw, 6.5rem);
+  --starbot-text-display: 32px;
+  --starbot-text-usage-total: clamp(2rem, 3.5cqi, 2.75rem);
+  --starbot-leading-display: 38px;
+  --starbot-text-hero: clamp(3rem, 8vw, 6.5rem);
 
-  --openbot-glyph-xs: 7px;
-  --openbot-glyph-sm: 8px;
+  --starbot-glyph-xs: 7px;
+  --starbot-glyph-sm: 8px;
 
-  --openbot-weight-regular: 400;
-  --openbot-weight-medium: 500;
-  --openbot-weight-semibold: 600;
-  --openbot-weight-bold: 700;
-  --openbot-tracking-tight: -0.1px;
-  --openbot-tracking-normal: 0;
-  --openbot-tracking-wide: 0.02em;
-  --openbot-space-0-5: 2px;
-  --openbot-space-1: 4px;
-  --openbot-space-1-5: 6px;
-  --openbot-space-2: 8px;
-  --openbot-space-3: 12px;
-  --openbot-space-4: 16px;
-  --openbot-space-6: 24px;
-  --openbot-space-8: 32px;
-  --openbot-scrollbar-size: 8px;
-  --openbot-radius-xs: 4px;
-  --openbot-radius-sm: 6px;
-  --openbot-radius-md: 8px;
-  --openbot-radius-lg: 12px;
-  --openbot-radius-card: 14px;
-  --openbot-radius-xl: 20px;
-  --openbot-radius-bubble: 22px;
-  --openbot-radius-bubble-inset: calc(var(--openbot-radius-bubble) - var(--openbot-space-3) - 1px);
-  --openbot-radius-modal: 30px;
-  --openbot-radius-media-preview: calc(var(--openbot-radius-lg) - 1px);
-  --openbot-radius-pill: 999px;
-  --openbot-radius-logo: 20%;
-  --openbot-control-xs: 24px;
-  --openbot-control-sm: 28px;
-  --openbot-control-md: 32px;
-  --openbot-control-lg: 36px;
-  --openbot-control-xl: 40px;
+  --starbot-weight-regular: 400;
+  --starbot-weight-medium: 500;
+  --starbot-weight-semibold: 600;
+  --starbot-weight-bold: 700;
+  --starbot-tracking-tight: -0.1px;
+  --starbot-tracking-normal: 0;
+  --starbot-tracking-wide: 0.02em;
+  --starbot-space-0-5: 2px;
+  --starbot-space-1: 4px;
+  --starbot-space-1-5: 6px;
+  --starbot-space-2: 8px;
+  --starbot-space-3: 12px;
+  --starbot-space-4: 16px;
+  --starbot-space-6: 24px;
+  --starbot-space-8: 32px;
+  --starbot-scrollbar-size: 8px;
+  --starbot-radius-xs: 4px;
+  --starbot-radius-sm: 6px;
+  --starbot-radius-md: 8px;
+  --starbot-radius-lg: 12px;
+  --starbot-radius-card: 14px;
+  --starbot-radius-xl: 20px;
+  --starbot-radius-bubble: 22px;
+  --starbot-radius-bubble-inset: calc(var(--starbot-radius-bubble) - var(--starbot-space-3) - 1px);
+  --starbot-radius-modal: 30px;
+  --starbot-radius-media-preview: calc(var(--starbot-radius-lg) - 1px);
+  --starbot-radius-pill: 999px;
+  --starbot-radius-logo: 20%;
+  --starbot-control-xs: 24px;
+  --starbot-control-sm: 28px;
+  --starbot-control-md: 32px;
+  --starbot-control-lg: 36px;
+  --starbot-control-xl: 40px;
 
-  --openbot-switch-width: 36px;
-  --openbot-switch-height: 20px;
-  --openbot-switch-thumb: 16px;
-  --openbot-switch-inset: 2px;
-  --openbot-switch-sm-width: 24px;
-  --openbot-switch-sm-height: 14px;
-  --openbot-switch-sm-thumb: 12px;
-  --openbot-switch-sm-inset: 1px;
+  --starbot-switch-width: 36px;
+  --starbot-switch-height: 20px;
+  --starbot-switch-thumb: 16px;
+  --starbot-switch-inset: 2px;
+  --starbot-switch-sm-width: 24px;
+  --starbot-switch-sm-height: 14px;
+  --starbot-switch-sm-thumb: 12px;
+  --starbot-switch-sm-inset: 1px;
 
-  --openbot-icon-stroke: 2;
-  --openbot-icon-stroke-lg: 1.5;
-  --openbot-icon-xs: 12px;
-  --openbot-icon-sm: 14px;
-  --openbot-icon-md: 16px;
-  --openbot-icon-lg: 20px;
-  --openbot-chat-entry-gap: var(--openbot-space-3);
-  --openbot-chat-marker-gap: var(--openbot-space-1);
-  --openbot-chat-marker-height: var(--openbot-control-xs);
-  --openbot-chat-marker-avatar: var(--openbot-icon-md);
-  --openbot-chat-marker-width: 680px;
-  --openbot-duration-fast: 120ms;
-  --openbot-duration-hover: 0ms;
-  --openbot-duration-dialog: 100ms;
-  --openbot-duration-normal: 160ms;
-  --openbot-duration-slow: 200ms;
-  --openbot-duration-overlay: 240ms;
-  --openbot-duration-toast-enter: 340ms;
-  --openbot-duration-toast-exit: 220ms;
-  --openbot-duration-island-content: 340ms;
-  --openbot-duration-island-content-exit: 220ms;
+  --starbot-icon-stroke: 2;
+  --starbot-icon-stroke-lg: 1.5;
+  --starbot-icon-xs: 12px;
+  --starbot-icon-sm: 14px;
+  --starbot-icon-md: 16px;
+  --starbot-icon-lg: 20px;
+  --starbot-chat-entry-gap: var(--starbot-space-3);
+  --starbot-chat-marker-gap: var(--starbot-space-1);
+  --starbot-chat-marker-height: var(--starbot-control-xs);
+  --starbot-chat-marker-avatar: var(--starbot-icon-md);
+  --starbot-chat-marker-width: 680px;
+  --starbot-duration-fast: 120ms;
+  --starbot-duration-hover: 0ms;
+  --starbot-duration-dialog: 100ms;
+  --starbot-duration-normal: 160ms;
+  --starbot-duration-slow: 200ms;
+  --starbot-duration-overlay: 240ms;
+  --starbot-duration-toast-enter: 340ms;
+  --starbot-duration-toast-exit: 220ms;
+  --starbot-duration-island-content: 340ms;
+  --starbot-duration-island-content-exit: 220ms;
 
-  --openbot-agent-activity-show-delay: 750ms;
-  --openbot-agent-activity-exit-delay: 500ms;
-  --openbot-loading-indicator-delay: 400ms;
-  --openbot-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --openbot-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --openbot-shadow-raised: 0 12px 32px var(--openbot-shadow-popover-ambient);
-  --openbot-shadow-card: 0 0 0 transparent;
-  --openbot-shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.48);
-  --openbot-focus-ring: 0 0 0 1px var(--openbot-border-focus);
-  --openbot-layer-dropdown: 40;
-  --openbot-layer-popover: 60;
-  --openbot-layer-dialog: 100;
+  --starbot-agent-activity-show-delay: 750ms;
+  --starbot-agent-activity-exit-delay: 500ms;
+  --starbot-loading-indicator-delay: 400ms;
+  --starbot-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --starbot-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --starbot-shadow-raised: 0 12px 32px var(--starbot-shadow-popover-ambient);
+  --starbot-shadow-card: 0 0 0 transparent;
+  --starbot-shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.48);
+  --starbot-focus-ring: 0 0 0 1px var(--starbot-border-focus);
+  --starbot-layer-dropdown: 40;
+  --starbot-layer-popover: 60;
+  --starbot-layer-dialog: 100;
 
-  --openbot-layer-dialog-host: calc(var(--openbot-layer-dialog) + var(--openbot-layer-popover));
-  --openbot-layer-toast: 120;
+  --starbot-layer-dialog-host: calc(var(--starbot-layer-dialog) + var(--starbot-layer-popover));
+  --starbot-layer-toast: 120;
 
-  --openbot-layer-tooltip: 240;
+  --starbot-layer-tooltip: 240;
 }
 
 [data-provider] {
-  --openbot-provider-current: currentcolor;
+  --starbot-provider-current: currentcolor;
 }
 
 [data-provider="codex"] {
-  --openbot-provider-current: var(--openbot-provider-codex);
+  --starbot-provider-current: var(--starbot-provider-codex);
 }
 
 [data-provider="claude"] {
-  --openbot-provider-current: var(--openbot-provider-claude);
+  --starbot-provider-current: var(--starbot-provider-claude);
 }
 
 [data-provider="grok"] {
-  --openbot-provider-current: var(--openbot-provider-grok);
+  --starbot-provider-current: var(--starbot-provider-grok);
 }
 
 [data-provider="opencode"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="antigravity"] {
-  --openbot-provider-current: var(--openbot-provider-antigravity);
+  --starbot-provider-current: var(--starbot-provider-antigravity);
 }
 
 [data-provider="cursor"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="cline"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="kimi"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="devin"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="copilot"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="mistral"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="acp"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="sunra"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }
 
 [data-provider="higgsfield"] {
-  --openbot-provider-current: var(--openbot-text-primary);
+  --starbot-provider-current: var(--starbot-text-primary);
 }

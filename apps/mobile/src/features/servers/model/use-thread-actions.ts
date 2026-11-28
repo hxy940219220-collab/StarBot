@@ -1,5 +1,5 @@
-import type { AgentTask, AgentTasksSnapshot } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { AgentTask, AgentTasksSnapshot } from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useCallback, useMemo, useRef, useState } from "react";

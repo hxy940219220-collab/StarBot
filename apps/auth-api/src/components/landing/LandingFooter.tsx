@@ -1,10 +1,10 @@
-import { AppLogo } from "@openbot/brand";
-import { SocialNetworkMark } from "@openbot/ui/features/social-follow/social-marks";
-import { SOCIAL_NETWORKS, type SocialNetworkId } from "@openbot/ui/features/social-follow/social-networks";
+import { AppLogo } from "@starbot/brand";
+import { SocialNetworkMark } from "@starbot/ui/features/social-follow/social-marks";
+import { SOCIAL_NETWORKS, type SocialNetworkId } from "@starbot/ui/features/social-follow/social-networks";
 import type { JSX } from "@solidjs/web";
 import { Link } from "@tanstack/solid-router";
 import { For, Show } from "solid-js";
-import { EXTERNAL_LINK_REL, FOOTER_COLUMNS, type FooterLink, OPENBOT_LINKS } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, FOOTER_COLUMNS, type FooterLink, STARBOT_LINKS } from "../../lib/landing-links";
 import { localizedPath } from "../../lib/site-paths";
 import { createLandingReveal } from "./createLandingReveal";
 import { LandingIcon } from "./LandingIcon";
@@ -43,12 +43,12 @@ function pathMark(path: string) {
 }
 
 const SOCIALS: readonly FooterSocial[] = [
-  { label: "GitHub", href: OPENBOT_LINKS.repository, Mark: pathMark(GITHUB_MARK_PATH) },
-  { label: "X", href: OPENBOT_LINKS.x, Mark: pathMark(X_MARK_PATH) },
-  { label: "Discord", href: OPENBOT_LINKS.discord, Mark: pathMark(DISCORD_MARK_PATH) },
+  { label: "GitHub", href: STARBOT_LINKS.repository, Mark: pathMark(GITHUB_MARK_PATH) },
+  { label: "X", href: STARBOT_LINKS.x, Mark: pathMark(X_MARK_PATH) },
+  { label: "Discord", href: STARBOT_LINKS.discord, Mark: pathMark(DISCORD_MARK_PATH) },
   ...OTHER_NETWORKS.map((network) => ({
     label: SOCIAL_NETWORKS[network].name,
-    href: OPENBOT_LINKS[network],
+    href: STARBOT_LINKS[network],
     Mark: () => <SocialNetworkMark network={network} />,
   })),
 ];
@@ -72,7 +72,7 @@ export function LandingFooter() {
               aria-label={chrome().text.home}
             >
               <AppLogo variant="production" class="landing-footer-logo" />
-              <span>OpenBot</span>
+              <span>StarBot</span>
             </Link>
 
             <p class="landing-footer-description">{text().description}</p>

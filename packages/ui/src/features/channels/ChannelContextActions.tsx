@@ -9,8 +9,8 @@ import {
   ItemGroup,
   ItemTitle,
   Text,
-} from "@openbot/ui";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+} from "@starbot/ui";
+import { errorReference, type UserErrorDetails } from "@starbot/user-errors";
 import { createSignal, Show } from "solid-js";
 import { useText } from "../../text";
 

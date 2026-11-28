@@ -1,5 +1,5 @@
-import { DEFAULT_TEAM_MEMBER_LIMIT } from "@openbot/contracts/input-limits";
-import { WAKE_RECONNECT_STATES } from "@openbot/team-client/hosted-server-wake";
+import { DEFAULT_TEAM_MEMBER_LIMIT } from "@starbot/contracts/input-limits";
+import { WAKE_RECONNECT_STATES } from "@starbot/team-client/hosted-server-wake";
 import { router } from "expo-router";
 import { Typography } from "heroui-native";
 import type { LucideIcon } from "lucide-react-native";

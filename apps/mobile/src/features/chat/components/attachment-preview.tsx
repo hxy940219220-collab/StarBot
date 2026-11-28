@@ -1,7 +1,7 @@
-import { attachmentFileExtension } from "@openbot/contracts/attachment-files";
-import type { AttachmentSummary } from "@openbot/contracts/ipc";
-import type { MobileTranslate } from "@openbot/i18n/mobile";
-import { MOBILE_ATTACHMENT_BYTES, type RemoteFileUpload } from "@openbot/team-client/remote-peer";
+import { attachmentFileExtension } from "@starbot/contracts/attachment-files";
+import type { AttachmentSummary } from "@starbot/contracts/ipc";
+import type { MobileTranslate } from "@starbot/i18n/mobile";
+import { MOBILE_ATTACHMENT_BYTES, type RemoteFileUpload } from "@starbot/team-client/remote-peer";
 import { queryOptions, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as Clipboard from "expo-clipboard";
 import { Directory, File, FileMode, Paths } from "expo-file-system";

@@ -8,10 +8,10 @@ import {
   type PasswordManagerErrorCode,
   type PasswordManagerStatus,
   type PasswordManagerStep,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { isFixedSourceText, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { isFixedSourceText, sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Effect, Exit, Result, Schema, Scope, Semaphore } from "effect";
 import { causeHelpers } from "../../backend/effect-boundary";
 import {
@@ -26,7 +26,7 @@ import type { EncryptedRecordStore } from "./encrypted-record-store";
 import { type ExtraPasswordAnswer, openExtraPasswordPipe } from "./extra-password-pipe";
 import { allowedSignInPage } from "./password-managers-service";
 
-const logger = createOpenBotLogger("proton-pass");
+const logger = createStarBotLogger("proton-pass");
 const { io } = causeHelpers(PasswordManagerError);
 
 const PROTON_PASS_SHARED_VAULT = "Shared with StarBot";

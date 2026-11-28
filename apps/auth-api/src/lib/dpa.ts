@@ -3,7 +3,7 @@ export const DPA_ROUTE = "/dpa";
 export const DPA_UPDATED_AT = "2026-11-20";
 
 export const DPA_META = {
-  title: "OpenBot Data Processing Addendum",
+  title: "StarBot Data Processing Addendum",
   description:
-    "How Synthetify Labs processes personal data on behalf of customers of OpenBot hosted servers: instructions, security, sub-processors, transfers, breaches, audits and deletion.",
+    "How Synthetify Labs processes personal data on behalf of customers of StarBot hosted servers: instructions, security, sub-processors, transfers, breaches, audits and deletion.",
 } as const;

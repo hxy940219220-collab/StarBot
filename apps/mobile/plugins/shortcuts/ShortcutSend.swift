@@ -72,7 +72,7 @@ enum ShortcutMessageSender {
         case .sent:
           result.finish(.sent)
         case let .failed(unconfirmed, detail):
-          NSLog("OpenBot shortcut: send failed at %@", detail)
+          NSLog("StarBot shortcut: send failed at %@", detail)
           result.finish(unconfirmed ? .unconfirmed : .failed)
         }
       }

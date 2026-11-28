@@ -409,7 +409,7 @@ export const messages = {
   "routine.webhook.stepSecretHint": "يوقّع المرسل كل طلب بهذا السر. يرفض StarBot أي طلب بلا توقيع صالح.",
 
   "routine.webhook.howToSign": "كيفية توقيع طلب",
-  "routine.webhook.howToSignHint": "احفظ السر في OPENBOT_WEBHOOK_SECRET لدى المرسل. لا تضعه في الشيفرة.",
+  "routine.webhook.howToSignHint": "احفظ السر في STARBOT_WEBHOOK_SECRET لدى المرسل. لا تضعه في الشيفرة.",
   "routine.webhook.stepTest": "إرسال حدث تجريبي",
   "routine.webhook.stepTestHint":
     "يوقّع StarBot حدثًا يطابق هذه المهمة الدورية ويتلقاه كطلب حقيقي. تعمل المهمة الدورية مرة واحدة.",

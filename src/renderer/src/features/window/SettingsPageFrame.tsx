@@ -1,8 +1,8 @@
-import type { CentralAuthUser, ServerSummary } from "@openbot/contracts/ipc";
-import { Button, ChevronRight, Input, Search, UserAvatar, UserRound, X } from "@openbot/ui";
-import { ServerMark } from "@openbot/ui/features/servers/ServerRail";
-import type { SettingsPagePlacement } from "@openbot/ui/features/settings/SettingsDialogShell";
-import { useText } from "@openbot/ui/text";
+import type { CentralAuthUser, ServerSummary } from "@starbot/contracts/ipc";
+import { Button, ChevronRight, Input, Search, UserAvatar, UserRound, X } from "@starbot/ui";
+import { ServerMark } from "@starbot/ui/features/servers/ServerRail";
+import type { SettingsPagePlacement } from "@starbot/ui/features/settings/SettingsDialogShell";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { flush, onSettled, Show } from "solid-js";
 

@@ -120,7 +120,7 @@ export const messages = {
   "files.storage.allFiles": "Tüm dosyalar",
   "files.storage.allFilesOn": "{host} üzerindeki tüm dosyalar",
   "files.storage.allFilesDescription": "Tüm ajanların ve sohbetlerin dosyaları",
-  "files.storage.openBotOn": "{host} üzerinde StarBot",
+  "files.storage.starBotOn": "{host} üzerinde StarBot",
 
   "files.storage.measuring": "Ölçülüyor…",
   "files.storage.measureAgain": "Tekrar ölç",

@@ -914,7 +914,7 @@ export function PrivacyPolicy() {
       </p>
       <p>
         When you choose a language on the starbot.app website, the website saves that choice in the{" "}
-        <code>openbot_lang</code> cookie for one year, so that the next pages open in the same language. The cookie
+        <code>starbot_lang</code> cookie for one year, so that the next pages open in the same language. The cookie
         holds only the language code. To remove it, clear the site data of starbot.app.
       </p>
 

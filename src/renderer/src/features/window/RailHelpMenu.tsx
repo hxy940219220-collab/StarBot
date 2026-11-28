@@ -1,5 +1,5 @@
-import { requestFirstAgentTourReplay } from "@openbot/ui/features/agents/FirstAgentSetup";
-import { HelpMenu } from "@openbot/ui/features/updates/HelpMenu";
+import { requestFirstAgentTourReplay } from "@starbot/ui/features/agents/FirstAgentSetup";
+import { HelpMenu } from "@starbot/ui/features/updates/HelpMenu";
 import { createSignal, onCleanup, onSettled } from "solid-js";
 import { StarBotFeatureTourModal, StarBotFeedbackModal, StarBotGuideModal } from "./StarBotHelpModals";
 

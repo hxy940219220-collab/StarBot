@@ -1,4 +1,4 @@
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
 
 const STRUCTURED_TEXT_LABEL = "structuredContent as JSON, copied by StarBot for clients that show only text:";
 

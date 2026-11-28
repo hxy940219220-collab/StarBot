@@ -3,10 +3,10 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { WorkflowGitHubHistory, WorkflowGraph, WorkflowNode } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { WorkflowGitHubHistory, WorkflowGraph, WorkflowNode } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { EXTERNAL_EVENT_END } from "../src/backend/webhook-trigger";
 import type { WorkflowGitHubApi, WorkflowGitHubChange } from "../src/backend/workflows/workflow-github-api";
 import { WorkflowGitHubStore } from "../src/backend/workflows/workflow-github-store";
@@ -21,8 +21,8 @@ import {
 } from "../src/backend/workflows/workflows";
 import { receiveGitHubDelivery } from "../src/main/github-relay";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/github-workflow-e2e");
-const BOT = "openbotgit";
+const OUT = resolve(import.meta.dirname, "../.starbot-build/github-workflow-e2e");
+const BOT = "starbotgit";
 
 interface Report {
   checks: string[];
@@ -115,8 +115,8 @@ const comment = (repository: string, number: number, login: string, type: "User"
   };
 };
 
-const directory = await mkdtemp(join(tmpdir(), "openbot-github-workflow-"));
-const database = new OpenBotDatabase(directory);
+const directory = await mkdtemp(join(tmpdir(), "starbot-github-workflow-"));
+const database = new StarBotDatabase(directory);
 let service: WorkflowsHandle | null = null;
 
 try {

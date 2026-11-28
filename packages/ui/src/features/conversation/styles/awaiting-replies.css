@@ -5,17 +5,17 @@
   z-index: 9;
   width: auto;
   margin: 0 12px calc(-1 * var(--awaiting-composer-overlap));
-  border-color: var(--openbot-queue-border);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-queue-surface);
+  border-color: var(--starbot-queue-border);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-queue-surface);
   padding-bottom: var(--awaiting-composer-overlap);
-  animation: queue-panel-in var(--openbot-duration-normal) cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: queue-panel-in var(--starbot-duration-normal) cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .awaiting-replies.task-list .task-list-header {
   min-width: 0;
   flex: 1;
-  border-radius: var(--openbot-radius-lg);
+  border-radius: var(--starbot-radius-lg);
 }
 
 .awaiting-replies-bar {
@@ -24,8 +24,8 @@
 }
 
 .awaiting-replies-dismiss {
-  margin-inline-end: var(--openbot-space-2);
-  color: var(--openbot-text-muted);
+  margin-inline-end: var(--starbot-space-2);
+  color: var(--starbot-text-muted);
 }
 
 .awaiting-replies-item {
@@ -33,10 +33,10 @@
 }
 
 .awaiting-replies-avatar {
-  --agent-avatar-optical-offset: calc(var(--openbot-icon-md) * -0.14);
+  --agent-avatar-optical-offset: calc(var(--starbot-icon-md) * -0.14);
 
-  width: var(--openbot-icon-md);
-  height: var(--openbot-icon-md);
+  width: var(--starbot-icon-md);
+  height: var(--starbot-icon-md);
   flex: 0 0 auto;
 }
 
@@ -45,21 +45,21 @@
   min-width: 0;
   flex: 1;
   align-items: baseline;
-  gap: var(--openbot-space-2);
-  font-size: var(--openbot-text-md);
-  line-height: var(--openbot-leading-md);
+  gap: var(--starbot-space-2);
+  font-size: var(--starbot-text-md);
+  line-height: var(--starbot-leading-md);
 }
 
 .awaiting-replies-name {
   flex: 0 0 auto;
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-text-primary);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .awaiting-replies-preview {
   overflow: hidden;
   min-width: 0;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -68,30 +68,30 @@
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
-  gap: var(--openbot-space-2);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-md);
+  gap: var(--starbot-space-2);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-md);
 }
 
 .awaiting-replies-detail {
-  color: var(--openbot-text-dim);
+  color: var(--starbot-text-dim);
 }
 
 .awaiting-replies-item[data-state="failed"] .awaiting-replies-state-label {
-  color: var(--openbot-danger-text);
+  color: var(--starbot-danger-text);
 }
 
 .awaiting-replies-item[data-wait] .awaiting-replies-state-label {
-  color: var(--openbot-warning-text);
+  color: var(--starbot-warning-text);
 }
 
 .awaiting-replies-item[data-stopped] :is(.awaiting-replies-name, .awaiting-replies-state-label) {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .awaiting-replies-item[data-stopped] .task-list-mark-fill {
-  fill: var(--openbot-text-dim);
+  fill: var(--starbot-text-dim);
 }
 
 .awaiting-replies-mark {
@@ -105,7 +105,7 @@
   inset: 50% auto auto 50%;
   opacity: 0;
   transform: translate(-50%, -50%);
-  transition: opacity var(--openbot-duration-fast) ease;
+  transition: opacity var(--starbot-duration-fast) ease;
 }
 
 .awaiting-replies-item:is(:hover, :focus-within) .awaiting-replies-stop-icon {

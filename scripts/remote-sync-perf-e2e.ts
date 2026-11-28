@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { translateFor } from "@openbot/i18n";
-import { createOpenBotLogger } from "@openbot/logging";
-import type { RemoteRequestRecord } from "@openbot/team-client/sync-profile";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { translateFor } from "@starbot/i18n";
+import { createStarBotLogger } from "@starbot/logging";
+import type { RemoteRequestRecord } from "@starbot/team-client/sync-profile";
 import { type Browser, type BrowserContext, chromium, type Page } from "playwright-core";
 import { argument, WAIT_MS } from "./channel-e2e-support";
 import { type Spread, spread } from "./dev-automation/bench-stats";
@@ -15,20 +15,20 @@ import { resolveDevelopmentAppDataRoot } from "./development-state-paths";
 
 const NAME = "remote-sync-perf";
 const ROOT = resolve(import.meta.dirname, "..");
-const DEV_HOST_EMAIL = "openbot-dev-host@example.com";
-const MARK_PREFIX = "openbot:remote-";
+const DEV_HOST_EMAIL = "starbot-dev-host@example.com";
+const MARK_PREFIX = "starbot:remote-";
 const SYNC_FILE = "dev-sync-profile.ndjson";
 const SETTLE_GAP_MS = 500;
 const POLL_MS = 250;
 const UUID = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 const english = translateFor("en");
-const logger = createOpenBotLogger(NAME);
+const logger = createStarBotLogger(NAME);
 
 const runs = Number(argument("runs") ?? "5");
 assert.ok(Number.isInteger(runs) && runs >= 1, "--runs takes a whole number, 1 or more.");
 const label = argument("label") ?? "baseline";
 assert.match(label, /^\w[\w.-]*$/, "--label takes a folder name, not a path.");
-const OUT = resolve(ROOT, ".openbot-build", NAME, label);
+const OUT = resolve(ROOT, ".starbot-build", NAME, label);
 const api = (argument("api") ?? "http://localhost:3100").replace(/\/$/, "");
 const clients = new Set((argument("clients") ?? "web,desktop").split(","));
 for (const client of clients)
@@ -39,8 +39,8 @@ const hostId = argument("host-id");
 const allowMutations = process.argv.includes("--allow-mutations");
 const latencyMs = Number(argument("latency") ?? "0");
 assert.ok(Number.isInteger(latencyMs) && latencyMs >= 0, "--latency takes a whole number of milliseconds.");
-const FRAME_KEY_PREFIX = "openbot:remote-frame:";
-const TIMEZONE_CHECK_KEY_PREFIX = "openbot:routine-timezone-checked:";
+const FRAME_KEY_PREFIX = "starbot:remote-frame:";
+const TIMEZONE_CHECK_KEY_PREFIX = "starbot:routine-timezone-checked:";
 const TIMEZONE_CHECK_WAIT_MS = 30_000;
 
 type Client = "web" | "web-warm" | "desktop-cold" | "desktop-reload" | "desktop-start";
@@ -278,7 +278,7 @@ async function signIn(page: Page): Promise<void> {
   await page.keyboard.type(code);
 }
 
-const SELECTED_SERVER_PREFIX = "openbot.web.selected-server:";
+const SELECTED_SERVER_PREFIX = "starbot.web.selected-server:";
 
 async function selectHost(page: Page, id: string): Promise<void> {
   await page.waitForFunction(
@@ -299,7 +299,7 @@ async function instrument(context: BrowserContext): Promise<void> {
   await context.addInitScript((halfTrip: number) => {
     const collected: NonNullable<Window["__syncPerfSink"]> = { records: [], open: 0 };
     window.__syncPerfSink = collected;
-    globalThis.__openbotSyncProfile = {
+    globalThis.__starbotSyncProfile = {
       started() {
         collected.open += 1;
       },
@@ -621,7 +621,7 @@ function testClientInstance(): DevInstanceRecord {
   assert.equal(
     instances.length,
     1,
-    "Start `OPENBOT_DEV_SYNC_PROFILE=1 bun run dev:test-client` in this worktree first.",
+    "Start `STARBOT_DEV_SYNC_PROFILE=1 bun run dev:test-client` in this worktree first.",
   );
   const [instance] = instances;
   assert.ok(instance);
@@ -721,7 +721,7 @@ async function desktopRuns(): Promise<Run[]> {
   const instance = testClientInstance();
   const userData = join(resolveDevelopmentAppDataRoot(), instance.profile);
   const syncPath = join(userData, SYNC_FILE);
-  assert.ok(existsSync(syncPath), `${syncPath} is missing. Start the stack with OPENBOT_DEV_SYNC_PROFILE=1.`);
+  assert.ok(existsSync(syncPath), `${syncPath} is missing. Start the stack with STARBOT_DEV_SYNC_PROFILE=1.`);
   const session = await connectToDevApp(instance.remoteDebuggingPort, logger, {
     expectedRendererPort: instance.rendererPort,
     ownerPid: instance.pid,
@@ -889,7 +889,7 @@ if (clients.has("desktop-start")) all.push(...(await desktopStartRuns()));
 for (const run of all) assertNoIds(run);
 for (const roundTrip of desktopRoundTrips)
   if (roundTrip !== latencyMs)
-    logger.warn(`The test client runs with OPENBOT_DEV_RTT_MS=${roundTrip}, not --latency=${latencyMs}.`);
+    logger.warn(`The test client runs with STARBOT_DEV_RTT_MS=${roundTrip}, not --latency=${latencyMs}.`);
 
 const byClient = new Map<Client, Run[]>();
 for (const run of all) byClient.set(run.client, [...(byClient.get(run.client) ?? []), run]);

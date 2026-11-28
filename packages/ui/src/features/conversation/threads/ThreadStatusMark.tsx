@@ -1,9 +1,9 @@
-import type { AppTextKey } from "@openbot/i18n";
-import { Clock3, Hourglass, Split, X } from "@openbot/ui";
-import { TypingDots } from "@openbot/ui/components/TypingDots";
-import { SidebarWaitIcon } from "@openbot/ui/features/sidebar/SidebarAgentIndicator";
-import type { SidebarWaitReason } from "@openbot/ui/features/sidebar/sidebar-types";
-import { type TextValue, useText } from "@openbot/ui/text";
+import type { AppTextKey } from "@starbot/i18n";
+import { Clock3, Hourglass, Split, X } from "@starbot/ui";
+import { TypingDots } from "@starbot/ui/components/TypingDots";
+import { SidebarWaitIcon } from "@starbot/ui/features/sidebar/SidebarAgentIndicator";
+import type { SidebarWaitReason } from "@starbot/ui/features/sidebar/sidebar-types";
+import { type TextValue, useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { Show } from "solid-js";
 import type { ThreadStatus } from "./thread-types";

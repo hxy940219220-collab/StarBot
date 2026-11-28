@@ -5,8 +5,8 @@ import {
   isEuVatCountry,
   normalizeVatId,
   vatIdPrefix,
-} from "@openbot/contracts/billing-details";
-import { Field, Input, Label, SearchSelect } from "@openbot/ui";
+} from "@starbot/contracts/billing-details";
+import { Field, Input, Label, SearchSelect } from "@starbot/ui";
 import { createMemo, createSignal, createUniqueId, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 

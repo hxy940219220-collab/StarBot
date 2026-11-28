@@ -1,5 +1,5 @@
 {
-  "name": "@openbot/user-errors",
+  "name": "@starbot/user-errors",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,9 +11,9 @@
     "typecheck": "bun ../../scripts/type-checker.ts --noEmit -p tsconfig.json"
   },
   "dependencies": {
-    "@openbot/contracts": "workspace:*",
-    "@openbot/i18n": "workspace:*",
-    "@openbot/logging": "workspace:*"
+    "@starbot/contracts": "workspace:*",
+    "@starbot/i18n": "workspace:*",
+    "@starbot/logging": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",

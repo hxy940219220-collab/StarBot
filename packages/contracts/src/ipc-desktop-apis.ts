@@ -78,7 +78,7 @@ export type StorageDesktopApi = GroupApi<IpcEndpoints["storage"]>;
 
 export type AgentImportDesktopApi = GroupApi<IpcEndpoints["agentImport"]>;
 
-export interface OpenBotDesktopApi extends Omit<BridgedDesktopApi, "agent" | "browser" | "servers"> {
+export interface StarBotDesktopApi extends Omit<BridgedDesktopApi, "agent" | "browser" | "servers"> {
   agent: AgentDesktopApi;
   browser: BrowserDesktopApi;
   servers: ServersDesktopApi;

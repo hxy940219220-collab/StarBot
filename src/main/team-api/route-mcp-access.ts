@@ -1,6 +1,6 @@
-import { type AgentAccessRole, MCP_SERVERS_CAPABILITY, parseSetMcpAccessInput } from "@openbot/contracts/ipc";
-import { MCP_ACCESS_CAPABILITY, MCP_ACCESS_ROUTES } from "@openbot/contracts/team-protocol/mcp-access-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { type AgentAccessRole, MCP_SERVERS_CAPABILITY, parseSetMcpAccessInput } from "@starbot/contracts/ipc";
+import { MCP_ACCESS_CAPABILITY, MCP_ACCESS_ROUTES } from "@starbot/contracts/team-protocol/mcp-access-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result } from "effect";
 import { mcpAccessSnapshot } from "../mcp-access-store";
 import type { TeamApiMcpAccess, TeamApiMcpServerOwners, TeamApiMcpServers } from "./dependencies";

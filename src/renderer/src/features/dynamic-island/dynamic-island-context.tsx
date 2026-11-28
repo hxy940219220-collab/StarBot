@@ -2,10 +2,10 @@ import {
   type DynamicIslandAgentIdentity,
   type DynamicIslandRecordingState,
   isDynamicIslandServerVisible,
-} from "@openbot/contracts/ipc";
-import { DynamicIslandCoordinator } from "@openbot/team-client/dynamic-island-coordinator";
-import type { DynamicIslandText } from "@openbot/team-client/dynamic-island-presentation";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { DynamicIslandCoordinator } from "@starbot/team-client/dynamic-island-coordinator";
+import type { DynamicIslandText } from "@starbot/team-client/dynamic-island-presentation";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, flush, onCleanup, onSettled, untrack } from "solid-js";
 import { usePlatform } from "../../platform";
 import { createSimpleContext } from "../../simple-context";

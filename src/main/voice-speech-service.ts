@@ -11,9 +11,9 @@ import {
   type SpeechModelStatus,
   type SpeechSettings,
   VOICE_KEY_PROVIDER_NAMES,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Exit, Scope, Semaphore } from "effect";
 import type { SpeechPreferenceStore } from "./speech-preference-store";
 import { StarBotNeuralTts } from "./starbot-neural-tts";
@@ -28,7 +28,7 @@ import {
 } from "./voice-model-service";
 import type { VoiceSpeechFailure, VoiceSpeechHostProcess, VoiceSpeechResponse } from "./voice-speech-protocol";
 
-const logger = createOpenBotLogger("voice-speech-service");
+const logger = createStarBotLogger("voice-speech-service");
 
 const SPEECH_TIMEOUT_MS = 120_000;
 const HOST_IDLE_MS = 60_000;

@@ -12,9 +12,9 @@ function loadGuide(slug: string): CollectionArticle {
 
 export const Route = createFileRoute("/guides/$slug")({
   loader: ({ params }) => {
-    if (params.slug === "write-a-guide-for-openbot") {
+    if (params.slug === "write-a-guide-for-starbot") {
       throw redirect({
-        href: "https://github.com/nightly-labs/openbot/blob/main/CONTRIBUTING.md",
+        href: "https://github.com/nightly-labs/starbot/blob/main/CONTRIBUTING.md",
         statusCode: 308,
       });
     }

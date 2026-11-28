@@ -2,15 +2,15 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { resolve } from "node:path";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { z } from "zod";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { McpOAuth, type McpOAuthRecord, mcpOAuthRecordSchema } from "../src/backend/mcp-oauth-provider";
 import { testMcpServer } from "../src/backend/mcp-probe";
 
-const out = resolve(import.meta.dirname, "../.openbot-build/mcp-sign-in-client-metadata-document-e2e");
+const out = resolve(import.meta.dirname, "../.starbot-build/mcp-sign-in-client-metadata-document-e2e");
 const CLIENT_METADATA_URL = "https://starbot.app/oauth/mcp-client.json";
 const REDIRECT_URL = "http://127.0.0.1:28417/mcp-auth";
 const OTHER_REDIRECT_URL = "http://127.0.0.1:28418/mcp-auth";

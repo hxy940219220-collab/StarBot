@@ -1,10 +1,10 @@
-import type { ClaudeCompactWindowSetting, OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import type { ProviderClaudeCompactWindow } from "@openbot/ui/features/settings/ProviderSettingsPage";
-import { useText } from "@openbot/ui/text";
+import type { ClaudeCompactWindowSetting, StarBotDesktopApi } from "@starbot/contracts/ipc";
+import type { ProviderClaudeCompactWindow } from "@starbot/ui/features/settings/ProviderSettingsPage";
+import { useText } from "@starbot/ui/text";
 import { createHostSetting } from "./host-setting-state";
 
 export type HostClaudeCompactWindowCalls = Pick<
-  OpenBotDesktopApi["hostAdmin"],
+  StarBotDesktopApi["hostAdmin"],
   "getClaudeCompactWindow" | "setClaudeCompactWindow"
 >;
 
@@ -21,7 +21,7 @@ export function createProviderClaudeCompactWindow(
   status: () => unknown,
 ): () => ProviderClaudeCompactWindow | undefined {
   const { t } = useText();
-  const calls = (): HostClaudeCompactWindowCalls => source()?.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostClaudeCompactWindowCalls => source()?.calls ?? window.starbot.hostAdmin;
   const setting = createHostSetting<ClaudeCompactWindowSetting, number | null>({
     serverId: () => source()?.serverId,
     status,

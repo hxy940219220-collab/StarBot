@@ -735,7 +735,7 @@ export const messages = defineMessages("server", {
   "server.update.path.hosted":
     "The hosted service downloads updates in the background. A downloaded update starts when the server next starts. Wait for active work to finish before you stop and resume the server. If it stays on an old version, contact the host administrator.",
   "server.update.path.system":
-    "On the host, run sudo openbot update to install the latest release. This command stops StarBot. Wait for active work to finish first. Automatic downloads install at the next boot.",
+    "On the host, run sudo starbot update to install the latest release. This command stops StarBot. Wait for active work to finish first. Automatic downloads install at the next boot.",
   "server.update.path.container":
     "On the Docker host, pull the new StarBot image and create the container again with the same data volumes. Wait for active work to finish first. Keep the existing volumes to preserve your data.",
   "server.update.path.manual":
@@ -839,7 +839,7 @@ export const messages = defineMessages("server", {
   "server.setup.online": "{name} is online",
   "server.setup.starting": "{name} is starting",
   "server.setup.openApp": "Open StarBot",
-  "server.setup.signOutDescription": "To use another account, run openbot logout in a terminal of the container.",
+  "server.setup.signOutDescription": "To use another account, run starbot logout in a terminal of the container.",
   "server.setup.errorCompany": "This email signs in through your company. Use another email.",
   "server.setup.errorRefused": "StarBot refused the request.",
   "server.setup.errorNoAnswer": "StarBot does not answer. Reload the page.",

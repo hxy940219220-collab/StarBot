@@ -1,6 +1,6 @@
-import { referralCodeFromInput } from "@openbot/contracts/referral";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
-import { classifyFailure } from "@openbot/telemetry";
+import { referralCodeFromInput } from "@starbot/contracts/referral";
+import { normalizeEmailAddress } from "@starbot/contracts/validation";
+import { classifyFailure } from "@starbot/telemetry";
 import * as Crypto from "expo-crypto";
 import { useRef, useState } from "react";
 import { Keyboard } from "react-native";

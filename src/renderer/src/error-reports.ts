@@ -1,5 +1,5 @@
-import type { AppInfo, CentralAuthUser } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber } from "@openbot/contracts/runtime-values";
+import type { AppInfo, CentralAuthUser } from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber } from "@starbot/contracts/runtime-values";
 import {
   ANALYTICS_GENERATIONS,
   analyticsOnByDefault,
@@ -10,8 +10,8 @@ import {
   openPanelTransport,
   ReportQueue,
   safeProperties,
-} from "@openbot/telemetry";
-import { indexedReportStorage } from "@openbot/telemetry/browser";
+} from "@starbot/telemetry";
+import { indexedReportStorage } from "@starbot/telemetry/browser";
 import { Effect } from "effect";
 import { version } from "../../../package.json";
 
@@ -24,10 +24,10 @@ const startup: { properties: FailureProperties; timestamp: number }[] = [];
 let profileId: string | null = null;
 let installId: string | null = null;
 let webInstallId: string | null | undefined;
-export const WEB_PREFERENCE = "openbot:web:error-reports-enabled";
-const WEB_ACCOUNT_PENDING = "openbot:web:analytics-account-pending";
-const WEB_KEEP_OFF = "openbot:web:analytics-keep-off";
-const WEB_INSTALL_ID = "openbot:web:analytics-install-id";
+export const WEB_PREFERENCE = "starbot:web:error-reports-enabled";
+const WEB_ACCOUNT_PENDING = "starbot:web:analytics-account-pending";
+const WEB_KEEP_OFF = "starbot:web:analytics-keep-off";
+const WEB_INSTALL_ID = "starbot:web:analytics-install-id";
 
 export function configureDesktopReports(
   info: AppInfo,
@@ -37,7 +37,7 @@ export function configureDesktopReports(
   const capture = info.analyticsCaptureUrl;
   if (capture === undefined && (!import.meta.env.PROD || info.variant !== "production")) return;
   queue ??= new ReportQueue(
-    indexedReportStorage("openbot-desktop-error-reports-v1"),
+    indexedReportStorage("starbot-desktop-error-reports-v1"),
     openPanelTransport({
       clientId: "6c989975-87ef-4f0c-857e-ab449a65b5c2",
       ...(capture === undefined ? {} : { endpoint: `${capture}/track` }),
@@ -111,7 +111,7 @@ export function configureWebReports(user: Pick<CentralAuthUser, "id" | "email"> 
   webSignedIn = user !== null;
   if (!import.meta.env.PROD || window.location.origin !== "https://starbot.app") return;
   queue ??= new ReportQueue(
-    indexedReportStorage("openbot-web-error-reports-v1"),
+    indexedReportStorage("starbot-web-error-reports-v1"),
     openPanelTransport({ clientId: "6c989975-87ef-4f0c-857e-ab449a65b5c2" }),
     { surface: "web", platform: "web", app_version: version, event_schema_version: ANALYTICS_GENERATIONS.web },
   );

@@ -4,8 +4,8 @@ import {
   DEFAULT_AGENT_DEFAULTS,
   isAutomationRunsPerHour,
   isPlanStartAfterMs,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord } from "@starbot/contracts/runtime-values";
 import { PreferenceStore } from "./preference-file";
 
 export type AgentDefaultsPreferenceStore = PreferenceStore<AgentDefaults>;

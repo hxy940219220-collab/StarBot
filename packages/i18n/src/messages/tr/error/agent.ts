@@ -5,28 +5,28 @@ export const messages = {
   "error.agent.historyUnavailable":
     "Bu istek için geçmiş kullanılamıyor. Son geçmişi tekrar okuyun veya kanal çalışması için channel_history kullanın.",
   "error.agent.historyArgumentsInvalid":
-    "Geçmiş bağımsız değişkenleri yanlış: {detail} Bağımsız değişkenleri düzeltip yeniden dene. openbot.tool_describe şemayı verir.",
+    "Geçmiş bağımsız değişkenleri yanlış: {detail} Bağımsız değişkenleri düzeltip yeniden dene. starbot.tool_describe şemayı verir.",
   "error.agent.toolRequestInvalid":
     "Geçersiz araç keşfi bağımsız değişkenleri. Bildirilen şemayı ve özgün nitelikli araç adını kullanın.",
   "error.agent.toolCallArgumentsNotObject":
     "Araç çalışmadı. tool_call içinde arguments metin değil, bir JSON nesnesi olmalı. Çağrıyı arguments bir nesne olacak şekilde yeniden gönderin.",
   "error.agent.toolCallDiscoveryTool":
-    "Araç çalışmadı. tool_call, openbot.tool_search veya openbot.tool_describe çalıştıramaz. Bunları aynı bağımsız değişkenlerle doğrudan çağırın.",
+    "Araç çalışmadı. tool_call, starbot.tool_search veya starbot.tool_describe çalıştıramaz. Bunları aynı bağımsız değişkenlerle doğrudan çağırın.",
   "error.agent.toolCallEnvelopeKeys":
     "Araç çalışmadı. tool_call yalnızca name ve arguments alır. Aracın bağımsız değişkenlerini arguments içine nesne olarak koyun ve çağrıyı yeniden gönderin.",
   "error.agent.toolCallMissingName":
-    "Araç çalışmadı. tool_call içinde name yok. name alanına tool_search'ün verdiği tam nitelikli adı yazın, örneğin openbot.history_read, ve çağrıyı yeniden gönderin.",
+    "Araç çalışmadı. tool_call içinde name yok. name alanına tool_search'ün verdiği tam nitelikli adı yazın, örneğin starbot.history_read, ve çağrıyı yeniden gönderin.",
   "error.agent.toolCallUnknownTool":
-    "Araç çalışmadı. tool_call bu adla bir araç bulamadı. tool_search'ün verdiği tam nitelikli adı kullanın, örneğin openbot_browser.snapshot.",
+    "Araç çalışmadı. tool_call bu adla bir araç bulamadı. tool_search'ün verdiği tam nitelikli adı kullanın, örneğin starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "Araç çalışmadı. tool_call bu adla bir araç bulamadı. Nitelikli ad büyük olasılıkla {name}. Öyleyse çağrıyı bu adla yeniden gönderin.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe, {names} adında bir StarBot aracı bulamadı. Yalnızca openbot.tool_search'ün listelediği StarBot ve tarayıcı araçlarını açıklar, MCP araçlarını açıklamaz.",
+    "tool_describe, {names} adında bir StarBot aracı bulamadı. Yalnızca starbot.tool_search'ün listelediği StarBot ve tarayıcı araçlarını açıklar, MCP araçlarını açıklamaz.",
 
   "error.agent.toolDescribeDiscoveryNames":
     "{names} araçlarını doğrudan çağır. tool_describe arama araçlarını açıklamaz.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "Rutin zamanlaması geçersiz: {detail} Zamanlamayı düzeltip yeniden deneyin. openbot.tool_describe şemayı verir.",
+    "Rutin zamanlaması geçersiz: {detail} Zamanlamayı düzeltip yeniden deneyin. starbot.tool_describe şemayı verir.",
   "error.agent.approvalWhileDeleting": "Ajan silinirken onay verilemez.",
   "error.agent.accessLocalOnly": "Ajan erişimi yalnızca ajanı çalıştıran bilgisayarda değiştirilebilir.",
   "error.agent.duplicateCleanupFailed": "Ajan çoğaltma başarısız oldu ve tamamlanmamış kopya kaldırılamadı.",

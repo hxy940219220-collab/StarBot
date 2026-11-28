@@ -373,7 +373,7 @@ export const messages = {
 
   "error.provider.antigravityNotStarted": "Gemini sunucusu bulundu ancak sürümü okunamıyor.",
   "error.provider.antigravityOverrideInvalid":
-    "OPENBOT_ANTIGRAVITY_PATH içindeki Gemini sunucusu yok veya çalıştırılabilir değil. Yolu düzeltin ya da değişkeni kaldırın, ardından StarBot'u yeniden başlatın.",
+    "STARBOT_ANTIGRAVITY_PATH içindeki Gemini sunucusu yok veya çalıştırılabilir değil. Yolu düzeltin ya da değişkeni kaldırın, ardından StarBot'u yeniden başlatın.",
 
   "error.provider.antigravityVersionUnreadable": "Gemini sunucu sürümü okunamıyor.",
   "error.provider.antigravitySignIn": "Gemini'yi kullanmak için Google ile oturum açın.",

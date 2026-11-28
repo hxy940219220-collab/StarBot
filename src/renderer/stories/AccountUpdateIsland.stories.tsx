@@ -1,7 +1,7 @@
-import type { UpdateStatus } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { AccountUpdateIsland } from "@openbot/ui/features/account/AccountUpdateIsland";
-import { useText } from "@openbot/ui/text";
+import type { UpdateStatus } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { AccountUpdateIsland } from "@starbot/ui/features/account/AccountUpdateIsland";
+import { useText } from "@starbot/ui/text";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

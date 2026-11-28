@@ -1,5 +1,5 @@
-import { type WorkflowGraphProblem, workflowGraphProblemAt } from "@openbot/contracts/ipc";
-import type { MobileTextKey, MobileTranslate } from "@openbot/i18n/mobile";
+import { type WorkflowGraphProblem, workflowGraphProblemAt } from "@starbot/contracts/ipc";
+import type { MobileTextKey, MobileTranslate } from "@starbot/i18n/mobile";
 import type { MobileAgent } from "@/features/workspace/model/workspace-types";
 import { draftGraph, type WorkflowDraft } from "./workflow-draft";
 import { outlineProblems } from "./workflow-outline";

@@ -1,5 +1,5 @@
-import type { RemoteConnectionStage } from "@openbot/team-client";
-import type { RemoteTeamDiagnostic } from "@openbot/team-client/remote-peer";
+import type { RemoteConnectionStage } from "@starbot/team-client";
+import type { RemoteTeamDiagnostic } from "@starbot/team-client/remote-peer";
 import type { PhoneVpnState } from "@/features/support/model/phone-network";
 import type { MobileAnalytics } from "./analytics-core";
 

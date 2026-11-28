@@ -122,7 +122,7 @@ then build and launch the app with Expo. Expo arguments such as `--device` and
 `--port` pass through. The RocketSim command requires the app in `/Applications`
 or `~/Applications`, or `ROCKETSIM_APP_PATH` set to its `.app` directory. If it is
 missing, the command stops with setup instructions. The standard command does not
-look for RocketSim, even if `ROCKETSIM_APP_PATH` or the old `OPENBOT_ROCKETSIM`
+look for RocketSim, even if `ROCKETSIM_APP_PATH` or the old `STARBOT_ROCKETSIM`
 variable is set.
 
 A build for an iPhone signs all targets with the Apple team of `ios.appleTeamId` in `app.json`, so
@@ -148,16 +148,16 @@ installs the pods again. Metro keeps its file map cache in `.expo/metro-file-map
   projects of the libraries, such as Reanimated, Worklets, Expo modules and Skia.
 
 The first build in a new worktree also reuses the work of other worktrees through two shared caches
-in `openbot-mobile-cache.noindex` of the common git directory (`git rev-parse --git-common-dir`), on
-the disk of the main checkout. `OPENBOT_MOBILE_BUILD_CACHE=<directory>` puts them in another
-directory; a relative path starts at the checkout root. `OPENBOT_MOBILE_BUILD_CACHE=off` turns them
+in `starbot-mobile-cache.noindex` of the common git directory (`git rev-parse --git-common-dir`), on
+the disk of the main checkout. `STARBOT_MOBILE_BUILD_CACHE=<directory>` puts them in another
+directory; a relative path starts at the checkout root. `STARBOT_MOBILE_BUILD_CACHE=off` turns them
 off. You can remove the directory at any time.
 
 - `metro/`: Metro transforms of all mobile commands (`metro-cache.js`). Each set of mobile
   dependencies in `bun.lock` and their patches has its own namespace, because the Metro cache key
   does not include the versions of the Babel plugins. Packages that only other workspaces or the dev
   dependencies of the app use are not in the namespace. When `bun.lock` or a patch is newer than the
-  last `bun install` (`node_modules/.openbot-install-stamp`), Metro warns and does not use the shared
+  last `bun install` (`node_modules/.starbot-install-stamp`), Metro warns and does not use the shared
   cache. A namespace that no worktree used for 14 days is removed. A transform that contains the
   path of the checkout, such as a `use dom` component, stays in `.expo/metro-cache` of the worktree.
   The entries use the file store of `@expo/metro-config`, which writes each entry to a temporary file
@@ -168,7 +168,7 @@ off. You can remove the directory at any time.
   `expo run` clear the Metro cache before each release bundle; `bun mobile:ios` and
   `bun mobile:android` keep it. `bun mobile -- --clear` clears the namespace for all worktrees.
 - `xcode/`: the Xcode compilation cache of `bun mobile:ios` (Swift, Objective-C and C++). Prefix
-  mapping replaces the checkout path and its real path with `/^openbot` in the cache keys, in the
+  mapping replaces the checkout path and its real path with `/^starbot` in the cache keys, in the
   debug info and in `__FILE__`. Only the `xcodebuild` build command (with `-destination`) gets these
   settings. Xcode removes old entries above 20 GB.
 
@@ -339,7 +339,7 @@ stops at the retry cooldown, then saves the encrypted workspace copy and makes t
 inactive again. The app stays "away" for the hosts, so they continue to send notifications, and a
 chat on screen is not marked as read. A refresh sends no connection analytics.
 
-- iOS uses `BGAppRefreshTask` with the identifier `run.openbot.mobile.refresh` (`UIBackgroundModes`
+- iOS uses `BGAppRefreshTask` with the identifier `run.starbot.mobile.refresh` (`UIBackgroundModes`
   `fetch` in `app.json`). The local `modules/background-refresh` module registers the task at launch
   and gives each run to JavaScript. iOS lists the app in Settings > General > Background App Refresh.
 - Android uses `expo-background-task` (WorkManager). `package.json` excludes it, `expo-task-manager`
@@ -351,15 +351,15 @@ chat on screen is not marked as read. A refresh sends no connection analytics.
   opens the app again.
 - The support log shows `Background refresh: available` (or the iOS status), and for each run the
   number of servers that loaded, or why the run did nothing (`Background refresh skipped: ...`). On
-  iOS, the device log (subsystem `run.openbot.mobile`, category `BackgroundRefresh`) shows when iOS
+  iOS, the device log (subsystem `run.starbot.mobile`, category `BackgroundRefresh`) shows when iOS
   started the task and when it ended.
 - Test on a device. iOS has no background tasks in the Simulator. Attach Xcode to `StarBot`, put
   the app in the background and pause it. Select a thread that is not the main thread
   (`thread select <n>`): on the main thread the command does not return. Then run
   `e -l objc -- @import Foundation`, `e -l objc -- @import BackgroundTasks` and
-  `e -l objc -- (void)[[BGTaskScheduler sharedScheduler] performSelector:NSSelectorFromString(@"_simulateLaunchForTaskWithIdentifier:") withObject:@"run.openbot.mobile.refresh"]`,
+  `e -l objc -- (void)[[BGTaskScheduler sharedScheduler] performSelector:NSSelectorFromString(@"_simulateLaunchForTaskWithIdentifier:") withObject:@"run.starbot.mobile.refresh"]`,
   and continue. Wait before you open the app: a run with the app in the foreground does nothing.
-  On Android, `adb shell cmd jobscheduler run -f run.openbot.mobile <job id>` starts the job.
+  On Android, `adb shell cmd jobscheduler run -f run.starbot.mobile <job id>` starts the job.
 
 ## iOS shortcuts
 
@@ -373,7 +373,7 @@ start, and iOS suspends the app soon after the intent returns.
 - The App Intents, their cards and the `AppShortcutsProvider` are Swift files in `plugins/shortcuts`.
   `plugins/with-shortcuts.js` adds them to the app target, because Xcode reads the shortcuts of an
   app from that target. iOS reads the names and the phrases of the shortcuts at build time, so they
-  are English and not from the `@openbot/i18n` catalog. The text of the cards is from the catalog.
+  are English and not from the `@starbot/i18n` catalog. The text of the cards is from the catalog.
 - The app writes `shortcuts.json` to the App Group
   (`src/features/shortcuts/model/shortcut-directory.ts`): the agents, the agent of Settings >
   Shortcuts, the app lock and the card text. Sign-out deletes it. The servers with their public
@@ -498,7 +498,7 @@ bun run mobile:ios:build:local
 
 From `apps/mobile`, the equivalent command is `bun run ios:build:local`.
 This runs EAS Build locally with the `production` profile and writes
-`/private/tmp/openbot-testflight.ipa`. Each successful build replaces that output file.
+`/private/tmp/starbot-testflight.ipa`. Each successful build replaces that output file.
 The profile uses remote build numbers and increments the build number automatically.
 EAS CLI prompts for signing credentials when needed.
 
@@ -531,15 +531,15 @@ One-time setup:
 3. Keep the iOS distribution certificate and provisioning profiles configured in EAS. CI downloads
    these existing credentials. If they expire or need repair, update them interactively through
    EAS before retrying; the upload API key is not passed to the build step. Each target has its own
-   profile: the app, `ExpoWidgetsTarget` (`run.openbot.mobile.ExpoWidgetsTarget`),
-   `StarBotNotificationService` (`run.openbot.mobile.NotificationService`, the Notification Service
-   Extension) and `expo-sharing-extension` (`run.openbot.mobile.ShareExtension`, the share extension).
-   Each extension needs the App Group `group.run.openbot.mobile`. When a release adds a
+   profile: the app, `ExpoWidgetsTarget` (`run.starbot.mobile.ExpoWidgetsTarget`),
+   `StarBotNotificationService` (`run.starbot.mobile.NotificationService`, the Notification Service
+   Extension) and `expo-sharing-extension` (`run.starbot.mobile.ShareExtension`, the share extension).
+   Each extension needs the App Group `group.run.starbot.mobile`. When a release adds a
    target, set up its profile interactively once (`bunx eas-cli credentials -p ios`) before CI builds
    it. Keep the saved push key; do not let EAS make a new one.
 4. Keep the OpenPanel variables in EAS `production` with `Plain text` or `Sensitive` visibility.
    `Secret` variables are unavailable to this local build. Do not copy these values into source.
-5. Ensure App Store Connect has the app `run.openbot.mobile` and the intended TestFlight group.
+5. Ensure App Store Connect has the app `run.starbot.mobile` and the intended TestFlight group.
 
 After this workflow is merged into `main`, authenticate GitHub CLI with `gh auth login`, then run
 from the repository root:
@@ -628,7 +628,7 @@ One-time setup:
    same as in `release-ios`. The Google secret is the full JSON key of a Google Cloud service account.
 3. In the Google Cloud project of that service account, enable the Google Play Android Developer API.
    In Play Console, under **Users and permissions**, invite the service account email and give it
-   access to `run.openbot.mobile` with the release permissions for testing tracks.
+   access to `run.starbot.mobile` with the release permissions for testing tracks.
 4. Keep the Android upload keystore configured in EAS as the default build credentials. CI downloads
    it. Play App Signing keeps the app signing key; the EAS keystore is the upload key.
 5. Keep the OpenPanel variables in EAS `production`, as for iOS.
@@ -638,7 +638,7 @@ One-time setup:
    published release, Play accepts only draft releases: dispatch with `release_status` set to `draft`
    and roll out the release in Play Console.
 7. Commit `apps/mobile/google-services.json`, the Firebase file of the Android app
-   `run.openbot.mobile`. `app.config.js` adds it when it exists. Without it the build has no Firebase,
+   `run.starbot.mobile`. `app.config.js` adds it when it exists. Without it the build has no Firebase,
    and Android gets no notifications. The file has public identifiers only. The account service has
    the key that sends (`FCM_SERVICE_ACCOUNT` in [the account service](../auth-api/README.md)).
 
@@ -663,7 +663,7 @@ A successful workflow means Google Play accepted the bundle on the selected trac
 upload store metadata, screenshots or release notes. Write the release notes in Play Console.
 
 To build a signed `.aab` on your computer, run `bun run mobile:android:build:local`. It needs JDK 17
-and the Android SDK, and writes `/private/tmp/openbot-play.aab`.
+and the Android SDK, and writes `/private/tmp/starbot-play.aab`.
 See [Fastlane Google Play upload](https://docs.fastlane.tools/actions/upload_to_play_store/).
 
 ### Android APK
@@ -951,8 +951,8 @@ other files stay for the next store version. See
 3. Environment secrets of `release-mobile-ota`:
    - `MOBILE_OTA_PRIVATE_KEY`: the PEM text of the update signing key.
    - `MOBILE_OTA_R2_ACCESS_KEY_ID` and `MOBILE_OTA_R2_SECRET_ACCESS_KEY`: an R2 API token with
-     **Object Read & Write** for the bucket `openbot-mobile-updates` only. The token in Cloudflare
-     is `openbot-mobile-ota-publish`. The access key ID is the ID of the token, and the secret
+     **Object Read & Write** for the bucket `starbot-mobile-updates` only. The token in Cloudflare
+     is `starbot-mobile-ota-publish`. The access key ID is the ID of the token, and the secret
      access key is the SHA-256 of its value.
    - `EXPO_TOKEN`: the same token as in `release-ios`. The workflow reads the public values of the
      EAS environment with it, such as the OpenPanel client. It does not use EAS Update.
@@ -988,11 +988,11 @@ The endpoint is fixed to `https://analytics.starbot.app/api`. No analytics crede
 
 ### Production configuration
 
-1. In the self-hosted OpenPanel dashboard, open the existing **Openbot** project used by desktop and the website.
-   Do not create or select a separate **Openbot Mobile** project.
+1. In the self-hosted OpenPanel dashboard, open the existing **Starbot** project used by desktop and the website.
+   Do not create or select a separate **Starbot Mobile** project.
    Create a separate client for StarBot Mobile with **write** access only. Copy its Client ID and
    Client Secret. Do not use an organization/root client or a client with read access.
-2. In the Expo dashboard, open the **openbot** project → **Environment variables**, select the
+2. In the Expo dashboard, open the **starbot** project → **Environment variables**, select the
    **production** environment, and add:
 
    | Variable | Value |
@@ -1092,7 +1092,7 @@ Opt-out and process exit discard the buffer. Sign-out ends the previous account'
 new signed-out activity can be claimed by the next sign-in. There is no disk queue.
 Existing anonymous events already sent by older builds are not reassigned by this fix.
 If mobile credentials belong to another project, replace both production variables with credentials
-for a write-only client in **Openbot**, then ship a build or compatible update with those values.
+for a write-only client in **Starbot**, then ship a build or compatible update with those values.
 
 Mobile schema generation 2 adds safe error diagnostics. Native error alerts and chat send errors
 emit `notification_shown`; existing failed actions emit a separate `client_operation_failed`.
@@ -1100,7 +1100,7 @@ Only fixed cause, source, operation, and provider/model fields are sent. No aler
 
 Mobile schema generation 3 adds sign-in, hosted server plans, first-run, notification settings,
 Live Activity, voice, agent template and opt-out events, `entry_point` on pairing, and `scope` on
-`usage_viewed`. The generation comes from `ANALYTICS_GENERATIONS.mobile` in `@openbot/telemetry`.
+`usage_viewed`. The generation comes from `ANALYTICS_GENERATIONS.mobile` in `@starbot/telemetry`.
 The file queue holds at most 1,000 reports, 1 MiB, and seven days, and sends only after a local
 write succeeds. Foreground and host reconnection trigger retries. Opt-out and account changes
 clear this queue. See [the analytics contract](../../ANALYTICS.md#reliable-error-reports).

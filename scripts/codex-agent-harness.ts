@@ -3,8 +3,8 @@ import { readFileSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import type { AgentProviderId } from "@starbot/contracts/agent-providers";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
 import { readCodexMcpConfig } from "../src/backend/agent/codex-mcp-config";
 import { codexPromptSettings } from "../src/backend/agent/codex-prompt-settings";
 import { generateTextWithoutTools } from "../src/backend/agent/profile-generation";
@@ -14,7 +14,7 @@ import { CodexAppServerClient } from "../src/backend/app-server-client";
 import type { CodexCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { codexDisabledServers, toMcpShapeFailed } from "../src/backend/mcp-provider-shapes";
-import { webSearchToolSchema } from "../src/backend/openbot-tools";
+import { webSearchToolSchema } from "../src/backend/starbot-tools";
 import {
   type DynamicToolCallParams,
   decodeRecordResponse,
@@ -76,7 +76,7 @@ export async function makeGitWorkspace(workspace: string): Promise<(...args: str
   return git;
 }
 
-export function openbotConfig(read: DynamicRecord | null, promptSettings = true) {
+export function starbotConfig(read: DynamicRecord | null, promptSettings = true) {
   return {
     tools: { update_plan: { enabled: true }, experimental_request_user_input: { enabled: false } },
     ...CODEX_FEATURES_CONFIG,
@@ -145,7 +145,7 @@ export async function startCodexAgent(
   const request = (method: string, params: unknown) =>
     runCauseEffect(client.request(method, params, decodeRecordResponse));
   await request("initialize", {
-    clientInfo: { name: "openbot", title: "StarBot", version: "0.0.0" },
+    clientInfo: { name: "starbot", title: "StarBot", version: "0.0.0" },
     capabilities: { experimentalApi: true },
   });
   client.notify("initialized");
@@ -165,7 +165,7 @@ export async function startCodexAgent(
         approvalPolicy: "on-request",
         sandbox: "danger-full-access",
         developerInstructions: DEVELOPER_INSTRUCTIONS,
-        serviceName: "openbot",
+        serviceName: "starbot",
         dynamicTools: visibleDynamicTools(catalog),
       });
       const thread = getRecord(started, "thread");
@@ -270,7 +270,7 @@ export function toolCallParams(params: DynamicRecord): DynamicToolCallParams {
     threadId: getString(params, "threadId") ?? "",
     turnId: getString(params, "turnId") ?? "",
     callId: getString(params, "callId") ?? "",
-    namespace: "openbot",
+    namespace: "starbot",
     tool: getString(params, "tool") ?? "",
     arguments: params.arguments,
   };

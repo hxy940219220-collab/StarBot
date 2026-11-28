@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
+import { agentProviderDescriptor } from "@starbot/contracts/agent-providers";
 import {
   type AgentSummary,
   type AgentTask,
@@ -9,19 +9,19 @@ import {
   type ClientAgentSummary,
   isAgentModelOption,
   isAgentSummary,
-  type OpenBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+  type StarBotDesktopApi,
+} from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
 import { readDevInstanceRecords } from "./dev-automation/instance-registry";
 
 declare global {
   interface Window {
-    openbot: OpenBotDesktopApi;
+    starbot: StarBotDesktopApi;
   }
 }
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-tasks-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/agent-tasks-e2e");
 const argument = (name: string) => process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(`--${name}=`.length);
 const agentArgument = argument("agent");
 assert.ok(agentArgument, "Pass --agent=<agent id> of an agent whose provider is signed in.");
@@ -64,19 +64,19 @@ assertMutationAllowed({
   instanceNamed: true,
   target: instance.instanceId,
 });
-const session = await connectToDevApp(instance.remoteDebuggingPort, createOpenBotLogger("agent-tasks-e2e"), {
+const session = await connectToDevApp(instance.remoteDebuggingPort, createStarBotLogger("agent-tasks-e2e"), {
   expectedRendererPort: instance.rendererPort,
   ownerPid: instance.pid,
 });
 const page = session.page;
 
 function listTasks(): Promise<AgentTasksSnapshot> {
-  return page.evaluate((id) => window.openbot.agent.listTasks(id), agentId);
+  return page.evaluate((id) => window.starbot.agent.listTasks(id), agentId);
 }
 
 async function readAgent(): Promise<AgentSummary> {
   const agent = await page.evaluate(async (id) => {
-    const agent = (await window.openbot.agent.listAgents()).find((candidate) => candidate.id === id);
+    const agent = (await window.starbot.agent.listAgents()).find((candidate) => candidate.id === id);
     if (!agent) throw new Error(`Unknown agent: ${id}`);
     return agent;
   }, agentId);
@@ -85,7 +85,7 @@ async function readAgent(): Promise<AgentSummary> {
 }
 
 function setTaskLimit(taskLimit: number | null): Promise<ClientAgentSummary> {
-  return page.evaluate(({ id, limit }) => window.openbot.agent.updateAgent({ agentId: id, taskLimit: limit }), {
+  return page.evaluate(({ id, limit }) => window.starbot.agent.updateAgent({ agentId: id, taskLimit: limit }), {
     id: agentId,
     limit: taskLimit,
   });
@@ -94,7 +94,7 @@ function setTaskLimit(taskLimit: number | null): Promise<ClientAgentSummary> {
 async function startTask(text: string): Promise<AgentTask> {
   const task = await page.evaluate(
     ({ id, prompt }) =>
-      window.openbot.agent.startTask({ agentId: id, text: prompt, clientMessageId: crypto.randomUUID() }),
+      window.starbot.agent.startTask({ agentId: id, text: prompt, clientMessageId: crypto.randomUUID() }),
     { id: agentId, prompt: text },
   );
   started.push(task.id);
@@ -154,13 +154,13 @@ try {
   report.raisedLimit = { second: taskIn(raised, second.id).state, limit: raised.limit };
   assert.equal(raised.limit, 2);
 
-  const models = await page.evaluate(() => window.openbot.agent.listModels());
+  const models = await page.evaluate(() => window.starbot.agent.listModels());
   const target = models.filter(isAgentModelOption).find((model) => model.provider !== before.provider) ?? null;
   const running = await listTasks();
   if (target && taskIn(running, first.id).state === "running") {
     const outcome = await page.evaluate(
       async ({ id, provider, model }) => {
-        const agent = await window.openbot.agent.updateAgent({ agentId: id, provider, model });
+        const agent = await window.starbot.agent.updateAgent({ agentId: id, provider, model });
         return {
           refused: false,
           provider: agent.provider,
@@ -176,7 +176,7 @@ try {
     assert.equal(outcome.pendingProvider, target.provider);
     assert.equal(outcome.pendingModel, target.id);
     await page.evaluate(
-      ({ id, provider, model }) => window.openbot.agent.updateAgent({ agentId: id, provider, model }),
+      ({ id, provider, model }) => window.starbot.agent.updateAgent({ agentId: id, provider, model }),
       { id: agentId, provider: before.provider, model: before.model },
     );
   } else {
@@ -184,7 +184,7 @@ try {
   }
 
   for (const taskId of [first.id, second.id]) {
-    await page.evaluate(({ id, task }) => window.openbot.agent.stopTask({ agentId: id, taskId: task }), {
+    await page.evaluate(({ id, task }) => window.starbot.agent.stopTask({ agentId: id, taskId: task }), {
       id: agentId,
       task: taskId,
     });
@@ -204,7 +204,7 @@ try {
 } finally {
   for (const taskId of started) {
     await page
-      .evaluate(({ id, task }) => window.openbot.agent.stopTask({ agentId: id, taskId: task }), {
+      .evaluate(({ id, task }) => window.starbot.agent.stopTask({ agentId: id, taskId: task }), {
         id: agentId,
         task: taskId,
       })
@@ -217,7 +217,7 @@ try {
   }
   for (const taskId of started) {
     await page
-      .evaluate(({ id, task }) => window.openbot.agent.closeTask({ agentId: id, taskId: task }), {
+      .evaluate(({ id, task }) => window.starbot.agent.closeTask({ agentId: id, taskId: task }), {
         id: agentId,
         task: taskId,
       })

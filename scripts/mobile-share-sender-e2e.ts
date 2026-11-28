@@ -2,20 +2,20 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import { chromium } from "playwright-core";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = join(ROOT, ".openbot-build", "mobile-share-sender-e2e");
+const OUT = join(ROOT, ".starbot-build", "mobile-share-sender-e2e");
 const PAGE = join(OUT, "share-sender.html");
-const API_URL = "https://api.openbot.test/";
+const API_URL = "https://api.starbot.test/";
 const SESSION_TOKEN = "share-e2e-session-token";
 const SESSION_ID = "share-e2e-session";
 const PAGE_SIZE_LIMIT = 1_500_000;
 const SIGNAL_WAIT_MS = 20_000;
 
-const logger = createOpenBotLogger("mobile-share-sender-e2e");
+const logger = createStarBotLogger("mobile-share-sender-e2e");
 const checks: { name: string; passed: boolean; detail?: unknown }[] = [];
 function check(name: string, passed: boolean, detail?: unknown) {
   checks.push({ name, passed, ...(detail === undefined ? {} : { detail }) });
@@ -44,7 +44,7 @@ function shareRequest(hostId: string) {
 }
 
 function sendScript(hostId: string): string {
-  return `window.openbotShareSend(${JSON.stringify(shareRequest(hostId))})`;
+  return `window.starbotShareSend(${JSON.stringify(shareRequest(hostId))})`;
 }
 
 async function main(): Promise<void> {
@@ -81,7 +81,7 @@ async function main(): Promise<void> {
     page.on("request", (request) => {
       if (!request.url().startsWith("file:")) directRequests.push(request.url());
     });
-    await page.exposeFunction("openbotBridge", (message: unknown) => {
+    await page.exposeFunction("starbotBridge", (message: unknown) => {
       if (!isDynamicRecord(message)) return null;
       if (message.type === "file") {
         fileReads.push(Number(message.index));
@@ -112,11 +112,11 @@ async function main(): Promise<void> {
       return json(404, { error: "not_found" });
     });
     await page.addInitScript(
-      "window.webkit = { messageHandlers: { openbot: { postMessage: (message) => window.openbotBridge(message) } } };",
+      "window.webkit = { messageHandlers: { starbot: { postMessage: (message) => window.starbotBridge(message) } } };",
     );
     await page.goto(pathToFileURL(PAGE).href);
-    const offered = await page.evaluate("typeof window.openbotShareSend");
-    check("the page offers openbotShareSend under its CSP", offered === "function", { offered, pageErrors });
+    const offered = await page.evaluate("typeof window.starbotShareSend");
+    check("the page offers starbotShareSend under its CSP", offered === "function", { offered, pageErrors });
 
     const refused = await page.evaluate(sendScript("host-refused"));
     check(

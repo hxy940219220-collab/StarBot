@@ -1,7 +1,7 @@
-import type { AgentProviderId } from "@openbot/contracts/ipc";
-import { Toaster } from "@openbot/ui";
-import type { ProviderPickerOption } from "@openbot/ui/components/ProviderPicker";
-import { ProviderPicker } from "@openbot/ui/components/ProviderPicker";
+import type { AgentProviderId } from "@starbot/contracts/ipc";
+import { Toaster } from "@starbot/ui";
+import type { ProviderPickerOption } from "@starbot/ui/components/ProviderPicker";
+import { ProviderPicker } from "@starbot/ui/components/ProviderPicker";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -265,7 +265,7 @@ export const ProviderSwitchError: Story = {
   render: () => (
     <ProviderSwitchStory
       off={[]}
-      save={() => Promise.reject(new Error("OpenBot could not change the provider setting."))}
+      save={() => Promise.reject(new Error("StarBot could not change the provider setting."))}
     />
   ),
 };

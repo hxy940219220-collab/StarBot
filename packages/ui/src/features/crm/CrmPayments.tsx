@@ -1,4 +1,4 @@
-import type { CrmPayment } from "@openbot/contracts/ipc";
+import type { CrmPayment } from "@starbot/contracts/ipc";
 import {
   Badge,
   Button,
@@ -16,8 +16,8 @@ import {
   Tag,
   UserRound,
   X,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, Show } from "solid-js";
 import { sheetLayout } from "./CrmCustomers";
 import { Chips, Empty, Logo, Owner, PaymentMenu, PayStateBadge, useMarkPaid } from "./CrmParts";

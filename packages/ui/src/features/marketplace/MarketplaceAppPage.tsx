@@ -1,8 +1,8 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { mcpFlowFields } from "@openbot/contracts/mcp-connect-flows";
-import { pluginLinkText } from "@openbot/contracts/plugin-links";
-import type { AppTextKey } from "@openbot/i18n";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { mcpFlowFields } from "@starbot/contracts/mcp-connect-flows";
+import { pluginLinkText } from "@starbot/contracts/plugin-links";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Alert,
   AlertContent,
@@ -32,8 +32,8 @@ import {
   Text,
   Trash2,
   TriangleAlert,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createMemo, createSignal, For, Match, Show, Switch } from "solid-js";
 import { ProviderAccountRenameField } from "../../components/ProviderAccountList";
 import { type ConnectorDetail, ConnectorDetailPanel, connectorDescription } from "../connectors/ConnectorDetailPanel";

@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   Archive,
   ArrowRightToLine,
@@ -10,8 +10,8 @@ import {
   SlidingTabs,
   Trash2,
   X,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, flush, onSettled, Show } from "solid-js";
 import { formatShortSessionTabTitle } from "../main-session-title";

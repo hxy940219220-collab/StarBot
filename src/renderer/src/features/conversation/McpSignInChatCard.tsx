@@ -1,8 +1,8 @@
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import { McpSignInCard, type McpSignInCardState } from "@openbot/ui/features/conversation/McpSignInCard";
-import { isPluginAppConfig } from "@openbot/ui/features/settings/marketplace-plugins";
-import { useText } from "@openbot/ui/text";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
+import { McpSignInCard, type McpSignInCardState } from "@starbot/ui/features/conversation/McpSignInCard";
+import { isPluginAppConfig } from "@starbot/ui/features/settings/marketplace-plugins";
+import { useText } from "@starbot/ui/text";
 import { createMemo, createSignal, Show } from "solid-js";
 import { MARKETPLACE_PLUGINS } from "../settings/marketplace-plugin-catalog";
 import { conversationRuntime } from "./conversation-runtime";

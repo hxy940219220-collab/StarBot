@@ -1,6 +1,6 @@
-import { Button } from "@openbot/ui";
-import { ComposerErrorBanner } from "@openbot/ui/features/conversation/ComposerErrorBanner";
-import { ComposerUsageLimitNotice } from "@openbot/ui/features/conversation/ComposerNotice";
+import { Button } from "@starbot/ui";
+import { ComposerErrorBanner } from "@starbot/ui/features/conversation/ComposerErrorBanner";
+import { ComposerUsageLimitNotice } from "@starbot/ui/features/conversation/ComposerNotice";
 import type { JSX } from "@solidjs/web";
 import { createSignal, Show } from "solid-js";
 import { fn } from "storybook/test";

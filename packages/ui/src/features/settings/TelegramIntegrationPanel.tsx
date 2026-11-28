@@ -1,7 +1,7 @@
-import type { ConnectTelegramChatInput, MessagingConnection } from "@openbot/contracts/ipc";
-import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@openbot/contracts/telegram-app";
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, ExternalLink, ItemGroup, SettingsSection } from "@openbot/ui";
+import type { ConnectTelegramChatInput, MessagingConnection } from "@starbot/contracts/ipc";
+import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@starbot/contracts/telegram-app";
+import type { AppTextKey } from "@starbot/i18n";
+import { Button, ExternalLink, ItemGroup, SettingsSection } from "@starbot/ui";
 import { createEffect, createSignal, For, Match, Switch } from "solid-js";
 import { useText } from "../../text";
 import { TelegramTile } from "./brand-marks";

@@ -1,4 +1,4 @@
-import { AppWindow, buttonVariants, Clock3, ContextMenu, Lock } from "@openbot/ui";
+import { AppWindow, buttonVariants, Clock3, ContextMenu, Lock } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, Show } from "solid-js";
 import type { AgentProfile } from "../../data";

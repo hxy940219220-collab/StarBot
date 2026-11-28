@@ -4,7 +4,7 @@ import {
   type SidebarSection,
   sidebarFolderParents,
   sidebarFolderTreeOrder,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export function applySidebarLayoutAction(
   layout: SidebarLayoutSnapshot,

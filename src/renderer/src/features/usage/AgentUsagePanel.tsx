@@ -3,12 +3,12 @@ import {
   type ClientAgentSummary,
   type HostAnalytics,
   type HostAnalyticsInput,
-} from "@openbot/contracts/ipc";
-import { Button, ErrorReference, IconButton, RefreshCw } from "@openbot/ui";
-import { type UsageMetric, type UsagePeriod, usagePeriodDays } from "@openbot/ui/features/usage/usage-format";
-import { PageHeader } from "@openbot/ui/features/window/PageHeader";
-import { useText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { Button, ErrorReference, IconButton, RefreshCw } from "@starbot/ui";
+import { type UsageMetric, type UsagePeriod, usagePeriodDays } from "@starbot/ui/features/usage/usage-format";
+import { PageHeader } from "@starbot/ui/features/window/PageHeader";
+import { useText } from "@starbot/ui/text";
+import { errorReference } from "@starbot/user-errors";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createStore, onSettled, Show } from "solid-js";
 import { desktopAnalytics } from "../../analytics";

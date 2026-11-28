@@ -8,7 +8,7 @@ import { type AppServerNotification, getRecord, getString, isRecord } from "../s
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/antigravity-steer-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/antigravity-steer-e2e");
 const TURN_TIMEOUT_MS = 20_000;
 
 interface LogEntry {
@@ -38,7 +38,7 @@ interface Report {
   failure?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-antigravity-steer-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-antigravity-steer-e2e-"));
 process.env.GEMINI_HOME = join(root, "gemini");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];
@@ -84,7 +84,7 @@ async function startTurn(client: AgentClient, thread: string, log: string, text:
     listener = (notification) => {
       if (getString(notification.params, "threadId") !== thread) return;
       if (notification.method === "turn/started") started += 1;
-      if (notification.method === "openbot/usage") usage += 1;
+      if (notification.method === "starbot/usage") usage += 1;
       if (notification.method === "item/completed" && isRecord(notification.params))
         reply += getString(notification.params.item, "text") ?? "";
       if (notification.method === "turn/completed") {

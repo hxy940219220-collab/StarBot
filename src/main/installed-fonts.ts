@@ -1,9 +1,9 @@
 import { execFile } from "node:child_process";
-import { isAppFontFamily } from "@openbot/contracts/app-appearance";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { isAppFontFamily } from "@starbot/contracts/app-appearance";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Result, Schema } from "effect";
 
-const logger = createOpenBotLogger("installed-fonts");
+const logger = createStarBotLogger("installed-fonts");
 
 const LIST_TIMEOUT_MS = 10_000;
 const LIST_MAX_BUFFER = 8 * 1024 * 1024;

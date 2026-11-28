@@ -131,7 +131,7 @@ export const messages = {
   "files.storage.allFiles": "כל הקבצים",
   "files.storage.allFilesOn": "כל הקבצים ב-{host}",
   "files.storage.allFilesDescription": "קבצים של כל הסוכנים והצ'אטים",
-  "files.storage.openBotOn": "StarBot ב-{host}",
+  "files.storage.starBotOn": "StarBot ב-{host}",
 
   "files.storage.measuring": "מודד…",
   "files.storage.measureAgain": "מדידה מחדש",

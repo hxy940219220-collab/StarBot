@@ -117,7 +117,7 @@ export const messages = {
   "files.storage.allFiles": "すべてのファイル",
   "files.storage.allFilesOn": "{host} のすべてのファイル",
   "files.storage.allFilesDescription": "すべてのエージェントとチャットのファイル",
-  "files.storage.openBotOn": "{host} の StarBot",
+  "files.storage.starBotOn": "{host} の StarBot",
 
   "files.storage.measuring": "計測中…",
   "files.storage.measureAgain": "もう一度計測",

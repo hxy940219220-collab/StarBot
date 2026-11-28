@@ -6,8 +6,8 @@ import {
   type UiBlockResponse,
   type UiConfirmBlock as UiConfirmSpec,
   uiConfirmPreviewEditable,
-} from "@openbot/contracts/ui-blocks";
-import { Button, NativeSelect, Textarea } from "@openbot/ui";
+} from "@starbot/contracts/ui-blocks";
+import { Button, NativeSelect, Textarea } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createSignal, createUniqueId, For, flush, Match, onSettled, Show, Switch } from "solid-js";
 import { useText } from "../../../text";

@@ -5,8 +5,8 @@ import {
   type HostTurnLimitsInput,
   isHostAgentTaskLimit,
   isHostTurnLimit,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import { type PreferenceFileFailure, PreferenceStore } from "./preference-file";
 

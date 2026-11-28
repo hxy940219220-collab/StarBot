@@ -1,8 +1,8 @@
 import {
   WHATSAPP_READ_ONLY_CAPABILITY,
   WHATSAPP_READ_ONLY_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-read-only-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/whatsapp-read-only-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { parseSetWhatsAppSenderReadOnlyInput } from "../ipc/messaging-inputs";
 import type { TeamApiConnectors } from "./dependencies";

@@ -1,5 +1,5 @@
-import { AGENT_DOCK_SIZE_LIMITS, type AgentDockDisplay, type AgentDockDisplayInfo } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import { AGENT_DOCK_SIZE_LIMITS, type AgentDockDisplay, type AgentDockDisplayInfo } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Button,
   Item,
@@ -16,8 +16,8 @@ import {
   SettingsSection,
   SliderField,
   SwitchField,
-} from "@openbot/ui";
-import type { ComposerAgent } from "@openbot/ui/data";
+} from "@starbot/ui";
+import type { ComposerAgent } from "@starbot/ui/data";
 import type { JSX } from "@solidjs/web";
 import { createMemo, createSignal, onCleanup, onSettled, Show } from "solid-js";
 import { useI18n } from "../../i18n-context";

@@ -1,8 +1,8 @@
 import { randomBytes, timingSafeEqual } from "node:crypto";
 import { connect, createServer, isIP, type Server, type Socket } from "node:net";
 import type { Duplex } from "node:stream";
-import type { BrowserProxyFailure } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { BrowserProxyFailure } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { type BrowserOperationError, browserFailure } from "../browser-effects";
 
@@ -40,7 +40,7 @@ export interface BrowserProxyRelay {
   readonly close: Effect.Effect<void>;
 }
 
-const RELAY_USERNAME = "openbot";
+const RELAY_USERNAME = "starbot";
 const HEAD_MAX_BYTES = 64 * 1024;
 const HEAD_TIMEOUT_MS = 30_000;
 const SOCKS_TIMEOUT_MS = 20_000;

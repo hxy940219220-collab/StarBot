@@ -3,10 +3,10 @@ import {
   decodeWorkflowFoldersSnapshot,
   type HostReleaseStatus,
   type WorkflowFoldersSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
-import { emptyDecoder } from "@openbot/contracts/ipc-decoding";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { emptyDecoder } from "@starbot/contracts/ipc-decoding";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 
 export type ResponseDecoder<T> = (value: unknown) => T;
 

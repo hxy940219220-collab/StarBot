@@ -6,9 +6,9 @@ import {
   type WorkflowMediaInput,
   type WorkflowMediaKind,
   type WorkflowMediaSpecs,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Duration, Effect } from "effect";
 import { type HiggsfieldCatalogEntry, type HiggsfieldPlan, higgsfieldCatalogEntry } from "./higgsfield-catalog";
 import {
@@ -115,7 +115,7 @@ const uploadMedia = Effect.fnUntraced(function* (
 ) {
   const bytes = yield* Effect.tryPromise({ try: () => readFile(file.path), catch: () => mediaFailed() });
   const answer = yield* callTool(client, "media_upload", {
-    filename: `openbot-input-${index + 1}.${pictureExtension(file.mimeType)}`,
+    filename: `starbot-input-${index + 1}.${pictureExtension(file.mimeType)}`,
     content_type: file.mimeType,
   });
   const target = firstRecord(answer.uploads);

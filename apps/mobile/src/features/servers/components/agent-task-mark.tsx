@@ -1,4 +1,4 @@
-import type { AgentTask } from "@openbot/contracts/ipc";
+import type { AgentTask } from "@starbot/contracts/ipc";
 import Check from "lucide-react-native/icons/check";
 import Circle from "lucide-react-native/icons/circle";
 import X from "lucide-react-native/icons/x";
@@ -6,10 +6,10 @@ import { View } from "react-native";
 import { useCSSVariable } from "uniwind";
 
 export function AgentTaskMark({ task }: { task: AgentTask }) {
-  const muted = String(useCSSVariable("--openbot-text-grouped-secondary"));
-  const accent = String(useCSSVariable("--openbot-accent-text"));
-  const success = String(useCSSVariable("--openbot-success-text"));
-  const danger = String(useCSSVariable("--openbot-danger-text"));
+  const muted = String(useCSSVariable("--starbot-text-grouped-secondary"));
+  const accent = String(useCSSVariable("--starbot-accent-text"));
+  const success = String(useCSSVariable("--starbot-success-text"));
+  const danger = String(useCSSVariable("--starbot-danger-text"));
   return (
     <View
       className="size-4 items-center justify-center"

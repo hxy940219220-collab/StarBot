@@ -1,7 +1,7 @@
 import type { ExpressionId } from "@norbert_bodziony/bloub";
 import type { PlushState } from "@norbert_bodziony/bloub/plush";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { agentProviderDescriptor } from "@starbot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AccountUsage,
   AgentModelId,
@@ -14,9 +14,9 @@ import type {
   CustomAgentSummary,
   CustomProviderSummary,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
-import { Button, Field, Input, Textarea } from "@openbot/ui";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@starbot/i18n";
+import { Button, Field, Input, Textarea } from "@starbot/ui";
 import { createMemo, createSignal, For, onCleanup, onSettled, Show } from "solid-js";
 import {
   avatarColorChoicesForSeed,

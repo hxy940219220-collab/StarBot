@@ -50,31 +50,31 @@ What the workflows do, checked on 2026-10-01:
   which was last changed on 2026-08-31 and does not have the Slack route key. Signal then refuses every
   route ticket.
 - **Signal.** No workflow. `docs/remote-session-deployment.md` deploys it by hand over SSH. The release
-  links the server's own `/opt/openbot/remote/.env.production`; the archive leaves out `.env*`. The
+  links the server's own `/opt/starbot/remote/.env.production`; the archive leaves out `.env*`. The
   `SLACK_SIGNING_SECRET` in this repository does not reach the server by itself.
 - **Desktop.** `release.yml` on a version tag.
 
-Live state on 2026-10-01: `api.starbot.app/.well-known/jwks.json` lists only `openbot-remote-1`.
+Live state on 2026-10-01: `api.starbot.app/.well-known/jwks.json` lists only `starbot-remote-1`.
 `/v2/slack/authorize`, `/v2/remote/slack-route/validate` and `signal.starbot.app/v1/slack/events`
 return 404.
 
 Do the steps in this order:
 
 1. **GitHub secret.** Set `REMOTE_TICKET_PUBLIC_JWKS` in the `cloudflare-production` environment to the
-   decrypted value from `apps/auth-api/.env.production`. It lists `openbot-remote-1` and
-   `openbot-slack-route-1`.
+   decrypted value from `apps/auth-api/.env.production`. It lists `starbot-remote-1` and
+   `starbot-slack-route-1`.
 2. **Merge** the `slack-messaging` PR. CI applies D1 migration `0025` and deploys the Worker.
 3. **Worker Slack secrets**, one time: `bun run api:deploy` from `main`. It uploads `SLACK_CLIENT_ID`,
    `SLACK_CLIENT_SECRET`, `SLACK_STATE_SECRET`, `SLACK_ROUTE_PRIVATE_JWK` and `SLACK_ROUTE_KEY_ID`.
    Check:
-   - [ ] `jwks.json` lists `openbot-slack-route-1`.
+   - [ ] `jwks.json` lists `starbot-slack-route-1`.
    - [ ] `POST /v2/slack/authorize` without a session gives 401, not 404 or 503.
    - [ ] `POST /v2/remote/slack-route/validate` without a signature gives 401.
 4. **Signal**, after the Worker: Signal asks `/v2/remote/slack-route/validate` for 5 minutes after it
    starts, so an older Worker makes every `ingress` hello fail.
    - [ ] Set `SLACK_SIGNING_SECRET` as `A0C5H5C95NH:<production secret>,A0C5G5XGS83:<development secret>`.
          Signal binds each secret to its app. A value without app IDs turns the Slack route off (503).
-         `remote/.env.production` here and the server's `/opt/openbot/remote/.env.production` hold the
+         `remote/.env.production` here and the server's `/opt/starbot/remote/.env.production` hold the
          same value, encrypted with the root `DOTENV_PRIVATE_KEY_PRODUCTION`. It lists only
          `A0C5H5C95NH`. To add the development app, change the repository file with `-fk .env.keys`,
          then copy it to the server.
@@ -122,13 +122,13 @@ Then the same with production, in the unlisted pilot.
 
 | Item | State |
 | --- | --- |
-| Slack CLI login | `hello` in `openbotdev` (`T0C5B1XG542`) |
+| Slack CLI login | `hello` in `starbotdev` (`T0C5B1XG542`) |
 | Apps | `A0C5H5C95NH` (production), `A0C5G5XGS83` (development). StarBot manifest and icons applied on 2026-10-01. Distribution off. |
-| Old apps | `A0C5K4J6AUW`, `A0C5QNZTWLC` in `openbot-dev` (`T0C5443H7CP`). Not used, not deleted. |
+| Old apps | `A0C5K4J6AUW`, `A0C5QNZTWLC` in `starbot-dev` (`T0C5443H7CP`). Not used, not deleted. |
 | Code | #1152 merged on 2026-10-01 (`e9c04806`). No desktop release has it yet. |
-| Worker | Deployed by CI with D1 `0025`. Slack secrets set, and the JWKS lists `openbot-slack-route-1`. GitHub `REMOTE_TICKET_PUBLIC_JWKS` has the route key. |
-| Signal | Release `e9c04806` on `sui-alexandria`, with `SLACK_SIGNING_SECRET` for both apps and the `/v1/slack/` nginx block. Rollback image `openbot-remote-api:before-slack`. |
-| End-to-end | A dev build of `main` connected a workspace on production on 2026-10-01 and answered in Slack. The `openbot://` return reached the installed release, so the link was sent to the dev app by hand. |
+| Worker | Deployed by CI with D1 `0025`. Slack secrets set, and the JWKS lists `starbot-slack-route-1`. GitHub `REMOTE_TICKET_PUBLIC_JWKS` has the route key. |
+| Signal | Release `e9c04806` on `sui-alexandria`, with `SLACK_SIGNING_SECRET` for both apps and the `/v1/slack/` nginx block. Rollback image `starbot-remote-api:before-slack`. |
+| End-to-end | A dev build of `main` connected a workspace on production on 2026-10-01 and answered in Slack. The `starbot://` return reached the installed release, so the link was sent to the dev app by hand. |
 | Not done | Request URL check in the production app settings, distribution, device checks after the Signal restart, desktop release. |
 
 ## Sources

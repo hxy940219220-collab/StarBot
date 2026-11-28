@@ -5,11 +5,11 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import { isMissingFileError } from "../src/backend/file-errors";
 
-const logger = createOpenBotLogger("verify-macos-package");
+const logger = createStarBotLogger("verify-macos-package");
 
 const FUSE_DISABLED = 48;
 const FUSE_ENABLED = 49;
@@ -85,9 +85,9 @@ await Promise.all([
   access(resolve(resourcesPath, "remote-desktop-runtime/source-manifest.json")),
   access(resolve(resourcesPath, "remote-desktop-runtime/DISTRIBUTION-SHA256SUMS.txt")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/Sunshine-v2026.516.143833-source.tar.gz")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/sunshine-v2026.516.143833-openbot.patch")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot-source.tar.gz")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot.patch")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/sunshine-v2026.516.143833-starbot.patch")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-starbot-source.tar.gz")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-starbot.patch")),
   access(resolve(remoteRuntimePath, "Sunshine.app/Contents/MacOS/Sunshine")),
   access(resolve(remoteRuntimePath, "web-server")),
   access(resolve(remoteRuntimePath, "streamer")),
@@ -116,7 +116,7 @@ const plist = JSON.parse(run("plutil", ["-convert", "json", "-o", "-", plistPath
 if (!isDynamicRecord(plist)) throw new Error("Info.plist is not a JSON object.");
 expectEqual(plist.CFBundleDisplayName, "StarBot", "display name");
 expectEqual(plist.CFBundleExecutable, "StarBot", "executable name");
-expectEqual(plist.CFBundleIdentifier, "app.openbot.desktop", "bundle identifier");
+expectEqual(plist.CFBundleIdentifier, "app.starbot.desktop", "bundle identifier");
 expectEqual(plist.CFBundleIconFile, "icon.icns", "application icon");
 expectEqual(plist.CFBundleIconName, "Icon", "macOS 26 application icon");
 expectEqual(plist.LSMinimumSystemVersion, "13.0", "minimum macOS version");
@@ -224,7 +224,7 @@ async function verifyPackagedIcon(packagedPath: string, sourcePath: string): Pro
     throw new Error("The packaged macOS icon does not match build/icon-production.icns.");
   }
 
-  const iconRoot = await mkdtemp(join(tmpdir(), "openbot-icon-"));
+  const iconRoot = await mkdtemp(join(tmpdir(), "starbot-icon-"));
   const iconSetPath = join(iconRoot, "StarBot.iconset");
   try {
     run("iconutil", ["--convert", "iconset", packagedPath, "--output", iconSetPath]);
@@ -266,15 +266,15 @@ function run(command: string, args: string[], includeStderr = false): string {
 }
 
 async function verifyLaunch(executable: string): Promise<void> {
-  const userDataPath = await mkdtemp(join(tmpdir(), "openbot-package-smoke-"));
+  const userDataPath = await mkdtemp(join(tmpdir(), "starbot-package-smoke-"));
   const child = spawn(executable, [`--user-data-dir=${userDataPath}`, "--use-mock-keychain"], {
     env: {
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok"),
+      STARBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
+      STARBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
+      STARBOT_GROK_PATH: join(userDataPath, "missing-grok"),
     },
     stdio: ["ignore", "ignore", "pipe"],
   });
@@ -378,9 +378,9 @@ async function verifySecondInstanceExits(
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok"),
+      STARBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
+      STARBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
+      STARBOT_GROK_PATH: join(userDataPath, "missing-grok"),
     },
     stdio: ["ignore", "ignore", "pipe"],
   });

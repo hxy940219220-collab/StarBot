@@ -6,8 +6,8 @@ import { createServer as createTcpServer } from "node:net";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
-import { composedCustomModelId, isAgentModel } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { composedCustomModelId, isAgentModel } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentClient } from "../src/backend/agent-client";
 import { resolveOpencodeCli } from "../src/backend/cli";
@@ -18,7 +18,7 @@ import { requireProviderDriver } from "../src/backend/provider-drivers";
 import { createModelReasoningSupport } from "../src/main/model-reasoning-probe";
 import { runTurn, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-custom-model");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-custom-model");
 const ENDPOINT = "spark";
 const DEFAULT_MODEL = "default-model";
 const AGENT_MODEL = "agent-model";
@@ -70,7 +70,7 @@ interface Report {
 }
 
 const report: Report = { passed: false, requests: [], ollamaRequests: [], turns: [] };
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-model-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-opencode-model-e2e-"));
 const clients: AgentClient[] = [];
 const run = promisify(execFile);
 const pdfPath = join(root, "workspace", "report.pdf");

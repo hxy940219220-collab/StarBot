@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { FeedbackPhone } from "@openbot/contracts/feedback";
+import type { FeedbackPhone } from "@starbot/contracts/feedback";
 import type {
   AgentApproval,
   AgentApprovalKind,
@@ -15,15 +15,15 @@ import type {
   RespondToApprovalInput,
   RespondToBrowserTakeoverInput,
   RespondToPromptInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_RUNTIME_ATTENTION_LIMIT,
   AGENT_WELCOME_ITEM_TYPE,
   BROWSER_TAKEOVER_REASONS,
   cardBrand,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { normalizeTwoStepKey, twoStepKeySecret } from "@openbot/contracts/two-step-code";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { normalizeTwoStepKey, twoStepKeySecret } from "@starbot/contracts/two-step-code";
 import {
   type ConversationUiBlock,
   normalizeConversationUiBlock,
@@ -45,9 +45,9 @@ import {
   uiBlockResponseFromAnswers,
   uiConfirmPreviewEdit,
   validateUiBlockResponse,
-} from "@openbot/contracts/ui-blocks";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText, registerSecretValue, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ui-blocks";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Option, Result, Schema } from "effect";
 import { getDomain } from "tldts";
 import type { AgentApiKeys, SavedApiKey } from "../agent-api-keys";
@@ -132,7 +132,7 @@ import {
 import { compactRuntimeApproval, compactRuntimeQuestion } from "./runtime-snapshot";
 import { isDynamicToolCall } from "./thread-items";
 
-const logger = createOpenBotLogger("attention-registry");
+const logger = createStarBotLogger("attention-registry");
 
 interface PendingPrompt {
   client: AgentClient;
@@ -200,7 +200,7 @@ interface PendingApproval {
 
 export type ToolApprovalDecision = "accept" | "decline" | "cancel";
 
-const TOOL_APPROVAL_METHOD = "openbot/tool-approval";
+const TOOL_APPROVAL_METHOD = "starbot/tool-approval";
 const MESSAGING_QUESTION_REFUSED =
   "This conversation is in an external chat, where nobody can answer a question card. Ask the question in your answer: the person replies in the conversation.";
 const MESSAGING_REQUEST_CARD_REFUSED =
@@ -622,14 +622,14 @@ export class AttentionRegistry {
         .map((pending) => ({
           requestId: this.#localHandle(pending),
           questions: structuredClone(pending.questions),
-          requiresOpenBot: pending.questions.some(localQuestionNeedsOpenBot),
+          requiresStarBot: pending.questions.some(localQuestionNeedsStarBot),
         })),
       approvals: [...this.#approvals.values()]
         .filter((pending) => pending.approval.agentId === agentId)
         .map((pending) => ({ ...structuredClone(pending.approval), requestId: this.#localHandle(pending) })),
       browserTakeovers: [...this.#takeovers.values()]
         .filter((pending) => pending.request.agentId === agentId)
-        .map((pending) => ({ requestId: this.#localHandle(pending), requiresOpenBot: true })),
+        .map((pending) => ({ requestId: this.#localHandle(pending), requiresStarBot: true })),
     };
   }
 
@@ -642,7 +642,7 @@ export class AttentionRegistry {
       const pending = [...this.#prompts.values()].find(
         (entry) => entry.agentId === agentId && this.#localHandles.get(entry) === input.requestId,
       );
-      if (!pending || pending.questions.some(localQuestionNeedsOpenBot)) {
+      if (!pending || pending.questions.some(localQuestionNeedsStarBot)) {
         return yield* attentionStep(() => {
           throw new InactiveAttentionRequest(sourceText("error.backend.promptInactive"));
         });
@@ -2411,7 +2411,7 @@ export class AttentionRegistry {
     if (login.unknown)
       return skip(
         "unknown-login",
-        `no saved login for this site has the id ${login.loginId}. Call list_logins and give the id of a login exactly as list_logins shows it, with its prefix, for example openbot:.`,
+        `no saved login for this site has the id ${login.loginId}. Call list_logins and give the id of a login exactly as list_logins shows it, with its prefix, for example starbot:.`,
         { loginId: login.loginId, ...(login.otherLogins ? { card: "login-choice" } : {}) },
       );
     if (!login.secret)
@@ -2646,7 +2646,7 @@ class AttentionOperationFailed extends Schema.TaggedError<AttentionOperationFail
   cause: Schema.Defect(),
 }) {}
 
-function localQuestionNeedsOpenBot(question: AgentPromptQuestion): boolean {
+function localQuestionNeedsStarBot(question: AgentPromptQuestion): boolean {
   return (
     question.isSecret ||
     redactText(question.id) !== question.id ||

@@ -12,8 +12,8 @@ if (!sites) throw new Error("Missing --sites=<json file>.");
 const name = option("name") ?? "run";
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-const buildRoot = await mkdtemp(join(tmpdir(), "openbot-bot-check-"));
-const reportRoot = join(projectRoot, ".openbot-build/browser-bot-check-probe", name);
+const buildRoot = await mkdtemp(join(tmpdir(), "starbot-bot-check-"));
+const reportRoot = join(projectRoot, ".starbot-build/browser-bot-check-probe", name);
 const reportPath = join(reportRoot, "report.json");
 try {
   await rm(reportRoot, { recursive: true, force: true });

@@ -2,16 +2,16 @@ import {
   type AgentProviderId,
   agentProviderName,
   isProviderEnvironmentProvider,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type ProviderEnvironment,
   type ProviderEnvironmentVariableInput,
-} from "@openbot/contracts/ipc";
-import type { ProviderEnvironmentControl } from "@openbot/ui/features/settings/ProviderSettingsPage";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { ProviderEnvironmentControl } from "@starbot/ui/features/settings/ProviderSettingsPage";
+import { useText } from "@starbot/ui/text";
 import { createHostSetting } from "./host-setting-state";
 
 export type HostProviderEnvironmentCalls = Pick<
-  OpenBotDesktopApi["hostAdmin"],
+  StarBotDesktopApi["hostAdmin"],
   "getProviderEnvironment" | "setProviderEnvironment"
 >;
 
@@ -28,7 +28,7 @@ export function createProviderEnvironment(
   status: () => unknown,
 ): () => ((provider: AgentProviderId) => ProviderEnvironmentControl | undefined) | undefined {
   const { t } = useText();
-  const calls = (): HostProviderEnvironmentCalls => source()?.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostProviderEnvironmentCalls => source()?.calls ?? window.starbot.hostAdmin;
 
   function open(provider: AgentProviderId): ProviderEnvironmentControl | undefined {
     if (!isProviderEnvironmentProvider(provider)) return undefined;

@@ -1,12 +1,12 @@
-import { type AgentProviderId, agentProviderName } from "@openbot/contracts/agent-providers";
+import { type AgentProviderId, agentProviderName } from "@starbot/contracts/agent-providers";
 import type {
   AgentImportPreviewAgent,
   InstanceTransferPreview,
   InstanceTransferResult,
   InstanceTransferSummary,
   InstanceTransferUploadProgress,
-} from "@openbot/contracts/ipc";
-import type { AppFormat, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppFormat, AppTranslate } from "@starbot/i18n";
 import {
   ArrowLeftRight,
   ArrowRight,
@@ -30,7 +30,7 @@ import {
   SwitchField,
   TriangleAlert,
   Upload,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createMemo, createSignal, createUniqueId, For, onCleanup, Show, untrack } from "solid-js";
 import { RollingPrice } from "../../rolling-price";

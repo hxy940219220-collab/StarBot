@@ -348,7 +348,7 @@ export const messages = {
 
   "error.provider.antigravityNotStarted": "שרת Gemini נמצא, אך לא ניתן לקרוא את הגרסה שלו.",
   "error.provider.antigravityOverrideInvalid":
-    "שרת Gemini ב-OPENBOT_ANTIGRAVITY_PATH חסר או שאינו ניתן להרצה. יש לתקן את הנתיב או להסיר את המשתנה, ואז להפעיל מחדש את StarBot.",
+    "שרת Gemini ב-STARBOT_ANTIGRAVITY_PATH חסר או שאינו ניתן להרצה. יש לתקן את הנתיב או להסיר את המשתנה, ואז להפעיל מחדש את StarBot.",
 
   "error.provider.antigravityVersionUnreadable": "לא ניתן לקרוא את הגרסה של שרת Gemini.",
   "error.provider.antigravitySignIn": "יש להתחבר עם Google כדי להשתמש ב-Gemini.",

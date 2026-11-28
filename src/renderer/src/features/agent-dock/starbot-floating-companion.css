@@ -22,7 +22,7 @@
   pointer-events: none;
   display: grid;
   place-items: center;
-  font-family: var(--openbot-font-sans, -apple-system, BlinkMacSystemFont, "Hiragino Sans GB", sans-serif);
+  font-family: var(--starbot-font-sans, -apple-system, BlinkMacSystemFont, "Hiragino Sans GB", sans-serif);
 }
 
 .starbot-companion-stage.is-screen-stage {

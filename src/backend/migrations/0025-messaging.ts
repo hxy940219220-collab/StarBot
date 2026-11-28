@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Shared by migration v25 and the separate new-database schema. IF NOT EXISTS throughout, because
 // this text is both the migration and the tail of the latest schema.
@@ -46,7 +46,7 @@ export const MESSAGING_SCHEMA_SQL = `
   CREATE INDEX IF NOT EXISTS messaging_threads_agent ON projection_messaging_threads(agent_id, updated_at DESC);
 `;
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 25,
   name: "messaging",
   // Only creates tables, so no foreign-key pause and no vacuum.

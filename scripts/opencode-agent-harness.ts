@@ -96,7 +96,7 @@ async function freePort(): Promise<number> {
 }
 
 export async function startOpenCodeHarness(name: string): Promise<OpenCodeHarness> {
-  const root = await mkdtemp(join(tmpdir(), `openbot-${name}-`));
+  const root = await mkdtemp(join(tmpdir(), `starbot-${name}-`));
   const requests: ModelRequest[] = [];
   const clients: AgentClient[] = [];
   let calls = 0;
@@ -192,16 +192,16 @@ export async function startOpenCodeHarness(name: string): Promise<OpenCodeHarnes
   };
 }
 
-export function codeModeCatalog(system: string): { openbot: string[]; opencode: string[]; header: string | null } {
+export function codeModeCatalog(system: string): { starbot: string[]; opencode: string[]; header: string | null } {
   const names = (namespace: string) => [
     ...new Set(
       [...system.matchAll(new RegExp(`tools\\.${namespace}\\.([a-z_]+)\\(`, "gu"))].map((match) => match[1] ?? ""),
     ),
   ];
   return {
-    openbot: names("openbot").sort(),
+    starbot: names("starbot").sort(),
     opencode: names("opencode").sort(),
-    header: system.match(/- openbot \(([^)]*)\)/u)?.[1] ?? null,
+    header: system.match(/- starbot \(([^)]*)\)/u)?.[1] ?? null,
   };
 }
 

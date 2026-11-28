@@ -15,9 +15,9 @@
   width: var(--starbot-inspector-width, 332px);
   min-width: 288px;
   max-width: min(560px, 56vw);
-  border-inline-start: 1px solid var(--openbot-border);
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 82%, var(--openbot-bg-surface));
-  color: var(--openbot-text-primary);
+  border-inline-start: 1px solid var(--starbot-border);
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 82%, var(--starbot-bg-surface));
+  color: var(--starbot-text-primary);
 }
 
 .starbot-inspector-resizer {
@@ -50,7 +50,7 @@
 .starbot-inspector-resizer:hover::after,
 .starbot-inspector-resizer.is-dragging::after {
   height: 56px;
-  background: color-mix(in srgb, var(--openbot-accent) 68%, transparent);
+  background: color-mix(in srgb, var(--starbot-accent) 68%, transparent);
 }
 
 .starbot-inspector-topbar {
@@ -60,13 +60,13 @@
   height: 46px;
   flex: 0 0 auto;
   padding: 0 14px 0 16px;
-  border-bottom: 1px solid color-mix(in srgb, var(--openbot-border) 65%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--starbot-border) 65%, transparent);
 }
 
 .starbot-inspector-topbar-title {
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 13px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-back-btn {
@@ -79,14 +79,14 @@
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   cursor: pointer;
 }
 
 .starbot-inspector-back-btn:hover {
-  background: var(--openbot-hover);
+  background: var(--starbot-hover);
 }
 
 .starbot-inspector-close {
@@ -97,13 +97,13 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   cursor: pointer;
 }
 
 .starbot-inspector-close:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-inspector-scroll {
@@ -155,10 +155,10 @@
   margin-top: 2px;
   padding: 0 10px;
   border-radius: 999px;
-  background: var(--openbot-accent-soft);
-  color: var(--openbot-accent-text);
+  background: var(--starbot-accent-soft);
+  color: var(--starbot-accent-text);
   font-size: 11px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 /* Identity Fields (名称 + 角色身份) */
@@ -183,14 +183,14 @@
 
 .starbot-inspector-field-label {
   padding-inline: 2px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   line-height: 18px;
 }
 
 .starbot-inspector-field-sub {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11px;
 }
 
@@ -217,7 +217,7 @@
 
 .starbot-inspector-scroll .ui-input::placeholder,
 .starbot-inspector-scroll .ui-textarea::placeholder {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12px;
   line-height: 1.5;
   opacity: 0.78;
@@ -226,11 +226,11 @@
 .starbot-inspector-save-inline {
   border: 0;
   border-radius: 999px;
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   padding: 2px 9px;
   color: #ffffff;
   font-size: 11px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   cursor: pointer;
 }
 
@@ -243,18 +243,18 @@
 
 .starbot-inspector-group-title {
   padding-inline: 4px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-card-list {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 16px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
   box-shadow: 0 2px 8px rgba(42, 30, 84, 0.03);
 }
 
@@ -272,9 +272,9 @@
   width: 100%;
   padding: 6px 13px;
   border: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--openbot-border) 68%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--starbot-border) 68%, transparent);
   background: transparent;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 13px;
   text-align: left;
 }
@@ -289,7 +289,7 @@
 }
 
 .starbot-inspector-link-row:hover {
-  background: color-mix(in srgb, var(--openbot-accent) 5%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 5%, var(--starbot-bg-surface));
 }
 
 .starbot-inspector-row-left {
@@ -298,12 +298,12 @@
   align-items: center;
   gap: 9px;
   white-space: nowrap;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-row-left svg {
   flex-shrink: 0;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-inspector-row-right {
@@ -314,13 +314,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12px;
 }
 
 .starbot-inspector-row-right .is-accent {
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-model-picker-slot {
@@ -354,21 +354,21 @@
 .starbot-inspector-subhead h3 {
   margin: 0;
   font-size: 15px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
 }
 
 .starbot-inspector-subhead p {
   margin: 0;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
   line-height: 1.5;
 }
 
 .starbot-inspector-card {
   padding: 12px 14px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 15px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-inspector-toggle-row {
@@ -386,7 +386,7 @@
 .starbot-inspector-toggle-row span {
   display: block;
   margin-top: 2px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
 }
 
@@ -412,9 +412,9 @@
   justify-content: space-between;
   gap: 10px;
   padding: 10px 12px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 13px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
   font-size: 12.5px;
   line-height: 1.45;
 }
@@ -434,7 +434,7 @@
 }
 
 .starbot-inspector-routine-meta span {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
 }
 
@@ -453,13 +453,13 @@
   border: 0;
   border-radius: 7px;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   cursor: pointer;
 }
 
 .starbot-inspector-trash-btn:hover {
-  background: color-mix(in srgb, var(--openbot-danger) 12%, transparent);
-  color: var(--openbot-danger);
+  background: color-mix(in srgb, var(--starbot-danger) 12%, transparent);
+  color: var(--starbot-danger);
 }
 
 .starbot-inspector-routine-create {
@@ -467,9 +467,9 @@
   flex-direction: column;
   gap: 8px;
   padding: 12px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 15px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-inspector-routine-time-row {
@@ -483,17 +483,17 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
 }
 
 .starbot-inspector-time-input {
   height: 30px;
   padding: 0 8px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 8px;
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
 }
 
@@ -509,9 +509,9 @@
   flex-direction: column;
   gap: 4px;
   padding: 12px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 14px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-inspector-usage-box.is-wide {
@@ -519,14 +519,14 @@
 }
 
 .starbot-inspector-usage-box span {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
 }
 
 .starbot-inspector-usage-box strong {
   font-size: 15px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
 }
 
 /* Option Cards (Permissions & Proactive Frequency) */
@@ -542,22 +542,22 @@
   gap: 5px;
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid var(--openbot-border);
+  border: 1.5px solid var(--starbot-border);
   border-radius: 15px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
   text-align: left;
   cursor: pointer;
   transition: all 140ms ease;
 }
 
 .starbot-inspector-option-card:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--openbot-accent) 55%, var(--openbot-border));
+  border-color: color-mix(in srgb, var(--starbot-accent) 55%, var(--starbot-border));
 }
 
 .starbot-inspector-option-card.is-selected {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface));
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-surface));
 }
 
 .starbot-inspector-option-top {
@@ -569,25 +569,25 @@
 
 .starbot-inspector-option-top strong {
   font-size: 13px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-option-top svg {
-  color: var(--openbot-accent);
+  color: var(--starbot-accent);
 }
 
 .starbot-inspector-option-card p {
   margin: 0;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
   line-height: 1.45;
 }
 
 .starbot-inspector-empty-note {
   padding: 20px 12px;
-  border: 1px dashed var(--openbot-border-strong);
+  border: 1px dashed var(--starbot-border-strong);
   border-radius: 14px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12px;
   text-align: center;
 }
@@ -602,19 +602,19 @@
   gap: 5px;
   height: 32px;
   padding: 0 12px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 999px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-accent-text);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-accent-text);
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   box-shadow: 0 4px 14px rgba(42, 30, 84, 0.1);
   cursor: pointer;
 }
 
 .starbot-inspector-reopen:hover {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent-soft);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent-soft);
 }
 
 /* Segmented Personality Style Control (温柔 / 毒舌 / 热血) */
@@ -623,9 +623,9 @@
   align-items: center;
   gap: 2px;
   padding: 2px;
-  border: 1px solid color-mix(in srgb, var(--openbot-border-strong) 75%, transparent);
+  border: 1px solid color-mix(in srgb, var(--starbot-border-strong) 75%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 82%, transparent);
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 82%, transparent);
 }
 
 .starbot-inspector-style-seg button {
@@ -634,23 +634,23 @@
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 140ms ease;
 }
 
 .starbot-inspector-style-seg button:hover:not(:disabled):not(.is-active) {
-  color: var(--openbot-text-primary);
-  background: color-mix(in srgb, var(--openbot-accent) 8%, transparent);
+  color: var(--starbot-text-primary);
+  background: color-mix(in srgb, var(--starbot-accent) 8%, transparent);
 }
 
 .starbot-inspector-style-seg button.is-active {
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
-  font-weight: var(--openbot-weight-semibold);
-  box-shadow: 0 1px 4px color-mix(in srgb, var(--openbot-accent) 32%, transparent);
+  font-weight: var(--starbot-weight-semibold);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--starbot-accent) 32%, transparent);
 }
 
 /* Smart Proactive Care & Custom Idle Duration Input */
@@ -666,7 +666,7 @@
   gap: 6px;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid color-mix(in srgb, var(--openbot-border) 68%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--starbot-border) 68%, transparent);
 }
 
 .starbot-inspector-delay-custom-row {
@@ -677,9 +677,9 @@
 }
 
 .starbot-inspector-delay-label {
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .starbot-inspector-delay-input-group {
@@ -692,12 +692,12 @@
   width: 62px;
   height: 30px;
   padding: 0 8px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 8px;
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   text-align: center;
   outline: none;
   user-select: text;
@@ -705,16 +705,16 @@
 }
 
 .starbot-inspector-delay-number:focus {
-  border-color: var(--openbot-accent);
+  border-color: var(--starbot-accent);
 }
 
 .starbot-inspector-delay-unit-seg {
   display: inline-flex;
   align-items: center;
   padding: 2px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 8px;
-  background: var(--openbot-bg-canvas);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-inspector-delay-unit-seg button {
@@ -723,21 +723,21 @@
   border: 0;
   border-radius: 6px;
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 130ms ease;
 }
 
 .starbot-inspector-delay-unit-seg button.is-active {
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-delay-hint {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11px;
   line-height: 1.45;
 }
@@ -752,12 +752,12 @@
 }
 
 .virtual-chat-row.is-batch-mode:hover {
-  background: color-mix(in srgb, var(--openbot-accent) 5%, transparent);
+  background: color-mix(in srgb, var(--starbot-accent) 5%, transparent);
 }
 
 .virtual-chat-row.is-batch-selected {
-  background: color-mix(in srgb, var(--openbot-accent) 11%, transparent) !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--openbot-accent) 34%, transparent);
+  background: color-mix(in srgb, var(--starbot-accent) 11%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--starbot-accent) 34%, transparent);
 }
 
 .starbot-batch-checkbox {
@@ -769,9 +769,9 @@
   width: 20px;
   height: 20px;
   place-items: center;
-  border: 1.5px solid var(--openbot-border-strong);
+  border: 1.5px solid var(--starbot-border-strong);
   border-radius: 6px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
   color: transparent;
   padding: 0;
   cursor: pointer;
@@ -779,8 +779,8 @@
 }
 
 .starbot-batch-checkbox.is-checked {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
 }
 
@@ -796,9 +796,9 @@
   width: min(680px, calc(100% - 28px));
   margin: 8px auto 6px;
   padding: 10px 14px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 36%, var(--openbot-border-strong));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 36%, var(--starbot-border-strong));
   border-radius: 16px;
-  background: color-mix(in srgb, var(--openbot-bg-surface) 94%, var(--openbot-bg-canvas));
+  background: color-mix(in srgb, var(--starbot-bg-surface) 94%, var(--starbot-bg-canvas));
   backdrop-filter: blur(12px);
   box-shadow: 0 14px 34px rgba(28, 20, 58, 0.18);
   animation: starbot-help-pop 160ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -812,13 +812,13 @@
 
 .starbot-batch-bar-info strong {
   font-size: 13px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-batch-bar-info span {
   font-size: 11px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-batch-bar-actions {
@@ -833,26 +833,26 @@
   gap: 5px;
   height: 30px;
   padding: 0 12px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 999px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-secondary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 130ms ease;
 }
 
 .starbot-batch-btn:hover:not(:disabled) {
-  border-color: var(--openbot-accent);
-  color: var(--openbot-accent-text);
+  border-color: var(--starbot-accent);
+  color: var(--starbot-accent-text);
 }
 
 .starbot-batch-btn.is-danger {
   border-color: transparent;
   background: #ef4444;
   color: #ffffff;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-batch-btn.is-danger:hover:not(:disabled) {
@@ -880,25 +880,25 @@
 .starbot-inspector-freq-chip {
   height: 33px;
   padding: 0 10px;
-  border: 1.5px solid var(--openbot-border);
+  border: 1.5px solid var(--starbot-border);
   border-radius: 10px;
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 140ms ease;
 }
 
 .starbot-inspector-freq-chip:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--openbot-accent) 50%, var(--openbot-border));
+  border-color: color-mix(in srgb, var(--starbot-accent) 50%, var(--starbot-border));
 }
 
 .starbot-inspector-freq-chip.is-active {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 10%, var(--openbot-bg-surface));
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 10%, var(--starbot-bg-surface));
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-inspector-custom-times {
@@ -906,12 +906,12 @@
   flex-direction: column;
   gap: 8px;
   padding-top: 8px;
-  border-top: 1px solid color-mix(in srgb, var(--openbot-border) 68%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--starbot-border) 68%, transparent);
 }
 
 .starbot-inspector-freq-hint {
   margin: 0;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11px;
   line-height: 1.45;
 }
@@ -932,25 +932,25 @@
   gap: 4px;
   height: 28px;
   padding: 0 9px;
-  border: 1px solid color-mix(in srgb, var(--openbot-border-strong) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--starbot-border-strong) 82%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-bg-surface) 88%, transparent);
-  color: var(--openbot-text-secondary);
+  background: color-mix(in srgb, var(--starbot-bg-surface) 88%, transparent);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   white-space: nowrap;
   cursor: pointer;
   transition: all 140ms ease;
 }
 
 .starbot-header-capsule-btn:hover {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 10%, var(--openbot-bg-surface));
-  color: var(--openbot-accent-text);
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 10%, var(--starbot-bg-surface));
+  color: var(--starbot-accent-text);
 }
 
 .starbot-header-capsule-btn.is-clean {
-  border-color: color-mix(in srgb, var(--openbot-accent) 32%, var(--openbot-border-strong));
+  border-color: color-mix(in srgb, var(--starbot-accent) 32%, var(--starbot-border-strong));
 }
 
 .starbot-hero-badges-row {
@@ -968,11 +968,11 @@
   height: 24px;
   padding: 0 10px;
   border-radius: 999px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-secondary);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 140ms ease;
 }
@@ -981,7 +981,7 @@
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.22), rgba(245, 158, 11, 0.14));
   border-color: rgba(245, 158, 11, 0.5);
   color: #b45309;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-memory-toolbar-grid {
@@ -1003,19 +1003,19 @@
   height: 26px;
   padding: 0 9px;
   border-radius: 999px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-secondary);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
   cursor: pointer;
   transition: all 120ms ease;
 }
 
 .starbot-memory-cat-tab.is-active {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 12%, var(--openbot-bg-surface));
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 12%, var(--starbot-bg-surface));
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-memory-rich-item {
@@ -1023,14 +1023,14 @@
   flex-direction: column;
   gap: 6px;
   padding: 10px 11px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 12px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-memory-rich-item.is-pinned {
-  border-color: color-mix(in srgb, var(--openbot-accent) 45%, var(--openbot-border));
-  background: color-mix(in srgb, var(--openbot-accent) 5%, var(--openbot-bg-surface));
+  border-color: color-mix(in srgb, var(--starbot-accent) 45%, var(--starbot-border));
+  background: color-mix(in srgb, var(--starbot-accent) 5%, var(--starbot-bg-surface));
 }
 
 .starbot-memory-rich-top {
@@ -1046,10 +1046,10 @@
   gap: 3px;
   padding: 1px 7px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-accent) 10%, transparent);
-  color: var(--openbot-accent-text);
+  background: color-mix(in srgb, var(--starbot-accent) 10%, transparent);
+  color: var(--starbot-accent-text);
   font-size: 10.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-memory-item-actions {
@@ -1062,27 +1062,27 @@
   border: 1px solid transparent;
   border-radius: 6px;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11px;
   padding: 2px 6px;
   cursor: pointer;
 }
 
 .starbot-memory-mini-btn:hover {
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-memory-mini-btn.is-active {
-  color: var(--openbot-accent-text);
-  border-color: color-mix(in srgb, var(--openbot-accent) 36%, transparent);
-  background: color-mix(in srgb, var(--openbot-accent) 10%, transparent);
+  color: var(--starbot-accent-text);
+  border-color: color-mix(in srgb, var(--starbot-accent) 36%, transparent);
+  background: color-mix(in srgb, var(--starbot-accent) 10%, transparent);
 }
 
 .starbot-memory-rich-text {
   font-size: 12.5px;
   line-height: 1.5;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   word-break: break-word;
 }
 
@@ -1108,8 +1108,8 @@
   gap: 14px;
   padding: 20px 22px;
   border-radius: 20px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-surface);
   box-shadow: 0 24px 64px rgba(18, 12, 46, 0.26);
   overflow: hidden;
 }
@@ -1130,14 +1130,14 @@
 .starbot-capsule-title-row h3 {
   margin: 0;
   font-size: 16px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-clean-modal-header p {
   margin: 4px 0 0;
   font-size: 12px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-clean-mode-tabs {
@@ -1153,8 +1153,8 @@
   gap: 3px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1.5px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  border: 1.5px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
   text-align: left;
   cursor: pointer;
   transition: all 140ms ease;
@@ -1162,18 +1162,18 @@
 
 .starbot-clean-mode-tabs button span {
   font-size: 13px;
-  font-weight: var(--openbot-weight-semibold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-semibold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-clean-mode-tabs button small {
   font-size: 11px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-clean-mode-tabs button.is-active {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 9%, var(--openbot-bg-surface));
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 9%, var(--starbot-bg-surface));
 }
 
 .starbot-clean-mode-tabs button.is-active.is-danger {
@@ -1195,9 +1195,9 @@
   gap: 8px;
   padding: 8px 12px;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-canvas));
+  background: color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-canvas));
   font-size: 12px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-distill-list {
@@ -1215,12 +1215,12 @@
   gap: 8px;
   padding: 7px 10px;
   border-radius: 10px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-distill-item.is-selected {
-  border-color: color-mix(in srgb, var(--openbot-accent) 45%, var(--openbot-border));
+  border-color: color-mix(in srgb, var(--starbot-accent) 45%, var(--starbot-border));
 }
 
 .starbot-distill-check {
@@ -1229,8 +1229,8 @@
   display: inline-grid;
   place-items: center;
   border-radius: 5px;
-  border: 1.5px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
+  border: 1.5px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-surface);
   color: transparent;
   padding: 0;
   cursor: pointer;
@@ -1238,8 +1238,8 @@
 }
 
 .starbot-distill-check.is-checked {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
   color: #fff;
 }
 
@@ -1247,9 +1247,9 @@
   height: 28px;
   padding: 0 6px;
   border-radius: 7px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
   font-size: 11.5px;
   flex-shrink: 0;
 }
@@ -1262,13 +1262,13 @@
   border-radius: 7px;
   border: 1px solid transparent;
   background: transparent;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
 }
 
 .starbot-distill-input:focus {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-bg-surface);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-bg-surface);
   outline: none;
 }
 
@@ -1283,8 +1283,8 @@
   padding: 22px 14px;
   text-align: center;
   border-radius: 12px;
-  border: 1px dashed var(--openbot-border-strong);
-  color: var(--openbot-text-muted);
+  border: 1px dashed var(--starbot-border-strong);
+  color: var(--starbot-text-muted);
   font-size: 12.5px;
 }
 
@@ -1313,14 +1313,14 @@
 
 .starbot-purge-warning-box strong {
   font-size: 13.5px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-purge-warning-box p {
   margin: 0;
   font-size: 12px;
   line-height: 1.5;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-purge-checkbox-row {
@@ -1329,7 +1329,7 @@
   gap: 8px;
   margin-top: 4px;
   font-size: 12px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   cursor: pointer;
 }
 
@@ -1354,15 +1354,15 @@
   align-self: flex-start;
   padding: 2px 9px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-accent) 13%, transparent);
-  color: var(--openbot-accent-text);
+  background: color-mix(in srgb, var(--starbot-accent) 13%, transparent);
+  color: var(--starbot-accent-text);
   font-size: 11px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-capsule-pill.is-warm {
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.22), rgba(139, 92, 246, 0.16));
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-capsule-toolbar {
@@ -1377,18 +1377,18 @@
   align-items: center;
   gap: 6px;
   font-size: 12.5px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-capsule-select {
   height: 30px;
   padding: 0 10px;
   border-radius: 8px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-capsule-textarea {
@@ -1396,9 +1396,9 @@
   min-height: 96px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1.5px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  border: 1.5px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 13px;
   line-height: 1.5;
   resize: vertical;
@@ -1406,7 +1406,7 @@
 }
 
 .starbot-capsule-textarea:focus {
-  border-color: var(--openbot-accent);
+  border-color: var(--starbot-accent);
 }
 
 .starbot-capsule-memory-cat-bar {
@@ -1416,7 +1416,7 @@
   justify-content: space-between;
   gap: 8px;
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-capsule-cat-pills {
@@ -1428,18 +1428,18 @@
 .starbot-capsule-cat-pills button {
   padding: 3px 9px;
   border-radius: 999px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-secondary);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
   cursor: pointer;
 }
 
 .starbot-capsule-cat-pills button.is-active {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 12%, transparent);
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 12%, transparent);
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-digest-scroll {
@@ -1457,11 +1457,11 @@
   gap: 12px;
   padding: 14px;
   border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 32%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 32%, var(--starbot-border));
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--openbot-accent) 8%, var(--openbot-bg-canvas)),
-    color-mix(in srgb, #f59e0b 6%, var(--openbot-bg-surface))
+    color-mix(in srgb, var(--starbot-accent) 8%, var(--starbot-bg-canvas)),
+    color-mix(in srgb, #f59e0b 6%, var(--starbot-bg-surface))
   );
 }
 
@@ -1491,7 +1491,7 @@
   margin: 3px 0 0;
   font-size: 11.5px;
   line-height: 1.45;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-gold-badge {
@@ -1517,16 +1517,16 @@
   align-items: center;
   gap: 5px;
   font-size: 11.5px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   cursor: pointer;
 }
 
 .starbot-dream-empty {
   padding: 10px 12px;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--openbot-bg-surface) 80%, transparent);
+  background: color-mix(in srgb, var(--starbot-bg-surface) 80%, transparent);
   font-size: 12px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-dream-journal-list {
@@ -1541,8 +1541,8 @@
   gap: 6px;
   padding: 10px 12px;
   border-radius: 11px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-dream-journal-meta {
@@ -1555,14 +1555,14 @@
 
 .starbot-dream-journal-meta span {
   font-size: 11px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-dream-journal-summary {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.5;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-dream-tags,
@@ -1579,16 +1579,16 @@
   gap: 5px;
   padding: 3px 9px;
   border-radius: 999px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
   font-size: 11.5px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-global-profile-chip button {
   border: 0;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   padding: 0;
   display: inline-grid;
   place-items: center;
@@ -1601,8 +1601,8 @@
   gap: 8px;
   padding: 12px 14px;
   border-radius: 14px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-digest-section-head {
@@ -1613,13 +1613,13 @@
 
 .starbot-digest-section-head strong {
   font-size: 13px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-digest-section-head span,
 .starbot-digest-muted {
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-digest-profile-form {
@@ -1639,15 +1639,15 @@
   gap: 9px;
   padding: 9px 11px;
   border-radius: 11px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface);
   text-align: left;
   cursor: pointer;
   transition: border-color 130ms ease;
 }
 
 .starbot-digest-agent-card:hover {
-  border-color: var(--openbot-accent);
+  border-color: var(--starbot-accent);
 }
 
 .starbot-digest-agent-copy {
@@ -1666,7 +1666,7 @@
 
 .starbot-digest-agent-copy strong {
   font-size: 12.5px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1674,7 +1674,7 @@
 
 .starbot-digest-agent-copy span {
   font-size: 11px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1685,12 +1685,12 @@
    ========================================================================== */
 
 .starbot-header-menu-trigger {
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-header-menu-trigger:hover,
 .starbot-header-menu-trigger[aria-expanded="true"] {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-header-dropdown.ui-action-menu {
@@ -1711,14 +1711,14 @@
   border-radius: 8px;
   font-size: 12px;
   line-height: 1.3;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .starbot-header-dropdown-icon {
   width: 13.5px;
   height: 13.5px;
   flex-shrink: 0;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-header-dropdown-label {
@@ -1734,10 +1734,10 @@
   height: 16px;
   padding: 0 4px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-accent) 14%, transparent);
-  color: var(--openbot-accent-text);
+  background: color-mix(in srgb, var(--starbot-accent) 14%, transparent);
+  color: var(--starbot-accent-text);
   font-size: 10.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1745,7 +1745,7 @@
   width: 13px;
   height: 13px;
   flex-shrink: 0;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-threads-flyout.ui-action-menu {
@@ -1781,9 +1781,9 @@
 }
 
 .starbot-threads-flyout.ui-action-menu :is([role="menuitem"]).starbot-threads-flyout-item[data-current="true"] {
-  background: color-mix(in srgb, var(--openbot-accent) 13%, transparent);
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-semibold);
+  background: color-mix(in srgb, var(--starbot-accent) 13%, transparent);
+  color: var(--starbot-text-primary);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-threads-flyout-dot {
@@ -1791,12 +1791,12 @@
   height: 5.5px;
   border-radius: 50%;
   flex-shrink: 0;
-  background: color-mix(in srgb, var(--openbot-text-muted) 38%, transparent);
+  background: color-mix(in srgb, var(--starbot-text-muted) 38%, transparent);
 }
 
 .starbot-threads-flyout-dot.is-current {
-  background: var(--openbot-accent);
-  box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--openbot-accent) 22%, transparent);
+  background: var(--starbot-accent);
+  box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--starbot-accent) 22%, transparent);
 }
 
 .starbot-threads-flyout-dot.is-working {
@@ -1819,15 +1819,15 @@
   flex-shrink: 0;
   padding: 1px 5px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-text-muted) 14%, transparent);
-  color: var(--openbot-text-muted);
+  background: color-mix(in srgb, var(--starbot-text-muted) 14%, transparent);
+  color: var(--starbot-text-muted);
   font-size: 10px;
 }
 
 .starbot-threads-flyout-time {
   flex-shrink: 0;
   font-size: 10.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1835,7 +1835,7 @@
   padding: 3px 6px 1px;
   text-align: center;
   font-size: 10px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   opacity: 0.78;
 }
 
@@ -1847,10 +1847,10 @@
   min-height: 28px;
   padding: 0 8px;
   border-radius: 7px;
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
   font-size: 11.5px;
   line-height: 1.3;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 @keyframes starbot-dropdown-slide-down {
@@ -1892,13 +1892,13 @@
 .starbot-mem-minimal-title h3 {
   margin: 0;
   font-size: 15px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-mem-minimal-title span {
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-mem-minimal-filters {
@@ -1907,7 +1907,7 @@
   gap: 2px;
   padding: 3px;
   border-radius: 9px;
-  background: color-mix(in srgb, var(--openbot-border) 42%, transparent);
+  background: color-mix(in srgb, var(--starbot-border) 42%, transparent);
 }
 
 .starbot-mem-minimal-filters button {
@@ -1917,17 +1917,17 @@
   border: 0;
   border-radius: 6px;
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 120ms ease;
 }
 
 .starbot-mem-minimal-filters button.is-active {
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-semibold);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
+  font-weight: var(--starbot-weight-semibold);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -1946,17 +1946,17 @@
   gap: 6px;
   padding: 11px 12px;
   border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--openbot-border) 78%, transparent);
-  background: var(--openbot-bg-surface);
+  border: 1px solid color-mix(in srgb, var(--starbot-border) 78%, transparent);
+  background: var(--starbot-bg-surface);
   transition: border-color 120ms ease;
 }
 
 .starbot-mem-minimal-row:hover {
-  border-color: var(--openbot-border-strong);
+  border-color: var(--starbot-border-strong);
 }
 
 .starbot-mem-minimal-row.is-pinned {
-  border-left: 2.5px solid var(--openbot-accent);
+  border-left: 2.5px solid var(--starbot-accent);
 }
 
 .starbot-mem-minimal-row.is-compact {
@@ -1970,7 +1970,7 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.52;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   word-break: break-word;
 }
 
@@ -1983,7 +1983,7 @@
 
 .starbot-mem-minimal-tag {
   font-size: 11px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-mem-minimal-actions {
@@ -2003,19 +2003,19 @@
   border: 0;
   padding: 0;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11px;
   cursor: pointer;
 }
 
 .starbot-mem-minimal-actions button:hover,
 .starbot-mem-inline-del:hover {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-mem-minimal-actions button.is-active {
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-mem-minimal-actions button.is-danger:hover {
@@ -2035,30 +2035,30 @@
   gap: 8px;
   margin-top: 8px;
   padding-top: 12px;
-  border-top: 1px solid color-mix(in srgb, var(--openbot-border) 55%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--starbot-border) 55%, transparent);
 }
 
 .starbot-mem-footer-link {
   border: 0;
   padding: 2px 4px;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
   cursor: pointer;
   transition: color 120ms ease;
 }
 
 .starbot-mem-footer-link:hover:not(:disabled) {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-mem-footer-link.is-primary {
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .starbot-mem-footer-dot {
-  color: var(--openbot-border-strong);
+  color: var(--starbot-border-strong);
   font-size: 11px;
 }
 
@@ -2069,7 +2069,7 @@
   justify-content: space-between;
   gap: 12px;
   padding-bottom: 10px;
-  border-bottom: 1px solid color-mix(in srgb, var(--openbot-border) 65%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--starbot-border) 65%, transparent);
 }
 
 .starbot-minimal-modal-heading {
@@ -2080,12 +2080,12 @@
 
 .starbot-minimal-modal-heading strong {
   font-size: 15px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-minimal-modal-heading span {
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-minimal-capture-bottom {
@@ -2102,7 +2102,7 @@
   gap: 4px;
   padding: 3px;
   border-radius: 10px;
-  background: var(--openbot-bg-canvas);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-minimal-seg-tabs button {
@@ -2111,16 +2111,16 @@
   border: 0;
   border-radius: 7px;
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
 }
 
 .starbot-minimal-seg-tabs button.is-active {
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-semibold);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
+  font-weight: var(--starbot-weight-semibold);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
@@ -2132,7 +2132,7 @@
   gap: 12px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: var(--openbot-bg-canvas);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-minimal-chief-left {
@@ -2144,14 +2144,14 @@
 .starbot-minimal-chief-left strong {
   display: block;
   font-size: 13.5px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-minimal-chief-left span {
   display: block;
   margin-top: 2px;
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-minimal-chief-right {
@@ -2169,8 +2169,8 @@
 .starbot-minimal-dream-item {
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-minimal-dream-item header {
@@ -2182,7 +2182,7 @@
 }
 
 .starbot-minimal-dream-item header span {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11.5px;
 }
 
@@ -2190,7 +2190,7 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.55;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-minimal-dream-item ul {
@@ -2200,13 +2200,13 @@
   flex-direction: column;
   gap: 4px;
   font-size: 12px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-minimal-tab-desc {
   margin: 0;
   font-size: 12px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 /* ==========================================================================
@@ -2224,9 +2224,9 @@
   height: 21px;
   padding: 0 8px;
   border-radius: 6px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-secondary);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-secondary);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
   font-weight: 600;
@@ -2238,15 +2238,15 @@
   border-radius: 14px;
   font-size: 13.5px;
   line-height: 1.6;
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 75%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 75%, var(--starbot-bg-surface));
   transition:
     border-color 140ms ease,
     box-shadow 140ms ease;
 }
 
 .starbot-capsule-textarea.is-spacious:focus {
-  border-color: var(--openbot-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--openbot-accent) 14%, transparent);
+  border-color: var(--starbot-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--starbot-accent) 14%, transparent);
 }
 
 /* Custom StarBot Avatar Picker (replaces native OS <select>) */
@@ -2262,11 +2262,11 @@
   height: 34px;
   padding: 0 11px 0 7px;
   border-radius: 999px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   cursor: pointer;
   transition:
     border-color 130ms ease,
@@ -2276,8 +2276,8 @@
 
 .starbot-bot-picker-trigger:hover,
 .starbot-bot-picker-trigger.is-open {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface));
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-surface));
 }
 
 .starbot-bot-picker-avatar {
@@ -2294,7 +2294,7 @@
 }
 
 .starbot-bot-picker-chevron {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   transition: transform 150ms ease;
 }
 
@@ -2315,8 +2315,8 @@
   gap: 3px;
   padding: 6px;
   border-radius: 14px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-surface);
   box-shadow: 0 16px 42px rgba(18, 12, 46, 0.24);
 }
 
@@ -2329,22 +2329,22 @@
   border: 0;
   border-radius: 10px;
   background: transparent;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   text-align: left;
   cursor: pointer;
   transition: background-color 120ms ease;
 }
 
 .starbot-bot-picker-option:hover {
-  background: var(--openbot-bg-canvas);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-bot-picker-option.is-active {
-  background: color-mix(in srgb, var(--openbot-accent) 11%, var(--openbot-bg-surface));
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  background: color-mix(in srgb, var(--starbot-accent) 11%, var(--starbot-bg-surface));
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-bot-picker-option-avatar {
@@ -2362,16 +2362,16 @@
 }
 
 .starbot-bot-picker-check {
-  color: var(--openbot-accent);
+  color: var(--starbot-accent);
   flex-shrink: 0;
 }
 
 /* WeChat-Style Forward Modal & Multi-Select Bar Buttons */
 .starbot-batch-btn.is-primary {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-batch-btn.is-primary:hover:not(:disabled) {
@@ -2379,14 +2379,14 @@
 }
 
 .starbot-batch-btn.is-accent {
-  border-color: color-mix(in srgb, var(--openbot-accent) 48%, var(--openbot-border-strong));
-  background: color-mix(in srgb, var(--openbot-accent) 11%, var(--openbot-bg-surface));
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  border-color: color-mix(in srgb, var(--starbot-accent) 48%, var(--starbot-border-strong));
+  background: color-mix(in srgb, var(--starbot-accent) 11%, var(--starbot-bg-surface));
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-batch-btn.is-accent:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--openbot-accent) 18%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 18%, var(--starbot-bg-surface));
 }
 
 .starbot-forward-modal {
@@ -2397,8 +2397,8 @@
   gap: 13px;
   padding: 20px 22px;
   border-radius: 20px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-surface);
   box-shadow: 0 24px 64px rgba(18, 12, 46, 0.28);
 }
 
@@ -2408,21 +2408,21 @@
   gap: 4px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  border: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
 }
 
 .starbot-forward-preview-tag {
   font-size: 11px;
-  font-weight: var(--openbot-weight-semibold);
-  color: var(--openbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
+  color: var(--starbot-accent-text);
 }
 
 .starbot-forward-preview-box p {
   margin: 0;
   font-size: 12px;
   line-height: 1.45;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2438,8 +2438,8 @@
 
 .starbot-forward-section-label {
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-semibold);
-  color: var(--openbot-text-muted);
+  font-weight: var(--starbot-weight-semibold);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-forward-bot-list {
@@ -2458,20 +2458,20 @@
   width: 100%;
   padding: 9px 11px;
   border-radius: 12px;
-  border: 1.5px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  border: 1.5px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
   text-align: left;
   cursor: pointer;
   transition: all 130ms ease;
 }
 
 .starbot-forward-bot-row:hover {
-  border-color: var(--openbot-border-strong);
+  border-color: var(--starbot-border-strong);
 }
 
 .starbot-forward-bot-row.is-selected {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 8%, var(--openbot-bg-surface));
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 8%, var(--starbot-bg-surface));
 }
 
 .starbot-forward-bot-avatar {
@@ -2496,12 +2496,12 @@
 
 .starbot-forward-bot-name-line strong {
   font-size: 13px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-forward-bot-meta > span {
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2512,15 +2512,15 @@
   height: 36px;
   padding: 0 12px;
   border-radius: 10px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-canvas);
+  color: var(--starbot-text-primary);
   font-size: 12.5px;
   outline: none;
 }
 
 .starbot-forward-note-input:focus {
-  border-color: var(--openbot-accent);
+  border-color: var(--starbot-accent);
 }
 
 .starbot-forward-footer {
@@ -2536,6 +2536,6 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   cursor: pointer;
 }

@@ -5,16 +5,16 @@ import {
   type PasswordManagerConnectInput,
   type PasswordManagerConnectMethod,
   type PasswordManagerId,
-} from "@openbot/contracts/ipc";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
+} from "@starbot/contracts/ipc";
+import type { TeamCurrentCapability } from "@starbot/contracts/team-protocol/current";
 import {
   PASSWORD_MANAGERS_CAPABILITY,
   PASSWORD_MANAGERS_KEY_LIMIT,
   PASSWORD_MANAGERS_PASSWORD_LIMIT,
   PASSWORD_MANAGERS_ROUTES,
-} from "@openbot/contracts/team-protocol/password-managers-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { registerSecretValue } from "@openbot/logging";
+} from "@starbot/contracts/team-protocol/password-managers-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { registerSecretValue } from "@starbot/logging";
 import type { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { PasswordManagersService } from "../password-managers/password-managers-service";

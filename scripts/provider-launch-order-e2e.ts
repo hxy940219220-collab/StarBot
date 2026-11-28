@@ -8,14 +8,14 @@ import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { CodexAppServerClient } from "../src/backend/app-server-client";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import {
   BUILT_IN_PROVIDER_DRIVERS,
   NO_PROVIDER_CREDENTIALS,
   requireProviderDriver,
 } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-launch-order-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-launch-order-e2e");
 
 const FAKE_PI = `#!${process.execPath}
 const fs = require("node:fs");
@@ -72,22 +72,22 @@ interface Report {
   error?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-launch-order-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-provider-launch-order-e2e-"));
 const log = join(root, "launch.log");
 const pi = join(root, "bin", "pi");
 const codex = join(root, "bin", "codex");
 const piDirectory = join(root, "pi-agent");
 const report: Report = { passed: false };
-const names = ["OPENBOT_PI_PATH", "OPENBOT_CODEX_PATH", "PI_CODING_AGENT_DIR", "FAKE_LAUNCH_LOG"] as const;
+const names = ["STARBOT_PI_PATH", "STARBOT_CODEX_PATH", "PI_CODING_AGENT_DIR", "FAKE_LAUNCH_LOG"] as const;
 const saved = names.map((name) => [name, process.env[name]] as const);
-process.env.OPENBOT_PI_PATH = pi;
-process.env.OPENBOT_CODEX_PATH = codex;
+process.env.STARBOT_PI_PATH = pi;
+process.env.STARBOT_CODEX_PATH = codex;
 process.env.PI_CODING_AGENT_DIR = piDirectory;
 process.env.FAKE_LAUNCH_LOG = log;
 
 const started = async () => (await readFile(log, "utf8").catch(() => "")).split("\n").filter(Boolean);
 
-const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+const store = new AgentStore(join(root, "profile"), join(root, "home"), new StarBotDatabase(join(root, "profile")));
 const chatReady: Promise<{ started: string[]; codex: string | null }>[] = [];
 const codexAtReadyHook: (string | null)[] = [];
 const providers = new ProviderRuntime({

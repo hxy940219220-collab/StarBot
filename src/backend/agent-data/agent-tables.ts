@@ -1,8 +1,8 @@
 import { access, chmod, mkdir } from "node:fs/promises";
 import { join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { SharedTable } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { SharedTable } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema, Semaphore } from "effect";
 import {
   AGENT_DATABASE_LIMITS,

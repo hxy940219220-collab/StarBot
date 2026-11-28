@@ -1,6 +1,6 @@
-import { ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@openbot/contracts/ipc";
-import type { AgentMessage, AgentMessageMarkerModel } from "@openbot/ui/data";
-import { dayMarkerLabel } from "@openbot/ui/features/conversation/chat-day-markers";
+import { ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@starbot/contracts/ipc";
+import type { AgentMessage, AgentMessageMarkerModel } from "@starbot/ui/data";
+import { dayMarkerLabel } from "@starbot/ui/features/conversation/chat-day-markers";
 
 interface AgentMessageRow {
   message: AgentMessage;

@@ -118,7 +118,7 @@ export const messages = {
   "settings.externalLinks.title": "فتح الروابط الخارجية في",
   "settings.externalLinks.description": "تُفتح هنا الروابط في الدردشات وصفحات تسجيل الدخول وصفحات الفوترة.",
   "settings.externalLinks.defaultBrowser": "المتصفح الافتراضي",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
 
   "settings.externalLinks.defaultBrowserNamed": "المتصفح الافتراضي ({name})",
   "settings.externalLinks.otherApp": "تطبيق آخر…",
@@ -464,10 +464,10 @@ export const messages = {
   "settings.mobileConnect.route.title": "كيف تتصل الأجهزة",
   "settings.mobileConnect.route.description": "للهواتف والحواسيب الأخرى وأعضاء الفريق الذين يتصلون بهذا الحاسوب.",
   "settings.mobileConnect.route.chipLabel": "كيف تتصل الأجهزة: {route}",
-  "settings.mobileConnect.route.openbot.title": "عبر StarBot",
+  "settings.mobileConnect.route.starbot.title": "عبر StarBot",
 
-  "settings.mobileConnect.route.openbot.badge": "مستحسن",
-  "settings.mobileConnect.route.openbot.description": "يعمل على أي شبكة. الدردشات والملفات مشفّرة بين أجهزتك.",
+  "settings.mobileConnect.route.starbot.badge": "مستحسن",
+  "settings.mobileConnect.route.starbot.description": "يعمل على أي شبكة. الدردشات والملفات مشفّرة بين أجهزتك.",
   "settings.mobileConnect.route.private.title": "شبكة خاصة",
   "settings.mobileConnect.route.private.tailscale": "تم العثور على Tailscale",
   "settings.mobileConnect.route.private.description":
@@ -514,7 +514,7 @@ export const messages = {
   "settings.profile.share.copied": "تم نسخ الصورة",
   "settings.profile.share.copyFailed": "تعذّر نسخ الصورة.",
   "settings.profile.share.createFailed": "تعذّر إنشاء الصورة.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "starbot-activity.png",
   "settings.profile.share.caption": "أشهري الستة الأخيرة مع StarBot",
 
   "settings.profile.activity.title": "النشاط على هذا الحاسوب",

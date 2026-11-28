@@ -3,7 +3,7 @@ import {
   DEFAULT_AGENT_DEFAULTS,
   DEFAULT_MACHINE_ALERT_SETTINGS,
   type HostTurnLimitsInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import { type InstanceTransferOptions, InstanceTransferService } from "../src/main/instance-transfer-service";
 import { LocalSkillFailure } from "../src/main/local-skill-library";

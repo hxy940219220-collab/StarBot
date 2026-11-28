@@ -1,4 +1,4 @@
-import type { AttachmentSupport } from "@openbot/contracts/attachment-files";
+import type { AttachmentSupport } from "@starbot/contracts/attachment-files";
 import type {
   AddAgentFolderInput,
   AddedAgent,
@@ -198,7 +198,7 @@ import type {
   WorkflowVersion,
   WorkflowVersionInput,
   WorkflowWebhookSecret,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import type {
   AgentWebhookSecret,
   EventActivity,
@@ -209,19 +209,19 @@ import type {
   SaveEventRoutineInput,
   SaveEventRoutineResult,
   WebhookSecret,
-} from "@openbot/contracts/ipc-events";
-import type { ServerAppearance } from "@openbot/contracts/team-protocol/host-appearance-v1";
-import type { LiveVoiceSessionResponse, LiveVoiceStartRequest } from "@openbot/contracts/team-protocol/live-voice-v1";
-import type { QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import type { RemoteConnectionFailure, RemoteRecoveryStatus, RemoteTeamDirectoryClient } from "@openbot/team-client";
-import type { PlanLimits } from "@openbot/team-client/plan-limits";
-import type { RemoteDownloadWatch, RemoteFileUpload, RemoteLargeDownload } from "@openbot/team-client/remote-peer";
+} from "@starbot/contracts/ipc-events";
+import type { ServerAppearance } from "@starbot/contracts/team-protocol/host-appearance-v1";
+import type { LiveVoiceSessionResponse, LiveVoiceStartRequest } from "@starbot/contracts/team-protocol/live-voice-v1";
+import type { QueueEditRequest } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import type { RemoteConnectionFailure, RemoteRecoveryStatus, RemoteTeamDirectoryClient } from "@starbot/team-client";
+import type { PlanLimits } from "@starbot/team-client/plan-limits";
+import type { RemoteDownloadWatch, RemoteFileUpload, RemoteLargeDownload } from "@starbot/team-client/remote-peer";
 import type {
   HostLocalServer,
   HostLocalServerList,
   MessagingConnectorPage,
-} from "@openbot/team-client/team-admin-requests";
-import type { AgentExportParts } from "@openbot/team-client/team-api-requests";
+} from "@starbot/team-client/team-admin-requests";
+import type { AgentExportParts } from "@starbot/team-client/team-api-requests";
 import type { NewAgentInput } from "@/features/agents/model/agent-initial-message";
 import type { MobileBrowserTab } from "@/features/browser/model/browser-tabs";
 import type { BrowserViewBridgeEvent, RemoteBrowserViewSession } from "@/features/browser/model/browser-view-bridge";

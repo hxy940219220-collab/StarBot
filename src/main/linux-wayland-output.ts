@@ -4,15 +4,15 @@ import { rm, writeFile } from "node:fs/promises";
 import { createConnection } from "node:net";
 import { endianness } from "node:os";
 import { isAbsolute, join } from "node:path";
-import type { AboveAppsSupport } from "@openbot/contracts/ipc";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import type { AboveAppsSupport } from "@starbot/contracts/ipc";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Option, Schema } from "effect";
 import { app } from "electron";
 import { relaunchApp } from "./linux-appimage-relaunch";
 
-const logger = createOpenBotLogger("main");
+const logger = createStarBotLogger("main");
 
-const RESTART_MARKER = "OPENBOT_XWAYLAND_RESTART";
+const RESTART_MARKER = "STARBOT_XWAYLAND_RESTART";
 export type XWaylandRestartReason = "monitor" | "above-apps" | "software-rendering";
 export type AboveAppsFeature = "agent-dock" | "dynamic-island";
 const ABOVE_APPS_XWAYLAND_FILES: Record<AboveAppsFeature, string> = {

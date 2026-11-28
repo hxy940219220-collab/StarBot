@@ -1,6 +1,6 @@
-import type { BrowserTab, BrowserWindowAction, BrowserWindowModel } from "@openbot/contracts/ipc";
-import BrowserFullView from "@openbot/ui/features/browser/BrowserFullView";
-import { useText } from "@openbot/ui/text";
+import type { BrowserTab, BrowserWindowAction, BrowserWindowModel } from "@starbot/contracts/ipc";
+import BrowserFullView from "@starbot/ui/features/browser/BrowserFullView";
+import { useText } from "@starbot/ui/text";
 import { render } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, onCleanup } from "solid-js";
 import "../../styles.css";

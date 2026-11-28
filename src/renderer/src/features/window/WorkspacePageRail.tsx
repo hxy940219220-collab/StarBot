@@ -1,8 +1,8 @@
-import { isUpdateActivePhase } from "@openbot/contracts/ipc";
-import { CRM_CAPABILITY } from "@openbot/contracts/team-protocol/crm-v1";
-import { requestFirstAgentTourReplay } from "@openbot/ui/features/agents/FirstAgentSetup";
-import { PageRail, type PageRailPage } from "@openbot/ui/features/window/PageRail";
-import { useText } from "@openbot/ui/text";
+import { isUpdateActivePhase } from "@starbot/contracts/ipc";
+import { CRM_CAPABILITY } from "@starbot/contracts/team-protocol/crm-v1";
+import { requestFirstAgentTourReplay } from "@starbot/ui/features/agents/FirstAgentSetup";
+import { PageRail, type PageRailPage } from "@starbot/ui/features/window/PageRail";
+import { useText } from "@starbot/ui/text";
 import { appPort } from "../../app-port";
 import { useLayout } from "../../layout";
 import { usePlatform } from "../../platform";

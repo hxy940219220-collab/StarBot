@@ -1,6 +1,6 @@
-import { ConfirmDialog, RadioGroup, TriangleAlert } from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
-import { useText } from "@openbot/ui/text";
+import { ConfirmDialog, RadioGroup, TriangleAlert } from "@starbot/ui";
+import { createScrollFades } from "@starbot/ui/components/createScrollFades";
+import { useText } from "@starbot/ui/text";
 import { createStore, For, onCleanup, Show } from "solid-js";
 
 export interface AgentUpdateChangedSkill {

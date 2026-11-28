@@ -128,7 +128,7 @@ async function pinArtifact(
   }
 
   const archiveBytes = await fetchBytes(fetchImpl, platform.dist.tarball);
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-opencode-pin-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "starbot-opencode-pin-"));
   try {
     const archive = join(temporaryRoot, asset);
     const extracted = join(temporaryRoot, "extracted");
@@ -167,7 +167,7 @@ async function pinArtifact(
 async function packageLicense(fetchImpl: typeof fetch, version: string): Promise<Buffer> {
   const asset = `${LICENSE_PACKAGE}-${version}.tgz`;
   const archiveBytes = await fetchBytes(fetchImpl, `${REGISTRY}/${LICENSE_PACKAGE}/-/${asset}`);
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-opencode-pin-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "starbot-opencode-pin-"));
   try {
     const archive = join(temporaryRoot, asset);
     await writeFile(archive, archiveBytes, { mode: 0o600 });

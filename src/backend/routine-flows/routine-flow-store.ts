@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   ROUTINE_FLOW_STEP_STATUSES,
   ROUTINE_RUN_SOURCES,
@@ -8,12 +8,12 @@ import {
   type RoutineFlowStepStatus,
   type RoutineRun,
   type RoutineRunStatus,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { databaseRow, databaseRows, placeholders } from "../database/database-rows";
 import { withTransaction } from "../database/sqlite-transaction";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 import { routineFlowConnectProblem, routineFlowDepths } from "./routine-flow-graph";
 
 export class RoutineFlowError extends Error {}
@@ -32,7 +32,7 @@ export interface RoutineFlowRun extends Pick<RoutineRun, "kind" | "source"> {
 }
 
 export interface RoutineFlowStoreOptions {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   createId?: () => string;
 }
 
@@ -53,7 +53,7 @@ const RUN_STATUSES = [
 ] as const satisfies readonly RoutineRunStatus[];
 
 export class RoutineFlowStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #createId: () => string;
 
   constructor(options: RoutineFlowStoreOptions) {

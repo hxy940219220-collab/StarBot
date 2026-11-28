@@ -3,27 +3,27 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { DEFAULT_PROVIDER_ACCOUNT_ID, MAX_PROVIDER_ACCOUNTS } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { TEAM_APP_VERSION_HEADER, TEAM_PROTOCOL_VERSION_HEADER } from "@openbot/contracts/team-protocol";
-import { CLAUDE_API_KEY_ACCOUNT_ID } from "@openbot/contracts/team-protocol/claude-api-key-v1";
-import { teamCapabilitiesForProtocol, teamCapabilityHeaders } from "@openbot/contracts/team-protocol/current";
-import { PROVIDER_ACCOUNT_CODE_ROUTES } from "@openbot/contracts/team-protocol/provider-account-code-v1";
-import { PROVIDER_ACCOUNT_KEYS_ROUTES } from "@openbot/contracts/team-protocol/provider-account-keys-v1";
-import { PROVIDER_ACCOUNT_MODELS_ROUTES } from "@openbot/contracts/team-protocol/provider-account-models-v1";
-import { PROVIDER_ACCOUNT_POOL_ROUTES } from "@openbot/contracts/team-protocol/provider-account-pool-v1";
-import { PROVIDER_ACCOUNTS_ROUTES } from "@openbot/contracts/team-protocol/provider-accounts-v1";
+import { DEFAULT_PROVIDER_ACCOUNT_ID, MAX_PROVIDER_ACCOUNTS } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { TEAM_APP_VERSION_HEADER, TEAM_PROTOCOL_VERSION_HEADER } from "@starbot/contracts/team-protocol";
+import { CLAUDE_API_KEY_ACCOUNT_ID } from "@starbot/contracts/team-protocol/claude-api-key-v1";
+import { teamCapabilitiesForProtocol, teamCapabilityHeaders } from "@starbot/contracts/team-protocol/current";
+import { PROVIDER_ACCOUNT_CODE_ROUTES } from "@starbot/contracts/team-protocol/provider-account-code-v1";
+import { PROVIDER_ACCOUNT_KEYS_ROUTES } from "@starbot/contracts/team-protocol/provider-account-keys-v1";
+import { PROVIDER_ACCOUNT_MODELS_ROUTES } from "@starbot/contracts/team-protocol/provider-account-models-v1";
+import { PROVIDER_ACCOUNT_POOL_ROUTES } from "@starbot/contracts/team-protocol/provider-account-pool-v1";
+import { PROVIDER_ACCOUNTS_ROUTES } from "@starbot/contracts/team-protocol/provider-accounts-v1";
 import {
   PROVIDER_FROZEN_ACCOUNTS_LIMIT,
   PROVIDER_MANY_ACCOUNTS_CAPABILITY,
   PROVIDER_MANY_ACCOUNTS_LIMIT,
-} from "@openbot/contracts/team-protocol/provider-many-accounts-v1";
-import { PROVIDER_USAGE_RESET_ROUTES } from "@openbot/contracts/team-protocol/provider-usage-reset-v1";
-import { PROVIDERS_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/providers-v1";
-import { teamSideRouteCodec } from "@openbot/contracts/team-protocol/side-routes";
-import { TEAM_PROTOCOL_V10 } from "@openbot/contracts/team-protocol/v10";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/provider-many-accounts-v1";
+import { PROVIDER_USAGE_RESET_ROUTES } from "@starbot/contracts/team-protocol/provider-usage-reset-v1";
+import { PROVIDERS_ADMIN_ROUTES } from "@starbot/contracts/team-protocol/providers-v1";
+import { teamSideRouteCodec } from "@starbot/contracts/team-protocol/side-routes";
+import { TEAM_PROTOCOL_V10 } from "@starbot/contracts/team-protocol/v10";
+import { sourceText } from "@starbot/i18n/source";
 import { plugin } from "bun";
 import { Effect } from "effect";
 import { ProviderAccountStore } from "../src/backend/agent/provider-account-store";
@@ -33,7 +33,7 @@ import { AgentLifecycleFailed, AgentService } from "../src/backend/agent-service
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import type {
   TeamApiAdmin,
@@ -42,7 +42,7 @@ import type {
   TeamApiProviderUsageResets,
 } from "../src/main/team-api/dependencies";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-many-accounts-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-many-accounts-e2e");
 const HOST_VERSION = "0.0.0-e2e";
 const OWNER = { username: "owner-user", password: "owner-password-123" };
 const STEP_DEADLINE_MS = 60_000;
@@ -167,12 +167,12 @@ const teamBrowser: TeamApiBrowser = {
   importSignIn: unused,
 };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-many-accounts-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-provider-many-accounts-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 
 interface Host {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   agents: AgentService;
   accountStore: ProviderAccountStore;
   server: InstanceType<typeof TeamApiServer>;
@@ -305,11 +305,11 @@ function providersAdmin(store: ProviderAccountStore, agents: AgentService): Team
 }
 
 async function startHost(): Promise<Host> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const agentStore = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
-  const team = new TeamStore(join(userData, "openbot-team-server-v2.json"));
+  const team = new TeamStore(join(userData, "starbot-team-server-v2.json"));
   const accountStore = new ProviderAccountStore(
     join(userData, "provider-accounts.json"),
     join(userData, "provider-accounts"),

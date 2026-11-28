@@ -1,4 +1,4 @@
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentIpcRequest,
   type AttachmentImportEvent,
@@ -97,12 +97,12 @@ import {
   IPC_ENDPOINTS,
   type IpcEndpointGroup,
   LOCAL_SERVER_ID,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type RequestEndpoint,
   type ServerScope,
   type ServerSummary,
   type Untyped,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   decodeAgentWebhookSecret,
   decodeEventActivity,
@@ -112,8 +112,8 @@ import {
   decodeSaveEventRoutineResult,
   decodeWebhookSecret,
   decodeWebhookTestResult,
-} from "@openbot/contracts/ipc-events";
-import { decodeAcceptedOwnerTransfer, decodeOwnerTransfer } from "@openbot/contracts/owner-transfer";
+} from "@starbot/contracts/ipc-events";
+import { decodeAcceptedOwnerTransfer, decodeOwnerTransfer } from "@starbot/contracts/owner-transfer";
 import { contextBridge, ipcRenderer, webUtils } from "electron";
 import {
   decodeAccountUsageFromMain,
@@ -613,7 +613,7 @@ window.addEventListener("paste", (event) => {
 });
 window.addEventListener("change", (event) => {
   const input = event.target;
-  if (!(input instanceof HTMLInputElement) || input.dataset.openbotAttachmentPicker !== "true") return;
+  if (!(input instanceof HTMLInputElement) || input.dataset.starbotAttachmentPicker !== "true") return;
   void importFiles([...(input.files ?? [])]);
 });
 
@@ -765,7 +765,7 @@ function selectJoinedServer(server: ServerSummary): ServerSummary {
   return server;
 }
 
-const openbotApi: OpenBotDesktopApi = {
+const starbotApi: StarBotDesktopApi = {
   ...bridgeGroup(IPC_ENDPOINTS.app, {
     getAppInfo: decodeAppInfo,
     getSetupState: decodeAppSetupState,
@@ -1721,4 +1721,4 @@ const openbotApi: OpenBotDesktopApi = {
   }),
 };
 
-contextBridge.exposeInMainWorld("openbot", openbotApi);
+contextBridge.exposeInMainWorld("starbot", starbotApi);

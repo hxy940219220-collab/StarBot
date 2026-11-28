@@ -1,5 +1,5 @@
-import type { WorkflowMediaCatalogModel, WorkflowMediaKind } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
+import type { WorkflowMediaCatalogModel, WorkflowMediaKind } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
 import { canvasAspects, catalogDurations, numbers, strings, text } from "./higgsfield-catalog";
 
 export interface SunraPlan {

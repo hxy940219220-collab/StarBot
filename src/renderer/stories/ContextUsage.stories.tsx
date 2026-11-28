@@ -1,14 +1,14 @@
-import { ArrowUp, Button, Mic, Plus } from "@openbot/ui";
-import type { AgentMessage } from "@openbot/ui/data";
-import { ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
+import { ArrowUp, Button, Mic, Plus } from "@starbot/ui";
+import type { AgentMessage } from "@starbot/ui/data";
+import { ChatMessageRow } from "@starbot/ui/features/conversation/ChatMessageRow";
+import { ComposerEditor } from "@starbot/ui/features/conversation/ComposerEditor";
 import {
   ComposerCompactionNotice,
   ContextCompactionMarker,
   type ContextCompactionView,
   ContextUsageMeter,
   type ContextUsageView,
-} from "@openbot/ui/features/conversation/ContextUsage";
+} from "@starbot/ui/features/conversation/ContextUsage";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, Show } from "solid-js";
 import { fn } from "storybook/test";
@@ -121,7 +121,7 @@ function Composer(props: {
 function Row(props: { label: string; children: JSX.Element }) {
   return (
     <section style={{ display: "grid", gap: "8px" }} aria-label={props.label}>
-      <span style={{ color: "var(--openbot-text-muted)", "font-size": "var(--openbot-text-sm)" }}>{props.label}</span>
+      <span style={{ color: "var(--starbot-text-muted)", "font-size": "var(--starbot-text-sm)" }}>{props.label}</span>
       {props.children}
     </section>
   );

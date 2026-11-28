@@ -1,5 +1,5 @@
-import type { ConnectorMessagingPlatform, MessagingConnection } from "@openbot/contracts/ipc";
-import type { AppMobileMessages, MobileTextKey } from "@openbot/i18n/mobile";
+import type { ConnectorMessagingPlatform, MessagingConnection } from "@starbot/contracts/ipc";
+import type { AppMobileMessages, MobileTextKey } from "@starbot/i18n/mobile";
 
 export const MOBILE_CONNECTOR_IDS = [
   "slack",

@@ -389,7 +389,7 @@ export const messages = {
 
   "error.provider.antigravityNotStarted": "Le serveur Gemini a été trouvé, mais sa version est illisible.",
   "error.provider.antigravityOverrideInvalid":
-    "Le serveur Gemini de OPENBOT_ANTIGRAVITY_PATH est introuvable ou n’est pas exécutable. Corrigez le chemin ou supprimez la variable, puis redémarrez StarBot.",
+    "Le serveur Gemini de STARBOT_ANTIGRAVITY_PATH est introuvable ou n’est pas exécutable. Corrigez le chemin ou supprimez la variable, puis redémarrez StarBot.",
 
   "error.provider.antigravityVersionUnreadable": "Impossible de lire la version du serveur Gemini.",
   "error.provider.antigravitySignIn": "Connectez-vous avec Google pour utiliser Gemini.",

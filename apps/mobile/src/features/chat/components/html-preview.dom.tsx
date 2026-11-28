@@ -1,6 +1,6 @@
 "use dom";
 
-import { chatHtmlPreviewDocument } from "@openbot/contracts/chat-preview";
+import { chatHtmlPreviewDocument } from "@starbot/contracts/chat-preview";
 import { useEffect, useRef, useState } from "react";
 
 interface HtmlPreviewProps {
@@ -93,8 +93,8 @@ function placePage(frame: HTMLIFrameElement | null, top: number, bottom: number)
   const body = frame?.contentDocument?.body;
   if (!body) return;
   const own = getComputedStyle(body);
-  body.dataset.openbotPaddingTop ??= own.paddingTop;
-  body.dataset.openbotPaddingBottom ??= own.paddingBottom;
-  body.style.paddingTop = `calc(${body.dataset.openbotPaddingTop} + ${top}px)`;
-  body.style.paddingBottom = `calc(${body.dataset.openbotPaddingBottom} + ${bottom}px)`;
+  body.dataset.starbotPaddingTop ??= own.paddingTop;
+  body.dataset.starbotPaddingBottom ??= own.paddingBottom;
+  body.style.paddingTop = `calc(${body.dataset.starbotPaddingTop} + ${top}px)`;
+  body.style.paddingBottom = `calc(${body.dataset.starbotPaddingBottom} + ${bottom}px)`;
 }

@@ -1,6 +1,6 @@
-import { type AccountUsageLimit, canAdministerServer, DEFAULT_PROVIDER_ACCOUNT_ID } from "@openbot/contracts/ipc";
-import { USAGE_CREDITS_CAPABILITY, USAGE_CREDITS_ROUTES } from "@openbot/contracts/team-protocol/usage-credits-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { type AccountUsageLimit, canAdministerServer, DEFAULT_PROVIDER_ACCOUNT_ID } from "@starbot/contracts/ipc";
+import { USAGE_CREDITS_CAPABILITY, USAGE_CREDITS_ROUTES } from "@starbot/contracts/team-protocol/usage-credits-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAgents, TeamApiProviderAccounts } from "./dependencies";
 import { HttpError } from "./http-error";

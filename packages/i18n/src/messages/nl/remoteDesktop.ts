@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "Bediening op afstand",
   "remoteDesktop.displayLabel": "Extern scherm",
   "remoteDesktop.selectDisplay": "Scherm kiezen",
-  "remoteDesktop.backToOpenBot": "Terug naar StarBot",
+  "remoteDesktop.backToStarBot": "Terug naar StarBot",
 
   "remoteDesktop.disconnect": "Verbreken",
   "remoteDesktop.viewerTitle": "Extern Sunshine-bureaublad",

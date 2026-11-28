@@ -4,8 +4,8 @@ import {
   agentProviderName,
   agentSteersTurns,
   foreignProvider,
-} from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@starbot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentBackupModels,
   type AgentBrowserProfile,
@@ -42,8 +42,8 @@ import {
   type UpdateAgentInput,
   widensAgentPermission,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   ArrowLeftRight,
   Bell,
@@ -68,8 +68,8 @@ import {
   Switch,
   Text,
   toast,
-} from "@openbot/ui";
-import { normalizeAvatarFile } from "@openbot/ui/avatar-image";
+} from "@starbot/ui";
+import { normalizeAvatarFile } from "@starbot/ui/avatar-image";
 import {
   AVATAR_EXPRESSIONS,
   AVATAR_STYLES,
@@ -85,10 +85,10 @@ import {
   SUPPORTED_AVATAR_SILHOUETTES,
   type SupportedAvatarSilhouetteId,
   zodiacForShape,
-} from "@openbot/ui/bloub-avatar";
-import { ProviderModelPicker } from "@openbot/ui/components/ProviderModelPicker";
-import { findModelOption } from "@openbot/ui/components/provider-accounts";
-import { ResizableTextarea } from "@openbot/ui/components/ResizableTextarea";
+} from "@starbot/ui/bloub-avatar";
+import { ProviderModelPicker } from "@starbot/ui/components/ProviderModelPicker";
+import { findModelOption } from "@starbot/ui/components/provider-accounts";
+import { ResizableTextarea } from "@starbot/ui/components/ResizableTextarea";
 import {
   SettingsField,
   SettingsLinkGroup,
@@ -96,16 +96,16 @@ import {
   SettingsPanel,
   SettingsPanelContent,
   SettingsPanelHeader,
-} from "@openbot/ui/components/SettingsPanel";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { InstructionsLimit, instructionsTooLong } from "@openbot/ui/features/agents/InstructionsLimit";
+} from "@starbot/ui/components/SettingsPanel";
+import type { AgentProfile } from "@starbot/ui/data";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { InstructionsLimit, instructionsTooLong } from "@starbot/ui/features/agents/InstructionsLimit";
 import {
   type BrowserProfileChoice,
   BrowserProfileSelect,
   type BrowserProfileSelectProfile,
-} from "@openbot/ui/features/browser/BrowserProfileSelect";
-import { errorReference } from "@openbot/user-errors";
+} from "@starbot/ui/features/browser/BrowserProfileSelect";
+import { errorReference } from "@starbot/user-errors";
 import type { JSX } from "@solidjs/web";
 import {
   createEffect,

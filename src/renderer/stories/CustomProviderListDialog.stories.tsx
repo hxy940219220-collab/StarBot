@@ -1,6 +1,6 @@
-import type { CustomProviderSummary } from "@openbot/contracts/ipc";
-import { CustomProviderListDialog } from "@openbot/ui/features/custom-providers/CustomProviderListDialog";
-import { useText } from "@openbot/ui/text";
+import type { CustomProviderSummary } from "@starbot/contracts/ipc";
+import { CustomProviderListDialog } from "@starbot/ui/features/custom-providers/CustomProviderListDialog";
+import { useText } from "@starbot/ui/text";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

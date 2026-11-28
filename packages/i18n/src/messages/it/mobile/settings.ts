@@ -235,7 +235,7 @@ export const messages = {
     "Le risposte nei thread ti avvisano quando un agente finisce o si ferma per un errore in un thread. Senza, un thread ti avvisa comunque quando ha bisogno di una tua risposta o di un'approvazione.",
   "mobile.settings.notifications.sound": "Suono",
   "mobile.settings.notifications.playSound": "Riproduci suono",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Caldo",
   "mobile.settings.notifications.sound.mech": "Meccanico",
@@ -376,7 +376,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "I miei ultimi sei mesi con StarBot",
 
   "mobile.settings.profile.share.createFailed": "Impossibile creare l'immagine.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Voce",
   "mobile.settings.voice.sample": "Ciao. Ti leggerò le mie risposte così.",
   "mobile.settings.voice.voice": "Voce",

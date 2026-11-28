@@ -1,6 +1,6 @@
-import { CHANNEL_ASSIGNMENT_LIMIT_ERROR } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import type { AwaitingReplyItem } from "@openbot/ui/features/conversation/AwaitingReplies";
+import { CHANNEL_ASSIGNMENT_LIMIT_ERROR } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
+import type { AwaitingReplyItem } from "@starbot/ui/features/conversation/AwaitingReplies";
 import { createSignal, onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import {

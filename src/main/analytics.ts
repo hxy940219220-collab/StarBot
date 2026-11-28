@@ -1,4 +1,4 @@
-import { isKeyOnlyProvider } from "@openbot/contracts/agent-providers";
+import { isKeyOnlyProvider } from "@starbot/contracts/agent-providers";
 import {
   AGENT_PROVIDERS,
   AGENT_REASONING_EFFORTS,
@@ -14,9 +14,9 @@ import {
   type RoutineRunConversationEventStatus,
   type UsageTokens,
   WORKFLOW_RUN_SOURCES,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isFunction, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isFunction, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { normalizeEmailAddress } from "@starbot/contracts/validation";
 import {
   ANALYTICS_GENERATIONS,
   type CauseCode,
@@ -24,7 +24,7 @@ import {
   operationForCode,
   type ReportQueue,
   safeProperties,
-} from "@openbot/telemetry";
+} from "@starbot/telemetry";
 import { OpenPanelBase, type OpenPanelOptions } from "@openpanel/web";
 import { Effect, Exit, Scope } from "effect";
 import { parse as parseDomain } from "tldts";
@@ -120,7 +120,7 @@ const WORKFLOW_RUN_STEP_COUNTS = [
 ] as const satisfies readonly (readonly [string, readonly WorkflowRunEnd["stepKinds"][number][]])[];
 const MAX_INVENTORY_ITEMS = 32;
 const ANALYTICS_SCHEMA_VERSION = ANALYTICS_GENERATIONS.desktop_host;
-const CURATED_AGENT_PREFIX = "openbot-curated-agent-";
+const CURATED_AGENT_PREFIX = "starbot-curated-agent-";
 const LISTING_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]{0,63}$/u;
 const APP_VERSION_PATTERN = /^\d{1,4}\.\d{1,4}\.\d{1,6}(?:-[0-9A-Za-z.]{1,24})?$/u;
 const TOOL_NAME_PATTERN = /^[A-Za-z0-9_.-]{1,64}$/u;
@@ -131,7 +131,7 @@ const TOOL_KINDS = [
   "web_search",
   "web_fetch",
   "mcp",
-  "openbot",
+  "starbot",
   "browser",
   "computer_use",
   "image_generation",
@@ -140,8 +140,8 @@ const TOOL_KINDS = [
   "other",
 ] as const;
 const BUILTIN_TOOL_SERVERS = new Map<string, (typeof TOOL_KINDS)[number]>([
-  ["openbot", "openbot"],
-  ["openbot_browser", "browser"],
+  ["starbot", "starbot"],
+  ["starbot_browser", "browser"],
   [COMPUTER_USE_MCP_SERVER_NAME, "computer_use"],
 ]);
 const ROUTINE_TERMINAL_STATUSES = ["succeeded", "failed", "interrupted", "cancelled"] as const;
@@ -1368,7 +1368,7 @@ function sanitizeHostProperty(name: HostEventName, key: string, value: unknown):
   }
   if (name === "system_webhook_delivery") {
     if (key === "owner_kind") return isOneOf(["agent", "channel", "workflow"] as const, value) ? value : undefined;
-    if (key === "format") return isOneOf(["openbot", "standard"] as const, value) ? value : undefined;
+    if (key === "format") return isOneOf(["starbot", "standard"] as const, value) ? value : undefined;
     if (key === "result") return isOneOf(WEBHOOK_DELIVERY_RESULTS, value) ? value : undefined;
     if (key === "ignored_reason") return isOneOf(WEBHOOK_IGNORED_REASONS, value) ? value : undefined;
     if (key === "status_code") return isOneOf(WEBHOOK_DELIVERY_STATUSES, value) ? value : undefined;

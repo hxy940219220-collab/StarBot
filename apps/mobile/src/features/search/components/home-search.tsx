@@ -1,5 +1,5 @@
-import { avatarHeadColor } from "@openbot/brand/bloub-avatar";
-import { isAgentTaskOpen, taskNeedsYou } from "@openbot/team-client/agent-tasks";
+import { avatarHeadColor } from "@starbot/brand/bloub-avatar";
+import { isAgentTaskOpen, taskNeedsYou } from "@starbot/team-client/agent-tasks";
 import { type Href, router, useFocusEffect } from "expo-router";
 import { useNavigation } from "expo-router/react-navigation";
 import { Spinner, Typography } from "heroui-native";
@@ -569,7 +569,7 @@ export function HomeSearchBar({ search }: { search: HomeSearch }) {
     "default",
     "background",
   ]);
-  const danger = String(useCSSVariable("--openbot-danger-text"));
+  const danger = String(useCSSVariable("--starbot-danger-text"));
   const [shownResult, setShownResult] = useState(search.result);
   if (search.result && search.result !== shownResult) setShownResult(search.result);
   const showsResult = search.result !== null;

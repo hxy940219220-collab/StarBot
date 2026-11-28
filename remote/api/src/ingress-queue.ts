@@ -3,7 +3,7 @@ import {
   type QueuedSignalMessage,
   type RouteHostState,
   sealQueuedDelivery,
-} from "@openbot/contracts/signal-protocol/ingress-queue";
+} from "@starbot/contracts/signal-protocol/ingress-queue";
 import { Deferred, Effect } from "effect";
 
 export interface RouteWake {

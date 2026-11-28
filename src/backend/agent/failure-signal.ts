@@ -1,5 +1,5 @@
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
-import type { CauseCode } from "@openbot/telemetry";
+import type { AgentProviderId } from "@starbot/contracts/agent-providers";
+import type { CauseCode } from "@starbot/telemetry";
 
 export interface FailureContext {
   causeCode?: CauseCode;

@@ -1,6 +1,6 @@
 import { randomBytes } from "node:crypto";
-import { BROWSER_PROXY_SCHEMES, type BrowserProxyScheme } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import { BROWSER_PROXY_SCHEMES, type BrowserProxyScheme } from "@starbot/contracts/ipc";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
 import {
   checkedColumn,
   databaseRows,
@@ -8,7 +8,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "../database/database-rows";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 
 export interface BrowserProxyAddressRecord {
   kind: "address";
@@ -49,9 +49,9 @@ export interface BrowserProxyRow {
 }
 
 export class BrowserProxyStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
 
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     this.#database = database;
   }
 

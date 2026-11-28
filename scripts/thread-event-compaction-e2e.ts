@@ -3,14 +3,14 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { isDeepStrictEqual } from "node:util";
-import type { ConversationMessage } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import type { ConversationMessage } from "@starbot/contracts/ipc";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
 import { AgentStore } from "../src/backend/agent-store";
 import { databaseRows } from "../src/backend/database/database-rows";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/thread-event-compaction-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/thread-event-compaction-e2e");
 const UPDATED = "conversation.snapshot-updated";
 const RECONCILED = "conversation.mailbox-reconciled";
 const BASE = Date.parse("2026-05-06T12:00:00.000Z");
@@ -245,14 +245,14 @@ const cases: Case[] = [
 ];
 
 interface Side {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   agentId: string;
   threadId: string;
   totals: { rewritten: number; bytesBefore: number; bytesAfter: number };
 }
 
 async function openSide(root: string): Promise<Side> {
-  const database = new OpenBotDatabase(join(root, "state"));
+  const database = new StarBotDatabase(join(root, "state"));
   const store = new AgentStore(join(root, "state"), join(root, "home"), database);
   await runCauseEffect(store.initialize());
   const agent = await runCauseEffect(
@@ -407,7 +407,7 @@ function otherKeysKept(fullSide: Side, full: EventRow[], compactedSide: Side, co
 }
 
 async function runCase(test: Case): Promise<CaseReport> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-event-compaction-"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-event-compaction-"));
   const full = await openSide(join(root, "full"));
   const compacted = await openSide(join(root, "compacted"));
   try {

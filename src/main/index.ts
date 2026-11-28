@@ -1,6 +1,6 @@
 import { uptime } from "node:os";
 import { join, resolve } from "node:path";
-import { parseInviteUrl, selfHostedApiOrigin } from "@openbot/contracts/invite-links";
+import { parseInviteUrl, selfHostedApiOrigin } from "@starbot/contracts/invite-links";
 import {
   type AgentEvent,
   type AgentSummary,
@@ -10,11 +10,11 @@ import {
   type HostStatus,
   IPC_ENDPOINTS,
   type QuitGuard,
-} from "@openbot/contracts/ipc";
-import { createFormat, localeDirection, resolveLocale, translateFor, withHourCycle } from "@openbot/i18n";
-import { localizeSourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
-import { createRemoteDirectoryRefresh } from "@openbot/team-client/remote-directory";
+} from "@starbot/contracts/ipc";
+import { createFormat, localeDirection, resolveLocale, translateFor, withHourCycle } from "@starbot/i18n";
+import { localizeSourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
+import { createRemoteDirectoryRefresh } from "@starbot/team-client/remote-directory";
 import { Effect, Semaphore } from "effect";
 import {
   app,
@@ -38,7 +38,7 @@ import { localTimezone } from "../backend/agent/routine-tools";
 import { replaceInvalidLinuxSystemLanguages } from "../backend/browser-policy";
 import { setDiskRestoreProbe } from "../backend/disk-restore";
 import { runCauseEffect } from "../backend/effect-boundary";
-import { LATEST_SCHEMA_VERSION, NewerDatabaseError } from "../backend/openbot-database-schema";
+import { LATEST_SCHEMA_VERSION, NewerDatabaseError } from "../backend/starbot-database-schema";
 import { perfTime } from "../backend/perf-probe-hooks";
 import { OWNER_NOTIFICATION_KEY } from "./agent-notification-level-store";
 import { watchAppArchive } from "./app-archive-watch";
@@ -52,6 +52,7 @@ import {
 import { type BackgroundTray, createBackgroundTray } from "./background-tray";
 import { removeClaudeCodeSessionEnvironment } from "./claude-session-environment";
 import { guardConsoleOutput } from "./console-output";
+import { migrateLegacyStarBotDataDir } from "./migrate-legacy-data";
 import { type DeepLink, findDeepLink, parseDeepLink } from "./deep-link-router";
 import { requestNotificationPermission, showRetainedNotification } from "./desktop-notifications";
 import {
@@ -198,7 +199,7 @@ import { restartOutsideWindowsPackage } from "./windows-package-restart";
 guardConsoleOutput([process.stdout, process.stderr], () => {
   if (!app.isPackaged) app.quit();
 });
-const logger = createOpenBotLogger("main");
+const logger = createStarBotLogger("main");
 
 let crashTrace: TraceFile | null = null;
 let runMarker: RunMarker | null = null;
@@ -262,13 +263,13 @@ try {
 }
 
 const commandLineUserDataDirectory = app.commandLine.getSwitchValue("user-data-dir").trim();
-const developmentProfile = !app.isPackaged ? readDevelopmentProfile(process.env.OPENBOT_DEV_PROFILE) : null;
+const developmentProfile = !app.isPackaged ? readDevelopmentProfile(process.env.STARBOT_DEV_PROFILE) : null;
 const developmentRemoteRole =
   !app.isPackaged &&
-  (process.env.OPENBOT_DEV_REMOTE_ROLE === "host" || process.env.OPENBOT_DEV_REMOTE_ROLE === "client")
-    ? process.env.OPENBOT_DEV_REMOTE_ROLE
+  (process.env.STARBOT_DEV_REMOTE_ROLE === "host" || process.env.STARBOT_DEV_REMOTE_ROLE === "client")
+    ? process.env.STARBOT_DEV_REMOTE_ROLE
     : null;
-const developmentTestClientEnabled = !app.isPackaged && process.env.OPENBOT_DEV_TEST_CLIENT_ENABLED === "1";
+const developmentTestClientEnabled = !app.isPackaged && process.env.STARBOT_DEV_TEST_CLIENT_ENABLED === "1";
 removeClaudeCodeSessionEnvironment(process.env);
 removeOrcaPaneEnvironment(process.env);
 const hostedServer = takeHostedServerEnvironment(process.env, app.isPackaged, process.platform);
@@ -290,12 +291,12 @@ if (serverMode || hostedServer || localServerChild) keepWindowsHidden();
 if (localServerChild && process.platform === "darwin") app.dock?.hide();
 const inviteLinkOptions = {
   allowLocalDevelopmentApiUrl: developmentRemoteRole !== null,
-  selfHostedApiOrigin: selfHostedApiOrigin(process.env.OPENBOT_AUTH_API_URL),
+  selfHostedApiOrigin: selfHostedApiOrigin(process.env.STARBOT_AUTH_API_URL),
 };
 const developmentRemoteDebuggingPort = !app.isPackaged
-  ? readDevelopmentRemoteDebuggingPort(process.env.OPENBOT_DEV_REMOTE_DEBUGGING_PORT)
+  ? readDevelopmentRemoteDebuggingPort(process.env.STARBOT_DEV_REMOTE_DEBUGGING_PORT)
   : null;
-const analyticsCaptureUrl = !app.isPackaged ? readAnalyticsCaptureUrl(process.env.OPENBOT_ANALYTICS_CAPTURE_URL) : null;
+const analyticsCaptureUrl = !app.isPackaged ? readAnalyticsCaptureUrl(process.env.STARBOT_ANALYTICS_CAPTURE_URL) : null;
 app.commandLine.appendSwitch("disable-features", "FedCm,WebRtcHideLocalIpsWithMdns");
 app.commandLine.appendSwitch(
   "proxy-bypass-list",
@@ -317,18 +318,19 @@ if (commandLineUserDataDirectory) {
       app.getPath("appData"),
       developmentUserDataName(
         developmentProfile ?? "app",
-        readDevelopmentInstanceId(process.env.OPENBOT_DEV_INSTANCE_ID),
+        readDevelopmentInstanceId(process.env.STARBOT_DEV_INSTANCE_ID),
       ),
     ),
   );
 }
 app.setName("星友");
+migrateLegacyStarBotDataDir(app.getPath("userData"));
 const systemTimezone =
   serverMode || hostedServer || localServerChild
     ? applyServerTimezone(join(app.getPath("userData"), SERVER_TIMEZONE_PREFERENCE_FILE), process.env)
     : localTimezone;
 app.enableSandbox();
-if (process.platform === "win32") app.setAppUserModelId("app.openbot.desktop");
+if (process.platform === "win32") app.setAppUserModelId("app.starbot.desktop");
 if (
   app.isPackaged &&
   !(serverMode || hostedServer || localServerChildEnvironment) &&
@@ -424,8 +426,8 @@ configureLinuxGpu({
   ownsInstance: hasSingleInstanceLock,
   server: hostedServer !== null || serverMode !== null,
 });
-const isStarBotReplica = app.commandLine.hasSwitch("openbot-replica");
-const appVariant = readAppVariant(process.env.OPENBOT_APP_VARIANT, app.isPackaged || isStarBotReplica);
+const isStarBotReplica = app.commandLine.hasSwitch("starbot-replica");
+const appVariant = readAppVariant(process.env.STARBOT_APP_VARIANT, app.isPackaged || isStarBotReplica);
 const appIconPath = resolveAppIconPath({
   variant: appVariant,
   platform: process.platform,
@@ -435,43 +437,43 @@ const appIconPath = resolveAppIconPath({
 });
 protocol.registerSchemesAsPrivileged([
   {
-    scheme: "openbot-app",
+    scheme: "starbot-app",
     privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true },
   },
   {
-    scheme: "openbot-attachment",
+    scheme: "starbot-attachment",
     privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true },
   },
   {
-    scheme: "openbot-remote-attachment",
+    scheme: "starbot-remote-attachment",
     privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true },
   },
   {
-    scheme: "openbot-visual",
+    scheme: "starbot-visual",
     privileges: { standard: true, secure: true },
   },
   {
-    scheme: "openbot-remote-visual",
+    scheme: "starbot-remote-visual",
     privileges: { standard: true, secure: true },
   },
   {
-    scheme: "openbot-video",
+    scheme: "starbot-video",
     privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true },
   },
   {
-    scheme: "openbot-avatar",
+    scheme: "starbot-avatar",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   {
-    scheme: "openbot-remote-avatar",
+    scheme: "starbot-remote-avatar",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   {
-    scheme: "openbot-server-logo",
+    scheme: "starbot-server-logo",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   {
-    scheme: "openbot-remote-server-logo",
+    scheme: "starbot-remote-server-logo",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
 ]);
@@ -495,7 +497,7 @@ type RendererDeepLink = Exclude<DeepLink, { kind: "mcp-auth" | "slack-workspace"
 let pendingDeepLink: RendererDeepLink | null = takeRendererDeepLink(findDeepLink(process.argv, inviteLinkOptions));
 let deepLinkReceiverReady = false;
 
-const MAIN_WINDOW_STATE_FILE = "openbot-main-window-state-v1.json";
+const MAIN_WINDOW_STATE_FILE = "starbot-main-window-state-v1.json";
 const WM_ENDSESSION = 0x0016;
 
 {
@@ -1450,7 +1452,7 @@ if (!hasSingleInstanceLock) {
   void app
     .whenReady()
     .then(async () => {
-      performance.mark("openbot:when-ready");
+      performance.mark("starbot:when-ready");
       replaceInvalidLinuxSystemLanguages();
       powerMonitor.on("suspend", () => runMarker?.suspend());
       powerMonitor.on("resume", () => runMarker?.resume());
@@ -1517,7 +1519,7 @@ if (!hasSingleInstanceLock) {
         quitting: () => quitStarted,
       });
       services = built;
-      performance.mark("openbot:services-built");
+      performance.mark("starbot:services-built");
       placeWindowButtons(BrowserWindow.getAllWindows());
       if (app.isPackaged && !serverMode && !hostedServer && !localServerChild) {
         teardown.push(0, "app archive watch", watchAppArchive(process.resourcesPath, built.language.translate));
@@ -1793,7 +1795,7 @@ if (!hasSingleInstanceLock) {
         );
       reconcileDynamicIsland();
       await windows.loadRenderer(mainWindow);
-      performance.mark("openbot:renderer-loaded");
+      performance.mark("starbot:renderer-loaded");
       startAttempts?.finished();
       built.startup?.rendererLoaded();
       Effect.runFork(built.prewarmAgentDatabase);

@@ -1,5 +1,5 @@
-import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { currentText } from "@openbot/ui/text";
+import { LOCAL_SERVER_ID } from "@starbot/contracts/ipc";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { appPort } from "../../app-port";
@@ -41,15 +41,15 @@ export function TasksPanel(props: TasksPanelProps) {
   const { servers } = useServers();
   const responseStyle = createServerResponseStyle(
     () => servers().find((server) => server.id === props.serverId),
-    window.openbot.hostAdmin,
+    window.starbot.hostAdmin,
   );
 
   const attachmentFiles = createAttachmentDownloads({
     serverId: () => props.serverId,
     calls: () => ({
-      open: (input) => window.openbot.agent.openAttachment(input, props.serverId),
-      stop: (attachmentId) => window.openbot.agent.stopAttachmentDownload(attachmentId, props.serverId),
-      subscribe: window.openbot.agent.onAttachmentDownload,
+      open: (input) => window.starbot.agent.openAttachment(input, props.serverId),
+      stop: (attachmentId) => window.starbot.agent.stopAttachmentDownload(attachmentId, props.serverId),
+      subscribe: window.starbot.agent.onAttachmentDownload,
     }),
     target: () => undefined,
     onError: (error) => {
@@ -70,8 +70,8 @@ export function TasksPanel(props: TasksPanelProps) {
       downloads={attachmentFiles.downloads}
       files={{
         accepted: threads.filesAccepted,
-        import: (data, serverId) => window.openbot.agent.importAttachmentData(data, serverId),
-        discard: (id, serverId) => window.openbot.agent.discardDraftAttachment(id, serverId),
+        import: (data, serverId) => window.starbot.agent.importAttachmentData(data, serverId),
+        discard: (id, serverId) => window.starbot.agent.discardDraftAttachment(id, serverId),
       }}
       approvals={approvals()}
       waitsForAnswer={(task) => pendingPrompts()[attentionKey(task.agentId, task.threadId)] !== undefined}

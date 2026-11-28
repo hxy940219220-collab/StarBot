@@ -1,6 +1,6 @@
 import { withTransaction } from "../database/sqlite-transaction";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 
-export function workflowTransaction<T>(database: OpenBotDatabase, work: () => T): T {
+export function workflowTransaction<T>(database: StarBotDatabase, work: () => T): T {
   return withTransaction(database.connection, work);
 }

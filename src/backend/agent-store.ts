@@ -16,9 +16,9 @@ import {
 } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { basename, dirname, isAbsolute, join, relative, resolve } from "node:path";
-import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentProfileDraft } from "@openbot/contracts/ipc";
+import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@starbot/contracts/avatar-images";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { AgentProfileDraft } from "@starbot/contracts/ipc";
 import {
   AGENT_FOLDER_LIMIT,
   AGENT_PROVIDERS,
@@ -67,17 +67,17 @@ import {
   type SaveAgentProfileResult,
   type SidebarLayoutSnapshot,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { isGeneratedAgentId, isUuidV4, legacyAgentId } from "@openbot/contracts/validation";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { isGeneratedAgentId, isUuidV4, legacyAgentId } from "@starbot/contracts/validation";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Result, Semaphore, Stream } from "effect";
 import { ProfileCreationRecovery } from "./agent/profile-creation-recovery";
 import { isEmptyStoredFile, parseStoredJson, writeFileAtomically } from "./atomic-json-file";
 import { automationRoot } from "./automation-command";
 import type { AgentModelChange } from "./database/agent-roster";
-import { type OpenBotDatabase, type ProviderSession, stableThreadId } from "./openbot-database";
+import { type StarBotDatabase, type ProviderSession, stableThreadId } from "./starbot-database";
 import { isPathInside } from "./path-containment";
 import { isRecord } from "./protocol";
 import { StoredStateFailure, storedIO, storedSync } from "./stored-state-effects";
@@ -150,7 +150,7 @@ const LEGACY_AGENTS_STATE_KEY = "bots";
 const LEGACY_AGENTS_IMPORT_COMMAND_ID = "legacy-import:bots:v1";
 const CLAUDE_FAST_MODE_RESET_COMMAND_ID = "agent-fast-mode:claude-reset:v1";
 
-const logger = createOpenBotLogger("agent-store");
+const logger = createStarBotLogger("agent-store");
 
 const fsPromisesWithoutAsarArchives: typeof nodeFsPromises = process.versions.electron
   ? createRequire(import.meta.url)("original-fs").promises
@@ -171,7 +171,7 @@ export class AgentStore {
   readonly #duplicationsRoot: string;
   readonly #automationRoot: string;
   readonly #profileCreationRecovery: ProfileCreationRecovery;
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   #state: StoredState = { version: 2, examplesInitialized: false, agents: [] };
   readonly #avatarUpdateQueue = Semaphore.makeUnsafe(1);
   readonly #creationQueue = Semaphore.makeUnsafe(1);
@@ -181,15 +181,15 @@ export class AgentStore {
   constructor(
     userDataPath: string,
     homePath: string,
-    database: OpenBotDatabase,
+    database: StarBotDatabase,
     agentDefaults: () => AgentDefaults = () => DEFAULT_AGENT_DEFAULTS,
-    openbotRoot = join(homePath, "StarBot"),
+    starbotRoot = join(homePath, "StarBot"),
   ) {
     this.#statePath = join(userDataPath, LEGACY_AGENTS_STATE_FILE);
-    this.#agentsRoot = join(openbotRoot, "Agents");
-    this.#legacyAgentsRoot = join(openbotRoot, "Bots");
-    this.#sharedRoot = join(openbotRoot, "Shared");
-    this.#downloadsRoot = join(openbotRoot, "Downloads");
+    this.#agentsRoot = join(starbotRoot, "Agents");
+    this.#legacyAgentsRoot = join(starbotRoot, "Bots");
+    this.#sharedRoot = join(starbotRoot, "Shared");
+    this.#downloadsRoot = join(starbotRoot, "Downloads");
     this.#avatarsRoot = join(userDataPath, "avatars", "agents");
     this.channelImagesRoot = join(userDataPath, "avatars", "channels");
     this.#duplicationsRoot = join(userDataPath, "agent-duplications");
@@ -206,7 +206,7 @@ export class AgentStore {
     return this.#agentDefaults();
   }
 
-  get database(): OpenBotDatabase {
+  get database(): StarBotDatabase {
     return this.#database;
   }
 
@@ -399,9 +399,9 @@ export class AgentStore {
       if (source.avatarColor) record.avatarColor = source.avatarColor;
       if (source.chatColor) record.chatColor = source.chatColor;
 
-      const stagedWorkspace = `${record.workspacePath}.openbot-stage`;
+      const stagedWorkspace = `${record.workspacePath}.starbot-stage`;
       const avatarDirectory = join(this.#avatarsRoot, record.id);
-      const stagedAvatarDirectory = `${avatarDirectory}.openbot-stage`;
+      const stagedAvatarDirectory = `${avatarDirectory}.starbot-stage`;
       const duplicationMarker = this.#duplicationMarkerPath(record.id);
       let stagedAvatarPath: string | null = null;
       {
@@ -984,9 +984,9 @@ export class AgentStore {
       const agent = this.#state.agents.find((candidate) => candidate.id === id);
       for (const path of [
         join(this.#avatarsRoot, id),
-        `${join(this.#avatarsRoot, id)}.openbot-stage`,
+        `${join(this.#avatarsRoot, id)}.starbot-stage`,
         join(this.#agentsRoot, id),
-        `${join(this.#agentsRoot, id)}.openbot-stage`,
+        `${join(this.#agentsRoot, id)}.starbot-stage`,
       ]) {
         yield* storedIO(() => rm(path, AGENT_FILES_REMOVAL));
       }
@@ -1232,7 +1232,7 @@ export class AgentStore {
     }
     const entries = listing.success;
     yield* Effect.forEach(
-      entries.filter((entry) => entry.endsWith(".openbot-stage")),
+      entries.filter((entry) => entry.endsWith(".starbot-stage")),
       (entry) =>
         storedIO(() => rm(join(this.#legacyAgentsRoot, entry), { recursive: true, force: true })).pipe(
           Effect.catch(({ cause }) =>
@@ -1243,7 +1243,7 @@ export class AgentStore {
         ),
       { concurrency: "unbounded", discard: true },
     );
-    if (!entries.every((entry) => entry.endsWith(".openbot-stage"))) return;
+    if (!entries.every((entry) => entry.endsWith(".starbot-stage"))) return;
     yield* storedIO(() => rmdir(this.#legacyAgentsRoot)).pipe(
       Effect.catch(({ cause }) =>
         Effect.sync(() => logger.warn("Could not remove the legacy workspace root.", toLogValue(cause))),
@@ -1286,7 +1286,7 @@ export class AgentStore {
             ...roots.flatMap((root) =>
               names.flatMap((name) => [
                 storedIO(() => rm(join(root, name), { recursive: true, force: true })),
-                storedIO(() => rm(`${join(root, name)}.openbot-stage`, { recursive: true, force: true })),
+                storedIO(() => rm(`${join(root, name)}.starbot-stage`, { recursive: true, force: true })),
               ]),
             ),
             storedIO(() => rm(join(this.#duplicationsRoot, entry.name), { force: true })),
@@ -2099,7 +2099,7 @@ function stringList(value: unknown): string[] {
 }
 
 function agentAvatarUrl(agentId: string, version: string, mimeType: string): string {
-  const url = new URL(`openbot-avatar://agent/${encodeURIComponent(agentId)}`);
+  const url = new URL(`starbot-avatar://agent/${encodeURIComponent(agentId)}`);
   url.searchParams.set("v", version);
   url.searchParams.set("type", mimeType);
   return url.toString();
@@ -2115,7 +2115,7 @@ function parseAgentAvatarUrl(
     const version = url.searchParams.get("v") ?? "";
     const mimeType = url.searchParams.get("type") ?? "";
     if (
-      url.protocol !== "openbot-avatar:" ||
+      url.protocol !== "starbot-avatar:" ||
       url.hostname !== "agent" ||
       agentId !== expectedAgentId ||
       !isUuidV4(version) ||

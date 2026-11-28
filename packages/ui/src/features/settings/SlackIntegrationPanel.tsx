@@ -1,8 +1,8 @@
-import { DISCORD_ORCHESTRATOR_AVATAR } from "@openbot/contracts/discord-app";
-import type { MessagingConnection, MessagingPlatform, MessagingRole } from "@openbot/contracts/ipc";
-import { MESSAGING_LIMITS } from "@openbot/contracts/ipc";
-import { SLACK_ORCHESTRATOR_AVATAR } from "@openbot/contracts/slack-app";
-import type { AppMessages, AppTextKey } from "@openbot/i18n";
+import { DISCORD_ORCHESTRATOR_AVATAR } from "@starbot/contracts/discord-app";
+import type { MessagingConnection, MessagingPlatform, MessagingRole } from "@starbot/contracts/ipc";
+import { MESSAGING_LIMITS } from "@starbot/contracts/ipc";
+import { SLACK_ORCHESTRATOR_AVATAR } from "@starbot/contracts/slack-app";
+import type { AppMessages, AppTextKey } from "@starbot/i18n";
 import {
   Button,
   Checkbox,
@@ -17,7 +17,7 @@ import {
   SettingsSection,
   Spinner,
   Text,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createEffect, createSignal, createStore, createUniqueId, For, Match, Show, Switch } from "solid-js";
 import { useText } from "../../text";
 import { DiscordTile, SlackTile } from "./brand-marks";

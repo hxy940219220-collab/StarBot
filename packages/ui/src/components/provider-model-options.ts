@@ -7,7 +7,7 @@ import type {
   CustomProviderHarness,
   CustomProviderSummary,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   agentProviderName,
   CUSTOM_AGENT_DEFAULT_MODEL,
@@ -16,8 +16,8 @@ import {
   isFreeOpencodeModel,
   isFreeOpencodeModelName,
   isKnownAgentProvider,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@starbot/i18n";
 import { currentText } from "../text";
 
 const EFFORT_LABELS: Partial<Record<string, AppTextKey>> = {

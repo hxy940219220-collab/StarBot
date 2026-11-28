@@ -1,9 +1,9 @@
-import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { Button, Check, ChevronDown, Dialog, Input, Plus, Switch, X } from "@openbot/ui";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { isChiefStarBot } from "@openbot/ui/features/agents/chief-starbot";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+import { LOCAL_SERVER_ID } from "@starbot/contracts/ipc";
+import { Button, Check, ChevronDown, Dialog, Input, Plus, Switch, X } from "@starbot/ui";
+import type { AgentProfile } from "@starbot/ui/data";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { isChiefStarBot } from "@starbot/ui/features/agents/chief-starbot";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import { createEffect, createMemo, createSignal, For, onCleanup, onSettled, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { useNavigation } from "../../navigation";
@@ -162,11 +162,11 @@ export function StarBotWorkspaceCapsules() {
       if (action === "memory") {
         const { category } = parseMemoryCategory(content);
         const tagged = formatTaggedMemory(category, content);
-        await window.openbot.agent.createMemory({ agentId: target.id, text: tagged }, serverId());
+        await window.starbot.agent.createMemory({ agentId: target.id, text: tagged }, serverId());
         if (category === "profile") {
           addGlobalUserProfileItem(content);
         }
-        const list = await window.openbot.agent.listMemories(target.id, serverId()).catch(() => []);
+        const list = await window.starbot.agent.listMemories(target.id, serverId()).catch(() => []);
         await syncMemoriesToAgentInstructions(target.id, target.name, list, serverId());
         void playKawaiiCue("success");
         setCaptureText("");
@@ -177,7 +177,7 @@ export function StarBotWorkspaceCapsules() {
 
       const prompt = action === "ask" ? content : `请帮我把以下想法拆解为清晰可执行的下一步待办清单：\n\n${content}`;
 
-      await window.openbot.agent.sendMessage({ agentId: target.id, text: prompt }, serverId());
+      await window.starbot.agent.sendMessage({ agentId: target.id, text: prompt }, serverId());
       void playKawaiiCue("message-send");
       selectAgent(target.id);
       setCaptureText("");

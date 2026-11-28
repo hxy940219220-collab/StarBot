@@ -12,9 +12,9 @@ import {
   isAvatarColorChoice,
   SUPPORTED_AVATAR_SILHOUETTES,
   type SupportedAvatarSilhouetteId,
-} from "@openbot/brand/bloub-avatar";
-import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@starbot/brand/bloub-avatar";
+import type { AvatarColor, AvatarHue } from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { Button, Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import RotateCcw from "lucide-react-native/icons/rotate-ccw";

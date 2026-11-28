@@ -1,4 +1,4 @@
-import type { MobileReleaseNotes } from "@openbot/contracts/mobile-features";
+import type { MobileReleaseNotes } from "@starbot/contracts/mobile-features";
 
 export type AppUpdate = { kind: "ready"; id: string } | { kind: "store"; id: string; version: string };
 

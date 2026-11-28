@@ -4,7 +4,7 @@ This guide tells you how a sign-in reaches StarBot, how a joined server signs in
 computer of its user, and how to add a provider, an application or a connector. Each section has a
 working example with real file paths.
 
-- [How a sign-in reaches StarBot](#how-a-sign-in-reaches-openbot)
+- [How a sign-in reaches StarBot](#how-a-sign-in-reaches-starbot)
 - [Remote sign-in: the callback relay](#remote-sign-in-the-callback-relay)
 - [Add a provider](#add-a-provider)
 - [Add an application](#add-an-application)
@@ -24,7 +24,7 @@ computer of the user who signs in. A sign-in uses one of these kinds:
 | Device code | Codex (`codex-device`), Grok, Cline, Kimi, Muse, the GitHub connector | The user types a short code on the provider's page. Nothing comes back to StarBot. | The host starts it and the client shows the code (`providers-v1` to `providers-v5`; Kimi `providers-v8` only). Muse: the relay opens its device page with no callback. GitHub: `connectors-v1`. |
 | Pasted code | Claude on Linux (`cli` / `paste`), Cursor (`cli` / `link`) | The page shows a code, and the user pastes it into StarBot. | The host starts it and the client takes the code (`providers-v3` to `providers-v5`). |
 | CLI-owned browser login | Claude (`auth login`), Codex, Gemini (`acp-authenticate`) | The provider's CLI opens the browser and takes its own callback. | The relay (`provider/start`): the host captures the page, and the client sends the callback query to the CLI's listener on the host. Grok, Cursor and Cline: a code kind. Mistral: the host takes the page from Vibe (`acp-delegated`) and the client shows it as a link (`providers-v8` with `mistral-code-sign-in-v1`). |
-| Deep link | Slack, Discord (`openbot://slack-workspace`, `openbot://discord-guild`), MCP fallback (`openbot://mcp-auth`) | A hosted page ends in an `openbot://` link, which reaches only the computer that opened it. | Slack and Discord: `connectors-v1`. The client sends the sealed grant on to the host that started the install. The browser client gets the grant from a return page of its own origin (`web-messaging-install.ts`). |
+| Deep link | Slack, Discord (`starbot://slack-workspace`, `starbot://discord-guild`), MCP fallback (`starbot://mcp-auth`) | A hosted page ends in an `starbot://` link, which reaches only the computer that opened it. | Slack and Discord: `connectors-v1`. The client sends the sealed grant on to the host that started the install. The browser client gets the grant from a return page of its own origin (`web-messaging-install.ts`). |
 | Terminal | Pi | StarBot opens the CLI in a terminal on the host ([`provider-terminal-login.ts`](../../src/backend/provider-terminal-login.ts)). | Sign in on the host. |
 | Key or local session | API keys, 1Password, Bitwarden, Proton Pass | The user types a key or gives a CLI session. Proton Pass also signs in on Proton's web page. | Keys go to the host over the encrypted channel. Vault approval stays on the host. A Bitwarden session key works only on the computer that made it; a joined server gets an API key and the master password. Proton Pass: `password-managers-v1`; the client opens the host's sign-in page. |
 
@@ -92,7 +92,7 @@ The host checks each request in [`mcp-member-access.ts`](../../src/main/team-api
 | Client | The host lets a member in only when the client also sends the capability. A released client stays admin-only. `serverCanManageMcp` decides what the desktop and web clients offer, and `canManageMcpServers` what the phone offers. |
 | Read and add | A member reads the whole list, with its `env` and header values, tests a server, and adds a server, a stdio command too. |
 | Change | A member changes, turns on or off, or removes only a server that the member added. Any other row gets 403 `error.team.mcpServerNotYours`. Owners and admins change every row. |
-| Owners | `McpServerOwnersStore` keeps the member ID of each row that a joined server added, in `openbot-mcp-server-owners-v1.json`. A row with no entry, such as one added on the host, counts as an admin's. A damaged file reads as empty. |
+| Owners | `McpServerOwnersStore` keeps the member ID of each row that a joined server added, in `starbot-mcp-server-owners-v1.json`. A row with no entry, such as one added on the host, counts as an admin's. A damaged file reads as empty. |
 | Sign-in | A sign-in belongs to an address (`mcpOAuthAccountKey`), not to a row. A member starts, cancels or signs out a sign-in, or changes a sign-in app, only when each row on that address is the member's. Each server keeps one sign-in, which every agent of the host uses. |
 | Providers | Provider sign-ins, account starts and agent links on the relay stay with owners and admins. |
 
@@ -143,7 +143,7 @@ probe are not changed.
 | --- | --- |
 | Address | `http://127.0.0.1:<port>/mcp/<route>/<agent>`. The route is a digest of the row id and its URL, so a changed URL is a new route. The agent segment is a digest of the agent id (`mcpOAuthProxyAgentKey`). `/mcp/<route>` with no agent segment stays valid: Codex sessions from before the segment hold it. |
 | Bearer | An HMAC of the route and the agent segment with the proxy secret. A bearer opens one route for one agent only. It is compared with `timingSafeEqual` and registered for redaction. |
-| Identity | The `clientInfo` of each `initialize` becomes `{ name: "openbot", title: "<agent name> (StarBot)", version, websiteUrl }`; the name is read at each `initialize`, so a rename shows in the next session. With no known agent the title is `StarBot`. `User-Agent` is `StarBot/<version>` unless the row sets one. A body that is not JSON, is a batch, or is larger than 64 KiB goes through unchanged. |
+| Identity | The `clientInfo` of each `initialize` becomes `{ name: "starbot", title: "<agent name> (StarBot)", version, websiteUrl }`; the name is read at each `initialize`, so a rename shows in the next session. With no known agent the title is `StarBot`. `User-Agent` is `StarBot/<version>` unless the row sets one. A body that is not JSON, is a batch, or is larger than 64 KiB goes through unchanged. |
 | Refused with 403 | A `Host` that is not `127.0.0.1:<port>` or `localhost:<port>`, an unknown path, a wrong bearer. |
 | Upstream | The row's URL and its headers, with the current token. The provider's `Authorization` and cookies are not sent. Only same-origin 307 and 308 redirects are followed, at most 3. |
 | Server answers 401 | One `McpOAuth.refreshAccessToken`, then one retry with the new token. |
@@ -155,7 +155,7 @@ editing or signing out of a row refuses its route at once; there is no list of r
 current. A proxy that cannot start drops the row from the hand-off with
 `error.backend.mcpOAuthProxyUnavailable`. The raw token is never the fallback.
 
-The port and the secret are kept encrypted in `openbot-mcp-oauth-proxy-v1.json`. Codex keeps the
+The port and the secret are kept encrypted in `starbot-mcp-oauth-proxy-v1.json`. Codex keeps the
 MCP configuration of a resumed thread, so the same address must work after a restart. When the
 saved port is in use, the proxy takes a new port and a new secret, so the old bearers stop working.
 The Codex tool manifest records the proxy address and the proxied rows; a change replaces the Codex
@@ -184,7 +184,7 @@ three start routes, and `provider-account-relay-v1` and `-v2` add one more each.
 | `link/start` | A sign-in page that an agent of the host printed in its conversation | It replays the query to the loopback address of that page. |
 | `provider-account/start` | An account after the first of Codex or Claude (`PROVIDER_ACCOUNT_RELAY_PROVIDERS`), new or signed out. The separate capability `provider-account-relay-v1` adds this route ([`provider-account-relay-v1.ts`](../../packages/contracts/src/team-protocol/provider-account-relay-v1.ts)) | It replays the query to the loopback listener of the account's CLI on the host, as for `provider/start`. |
 | `provider-account/v2/start` | An account after the first of Codex, Claude or Gemini (`PROVIDER_ACCOUNT_RELAY_V2_PROVIDERS`), new or signed out. The separate capability `provider-account-relay-v2` adds this route ([`provider-account-relay-v2.ts`](../../packages/contracts/src/team-protocol/provider-account-relay-v2.ts)). A host advertises it with v1, and a client uses the newest one that the host advertises | As for `provider-account/start`. |
-| `mcp/start-deep-link` | As `mcp/start`. The separate capability `sign-in-relay-deep-link-v1` adds this route ([`sign-in-relay-deep-link-v1.ts`](../../packages/contracts/src/team-protocol/sign-in-relay-deep-link-v1.ts)). A desktop client sends it only while its operating system opens `openbot://` in StarBot. After two sign-ins of the same address got no grant back on `127.0.0.1` and on `localhost`, the host registers `openbot://mcp-auth`: TradingView's firewall blocks a page that returns to a loopback name (#9209) | The client takes the callback from `openbot://mcp-auth` by `state` and sends it with `complete`; the host gives the code to `McpOAuth`. |
+| `mcp/start-deep-link` | As `mcp/start`. The separate capability `sign-in-relay-deep-link-v1` adds this route ([`sign-in-relay-deep-link-v1.ts`](../../packages/contracts/src/team-protocol/sign-in-relay-deep-link-v1.ts)). A desktop client sends it only while its operating system opens `starbot://` in StarBot. After two sign-ins of the same address got no grant back on `127.0.0.1` and on `localhost`, the host registers `starbot://mcp-auth`: TradingView's firewall blocks a page that returns to a loopback name (#9209) | The client takes the callback from `starbot://mcp-auth` by `state` and sends it with `complete`; the host gives the code to `McpOAuth`. |
 
 ### Sequence
 
@@ -232,7 +232,7 @@ The client tries these, in this order:
 
 1. **Its own MCP listener.** The callback names port 28417 and path `/mcp-auth`, and the client's
    own MCP grant listener has that port. The listener gives a `state` that no local sign-in started
-   to `SignInRelayClient.deliver`. The `openbot://mcp-auth` link does the same.
+   to `SignInRelayClient.deliver`. The `starbot://mcp-auth` link does the same.
 2. **The exact port.** The client binds `127.0.0.1:<port>` for the time of the sign-in with
    `listenLoopbackExact`. It never takes another port, because the page sends the browser to the
    host's port.
@@ -402,7 +402,7 @@ is one folder per plugin in [`marketplace/plugin-catalog/`](../../marketplace/pl
    leaves out the vendor icon addresses: the phone loads icons from `/plugins/icon/<slug>?app=<id>`.
 5. For an `http` server, run `bun run test:mcp-catalog`
    ([`mcp-catalog-smoke.ts`](../../scripts/mcp-catalog-smoke.ts)). It connects to the live servers
-   with no account and writes `.openbot-build/mcp-catalog-smoke/report.json`. It needs the network,
+   with no account and writes `.starbot-build/mcp-catalog-smoke/report.json`. It needs the network,
    so it is a manual run and not a CI gate.
 
 The smoke checks an `http` server with no `auth` or with a `link` flow. It skips `stdio` servers and
@@ -423,7 +423,7 @@ StarBot's client metadata document (CIMD, SEP-991) as the `client_id`:
 `https://starbot.app/oauth/mcp-client.json`, which `apps/auth-api` serves
 ([`mcp-client[.]json.ts`](../../apps/auth-api/src/routes/oauth/mcp-client%5B.%5Djson.ts)). Its
 `redirect_uris` holds only `http://127.0.0.1:28417/mcp-auth`: ElevenLabs refuses a document that
-also lists a custom scheme such as `openbot://mcp-auth` (#5748). A server that
+also lists a custom scheme such as `starbot://mcp-auth` (#5748). A server that
 offers registration keeps it. ElevenLabs accepts only the document. When port 28417 is in use, the
 loopback address has another port, and a server that compares ports refuses it.
 
@@ -485,8 +485,8 @@ state on each of them.
 | Connector | Service | Sign-in | Contract |
 | --- | --- | --- | --- |
 | GitHub | [`github-connector-service.ts`](../../src/main/github-connector-service.ts), `github-device-flow.ts` | Device flow of a GitHub App with only the public client ID | `ipc-github-connector.ts`; joined server: `connectors-v1` GitHub routes |
-| Slack | `src/backend/messaging/slack/` | Hosted OAuth in the account Worker, which ends in `openbot://slack-workspace` with a sealed grant | `slack-workspace-grant.ts`, `ipc-messaging.ts` |
-| Discord | `src/backend/messaging/discord/` | The same, with `openbot://discord-guild` | `discord-guild-grant.ts`, `ipc-messaging.ts` |
+| Slack | `src/backend/messaging/slack/` | Hosted OAuth in the account Worker, which ends in `starbot://slack-workspace` with a sealed grant | `slack-workspace-grant.ts`, `ipc-messaging.ts` |
+| Discord | `src/backend/messaging/discord/` | The same, with `starbot://discord-guild` | `discord-guild-grant.ts`, `ipc-messaging.ts` |
 | Telegram | `src/backend/messaging/telegram/` | A one-use link code in a `t.me` link. No OAuth | `telegram-app.ts`, `ipc-messaging.ts` |
 | 1Password | [`onepassword-connector-service.ts`](../../src/main/onepassword-connector-service.ts) | The user's `op` session creates a read-only service account, or the user pastes a token | `ipc-onepassword-connector.ts`; joined server: `onepassword-connector-v1` (token only) |
 | Bitwarden | [`bitwarden-connector-service.ts`](../../src/main/bitwarden-connector-service.ts) | A `bw` session key, kept in memory only; a joined server signs in with an API key and the master password | `ipc-bitwarden-connector.ts`; joined server: `bitwarden-connector-v1` |
@@ -500,7 +500,7 @@ To add a connector:
 2. Add the service in `src/main/<name>-connector-service.ts`. Keep its secret in encrypted storage,
    and call `registerSecretValue` on every token before the first log line.
 3. Prefer a device code: it works on any computer and through any joined server. A deep link
-   (`openbot://...`) reaches only the computer that opened the page. Add its kind to
+   (`starbot://...`) reaches only the computer that opened the page. Add its kind to
    [`deep-link-router.ts`](../../src/main/deep-link-router.ts), and keep a grant out of the renderer.
 4. Add the id to `CONNECTOR_IDS` and its entry to `CONNECTORS` in
    [`connectors.ts`](../../packages/ui/src/features/connectors/connectors.ts). `server` is the capability that
@@ -534,7 +534,7 @@ and Telegram:
 - **GitHub**: the host runs the device flow. The client shows `userCode` and opens
   `verificationUri`. The host sees the sign-in by itself.
 - **Slack and Discord**: the host answers the install page and a `nonce`, and opens nothing. The
-  client opens the page. The install ends in an `openbot://` link on the client, with a grant that is
+  client opens the page. The install ends in an `starbot://` link on the client, with a grant that is
   sealed to a one-use key of the host. `RelayedMessagingInstalls`
   ([`relayed-messaging-installs.ts`](../../src/main/relayed-messaging-installs.ts)) sends the grant
   with `messagingComplete` only to the server whose install this computer opened, and only once. The
@@ -675,7 +675,7 @@ the client sends it with `connect`. The CLI reads it from a FIFO (a named pipe o
 from an argument or a file on disk. The host then finds or makes the vault `Shared with StarBot`,
 makes an agent access key that reads only that vault and ends after one year, and signs the
 temporary session out. With `key`, the user pastes an agent access key that they made. The host
-keeps only the access key, in `openbot-protonpass-connector-v1.json`, and the CLI session in
+keeps only the access key, in `starbot-protonpass-connector-v1.json`, and the CLI session in
 `<userData>/provider-state/protonpass-host`. It installs the `pass-cli` release that
 [`proton-pass-cli-installer.ts`](../../src/main/password-managers/proton-pass-cli-installer.ts)
 pins, with a SHA-256 per target, into `<userData>/provider-state/protonpass-cli`. Disconnect removes
@@ -715,7 +715,7 @@ Team API adapters stay while a release in the support window speaks them (see [T
    [`team-admin-requests.ts`](../../packages/team-client/src/team-admin-requests.ts), and gate them
    on the host's capabilities in the web client.
 8. **Bootstrap.** Make sure that the capability is not in bootstrap.
-9. **Text.** Error messages use `sourceText(key)` with keys in all languages of `@openbot/i18n`.
+9. **Text.** Error messages use `sourceText(key)` with keys in all languages of `@starbot/i18n`.
 
 ## Test a sign-in through a joined server
 

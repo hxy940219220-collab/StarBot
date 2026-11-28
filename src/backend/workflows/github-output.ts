@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   isGitHubRepositoryName,
   WORKFLOW_GITHUB_ACTIONS,
@@ -9,9 +9,9 @@ import {
   type WorkflowGraph,
   type WorkflowNode,
   workflowListField,
-} from "@openbot/contracts/ipc";
-import { isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { extractJsonObject, StructuredOutputError } from "../structured-output";
 import { EXTERNAL_EVENT_END, EXTERNAL_EVENT_START } from "../webhook-trigger";
 import { githubObjectKey, githubTriggerRepositories } from "./github-matching";

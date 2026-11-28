@@ -292,7 +292,7 @@ export const messages = {
 
   "workflow.output.title": "출력",
   "workflow.output.name": "출력",
-  "workflow.output.channel.openbot": "StarBot",
+  "workflow.output.channel.starbot": "StarBot",
 
   "workflow.output.channel.search": "채널 검색",
   "workflow.output.postsAs": "게시 방식",
@@ -376,8 +376,8 @@ export const messages = {
   "workflow.github.event.pr.checksFailed": "검사 실패",
   "workflow.github.event.pr.merged": "풀 리퀘스트 병합됨",
   "workflow.github.event.comment": "새 댓글",
-  "workflow.github.event.mention": "@openbotgit 멘션됨",
-  "workflow.github.event.assigned": "@openbotgit에 할당됨",
+  "workflow.github.event.mention": "@starbotgit 멘션됨",
+  "workflow.github.event.assigned": "@starbotgit에 할당됨",
   "workflow.github.trigger.event": "이벤트",
   "workflow.github.trigger.labelAdded": "추가된 레이블",
   "workflow.github.trigger.hasLabel": "레이블 포함",

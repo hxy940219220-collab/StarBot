@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { AgentEvent, AgentSummary, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { AgentEvent, AgentSummary, SidebarLayoutSnapshot } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Deferred, Effect, Result, Schema } from "effect";
 import type { AgentService } from "../agent-service";
 import { type AgentStore, duplicationProfileSignature } from "../agent-store";

@@ -1,5 +1,5 @@
-import type { MarketplaceSkillDetail, SkillPackagePreview } from "@openbot/contracts/ipc";
-import { Button, Check, Upload, X } from "@openbot/ui";
+import type { MarketplaceSkillDetail, SkillPackagePreview } from "@starbot/contracts/ipc";
+import { Button, Check, Upload, X } from "@starbot/ui";
 import { Portal } from "@solidjs/web";
 import { createSignal, Show } from "solid-js";
 import type { MarketplaceModel } from "./marketplace-model";

@@ -1,5 +1,5 @@
 import type { DatabaseSync } from "node:sqlite";
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 import { isDynamicRecord } from "./runtime-values";
 
 // Migration 33 adds what a routine does with the occurrences that came due while StarBot was closed, and
@@ -31,7 +31,7 @@ function addRoutineMissedRuns(db: DatabaseSync): void {
   }
 }
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 33,
   name: "routine-missed-runs",
   // Adds columns with a constant default or none to four tables: no rebuild, so no foreign-key pause and

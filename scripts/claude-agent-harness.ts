@@ -95,7 +95,7 @@ export async function makeGitWorkspace(workspace: string, origin = false): Promi
   const git = (...args: string[]) => execFileSync("git", args, { cwd: workspace, encoding: "utf8" });
   git("init", "-q");
   git("config", "user.name", "StarBot");
-  git("config", "user.email", "e2e@openbot.invalid");
+  git("config", "user.email", "e2e@starbot.invalid");
   git("add", ".");
   git("commit", "-q", "-m", "Start");
   if (origin) {

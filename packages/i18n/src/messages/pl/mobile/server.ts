@@ -1657,7 +1657,7 @@ export const messages = {
   "mobile.server.update.path.hosted":
     "Usługa hostingu pobiera aktualizacje w tle. Pobrana aktualizacja zostanie zastosowana przy następnym uruchomieniu serwera. Poczekaj na zakończenie aktywnej pracy, zanim zatrzymasz i wznowisz serwer. Jeśli serwer pozostaje na starej wersji, skontaktuj się z administratorem hosta.",
   "mobile.server.update.path.system":
-    "Na hoście uruchom sudo openbot update, aby zainstalować najnowsze wydanie. To polecenie zatrzymuje StarBot. Najpierw poczekaj na zakończenie aktywnej pracy. Automatycznie pobrane aktualizacje instalują się przy następnym rozruchu.",
+    "Na hoście uruchom sudo starbot update, aby zainstalować najnowsze wydanie. To polecenie zatrzymuje StarBot. Najpierw poczekaj na zakończenie aktywnej pracy. Automatycznie pobrane aktualizacje instalują się przy następnym rozruchu.",
 
   "mobile.server.update.path.container":
     "Na hoście Docker pobierz nowy obraz StarBot i utwórz kontener ponownie z tymi samymi woluminami danych. Najpierw poczekaj na zakończenie aktywnej pracy. Zachowaj istniejące woluminy, aby nie stracić danych.",

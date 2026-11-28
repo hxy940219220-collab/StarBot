@@ -1,5 +1,5 @@
-import { CHAT_VISUAL_PAGE_LIMIT } from "@openbot/contracts/chat-visual";
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { CHAT_VISUAL_PAGE_LIMIT } from "@starbot/contracts/chat-visual";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AcknowledgeFailedTurnInput,
   type AgentIpcRequest,
@@ -92,11 +92,11 @@ import {
   type UpdateQueuedMessageInput,
   type UpdateRoutineInput,
   type WithdrawFeedbackInput,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { AGENT_ACTIVE_QUEUES_LIMIT } from "@openbot/contracts/team-protocol/agent-active-queues-v1";
-import { decodeQueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { AGENT_ACTIVE_QUEUES_LIMIT } from "@starbot/contracts/team-protocol/agent-active-queues-v1";
+import { decodeQueueEditRequest } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@starbot/i18n/source";
 import type { PayloadDecoder } from "../trusted-ipc";
 import { parseAvatarImage } from "./avatar-inputs";
 import { isObject, requireString } from "./validation";

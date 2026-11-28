@@ -5,19 +5,19 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { set as dotenvSet } from "@dotenvx/dotenvx";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { z } from "zod";
 import { loadSharedDevelopmentEnvironment } from "../development-environment";
 import { bootstrapStripe } from "../stripe-bootstrap";
 
-const logger = createOpenBotLogger("hosting-setup");
+const logger = createStarBotLogger("hosting-setup");
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const BOAT_API_URL = "https://boat.dev/api/v1";
 const BOAT_EVENTS = ["sandbox.ready", "sandbox.error", "sandbox.archived", "sandbox.hydrated"];
 const GITHUB_ENVIRONMENT = "cloudflare-production";
 const TARGETS = {
   production: { api: "https://api.starbot.app" },
-  test: { api: "https://openbot-auth-api-test.internal9671.workers.dev" },
+  test: { api: "https://starbot-auth-api-test.internal9671.workers.dev" },
 } as const;
 
 interface SecretStore {
@@ -74,7 +74,7 @@ function envFileStore(path: string): SecretStore {
     if (!privateKey) {
       throw new Error(`${name} was not written to ${path}. Set DOTENV_PRIVATE_KEY_DEV in the shell.`);
     }
-    const keysDirectory = mkdtempSync(join(tmpdir(), "openbot-dotenv-"));
+    const keysDirectory = mkdtempSync(join(tmpdir(), "starbot-dotenv-"));
     const keysPath = join(keysDirectory, ".env.keys");
     writeFileSync(keysPath, `DOTENV_PRIVATE_KEY_DEV=${privateKey}\n`, { encoding: "utf8", mode: 0o600 });
     try {
@@ -202,7 +202,7 @@ async function main(args: string[]): Promise<void> {
   const boatSecretValue = await ensureBoatWebhook(
     boatKey,
     `${api}/v2/hosting/boat/webhook`,
-    `openbot-${target}`,
+    `starbot-${target}`,
     replace || !(await store.has("BOAT_WEBHOOK_SECRET")),
   );
   if (boatSecretValue) await put("BOAT_WEBHOOK_SECRET", boatSecretValue);

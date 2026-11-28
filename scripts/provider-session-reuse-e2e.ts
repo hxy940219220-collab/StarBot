@@ -12,7 +12,7 @@ import {
   type AgentProviderId,
   defaultProviderModel,
   type McpServerConfig,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentClientFactory } from "../src/backend/agent/provider-runtime";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -22,8 +22,8 @@ import type { AppServerNotification, AppServerRequest, RequestId, ResponseDecode
 import { providerSync } from "../src/backend/provider-client-effects";
 import type { ReadProviderHistory } from "../src/backend/provider-history";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-session-reuse-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-session-reuse-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-session-reuse-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-session-reuse-"));
 const home = join(root, "home");
 const claudeExecutable = join(root, "claude");
 const claudeSpawns = join(root, "claude-spawns.jsonl");
@@ -41,9 +41,9 @@ const CLAUDE_MODEL = defaultProviderModel("claude");
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
 process.env.GEMINI_HOME = join(home, ".gemini");
-process.env.OPENBOT_CLAUDE_PATH = claudeExecutable;
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
-process.env.OPENBOT_ANTIGRAVITY_PATH = fakeAgy;
+process.env.STARBOT_CLAUDE_PATH = claudeExecutable;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_ANTIGRAVITY_PATH = fakeAgy;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
@@ -51,7 +51,7 @@ const { AgentStore } = await import("../src/backend/agent-store");
 const { ClaudeAgentClient } = await import("../src/backend/claude-client");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 const { CODEX_PLACEHOLDER_COMMAND, codexMcpServerKey } = await import("../src/backend/mcp-provider-shapes");
 const { CURRENT_MESSAGE_SEPARATOR, HANDOFF_START } = await import("../src/backend/agent/delivery-content");
 
@@ -387,7 +387,7 @@ async function runCase(
 ): Promise<void> {
   const result: CaseReport = { name, passed: false, details: {} };
   report.cases.push(result);
-  const database = new OpenBotDatabase(join(root, `user-data-${name}`));
+  const database = new StarBotDatabase(join(root, `user-data-${name}`));
   const store = new AgentStore(database.userDataPath, home, database);
   const mailbox = new MailboxStore(database.userDataPath, store.sharedRoot, store.database);
   const agents = new AgentService({

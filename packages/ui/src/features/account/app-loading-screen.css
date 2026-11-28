@@ -2,7 +2,7 @@
   --app-loading-at: 0s;
   --app-loading-exit-delay: 120ms;
   position: absolute;
-  z-index: var(--openbot-layer-dialog);
+  z-index: var(--starbot-layer-dialog);
   inset: 0;
   display: grid;
   place-items: center;
@@ -108,7 +108,7 @@
   position: absolute;
   width: 78%;
   height: 78%;
-  border: 2px dashed color-mix(in srgb, var(--openbot-accent) 30%, transparent);
+  border: 2px dashed color-mix(in srgb, var(--starbot-accent) 30%, transparent);
   border-radius: 50%;
   animation: starbot-ring-spin 26s linear infinite;
 }
@@ -172,7 +172,7 @@
   align-items: center;
   gap: 8px;
   text-align: center;
-  animation: starbot-brand-in 580ms var(--openbot-ease-out) 260ms both;
+  animation: starbot-brand-in 580ms var(--starbot-ease-out) 260ms both;
 }
 
 .starbot-splash-title {
@@ -181,9 +181,9 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: clamp(26px, 3.6vmin, 34px);
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
   letter-spacing: 0.02em;
   line-height: 1.25;
 }
@@ -201,9 +201,9 @@
 
 .starbot-splash-subtitle {
   margin: 0;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: clamp(14px, 1.9vmin, 16px);
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   line-height: 1.4;
 }
 
@@ -213,7 +213,7 @@
 }
 
 .app-loading:is([data-phase="fade"], [data-phase="exit"]) {
-  animation: app-loading-exit 420ms var(--openbot-ease-in-out) forwards;
+  animation: app-loading-exit 420ms var(--starbot-ease-in-out) forwards;
 }
 
 @keyframes starbot-badge-pop {
@@ -312,22 +312,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-3);
-  padding: var(--openbot-space-3);
-  background: var(--openbot-bg-canvas);
-  border-bottom: 1px solid var(--openbot-border);
+  gap: var(--starbot-space-3);
+  padding: var(--starbot-space-3);
+  background: var(--starbot-bg-canvas);
+  border-bottom: 1px solid var(--starbot-border);
 }
 .server-connection-notice p {
   margin: 0;
 }
 .server-connection-detail {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-variant-numeric: tabular-nums;
   text-wrap: pretty;
 }
 .server-connection-actions {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   -webkit-app-region: no-drag;
 }
 
@@ -337,31 +337,31 @@
 .server-connection-toast {
   position: relative;
   display: grid;
-  gap: var(--openbot-space-2);
-  padding: var(--openbot-space-4) var(--openbot-space-4) var(--openbot-space-2);
-  border-radius: var(--openbot-radius-card);
-  background: var(--openbot-bg-surface-raised);
-  box-shadow: 0 0 0 1px var(--openbot-border);
-  color: var(--openbot-text-primary);
-  font-family: var(--openbot-font-sans);
-  font-size: var(--openbot-text-md);
-  line-height: var(--openbot-leading-md);
+  gap: var(--starbot-space-2);
+  padding: var(--starbot-space-4) var(--starbot-space-4) var(--starbot-space-2);
+  border-radius: var(--starbot-radius-card);
+  background: var(--starbot-bg-surface-raised);
+  box-shadow: 0 0 0 1px var(--starbot-border);
+  color: var(--starbot-text-primary);
+  font-family: var(--starbot-font-sans);
+  font-size: var(--starbot-text-md);
+  line-height: var(--starbot-leading-md);
 }
 .server-connection-toast-title {
-  padding-right: var(--openbot-space-1);
-  font-weight: var(--openbot-weight-semibold);
+  padding-right: var(--starbot-space-1);
+  font-weight: var(--starbot-weight-semibold);
   text-wrap: balance;
 }
 .server-connection-toast-body {
   margin: 0;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
   font-variant-numeric: tabular-nums;
   text-wrap: pretty;
 }
 .server-connection-toast-actions {
-  margin-top: var(--openbot-space-1);
+  margin-top: var(--starbot-space-1);
 }
 .server-connection-content {
   position: relative;

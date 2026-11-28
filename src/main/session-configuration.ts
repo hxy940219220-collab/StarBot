@@ -1,9 +1,9 @@
 import { readFile, stat } from "node:fs/promises";
 import { isAbsolute, relative, resolve } from "node:path";
-import { CHAT_VISUAL_PAGE_LIMIT, isChatVisualMimeType } from "@openbot/contracts/chat-visual";
-import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { isMobileConnectDevelopmentHost } from "@openbot/contracts/mobile-connect";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { CHAT_VISUAL_PAGE_LIMIT, isChatVisualMimeType } from "@starbot/contracts/chat-visual";
+import { LOCAL_SERVER_ID } from "@starbot/contracts/ipc";
+import { isMobileConnectDevelopmentHost } from "@starbot/contracts/mobile-connect";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { app, session } from "electron";
 import type { AgentService } from "../backend/agent-service";
 import { runCauseEffect } from "../backend/effect-boundary";
@@ -39,8 +39,8 @@ function resolveLocalSignalOrigins(authApiUrl: string, signalPort: string): stri
 
 export function configureContentSecurityPolicy(): void {
   const buildPolicy = (): string => {
-    const authApiUrl = process.env.OPENBOT_AUTH_API_URL ?? centralAuthApiUrl();
-    const explicitSelfHostedOrigin = readSelfHostedSignalOrigin(authApiUrl, process.env.OPENBOT_REMOTE_SIGNAL_URL);
+    const authApiUrl = process.env.STARBOT_AUTH_API_URL ?? centralAuthApiUrl();
+    const explicitSelfHostedOrigin = readSelfHostedSignalOrigin(authApiUrl, process.env.STARBOT_REMOTE_SIGNAL_URL);
     const localOrigins = resolveLocalSignalOrigins(authApiUrl, process.env.REMOTE_SIGNAL_PORT ?? "3101");
     const combinedSignalOrigin =
       [explicitSelfHostedOrigin, localOrigins].filter((value): value is string => Boolean(value)).join(" ") || null;
@@ -92,8 +92,8 @@ function asksToOpen(url: URL): boolean {
 }
 
 export function configureAttachmentProtocol({ mailbox, agents, remoteServers }: AttachmentProtocolDependencies): void {
-  const logger = createOpenBotLogger("attachment-protocol");
-  session.defaultSession.protocol.handle("openbot-attachment", async (request) => {
+  const logger = createStarBotLogger("attachment-protocol");
+  session.defaultSession.protocol.handle("starbot-attachment", async (request) => {
     try {
       const url = new URL(request.url);
       const id = url.pathname.split("/").filter(Boolean).at(-1);
@@ -117,7 +117,7 @@ export function configureAttachmentProtocol({ mailbox, agents, remoteServers }: 
       return new Response("Not found", { status: 404 });
     }
   });
-  session.defaultSession.protocol.handle("openbot-remote-attachment", async (request) => {
+  session.defaultSession.protocol.handle("starbot-remote-attachment", async (request) => {
     try {
       const url = new URL(request.url);
       const serverId = decodeURIComponent(url.hostname);
@@ -151,7 +151,7 @@ export function configureAttachmentProtocol({ mailbox, agents, remoteServers }: 
       return new Response("Not found", { status: 404 });
     }
   });
-  session.defaultSession.protocol.handle("openbot-visual", async (request) => {
+  session.defaultSession.protocol.handle("starbot-visual", async (request) => {
     try {
       const url = new URL(request.url);
       if (url.hostname === "preview") return await filePreviewPages.response(request);
@@ -165,7 +165,7 @@ export function configureAttachmentProtocol({ mailbox, agents, remoteServers }: 
       return new Response("Not found", { status: 404 });
     }
   });
-  session.defaultSession.protocol.handle("openbot-remote-visual", async (request) => {
+  session.defaultSession.protocol.handle("starbot-remote-visual", async (request) => {
     try {
       const url = new URL(request.url);
       const serverId = decodeURIComponent(url.hostname);
@@ -179,7 +179,7 @@ export function configureAttachmentProtocol({ mailbox, agents, remoteServers }: 
       return new Response("Not found", { status: 404 });
     }
   });
-  session.defaultSession.protocol.handle("openbot-avatar", async (request) => {
+  session.defaultSession.protocol.handle("starbot-avatar", async (request) => {
     try {
       const url = new URL(request.url);
       if (url.hostname !== "agent" && url.hostname !== "channel") return new Response("Not found", { status: 404 });
@@ -199,7 +199,7 @@ export function configureAttachmentProtocol({ mailbox, agents, remoteServers }: 
       return new Response("Not found", { status: 404 });
     }
   });
-  session.defaultSession.protocol.handle("openbot-remote-avatar", async (request) => {
+  session.defaultSession.protocol.handle("starbot-remote-avatar", async (request) => {
     try {
       const target = parseRemoteAvatarUrl(request.url);
       if (!target) return new Response("Not found", { status: 404 });
@@ -227,7 +227,7 @@ export interface ServerLogoProtocolDependencies {
 }
 
 export function configureServerLogoProtocols({ teamStore, remoteServers }: ServerLogoProtocolDependencies): void {
-  session.defaultSession.protocol.handle("openbot-server-logo", async (request) => {
+  session.defaultSession.protocol.handle("starbot-server-logo", async (request) => {
     try {
       const url = new URL(request.url);
       const logo = teamStore.resolveLogo();
@@ -245,7 +245,7 @@ export function configureServerLogoProtocols({ teamStore, remoteServers }: Serve
       return new Response("Not found", { status: 404 });
     }
   });
-  session.defaultSession.protocol.handle("openbot-remote-server-logo", async (request) => {
+  session.defaultSession.protocol.handle("starbot-remote-server-logo", async (request) => {
     try {
       const url = new URL(request.url);
       const serverId = decodeURIComponent(url.hostname);
@@ -267,7 +267,7 @@ export function configureServerLogoProtocols({ teamStore, remoteServers }: Serve
 
 export function configureApplicationProtocol(): void {
   const rendererRoot = resolve(__dirname, "../renderer");
-  session.defaultSession.protocol.handle("openbot-app", async (request) => {
+  session.defaultSession.protocol.handle("starbot-app", async (request) => {
     try {
       const url = new URL(request.url);
       if (url.host !== "app") return new Response("Not found", { status: 404 });

@@ -1,10 +1,10 @@
-import type { MessagingConnection, WhatsAppAccount, WhatsAppLinkState } from "@openbot/contracts/ipc";
+import type { MessagingConnection, WhatsAppAccount, WhatsAppLinkState } from "@starbot/contracts/ipc";
 import {
   WHATSAPP_LINK_IDLE,
   type WhatsAppIntegrationAgent,
   WhatsAppIntegrationPanel,
   WhatsAppLinkDialog,
-} from "@openbot/ui/features/settings/WhatsAppIntegrationPanel";
+} from "@starbot/ui/features/settings/WhatsAppIntegrationPanel";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { STORY_AGENT_SUMMARIES } from "./fixtures";
@@ -122,7 +122,7 @@ type DialogStory = StoryObj<typeof WhatsAppLinkDialog>;
 
 const LINK_QR: WhatsAppLinkState = {
   status: "waiting",
-  qr: "2@openbot-story-ref,openbot-story-noise-key,openbot-story-identity-key,story",
+  qr: "2@starbot-story-ref,starbot-story-noise-key,starbot-story-identity-key,story",
   code: null,
   workspaceId: null,
   error: null,

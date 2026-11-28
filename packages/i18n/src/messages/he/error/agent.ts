@@ -5,26 +5,26 @@ export const messages = {
   "error.agent.historyUnavailable":
     "ההיסטוריה אינה זמינה לבקשה הזו. יש לקרוא שוב את ההיסטוריה האחרונה, או להשתמש ב-channel_history לעבודה בערוץ.",
   "error.agent.historyArgumentsInvalid":
-    "ארגומנטים שגויים להיסטוריה: {detail} תקן את הארגומנטים ונסה שוב. openbot.tool_describe מחזיר את הסכמה.",
+    "ארגומנטים שגויים להיסטוריה: {detail} תקן את הארגומנטים ונסה שוב. starbot.tool_describe מחזיר את הסכמה.",
   "error.agent.toolRequestInvalid": "ארגומנטים לא תקינים לגילוי כלים. יש להשתמש בסכימה המוצהרת ובשם כלי מקורי מלא.",
   "error.agent.toolCallArgumentsNotObject":
     "הכלי לא רץ. ב-tool_call, arguments חייב להיות אובייקט JSON ולא טקסט. יש לשלוח את הקריאה שוב עם arguments כאובייקט.",
   "error.agent.toolCallDiscoveryTool":
-    "הכלי לא רץ. tool_call לא יכול להריץ את openbot.tool_search או את openbot.tool_describe. יש לקרוא להם ישירות עם אותם ארגומנטים.",
+    "הכלי לא רץ. tool_call לא יכול להריץ את starbot.tool_search או את starbot.tool_describe. יש לקרוא להם ישירות עם אותם ארגומנטים.",
   "error.agent.toolCallEnvelopeKeys":
     "הכלי לא רץ. tool_call מקבל רק name ו-arguments. יש לשים את הארגומנטים של הכלי ב-arguments, כאובייקט, ולשלוח את הקריאה שוב.",
   "error.agent.toolCallMissingName":
-    "הכלי לא רץ. ל-tool_call אין name. יש לשים ב-name את השם המלא ש-tool_search מחזיר, למשל openbot.history_read, ולשלוח את הקריאה שוב.",
+    "הכלי לא רץ. ל-tool_call אין name. יש לשים ב-name את השם המלא ש-tool_search מחזיר, למשל starbot.history_read, ולשלוח את הקריאה שוב.",
   "error.agent.toolCallUnknownTool":
-    "הכלי לא רץ. tool_call לא מצא כלי בשם הזה. יש להשתמש בשם המלא המדויק ש-tool_search מחזיר, למשל openbot_browser.snapshot.",
+    "הכלי לא רץ. tool_call לא מצא כלי בשם הזה. יש להשתמש בשם המלא המדויק ש-tool_search מחזיר, למשל starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "הכלי לא רץ. tool_call לא מצא כלי בשם הזה. ייתכן שהשם המלא הוא {name}. אם כן, יש לשלוח את הקריאה שוב עם השם הזה.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe לא מצא כלי StarBot בשם {names}. הוא מתאר רק את כלי StarBot והדפדפן ש-openbot.tool_search מציג, ולא כלי MCP.",
+    "tool_describe לא מצא כלי StarBot בשם {names}. הוא מתאר רק את כלי StarBot והדפדפן ש-starbot.tool_search מציג, ולא כלי MCP.",
 
   "error.agent.toolDescribeDiscoveryNames": "קרא ל-{names} ישירות. tool_describe לא מתאר את כלי החיפוש.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "לוח הזמנים של השגרה אינו תקין: {detail} יש לתקן את לוח הזמנים ולנסות שוב. openbot.tool_describe מחזיר את הסכמה.",
+    "לוח הזמנים של השגרה אינו תקין: {detail} יש לתקן את לוח הזמנים ולנסות שוב. starbot.tool_describe מחזיר את הסכמה.",
   "error.agent.approvalWhileDeleting": "אי אפשר לתת אישור בזמן שהסוכן נמחק.",
   "error.agent.accessLocalOnly": "אפשר לשנות גישה של סוכן רק במחשב שמריץ את הסוכן.",
   "error.agent.duplicateCleanupFailed": "שכפול הסוכן נכשל ולא ניתן היה להסיר את ההעתק החלקי.",

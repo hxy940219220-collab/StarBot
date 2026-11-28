@@ -1,5 +1,5 @@
-import { ErrorReference, IconButton, Pencil, RotateCcw, TriangleAlert, X } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { ErrorReference, IconButton, Pencil, RotateCcw, TriangleAlert, X } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { Show } from "solid-js";
 

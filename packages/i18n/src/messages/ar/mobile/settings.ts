@@ -245,7 +245,7 @@ export const messages = {
     "ردود السلاسل تُعلمك عندما ينتهي وكيل أو يتوقف بسبب خطأ في سلسلة. من دونها، تبقى السلسلة تُعلمك عندما تحتاج إلى إدخالك أو موافقتك.",
   "mobile.settings.notifications.sound": "الصوت",
   "mobile.settings.notifications.playSound": "تشغيل الصوت",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "دافئ",
   "mobile.settings.notifications.sound.mech": "ميكانيكي",
@@ -399,7 +399,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "أشهري الستة الأخيرة مع StarBot",
 
   "mobile.settings.profile.share.createFailed": "تعذّر إنشاء الصورة.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "الصوت",
   "mobile.settings.voice.sample": "مرحبًا. هكذا سأقرأ ردودي عليك.",
   "mobile.settings.voice.voice": "الصوت",

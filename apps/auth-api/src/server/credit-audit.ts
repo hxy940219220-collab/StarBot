@@ -1,4 +1,4 @@
-import { creditTenths } from "@openbot/contracts/credits";
+import { creditTenths } from "@starbot/contracts/credits";
 import { Effect } from "effect";
 import { BillingError, type BillingOperationError, billingCall } from "./billing-errors";
 

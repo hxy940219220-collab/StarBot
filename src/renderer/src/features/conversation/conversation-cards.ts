@@ -1,10 +1,10 @@
 import { lazy } from "solid-js";
 
 export const ApprovalCard = lazy(() =>
-  import("@openbot/ui/features/conversation/ConversationPrompts").then((module) => ({ default: module.ApprovalCard })),
+  import("@starbot/ui/features/conversation/ConversationPrompts").then((module) => ({ default: module.ApprovalCard })),
 );
 export const QuestionPromptBubble = lazy(() =>
-  import("@openbot/ui/components/QuestionPromptBubble").then((module) => ({ default: module.QuestionPromptBubble })),
+  import("@starbot/ui/components/QuestionPromptBubble").then((module) => ({ default: module.QuestionPromptBubble })),
 );
 export const UiBlockPrompt = lazy(() =>
   import("./UiBlockPrompt").then((module) => ({ default: module.UiBlockPrompt })),

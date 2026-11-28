@@ -2,16 +2,16 @@ import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { AgentProviderStatus } from "@openbot/contracts/ipc";
+import type { AgentProviderStatus } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { BUILT_IN_PROVIDER_DRIVERS, NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/muse-sign-in-reason-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/muse-sign-in-reason-e2e");
 const WAIT_MS = 20_000;
 const PAYMENT = "Muse Code requires a payment method — finish onboarding at https://dev.meta.ai, then log in again.";
 const SECRET = "abcdef1234567890";
@@ -86,11 +86,11 @@ const CASES: Case[] = [
   },
 ];
 
-const root = await mkdtemp(join(tmpdir(), "openbot-muse-sign-in-reason-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-muse-sign-in-reason-e2e-"));
 const executable = join(root, "bin", "muse");
-const saved = { OPENBOT_MUSE_PATH: process.env.OPENBOT_MUSE_PATH, FAKE_MUSE_DIR: process.env.FAKE_MUSE_DIR };
-process.env.OPENBOT_MUSE_PATH = executable;
-const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+const saved = { STARBOT_MUSE_PATH: process.env.STARBOT_MUSE_PATH, FAKE_MUSE_DIR: process.env.FAKE_MUSE_DIR };
+process.env.STARBOT_MUSE_PATH = executable;
+const store = new AgentStore(join(root, "profile"), join(root, "home"), new StarBotDatabase(join(root, "profile")));
 const report: {
   passed: boolean;
   cases: { name: string; state?: string; message?: string | null; opened: string[]; error?: string }[];

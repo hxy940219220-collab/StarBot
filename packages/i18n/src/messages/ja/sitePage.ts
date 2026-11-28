@@ -255,7 +255,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "「{query}」に一致するスキルはありません。",
   "sitePage.marketplace.emptyApps": "一致するアプリはありません。",
   "sitePage.marketplace.breadcrumb": "パンくずリスト",
-  "sitePage.marketplace.addToOpenBot": "StarBot に追加",
+  "sitePage.marketplace.addToStarBot": "StarBot に追加",
 
   "sitePage.marketplace.addFromApp":
     "{name} は StarBot の中から追加します。アプリを入手してから、このリンクをもう一度開いてください。",
@@ -535,7 +535,7 @@ export const messages = {
   "sitePage.site.cta.title": "最初のチームメイトに会いましょう",
   "sitePage.site.cta.description":
     "Codex、Claude、Gemini、Grok、または自分のモデルを、すでに契約しているプランで動かせます。それぞれに専用のワークスペースとコンテキストがあります。作業はあなたのコンピューターに残ります。",
-  "sitePage.site.downloadOpenBot": "StarBot をダウンロード",
+  "sitePage.site.downloadStarBot": "StarBot をダウンロード",
 
   "sitePage.site.contact": "お問い合わせ",
   "sitePage.site.footer.description":

@@ -1,50 +1,50 @@
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
-import { chatVisualReply } from "@openbot/contracts/chat-visual";
-import type { AgentApproval, ConversationMessageSender, MessageReaction } from "@openbot/contracts/ipc";
-import { speechTextFromMarkdown } from "@openbot/contracts/speech-text";
-import { FEEDBACK_WITHDRAW_CAPABILITY } from "@openbot/contracts/team-protocol/feedback-withdraw-v1";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
-import { feedbackApproval } from "@openbot/team-client/feedback-approval";
-import { Button } from "@openbot/ui";
-import type { AgentMessage, ChatActionMarkerModel, MessageKind } from "@openbot/ui/data";
-import { ChannelActivityIndicator, type ChannelWorker } from "@openbot/ui/features/channels/ChannelActivityIndicator";
-import { AgentActivityIndicator, nextAgentActivityLabel } from "@openbot/ui/features/conversation/AgentActivity";
-import { AgentChatEmptyState } from "@openbot/ui/features/conversation/AgentChatEmptyState";
+import type { AgentProviderId } from "@starbot/contracts/agent-providers";
+import { chatVisualReply } from "@starbot/contracts/chat-visual";
+import type { AgentApproval, ConversationMessageSender, MessageReaction } from "@starbot/contracts/ipc";
+import { speechTextFromMarkdown } from "@starbot/contracts/speech-text";
+import { FEEDBACK_WITHDRAW_CAPABILITY } from "@starbot/contracts/team-protocol/feedback-withdraw-v1";
+import type { ConversationUiBlock } from "@starbot/contracts/ui-blocks";
+import { feedbackApproval } from "@starbot/team-client/feedback-approval";
+import { Button } from "@starbot/ui";
+import type { AgentMessage, ChatActionMarkerModel, MessageKind } from "@starbot/ui/data";
+import { ChannelActivityIndicator, type ChannelWorker } from "@starbot/ui/features/channels/ChannelActivityIndicator";
+import { AgentActivityIndicator, nextAgentActivityLabel } from "@starbot/ui/features/conversation/AgentActivity";
+import { AgentChatEmptyState } from "@starbot/ui/features/conversation/AgentChatEmptyState";
 import {
   type AgentStep,
   AgentStepsDisclosure,
   type AgentStepsTrace,
-} from "@openbot/ui/features/conversation/AgentSteps";
-import { AttachmentCards } from "@openbot/ui/features/conversation/AttachmentCards";
-import { agentActivityExitDelay, agentActivityExitDuration } from "@openbot/ui/features/conversation/activity-timing";
-import { UsageLimitAskCard } from "@openbot/ui/features/conversation/BackupModels";
-import { ChatActionMarker } from "@openbot/ui/features/conversation/ChatActionMarker";
-import { type ChatMessageAuthor, ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ChatRowBoundary } from "@openbot/ui/features/conversation/ChatRowBoundary";
-import { ChatScrollRail, createChatScrollRail } from "@openbot/ui/features/conversation/ChatScrollRail";
-import { ChatSearch } from "@openbot/ui/features/conversation/ChatSearch";
-import { ContextCompactionMarker, type ContextCompactionView } from "@openbot/ui/features/conversation/ContextUsage";
-import { dayMarkerLabel } from "@openbot/ui/features/conversation/chat-day-markers";
-import { CHAT_TIME_GAP_MS, continuesSenderRun } from "@openbot/ui/features/conversation/chat-grouping";
-import { markdownPlainText } from "@openbot/ui/features/conversation/MarkdownMessageText";
-import { ReplyReturnButton, ScrollToLatestButton } from "@openbot/ui/features/conversation/MessageNavigation";
+} from "@starbot/ui/features/conversation/AgentSteps";
+import { AttachmentCards } from "@starbot/ui/features/conversation/AttachmentCards";
+import { agentActivityExitDelay, agentActivityExitDuration } from "@starbot/ui/features/conversation/activity-timing";
+import { UsageLimitAskCard } from "@starbot/ui/features/conversation/BackupModels";
+import { ChatActionMarker } from "@starbot/ui/features/conversation/ChatActionMarker";
+import { type ChatMessageAuthor, ChatMessageRow } from "@starbot/ui/features/conversation/ChatMessageRow";
+import { ChatRowBoundary } from "@starbot/ui/features/conversation/ChatRowBoundary";
+import { ChatScrollRail, createChatScrollRail } from "@starbot/ui/features/conversation/ChatScrollRail";
+import { ChatSearch } from "@starbot/ui/features/conversation/ChatSearch";
+import { ContextCompactionMarker, type ContextCompactionView } from "@starbot/ui/features/conversation/ContextUsage";
+import { dayMarkerLabel } from "@starbot/ui/features/conversation/chat-day-markers";
+import { CHAT_TIME_GAP_MS, continuesSenderRun } from "@starbot/ui/features/conversation/chat-grouping";
+import { markdownPlainText } from "@starbot/ui/features/conversation/MarkdownMessageText";
+import { ReplyReturnButton, ScrollToLatestButton } from "@starbot/ui/features/conversation/MessageNavigation";
 import {
   DeleteMessageDialog,
   MessageActions,
   MessageMenu,
   MessageMenuItems,
   type MessageMenuItemsProps,
-} from "@openbot/ui/features/conversation/MessageRendering";
-import { countableTimelineMessage } from "@openbot/ui/features/conversation/new-message-tally";
-import { ownMessageAuthor } from "@openbot/ui/features/conversation/own-bubble";
-import { PendingSendStatus } from "@openbot/ui/features/conversation/PendingSendStatus";
-import { SubagentDock, SubagentGroup } from "@openbot/ui/features/conversation/Subagents";
-import { TaskList } from "@openbot/ui/features/conversation/TaskList";
-import { MAIN_THREAD_ID } from "@openbot/ui/features/conversation/threads/thread-types";
-import { UnreadMessagesBanner, UnreadMessagesDivider } from "@openbot/ui/features/conversation/UnreadMessages";
-import { VoicePlayer } from "@openbot/ui/features/conversation/VoicePlayer";
-import { teamMemberName } from "@openbot/ui/features/team/TeamPersonAvatar";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/MessageRendering";
+import { countableTimelineMessage } from "@starbot/ui/features/conversation/new-message-tally";
+import { ownMessageAuthor } from "@starbot/ui/features/conversation/own-bubble";
+import { PendingSendStatus } from "@starbot/ui/features/conversation/PendingSendStatus";
+import { SubagentDock, SubagentGroup } from "@starbot/ui/features/conversation/Subagents";
+import { TaskList } from "@starbot/ui/features/conversation/TaskList";
+import { MAIN_THREAD_ID } from "@starbot/ui/features/conversation/threads/thread-types";
+import { UnreadMessagesBanner, UnreadMessagesDivider } from "@starbot/ui/features/conversation/UnreadMessages";
+import { VoicePlayer } from "@starbot/ui/features/conversation/VoicePlayer";
+import { teamMemberName } from "@starbot/ui/features/team/TeamPersonAvatar";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, For, Loading, onSettled, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { planItems, planTitle, replacedPlanIds } from "../../app-message-projection";
@@ -728,7 +728,7 @@ export function ConversationTimeline() {
       return {
         agentId,
         serverId: server.id,
-        listRuns: (input) => window.openbot.agent.listRoutineRuns(input, server.id),
+        listRuns: (input) => window.starbot.agent.listRoutineRuns(input, server.id),
       };
     },
     { equals: (left, right) => left?.agentId === right?.agentId && left?.serverId === right?.serverId },

@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { isRoutineDate, type RoutineSchedule } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { isRoutineDate, type RoutineSchedule } from "@starbot/contracts/ipc";
 
 export type RoutineClock = string;
 

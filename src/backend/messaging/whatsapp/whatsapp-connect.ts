@@ -5,10 +5,10 @@ import type {
   WhatsAppGroupList,
   WhatsAppLinkState,
   WhatsAppSender,
-} from "@openbot/contracts/ipc";
-import { MESSAGING_LIMITS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { newStoreKey } from "@openbot/whatsapp/auth-store";
+} from "@starbot/contracts/ipc";
+import { MESSAGING_LIMITS } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { newStoreKey } from "@starbot/whatsapp/auth-store";
 import { Effect, Schema } from "effect";
 import type { MessagingHistoryStore } from "../messaging-history-store";
 import type { MessagingCredentials, MessagingOperationFailed } from "../messaging-service";

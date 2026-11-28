@@ -3,13 +3,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
 import {
   DISCORD_MESSAGE_TEXT_LIMIT,
   type DiscordApiErrorCode,
   type DiscordApiRequest,
-} from "@openbot/contracts/signal-protocol/discord-api";
-import { registerSecretValue } from "@openbot/logging";
+} from "@starbot/contracts/signal-protocol/discord-api";
+import { registerSecretValue } from "@starbot/logging";
 import { Effect } from "effect";
 import {
   type DiscordRestRequest,
@@ -31,12 +31,12 @@ import {
   MessagingAdapterError,
   type MessagingIngress,
 } from "../src/backend/messaging/messaging-types";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-discord-embeds-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/messaging-discord-embeds-e2e");
 const REPORT = join(OUT, "report.json");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-discord-embeds-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-messaging-discord-embeds-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const APP = "300000000000000001";
@@ -164,7 +164,7 @@ const credentials: MessagingCredentials = {
 };
 
 async function boot<T>(use: (threads: MessagingThreads) => Promise<T>): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));

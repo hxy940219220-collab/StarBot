@@ -1,19 +1,19 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentApprovalPermissions,
   AgentPromptQuestion,
   AgentPromptResolution,
   RespondToBrowserTakeoverInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   COMPUTER_USE_MCP_SERVER_NAME,
   isReservedMcpServerName,
   MCP_ELICITATION_DECISION_QUESTION_ID,
   vaultExpiryText,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { decodeSharedLocationAnswer } from "@openbot/contracts/team-protocol/ui-block-location-v1";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { decodeSharedLocationAnswer } from "@starbot/contracts/team-protocol/ui-block-location-v1";
 import {
   normalizeUiBlockSpec,
   UI_API_KEY_SCOPE_FIELD_ID,
@@ -27,8 +27,8 @@ import {
   type UiFormField,
   type UiVaultRequestField,
   uiBlockFallbackQuestions,
-} from "@openbot/contracts/ui-blocks";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ui-blocks";
+import { sourceText } from "@starbot/i18n/source";
 import type { SavedApiKey } from "../agent-api-keys";
 import type { BrowserToolArguments } from "../browser-tools";
 import { type DynamicToolResult, getArray, getRecord, getString, isRecord } from "../protocol";
@@ -215,7 +215,7 @@ function mcpSignInPageQuestion(params: unknown, serverName: string | null): Agen
 
 function elicitationServerName(params: unknown): string | null {
   const name = getString(params, "serverName")?.trim() || null;
-  const shown = name?.startsWith("openbot_") ? name.slice("openbot_".length) : name;
+  const shown = name?.startsWith("starbot_") ? name.slice("starbot_".length) : name;
   return shown && name && !isReservedMcpServerName(name) && shown !== CODEX_APPS_MCP_SERVER_NAME ? shown : name;
 }
 

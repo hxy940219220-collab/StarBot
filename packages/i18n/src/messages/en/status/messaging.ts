@@ -51,7 +51,7 @@ export const messages = defineMessages("status.messaging", {
     "👋 *StarBot is connected*\n\nWrite here to ask your agents. The WhatsApp Orchestrator answers, or gives the work to the right agent.\n\nSend *stop* to stop a request.",
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *StarBot is connected*\n\nThe people you allow in StarBot can now write to this number. A new person gets a code: approve it in StarBot under Requests.\n\nSend *stop* to stop a request.",
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "Another StarBot is linked to this WhatsApp number, so you can get two answers. To fix this, open Linked devices in WhatsApp on your phone and log out the StarBot that you do not use.",
   "status.messaging.whatsappPaused":
     "StarBot stopped answering here for 10 minutes: too many messages came in a short time. If another StarBot is linked to this number, open Linked devices in WhatsApp on your phone and log out the StarBot that you do not use.",

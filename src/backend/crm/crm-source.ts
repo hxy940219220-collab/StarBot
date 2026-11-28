@@ -4,8 +4,8 @@ import type {
   CrmSourceError,
   CrmSourceInput,
   CrmSourceKind,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema, Semaphore } from "effect";
 import { CrmError } from "./crm-handle";
 import { CrmSourceStore, type SourceBatch, type SourceSkips } from "./crm-source-store";

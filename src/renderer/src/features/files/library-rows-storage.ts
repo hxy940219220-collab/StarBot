@@ -1,7 +1,7 @@
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 
-const COLLAPSED_KEY = "openbot:library-collapsed-rows";
-const FAVORITES_KEY = "openbot:library-favorites";
+const COLLAPSED_KEY = "starbot:library-collapsed-rows";
+const FAVORITES_KEY = "starbot:library-favorites";
 
 const ROW_LIMIT = 500;
 

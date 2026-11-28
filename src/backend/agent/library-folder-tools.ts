@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   LIBRARY_FOLDER_LIMITS,
   type LibraryFolder,
@@ -8,7 +8,7 @@ import {
   libraryFolderPath,
   libraryFolderTree,
   type StoredFileWorkflow,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { LibraryFoldersStore } from "../library-folders-store";

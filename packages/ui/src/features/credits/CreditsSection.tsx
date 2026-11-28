@@ -3,8 +3,8 @@ import type {
   CreditServerRole,
   CreditServerWallet,
   CreditTransferDirection,
-} from "@openbot/contracts/credits";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/credits";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   ArrowDown,
   ArrowUp,
@@ -22,7 +22,7 @@ import {
   ServerPlushLogo,
   SettingsSection,
   Text,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, Show } from "solid-js";
 import { useText } from "../../text";

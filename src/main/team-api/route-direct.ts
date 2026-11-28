@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   DirectConversationPage,
   DirectConversationPageAnchor,
@@ -6,9 +6,9 @@ import type {
   DirectConversationSnapshot,
   DirectMessage,
   DirectThreadSummary,
-} from "@openbot/contracts/ipc";
-import { isNumber } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+} from "@starbot/contracts/ipc";
+import { isNumber } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import { HttpError } from "./http-error";
 import type { RouteOutcome, TeamApiRequestContext } from "./request-context";
 import { pageAnchor, pageLimit, pathIdentifier, readJson, stringField } from "./request-helpers";

@@ -7,7 +7,7 @@ import { isIOS } from "@/shared/lib/platform";
 import { sheetHeaderInsetOptions } from "@/shared/lib/sheet-header";
 
 export function SheetPageStack({ title, opaqueHeader = false }: { title?: string; opaqueHeader?: boolean }) {
-  const background = String(useCSSVariable("--openbot-bg-sheet"));
+  const background = String(useCSSVariable("--starbot-bg-sheet"));
   const transparentHeader = isIOS && !opaqueHeader;
   return (
     <Stack

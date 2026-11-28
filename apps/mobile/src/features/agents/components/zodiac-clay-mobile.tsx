@@ -5,9 +5,9 @@ import {
   type ZodiacEyeSpec,
   type ZodiacId,
   zodiacForShape,
-} from "@openbot/brand/bloub-avatar";
-import { type AvatarMood, avatarMoodIsBusy, avatarMoodPresentation } from "@openbot/brand/bloub-avatar-motion";
-import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
+} from "@starbot/brand/bloub-avatar";
+import { type AvatarMood, avatarMoodIsBusy, avatarMoodPresentation } from "@starbot/brand/bloub-avatar-motion";
+import type { AvatarColor, AvatarHue } from "@starbot/contracts/ipc";
 import { Image, type ImageSource } from "expo-image";
 import { memo, useEffect, useId } from "react";
 import { StyleSheet, View } from "react-native";

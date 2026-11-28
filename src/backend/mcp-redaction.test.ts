@@ -1,8 +1,8 @@
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { registerSecretValue } from "@openbot/logging";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { registerSecretValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { mcpSecretValues, redactMcpRecord } from "./mcp-redaction";
@@ -115,7 +115,7 @@ describe("mcpSecretValues", () => {
   });
 
   it("gives Pi each value but only the credentials as secrets", async () => {
-    const directory = await mkdtemp(join(tmpdir(), "openbot-pi-mcp-test-"));
+    const directory = await mkdtemp(join(tmpdir(), "starbot-pi-mcp-test-"));
     try {
       const local = {
         servers: [],
@@ -142,8 +142,8 @@ describe("mcpSecretValues", () => {
       );
       expect(extension.secrets).toEqual(["svc-login-7f3k"]);
       expect(extension.environment).toMatchObject({
-        OPENBOT_PI_MCP_VALUE_0: home,
-        OPENBOT_PI_MCP_VALUE_1: "svc-login-7f3k",
+        STARBOT_PI_MCP_VALUE_0: home,
+        STARBOT_PI_MCP_VALUE_1: "svc-login-7f3k",
       });
       await Effect.runPromise(extension.close());
     } finally {

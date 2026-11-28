@@ -1,6 +1,6 @@
-import { type ChatPreviewKind, chatHtmlPreviewDocument } from "@openbot/contracts/chat-preview";
-import { Button, Dialog, Maximize2, SlidingTabs } from "@openbot/ui";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { type ChatPreviewKind, chatHtmlPreviewDocument } from "@starbot/contracts/chat-preview";
+import { Button, Dialog, Maximize2, SlidingTabs } from "@starbot/ui";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createSignal, Match, onSettled, Show, Switch } from "solid-js";
 import { documentColorScheme } from "../../document-color-scheme";

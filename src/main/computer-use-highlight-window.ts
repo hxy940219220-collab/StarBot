@@ -2,14 +2,14 @@ import type {
   ComputerUseCoveredArea,
   ComputerUseCursorPoint,
   ComputerUseHighlightPlacement,
-} from "@openbot/contracts/ipc";
-import { createOpenBotLogger, type Logger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { createStarBotLogger, type Logger, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Exit, Schema } from "effect";
 import type { BrowserWindow, Rectangle } from "electron";
 import type { ComputerUseHighlightTarget } from "./computer-use-target-window";
 import type { CuaDriverFailure } from "./cua-driver-effects";
 
-const logger = createOpenBotLogger("computer-use-highlight");
+const logger = createStarBotLogger("computer-use-highlight");
 
 const DEFAULT_POLL_INTERVAL_MS = 33;
 const SEARCH_POLL_INTERVAL_MS = 250;

@@ -1,8 +1,8 @@
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import { CHAT_VISUAL_PAGE_LIMIT, isChatVisualMimeType } from "@openbot/contracts/chat-visual";
-import { type AttachmentSummary, type FilePreview, filePreviewKindForFile } from "@openbot/contracts/ipc";
-import { base64ToBytes } from "@openbot/team-client/base64";
-import { currentText } from "@openbot/ui/text";
+import { attachmentMimeTypeForName } from "@starbot/contracts/attachment-files";
+import { CHAT_VISUAL_PAGE_LIMIT, isChatVisualMimeType } from "@starbot/contracts/chat-visual";
+import { type AttachmentSummary, type FilePreview, filePreviewKindForFile } from "@starbot/contracts/ipc";
+import { base64ToBytes } from "@starbot/team-client/base64";
+import { currentText } from "@starbot/ui/text";
 import type { WebAttachmentMedia } from "./web-attachment-media";
 import { createDownloadLimit, type DownloadLimit } from "./web-download-limit";
 import { createWebFileSaver } from "./web-file-download";

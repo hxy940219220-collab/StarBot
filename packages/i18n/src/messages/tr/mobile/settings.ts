@@ -233,7 +233,7 @@ export const messages = {
     "Dizi yanıtları, bir ajan bir mesaj dizisinde işi bitirdiğinde veya bir hatayla durduğunda size haber verir. Kapalıyken de bir dizi, girdinize veya bir onaya ihtiyaç duyduğunda haber verir.",
   "mobile.settings.notifications.sound": "Ses",
   "mobile.settings.notifications.playSound": "Ses çal",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Sıcak",
   "mobile.settings.notifications.sound.mech": "Mekanik",
@@ -373,7 +373,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "StarBot ile son altı ayım",
 
   "mobile.settings.profile.share.createFailed": "Görüntü oluşturulamadı.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Ses",
   "mobile.settings.voice.sample": "Merhaba. Yanıtlarımı sana böyle okuyacağım.",
   "mobile.settings.voice.voice": "Ses",

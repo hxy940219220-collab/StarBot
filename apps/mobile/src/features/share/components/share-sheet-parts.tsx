@@ -1,4 +1,4 @@
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
+import { attachmentMimeTypeForName } from "@starbot/contracts/attachment-files";
 import { Typography } from "heroui-native";
 import Check from "lucide-react-native/icons/check";
 import { useCSSVariable } from "uniwind";
@@ -48,7 +48,7 @@ export function AgentChoice({
   disabled?: boolean;
   onSelect: (agent: MobileAgent) => void;
 }) {
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   return (
     <SettingsRow
       checked={checked}

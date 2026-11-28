@@ -1,12 +1,12 @@
 import { type ChildProcess, type ExecFileException, execFile } from "node:child_process";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Fiber, Schema } from "effect";
 
 class ProcessTreeFailed extends Schema.TaggedError<ProcessTreeFailed>()("ProcessTreeFailed", {
   cause: Schema.Defect(),
 }) {}
 
-const logger = createOpenBotLogger("windows-process-tree");
+const logger = createStarBotLogger("windows-process-tree");
 
 const taskkillTree = (pid: number) =>
   Effect.tryPromise({

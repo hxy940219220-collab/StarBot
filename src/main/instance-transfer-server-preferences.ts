@@ -15,9 +15,9 @@ import {
   parseHostTurnLimitsInput,
   type ServerNotificationLevel,
   type SkillLearningPreference,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema } from "effect";
 import {
   parseAgentDefaults,

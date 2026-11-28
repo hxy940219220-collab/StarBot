@@ -1,8 +1,8 @@
-import { AppLogo } from "@openbot/brand";
-import type { AppVariant, CentralAuthIssue, CentralAuthState } from "@openbot/contracts/ipc";
-import { Button } from "@openbot/ui";
-import { AccountLogin } from "@openbot/ui/features/account/AccountLogin";
-import { useText } from "@openbot/ui/text";
+import { AppLogo } from "@starbot/brand";
+import type { AppVariant, CentralAuthIssue, CentralAuthState } from "@starbot/contracts/ipc";
+import { Button } from "@starbot/ui";
+import { AccountLogin } from "@starbot/ui/features/account/AccountLogin";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createStore, onCleanup, onSettled, Show } from "solid-js";
 import {
   NO_ANSWER,

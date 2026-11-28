@@ -1,5 +1,5 @@
-import type { AgentDefaultChoice, AgentDefaultSetting, AgentDefaultsOverview } from "@openbot/contracts/ipc";
-import type { MobileTranslate } from "@openbot/i18n/mobile";
+import type { AgentDefaultChoice, AgentDefaultSetting, AgentDefaultsOverview } from "@starbot/contracts/ipc";
+import type { MobileTranslate } from "@starbot/i18n/mobile";
 import { Typography } from "heroui-native";
 import { View } from "react-native";
 import { BloubAvatar } from "@/features/agents/components/bloub-avatar";

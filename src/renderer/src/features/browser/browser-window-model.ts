@@ -4,8 +4,8 @@ import type {
   BrowserTabAgent,
   BrowserTabLabel,
   BrowserWindowTabDetails,
-} from "@openbot/contracts/ipc";
-import type { AgentProfile } from "@openbot/ui/data";
+} from "@starbot/contracts/ipc";
+import type { AgentProfile } from "@starbot/ui/data";
 
 export function ownsBrowserTab(agent: Pick<AgentProfile, "id" | "threadId">, tab: BrowserTab): boolean {
   return tab.ownerAgentId

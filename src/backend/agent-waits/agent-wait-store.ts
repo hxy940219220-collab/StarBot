@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentWait } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { AgentWait } from "@starbot/contracts/ipc";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import {
   databaseRow,
   databaseRows,
@@ -9,14 +9,14 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "../database/database-rows";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 
 export class AgentWaitError extends Error {}
 
 export class AgentWaitLimitError extends AgentWaitError {}
 
 export interface AgentWaitStoreOptions {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   createId?: () => string;
   now?: () => Date;
 }
@@ -30,7 +30,7 @@ export interface OpenAgentWaitInput {
 }
 
 export class AgentWaitStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #createId: () => string;
   readonly #now: () => Date;
 

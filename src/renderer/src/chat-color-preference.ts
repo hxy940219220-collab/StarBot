@@ -1,14 +1,13 @@
-import { type AvatarColor, isAvatarColor } from "@openbot/contracts/ipc";
+import { type AvatarColor, isAvatarColor } from "@starbot/contracts/ipc";
 import { createSignal } from "solid-js";
 
 const STORAGE_KEY = "starbot:chat-color";
-const LEGACY_STORAGE_KEY = "openbot:chat-color";
 
 type StoredChatColor = AvatarColor | null | undefined;
 
 function readStored(): StoredChatColor {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw === null) return undefined;
     if (raw === "none") return null;
     return isAvatarColor(raw) ? raw : undefined;

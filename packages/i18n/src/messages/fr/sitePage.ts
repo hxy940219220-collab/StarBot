@@ -263,7 +263,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "Aucune compétence ne correspond à « {query} ».",
   "sitePage.marketplace.emptyApps": "Aucune app ne correspond.",
   "sitePage.marketplace.breadcrumb": "Fil d’Ariane",
-  "sitePage.marketplace.addToOpenBot": "Ajouter à StarBot",
+  "sitePage.marketplace.addToStarBot": "Ajouter à StarBot",
 
   "sitePage.marketplace.addFromApp": "{name} s’ajoute depuis StarBot. Installez l’app, puis ouvrez de nouveau ce lien.",
 
@@ -547,7 +547,7 @@ export const messages = {
   "sitePage.site.cta.title": "Rencontrez votre premier coéquipier",
   "sitePage.site.cta.description":
     "Utilisez Codex, Claude, Gemini, Grok ou votre propre modèle avec les forfaits que vous payez déjà, chacun avec son espace de travail et son contexte. Votre travail reste sur votre ordinateur.",
-  "sitePage.site.downloadOpenBot": "Télécharger StarBot",
+  "sitePage.site.downloadStarBot": "Télécharger StarBot",
 
   "sitePage.site.contact": "Contact",
   "sitePage.site.footer.description":

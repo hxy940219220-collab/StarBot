@@ -7,7 +7,7 @@ name: Stage the Android APK
 #
 # This workflow makes nothing public. It saves the APK on a draft GitHub release, which only people
 # who can write to the repository see. `publish-android-apk.yml` makes the draft public when the
-# version is marked as available, and then openbot.run links to it.
+# version is marked as available, and then starbot.run links to it.
 # See apps/mobile/README.md#android-apk.
 
 on:
@@ -72,7 +72,7 @@ jobs:
       - name: Install Fastlane
         shell: bash
         run: |
-          echo "APK_PATH=$RUNNER_TEMP/openbot-play.apk" >> "$GITHUB_ENV"
+          echo "APK_PATH=$RUNNER_TEMP/starbot-play.apk" >> "$GITHUB_ENV"
           gem install fastlane --version 2.240.1 --no-document
           fastlane --version
 

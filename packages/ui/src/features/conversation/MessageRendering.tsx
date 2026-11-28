@@ -1,11 +1,11 @@
-import { fileReferenceName } from "@openbot/brand/file-reference";
-import { attachmentMimeTypeForName, playableMediaKind } from "@openbot/contracts/attachment-files";
-import { removeAttachmentReferences } from "@openbot/contracts/attachment-references";
-import { chatPreviewKind } from "@openbot/contracts/chat-preview";
-import type { AttachmentSummary, InstalledSkill, MessageReaction } from "@openbot/contracts/ipc";
-import { canPreviewAttachment, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@openbot/contracts/ipc";
-import { markdownImageName } from "@openbot/contracts/markdown-preview-text";
-import { parseSelectionInstruction } from "@openbot/contracts/selection-instruction";
+import { fileReferenceName } from "@starbot/brand/file-reference";
+import { attachmentMimeTypeForName, playableMediaKind } from "@starbot/contracts/attachment-files";
+import { removeAttachmentReferences } from "@starbot/contracts/attachment-references";
+import { chatPreviewKind } from "@starbot/contracts/chat-preview";
+import type { AttachmentSummary, InstalledSkill, MessageReaction } from "@starbot/contracts/ipc";
+import { canPreviewAttachment, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@starbot/contracts/ipc";
+import { markdownImageName } from "@starbot/contracts/markdown-preview-text";
+import { parseSelectionInstruction } from "@starbot/contracts/selection-instruction";
 import {
   AudioLines,
   type BubbleVariant,
@@ -22,8 +22,8 @@ import {
   PinOff,
   Trash2,
   Wallpaper,
-} from "@openbot/ui";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@starbot/ui";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import {
   createEffect,

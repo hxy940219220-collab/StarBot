@@ -1,5 +1,5 @@
-import { createOpenBotLogger } from "@openbot/logging";
-import type { WhatsAppAuthStore } from "@openbot/whatsapp/auth-store";
+import { createStarBotLogger } from "@starbot/logging";
+import type { WhatsAppAuthStore } from "@starbot/whatsapp/auth-store";
 import {
   type AnyMessageContent,
   type BaileysEventMap,
@@ -22,12 +22,12 @@ import {
   type WAMessage,
   type WAMessageKey,
   type WAVersion,
-} from "@openbot/whatsapp/baileys";
+} from "@starbot/whatsapp/baileys";
 import { Effect } from "effect";
 import { MessagingAdapterError, WhatsAppRefusedError } from "../messaging-types";
 import type { WhatsAppUpsertWindow } from "./whatsapp-events";
 
-const logger = createOpenBotLogger("whatsapp");
+const logger = createStarBotLogger("whatsapp");
 
 export interface WhatsAppSocket {
   ev: { on<T extends keyof BaileysEventMap>(event: T, listener: (arg: BaileysEventMap[T]) => void): void };
@@ -63,7 +63,7 @@ export interface WhatsAppAck {
 
 export const MESSAGE_ACK = "CB:ack,class:message";
 
-export const NODE_HANDLING = "openbot:node";
+export const NODE_HANDLING = "starbot:node";
 
 export type WhatsAppSocketFactory = (config: UserFacingSocketConfig) => WhatsAppSocket;
 

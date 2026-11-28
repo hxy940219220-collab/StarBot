@@ -4,7 +4,7 @@ import type {
   VaultItemKind,
   VaultItemOrigin,
   VaultSaveInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import type { Effect } from "effect";
 import type { PasswordVaultError } from "./password-vault";
 

@@ -15,7 +15,7 @@ import {
   type JSONRPCResultResponse,
   type RequestId,
 } from "@modelcontextprotocol/sdk/types.js";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { cliSpawnTarget } from "./cli";
 import { boundedError, MCP_TOOL_CALL_TIMEOUT_MS, type McpToolArguments, type McpToolCallResult } from "./mcp-probe";
@@ -196,7 +196,7 @@ export const startStdioMcpRelay = Effect.fn("StdioMcpRelay.start")(function* (la
     Effect.callback<RelayedMcpToolOutcome | null>((resume, signal) => {
       const target = running.findLast((entry) => entry.initialized && entry.child.stdin?.writable === true);
       if (closing || !target) return resume(Effect.succeed(null));
-      const id = `openbot-${randomBytes(12).toString("hex")}`;
+      const id = `starbot-${randomBytes(12).toString("hex")}`;
       target.output.own.set(id, (answer) => {
         target.output.own.delete(id);
         resume(Effect.succeed(relayedOutcome(answer)));

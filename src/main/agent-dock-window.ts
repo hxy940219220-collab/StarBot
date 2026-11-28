@@ -9,15 +9,15 @@ import type {
   AgentDockPresentation,
   AgentDockSnapEdge,
   SetAgentDockInteractiveInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_DOCK_LIMITS,
   AGENT_DOCK_SIZE_LIMITS,
   IPC_ENDPOINTS,
   sameAgentDockDisplayBounds,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, type Logger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, type Logger, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Schema, Semaphore } from "effect";
 import type { BrowserWindow, Display, Rectangle, Screen } from "electron";
 import { causeHelpers } from "../backend/effect-boundary";
@@ -26,7 +26,7 @@ import { letPointerThrough, type PointerForwardingGate } from "./pointer-forward
 import { sendToRenderer } from "./renderer-ipc";
 import type { WindowsTopmostKeeper } from "./windows-topmost-keeper";
 
-const logger = createOpenBotLogger("agent-dock-window");
+const logger = createStarBotLogger("agent-dock-window");
 
 const AGENT_DOCK_WINDOW_SIZE = { width: 860, height: 560 } as const;
 const DEFAULT_COMPANION_X_OFFSET = 0.91;

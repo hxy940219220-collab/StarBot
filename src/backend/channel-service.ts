@@ -1,9 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { realpathSync } from "node:fs";
 import { basename, dirname, isAbsolute, join, normalize, sep } from "node:path";
-import { chatTagReferences, leadingAddress } from "@openbot/contracts/chat-tag-references";
-import { isNarrationItemId } from "@openbot/contracts/conversation-narration";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { chatTagReferences, leadingAddress } from "@starbot/contracts/chat-tag-references";
+import { isNarrationItemId } from "@starbot/contracts/conversation-narration";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentAccessLevel,
   type AgentEvent,
@@ -36,10 +36,10 @@ import {
   ROUTINE_QUIET_ANSWER_ITEM_TYPE,
   settingLinkEvent,
   type UpdateChannelMemoryInput,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { isFixedSourceText, matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { isFixedSourceText, matchingSourceKeys, sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Deferred, Effect, Exit, Fiber, Result, Schema, Scope } from "effect";
 import { isTextAnswer } from "./agent/routine-quiet-runs";
 import { setChannelFolderSource } from "./agent/workspace-sandbox";
@@ -75,10 +75,10 @@ import { CHANNEL_REPLY_ID_PREFIX, channelReplyExpectedResult, checkChannelReply,
 import { type ChannelAssignment, type ChannelContext, ChannelStore } from "./channel-store";
 import type { DeliveryContext, MailboxStore } from "./mailbox-store";
 import { type MessageDeleteAccess, MessageDeleteRefused } from "./message-delete";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 import { extractJsonObject, StructuredOutputError } from "./structured-output";
 
-const logger = createOpenBotLogger("channel-service");
+const logger = createStarBotLogger("channel-service");
 
 export interface ChannelHooks {
   agents(): AgentSummary[];
@@ -210,7 +210,7 @@ export class ChannelService {
   readonly #resumedDeliveries = new Set<string>();
 
   constructor(
-    database: OpenBotDatabase,
+    database: StarBotDatabase,
     readonly mailbox: MailboxStore,
     readonly images: ChannelImages,
     readonly hooks: ChannelHooks,

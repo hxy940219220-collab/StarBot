@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Avvia un flusso di lavoro da GitHub: un trigger GitHub si attiva su nuove issue, commenti, pull request, revisioni, controlli non riusciti o una menzione di @openbotgit.",
+          "Avvia un flusso di lavoro da GitHub: un trigger GitHub si attiva su nuove issue, commenti, pull request, revisioni, controlli non riusciti o una menzione di @starbotgit.",
           "Modifica GitHub da un flusso di lavoro: commenta, aggiungi etichette, assegna, revisiona, chiudi o crea una issue come GitHub App di StarBot.",
           "Il Marketplace ha 17 nuovi agenti StarBot, come QA Tester, PR Shepherd e Chief of Staff, e 15 nuove skill per loro.",
           "Utilizzo mostra il limite mensile di OpenCode Go come terza barra."

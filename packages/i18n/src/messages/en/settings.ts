@@ -111,7 +111,7 @@ export const messages = defineMessages("settings", {
   "settings.externalLinks.title": "Open external links in",
   "settings.externalLinks.description": "Links in chats, sign-in pages and billing pages open here.",
   "settings.externalLinks.defaultBrowser": "Default browser",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
   "settings.externalLinks.defaultBrowserNamed": "Default browser ({name})",
   "settings.externalLinks.otherApp": "Other app…",
   "settings.externalLinks.command": "Command…",
@@ -421,9 +421,9 @@ export const messages = defineMessages("settings", {
   "settings.mobileConnect.route.description":
     "For phones, other computers and team members that connect to this computer.",
   "settings.mobileConnect.route.chipLabel": "How devices connect: {route}",
-  "settings.mobileConnect.route.openbot.title": "Through StarBot",
-  "settings.mobileConnect.route.openbot.badge": "Recommended",
-  "settings.mobileConnect.route.openbot.description":
+  "settings.mobileConnect.route.starbot.title": "Through StarBot",
+  "settings.mobileConnect.route.starbot.badge": "Recommended",
+  "settings.mobileConnect.route.starbot.description":
     "Works on any network. Chats and files are encrypted between your devices.",
   "settings.mobileConnect.route.private.title": "Private network",
   "settings.mobileConnect.route.private.tailscale": "Tailscale found",
@@ -469,7 +469,7 @@ export const messages = defineMessages("settings", {
   "settings.profile.share.copied": "Image copied",
   "settings.profile.share.copyFailed": "Could not copy the image.",
   "settings.profile.share.createFailed": "Could not make the image.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "starbot-activity.png",
   "settings.profile.share.caption": "My last six months with StarBot",
   "settings.profile.activity.title": "Activity on this computer",
   "settings.profile.activity.activeDays": {

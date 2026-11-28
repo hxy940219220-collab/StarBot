@@ -1,7 +1,7 @@
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
 import { databaseRow, databaseRows, requiredNumberColumn, requiredStringColumn } from "../database/database-rows";
 import { withTransaction } from "../database/sqlite-transaction";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 import type { ContextEntry, HistoryFilter, InboundFile } from "./messaging-types";
 
 const CONTEXT_MESSAGES = 200;
@@ -12,9 +12,9 @@ export interface ThreadedEntry extends ContextEntry {
 }
 
 export class MessagingHistoryStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
 
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     this.#database = database;
   }
 

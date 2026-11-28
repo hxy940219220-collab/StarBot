@@ -10,7 +10,7 @@ import {
   KeyRound,
   Text,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";

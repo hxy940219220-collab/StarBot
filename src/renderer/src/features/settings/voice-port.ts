@@ -1,9 +1,9 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface VoicePort {
-  voice: OpenBotDesktopApi["voice"];
+  voice: StarBotDesktopApi["voice"];
 }
 
 export function voicePort(): VoicePort {
-  return window.openbot;
+  return window.starbot;
 }

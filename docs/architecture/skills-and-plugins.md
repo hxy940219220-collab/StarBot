@@ -26,8 +26,8 @@ skill folders: `src/backend/process-confinement.ts` protects them as project set
 
 StarBot writes each skill that it installs to both `.agents/skills/<slug>` and
 `.claude/skills/<slug>`, because Claude Code does not read `.agents/skills`. It copies the files and
-does not make links. `.openbot/skills-lock.json` in the workspace records the file hashes, and
-`.openbot/skills-disabled/` holds disabled skills. A bundled skill has an `.openbot-managed.json`
+does not make links. `.starbot/skills-lock.json` in the workspace records the file hashes, and
+`.starbot/skills-disabled/` holds disabled skills. A bundled skill has an `.starbot-managed.json`
 marker.
 
 `src/main/skill-folder-discovery.ts` lists all other skills in the seven workspace folders as
@@ -86,11 +86,11 @@ that `checkSetup()` reads: a CLI of 2.18 or later (the user's own on `PATH`, els
 `src/main/onepassword-cli-installer.ts` downloads, with a SHA-256 pinned per target, into
 `<userData>/provider-state/1password-cli`), the 1Password app's CLI integration (`op account list`
 answers at least one account), and Connect. The service keeps only the token in
-`openbot-onepassword-connector-v1.json`, encrypted with `safeStorage`. It reads the vault with
+`starbot-onepassword-connector-v1.json`, encrypted with `safeStorage`. It reads the vault with
 `@1password/sdk` and implements `PasswordVault` (`src/backend/password-vault.ts`). The developer
 instructions tell agents about the vault only while `PasswordVault.connected()` is true, read at
 each session start and resume, because most users have no vault. The agent service
-uses it in two places: `openbot_browser.list_logins` returns the logins saved for the tab's HTTPS
+uses it in two places: `starbot_browser.list_logins` returns the logins saved for the tab's HTTPS
 site (id, title, username), and `AttentionRegistry` answers a `submit_secret` password or
 authenticator request for a saved login by filling it through the same `prepareSecret` path as the
 secure card, with no card. While agent code from `evaluate` can still run in the page,
@@ -134,7 +134,7 @@ The session key can decrypt the wider vault; the folder limit is enforced by Sta
 All local agents share this grant. Prompt injection can still use an approved account on its own
 site; this feature does not authorize or constrain actions after sign-in.
 
-API keys that a task needs, such as for a script or a service, use `openbot.request_api_key`. The
+API keys that a task needs, such as for a script or a service, use `starbot.request_api_key`. The
 router builds a `form` UI block with one required secret field (`apiKeyFormSpec` in
 `src/backend/agent/prompts.ts`), so every client that shows `ask_ui` shows it; no IPC or Team API
 contract changed. When the Vault is ready, the form also has a segmented "Save for" field: "All agents
@@ -154,9 +154,9 @@ value is registered for log redaction when it is saved and at startup, and the s
 secret field value. `list_api_keys` and `remove_api_key` are the reverse actions, and deleting the agent
 deletes its folder. The form is refused in Slack, Discord and Telegram chats.
 
-When the agent already has a secret, such as one that the user pasted in the chat, `openbot.save_api_key`
+When the agent already has a secret, such as one that the user pasted in the chat, `starbot.save_api_key`
 saves it in the encrypted Vault as an `apiKey` item for every agent (`VaultItems.saveApiKey`), and
-`openbot_browser.save_vault_item kind=login` saves a website password (`VaultItems.saveLogin`). Both
+`starbot_browser.save_vault_item kind=login` saves a website password (`VaultItems.saveLogin`). Both
 register a value of 8 or more characters for log redaction when the call arrives, before any check;
 the Vault registers a shorter value when it saves it. Both work only when a
 person's message in this computer's StarBot chat started the turn, as for workflow changes: an
@@ -184,7 +184,7 @@ A session key from one computer cannot open the vault of another, so a joined se
 its own CLI (`bitwarden-connector-v1`, see [integrations](integrations.md#bitwarden-on-a-joined-server)).
 An owner or admin enters the server address (Bitwarden or a self-hosted Vaultwarden, `https:` only),
 the personal API key (`client_id`, `client_secret`) and the master password in the desktop or browser
-client. The host keeps them in `openbot-bitwarden-connector-v1.json`, encrypted with `safeStorage`,
+client. The host keeps them in `starbot-bitwarden-connector-v1.json`, encrypted with `safeStorage`,
 and its CLI data in `<userData>/provider-state/bitwarden-host` (`BITWARDENCLI_APPDATA_DIR`), apart from
 any `bw` configuration of the user. Without `bw` on `PATH`, it downloads the release that
 `src/main/bitwarden-cli-installer.ts` pins, with a SHA-256 per target, into
@@ -194,14 +194,14 @@ idle hours, the next vault call unlocks again from the stored record. Disconnect
 the CLI data. The phone shows the connector with no action.
 
 The GitHub connector is built in and has no SQLite row. `src/main/github-connector-service.ts` signs
-in to the `openbotgit` GitHub App with the device flow, which needs only the public Client ID, and keeps
-the tokens in `openbot-github-connector-v1.json`, encrypted with `safeStorage`. While it is
-connected, `McpGateway.enabled()` adds the `openbot-github` server (`api.githubcopilot.com/mcp/`),
+in to the `starbotgit` GitHub App with the device flow, which needs only the public Client ID, and keeps
+the tokens in `starbot-github-connector-v1.json`, encrypted with `safeStorage`. While it is
+connected, `McpGateway.enabled()` adds the `starbot-github` server (`api.githubcopilot.com/mcp/`),
 and `mcpAuthorization()` gives it a fresh bearer at each hand-off. An enabled server that the user added
 with the name `github` wins. For `gh` and `git`, the service writes the token to
 `<userData>/provider-state/github` (mode 0600), and each provider gets `GH_CONFIG_DIR` and a
 `GIT_CONFIG_*` credential helper that reads that file. The environment holds only paths, never the
-token. The helper gives the `openbotgit[bot]` token for a repository that has one. For other
+token. The helper gives the `starbotgit[bot]` token for a repository that has one. For other
 repositories, it first asks the git credential helpers that the computer had before (with the
 original `GH_CONFIG_DIR` and no prompts), and gives the connector's user token only when they have
 no credential. The StarBot GitHub App reaches only the repositories where it is installed, so this
@@ -210,7 +210,7 @@ reads: git does not send a store or an erase to the helpers of the computer, and
 the computer's credential, git does not try the connector token in the same command. Codex gets
 these values through `shell_environment_policy.set` in the thread config.
 
-A user token makes GitHub show "user with StarBotGit". To show `openbotgit[bot]`, the desktop sends
+A user token makes GitHub show "user with StarBotGit". To show `starbotgit[bot]`, the desktop sends
 the user token to `POST /v1/github/installation-tokens` on the account Worker
 (`apps/auth-api/src/server/github-installation-tokens.ts`). The Worker holds the app's private key
 (`GITHUB_APP_PRIVATE_KEY`, PKCS #8) and signs an app JWT. It mints one installation token for each
@@ -233,7 +233,7 @@ agent can give to the user. With no key it answers 503, and the desktop keeps th
   URL and header.
 - `gh` has one token for each host, so it acts as the user.
 
-A pull request that an agent opens with a bot token has `openbotgit[bot]` as its author, so the user
+A pull request that an agent opens with a bot token has `starbotgit[bot]` as its author, so the user
 who asked for it can approve it. A branch rule that needs one approval then passes with no second
 person.
 
@@ -251,6 +251,6 @@ The backend local skill tools derive the agent from the calling provider session
 
 ## Plugin distribution
 
-A plugin is one developer's bundle: an MCP server, shown as an app, the skills that drive it, and the listing text. The catalog of available plugins is a static file set that the Account Worker serves from `starbot.app` without an account, and the main process keeps a copy in the user-data directory rather than in SQLite, because a remote catalog is a cache and not the source of truth. An install saves the app as a host-global MCP server and installs the pinned skills into the chosen agent. A share link at `starbot.app/plugins/<slug>` opens a public page, and `openbot://plugins/<slug>` opens the listing in the app; neither one installs anything.
+A plugin is one developer's bundle: an MCP server, shown as an app, the skills that drive it, and the listing text. The catalog of available plugins is a static file set that the Account Worker serves from `starbot.app` without an account, and the main process keeps a copy in the user-data directory rather than in SQLite, because a remote catalog is a cache and not the source of truth. An install saves the app as a host-global MCP server and installs the pinned skills into the chosen agent. A share link at `starbot.app/plugins/<slug>` opens a public page, and `starbot://plugins/<slug>` opens the listing in the app; neither one installs anything.
 
-See [plugin distribution and sharing](../plugin-distribution.md) for the catalog shape, the fetch and cache rules, the install and uninstall order, the deep-link parser rules, and the security review. Three parts of that design run today. The Apps tab installs the listing's pinned skills into the chosen agent and saves its app as a host-global MCP server. The links work: `starbot.app/marketplace/apps` (which `starbot.app/plugins` redirects to) and `starbot.app/plugins/<slug>` are pages on the public site, and `openbot://plugins/<slug>` opens that listing in the app, which is one of the link kinds that `src/main/deep-link-router.ts` recognises beside an invitation. Both sides read one catalog, generated from `marketplace/plugin-catalog/`, because a listing that said one thing on the page and another in the app would be two catalogs. The Apps tab also uninstalls a listing. The catalog files, the Worker routes that serve them, and the cache in the main process are still design.
+See [plugin distribution and sharing](../plugin-distribution.md) for the catalog shape, the fetch and cache rules, the install and uninstall order, the deep-link parser rules, and the security review. Three parts of that design run today. The Apps tab installs the listing's pinned skills into the chosen agent and saves its app as a host-global MCP server. The links work: `starbot.app/marketplace/apps` (which `starbot.app/plugins` redirects to) and `starbot.app/plugins/<slug>` are pages on the public site, and `starbot://plugins/<slug>` opens that listing in the app, which is one of the link kinds that `src/main/deep-link-router.ts` recognises beside an invitation. Both sides read one catalog, generated from `marketplace/plugin-catalog/`, because a listing that said one thing on the page and another in the app would be two catalogs. The Apps tab also uninstalls a listing. The catalog files, the Worker routes that serve them, and the cache in the main process are still design.

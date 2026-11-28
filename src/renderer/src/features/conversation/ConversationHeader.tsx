@@ -1,4 +1,4 @@
-import { foreignProvider, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
+import { foreignProvider, isKnownAgentProvider } from "@starbot/contracts/agent-providers";
 import {
   type AgentModelId,
   type AgentProviderRef,
@@ -7,7 +7,7 @@ import {
   DEFAULT_PROVIDER_ACCOUNT_ID,
   providerDisplayName,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   buttonVariants,
   ChevronRight,
@@ -16,23 +16,23 @@ import {
   MessageCirclePlus,
   MessagesSquare,
   Sparkles,
-} from "@openbot/ui";
-import { reasoningLabel } from "@openbot/ui/components/ProviderModelPicker";
-import { findModelOption, providerAccountName } from "@openbot/ui/components/provider-accounts";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+} from "@starbot/ui";
+import { reasoningLabel } from "@starbot/ui/components/ProviderModelPicker";
+import { findModelOption, providerAccountName } from "@starbot/ui/components/provider-accounts";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import {
   getStoredMainSessionTitle,
   setStoredMainSessionTitle,
   ConversationHeader as SharedConversationHeader,
-} from "@openbot/ui/features/conversation/ConversationHeader";
-import { ThreadHeader } from "@openbot/ui/features/conversation/threads/ThreadHeader";
+} from "@starbot/ui/features/conversation/ConversationHeader";
+import { ThreadHeader } from "@starbot/ui/features/conversation/threads/ThreadHeader";
 import {
   DRAFT_THREAD_ID,
   MAIN_THREAD_ID,
   type ThreadItem,
-} from "@openbot/ui/features/conversation/threads/thread-types";
-import { sidebarMessageTime } from "@openbot/ui/features/sidebar/sidebar-filtering";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/threads/thread-types";
+import { sidebarMessageTime } from "@starbot/ui/features/sidebar/sidebar-filtering";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, For, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { usePlatform } from "../../platform";
@@ -455,7 +455,7 @@ export function ConversationHeader() {
               ag().id,
               ag().name,
               null,
-              props.runtime?.agentMemories ?? window.openbot.agent,
+              props.runtime?.agentMemories ?? window.starbot.agent,
             )}
             onDeleteHistory={props.onDeleteAgentHistory}
             onClearContext={props.onClearAgentContext}

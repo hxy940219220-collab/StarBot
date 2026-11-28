@@ -3,10 +3,10 @@ import { existsSync } from "node:fs";
 import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir, tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 
-const logger = createOpenBotLogger("windows-home-install-update-e2e");
+const logger = createStarBotLogger("windows-home-install-update-e2e");
 
 if (process.platform !== "win32") throw new Error("This test drives the Windows installers and must run on Windows.");
 if (process.env.GITHUB_ACTIONS !== "true") {
@@ -27,8 +27,8 @@ const defaultFolder = join(localAppData, "Programs", "StarBot");
 const nestedFolder = join(defaultFolder, "StarBot");
 const uninstallKey = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
 const runKey = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run";
-const loginItemName = "app.openbot.desktop";
-const reportPath = resolve(".openbot-build/windows-home-install-update-e2e.json");
+const loginItemName = "app.starbot.desktop";
+const reportPath = resolve(".starbot-build/windows-home-install-update-e2e.json");
 const installerLimitMs = 5 * 60_000;
 const longPathLength = 250;
 
@@ -192,7 +192,7 @@ function presentAppFiles(folder: string): string[] {
 }
 
 async function runEarlierUninstallerAsUpdate(): Promise<number> {
-  const copyFolder = await mkdtemp(join(tmpdir(), "openbot-old-uninstaller-"));
+  const copyFolder = await mkdtemp(join(tmpdir(), "starbot-old-uninstaller-"));
   const copy = join(copyFolder, "old-uninstaller.exe");
   await copyFile(join(homeFolder, "Uninstall StarBot.exe"), copy);
   try {

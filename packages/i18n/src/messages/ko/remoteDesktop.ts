@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "원격 제어",
   "remoteDesktop.displayLabel": "원격 디스플레이",
   "remoteDesktop.selectDisplay": "디스플레이 선택",
-  "remoteDesktop.backToOpenBot": "StarBot으로 돌아가기",
+  "remoteDesktop.backToStarBot": "StarBot으로 돌아가기",
   "remoteDesktop.disconnect": "연결 끊기",
   "remoteDesktop.viewerTitle": "Sunshine 원격 데스크톱",
   "remoteDesktop.viewerLoadFailed": "Moonlight 뷰어를 불러올 수 없어요.",

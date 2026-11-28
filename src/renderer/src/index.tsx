@@ -1,4 +1,4 @@
-import { installPointerFocusGuard } from "@openbot/ui/pointer-focus";
+import { installPointerFocusGuard } from "@starbot/ui/pointer-focus";
 import { render } from "@solidjs/web";
 import "katex/contrib/copy-tex";
 import "./selection-copy";
@@ -9,6 +9,7 @@ import "./dev-worktree";
 import { WindowBackdropBubbles } from "./features/window/backdrop-bubbles";
 import { readChatWindowTarget } from "./features/window/chat-window";
 import { syncLogoColor } from "./logo-color";
+import { migrateLegacyLocalStorage } from "./migrate-legacy-storage";
 import { startRendererTiming } from "./renderer-timing";
 import "./styles.css";
 
@@ -18,11 +19,12 @@ if (!root) {
   throw new Error("Renderer root element was not found.");
 }
 
-performance.mark("openbot:renderer-start");
-if (__OPENBOT_PERF_PROBES__) {
+performance.mark("starbot:renderer-start");
+if (__STARBOT_PERF_PROBES__) {
   const { installRendererPerfProbes } = await import("./perf-probes");
   installRendererPerfProbes();
 }
+migrateLegacyLocalStorage();
 installPointerFocusGuard();
 syncAppearance({ windowGlass: true });
 syncLogoColor();

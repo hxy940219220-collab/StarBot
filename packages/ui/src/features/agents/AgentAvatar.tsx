@@ -1,8 +1,8 @@
 import { BloubBot, type ExpressionId, POSES } from "@norbert_bodziony/bloub";
 import type { PlushState, PlushTransition } from "@norbert_bodziony/bloub/plush";
-import { type AvatarMood, avatarMoodPresentation, type ShapeSafeStateId } from "@openbot/brand/bloub-avatar-motion";
-import type { AgentStepActivity, AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { type AvatarMood, avatarMoodPresentation, type ShapeSafeStateId } from "@starbot/brand/bloub-avatar-motion";
+import type { AgentStepActivity, AvatarColor, AvatarHue } from "@starbot/contracts/ipc";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { useAmbientMotion } from "../../ambient-motion";
 import {

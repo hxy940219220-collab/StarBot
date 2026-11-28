@@ -1,7 +1,7 @@
-import { type AppAppearance, isAppAppearance } from "@openbot/contracts/app-appearance";
-import type { AppLanguage } from "@openbot/contracts/app-language";
-import type { AvatarColor, CentralAuthUser } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import { type AppAppearance, isAppAppearance } from "@starbot/contracts/app-appearance";
+import type { AppLanguage } from "@starbot/contracts/app-language";
+import type { AvatarColor, CentralAuthUser } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Button,
   CreditCard,
@@ -19,25 +19,25 @@ import {
   Tabs,
   toast,
   UserRound,
-} from "@openbot/ui";
-import { documentColorScheme } from "@openbot/ui/document-color-scheme";
-import { ReferralPanel } from "@openbot/ui/features/referral/ReferralPanel";
-import { createReferralStore, type ReferralCalls } from "@openbot/ui/features/referral/referral-store";
-import { AppearanceSelect } from "@openbot/ui/features/settings/AppearanceSelect";
-import { ACTION_SOUND_CHOICES, TASK_SOUND_CHOICES } from "@openbot/ui/features/settings/app-settings";
-import { ChatBackgroundSetting } from "@openbot/ui/features/settings/ChatBackgroundSetting";
-import { ChatBubbleStyleSelect } from "@openbot/ui/features/settings/ChatBubbleStyleSelect";
-import { OwnChatColorTrigger } from "@openbot/ui/features/settings/ChatColorSetting";
-import { LanguageSelect } from "@openbot/ui/features/settings/LanguageSelect";
-import { NotificationMatrix, NotificationScopeTitle } from "@openbot/ui/features/settings/NotificationMatrix";
-import { SendShortcutSelect } from "@openbot/ui/features/settings/SendShortcutSelect";
-import { SettingsDialogShell, type SettingsPagePlacement } from "@openbot/ui/features/settings/SettingsDialogShell";
-import { SettingsProfileTab } from "@openbot/ui/features/settings/SettingsProfileTab";
-import { SidebarChatOrderSelect } from "@openbot/ui/features/settings/SidebarChatOrderSelect";
-import { SoundChoiceSelect } from "@openbot/ui/features/settings/SoundChoiceSelect";
-import { createSettingsProfileStore } from "@openbot/ui/features/settings/stores/profile-store";
-import { TalkKeyRecorder } from "@openbot/ui/features/settings/TalkKeyRecorder";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { documentColorScheme } from "@starbot/ui/document-color-scheme";
+import { ReferralPanel } from "@starbot/ui/features/referral/ReferralPanel";
+import { createReferralStore, type ReferralCalls } from "@starbot/ui/features/referral/referral-store";
+import { AppearanceSelect } from "@starbot/ui/features/settings/AppearanceSelect";
+import { ACTION_SOUND_CHOICES, TASK_SOUND_CHOICES } from "@starbot/ui/features/settings/app-settings";
+import { ChatBackgroundSetting } from "@starbot/ui/features/settings/ChatBackgroundSetting";
+import { ChatBubbleStyleSelect } from "@starbot/ui/features/settings/ChatBubbleStyleSelect";
+import { OwnChatColorTrigger } from "@starbot/ui/features/settings/ChatColorSetting";
+import { LanguageSelect } from "@starbot/ui/features/settings/LanguageSelect";
+import { NotificationMatrix, NotificationScopeTitle } from "@starbot/ui/features/settings/NotificationMatrix";
+import { SendShortcutSelect } from "@starbot/ui/features/settings/SendShortcutSelect";
+import { SettingsDialogShell, type SettingsPagePlacement } from "@starbot/ui/features/settings/SettingsDialogShell";
+import { SettingsProfileTab } from "@starbot/ui/features/settings/SettingsProfileTab";
+import { SidebarChatOrderSelect } from "@starbot/ui/features/settings/SidebarChatOrderSelect";
+import { SoundChoiceSelect } from "@starbot/ui/features/settings/SoundChoiceSelect";
+import { createSettingsProfileStore } from "@starbot/ui/features/settings/stores/profile-store";
+import { TalkKeyRecorder } from "@starbot/ui/features/settings/TalkKeyRecorder";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal, onCleanup, Show } from "solid-js";
 import { readActionSoundChoice, setActionSoundChoice } from "../../action-sounds";
 import { setShowAgentSteps, useShowAgentSteps } from "../../agent-steps-preference";

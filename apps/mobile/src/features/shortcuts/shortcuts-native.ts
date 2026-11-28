@@ -1,4 +1,4 @@
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import { type NativeModule, requireOptionalNativeModule } from "expo";
 import { pendingNavigation } from "@/shared/lib/pending-navigation";
 import type { ShortcutOpenTarget } from "./model/shortcut-target";
@@ -7,7 +7,7 @@ declare class ShortcutsModule extends NativeModule<{ onShortcutOpen: (event: { p
   readonly supported: boolean;
 }
 
-const native = requireOptionalNativeModule<ShortcutsModule>("OpenBotShortcuts");
+const native = requireOptionalNativeModule<ShortcutsModule>("StarBotShortcuts");
 
 export const shortcutsSupported = native?.supported === true;
 

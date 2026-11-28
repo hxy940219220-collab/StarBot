@@ -1,8 +1,8 @@
-import { customAgentIdOfModel } from "@openbot/contracts/agent-providers";
-import { developmentStartingModel } from "@openbot/contracts/development-defaults";
-import type { AgentModelId, AgentModelOption, AgentProviderStatus, CreateAgentInput } from "@openbot/contracts/ipc";
-import { defaultProviderModel, PICKER_PROVIDERS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { customAgentIdOfModel } from "@starbot/contracts/agent-providers";
+import { developmentStartingModel } from "@starbot/contracts/development-defaults";
+import type { AgentModelId, AgentModelOption, AgentProviderStatus, CreateAgentInput } from "@starbot/contracts/ipc";
+import { defaultProviderModel, PICKER_PROVIDERS } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import type { AgentProvider } from "../agent-client";
 import { DEFAULT_AGENT_PROVIDER } from "../agent-store";
 import { AgentSettingsRefused } from "./agent-settings-refused";

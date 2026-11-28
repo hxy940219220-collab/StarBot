@@ -292,7 +292,7 @@ export const messages = {
 
   "workflow.output.title": "输出",
   "workflow.output.name": "输出",
-  "workflow.output.channel.openbot": "星友",
+  "workflow.output.channel.starbot": "星友",
   "workflow.output.channel.search": "搜索频道",
   "workflow.output.postsAs": "发布方式",
   "workflow.output.postsAsNote": "备注；不会开始任务",

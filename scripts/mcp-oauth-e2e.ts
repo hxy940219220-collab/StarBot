@@ -15,9 +15,9 @@ import {
   McpError,
   ToolListChangedNotificationSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText } from "@openbot/logging";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText } from "@starbot/logging";
 import { Effect } from "effect";
 import { McpGateway } from "../src/backend/agent/mcp-gateway";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -38,10 +38,10 @@ import {
 } from "../src/backend/mcp-provider-shapes";
 import { McpServerStore } from "../src/backend/mcp-server-store";
 import { AddressLookupError, isPublicAddress } from "../src/backend/network-address";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mcp-oauth-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/mcp-oauth-e2e");
 const REDIRECT_URL = "http://127.0.0.1:28417/mcp-auth";
 const DEADLINE_MS = 10_000;
 
@@ -234,7 +234,7 @@ async function main() {
         throw new Error("A silent path opened the browser.");
       },
       redirectUrl: REDIRECT_URL,
-      logger: createOpenBotLogger("mcp-oauth", (line) => {
+      logger: createStarBotLogger("mcp-oauth", (line) => {
         logLines.push(line);
         onLog();
       }),
@@ -586,8 +586,8 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
   auth.setTokenMode("rotate");
   auth.setRevokeStatus(200);
   const resource = await startResourceServer(auth.base);
-  const root = await mkdtemp(join(tmpdir(), "openbot-mcp-oauth-proxy-"));
-  const database = new OpenBotDatabase(root);
+  const root = await mkdtemp(join(tmpdir(), "starbot-mcp-oauth-proxy-"));
+  const database = new StarBotDatabase(root);
   const clients: Client[] = [];
   const gateways: McpGateway[] = [];
   try {
@@ -619,7 +619,7 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
         throw new Error("A proxy path opened the browser.");
       },
       redirectUrl: REDIRECT_URL,
-      logger: createOpenBotLogger("mcp-oauth", (line) => logLines.push(line)),
+      logger: createStarBotLogger("mcp-oauth", (line) => logLines.push(line)),
     });
     const saved: { value: McpOAuthProxySettings | null } = { value: null };
     const settings = {
@@ -644,7 +644,7 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
         },
         agents: () => agents,
         computerUseMcpServer: () => null,
-        logger: createOpenBotLogger("agent-service", (line) => logLines.push(line)),
+        logger: createStarBotLogger("agent-service", (line) => logLines.push(line)),
         hooks: { emitError: () => undefined, refreshAllAgentRuntimes: () => Effect.void },
       });
       gateways.push(gateway);
@@ -711,13 +711,13 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
     assert.ok(upstream.every((hit) => hit.authorization === "Bearer access-on-file" && hit.rowKey === "row-secret"));
     const echo = { text: "through", upstreamToken: "access-on-file", rowHeaderUpstream: true };
 
-    const openbotClient = (title: string) => ({
-      name: "openbot",
+    const starbotClient = (title: string) => ({
+      name: "starbot",
       title,
       version: "9.9.9-e2e",
       websiteUrl: "https://starbot.app",
     });
-    assert.deepEqual(resource.clients.at(-1), openbotClient("StarBot"));
+    assert.deepEqual(resource.clients.at(-1), starbotClient("StarBot"));
     assert.ok(upstream.every((hit) => !/bot/iu.test(hit.userAgent ?? "")));
     const titleOf = async (route: { url: string; bearer: string }) => {
       const before = resource.clients.length;
@@ -725,7 +725,7 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
       assert.equal(textOf(await named.callTool({ name: "echo", arguments: { text: "named" } })), "named");
       assert.equal(resource.clients.length, before + 1);
       const info = resource.clients.at(-1);
-      assert.deepEqual(info, openbotClient(info?.title ?? ""));
+      assert.deepEqual(info, starbotClient(info?.title ?? ""));
       return info?.title;
     };
     const researchRoute = await endpointOf(gateway, direct, "agent-research");

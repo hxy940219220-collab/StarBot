@@ -10,7 +10,7 @@ import {
   Spinner,
   Text,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createEffect, createMemo, createSignal, Show } from "solid-js";
 import {
   McpSignInPage,

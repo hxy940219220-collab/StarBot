@@ -236,7 +236,7 @@ export const messages = {
     "As respostas em tópicos avisam quando um agente termina ou para com um erro em um tópico. Sem elas, um tópico ainda avisa quando precisa da sua resposta ou de uma aprovação.",
   "mobile.settings.notifications.sound": "Som",
   "mobile.settings.notifications.playSound": "Tocar som",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Acolhedor",
   "mobile.settings.notifications.sound.mech": "Mecânico",
@@ -377,7 +377,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Meus últimos seis meses com o StarBot",
 
   "mobile.settings.profile.share.createFailed": "Não foi possível criar a imagem.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Voz",
   "mobile.settings.voice.sample": "Olá. É assim que vou ler minhas respostas.",
   "mobile.settings.voice.voice": "Voz",

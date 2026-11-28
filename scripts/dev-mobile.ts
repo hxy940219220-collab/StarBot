@@ -3,15 +3,15 @@ import { connect } from "node:net";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
-import { parseMobileConnectUrl } from "@openbot/contracts/mobile-connect";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { parseMobileConnectUrl } from "@starbot/contracts/mobile-connect";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import { connectToDevApp } from "./dev-automation/cdp-client";
 import { type DevInstanceRecord, readDevInstanceRecords, selectDevInstance } from "./dev-automation/instance-registry";
 import { isSameWorktree } from "./dev-automation/stack-registry";
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-const MOBILE_BUNDLE_ID = "run.openbot.mobile";
+const MOBILE_BUNDLE_ID = "run.starbot.mobile";
 const DEFAULT_METRO_PORT = 8081;
 const DESKTOP_TIMEOUT_MS = 5 * 60_000;
 const METRO_TIMEOUT_MS = 20 * 60_000;
@@ -21,8 +21,8 @@ const PAIRING_CONFIRM_MS = 20_000;
 const POLL_INTERVAL_MS = 1_000;
 
 const writeLine = (line: string) => process.stderr.write(`${line}\n`);
-const logger = createOpenBotLogger("dev-mobile", writeLine, "info");
-const cdpLogger = createOpenBotLogger("dev-mobile", writeLine, "warn");
+const logger = createStarBotLogger("dev-mobile", writeLine, "info");
+const cdpLogger = createStarBotLogger("dev-mobile", writeLine, "warn");
 const runCommand = promisify(execFile);
 
 export interface DevMobileOptions {
@@ -170,7 +170,7 @@ function readPairingLink(ticket: unknown): string {
 
 async function createPairingLink(desktop: DevInstanceRecord): Promise<string> {
   return waitFor("a Mobile Connect ticket from the desktop", TICKET_TIMEOUT_MS, async () => {
-    return evaluateInDesktop(desktop, "window.openbot.auth.createMobileConnect()", readPairingLink);
+    return evaluateInDesktop(desktop, "window.starbot.auth.createMobileConnect()", readPairingLink);
   });
 }
 
@@ -203,7 +203,7 @@ async function pairSimulator(desktop: DevInstanceRecord, simulator: string): Pro
     }
     try {
       await waitFor("the simulator to redeem the ticket", PAIRING_CONFIRM_MS, async () =>
-        (await evaluateInDesktop(desktop, "window.openbot.auth.listMobileConnectedDevices()", (devices) =>
+        (await evaluateInDesktop(desktop, "window.starbot.auth.listMobileConnectedDevices()", (devices) =>
           hasNewIosDevice(devices, sentAt),
         ))
           ? true

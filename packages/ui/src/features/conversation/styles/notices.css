@@ -2,8 +2,8 @@
   --notice-composer-overlap: 14px;
   --notice-inset: 6px;
 
-  --notice-accent: var(--openbot-warning);
-  --notice-surface: var(--openbot-warning-soft);
+  --notice-accent: var(--starbot-warning);
+  --notice-surface: var(--starbot-warning-soft);
 
   position: relative;
   z-index: 10;
@@ -15,14 +15,14 @@
   gap: 10px;
   border: none;
 
-  border-radius: var(--openbot-radius-card);
+  border-radius: var(--starbot-radius-card);
   background: var(--notice-surface);
-  animation: queue-panel-in var(--openbot-duration-normal) cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: queue-panel-in var(--starbot-duration-normal) cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .composer-notice[data-tone="danger"] {
-  --notice-accent: var(--openbot-danger-text);
-  --notice-surface: var(--openbot-danger-soft);
+  --notice-accent: var(--starbot-danger-text);
+  --notice-surface: var(--starbot-danger-soft);
 }
 
 .composer-notice:not(:has(.ui-button)) {
@@ -36,7 +36,7 @@
   height: 20px;
   flex: none;
   color: var(--notice-accent);
-  stroke-width: var(--openbot-icon-stroke-lg);
+  stroke-width: var(--starbot-icon-stroke-lg);
 }
 
 .composer-notice .ui-button {
@@ -62,15 +62,15 @@
 
 .composer-notice-copy strong {
   color: var(--notice-accent);
-  font-size: var(--openbot-text-sm);
+  font-size: var(--starbot-text-sm);
   font-weight: 600;
   line-height: 1.35;
 }
 
 .composer-notice-copy p {
   margin: 0;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
   line-height: 1.35;
 }
 

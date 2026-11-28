@@ -1,11 +1,11 @@
-import { isKeyOnlyProvider } from "@openbot/contracts/agent-providers";
+import { isKeyOnlyProvider } from "@starbot/contracts/agent-providers";
 import type {
   AgentProviderId,
   ExternalDestination,
   ProviderApiKeyState,
   ProviderApiKeyStatus,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Alert,
   AlertContent,
@@ -17,7 +17,7 @@ import {
   Field,
   Input,
   OctagonX,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createSignal, onSettled, Show } from "solid-js";
 import { useText } from "../../text";
 

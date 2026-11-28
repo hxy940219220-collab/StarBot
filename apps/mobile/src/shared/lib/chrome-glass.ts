@@ -5,7 +5,7 @@ import { useCSSVariable } from "uniwind";
 import { isAndroid } from "@/shared/lib/platform";
 
 export function useChromeGlass({ shadow = true }: { shadow?: boolean } = {}): ViewStyle {
-  const [fill, edge] = useCSSVariable(["--openbot-bg-chrome-glass", "--openbot-border-chrome-glass"]);
+  const [fill, edge] = useCSSVariable(["--starbot-bg-chrome-glass", "--starbot-border-chrome-glass"]);
   const plain = useThemeColor("default");
   return useMemo(
     () =>

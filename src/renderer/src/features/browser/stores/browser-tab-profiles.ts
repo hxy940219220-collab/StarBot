@@ -1,6 +1,6 @@
-import type { BrowserTab, BrowserTabProfile } from "@openbot/contracts/ipc";
-import { browserProfileProxyNames } from "@openbot/ui/features/browser/BrowserProxies";
-import { currentText } from "@openbot/ui/text";
+import type { BrowserTab, BrowserTabProfile } from "@starbot/contracts/ipc";
+import { browserProfileProxyNames } from "@starbot/ui/features/browser/BrowserProxies";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal } from "solid-js";
 import type { BrowserProfileCalls } from "../browser-profiles-port";
 

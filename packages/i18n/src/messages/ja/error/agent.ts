@@ -5,28 +5,28 @@ export const messages = {
   "error.agent.historyUnavailable":
     "このリクエストでは履歴を利用できません。最近の履歴をもう一度読み取るか、チャンネルの作業には channel_history を使用してください。",
   "error.agent.historyArgumentsInvalid":
-    "履歴の引数が正しくありません: {detail} 引数を修正して再試行してください。スキーマは openbot.tool_describe で取得できます。",
+    "履歴の引数が正しくありません: {detail} 引数を修正して再試行してください。スキーマは starbot.tool_describe で取得できます。",
   "error.agent.toolRequestInvalid":
     "ツール検出の引数が無効です。宣言されたスキーマと、元の修飾されたツール名を使用してください。",
   "error.agent.toolCallArgumentsNotObject":
     "ツールは実行されませんでした。tool_call の arguments はテキストではなく JSON オブジェクトにする必要があります。arguments をオブジェクトにして、もう一度呼び出してください。",
   "error.agent.toolCallDiscoveryTool":
-    "ツールは実行されませんでした。tool_call では openbot.tool_search と openbot.tool_describe を実行できません。同じ引数で直接呼び出してください。",
+    "ツールは実行されませんでした。tool_call では starbot.tool_search と starbot.tool_describe を実行できません。同じ引数で直接呼び出してください。",
   "error.agent.toolCallEnvelopeKeys":
     "ツールは実行されませんでした。tool_call が受け付けるのは name と arguments だけです。ツールの引数をオブジェクトとして arguments に入れ、もう一度呼び出してください。",
   "error.agent.toolCallMissingName":
-    "ツールは実行されませんでした。tool_call に name がありません。tool_search が返す完全修飾名（例: openbot.history_read）を name に入れて、もう一度呼び出してください。",
+    "ツールは実行されませんでした。tool_call に name がありません。tool_search が返す完全修飾名（例: starbot.history_read）を name に入れて、もう一度呼び出してください。",
   "error.agent.toolCallUnknownTool":
-    "ツールは実行されませんでした。tool_call はこの名前のツールを見つけられませんでした。tool_search が返す正確な完全修飾名（例: openbot_browser.snapshot）を使ってください。",
+    "ツールは実行されませんでした。tool_call はこの名前のツールを見つけられませんでした。tool_search が返す正確な完全修飾名（例: starbot_browser.snapshot）を使ってください。",
   "error.agent.toolCallUnknownToolSuggest":
     "ツールは実行されませんでした。tool_call はこの名前のツールを見つけられませんでした。完全修飾名は {name} の可能性があります。その場合は、その名前でもう一度呼び出してください。",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe は {names} という名前の StarBot ツールを見つけられませんでした。openbot.tool_search が一覧にする StarBot とブラウザーのツールだけを説明し、MCP ツールは説明しません。",
+    "tool_describe は {names} という名前の StarBot ツールを見つけられませんでした。starbot.tool_search が一覧にする StarBot とブラウザーのツールだけを説明し、MCP ツールは説明しません。",
 
   "error.agent.toolDescribeDiscoveryNames":
     "{names} は直接呼び出してください。tool_describe は検索ツールを説明しません。",
   "error.agent.routineScheduleArgumentsInvalid":
-    "ルーティンのスケジュールが無効です: {detail} スケジュールを修正して再試行してください。スキーマは openbot.tool_describe で取得できます。",
+    "ルーティンのスケジュールが無効です: {detail} スケジュールを修正して再試行してください。スキーマは starbot.tool_describe で取得できます。",
   "error.agent.approvalWhileDeleting": "エージェントの削除中は承認できません。",
   "error.agent.accessLocalOnly":
     "エージェントへのアクセスは、そのエージェントを実行しているコンピューターでのみ変更できます。",

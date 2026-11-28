@@ -249,7 +249,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "لا توجد مهارات تطابق «{query}».",
   "sitePage.marketplace.emptyApps": "لا يوجد تطبيق مطابق.",
   "sitePage.marketplace.breadcrumb": "مسار التنقل",
-  "sitePage.marketplace.addToOpenBot": "إضافة إلى StarBot",
+  "sitePage.marketplace.addToStarBot": "إضافة إلى StarBot",
 
   "sitePage.marketplace.addFromApp": "تتم إضافة {name} من داخل StarBot. احصل على التطبيق، ثم افتح هذا الرابط مرة أخرى.",
 
@@ -528,7 +528,7 @@ export const messages = {
   "sitePage.site.cta.title": "تعرّف على أول زميل لك في الفريق",
   "sitePage.site.cta.description":
     "شغّل Codex أو Claude أو Gemini أو Grok أو نموذجك الخاص بالخطط التي تدفع لها أصلًا، ولكل منها مساحة عمله وسياقه. يبقى عملك على حاسوبك.",
-  "sitePage.site.downloadOpenBot": "نزّل StarBot",
+  "sitePage.site.downloadStarBot": "نزّل StarBot",
 
   "sitePage.site.contact": "تواصل معنا",
   "sitePage.site.footer.description":

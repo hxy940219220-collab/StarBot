@@ -2,7 +2,7 @@ import {
   type LiveActivityAction,
   type LiveActivityLink,
   readLiveActivityLink,
-} from "@openbot/team-client/live-activity-props";
+} from "@starbot/team-client/live-activity-props";
 import type { OutsideTarget } from "../../workspace/model/outside-target";
 
 export interface LiveActivityRequest {

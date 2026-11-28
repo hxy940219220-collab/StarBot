@@ -1,9 +1,9 @@
-import { isAgentModel } from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isAgentModel } from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Schema } from "effect";
 import type { AcpModel } from "./acp-configuration";
 
-const logger = createOpenBotLogger("provider-runtime");
+const logger = createStarBotLogger("provider-runtime");
 
 export const CLINE_RECOMMENDED_MODELS_URL = "https://api.cline.bot/api/v1/ai/cline/recommended-models";
 

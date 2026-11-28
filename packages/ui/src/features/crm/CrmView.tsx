@@ -1,7 +1,7 @@
-import type { CrmCustomer } from "@openbot/contracts/ipc";
-import { buttonVariants, CreditCard, DropdownMenu, IconButton, Plug, Plus, SlidingTabs, UsersRound } from "@openbot/ui";
-import { FileSearch } from "@openbot/ui/features/files/FileList";
-import { useText } from "@openbot/ui/text";
+import type { CrmCustomer } from "@starbot/contracts/ipc";
+import { buttonVariants, CreditCard, DropdownMenu, IconButton, Plug, Plus, SlidingTabs, UsersRound } from "@starbot/ui";
+import { FileSearch } from "@starbot/ui/features/files/FileList";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, For, Show } from "solid-js";
 import { CrmCustomerPanel } from "./CrmCustomerPanel";
 import { CrmCustomers } from "./CrmCustomers";

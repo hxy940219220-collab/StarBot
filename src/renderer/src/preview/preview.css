@@ -1,70 +1,70 @@
 @import "../styles.css";
 @source "../";
 
-.openbot-playground-root {
+.starbot-playground-root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--openbot-bg-canvas);
+  background: var(--starbot-bg-canvas);
 }
 
-.openbot-playground-loading {
+.starbot-playground-loading {
   width: 100%;
   height: 100%;
-  background: var(--openbot-bg-canvas);
+  background: var(--starbot-bg-canvas);
 }
 
-.openbot-playground-root .unread-messages-banner {
+.starbot-playground-root .unread-messages-banner {
   display: none;
 }
 
 @media (max-width: 640px) {
-  .openbot-playground-root .app-frame,
-  .openbot-playground-root .app-frame-with-server-rail {
+  .starbot-playground-root .app-frame,
+  .starbot-playground-root .app-frame-with-server-rail {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 68px minmax(0, 1fr);
   }
 
-  .openbot-playground-root .server-rail,
-  .openbot-playground-root .left-panel-resizer,
-  .openbot-playground-root .sidebar-topbar,
-  .openbot-playground-root .sidebar-search-wrap,
-  .openbot-playground-root .sidebar-list-context-trigger,
-  .openbot-playground-root .sidebar-chat-group > header {
+  .starbot-playground-root .server-rail,
+  .starbot-playground-root .left-panel-resizer,
+  .starbot-playground-root .sidebar-topbar,
+  .starbot-playground-root .sidebar-search-wrap,
+  .starbot-playground-root .sidebar-list-context-trigger,
+  .starbot-playground-root .sidebar-chat-group > header {
     display: none;
   }
 
-  .openbot-playground-root .sidebar {
+  .starbot-playground-root .sidebar {
     grid-column: 1;
     grid-row: 1;
     flex-direction: row;
     border-inline-end: 0;
-    border-bottom: 1px solid var(--openbot-border);
+    border-bottom: 1px solid var(--starbot-border);
   }
 
-  .openbot-playground-root .agent-list,
-  .openbot-playground-root .sidebar-compact .agent-list {
+  .starbot-playground-root .agent-list,
+  .starbot-playground-root .sidebar-compact .agent-list {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     align-items: center;
     justify-content: center;
-    gap: var(--openbot-space-1-5);
-    padding: var(--openbot-space-2) var(--openbot-space-3);
+    gap: var(--starbot-space-1-5);
+    padding: var(--starbot-space-2) var(--starbot-space-3);
   }
 
-  .openbot-playground-root .agent-list-content,
-  .openbot-playground-root .sidebar-chat-group,
-  .openbot-playground-root .sidebar-section-collapse,
-  .openbot-playground-root .sidebar-section-body {
+  .starbot-playground-root .agent-list-content,
+  .starbot-playground-root .sidebar-chat-group,
+  .starbot-playground-root .sidebar-section-collapse,
+  .starbot-playground-root .sidebar-section-body {
     display: flex;
     align-items: center;
-    gap: var(--openbot-space-1-5);
+    gap: var(--starbot-space-1-5);
     margin: 0;
   }
 
-  .openbot-playground-root .agent-row,
-  .openbot-playground-root .sidebar-compact .agent-row {
+  .starbot-playground-root .agent-row,
+  .starbot-playground-root .sidebar-compact .agent-row {
     --agent-row-avatar-size: 36px;
     --sidebar-pinned-avatar-size: 36px;
 
@@ -75,17 +75,17 @@
     padding: 6px;
   }
 
-  .openbot-playground-root .sidebar-compact .agent-row-avatar {
+  .starbot-playground-root .sidebar-compact .agent-row-avatar {
     transform: none;
   }
 
-  .openbot-playground-root .agent-row-copy {
+  .starbot-playground-root .agent-row-copy {
     display: none;
   }
 
-  .openbot-playground-root .app-frame-panes,
-  .openbot-playground-root .conversation-panel,
-  .openbot-playground-root .app-frame-with-server-rail .conversation-panel {
+  .starbot-playground-root .app-frame-panes,
+  .starbot-playground-root .conversation-panel,
+  .starbot-playground-root .app-frame-with-server-rail .conversation-panel {
     grid-column: 1;
     grid-row: 2;
   }

@@ -1,30 +1,30 @@
-import { isKnownAgentProvider, providerDisplayName } from "@openbot/contracts/agent-providers";
+import { isKnownAgentProvider, providerDisplayName } from "@starbot/contracts/agent-providers";
 import {
   type FileQuoteTarget,
   fileQuoteId,
   fileQuoteTarget,
   limitedQuoteText,
-} from "@openbot/contracts/chat-tag-references";
-import { isNarrationItemId } from "@openbot/contracts/conversation-narration";
+} from "@starbot/contracts/chat-tag-references";
+import { isNarrationItemId } from "@starbot/contracts/conversation-narration";
 import {
   customProviderOfModel,
   isCustomProviderHarness,
   type McpSignInRelayPage,
   relayableSignInLink,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { AGENT_FAST_MODE_CAPABILITY } from "@openbot/contracts/team-protocol/agent-fast-mode-v1";
-import { AGENT_SPEED_CAPABILITY } from "@openbot/contracts/team-protocol/agent-speed-v1";
-import { toast } from "@openbot/ui";
-import type { QuestionPromptComposerAnswer } from "@openbot/ui/components/QuestionPromptBubble";
-import type { AgentMessage } from "@openbot/ui/data";
-import { awaitingReplyEnded } from "@openbot/ui/features/conversation/AwaitingReplies";
-import type { QuoteRequest } from "@openbot/ui/features/conversation/ComposerEditor";
-import type { AgentThreadVoice } from "@openbot/ui/features/conversation/threads/AgentThreadView";
-import { MAIN_THREAD_ID } from "@openbot/ui/features/conversation/threads/thread-types";
-import { currentText } from "@openbot/ui/text";
-import { prefersReducedMotion, usesTouchLayout } from "@openbot/ui/utils";
-import { errorReference } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { AGENT_FAST_MODE_CAPABILITY } from "@starbot/contracts/team-protocol/agent-fast-mode-v1";
+import { AGENT_SPEED_CAPABILITY } from "@starbot/contracts/team-protocol/agent-speed-v1";
+import { toast } from "@starbot/ui";
+import type { QuestionPromptComposerAnswer } from "@starbot/ui/components/QuestionPromptBubble";
+import type { AgentMessage } from "@starbot/ui/data";
+import { awaitingReplyEnded } from "@starbot/ui/features/conversation/AwaitingReplies";
+import type { QuoteRequest } from "@starbot/ui/features/conversation/ComposerEditor";
+import type { AgentThreadVoice } from "@starbot/ui/features/conversation/threads/AgentThreadView";
+import { MAIN_THREAD_ID } from "@starbot/ui/features/conversation/threads/thread-types";
+import { currentText } from "@starbot/ui/text";
+import { prefersReducedMotion, usesTouchLayout } from "@starbot/ui/utils";
+import { errorReference } from "@starbot/user-errors";
 import type { VirtualItem } from "@tanstack/virtual-core";
 import {
   createContext,

@@ -1,5 +1,5 @@
-import type { McpKeyFlow } from "@openbot/contracts/mcp-connect-flows";
-import { McpKeyDialog } from "@openbot/ui/features/settings/McpKeyDialog";
+import type { McpKeyFlow } from "@starbot/contracts/mcp-connect-flows";
+import { McpKeyDialog } from "@starbot/ui/features/settings/McpKeyDialog";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { MARKETPLACE_PLUGINS } from "../src/features/settings/marketplace-plugin-catalog";

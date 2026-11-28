@@ -322,7 +322,7 @@ export const messages = {
 
   "workflow.output.title": "Вывод",
   "workflow.output.name": "вывод",
-  "workflow.output.channel.openbot": "StarBot",
+  "workflow.output.channel.starbot": "StarBot",
 
   "workflow.output.channel.search": "Поиск каналов",
   "workflow.output.postsAs": "Публикуется как",
@@ -411,8 +411,8 @@ export const messages = {
   "workflow.github.event.pr.checksFailed": "Проверки не прошли",
   "workflow.github.event.pr.merged": "Пул-реквест слит",
   "workflow.github.event.comment": "Новый комментарий",
-  "workflow.github.event.mention": "Упоминание @openbotgit",
-  "workflow.github.event.assigned": "Назначено @openbotgit",
+  "workflow.github.event.mention": "Упоминание @starbotgit",
+  "workflow.github.event.assigned": "Назначено @starbotgit",
   "workflow.github.trigger.event": "Событие",
   "workflow.github.trigger.labelAdded": "Добавлена метка",
   "workflow.github.trigger.hasLabel": "Есть метка",

@@ -6,8 +6,8 @@ import {
   type VoiceServerModels,
   type VoiceServerProbeField,
   type VoiceServerRoutes,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import {
   decodeVoiceServerWav,
   encodeVoiceServerWav,
@@ -16,8 +16,8 @@ import {
   voiceServerHost,
   voiceServerModelLists,
   voiceServerVoiceNames,
-} from "@openbot/contracts/voice-server";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/voice-server";
+import { sourceText } from "@starbot/i18n/source";
 import { fetch } from "expo/fetch";
 import * as Crypto from "expo-crypto";
 import { File, Paths } from "expo-file-system";

@@ -333,7 +333,7 @@ export const messages = defineMessages("routine", {
   "routine.webhook.stepSecretHint":
     "The sender signs each request with this secret. StarBot rejects a request without a valid signature.",
   "routine.webhook.howToSign": "How to sign a request",
-  "routine.webhook.howToSignHint": "Keep the secret in OPENBOT_WEBHOOK_SECRET on the sender. Do not put it in code.",
+  "routine.webhook.howToSignHint": "Keep the secret in STARBOT_WEBHOOK_SECRET on the sender. Do not put it in code.",
   "routine.webhook.stepTest": "Send a test event",
   "routine.webhook.stepTestHint":
     "StarBot signs an event that matches this routine and receives it as a real request. The routine runs one time.",

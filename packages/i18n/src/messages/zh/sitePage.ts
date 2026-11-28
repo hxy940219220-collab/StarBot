@@ -188,7 +188,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "没有与“{query}”匹配的技能。",
   "sitePage.marketplace.emptyApps": "没有匹配的应用。",
   "sitePage.marketplace.breadcrumb": "导航路径",
-  "sitePage.marketplace.addToOpenBot": "添加到星友",
+  "sitePage.marketplace.addToStarBot": "添加到星友",
   "sitePage.marketplace.addFromApp": "{name} 需要在星友中添加。获取应用后，再次打开此链接。",
   "sitePage.marketplace.downloadFor": "下载 {platform} 版",
   "sitePage.marketplace.copyLink": "复制链接",
@@ -426,7 +426,7 @@ export const messages = {
   "sitePage.site.cta.title": "认识你的第一位队友",
   "sitePage.site.cta.description":
     "用你已付费的套餐运行 Codex、Claude、Gemini、Grok 或你自己的模型，每个助手都有独立的工作区和上下文。你的工作始终留在你的电脑上。",
-  "sitePage.site.downloadOpenBot": "下载星友",
+  "sitePage.site.downloadStarBot": "下载星友",
   "sitePage.site.contact": "联系我们",
   "sitePage.site.footer.description":
     "在你自己的电脑上拥有持久的 AI 队友。用你已付费的套餐运行 Codex、Claude、Gemini、Grok、Muse Code、Pi 或你自己的模型。",

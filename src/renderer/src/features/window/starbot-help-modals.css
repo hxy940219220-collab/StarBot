@@ -18,10 +18,10 @@
   flex-direction: column;
   max-height: calc(100dvh - 44px);
   overflow: hidden;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 24px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
   box-shadow: 0 28px 72px rgba(24, 16, 52, 0.3);
   animation: starbot-help-pop 190ms cubic-bezier(0.22, 1, 0.36, 1);
   user-select: text;
@@ -55,11 +55,11 @@
   justify-content: space-between;
   gap: 12px;
   padding: 16px 22px 14px;
-  border-bottom: 1px solid var(--openbot-border);
+  border-bottom: 1px solid var(--starbot-border);
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface)) 0%,
-    var(--openbot-bg-surface) 100%
+    color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-surface)) 0%,
+    var(--starbot-bg-surface) 100%
   );
 }
 
@@ -78,14 +78,14 @@
 .starbot-help-brand h2 {
   margin: 0;
   font-size: 16.5px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-help-brand p {
   margin: 2px 0 0;
   font-size: 12px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-help-close {
@@ -96,13 +96,13 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   cursor: pointer;
 }
 
 .starbot-help-close:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 /* Two-Column Manual Body */
@@ -120,7 +120,7 @@
   .starbot-manual-toc {
     max-height: 168px;
     border-inline-end: 0 !important;
-    border-bottom: 1px solid var(--openbot-border);
+    border-bottom: 1px solid var(--starbot-border);
   }
 }
 
@@ -128,8 +128,8 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  border-inline-end: 1px solid var(--openbot-border);
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 74%, var(--openbot-bg-surface));
+  border-inline-end: 1px solid var(--starbot-border);
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 74%, var(--starbot-bg-surface));
 }
 
 .starbot-manual-search-box {
@@ -143,7 +143,7 @@
   left: 22px;
   top: 50%;
   transform: translateY(-30%);
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   pointer-events: none;
 }
 
@@ -151,10 +151,10 @@
   width: 100%;
   height: 32px;
   padding: 0 10px 0 30px;
-  border: 1px solid var(--openbot-border-strong);
+  border: 1px solid var(--starbot-border-strong);
   border-radius: 10px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
   font-size: 12px;
   outline: none;
   user-select: text;
@@ -162,7 +162,7 @@
 }
 
 .starbot-manual-search-input:focus {
-  border-color: var(--openbot-accent);
+  border-color: var(--starbot-accent);
 }
 
 .starbot-manual-toc-scroll {
@@ -183,9 +183,9 @@
 
 .starbot-manual-toc-group-label {
   padding: 2px 8px 4px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 11px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   letter-spacing: 0.02em;
 }
 
@@ -199,9 +199,9 @@
   border: 0;
   border-radius: 10px;
   background: transparent;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   text-align: left;
   cursor: pointer;
   transition:
@@ -210,14 +210,14 @@
 }
 
 .starbot-manual-toc-item:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-manual-toc-item.is-active {
-  background: var(--openbot-accent-soft);
-  color: var(--openbot-accent-text);
-  font-weight: var(--openbot-weight-semibold);
+  background: var(--starbot-accent-soft);
+  color: var(--starbot-accent-text);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-manual-toc-num {
@@ -227,13 +227,13 @@
   flex: 0 0 20px;
   place-items: center;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--openbot-text-muted) 12%, transparent);
+  background: color-mix(in srgb, var(--starbot-text-muted) 12%, transparent);
   font-size: 10.5px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
 }
 
 .starbot-manual-toc-item.is-active .starbot-manual-toc-num {
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
 }
 
@@ -252,7 +252,7 @@
   padding: 20px 10px;
   text-align: center;
   font-size: 12px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 /* Right Content Area */
@@ -273,7 +273,7 @@
   flex-direction: column;
   gap: 6px;
   padding-bottom: 12px;
-  border-bottom: 1px solid color-mix(in srgb, var(--openbot-border) 75%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--starbot-border) 75%, transparent);
 }
 
 .starbot-manual-chapter-pill {
@@ -283,24 +283,24 @@
   height: 22px;
   padding: 0 10px;
   border-radius: 999px;
-  background: var(--openbot-accent-soft);
-  color: var(--openbot-accent-text);
+  background: var(--starbot-accent-soft);
+  color: var(--starbot-accent-text);
   font-size: 11px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
 }
 
 .starbot-manual-article-head h3 {
   margin: 2px 0 0;
   font-size: 18px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-manual-article-head p {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.55;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-manual-steps {
@@ -314,9 +314,9 @@
   align-items: flex-start;
   gap: 12px;
   padding: 13px 15px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 15px;
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 52%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 52%, var(--starbot-bg-surface));
 }
 
 .starbot-manual-step-index {
@@ -327,10 +327,10 @@
   margin-top: 1px;
   place-items: center;
   border-radius: 50%;
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
   font-size: 12px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
 }
 
 .starbot-manual-step-body {
@@ -343,29 +343,29 @@
 .starbot-manual-step-body h4 {
   margin: 0;
   font-size: 13.5px;
-  font-weight: var(--openbot-weight-semibold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-semibold);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-manual-step-body p {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.62;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-manual-tips-box {
   padding: 12px 15px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 28%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 28%, var(--starbot-border));
   border-radius: 14px;
-  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-surface));
 }
 
 .starbot-manual-tips-box strong {
   display: block;
   margin-bottom: 6px;
   font-size: 12.5px;
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
 }
 
 .starbot-manual-tips-box ul {
@@ -379,7 +379,7 @@
 .starbot-manual-tips-box li {
   font-size: 12px;
   line-height: 1.55;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-manual-pager {
@@ -396,20 +396,20 @@
   gap: 5px;
   height: 32px;
   padding: 0 11px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 10px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-secondary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 130ms ease;
 }
 
 .starbot-manual-pager-btn:hover:not(:disabled) {
-  border-color: var(--openbot-accent);
-  color: var(--openbot-accent-text);
-  background: var(--openbot-accent-soft);
+  border-color: var(--starbot-accent);
+  color: var(--starbot-accent-text);
+  background: var(--starbot-accent-soft);
 }
 
 .starbot-manual-pager-btn:disabled {
@@ -424,8 +424,8 @@
   justify-content: space-between;
   gap: 12px;
   padding: 13px 22px;
-  border-top: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface);
+  border-top: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-help-foot-left,
@@ -451,8 +451,8 @@
 
 .starbot-feedback-label {
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
-  color: var(--openbot-text-secondary);
+  font-weight: var(--starbot-weight-semibold);
+  color: var(--starbot-text-secondary);
 }
 
 .starbot-feedback-pills {
@@ -464,19 +464,19 @@
 .starbot-feedback-pill {
   height: 30px;
   padding: 0 13px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 999px;
-  background: var(--openbot-bg-control);
-  color: var(--openbot-text-secondary);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
   transition: all 140ms ease;
 }
 
 .starbot-feedback-pill.is-active {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
 }
 
@@ -487,7 +487,7 @@
 
 .starbot-feedback-count {
   font-size: 11.5px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-feedback-thanks {
@@ -512,7 +512,7 @@
 .starbot-feedback-thanks h3 {
   margin: 4px 0 0;
   font-size: 15.5px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
 }
 
 .starbot-feedback-thanks p {
@@ -520,7 +520,7 @@
   max-width: 300px;
   font-size: 12.5px;
   line-height: 1.55;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 /* ==========================================================================
@@ -539,7 +539,7 @@
   width: 100%;
   aspect-ratio: 1120 / 620;
   background: #f6f3ff;
-  border-bottom: 1px solid var(--openbot-border);
+  border-bottom: 1px solid var(--starbot-border);
   overflow: hidden;
 }
 
@@ -564,9 +564,9 @@
   border: 1px solid rgba(120, 110, 160, 0.16);
   background: rgba(255, 255, 255, 0.84);
   backdrop-filter: blur(8px);
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 11.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   font-variant-numeric: tabular-nums;
   pointer-events: none;
 }
@@ -584,7 +584,7 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(8px);
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   cursor: pointer;
   transition:
     background-color 130ms ease,
@@ -593,7 +593,7 @@
 
 .starbot-tour-floating-close:hover {
   background: #ffffff;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-tour-minimal-body {
@@ -601,7 +601,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 22px 26px 22px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
 }
 
 .starbot-tour-minimal-copy {
@@ -615,8 +615,8 @@
 .starbot-tour-minimal-copy h3 {
   margin: 0;
   font-size: 17.5px;
-  font-weight: var(--openbot-weight-bold);
-  color: var(--openbot-text-primary);
+  font-weight: var(--starbot-weight-bold);
+  color: var(--starbot-text-primary);
   letter-spacing: -0.01em;
 }
 
@@ -624,7 +624,7 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-tour-minimal-footer {
@@ -639,14 +639,14 @@
   border: 0;
   padding: 4px 2px;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12.5px;
   cursor: pointer;
   transition: color 120ms ease;
 }
 
 .starbot-tour-skip-link:hover {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-tour-dots {
@@ -662,14 +662,14 @@
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--openbot-text-muted) 26%, transparent);
+  background: color-mix(in srgb, var(--starbot-text-muted) 26%, transparent);
   cursor: pointer;
   transition: all 160ms ease;
 }
 
 .starbot-tour-dot.is-active {
   width: 22px;
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
 }
 
 .starbot-tour-nav-btns {

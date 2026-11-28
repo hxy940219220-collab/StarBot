@@ -6,10 +6,10 @@ import type {
   AgentWaitsSnapshot,
   QueueSnapshot,
   RoutineFields,
-} from "@openbot/contracts/ipc";
-import type { AgentActiveQueues } from "@openbot/contracts/team-protocol/agent-active-queues-v1";
-import { approvalIsCut, withWholeApproval } from "@openbot/team-client/runtime-attention";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { AgentActiveQueues } from "@starbot/contracts/team-protocol/agent-active-queues-v1";
+import { approvalIsCut, withWholeApproval } from "@starbot/team-client/runtime-attention";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, createStore, untrack } from "solid-js";
 import { desktopAnalytics } from "./analytics";
 import { useAnsweredPrompts } from "./answered-prompts";

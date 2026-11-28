@@ -1504,7 +1504,7 @@ export const messages = {
   "mobile.server.update.path.hosted":
     "De gehoste dienst downloadt updates op de achtergrond. Een gedownloade update start bij de volgende start van de server. Wacht tot actief werk klaar is voordat je de server stopt en hervat. Blijft hij op een oude versie, neem dan contact op met de hostbeheerder.",
   "mobile.server.update.path.system":
-    "Voer op de host sudo openbot update uit om de nieuwste release te installeren. Deze opdracht stopt StarBot. Wacht eerst tot actief werk klaar is. Automatische downloads worden bij de volgende opstart geïnstalleerd.",
+    "Voer op de host sudo starbot update uit om de nieuwste release te installeren. Deze opdracht stopt StarBot. Wacht eerst tot actief werk klaar is. Automatische downloads worden bij de volgende opstart geïnstalleerd.",
 
   "mobile.server.update.path.container":
     "Haal op de Docker-host de nieuwe StarBot-image op en maak de container opnieuw met dezelfde datavolumes. Wacht eerst tot actief werk klaar is. Houd de bestaande volumes om je gegevens te bewaren.",

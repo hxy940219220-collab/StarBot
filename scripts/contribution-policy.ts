@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-const TRUSTED_BOTS = new Set(["infeld-ai[bot]", "dependabot[bot]", "openbotgit[bot]"]);
+const TRUSTED_BOTS = new Set(["infeld-ai[bot]", "dependabot[bot]", "starbotgit[bot]"]);
 const TRUSTED_ASSOCIATIONS = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
 const TRUSTED_PERMISSIONS = new Set(["admin", "maintain", "write"]);
 const LABEL_EXTERNAL = "external";
@@ -15,7 +15,7 @@ const COMMENT_MARKER = "<!-- contribution-policy -->";
 const COMMENT_AUTHOR = "github-actions[bot]";
 const CLOSE_AFTER_DAYS = 7;
 const FORM_DIR = ".github/ISSUE_TEMPLATE";
-const REPORT_PATH = ".openbot-build/contribution-policy/report.json";
+const REPORT_PATH = ".starbot-build/contribution-policy/report.json";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");

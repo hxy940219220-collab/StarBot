@@ -13,9 +13,9 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { join } from "node:path";
-import type { ManagedRuntimeId } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import type { ManagedRuntimeId } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentRuntimeLock } from "../../scripts/agent-runtime-lock";
 import {
@@ -56,7 +56,7 @@ export interface RuntimeSpec {
   executableName: string;
 }
 
-export const INSTALL_RECORD = "openbot-install.json";
+export const INSTALL_RECORD = "starbot-install.json";
 
 export interface ProviderStageContext {
   readonly spec: RuntimeSpec;

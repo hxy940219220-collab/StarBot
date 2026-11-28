@@ -5,10 +5,10 @@ import {
   type CreditMediaKind,
   type CreditModelCost,
   creditModelCharge,
-} from "@openbot/contracts/credits";
-import { CreditIcon } from "@openbot/ui/features/credits/CreditIcon";
-import { MakerLogo } from "@openbot/ui/features/credits/MakerLogo";
-import { Search } from "@openbot/ui/icons";
+} from "@starbot/contracts/credits";
+import { CreditIcon } from "@starbot/ui/features/credits/CreditIcon";
+import { MakerLogo } from "@starbot/ui/features/credits/MakerLogo";
+import { Search } from "@starbot/ui/icons";
 import { createMemo, createSignal, For, onSettled, Show } from "solid-js";
 import { landingAnalytics } from "../../lib/analytics";
 import { CREDITS_ROUTE } from "../../lib/credits-page";

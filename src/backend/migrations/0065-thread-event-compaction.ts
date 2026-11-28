@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // The threads whose old events StarBot compacted after start (`ThreadEventCompaction`). A row means
 // that each event of the thread up to `through_sequence` keeps only the `changedMessages` items that
@@ -18,7 +18,7 @@ export const THREAD_EVENT_COMPACTION_TABLES_AFTER_MIGRATION: Record<string, neve
   thread_event_compaction: [],
 };
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 65,
   name: "thread-event-compaction",
   // Only creates a table, so no foreign-key pause and no vacuum. The compaction itself runs after

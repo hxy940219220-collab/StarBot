@@ -22,27 +22,27 @@ import {
   type SkillLearningMode,
   type UpdateHostIdentityInput,
   WORKFLOW_UNLINKED_CONNECTION,
-} from "@openbot/contracts/ipc";
-import { copiedTransferUpload } from "@openbot/team-client/team-api-requests";
+} from "@starbot/contracts/ipc";
+import { copiedTransferUpload } from "@starbot/team-client/team-api-requests";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/instance-transfer-everything-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-transfer-everything-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/instance-transfer-everything-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-transfer-everything-"));
 const fakeCodex = join(root, "codex");
 const fakeLog = join(root, "codex.jsonl");
 const home = join(root, "home");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 const { HISTORY_IMPORTED_EVENT } = await import("../src/backend/agent-history-transfer");
 const { InstanceTransferService } = await import("../src/main/instance-transfer-service");
 type MemberPreferences<Id> = import("../src/main/instance-transfer-service").MemberPreferences<Id>;
@@ -185,7 +185,7 @@ function profile(name: string) {
   const userData = join(root, name, "user-data");
   const profileHome = join(root, name, "home");
   mkdirSync(profileHome, { recursive: true });
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, profileHome, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const agents = new AgentService({

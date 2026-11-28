@@ -11,10 +11,10 @@ import {
   type GitHubConnectorStatus,
   type McpServerConfig,
   type WorkflowGitHubCatalog,
-} from "@openbot/contracts/ipc";
-import { GITHUB_ROUTE_EVENTS } from "@openbot/contracts/signal-protocol/github-route";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText, registerSecretValue, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { GITHUB_ROUTE_EVENTS } from "@starbot/contracts/signal-protocol/github-route";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Exit, type Layer, Result, Scope, Semaphore } from "effect";
 import { z } from "zod";
 import { writeFileAtomically } from "../backend/atomic-json-file";
@@ -35,7 +35,7 @@ import {
 import { GitHubOperationError, GitHubPlatform, githubCall, toGitHubOperationError } from "./github-effects";
 import { GitHubMcpProxy } from "./github-mcp-proxy";
 
-const logger = createOpenBotLogger("github-connector");
+const logger = createStarBotLogger("github-connector");
 
 const REFRESH_MARGIN_MS = 10 * 60_000;
 const REFRESH_CHECK_MS = 60_000;

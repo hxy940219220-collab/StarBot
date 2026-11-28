@@ -1,5 +1,5 @@
 import { join } from "node:path";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { utilityProcess } from "electron";
 import {
@@ -8,7 +8,7 @@ import {
   type AgentDatabaseHostProcess,
 } from "../backend/agent-data/agent-database-protocol";
 
-const logger = createOpenBotLogger("database-check");
+const logger = createStarBotLogger("database-check");
 const DAMAGED_FILE_CODES = new Set([11, 26]);
 
 const OUTPUT_TAIL_CHARS = 1_900;

@@ -1,5 +1,5 @@
-import type { ComputerUsePermissionApp, MacPermissionId } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { ComputerUsePermissionApp, MacPermissionId } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema } from "effect";
 import type { BrowserWindow, NativeImage } from "electron";
 import { causeHelpers } from "../backend/effect-boundary";

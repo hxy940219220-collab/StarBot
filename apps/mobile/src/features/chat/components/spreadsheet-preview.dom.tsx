@@ -1,7 +1,7 @@
 "use dom";
 
-import { parseSpreadsheet, type SpreadsheetData } from "@openbot/contracts/spreadsheet-workbook";
-import { base64ToBytes } from "@openbot/team-client/base64";
+import { parseSpreadsheet, type SpreadsheetData } from "@starbot/contracts/spreadsheet-workbook";
+import { base64ToBytes } from "@starbot/team-client/base64";
 import { useMemo, useState } from "react";
 
 interface SpreadsheetPreviewProps {

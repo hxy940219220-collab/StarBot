@@ -747,7 +747,7 @@
       {
         "type": "added",
         "items": [
-          "אפשר להפעיל תהליך עבודה מ-GitHub: טריגר GitHub רץ על issues חדשים, תגובות, pull requests, סקירות, בדיקות שנכשלו או אזכור של @openbotgit.",
+          "אפשר להפעיל תהליך עבודה מ-GitHub: טריגר GitHub רץ על issues חדשים, תגובות, pull requests, סקירות, בדיקות שנכשלו או אזכור של @starbotgit.",
           "אפשר לשנות את GitHub מתהליך עבודה: להגיב, להוסיף תווית, להקצות, לסקור, לסגור או ליצור issue בתור StarBot GitHub App.",
           "בחנות יש 17 סוכני StarBot חדשים, כמו QA Tester, PR Shepherd ו-Chief of Staff, ו-15 מיומנויות חדשות בשבילם.",
           "דף השימוש מציג את המגבלה החודשית של OpenCode Go כפס שלישי."

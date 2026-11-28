@@ -4,8 +4,8 @@ import {
   type McpAccessLevel,
   type McpServerAccess,
   mcpAccessRank,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Button,
   Dialog,
@@ -25,9 +25,9 @@ import {
   ShieldCheck,
   UsersRound,
   X,
-} from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { useText } from "@starbot/ui/text";
 import { createSignal, createStore, For, Show } from "solid-js";
 import { AgentSearchList } from "./MarketplaceAgentsDialog";
 import type { MarketplaceAgent, MarketplaceMcpAccess } from "./marketplace-model";

@@ -1,11 +1,11 @@
 import {
   disconnectedPasswordManager,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type PasswordManagerId,
   type PasswordManagerStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
-type PasswordManagersApi = OpenBotDesktopApi["passwordManagers"];
+type PasswordManagersApi = StarBotDesktopApi["passwordManagers"];
 
 const MOCK_SIGN_IN_MS = 2_500;
 const MOCK_SETUP_MS = 1_500;

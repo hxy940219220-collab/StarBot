@@ -2,11 +2,11 @@
   display: inline-grid;
   flex: none;
   place-items: center;
-  width: var(--openbot-control-lg);
-  height: var(--openbot-control-lg);
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-bg-control-active);
-  color: var(--openbot-text-primary);
+  width: var(--starbot-control-lg);
+  height: var(--starbot-control-lg);
+  border-radius: var(--starbot-radius-md);
+  background: var(--starbot-bg-control-active);
+  color: var(--starbot-text-primary);
 }
 
 .setting-link-card .setting-link-icon > svg {
@@ -24,11 +24,11 @@
   width: 12px;
   height: 12px;
   flex: none;
-  color: var(--openbot-text-tertiary);
+  color: var(--starbot-text-tertiary);
 }
 
 .setting-link-card .setting-link-note {
   margin: 0;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
 }

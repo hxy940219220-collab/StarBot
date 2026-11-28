@@ -1,0 +1,6 @@
+[Unit]
+Description=Rotate the container logs of the StarBot instances
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/logrotate --state /var/lib/logrotate/starbot-docker.status /etc/starbot-docker/logrotate.conf

@@ -1,4 +1,4 @@
-import { isNewerMobileVersion, type MobileReleaseNotes } from "@openbot/contracts/mobile-features";
+import { isNewerMobileVersion, type MobileReleaseNotes } from "@starbot/contracts/mobile-features";
 import { createFileRoute } from "@tanstack/solid-router";
 import { json } from "../../../server/request-auth";
 

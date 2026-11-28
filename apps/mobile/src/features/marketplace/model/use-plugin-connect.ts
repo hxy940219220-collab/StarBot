@@ -1,5 +1,5 @@
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { applyMcpFlow, type McpAuthValues } from "@openbot/contracts/mcp-connect-flows";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { applyMcpFlow, type McpAuthValues } from "@starbot/contracts/mcp-connect-flows";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { mobileAnalytics } from "@/features/analytics/mobile-analytics";

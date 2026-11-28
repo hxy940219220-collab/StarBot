@@ -1,6 +1,6 @@
-import type { ServerSummary, SidebarLayoutAction, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
-import { SIDEBAR_PINS_CAPABILITY } from "@openbot/contracts/team-protocol/sidebar-pins-v1";
-import { currentText } from "@openbot/ui/text";
+import type { ServerSummary, SidebarLayoutAction, SidebarLayoutSnapshot } from "@starbot/contracts/ipc";
+import { SIDEBAR_PINS_CAPABILITY } from "@starbot/contracts/team-protocol/sidebar-pins-v1";
+import { currentText } from "@starbot/ui/text";
 import { createMemo, createSignal } from "solid-js";
 import { createSimpleContext } from "../../simple-context";
 import { serverSupportsCapability } from "../servers/server-capabilities";

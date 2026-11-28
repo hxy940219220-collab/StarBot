@@ -8,9 +8,9 @@ import { databaseRows } from "../src/backend/database/database-rows";
 import type { MailboxProjectionChanges, MailboxProjectionState } from "../src/backend/database/mailbox-projection";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mailbox-incremental-persist-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/mailbox-incremental-persist-e2e");
 const AGENT = "agent-a";
 const OTHER_AGENT = "agent-b";
 const CHANNEL = "channel-1";
@@ -45,10 +45,10 @@ interface Report {
 
 const report: Report = { steps: [], incrementalWrites: 0, fullWrites: 0, passed: false };
 
-class MirroredDatabase extends OpenBotDatabase {
-  readonly #reference: OpenBotDatabase;
+class MirroredDatabase extends StarBotDatabase {
+  readonly #reference: StarBotDatabase;
 
-  constructor(path: string, reference: OpenBotDatabase) {
+  constructor(path: string, reference: StarBotDatabase) {
     super(path);
     this.#reference = reference;
   }
@@ -80,7 +80,7 @@ class MirroredDatabase extends OpenBotDatabase {
   }
 }
 
-function projectionRows(database: OpenBotDatabase): Record<string, unknown[]> {
+function projectionRows(database: StarBotDatabase): Record<string, unknown[]> {
   const rows: Record<string, unknown[]> = {};
   for (const [table, order] of TABLES) {
     rows[table] = databaseRows(database.connection.prepare(`SELECT * FROM ${table} ORDER BY ${order}`).all()).map(
@@ -93,7 +93,7 @@ function projectionRows(database: OpenBotDatabase): Record<string, unknown[]> {
   return rows;
 }
 
-function check(step: string, database: OpenBotDatabase, reference: OpenBotDatabase): void {
+function check(step: string, database: StarBotDatabase, reference: StarBotDatabase): void {
   const actual = projectionRows(database);
   const expected = projectionRows(reference);
   const rows = Object.values(actual).reduce((count, table) => count + table.length, 0);
@@ -102,9 +102,9 @@ function check(step: string, database: OpenBotDatabase, reference: OpenBotDataba
   assert.deepEqual(actual, expected, `The rows differ from the full replace after: ${step}`);
 }
 
-async function openProfile(root: string, name: string, reference?: OpenBotDatabase) {
+async function openProfile(root: string, name: string, reference?: StarBotDatabase) {
   const path = join(root, name);
-  const database = reference ? new MirroredDatabase(path, reference) : new OpenBotDatabase(path);
+  const database = reference ? new MirroredDatabase(path, reference) : new StarBotDatabase(path);
   const mailbox = new MailboxStore(path, join(root, "shared"), database);
   await runCauseEffect(mailbox.initialize());
   return { database, mailbox };
@@ -137,7 +137,7 @@ function deliveryOf(receipt: { deliveries: Array<{ id: string; recipientAgentId:
 }
 
 async function parity(root: string): Promise<void> {
-  const reference = new OpenBotDatabase(join(root, "reference"));
+  const reference = new StarBotDatabase(join(root, "reference"));
   await runCauseEffect(reference.initialize());
   let { database, mailbox } = await openProfile(root, "profile", reference);
   check("legacy import", database, reference);
@@ -317,7 +317,7 @@ async function timing(root: string): Promise<NonNullable<Report["timing"]>> {
   };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-mailbox-persist-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-mailbox-persist-"));
 try {
   await parity(root);
   report.timing = await timing(root);

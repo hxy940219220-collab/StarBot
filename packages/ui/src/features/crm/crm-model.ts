@@ -11,9 +11,9 @@ import type {
   CrmSourceKind,
   CrmStatus,
   CrmTextField,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@starbot/i18n";
 import type { AgentProfile } from "../../data";
 
 export type CrmAgent = Pick<AgentProfile, "id" | "name" | "avatarSeed" | "avatarHue" | "avatarColor" | "avatarUrl">;

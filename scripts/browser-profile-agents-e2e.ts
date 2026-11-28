@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { AgentBrowserProfile } from "@openbot/contracts/ipc";
+import type { AgentBrowserProfile } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { AgentService } from "../src/backend/agent-service";
@@ -12,11 +12,11 @@ import { BrowserProfileStore } from "../src/backend/browser-profiles/browser-pro
 import { BrowserProxyStore } from "../src/backend/browser-profiles/browser-proxy-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { type BrowserProfileService, createBrowserProfileService } from "../src/main/browser-profile-service";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/browser-profile-agents-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-browser-profile-agents-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/browser-profile-agents-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-browser-profile-agents-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 mkdirSync(home, { recursive: true });
@@ -55,14 +55,14 @@ const agentBrowser: AgentBrowserHost = {
 };
 
 interface Host {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   store: AgentStore;
   agents: AgentService;
   profiles: BrowserProfileService;
 }
 
 async function startHost(): Promise<Host> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   await runCauseEffect(store.initialize());

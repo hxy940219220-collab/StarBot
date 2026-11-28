@@ -129,16 +129,16 @@ On Ubuntu 23.10 or newer and on Debian 13, unprivileged user namespaces are rest
 and StarBot exits during launch until you install an AppArmor profile:
 
 ```bash
-sudo install -m 0644 build/linux/openbot.apparmor /etc/apparmor.d/openbot
+sudo install -m 0644 build/linux/starbot.apparmor /etc/apparmor.d/starbot
 sudo systemctl reload apparmor
 ```
 
-The same file ships inside the AppImage at `resources/linux/openbot.apparmor`. Edit the attachment
+The same file ships inside the AppImage at `resources/linux/starbot.apparmor`. Edit the attachment
 path in the profile if you keep the AppImage outside the usual locations. Do not start StarBot with
 `--no-sandbox`: that removes the boundary between a renderer and the rest of the computer.
 
-On the first start from an AppImage, StarBot writes `~/.local/share/applications/openbot.desktop`
-and `~/.local/share/icons/openbot.png`, which is what lets an `openbot://` link - an invitation, or
+On the first start from an AppImage, StarBot writes `~/.local/share/applications/starbot.desktop`
+and `~/.local/share/icons/starbot.png`, which is what lets an `starbot://` link - an invitation, or
 a plugin listing - open the app and gives the launcher an icon that stays after the app exits. Delete the two files to undo it.
 
 #### Theme palette files
@@ -191,11 +191,11 @@ To run StarBot as an always-on server of your account on a VPS or home server (U
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hxy940219220-collab/StarBot/main/scripts/install-server.sh | sudo bash
-sudo openbot login
+sudo starbot login
 ```
 
 Then use it from the desktop app, the iPhone app or `starbot.app/app`. See
-[self-hosted servers](docs/self-hosted-server.md) for the options and the `openbot` commands.
+[self-hosted servers](docs/self-hosted-server.md) for the options and the `starbot` commands.
 
 #### Docker
 
@@ -204,11 +204,11 @@ Electron sandbox stay on:
 
 ```bash
 curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot/main/docker/seccomp.json
-docker run -d --name openbot --restart unless-stopped \
+docker run -d --name starbot --restart unless-stopped \
   --security-opt seccomp=seccomp.json --security-opt no-new-privileges:true \
-  --shm-size 1g --stop-timeout 60 -v openbot-data:/data \
+  --shm-size 1g --stop-timeout 60 -v starbot-data:/data \
   ghcr.io/hxy940219220-collab/StarBot:latest
-docker exec -it openbot openbot login
+docker exec -it starbot starbot login
 ```
 
 See [Docker](docs/docker.md) for Compose, the data volume, upgrades and the security limits. For Amazon ECS,
@@ -223,8 +223,8 @@ nix run github:hxy940219220-collab/StarBot
 nix profile install github:hxy940219220-collab/StarBot
 ```
 
-`overlays.default` adds `pkgs.openbot`. StarBot is not free software, so your nixpkgs must allow it,
-for example with `nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "openbot";`.
+`overlays.default` adds `pkgs.starbot`. StarBot is not free software, so your nixpkgs must allow it,
+for example with `nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "starbot";`.
 Nix installs StarBot updates. StarBot does not update itself from the Nix store. On Linux, the Nix
 package does not include the remote desktop runtime, because nixpkgs does not have a library that it
 needs.
@@ -237,7 +237,7 @@ needs.
 ### Agent setup
 
 StarBot can download a supported provider runtime when you select `Download` in onboarding,
-Settings, agent setup, or the model picker. StarBot prefers its managed CLI. Explicit `OPENBOT_*_PATH` overrides take precedence; a compatible
+Settings, agent setup, or the model picker. StarBot prefers its managed CLI. Explicit `STARBOT_*_PATH` overrides take precedence; a compatible
 system CLI is used when no managed copy is available. StarBot checks for a newer provider CLI
 release at startup and every hour, and `Check for updates` in a provider's actions menu checks at
 once. Updates install the latest upstream release without changing the user’s system CLI; the
@@ -269,7 +269,7 @@ Go key does not buy stay out of the picker. Models with the Free label in the mo
 sign-in. Other models need a sign-in with their provider: a Go key for the `opencode-go/` models, or
 `opencode auth login` in a terminal for OpenCode Zen and third-party providers. Without it, the turn
 fails with an error that names the provider. If you installed OpenCode yourself, StarBot
-keeps that install and offers no download. Set `OPENBOT_OPENCODE_PATH` to select an executable
+keeps that install and offers no download. Set `STARBOT_OPENCODE_PATH` to select an executable
 outside your shell's search path. Remote OpenCode agents require Team API v4; older clients do not
 show these agents.
 
@@ -277,7 +277,7 @@ Gemini uses a Google AI Pro or Ultra plan. StarBot downloads Google's Antigravit
 computer when you select Download on the Gemini row, because Google's license does not let StarBot
 include it. Sign in opens Google's sign-in page in your browser. StarBot never uses an
 `antigravity` command on your search path, because the Antigravity editor installs a command with
-that name. Set `OPENBOT_ANTIGRAVITY_PATH` to select an Antigravity CLI 1.5.3 or later executable
+that name. Set `STARBOT_ANTIGRAVITY_PATH` to select an Antigravity CLI 1.5.3 or later executable
 yourself. StarBot reads its version with `--version`. When that path is set, StarBot uses only
 it. Connect remains available in the host's local Server settings > Providers screen. Remote
 settings cannot perform Google sign-in; use a browser on the host. See
@@ -289,7 +289,7 @@ Cursor uses a Cursor plan or a Cursor API key. StarBot downloads and pins the Cu
 `cursor-agent acp`. Sign in opens Cursor's sign-in page in your browser. You can also set
 `CURSOR_API_KEY` in the environment used to launch StarBot. If you installed `cursor-agent`
 yourself, StarBot uses it until a download exists. StarBot never uses the `cursor` command, which
-starts the Cursor editor. Set `OPENBOT_CURSOR_PATH` to select an executable yourself. Cursor
+starts the Cursor editor. Set `STARBOT_CURSOR_PATH` to select an executable yourself. Cursor
 agents stay on this computer: team members do not see them.
 
 Cline uses a Cline account, which has free models with limits for each model. The provider of a
@@ -298,13 +298,13 @@ free model can use your prompts to train models. With a ClinePass subscription, 
 select Download on the Cline row in More providers, and starts it with `cline --acp`. Sign in opens
 Cline's sign-in page in your browser. You can also set `CLINE_API_KEY` in the environment used to
 launch StarBot. If you installed `cline` 3.0.68 or newer yourself, StarBot uses it until a download
-exists. Set `OPENBOT_CLINE_PATH` to select an executable yourself. Cline agents stay on this
+exists. Set `STARBOT_CLINE_PATH` to select an executable yourself. Cline agents stay on this
 computer: team members do not see them.
 
 Kimi uses a Kimi Code account. StarBot downloads and pins the Kimi Code CLI (`kimi`) when you select
 Download on the Kimi row in More providers, and starts it with `kimi acp`. Sign in runs `kimi login`,
 which opens Kimi's sign-in page in your browser. If you installed `kimi` 1.52.0 or newer yourself,
-StarBot uses it until a download exists. Set `OPENBOT_KIMI_PATH` to select an executable yourself.
+StarBot uses it until a download exists. Set `STARBOT_KIMI_PATH` to select an executable yourself.
 When a Full access Kimi agent changes its model, the CLI saves that model as its default in
 `~/.kimi/config.toml`, so a Kimi session that you start in a terminal also uses it. Kimi agents run
 on this computer. Team members see them when their app supports Kimi.
@@ -312,7 +312,7 @@ on this computer. Team members see them when their app supports Kimi.
 Devin uses a Devin account. StarBot downloads and pins the Devin CLI (`devin`) when you select
 Download on the Devin row in More providers, and starts it with `devin acp`. Sign in opens Devin's
 sign-in page in your browser. If you installed `devin` yourself, StarBot uses it until a download
-exists. Set `OPENBOT_DEVIN_PATH` to select an executable yourself. Devin agents run on this computer.
+exists. Set `STARBOT_DEVIN_PATH` to select an executable yourself. Devin agents run on this computer.
 Team members see them when their app supports Devin.
 
 GitHub Copilot uses a GitHub account with a Copilot plan. StarBot downloads and pins the GitHub
@@ -320,7 +320,7 @@ Copilot CLI (`copilot`) when you select Download on the GitHub Copilot row in Mo
 starts it with `copilot --acp`. Sign in opens GitHub's sign-in page in your browser. The CLI keeps
 the sign-in in the system keychain. If `COPILOT_GITHUB_TOKEN`, `GH_TOKEN` or `GITHUB_TOKEN` is set
 for StarBot, the CLI uses that token instead, and Disconnect cannot remove it. If you installed
-`copilot` yourself, StarBot uses it until a download exists. Set `OPENBOT_COPILOT_PATH` to select
+`copilot` yourself, StarBot uses it until a download exists. Set `STARBOT_COPILOT_PATH` to select
 an executable yourself. Copilot agents run on this computer. Team members see them when their app
 supports GitHub Copilot.
 
@@ -330,7 +330,7 @@ Mistral's sign-in page in your browser. Vibe saves an API key in the system keyc
 `~/.vibe/.env` when there is no keychain. If `MISTRAL_API_KEY` is set for StarBot, Vibe uses that key,
 and Disconnect cannot remove it. StarBot turns off Vibe's telemetry, and turns on Vibe's model
 catalogue, so the model picker shows the models of your Mistral account, not only Mistral Medium 3.5. If you installed `vibe-acp`
-yourself, StarBot uses it until a download exists. Set `OPENBOT_MISTRAL_PATH` to select an executable
+yourself, StarBot uses it until a download exists. Set `STARBOT_MISTRAL_PATH` to select an executable
 yourself. When a Full access Mistral agent changes its model or thinking level, Vibe saves it as its
 default in `~/.vibe/config.toml`. Mistral agents run on this computer. Team members see them when
 their app supports Mistral.
@@ -379,7 +379,7 @@ iex "& {$(irm https://bun.com/install.ps1)} -Version 1.4.2"
 
 ```bash
 git clone https://github.com/hxy940219220-collab/StarBot.git
-cd openbot
+cd starbot
 bun install --frozen-lockfile
 bun run codex:doctor
 bun run dev
@@ -401,7 +401,7 @@ to clear the cache; an entry that nobody used for 30 days is removed by the next
 To reset only the local development state, quit the dev app and test client, then run
 `bun run dev:reset`.
 The command deletes the app and test-client development profiles plus the legacy host profile,
-including `openbot.db` and its WAL files. It prints each profile before it deletes it, and it
+including `starbot.db` and its WAL files. It prints each profile before it deletes it, and it
 deletes nothing while a dev app has one of them open. It does not change the production profile,
 the worktree profiles that `bun run dev` opens (`StarBot Dev wt-<hash>`), agent workspaces,
 `~/.codex`, or `~/.claude`.
@@ -448,7 +448,7 @@ Ask an agent to create a skill from a reusable workflow. It prepares a folder wi
 
 Agents can use `list_local_skills`, `read_local_skill`, `revise_skill`, and `install_local_skill`. Revisions require the version read by the agent and retain previous versions. Updating a library skill does not update installed copies: use the Update chip or install an exact revision. Modified installed files are protected. To publish a local skill, submit its folder separately through the marketplace.
 
-Optional scripts, references, and assets follow the Codex skill folder structure. A PNG at `assets/icon.png` supplies the local preview logo. The built-in `openbot-skill-creator` guide explains the format and validation limits. Registration does not run scripts.
+Optional scripts, references, and assets follow the Codex skill folder structure. A PNG at `assets/icon.png` supplies the local preview logo. The built-in `starbot-skill-creator` guide explains the format and validation limits. Registration does not run scripts.
 
 ## Commands
 
@@ -462,7 +462,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | --- | --- |
 | `bun run dev` | Start the local Auth API, Signal service, and Electron client with renderer HMR on its app profile. Ports are allocated through the dev registry, so a sibling worktree never takes one this stack won. It refuses a second stack in the same worktree unless you pass `--force`. Each worktree opens a profile of its own, keyed to its path; `--shared` opens the shared `StarBot Dev` profile instead. `--isolated` is still accepted and changes nothing. A profile that you used before stays on disk unchanged. `--hosting=test` signs the app in to the `test` account Worker, on a profile that all worktrees share, so that a hosted server is a real VM; see [docs/hosted-servers.md](docs/hosted-servers.md#real-servers-from-a-development-build). A profile that does not exist yet is seeded with the showcase data of `bun run dev:seed` before the client starts, so a first start never opens an empty app; an existing profile is left as it is. An isolated profile still shares the computer's provider CLI store, so it does not download the pinned CLIs again. Before it starts, it runs `bun install --frozen-lockfile` and `bun run api:migrate:local` only when `bun.lock`, a workspace `package.json`, a patch, or a migration changed since their last successful run. The stamps are in `node_modules` and `apps/auth-api/.wrangler/state/v3/d1`, and each `bun install` writes the install stamp too; delete one to run its step again. |
 | `bun run preview` | Preview the built Electron client with the green preview icon. |
-| `bun run mobile:go` | Start the mobile app in Expo Go and clear the Metro cache. When the branch name ends in `-<number>`, such as `mobile-triage-12555`, Expo Go shows the server as `Issue #12555`. Set `OPENBOT_EXPO_SESSION_NAME` to use a different name. |
+| `bun run mobile:go` | Start the mobile app in Expo Go and clear the Metro cache. When the branch name ends in `-<number>`, such as `mobile-triage-12555`, Expo Go shows the server as `Issue #12555`. Set `STARBOT_EXPO_SESSION_NAME` to use a different name. |
 | `bun mobile:ios` | Build and launch the iOS simulator app without RocketSim. |
 | `bun run dev:mobile` | Start or reuse this worktree's `bun run dev` stack, build and launch the iOS simulator app, and pair them without a QR scan. The desktop issues a Mobile Connect ticket over CDP, and `simctl openurl` opens the link in the development build, which accepts only loopback or private-network account services. Other arguments go to `bun mobile:ios`. `--pair-only` pairs an app that already runs; `--simulator=<udid>` chooses one of several booted simulators. It stops when the Metro port is already in use, because another worktree's Metro would serve the same app id; pass `--port=<n>` then. |
 | `bun run mobile:ios:build:local` | Build a production iOS `.ipa` locally for upload with Transporter. See [TestFlight setup](apps/mobile/README.md#local-testflight-build). |
@@ -480,47 +480,47 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run hosting:setup --target=production\|test` | Set up the Stripe catalog, the Customer Portal, and the Stripe and boat webhooks of one account server, and store the webhook signing secrets: production in the `cloudflare-production` GitHub Environment, test in the encrypted `apps/auth-api/.env.dev`. See [hosted servers](docs/hosted-servers.md#production). |
 | `bun run hosting:template` | Build the boat named snapshot that new hosted servers start from. Needs `BOAT_TEMPLATE_API_KEY` and `--version`, `--appimage-url`, `--appimage-sha256` and `--auth-api-url`. See [hosted servers](docs/hosted-servers.md). |
 | `bun run status:build` | Build the public status page in `apps/status/dist`. The `status-page` workflow adds `status.json` and `feed.xml` and publishes it to GitHub Pages at `status.starbot.app`. |
-| `bun run status:smoke` | Run the status page smoke test: update runs against a local fake service, the status webhooks against a local receiver, one read-only run against the live checks, and the built page in Chrome. It writes `.openbot-build/status-page/report.json`. |
+| `bun run status:smoke` | Run the status page smoke test: update runs against a local fake service, the status webhooks against a local receiver, one read-only run against the live checks, and the built page in Chrome. It writes `.starbot-build/status-page/report.json`. |
 | `bun run remote:up` | Build and start the self-hosted Signal, coturn, and ACME stack. |
 | `bun run remote:check` | Check the Remote API and both Docker Compose configurations. |
 | `bun run remote:check:compose` | Validate both Docker Compose configurations alone, without a running daemon. |
 | `bun run remote:update` | Update Signal, then drain and update the single coturn instance. |
 | `bun run dev:all` | Start the Auth API, Signal service, and single local Electron instance. |
-| `bun run dev:slack` | Start the same stack as `bun run dev`, with two `cloudflared` quick tunnels, one to Signal and one to the local account API, so that Slack can send the development Slack app's events and install return to the agents on this computer. It reads `OPENBOT_DEV_SLACK_SIGNING_SECRET` from the ignored `.env.slack-dev`, and needs `SLACK_ROUTE_PRIVATE_JWK` and `SLACK_ROUTE_KEY_ID` in the shell environment. Takes the same options as `bun run dev`, such as `--shared`. See [docs/messaging.md](docs/messaging.md#test-slack-locally). |
+| `bun run dev:slack` | Start the same stack as `bun run dev`, with two `cloudflared` quick tunnels, one to Signal and one to the local account API, so that Slack can send the development Slack app's events and install return to the agents on this computer. It reads `STARBOT_DEV_SLACK_SIGNING_SECRET` from the ignored `.env.slack-dev`, and needs `SLACK_ROUTE_PRIVATE_JWK` and `SLACK_ROUTE_KEY_ID` in the shell environment. Takes the same options as `bun run dev`, such as `--shared`. See [docs/messaging.md](docs/messaging.md#test-slack-locally). |
 | `bun run dev:test-client` | Start the Auth API, Signal service, local instance, and an isolated second client for team testing. |
 | `bun run dev:seed` | Replace only the app development profile with durable showcase data. `--if-missing` keeps an existing profile, which is how `bun run dev` seeds a first start. `--scale=agents:N,messages:M,channels:C,channelMessages:K,attachments:A` adds generated agents, chat history, channel history and large images to the showcase data, for memory and CPU measurements. |
 | `bun run dev:reset` | Delete the local app, test-client, and legacy host development state. It refuses while a dev app has one of these profiles open. |
-| `bun run dev:status` | Print, as JSON, every dev stack and dev app instance live on this machine: services, ports, pids, which of them belong to this worktree, and which are orphaned - a supervisor that is gone with its children still holding the ports. Each recorded process carries the state a stop command acts on: `live`, `gone` with `groupLive` for a survivor of a dead leader, and `unverified` for a pid this machine cannot date. `registryDirectory` is the directory it read: `~/Library/Caches/StarBot/dev` on macOS, `$XDG_RUNTIME_DIR/openbot-dev` (else `~/.cache/openbot/dev`) on Linux, `%LOCALAPPDATA%\StarBot\openbot-dev-instances` on Windows, or `OPENBOT_DEV_REGISTRY_DIR` when set. It does not depend on `TMPDIR`. |
+| `bun run dev:status` | Print, as JSON, every dev stack and dev app instance live on this machine: services, ports, pids, which of them belong to this worktree, and which are orphaned - a supervisor that is gone with its children still holding the ports. Each recorded process carries the state a stop command acts on: `live`, `gone` with `groupLive` for a survivor of a dead leader, and `unverified` for a pid this machine cannot date. `registryDirectory` is the directory it read: `~/Library/Caches/StarBot/dev` on macOS, `$XDG_RUNTIME_DIR/starbot-dev` (else `~/.cache/starbot/dev`) on Linux, `%LOCALAPPDATA%\StarBot\starbot-dev-instances` on Windows, or `STARBOT_DEV_REGISTRY_DIR` when set. It does not depend on `TMPDIR`. |
 | `bun run dev:verify` | Print a stable JSON verification plan for this worktree: `ready`/`reasons` for safe checks, setup state, changed files and affected surfaces, nearby tests, runtime state, `qa.required`/`qa.ready`/`qa.reasons`, the renderer QA loop, safe `runnableCommands`, and all suggested `commands`. Add `--run` to execute only the safe non-mutating checks in the plan. Renderer QA follows `snapshot → action with --wait-for → snapshot → screenshot` when appearance matters. |
 | `bun run dev:restart-client` | Restart only the test client of this worktree's `dev:test-client` stack. The host and the other services stay live. The supervisor stops its own test-client child by PID and starts it again. Not on Windows. |
 | `bun run dev:stop` | Stop this worktree's dev stack, children included, using the pids in the registry rather than a process-name pattern. It signals only a pid whose start time still matches the record, so a recycled pid is never sent SIGTERM; anything it cannot confirm is reported, left running and kept in the registry, and the command exits non-zero. `--pid=<supervisor pid>` stops one other stack, `--all` stops every stack on the machine. |
 | `bun run dev:forget` | Drop this worktree's stack record without signalling anything, for the one case `dev:stop` refuses to resolve on its own. It is also the only command that reads a dead record: nothing else deletes one, because a reader that removes what it judged can remove a record the supervisor rewrote in between. Takes the same `--pid=` and `--all`. |
-| `bun run storybook` | Start Storybook on a port allocated through the same registry, so two worktrees never announce one port. `OPENBOT_STORYBOOK_PORT` moves where the search starts; `--port` is refused. |
-| `bun run build-storybook` | Build static Storybook. CI sets `OPENBOT_STORYBOOK_CHECK=true` to skip automatic prop documentation during its build check. |
-| `bun run dev:automation` | Drive the running dev app over CDP: `instances`, `pages`, `snapshot`, `screenshot`, `record` (a `.webm` video of one page under `.openbot-build/dev-automation/`; `--duration=<ms>`, default 60000, maximum 90000; SIGINT stops it early; needs Playwright's ffmpeg: `bun node_modules/playwright-core/cli.js install ffmpeg`), `click`/`type` by accessible role. `--page=<target-id\|url-substring>` aims at any window, including embedded browser views; `--wait-for=<role>,<name>` settles on an accessible target instead of polling; mutations need `--allow-mutations` and a named instance (this worktree's record, `--instance=<id>` or `--port=`). |
-| `bun run dev:cpu` | Measure idle CPU on the running dev app, per process kind and per page. `--duration=<ms>` (default 60000), `--interval=<ms>` (default 5000), `--label=<name>`, `--out=<name>.json` (always under `.openbot-build/dev-automation/cpu/`, and refused if it would leave that directory or pass through a symbolic link) and `--compare=<file>` for a before/after delta. Read-only. Take a baseline before a change and a second run after it: only the difference between two runs on the same machine is a result, because a dev build carries the Vite server and the source maps as well. |
-| `bun run dev:memory` | Measure the running dev app's memory once: resident memory per process kind (main, renderer, GPU, provider CLIs and their MCP servers), with the dev tooling kept out of the app total, plus JS heap and DOM counters per page. `--label=<name>`, `--out=<name>.json` (always under `.openbot-build/dev-automation/memory/`) and `--heap-snapshot=<target-id\|url-substring>` to also write a V8 heap snapshot of one page to that directory. Read-only. |
-| `bun run dev:bench` | Run repeatable RAM and CPU scenarios on the built app (`bun run build` first). Each run seeds a bench profile of its own, starts the built app, samples the process tree every second (resident memory, macOS physical footprint and CPU per process kind, provider memory per CLI) with the main-process and page heaps, drives the scenario, and reads a settled state after garbage collection. `--scenario=<id\|prefix\|all>` (required; without it the command lists the scenarios), `--runs=<n>` (default 3; the report shows the median and range), `--label=<name>`, `--compare=<report.json>`, `--cpu-profile` (records the app window's JavaScript for 15 s after the first run settles, as a `.cpuprofile` for DevTools), `--frames` (counts frames slower than 17 ms and 50 ms while the scenario runs; the loop keeps the renderer drawing, so CPU readings rise) and `--call-counts` (V8 call counts per function while the scenario runs, top 25 in a `-call-counts.json` file; slows JavaScript). Every run also reports the startup marks (`startup.*`, ms) and the app window's layout and style recalculation counts, script and task time, and long tasks (`render.*`). Reports go to `.openbot-build/dev-automation/bench/`. Turn scenarios (`s5` to `s9`) use the real claude, opencode and grok CLIs and spend model quota. `s14-agents-100` streams 96 agents at once with a fake Codex (`scripts/dev-automation/bench-fake-codex.ts`) and spends no quota; it reports main-process CPU and event-loop delay and the app window's busy time and lag while the agents stream (`stream.*`), and with `OPENBOT_BENCH_PROFILE_STREAM=1` it writes a `.cpuprofile` of the main process and of the app window for that time. It never touches a dev instance or your own profile, and `bun run dev:stop` stops an app a failed run left behind. |
-| `bun run perf:remote` | Measure how fast a remote client gets into the workspace, and which host requests it sends before and after that point. Start `OPENBOT_DEV_SYNC_PROFILE=1 bun run dev:test-client` in this worktree first. The web runs sign in to `/app` as the dev host user and open it in a new browser context each time; the desktop run reads the cold start of the test client, and with `--allow-mutations` each further run reloads its window. `--clients=desktop-start` restarts only the test client (with `--allow-mutations`) and measures from its main process start. `--latency=<ms>` delays the web page's requests and data channel; start the stack with `OPENBOT_DEV_RTT_MS=<ms>` for the same delay in the desktop client, and with `OPENBOT_DEV_CLIENT_TRANSPORT=webrtc` to connect the test client over WebRTC as the dev host user. `--runs=<n>` (default 5), `--label=<name>`, `--clients=web,desktop,desktop-start`, `--api=<url>`, `--compare=<report.json>`, `--browser-executable=<path>`. Writes `report.json` and `waterfall.md` to `.openbot-build/remote-sync-perf/<label>/`. See [remote connect measurement](docs/architecture/servers.md#remote-connect-measurement). |
+| `bun run storybook` | Start Storybook on a port allocated through the same registry, so two worktrees never announce one port. `STARBOT_STORYBOOK_PORT` moves where the search starts; `--port` is refused. |
+| `bun run build-storybook` | Build static Storybook. CI sets `STARBOT_STORYBOOK_CHECK=true` to skip automatic prop documentation during its build check. |
+| `bun run dev:automation` | Drive the running dev app over CDP: `instances`, `pages`, `snapshot`, `screenshot`, `record` (a `.webm` video of one page under `.starbot-build/dev-automation/`; `--duration=<ms>`, default 60000, maximum 90000; SIGINT stops it early; needs Playwright's ffmpeg: `bun node_modules/playwright-core/cli.js install ffmpeg`), `click`/`type` by accessible role. `--page=<target-id\|url-substring>` aims at any window, including embedded browser views; `--wait-for=<role>,<name>` settles on an accessible target instead of polling; mutations need `--allow-mutations` and a named instance (this worktree's record, `--instance=<id>` or `--port=`). |
+| `bun run dev:cpu` | Measure idle CPU on the running dev app, per process kind and per page. `--duration=<ms>` (default 60000), `--interval=<ms>` (default 5000), `--label=<name>`, `--out=<name>.json` (always under `.starbot-build/dev-automation/cpu/`, and refused if it would leave that directory or pass through a symbolic link) and `--compare=<file>` for a before/after delta. Read-only. Take a baseline before a change and a second run after it: only the difference between two runs on the same machine is a result, because a dev build carries the Vite server and the source maps as well. |
+| `bun run dev:memory` | Measure the running dev app's memory once: resident memory per process kind (main, renderer, GPU, provider CLIs and their MCP servers), with the dev tooling kept out of the app total, plus JS heap and DOM counters per page. `--label=<name>`, `--out=<name>.json` (always under `.starbot-build/dev-automation/memory/`) and `--heap-snapshot=<target-id\|url-substring>` to also write a V8 heap snapshot of one page to that directory. Read-only. |
+| `bun run dev:bench` | Run repeatable RAM and CPU scenarios on the built app (`bun run build` first). Each run seeds a bench profile of its own, starts the built app, samples the process tree every second (resident memory, macOS physical footprint and CPU per process kind, provider memory per CLI) with the main-process and page heaps, drives the scenario, and reads a settled state after garbage collection. `--scenario=<id\|prefix\|all>` (required; without it the command lists the scenarios), `--runs=<n>` (default 3; the report shows the median and range), `--label=<name>`, `--compare=<report.json>`, `--cpu-profile` (records the app window's JavaScript for 15 s after the first run settles, as a `.cpuprofile` for DevTools), `--frames` (counts frames slower than 17 ms and 50 ms while the scenario runs; the loop keeps the renderer drawing, so CPU readings rise) and `--call-counts` (V8 call counts per function while the scenario runs, top 25 in a `-call-counts.json` file; slows JavaScript). Every run also reports the startup marks (`startup.*`, ms) and the app window's layout and style recalculation counts, script and task time, and long tasks (`render.*`). Reports go to `.starbot-build/dev-automation/bench/`. Turn scenarios (`s5` to `s9`) use the real claude, opencode and grok CLIs and spend model quota. `s14-agents-100` streams 96 agents at once with a fake Codex (`scripts/dev-automation/bench-fake-codex.ts`) and spends no quota; it reports main-process CPU and event-loop delay and the app window's busy time and lag while the agents stream (`stream.*`), and with `STARBOT_BENCH_PROFILE_STREAM=1` it writes a `.cpuprofile` of the main process and of the app window for that time. It never touches a dev instance or your own profile, and `bun run dev:stop` stops an app a failed run left behind. |
+| `bun run perf:remote` | Measure how fast a remote client gets into the workspace, and which host requests it sends before and after that point. Start `STARBOT_DEV_SYNC_PROFILE=1 bun run dev:test-client` in this worktree first. The web runs sign in to `/app` as the dev host user and open it in a new browser context each time; the desktop run reads the cold start of the test client, and with `--allow-mutations` each further run reloads its window. `--clients=desktop-start` restarts only the test client (with `--allow-mutations`) and measures from its main process start. `--latency=<ms>` delays the web page's requests and data channel; start the stack with `STARBOT_DEV_RTT_MS=<ms>` for the same delay in the desktop client, and with `STARBOT_DEV_CLIENT_TRANSPORT=webrtc` to connect the test client over WebRTC as the dev host user. `--runs=<n>` (default 5), `--label=<name>`, `--clients=web,desktop,desktop-start`, `--api=<url>`, `--compare=<report.json>`, `--browser-executable=<path>`. Writes `report.json` and `waterfall.md` to `.starbot-build/remote-sync-perf/<label>/`. See [remote connect measurement](docs/architecture/servers.md#remote-connect-measurement). |
 | `bun run check` | Run Biome, both typechecks, offline tests, the browser smoke test, and the production build. |
 | `bun run typecheck` | Check all 15 projects in parallel with a separate incremental cache for each project in this worktree. |
 | `bun run knip:check` | Find unused files, exports, and types, unused or unlisted dependencies, and unresolved imports in all workspaces. CI runs it. |
-| `bun run check:ui` | Check the renderer against the design system: shared primitives, Kobalte and Lucide confined to `@openbot/ui`, palette tokens instead of colour, size, radius and transition literals. Checks renderer and shared UI source. |
+| `bun run check:ui` | Check the renderer against the design system: shared primitives, Kobalte and Lucide confined to `@starbot/ui`, palette tokens instead of colour, size, radius and transition literals. Checks renderer and shared UI source. |
 | `bun run check:assets` | Fail when a tracked image or video file is outside the product asset directories. Pull request screenshots go in the pull request body. |
 | `bun run check:doc-links` | Fail when a link in a tracked Markdown file names a Markdown file that does not exist, or an anchor that the file does not have. |
 | `bun run verify:preload` | After `bun run build`, run the built preload with a fake Electron. Fail when it loads a module that a sandboxed preload cannot load, uses `import()`, or exposes a method that `IPC_ENDPOINTS` does not name. |
 | `bun run types:ratchet` | Hold each TypeScript option in `tools/typescript/type-baseline.json` to its error count per file in every project that extends `tsconfig.base.json`. A new error fails. Add `--write` after a fix to lower the baseline, or `--add=<option>` to start an option at its current counts. |
-| `bun run i18n:check` | Check the translation catalogs: key prefixes, placeholders, plural forms, ambiguous source text, unused keys, and new untranslated keys that `packages/i18n/untranslated.json` does not list. `--fix` puts translated keys in the English order and removes translated keys from `untranslated.json`. `--json` writes `.openbot-build/i18n-report.json`. See [docs/i18n.md](docs/i18n.md). |
+| `bun run i18n:check` | Check the translation catalogs: key prefixes, placeholders, plural forms, ambiguous source text, unused keys, and new untranslated keys that `packages/i18n/untranslated.json` does not list. `--fix` puts translated keys in the English order and removes translated keys from `untranslated.json`. `--json` writes `.starbot-build/i18n-report.json`. See [docs/i18n.md](docs/i18n.md). |
 | `bun run test:backend` | Run backend tests only. |
 | `bun run test:changed` | Run, on one worker, only the desktop and mobile test files that import a file changed since `origin/main`, including staged, unstaged and untracked files. It stops with an error when `origin/main` is missing. A change to a vitest config, a setup file or `package.json` selects no test. See [docs/development-checks.md](docs/development-checks.md#focused-tests). |
 | `bun run test:related -- <source>...` | Run, on one worker, only the test files that import the named source files. |
 | `bun run test:browser-agent-session` | Check that an agent with its own browser session, and the agents of a named browser profile, keep their cookies and storage apart, across popups, a restart, a deleted profile, and a clear. |
 | `bun run test:browser-profile-agents` | Check that the shared profile, an agent's own session, a named profile, and the delete of a named profile change the stored browser profile of an agent, and that the choice stays after a restart. |
-| `bun run test:browser-takeover-deadline` | Run the real attention registry past a provider's tool-call deadline (#9689): a password or takeover card stays open after its call gets the waiting answer, the next call for the tab waits on the same card, a result between calls reaches that call, and the end of the turn closes the card. With no provider deadline, a takeover or a question that the user does not answer in the time limit ends its call; the takeover card stays open past the turn, and the user's later result reaches the agent once as a new message. A Claude question detaches at the limit in the same way. A secret question, or a question in a chat that cannot get a late answer, expires at the limit. A secure fill that fails gives the page to the user and tells the agent only a fixed reason (#10536). Offline; writes `.openbot-build/browser-takeover-deadline-e2e/report.json`. |
+| `bun run test:browser-takeover-deadline` | Run the real attention registry past a provider's tool-call deadline (#9689): a password or takeover card stays open after its call gets the waiting answer, the next call for the tab waits on the same card, a result between calls reaches that call, and the end of the turn closes the card. With no provider deadline, a takeover or a question that the user does not answer in the time limit ends its call; the takeover card stays open past the turn, and the user's later result reaches the agent once as a new message. A Claude question detaches at the limit in the same way. A secret question, or a question in a chat that cannot get a late answer, expires at the limit. A secure fill that fails gives the page to the user and tells the agent only a fixed reason (#10536). Offline; writes `.starbot-build/browser-takeover-deadline-e2e/report.json`. |
 | `bun run test:browser` | Run the complete local embedded-browser smoke test, including cross-process persistence. Use `--scenario=controls`, `--scenario=tool-boundary`, `--scenario=evaluation`, `--scenario=wait-deadlines`, or `--scenario=popups` for one isolated scenario. |
 | `bun run test:codex` | Probe the real CLI handshake and account without starting a paid turn. |
 | `bun run test:durations` | Re-record how long each desktop test file takes. CI splits its shards by this table, so run it when the two shards stop finishing together. |
-| `bun run cua-driver:doctor` | Print, as JSON, which `cua-driver` binary StarBot would use for Computer Use, and the driver's own `doctor` report. Read-only, and it starts no daemon. `OPENBOT_CUA_DRIVER_PATH` selects a different binary in a checkout; an installed application runs only the driver it was released with. |
+| `bun run cua-driver:doctor` | Print, as JSON, which `cua-driver` binary StarBot would use for Computer Use, and the driver's own `doctor` report. Read-only, and it starts no daemon. `STARBOT_CUA_DRIVER_PATH` selects a different binary in a checkout; an installed application runs only the driver it was released with. |
 | `bun run prepare:cua-driver` | Write the pinned Computer Use driver to `build/cua-driver/<platform>/<arch>`, verifying every SHA-256 in `native-runtime.lock.json`. Name another target with `bun scripts/install-cua-driver.ts <platform> <arch>`. Every packaging command runs this first. |
 | `bun run pin:cua-driver <version>` | Print a new `cuaDriver` block for `native-runtime.lock.json` from a published `cua-driver` release. Downloads the release assets of all five targets and hashes each shipped file. |
 | `bun run package` | Build an unpacked local application for the architecture of this Mac. |
@@ -530,7 +530,7 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run package:linux` | Build an unpacked local Linux x64 application on Linux. |
 | `bun run package:linux:arm64` | Build an unpacked local Linux arm64 application on arm64 Linux. |
 | `bun run package:linux:verify` | Build and verify the Linux x64 application on Linux. Run it under `xvfb-run -a` without a display. |
-| `bun scripts/create-github-app.ts [--org <org>]` | Create the StarBot GitHub App from `scripts/github-app/manifest.json` with the manifest flow. Prints the Client ID for `src/main/github-connector-config.ts` and writes the app secrets to `~/.config/openbot/github-app-<slug>.json` (mode 0600). Enable Device Flow in the app settings after the run. |
+| `bun scripts/create-github-app.ts [--org <org>]` | Create the StarBot GitHub App from `scripts/github-app/manifest.json` with the manifest flow. Prints the Client ID for `src/main/github-connector-config.ts` and writes the app secrets to `~/.config/starbot/github-app-<slug>.json` (mode 0600). Enable Device Flow in the app settings after the run. |
 | `bun run release:preflight` | Verify version, Git state, and GitHub release secrets before tagging. |
 | `bun run dist:mac` | Build unsigned local DMG and ZIP update artifacts for this Mac. |
 | `bun run dist:win` | Build an unsigned Windows x64 NSIS installer on Windows. |
@@ -542,16 +542,16 @@ See [web client delivery](docs/web-client.md) for the release gate and focused c
 | `bun run mobile:ota:check` | Show the native runtime version of this checkout and the mobile store builds that can get it as an over-the-air update. Read-only. See [over-the-air updates](apps/mobile/README.md#over-the-air-updates). |
 | `bun run mobile:ota:publish -- --platform <ios\|android\|all> --message <text>` | Start the `Mobile OTA update` workflow for the current branch (`main` or `mobile-hotfix/*`): it sends the JavaScript bundle to the phones of the store builds with the same runtime version, with no store review. `--rollout <1-100>` limits the phones, `--dry-run` publishes nothing. `mobile:ota:rollout` changes the percentage, `mobile:ota:rollback` takes the update back, and `mobile:ota:status` shows what the update server gives each store build. |
 | `bun run mobile:release:ota -- --base <store build tag> --platform <ios\|android\|all>` | Move the note files that are new since the store build into an over-the-air section of `apps/mobile/CHANGELOG.md`, such as `1.5.0.1`. The store version does not change. |
-| `bun run test:mobile-ota` | Run the mobile update server (`apps/mobile-updates`) on a local R2 bucket with the real publish commands, and ask for updates as a phone does: signatures, file hashes, rollout, rollback and the publish guard. Offline; writes `.openbot-build/mobile-ota-e2e/report.json`. |
+| `bun run test:mobile-ota` | Run the mobile update server (`apps/mobile-updates`) on a local R2 bucket with the real publish commands, and ask for updates as a phone does: signatures, file hashes, rollout, rollback and the publish guard. Offline; writes `.starbot-build/mobile-ota-e2e/report.json`. |
 | `bun run mobile:release:published <ios\|android\|both>` | Write today's date for a store that made the mobile build available. `/changelog` shows each store, and a store that still reviews the build as "In review". Also raises that store's flags in `mobile-features-config.ts`. Add `--version x.y.z` for a version that is not in `app.json`, and `--skip-older` to mark the older versions that the store still reviews as skipped. |
-| `bun run test:acp-directories` | Run three fake ACP agents through the `acp` provider driver: new, load and resume requests carry the workspace roots as `additionalDirectories` only when the agent advertises them. Offline; writes `.openbot-build/acp-additional-directories-e2e/report.json`. |
-| `bun run test:custom-agents` | Run two fake ACP agents through the agent store, Check agent (with its model list) and the `acp` provider router: equal session ids, restart and resume, switch, and delete. Offline; writes `.openbot-build/custom-acp-agent-e2e/report.json`. |
-| `bun run test:mcp-tool-consent` | Run the real Codex app-server with a fake model, a real MCP server and the real attention registry: tool consent at Ask first and Full access, Always allow and a restart, refusals, and the requests that stay with the user (forms, sign-in, look-alikes). Needs a Codex CLI; offline; writes `.openbot-build/mcp-tool-consent-e2e/report.json`. |
-| `bun run test:ui-blocks` | Run the real attention registry and Team API codecs on `ask_ui` blocks: answers from the owner, an admin, a member and a released client, the member and local script refusal for privileged actions, a secret form value that is never stored, skip and expiry, and the `ui-blocks-v1` wire on protocols 6 and 7. Offline; writes `.openbot-build/ui-blocks-e2e/report.json`. |
+| `bun run test:acp-directories` | Run three fake ACP agents through the `acp` provider driver: new, load and resume requests carry the workspace roots as `additionalDirectories` only when the agent advertises them. Offline; writes `.starbot-build/acp-additional-directories-e2e/report.json`. |
+| `bun run test:custom-agents` | Run two fake ACP agents through the agent store, Check agent (with its model list) and the `acp` provider router: equal session ids, restart and resume, switch, and delete. Offline; writes `.starbot-build/custom-acp-agent-e2e/report.json`. |
+| `bun run test:mcp-tool-consent` | Run the real Codex app-server with a fake model, a real MCP server and the real attention registry: tool consent at Ask first and Full access, Always allow and a restart, refusals, and the requests that stay with the user (forms, sign-in, look-alikes). Needs a Codex CLI; offline; writes `.starbot-build/mcp-tool-consent-e2e/report.json`. |
+| `bun run test:ui-blocks` | Run the real attention registry and Team API codecs on `ask_ui` blocks: answers from the owner, an admin, a member and a released client, the member and local script refusal for privileged actions, a secret form value that is never stored, skip and expiry, and the `ui-blocks-v1` wire on protocols 6 and 7. Offline; writes `.starbot-build/ui-blocks-e2e/report.json`. |
 | `bun run test:filesystem` | **Online/manual:** run real full-access Codex and Claude filesystem turns across private and shared workspaces. |
 | `bun run test:imagegen` | **Online/manual:** run a real full-access image-generation turn. |
-| `bun run test:workspace-only` | **Online/manual:** run real Workspace only Codex, Claude, Grok and OpenCode turns that try to write outside; writes a JSON report per provider to `.openbot-build/workspace-only-smoke/`. Add `--provider <id>` for one, and `--model <id>` to choose its model. |
-| `bun run test:provider-detection` | Run local detection, Load models and endpoint Edit against fake OpenAI-compatible servers on this computer: no key in a scan, no redirect, the stored key only to its own origin. Offline; writes `.openbot-build/provider-detection-e2e/report.json`. |
+| `bun run test:workspace-only` | **Online/manual:** run real Workspace only Codex, Claude, Grok and OpenCode turns that try to write outside; writes a JSON report per provider to `.starbot-build/workspace-only-smoke/`. Add `--provider <id>` for one, and `--model <id>` to choose its model. |
+| `bun run test:provider-detection` | Run local detection, Load models and endpoint Edit against fake OpenAI-compatible servers on this computer: no key in a scan, no redirect, the stored key only to its own origin. Offline; writes `.starbot-build/provider-detection-e2e/report.json`. |
 | `bun run test:storage-live` | **Online/manual:** verify isolated Codex and Claude turns in a temporary SQLite database. |
 
 Publishing never creates a second StarBot instance. The host keeps its Team API on loopback. A hidden,
@@ -570,7 +570,7 @@ Production mobile analytics setup and required OpenPanel credentials are documen
 `mobile:go:tunnel` exposes only the Expo development server. It does not expose the local account
 API, Signal, or TURN. A phone on 5G cannot use the default LAN addresses. For a test across networks,
 use a VPN that connects both devices, or provide HTTPS and WSS endpoints that forward to this dev
-stack's account API and Signal ports. Set `OPENBOT_MOBILE_AUTH_API_URL` to the reachable account API
+stack's account API and Signal ports. Set `STARBOT_MOBILE_AUTH_API_URL` to the reachable account API
 origin and `REMOTE_SIGNAL_URL` to the reachable Signal URL, including `/v1/signal`, before starting
 `bun run dev`. Use the ports reported by `bun run dev:status`; they can differ between worktrees.
 If direct WebRTC cannot connect, `TURN_HOST` must name a reachable coturn service and
@@ -592,11 +592,11 @@ that terminal is gone. Never stop a dev stack with `pkill -f electron` or `pkill
 machine running several worktrees those kill the other checkouts' work mid-write, which is what
 `dev:status` and `dev:stop` exist to make unnecessary.
 
-Set `OPENBOT_DEV_ICE_TRANSPORT_POLICY=relay` before this command to force Team API traffic through
+Set `STARBOT_DEV_ICE_TRANSPORT_POLICY=relay` before this command to force Team API traffic through
 coturn. This test option works only with the development renderer. Production always starts with `all`.
-Set `OPENBOT_DEV_SYNC_PROFILE=1` as well to let `bun run perf:remote` read the host requests of the
+Set `STARBOT_DEV_SYNC_PROFILE=1` as well to let `bun run perf:remote` read the host requests of the
 desktop client.
-Set `OPENBOT_DEV_AWAY_SECONDS=<seconds>` to change the time without input on the computer after which
+Set `STARBOT_DEV_AWAY_SECONDS=<seconds>` to change the time without input on the computer after which
 a phone gets the notifications of a host (30 seconds by default), for example `5` to test it. The host
 and the desktop client of the stack both read it. A packaged app ignores it.
 
@@ -654,7 +654,7 @@ Cloudflare Workers
 
 - `src/main` owns the Electron lifecycle, window security, local protocol, and IPC registration.
 - `src/backend` owns provider adapters, persistence, message scheduling, transfers, and the browser host.
-- `src/preload` exposes only the typed `window.openbot` API.
+- `src/preload` exposes only the typed `window.starbot` API.
 - `src/renderer` contains the SolidJS interface.
 - `apps/auth-api` contains the TanStack Start account API, one-time email codes, rate limits, and D1 migrations. It also serves the public site: the landing page, `/news`, `/guides`, and the Marketplace pages at `/marketplace` (Agents, Skills, and Apps), `/marketplace/agents/<id>`, `/marketplace/skills/<slug>`, and `/plugins/<slug>`. `/plugins` redirects to `/marketplace/apps`.
 - `apps/status` contains the public status page at `status.starbot.app`, the script that the `status-page` workflow runs to check the services, and the script that sends the [status webhooks](docs/status-webhooks.md) of the team. GitHub hosts it, so it stays up when Cloudflare does not.
@@ -678,7 +678,7 @@ MP4 video uses the same limits and rules as MOV. Remote hosts must also advertis
 
 ZIP archives use the same limits. StarBot does not extract or inspect an archive: the agent gets the
 original file and extracts it with its own tools. An agent sends a ZIP archive back with
-`openbot.attach_files_to_response`, and the user downloads it from the chat. Open shows a ZIP
+`starbot.attach_files_to_response`, and the user downloads it from the chat. Open shows a ZIP
 archive in the file manager instead of opening it. Remote hosts must advertise the `zip-attachments`
 capability.
 
@@ -699,9 +699,9 @@ list of documents, text, data, and source files.
   workspace whose move could not run stays readable where it is.
 - `~/StarBot/Shared` — files intentionally shared between agents.
 - `~/StarBot/Shared/Transfers` — managed message snapshots and generated files. Each transfer has
-  an `.openbot-transfer.json` manifest with ownership, recipients, size, and SHA-256 metadata.
+  an `.starbot-transfer.json` manifest with ownership, recipients, size, and SHA-256 metadata.
 - `~/StarBot/Downloads` — embedded-browser downloads.
-- Electron `userData/openbot.db` — the canonical StarBot event log and projections for agents,
+- Electron `userData/starbot.db` — the canonical StarBot event log and projections for agents,
   conversations, provider session bindings, queues, reactions, and attachment indexes.
 - Electron `userData/legacy-backup-v1` — unchanged copies of imported `bots.json` and
   `mailbox.json` files, when these files existed before the SQLite migration.
@@ -715,7 +715,7 @@ list of documents, text, data, and source files.
 - `~/.gemini` (or `$GEMINI_HOME`) — login and session history managed exclusively by the
   Antigravity CLI that Gemini uses.
 - `~/.cursor` — login and session history managed exclusively by the Cursor CLI. A confined Cursor
-  process keeps its settings in `~/.cursor/openbot-confined`, so it never changes yours.
+  process keeps its settings in `~/.cursor/starbot-confined`, so it never changes yours.
 - `~/.cline` (or `$CLINE_DIR`) — login and session history managed exclusively by the Cline CLI.
 - `~/.kimi` (or `$KIMI_SHARE_DIR`) — login and session history managed exclusively by the Kimi Code CLI.
 - `~/.local/share/devin`, `~/.config/devin` and `~/.devin` (or the XDG folders) — login, settings and
@@ -743,7 +743,7 @@ without a custom native development build. The account flow connects to
 the configured HTTPS Cloudflare API. The client stores only an encrypted StarBot session token. One-time codes expire after
 10 minutes and are stored only as hashes. A daily maintenance task removes expired or consumed
 authentication records from D1. The embedded browser uses a separate sandboxed Electron session and
-cannot access `window.openbot` or managed local attachments.
+cannot access `window.starbot` or managed local attachments.
 
 To run your own account service, Signal and TURN, see [Self-hosted remote access](docs/self-hosting.md).
 
@@ -797,8 +797,8 @@ respective products and services.
 
 For one native Standard user per tenant, install the normal StarBot DMG and the optional
 `StarBot-Host-<VERSION>-arm64.pkg` from the same release. The Host package provides
-`sudo openbot-host setup --create-user client-acme --create-user client-bravo` and
-`sudo openbot-host verify`. `sudo openbot-host status [--json]` and `sudo openbot-host watch`
+`sudo starbot-host setup --create-user client-acme --create-user client-bravo` and
+`sudo starbot-host verify`. `sudo starbot-host status [--json]` and `sudo starbot-host watch`
 show the update phase, the staged version, and each tenant's work state. No Git checkout, Bun,
 or compilation is required on the host.
 Normal desktop users need only the DMG. See the [host deployment guide](docs/multi-tenant-hosting.md)

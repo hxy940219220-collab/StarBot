@@ -1,10 +1,10 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Bot, Brain, Button, HardDrive, Monitor, RefreshCw, Server, Sparkles, Store } from "@openbot/ui";
-import { CONNECTOR_LISTINGS } from "@openbot/ui/features/connectors/connector-catalog";
-import type { ConnectorId } from "@openbot/ui/features/connectors/connectors";
-import { waitForSettingRow } from "@openbot/ui/features/conversation/agent-setting-links";
-import { SettingsNavGroupLabel } from "@openbot/ui/features/settings/SettingsDialogShell";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { Bot, Brain, Button, HardDrive, Monitor, RefreshCw, Server, Sparkles, Store } from "@starbot/ui";
+import { CONNECTOR_LISTINGS } from "@starbot/ui/features/connectors/connector-catalog";
+import type { ConnectorId } from "@starbot/ui/features/connectors/connectors";
+import { waitForSettingRow } from "@starbot/ui/features/conversation/agent-setting-links";
+import { SettingsNavGroupLabel } from "@starbot/ui/features/settings/SettingsDialogShell";
 import { createEffect, createMemo, createSignal, For, flush, onCleanup, Show } from "solid-js";
 import { useI18n } from "../../i18n-context";
 import { usePlatform } from "../../platform";

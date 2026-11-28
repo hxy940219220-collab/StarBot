@@ -1,11 +1,11 @@
-import { feedbackSentIssue } from "@openbot/contracts/feedback";
-import { serverInstallEvent } from "@openbot/contracts/hosted-servers";
+import { feedbackSentIssue } from "@starbot/contracts/feedback";
+import { serverInstallEvent } from "@starbot/contracts/hosted-servers";
 import type {
   ClientAgentSummary,
   ConversationMessage,
   ConversationSearchPage,
   QueueDeliveryStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_INSTRUCTIONS_CHANGE_ITEM_TYPE,
   AGENT_WELCOME_ITEM_TYPE,
@@ -29,10 +29,10 @@ import {
   signInFailureProvider,
   skillConversationEvent,
   skillSuggestionEvent,
-} from "@openbot/contracts/ipc";
-import { markdownImageNames, markdownPreviewText } from "@openbot/contracts/markdown-preview-text";
-import { sourceText as englishSourceText } from "@openbot/i18n/source";
-import { cleanAgentMessageText } from "@openbot/team-client/agent-message-text";
+} from "@starbot/contracts/ipc";
+import { markdownImageNames, markdownPreviewText } from "@starbot/contracts/markdown-preview-text";
+import { sourceText as englishSourceText } from "@starbot/i18n/source";
+import { cleanAgentMessageText } from "@starbot/team-client/agent-message-text";
 import type {
   AgentDeliveryMarkerStatus,
   AgentMessage,
@@ -40,10 +40,10 @@ import type {
   AgentProfile,
   ChatActionMarkerModel,
   ComposerThreadMessageMatch,
-} from "@openbot/ui/data";
-import { formatChatTimestamp } from "@openbot/ui/features/conversation/chat-timestamp";
-import type { TaskListItem } from "@openbot/ui/features/conversation/TaskList";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/data";
+import { formatChatTimestamp } from "@starbot/ui/features/conversation/chat-timestamp";
+import type { TaskListItem } from "@starbot/ui/features/conversation/TaskList";
+import { currentText } from "@starbot/ui/text";
 import { isRoutineEventItem } from "./features/conversation/conversation-read-state";
 
 function feedbackSentTitle(text: string): string {

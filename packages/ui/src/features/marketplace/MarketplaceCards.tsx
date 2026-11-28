@@ -1,5 +1,5 @@
-import { Button, Plus, TriangleAlert } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { Button, Plus, TriangleAlert } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { Show } from "solid-js";
 import { AppLogo, Done } from "./MarketplaceParts";
 import { customServerStatus, type MarketplaceApp, pluginNeedsMac } from "./marketplace-model";

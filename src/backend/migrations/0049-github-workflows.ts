@@ -1,5 +1,5 @@
 import type { DatabaseSync } from "node:sqlite";
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Migration v49: GitHub triggers and outputs of workflows. The text below is the migration; the latest
 // schema takes the same tables, and the run source line of migration 50, so do not edit it after release.
@@ -132,7 +132,7 @@ function addGitHubWorkflows(db: DatabaseSync): void {
   db.exec(WORKFLOW_GITHUB_SCHEMA_SQL);
 }
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 49,
   name: "github-workflows",
   // Rebuilds the run table to add the GitHub run source, so foreign keys pause while steps point to

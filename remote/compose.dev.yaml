@@ -1,4 +1,4 @@
-name: openbot-remote-dev
+name: starbot-remote-dev
 
 services:
   remote-api:

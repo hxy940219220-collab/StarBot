@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { plainTaskTitle } from "@openbot/team-client/agent-tasks";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { plainTaskTitle } from "@starbot/team-client/agent-tasks";
 import { useQueryClient } from "@tanstack/react-query";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
@@ -31,7 +31,7 @@ export function NewTaskScreen() {
   const { serverId, agentId: initialAgentId } = useLocalSearchParams<{ serverId: string; agentId?: string }>();
   const queryScope = useQueryScope();
   const queryClient = useQueryClient();
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   const { startAgentTask } = useMobileWorkspace();
   const { agents, online, supported } = useServerTasks(serverId, { enabled: false });
   const [draft, setDraft] = useState("");

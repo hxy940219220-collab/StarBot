@@ -14,22 +14,22 @@ import {
   parseSetMcpAccessInput,
   type ServerSummary,
   type TestMcpServerInput,
-} from "@openbot/contracts/ipc";
-import { TEAM_BROWSER_VIEW_CAPABILITY } from "@openbot/contracts/team-protocol/browser-view-v1";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { MCP_ACCESS_CAPABILITY, MCP_ACCESS_ROUTES } from "@openbot/contracts/team-protocol/mcp-access-v1";
+} from "@starbot/contracts/ipc";
+import { TEAM_BROWSER_VIEW_CAPABILITY } from "@starbot/contracts/team-protocol/browser-view-v1";
+import type { TeamCurrentCapability } from "@starbot/contracts/team-protocol/current";
+import { MCP_ACCESS_CAPABILITY, MCP_ACCESS_ROUTES } from "@starbot/contracts/team-protocol/mcp-access-v1";
 import {
   MCP_SIGN_IN_APP_CAPABILITY,
   MCP_SIGN_IN_APP_ROUTES,
-} from "@openbot/contracts/team-protocol/mcp-sign-in-app-v1";
-import { MCP_SIGN_IN_CAPABILITY, MCP_SIGN_IN_ROUTES } from "@openbot/contracts/team-protocol/mcp-sign-in-v1";
-import { MCP_ROUTES } from "@openbot/contracts/team-protocol/mcp-v1";
+} from "@starbot/contracts/team-protocol/mcp-sign-in-app-v1";
+import { MCP_SIGN_IN_CAPABILITY, MCP_SIGN_IN_ROUTES } from "@starbot/contracts/team-protocol/mcp-sign-in-v1";
+import { MCP_ROUTES } from "@starbot/contracts/team-protocol/mcp-v1";
 import {
   SIGN_IN_RELAY_DEEP_LINK_CAPABILITY,
   SIGN_IN_RELAY_DEEP_LINK_ROUTES,
-} from "@openbot/contracts/team-protocol/sign-in-relay-deep-link-v1";
-import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/sign-in-relay-deep-link-v1";
+import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@starbot/contracts/team-protocol/sign-in-relay-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Duration, Effect, Result, Schema } from "effect";
 import type { AgentService } from "../../backend/agent-service";
 import { runCauseEffect } from "../../backend/effect-boundary";

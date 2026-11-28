@@ -21,8 +21,8 @@ import type {
   TeamPresenceSnapshot,
   UpdateHostIdentityInput,
   VoiceLiveEvent,
-} from "@openbot/contracts/ipc";
-import type { Logger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import type { Logger } from "@starbot/logging";
 import type { Effect } from "effect";
 import type { AgentService } from "../../backend/agent-service";
 import type { BrowserHost } from "../../backend/browser-host";

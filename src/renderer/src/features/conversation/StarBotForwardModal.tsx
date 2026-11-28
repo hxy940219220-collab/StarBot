@@ -1,9 +1,9 @@
-import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { Button, Check, Dialog, X } from "@openbot/ui";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { isChiefStarBot } from "@openbot/ui/features/agents/chief-starbot";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+import { LOCAL_SERVER_ID } from "@starbot/contracts/ipc";
+import { Button, Check, Dialog, X } from "@starbot/ui";
+import type { AgentMessage, AgentProfile } from "@starbot/ui/data";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { isChiefStarBot } from "@starbot/ui/features/agents/chief-starbot";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import { createEffect, createMemo, createSignal, For, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
 
@@ -98,19 +98,19 @@ export function StarBotForwardModal(props: {
           const fullText = [header, msg.body.trim(), ...(extraNote ? [`\n💬 附言：${extraNote}`] : [])]
             .filter(Boolean)
             .join("\n\n");
-          await window.openbot.agent.sendMessage({ agentId: bot.id, text: fullText }, srvId);
+          await window.starbot.agent.sendMessage({ agentId: bot.id, text: fullText }, srvId);
         } else if (req.mode === "step-by-step") {
           for (const msg of req.messages) {
             const prefix = msg.author === "you" ? "[我]" : `[${fromName}]`;
             const body = msg.body.trim();
             if (!body) continue;
-            await window.openbot.agent.sendMessage(
+            await window.starbot.agent.sendMessage(
               { agentId: bot.id, text: `【逐条转发 · ${prefix}】\n${body}` },
               srvId,
             );
           }
           if (extraNote) {
-            await window.openbot.agent.sendMessage({ agentId: bot.id, text: extraNote }, srvId);
+            await window.starbot.agent.sendMessage({ agentId: bot.id, text: extraNote }, srvId);
           }
         } else {
           const lines = req.messages
@@ -127,7 +127,7 @@ export function StarBotForwardModal(props: {
             "━━━━━━━━━━━━━━",
             ...(extraNote ? [`💬 附言：${extraNote}`] : ["请阅读以上聊天记录并协助跟进。"]),
           ].join("\n");
-          await window.openbot.agent.sendMessage({ agentId: bot.id, text: mergedPayload }, srvId);
+          await window.starbot.agent.sendMessage({ agentId: bot.id, text: mergedPayload }, srvId);
         }
       }
 

@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { BrowserViewInput } from "@openbot/contracts/team-protocol/browser-view-v1";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { BrowserViewInput } from "@starbot/contracts/team-protocol/browser-view-v1";
 import { clamp } from "@/shared/lib/worklet-math";
 
 export function createLiveViewInputQueue(

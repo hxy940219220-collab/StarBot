@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { Button, buttonVariants, Download, ErrorReference, Heading, Link2, RefreshCw, Server, Text } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { AppLogo } from "@starbot/brand";
+import { Button, buttonVariants, Download, ErrorReference, Heading, Link2, RefreshCw, Server, Text } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { Show } from "solid-js";
 
 export function WebConnectComputer(props: {

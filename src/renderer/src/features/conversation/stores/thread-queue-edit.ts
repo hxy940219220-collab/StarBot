@@ -1,9 +1,9 @@
-import { agentSteersTurns } from "@openbot/contracts/agent-providers";
-import { attachmentReferenceIds } from "@openbot/contracts/attachment-references";
-import type { AgentTask, QueueDelivery } from "@openbot/contracts/ipc";
-import { isQueueEditRejected } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import type { AgentThreadQueue } from "@openbot/ui/features/conversation/threads/AgentThreadView";
-import { currentText } from "@openbot/ui/text";
+import { agentSteersTurns } from "@starbot/contracts/agent-providers";
+import { attachmentReferenceIds } from "@starbot/contracts/attachment-references";
+import type { AgentTask, QueueDelivery } from "@starbot/contracts/ipc";
+import { isQueueEditRejected } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import type { AgentThreadQueue } from "@starbot/ui/features/conversation/threads/AgentThreadView";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createSignal } from "solid-js";
 import { actionToast } from "../../../action-toast";
 import {

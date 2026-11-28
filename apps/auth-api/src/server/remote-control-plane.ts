@@ -1,35 +1,35 @@
-import { BILLING_PLAN_IDS, storageTierGb, storageTierOf } from "@openbot/contracts/billing";
-import { CUSTOM_SERVER_PAID_STATUSES } from "@openbot/contracts/custom-server-plans";
+import { BILLING_PLAN_IDS, storageTierGb, storageTierOf } from "@starbot/contracts/billing";
+import { CUSTOM_SERVER_PAID_STATUSES } from "@starbot/contracts/custom-server-plans";
 import {
   HOST_KEY_HANDOVER_LIMIT,
   type HostKeyHandover,
   hostKeyHandoverStatement,
-} from "@openbot/contracts/host-key-handover";
-import { DEFAULT_TEAM_MEMBER_LIMIT } from "@openbot/contracts/input-limits";
-import { isAvatarColor } from "@openbot/contracts/ipc";
-import { isSignalHomeId } from "@openbot/contracts/ipc-host-signal-home";
-import { isMobileConnectDevelopmentHost, type MobileConnectHostBinding } from "@openbot/contracts/mobile-connect";
-import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import type { RemoteAuthEvent } from "@openbot/contracts/signal-protocol/auth-events";
+} from "@starbot/contracts/host-key-handover";
+import { DEFAULT_TEAM_MEMBER_LIMIT } from "@starbot/contracts/input-limits";
+import { isAvatarColor } from "@starbot/contracts/ipc";
+import { isSignalHomeId } from "@starbot/contracts/ipc-host-signal-home";
+import { isMobileConnectDevelopmentHost, type MobileConnectHostBinding } from "@starbot/contracts/mobile-connect";
+import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import type { RemoteAuthEvent } from "@starbot/contracts/signal-protocol/auth-events";
 import {
   DISCORD_ROUTE_AUDIENCE,
   DISCORD_ROUTE_GUILDS_LIMIT,
   DISCORD_ROUTE_TTL_SECONDS,
   type DiscordRouteGuild,
-} from "@openbot/contracts/signal-protocol/discord-route";
+} from "@starbot/contracts/signal-protocol/discord-route";
 import {
   GITHUB_ROUTE_AUDIENCE,
   GITHUB_ROUTE_TTL_SECONDS,
   type GitHubRouteRepository,
-} from "@openbot/contracts/signal-protocol/github-route";
-import type { IngressRoute } from "@openbot/contracts/signal-protocol/ingress-queue";
+} from "@starbot/contracts/signal-protocol/github-route";
+import type { IngressRoute } from "@starbot/contracts/signal-protocol/ingress-queue";
 import {
   SLACK_ROUTE_AUDIENCE,
   SLACK_ROUTE_TEAMS_LIMIT,
   SLACK_ROUTE_TTL_SECONDS,
   type SlackRouteClaims,
   type SlackRouteTeam,
-} from "@openbot/contracts/signal-protocol/slack-route";
+} from "@starbot/contracts/signal-protocol/slack-route";
 import {
   TELEGRAM_BOT_ID_PATTERN,
   TELEGRAM_CHAT_ID_PATTERN,
@@ -40,27 +40,27 @@ import {
   TELEGRAM_ROUTE_TTL_SECONDS,
   type TelegramRouteChat,
   type TelegramRouteClaims,
-} from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@starbot/contracts/signal-protocol/telegram-route";
 import {
   REMOTE_TICKET_AUDIENCE,
   REMOTE_TICKET_PROTOCOL_VERSION,
   type RemoteMemberRole,
   type RemoteTicketClaims,
-} from "@openbot/contracts/signal-protocol/ticket";
+} from "@starbot/contracts/signal-protocol/ticket";
 import {
   WEBHOOK_ROUTE_AUDIENCE,
   WEBHOOK_ROUTE_ID_PATTERN,
   WEBHOOK_ROUTE_TTL_SECONDS,
   WEBHOOK_ROUTES_LIMIT,
   type WebhookRoute,
-} from "@openbot/contracts/signal-protocol/webhook-route";
+} from "@starbot/contracts/signal-protocol/webhook-route";
 import {
   isServerAppearanceColor,
   isServerAppearanceShape,
   type ServerAppearance,
   serverAppearanceOrNull,
-} from "@openbot/contracts/team-protocol/host-appearance-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/host-appearance-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Context, Effect, Layer, Option, Result, Schema } from "effect";
 import { importJWK, type JWK, type JWTPayload, SignJWT } from "jose";
 import {
@@ -3327,7 +3327,7 @@ export class RemoteControlPlane {
       return yield* new RemoteControlPlaneError(
         409,
         "telegram_chat_taken",
-        "Another OpenBot server answers this Telegram chat. Disconnect it there first.",
+        "Another StarBot server answers this Telegram chat. Disconnect it there first.",
       );
     }
     if (route?.host_id === code.host_id) {
@@ -3949,8 +3949,8 @@ const deliverRemoteAuthEvents = Effect.fn("RemoteControlPlane.deliverAuthEvents"
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "OpenBot-Timestamp": timestamp,
-            "OpenBot-Signature": signature,
+            "StarBot-Timestamp": timestamp,
+            "StarBot-Signature": signature,
           },
           body: payload,
           signal: AbortSignal.any([signal, AbortSignal.timeout(5_000)]),

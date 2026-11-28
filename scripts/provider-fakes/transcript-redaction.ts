@@ -1,4 +1,4 @@
-import { redactText } from "@openbot/logging";
+import { redactText } from "@starbot/logging";
 
 export const REDACTED = "[redacted]";
 

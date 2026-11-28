@@ -1,9 +1,9 @@
 import { lstat, mkdir, readdir, readFile, realpath, rename, unlink, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
-import { agentProviderDescriptor, MANAGED_SKILL_FOLDERS } from "@openbot/contracts/agent-providers";
-import type { AgentSummary, InstalledSkill } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { agentProviderDescriptor, MANAGED_SKILL_FOLDERS } from "@starbot/contracts/agent-providers";
+import type { AgentSummary, InstalledSkill } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Result, Schema } from "effect";
 import { parse as parseYaml } from "yaml";
 import { causeHelpers } from "../backend/effect-boundary";
@@ -11,10 +11,10 @@ import { isMissingFileError } from "../backend/file-errors";
 import { SKILL_OWNERSHIP_MARKER } from "../backend/home-skills";
 import { isPathInside } from "../backend/path-containment";
 
-const MANAGED_SKILL_SLUG = "openbot-site-hosting";
-export const SKILL_CREATOR_SKILL_SLUG = "openbot-skill-creator";
+const MANAGED_SKILL_SLUG = "starbot-site-hosting";
+export const SKILL_CREATOR_SKILL_SLUG = "starbot-skill-creator";
 export const FIND_SKILLS_SKILL_SLUG = "find-skills";
-export const DATA_SKILL_SLUG = "openbot-data";
+export const DATA_SKILL_SLUG = "starbot-data";
 export const MANAGED_SKILL_SLUGS: ReadonlySet<string> = new Set([
   MANAGED_SKILL_SLUG,
   SKILL_CREATOR_SKILL_SLUG,
@@ -23,7 +23,7 @@ export const MANAGED_SKILL_SLUGS: ReadonlySet<string> = new Set([
 ]);
 export const OWNERSHIP_MARKER = SKILL_OWNERSHIP_MARKER;
 
-const logger = createOpenBotLogger("managed-skill-service");
+const logger = createStarBotLogger("managed-skill-service");
 
 interface SyncTargetsResult {
   collisions: string[];
@@ -121,7 +121,7 @@ const syncTarget = Effect.fn("ManagedSkill.syncTarget")(function* (
   content: string,
   slug: string,
 ): Effect.fn.Return<"synced" | "collision", ManagedSkillFailure> {
-  const ownershipContent = `${JSON.stringify({ managedBy: "openbot", slug, version: 1 })}\n`;
+  const ownershipContent = `${JSON.stringify({ managedBy: "starbot", slug, version: 1 })}\n`;
   const parent = dirname(target);
   yield* ensureSafeDirectory(workspaceRoot, parent);
   const marker = join(parent, OWNERSHIP_MARKER);
@@ -256,7 +256,7 @@ export const listManagedSkillsForChat = Effect.fn("ManagedSkill.listForChat")(fu
         yield* rejectSymlink(file);
         if (
           (yield* optionalText(marker)) !==
-          `${JSON.stringify({ managedBy: "openbot", slug: entry.name, version: 1 })}\n`
+          `${JSON.stringify({ managedBy: "starbot", slug: entry.name, version: 1 })}\n`
         )
           return;
         const content = yield* managedIO(() => readFile(file, "utf8"));

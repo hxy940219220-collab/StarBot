@@ -5,11 +5,11 @@ import {
   APP_THEME_PALETTE_COLOR_PATTERN,
   type AppThemePalette,
   isAppThemePaletteId,
-} from "@openbot/contracts/app-appearance";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/app-appearance";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Option, Schema } from "effect";
 
-const logger = createOpenBotLogger("theme-palette-files");
+const logger = createStarBotLogger("theme-palette-files");
 
 export const THEME_PALETTE_DIRECTORY = "themes";
 

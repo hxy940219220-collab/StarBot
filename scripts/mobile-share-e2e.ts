@@ -3,14 +3,14 @@ import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writ
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { bootedSimulatorIds, hasMobileRuntime } from "./dev-mobile";
 
-const BUNDLE_ID = "run.openbot.mobile";
-const APP_GROUP = "group.run.openbot.mobile";
+const BUNDLE_ID = "run.starbot.mobile";
+const APP_GROUP = "group.run.starbot.mobile";
 const PAYLOAD_KEY = "expo-sharing";
-const SHARE_LINK = "openbot://expo-sharing";
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mobile-share-e2e");
+const SHARE_LINK = "starbot://expo-sharing";
+const OUT = resolve(import.meta.dirname, "../.starbot-build/mobile-share-e2e");
 const RUNTIME_TIMEOUT_MS = 5 * 60_000;
 const TAKE_TIMEOUT_MS = 2 * 60_000;
 const POLL_INTERVAL_MS = 500;
@@ -19,7 +19,7 @@ const PDF =
   "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj 2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj " +
   "3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 72 72]>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n";
 
-const logger = createOpenBotLogger("mobile-share-e2e");
+const logger = createStarBotLogger("mobile-share-e2e");
 const run = promisify(execFile);
 
 interface SharePayload {
@@ -110,7 +110,7 @@ function findReceived(cacheRoot: string, name: string): string | null {
 }
 
 async function makeFixtures(): Promise<{ png: string; heic: string; pdf: string; folder: string }> {
-  const folder = mkdtempSync(join(tmpdir(), "openbot-share-e2e-"));
+  const folder = mkdtempSync(join(tmpdir(), "starbot-share-e2e-"));
   const tiny = join(folder, "tiny.png");
   writeFileSync(tiny, Buffer.from(PNG_1PX, "base64"));
   const png = join(folder, "share-e2e.png");

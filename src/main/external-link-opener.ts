@@ -8,13 +8,13 @@ import {
   type ExternalLinkFallback,
   type ExternalLinkPreference,
   externalLinkAppName,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Result, Schema } from "effect";
 import { PreferenceStore } from "./preference-file";
 
-const logger = createOpenBotLogger("external-links");
+const logger = createStarBotLogger("external-links");
 
 export type ExternalLinkPreferenceStore = PreferenceStore<ExternalLinkPreference>;
 

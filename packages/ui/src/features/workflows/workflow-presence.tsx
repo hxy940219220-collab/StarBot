@@ -1,5 +1,5 @@
-import type { TeamPresenceMember } from "@openbot/contracts/ipc";
-import { Button, LabelTooltipTrigger } from "@openbot/ui";
+import type { TeamPresenceMember } from "@starbot/contracts/ipc";
+import { Button, LabelTooltipTrigger } from "@starbot/ui";
 import { For, Show } from "solid-js";
 import { avatarHeadColor } from "../../bloub-avatar";
 import { useText } from "../../text";
@@ -91,7 +91,7 @@ export function BuilderCursor(props: { spot: WorkflowBuilderSpot; glide: number 
       color={props.spot.color}
       at={props.spot.at}
       glide={props.glide}
-      ease="var(--openbot-ease-in-out)"
+      ease="var(--starbot-ease-in-out)"
       leaving={props.spot.leaving}
     />
   );

@@ -3,11 +3,11 @@ import type {
   AgentDockSnapEdge,
   StarBotCompanionInfo,
   StarBotCompanionModelChoice,
-} from "@openbot/contracts/ipc";
-import { Check, Mic, Sparkles, X } from "@openbot/ui";
-import type { AgentDockVoice } from "@openbot/ui/features/agent-dock/AgentDock";
-import { AgentAvatar, type ZodiacCuteEmote } from "@openbot/ui/features/agents/AgentAvatar";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+} from "@starbot/contracts/ipc";
+import { Check, Mic, Sparkles, X } from "@starbot/ui";
+import type { AgentDockVoice } from "@starbot/ui/features/agent-dock/AgentDock";
+import { AgentAvatar, type ZodiacCuteEmote } from "@starbot/ui/features/agents/AgentAvatar";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import { createEffect, createMemo, createSignal, For, onCleanup, Show } from "solid-js";
 import "./starbot-floating-companion.css";
 
@@ -31,7 +31,7 @@ export interface StarBotFloatingCompanionProps {
   onSelectBot: (agentId: string) => void;
   onSendVoiceText: (agentId: string, text: string) => Promise<void>;
   onSwitchModel: (agentId: string, provider: string, model: string) => void;
-  onOpenBotChat: (agentId: string) => void;
+  onStarBotChat: (agentId: string) => void;
   onResizeSizePercent?: ((sizePercent: number) => void) | undefined;
   onHide?: (() => void) | undefined;
   onDrag?: ((phase: AgentDockDragPhase) => void) | undefined;
@@ -1120,7 +1120,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                       onClick={() => {
                         void playKawaiiCue("tab-switch", { subtle: true });
                         setActivePanel(null);
-                        props.onOpenBotChat(bot().agent.id);
+                        props.onStarBotChat(bot().agent.id);
                       }}
                     >
                       打开当前对话
@@ -1184,12 +1184,12 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                   title="点击查看实时对话进度"
                   onClick={() => {
                     void playKawaiiCue("tab-switch", { subtle: true });
-                    props.onOpenBotChat(bot().agent.id);
+                    props.onStarBotChat(bot().agent.id);
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      props.onOpenBotChat(bot().agent.id);
+                      props.onStarBotChat(bot().agent.id);
                     }
                   }}
                 >
@@ -1230,13 +1230,13 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                         setDismissedReplyKey(`${reply().agentId}:${reply().replyId}`);
                       }
                       setShownReply(null);
-                      props.onOpenBotChat(reply().agentId);
+                      props.onStarBotChat(reply().agentId);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         setShownReply(null);
-                        props.onOpenBotChat(reply().agentId);
+                        props.onStarBotChat(reply().agentId);
                       }
                     }}
                   >

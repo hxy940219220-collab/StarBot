@@ -1,4 +1,4 @@
-import { type VaultItemKind, type VaultSaveInput, vaultExpiryText } from "@openbot/contracts/ipc";
+import { type VaultItemKind, type VaultSaveInput, vaultExpiryText } from "@starbot/contracts/ipc";
 import {
   type ConversationUiBlock,
   isSecretFormField,
@@ -11,13 +11,13 @@ import {
   uiBlockFallbackQuestions,
   uiBlockOutcomeText,
   uiConfirmAnswersWithPreview,
-} from "@openbot/contracts/ui-blocks";
-import type { AgentProfile } from "@openbot/ui/data";
-import { MarkdownMessageText } from "@openbot/ui/features/conversation/MarkdownMessageText";
-import { UiBlockingBlock } from "@openbot/ui/features/conversation/ui-blocks/UiBlockingBlock";
-import type { VaultRequestScope } from "@openbot/ui/features/vault/VaultPanel";
-import { VaultRequestCard } from "@openbot/ui/features/vault/VaultRequestCard";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ui-blocks";
+import type { AgentProfile } from "@starbot/ui/data";
+import { MarkdownMessageText } from "@starbot/ui/features/conversation/MarkdownMessageText";
+import { UiBlockingBlock } from "@starbot/ui/features/conversation/ui-blocks/UiBlockingBlock";
+import type { VaultRequestScope } from "@starbot/ui/features/vault/VaultPanel";
+import { VaultRequestCard } from "@starbot/ui/features/vault/VaultRequestCard";
+import { useText } from "@starbot/ui/text";
 import { createMemo, createSignal, onCleanup, Show } from "solid-js";
 import type { PromptAnswerOptions } from "./conversation-types";
 

@@ -9,62 +9,62 @@ import {
   type WorkflowRunPage,
   type WorkflowStep,
   workflowNeedsAdmin,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   WORKFLOWS_CREDIT_MEDIA_UNAVAILABLE_CAPABILITY,
   WORKFLOWS_CREDIT_MEDIA_UNAVAILABLE_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-credit-media-unavailable-v1";
+} from "@starbot/contracts/team-protocol/workflows-credit-media-unavailable-v1";
 import {
   WORKFLOWS_CREDIT_MEDIA_CAPABILITY,
   WORKFLOWS_CREDIT_MEDIA_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-credit-media-v1";
+} from "@starbot/contracts/team-protocol/workflows-credit-media-v1";
 import {
   WORKFLOWS_GITHUB_CAPABILITY,
   WORKFLOWS_GITHUB_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-github-v1";
+} from "@starbot/contracts/team-protocol/workflows-github-v1";
 import {
   WORKFLOWS_HIGGSFIELD_CAPABILITY,
   WORKFLOWS_HIGGSFIELD_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-higgsfield-v1";
+} from "@starbot/contracts/team-protocol/workflows-higgsfield-v1";
 import {
   WORKFLOWS_MEDIA_CATALOG_CAPABILITY,
   WORKFLOWS_MEDIA_CATALOG_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-media-catalog-v1";
+} from "@starbot/contracts/team-protocol/workflows-media-catalog-v1";
 import {
   WORKFLOWS_MEDIA_CATALOG_V2_CAPABILITY,
   WORKFLOWS_MEDIA_CATALOG_V2_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-media-catalog-v2";
+} from "@starbot/contracts/team-protocol/workflows-media-catalog-v2";
 import {
   WORKFLOWS_MEDIA_SERVICE_ACCOUNT_CAPABILITY,
   WORKFLOWS_MEDIA_SERVICE_ACCOUNT_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-media-service-account-v1";
+} from "@starbot/contracts/team-protocol/workflows-media-service-account-v1";
 import {
   WORKFLOWS_MEDIA_CAPABILITY,
   WORKFLOWS_MEDIA_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-media-v1";
+} from "@starbot/contracts/team-protocol/workflows-media-v1";
 import {
   WORKFLOWS_PAUSE_CAPABILITY,
   WORKFLOWS_PAUSE_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-pause-v1";
+} from "@starbot/contracts/team-protocol/workflows-pause-v1";
 import {
   WORKFLOWS_PORTABLE_CAPABILITY,
   WORKFLOWS_PORTABLE_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-portable-v1";
+} from "@starbot/contracts/team-protocol/workflows-portable-v1";
 import {
   WORKFLOWS_STEP_SETTINGS_CAPABILITY,
   WORKFLOWS_STEP_SETTINGS_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-step-settings-v1";
+} from "@starbot/contracts/team-protocol/workflows-step-settings-v1";
 import {
   WORKFLOWS_SUNRA_CAPABILITY,
   WORKFLOWS_SUNRA_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-sunra-v1";
+} from "@starbot/contracts/team-protocol/workflows-sunra-v1";
 import {
   WORKFLOW_RUN_STEP_LIMIT,
   WORKFLOW_STEP_TEXT_LIMIT,
   WORKFLOWS_CAPABILITY,
   WORKFLOWS_ROUTES,
-} from "@openbot/contracts/team-protocol/workflows-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/workflows-v1";
+import { sourceText } from "@starbot/i18n/source";
 import {
   parseCreateWorkflow,
   parseDecideWorkflowStep,
@@ -103,7 +103,7 @@ const WORKFLOW_PAUSE_PATHS = new Set<string>(Object.values(WORKFLOWS_PAUSE_ROUTE
 const WORKFLOW_PORTABLE_PATHS = new Set<string>(Object.values(WORKFLOWS_PORTABLE_ROUTES));
 
 function serviceCatalog(catalog: WorkflowMediaCatalog): WorkflowMediaCatalog {
-  return { models: catalog.models.filter((model) => model.provider !== "openbot") };
+  return { models: catalog.models.filter((model) => model.provider !== "starbot") };
 }
 
 function catalogV1(catalog: WorkflowMediaCatalog): WorkflowMediaCatalog {
@@ -446,11 +446,11 @@ export async function routeWorkflows(
   if (path === WORKFLOWS_MEDIA_CATALOG_V2_ROUTES.catalog)
     return json(200, serviceCatalog(await run(workflows.mediaCatalog())));
   if (path === WORKFLOWS_CREDIT_MEDIA_ROUTES.catalog)
-    return json(200, { models: (await run(workflows.mediaCatalog("openbot"))).models });
+    return json(200, { models: (await run(workflows.mediaCatalog("starbot"))).models });
   if (path === WORKFLOWS_CREDIT_MEDIA_UNAVAILABLE_ROUTES.list)
-    return json(200, { models: (await run(workflows.mediaCatalog("openbot"))).unavailable ?? [] });
+    return json(200, { models: (await run(workflows.mediaCatalog("starbot"))).unavailable ?? [] });
   if (path === WORKFLOWS_CREDIT_MEDIA_ROUTES.credits)
-    return json(200, { openbot: (await run(workflows.mediaCredits("openbot"))).openbot ?? null });
+    return json(200, { starbot: (await run(workflows.mediaCredits("starbot"))).starbot ?? null });
   if (path === WORKFLOWS_MEDIA_CATALOG_ROUTES.price || path === WORKFLOWS_MEDIA_CATALOG_V2_ROUTES.price)
     return json(200, await run(workflows.mediaPrice(parse(parseWorkflowMediaPrice, body))));
   if (!github) return "unmatched";

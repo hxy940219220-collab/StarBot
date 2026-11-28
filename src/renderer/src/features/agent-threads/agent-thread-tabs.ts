@@ -1,7 +1,7 @@
-import type { AgentTask } from "@openbot/contracts/ipc";
-import { TOAST_DURATION, toast } from "@openbot/ui";
-import { DRAFT_THREAD_ID, MAIN_THREAD_ID } from "@openbot/ui/features/conversation/threads/thread-types";
-import { currentText } from "@openbot/ui/text";
+import type { AgentTask } from "@starbot/contracts/ipc";
+import { TOAST_DURATION, toast } from "@starbot/ui";
+import { DRAFT_THREAD_ID, MAIN_THREAD_ID } from "@starbot/ui/features/conversation/threads/thread-types";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createSignal, onCleanup, untrack } from "solid-js";
 import { createScopeGuard } from "../../scope-lifetime";
 import type { AgentTasks } from "../agent-tasks/agent-tasks-state";

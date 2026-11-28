@@ -5,9 +5,9 @@ import {
   isLocalVoiceModelId,
   type LocalVoiceModelId,
   VOICE_MODELS,
-} from "@openbot/contracts/ipc";
-import { ItemDescription, ItemGroup, SettingsSection } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { ItemDescription, ItemGroup, SettingsSection } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, Show, untrack } from "solid-js";
 import {
   MODEL_DESCRIPTION,
@@ -35,7 +35,7 @@ export function ServerVoiceModelSetting(
   },
 ) {
   const { t, errorMessage } = useText();
-  const calls = (): HostVoiceModelCalls => props.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostVoiceModelCalls => props.calls ?? window.starbot.hostAdmin;
   const [snapshot, setSnapshot] = createSignal<HostVoiceModel | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);
   let generation = 0;

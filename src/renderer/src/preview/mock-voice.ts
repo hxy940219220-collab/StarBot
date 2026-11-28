@@ -5,7 +5,7 @@ import {
   type DictationKeyProvider,
   ELEVENLABS_VOICE_MODEL_ID,
   isLocalVoiceModelId,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   SPEECH_MODEL_ID,
   type SpeechKeyProvider,
   type SpeechModelStatus,
@@ -20,7 +20,7 @@ import {
   type VoiceServerSettings,
   type VoiceSettings,
   type VoiceStreamTranscript,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { clone, type Listener, type MockRuntime } from "./mock-support";
 
 export interface MockVoiceOptions {
@@ -156,7 +156,7 @@ export function createMockVoice(options: MockVoiceOptions, { emit, schedule }: M
     }
   };
 
-  const voice: OpenBotDesktopApi["voice"] = {
+  const voice: StarBotDesktopApi["voice"] = {
     getModelStatus: async () => status(settings.modelId),
     getModelStatuses: async () => VOICE_MODEL_IDS.map(status),
     prepareModel: () => download(settings.modelId),

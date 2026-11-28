@@ -1,11 +1,11 @@
 import {
   createAgentTemplateShareUrl,
-  OPENBOT_AGENT_TEMPLATE_PATH_PREFIX,
+  STARBOT_AGENT_TEMPLATE_PATH_PREFIX,
   parseAgentTemplateUrl,
-} from "@openbot/contracts/agent-template-links";
-import { parseInviteUrl, selfHostedApiOrigin } from "@openbot/contracts/invite-links";
-import { parseMobileConnectUrl } from "@openbot/contracts/mobile-connect";
-import { createPluginShareUrl, parsePluginUrl } from "@openbot/contracts/plugin-links";
+} from "@starbot/contracts/agent-template-links";
+import { parseInviteUrl, selfHostedApiOrigin } from "@starbot/contracts/invite-links";
+import { parseMobileConnectUrl } from "@starbot/contracts/mobile-connect";
+import { createPluginShareUrl, parsePluginUrl } from "@starbot/contracts/plugin-links";
 
 export type IncomingLink =
   | { kind: "invite"; url: string }
@@ -84,7 +84,7 @@ export function redirectIncomingLink(path: string, initial: boolean): string | n
     if (
       url.pathname !== "/join" &&
       !url.pathname.startsWith("/plugins/") &&
-      !url.pathname.startsWith(OPENBOT_AGENT_TEMPLATE_PATH_PREFIX)
+      !url.pathname.startsWith(STARBOT_AGENT_TEMPLATE_PATH_PREFIX)
     )
       return path;
     path = url.toString();

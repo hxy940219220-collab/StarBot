@@ -1,12 +1,12 @@
-import type { DiscoverModelsInput, ProviderDetectionSettings } from "@openbot/contracts/ipc";
+import type { DiscoverModelsInput, ProviderDetectionSettings } from "@starbot/contracts/ipc";
 import {
   customProviderEndpointKey,
   isCustomProviderId,
   isDetectionFolder,
   PROVIDER_DETECTION_LIMITS,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { parseApiKey, parseBaseUrl, parseHeaders } from "./custom-provider-inputs";
 import { isObject } from "./validation";
 

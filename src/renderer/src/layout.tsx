@@ -1,7 +1,7 @@
-import type { AppInfo } from "@openbot/contracts/ipc";
-import type { ServerView } from "@openbot/ui/features/servers/ServerMenu";
-import { SIDEBAR_CHAT_ORDERS, type SidebarChatOrder } from "@openbot/ui/features/sidebar/sidebar-types";
-import { PAGE_RAIL_PINNABLE_PAGES, type PageRailPinnablePage } from "@openbot/ui/features/window/PageRail";
+import type { AppInfo } from "@starbot/contracts/ipc";
+import type { ServerView } from "@starbot/ui/features/servers/ServerMenu";
+import { SIDEBAR_CHAT_ORDERS, type SidebarChatOrder } from "@starbot/ui/features/sidebar/sidebar-types";
+import { PAGE_RAIL_PINNABLE_PAGES, type PageRailPinnablePage } from "@starbot/ui/features/window/PageRail";
 import { createEffect, createMemo, createSignal, onSettled } from "solid-js";
 import { z } from "zod";
 import { readPanelWidth } from "./components/panel-width-storage";

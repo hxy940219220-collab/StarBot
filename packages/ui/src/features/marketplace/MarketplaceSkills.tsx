@@ -5,8 +5,8 @@ import {
   type MarketplaceSkillSummary,
   SKILL_CATEGORIES,
   type SkillCategory,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Button,
   buttonVariants,
@@ -23,9 +23,9 @@ import {
   ShieldCheck,
   SlidingTabs,
   Text,
-} from "@openbot/ui";
-import { SkillGradient } from "@openbot/ui/skill-gradient";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { SkillGradient } from "@starbot/ui/skill-gradient";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import {
   createEffect,

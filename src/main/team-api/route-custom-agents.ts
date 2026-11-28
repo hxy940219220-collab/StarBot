@@ -1,7 +1,7 @@
-import type { CustomAgentSummary } from "@openbot/contracts/ipc";
-import { CUSTOM_AGENTS_CAPABILITY, CUSTOM_AGENTS_ROUTES } from "@openbot/contracts/team-protocol/custom-agents-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+import type { CustomAgentSummary } from "@starbot/contracts/ipc";
+import { CUSTOM_AGENTS_CAPABILITY, CUSTOM_AGENTS_ROUTES } from "@starbot/contracts/team-protocol/custom-agents-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { parseDeleteCustomAgent, parseSaveCustomAgent } from "../ipc/custom-agent-inputs";
 import type { TeamApiAdmin } from "./dependencies";

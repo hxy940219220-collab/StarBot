@@ -1,4 +1,4 @@
-import { Button, ChevronDown, MessageCirclePlus, Popover } from "@openbot/ui";
+import { Button, ChevronDown, MessageCirclePlus, Popover } from "@starbot/ui";
 import { createEffect, createMemo, createSignal, For, onCleanup, Show } from "solid-js";
 import { useText } from "../../text";
 import { ThreadStatusText, ThreadTabIcon } from "../conversation/threads/ThreadStatusMark";

@@ -4,8 +4,8 @@ import { copyFile, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promise
 import { arch, release as osRelease, tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { promisify } from "node:util";
-import type { AgentSummary, ExportResult } from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+import type { AgentSummary, ExportResult } from "@starbot/contracts/ipc";
+import type { AppTranslate } from "@starbot/i18n";
 import { Effect } from "effect";
 import { app, type BrowserWindow, dialog } from "electron";
 import type { AgentService } from "../backend/agent-service";
@@ -29,7 +29,7 @@ interface MaintenanceContext {
   parentWindow: BrowserWindow | null;
   translate: AppTranslate;
 }
-export const exportOpenBotData = Effect.fn("Archive.exportOpenBotData")(function* (
+export const exportStarBotData = Effect.fn("Archive.exportStarBotData")(function* (
   context: Pick<MaintenanceContext, "service" | "mailbox" | "parentWindow" | "translate">,
 ): Effect.fn.Return<ExportResult, ArchiveOperationError> {
   const destination = yield* chooseExportDestinationEffect(
@@ -41,7 +41,7 @@ export const exportOpenBotData = Effect.fn("Archive.exportOpenBotData")(function
 
   const archiveCandidate = `${destination}.${randomUUID()}.tmp.zip`;
   return yield* Effect.acquireUseRelease(
-    archiveCall(() => mkdtemp(join(tmpdir(), "openbot-export-"))),
+    archiveCall(() => mkdtemp(join(tmpdir(), "starbot-export-"))),
     (temporaryRoot) =>
       Effect.gen(function* () {
         const exportRoot = join(temporaryRoot, "StarBot Backup");
@@ -85,7 +85,7 @@ export const exportOpenBotData = Effect.fn("Archive.exportOpenBotData")(function
           queues,
         };
         yield* archiveCall(() =>
-          writeFile(join(exportRoot, "openbot-data.json"), `${JSON.stringify(manifest, null, 2)}\n`, {
+          writeFile(join(exportRoot, "starbot-data.json"), `${JSON.stringify(manifest, null, 2)}\n`, {
             encoding: "utf8",
             mode: 0o600,
           }),

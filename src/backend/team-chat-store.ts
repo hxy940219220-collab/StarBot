@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   DirectConversationPage,
   DirectConversationPageAnchor,
@@ -7,9 +7,9 @@ import type {
   DirectConversationSnapshot,
   DirectMessage,
   DirectThreadSummary,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import {
   databaseRow,
   databaseRows,
@@ -18,10 +18,10 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 
 export class TeamChatStore {
-  constructor(readonly database: OpenBotDatabase) {}
+  constructor(readonly database: StarBotDatabase) {}
 
   listThreads(memberId: string): DirectThreadSummary[] {
     const rows = databaseRows(

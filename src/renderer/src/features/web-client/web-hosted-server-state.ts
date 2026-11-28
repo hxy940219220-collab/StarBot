@@ -1,6 +1,6 @@
-import type { HostedServerEntryPoint } from "@openbot/contracts/hosted-servers";
-import type { PricingOrder } from "@openbot/contracts/license";
-import { serverPlanDeletionDates } from "@openbot/ui/features/servers/ServerPlanEnd";
+import type { HostedServerEntryPoint } from "@starbot/contracts/hosted-servers";
+import type { PricingOrder } from "@starbot/contracts/license";
+import { serverPlanDeletionDates } from "@starbot/ui/features/servers/ServerPlanEnd";
 import { createEffect, createSignal, onCleanup, untrack } from "solid-js";
 import type { AddServerResume } from "../servers/AddServerOverlay";
 import { openServerPlanCheckout, refreshEndedPlansOnFocus } from "../servers/ServerPlanReminder";

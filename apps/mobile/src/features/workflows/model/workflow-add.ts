@@ -1,5 +1,5 @@
-import type { WorkflowFieldValue, WorkflowNodeKind } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { WorkflowFieldValue, WorkflowNodeKind } from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 
 export const ADD_KEYS = [
   "prompt",

@@ -1,5 +1,5 @@
-import { WORKFLOW_GROUP_FIELDS } from "@openbot/contracts/ipc";
-import { Button, Image as ImageIcon, Input, Layers } from "@openbot/ui";
+import { WORKFLOW_GROUP_FIELDS } from "@starbot/contracts/ipc";
+import { Button, Image as ImageIcon, Input, Layers } from "@starbot/ui";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
 import {

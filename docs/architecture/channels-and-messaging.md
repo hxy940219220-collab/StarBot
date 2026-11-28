@@ -2,7 +2,7 @@
 
 ## iPhone Live Activity updates
 
-The phone and a host build the same Live Activity view with `@openbot/team-client`:
+The phone and a host build the same Live Activity view with `@starbot/team-client`:
 `dynamic-island-coordinator.ts` gives the state, and `live-activity-props.ts` turns it into the props
 that the widget shows. While the app runs, `use-live-activity.ts` publishes them itself.
 
@@ -51,7 +51,7 @@ A host sends an iOS notification when an agent finishes a turn, stops with an er
 message or a routine run (`error` with the code `delivery_start_failed`), or waits for input, an
 approval, or a step in the browser (`browser-takeover-requested`, also for a password or a code).
 The desktop and the web client notify about the same events (`agentEventCanNotify`), and all three
-decide as one: `notificationForAgentEvent` in `@openbot/team-client` applies the level of the server
+decide as one: `notificationForAgentEvent` in `@starbot/team-client` applies the level of the server
 (`all`, or `needs-me` for the events that wait for the user), or the member's own level of the agent
 (`agent-notification-levels-v1`, see [servers](servers.md)), the switch of the agent, and the quiet
 routine runs. The desktop and the web client close the notification of a request when an
@@ -88,7 +88,7 @@ sends no notification, and uses the registration only to make the Live Activity 
 tells each host again after each connection and when a choice changes, and removes the registration
 when nothing is left for that host or the user signs out. A level of
 "Nothing" and a mute with no end remove it too. `PushNotificationService` in `src/main` keeps the
-registrations in `openbot-push-notifications-v1.json` in the user data folder, readable only by the
+registrations in `starbot-push-notifications-v1.json` in the user data folder, readable only by the
 user, so a phone that does not connect after the host restarts still gets notifications. It sends
 only while the phone is away or its connection is closed. iOS can suspend the app before it says
 that it goes away, and the host sees the lost path about 30 seconds later. So an event that comes
@@ -106,7 +106,7 @@ seconds (`TeamApiServer.lastMemberUseElsewhere`, kept in memory); or the compute
 desktop app had input, in any app, in the last 30 seconds (`computer-activity-v1`, see
 [servers](servers.md#computer-activity)). The time is short because a task can end at any time after
 the member leaves the computer. An unpackaged app reads another time in whole seconds from
-`OPENBOT_DEV_AWAY_SECONDS`, for the host and for the desktop that reports its input, so a check
+`STARBOT_DEV_AWAY_SECONDS`, for the host and for the desktop that reports its input, so a check
 need not wait 30 seconds. While the phone shows a Live Activity of
 this host that iOS still updates (8 hours from its start, which the phone gives because a host that
 restarted does not know it), and the next view of the activity shows the event, the host sends no
@@ -141,7 +141,7 @@ routine ran in the agent's chat. It sends the turn of another side thread only t
 advertises `push-notification-threads-v1`, because an app from before it opens the agent's chat, and
 only while that phone did not turn these notifications off (`POST /v1/push-notifications/threads`
 with `replies`; Settings > Notifications > Thread replies). The host keeps the choice with the
-registration of the session in `openbot-push-notifications-v1.json` (`threadReplies`), also when the
+registration of the session in `starbot-push-notifications-v1.json` (`threadReplies`), also when the
 phone registers again. A request for input, an approval or a browser step of a side thread does not
 read the choice. The level, the mute, the preview and the Live Activity check apply as for the
 agent's chat, but the Live Activity shows the replies and the failed turn of the agent's own chat
@@ -207,7 +207,7 @@ Archiving stops channel work and retains its records. Restore makes the chat ava
 A channel can have a picture. `channel_json` keeps an optional icon (`{ name, hue }`) and an
 optional `imageUrl`. A channel save keeps both when its draft has no `icon` key. The image is a file
 for each version under `userData/avatars/channels/<sha256(channel id)>/`, served as
-`openbot-avatar://channel/<id>?v=<version>&type=<mime>`. `ChannelService.setImage` writes the new file,
+`starbot-avatar://channel/<id>?v=<version>&type=<mime>`. `ChannelService.setImage` writes the new file,
 commits the URL, and then removes the old file. Archiving keeps the file; only the permanent
 delete of the channel records removes the folder. An icon or
 color choice removes the image. A name or hue that this version does not know shows the member
@@ -507,7 +507,7 @@ the person asks for another member or for help, or when a part clearly needs ano
   review does. When the lead's provider or model is not available, the summary uses the model of
   another visible member (#3957).
 - An isolated channel (`Channel.isolated`, off by default, in `channel_json`, so no migration) keeps
-  what its members learn there (#4332). `StarBotToolRouter` saves `openbot.remember` of a channel turn
+  what its members learn there (#4332). `StarBotToolRouter` saves `starbot.remember` of a channel turn
   as a channel memory (`channel_remember`), and refuses a `memoryId`, so a channel cannot change an
   agent memory. Agent memories still reach the channel. The packet gives `isolated: true` in the
   channel facts with a rule line, and a line when a person turns it off. A save without the field
@@ -530,7 +530,7 @@ the person asks for another member or for help, or when a part clearly needs ano
 - The Browser setting of a channel (`Channel.browser`, in `channel_json`, so no migration) says which
   members can use the browser there (#4135): every member (absent, or `{ kind: "members" }`), one
   member (`{ kind: "member", agentId }`), or no member (`{ kind: "none" }`). `StarBotToolRouter`
-  refuses an `openbot_browser` call of a channel thread that the setting forbids, and the answer tells
+  refuses an `starbot_browser` call of a channel thread that the setting forbids, and the answer tells
   the agent to give the browser step to the browser member with `channel_assign`. The packet gives
   `browser` in the channel facts with a rule line for each member, and a line when a person gives the
   browser to every member again. A save without the field keeps the stored value. A value that this
@@ -631,12 +631,12 @@ for the Files pane. Every member who sees the channel can read them; a hidden ch
 `POST /v1/channels/read` does.
 
 On a host with `channel-picture-v1`, each channel record carries its picture: `icon` and the
-`openbot-avatar://channel/` `imageUrl`, which names only the image version. A `save` draft can carry
+`starbot-avatar://channel/` `imageUrl`, which names only the image version. A `save` draft can carry
 `icon`; absent keeps the stored icon, and null removes it. `/v1/channels/image?channelId=` reads the
 image bytes by version (`GET`), sets them (`PUT`) and removes them (`DELETE`). The phone keeps the
 images beside the agent photos in its cache and edits the picture in Channel info, as the desktop
 channel settings do. The browser client cannot open the host URL, so it reads the bytes of each
-version into a data URL. A joined desktop changes the URL to `openbot-remote-avatar://<server>/channel/<id>`,
+version into a data URL. A joined desktop changes the URL to `starbot-remote-avatar://<server>/channel/<id>`,
 which reads the same route. Both clients set the icon and the image as the phone does.
 
 On a host with `channel-attention-v1`, each channel summary names the threads of its members. The
@@ -672,8 +672,8 @@ the answer. Every answer comes from StarBot.
 - **Install.** The desktop asks `POST /v2/slack/authorize` for Slack's install URL, with a one-use host
   key. The Worker exchanges the code at `/v2/slack/callback`, because the app's client secret lives
   there. It links the workspace to the host in D1 (`slack_workspace_routes`: team, host, account; no
-  token) and seals the bot token to the host key (`@openbot/contracts/slack-workspace-grant`). The
-  page `/slack/connect` opens `openbot://slack-workspace`. Only the account that linked a workspace
+  token) and seals the bot token to the host key (`@starbot/contracts/slack-workspace-grant`). The
+  page `/slack/connect` opens `starbot://slack-workspace`. Only the account that linked a workspace
   can move it to another of its hosts; another account gets `slack_workspace_taken`.
 - **Events.** Slack posts every workspace's events and button presses to one URL,
   `https://signal.starbot.app/v1/slack/events`. Signal checks Slack's signature with the app's
@@ -700,7 +700,7 @@ the answer. Every answer comes from StarBot.
 
 Telegram uses the same socket with one difference: one StarBot bot serves every user, so its token
 must not reach any host. Only Signal has it (`TELEGRAM_BOT_TOKENS`), and the contract is
-`@openbot/contracts/signal-protocol/telegram-route`.
+`@starbot/contracts/signal-protocol/telegram-route`.
 
 - **Link.** A connection is one chat. The desktop asks `POST /v2/remote/hosts/<id>/telegram-link`
   (machine token) for a one-use code, and opens `t.me/<bot>?startgroup=<code>` or `?start=<code>`.
@@ -719,7 +719,7 @@ must not reach any host. Only Signal has it (`TELEGRAM_BOT_TOKENS`), and the con
   message, a mention or a command there gets one `status.messaging.telegramNotLinked` notice from
   Signal, at most once a day for each chat. A failed lookup, or a chat that this Signal saw linked,
   revoked or named in a route ticket, gets none. The Telegram
-  route ticket (`telegramRoute` in the hello, audience `openbot-telegram-route`, the Slack route key)
+  route ticket (`telegramRoute` in the hello, audience `starbot-telegram-route`, the Slack route key)
   and `telegram-route-revoked` work as the Slack ones do. A chat that is not in the ticket's chat list
   reports `not_linked` as a Slack workspace does, and Reconnect opens a new link for the chat. A chat
   that Signal links on the open socket joins the socket's list at once.
@@ -787,7 +787,7 @@ transport for its events. `messaging-types.ts` is the seam; the core never reads
   `MessagingService.#receive` names each user mention (`InboundMessage.mentionedUserIds`) with the
   adapter's name cache; the adapters do the same for context messages.
 - **Tools.** `messaging_remember`, `messaging_forget_memory` and `messaging_history` are deferred
-  `openbot` tools. `StarBotToolRouter` finds the link from the calling turn's execution thread and
+  `starbot` tools. `StarBotToolRouter` finds the link from the calling turn's execution thread and
   refuses a call from any other thread; no argument names a connection or a channel. The history
   tool calls the adapter's `recent` through `MessagingThreads.setHistorySource`. A fact is not saved
   from a direct message. The two outbound tools, `messaging_list_places` and `messaging_post`, are
@@ -863,8 +863,8 @@ the token and does the platform work for the hosts:
 
 - **Install.** As for Slack: `POST /v2/discord/authorize`, `/v2/discord/callback` (scope `bot`, the
   Worker exchanges the code, revokes the user token it gets, and links the guild in D1
-  `discord_guild_routes`), the page `/discord/connect` and `openbot://discord-guild`. The sealed grant
-  (`@openbot/contracts/discord-guild-grant`, on `host-grant.ts`) names the guild and holds no token.
+  `discord_guild_routes`), the page `/discord/connect` and `starbot://discord-guild`. The sealed grant
+  (`@starbot/contracts/discord-guild-grant`, on `host-grant.ts`) names the guild and holds no token.
   Another account gets `discord_guild_taken`.
 - **Events.** Signal keeps one Gateway connection (`@discordjs/ws`) with the guilds, guild messages
   and direct messages intents, and no privileged intent. It passes on only a guild message that
@@ -872,10 +872,10 @@ the token and does the platform work for the hosts:
   Discord at once. Discord makes that role, with the bot's name, when the bot joins a guild, and its
   autocomplete can choose it instead of the bot. Signal finds the role by its `tags.bot_id` in the
   guild and role events, and keeps only its ID in memory. It normalizes each message into
-  `DiscordDelivery` (`@openbot/contracts/signal-protocol/discord-api`), takes the bot's own mention
+  `DiscordDelivery` (`@starbot/contracts/signal-protocol/discord-api`), takes the bot's own mention
   and role mention out, and sends a `discord-delivery` frame to the `ingress` socket that holds a
   Discord route ticket for the guild. The ticket mirrors the Slack one (audience
-  `openbot-discord-route`, `/v2/remote/hosts/:id/discord-route`, `discord-route-revoked`,
+  `starbot-discord-route`, `/v2/remote/hosts/:id/discord-route`, `discord-route-revoked`,
   `/v2/remote/discord-route/validate`). The socket asks for a route only for the platforms whose
   connections hold it.
 - **Removal.** When the bot leaves a guild, Signal drops its route and asks the account service to
@@ -913,7 +913,7 @@ is one linked number (`workspace_id` is the number in digits).
   is AES-256-GCM sealed under a random key that `MessagingCredentialStore` keeps
   (`whatsappStoreKey`), with its table and row as additional data. The file is held in SQLite's
   exclusive locking mode while it is open, so a second process cannot take the same session.
-  `openbot.db` stays the source of truth for the connection, its conversations and its memories.
+  `starbot.db` stays the source of truth for the connection, its conversations and its memories.
 - **Runtime.** `WhatsAppRuntime` keeps the open store, the `WhatsAppSession` and the in-memory chat
   state of each number. The driver's adapter and transport share them. A store stays open across a
   restart of its connection and closes when the messaging service stops.
@@ -924,7 +924,7 @@ is one linked number (`workspace_id` is the number in digits).
   jitter. A watchdog reconnects a socket that is silent for 90 seconds. Keep-alive replies do not
   prove that WhatsApp still delivers messages: a Baileys handler that stalls holds its ack, and
   WhatsApp then holds the messages (Baileys issue #2491). So the vendored Baileys reports when each
-  node handler starts and ends (`openbot:node`), and the session also reconnects when a handler runs
+  node handler starts and ends (`starbot:node`), and the session also reconnects when a handler runs
   for 5 minutes. The first socket after a link is not checked: its history and app-state sync can take
   that long. After the third stalled handler in an hour, the session drops the socket and shows
   `error` until Reconnect or a wake of the computer. When WhatsApp does not confirm a post within 10

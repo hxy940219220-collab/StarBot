@@ -252,7 +252,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "אין מיומנויות שמתאימות ל-״{query}״.",
   "sitePage.marketplace.emptyApps": "אין אפליקציה שמתאימה.",
   "sitePage.marketplace.breadcrumb": "נתיב ניווט",
-  "sitePage.marketplace.addToOpenBot": "הוספה ל-StarBot",
+  "sitePage.marketplace.addToStarBot": "הוספה ל-StarBot",
 
   "sitePage.marketplace.addFromApp": "{name} מתווסף מתוך StarBot. יש להוריד את האפליקציה ולפתוח שוב את הקישור הזה.",
 
@@ -529,7 +529,7 @@ export const messages = {
   "sitePage.site.cta.title": "הכירו את העמית הראשון שלכם",
   "sitePage.site.cta.description":
     "מריצים את Codex, Claude, Gemini, Grok או מודל משלכם עם התוכניות שאתם כבר משלמים עליהן, כל אחד עם סביבת עבודה והקשר משלו. העבודה שלכם נשארת במחשב שלכם.",
-  "sitePage.site.downloadOpenBot": "הורדת StarBot",
+  "sitePage.site.downloadStarBot": "הורדת StarBot",
 
   "sitePage.site.contact": "צרו קשר",
   "sitePage.site.footer.description":

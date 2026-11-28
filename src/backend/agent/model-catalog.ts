@@ -1,6 +1,6 @@
-import type { AgentModelOption, ProviderModelSource } from "@openbot/contracts/ipc";
-import { isAgentModel, isReasoningEffort } from "@openbot/contracts/ipc";
-import { createOpenBotLogger, registerPublicValues } from "@openbot/logging";
+import type { AgentModelOption, ProviderModelSource } from "@starbot/contracts/ipc";
+import { isAgentModel, isReasoningEffort } from "@starbot/contracts/ipc";
+import { createStarBotLogger, registerPublicValues } from "@starbot/logging";
 import { Effect, Result } from "effect";
 import type { AgentClient, AgentProvider } from "./../agent-client";
 import { providerCheckTimeoutMs } from "../disk-restore";
@@ -19,7 +19,7 @@ import { providerLabel } from "./thread-items";
 
 type ProviderModelCatalog = NonNullable<BuiltInProviderDriver["catalog"]>;
 
-const logger = createOpenBotLogger("provider-runtime");
+const logger = createStarBotLogger("provider-runtime");
 const MODEL_METADATA_FALLBACKS = [...FALLBACK_MODELS, ...OPENCODE_FREE_MODEL_FALLBACKS];
 
 function withPublicIds(models: AgentModelOption[]): AgentModelOption[] {

@@ -1,4 +1,4 @@
-import type { MobileTextKey, MobileTranslate } from "@openbot/i18n/mobile";
+import type { MobileTextKey, MobileTranslate } from "@starbot/i18n/mobile";
 
 const LANGUAGES: Record<string, MobileTextKey> = {
   af: "language.name.af",

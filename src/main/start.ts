@@ -1,8 +1,8 @@
-import { resolveLocale, translateFor } from "@openbot/i18n";
+import { resolveLocale, translateFor } from "@starbot/i18n";
 import { app, dialog, shell } from "electron";
 import { DOWNLOAD_URL } from "./download-url";
 
-if (!app.isPackaged && app.commandLine.hasSwitch("openbot-replica")) {
+if (!app.isPackaged && app.commandLine.hasSwitch("starbot-replica")) {
   process.chdir(app.getAppPath());
 }
 
@@ -15,7 +15,7 @@ function isDamagedInstallation(error: unknown): boolean {
 
 function runsAsServer(): boolean {
   return (
-    process.platform === "linux" && (process.env.OPENBOT_SERVER === "1" || process.env.OPENBOT_HOSTED_SERVER === "1")
+    process.platform === "linux" && (process.env.STARBOT_SERVER === "1" || process.env.STARBOT_HOSTED_SERVER === "1")
   );
 }
 
@@ -36,7 +36,7 @@ async function showDamagedInstallation(): Promise<void> {
   if (response === 0) await shell.openExternal(DOWNLOAD_URL);
 }
 
-if (__OPENBOT_PERF_PROBES__ && !app.isPackaged && process.env.OPENBOT_PERF_PROBES === "1") {
+if (__STARBOT_PERF_PROBES__ && !app.isPackaged && process.env.STARBOT_PERF_PROBES === "1") {
   const { installPerfProbes } = await import("./perf-probes-install");
   installPerfProbes();
 }

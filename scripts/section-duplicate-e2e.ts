@@ -3,8 +3,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { SidebarLayoutAction, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
-import { duplicateSection } from "@openbot/ui/features/sidebar/duplicate-section";
+import type { SidebarLayoutAction, SidebarLayoutSnapshot } from "@starbot/contracts/ipc";
+import { duplicateSection } from "@starbot/ui/features/sidebar/duplicate-section";
 import { Effect } from "effect";
 import { duplicateAgentIntoLayout } from "../src/backend/agent/duplication-gate";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -12,10 +12,10 @@ import { AgentService } from "../src/backend/agent-service";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/section-duplicate-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/section-duplicate-e2e");
 
 interface Step {
   name: string;
@@ -67,11 +67,11 @@ const agentBrowser: AgentBrowserHost = {
   agentTab: () => null,
 };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-section-duplicate-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-section-duplicate-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const agentStore = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
 const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));

@@ -32,7 +32,7 @@ renderer hides those controls from a member. The wire carries no absolute paths,
 download files travel only as category totals. A host without the capability reads as null, and the
 surface asks for an update; a change is refused before any request. The desktop Library page and
 the phone Library (the server drawer) read the same `host` scope. The file types, the type filter
-and the order of both are in `@openbot/team-client/stored-files`.
+and the order of both are in `@starbot/team-client/stored-files`.
 
 The optional `storage-channel-v1` capability adds `POST /v1/storage/channel-files`
 (`team-protocol/storage-channel-v1.ts`), with `channelId` and an optional `force`. It answers the file
@@ -58,7 +58,7 @@ frozen `storage-disk-v1` reply cannot get a new field, so this is a new route. O
 measures it (`src/backend/user-files-bytes.ts`, `nice -n 19 du -s -x -c`), at most each 10 minutes,
 in the background after the first value. It is null on another host, and on a machine with Docker,
 because `du` cannot read the Docker folder. The clients count the plan storage that is left
-(`hostedPlanDisk` in `@openbot/contracts/hosted-servers`) from `userBytes`. When it is null or the
+(`hostedPlanDisk` in `@starbot/contracts/hosted-servers`) from `userBytes`. When it is null or the
 host does not have the capability, they subtract `HOSTED_SERVER_BASE_IMAGE_GB` for the system, which
 is correct only for a boat sandbox. Every member can read it. The desktop, the web client and mobile
 prefer this route and use `storage-disk-v1` with an older host.
@@ -67,7 +67,7 @@ The optional `library-folders-v1` capability (`team-protocol/library-folders-v1.
 adds `POST /v1/library-folders` and `POST /v1/library-folders/actions` for the folders of the Library
 page. Each agent has folders for its files, five levels in all, and a file is in one folder of its
 agent or in none. The folders are a layout over the stored files: a change moves, copies and deletes
-no file. The host keeps them in `openbot-library-folders-v1.json` in its user data
+no file. The host keeps them in `starbot-library-folders-v1.json` in its user data
 (`src/backend/library-folders-store.ts`), and `src/main/library-folders-service.ts` applies each change
 for the `storage:getLibraryFolders` and `storage:changeLibraryFolders` IPC of this computer and for the
 route, so a joined server uses the same rules. The service reads the agent of a file from the `host`
@@ -95,7 +95,7 @@ such as `docker run --cpus`), it is the cgroup's `usage_usec` against that limit
 is the limit; otherwise it is the use of all cores of the machine. The panel reads it each minute
 while it is open; the read routes are passive. `.../machine/alerts` and `.../alerts/update` read and
 set one level per metric (50–99%) and the owner or admin who gets the alert, in
-`openbot-machine-alerts-v1.json` (`src/main/machine-alerts.ts`). With no member set, or when that
+`starbot-machine-alerts-v1.json` (`src/main/machine-alerts.ts`). With no member set, or when that
 member is no longer an admin, the owner gets it. The host checks the machine once a minute. A metric
 at or above its level alerts once, and again each day while it stays there; CPU must stay above for
 five readings. The alert ends when the use goes 5 points below the level. The host sends the
@@ -140,10 +140,10 @@ as an enterprise customer's, from 1 to 1000. It has the rules of `server_member_
 [hosted servers](../hosted-servers.md)): the row names the owner account and applies only while that
 account owns the server, it stays when the owner registers the host again, and it stops when the
 account is deleted. The unlinked bucket has no custom limit. No route writes the row; add, change or
-delete it by hand (`openbot-auth-test` for the test Worker):
+delete it by hand (`starbot-auth-test` for the test Worker):
 
 ```sh
-bunx wrangler d1 execute openbot-auth --cwd apps/auth-api --remote --command \
+bunx wrangler d1 execute starbot-auth --cwd apps/auth-api --remote --command \
   "INSERT INTO server_site_limits(server_id, owner_user_id, site_limit, created_at, updated_at)
    SELECT host_id, owner_user_id, 200, unixepoch() * 1000, unixepoch() * 1000
      FROM remote_hosts WHERE host_id = '<server id>'
@@ -345,7 +345,7 @@ this computer's included. `instance-transfer:copy` is scoped to the destination 
 server settings and without chat history to a temporary file. As in a file export, the file also has
 the channels that have a selected agent as a member and the Shared folder. Each apply adds the
 channels again as new channels. Main then keeps only the settings of the copied agents in the file
-(`InstanceTransferService.keepCopiedSettings`, with `@openbot/team-client/instance-transfer-copy`): the
+(`InstanceTransferService.keepCopiedSettings`, with `@starbot/team-client/instance-transfer-copy`): the
 routine flows between them, the places on their routine canvas, and the workflows with a step for one
 of them or an output to one of their channels. MCP servers, custom providers and agents, sidebar
 sections and shared skills stay out. It writes a new manifest and a new central directory over the old
@@ -362,7 +362,7 @@ added beside it. The browser client has no copy: it connects to one host at a ti
 The mobile app has the same copy in Server settings > Transfer > Copy to another server. The source
 is the server of the page, and the destination is another online server that the user administers
 with `instance-transfer-v1`. The phone downloads the file from the source with the export route,
-keeps the same settings as the desktop (`copiedTransferUpload` in `@openbot/team-client`, which decodes
+keeps the same settings as the desktop (`copiedTransferUpload` in `@starbot/team-client`, which decodes
 only the Base64 of the manifest and the end of the file), sends it to the destination with the upload
 route, and applies all of its agents with the settings. The phone uses
 only `instance-transfer-v1`, so the file is at most 100 MB. The file stays in memory on the phone and
@@ -538,7 +538,7 @@ is format 3 when a step after the trigger reads one of these names in `{{name}}`
 step declares that name. A host of format 2 does not give these fields, so the editor offers them,
 and checks names against them, only when `hostFormat` is 3 or higher (`WorkflowAnswerScope`).
 
-An `openbot.workflow` file holds one workflow (`packages/contracts/src/ipc-workflow-file.ts`). It has
+An `starbot.workflow` file holds one workflow (`packages/contracts/src/ipc-workflow-file.ts`). It has
 `format`, the file `version`, the `graphFormat` of the graph, the `minAppVersion` (the version of the
 app that wrote it), the title, the graph, `references`, `links` and `assets`. The id fields of the
 node registry (`workflowIdFields`) decide what changes. An agent or a channel id becomes a key such as
@@ -627,7 +627,7 @@ manages the agents of the workflow can pause or resume it. With the capability, 
 client strips `paused` from `create` when the host does not have the capability. The capability goes
 to protocol 10 peers. The state is in the `paused` column of `workflows` (migration 68).
 
-`workflows-portable-v1` exports a workflow as an `openbot.workflow` file
+`workflows-portable-v1` exports a workflow as an `starbot.workflow` file
 (`packages/contracts/src/ipc-workflow-file.ts`). `POST /v1/workflows/export { workflowId }` answers
 `{ text, assets, problem }`. Only a member who manages the agents of the workflow can export it. The
 host writes the file with the names of its agents and channels, not their ids, and with each asset
@@ -675,11 +675,11 @@ The optional `workflow-folders-v1` capability (`team-protocol/workflow-folders-v
 adds `POST /v1/workflow-folders` and `POST /v1/workflow-folders/actions` for the folders of the
 Workflows page. The folders are one flat list for the server, and a workflow is in one folder or in
 none. The folders are a layout only: a change moves, copies and deletes no workflow. The host keeps
-them in `openbot-workflow-folders-v1.json` in its user data (`src/backend/workflow-folders-store.ts`,
+them in `starbot-workflow-folders-v1.json` in its user data (`src/backend/workflow-folders-store.ts`,
 a versioned JSON file), and `src/main/workflow-folders-service.ts` applies each action (create,
 rename, delete, place) for the `workflows:folders` and `workflows:folder-action` IPC of this computer
 and for the route, so a joined server uses the same rules (`applyWorkflowFolderAction` in
-`@openbot/contracts/ipc-workflow-folders`). The placement shows only the workflows that the member
+`@starbot/contracts/ipc-workflow-folders`). The placement shows only the workflows that the member
 can see, with the same filter as the workflow list. A member who may use workflows reads each empty
 folder and each folder with a workflow that the member can see; a folder with only hidden workflows
 does not show. Each member who may use workflows creates folders. To rename or delete a folder, to
@@ -1086,7 +1086,7 @@ host advertises a capability only when its `TeamApiAdmin` member exists.
 | `agent-instructions-v1` | Read and save the instruction file at the root of an agent's workspace (`AGENTS.md`, or `CLAUDE.md` in an older workspace). A save sends the text that the edit started from; the host refuses it with 409 when the file changed. The workspace path does not cross the wire, and a client cannot show the file in its file manager. Protocol 9 only | `agentInstructions` |
 | `browser-profiles-v1` | Named browser profiles of the host: list, create, rename, recolor, clear, delete, and the profile of each agent. One route, `/v1/browser/tab-profiles`, also answers a member: the profile label of each tab that the member can see. Cookies and site data stay on the host. Advertised when the host has `browserProfiles` | `agentAdmin` |
 | `browser-proxies-v1` | Saved proxies of the host's named browser profiles: list, save, delete, and the proxy of each named profile (`/v1/admin/browser-proxies`, `/save`, `/delete`, `/v1/admin/browser-profiles/proxy`). The list also has the computers of members, and `/computer` adds the computer of the member who sends it; no member can add the computer of another. A password goes to the host only in a save request and never comes back. Advertised when the host has `browserProfiles` | `agentAdmin` |
-| `browser-egress-v1` | The data channel `openbot.browser-egress.v1`, which a desktop client opens only while its member shares the internet connection of that computer with the server. Only the host opens streams: each is one TCP connection of a browser profile with that member's computer as its proxy. The client connects only to a public internet address that it resolved itself, on any port. At most 256 streams, 256 KiB of credit for each stream. A lost egress channel never closes the connection. Advertised when the host has `browserProfiles` | the member's own computer |
+| `browser-egress-v1` | The data channel `starbot.browser-egress.v1`, which a desktop client opens only while its member shares the internet connection of that computer with the server. Only the host opens streams: each is one TCP connection of a browser profile with that member's computer as its proxy. The client connects only to a public internet address that it resolved itself, on any port. At most 256 streams, 256 KiB of credit for each stream. A lost egress channel never closes the connection. Advertised when the host has `browserProfiles` | the member's own computer |
 | `browser-profiles-events-v1` | One event with no data, `browser-profiles-changed`, after each change of the named browser profiles or of an agent's profile. A client reads the `browser-profiles-v1` routes again. Advertised when the host has `browserProfiles` | `browserProfiles` |
 | `skills-admin-v1` | List, install, remove, enable skills by marketplace id | `agentAdmin` |
 | `shared-tables-v1` | List and delete shared tables | `sharedTables` |
@@ -1201,7 +1201,7 @@ defaults for a joined server; mobile shows it in Server settings > Agents.
 homes (`POST /v2/remote/hosts/:hostId/signal-homes`, machine token) and measures the latency of each
 one: one `GET /health/ready` to open the connection, then the median of three more. A home that does
 not answer in 3 seconds has no latency. The host uses a measurement again for 60 seconds, because any
-member can read the list. The choice is in `openbot-signal-home-v1.json` (`null` is
+member can read the list. The choice is in `starbot-signal-home-v1.json` (`null` is
 automatic) and does not go with an instance transfer, because the latency belongs to the computer.
 Each host ticket that asks for a home sends it as `preferredSignalHome`. The account service gives
 the chosen home when it answers, and the automatic home when it fails or does not answer. A change
@@ -1216,7 +1216,7 @@ shows it for a joined server. Mobile shows a Signal server row in Server setting
 host lists two or more homes, with the colored latency of the home in use (green under 100 ms, yellow
 under 200 ms, red above or with no answer). Only an owner or an admin can open the list and choose. Safe mode reads the saved choice and sends it too.
 
-`host-timezone-v1` reads and sets the server timezone (`openbot-server-timezone-v1.json`; `null` is
+`host-timezone-v1` reads and sets the server timezone (`starbot-server-timezone-v1.json`; `null` is
 automatic, the system zone of the host). When an agent creates a routine, the zone comes from the tool
 call first, then from the sender's last message in that turn, then from this setting. The sender's
 zone stays in memory only, so after a restart a queued message uses the server timezone. Agent import
@@ -1226,15 +1226,15 @@ because Chromium reads the zone of its pages only when a renderer starts: the ag
 agent processes and main use it after the next restart (#8935). "Automatic" still shows and uses the
 zone of the computer from before that change.
 
-`host-turn-limits-v1` reads and sets the turn limits of the host (`openbot-host-turn-limits-v1.json`).
+`host-turn-limits-v1` reads and sets the turn limits of the host (`starbot-host-turn-limits-v1.json`).
 `turnLimit` is the most turns that run at the same time on the host; `null` is automatic: 2, 8 or 16 by
 the memory of a server, no limit on a desktop computer. `automaticTurnLimit` gives that value. A chosen
 value can be above it; low memory still holds a new turn. `agentTaskLimit` is the task limit of an
 agent with no limit of its own; `null` is `defaultAgentTaskLimit` (4). A save starts the turns that a
-higher limit lets start. `openbot status` shows the limit that runs.
+higher limit lets start. `starbot status` shows the limit that runs.
 
 `host-personality-v1` reads and sets how the agents of a server talk while they work
-(`openbot-server-personality-v1.json`, Server settings → Personality). `natural`, the default, tells
+(`starbot-server-personality-v1.json`, Server settings → Personality). `natural`, the default, tells
 the agents to send short updates between their steps, and the chat shows them as messages.
 `classic` keeps the earlier prompt, and the chat keeps those updates in the steps. Any member reads
 the style, so each client knows what to show; only an owner or admin changes it. A change unloads the
@@ -1243,12 +1243,12 @@ agents' threads, so the next turn uses the new prompt. A host without the capabi
 
 `host-restart-v1` lets an owner or admin restart a self-hosted server from Restart server in the
 server menu (desktop and web client) or in Server settings (mobile). Only a host in server mode
-(`OPENBOT_SERVER=1`, not a hosted server) advertises it, because only there does a service manager
-start the app again: systemd (`Restart=always` in `openbot.service`) or the Docker restart policy.
+(`STARBOT_SERVER=1`, not a hosted server) advertises it, because only there does a service manager
+start the app again: systemd (`Restart=always` in `starbot.service`) or the Docker restart policy.
 The host answers, then quits; it does not use `app.relaunch`, which would start the app outside
 `xvfb-run`. Running agent turns stop, as on any restart. A hosted server still restarts through the
 account service, and a server on this computer through `localServers`. A host that does not answer
-cannot get the request; then the owner runs `sudo openbot restart`.
+cannot get the request; then the owner runs `sudo starbot restart`.
 
 `owner-transfer-v1` lets the owner give the server to another StarBot account from Server Settings ›
 Members (desktop, web client and mobile). The owner enters an email; the account service stores a
@@ -1289,21 +1289,21 @@ place that sets the limit, for this computer (`hostAdmin.setAgentMemoryLimit`, l
 joined server. App Settings does not show it, so that one name does not have two values.
 
 `memory-review-v1` reads and sets how many completed turns of one conversation pass between two
-background memory reviews of the host's agents (`openbot-memory-review-v1.json`; 10, 20 or 40, default
+background memory reviews of the host's agents (`starbot-memory-review-v1.json`; 10, 20 or 40, default
 20; `0` is Off). The snapshot gives the value and the values that the host permits; the host refuses
 other values. The agent service reads the value at each use, so a change applies from the next turn.
 Server settings → General → Agents → Memory review sets it for this computer
 (`hostAdmin.setMemoryReview`, local handler) and for a joined server.
 
 `skill-learning-v1` reads and sets what the background memory reviews of the host's agents do when a
-chat teaches an agent a skill (`openbot-skill-learning-v1.json`; `automatic`, the default, writes
+chat teaches an agent a skill (`starbot-skill-learning-v1.json`; `automatic`, the default, writes
 and installs the skill for that agent; `ask` asks the user in the chat first; `off` does neither).
 The snapshot gives the mode and the modes that the host permits; the host refuses other values. A
 client shows an unknown mode from a later host as its raw value. The agent service reads the value
 at each review. Server settings → General → Agents → Skill learning sets it for this computer
 (`hostAdmin.setSkillLearning`, local handler) and for a joined server.
 
-`browsing-memory-v1` reads and sets "Learn from my browsing" (`openbot-browsing-memory-v1.json`,
+`browsing-memory-v1` reads and sets "Learn from my browsing" (`starbot-browsing-memory-v1.json`,
 `{ enabled }`, off by default) at `POST /v1/admin/host/browsing-memory` and
 `POST /v1/admin/host/browsing-memory/update` (owner or admin). While it is on, the host records the
 pages and the controls that a person uses in an agent tab that they hold, and the next memory review
@@ -1330,7 +1330,7 @@ sends the user's yes. The desktop handler asks a joined host only when it advert
 `agent-notification-levels-v1` reads and sets the notification levels that the signed-in member chose
 on this server, for all of their devices: the level of the whole server (`server`, `null` until they
 choose one) and the level of each agent (`all`, `needs-me` or `nothing`; `null` removes it). The host
-keeps the levels in `openbot-agent-notification-levels-v1.json`, by member ID; the owner's levels have
+keeps the levels in `starbot-agent-notification-levels-v1.json`, by member ID; the owner's levels have
 the key `owner`, so the desktop app of the host computer and the owner's phones read the same levels. A
 member reads and sets only their own levels, and the read leaves out the agents that the member cannot
 see. After each change, the host sends `agent-notification-levels-changed` with all of the member's
@@ -1339,7 +1339,7 @@ once on the desktop and the reverse. The owner's levels change in the host store
 the desktop app gets the same event from `RemoteServerManager`. Each client also reads the levels when
 a server connects; the desktop reads them for each notification too. The server level replaces the level that each device kept for the
 server before (the effective level is `server ?? the device level`); the agent level replaces the
-server level for that agent (`agentNotificationLevel` in `@openbot/team-client`), in both directions.
+server level for that agent (`agentNotificationLevel` in `@starbot/team-client`), in both directions.
 A server set to Nothing, or muted on a device, stays quiet for all agents. A mute stays on each device.
 The shared switch of the agent (`notifications`) still turns notifications off for every member, because the released Team API carries it. Current clients do not show it in the agent settings any more: the matrix shows such an agent with a "Turn on" button, which sets the switch back on. The
 host applies the levels to phone notifications itself (`PushNotificationService`), so phones of every
@@ -1347,13 +1347,13 @@ version follow them. On the desktop, `RemoteServerManager` reports the effective
 `ServerSummary`, so the rail, the menus and the island follow it.
 
 Settings › Notifications is the one place that changes these levels: a matrix of the servers and their
-agents (`NotificationMatrix` in `@openbot/ui`, and its own screen on the phone). Server settings have no
+agents (`NotificationMatrix` in `@starbot/ui`, and its own screen on the phone). Server settings have no
 notification section on any device; the server menu (desktop and web) and the agent settings show the
 current level and open the matrix. A joined server
 without the capability keeps the level of each device and shows "This computer only".
 
 `sidebar-pins-v1` keeps the agents and channels that the signed-in member pinned on this server, in
-their order, for all of their devices. The host keeps the lists in `openbot-sidebar-pins-v1.json` by
+their order, for all of their devices. The host keeps the lists in `starbot-sidebar-pins-v1.json` by
 member ID (`SidebarPinStore`); the owner's list has the key `owner`, so the desktop app of the host
 computer and the owner's phones read the same list. `set` replaces the list; `seed` saves it only when
 the member has no list yet (`updatedAt` is `null`), so the first connect after the upgrade moves the
@@ -1368,7 +1368,7 @@ a pin (`phoneSidebarPins`). Workflow pins stay on each phone. A server without t
 pins of each device, as before.
 
 `prompt-cache-ttl-v1` reads and sets how long Claude keeps the prompt cache of the host's agents
-(`openbot-prompt-cache-ttl-v1.json`; `5m` or `1h`, default `5m`). With `1h` the host starts each
+(`starbot-prompt-cache-ttl-v1.json`; `5m` or `1h`, default `5m`). With `1h` the host starts each
 Claude process with `ENABLE_PROMPT_CACHING_1H=1`. Claude Code reads this flag before its subscription
 rules, so subagents and a subscription that uses extra usage also get 1 hour. With `5m`, the default, it
 sets nothing, so Claude Code uses its own choice: 5 minutes with an API key, 1 hour for the main thread of a
@@ -1379,7 +1379,7 @@ The Cache section of the Claude page in Server settings → Providers sets it fo
 for a joined server.
 
 `claude-compact-window-v1` reads and sets the size at which Claude Code compacts the chats of the
-host's agents (`openbot-claude-compact-window-v1.json`; `tokens` is a whole number from 100,000 to
+host's agents (`starbot-claude-compact-window-v1.json`; `tokens` is a whole number from 100,000 to
 1,000,000, or `null`, the default). With a size the host starts each Claude process with
 `CLAUDE_CODE_AUTO_COMPACT_WINDOW` set to it. Claude Code reads this variable before the
 `autoCompactWindow` of the Claude settings, and lowers it to the context window of a smaller model.
@@ -1391,7 +1391,7 @@ server, on the web client and in the mobile app.
 
 `provider-environment-v1` reads and sets the variables of one provider of the host (see
 [Provider variables](providers.md#provider-variables)): names and plain values in
-`openbot-provider-environment-v1.json`, sensitive values in the encrypted provider key file. A read
+`starbot-provider-environment-v1.json`, sensitive values in the encrypted provider key file. A read
 gives a sensitive variable with an empty value and `stored: true`. A change restarts the provider when
 its turns end, and an agent's own process before the agent's next turn. The Environment section of each
 provider page in Server settings → Providers sets them for this computer, for a joined server, on the
@@ -1399,7 +1399,7 @@ web client and in the mobile app. Instance transfer does not copy them: the sens
 encrypted for this computer.
 
 `model-visibility-v1` reads every model that one provider of the host lists, and sets which of them
-the model picker shows. The file `openbot-model-visibility-v1.json` keeps, for each provider, only the
+the model picker shows. The file `starbot-model-visibility-v1.json` keeps, for each provider, only the
 models that an admin turned off (`hidden`); the picker leaves them out. Every other model shows, so a
 new release shows after an admin edits the list too. The default below puts a model in the main list
 or under Older models; an admin cannot move a model between them. `shown: null` on the update route
@@ -1439,7 +1439,7 @@ each provider page in Server settings → Providers sets the list for this compu
 server. A change sends a `status` event, so each client reads the model list again.
 
 `provider-default-v1` reads and sets the provider, and the model beside it, that a new agent of the
-host starts on when its creator chooses none. It is the setup choice of the host (`openbot-setup`
+host starts on when its creator chooses none. It is the setup choice of the host (`starbot-setup`
 file, `preferredProvider` and `preferredModel`): a set writes the file and calls
 `AgentService.setPreferredProvider`, as the local Settings save does. A read gives the provider that
 `AgentService.preferredProvider` uses now, so a host before its setup choice reads `codex`. A
@@ -1473,7 +1473,7 @@ only when the host advertises the capability.
 `host-update-v1` runs the same update as the host's own Settings. `src/main/requested-update.ts`
 keeps the schedule in memory: who asked, and whether the restart waits until
 `describeRestartReadiness` reports no running work or happens as soon as the update is ready. The
-host user can turn the routes off with "Allow updates from server members" (`openbot-update-preference-v1.json`,
+host user can turn the routes off with "Allow updates from server members" (`starbot-update-preference-v1.json`,
 default on) and can cancel a restart that waits. The host still advertises the capability when the
 setting is off, so the client can show why. A Host Manager tenant refuses the routes. The client
 reads the status again every second while a check, a download or a restart runs. An admin can also
@@ -1522,7 +1522,7 @@ older build ignores it. This is a routing rule for the StarBot tools, not a wall
 agent with Full access can still read the files of other agents on the host.
 `scripts/agent-message-access-e2e.ts` checks these rules.
 
-The host keeps the roles in `openbot-agent-access-v1.json`, by server ID (`src/main/agent-access-store.ts`).
+The host keeps the roles in `starbot-agent-access-v1.json`, by server ID (`src/main/agent-access-store.ts`).
 It is a preference file, not the database: there is no migration, and an older build ignores it, so a
 downgrade keeps the roles. A file that does not decode closes every agent to members until the next
 save. Nothing goes to the account service. An owner or admin reads the whole set; a member reads only
@@ -1533,7 +1533,7 @@ source before the copy shows to clients, so a copy does not open memories that t
 each change it sends `agent-access-changed` and a new `agents-changed` to each connection, so the agent
 lists of members change without a reload.
 
-Server settings → Roles (`ServerRolesSection.tsx`, `@openbot/ui/features/servers/ServerRoles`) edits the
+Server settings → Roles (`ServerRolesSection.tsx`, `@starbot/ui/features/servers/ServerRoles`) edits the
 set on desktop and web. The role menu of each member row on the Members page sets the server role
 (Member or Admin, through the same confirmation as before) and the custom roles. The tab shows for the
 local server and for a joined server whose host advertises the capability to an owner or admin.
@@ -1565,7 +1565,7 @@ for a join. A member update or removal gives the actor only to the changes of th
 changes that the same directory sync finds have a null actor. A client leaves out an entry whose
 `kind` it does not know, so a later kind needs no new capability.
 
-The host keeps the log in `openbot-server-audit-v1.json`, by server ID (`src/main/server-audit-store.ts`),
+The host keeps the log in `starbot-server-audit-v1.json`, by server ID (`src/main/server-audit-store.ts`),
 with the newest 500 entries of each server. Like the roles file it is a preference file: no migration,
 and an older build ignores it. A file that does not decode reads as an empty log, and an entry that
 does not decode is left out. The next write removes those entries, so a downgrade loses the entries
@@ -1576,7 +1576,7 @@ member update, a removal, and each account directory sync (`memberAuditChanges`)
 or change runs at a time, from the read of the directory to the audit entry, so a slow read cannot
 apply an older list after a newer one. A join keeps the time when the membership was made.
 
-Server settings → Audit log (`ServerAuditSection.tsx`, `@openbot/ui/features/servers/ServerAuditLog`)
+Server settings → Audit log (`ServerAuditSection.tsx`, `@starbot/ui/features/servers/ServerAuditLog`)
 shows the log on desktop and web, with a filter by kind and a search. The tab shows for an owner or
 admin of the local server and of a joined server whose host advertises the capability. It reads the log
 again each time it shows.
@@ -1603,7 +1603,7 @@ starts a test sign-in at the provider. Only a test that passes saves the values.
 
 - A domain belongs to the first server whose test passes with it. Public mail domains (`gmail.com`
   and others) are refused.
-- A production account service also needs the TXT record `_openbot.<domain>` with the value of the
+- A production account service also needs the TXT record `_starbot.<domain>` with the value of the
   server. A development API does not check DNS.
 - The issuer field also accepts the metadata URL (the issuer with `/.well-known/openid-configuration`)
   and an Entra ID tenant domain. The discovery document can give an issuer on the same origin, such as
@@ -1625,11 +1625,11 @@ once between the account service and the provider, and once between the app and 
   `127.0.0.1`, opens the provider page in the user's browser, and gets a one-time code (2 minutes)
   at the listener. It exchanges the code and its verifier for an account session.
 - Web `/app`: `POST /api/browser/company/start` keeps the state and the verifier in the HttpOnly
-  `__Host-openbot-company` cookie (10 minutes) and opens the provider in the same tab.
-  `GET /api/browser/company/return` exchanges the code, sets the `__Host-openbot-web` session cookie,
+  `__Host-starbot-company` cookie (10 minutes) and opens the provider in the same tab.
+  `GET /api/browser/company/return` exchanges the code, sets the `__Host-starbot-web` session cookie,
   and answers 303 to `/app`. The cookie stops a login CSRF.
 - Phone (`signInMobileWithCompany` in `apps/mobile/src/features/auth/api/mobile-auth.ts`): the start
-  names the return `openbot://company-sign-in` (`MOBILE_COMPANY_SIGN_IN_RETURN`), which only a
+  names the return `starbot://company-sign-in` (`MOBILE_COMPANY_SIGN_IN_RETURN`), which only a
   sign-in start accepts, not a test. `openAuthSessionAsync` opens the provider page and takes the
   return, and `+native-intent.tsx` ignores another copy of the link. The app gives the code, its
   verifier and its device to `POST /v1/mobile-auth/company/exchange`, which makes a mobile session
@@ -1697,19 +1697,19 @@ Billing is per server. One account can pay for several servers; each server has 
 subscription. The Account Worker (`apps/auth-api/src/server/billing-service.ts`) talks to the Stripe
 REST API with `fetch`; there is no Stripe SDK. The plan catalog in `packages/contracts/src/billing.ts`
 holds the plan IDs, storage, member and site limits, relative speed and lookup keys, and no amounts. The amounts are six Stripe Prices with the lookup
-keys `openbot_{plan}_{interval}`. `bun run api:stripe:bootstrap` (`scripts/stripe-bootstrap.ts`)
+keys `starbot_{plan}_{interval}`. `bun run api:stripe:bootstrap` (`scripts/stripe-bootstrap.ts`)
 creates them and the Customer Portal settings.
 
 - The add server dialog starts a plan. The hosting service
   (`apps/auth-api/src/server/hosted-billing.ts`) makes the Stripe customer before the Checkout, so
   two open Checkouts use one customer. The Checkout sets the subscription metadata
-  `openbot_user_id` and `openbot_server_id` (`BILLING_METADATA`). The billing service calls the
+  `starbot_user_id` and `starbot_server_id` (`BILLING_METADATA`). The billing service calls the
   `onSubscriptionSynced` hook after each subscription sync; the hosting side uses it to provision,
   stop and resume servers, so billing does not know about boat. See
   [hosted servers](../hosted-servers.md#lifecycle). The webhook links a new Stripe customer to the
-  account from `openbot_user_id`. It never moves a known
+  account from `starbot_user_id`. It never moves a known
   customer to another account, and it skips a subscription that names no account.
-- Desktop Settings → Billing and the web Billing dialog render `@openbot/ui/features/billing`: one
+- Desktop Settings → Billing and the web Billing dialog render `@starbot/ui/features/billing`: one
   row for each open plan, with the server name, the plan, its price, and its renewal controls.
   Hosted plans support cancellation that keeps data, Keep server, and explicit deletion now or
   after the paid period. A stored deletion date and subscription ID drive the cron; a fresh
@@ -1731,15 +1731,15 @@ creates them and the Customer Portal settings.
   (not `XX` or `T1`). The form starts on it; only the country that the buyer sends is saved.
   - A buyer in Poland, and a buyer in another EU country with no valid VAT ID, pay Polish VAT: the
     Checkout and the license split subscription get the `default_tax_rates` of the Tax Rate with the
-    metadata `openbot_vat=pl_standard` (`VAT_TAX_RATE`, made by `api:stripe:bootstrap`).
+    metadata `starbot_vat=pl_standard` (`VAT_TAX_RATE`, made by `api:stripe:bootstrap`).
   - A VAT ID of another EU country gets reverse charge (`tax_exempt=reverse`, no Tax Rate) only after
     the EU VIES REST service confirms it. An unknown ID returns 400 `vat_id_invalid`; no answer from
     VIES returns 503 `vat_id_unverified`, and nothing changes. The optional setting
     `VIES_REQUESTER_VAT_ID` (the seller's VAT ID) makes VIES return a consultation number, which the
-    customer metadata `openbot_vies_request` keeps as proof.
+    customer metadata `starbot_vies_request` keeps as proof.
   - A buyer outside the EU (also the UK, Norway and Switzerland) pays no VAT.
   - A `PUT` of new details also sets the Tax Rate of each open subscription with the metadata
-    `openbot_vat_treatment`, so that the next invoice of a plan that runs gets the new VAT. Checkout,
+    `starbot_vat_treatment`, so that the next invoice of a plan that runs gets the new VAT. Checkout,
     the license split and `scripts/stripe-vat-migrate.ts` write that metadata. A plan from before VAT
     has none and keeps its tax. The buyer declares the new country with no proof, so each subscription
     whose VAT treatment changes writes a log line and sends a [pool alert](../hosted-servers.md#pool-alerts)
@@ -1784,17 +1784,17 @@ gives 8 Stripe prices (`LICENSE_PLANS`):
 
 | Plan | Lookup key | Month (EUR) | Year (EUR) | Users |
 | --- | --- | --- | --- | --- |
-| Starter | `openbot_license_starter_{month,year}` | 10 | 96 | 1 |
-| Starter bundle | `openbot_license_starter_bundle_{month,year}` | 9 | 86.40 | 1 |
-| Team | `openbot_license_{month,year}` | 25 for 2 users, + 15 for each extra user | 240, + 144 | 2–10 |
-| Team bundle | `openbot_license_bundle_{month,year}` | 22.50, + 13.50 | 216, + 129.60 | 2–10 |
+| Starter | `starbot_license_starter_{month,year}` | 10 | 96 | 1 |
+| Starter bundle | `starbot_license_starter_bundle_{month,year}` | 9 | 86.40 | 1 |
+| Team | `starbot_license_{month,year}` | 25 for 2 users, + 15 for each extra user | 240, + 144 | 2–10 |
+| Team bundle | `starbot_license_bundle_{month,year}` | 22.50, + 13.50 | 216, + 129.60 | 2–10 |
 
 A year is 12 months less 20% (`LICENSE_YEAR_DISCOUNT_PERCENT`). The bundle discount
 (`LICENSE_BUNDLE_DISCOUNT_PERCENT`: 10%) comes off after it. The amounts are
 in `LICENSE_PLAN_PRICES` (EUR is the base currency; USD and PLN are `currency_options` with their own
 amounts). Team prices are graduated; the 1-user prices are flat. `stripe-bootstrap.ts` creates each
-price with the metadata `openbot_license_tier`, `openbot_license_interval` and
-`openbot_license_bundle`, and `licensePlanFromPrice` reads them. A price with no metadata is Team monthly: the license from before
+price with the metadata `starbot_license_tier`, `starbot_license_interval` and
+`starbot_license_bundle`, and `licensePlanFromPrice` reads them. A price with no metadata is Team monthly: the license from before
 the tiers used the same lookup key. The license terms allow 3 devices for each user
 (`LICENSE_DEVICES_PER_USER`); the app shows this and does not count devices.
 
@@ -1812,7 +1812,7 @@ the tiers used the same lookup key. The license terms allow 3 devices for each u
   `license_users_in_use`, as a license checkout does. One Checkout page then has 2 line items: the server price, and the license bundle
   price for the same interval and currency, with the users as its quantity. The customer pays one
   invoice. On the first sync of the paid subscription, `LicenseService.splitOrder` makes a license
-  subscription with the metadata `openbot_order_subscription` (the server subscription), anchored at
+  subscription with the metadata `starbot_order_subscription` (the server subscription), anchored at
   the server period end with `proration_behavior=none`, so its first invoice is 0. Then it deletes the
   license item from the server subscription, also with no proration. Each later sync runs the split
   again until it is done, and the metadata stops a second license subscription. The sales ledger
@@ -1826,7 +1826,7 @@ the tiers used the same lookup key. The license terms allow 3 devices for each u
   "Free until" with the date in UTC. A license checkout sets `subscription_data[trial_end]`, so the
   license is `trialing` and the first charge is on the trial end. A server order during the promotion
   has no license item: the server is the only line, and the session and subscription metadata keep
-  the order (`openbot_order_license_{tier,users,interval,trial_end}`). `splitOrder` then makes the
+  the order (`starbot_order_license_{tier,users,interval,trial_end}`). `splitOrder` then makes the
   license subscription at the bundle price with `trial_end` (at least 1 hour ahead, for a late
   webhook) and removes the order metadata from the server subscription. The 0 trial invoice is a
   `first_purchase` sales fact of 0, and the charge on the trial end is a `renewal`. Apps before the
@@ -1860,7 +1860,7 @@ the tiers used the same lookup key. The license terms allow 3 devices for each u
   subscriptions, and a server checkout in another currency gets 409 `billing_currency`. Add server
   opens in that currency and does not let the user change it. Checkout cannot buy fewer users than are in use. An increase is charged at once
   (`always_invoice`). A decrease starts at the next invoice and cannot go below the users in use or
-  below 5. The subscription metadata `openbot_paid_users` and `openbot_paid_period_end` keep the
+  below 5. The subscription metadata `starbot_paid_users` and `starbot_paid_period_end` keep the
   users paid in the current period, so an increase after a decrease charges only the users above
   that number.
 - Checkout keeps one open page that sells a license for each account: a license page, or a server
@@ -1878,12 +1878,12 @@ the tiers used the same lookup key. The license terms allow 3 devices for each u
   monthly for 5 users in place of the added user. At 25 users it shows "Contact
   us" and creates no invite. Admins get no step; the join tells the person that the license is full.
 - Desktop calls the `license` IPC group; the web client calls the browser routes. Both render
-  `@openbot/ui/features/billing/LicenseSection` in the license slot of `BillingPanel`.
+  `@starbot/ui/features/billing/LicenseSection` in the license slot of `BillingPanel`.
 
 ## Servers on this computer
 
 The desktop can run more servers on the same computer. Each one is a separate workspace: its own
-`openbot.db`, agents, chats, workspace folders, server settings, MCP servers and browser data. App
+`starbot.db`, agents, chats, workspace folders, server settings, MCP servers and browser data. App
 preferences and the account sign-in stay with the desktop. The first server, "Local", does not
 change.
 
@@ -1895,11 +1895,11 @@ writes one ready line to stdout with the API address and its identity. The line 
 desktop pins the identity at the first start, signs in as the owner with the password, and attaches
 the server as a joined server with `thisComputer: true`. `kind` stays `"remote"`.
 
-- **Registry.** `openbot-local-servers-v1.json` in the desktop userData. The owner password is 32
+- **Registry.** `starbot-local-servers-v1.json` in the desktop userData. The owner password is 32
   random bytes, sealed with the secret storage cipher. A file that this build cannot read is
   read-only: no server starts and no write replaces it. Folder names come from a UUID, so a
   changed file cannot name another path.
-- **Connection entry.** The server is an HTTPS entry in `openbot-remote-servers-v1.json`. The
+- **Connection entry.** The server is an HTTPS entry in `starbot-remote-servers-v1.json`. The
   directory sync keeps it. While the child is stopped, the entry has the address
   `http://127.0.0.1:0` and no token, so a client never reaches an old port.
 - **Lifetime.** The child ends when its control pipe closes: stdin, or fd 3 on Windows, where
@@ -1907,7 +1907,7 @@ the server as a joined server with `thisComputer: true`. `kind` stays `"remote"`
   all children before the joined-server connections close (step 60). The sibling scan before an
   update leaves out the child PIDs. The desktop installs the update for its children too, so a
   restart when idle and the automatic install also wait while an agent of a child works (the
-  child's `OPENBOT_LOCAL_SERVER_WORKING` line, reason `agent-turn`). After an unexpected exit, the desktop starts the child again
+  child's `STARBOT_LOCAL_SERVER_WORKING` line, reason `agent-turn`). After an unexpected exit, the desktop starts the child again
   after 5 seconds, at most 3 times in 10 minutes. The owner password is registered for redaction
   and is never logged.
 - **Delete.** The desktop stops the child, removes the entry, and moves both folders to the trash
@@ -1929,7 +1929,7 @@ the server as a joined server with `thisComputer: true`. `kind` stays `"remote"`
   (`RemoteTeamDirectory`, `isRegisteredThisComputer`), as for a WebRTC server. Before the
   registration, they go to the child's Team API, which lists its owner. Invited people join over WebRTC.
   The child reads its members through the desktop app: it writes the line
-  `OPENBOT_LOCAL_SERVER_REQUEST members` to stdout, and the desktop app answers on the control pipe
+  `STARBOT_LOCAL_SERVER_REQUEST members` to stdout, and the desktop app answers on the control pipe
   with `members` (the account directory) or `members-unavailable` (not registered, or the read
   failed). After the desktop app changes or removes a member, it writes `members` without a request,
   and the child syncs it and closes the sessions that the directory no longer allows. The sync keeps
@@ -1965,15 +1965,15 @@ Limits:
 - The provider CLI sign-ins in the home folder (`~/.codex`, `~/.claude`) and `~/.agents/skills` are
   shared with the other servers.
 - Not confirmed: the memory of each child, the agent browser in a child with no window, and which
-  process gets an `openbot://` link on macOS.
+  process gets an `starbot://` link on macOS.
 
 ## macOS Host Manager
 
 `scripts/macos-tenant-setup.swift` is a separate administrator command for new Standard accounts.
 It uses OpenDirectory directly, creates only new empty homes, and stores generated credentials
 in a new root-only file before account creation. It is not installed or called by the daemon.
-The Host PKG installs this as `create-tenants`, alongside the standalone `openbot-host` CLI.
-`openbot-host-service.ts` owns setup/verification sequencing; `openbot-host-macos.ts` owns OS
+The Host PKG installs this as `create-tenants`, alongside the standalone `starbot-host` CLI.
+`starbot-host-service.ts` owns setup/verification sequencing; `starbot-host-macos.ts` owns OS
 operations. Passwords cross only the native helper's captured pipe and the administrator's tty,
 not the host protocol. The root-only recovery file is removed after successful presentation.
 `build-host-installer.ts` and `verify-host-installer.ts` own release packaging and the exact
@@ -2008,7 +2008,7 @@ turns while it is low and limits the turns that run at the same time. See
 
 A self-hosted server uses the same Linux build, scripts and units on the owner's own computer, with
 `/opt/StarBot/hosted/mode` set to `self`. It has no claim: main starts in server mode
-(`src/main/server-mode.ts`, `OPENBOT_SERVER=1`), and the `openbot` terminal command signs it in over
+(`src/main/server-mode.ts`, `STARBOT_SERVER=1`), and the `starbot` terminal command signs it in over
 a Unix socket in the 0700 runtime directory of the service user. Main publishes the host after each
 sign-in. See [self-hosted servers](../self-hosted-server.md).
 
@@ -2045,11 +2045,11 @@ the time until the workspace can be used, and the host requests that block that 
   `TeamWebRtcClientTransport` and of the HTTPS arm `requestJson` (desktop main): route template,
   method, transport, times, bytes and the requests in flight. The dev test client uses the HTTPS arm
   when its account has no WebRTC membership of the host, so the report names the transport. It records only when a sink is installed. The web harness installs
-  `globalThis.__openbotSyncProfile` before the page loads. Desktop main installs a file sink only in an
-  unpackaged build with `OPENBOT_DEV_SYNC_PROFILE=1`; it writes `dev-sync-profile.ndjson` in the profile
+  `globalThis.__starbotSyncProfile` before the page loads. Desktop main installs a file sink only in an
+  unpackaged build with `STARBOT_DEV_SYNC_PROFILE=1`; it writes `dev-sync-profile.ndjson` in the profile
   root, which no export reads. A route keeps its words and `v<n>` segments; every other segment becomes
   `:id`, and query values are dropped. Records never go to the trace file, the logs or analytics.
-- Marks use fixed names only, `openbot:remote-<step>`. Web: `session`, `workspace-code`,
+- Marks use fixed names only, `starbot:remote-<step>`. Web: `session`, `workspace-code`,
   `hosts-start`, `hosts`, `connect-start`, `peer:<step>`, `connected`, `workspace-ready`,
   `panels-ready` and `conversation-ready`. Desktop renderer:
   `workspace-load`, `workspace-shell`, `workspace-ready` and `conversation-ready`. Desktop main keeps
@@ -2067,7 +2067,7 @@ the time until the workspace can be used, and the host requests that block that 
   child by PID on `SIGUSR2` and starts it again. The run measures from the main process start, which
   is the first line of `dev-sync-profile.ndjson`. It writes `steps.md`, the time of each step from
   that origin.
-- `OPENBOT_DEV_CLIENT_TRANSPORT=webrtc` makes the test client sign in as the dev host user. The
+- `STARBOT_DEV_CLIENT_TRANSPORT=webrtc` makes the test client sign in as the dev host user. The
   account directory then lists the host, and the client connects over `webrtc-v2` as real users do.
   Without it, the client joins over the HTTPS arm. A new `dev:seed` gives the host a new id while the account keeps the old one; pass
   `--host-id=<id>` so the web client opens the new host.
@@ -2078,10 +2078,10 @@ the time until the workspace can be used, and the host requests that block that 
   each document and fetch request of the web page by that time, and each WebSocket message by half
   of it. Module files keep their time, because the dev server sends hundreds of them. The page wrapper
   also delays each `RTCDataChannel` send and message by half of it. For the desktop client, start
-  the stack with `OPENBOT_DEV_RTT_MS=<ms>`: an unpackaged main then delays the account service calls
+  the stack with `STARBOT_DEV_RTT_MS=<ms>`: an unpackaged main then delays the account service calls
   by the full time and each data-channel send and message by half of it. The desktop Signal socket is
   in the hidden peer window, so it keeps its time. The report warns when this value is not equal to
-  `--latency`. `OPENBOT_DEV_DOWNLINK_KBPS=<kbit/s>` also limits the data that an unpackaged desktop
+  `--latency`. `STARBOT_DEV_DOWNLINK_KBPS=<kbit/s>` also limits the data that an unpackaged desktop
   client receives on the data channel to that rate. `scripts/workflow-canvas-pictures-perf-e2e.ts`
   uses both values to measure the pictures of the Workflows canvas on a joined server.
 - A failed request records a safe code (`http/<status>/<code>`, `errno/<code>` or `error/<tag>`), and
@@ -2098,7 +2098,7 @@ A client connects to a live host with as few serial round trips as it can.
   (`refreshWebRtcCompatibility` forces the read). It does not read it twice in sequence.
 - The web app loads the workspace code at the same time as the session request.
 - The web client stores the negotiated host protocol in `localStorage`
-  (`openbot.web.host-protocol:<account>:<host>`). It holds the protocol number only. When it has one,
+  (`starbot.web.host-protocol:<account>:<host>`). It holds the protocol number only. When it has one,
   the gate reads start with that protocol at the same time as the compatibility read. When the new
   compatibility gives a different protocol, the client drops the early results and reads again. A
   first connection, with no stored protocol, reads compatibility first: without it the request frames
@@ -2126,7 +2126,7 @@ and replaces it when the host answers (`src/renderer/src/features/servers/remote
   queues or conversations. The channel rows stop the agents below them from moving down when the
   channel list comes.
 - It is in the renderer's `localStorage`, one key for each account and server
-  (`openbot:remote-frame:v1:<account>:<server>`), not in `openbot.db`. The host stays the source of
+  (`starbot:remote-frame:v1:<account>:<server>`), not in `starbot.db`. The host stays the source of
   truth. A frame older than 30 days is not shown, and a frame with no agents is not shown.
 - Desktop applies the frame only when setup is complete and the remote server has no content yet:
   `hasContent` turns on while `loaded` stays off, so the shell shows the cached-content notice. The

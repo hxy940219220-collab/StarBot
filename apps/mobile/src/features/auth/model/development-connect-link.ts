@@ -2,7 +2,7 @@ import {
   isMobileConnectDevelopmentHost,
   type MobileConnectHostBinding,
   parseMobileConnectUrl,
-} from "@openbot/contracts/mobile-connect";
+} from "@starbot/contracts/mobile-connect";
 
 type Listener = () => void;
 

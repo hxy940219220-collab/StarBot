@@ -1,6 +1,6 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { ListRoutineRunsInput, RoutineRun } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { ListRoutineRunsInput, RoutineRun } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
 import { createEffect, createMemo, createSignal } from "solid-js";
 
 export interface RoutineRunFailureSource {

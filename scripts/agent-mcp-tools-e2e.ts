@@ -11,8 +11,8 @@ import {
   COMPUTER_USE_MCP_SERVER_NAME,
   GITHUB_CONNECTOR_MCP_SERVER_ID,
   type McpServerConfig,
-} from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import { McpGateway } from "../src/backend/agent/mcp-gateway";
 import {
@@ -29,11 +29,11 @@ import {
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { CATALOG_PIN_MOVES, McpServerStore } from "../src/backend/mcp-server-store";
 import { startStdioMcpRelay } from "../src/backend/mcp-stdio-relay";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 import { catalogPluginSlug, loadCatalogPluginServers } from "../src/main/analytics-plugin-catalog";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-mcp-tools-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/agent-mcp-tools-e2e");
 const URL_SECRET = "url-secret-7f3a91";
 const HEADER_SECRET = "header-secret-2c8d40";
 
@@ -181,8 +181,8 @@ interface Call {
   removed: string[];
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-agent-mcp-tools-"));
-const database = new OpenBotDatabase(root);
+const root = await mkdtemp(join(tmpdir(), "starbot-agent-mcp-tools-"));
+const database = new StarBotDatabase(root);
 const servers: Record<Mode, { url: string; close: () => Promise<void> }> = {
   open: await mcpServer("open"),
   "sign-in": await mcpServer("sign-in"),
@@ -212,7 +212,7 @@ try {
     servers: store,
     credentials: NO_PROVIDER_CREDENTIALS,
     computerUseMcpServer: () => null,
-    logger: createOpenBotLogger("agent-service", () => undefined),
+    logger: createStarBotLogger("agent-service", () => undefined),
     hooks: {
       emitError: () => undefined,
       refreshAllAgentRuntimes: () =>
@@ -531,7 +531,7 @@ try {
       }),
       mcpAuthorization: () => Effect.succeed(null),
     },
-    logger: createOpenBotLogger("agent-service", () => undefined),
+    logger: createStarBotLogger("agent-service", () => undefined),
     hooks: { emitError: () => undefined, refreshAllAgentRuntimes: () => Effect.void },
   });
   const githubTools = mcpServersFromGateway(githubGateway);
@@ -549,7 +549,7 @@ try {
     githubTools,
   );
   assert.equal(githubTested.success, false);
-  assert.match(githubTested.result.error ?? "", /part of OpenBot/u);
+  assert.match(githubTested.result.error ?? "", /part of StarBot/u);
   const githubRemoved = await call(
     "the GitHub connection is not removed",
     "remove_mcp_server",
@@ -561,7 +561,7 @@ try {
   assert.equal(githubRemoved.approvals.length, 0);
 
   const reserved = await call("a reserved name is refused", "save_mcp_server", {
-    name: "openbot",
+    name: "starbot",
     url: servers.open.url,
   });
   assert.equal(reserved.success, false);

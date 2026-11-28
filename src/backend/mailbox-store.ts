@@ -1,9 +1,9 @@
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { playableMediaKind } from "@openbot/contracts/attachment-files";
-import { rewriteAttachmentReferences } from "@openbot/contracts/attachment-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { playableMediaKind } from "@starbot/contracts/attachment-files";
+import { rewriteAttachmentReferences } from "@starbot/contracts/attachment-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentRuntimeWorkItem,
   AgentTaskAwaitedReply,
@@ -21,7 +21,7 @@ import type {
   QueuedMessageReceipt,
   QueueSnapshot,
   QueueSteerFallback,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_EXCHANGE_ITEM_TYPE,
   AGENT_RUNTIME_ATTENTION_LIMIT,
@@ -32,11 +32,11 @@ import {
   isConversationMessageSender,
   isMessageReaction,
   QUEUE_STEER_FALLBACKS,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { QueueEditRejectedError } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { QueueEditRejectedError } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { Effect, Result } from "effect";
 import {
   AttachmentFiles,
@@ -56,7 +56,7 @@ import { routineNameInLimit } from "./database/legacy-conversation-message";
 import { mailboxReactionRowKey } from "./database/mailbox-projection";
 import { MailboxDeliveryGate } from "./mailbox-delivery-gate";
 import { runIdOrigins } from "./message-run-ids";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 import { isRecord } from "./protocol";
 import { recordRestartActivity } from "./restart-activity";
 
@@ -269,7 +269,7 @@ export const MESSAGING_LANE = "\u0001messaging";
 export class MailboxStore {
   readonly #statePath: string;
   readonly #files: AttachmentFiles;
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #queueUpdates = new Set<string>();
   #usesMessagingLane: (agentId: string, linkId: string) => boolean = () => true;
   readonly #editHolds = new Map<string, { editId: string; startedAt: number }>();
@@ -289,7 +289,7 @@ export class MailboxStore {
     reactionKeys: new Set<string>(),
   };
 
-  constructor(userDataPath: string, sharedRoot: string, database: OpenBotDatabase) {
+  constructor(userDataPath: string, sharedRoot: string, database: StarBotDatabase) {
     this.#statePath = join(userDataPath, "mailbox.json");
     this.#files = new AttachmentFiles({ userDataPath, sharedRoot });
     this.#database = database;

@@ -98,7 +98,7 @@ async function stopHosts(): Promise<void> {
 }
 
 beforeAll(async () => {
-  root = await mkdtemp(join(tmpdir(), "openbot-agent-database-version-"));
+  root = await mkdtemp(join(tmpdir(), "starbot-agent-database-version-"));
 });
 
 afterEach(stopHosts);

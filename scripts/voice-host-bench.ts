@@ -2,8 +2,8 @@ import { execFileSync, fork } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { availableParallelism, cpus, tmpdir, totalmem } from "node:os";
 import { join, resolve } from "node:path";
-import { isLocalVoiceModelId, type LocalVoiceModelId } from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isLocalVoiceModelId, type LocalVoiceModelId } from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import { SpeechPreferenceStore } from "../src/main/speech-preference-store";
 import { VoiceApiKeyStore } from "../src/main/voice-api-key-store";
@@ -35,9 +35,9 @@ import type {
 } from "../src/main/voice-transcription-protocol";
 import { MODEL_ENGINES, VoiceTranscriptionService } from "../src/main/voice-transcription-service";
 
-const RESOURCES_ROOT = resolve(".openbot-build/voice");
+const RESOURCES_ROOT = resolve(".starbot-build/voice");
 const RUNTIME = join(RESOURCES_ROOT, "runtime");
-const OUTPUT = resolve(".openbot-build/voice-host-bench");
+const OUTPUT = resolve(".starbot-build/voice-host-bench");
 const TRANSCRIPTION_HOST = resolve("src/main/voice-transcription-host.ts");
 const SPEECH_HOST = resolve("src/main/voice-speech-host.ts");
 const ELECTRON = resolve("node_modules/electron/dist/Electron.app/Contents/MacOS/Electron");
@@ -69,7 +69,7 @@ const CLIPS: readonly { name: string; text: string }[] = [
 const SPEECH_TEXT =
   "I found two failing tests. Both read the old settings file, so I updated the fixture and they pass now.";
 
-const logger = createOpenBotLogger("voice-host-bench");
+const logger = createStarBotLogger("voice-host-bench");
 
 function option(name: string): string | undefined {
   return process.argv.find((argument) => argument.startsWith(`--${name}=`))?.slice(name.length + 3);
@@ -401,7 +401,7 @@ async function main(): Promise<void> {
   const idle = !process.argv.includes("--no-idle");
 
   await mkdir(OUTPUT, { recursive: true });
-  const temporary = await mkdtemp(join(tmpdir(), "openbot-voice-host-bench-"));
+  const temporary = await mkdtemp(join(tmpdir(), "starbot-voice-host-bench-"));
   try {
     const downloader = new VoiceTranscriptionService({
       resourcesRoot: RESOURCES_ROOT,

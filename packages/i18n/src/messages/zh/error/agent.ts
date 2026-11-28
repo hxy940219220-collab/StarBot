@@ -5,25 +5,25 @@ export const messages = {
   "error.agent.historyUnavailable":
     "该请求的历史记录不可用，请重新读取最近的历史，或在频道工作中使用 channel_history。",
   "error.agent.historyArgumentsInvalid":
-    "历史记录参数不正确：{detail} 请更正参数后重试。openbot.tool_describe 可提供架构。",
+    "历史记录参数不正确：{detail} 请更正参数后重试。starbot.tool_describe 可提供架构。",
   "error.agent.toolRequestInvalid": "工具发现参数无效。请使用声明的 schema 和原始的完整工具名。",
   "error.agent.toolCallArgumentsNotObject":
     "工具未运行。在 tool_call 中，arguments 必须是 JSON 对象，而不是文本。请将 arguments 作为对象，再次发送调用。",
   "error.agent.toolCallDiscoveryTool":
-    "工具未运行。tool_call 无法运行 openbot.tool_search 或 openbot.tool_describe。请使用相同的参数直接调用它们。",
+    "工具未运行。tool_call 无法运行 starbot.tool_search 或 starbot.tool_describe。请使用相同的参数直接调用它们。",
   "error.agent.toolCallEnvelopeKeys":
     "工具未运行。tool_call 只接受 name 和 arguments。请将工具的参数作为对象放入 arguments，再次发送调用。",
   "error.agent.toolCallMissingName":
-    "工具未运行。tool_call 没有 name。请在 name 中填写 tool_search 给出的完整名称，例如 openbot.history_read，然后再次发送调用。",
+    "工具未运行。tool_call 没有 name。请在 name 中填写 tool_search 给出的完整名称，例如 starbot.history_read，然后再次发送调用。",
   "error.agent.toolCallUnknownTool":
-    "工具未运行。tool_call 找不到此名称的工具。请使用 tool_search 给出的准确完整名称，例如 openbot_browser.snapshot。",
+    "工具未运行。tool_call 找不到此名称的工具。请使用 tool_search 给出的准确完整名称，例如 starbot_browser.snapshot。",
   "error.agent.toolCallUnknownToolSuggest":
     "工具未运行。tool_call 找不到此名称的工具。完整名称可能是 {name}。如果是，请使用该名称再次发送调用。",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe 未找到名为 {names} 的星友工具。它只描述 openbot.tool_search 列出的星友和浏览器工具，不描述 MCP 工具。",
+    "tool_describe 未找到名为 {names} 的星友工具。它只描述 starbot.tool_search 列出的星友和浏览器工具，不描述 MCP 工具。",
   "error.agent.toolDescribeDiscoveryNames": "请直接调用 {names}。tool_describe 不描述发现工具。",
   "error.agent.routineScheduleArgumentsInvalid":
-    "自动化任务的时间表无效：{detail} 请更正时间表后重试。openbot.tool_describe 可提供架构。",
+    "自动化任务的时间表无效：{detail} 请更正时间表后重试。starbot.tool_describe 可提供架构。",
   "error.agent.approvalWhileDeleting": "助手正在删除中，无法授予批准。",
   "error.agent.accessLocalOnly": "助手访问权限只能在运行该助手的电脑上更改。",
   "error.agent.duplicateCleanupFailed": "助手复制失败，且无法移除不完整的副本。",

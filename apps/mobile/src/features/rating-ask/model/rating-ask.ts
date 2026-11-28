@@ -1,4 +1,4 @@
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 

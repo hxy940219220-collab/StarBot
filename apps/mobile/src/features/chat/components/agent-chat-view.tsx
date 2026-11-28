@@ -1,5 +1,5 @@
-import { itemTypeCountsAsUnread } from "@openbot/contracts/conversation-read";
-import type { RespondToPromptInput } from "@openbot/contracts/ipc";
+import { itemTypeCountsAsUnread } from "@starbot/contracts/conversation-read";
+import type { RespondToPromptInput } from "@starbot/contracts/ipc";
 import { router, useIsFocused } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useAgentSteers } from "@/features/agents/model/use-agent-steers";

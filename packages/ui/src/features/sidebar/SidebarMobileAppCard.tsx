@@ -1,6 +1,6 @@
-import { type MobilePlatformLogoVariant, PlatformLogo } from "@openbot/brand";
-import type { AvatarHue } from "@openbot/contracts/ipc";
-import { Button, IconButton, X } from "@openbot/ui";
+import { type MobilePlatformLogoVariant, PlatformLogo } from "@starbot/brand";
+import type { AvatarHue } from "@starbot/contracts/ipc";
+import { Button, IconButton, X } from "@starbot/ui";
 import { createSignal, For, onSettled } from "solid-js";
 import type { AgentProfile } from "../../data";
 import { useText } from "../../text";

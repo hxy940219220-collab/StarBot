@@ -10,7 +10,7 @@ import {
   type ChannelMessage,
   COMPUTER_USE_MCP_SERVER_ID,
   COMPUTER_USE_MCP_SERVER_NAME,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import type { boundedHistoryPage, historyMessagePart } from "../src/backend/channel-history";
@@ -18,8 +18,8 @@ import type { boundedHistoryPage, historyMessagePart } from "../src/backend/chan
 type HistoryPage = ReturnType<typeof boundedHistoryPage>;
 type HistoryPart = ReturnType<typeof historyMessagePart>;
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/channel-context-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-channel-context-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/channel-context-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-channel-context-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -28,14 +28,14 @@ const release = join(root, "release");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const PERSON = { id: "local", name: "Alex" };
 const PACKET_STARTS = [
@@ -149,7 +149,7 @@ const answer = (message) => {
           log({ threadId, turnId, method: "tool/result", text: JSON.stringify(response.result ?? response.error) });
           then();
         });
-        write({ id, method: "item/tool/call", params: { threadId, turnId, callId: "call-" + calls, namespace: "openbot", tool: "remember", arguments: args } });
+        write({ id, method: "item/tool/call", params: { threadId, turnId, callId: "call-" + calls, namespace: "starbot", tool: "remember", arguments: args } });
       };
       if (assignment.startsWith("REMEMBER")) {
         const text = assignment.slice("REMEMBER: ".length);
@@ -346,7 +346,7 @@ function record(agent: string, packet: string): void {
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({
@@ -885,7 +885,7 @@ try {
     pass(
       "The packet says that the channel is isolated",
       facts(isolatedPacket).channel?.isolated === true &&
-        isolatedPacket.includes("openbot.remember saves a channel memory here"),
+        isolatedPacket.includes("starbot.remember saves a channel memory here"),
     );
     const results = turnLogs()
       .filter((entry) => entry.method === "tool/result")
@@ -914,7 +914,7 @@ try {
       "The packet says when isolation is off",
       facts(sharedPacket).channel?.isolated === undefined &&
         sharedPacket.includes("no longer isolated") &&
-        !sharedPacket.includes("openbot.remember saves a channel memory here"),
+        !sharedPacket.includes("starbot.remember saves a channel memory here"),
     );
 
     const answer = messages(channelId)

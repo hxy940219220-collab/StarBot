@@ -1,6 +1,6 @@
-import { type CreditExpiring, creditsFromTenths, creditTenths } from "@openbot/contracts/credits";
-import { LICENSE_TIERS, licenseMonthlyCredits } from "@openbot/contracts/license";
-import { isOneOf } from "@openbot/contracts/runtime-values";
+import { type CreditExpiring, creditsFromTenths, creditTenths } from "@starbot/contracts/credits";
+import { LICENSE_TIERS, licenseMonthlyCredits } from "@starbot/contracts/license";
+import { isOneOf } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import { type AccountAnalytics, NO_ACCOUNT_ANALYTICS } from "./account-analytics";
 import { type BillingError, type BillingOperationError, billingCall } from "./billing-errors";

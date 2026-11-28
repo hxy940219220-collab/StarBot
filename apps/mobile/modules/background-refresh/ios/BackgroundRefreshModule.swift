@@ -125,7 +125,7 @@ private func refreshStatus() -> String {
 
 public class BackgroundRefreshModule: Module {
   public func definition() -> ModuleDefinition {
-    Name("OpenBotBackgroundRefresh")
+    Name("StarBotBackgroundRefresh")
 
     Events(refreshEvent, expireEvent)
 

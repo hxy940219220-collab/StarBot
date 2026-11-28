@@ -1,4 +1,4 @@
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import type { JSX } from "@solidjs/web";
 import { Link } from "@tanstack/solid-router";
 import { createSignal, createUniqueId, For, Show } from "solid-js";
@@ -11,7 +11,7 @@ const REPORT_REASONS = ["phishing", "malware", "abuse", "copyright", "other"] as
 
 const DETAILS_LIMIT = 1_000;
 
-const HOSTNAME_EXAMPLE = "example.openbot.site";
+const HOSTNAME_EXAMPLE = "example.starbot.site";
 
 type ReportStatus = "idle" | "sending" | "sent" | "failed";
 

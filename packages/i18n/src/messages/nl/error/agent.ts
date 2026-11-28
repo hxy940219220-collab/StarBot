@@ -5,28 +5,28 @@ export const messages = {
   "error.agent.historyUnavailable":
     "De geschiedenis is niet beschikbaar voor dit verzoek. Lees de recente geschiedenis opnieuw, of gebruik channel_history voor werk in een kanaal.",
   "error.agent.historyArgumentsInvalid":
-    "Onjuiste geschiedenisargumenten: {detail} Corrigeer de argumenten en probeer het opnieuw. openbot.tool_describe geeft het schema.",
+    "Onjuiste geschiedenisargumenten: {detail} Corrigeer de argumenten en probeer het opnieuw. starbot.tool_describe geeft het schema.",
   "error.agent.toolRequestInvalid":
     "Ongeldige argumenten voor het zoeken naar tools. Gebruik het opgegeven schema en een oorspronkelijke, volledige toolnaam.",
   "error.agent.toolCallArgumentsNotObject":
     "De tool is niet uitgevoerd. In tool_call moet arguments een JSON-object zijn, geen tekst. Stuur de aanroep opnieuw met arguments als object.",
   "error.agent.toolCallDiscoveryTool":
-    "De tool is niet uitgevoerd. tool_call kan openbot.tool_search en openbot.tool_describe niet uitvoeren. Roep ze direct aan met dezelfde argumenten.",
+    "De tool is niet uitgevoerd. tool_call kan starbot.tool_search en starbot.tool_describe niet uitvoeren. Roep ze direct aan met dezelfde argumenten.",
   "error.agent.toolCallEnvelopeKeys":
     "De tool is niet uitgevoerd. tool_call accepteert alleen name en arguments. Zet de argumenten van de tool in arguments, als object, en stuur de aanroep opnieuw.",
   "error.agent.toolCallMissingName":
-    "De tool is niet uitgevoerd. De tool_call heeft geen name. Zet in name de gekwalificeerde naam die tool_search geeft, zoals openbot.history_read, en stuur de aanroep opnieuw.",
+    "De tool is niet uitgevoerd. De tool_call heeft geen name. Zet in name de gekwalificeerde naam die tool_search geeft, zoals starbot.history_read, en stuur de aanroep opnieuw.",
   "error.agent.toolCallUnknownTool":
-    "De tool is niet uitgevoerd. tool_call heeft geen tool met deze naam gevonden. Gebruik de exacte gekwalificeerde naam die tool_search geeft, zoals openbot_browser.snapshot.",
+    "De tool is niet uitgevoerd. tool_call heeft geen tool met deze naam gevonden. Gebruik de exacte gekwalificeerde naam die tool_search geeft, zoals starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "De tool is niet uitgevoerd. tool_call heeft geen tool met deze naam gevonden. De gekwalificeerde naam is mogelijk {name}. Als dat zo is, stuur de aanroep dan opnieuw met die naam.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe heeft geen StarBot-tool met de naam {names} gevonden. Het beschrijft alleen de StarBot- en browsertools die openbot.tool_search toont, geen MCP-tools.",
+    "tool_describe heeft geen StarBot-tool met de naam {names} gevonden. Het beschrijft alleen de StarBot- en browsertools die starbot.tool_search toont, geen MCP-tools.",
 
   "error.agent.toolDescribeDiscoveryNames":
     "Roep {names} rechtstreeks aan. tool_describe beschrijft de zoektools niet.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "De planning van de routine is ongeldig: {detail} Corrigeer de planning en probeer het opnieuw. openbot.tool_describe geeft het schema.",
+    "De planning van de routine is ongeldig: {detail} Corrigeer de planning en probeer het opnieuw. starbot.tool_describe geeft het schema.",
   "error.agent.approvalWhileDeleting": "Je kunt geen toestemming geven terwijl de agent wordt verwijderd.",
   "error.agent.accessLocalOnly": "Toegang van de agent kun je alleen wijzigen op de computer waarop de agent draait.",
   "error.agent.duplicateCleanupFailed":

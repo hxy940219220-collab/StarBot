@@ -7,33 +7,33 @@ import {
   type SidebarLayoutSnapshot,
   type SidebarPin,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_ACCESS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-access-v1";
-import { AGENT_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/agent-admin-v1";
-import { AGENT_BACKUP_MODELS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-backup-models-v1";
-import { AGENT_BUILTIN_MEMORY_CAPABILITY } from "@openbot/contracts/team-protocol/agent-builtin-memory-v1";
-import { agentColorsEvent } from "@openbot/contracts/team-protocol/agent-colors-v1";
-import { AGENT_CREATE_OPERATION_CAPABILITY } from "@openbot/contracts/team-protocol/agent-create-operation-v1";
-import { AGENT_DEFAULTS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-defaults-v1";
-import { AGENT_FOLDERS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-folders-v1";
-import { AGENT_HOST_SETTINGS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-host-settings-v1";
-import { AGENT_IMPORT_CAPABILITY } from "@openbot/contracts/team-protocol/agent-import-v1";
-import { AGENT_INSTALL_CAPABILITY } from "@openbot/contracts/team-protocol/agent-install-v1";
-import { AGENT_INSTRUCTIONS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-instructions-v1";
-import { AGENT_MEMORY_LIMIT_CAPABILITY } from "@openbot/contracts/team-protocol/agent-memory-limit-v1";
-import { AGENT_NEW_CHAT_CAPABILITY } from "@openbot/contracts/team-protocol/agent-new-chat-v1";
-import { AGENT_PLAN_CARD_CAPABILITY } from "@openbot/contracts/team-protocol/agent-plan-card-v1";
-import { AGENT_PUBLISH_CAPABILITY } from "@openbot/contracts/team-protocol/agent-publish-v1";
-import { AGENT_TASK_LIMIT_CAPABILITY } from "@openbot/contracts/team-protocol/agent-task-limit-v1";
-import { AGENT_UPDATE_CAPABILITY } from "@openbot/contracts/team-protocol/agent-update-v1";
-import { BACKGROUND_PROCESSES_CAPABILITY } from "@openbot/contracts/team-protocol/background-processes-v1";
-import { BITWARDEN_CONNECTOR_CAPABILITY } from "@openbot/contracts/team-protocol/bitwarden-connector-v1";
-import { BROWSER_PROFILES_CAPABILITY } from "@openbot/contracts/team-protocol/browser-profiles-v1";
-import { BROWSER_PROXIES_CAPABILITY } from "@openbot/contracts/team-protocol/browser-proxies-v1";
-import { BROWSING_MEMORY_CAPABILITY } from "@openbot/contracts/team-protocol/browsing-memory-v1";
-import { CHANNEL_FOLDERS_CAPABILITY } from "@openbot/contracts/team-protocol/channel-folders-v1";
-import { CONNECTORS_CAPABILITY } from "@openbot/contracts/team-protocol/connectors-v1";
+} from "@starbot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { AGENT_ACCESS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-access-v1";
+import { AGENT_ADMIN_CAPABILITY } from "@starbot/contracts/team-protocol/agent-admin-v1";
+import { AGENT_BACKUP_MODELS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-backup-models-v1";
+import { AGENT_BUILTIN_MEMORY_CAPABILITY } from "@starbot/contracts/team-protocol/agent-builtin-memory-v1";
+import { agentColorsEvent } from "@starbot/contracts/team-protocol/agent-colors-v1";
+import { AGENT_CREATE_OPERATION_CAPABILITY } from "@starbot/contracts/team-protocol/agent-create-operation-v1";
+import { AGENT_DEFAULTS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-defaults-v1";
+import { AGENT_FOLDERS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-folders-v1";
+import { AGENT_HOST_SETTINGS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-host-settings-v1";
+import { AGENT_IMPORT_CAPABILITY } from "@starbot/contracts/team-protocol/agent-import-v1";
+import { AGENT_INSTALL_CAPABILITY } from "@starbot/contracts/team-protocol/agent-install-v1";
+import { AGENT_INSTRUCTIONS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-instructions-v1";
+import { AGENT_MEMORY_LIMIT_CAPABILITY } from "@starbot/contracts/team-protocol/agent-memory-limit-v1";
+import { AGENT_NEW_CHAT_CAPABILITY } from "@starbot/contracts/team-protocol/agent-new-chat-v1";
+import { AGENT_PLAN_CARD_CAPABILITY } from "@starbot/contracts/team-protocol/agent-plan-card-v1";
+import { AGENT_PUBLISH_CAPABILITY } from "@starbot/contracts/team-protocol/agent-publish-v1";
+import { AGENT_TASK_LIMIT_CAPABILITY } from "@starbot/contracts/team-protocol/agent-task-limit-v1";
+import { AGENT_UPDATE_CAPABILITY } from "@starbot/contracts/team-protocol/agent-update-v1";
+import { BACKGROUND_PROCESSES_CAPABILITY } from "@starbot/contracts/team-protocol/background-processes-v1";
+import { BITWARDEN_CONNECTOR_CAPABILITY } from "@starbot/contracts/team-protocol/bitwarden-connector-v1";
+import { BROWSER_PROFILES_CAPABILITY } from "@starbot/contracts/team-protocol/browser-profiles-v1";
+import { BROWSER_PROXIES_CAPABILITY } from "@starbot/contracts/team-protocol/browser-proxies-v1";
+import { BROWSING_MEMORY_CAPABILITY } from "@starbot/contracts/team-protocol/browsing-memory-v1";
+import { CHANNEL_FOLDERS_CAPABILITY } from "@starbot/contracts/team-protocol/channel-folders-v1";
+import { CONNECTORS_CAPABILITY } from "@starbot/contracts/team-protocol/connectors-v1";
 import {
   AGENT_HIDDEN_WORK_CAPABILITY,
   AGENT_WELCOME_CAPABILITY,
@@ -41,66 +41,66 @@ import {
   readTeamHostCompatibility,
   TEAM_AGENT_CREATE_MODEL_CAPABILITY,
   TEAM_WEB_CLIENT_PROTOCOL,
-} from "@openbot/contracts/team-protocol/current";
-import { EVENTS_CAPABILITY } from "@openbot/contracts/team-protocol/events-v1";
-import { FOCUS_USE_CAPABILITY, FOCUS_USE_ROUTES } from "@openbot/contracts/team-protocol/focus-use-v1";
-import { HOST_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/host-admin-v1";
-import { HOST_APPEARANCE_CAPABILITY } from "@openbot/contracts/team-protocol/host-appearance-v1";
-import { HOST_KEY_ROTATION_CAPABILITY } from "@openbot/contracts/team-protocol/host-key-rotation-v1";
-import { HOST_MEMBER_UPDATE_CAPABILITY } from "@openbot/contracts/team-protocol/host-member-update-v1";
-import { HOST_PERSONALITY_CAPABILITY } from "@openbot/contracts/team-protocol/host-personality-v1";
-import { HOST_RELEASE_CAPABILITY } from "@openbot/contracts/team-protocol/host-release-v1";
-import { HOST_RESTART_CAPABILITY } from "@openbot/contracts/team-protocol/host-restart-v1";
-import { HOST_SIGNAL_HOME_CAPABILITY } from "@openbot/contracts/team-protocol/host-signal-home-v1";
-import { HOST_TIMEZONE_CAPABILITY } from "@openbot/contracts/team-protocol/host-timezone-v1";
-import { HOST_UPDATE_CAPABILITY } from "@openbot/contracts/team-protocol/host-update-v1";
-import { HOST_VOICE_MODEL_CAPABILITY } from "@openbot/contracts/team-protocol/host-voice-model-v1";
-import { HOSTED_SITES_CAPABILITY } from "@openbot/contracts/team-protocol/hosted-sites-v1";
-import { INSTANCE_TRANSFER_CAPABILITY } from "@openbot/contracts/team-protocol/instance-transfer-v1";
-import { LIVE_ACTIVITY_PUSH_CAPABILITY } from "@openbot/contracts/team-protocol/live-activity-push-v1";
-import { LIVE_VOICE_EVENT } from "@openbot/contracts/team-protocol/live-voice-v1";
-import { LOCAL_SERVERS_CAPABILITY } from "@openbot/contracts/team-protocol/local-servers-v1";
-import { MAC_APPS_LIMIT_CAPABILITY } from "@openbot/contracts/team-protocol/mac-apps-limit-v1";
-import { MACHINE_RESOURCES_CAPABILITY } from "@openbot/contracts/team-protocol/machine-resources-v1";
-import { MCP_ACCESS_CAPABILITY } from "@openbot/contracts/team-protocol/mcp-access-v1";
-import { MEMORY_REVIEW_CAPABILITY } from "@openbot/contracts/team-protocol/memory-review-v1";
-import { ONEPASSWORD_CONNECTOR_CAPABILITY } from "@openbot/contracts/team-protocol/onepassword-connector-v1";
-import { OWNER_TRANSFER_CAPABILITY } from "@openbot/contracts/team-protocol/owner-transfer-v1";
-import { PASSWORD_MANAGERS_CAPABILITY } from "@openbot/contracts/team-protocol/password-managers-v1";
-import { PENDING_APPROVAL_CAPABILITY } from "@openbot/contracts/team-protocol/pending-approval-v1";
-import { PHONE_FEEDBACK_CAPABILITY } from "@openbot/contracts/team-protocol/phone-feedback-v1";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import { PROVIDERS_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/providers-v1";
-import { PUSH_NOTIFICATION_THREADS_CAPABILITY } from "@openbot/contracts/team-protocol/push-notification-threads-v1";
-import { ANDROID_PUSH_NOTIFICATIONS_CAPABILITY } from "@openbot/contracts/team-protocol/push-notifications-android-v1";
-import { PUSH_NOTIFICATIONS_CAPABILITY } from "@openbot/contracts/team-protocol/push-notifications-v1";
-import { ROUTINE_RECOVERY_CAPABILITY } from "@openbot/contracts/team-protocol/routine-recovery-v1";
-import { ROUTINE_RESULTS_CAPABILITY } from "@openbot/contracts/team-protocol/routine-results-v1";
-import { SERVER_AUDIT_CAPABILITY } from "@openbot/contracts/team-protocol/server-audit-v1";
+} from "@starbot/contracts/team-protocol/current";
+import { EVENTS_CAPABILITY } from "@starbot/contracts/team-protocol/events-v1";
+import { FOCUS_USE_CAPABILITY, FOCUS_USE_ROUTES } from "@starbot/contracts/team-protocol/focus-use-v1";
+import { HOST_ADMIN_CAPABILITY } from "@starbot/contracts/team-protocol/host-admin-v1";
+import { HOST_APPEARANCE_CAPABILITY } from "@starbot/contracts/team-protocol/host-appearance-v1";
+import { HOST_KEY_ROTATION_CAPABILITY } from "@starbot/contracts/team-protocol/host-key-rotation-v1";
+import { HOST_MEMBER_UPDATE_CAPABILITY } from "@starbot/contracts/team-protocol/host-member-update-v1";
+import { HOST_PERSONALITY_CAPABILITY } from "@starbot/contracts/team-protocol/host-personality-v1";
+import { HOST_RELEASE_CAPABILITY } from "@starbot/contracts/team-protocol/host-release-v1";
+import { HOST_RESTART_CAPABILITY } from "@starbot/contracts/team-protocol/host-restart-v1";
+import { HOST_SIGNAL_HOME_CAPABILITY } from "@starbot/contracts/team-protocol/host-signal-home-v1";
+import { HOST_TIMEZONE_CAPABILITY } from "@starbot/contracts/team-protocol/host-timezone-v1";
+import { HOST_UPDATE_CAPABILITY } from "@starbot/contracts/team-protocol/host-update-v1";
+import { HOST_VOICE_MODEL_CAPABILITY } from "@starbot/contracts/team-protocol/host-voice-model-v1";
+import { HOSTED_SITES_CAPABILITY } from "@starbot/contracts/team-protocol/hosted-sites-v1";
+import { INSTANCE_TRANSFER_CAPABILITY } from "@starbot/contracts/team-protocol/instance-transfer-v1";
+import { LIVE_ACTIVITY_PUSH_CAPABILITY } from "@starbot/contracts/team-protocol/live-activity-push-v1";
+import { LIVE_VOICE_EVENT } from "@starbot/contracts/team-protocol/live-voice-v1";
+import { LOCAL_SERVERS_CAPABILITY } from "@starbot/contracts/team-protocol/local-servers-v1";
+import { MAC_APPS_LIMIT_CAPABILITY } from "@starbot/contracts/team-protocol/mac-apps-limit-v1";
+import { MACHINE_RESOURCES_CAPABILITY } from "@starbot/contracts/team-protocol/machine-resources-v1";
+import { MCP_ACCESS_CAPABILITY } from "@starbot/contracts/team-protocol/mcp-access-v1";
+import { MEMORY_REVIEW_CAPABILITY } from "@starbot/contracts/team-protocol/memory-review-v1";
+import { ONEPASSWORD_CONNECTOR_CAPABILITY } from "@starbot/contracts/team-protocol/onepassword-connector-v1";
+import { OWNER_TRANSFER_CAPABILITY } from "@starbot/contracts/team-protocol/owner-transfer-v1";
+import { PASSWORD_MANAGERS_CAPABILITY } from "@starbot/contracts/team-protocol/password-managers-v1";
+import { PENDING_APPROVAL_CAPABILITY } from "@starbot/contracts/team-protocol/pending-approval-v1";
+import { PHONE_FEEDBACK_CAPABILITY } from "@starbot/contracts/team-protocol/phone-feedback-v1";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@starbot/contracts/team-protocol/provider-accounts-v1";
+import { PROVIDERS_ADMIN_CAPABILITY } from "@starbot/contracts/team-protocol/providers-v1";
+import { PUSH_NOTIFICATION_THREADS_CAPABILITY } from "@starbot/contracts/team-protocol/push-notification-threads-v1";
+import { ANDROID_PUSH_NOTIFICATIONS_CAPABILITY } from "@starbot/contracts/team-protocol/push-notifications-android-v1";
+import { PUSH_NOTIFICATIONS_CAPABILITY } from "@starbot/contracts/team-protocol/push-notifications-v1";
+import { ROUTINE_RECOVERY_CAPABILITY } from "@starbot/contracts/team-protocol/routine-recovery-v1";
+import { ROUTINE_RESULTS_CAPABILITY } from "@starbot/contracts/team-protocol/routine-results-v1";
+import { SERVER_AUDIT_CAPABILITY } from "@starbot/contracts/team-protocol/server-audit-v1";
 import {
   decodeServerSafeModeReason,
   SERVER_SAFE_MODE_CAPABILITY,
   SERVER_SAFE_MODE_ROUTES,
-} from "@openbot/contracts/team-protocol/server-safe-mode-v1";
-import { SHARED_TABLES_CAPABILITY } from "@openbot/contracts/team-protocol/shared-tables-v1";
+} from "@starbot/contracts/team-protocol/server-safe-mode-v1";
+import { SHARED_TABLES_CAPABILITY } from "@starbot/contracts/team-protocol/shared-tables-v1";
 import {
   SIDEBAR_FOLDERS_CAPABILITY,
   SIDEBAR_FOLDERS_ROUTES,
-} from "@openbot/contracts/team-protocol/sidebar-folders-v1";
-import { SIDEBAR_PINS_CAPABILITY } from "@openbot/contracts/team-protocol/sidebar-pins-v1";
-import { SIGN_IN_RELAY_CAPABILITY } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { SKILL_LEARNING_CAPABILITY } from "@openbot/contracts/team-protocol/skill-learning-v1";
-import { SKILLS_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/skills-admin-v1";
-import { UI_BLOCK_PREVIEW_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/ui-block-preview-edit-v1";
-import type { TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
-import { VAULT_IMPORT_CAPABILITY } from "@openbot/contracts/team-protocol/vault-import-v1";
-import { VAULT_MEMBER_SAVE_CAPABILITY } from "@openbot/contracts/team-protocol/vault-member-save-v1";
-import { VAULT_CAPABILITY } from "@openbot/contracts/team-protocol/vault-v1";
-import { VAULT_V2_CAPABILITY } from "@openbot/contracts/team-protocol/vault-v2";
-import { VAULT_V3_CAPABILITY } from "@openbot/contracts/team-protocol/vault-v3";
-import { WEBHOOK_AGENT_SECRET_CAPABILITY } from "@openbot/contracts/team-protocol/webhook-agent-secret-v1";
-import { WHATSAPP_CONNECTOR_CAPABILITY } from "@openbot/contracts/team-protocol/whatsapp-connector-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/sidebar-folders-v1";
+import { SIDEBAR_PINS_CAPABILITY } from "@starbot/contracts/team-protocol/sidebar-pins-v1";
+import { SIGN_IN_RELAY_CAPABILITY } from "@starbot/contracts/team-protocol/sign-in-relay-v1";
+import { SKILL_LEARNING_CAPABILITY } from "@starbot/contracts/team-protocol/skill-learning-v1";
+import { SKILLS_ADMIN_CAPABILITY } from "@starbot/contracts/team-protocol/skills-admin-v1";
+import { UI_BLOCK_PREVIEW_EDIT_CAPABILITY } from "@starbot/contracts/team-protocol/ui-block-preview-edit-v1";
+import type { TeamProtocolV2Json } from "@starbot/contracts/team-protocol/v2";
+import { VAULT_IMPORT_CAPABILITY } from "@starbot/contracts/team-protocol/vault-import-v1";
+import { VAULT_MEMBER_SAVE_CAPABILITY } from "@starbot/contracts/team-protocol/vault-member-save-v1";
+import { VAULT_CAPABILITY } from "@starbot/contracts/team-protocol/vault-v1";
+import { VAULT_V2_CAPABILITY } from "@starbot/contracts/team-protocol/vault-v2";
+import { VAULT_V3_CAPABILITY } from "@starbot/contracts/team-protocol/vault-v3";
+import { WEBHOOK_AGENT_SECRET_CAPABILITY } from "@starbot/contracts/team-protocol/webhook-agent-secret-v1";
+import { WHATSAPP_CONNECTOR_CAPABILITY } from "@starbot/contracts/team-protocol/whatsapp-connector-v1";
+import { sourceText } from "@starbot/i18n/source";
 import {
   createRemoteAccountRefresh,
   createRemoteReadRefresh,
@@ -114,19 +114,19 @@ import {
   readAgentAnalytics,
   remoteRecoveryMessage,
   runTeamEffect,
-} from "@openbot/team-client";
-import { verifyEd25519Base64Url } from "@openbot/team-client/ed25519";
-import { feedbackApproval } from "@openbot/team-client/feedback-approval";
-import { createFocusUsePing } from "@openbot/team-client/focus-use";
-import { createHostedServerWake, WAKE_RECONNECT_DELAY_MS } from "@openbot/team-client/hosted-server-wake";
+} from "@starbot/team-client";
+import { verifyEd25519Base64Url } from "@starbot/team-client/ed25519";
+import { feedbackApproval } from "@starbot/team-client/feedback-approval";
+import { createFocusUsePing } from "@starbot/team-client/focus-use";
+import { createHostedServerWake, WAKE_RECONNECT_DELAY_MS } from "@starbot/team-client/hosted-server-wake";
 import type {
   RemoteDownloadWatch,
   RemoteFileUpload,
   RemoteLargeDownload,
   RemoteTeamEvent,
-} from "@openbot/team-client/remote-peer";
-import { retryOperationIds } from "@openbot/team-client/retry-operation-id";
-import { withWholeApproval } from "@openbot/team-client/runtime-attention";
+} from "@starbot/team-client/remote-peer";
+import { retryOperationIds } from "@starbot/team-client/retry-operation-id";
+import { withWholeApproval } from "@starbot/team-client/runtime-attention";
 import {
   createHostLocalServer,
   deleteHostLocalServer,
@@ -138,7 +138,7 @@ import {
   setHostAppearance,
   setSidebarPins,
   updateHostIdentity,
-} from "@openbot/team-client/team-admin-requests";
+} from "@starbot/team-client/team-admin-requests";
 import {
   deleteAgent,
   discardAttachmentDraft,
@@ -150,7 +150,7 @@ import {
   sendPhoneFeedback,
   type TeamApiRequest,
   uploadAttachmentDraft,
-} from "@openbot/team-client/team-api-requests";
+} from "@starbot/team-client/team-api-requests";
 import { replaceEqualDeep, useQueryClient } from "@tanstack/react-query";
 import { Effect } from "effect";
 import * as Crypto from "expo-crypto";

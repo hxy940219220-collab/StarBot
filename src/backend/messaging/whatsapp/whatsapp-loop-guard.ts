@@ -1,4 +1,4 @@
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 import { CANCEL_TEXT, chatFailureReason } from "../messaging-types";
 
 const OLD_SPACER = /\n⠀{8,}\s*$/u;
@@ -14,7 +14,7 @@ const SELF_CHAT_PAUSE_MS = 10 * 60_000;
 
 let known: { posts: ReadonlySet<string>; menus: readonly string[] } | null = null;
 
-function openBotPosts(): { posts: ReadonlySet<string>; menus: readonly string[] } {
+function starBotPosts(): { posts: ReadonlySet<string>; menus: readonly string[] } {
   known ??= {
     posts: new Set([
       OLD_QUEUED,
@@ -26,7 +26,7 @@ function openBotPosts(): { posts: ReadonlySet<string>; menus: readonly string[] 
       sourceText("status.messaging.whatsappNoAgent"),
       sourceText("status.messaging.whatsappWelcomeOwn"),
       sourceText("status.messaging.whatsappWelcomeDedicated"),
-      sourceText("status.messaging.whatsappOtherOpenBot"),
+      sourceText("status.messaging.whatsappOtherStarBot"),
       sourceText("status.messaging.whatsappPaused"),
     ]),
     menus: [
@@ -37,8 +37,8 @@ function openBotPosts(): { posts: ReadonlySet<string>; menus: readonly string[] 
   return known;
 }
 
-export function isOtherOpenBotPost(text: string): boolean {
-  const { posts, menus } = openBotPosts();
+export function isOtherStarBotPost(text: string): boolean {
+  const { posts, menus } = starBotPosts();
   const trimmed = text.trim();
   return (
     OLD_SPACER.test(text) ||

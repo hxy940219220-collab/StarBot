@@ -12,18 +12,18 @@ const DIM = "#6a6a6a";
 const CANVAS = "#1a1a1a";
 
 export const ARTICLE_GRADIENT_BRAND_HEXES = {
-  "--openbot-logo-production": LOGO_PRODUCTION,
-  "--openbot-warning": LOGO_DEV,
-  "--openbot-success": LOGO_PREVIEW,
-  "--openbot-accent": ACCENT,
-  "--openbot-unread-surface": UNREAD,
-  "--openbot-onboarding-desktop-indigo": INDIGO,
-  "--openbot-chart-series-grok": CYAN,
-  "--openbot-provider-claude": TERRACOTTA,
-  "--openbot-danger-text": CORAL,
-  "--openbot-badge-new": MAGENTA,
-  "--openbot-text-dim": DIM,
-  "--openbot-bg-canvas": CANVAS,
+  "--starbot-logo-production": LOGO_PRODUCTION,
+  "--starbot-warning": LOGO_DEV,
+  "--starbot-success": LOGO_PREVIEW,
+  "--starbot-accent": ACCENT,
+  "--starbot-unread-surface": UNREAD,
+  "--starbot-onboarding-desktop-indigo": INDIGO,
+  "--starbot-chart-series-grok": CYAN,
+  "--starbot-provider-claude": TERRACOTTA,
+  "--starbot-danger-text": CORAL,
+  "--starbot-badge-new": MAGENTA,
+  "--starbot-text-dim": DIM,
+  "--starbot-bg-canvas": CANVAS,
 } as const;
 
 const VIOLET_DEEP = "#7b3fa8";

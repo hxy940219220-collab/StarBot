@@ -1,4 +1,4 @@
-import type { HourCycle } from "@openbot/contracts/ipc";
+import type { HourCycle } from "@starbot/contracts/ipc";
 import { systemPreferences } from "electron";
 
 export function systemHourCycle(): HourCycle | undefined {

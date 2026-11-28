@@ -1,10 +1,10 @@
-import { hostedSiteDeploymentPrefix, isHostedSiteStatus } from "@openbot/contracts/hosted-sites";
+import { hostedSiteDeploymentPrefix, isHostedSiteStatus } from "@starbot/contracts/hosted-sites";
 import type {
   HostedSiteSummary as HostedSiteClientSummary,
   HostedSiteFramework,
   HostedSiteStatus,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import { hmacSha256, sha256 } from "./crypto";
 import {
@@ -214,7 +214,7 @@ export function mapSite(
 function siteUrl(hostname: string, localSiteOrigin?: string): string {
   if (!localSiteOrigin) return `https://${hostname}`;
   const origin = new URL(localSiteOrigin);
-  const label = hostname.slice(0, -".openbot.site".length);
+  const label = hostname.slice(0, -".starbot.site".length);
   origin.hostname = `${label}.${origin.hostname}`;
   origin.pathname = "/";
   origin.search = "";

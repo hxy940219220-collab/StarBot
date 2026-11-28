@@ -1,4 +1,4 @@
-import { parseCustomServerCheckout } from "@openbot/contracts/custom-server-plans";
+import { parseCustomServerCheckout } from "@starbot/contracts/custom-server-plans";
 import {
   type HostedServerCheckout,
   type HostedServerSummary,
@@ -7,10 +7,10 @@ import {
   parseHostedServerList,
   parseHostedServerSummary,
   parseServerClaim,
-} from "@openbot/contracts/hosted-servers";
-import type { HostedServersDesktopApi } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/hosted-servers";
+import type { HostedServersDesktopApi } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { currentText } from "@starbot/ui/text";
 import type { AddServerResume } from "../servers/AddServerOverlay";
 import { savedPromotionCode } from "./web-billing";
 

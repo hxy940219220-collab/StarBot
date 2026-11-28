@@ -1,4 +1,4 @@
-import type { BrowserTab } from "@openbot/contracts/ipc";
+import type { BrowserTab } from "@starbot/contracts/ipc";
 
 export function activeTabAfterLoad(state: { tabs: readonly BrowserTab[]; activeTabId: string | null }): string | null {
   return state.activeTabId ?? state.tabs[0]?.id ?? null;

@@ -208,7 +208,7 @@ export const messages = {
     "开启话题回复后，助手在话题中完成或出错停止时会通知你。关闭后，话题需要你输入或审批时仍会通知你。",
   "mobile.settings.notifications.sound": "提示音",
   "mobile.settings.notifications.playSound": "播放提示音",
-  "mobile.settings.notifications.sound.openbot": "星友",
+  "mobile.settings.notifications.sound.starbot": "星友",
   "mobile.settings.notifications.sound.warm": "温暖",
   "mobile.settings.notifications.sound.mech": "机械",
   "mobile.settings.notifications.sound.bubble": "气泡",

@@ -1,30 +1,30 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface ProvidersPort {
-  cancelProviderCodeLogin: OpenBotDesktopApi["cancelProviderCodeLogin"];
-  connectProvider: OpenBotDesktopApi["connectProvider"];
-  connectProviderInMainlandChina: OpenBotDesktopApi["connectProviderInMainlandChina"];
-  cancelProviderSignIn: OpenBotDesktopApi["cancelProviderSignIn"];
-  refreshAgentProviders: OpenBotDesktopApi["refreshAgentProviders"];
-  setProviderOn: OpenBotDesktopApi["setProviderOn"];
-  restartProvider: OpenBotDesktopApi["restartProvider"];
-  cancelProviderRestart: OpenBotDesktopApi["cancelProviderRestart"];
-  chooseInstalledCli: OpenBotDesktopApi["chooseInstalledCli"];
-  startProviderCodeLogin: OpenBotDesktopApi["startProviderCodeLogin"];
-  providerRuntimes: OpenBotDesktopApi["providerRuntimes"];
-  connectProviderAccount: OpenBotDesktopApi["connectProviderAccount"];
-  connectProviderAccountKey: OpenBotDesktopApi["connectProviderAccountKey"];
-  cancelProviderAccountSignIn: OpenBotDesktopApi["cancelProviderAccountSignIn"];
-  renameProviderAccount: OpenBotDesktopApi["renameProviderAccount"];
-  removeProviderAccount: OpenBotDesktopApi["removeProviderAccount"];
-  setProviderAccountPool: OpenBotDesktopApi["setProviderAccountPool"];
-  setLiveVoiceAccount: OpenBotDesktopApi["setLiveVoiceAccount"];
-  signOutProvider: OpenBotDesktopApi["signOutProvider"];
-  providerUsageResets: OpenBotDesktopApi["providerUsageResets"];
-  resetProviderUsage: OpenBotDesktopApi["resetProviderUsage"];
-  providerAdmin: OpenBotDesktopApi["providerAdmin"];
+  cancelProviderCodeLogin: StarBotDesktopApi["cancelProviderCodeLogin"];
+  connectProvider: StarBotDesktopApi["connectProvider"];
+  connectProviderInMainlandChina: StarBotDesktopApi["connectProviderInMainlandChina"];
+  cancelProviderSignIn: StarBotDesktopApi["cancelProviderSignIn"];
+  refreshAgentProviders: StarBotDesktopApi["refreshAgentProviders"];
+  setProviderOn: StarBotDesktopApi["setProviderOn"];
+  restartProvider: StarBotDesktopApi["restartProvider"];
+  cancelProviderRestart: StarBotDesktopApi["cancelProviderRestart"];
+  chooseInstalledCli: StarBotDesktopApi["chooseInstalledCli"];
+  startProviderCodeLogin: StarBotDesktopApi["startProviderCodeLogin"];
+  providerRuntimes: StarBotDesktopApi["providerRuntimes"];
+  connectProviderAccount: StarBotDesktopApi["connectProviderAccount"];
+  connectProviderAccountKey: StarBotDesktopApi["connectProviderAccountKey"];
+  cancelProviderAccountSignIn: StarBotDesktopApi["cancelProviderAccountSignIn"];
+  renameProviderAccount: StarBotDesktopApi["renameProviderAccount"];
+  removeProviderAccount: StarBotDesktopApi["removeProviderAccount"];
+  setProviderAccountPool: StarBotDesktopApi["setProviderAccountPool"];
+  setLiveVoiceAccount: StarBotDesktopApi["setLiveVoiceAccount"];
+  signOutProvider: StarBotDesktopApi["signOutProvider"];
+  providerUsageResets: StarBotDesktopApi["providerUsageResets"];
+  resetProviderUsage: StarBotDesktopApi["resetProviderUsage"];
+  providerAdmin: StarBotDesktopApi["providerAdmin"];
 }
 
 export function providersPort(): ProvidersPort {
-  return window.openbot;
+  return window.starbot;
 }

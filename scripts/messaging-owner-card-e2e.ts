@@ -3,14 +3,14 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { bugReportPlatform, type Feedback, type FeedbackPhone } from "@openbot/contracts/feedback";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { bugReportPlatform, type Feedback, type FeedbackPhone } from "@starbot/contracts/feedback";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-owner-card-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-owner-card-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/messaging-owner-card-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-messaging-owner-card-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -18,14 +18,14 @@ const fakeLog = join(root, "codex.jsonl");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const CALL_MARK = "FEEDBACK-CALL";
 const PERSON = { id: "local", name: "Alex" };
@@ -89,9 +89,9 @@ const answer = (message) => {
           threadId: params.threadId,
           turnId,
           callId: "call-" + turnId,
-          namespace: "openbot",
+          namespace: "starbot",
           tool: "tool_call",
-          arguments: { name: "openbot." + __tool, arguments: args },
+          arguments: { name: "starbot." + __tool, arguments: args },
         },
       });
     }
@@ -190,7 +190,7 @@ const report: {
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
 const sent: Feedback[] = [];
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

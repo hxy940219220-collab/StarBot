@@ -1,7 +1,7 @@
-import type { ServerNotificationLevel } from "@openbot/contracts/ipc";
-import { NOTIFICATION_SOUNDS, type NotificationSound } from "@openbot/contracts/notification-relay";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import type { PushNotificationSound } from "@openbot/contracts/team-protocol/push-notifications-v1";
+import type { ServerNotificationLevel } from "@starbot/contracts/ipc";
+import { NOTIFICATION_SOUNDS, type NotificationSound } from "@starbot/contracts/notification-relay";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import type { PushNotificationSound } from "@starbot/contracts/team-protocol/push-notifications-v1";
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 
@@ -32,7 +32,7 @@ export const usePushNotificationPreference = create<
   preview: true,
   threadReplies: true,
   playSound: true,
-  sound: "openbot",
+  sound: "starbot",
   servers: {},
   ready: false,
   saving: false,
@@ -127,7 +127,7 @@ function decode(value: string | null): StoredPreference | null {
     preview: parsed.preview !== false,
     threadReplies: parsed.threadReplies !== false,
     playSound: sound !== "none" && parsed.playSound !== false,
-    sound: NOTIFICATION_SOUNDS.find((known) => known === sound) ?? "openbot",
+    sound: NOTIFICATION_SOUNDS.find((known) => known === sound) ?? "starbot",
     servers,
   };
 }

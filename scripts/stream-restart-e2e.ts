@@ -142,9 +142,9 @@ async function checkWriting(directory: string, action: StreamAction): Promise<Sc
   }
 }
 
-const artifactDirectory = new URL("../.openbot-build/", import.meta.url);
+const artifactDirectory = new URL("../.starbot-build/", import.meta.url);
 const report: StreamRestartReport = { status: "failed", scenarios: [] };
-const directory = await mkdtemp(join(tmpdir(), "openbot-stream-restart-"));
+const directory = await mkdtemp(join(tmpdir(), "starbot-stream-restart-"));
 try {
   report.scenarios.push(await checkWriting(join(directory, "failure"), "failure"));
   report.scenarios.push(await checkWriting(join(directory, "stop"), "stop"));

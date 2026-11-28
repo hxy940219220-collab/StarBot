@@ -15,7 +15,7 @@ export const unstable_settings = { anchor: "index" };
 export default function AgentInfoLayout() {
   const { t } = useText();
   const { theme } = useUniwind();
-  const sheetBg = String(useCSSVariable("--openbot-bg-sheet"));
+  const sheetBg = String(useCSSVariable("--starbot-bg-sheet"));
   const background = theme === "dark" ? sheetBg : "#f6f7fb";
   const foreground = useThemeColor("foreground");
 

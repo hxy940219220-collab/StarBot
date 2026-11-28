@@ -7,7 +7,7 @@ import { Effect } from "effect";
 import { z } from "zod";
 import { deferredCallArgumentsError, discoverTools, resolveDeferredTool } from "../src/backend/agent/tool-catalog";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import type { DynamicToolCallParams } from "../src/backend/protocol";
 import { WorkflowGitHubStore } from "../src/backend/workflows/workflow-github-store";
 import { WorkflowRunStore } from "../src/backend/workflows/workflow-run-store";
@@ -16,7 +16,7 @@ import { handleWorkflowTool } from "../src/backend/workflows/workflow-tools";
 import { workflowScheduleDueAt } from "../src/backend/workflows/workflow-triggers";
 import { createWorkflows, type WorkflowsHandle } from "../src/backend/workflows/workflows";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/workflow-agent-tools-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/workflow-agent-tools-e2e");
 const WAIT_MS = 5_000;
 const AGENTS = new Set(["agent-research"]);
 const TITLE_ANSWER = "A red bicycle at dawn";
@@ -96,13 +96,13 @@ const params = (tool: string, args: unknown): DynamicToolCallParams => ({
   threadId: "thread-e2e",
   turnId: "turn-e2e",
   callId: crypto.randomUUID(),
-  namespace: "openbot",
+  namespace: "starbot",
   tool,
   arguments: args,
 });
 
-const directory = await mkdtemp(join(tmpdir(), "openbot-workflow-agent-tools-"));
-const database = new OpenBotDatabase(directory);
+const directory = await mkdtemp(join(tmpdir(), "starbot-workflow-agent-tools-"));
+const database = new StarBotDatabase(directory);
 let workflows: WorkflowsHandle | null = null;
 
 const handoffs: string[] = [];
@@ -150,8 +150,8 @@ async function call(
   callKey = `call-${++calls}`,
 ): Promise<{ ok: boolean; value: unknown }> {
   assert.ok(workflows);
-  const resolved = resolveDeferredTool(params("tool_call", { name: `openbot.${name}`, arguments: args }), "codex");
-  assert.ok(resolved, `tool_call refused openbot.${name}`);
+  const resolved = resolveDeferredTool(params("tool_call", { name: `starbot.${name}`, arguments: args }), "codex");
+  assert.ok(resolved, `tool_call refused starbot.${name}`);
   const response = await runCauseEffect(
     handleWorkflowTool(resolved.tool, resolved.arguments, workflows, CALLER, callKey, AGENTS, confirmDelete),
   );
@@ -221,15 +221,15 @@ try {
   );
   check(
     "a canvas search keeps the browser and routine schemas that it finds",
-    ["openbot_browser.click", "openbot.connect_routine_agents", "openbot.edit_workflow"].every((name) =>
+    ["starbot_browser.click", "starbot.connect_routine_agents", "starbot.edit_workflow"].every((name) =>
       otherReady.includes(name),
     ),
     otherReady,
   );
-  const mixed = discoverTools(params("tool_search", { queries: ["workflow", "openbot_browser.snapshot"] }), "codex");
+  const mixed = discoverTools(params("tool_search", { queries: ["workflow", "starbot_browser.snapshot"] }), "codex");
   check(
     "a workflow search keeps the schema of a tool that another query names exactly",
-    mixed.tools.some((tool) => tool.name === "openbot_browser.snapshot" && "inputSchema" in tool),
+    mixed.tools.some((tool) => tool.name === "starbot_browser.snapshot" && "inputSchema" in tool),
     mixed.tools.map((tool) => tool.name),
   );
   check(
@@ -237,9 +237,9 @@ try {
     search.call?.includes("tool_call") === true && !("note" in search),
     search,
   );
-  const alias = resolveDeferredTool(params("tool_call", { tool: "openbot.list_workflows", arguments: {} }), "codex");
+  const alias = resolveDeferredTool(params("tool_call", { tool: "starbot.list_workflows", arguments: {} }), "codex");
   check("tool_call accepts the qualified name as tool", alias?.tool === "list_workflows", alias);
-  const mcpName = resolveDeferredTool(params("tool_call", { name: "mcp__openbot__list_workflows" }), "acp");
+  const mcpName = resolveDeferredTool(params("tool_call", { name: "mcp__starbot__list_workflows" }), "acp");
   check(
     "tool_call accepts an MCP tool name and no arguments",
     mcpName?.tool === "list_workflows" && JSON.stringify(mcpName.arguments) === "{}",
@@ -249,7 +249,7 @@ try {
   const bareError = resolveDeferredTool(bareName, "acp") ? null : deferredCallArgumentsError(bareName, "acp");
   check(
     "tool_call names the catalog tool for a name without its namespace",
-    bareError?.includes("openbot.list_workflows") === true,
+    bareError?.includes("starbot.list_workflows") === true,
     bareError,
   );
 
@@ -295,7 +295,7 @@ try {
   );
   const typed = resolveDeferredTool(
     params("tool_call", {
-      name: "openbot.read_workflow_runs",
+      name: "starbot.read_workflow_runs",
       arguments: { workflowId: "12", runId: "true", limit: "1" },
     }),
     "codex",
@@ -306,7 +306,7 @@ try {
     typed?.arguments,
   );
   const untyped = resolveDeferredTool(
-    params("tool_call", { name: "openbot.read_workflow_runs", arguments: { workflowId, limit: "1.5", x: "2" } }),
+    params("tool_call", { name: "starbot.read_workflow_runs", arguments: { workflowId, limit: "1.5", x: "2" } }),
     "codex",
   );
   check(

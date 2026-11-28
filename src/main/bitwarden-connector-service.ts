@@ -2,9 +2,9 @@ import { execFile } from "node:child_process";
 import { constants } from "node:fs";
 import { access, realpath, rm } from "node:fs/promises";
 import { delimiter, isAbsolute, join } from "node:path";
-import type { BitwardenConnectorStatus, BitwardenHostConnectInput } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import type { BitwardenConnectorStatus, BitwardenHostConnectInput } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Effect, Exit, Schema, Scope, Semaphore } from "effect";
 import { cliPathEnvironment, cliSpawnTarget, loginSearchPath, windowsRegistryPathFolders } from "../backend/cli";
 import { causeHelpers } from "../backend/effect-boundary";
@@ -18,7 +18,7 @@ import {
 import { stopWindowsProcessTree } from "../backend/windows-process-tree";
 import type { BitwardenConnectorRecord, BitwardenConnectorStore } from "./bitwarden-connector-store";
 
-const logger = createOpenBotLogger("bitwarden-connector");
+const logger = createStarBotLogger("bitwarden-connector");
 const { io: vaultCall } = causeHelpers(PasswordVaultError);
 
 const IDLE_MS = 8 * 60 * 60 * 1000;

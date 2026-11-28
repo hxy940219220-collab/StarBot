@@ -3,7 +3,7 @@ import {
   type AgentPermissionLevel,
   SETTING_LINK_IDS,
   type SettingLinkId,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 interface SettingLinkEntry {
   title: string;

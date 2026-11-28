@@ -1,12 +1,12 @@
-import { hostedPlanDisk } from "@openbot/contracts/hosted-servers";
+import { hostedPlanDisk } from "@starbot/contracts/hosted-servers";
 import {
   CLEARABLE_STORAGE_CATEGORIES,
   type ClearableStorageCategory,
   canAdministerServer,
   type StorageCategory,
-} from "@openbot/contracts/ipc";
-import { isOneOf } from "@openbot/contracts/runtime-values";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@starbot/contracts/ipc";
+import { isOneOf } from "@starbot/contracts/runtime-values";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
 import RotateCw from "lucide-react-native/icons/rotate-cw";
@@ -305,12 +305,12 @@ export function ServerStorageScreen() {
 
 function useStorageGroupColors(): Record<StorageGroup, string> {
   return {
-    workspaces: String(useCSSVariable("--openbot-chart-storage-workspaces")),
-    files: String(useCSSVariable("--openbot-chart-storage-files")),
-    chats: String(useCSSVariable("--openbot-chart-storage-chats")),
-    downloads: String(useCSSVariable("--openbot-chart-storage-downloads")),
-    runtimes: String(useCSSVariable("--openbot-chart-storage-runtimes")),
-    app: String(useCSSVariable("--openbot-chart-storage-app")),
+    workspaces: String(useCSSVariable("--starbot-chart-storage-workspaces")),
+    files: String(useCSSVariable("--starbot-chart-storage-files")),
+    chats: String(useCSSVariable("--starbot-chart-storage-chats")),
+    downloads: String(useCSSVariable("--starbot-chart-storage-downloads")),
+    runtimes: String(useCSSVariable("--starbot-chart-storage-runtimes")),
+    app: String(useCSSVariable("--starbot-chart-storage-app")),
   };
 }
 

@@ -1,16 +1,16 @@
-import { fileReferenceName, isFileReference } from "@openbot/brand/file-reference";
-import { attachmentReferenceAt } from "@openbot/contracts/attachment-references";
+import { fileReferenceName, isFileReference } from "@starbot/brand/file-reference";
+import { attachmentReferenceAt } from "@starbot/contracts/attachment-references";
 import {
   blockChatMath,
   chatMathBlockInterrupts,
   chatMathBlockStart,
   chatMathStart,
   inlineChatMath,
-} from "@openbot/contracts/chat-math";
-import { chatPreviewKind } from "@openbot/contracts/chat-preview";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { markdownImageName } from "@openbot/contracts/markdown-preview-text";
-import { Button, Checkbox } from "@openbot/ui";
+} from "@starbot/contracts/chat-math";
+import { chatPreviewKind } from "@starbot/contracts/chat-preview";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { markdownImageName } from "@starbot/contracts/markdown-preview-text";
+import { Button, Checkbox } from "@starbot/ui";
 import { Dynamic } from "@solidjs/web";
 import { Marked, type Token, type Tokens, type TokensList } from "marked";
 import { createMemo, createSignal, For, Show } from "solid-js";

@@ -1,4 +1,4 @@
-import type { BrowserBounds, BrowserPictureInPictureEvent } from "@openbot/contracts/ipc";
+import type { BrowserBounds, BrowserPictureInPictureEvent } from "@starbot/contracts/ipc";
 import { Effect, Schema } from "effect";
 import { BrowserWindow, screen, WebContentsView } from "electron";
 import type { BrowserHost } from "../backend/browser-host";
@@ -137,7 +137,7 @@ export class BrowserPictureInPicture {
     const developmentUrl = this.#options.developmentUrl;
     const pageUrl = developmentUrl
       ? new URL("browser-pip.html", `${developmentUrl}/`)
-      : new URL("openbot-app://app/browser-pip.html");
+      : new URL("starbot-app://app/browser-pip.html");
     if (liveView) {
       pageUrl.searchParams.set("view", "live");
       if (liveView.clipboard) pageUrl.searchParams.set("clipboard", "1");
@@ -147,7 +147,7 @@ export class BrowserPictureInPicture {
     yield* pipCall(() =>
       developmentUrl
         ? controlsView.webContents.loadURL(new URL("browser-pip-controls.html", `${developmentUrl}/`).toString())
-        : controlsView.webContents.loadURL("openbot-app://app/browser-pip-controls.html"),
+        : controlsView.webContents.loadURL("starbot-app://app/browser-pip-controls.html"),
     );
     if (!window.isDestroyed()) {
       this.#startHoverTracking(window, controlsView);

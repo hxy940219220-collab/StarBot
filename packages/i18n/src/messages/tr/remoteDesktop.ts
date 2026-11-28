@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "Uzaktan kontrol",
   "remoteDesktop.displayLabel": "Uzak ekran",
   "remoteDesktop.selectDisplay": "Ekran seçin",
-  "remoteDesktop.backToOpenBot": "StarBot'a dön",
+  "remoteDesktop.backToStarBot": "StarBot'a dön",
 
   "remoteDesktop.disconnect": "Bağlantıyı kes",
   "remoteDesktop.viewerTitle": "Sunshine uzak masaüstü",

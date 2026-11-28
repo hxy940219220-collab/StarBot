@@ -1,11 +1,11 @@
 import { EventEmitter } from "node:events";
 import { join } from "node:path";
-import type { RemoteDesktopIceServer } from "@openbot/contracts/ipc";
-import type { IceServer } from "@openbot/contracts/signal-protocol/messages";
-import type { RemoteMemberRole } from "@openbot/contracts/signal-protocol/ticket";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
-import { iceServerErrorDetail, knownIceCandidateRoute } from "@openbot/team-client/ice-diagnostics";
+import type { RemoteDesktopIceServer } from "@starbot/contracts/ipc";
+import type { IceServer } from "@starbot/contracts/signal-protocol/messages";
+import type { RemoteMemberRole } from "@starbot/contracts/signal-protocol/ticket";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
+import { iceServerErrorDetail, knownIceCandidateRoute } from "@starbot/team-client/ice-diagnostics";
 import { Deferred, Effect, Exit, Fiber, Scope } from "effect";
 import { BrowserWindow, MessageChannelMain, type MessagePortMain, webContents } from "electron";
 import { z } from "zod";
@@ -129,7 +129,7 @@ const SEND_COMMAND_TIMEOUT_MS = 75_000;
 const LIVENESS_INTERVAL_MS = 30_000;
 const LIVENESS_MISSES = 2;
 
-const logger = createOpenBotLogger("team-webrtc-bridge");
+const logger = createStarBotLogger("team-webrtc-bridge");
 
 export class TeamWebRtcBridge extends EventEmitter<TeamWebRtcBridgeEvents> {
   readonly #options: TeamWebRtcBridgeOptions;
@@ -302,7 +302,7 @@ export class TeamWebRtcBridge extends EventEmitter<TeamWebRtcBridgeEvents> {
     yield* remoteCall(() =>
       this.#options.developmentUrl
         ? window.loadURL(new URL("team-webrtc.html", `${this.#options.developmentUrl}/`).toString())
-        : window.loadURL("openbot-app://app/team-webrtc.html"),
+        : window.loadURL("starbot-app://app/team-webrtc.html"),
     );
     const { port1, port2 } = yield* remoteDecode(() => new MessageChannelMain());
     this.#port = port1;
@@ -333,7 +333,7 @@ export class TeamWebRtcBridge extends EventEmitter<TeamWebRtcBridgeEvents> {
       port1.start();
     });
     yield* Effect.gen(function* () {
-      yield* remoteDecode(() => window.webContents.postMessage("openbot-team-webrtc-port", null, [port2]));
+      yield* remoteDecode(() => window.webContents.postMessage("starbot-team-webrtc-port", null, [port2]));
       yield* Deferred.await(ready).pipe(
         Effect.timeoutOrElse({
           duration: 10_000,

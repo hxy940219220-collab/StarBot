@@ -1,5 +1,5 @@
-import { type AccountUsage, type AgentStatus, keepUsageCredits, withReadCredits } from "@openbot/contracts/ipc";
-import type { TextValue } from "@openbot/ui/text";
+import { type AccountUsage, type AgentStatus, keepUsageCredits, withReadCredits } from "@starbot/contracts/ipc";
+import type { TextValue } from "@starbot/ui/text";
 import { type Accessor, createEffect, createMemo, createSignal, onCleanup, untrack } from "solid-js";
 import type { WebWorkspace } from "./web-client-context";
 

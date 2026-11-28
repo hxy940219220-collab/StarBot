@@ -1,6 +1,6 @@
-import type { ProviderCodeLoginStart } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { classifyUserError } from "@openbot/user-errors";
+import type { ProviderCodeLoginStart } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { classifyUserError } from "@starbot/user-errors";
 import { Deferred, Effect, Result, Schema } from "effect";
 import type { AgentClient } from "./../agent-client";
 import { type CodexCliInfo, resolveCodexCli, resolveInstalledFirst } from "./../cli";
@@ -349,7 +349,7 @@ function initializeLoginClient(client: AgentClient): Effect.Effect<void, CodexLo
       .request(
         "initialize",
         {
-          clientInfo: { name: "openbot", title: "StarBot", version: "0.1.0" },
+          clientInfo: { name: "starbot", title: "StarBot", version: "0.1.0" },
           capabilities: { experimentalApi: true, mcpServerOpenaiFormElicitation: true },
         },
         decodeRecordResponse,

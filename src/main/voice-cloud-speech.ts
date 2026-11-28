@@ -6,14 +6,14 @@ import {
   type SpeechLanguage,
   VOICE_KEY_PROVIDER_NAMES,
   type XaiSpeechVoice,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect, Option, Schema } from "effect";
 import { readLimitedBody } from "../backend/limited-body";
 import { VoiceOperationError } from "./voice-model-service";
 
-const logger = createOpenBotLogger("voice-cloud-speech");
+const logger = createStarBotLogger("voice-cloud-speech");
 
 const SPEECH_TIMEOUT_MS = 60_000;
 const SPEECH_BODY_LIMIT = 16 * 1024 * 1024;

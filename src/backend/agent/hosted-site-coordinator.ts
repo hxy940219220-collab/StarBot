@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { sortConversationMessages } from "@starbot/contracts/conversation-order";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentApproval,
   AgentApprovalPermissions,
@@ -11,14 +11,14 @@ import type {
   HostedSiteList,
   HostedSiteSummary,
   PublishHostedSiteInput,
-} from "@openbot/contracts/ipc";
-import { hostedSiteConversationEventItemType, hostedSiteConversationEventText } from "@openbot/contracts/ipc";
-import { isBoolean } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { hostedSiteConversationEventItemType, hostedSiteConversationEventText } from "@starbot/contracts/ipc";
+import { isBoolean } from "@starbot/contracts/runtime-values";
 import { Effect, Result, Schema } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
 import { causeHelpers } from "../effect-boundary";
-import type { PendingHostedSiteTerminalEvent } from "../openbot-database";
+import type { PendingHostedSiteTerminalEvent } from "../starbot-database";
 import { type AppServerRequest, type DynamicToolCallParams, isRecord, type RequestId } from "../protocol";
 import type { ConversationRuntime } from "./conversation-runtime";
 import {
@@ -29,7 +29,7 @@ import {
   hostedSiteEventMessageId,
   hostedSiteTool,
 } from "./hosted-site-events";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult, siteToolString } from "./routine-tools";
+import { type StarBotToolResponse, starBotToolFailure, starBotToolResult, siteToolString } from "./routine-tools";
 import { checkAgentFolders, workspaceWritableRoots } from "./workspace-sandbox";
 
 export interface AgentHostedSites {
@@ -76,11 +76,11 @@ interface HostedSiteApprovalDetails {
 }
 
 interface HostedSiteMutationResult {
-  response: OpenBotToolResponse;
+  response: StarBotToolResponse;
   eventDetails: HostedSiteConversationEventDetails;
 }
 
-export const HOSTED_SITE_APPROVAL_METHOD = "openbot/hosted-site-mutation";
+export const HOSTED_SITE_APPROVAL_METHOD = "starbot/hosted-site-mutation";
 
 export class HostedSiteCoordinator {
   readonly #store: AgentStore;
@@ -223,8 +223,8 @@ export class HostedSiteCoordinator {
     this.#pendingTerminalDeliveries.clear();
   }
 
-  #failureResult(error: unknown): OpenBotToolResponse {
-    return openBotToolFailure(this.#redact(error instanceof Error ? error.message : String(error)));
+  #failureResult(error: unknown): StarBotToolResponse {
+    return starBotToolFailure(this.#redact(error instanceof Error ? error.message : String(error)));
   }
 
   #requireHostedSites(): AgentHostedSites {
@@ -299,7 +299,7 @@ export class HostedSiteCoordinator {
       const siteId = yield* siteStep(() => siteToolString(args.siteId, "siteId", INPUT_LIMITS.identifier));
       const host = yield* siteStep(() => this.#requireHostedSites());
       yield* host.delete(siteId);
-      return { response: openBotToolResult({ deleted: true, siteId }), eventDetails: context.eventDetails };
+      return { response: starBotToolResult({ deleted: true, siteId }), eventDetails: context.eventDetails };
     }
 
     const sourcePath = yield* siteStep(() => siteToolString(args.sourcePath, "sourcePath", INPUT_LIMITS.path));
@@ -323,7 +323,7 @@ export class HostedSiteCoordinator {
         : yield* siteStep(() => siteToolString(args.siteId, "siteId", INPUT_LIMITS.identifier));
     const host = yield* siteStep(() => this.#requireHostedSites());
     const site = siteId ? yield* host.replace({ ...input, siteId }, roots) : yield* host.publish(input, roots);
-    return { response: openBotToolResult(site), eventDetails: hostedSiteEventDetails(site, siteId) };
+    return { response: starBotToolResult(site), eventDetails: hostedSiteEventDetails(site, siteId) };
   });
 
   #recordEvent(
@@ -407,7 +407,7 @@ export class HostedSiteCoordinator {
           threadId: event.threadId,
           turnId: event.turnId,
           callId: event.operationId,
-          namespace: "openbot",
+          namespace: "starbot",
           tool: hostedSiteTool(event.action),
           arguments: {},
         },
@@ -506,7 +506,7 @@ export class HostedSiteCoordinator {
           threadId,
           turnId: turnId ?? `hosted-site-${event.operationId}`,
           callId: event.operationId,
-          namespace: "openbot",
+          namespace: "starbot",
           tool: hostedSiteTool(event.action),
           arguments: {},
         },

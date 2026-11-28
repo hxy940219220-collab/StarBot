@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { sourceText } from "@starbot/i18n/source";
 
 const SLACK_ORCHESTRATOR_DESCRIPTION = `You are the Slack Orchestrator of this StarBot team. Every message that people send to @StarBot in Slack comes to you first, and Slack shows your replies as "StarBot".
 

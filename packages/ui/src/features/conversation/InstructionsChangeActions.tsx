@@ -1,5 +1,5 @@
-import type { AgentInstructionsChange } from "@openbot/contracts/ipc";
-import { Button, FileText, MarkerIcon, Undo2 } from "@openbot/ui";
+import type { AgentInstructionsChange } from "@starbot/contracts/ipc";
+import { Button, FileText, MarkerIcon, Undo2 } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, onSettled, Show } from "solid-js";
 import { useText } from "../../text";

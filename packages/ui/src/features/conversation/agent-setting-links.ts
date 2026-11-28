@@ -1,5 +1,5 @@
-import type { SettingLinkId } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { SettingLinkId } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 
 export type AgentSettingsPage = "permissions" | "folders" | "backup-models" | "advanced";
 

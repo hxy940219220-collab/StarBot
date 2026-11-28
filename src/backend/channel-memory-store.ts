@@ -1,8 +1,8 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { ChannelMemory } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { ChannelMemory } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { MemoryStore, type MemoryTables } from "./memory-store";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 
 const CHANNEL_MEMORY_TABLES: MemoryTables = {
   table: "projection_channel_memories",
@@ -14,7 +14,7 @@ const CHANNEL_MEMORY_TABLES: MemoryTables = {
 };
 
 export class ChannelMemoryStore extends MemoryStore {
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     super(database, CHANNEL_MEMORY_TABLES);
   }
 

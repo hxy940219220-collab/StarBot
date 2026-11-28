@@ -2,13 +2,13 @@ import { randomBytes } from "node:crypto";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentEvent, AgentRuntimeSnapshot, AgentSummary, ConversationMessage } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { TEAM_PROTOCOL_V1_WEBSOCKET } from "@openbot/contracts/team-protocol";
-import { TEAM_CURRENT_CAPABILITIES } from "@openbot/contracts/team-protocol/current";
-import { createOpenBotLogger } from "@openbot/logging";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { AgentEvent, AgentRuntimeSnapshot, AgentSummary, ConversationMessage } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { TEAM_PROTOCOL_V1_WEBSOCKET } from "@starbot/contracts/team-protocol";
+import { TEAM_CURRENT_CAPABILITIES } from "@starbot/contracts/team-protocol/current";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { setPerfProbeSink } from "../src/backend/perf-probe-hooks";
@@ -17,7 +17,7 @@ import { TeamApiServer } from "../src/main/team-api-server";
 import { TeamStore } from "../src/main/team-store";
 
 const APP_VERSION = "0.43.0";
-const OUT = resolve(import.meta.dirname, "../.openbot-build/team-api-broadcast-bench");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/team-api-broadcast-bench");
 const AGENT_ID = "agent-bench";
 const THREAD_ID = "thread-bench";
 const TURN_ID = "turn-bench";
@@ -135,7 +135,7 @@ function benchAgent(): AgentSummary {
     model: "gpt-5",
     reasoningEffort: "medium",
     threadId: THREAD_ID,
-    workspacePath: join(tmpdir(), "openbot-broadcast-bench-workspace"),
+    workspacePath: join(tmpdir(), "starbot-broadcast-bench-workspace"),
     preview: "",
     updatedAt: null,
     avatarSeed: AGENT_ID,
@@ -243,7 +243,7 @@ function waitFor(client: BenchClient, ready: () => boolean, what: string): Promi
 async function openClient(port: number, token: string, includeConversations: boolean): Promise<BenchClient> {
   const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
     TEAM_PROTOCOL_V1_WEBSOCKET,
-    `openbot-token.${token}`,
+    `starbot-token.${token}`,
   ]);
   const client: BenchClient = {
     socket,
@@ -294,7 +294,7 @@ async function closeClient(client: BenchClient): Promise<void> {
 
 const options = parseOptions(process.argv.slice(2));
 mkdirSync(OUT, { recursive: true });
-const root = mkdtempSync(join(tmpdir(), "openbot-team-api-broadcast-bench-"));
+const root = mkdtempSync(join(tmpdir(), "starbot-team-api-broadcast-bench-"));
 const logged: string[] = [];
 const agentEventListeners = new Set<(event: AgentEvent, memberId?: string) => void>();
 const counters = { runtimeSnapshots: 0, listAgents: 0 };
@@ -580,7 +580,7 @@ try {
     agents: fakeAgents,
     mailbox,
     browser,
-    logger: createOpenBotLogger("team-api-broadcast-bench", (line) => logged.push(line)),
+    logger: createStarBotLogger("team-api-broadcast-bench", (line) => logged.push(line)),
   });
   const port = await Effect.runPromise(server.start());
   for (const clientCount of options.clients) {

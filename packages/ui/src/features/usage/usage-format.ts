@@ -1,6 +1,6 @@
-import type { AnalyticsModel } from "@openbot/contracts/ipc";
-import { agentProviderName, analyticsTokens, isAgentProvider } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AnalyticsModel } from "@starbot/contracts/ipc";
+import { agentProviderName, analyticsTokens, isAgentProvider } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import { currentText, type TextValue } from "../../text";
 
 type UsageText = Pick<TextValue, "t" | "format">;
@@ -67,12 +67,12 @@ export function usageProviders(models: AnalyticsModel[]) {
 }
 
 const seriesColors: Readonly<Record<string, string>> = {
-  codex: "var(--openbot-chart-series-codex)",
-  claude: "var(--openbot-chart-series-claude)",
-  grok: "var(--openbot-chart-series-grok)",
+  codex: "var(--starbot-chart-series-codex)",
+  claude: "var(--starbot-chart-series-claude)",
+  grok: "var(--starbot-chart-series-grok)",
 };
 export function usageSeriesColor(provider: string): string {
-  return seriesColors[provider] ?? "var(--openbot-chart-series-other)";
+  return seriesColors[provider] ?? "var(--starbot-chart-series-other)";
 }
 
-export { type UsageSeriesRow, usageSeries, usageTotalSeries } from "@openbot/team-client/usage-series";
+export { type UsageSeriesRow, usageSeries, usageTotalSeries } from "@starbot/team-client/usage-series";

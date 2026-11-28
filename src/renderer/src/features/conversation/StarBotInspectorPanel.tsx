@@ -1,5 +1,5 @@
-import { foreignProvider } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { foreignProvider } from "@starbot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentMemorySelection,
   agentComputerUseEnabled,
@@ -11,8 +11,8 @@ import {
   LOCAL_SERVER_ID,
   type MemoryEntry,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import { ROUTINE_EVERY_DAY } from "@openbot/team-client/routine-schedule-draft";
+} from "@starbot/contracts/ipc";
+import { ROUTINE_EVERY_DAY } from "@starbot/team-client/routine-schedule-draft";
 import {
   Bell,
   BookMarked,
@@ -33,21 +33,21 @@ import {
   Textarea,
   Trash2,
   X,
-} from "@openbot/ui";
-import { bloubAvatarProfile, zodiacForShape } from "@openbot/ui/bloub-avatar";
-import { ProviderModelPicker } from "@openbot/ui/components/ProviderModelPicker";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
+} from "@starbot/ui";
+import { bloubAvatarProfile, zodiacForShape } from "@starbot/ui/bloub-avatar";
+import { ProviderModelPicker } from "@starbot/ui/components/ProviderModelPicker";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
 import {
   isChiefStarBot,
   isManualChiefStarBot,
   setManualChiefStarBotId,
-} from "@openbot/ui/features/agents/chief-starbot";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+} from "@starbot/ui/features/agents/chief-starbot";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import {
   routineScheduleFromDraft,
   routineScheduleToDraft,
-} from "@openbot/ui/features/conversation/routine-schedule-saved";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/routine-schedule-saved";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, For, onCleanup, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { skillsPort } from "../../skills-port";
@@ -409,9 +409,9 @@ export function StarBotInspectorPanel(props: {
       }
       const savedLocal = readPersonaTone(agentId);
       setPersonaTone(savedLocal);
-      if (!window.openbot?.agent?.readAgentInstructions) return;
+      if (!window.starbot?.agent?.readAgentInstructions) return;
       let alive = true;
-      void window.openbot.agent
+      void window.starbot.agent
         .readAgentInstructions(agentId, serverId ?? LOCAL_SERVER_ID)
         .then((file) => {
           if (!alive || !file?.text) return;
@@ -441,10 +441,10 @@ export function StarBotInspectorPanel(props: {
     setPersonaTone(nextTone);
     writePersonaTone(current.id, nextTone);
     try {
-      if (window.openbot?.agent?.readAgentInstructions && window.openbot?.agent?.saveAgentInstructions) {
-        const currentFile = await window.openbot.agent.readAgentInstructions(current.id, serverId);
+      if (window.starbot?.agent?.readAgentInstructions && window.starbot?.agent?.saveAgentInstructions) {
+        const currentFile = await window.starbot.agent.readAgentInstructions(current.id, serverId);
         const nextText = injectPersonaToneIntoInstructions(currentFile.text ?? "", nextTone);
-        await window.openbot.agent.saveAgentInstructions(
+        await window.starbot.agent.saveAgentInstructions(
           {
             agentId: current.id,
             text: nextText,
@@ -553,7 +553,7 @@ export function StarBotInspectorPanel(props: {
   createEffect(
     () => [subView(), agent()?.id, convProps.server?.id] as const,
     ([view, agentId, serverId]) => {
-      if (view !== "permissions" || !agentId || !window.openbot?.agent?.listBrowserProfiles) return;
+      if (view !== "permissions" || !agentId || !window.starbot?.agent?.listBrowserProfiles) return;
       let alive = true;
       const calls = desktopBrowserProfileCalls(serverId ?? LOCAL_SERVER_ID);
       void Promise.all([calls.list().catch(() => null), calls.readAgent(agentId).catch(() => null)]).then(
@@ -674,7 +674,7 @@ export function StarBotInspectorPanel(props: {
       current.id,
       undefined,
       convProps.server?.kind === "local",
-      convProps.runtime?.routines ?? window.openbot.agent,
+      convProps.runtime?.routines ?? window.starbot.agent,
     );
   });
 
@@ -725,7 +725,7 @@ export function StarBotInspectorPanel(props: {
   const memoriesPort = createMemo(() => {
     const current = agent();
     if (!current) return null;
-    return agentMemoriesPort(current.id, current.name, null, convProps.runtime?.agentMemories ?? window.openbot.agent);
+    return agentMemoriesPort(current.id, current.name, null, convProps.runtime?.agentMemories ?? window.starbot.agent);
   });
 
   createEffect(memoriesPort, (port) => {
@@ -789,13 +789,13 @@ export function StarBotInspectorPanel(props: {
   createEffect(
     () => [agent()?.id, convProps.server?.id] as const,
     ([agentId, serverId]) => {
-      if (!agentId || !window.openbot?.agent?.getHostAnalytics) {
+      if (!agentId || !window.starbot?.agent?.getHostAnalytics) {
         setUsageSummary(null);
         return;
       }
       let alive = true;
       const { startDate, endDate, timeZone } = analyticsRange("", 30);
-      void window.openbot.agent
+      void window.starbot.agent
         .getHostAnalytics({ startDate, endDate, timeZone, agentId }, serverId ?? LOCAL_SERVER_ID)
         .then((res) => {
           if (!alive || !res) return;
@@ -968,7 +968,7 @@ export function StarBotInspectorPanel(props: {
       return id ? `${id}|${srv}` : "";
     },
     (key) => {
-      if (!key || !window.openbot?.agent?.readConversationPage) return;
+      if (!key || !window.starbot?.agent?.readConversationPage) return;
       const [agentId, serverId] = key.split("|");
       if (!agentId) return;
       let disposed = false;
@@ -988,7 +988,7 @@ export function StarBotInspectorPanel(props: {
 
         proactiveTickInFlight.add(agentId);
         try {
-          const page = await window.openbot.agent.readConversationPage(
+          const page = await window.starbot.agent.readConversationPage(
             { agentId, anchor: { type: "latest" }, limit: 6 },
             serverId || LOCAL_SERVER_ID,
           );
@@ -1959,7 +1959,7 @@ export function StarBotInspectorPanel(props: {
                         <code
                           style={{
                             "font-size": "11.5px",
-                            color: "var(--openbot-text-secondary)",
+                            color: "var(--starbot-text-secondary)",
                             "word-break": "break-all",
                             "line-height": "1.45",
                           }}
@@ -1978,13 +1978,13 @@ export function StarBotInspectorPanel(props: {
                           >
                             复制路径
                           </Button>
-                          <Show when={convProps.server?.kind === "local" && window.openbot?.storage?.openLocation}>
+                          <Show when={convProps.server?.kind === "local" && window.starbot?.storage?.openLocation}>
                             <Button
                               type="button"
                               variant="outline"
                               size="sm"
                               onClick={() => {
-                                void window.openbot.storage
+                                void window.starbot.storage
                                   .openLocation({ agentId: current().id })
                                   .catch(() => actionToast.error("无法在访达中打开该目录"));
                               }}

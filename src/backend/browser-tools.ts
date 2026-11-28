@@ -1,13 +1,13 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   BROWSER_TAKEOVER_REASONS,
   VAULT_PASSWORD_LIMIT,
   VAULT_TEXT_LIMIT,
   type VaultContactFields,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { TWO_STEP_KEY_LIMIT } from "@openbot/contracts/two-step-code";
-import { UI_BLOCK_LIMITS, UI_VAULT_REQUEST_KINDS } from "@openbot/contracts/ui-blocks";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { TWO_STEP_KEY_LIMIT } from "@starbot/contracts/two-step-code";
+import { UI_BLOCK_LIMITS, UI_VAULT_REQUEST_KINDS } from "@starbot/contracts/ui-blocks";
 import { z } from "zod";
 import { advertisedJsonSchema } from "./agent/advertised-json-schema";
 import {
@@ -17,7 +17,7 @@ import {
 } from "./browser-fill-fields";
 import { repairBrowserStep, repairBrowserToolInput } from "./browser-tool-input";
 
-export const OPENBOT_BROWSER_NAMESPACE = "openbot_browser";
+export const STARBOT_BROWSER_NAMESPACE = "starbot_browser";
 
 const identifier = z.string().min(1).max(INPUT_LIMITS.identifier);
 const requiredString = (max: number) =>
@@ -569,7 +569,7 @@ export const BROWSER_TOOL_DEFINITIONS = [
 export const BROWSER_DYNAMIC_TOOLS = [
   {
     type: "namespace" as const,
-    name: OPENBOT_BROWSER_NAMESPACE,
+    name: STARBOT_BROWSER_NAMESPACE,
     description: "Operate StarBot's private, persistent native Electron/CDP browser.",
     tools: BROWSER_TOOL_DEFINITIONS.map((definition) => ({
       type: "function" as const,

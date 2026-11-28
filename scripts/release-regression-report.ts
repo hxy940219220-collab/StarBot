@@ -2,7 +2,7 @@ import { createHmac } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { redactText } from "@openbot/logging";
+import { redactText } from "@starbot/logging";
 import { type Connection, connectClickHouse, credentials, type QueryResult, runQuery } from "./openpanel-sql";
 import { readScriptArguments } from "./script-arguments";
 
@@ -703,7 +703,7 @@ async function buildReport(connection: Connection): Promise<Report | null> {
 
 function buildDirectory(): string {
   const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-  return join(projectRoot, ".openbot-build", "release-regression");
+  return join(projectRoot, ".starbot-build", "release-regression");
 }
 
 async function writeReport(report: Report): Promise<string> {

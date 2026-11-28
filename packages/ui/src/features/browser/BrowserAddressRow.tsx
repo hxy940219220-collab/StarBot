@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   Button,
   CircleDot,
@@ -10,15 +10,15 @@ import {
   TriangleAlert,
   UserRound,
   Waypoints,
-} from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
+} from "@starbot/ui";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
 import {
   BrowserBackIcon,
   BrowserForwardIcon,
   BrowserReloadIcon,
   BrowserStopIcon,
-} from "@openbot/ui/features/conversation/ConversationIcons";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/ConversationIcons";
+import { useText } from "@starbot/ui/text";
 import { createMemo, createStore, createUniqueId, flush, Show } from "solid-js";
 import { BrowserPageMenu } from "./BrowserPageMenu";
 import { BrowserProfileDot } from "./BrowserProfileColor";

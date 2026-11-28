@@ -1,8 +1,8 @@
-import { ErrorReference, IconButton, X } from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
-import { PageHeader, type PageHeaderParent } from "@openbot/ui/features/window/PageHeader";
-import { useText } from "@openbot/ui/text";
-import { holdFlag } from "@openbot/ui/utils";
+import { ErrorReference, IconButton, X } from "@starbot/ui";
+import { createScrollFades } from "@starbot/ui/components/createScrollFades";
+import { PageHeader, type PageHeaderParent } from "@starbot/ui/features/window/PageHeader";
+import { useText } from "@starbot/ui/text";
+import { holdFlag } from "@starbot/ui/utils";
 import { createEffect, Match, onCleanup, onSettled, Show, Switch } from "solid-js";
 import { MarketplaceAgentPage } from "./MarketplaceAgentPage";
 import { AgentGroupPage } from "./MarketplaceAgents";

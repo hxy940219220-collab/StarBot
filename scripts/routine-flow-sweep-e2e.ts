@@ -5,11 +5,11 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { RoutineFlowStore } from "../src/backend/routine-flows/routine-flow-store";
 import { createRoutineFlows } from "../src/backend/routine-flows/routine-flows";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/routine-flow-sweep-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/routine-flow-sweep-e2e");
 const QUARTER_HOUR_MS = 15 * 60 * 1000;
 const SOLO_RUNS = 672;
 const DONE_FLOW_RUNS = 160;
@@ -36,7 +36,7 @@ const report: Report = {
   passed: false,
 };
 
-function seed(database: OpenBotDatabase): void {
+function seed(database: StarBotDatabase): void {
   const db = database.connection;
   const now = Date.now();
   const at = (ms: number) => new Date(ms).toISOString();
@@ -84,7 +84,7 @@ function seed(database: OpenBotDatabase): void {
   db.exec("COMMIT");
 }
 
-async function sweepPlans(database: OpenBotDatabase, sweep: () => Promise<void>): Promise<Record<string, string[]>> {
+async function sweepPlans(database: StarBotDatabase, sweep: () => Promise<void>): Promise<Record<string, string[]>> {
   const connection = database.connection;
   const prepare = connection.prepare.bind(connection);
   const statements = new Set<string>();
@@ -110,7 +110,7 @@ async function sweepPlans(database: OpenBotDatabase, sweep: () => Promise<void>)
   );
 }
 
-function checkTurnAnswerRead(database: OpenBotDatabase): string[] {
+function checkTurnAnswerRead(database: StarBotDatabase): string[] {
   const db = database.connection;
   const at = (second: number) => new Date(Date.UTC(2026, 10, 1, 0, 0, second)).toISOString();
   db.prepare(
@@ -164,12 +164,12 @@ function checkTurnAnswerRead(database: OpenBotDatabase): string[] {
   return plan;
 }
 
-function count(database: OpenBotDatabase, sql: string): number {
+function count(database: StarBotDatabase, sql: string): number {
   return Number(database.connection.prepare(sql).get()?.count);
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-routine-flow-sweep-"));
-const database = new OpenBotDatabase(join(root, "profile"));
+const root = await mkdtemp(join(tmpdir(), "starbot-routine-flow-sweep-"));
+const database = new StarBotDatabase(join(root, "profile"));
 try {
   await runCauseEffect(database.initialize());
   const indexes = database.connection

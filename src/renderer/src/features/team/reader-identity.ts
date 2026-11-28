@@ -1,4 +1,4 @@
-import { SIGNED_OUT_CHANNEL_MEMBER_ID } from "@openbot/contracts/ipc";
+import { SIGNED_OUT_CHANNEL_MEMBER_ID } from "@starbot/contracts/ipc";
 
 export interface ReaderIdentity {
   memberId: string | null;

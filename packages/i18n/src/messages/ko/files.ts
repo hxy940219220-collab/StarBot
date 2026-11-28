@@ -116,7 +116,7 @@ export const messages = {
   "files.storage.allFiles": "모든 파일",
   "files.storage.allFilesOn": "{host}의 모든 파일",
   "files.storage.allFilesDescription": "모든 에이전트와 채팅의 파일",
-  "files.storage.openBotOn": "{host}의 StarBot",
+  "files.storage.starBotOn": "{host}의 StarBot",
 
   "files.storage.measuring": "측정 중…",
   "files.storage.measureAgain": "다시 측정",

@@ -1,4 +1,4 @@
-import type { McpServerConfig, McpSignInState } from "@openbot/contracts/ipc";
+import type { McpServerConfig, McpSignInState } from "@starbot/contracts/ipc";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useQueryScope } from "@/features/auth/context/mobile-session-context";
 import { useLockedMutation } from "@/features/servers/model/use-locked-action";

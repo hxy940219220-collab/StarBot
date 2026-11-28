@@ -1,6 +1,6 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 64,
   name: "provider-history-compaction",
   // A marker only: it changes no table and no row. From this version on, StarBot replaces each

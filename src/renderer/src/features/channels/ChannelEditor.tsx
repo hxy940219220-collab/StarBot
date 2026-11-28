@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { Channel, ChannelBrowser, ChannelDraft, ChannelIcon } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { Channel, ChannelBrowser, ChannelDraft, ChannelIcon } from "@starbot/contracts/ipc";
 import {
   Button,
   buttonVariants,
@@ -18,18 +18,18 @@ import {
   SelectValue,
   SwitchField,
   Tooltip,
-} from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
-import { ResizableTextarea } from "@openbot/ui/components/ResizableTextarea";
-import { SettingsField, SettingsLinkGroup, SettingsLinkRow } from "@openbot/ui/components/SettingsPanel";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { InstructionsLimit, instructionsTooLong } from "@openbot/ui/features/agents/InstructionsLimit";
-import { ChannelContextActions } from "@openbot/ui/features/channels/ChannelContextActions";
-import { type ChannelFolders, ChannelFoldersRow } from "@openbot/ui/features/channels/ChannelFolders";
-import { ChannelMemberRow } from "@openbot/ui/features/channels/ChannelMemberRow";
-import { ChannelPictureEditor } from "@openbot/ui/features/channels/ChannelPictureEditor";
-import { ContentExitMotion } from "@openbot/ui/menu-motion";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { createScrollFades } from "@starbot/ui/components/createScrollFades";
+import { ResizableTextarea } from "@starbot/ui/components/ResizableTextarea";
+import { SettingsField, SettingsLinkGroup, SettingsLinkRow } from "@starbot/ui/components/SettingsPanel";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { InstructionsLimit, instructionsTooLong } from "@starbot/ui/features/agents/InstructionsLimit";
+import { ChannelContextActions } from "@starbot/ui/features/channels/ChannelContextActions";
+import { type ChannelFolders, ChannelFoldersRow } from "@starbot/ui/features/channels/ChannelFolders";
+import { ChannelMemberRow } from "@starbot/ui/features/channels/ChannelMemberRow";
+import { ChannelPictureEditor } from "@starbot/ui/features/channels/ChannelPictureEditor";
+import { ContentExitMotion } from "@starbot/ui/menu-motion";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createStore, For, onSettled, Show } from "solid-js";
 import { useChannels } from "./channels-context";
 import { matchesAgentSearch, toggleChannelMember } from "./channels-draft";

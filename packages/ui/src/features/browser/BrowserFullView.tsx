@@ -1,7 +1,7 @@
-import { Alert, AlertContent, AlertDescription, AlertTitle, ArrowLeft, Button, Tabs } from "@openbot/ui";
-import { CloseIcon, PlusIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { useText } from "@openbot/ui/text";
-import { clamp, holdFlag } from "@openbot/ui/utils";
+import { Alert, AlertContent, AlertDescription, AlertTitle, ArrowLeft, Button, Tabs } from "@starbot/ui";
+import { CloseIcon, PlusIcon } from "@starbot/ui/features/conversation/ConversationIcons";
+import { useText } from "@starbot/ui/text";
+import { clamp, holdFlag } from "@starbot/ui/utils";
 import { createEffect, createSignal, flush, onCleanup, onSettled, Show } from "solid-js";
 import { BrowserAddressRow } from "./BrowserAddressRow";
 import BrowserLiveView from "./BrowserLiveView";

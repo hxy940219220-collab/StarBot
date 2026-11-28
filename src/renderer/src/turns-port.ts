@@ -1,8 +1,8 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface TurnsPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "cancelQueuedMessage"
     | "cancelWait"
     | "clearContext"
@@ -25,5 +25,5 @@ export interface TurnsPort {
 }
 
 export function turnsPort(): TurnsPort {
-  return window.openbot;
+  return window.starbot;
 }

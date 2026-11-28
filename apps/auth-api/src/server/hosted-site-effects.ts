@@ -15,7 +15,7 @@ export const siteCall = <A>(operation: () => Promise<A>) => Effect.tryPromise({ 
 export const siteDecode = <A>(operation: () => A) => Effect.try({ try: operation, catch: siteFailure });
 
 export class HostedSiteStorage extends Context.Service<HostedSiteStorage, { database: D1Database; bucket: R2Bucket }>()(
-  "@openbot/auth-api/HostedSiteStorage",
+  "@starbot/auth-api/HostedSiteStorage",
 ) {
   static layer(database: D1Database, bucket: R2Bucket) {
     return Layer.succeed(HostedSiteStorage, HostedSiteStorage.of({ database, bucket }));

@@ -1,4 +1,4 @@
-import type { AttachmentSummary } from "@openbot/contracts/ipc";
+import type { AttachmentSummary } from "@starbot/contracts/ipc";
 
 export interface ImageGalleryEntry {
   serverId: string;

@@ -101,11 +101,11 @@
         "./plugins/with-notification-sounds",
         {
           "sounds": [
-            "./assets/sounds/openbot-task.wav",
-            "./assets/sounds/openbot-warm.wav",
-            "./assets/sounds/openbot-mech.wav",
-            "./assets/sounds/openbot-bubble.wav",
-            "./assets/sounds/openbot-press.wav"
+            "./assets/sounds/starbot-task.wav",
+            "./assets/sounds/starbot-warm.wav",
+            "./assets/sounds/starbot-mech.wav",
+            "./assets/sounds/starbot-bubble.wav",
+            "./assets/sounds/starbot-press.wav"
           ]
         }
       ],

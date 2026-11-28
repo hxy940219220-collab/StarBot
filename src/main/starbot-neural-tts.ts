@@ -1,11 +1,11 @@
 import { type ChildProcessWithoutNullStreams, spawn } from "node:child_process";
 import { existsSync } from "node:fs";
-import type { SpeechAudio } from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+import type { SpeechAudio } from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import { VoiceOperationError } from "./voice-model-service";
 
-const logger = createOpenBotLogger("starbot-neural-tts");
+const logger = createStarBotLogger("starbot-neural-tts");
 
 const NEURAL_TTS_TIMEOUT_MS = 28_000;
 const WORKER_IDLE_MS = 120_000;

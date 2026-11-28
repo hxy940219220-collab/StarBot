@@ -30,9 +30,9 @@ export function FavoriteAgentPickerSheet({
   const { t } = useText();
   const insets = useSafeAreaInsets();
   const muted = String(useThemeColor("muted"));
-  const sheetBg = String(useCSSVariable("--openbot-bg-sheet"));
-  const cardBg = String(useCSSVariable("--openbot-bg-grouped"));
-  const borderColor = String(useCSSVariable("--openbot-border-grouped"));
+  const sheetBg = String(useCSSVariable("--starbot-bg-sheet"));
+  const cardBg = String(useCSSVariable("--starbot-bg-grouped"));
+  const borderColor = String(useCSSVariable("--starbot-border-grouped"));
 
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent onRequestClose={onClose}>

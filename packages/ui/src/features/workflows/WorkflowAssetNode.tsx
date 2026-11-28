@@ -1,6 +1,6 @@
-import { type StoredFileRow, WORKFLOW_PICTURE_TYPES } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, Download, File, FileInput, Input, Maximize2, Popover, Search, SlidingTabs, Upload } from "@openbot/ui";
+import { type StoredFileRow, WORKFLOW_PICTURE_TYPES } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { Button, Download, File, FileInput, Input, Maximize2, Popover, Search, SlidingTabs, Upload } from "@starbot/ui";
 import { createSignal, createStore, For, onCleanup, Show, untrack } from "solid-js";
 import { createScrollFades } from "../../components/createScrollFades";
 import { useText } from "../../text";

@@ -1,14 +1,14 @@
-import type { AgentEvent, ClientAgentSummary } from "@openbot/contracts/ipc";
-import { teammateTurnCompleted } from "@openbot/team-client/agent-notifications";
+import type { AgentEvent, ClientAgentSummary } from "@starbot/contracts/ipc";
+import { teammateTurnCompleted } from "@starbot/team-client/agent-notifications";
 import {
   getKawaiiAudioContext,
   playKawaiiCue,
   unlockKawaiiAudio,
-} from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import { TASK_SOUND_CHOICES, type TaskSoundChoice } from "@openbot/ui/features/settings/app-settings";
+} from "@starbot/ui/features/agents/starbot-kawaii-audio";
+import { TASK_SOUND_CHOICES, type TaskSoundChoice } from "@starbot/ui/features/settings/app-settings";
 
-const TASK_SOUND_STORAGE_KEY = "openbot:task-sound";
-const COMPLETION_SOUND_STORAGE_KEY = "openbot:completion-sound-enabled";
+const TASK_SOUND_STORAGE_KEY = "starbot:task-sound";
+const COMPLETION_SOUND_STORAGE_KEY = "starbot:completion-sound-enabled";
 
 type NotificationAgent = Pick<ClientAgentSummary, "id" | "notifications">;
 type PreferenceStorage = Pick<Storage, "getItem">;

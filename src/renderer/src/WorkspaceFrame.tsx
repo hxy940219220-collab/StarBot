@@ -1,7 +1,7 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { RemoteCompatibilityScreen } from "@openbot/ui/features/remote-desktop/RemoteCompatibilityScreen";
-import { type ServerPaywall, ServerPaywallScreen } from "@openbot/ui/features/servers/ServerPaywall";
-import { ServerPlanEndedScreen, serverPlanScreenShown } from "@openbot/ui/features/servers/ServerPlanEnd";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { RemoteCompatibilityScreen } from "@starbot/ui/features/remote-desktop/RemoteCompatibilityScreen";
+import { type ServerPaywall, ServerPaywallScreen } from "@starbot/ui/features/servers/ServerPaywall";
+import { ServerPlanEndedScreen, serverPlanScreenShown } from "@starbot/ui/features/servers/ServerPlanEnd";
 import type { JSX } from "@solidjs/web";
 import { omit, type ParentProps, Show } from "solid-js";
 import { type WindowPage, windowPageKind } from "./features/window/window-page-context";

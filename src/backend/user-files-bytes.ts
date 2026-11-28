@@ -1,9 +1,9 @@
 import { execFile } from "node:child_process";
 import { stat } from "node:fs/promises";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Exit, Fiber, Option, Schema, Scope } from "effect";
 
-const logger = createOpenBotLogger("user-files-bytes");
+const logger = createStarBotLogger("user-files-bytes");
 
 const MEASURE_INTERVAL_MS = 10 * 60_000;
 const FIRST_ANSWER_WAIT_MS = 15_000;

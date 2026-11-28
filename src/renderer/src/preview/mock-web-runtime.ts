@@ -1,14 +1,14 @@
-import { CHANNEL_CHATS_CAPABILITY } from "@openbot/contracts/ipc";
-import { MESSAGE_DELETE_CAPABILITY } from "@openbot/contracts/team-protocol/message-delete-v1";
-import { MESSAGE_PINS_CAPABILITY } from "@openbot/contracts/team-protocol/message-pins-v1";
+import { CHANNEL_CHATS_CAPABILITY } from "@starbot/contracts/ipc";
+import { MESSAGE_DELETE_CAPABILITY } from "@starbot/contracts/team-protocol/message-delete-v1";
+import { MESSAGE_PINS_CAPABILITY } from "@starbot/contracts/team-protocol/message-pins-v1";
 import type { WebRuntimeFactory } from "../features/web-client/web-client-context";
 import type { WebRuntimeEvents, WebWorkspaceRuntime } from "../features/web-client/web-runtime";
-import { createMockOpenBot, type MockOpenBotControls } from "./mock-openbot";
+import { createMockStarBot, type MockStarBotControls } from "./mock-starbot";
 
 export const createMockWebRuntime: WebRuntimeFactory = (_accountId, events) =>
-  mockWebRuntimeFor(createMockOpenBot(), events);
+  mockWebRuntimeFor(createMockStarBot(), events);
 
-export function mockWebRuntimeFor(mock: MockOpenBotControls, events: WebRuntimeEvents): WebWorkspaceRuntime {
+export function mockWebRuntimeFor(mock: MockStarBotControls, events: WebRuntimeEvents): WebWorkspaceRuntime {
   const agent = mock.api.agent;
   const host = {
     hostId: "preview-host",

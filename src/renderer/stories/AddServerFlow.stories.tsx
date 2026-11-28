@@ -1,8 +1,8 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { Heading, Text, Toaster } from "@openbot/ui";
-import { AddServerDialog, type HostedServerSetupStatus } from "@openbot/ui/features/servers/AddServerDialog";
-import { hostedServerPlansFromCatalog } from "@openbot/ui/features/servers/HostedServerPricing";
-import { ServerRail } from "@openbot/ui/features/servers/ServerRail";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { Heading, Text, Toaster } from "@starbot/ui";
+import { AddServerDialog, type HostedServerSetupStatus } from "@starbot/ui/features/servers/AddServerDialog";
+import { hostedServerPlansFromCatalog } from "@starbot/ui/features/servers/HostedServerPricing";
+import { ServerRail } from "@starbot/ui/features/servers/ServerRail";
 import { createMemo, createSignal, onCleanup, Show } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { MOCK_HOSTED_SERVER_CATALOG } from "../src/preview/mock-hosted-servers";
@@ -84,7 +84,7 @@ function AddServerFlow(props: FlowProps) {
         </Heading>
         <Text tone="muted">Click the plus button in the server rail to add a server.</Text>
         <Show when={contactNote()}>
-          <Text tone="muted">"Contact us" was clicked. The app opens an email to hello@openbot.run here.</Text>
+          <Text tone="muted">"Contact us" was clicked. The app opens an email to hello@starbot.run here.</Text>
         </Show>
         <Show when={manageNote()}>
           <Text tone="muted">"Manage servers" was clicked. The app opens the list of hosted servers here.</Text>
@@ -133,7 +133,7 @@ function AddServerFlow(props: FlowProps) {
               ...serverDefaults(),
               id: pending().id,
               name: pending().name,
-              apiUrl: `https://${pending().id}.hosted.openbot.run`,
+              apiUrl: `https://${pending().id}.hosted.starbot.run`,
               role: "owner",
             })
           }

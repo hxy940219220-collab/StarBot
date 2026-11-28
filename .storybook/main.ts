@@ -15,7 +15,7 @@ const config = {
   framework: {
     name: "storybook-solidjs-vite",
     options: {
-      docgen: process.env.OPENBOT_STORYBOOK_CHECK === "true" ? false : undefined,
+      docgen: process.env.STARBOT_STORYBOOK_CHECK === "true" ? false : undefined,
     },
   },
   viteFinal: async (viteConfig) => {

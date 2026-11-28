@@ -1,4 +1,4 @@
-import type { CompanySignInSettings, OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { CompanySignInSettings, StarBotDesktopApi } from "@starbot/contracts/ipc";
 import {
   Badge,
   Button,
@@ -22,13 +22,13 @@ import {
   Text,
   toast,
   X,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createStore, Show } from "solid-js";
 import type { ServerSettingsSectionHost } from "./server-settings-section";
 
 export type CompanySignInCalls = Pick<
-  OpenBotDesktopApi["auth"],
+  StarBotDesktopApi["auth"],
   | "getCompanySignIn"
   | "testCompanySignIn"
   | "cancelCompanySignInTest"

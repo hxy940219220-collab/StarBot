@@ -1,8 +1,8 @@
-import { nextSpeechSpeed } from "@openbot/contracts/ipc";
-import { Button } from "@openbot/ui";
-import { defaultTalkKey } from "@openbot/ui/features/conversation/talk-key";
-import { VoicePill } from "@openbot/ui/features/conversation/VoicePill";
-import { useText } from "@openbot/ui/text";
+import { nextSpeechSpeed } from "@starbot/contracts/ipc";
+import { Button } from "@starbot/ui";
+import { defaultTalkKey } from "@starbot/ui/features/conversation/talk-key";
+import { VoicePill } from "@starbot/ui/features/conversation/VoicePill";
+import { useText } from "@starbot/ui/text";
 import { createSignal, Show, untrack } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -142,7 +142,7 @@ export const Speaking: Story = { args: { phase: "speaking", levels: SPEECH } };
 export const LiveVoice: Story = { args: { onCycleSpeed: undefined } };
 
 export const MicrophoneBlocked: Story = {
-  args: { muted: true, error: "OpenBot cannot use the microphone. Allow it in System Settings." },
+  args: { muted: true, error: "StarBot cannot use the microphone. Allow it in System Settings." },
 };
 
 export const ServerOffline: Story = {

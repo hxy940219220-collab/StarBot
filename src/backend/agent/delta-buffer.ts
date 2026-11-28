@@ -1,10 +1,10 @@
-import type { AgentEvent, ConversationSnapshot } from "@openbot/contracts/ipc";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
-import type { OpenBotDatabase, StreamingMessageWrite } from "../openbot-database";
+import type { AgentEvent, ConversationSnapshot } from "@starbot/contracts/ipc";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
+import type { StarBotDatabase, StreamingMessageWrite } from "../starbot-database";
 import { perfCount } from "../perf-probe-hooks";
 import type { ConversationRuntime } from "./conversation-runtime";
 
-const logger = createOpenBotLogger("delta-buffer");
+const logger = createStarBotLogger("delta-buffer");
 
 const STORAGE_FAILURE_CODES = new Set([5, 6, 10, 13]);
 const SAVE_INTERVAL_MS = 100;
@@ -44,13 +44,13 @@ export interface DeltaBufferHooks {
 
 export interface DeltaBufferOptions {
   conversation: ConversationRuntime;
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   hooks: DeltaBufferHooks;
 }
 
 export class DeltaBuffer {
   readonly #conversation: ConversationRuntime;
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #hooks: DeltaBufferHooks;
   readonly #pending = new Map<string, BufferedDelta>();
   #tick: NodeJS.Timeout | null = null;
@@ -119,7 +119,7 @@ export class DeltaBuffer {
       snapshot: this.#conversation.ensureSnapshot(pending.agentId, pending.publicThreadId),
     }));
     this.#pending.clear();
-    let results: ReturnType<OpenBotDatabase["persistStreamingMessages"]>;
+    let results: ReturnType<StarBotDatabase["persistStreamingMessages"]>;
     try {
       results = this.#database.persistStreamingMessages(
         waiting.map(({ snapshot, pending }) => streamingWrite(snapshot, pending)),

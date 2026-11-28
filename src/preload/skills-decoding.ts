@@ -2,7 +2,7 @@ import {
   createAgentTemplateShareUrl,
   isAgentTemplateId,
   isAgentTemplateShareOrigin,
-} from "@openbot/contracts/agent-template-links";
+} from "@starbot/contracts/agent-template-links";
 import {
   type AgentPublicationPreview,
   type AgentSubmission,
@@ -36,15 +36,15 @@ import {
   type SkillPackagePreview,
   type SkillSubmission,
   toAgentTemplateSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   decodeRecord,
   nullableString,
   requiredBoolean,
   requiredNumber,
   requiredString,
-} from "@openbot/contracts/ipc-decoding";
-import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc-decoding";
+import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
 import { decodeAgent } from "./agent-decoding";
 
 function decodeSkillSummary(value: unknown) {

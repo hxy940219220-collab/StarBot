@@ -1,5 +1,5 @@
-import type { CreateAgentInput } from "@openbot/contracts/ipc";
-import type { FirstAgentDraft } from "@openbot/ui/features/agents/FirstAgentSetup";
+import type { CreateAgentInput } from "@starbot/contracts/ipc";
+import type { FirstAgentDraft } from "@starbot/ui/features/agents/FirstAgentSetup";
 import { createAgentInitialMessage } from "./agent-initial-message";
 
 export type NewAgentDraft = Pick<FirstAgentDraft, "name" | "purpose" | "avatarSeed" | "avatarHue" | "avatarColor"> &

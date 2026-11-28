@@ -1,4 +1,4 @@
-import { useText } from "@openbot/ui/text";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createStore, untrack } from "solid-js";
 
 export interface HostSettingState<Value> {

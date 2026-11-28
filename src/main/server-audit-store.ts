@@ -12,16 +12,16 @@ import {
   type ServerAuditNames,
   serverAuditName,
   type TeamMemberSummary,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Result, Semaphore } from "effect";
 import { isMissingFileError } from "../backend/file-errors";
 import { type PreferenceFileFailure, readPreferenceFile, writePreferenceFile } from "./preference-file";
 
-export const SERVER_AUDIT_FILE = "openbot-server-audit-v1.json";
+export const SERVER_AUDIT_FILE = "starbot-server-audit-v1.json";
 
-const logger = createOpenBotLogger("server-audit");
+const logger = createStarBotLogger("server-audit");
 
 export function memberAuditName(member: Pick<TeamMemberSummary, "id" | "name" | "username">): ServerAuditName {
   return serverAuditName(member.id, member.name?.trim() || member.username);

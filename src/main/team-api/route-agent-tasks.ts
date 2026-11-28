@@ -1,14 +1,14 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   AGENT_TASK_LIMIT_MAX,
   type AgentTask,
   type AgentTasksSnapshot,
   type TeamMemberSummary,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { AGENT_TASKS_CAPABILITY, AGENT_TASKS_ROUTES } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { QUEUE_HOLD_SIGN_IN_CAPABILITY } from "@openbot/contracts/team-protocol/queue-hold-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { AGENT_TASKS_CAPABILITY, AGENT_TASKS_ROUTES } from "@starbot/contracts/team-protocol/agent-tasks-v1";
+import { QUEUE_HOLD_SIGN_IN_CAPABILITY } from "@starbot/contracts/team-protocol/queue-hold-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAgentTasks } from "./dependencies";
 import { HttpError } from "./http-error";

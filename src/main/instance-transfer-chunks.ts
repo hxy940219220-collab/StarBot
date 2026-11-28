@@ -5,9 +5,9 @@ import {
   type ExportInstanceInput,
   INSTANCE_TRANSFER_LIMITS,
   type InstanceTransferPreview,
-} from "@openbot/contracts/ipc";
-import { INSTANCE_TRANSFER_CHUNK_BYTES } from "@openbot/contracts/team-protocol/instance-transfer-chunks-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { INSTANCE_TRANSFER_CHUNK_BYTES } from "@starbot/contracts/team-protocol/instance-transfer-chunks-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Deferred, Effect, Exit } from "effect";
 import { diskSpace } from "../backend/storage-usage";
 import { type ArchiveOperationError, archiveCall, archiveFailure } from "./archive-effects";

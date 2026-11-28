@@ -20,7 +20,7 @@ import {
 
 async function main(): Promise<void> {
   if (process.argv[2] === "--help") {
-    process.stdout.write("StarBot Host Manager: run through launchd; administrator setup uses openbot-host.\n");
+    process.stdout.write("StarBot Host Manager: run through launchd; administrator setup uses starbot-host.\n");
     return;
   }
   if (process.argv[2] === "--runtime-check") {

@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOpenBotDatabase } from "./openbot-database-schema";
+import { migrateStarBotDatabase } from "./starbot-database-schema";
 
 const databases: DatabaseSync[] = [];
 afterEach(() => {
@@ -14,7 +14,7 @@ function databaseAt(version: number): DatabaseSync {
   db.exec(`CREATE TABLE schema_migrations(version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL);
     CREATE TEMP TRIGGER stop_at_version BEFORE INSERT ON schema_migrations WHEN new.version > ${version}
     BEGIN SELECT RAISE(ABORT, 'fixture stop'); END;`);
-  expect(() => migrateOpenBotDatabase(db)).toThrow(`migration to version ${version + 1} failed`);
+  expect(() => migrateStarBotDatabase(db)).toThrow(`migration to version ${version + 1} failed`);
   db.exec("DROP TRIGGER stop_at_version");
   return db;
 }
@@ -45,17 +45,17 @@ function seed(db: DatabaseSync): void {
   );
   agent.run(
     "chief",
-    "openbot-thread-chief",
+    "starbot-thread-chief",
     2,
     JSON.stringify({ id: "chief", workspacePath: "/Users/user/StarBot/Bots/chief" }),
   );
   db.exec(`INSERT INTO projection_threads
       (thread_id, agent_id, title, active_turn_id, created_at, updated_at, last_event_sequence)
-    VALUES ('openbot-thread-chief', 'chief', 'Chief', NULL, '2026-03-01T09:00:00.000Z', '2026-03-01T09:00:00.000Z', 1)`);
+    VALUES ('starbot-thread-chief', 'chief', 'Chief', NULL, '2026-03-01T09:00:00.000Z', '2026-03-01T09:00:00.000Z', 1)`);
   db.prepare(
     `INSERT INTO projection_thread_messages (thread_id, message_id, turn_id, author, status, item_type, created_at,
        ordinal, message_json, last_event_sequence)
-     VALUES ('openbot-thread-chief', 'message-1', NULL, 'user', 'completed', NULL, '2026-03-01T09:00:00.000Z', 0, ?, 1)`,
+     VALUES ('starbot-thread-chief', 'message-1', NULL, 'user', 'completed', NULL, '2026-03-01T09:00:00.000Z', 0, ?, 1)`,
   ).run(JSON.stringify({ id: "message-1", text: quotedPaths.join("\n") }));
   db.prepare(
     `INSERT INTO projection_attachments
@@ -89,7 +89,7 @@ describe("agent workspace root migration", () => {
   it("moves each stored root from StarBot/Bots to StarBot/Agents once, in every form", () => {
     const db = databaseAt(12);
     seed(db);
-    migrateOpenBotDatabase(db);
+    migrateStarBotDatabase(db);
 
     const posixAgent = `agent-${posixUuid}`;
     const windowsAgent = `agent-${windowsUuid}`;
@@ -123,13 +123,13 @@ describe("agent workspace root migration", () => {
     const before = contents(db);
     db.exec(`CREATE TEMP TRIGGER fail_marker BEFORE INSERT ON schema_migrations WHEN new.version = 13
       BEGIN SELECT RAISE(ABORT, 'late failure'); END;`);
-    expect(() => migrateOpenBotDatabase(db)).toThrow("migration to version 13 failed");
+    expect(() => migrateStarBotDatabase(db)).toThrow("migration to version 13 failed");
     expect(contents(db)).toEqual(before);
     expect(db.prepare("SELECT version FROM schema_migrations WHERE version = 13").all()).toEqual([]);
     expect(db.prepare("PRAGMA foreign_keys").get()).toEqual({ foreign_keys: 1 });
 
     db.exec("DROP TRIGGER fail_marker");
-    migrateOpenBotDatabase(db);
+    migrateStarBotDatabase(db);
     expect(workspacePaths(db)).toEqual([
       { agent_id: `agent-${posixUuid}`, path: `/Users/user/StarBot/Agents/agent-${posixUuid}` },
       { agent_id: `agent-${windowsUuid}`, path: `C:\\Users\\user\\StarBot\\Agents\\agent-${windowsUuid}` },

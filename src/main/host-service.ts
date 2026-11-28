@@ -1,8 +1,8 @@
 import { randomBytes } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { dirname, join } from "node:path";
-import type { HostKeyHandover } from "@openbot/contracts/host-key-handover";
-import { createInviteUrl, selfHostedApiOrigin } from "@openbot/contracts/invite-links";
+import type { HostKeyHandover } from "@starbot/contracts/host-key-handover";
+import { createInviteUrl, selfHostedApiOrigin } from "@starbot/contracts/invite-links";
 import type {
   AgentEvent,
   AgentTaskReadState,
@@ -40,7 +40,7 @@ import type {
   TeamSessionSummary,
   UpdateHostIdentityInput,
   UpdateTeamMemberInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   type AgentAccessLevel,
   canAdministerServer,
@@ -49,12 +49,12 @@ import {
   isAvatarColor,
   type ServerAuditName,
   SIGNED_OUT_CHANNEL_MEMBER_ID,
-} from "@openbot/contracts/ipc";
-import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
-import type { ServerAppearance } from "@openbot/contracts/team-protocol/host-appearance-v1";
-import type { HostRestartState } from "@openbot/contracts/team-protocol/host-update-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import type { LiveActivityRelayPush } from "@starbot/contracts/live-activity-relay";
+import type { ServerAppearance } from "@starbot/contracts/team-protocol/host-appearance-v1";
+import type { HostRestartState } from "@starbot/contracts/team-protocol/host-update-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import {
   Cause,
   Context,
@@ -105,9 +105,9 @@ import type { TeamWebRtcBridge } from "./team-webrtc-bridge";
 import { TeamWebRtcHostGateway } from "./team-webrtc-host-gateway";
 import { windowsSessionDisconnected } from "./windows-session-state";
 
-export const DEVELOPMENT_REMOTE_CLIENT_USERNAME = "openbot-dev-client";
+export const DEVELOPMENT_REMOTE_CLIENT_USERNAME = "starbot-dev-client";
 
-const logger = createOpenBotLogger("host-service");
+const logger = createStarBotLogger("host-service");
 const REMOTE_CONTROL_QUESTION_MS = 30_000;
 
 interface HostEvents {
@@ -295,7 +295,7 @@ class HostApiRuntime extends Context.Service<
   {
     start(): Effect.Effect<number, RemoteWorkflowError>;
   }
->()("openbot/main/HostApiRuntime") {}
+>()("starbot/main/HostApiRuntime") {}
 
 export class HostService extends EventEmitter<HostEvents> {
   readonly #options: Required<Pick<HostServiceOptions, "localDevelopmentHost">> &
@@ -336,10 +336,10 @@ export class HostService extends EventEmitter<HostEvents> {
       platform: options.platform ?? normalizeRemoteDesktopPlatform(process.platform),
       unattended: options.unattended ?? false,
       runtimePaths: options.remoteDesktopRuntimePaths ?? null,
-      runtimeStateDirectory: options.remoteDesktopStateDirectory ?? ".openbot-remote-desktop",
+      runtimeStateDirectory: options.remoteDesktopStateDirectory ?? ".starbot-remote-desktop",
       getRuntimeCredentials:
         options.getRemoteDesktopRuntimeCredentials ??
-        (() => Effect.succeed({ username: "openbot", password: "development-runtime-not-for-release" })),
+        (() => Effect.succeed({ username: "starbot", password: "development-runtime-not-for-release" })),
       ...(options.getRemoteDesktopDisplays ? { getDisplays: options.getRemoteDesktopDisplays } : {}),
       getDisplayScreenOrigin: options.getRemoteDesktopDisplayScreenOrigin,
       sessionDisconnected: windowsSessionDisconnected,
@@ -547,7 +547,7 @@ export class HostService extends EventEmitter<HostEvents> {
           bridge: options.teamWebRtcBridge,
           store: options.store,
           appVersion: options.appVersion,
-          transferDirectory: join(options.logDirectory ?? ".openbot-remote", "transfers"),
+          transferDirectory: join(options.logDirectory ?? ".starbot-remote", "transfers"),
           renewSignal: (hostId, failedSignalUrl) =>
             Effect.gen(function* () {
               const issueTicket = options.issueRemoteHostTicket;
@@ -1236,7 +1236,7 @@ export class HostService extends EventEmitter<HostEvents> {
       if (!identity || !apiUrl)
         return yield* new RemoteWorkflowError({ cause: new Error("The local development host is not ready.") });
       const username = DEVELOPMENT_REMOTE_CLIENT_USERNAME;
-      const password = "openbot-local-development-client";
+      const password = "starbot-local-development-client";
       const authenticated = yield* this.#options.store.login(username, password).pipe(
         Effect.catch(() =>
           Effect.gen({ self: this }, function* () {
@@ -2121,7 +2121,7 @@ function initialHostStatus(identity: TeamIdentity | null, unattended: boolean): 
 }
 
 function serverLogoUrl(version: string): string {
-  return `openbot-server-logo://local/logo?v=${encodeURIComponent(version)}`;
+  return `starbot-server-logo://local/logo?v=${encodeURIComponent(version)}`;
 }
 
 function normalizeRemoteDesktopPlatform(platform: NodeJS.Platform): "darwin" | "win32" | "linux" {

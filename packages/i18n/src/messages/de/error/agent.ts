@@ -5,28 +5,28 @@ export const messages = {
   "error.agent.historyUnavailable":
     "Der Verlauf ist für diese Anfrage nicht verfügbar. Lies den aktuellen Verlauf erneut oder verwende channel_history für Arbeit in Kanälen.",
   "error.agent.historyArgumentsInvalid":
-    "Ungültige Verlaufsargumente: {detail} Korrigiere die Argumente und versuche es erneut. openbot.tool_describe liefert das Schema.",
+    "Ungültige Verlaufsargumente: {detail} Korrigiere die Argumente und versuche es erneut. starbot.tool_describe liefert das Schema.",
   "error.agent.toolRequestInvalid":
     "Ungültige Argumente für die Werkzeugsuche. Verwende das deklarierte Schema und einen originalen qualifizierten Werkzeugnamen.",
   "error.agent.toolCallArgumentsNotObject":
     "Das Werkzeug wurde nicht ausgeführt. In tool_call muss arguments ein JSON-Objekt sein, kein Text. Sende den Aufruf erneut mit arguments als Objekt.",
   "error.agent.toolCallDiscoveryTool":
-    "Das Werkzeug wurde nicht ausgeführt. tool_call kann openbot.tool_search und openbot.tool_describe nicht ausführen. Rufe sie direkt mit denselben Argumenten auf.",
+    "Das Werkzeug wurde nicht ausgeführt. tool_call kann starbot.tool_search und starbot.tool_describe nicht ausführen. Rufe sie direkt mit denselben Argumenten auf.",
   "error.agent.toolCallEnvelopeKeys":
     "Das Werkzeug wurde nicht ausgeführt. tool_call nimmt nur name und arguments an. Gib die Argumente des Werkzeugs in arguments als Objekt an und sende den Aufruf erneut.",
   "error.agent.toolCallMissingName":
-    "Das Werkzeug wurde nicht ausgeführt. Der tool_call hat keinen name. Gib in name den qualifizierten Namen aus tool_search an, zum Beispiel openbot.history_read, und sende den Aufruf erneut.",
+    "Das Werkzeug wurde nicht ausgeführt. Der tool_call hat keinen name. Gib in name den qualifizierten Namen aus tool_search an, zum Beispiel starbot.history_read, und sende den Aufruf erneut.",
   "error.agent.toolCallUnknownTool":
-    "Das Werkzeug wurde nicht ausgeführt. tool_call hat kein Werkzeug mit diesem Namen gefunden. Verwende den genauen qualifizierten Namen aus tool_search, zum Beispiel openbot_browser.snapshot.",
+    "Das Werkzeug wurde nicht ausgeführt. tool_call hat kein Werkzeug mit diesem Namen gefunden. Verwende den genauen qualifizierten Namen aus tool_search, zum Beispiel starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "Das Werkzeug wurde nicht ausgeführt. tool_call hat kein Werkzeug mit diesem Namen gefunden. Der qualifizierte Name ist möglicherweise {name}. Wenn ja, sende den Aufruf mit diesem Namen erneut.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe hat kein StarBot-Werkzeug mit dem Namen {names} gefunden. Es beschreibt nur die StarBot- und Browser-Werkzeuge, die openbot.tool_search auflistet, keine MCP-Werkzeuge.",
+    "tool_describe hat kein StarBot-Werkzeug mit dem Namen {names} gefunden. Es beschreibt nur die StarBot- und Browser-Werkzeuge, die starbot.tool_search auflistet, keine MCP-Werkzeuge.",
 
   "error.agent.toolDescribeDiscoveryNames":
     "Rufe {names} direkt auf. tool_describe beschreibt die Suchwerkzeuge nicht.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "Der Zeitplan der Routine ist ungültig: {detail} Korrigiere den Zeitplan und versuche es erneut. openbot.tool_describe liefert das Schema.",
+    "Der Zeitplan der Routine ist ungültig: {detail} Korrigiere den Zeitplan und versuche es erneut. starbot.tool_describe liefert das Schema.",
   "error.agent.approvalWhileDeleting": "Während der Agent gelöscht wird, kann keine Genehmigung erteilt werden.",
   "error.agent.accessLocalOnly":
     "Der Agentenzugriff kann nur auf dem Computer geändert werden, auf dem der Agent läuft.",

@@ -1,5 +1,5 @@
-import { HOSTED_SERVER_ENTRY_POINTS } from "@openbot/contracts/hosted-servers";
-import { isDynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { HOSTED_SERVER_ENTRY_POINTS } from "@starbot/contracts/hosted-servers";
+import { isDynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import {
   ACCOUNT_ANALYTICS_SCHEMA_VERSION,
@@ -10,7 +10,7 @@ import {
   readAccountEmail,
 } from "./account-analytics";
 
-const OPENPANEL_API_URL = "https://analytics.openbot.run/api";
+const OPENPANEL_API_URL = "https://analytics.starbot.run/api";
 const SEND_TIMEOUT_MS = 5_000;
 const CLAIM_TIMEOUT_MS = 5 * 60_000;
 const MAX_BATCH_SIZE = 50;
@@ -255,7 +255,7 @@ export class SalesAnalyticsDelivery {
           "content-type": "application/json",
           "openpanel-client-id": clientId,
           "openpanel-client-secret": clientSecret,
-          "openpanel-sdk-name": "openbot-account-api",
+          "openpanel-sdk-name": "starbot-account-api",
         },
         body: JSON.stringify({ type: "identify", payload: { profileId, email } }),
         signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
@@ -303,7 +303,7 @@ export class SalesAnalyticsDelivery {
           "content-type": "application/json",
           "openpanel-client-id": clientId,
           "openpanel-client-secret": clientSecret,
-          "openpanel-sdk-name": "openbot-account-api",
+          "openpanel-sdk-name": "starbot-account-api",
         },
         body: JSON.stringify({ type: "track", payload }),
         signal: AbortSignal.timeout(SEND_TIMEOUT_MS),

@@ -8,10 +8,10 @@ import type {
   TeamInviteSummary,
   TeamPresenceMember,
   UpdateTeamMemberInput,
-} from "@openbot/contracts/ipc";
-import { CRM_CAPABILITY } from "@openbot/contracts/team-protocol/crm-v1";
-import type { AppTextKey } from "@openbot/i18n";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@starbot/contracts/ipc";
+import { CRM_CAPABILITY } from "@starbot/contracts/team-protocol/crm-v1";
+import type { AppTextKey } from "@starbot/i18n";
+import { classifyFailure } from "@starbot/telemetry";
 import {
   Alert,
   AlertActions,
@@ -34,21 +34,21 @@ import {
   Store,
   Tabs,
   Text,
-} from "@openbot/ui";
-import type { LicenseCalls } from "@openbot/ui/features/billing/license-store";
-import type { ProviderSettingsDetail } from "@openbot/ui/features/settings/ProviderSettingsPage";
+} from "@starbot/ui";
+import type { LicenseCalls } from "@starbot/ui/features/billing/license-store";
+import type { ProviderSettingsDetail } from "@starbot/ui/features/settings/ProviderSettingsPage";
 import {
   SaveBarDock,
   SettingsDialogShell,
   SettingsNavGroupLabel,
   type SettingsPagePlacement,
-} from "@openbot/ui/features/settings/SettingsDialogShell";
-import { SettingsHostedSitesTab } from "@openbot/ui/features/settings/SettingsHostedSitesTab";
+} from "@starbot/ui/features/settings/SettingsDialogShell";
+import { SettingsHostedSitesTab } from "@starbot/ui/features/settings/SettingsHostedSitesTab";
 import {
   createSettingsHostedSitesStore,
   type HostedSiteDeleteResult,
-} from "@openbot/ui/features/settings/stores/hosted-sites-store";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/settings/stores/hosted-sites-store";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, For, onCleanup, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { type ServerBrowserProfilesOptions, ServerBrowserProfilesPanel } from "../browser/ServerBrowserProfilesPanel";

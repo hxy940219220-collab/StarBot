@@ -4,8 +4,8 @@ import type {
   CreditServerWallet,
   CreditsState,
   CreditTransferRequest,
-} from "@openbot/contracts/credits";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@starbot/contracts/credits";
+import { classifyFailure } from "@starbot/telemetry";
 import { createEffect, createSignal, createStore } from "solid-js";
 import { currentText } from "../../text";
 import { toast } from "../../toast";

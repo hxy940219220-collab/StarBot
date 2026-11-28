@@ -1,4 +1,4 @@
-import type { MarketplacePluginDetail } from "@openbot/ui/features/settings/marketplace-plugins";
+import type { MarketplacePluginDetail } from "@starbot/ui/features/settings/marketplace-plugins";
 import { MARKETPLACE_PLUGINS } from "./marketplace-plugin-catalog";
 import { STARBOT_OFFICIAL_APP_ICONS } from "./starbot-official-app-icons";
 

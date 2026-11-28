@@ -25,7 +25,7 @@ screens switch between the same conversation and workspace components. The share
 panel receives the web live-view runtime and hides unsupported native controls. `BrowserLiveView`
 accepts an explicit runtime; desktop and the existing preview still default to the preload-compatible
 API. The web Storybook runtime uses
-`preview/mock-openbot.ts` through `preview/mock-web-runtime.ts`.
+`preview/mock-starbot.ts` through `preview/mock-web-runtime.ts`.
 
 The browser runtime uses `packages/team-client` for the directory, authenticated WebRTC peer,
 Signal recovery, file transfers, and browser-view streams. The stream codec lives in contracts;
@@ -42,14 +42,14 @@ checks still apply. `web-account.ts` makes these calls, and the Profile tab of t
 An owner or admin gets the host controls of a desktop remote admin. Shared components keep their
 desktop port as the default and take injected calls: `web-server-settings.ts` gives
 `ServerSettingsModal` the host identity and storage routes through
-`@openbot/team-client/team-admin-requests`, and member and invitation calls through the closed
+`@starbot/team-client/team-admin-requests`, and member and invitation calls through the closed
 `/api/browser/*` list. The Worker applies the same `RemoteControlPlane` role checks as the bearer
 routes. A member or role change revokes every session on the host; the browser reconnects once when
 the directory still lists the host. `ConversationRuntime.admin` carries the skills and shared-table
 calls to the agent settings panel, which shows only Skills and Tables in the browser. Memories,
 routines, and files stay on the desktop. The Permissions select writes access and auto-approve through
 the agent-admin route. `web-marketplace.ts` gives `MarketplaceModal` its calls: the public catalog routes of
-the account service that serves `/app` (`@openbot/team-client/marketplace-catalog`), and installs on
+the account service that serves `/app` (`@starbot/team-client/marketplace-catalog`), and installs on
 the host over `skills-admin-v1`, `agent-install-v1`, `agent-update-v1`, and `mcp-servers-v1`. Try skill and a plugin
 prompt add a line to the agent's draft, as on desktop. A shared agent page also links
 `/app?agent=<id>`: `WebApp` reads the id once, removes the query, and keeps it through sign-in;
@@ -129,7 +129,7 @@ Enter key. A page focus or input handler that moves focus stops it with an error
 text is already in the field. The check also reads each frame element that holds the target,
 because a frame in another process can keep its active element after the page takes focus.
 `bun run test:browser --scenario=typing-focus` covers it and writes
-`.openbot-build/browser-typing-focus.json`.
+`.starbot-build/browser-typing-focus.json`.
 The browser session and service-worker fallback remove the `StarBot/` and `Electron/` user-agent
 tokens. They keep the installed Chromium major version and host platform, and give the other version
 parts as `0.0.0` (`Chrome/156.0.0.0`), as Chrome does: some bot checks refuse the full version that
@@ -155,7 +155,7 @@ value is the one that `getHighEntropyValues()` gives the page. The record is in 
 load after a restart is as a first visit. Windows sends no platform version: the page reads a
 contract version that the host cannot compute. The focused check is
 `bun run test:browser --scenario=identity`; add `--google-live` for the Google identifier check.
-The local identity report is `.openbot-build/browser-identity.json`.
+The local identity report is `.starbot-build/browser-identity.json`.
 The tab preload (`src/preload/browser-page.ts`) makes page values agree with Chrome: the outer size,
 the screen position, `window.chrome` and the passkey dialog. Each replaced function is a Proxy that
 reads as native code. Its `setPrototypeOf` trap throws `Cyclic __proto__ value` as a native function
@@ -168,7 +168,7 @@ rendering, the limits and the extensions stay those of SwiftShader. The preload 
 worker, so WebGL on an `OffscreenCanvas` in a worker still names SwiftShader. A computer with a GPU
 keeps its real names. The check is `bun scripts/browser-fingerprint-e2e.ts`; on Linux it uses the server GPU
 switches, so CI checks the SwiftShader case. Its report is
-`.openbot-build/browser-fingerprint-e2e/report.json`.
+`.starbot-build/browser-fingerprint-e2e/report.json`.
 Website popups are adopted into managed `WebContentsView` tabs through Electron's window creation
 hook. Native guests retain their opener, request body, and the browser session of the opener. Local tab and
 agent tool results expose `openerTabId` while that relationship is live. Independent `noopener`
@@ -205,7 +205,7 @@ person opened keeps its banner, and so does a secret tab. A takeover, user contr
 stops the script of the current page. The site stores the refusal in the profile of the tab, so a
 later tab on that site in the same profile shows no banner either. Banners in frames (for example
 Sourcepoint) are not handled. `bun run test:browser --scenario=cookie-banner` covers it and writes
-`.openbot-build/browser-cookie-banner.json`.
+`.starbot-build/browser-cookie-banner.json`.
 
 Each snapshot also looks for a bot check (`browser-challenge.ts`). It reads the DOM of the main frame
 in an isolated world: vendor markers of the interstitial page (Cloudflare, DataDome, PerimeterX,
@@ -250,7 +250,7 @@ after 4 seconds, the agent opens the page with `navigate`. Before, it waited and
 and 75k tokens.
 
 A memory can name a site (`site`, migration 60): a lowercase host without `www.`. The agent sets it
-with `openbot.remember` (a host or a URL), for example how to work a site. A snapshot of a page then
+with `starbot.remember` (a host or a URL), for example how to work a site. A snapshot of a page then
 has `siteMemories`, up to 5 of the agent's memories for the page's host and its parent domains
 (`app.example.com` also shows `example.com`), newest first. A tab shows them one time per host and
 turn, so the next pages of the same site in that turn do not show them again. A secret tab shows none.
@@ -279,7 +279,7 @@ view's press does not move `:hover`; the engine gives its point in the page's pi
 outside a control, on a password field, or on a field whose
 `autocomplete` is a password, a one-time code or a card value, gives no step. A field gives its label,
 never its value; key presses are never read. `UserBrowsingLog` keeps the steps in
-`openbot-browsing-steps-v1.json` (no migration), the newest 80 per agent. The next memory review of the
+`starbot-browsing-steps-v1.json` (no migration), the newest 80 per agent. The next memory review of the
 agent reads all of them in a `<user_browsing>` block, with secrets redacted, and deletes the steps
 that it read after its result decodes. A step that no review read goes after 30 days (at start and at
 each change). Turning the setting off deletes the file, and deleting an agent deletes its steps. Only
@@ -376,7 +376,7 @@ things stays a refusal:
 - `fill_fields` takes `value` as `text`, and takes `revision` from the refs when they all have the
   same one.
 - `open` drops a `tabId` and opens a new tab, so the page in that tab stays. A call written as
-  `{ name: "openbot_browser.<tool>", arguments }` is unwrapped, and a snake_case field such as
+  `{ name: "starbot_browser.<tool>", arguments }` is unwrapped, and a snake_case field such as
   `tab_id` takes its camelCase name when the call does not also give that name. The user-control
   check reads the same repaired `tabId`.
 - The Vault, secret and payment tools (`submit_secret`, `fill_card`, `list_logins`,
@@ -407,7 +407,7 @@ target, which the tools refuse on purpose, `document` read in the sandbox, and t
 
 ### Fill inspected ordinary fields
 
-`openbot_browser.fill_fields` is a deferred tool in the original browser catalog. It replaces
+`starbot_browser.fill_fields` is a deferred tool in the original browser catalog. It replaces
 1 to 16 main-frame native text inputs or textareas from one fresh snapshot revision. The combined
 literal text has a 16 KiB UTF-8 limit. The total operation deadline, including its final capture,
 is at most 30 seconds. It performs no submit, Enter, click, navigation, target search, or caller
@@ -446,7 +446,7 @@ codes; page exceptions do not enter the new progress result or diagnostic action
 `bun scripts/browser-fill-fields-e2e.ts` compiles only its native fixture and uses an owned hidden
 Electron process with a temporary profile and synthetic loopback forms. It must not make a window
 visible or request native focus to obtain a passing result. It is a local check, not a CI step; on
-Linux, run it under `xvfb-run -a`. The report is `.openbot-build/browser-fill-fields-e2e/report.json`.
+Linux, run it under `xvfb-run -a`. The report is `.starbot-build/browser-fill-fields-e2e/report.json`.
 It includes actual runtime versions, completed cases, three warm-up pairs and twenty measured pairs,
 serialized result bytes, and observed snapshot counts. Measurements include tool execution and loopback fixture
 confirmation. They do not measure provider tokens, model speed, or billable cost.
@@ -454,7 +454,7 @@ confirmation. They do not measure provider tokens, model speed, or billable cost
 ### Run many steps in one call
 
 Each single action tool takes one model turn, and the model reads the page with a separate snapshot.
-`openbot_browser.run_script` does many actions in one call and returns one final snapshot, so a long
+`starbot_browser.run_script` does many actions in one call and returns one final snapshot, so a long
 task takes fewer turns.
 
 `run_script` takes JavaScript that awaits helpers named after the action tools (`navigate`, `click`,
@@ -499,7 +499,7 @@ backend bundle keeps the QuickJS packages external, so the WebAssembly file load
 
 `bun run test:browser-steps` compiles its native fixture and drives a hidden Electron process with
 loopback pages, like the fill fields check. CI runs it in the `browser` job under `xvfb-run -a`.
-The report is `.openbot-build/browser-steps-e2e/report.json`.
+The report is `.starbot-build/browser-steps-e2e/report.json`.
 
 ### Browser sessions
 
@@ -508,9 +508,9 @@ fields `ownBrowserSession` and `browserProfileId` (`agent_json`) select it:
 
 | Choice | Partition |
 | --- | --- |
-| Shared (default) | `persist:openbot-browser` |
-| Only this agent | `persist:openbot-browser-agent-<key>`. The key is the first 32 hex characters of the SHA-256 of the agent id. |
-| Named profile | `persist:openbot-browser-profile-<id>`. The id is 32 random hex characters. |
+| Shared (default) | `persist:starbot-browser` |
+| Only this agent | `persist:starbot-browser-agent-<key>`. The key is the first 32 hex characters of the SHA-256 of the agent id. |
+| Named profile | `persist:starbot-browser-profile-<id>`. The id is 32 random hex characters. |
 
 Named profiles are rows of the `browser_profiles` table (migration 45). Many agents can use one
 profile, so they share its sign-ins; a profile has no owner agent, and the tab rules below do not
@@ -599,7 +599,7 @@ A proxy can also be the computer of a member (`kind = 'computer'`, one row for e
 The member selects "Use your computer…" in the Proxy submenu, or Share in the Proxies section, of a
 joined server. The desktop app then stores the server id in `browserEgressServerIds`
 (`remote-server-store.ts`), calls `/v1/admin/browser-proxies/computer`, and opens the
-`openbot.browser-egress.v1` data channel while it is connected (`BrowserEgressClient`). The host binds
+`starbot.browser-egress.v1` data channel while it is connected (`BrowserEgressClient`). The host binds
 the channel to the membership that signed in on that peer (`BrowserEgressHost.peerMemberChanged`);
 the newest open peer of a member carries its connections. A tab of a profile with a computer proxy
 uses the same loopback relay, with `BrowserEgressHost.exit` as its exit: each browser connection
@@ -655,7 +655,7 @@ stops at once with `page_crashed`, and its final snapshot loads the page again. 
 waited for its timeout. A tab with a secret, a typed card, a takeover or user control is not loaded
 again, because a reload could send a form again or lose the work of the person.
 `bun run test:browser-steps` covers the crash, the settle wait and the bot check, and writes
-`.openbot-build/browser-steps-e2e/report.json`.
+`.starbot-build/browser-steps-e2e/report.json`.
 
 ### Page dialogs
 
@@ -726,7 +726,7 @@ version (`apps/auth-api/src/server/mobile-features-config.ts`).
 
 ## Secure browser authentication
 
-`openbot_browser.submit_secret` uses the existing attention/takeover lifecycle with optional public
+`starbot_browser.submit_secret` uses the existing attention/takeover lifecycle with optional public
 secret-request metadata. The attention registry creates a fresh request ID and owns the pending
 response. The secret travels through a dedicated typed IPC endpoint or the optional
 `browser-secret-handoff` Team API capability, never a prompt answer or provider tool argument.
@@ -740,7 +740,7 @@ an older host takes it only from an owner or admin. The card shows the save box 
 password request, and for a member of an older host, or an older host without the route, it shows
 the box off with the reason.
 
-`openbot_browser.request_vault_item` asks the user to add a login, a card or contact info that the
+`starbot_browser.request_vault_item` asks the user to add a login, a card or contact info that the
 Vault does not have. The attention registry surfaces a `form` UI block with `uiBlock.vault.kind`.
 The agent can fill in the fields that are not secret; the password, card number and security code
 are secret form fields, so the stored block never holds them. The desktop card opens the Vault

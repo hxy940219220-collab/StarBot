@@ -77,9 +77,9 @@ const ZODIAC_VOICE_PROFILES: Readonly<Record<string, ZodiacVoiceProfile>> = {
   pisces: { pitch: 1.06, wave: "sine", harmonic: 0.36, filterHz: 4300 },
 };
 
-const ACTION_SOUNDS_STORAGE_KEY = "openbot:action-sounds-enabled";
-const ACTION_SOUNDS_THEME_STORAGE_KEY = "openbot:action-sounds-theme";
-const COMPLETION_SOUND_STORAGE_KEY = "openbot:completion-sound-enabled";
+const ACTION_SOUNDS_STORAGE_KEY = "starbot:action-sounds-enabled";
+const ACTION_SOUNDS_THEME_STORAGE_KEY = "starbot:action-sounds-theme";
+const COMPLETION_SOUND_STORAGE_KEY = "starbot:completion-sound-enabled";
 
 let sharedCtx: AudioContext | null = null;
 let sharedNoiseBuffer: AudioBuffer | null = null;

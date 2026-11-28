@@ -99,7 +99,7 @@ export const messages = {
   "app.socialFollow.followedTitle": "Do zobaczenia na {name}!",
   "app.socialFollow.followedBody": "Tam najpierw pojawiają się nasze nowości.",
   "app.socialFollow.draftPost":
-    "Moje agenty AI pracują teraz na moim komputerze z OpenBotem. Moje czaty i pliki zostają u mnie. Wypróbuj: {site}",
+    "Moje agenty AI pracują teraz na moim komputerze z StarBotem. Moje czaty i pliki zostają u mnie. Wypróbuj: {site}",
   "app.socialFollow.redditTitle": "Jak używam StarBota",
   "app.rail.usageRings": "Użycie {name}: {windows}. Otwórz użycie",
   "app.rail.usageUnavailable": "Użycie {name} niedostępne. Otwórz użycie",

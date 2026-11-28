@@ -1,4 +1,4 @@
-import type { ConversationMessage, ConversationPlan, ConversationTraceStep } from "@openbot/contracts/ipc";
+import type { ConversationMessage, ConversationPlan, ConversationTraceStep } from "@starbot/contracts/ipc";
 import { Schema } from "effect";
 
 export const FINISH_CHECK_DEADLINE_MS = 30_000;

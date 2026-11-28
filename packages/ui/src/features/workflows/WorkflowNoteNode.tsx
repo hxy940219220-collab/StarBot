@@ -1,5 +1,5 @@
-import type { AppTextKey } from "@openbot/i18n";
-import { Bold, Button, LabelTooltipTrigger, StickyNote, Textarea, UserRoundPen } from "@openbot/ui";
+import type { AppTextKey } from "@starbot/i18n";
+import { Bold, Button, LabelTooltipTrigger, StickyNote, Textarea, UserRoundPen } from "@starbot/ui";
 import { Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import { Hint } from "./workflow-board";
@@ -33,8 +33,8 @@ import {
 
 const noteInk = (color: CanvasColor) =>
   color === "ink"
-    ? "var(--openbot-paper-text)"
-    : `color-mix(in srgb, var(--openbot-file-${color}) 62%, var(--openbot-paper-text))`;
+    ? "var(--starbot-paper-text)"
+    : `color-mix(in srgb, var(--starbot-file-${color}) 62%, var(--starbot-paper-text))`;
 
 type NoteSize = "lg" | "2xl" | "3xl" | "display";
 
@@ -74,7 +74,7 @@ export function NoteNode(props: { id: string; text?: string; tone?: NoteTone }) 
       icon={<StickyNote aria-hidden="true" />}
       kind="note"
       bare
-      style={{ "--wfn-note": `var(--openbot-file-${tone()})`, "--wfn-note-ink": noteInk(ink()) }}
+      style={{ "--wfn-note": `var(--starbot-file-${tone()})`, "--wfn-note-ink": noteInk(ink()) }}
       toolbar={
         <NodeToolbar id={props.id} name={t("workflow.note.name")} locked={locked()} onLock={setLocked}>
           <Show when={!locked()}>

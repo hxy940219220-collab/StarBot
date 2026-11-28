@@ -1,10 +1,10 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   AGENT_INSTRUCTIONS_CHANGE_ITEM_TYPE,
   type AgentInstructionsChange,
   type ConversationMessage,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { readAgentInstructionsFile } from "./workspace-instructions";
 

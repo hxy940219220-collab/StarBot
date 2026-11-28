@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { SidebarLayoutAction, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { SidebarLayoutAction, SidebarLayoutSnapshot } from "@starbot/contracts/ipc";
 
 export interface SectionDuplicateDeps {
   layout: SidebarLayoutSnapshot;

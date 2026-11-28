@@ -1,4 +1,4 @@
-import { Button, ChevronDown } from "@openbot/ui";
+import { Button, ChevronDown } from "@starbot/ui";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
 import { SidebarAgentRow } from "./SidebarAgentRow";

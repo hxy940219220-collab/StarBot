@@ -45,7 +45,7 @@ if (existsSync(appPidFile)) {
   } catch {}
 }
 writeFileSync(
-  join(profile, "openbot-setup-v2.json"),
+  join(profile, "starbot-setup-v2.json"),
   `${JSON.stringify({ version: 2, preferredProvider: provider, completedAt: new Date().toISOString() })}\n`,
 );
 
@@ -214,9 +214,9 @@ const app = spawn(
     env: {
       ...withoutElectronRuntimeFlags(process.env),
       ELECTRON_RENDERER_URL: rendererUrl,
-      OPENBOT_DEV_REMOTE_DEBUGGING_PORT: String(debuggingPort),
-      OPENBOT_DEV_REMOTE_ROLE: "host",
-      OPENBOT_DEV_HOST_EMAIL: `openbot-live-${provider}@example.com`,
+      STARBOT_DEV_REMOTE_DEBUGGING_PORT: String(debuggingPort),
+      STARBOT_DEV_REMOTE_ROLE: "host",
+      STARBOT_DEV_HOST_EMAIL: `starbot-live-${provider}@example.com`,
     },
     stdio: "inherit",
     detached: true,

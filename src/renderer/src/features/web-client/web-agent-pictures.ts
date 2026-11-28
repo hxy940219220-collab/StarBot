@@ -1,5 +1,5 @@
-const PICTURE_CACHE = "openbot-agent-pictures-v1";
-const PICTURE_PATH = "/openbot-agent-pictures/";
+const PICTURE_CACHE = "starbot-agent-pictures-v1";
+const PICTURE_PATH = "/starbot-agent-pictures/";
 const SOURCE_HEADER = "X-StarBot-Picture-Source";
 
 let signOuts = 0;

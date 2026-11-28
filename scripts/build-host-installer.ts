@@ -52,13 +52,13 @@ async function build(): Promise<void> {
     ])
   ).trim();
   if (appVersion !== version) throw new Error("StarBot.app and Host package versions differ.");
-  const temp = await mkdtemp(join(tmpdir(), "openbot-host-build-"));
+  const temp = await mkdtemp(join(tmpdir(), "starbot-host-build-"));
   const payload = join(temp, "payload");
   const installerScripts = join(temp, "scripts");
   const destination = resolve(`dist/StarBot-Host-${version}-arm64.pkg`);
   try {
     await mkdir(join(payload, HOST_MANAGER_DIRECTORY), { recursive: true });
-    for (const name of ["host-manager", "openbot-host"]) {
+    for (const name of ["host-manager", "starbot-host"]) {
       await command("bun", [
         "build",
         `scripts/${name}.ts`,
@@ -92,7 +92,7 @@ async function build(): Promise<void> {
         "--options",
         "runtime",
         "--identifier",
-        `app.openbot.host.${name}`,
+        `app.starbot.host.${name}`,
         ...(name === "create-tenants" ? [] : ["--entitlements", "build/macos/host-updates/entitlements.plist"]),
         binary,
       ]);
@@ -106,10 +106,10 @@ async function build(): Promise<void> {
       ]);
     }
     for (const [source, target] of [
-      ["openbot-host", "/usr/local/bin/openbot-host"],
-      ["openbot-relaunch.sh", `${HOST_MANAGER_DIRECTORY}/openbot-relaunch.sh`],
-      ["app.openbot.host-manager.plist", "/Library/LaunchDaemons/app.openbot.host-manager.plist"],
-      ["app.openbot.desktop.relaunch.plist", "/Library/LaunchAgents/app.openbot.desktop.relaunch.plist"],
+      ["starbot-host", "/usr/local/bin/starbot-host"],
+      ["starbot-relaunch.sh", `${HOST_MANAGER_DIRECTORY}/starbot-relaunch.sh`],
+      ["app.starbot.host-manager.plist", "/Library/LaunchDaemons/app.starbot.host-manager.plist"],
+      ["app.starbot.desktop.relaunch.plist", "/Library/LaunchAgents/app.starbot.desktop.relaunch.plist"],
     ] as const) {
       await mkdir(dirname(join(payload, target)), { recursive: true });
       await copyFile(`build/macos/host-updates/${source}`, join(payload, target));

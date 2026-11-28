@@ -11,13 +11,13 @@ import {
   type ConversationMessage,
   defaultProviderModel,
   type QueueDelivery,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-empty-lead-turn-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-codex-empty-lead-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-empty-lead-turn-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-codex-empty-lead-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -35,14 +35,14 @@ const NO_ANSWER_AFTER_STEPS = sourceText("error.provider.noAnswerAfterSteps", {
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 interface FakeCall {
   tool: "send_message";
@@ -119,7 +119,7 @@ const callNext = (turn) => {
   write({
     id,
     method: "item/tool/call",
-    params: { threadId: turn.threadId, turnId: turn.turnId, callId: "call-" + id, namespace: "openbot", tool: call.tool, arguments: call.arguments || {} },
+    params: { threadId: turn.threadId, turnId: turn.turnId, callId: "call-" + id, namespace: "starbot", tool: call.tool, arguments: call.arguments || {} },
   });
 };
 const decide = (text, model) => {
@@ -269,7 +269,7 @@ async function check(name: string, run: () => Promise<unknown>) {
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

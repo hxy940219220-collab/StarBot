@@ -10,7 +10,7 @@ import { decodeModelListResponse, type ModelListResponse } from "../src/backend/
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, runTurn, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/cline-free-models-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/cline-free-models-e2e");
 
 const RECOMMENDED = {
   recommended: [{ id: "anthropic/claude-sonnet-5.5", name: "claude-sonnet-5.5", description: "", tags: ["NEW"] }],
@@ -41,7 +41,7 @@ interface Report {
   ended?: string[];
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-cline-free-models-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-cline-free-models-e2e-"));
 const log = join(root, "cline.jsonl");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];

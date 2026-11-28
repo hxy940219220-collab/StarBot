@@ -1,9 +1,9 @@
-export const LEFT_PANEL_STORAGE_KEY = "openbot:left-panel-width";
-export const LEFT_PANEL_COLLAPSED_STORAGE_KEY = "openbot:left-panel-collapsed";
-export const LEFT_PANEL_CLOSED_STORAGE_KEY = "openbot:left-panel-closed";
-export const SERVER_VIEW_STORAGE_KEY = "openbot:server-view";
-export const SIDEBAR_CHAT_ORDER_STORAGE_KEY = "openbot:sidebar-chat-order";
-export const RAIL_PINS_STORAGE_KEY = "openbot:rail-pins";
+export const LEFT_PANEL_STORAGE_KEY = "starbot:left-panel-width";
+export const LEFT_PANEL_COLLAPSED_STORAGE_KEY = "starbot:left-panel-collapsed";
+export const LEFT_PANEL_CLOSED_STORAGE_KEY = "starbot:left-panel-closed";
+export const SERVER_VIEW_STORAGE_KEY = "starbot:server-view";
+export const SIDEBAR_CHAT_ORDER_STORAGE_KEY = "starbot:sidebar-chat-order";
+export const RAIL_PINS_STORAGE_KEY = "starbot:rail-pins";
 export const LEFT_PANEL_DEFAULT = 280;
 export const LEFT_PANEL_MIN = 128;
 export const LEFT_PANEL_MAX = 400;

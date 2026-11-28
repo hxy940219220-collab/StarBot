@@ -1,0 +1,7 @@
+abi <abi/4.0>,
+include <tunables/global>
+
+profile starbot-hosted /opt/StarBot/app/starbot flags=(unconfined) {
+  userns,
+  network,
+}

@@ -1,5 +1,5 @@
-import { serverPlushHex } from "@openbot/brand/bloub-avatar";
-import type { ServerAppearance, ServerAppearanceShape } from "@openbot/contracts/team-protocol/host-appearance-v1";
+import { serverPlushHex } from "@starbot/brand/bloub-avatar";
+import type { ServerAppearance, ServerAppearanceShape } from "@starbot/contracts/team-protocol/host-appearance-v1";
 import { ImageFormat, Skia } from "@shopify/react-native-skia";
 import { useEffect, useState } from "react";
 import { PixelRatio } from "react-native";

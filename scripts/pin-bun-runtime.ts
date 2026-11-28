@@ -101,7 +101,7 @@ async function pinArtifact(
   }
 
   const archiveBytes = await fetchBytes(fetchImpl, platform.dist.tarball);
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-bun-pin-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "starbot-bun-pin-"));
   try {
     const archive = join(temporaryRoot, asset);
     const extracted = join(temporaryRoot, "extracted");

@@ -1,9 +1,9 @@
-import type { AgentTaskInput, OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { AgentTaskInput, StarBotDesktopApi } from "@starbot/contracts/ipc";
 import { noteAgentRequest } from "../../agent-requests";
 
 export interface AgentTasksPort
   extends Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "closeTask"
     | "deleteTask"
     | "listTasks"
@@ -14,7 +14,7 @@ export interface AgentTasksPort
     | "startTask"
     | "stopTask"
   > {
-  listTaskReads?: OpenBotDesktopApi["agent"]["listTaskReads"];
+  listTaskReads?: StarBotDesktopApi["agent"]["listTaskReads"];
   sendToTask(
     input: AgentTaskInput & {
       text: string;
@@ -23,17 +23,17 @@ export interface AgentTasksPort
       clientMessageId: string;
     },
   ): Promise<unknown>;
-  runQueuedMessageAsTask?: OpenBotDesktopApi["agent"]["runQueuedMessageAsTask"];
-  listArchivedTasks?: OpenBotDesktopApi["agent"]["listArchivedTasks"];
-  readTaskPage?: OpenBotDesktopApi["agent"]["readTaskPage"];
-  readTaskAround?: OpenBotDesktopApi["agent"]["readTaskAround"];
-  branchTask?: OpenBotDesktopApi["agent"]["branchTask"];
+  runQueuedMessageAsTask?: StarBotDesktopApi["agent"]["runQueuedMessageAsTask"];
+  listArchivedTasks?: StarBotDesktopApi["agent"]["listArchivedTasks"];
+  readTaskPage?: StarBotDesktopApi["agent"]["readTaskPage"];
+  readTaskAround?: StarBotDesktopApi["agent"]["readTaskAround"];
+  branchTask?: StarBotDesktopApi["agent"]["branchTask"];
   deleteTaskMessage?: ((input: { agentId: string; taskId: string; messageId: string }) => Promise<void>) | undefined;
-  queue?: Pick<OpenBotDesktopApi["agent"], "cancelQueuedMessage" | "steerQueuedMessage" | "reorderQueue"> | undefined;
+  queue?: Pick<StarBotDesktopApi["agent"], "cancelQueuedMessage" | "steerQueuedMessage" | "reorderQueue"> | undefined;
 }
 
 export function agentTasksPort(server: string): AgentTasksPort {
-  const { agent } = window.openbot;
+  const { agent } = window.starbot;
   return {
     listTasks: (agentId) => agent.listTasks(agentId, server),
     listArchivedTasks: (input) => agent.listArchivedTasks(input, server),

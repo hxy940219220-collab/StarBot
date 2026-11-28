@@ -2,8 +2,8 @@ import {
   REMOTE_CONTROL_ACCESS_LEVELS,
   type RemoteControlAccess,
   type RemoteControlPolicy,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Alert,
   AlertContent,
@@ -21,8 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
   SwitchField,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createStore, onSettled, Show } from "solid-js";
 import { serversPort } from "./servers-port";
 

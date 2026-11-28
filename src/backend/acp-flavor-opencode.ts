@@ -1,8 +1,8 @@
 import { RequestError, type SessionUpdate } from "@agentclientprotocol/sdk";
-import { isFreeOpencodeModel } from "@openbot/contracts/ipc";
-import { type SourceMessages, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
-import type { CauseCode } from "@openbot/telemetry";
+import { isFreeOpencodeModel } from "@starbot/contracts/ipc";
+import { type SourceMessages, sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
+import type { CauseCode } from "@starbot/telemetry";
 import { type AcpCustomEndpoint, type AcpFlavor, type AcpRetryCause, shownFailureDetail } from "./acp-flavor";
 import {
   isContextTooSmallFailure,
@@ -14,7 +14,7 @@ import {
 } from "./agent/provider-diagnostics";
 import { isRecord } from "./protocol";
 
-const logger = createOpenBotLogger("acp-client");
+const logger = createStarBotLogger("acp-client");
 
 function isOpenCodeTimeoutRetry(update: SessionUpdate): boolean {
   if (update.sessionUpdate !== "session_info_update" || !isRecord(update._meta)) return false;

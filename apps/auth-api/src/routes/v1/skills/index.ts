@@ -1,5 +1,5 @@
-import { isSkillCategory, type MarketplaceSkillSort } from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
+import { isSkillCategory, type MarketplaceSkillSort } from "@starbot/contracts/ipc";
+import { isString } from "@starbot/contracts/runtime-values";
 import { createFileRoute } from "@tanstack/solid-router";
 import { Effect } from "effect";
 import { runApiResponse } from "../../../server/effect-runtime";

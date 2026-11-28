@@ -1,5 +1,5 @@
-import { bloubAvatarProfile } from "@openbot/brand/bloub-avatar";
-import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
+import { bloubAvatarProfile } from "@starbot/brand/bloub-avatar";
+import type { AvatarColor, AvatarHue } from "@starbot/contracts/ipc";
 import { render } from "@solidjs/web";
 import { flush } from "solid-js";
 import { ZodiacClayAvatar } from "./features/agents/ZodiacClayAvatar";
@@ -29,14 +29,14 @@ export {
   type ZodiacEyeSpec,
   type ZodiacId,
   zodiacForShape,
-} from "@openbot/brand/bloub-avatar";
+} from "@starbot/brand/bloub-avatar";
 export {
   type AvatarMood,
   avatarMoodIsBusy,
   avatarMoodPresentation,
   SHAPE_SAFE_STATES,
   type ShapeSafeStateId,
-} from "@openbot/brand/bloub-avatar-motion";
+} from "@starbot/brand/bloub-avatar-motion";
 
 export function createStaticAvatarSvg(
   seed: string,

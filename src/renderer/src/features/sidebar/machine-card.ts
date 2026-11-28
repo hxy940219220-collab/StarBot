@@ -6,8 +6,8 @@ import {
   machineAlertLevel,
   machineMetricRatio,
   type ServerSummary,
-} from "@openbot/contracts/ipc";
-import { MACHINE_RESOURCES_CAPABILITY } from "@openbot/contracts/team-protocol/machine-resources-v1";
+} from "@starbot/contracts/ipc";
+import { MACHINE_RESOURCES_CAPABILITY } from "@starbot/contracts/team-protocol/machine-resources-v1";
 import { createMemo, createSignal, untrack } from "solid-js";
 import { createUsageRefreshPoll } from "../account/usage-refresh-poll";
 import { MACHINE_RESOURCES_SHOWN } from "../files/machine-resources";
@@ -15,7 +15,7 @@ import { canManageStorage } from "../files/storage-usage";
 import { serverSupportsCapability } from "../servers/server-capabilities";
 import { type SidebarCardsPort, sidebarPort } from "./sidebar-port";
 
-const DISMISSED_KEY_PREFIX = "openbot:machine-card-dismissed:";
+const DISMISSED_KEY_PREFIX = "starbot:machine-card-dismissed:";
 
 interface MachineCardState {
   metric: MachineMetric;

@@ -1,4 +1,4 @@
-import { ArrowLeft, Button, History, Lock } from "@openbot/ui";
+import { ArrowLeft, Button, History, Lock } from "@starbot/ui";
 import { useText } from "../../text";
 
 export function WorkflowVersionBar(props: { at: string; onBack: () => void; onMakeCurrent: () => void }) {

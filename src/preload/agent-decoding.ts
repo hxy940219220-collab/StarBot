@@ -49,9 +49,9 @@ import {
   type SharedTable,
   type SidebarLayoutSnapshot,
   type SidebarPinsSnapshot,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, guardedDecoder, guardedListDecoder } from "@openbot/contracts/ipc-decoding";
-import { isDynamicRecord, isHttpsUrl, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { decodeRecord, guardedDecoder, guardedListDecoder } from "@starbot/contracts/ipc-decoding";
+import { isDynamicRecord, isHttpsUrl, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
 
 export const decodeRoutine = guardedDecoder(isRoutine, "routine response");
 export const decodeAgentHostSettingsFromMain = guardedDecoder(isAgentHostSettings, "agent host settings response");

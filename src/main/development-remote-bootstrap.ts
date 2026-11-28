@@ -13,8 +13,8 @@ import type { TeamStore } from "./team-store";
 export type DevelopmentRemoteRole = "host" | "client";
 export type DevelopmentClientTransport = "http" | "webrtc";
 
-const DEVELOPMENT_HOST_EMAIL = "openbot-dev-host@example.com";
-const DEVELOPMENT_CLIENT_EMAIL = "openbot-dev-client@example.com";
+const DEVELOPMENT_HOST_EMAIL = "starbot-dev-host@example.com";
+const DEVELOPMENT_CLIENT_EMAIL = "starbot-dev-client@example.com";
 
 export function readDevelopmentClientTransport(value: string | undefined): DevelopmentClientTransport {
   return value === "webrtc" ? "webrtc" : "http";

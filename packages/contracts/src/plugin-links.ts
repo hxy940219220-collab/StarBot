@@ -1,6 +1,6 @@
-export const OPENBOT_PLUGIN_ORIGIN = "https://starbot.app";
-export const OPENBOT_PLUGIN_PATH_PREFIX = "/plugins/";
-export const OPENBOT_PLUGIN_HOST = "plugins";
+export const STARBOT_PLUGIN_ORIGIN = "https://starbot.app";
+export const STARBOT_PLUGIN_PATH_PREFIX = "/plugins/";
+export const STARBOT_PLUGIN_HOST = "plugins";
 export const WEB_APP_PLUGIN_PARAM = "plugin";
 
 const PLUGIN_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]{0,62}$/u;
@@ -11,7 +11,7 @@ export function isPluginSlug(value: string): boolean {
 
 export function createPluginShareUrl(slug: string): string {
   assertPluginSlug(slug);
-  return `${OPENBOT_PLUGIN_ORIGIN}${OPENBOT_PLUGIN_PATH_PREFIX}${slug}`;
+  return `${STARBOT_PLUGIN_ORIGIN}${STARBOT_PLUGIN_PATH_PREFIX}${slug}`;
 }
 
 export function createWebAppPluginPath(slug: string): string {
@@ -24,9 +24,9 @@ export function pluginSlugFromWebAppSearch(search: string): string | null {
   return slug !== null && isPluginSlug(slug) ? slug : null;
 }
 
-export function createOpenBotPluginUrl(slug: string): string {
+export function createStarBotPluginUrl(slug: string): string {
   assertPluginSlug(slug);
-  return `starbot://${OPENBOT_PLUGIN_HOST}/${slug}`;
+  return `starbot://${STARBOT_PLUGIN_HOST}/${slug}`;
 }
 
 export function pluginLinkText(url: string): string {
@@ -48,10 +48,10 @@ export function parsePluginUrl(value: string): string {
 
   const canonical =
     url.protocol === "https:" &&
-    url.origin === OPENBOT_PLUGIN_ORIGIN &&
-    url.pathname.startsWith(OPENBOT_PLUGIN_PATH_PREFIX);
+    url.origin === STARBOT_PLUGIN_ORIGIN &&
+    url.pathname.startsWith(STARBOT_PLUGIN_PATH_PREFIX);
   const customScheme =
-    (url.protocol === "starbot:" || url.protocol === "openbot:") && url.hostname === OPENBOT_PLUGIN_HOST;
+    (url.protocol === "starbot:" || url.protocol === "starbot:") && url.hostname === STARBOT_PLUGIN_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||
@@ -63,7 +63,7 @@ export function parsePluginUrl(value: string): string {
     throw new Error("The StarBot plugin link is invalid.");
   }
 
-  const rest = canonical ? url.pathname.slice(OPENBOT_PLUGIN_PATH_PREFIX.length) : url.pathname.replace(/^\//u, "");
+  const rest = canonical ? url.pathname.slice(STARBOT_PLUGIN_PATH_PREFIX.length) : url.pathname.replace(/^\//u, "");
   const segments = rest.split("/");
   if (segments.length !== 1) {
     throw new Error("The StarBot plugin link is invalid.");

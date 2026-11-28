@@ -3,13 +3,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { AgentProviderId } from "@openbot/contracts/ipc";
+import type { AgentProviderId } from "@starbot/contracts/ipc";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = join(ROOT, ".openbot-build", "agent-pending-runtime-e2e");
+const OUT = join(ROOT, ".starbot-build", "agent-pending-runtime-e2e");
 
 interface Step {
   name: string;
@@ -32,10 +32,10 @@ async function step<T>(name: string, run: () => Promise<T>): Promise<T> {
   }
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-pending-runtime-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-pending-runtime-"));
 const statePath = join(root, "state");
 const homePath = join(root, "home");
-const database = new OpenBotDatabase(statePath);
+const database = new StarBotDatabase(statePath);
 const store = new AgentStore(statePath, homePath, database);
 
 try {
@@ -59,7 +59,7 @@ try {
   });
 
   await step("The queued runtime survives a reload", async () => {
-    const reopened = new AgentStore(statePath, homePath, new OpenBotDatabase(statePath));
+    const reopened = new AgentStore(statePath, homePath, new StarBotDatabase(statePath));
     await runCauseEffect(reopened.initialize());
     const loaded = reopened.list().find((candidate) => candidate.id === agent.id);
     assert.ok(loaded);

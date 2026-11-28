@@ -4,19 +4,19 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { AGENT_PROVIDERS, decodeUsageTokens, type UsageTokens } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS, decodeUsageTokens, type UsageTokens } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-usage-metering-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-metering-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-usage-metering-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-opencode-metering-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeOpenCode = join(root, "opencode");
 const logPath = join(root, "opencode.jsonl");
 
 process.env.HOME = home;
-process.env.OPENBOT_OPENCODE_PATH = fakeOpenCode;
+process.env.STARBOT_OPENCODE_PATH = fakeOpenCode;
 process.env.FAKE_OPENCODE_LOG = logPath;
 mkdirSync(home, { recursive: true });
 
@@ -24,7 +24,7 @@ const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_OPENCODE = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -157,7 +157,7 @@ function protocol(): LogEntry[] {
 }
 
 await writeFile(fakeOpenCode, FAKE_OPENCODE, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

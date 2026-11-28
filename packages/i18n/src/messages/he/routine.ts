@@ -347,7 +347,7 @@ export const messages = {
   "routine.webhook.stepSecretHint": "השולח חותם כל בקשה בסוד הזה. StarBot דוחה בקשה בלי חתימה תקפה.",
 
   "routine.webhook.howToSign": "איך לחתום על בקשה",
-  "routine.webhook.howToSignHint": "יש לשמור את הסוד ב-OPENBOT_WEBHOOK_SECRET אצל השולח. אין להכניס אותו לקוד.",
+  "routine.webhook.howToSignHint": "יש לשמור את הסוד ב-STARBOT_WEBHOOK_SECRET אצל השולח. אין להכניס אותו לקוד.",
   "routine.webhook.stepTest": "שליחת אירוע בדיקה",
   "routine.webhook.stepTestHint": "StarBot חותם על אירוע שמתאים לשגרה הזו ומקבל אותו כבקשה אמיתית. השגרה רצה פעם אחת.",
 

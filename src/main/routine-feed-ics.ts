@@ -1,4 +1,4 @@
-import type { RoutineCalendar } from "@openbot/contracts/ipc";
+import type { RoutineCalendar } from "@starbot/contracts/ipc";
 
 const EVENT_DURATION = "PT15M";
 const REFRESH_INTERVAL = "PT15M";

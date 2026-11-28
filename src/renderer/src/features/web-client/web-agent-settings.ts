@@ -4,11 +4,11 @@ import {
   decodeAgentInstructionsFileFromMain,
   isAgentMemory,
   type TeamRealtimeEvent,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_INSTRUCTIONS_ROUTES } from "@openbot/contracts/team-protocol/agent-instructions-v1";
-import { AGENT_MEMORIES_CAPABILITY } from "@openbot/contracts/team-protocol/agent-memories-v1";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@starbot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { AGENT_INSTRUCTIONS_ROUTES } from "@starbot/contracts/team-protocol/agent-instructions-v1";
+import { AGENT_MEMORIES_CAPABILITY } from "@starbot/contracts/team-protocol/agent-memories-v1";
+import { runTeamEffect } from "@starbot/team-client";
 import {
   addAgentFolder,
   addChannelFolder,
@@ -24,14 +24,14 @@ import {
   removeAgentFolder,
   removeChannelFolder,
   setRoutineResultDestination,
-} from "@openbot/team-client/team-admin-requests";
+} from "@starbot/team-client/team-admin-requests";
 import {
   type AgentMemoriesRequest,
   readAgentMemories,
   readAgentMemorySelection,
   setAgentMemoryInclusion,
   type TeamApiRequest,
-} from "@openbot/team-client/team-api-requests";
+} from "@starbot/team-client/team-api-requests";
 import { Effect } from "effect";
 import type { ChannelFoldersApi } from "../channels/channel-folders-port";
 import type { AgentFoldersApi, AgentInstructionsApi } from "../conversation/agent-folders-port";

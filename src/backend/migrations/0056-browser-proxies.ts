@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Shared by migration v56 and the separate new-database schema. IF NOT EXISTS, because this text is
 // both the migration and the tail of the latest schema.
@@ -39,7 +39,7 @@ export const BROWSER_PROXY_SCHEMA_SQL = `
   CREATE INDEX IF NOT EXISTS browser_profile_proxies_proxy ON browser_profile_proxies(proxy_id);
 `;
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 56,
   name: "browser-proxies",
   // Only creates tables, so no foreign-key pause and no vacuum. No profile has a proxy yet, so every

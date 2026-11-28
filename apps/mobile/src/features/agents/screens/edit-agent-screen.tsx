@@ -1,5 +1,5 @@
-import { avatarHeadColor } from "@openbot/brand/bloub-avatar";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { avatarHeadColor } from "@starbot/brand/bloub-avatar";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentInstructionsFile,
   agentPermissionLevel,
@@ -11,8 +11,8 @@ import {
   type HostProviderAccounts,
   type UpdateAgentInput,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
@@ -267,7 +267,7 @@ function AgentForm({
 
   const [edits, setEdits] = useState<AgentEdits>({});
   const [foreground, muted] = useThemeColor(["foreground", "muted"]);
-  const sheetBg = String(useCSSVariable("--openbot-bg-sheet") ?? "#ffffff");
+  const sheetBg = String(useCSSVariable("--starbot-bg-sheet") ?? "#ffffff");
 
   // Crisp Desktop-matched airy palette: ice-lavender canvas + pure white elevated cards
   const canvasBg = dark ? sheetBg : "#f6f7fb";

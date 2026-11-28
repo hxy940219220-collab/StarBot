@@ -4,8 +4,8 @@ import type {
   ChannelRoutineRunStatus,
   CreateChannelRoutineInput,
   UpdateChannelRoutineInput,
-} from "@openbot/contracts/ipc";
-import type { OpenBotDatabase } from "./openbot-database";
+} from "@starbot/contracts/ipc";
+import type { StarBotDatabase } from "./starbot-database";
 import {
   type DueRoutine,
   type ImportedRoutineRun,
@@ -26,7 +26,7 @@ export interface DueChannelRoutine {
 }
 
 export class ChannelRoutineStore extends RoutineStore {
-  constructor(database: OpenBotDatabase) {
+  constructor(database: StarBotDatabase) {
     super(database, ROUTINE_TABLES.channel);
   }
 

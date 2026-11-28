@@ -7,7 +7,7 @@ review.
 
 These rules apply to people outside the `nightly-labs` organization. Organization members and
 users with write access to this repository skip them. So do their agents, which act as
-`openbotgit[bot]` through the StarBot GitHub App.
+`starbotgit[bot]` through the StarBot GitHub App.
 
 You can open a pull request without an issue for:
 
@@ -55,7 +55,7 @@ A maintainer who reopens a closed pull request starts a new 7-day period.
 
 ```bash
 git clone https://github.com/hxy940219220-collab/StarBot.git
-cd openbot
+cd starbot
 bun install --frozen-lockfile
 bun run check
 bun run dev
@@ -103,7 +103,7 @@ Write for someone who has StarBot open and is trying to complete a task. Use sho
 exact names of buttons, settings and files. Keep product claims tied to the current app. Use `ArticleImage` only
 when the picture adds information that the text does not.
 
-Use `OPENBOT_LINKS` for external links and include useful `alt` text for every image. Do not paste bare URLs into a
+Use `STARBOT_LINKS` for external links and include useful `alt` text for every image. Do not paste bare URLs into a
 guide.
 
 ### Answering the NorbiAI review
@@ -155,7 +155,7 @@ Preserve the following boundaries, and their tests where they exist:
 - Attachment realpath, MIME, size, quota, and managed-protocol checks.
 - Queue serialization, idempotency, crash reconciliation, and atomic persistence.
 - The browser tabs' page preload (`src/preload/browser-page.ts`): it only changes page values in the
-  page world. It has no IPC and exposes no world, so a page gets no `window.openbot` and no path to
+  page world. It has no IPC and exposes no world, so a page gets no `window.starbot` and no path to
   main. `scripts/verify-preload-bundle.ts` checks this.
 - Secret redaction and agent child-process cleanup.
 

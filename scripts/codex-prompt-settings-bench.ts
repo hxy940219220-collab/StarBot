@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, realpath } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
 import { CODEX_UNFIT_SKILLS, codexPromptSettings } from "../src/backend/agent/codex-prompt-settings";
 import { resolveCodexCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -12,7 +12,7 @@ import {
   listsSkill,
   makeCodexHome,
   makeGitWorkspace,
-  openbotConfig,
+  starbotConfig,
   type PromptContents,
   promptContents,
   type RequestUsage,
@@ -20,7 +20,7 @@ import {
   startCodexAgent,
 } from "./codex-agent-harness";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-prompt-settings-bench");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-prompt-settings-bench");
 const REPLY_PROMPT = "Reply with the single word OK. Do not use any tool.";
 const TASK_PROMPT =
   "Read notes.md and count.txt with one shell command. Then reply with one line: the title of notes.md and the number in count.txt.";
@@ -82,7 +82,7 @@ const median = (values: number[]) => {
     : Math.round(((sorted[middle - 1] ?? 0) + (sorted[middle] ?? 0)) / 2);
 };
 
-const root = await realpath(await mkdtemp(join(tmpdir(), "openbot-codex-prompt-bench-")));
+const root = await realpath(await mkdtemp(join(tmpdir(), "starbot-codex-prompt-bench-")));
 const cli = await runCauseEffect(resolveCodexCli());
 const report: {
   codexVersion: string;
@@ -102,7 +102,7 @@ async function runVariant(
   setup: RunReport["setup"],
   run: number,
 ) {
-  const config = { ...openbotConfig(agent.read, variant.promptSettings), ...variant.config };
+  const config = { ...starbotConfig(agent.read, variant.promptSettings), ...variant.config };
   const result: RunReport = { variant: variant.name, setup, run, turns: [] };
   let contents: PromptContents | null = null;
   try {

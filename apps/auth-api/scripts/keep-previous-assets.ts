@@ -1,13 +1,13 @@
 import { existsSync } from "node:fs";
 import { readdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Option, Schema } from "effect";
 
-const logger = createOpenBotLogger("keep-previous-assets");
+const logger = createStarBotLogger("keep-previous-assets");
 
 const ASSET_HISTORY_FILE = "asset-history.json";
-const PRODUCTION_ORIGIN = "https://openbot.run";
+const PRODUCTION_ORIGIN = "https://starbot.run";
 const RETENTION_MS = 24 * 60 * 60 * 1000;
 const MAX_KEPT_FILES = 10_000;
 const DOWNLOAD_CONCURRENCY = 16;

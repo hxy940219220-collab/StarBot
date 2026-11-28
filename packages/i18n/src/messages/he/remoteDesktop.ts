@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "שליטה מרחוק",
   "remoteDesktop.displayLabel": "מסך מרוחק",
   "remoteDesktop.selectDisplay": "בחירת מסך",
-  "remoteDesktop.backToOpenBot": "חזרה ל-StarBot",
+  "remoteDesktop.backToStarBot": "חזרה ל-StarBot",
 
   "remoteDesktop.disconnect": "ניתוק",
   "remoteDesktop.viewerTitle": "שולחן עבודה מרוחק של Sunshine",

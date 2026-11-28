@@ -45,7 +45,7 @@ const LINUX_BUNDLED_LIBRARIES: Readonly<Record<string, string>> = {
 
 const lock = await loadNativeRuntimeLock();
 const outputRoot = resolve("build/remote-desktop-runtime", platform, architecture);
-const workRoot = await mkdtemp(join(tmpdir(), "openbot-remote-desktop-build-"));
+const workRoot = await mkdtemp(join(tmpdir(), "starbot-remote-desktop-build-"));
 
 try {
   const sunshineSource = await downloadAndExtract(
@@ -60,8 +60,8 @@ try {
   );
   await preparePinnedCheckout(sunshineSource, lock.remoteDesktop.sunshine, requiredSunshineSubmodules(platform));
   await preparePinnedCheckout(moonlightSource, lock.remoteDesktop.moonlightWeb);
-  await prepareOpenBotSource(sunshineSource, lock.remoteDesktop.sunshine);
-  await prepareOpenBotSource(moonlightSource, lock.remoteDesktop.moonlightWeb);
+  await prepareStarBotSource(sunshineSource, lock.remoteDesktop.sunshine);
+  await prepareStarBotSource(moonlightSource, lock.remoteDesktop.moonlightWeb);
   auditNpmDependencies(sunshineSource);
   auditNpmDependencies(moonlightSource);
 
@@ -74,7 +74,7 @@ try {
   const sunshineBinary = findSunshineBinary(sunshineSource);
   const executableSuffix = platform === "win32" ? ".exe" : "";
   if (platform === "darwin") {
-    await cp(join(sunshineSource, "build-openbot", "Sunshine.app"), join(outputRoot, "Sunshine.app"), {
+    await cp(join(sunshineSource, "build-starbot", "Sunshine.app"), join(outputRoot, "Sunshine.app"), {
       recursive: true,
     });
   } else {
@@ -135,7 +135,7 @@ async function packageCorrespondingSource(
     "--exclude=node_modules",
     "--exclude=target",
     "--exclude=dist",
-    "--exclude=build-openbot",
+    "--exclude=build-starbot",
   ];
   execFileSync(
     tarExecutable,
@@ -153,7 +153,7 @@ async function packageCorrespondingSource(
     tarExecutable,
     [
       "-czf",
-      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-openbot-source.tar.gz`),
+      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-starbot-source.tar.gz`),
       ...exclusions,
       "-C",
       moonlightSource,
@@ -163,11 +163,11 @@ async function packageCorrespondingSource(
   );
   await cp(
     resolve(lock.remoteDesktop.sunshine.patch.path),
-    join(sourceOutput, lock.remoteDesktop.sunshine.patch.path.split("/").at(-1) ?? "sunshine-openbot.patch"),
+    join(sourceOutput, lock.remoteDesktop.sunshine.patch.path.split("/").at(-1) ?? "sunshine-starbot.patch"),
   );
   await cp(
     resolve(lock.remoteDesktop.moonlightWeb.patch.path),
-    join(sourceOutput, lock.remoteDesktop.moonlightWeb.patch.path.split("/").at(-1) ?? "moonlight-openbot.patch"),
+    join(sourceOutput, lock.remoteDesktop.moonlightWeb.patch.path.split("/").at(-1) ?? "moonlight-starbot.patch"),
   );
   await writeFile(
     join(sourceOutput, "README.txt"),
@@ -241,7 +241,7 @@ function requiredSunshineSubmodules(targetPlatform: "darwin" | "win32" | "linux"
 }
 
 function buildSunshine(source: string, version: string, commit: string): void {
-  const build = join(source, "build-openbot");
+  const build = join(source, "build-starbot");
   const generator = process.env.CMAKE_GENERATOR ?? (hasExecutable("ninja") ? "Ninja" : "Unix Makefiles");
   const buildEnvironment = {
     ...process.env,
@@ -262,7 +262,7 @@ function buildSunshine(source: string, version: string, commit: string): void {
       "-DCMAKE_BUILD_TYPE=Release",
       "-DBUILD_DOCS=OFF",
       "-DBUILD_TESTS=ON",
-      "-DOPENBOT_SECURITY_TESTS=ON",
+      "-DSTARBOT_SECURITY_TESTS=ON",
       "-DBUILD_WERROR=OFF",
       ...(platform === "linux" ? LINUX_SUNSHINE_OPTIONS : []),
     ],
@@ -289,10 +289,10 @@ function buildSunshine(source: string, version: string, commit: string): void {
     },
   );
   if (platform === "darwin") {
-    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "openbot-setup-test"], {
+    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "starbot-setup-test"], {
       stdio: "inherit",
     });
-    execFileSync(join(build, "openbot-setup-test"), [], { stdio: "inherit" });
+    execFileSync(join(build, "starbot-setup-test"), [], { stdio: "inherit" });
   }
 }
 
@@ -316,7 +316,7 @@ function moonlightCargoEnvironment(): NodeJS.ProcessEnv {
   return { ...process.env, [variable]: flags };
 }
 
-async function applyOpenBotPatch(source: string, entry: { path: string; sha256: string }): Promise<void> {
+async function applyStarBotPatch(source: string, entry: { path: string; sha256: string }): Promise<void> {
   const patch = resolve(entry.path);
   if (sha256(await readFile(patch)) !== entry.sha256) {
     throw new Error(`Runtime patch checksum failed for ${entry.path}.`);
@@ -325,12 +325,12 @@ async function applyOpenBotPatch(source: string, entry: { path: string; sha256: 
   execFileSync("git", ["apply", patch], { cwd: source, stdio: "inherit" });
 }
 
-async function prepareOpenBotSource(
+async function prepareStarBotSource(
   source: string,
   runtime: Awaited<ReturnType<typeof loadNativeRuntimeLock>>["remoteDesktop"]["sunshine"],
 ): Promise<void> {
   if (runtime.sourceMode === "upstream-with-patch") {
-    await applyOpenBotPatch(source, runtime.patch);
+    await applyStarBotPatch(source, runtime.patch);
     await applyRuntimeOverrides(source, runtime.overrides);
     return;
   }
@@ -410,10 +410,10 @@ function signMacRuntime(root: string, bundledLibraries: string[] = []): void {
 function findSunshineBinary(source: string): string {
   const suffix = platform === "win32" ? ".exe" : "";
   const candidates = [
-    join(source, "build-openbot", `sunshine${suffix}`),
-    join(source, "build-openbot", "sunshine", `sunshine${suffix}`),
-    join(source, "build-openbot", "Release", `sunshine${suffix}`),
-    join(source, "build-openbot", "Sunshine.app", "Contents", "MacOS", "Sunshine"),
+    join(source, "build-starbot", `sunshine${suffix}`),
+    join(source, "build-starbot", "sunshine", `sunshine${suffix}`),
+    join(source, "build-starbot", "Release", `sunshine${suffix}`),
+    join(source, "build-starbot", "Sunshine.app", "Contents", "MacOS", "Sunshine"),
   ];
   for (const candidate of candidates) {
     try {

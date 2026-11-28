@@ -1,8 +1,8 @@
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { ATTACHMENT_PREVIEW_EDGE } from "@openbot/contracts/team-protocol/attachment-preview-v1";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { ATTACHMENT_PREVIEW_EDGE } from "@starbot/contracts/team-protocol/attachment-preview-v1";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Deferred, Effect } from "effect";
 import { nativeImage } from "electron";
 import { jpegFacts, PNG_SIGNATURE, upright } from "./agent-image-fit";
@@ -66,7 +66,7 @@ function hash(value: string): string {
 
 export class AttachmentPreviews {
   readonly #root: string;
-  readonly #logger = createOpenBotLogger("attachment-previews");
+  readonly #logger = createStarBotLogger("attachment-previews");
   readonly #known = new Map<string, PreviewFile | "source">();
   readonly #pending = new Map<string, Deferred.Deferred<PreviewFile | "source">>();
   #written = 0;

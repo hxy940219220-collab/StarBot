@@ -1,5 +1,5 @@
-import type { AgentMessage } from "@openbot/ui/data";
-import { MessageActions, MessageMenuItems } from "@openbot/ui/features/conversation/MessageRendering";
+import type { AgentMessage } from "@starbot/ui/data";
+import { MessageActions, MessageMenuItems } from "@starbot/ui/features/conversation/MessageRendering";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

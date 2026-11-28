@@ -1,5 +1,5 @@
-import { coordinatorText } from "@openbot/contracts/coordinator-text";
-import type { ChannelSummary } from "@openbot/contracts/ipc";
+import { coordinatorText } from "@starbot/contracts/coordinator-text";
+import type { ChannelSummary } from "@starbot/contracts/ipc";
 import * as Crypto from "expo-crypto";
 import { Link, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";

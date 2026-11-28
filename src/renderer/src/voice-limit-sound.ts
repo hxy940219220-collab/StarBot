@@ -1,4 +1,4 @@
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 
 export function playVoiceLimitWarning(): void {
   void playKawaiiCue("voice-warn", { force: true });

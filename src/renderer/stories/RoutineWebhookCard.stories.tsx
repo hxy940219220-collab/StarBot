@@ -1,5 +1,5 @@
-import type { EventFilterDraft } from "@openbot/contracts/event-filter-value";
-import { RoutineWebhookCard, type RoutineWebhookCardProps } from "@openbot/ui/features/conversation/RoutineWebhookCard";
+import type { EventFilterDraft } from "@starbot/contracts/event-filter-value";
+import { RoutineWebhookCard, type RoutineWebhookCardProps } from "@starbot/ui/features/conversation/RoutineWebhookCard";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -39,14 +39,14 @@ function CardStage(props: RoutineWebhookCardProps) {
 const meta = {
   title: "Routines/Webhook card",
   render: (args) => (
-    <main style={{ width: "min(560px, 100vw)", padding: "var(--openbot-space-4)" }}>
+    <main style={{ width: "min(560px, 100vw)", padding: "var(--starbot-space-4)" }}>
       <CardStage {...args} />
     </main>
   ),
   args: {
     routineName: "Triage new GitHub issues",
     action: "created",
-    url: "https://signal.openbot.run/v1/webhooks/0f3c9d2e-4b1a-4c55-9a87-2f6d1e0b7c34",
+    url: "https://signal.starbot.run/v1/webhooks/0f3c9d2e-4b1a-4c55-9a87-2f6d1e0b7c34",
     connected: true,
     secret: null,
     eventType: "",
@@ -79,7 +79,7 @@ export const UpdatedWithFilters: Story = {
   args: {
     action: "updated",
     eventType: "issues.opened",
-    filters: [{ pointer: "/repository/name", value: "openbot" }],
+    filters: [{ pointer: "/repository/name", value: "starbot" }],
   },
 };
 

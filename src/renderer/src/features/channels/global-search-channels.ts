@@ -1,6 +1,6 @@
-import { coordinatorText } from "@openbot/contracts/coordinator-text";
-import type { ChannelSummary } from "@openbot/contracts/ipc";
-import type { GlobalSearchChannel } from "@openbot/ui/components/GlobalSearch";
+import { coordinatorText } from "@starbot/contracts/coordinator-text";
+import type { ChannelSummary } from "@starbot/contracts/ipc";
+import type { GlobalSearchChannel } from "@starbot/ui/components/GlobalSearch";
 
 export function globalSearchChannels(
   channels: ChannelSummary[],

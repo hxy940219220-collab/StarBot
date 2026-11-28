@@ -1,6 +1,6 @@
-import type { RoutineSchedule } from "@openbot/contracts/ipc";
-import { routineOnceInstant } from "@openbot/team-client/routine-schedule";
-import { routineScheduleToDraft } from "@openbot/team-client/routine-schedule-draft";
+import type { RoutineSchedule } from "@starbot/contracts/ipc";
+import { routineOnceInstant } from "@starbot/team-client/routine-schedule";
+import { routineScheduleToDraft } from "@starbot/team-client/routine-schedule-draft";
 import { type QueryKey, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { Typography } from "heroui-native";
@@ -115,7 +115,7 @@ function RoutineCard({
   onPress: () => void;
 }) {
   const text = useText();
-  const [success, muted] = useCSSVariable(["--openbot-success-text", "--openbot-text-grouped-secondary"]);
+  const [success, muted] = useCSSVariable(["--starbot-success-text", "--starbot-text-grouped-secondary"]);
   const completed = routineCompleted(routine);
   const Icon = completed ? CircleCheck : isWebhookRoutine(routine) ? Webhook : AlarmClock;
   const summary = routineSummary(routine, completed, text);

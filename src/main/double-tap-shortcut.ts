@@ -1,8 +1,8 @@
 import { createRequire } from "node:module";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import type * as Koffi from "koffi";
 
-const logger = createOpenBotLogger("double-tap-shortcut");
+const logger = createStarBotLogger("double-tap-shortcut");
 const requireModule = createRequire(import.meta.url);
 
 export type DoubleTapModifier = "Alt" | "Control" | "Shift" | "Command";

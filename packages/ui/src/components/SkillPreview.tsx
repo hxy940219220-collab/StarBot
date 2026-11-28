@@ -1,11 +1,11 @@
-import type { MarketplaceSkillDetail } from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
-import { ArrowRight, ErrorReference, IconButton, Puzzle } from "@openbot/ui";
-import { MarkdownMessageText } from "@openbot/ui/features/conversation/MarkdownMessageText";
-import { safeBrowserUrl } from "@openbot/ui/features/conversation/RichMessageText";
-import { ReferenceChip } from "@openbot/ui/reference-chip";
-import { SkillGradient } from "@openbot/ui/skill-gradient";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+import type { MarketplaceSkillDetail } from "@starbot/contracts/ipc";
+import type { AppTranslate } from "@starbot/i18n";
+import { ArrowRight, ErrorReference, IconButton, Puzzle } from "@starbot/ui";
+import { MarkdownMessageText } from "@starbot/ui/features/conversation/MarkdownMessageText";
+import { safeBrowserUrl } from "@starbot/ui/features/conversation/RichMessageText";
+import { ReferenceChip } from "@starbot/ui/reference-chip";
+import { SkillGradient } from "@starbot/ui/skill-gradient";
+import { errorReference, type UserErrorDetails } from "@starbot/user-errors";
 import type { JSX } from "@solidjs/web";
 import { createSignal, Show } from "solid-js";
 import { currentText, useText } from "../text";
@@ -109,7 +109,7 @@ export function SkillPreview(props: {
               name={props.skill.name}
               class="skill-preview-chip"
               style={{
-                "--skill-logo-color": iconTint()?.url === iconUrl() ? iconTint()?.color : "var(--openbot-accent-text)",
+                "--skill-logo-color": iconTint()?.url === iconUrl() ? iconTint()?.color : "var(--starbot-accent-text)",
               }}
               icon={
                 <Show when={iconUrl()} fallback={<Puzzle />} keyed>

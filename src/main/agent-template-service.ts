@@ -4,8 +4,8 @@ import {
   agentTemplateShareOrigin,
   createAgentTemplateShareUrl,
   isAgentTemplateId,
-} from "@openbot/contracts/agent-template-links";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@starbot/contracts/agent-template-links";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   AGENT_TEMPLATE_LIMITS,
   type AgentSummary,
@@ -26,10 +26,10 @@ import {
   type PublishAgentTemplateInput,
   type RoutineSchedule,
   toAgentTemplateSnapshot,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { containsSecret } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { containsSecret } from "@starbot/logging";
 import { Effect, Result, Schema } from "effect";
 import type { AgentLifecycleFailed } from "../backend/agent-service";
 import { causeHelpers } from "../backend/effect-boundary";
@@ -70,7 +70,7 @@ function snapshotProblemText(problem: AgentTemplateSnapshotProblem): string {
   }
 }
 
-const SKILL_STAGING = ".openbot/template-skills";
+const SKILL_STAGING = ".starbot/template-skills";
 
 interface AgentTemplateAuth {
   requestAuthorized<T>(

@@ -234,7 +234,7 @@ export const messages = {
     "スレッドの返信をオンにすると、エージェントがスレッドで作業を終えたとき、またはエラーで止まったときに通知します。オフでも、スレッドで入力または承認が必要なときは通知します。",
   "mobile.settings.notifications.sound": "サウンド",
   "mobile.settings.notifications.playSound": "サウンドを再生",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "あたたか",
   "mobile.settings.notifications.sound.mech": "メカニカル",
@@ -371,7 +371,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "StarBot と過ごした直近 6 か月",
 
   "mobile.settings.profile.share.createFailed": "画像を作成できませんでした。",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "音声",
   "mobile.settings.voice.sample": "こんにちは。このように返信を読み上げます。",
   "mobile.settings.voice.voice": "声",

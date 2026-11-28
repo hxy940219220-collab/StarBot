@@ -1,7 +1,7 @@
-import { ProviderLogo, type ProviderLogoVariant } from "@openbot/brand";
-import { Button, ChevronRight, Spinner } from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { useText } from "@openbot/ui/text";
+import { ProviderLogo, type ProviderLogoVariant } from "@starbot/brand";
+import { Button, ChevronRight, Spinner } from "@starbot/ui";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { useText } from "@starbot/ui/text";
 import { createUniqueId, For, Show } from "solid-js";
 import { AnalyticsConsentRow, ConsentNotice } from "./AnalyticsConsent";
 import type { OnboardingAvatarVariant } from "./onboarding-avatars";

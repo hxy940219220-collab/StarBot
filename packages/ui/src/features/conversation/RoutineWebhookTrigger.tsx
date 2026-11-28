@@ -1,7 +1,7 @@
-import type { EventFilterDraft } from "@openbot/contracts/event-filter-value";
-import type { WebhookTestResult } from "@openbot/contracts/ipc-events";
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, Check, ChevronDown, ChevronRight, Text, Webhook } from "@openbot/ui";
+import type { EventFilterDraft } from "@starbot/contracts/event-filter-value";
+import type { WebhookTestResult } from "@starbot/contracts/ipc-events";
+import type { AppTextKey } from "@starbot/i18n";
+import { Button, Check, ChevronDown, ChevronRight, Text, Webhook } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createStore, Show } from "solid-js";
 import { useText } from "../../text";
@@ -51,7 +51,7 @@ function curlExample(url: string): string {
   return [
     `BODY='{"type":"order.created","data":{"order":{"status":"paid"}}}'`,
     "TS=$(date +%s); ID=$(openssl rand -hex 16)",
-    `SIG=$(printf '%s.%s.%s' "$TS" "$ID" "$BODY" | openssl dgst -sha256 -hmac "$OPENBOT_WEBHOOK_SECRET" | sed 's/^.* //')`,
+    `SIG=$(printf '%s.%s.%s' "$TS" "$ID" "$BODY" | openssl dgst -sha256 -hmac "$STARBOT_WEBHOOK_SECRET" | sed 's/^.* //')`,
     `curl -X POST "${url}" \\`,
     `  -H "Content-Type: application/json" \\`,
     `  -H "X-StarBot-Timestamp: $TS" \\`,

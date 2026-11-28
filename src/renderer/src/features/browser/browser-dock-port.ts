@@ -1,13 +1,13 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface BrowserDockPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "respondToBrowserSecret">;
+  agent: Pick<StarBotDesktopApi["agent"], "respondToBrowserSecret">;
   browserDock: Pick<
-    OpenBotDesktopApi["browserDock"],
+    StarBotDesktopApi["browserDock"],
     "getPresentation" | "onPresentation" | "performAction" | "setFrame"
   >;
 }
 
 export function browserDockPort(): BrowserDockPort {
-  return window.openbot;
+  return window.starbot;
 }

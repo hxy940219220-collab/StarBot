@@ -2,9 +2,9 @@ import {
   CONVERSATION_PLAN_ITEM_TYPE,
   type ConversationMessage,
   PLAN_CONTINUATION_ITEM_TYPE,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Cause, Effect, Schema } from "effect";
 import { type AgentProvider, MissingPiSessionError, RequestTimeoutError } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -32,8 +32,8 @@ import type { ThreadLifecycle } from "./thread-lifecycle";
 
 type UnresolvedDelivery = DeliveryContext["delivery"];
 
-const logger = createOpenBotLogger("provider-history");
-const eventLogger = createOpenBotLogger("thread-event-compaction");
+const logger = createStarBotLogger("provider-history");
+const eventLogger = createStarBotLogger("thread-event-compaction");
 
 export interface BootRecoveryHooks {
   executionThreads?(): Array<{ id: string; threadId: string; channelId?: string }>;

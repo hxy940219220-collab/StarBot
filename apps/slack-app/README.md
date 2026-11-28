@@ -7,8 +7,8 @@ asks the right agent and answers. No code runs here: each directory holds only t
 
 | Directory | App | App ID | Home team | Redirect URL |
 | --- | --- | --- | --- | --- |
-| `production` | `StarBot` | `A0C5H5C95NH` | `openbotdev` (`T0C5B1XG542`) | `https://api.starbot.app/v2/slack/callback` |
-| `development` | `StarBot (dev)` | `A0C5G5XGS83` | `openbotdev` (`T0C5B1XG542`) | Test Worker (`bun run deploy:test`) |
+| `production` | `StarBot` | `A0C5H5C95NH` | `starbotdev` (`T0C5B1XG542`) | `https://api.starbot.app/v2/slack/callback` |
+| `development` | `StarBot (dev)` | `A0C5G5XGS83` | `starbotdev` (`T0C5B1XG542`) | Test Worker (`bun run deploy:test`) |
 
 `.slack/apps.json` links each directory to its app. Run the Slack CLI from inside a directory.
 

@@ -1,9 +1,9 @@
-import { ProviderLogo } from "@openbot/brand";
+import { ProviderLogo } from "@starbot/brand";
 import {
   isInstallerProvider,
   isManagedRuntimeProvider,
   type ManagedProviderId,
-} from "@openbot/contracts/agent-providers";
+} from "@starbot/contracts/agent-providers";
 import {
   type AgentModelId,
   type AgentProviderId,
@@ -25,8 +25,8 @@ import {
   type ProviderUsageResetOutcome,
   type ProviderUsageResets,
   providerEnvironmentProblem,
-} from "@openbot/contracts/ipc";
-import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@starbot/i18n";
 import {
   Badge,
   Bot,
@@ -77,7 +77,7 @@ import {
   Trash2,
   UserRoundPlus,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createStore, For, onCleanup, Show, untrack } from "solid-js";
 import { ProviderAccountRenameField } from "../../components/ProviderAccountList";

@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { RoutineCalendar as HostCalendar, RoutineSchedule } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { RoutineCalendar as HostCalendar, RoutineSchedule } from "@starbot/contracts/ipc";
 import {
   addCalendarDays,
   addCalendarMonths,
@@ -9,20 +9,20 @@ import {
   calendarDays,
   calendarMonthStart,
   calendarWeekStart,
-} from "@openbot/team-client/routine-calendar-dates";
+} from "@starbot/team-client/routine-calendar-dates";
 import {
   ROUTINE_EVERY_DAY,
   ROUTINE_WORKDAYS,
   type RoutineScheduleDraft,
   sameRoutineDays,
-} from "@openbot/team-client/routine-schedule-draft";
-import { Button, ChevronLeft, ChevronRight, Clock3, Input, Plus, Switch, Textarea, Trash2, X } from "@openbot/ui";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
+} from "@starbot/team-client/routine-schedule-draft";
+import { Button, ChevronLeft, ChevronRight, Clock3, Input, Plus, Switch, Textarea, Trash2, X } from "@starbot/ui";
+import type { AgentProfile } from "@starbot/ui/data";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
 import {
   routineScheduleFromDraft,
   routineScheduleToDraft,
-} from "@openbot/ui/features/conversation/routine-schedule-saved";
+} from "@starbot/ui/features/conversation/routine-schedule-saved";
 import { Portal } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, For, onCleanup, onSettled, Show } from "solid-js";
 import { actionToast } from "../../action-toast";

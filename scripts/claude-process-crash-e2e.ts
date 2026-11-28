@@ -3,8 +3,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS, defaultProviderModel } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n";
+import { AGENT_PROVIDERS, defaultProviderModel } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import type { AgentClient, DiagnosticOrigin } from "../src/backend/agent-client";
@@ -13,8 +13,8 @@ import type { AppServerNotification, AppServerRequest, RequestId, ResponseDecode
 import { providerSync } from "../src/backend/provider-client-effects";
 import type { ReadProviderHistory } from "../src/backend/provider-history";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/claude-process-crash-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-claude-process-crash-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/claude-process-crash-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-claude-process-crash-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const claudeConfig = join(home, ".claude");
@@ -27,7 +27,7 @@ const PANIC = "panic: Segmentation fault at address 0x40";
 const COMPLETE_ANSWER = "Complete answer.";
 
 process.env.HOME = home;
-process.env.OPENBOT_CLAUDE_PATH = claudeExecutable;
+process.env.STARBOT_CLAUDE_PATH = claudeExecutable;
 process.env.CLAUDE_CONFIG_DIR = claudeConfig;
 mkdirSync(projectsDir, { recursive: true });
 
@@ -36,7 +36,7 @@ const { AgentStore } = await import("../src/backend/agent-store");
 const { ClaudeAgentClient } = await import("../src/backend/claude-client");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const STAND_IN_CLAUDE = `#!${process.execPath}
 const fs = require("node:fs");
@@ -262,7 +262,7 @@ const standInLog = (): { pid: number; start?: true; prompt?: string }[] =>
     : [];
 
 await writeFile(claudeExecutable, STAND_IN_CLAUDE, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, rmSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   createMcpServerId,
   isMcpKeyValue,
@@ -11,14 +11,14 @@ import {
   type McpServerConfig,
   mcpConfigErrors,
   normalizeMcpConfig,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, type Logger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, type Logger } from "@starbot/logging";
 import { databaseRow, databaseRows, requiredNumberColumn, requiredStringColumn } from "./database/database-rows";
 import { withTransaction } from "./database/sqlite-transaction";
 import { registerMcpSecretValues } from "./mcp-redaction";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 
 export class McpServerError extends Error {}
 
@@ -89,8 +89,8 @@ export class McpServerStore {
   private readonly reported = new Set<string>();
 
   constructor(
-    private readonly database: OpenBotDatabase,
-    private readonly logger: Pick<Logger, "warn"> = createOpenBotLogger("mcp-server-store"),
+    private readonly database: StarBotDatabase,
+    private readonly logger: Pick<Logger, "warn"> = createStarBotLogger("mcp-server-store"),
   ) {}
 
   list(): McpServerConfig[] {

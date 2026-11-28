@@ -1,5 +1,5 @@
-import type { AgentMessage } from "@openbot/ui/data";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import type { AgentMessage } from "@starbot/ui/data";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import { createEffect, onCleanup } from "solid-js";
 import { matchesShortcut } from "../../../keyboard-shortcut-preference";
 import type { ChatSearchMatch } from "../chat-search";

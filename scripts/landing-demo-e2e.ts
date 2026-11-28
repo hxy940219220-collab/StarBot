@@ -3,13 +3,13 @@ import { type ChildProcess, spawn } from "node:child_process";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { createServer } from "node:net";
 import { resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { type Browser, chromium, type FrameLocator, type Page } from "playwright-core";
 
-const logger = createOpenBotLogger("landing-demo-e2e");
+const logger = createStarBotLogger("landing-demo-e2e");
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = resolve(ROOT, ".openbot-build/landing-demo");
+const OUT = resolve(ROOT, ".starbot-build/landing-demo");
 const option = (name: string) => process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
 const browserExecutable = option("browser-executable");
 const givenOrigin = option("origin");

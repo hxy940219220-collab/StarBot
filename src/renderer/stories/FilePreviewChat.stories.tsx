@@ -1,6 +1,6 @@
-import { Bubble, BubbleContent } from "@openbot/ui";
-import type { AgentMessage } from "@openbot/ui/data";
-import { MessageBody } from "@openbot/ui/features/conversation/MessageRendering";
+import { Bubble, BubbleContent } from "@starbot/ui";
+import type { AgentMessage } from "@starbot/ui/data";
+import { MessageBody } from "@starbot/ui/features/conversation/MessageRendering";
 import { createEffect, createSignal, For, Show, untrack } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -9,7 +9,7 @@ import { INLINE_SVG_CHART, publishChatVisualPage } from "./chat-visual-fixtures"
 import { filePreviewForPath, WORKSPACE_FILE_PREVIEWS } from "./file-previews";
 import { STORY_AGENTS } from "./fixtures";
 
-const WORKSPACE = "/Users/test/OpenBot/Agents/agent-4f2c";
+const WORKSPACE = "/Users/test/StarBot/Agents/agent-4f2c";
 
 const MESSAGES: AgentMessage[] = [
   {

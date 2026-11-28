@@ -9,9 +9,9 @@ import {
   fitAgentTaskTitle,
   isChannelMessage,
   isConversationMessage,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result } from "effect";
 import type {
   AgentHistoryTransferFailed,

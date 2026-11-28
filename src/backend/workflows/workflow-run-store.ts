@@ -18,8 +18,8 @@ import {
   type WorkflowStep,
   type WorkflowStepSource,
   type WorkflowStepStatus,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
 import {
   checkedColumn,
   databaseRow,
@@ -29,7 +29,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "../database/database-rows";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 import { webhookReceiptCutoff } from "../webhook-route-store";
 import { workflowTransaction } from "./workflow-transaction";
 
@@ -121,10 +121,10 @@ export interface WorkflowStepEnd {
 }
 
 export class WorkflowRunStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #createId: () => string;
 
-  constructor(options: { database: OpenBotDatabase; createId?: () => string }) {
+  constructor(options: { database: StarBotDatabase; createId?: () => string }) {
     this.#database = options.database;
     this.#createId = options.createId ?? (() => crypto.randomUUID());
   }

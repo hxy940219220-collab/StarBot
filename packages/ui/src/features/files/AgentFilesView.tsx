@@ -1,6 +1,6 @@
-import { Button, FolderOpen, IconButton, Skeleton } from "@openbot/ui";
-import { SettingsPanelHeader } from "@openbot/ui/components/SettingsPanel";
-import { currentText, useText } from "@openbot/ui/text";
+import { Button, FolderOpen, IconButton, Skeleton } from "@starbot/ui";
+import { SettingsPanelHeader } from "@starbot/ui/components/SettingsPanel";
+import { currentText, useText } from "@starbot/ui/text";
 import { createMemo, createUniqueId, For, Show } from "solid-js";
 import { FileList } from "./FileList";
 import {

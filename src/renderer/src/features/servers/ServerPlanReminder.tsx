@@ -1,18 +1,18 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { classifyFailure } from "@starbot/telemetry";
 import {
   type ServerPlanEnd,
   ServerPlanEndedDialog,
   serverPlanBlocks,
   serverPlanDaysLeft,
   serverPlanEnds,
-} from "@openbot/ui/features/servers/ServerPlanEnd";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/servers/ServerPlanEnd";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createStore } from "solid-js";
 import { z } from "zod";
 import { actionToast } from "../../action-toast";
 
-const REMINDER_STORAGE_KEY = "openbot:server-plan-reminders";
+const REMINDER_STORAGE_KEY = "starbot:server-plan-reminders";
 const REMINDER_INTERVAL_MS = 24 * 60 * 60_000;
 const DAILY_START_REMINDER_DAYS = 3;
 const PLAN_FOCUS_REFRESH_MS = 30_000;

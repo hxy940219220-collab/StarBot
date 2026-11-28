@@ -42,13 +42,13 @@ export const messages = {
   "island.action.openChat": "פתיחת הצ'אט",
   "island.action.openDetails": "פתיחת הפרטים",
   "island.action.takeOver": "השתלטות",
-  "island.action.reviewInOpenBot": "סקירה ב-StarBot",
+  "island.action.reviewInStarBot": "סקירה ב-StarBot",
 
   "island.action.decline": "דחייה",
   "island.action.approve": "אישור",
   "island.action.later": "מאוחר יותר",
   "island.action.dismiss": "סגירה",
-  "island.action.answerInOpenBot": "מענה ב-StarBot",
+  "island.action.answerInStarBot": "מענה ב-StarBot",
 
   "island.action.stopAgent": "עצירת {name}",
   "island.action.failed": "הפעולה לא הצליחה. יש לנסות שוב.",

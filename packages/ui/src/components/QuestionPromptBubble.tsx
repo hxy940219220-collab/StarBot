@@ -1,12 +1,12 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentPromptQuestion,
   type AgentPromptResolution,
   MCP_ELICITATION_DECISION_QUESTION_ID,
-} from "@openbot/contracts/ipc";
-import { Bubble, BubbleContent, Button, Kbd, Questionnaire, Spinner, X } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@starbot/contracts/ipc";
+import { Bubble, BubbleContent, Button, Kbd, Questionnaire, Spinner, X } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import { createStore, For, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { MarkdownInlineText, markdownPlainText } from "../features/conversation/MarkdownMessageText";
 import { isSendShortcutKey, type SendShortcut, sendShortcutAriaKey } from "../features/conversation/send-shortcut";

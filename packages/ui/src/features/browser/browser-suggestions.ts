@@ -1,4 +1,4 @@
-import type { BrowserTab } from "@openbot/contracts/ipc";
+import type { BrowserTab } from "@starbot/contracts/ipc";
 
 export interface BrowserHistoryEntry {
   url: string;

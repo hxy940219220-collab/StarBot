@@ -1,10 +1,10 @@
-import { agentProviderDescriptor, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
-import { DEFAULT_AGENT_ACCESS } from "@openbot/contracts/ipc";
-import { ConfirmDialog } from "@openbot/ui";
-import { AgentFolderDropOverlay, createAgentFolders } from "@openbot/ui/features/conversation/AgentFolders";
-import { MessageSelectionActions } from "@openbot/ui/features/conversation/SelectionActions";
-import { CoveredVoiceRecording } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { useText } from "@openbot/ui/text";
+import { agentProviderDescriptor, isKnownAgentProvider } from "@starbot/contracts/agent-providers";
+import { DEFAULT_AGENT_ACCESS } from "@starbot/contracts/ipc";
+import { ConfirmDialog } from "@starbot/ui";
+import { AgentFolderDropOverlay, createAgentFolders } from "@starbot/ui/features/conversation/AgentFolders";
+import { MessageSelectionActions } from "@starbot/ui/features/conversation/SelectionActions";
+import { CoveredVoiceRecording } from "@starbot/ui/features/conversation/VoiceRecordingMorph";
+import { useText } from "@starbot/ui/text";
 import { Portal } from "@solidjs/web";
 import { createEffect, Show } from "solid-js";
 import { deviceQuoteShortcut } from "../../send-shortcut-preference";

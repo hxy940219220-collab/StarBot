@@ -746,7 +746,7 @@
       {
         "type": "added",
         "items": [
-          "Start a workflow from GitHub: a GitHub trigger runs on new issues, comments, pull requests, reviews, failed checks or a mention of @openbotgit.",
+          "Start a workflow from GitHub: a GitHub trigger runs on new issues, comments, pull requests, reviews, failed checks or a mention of @starbotgit.",
           "Change GitHub from a workflow: comment, label, assign, review, close or create an issue as the StarBot GitHub App.",
           "Marketplace has 17 new StarBot agents, such as QA Tester, PR Shepherd and Chief of Staff, and 15 new skills for them.",
           "Usage shows the OpenCode Go monthly limit as a third bar."
@@ -1817,7 +1817,7 @@
           "Settings > Voice shows the dictation models. You can download Whisper large-v3 turbo and set a fixed dictation language, for example Hungarian.",
           "A scheduled routine can skip a time that StarBot missed while it was closed, or run once when StarBot opens.",
           "When a browser sign-in does not finish, you can log in with a code. Grok, Cursor, Cline and Muse also accept a code.",
-          "Run openbot mobile-connect on a self-hosted or Docker server to connect the phone app to it."
+          "Run starbot mobile-connect on a self-hosted or Docker server to connect the phone app to it."
         ]
       },
       {

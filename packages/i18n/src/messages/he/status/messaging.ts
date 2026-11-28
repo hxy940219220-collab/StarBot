@@ -68,7 +68,7 @@ export const messages = {
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *StarBot מחובר*\n\nהאנשים שאישרת ב-StarBot יכולים עכשיו לכתוב למספר הזה. אדם חדש מקבל קוד: יש לאשר אותו ב-StarBot תחת בקשות.\n\nיש לשלוח *stop* כדי לעצור בקשה.",
 
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "StarBot נוסף מקושר למספר הוואטסאפ הזה, ולכן ייתכן שיתקבלו שתי תשובות. כדי לתקן זאת, יש לפתוח את 'מכשירים מקושרים' בוואטסאפ בטלפון ולהתנתק מה-StarBot שאינו בשימוש.",
 
   "status.messaging.whatsappPaused":

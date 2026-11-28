@@ -1,4 +1,4 @@
-import type { AgentProviderId, AgentProviderRef } from "@openbot/contracts/agent-providers";
+import type { AgentProviderId, AgentProviderRef } from "@starbot/contracts/agent-providers";
 import type {
   AgentAccess,
   AgentExchangeSummary,
@@ -32,8 +32,8 @@ import type {
   SkillConversationEvent,
   SkillSuggestionEvent,
   VideoGenerationInfo,
-} from "@openbot/contracts/ipc";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
+} from "@starbot/contracts/ipc";
+import type { ConversationUiBlock } from "@starbot/contracts/ui-blocks";
 
 export type MessageKind =
   | "text"

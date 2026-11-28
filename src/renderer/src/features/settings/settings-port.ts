@@ -1,40 +1,40 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface SettingsPort {
-  getAgentDefaults: OpenBotDesktopApi["getAgentDefaults"];
-  getAgentMemoryLimitPreference: OpenBotDesktopApi["getAgentMemoryLimitPreference"];
-  getAnalyticsPreference: OpenBotDesktopApi["getAnalyticsPreference"];
-  getAppBehaviorPreference: OpenBotDesktopApi["getAppBehaviorPreference"];
-  getApprovalAutomation: OpenBotDesktopApi["getApprovalAutomation"];
-  getBusyMessageModePreference: OpenBotDesktopApi["getBusyMessageModePreference"];
-  getExternalLinkPreference: OpenBotDesktopApi["getExternalLinkPreference"];
-  listExternalLinkBrowsers: OpenBotDesktopApi["listExternalLinkBrowsers"];
-  chooseExternalLinkApp: OpenBotDesktopApi["chooseExternalLinkApp"];
-  onExternalLinkFallback: OpenBotDesktopApi["onExternalLinkFallback"];
-  getRemoteNetworkRoute: OpenBotDesktopApi["getRemoteNetworkRoute"];
-  getRemoteSessionReusePreference: OpenBotDesktopApi["getRemoteSessionReusePreference"];
-  onAgentMemoryLimitPreference: OpenBotDesktopApi["onAgentMemoryLimitPreference"];
-  onAnalyticsPreference: OpenBotDesktopApi["onAnalyticsPreference"];
-  onApprovalAutomation: OpenBotDesktopApi["onApprovalAutomation"];
-  onOpenSettings: OpenBotDesktopApi["onOpenSettings"];
-  onOpenUpdateSettings: OpenBotDesktopApi["onOpenUpdateSettings"];
-  setAnalyticsPreference: OpenBotDesktopApi["setAnalyticsPreference"];
-  setAppBehaviorPreference: OpenBotDesktopApi["setAppBehaviorPreference"];
-  setExternalLinkPreference: OpenBotDesktopApi["setExternalLinkPreference"];
-  setRemoteNetworkRoute: OpenBotDesktopApi["setRemoteNetworkRoute"];
-  setRemoteSessionReusePreference: OpenBotDesktopApi["setRemoteSessionReusePreference"];
+  getAgentDefaults: StarBotDesktopApi["getAgentDefaults"];
+  getAgentMemoryLimitPreference: StarBotDesktopApi["getAgentMemoryLimitPreference"];
+  getAnalyticsPreference: StarBotDesktopApi["getAnalyticsPreference"];
+  getAppBehaviorPreference: StarBotDesktopApi["getAppBehaviorPreference"];
+  getApprovalAutomation: StarBotDesktopApi["getApprovalAutomation"];
+  getBusyMessageModePreference: StarBotDesktopApi["getBusyMessageModePreference"];
+  getExternalLinkPreference: StarBotDesktopApi["getExternalLinkPreference"];
+  listExternalLinkBrowsers: StarBotDesktopApi["listExternalLinkBrowsers"];
+  chooseExternalLinkApp: StarBotDesktopApi["chooseExternalLinkApp"];
+  onExternalLinkFallback: StarBotDesktopApi["onExternalLinkFallback"];
+  getRemoteNetworkRoute: StarBotDesktopApi["getRemoteNetworkRoute"];
+  getRemoteSessionReusePreference: StarBotDesktopApi["getRemoteSessionReusePreference"];
+  onAgentMemoryLimitPreference: StarBotDesktopApi["onAgentMemoryLimitPreference"];
+  onAnalyticsPreference: StarBotDesktopApi["onAnalyticsPreference"];
+  onApprovalAutomation: StarBotDesktopApi["onApprovalAutomation"];
+  onOpenSettings: StarBotDesktopApi["onOpenSettings"];
+  onOpenUpdateSettings: StarBotDesktopApi["onOpenUpdateSettings"];
+  setAnalyticsPreference: StarBotDesktopApi["setAnalyticsPreference"];
+  setAppBehaviorPreference: StarBotDesktopApi["setAppBehaviorPreference"];
+  setExternalLinkPreference: StarBotDesktopApi["setExternalLinkPreference"];
+  setRemoteNetworkRoute: StarBotDesktopApi["setRemoteNetworkRoute"];
+  setRemoteSessionReusePreference: StarBotDesktopApi["setRemoteSessionReusePreference"];
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     "listAgents" | "updateAgent" | "listAgentNotificationLevels" | "setAgentNotificationLevel" | "onScopedEvent"
   >;
   dynamicIsland: Pick<
-    OpenBotDesktopApi["dynamicIsland"],
+    StarBotDesktopApi["dynamicIsland"],
     "getBuiltInDisplayGeometry" | "getPreference" | "onPreference" | "setPreference" | "setXWayland"
   >;
-  notifications: Pick<OpenBotDesktopApi["notifications"], "getPreference" | "openSettings" | "setPreference" | "test">;
-  update: Pick<OpenBotDesktopApi["update"], "getPreference" | "onPreference" | "setPreference">;
+  notifications: Pick<StarBotDesktopApi["notifications"], "getPreference" | "openSettings" | "setPreference" | "test">;
+  update: Pick<StarBotDesktopApi["update"], "getPreference" | "onPreference" | "setPreference">;
 }
 
 export function settingsPort(): SettingsPort {
-  return window.openbot;
+  return window.starbot;
 }

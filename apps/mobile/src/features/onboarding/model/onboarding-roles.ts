@@ -1,6 +1,6 @@
-import { avatarHueSwatch } from "@openbot/brand/bloub-avatar";
-import type { AvatarHue } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import { avatarHueSwatch } from "@starbot/brand/bloub-avatar";
+import type { AvatarHue } from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 
 export interface OnboardingRole {
   id: "builder" | "researcher" | "planner" | "writer" | "helper";

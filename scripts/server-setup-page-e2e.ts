@@ -4,17 +4,17 @@ import { mkdtemp } from "node:fs/promises";
 import { createServer } from "node:net";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { CentralAuthState, HostStatus } from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+import type { CentralAuthState, HostStatus } from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import { chromium, type Page } from "playwright-core";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { ServerMode, type ServerModeOptions } from "../src/main/server-mode";
 import { ServerSetupPage } from "../src/main/server-setup-page";
 
-const logger = createOpenBotLogger("server-setup-page-e2e");
+const logger = createStarBotLogger("server-setup-page-e2e");
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = resolve(ROOT, ".openbot-build/server-setup-page-e2e");
+const OUT = resolve(ROOT, ".starbot-build/server-setup-page-e2e");
 const browserExecutable = process.argv.find((value) => value.startsWith("--browser-executable="))?.split("=")[1];
 const rendererRoot = resolve(
   process.argv.find((value) => value.startsWith("--renderer="))?.split("=")[1] ?? join(ROOT, "out/renderer"),
@@ -124,7 +124,7 @@ const host: ServerModeOptions["host"] = {
   refreshRegistration: () => Effect.void,
 };
 
-const runtime = await mkdtemp(join(tmpdir(), "openbot-setup-page-"));
+const runtime = await mkdtemp(join(tmpdir(), "starbot-setup-page-"));
 const serverMode = new ServerMode({
   environment: { controlSocketPath: join(runtime, "control.sock"), setupPagePort: null },
   version: "0.0.0-e2e",
@@ -178,19 +178,19 @@ try {
   const refusals = {
     noHeader: (await fetch(`${origin}/api/status`)).status,
     crossSite: (
-      await fetch(`${origin}/api/status`, { headers: { "x-openbot-setup": "1", "sec-fetch-site": "cross-site" } })
+      await fetch(`${origin}/api/status`, { headers: { "x-starbot-setup": "1", "sec-fetch-site": "cross-site" } })
     ).status,
     textPlainPost: (
       await fetch(`${origin}/api/login/start`, {
         method: "POST",
-        headers: { "x-openbot-setup": "1", "content-type": "text/plain" },
+        headers: { "x-starbot-setup": "1", "content-type": "text/plain" },
         body: `email=${EMAIL}`,
       })
     ).status,
-    logout: (await fetch(`${origin}/api/logout`, { method: "POST", headers: { "x-openbot-setup": "1" } })).status,
-    claim: (await fetch(`${origin}/api/login/claim`, { method: "POST", headers: { "x-openbot-setup": "1" } })).status,
+    logout: (await fetch(`${origin}/api/logout`, { method: "POST", headers: { "x-starbot-setup": "1" } })).status,
+    claim: (await fetch(`${origin}/api/login/claim`, { method: "POST", headers: { "x-starbot-setup": "1" } })).status,
     mobileConnect: (
-      await fetch(`${origin}/api/mobile-connect`, { method: "POST", headers: { "x-openbot-setup": "1" } })
+      await fetch(`${origin}/api/mobile-connect`, { method: "POST", headers: { "x-starbot-setup": "1" } })
     ).status,
     pathEscape: (await fetch(`${origin}/assets/..%2F..%2Fpackage.json`)).status,
     sourceFile: (await fetch(`${origin}/index.html`)).status,
@@ -328,7 +328,7 @@ try {
 function postForm(path: string, fields: Record<string, string>): Promise<Response> {
   return fetch(`${origin}${path}`, {
     method: "POST",
-    headers: { "x-openbot-setup": "1", "content-type": "application/x-www-form-urlencoded" },
+    headers: { "x-starbot-setup": "1", "content-type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams(fields).toString(),
   });
 }

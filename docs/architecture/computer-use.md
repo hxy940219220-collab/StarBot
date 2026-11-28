@@ -63,7 +63,7 @@ needs. A packaged build reads the copy under `resources/cua-driver` and nothing 
 is pinned and signed against that build and an environment variable must not decide which program
 drives the user's desktop; a release without the binary reports no driver. In a checkout
 `resolveCuaDriver` also reads an override, an install directory and `PATH`, so a developer can point
-`OPENBOT_CUA_DRIVER_PATH` at another build.
+`STARBOT_CUA_DRIVER_PATH` at another build.
 
 StarBot draws the agent cursor in its own per-display overlays for every display layout. The
 runtime starts `serve` with `--no-overlay`. The driver's overlay covers only the main display and
@@ -97,14 +97,14 @@ on macOS. When a driver release with trycua/cua#8117 is pinned, the rule can go.
 ### Agent display on a server
 
 A self-hosted server and the container start two Xvfb displays, and name the agent display in
-`OPENBOT_AGENT_DISPLAY`. The agent display has a white root (Xvfb `-wr`), because remote desktop
+`STARBOT_AGENT_DISPLAY`. The agent display has a white root (Xvfb `-wr`), because remote desktop
 shows a black root as if no video came. `xsetroot` gives it an arrow pointer, because the default
 "×" of an empty display looks like an error, and `-noreset` keeps the arrow.
 
-`scripts/hosting/openbot-desktop` starts Openbox on the agent display, with the configuration and
+`scripts/hosting/starbot-desktop` starts Openbox on the agent display, with the configuration and
 the flat light theme in `scripts/hosting/desktop/`. Before Openbox starts, `hsetroot` draws the
-background: the dark color of the app (`#1a1a1a`) with the StarBot logo (`desktop/openbot-logo.png`,
-the lilac logo with a light name from `@openbot/brand`) in the center, at each display size. Without
+background: the dark color of the app (`#1a1a1a`) with the StarBot logo (`desktop/starbot-logo.png`,
+the lilac logo with a light name from `@starbot/brand`) in the center, at each display size. Without
 `hsetroot`, the white root stays, because a dark screen with no logo looks like no video.
 
 Windows get title bars, and a click focuses and raises a window. A right-click on the empty screen or
@@ -135,10 +135,10 @@ draws the agent cursor or the rim there. `capture_screen` and `list_capture_sour
 `desktopCapturer`, which sees only the StarBot display, so with an agent display they are not
 available, and agents take screenshots with the driver.
 
-`openbot.service` holds the Xvfb displays too, and a stop signals each process of the unit at the
+`starbot.service` holds the Xvfb displays too, and a stop signals each process of the unit at the
 same time. An Xvfb that stops first ends StarBot before it closes its database. So the unit's
-`ExecStop` runs `openbot-hosted-server --stop`: it sends `SIGTERM` to StarBot only, whose PID the
-script writes to `$XDG_RUNTIME_DIR/openbot.pid`, and waits for it. Then it waits at most 10 s for
+`ExecStop` runs `starbot-hosted-server --stop`: it sends `SIGTERM` to StarBot only, whose PID the
+script writes to `$XDG_RUNTIME_DIR/starbot.pid`, and waits for it. Then it waits at most 10 s for
 the main process of the unit, so that `xvfb-run` completes its `xauth remove`. An `xauth` that the
 stop signal ended left the `~/.Xauthority-c` lock, and each later start failed after 20 to 40 s.
 The start also removes these lock files when no `xauth` of the user runs. The container does not
@@ -188,9 +188,9 @@ A local video-only test can run without native diagnostics. Its viewer iframe is
 
 A paste in the viewer puts the member's text on the host's clipboard, and then presses the host's
 paste keys. Moonlight sends Cmd+V or Ctrl+V as keys and cancels them, so the browser fires no paste
-event and the host pastes its own clipboard. The gateway adds `openbot-paste.js` to Moonlight's
+event and the host pastes its own clipboard. The gateway adds `starbot-paste.js` to Moonlight's
 `stream.html`. The script keeps the member's paste key from Moonlight, reads the paste event, and
-posts the text to `moonlight/openbot-clipboard`. Both routes are under `moonlight/` because the
+posts the text to `moonlight/starbot-clipboard`. Both routes are under `moonlight/` because the
 released Team API adapters forward only that family of viewer routes. The same viewer cookie or
 WebRTC session check protects them, and the clipboard route refuses a request from another site.
 At the paste event, the script presses the host's paste modifier, Cmd for a macOS host or Ctrl for
@@ -298,7 +298,7 @@ only its loopback address, and cannot call the app. The app calls the page with 
   display of 120 Hz or more. The script also puts the app's background in place of Moonlight's blue
   page, which is a `body::before` layer, and hides Moonlight's stats overlay.
 - Connection stats is a sheet. While it is open, the page posts Moonlight's stats once a second to
-  `moonlight/openbot-phone-stats`. The proxy answers that one path itself and sends it to no host,
+  `moonlight/starbot-phone-stats`. The proxy answers that one path itself and sends it to no host,
   so the page gets no other way to reach the app. Moonlight's WebRTC values named "…Ms" are running
   totals in seconds, so the sheet shows the time per frame from the change between two samples. Copy
   in the sheet's header copies the shown values and Moonlight's raw values.
@@ -329,7 +329,7 @@ Codex saves an “Always allow” tool decision only when the MCP server is in a
 configuration layer. A thread configuration alone does not satisfy this check. Before starting or
 resuming a thread with Computer Use, StarBot registers `computer_use` in the Codex user
 configuration through `config/batchWrite`. The new entry contains only a placeholder command
-(`openbot-mcp`) and `enabled = false`. The write uses the user layer's version, and an existing entry is left unchanged.
+(`starbot-mcp`) and `enabled = false`. The write uses the user layer's version, and an existing entry is left unchanged.
 StarBot does not save the driver socket, environment, or credentials in that entry.
 
 The thread configuration enables the running driver and supplies its current command, arguments,

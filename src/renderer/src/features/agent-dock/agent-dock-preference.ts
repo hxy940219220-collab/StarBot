@@ -5,8 +5,8 @@ import {
   type AgentDockEdge,
   type AgentDockOffset,
   type AgentDockSeatRef,
-} from "@openbot/contracts/ipc";
-import { agentDockSeatKey } from "@openbot/ui/features/agent-dock/AgentDock";
+} from "@starbot/contracts/ipc";
+import { agentDockSeatKey } from "@starbot/ui/features/agent-dock/AgentDock";
 import { createSignal } from "solid-js";
 import { z } from "zod";
 
@@ -41,8 +41,8 @@ const DEFAULT_PREFERENCE: AgentDockPreference = {
 };
 
 const DISPLAY_EXTENT = AGENT_DOCK_LIMITS.inputExtent;
-const PREFERENCE_KEY = "openbot:agent-dock-preference";
-const SEATS_PREFIX = "openbot:agent-dock:";
+const PREFERENCE_KEY = "starbot:agent-dock-preference";
+const SEATS_PREFIX = "starbot:agent-dock:";
 
 const preferenceSchema = z
   .object({

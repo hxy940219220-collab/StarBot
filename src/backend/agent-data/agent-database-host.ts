@@ -16,7 +16,7 @@ import type {
   AgentDatabaseValue,
 } from "./agent-database-protocol";
 
-const METADATA_TABLE = "openbot_metadata";
+const METADATA_TABLE = "starbot_metadata";
 
 const SCHEMA_VERSION = 1;
 
@@ -351,7 +351,7 @@ function reopenWritable(request: AgentDatabaseStatement): Effect.Effect<void> {
 class AgentDatabaseHost extends Context.Service<
   AgentDatabaseHost,
   { execute(request: AgentDatabaseRequest): Effect.Effect<AgentDatabaseRows, HostFailure> }
->()("openbot/agent-data/AgentDatabaseHost") {
+>()("starbot/agent-data/AgentDatabaseHost") {
   static readonly layer = Layer.effect(
     AgentDatabaseHost,
     Effect.gen(function* () {

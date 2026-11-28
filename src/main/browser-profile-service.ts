@@ -19,8 +19,8 @@ import {
   type SetBrowserProfileProxyInput,
   type UpdateAgentBrowserProfileInput,
   type UpdateBrowserProfileInput,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema, Semaphore } from "effect";
 import type { AgentService } from "../backend/agent-service";
 import type { BrowserHost } from "../backend/browser-host";

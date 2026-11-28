@@ -1,6 +1,6 @@
 import {
   LOCAL_SERVER_ID,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type RoutineFields,
   type RoutineLimitPolicy,
   type RoutineMissedPolicy,
@@ -13,8 +13,8 @@ import {
   type RoutineSchedule,
   type SetRoutineResultDestinationInput,
   type TestRoutineInput,
-} from "@openbot/contracts/ipc";
-import type { EventRoutine, EventRoutineOwner, EventRoutineTriggerInput } from "@openbot/contracts/ipc-events";
+} from "@starbot/contracts/ipc";
+import type { EventRoutine, EventRoutineOwner, EventRoutineTriggerInput } from "@starbot/contracts/ipc-events";
 import type { EventRoutinesApi, RoutineWebhooksApi } from "./routine-webhooks-api";
 
 interface RoutineSaveInput {
@@ -79,7 +79,7 @@ function agentRoutineResults(agentId: string, serverId?: string | RoutineResults
       destination: (routineId) => serverId.destination({ agentId, routineId }),
       setDestination: (routineId, destination) => serverId.setDestination({ agentId, routineId, destination }),
     };
-  const api = window.openbot.routineResults;
+  const api = window.starbot.routineResults;
   const server = serverId ?? LOCAL_SERVER_ID;
   const destinations: RoutineResultsPort = {
     options: () => api.options(server),
@@ -95,7 +95,7 @@ function agentRoutineResults(agentId: string, serverId?: string | RoutineResults
 }
 
 export type AgentRoutinesApi = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   "listRoutines" | "listRoutineRuns" | "createRoutine" | "updateRoutine" | "deleteRoutine" | "testRoutine" | "onEvent"
 >;
 
@@ -103,7 +103,7 @@ export function agentRoutinesPort(
   agentId: string,
   runCommand?: (input: TestRoutineInput) => Promise<string>,
   localHost = false,
-  api: AgentRoutinesApi = window.openbot.agent,
+  api: AgentRoutinesApi = window.starbot.agent,
   runPlace = localHost,
   resultsServerId?: string | RoutineResultsCalls,
   onceSchedule = localHost,
@@ -144,7 +144,7 @@ export function agentRoutinesPort(
 }
 
 export type ChannelRoutinesApi = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   | "listChannelRoutines"
   | "listChannelRoutineRuns"
   | "createChannelRoutine"
@@ -156,7 +156,7 @@ export type ChannelRoutinesApi = Pick<
 
 export function channelRoutinesPort(
   channelId: string,
-  api: ChannelRoutinesApi = window.openbot.agent,
+  api: ChannelRoutinesApi = window.starbot.agent,
   localHost = false,
   onceSchedule = localHost,
 ): RoutinesPort {

@@ -1,14 +1,14 @@
 import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { once } from "node:events";
 import { createServer, type Server as HttpServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Effect, Semaphore } from "effect";
 import { runCauseEffect } from "./effect-boundary";
 import { McpOperationError, mcpCall, mcpSync } from "./mcp-effects";
 
-const logger = createOpenBotLogger("mcp-oauth-proxy");
+const logger = createStarBotLogger("mcp-oauth-proxy");
 
 const MAX_BODY_BYTES = 4 * 1024 * 1024;
 const POST_HEADER_TIMEOUT_MS = 5 * 60_000;
@@ -326,7 +326,7 @@ function clientInfo(client: McpOAuthProxyClient, agentKey: string | null): Clien
         .trim()
     : null;
   return {
-    name: "openbot",
+    name: "starbot",
     title: name ? `${name} (StarBot)` : "StarBot",
     version: client.version,
     websiteUrl: "https://starbot.app",

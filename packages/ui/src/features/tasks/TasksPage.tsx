@@ -1,38 +1,38 @@
-import type { AgentTask, DraftAttachment } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AgentTask, DraftAttachment } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   plainTaskTitle,
   TASKS_CLOSED_SHOWN,
   type TasksSectionId,
   taskSections,
   taskTone,
-} from "@openbot/team-client/agent-tasks";
-import { ArrowUp, Button, LoaderCircle, Mic, X } from "@openbot/ui";
-import { PanelResizer } from "@openbot/ui/components/PanelResizer";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { AgentSearchSelect, agentOf } from "@openbot/ui/features/agents/AgentSearchSelect";
-import { AgentTaskMark, type AgentTaskWait, agentTaskStatus } from "@openbot/ui/features/conversation/AgentTasks";
+} from "@starbot/team-client/agent-tasks";
+import { ArrowUp, Button, LoaderCircle, Mic, X } from "@starbot/ui";
+import { PanelResizer } from "@starbot/ui/components/PanelResizer";
+import type { AgentProfile } from "@starbot/ui/data";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { AgentSearchSelect, agentOf } from "@starbot/ui/features/agents/AgentSearchSelect";
+import { AgentTaskMark, type AgentTaskWait, agentTaskStatus } from "@starbot/ui/features/conversation/AgentTasks";
 import {
   ComposerAttachmentRow,
   type ComposerPendingImage,
-} from "@openbot/ui/features/conversation/ComposerAttachmentRow";
+} from "@starbot/ui/features/conversation/ComposerAttachmentRow";
 import {
   ComposerEditor,
   type ComposerPasteResult,
   type ComposerSelection,
-} from "@openbot/ui/features/conversation/ComposerEditor";
-import { ComposerNotice } from "@openbot/ui/features/conversation/ComposerNotice";
-import { ComposerStackCard } from "@openbot/ui/features/conversation/ComposerStackCard";
-import type { SendShortcut } from "@openbot/ui/features/conversation/send-shortcut";
+} from "@starbot/ui/features/conversation/ComposerEditor";
+import { ComposerNotice } from "@starbot/ui/features/conversation/ComposerNotice";
+import { ComposerStackCard } from "@starbot/ui/features/conversation/ComposerStackCard";
+import type { SendShortcut } from "@starbot/ui/features/conversation/send-shortcut";
 import {
   type VoicePhase,
   VoiceRecordingMorph,
   voiceButtonLabel,
-} from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { PageHeader, type PageHeaderFrame } from "@openbot/ui/features/window/PageHeader";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@starbot/ui/features/conversation/VoiceRecordingMorph";
+import { PageHeader, type PageHeaderFrame } from "@starbot/ui/features/window/PageHeader";
+import { useText } from "@starbot/ui/text";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createStore, createUniqueId, For, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { createComposerRowsResize } from "../conversation/createComposerRowsResize";

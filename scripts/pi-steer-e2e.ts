@@ -10,7 +10,7 @@ import { type AppServerNotification, getRecord, getString, isRecord, type Thread
 import { requireProviderDriver } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/pi-steer-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/pi-steer-e2e");
 const TURN_TIMEOUT_MS = 20_000;
 
 interface LogEntry {
@@ -32,7 +32,7 @@ interface Report {
   failure?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-pi-steer-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-pi-steer-e2e-"));
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];
 const saved = new Map<string, ThreadItem[]>();

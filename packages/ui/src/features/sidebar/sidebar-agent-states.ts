@@ -1,4 +1,4 @@
-import { type ChannelSummary, type QueueSnapshot, queueHoldWorker } from "@openbot/contracts/ipc";
+import { type ChannelSummary, type QueueSnapshot, queueHoldWorker } from "@starbot/contracts/ipc";
 import type { SidebarAgentState, SidebarChannelWait, SidebarRoutinePhase } from "./sidebar-types";
 
 export type SidebarAttention =

@@ -1,5 +1,5 @@
-import { type AvatarMood, avatarMoodIsBusy, avatarMoodPresentation } from "@openbot/brand/bloub-avatar-motion";
-import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
+import { type AvatarMood, avatarMoodIsBusy, avatarMoodPresentation } from "@starbot/brand/bloub-avatar-motion";
+import type { AvatarColor, AvatarHue } from "@starbot/contracts/ipc";
 import { memo, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import Animated, {

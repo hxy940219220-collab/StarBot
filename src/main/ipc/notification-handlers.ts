@@ -1,5 +1,5 @@
-import type { AppTranslate } from "@openbot/i18n";
-import { sourceText } from "@openbot/i18n/source";
+import type { AppTranslate } from "@starbot/i18n";
+import { sourceText } from "@starbot/i18n/source";
 import { Notification } from "electron";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { notificationSettingsUrl, showRetainedNotification } from "../desktop-notifications";

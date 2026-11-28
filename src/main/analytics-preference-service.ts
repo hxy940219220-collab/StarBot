@@ -1,5 +1,5 @@
-import type { CentralAuthState, CentralAuthUser } from "@openbot/contracts/ipc";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import type { CentralAuthState, CentralAuthUser } from "@starbot/contracts/ipc";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Semaphore } from "effect";
 import {
   readAnalyticsPreference,
@@ -9,7 +9,7 @@ import {
   writeAnalyticsPreference,
 } from "./analytics-preference-store";
 
-const logger = createOpenBotLogger("analytics-preference");
+const logger = createStarBotLogger("analytics-preference");
 
 export interface AnalyticsAccount {
   getState(): CentralAuthState;

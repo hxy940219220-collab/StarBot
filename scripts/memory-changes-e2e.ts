@@ -7,8 +7,8 @@ import {
   type ConversationMessage,
   type ConversationPage,
   isConversationMessage,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 import {
   legacyTeamCapabilities,
   TEAM_BOOTSTRAP_CAPABILITIES,
@@ -16,17 +16,17 @@ import {
   TEAM_MEMORY_CHANGES_CAPABILITY,
   TEAM_PROTOCOL_V9_ONLY_CAPABILITIES,
   teamCapabilitiesForProtocol,
-} from "@openbot/contracts/team-protocol/current";
-import { teamHttpCodec } from "@openbot/contracts/team-protocol/http-codecs";
-import { encodeTeamProtocolV8BaseCurrentEvent } from "@openbot/contracts/team-protocol/v8-base-adapter";
+} from "@starbot/contracts/team-protocol/current";
+import { teamHttpCodec } from "@starbot/contracts/team-protocol/http-codecs";
+import { encodeTeamProtocolV8BaseCurrentEvent } from "@starbot/contracts/team-protocol/v8-base-adapter";
 import {
   createTeamProtocolV8Event,
   decodeTeamProtocolV8CurrentEvent,
   encodeTeamProtocolV8WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v8-webrtc-adapter";
-import { decodeTeamProtocolV9WebRtcHttpResponse } from "@openbot/contracts/team-protocol/v9-webrtc-adapter";
+} from "@starbot/contracts/team-protocol/v8-webrtc-adapter";
+import { decodeTeamProtocolV9WebRtcHttpResponse } from "@starbot/contracts/team-protocol/v9-webrtc-adapter";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/memory-changes-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/memory-changes-e2e");
 const PAGE_PATH = "/v1/agents/agent-1/conversation-page";
 
 const steps: Array<{ step: string; result: unknown }> = [];

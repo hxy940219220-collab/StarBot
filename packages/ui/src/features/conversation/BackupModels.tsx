@@ -1,5 +1,5 @@
-import { ProviderLogo } from "@openbot/brand";
-import { agentProviderName, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
+import { ProviderLogo } from "@starbot/brand";
+import { agentProviderName, isKnownAgentProvider } from "@starbot/contracts/agent-providers";
 import {
   AGENT_BACKUP_MODEL_LIMIT,
   type AgentBackupModels,
@@ -9,7 +9,7 @@ import {
   type ClientAgentModelOption,
   DEFAULT_PROVIDER_ACCOUNT_ID,
   sameAgentModelChoice,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   ArrowLeftRight,
   Button,
@@ -28,9 +28,9 @@ import {
   Switch,
   Text,
   Trash2,
-} from "@openbot/ui";
-import { SettingsLinkGroup } from "@openbot/ui/components/SettingsPanel";
-import { errorReference } from "@openbot/user-errors";
+} from "@starbot/ui";
+import { SettingsLinkGroup } from "@starbot/ui/components/SettingsPanel";
+import { errorReference } from "@starbot/user-errors";
 import { createSignal, createUniqueId, For, Show } from "solid-js";
 import { providerAccountName } from "../../components/provider-accounts";
 import { currentText, useText } from "../../text";

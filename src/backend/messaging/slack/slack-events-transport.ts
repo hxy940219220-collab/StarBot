@@ -1,4 +1,4 @@
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import type {
   ConnectionIdentity,

@@ -11,7 +11,7 @@ import {
   agentFolderParent,
   agentPermissionLevel,
   agentProviderDescriptor,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { keepPreviousData, type UseQueryResult, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
 import { Button, Typography } from "heroui-native";

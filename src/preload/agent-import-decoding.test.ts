@@ -4,7 +4,7 @@ import {
   decodeAgentImportResult,
   decodeInstanceTransferResult,
   decodeRemoteInstanceTransferResult,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { describe, expect, it } from "vitest";
 
 const AGENT = {

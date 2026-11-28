@@ -1,26 +1,26 @@
-import type { AgentProviderRef } from "@openbot/contracts/agent-providers";
-import { isNarrationItemId, showsNarration } from "@openbot/contracts/conversation-narration";
+import type { AgentProviderRef } from "@starbot/contracts/agent-providers";
+import { isNarrationItemId, showsNarration } from "@starbot/contracts/conversation-narration";
 import type {
   AgentEvent,
   ConversationMessage,
   ConversationSnapshot,
   MessagingPlatform,
   RoutineResultConnectionOption,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   CONVERSATION_PLAN_ITEM_TYPE,
   CONVERSATION_SUBAGENTS_ITEM_TYPE,
   MESSAGING_LIMITS,
-} from "@openbot/contracts/ipc";
-import type { DiscordEmbed } from "@openbot/contracts/signal-protocol/discord-api";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import type { DiscordEmbed } from "@starbot/contracts/signal-protocol/discord-api";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Deferred, Effect, Result, Schema, type Scope } from "effect";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { type StarBotToolResponse, starBotToolFailure, starBotToolResult } from "../agent/routine-tools";
 import type { AttachmentOperationError } from "../attachment-effects";
 import { causeHelpers } from "../effect-boundary";
 import type { DeliveryContext, MailboxStore, MessagingOrigin } from "../mailbox-store";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 import { MessagingHistoryStore } from "./messaging-history-store";
 import { MessagingMemoryStore } from "./messaging-memory-store";
 import { type MessagingContextMessage, messagingPromptText, REPLY_CHARACTERS } from "./messaging-prompt";
@@ -220,15 +220,15 @@ export interface MessagingThreadsHooks {
   progressUpdates(agentId: string): AgentProviderRef | null;
 }
 
-const logger = createOpenBotLogger("messaging-threads");
+const logger = createStarBotLogger("messaging-threads");
 const AGENT_QUEUE_LIMIT = 20;
 const AUTHOR_QUEUE_LIMIT = 2;
 const CONTEXT_TIMEOUT_MS = 5_000;
 const HISTORY_TIMEOUT_MS = 15_000;
 const HISTORY_NO_ANSWER = "The platform did not answer, or it limits reads now. Try again in a minute.";
 
-function historyResult(history: MessagingHistory, scope: "channel" | "conversation"): OpenBotToolResponse {
-  return openBotToolResult({
+function historyResult(history: MessagingHistory, scope: "channel" | "conversation"): StarBotToolResponse {
+  return starBotToolResult({
     place: history.place,
     scope,
     messages: boundedHistory(history.messages),
@@ -248,7 +248,7 @@ export class MessagingThreads {
   readonly store: MessagingStore;
   readonly memories: MessagingMemoryStore;
   readonly history: MessagingHistoryStore;
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #mailbox: MailboxStore;
   readonly #hooks: MessagingThreadsHooks;
   readonly #listeners = new Set<(activity: MessagingActivity) => void>();
@@ -286,7 +286,7 @@ export class MessagingThreads {
   #telegramMentionHandler: ((mention: MessagingTelegramMention) => Effect.Effect<MessagingMentionResult>) | null = null;
   #slackMentionHandler: ((mention: MessagingSlackMention) => Effect.Effect<MessagingMentionResult>) | null = null;
 
-  constructor(database: OpenBotDatabase, mailbox: MailboxStore, hooks: MessagingThreadsHooks) {
+  constructor(database: StarBotDatabase, mailbox: MailboxStore, hooks: MessagingThreadsHooks) {
     this.store = new MessagingStore(database);
     this.memories = new MessagingMemoryStore(database);
     this.history = new MessagingHistoryStore(database);
@@ -409,19 +409,19 @@ export class MessagingThreads {
     tool: string,
     args: unknown,
     openFiles: (paths: string[]) => Effect.Effect<MessagingAnswerFile[], AttachmentOperationError>,
-  ): Effect.fn.Return<OpenBotToolResponse, AttachmentOperationError> {
+  ): Effect.fn.Return<StarBotToolResponse, AttachmentOperationError> {
     if (
       tool === "messaging_history" &&
       (this.store.linkForThread(turn.threadId) || this.#mailbox.turnServesExternalChat(agentId, turn.turnId))
     )
-      return openBotToolFailure(
+      return starBotToolFailure(
         "A turn that works for an external chat cannot read a place by name. In the turn that answers the chat, call messaging_history without connection and place.",
       );
     const call = parseMessagingOutboundTool(tool, args);
-    if ("error" in call) return openBotToolFailure(call.error);
+    if ("error" in call) return starBotToolFailure(call.error);
     const enabled = this.store.connections().filter((record) => record.enabled);
     if (call.tool === "messaging_list_places" && !call.connection)
-      return openBotToolResult({
+      return starBotToolResult({
         connections: enabled.map((record) => ({
           connection: record.connectionId,
           platform: PLATFORM_NAMES[record.platform],
@@ -430,15 +430,15 @@ export class MessagingThreads {
       });
     const record = enabled.find((candidate) => candidate.connectionId === call.connection);
     if (!record)
-      return openBotToolFailure("No enabled connection has that id. Call openbot.messaging_list_places for the ids.");
+      return starBotToolFailure("No enabled connection has that id. Call starbot.messaging_list_places for the ids.");
     const outbound = this.#outbound;
-    if (!outbound) return openBotToolFailure(MESSAGING_NOT_RUNNING);
+    if (!outbound) return starBotToolFailure(MESSAGING_NOT_RUNNING);
     if (call.tool === "messaging_history") {
       const read = yield* outbound.history(record.connectionId, call.place, call.limit, call.filter).pipe(
         Effect.timeout(HISTORY_TIMEOUT_MS),
         Effect.catch(() => Effect.succeed({ error: HISTORY_NO_ANSWER })),
       );
-      if ("error" in read) return openBotToolFailure(read.error);
+      if ("error" in read) return starBotToolFailure(read.error);
       return historyResult(read.history, "channel");
     }
     const answer =
@@ -454,8 +454,8 @@ export class MessagingThreads {
             call.files.length ? yield* openFiles(call.files) : [],
             call.embeds,
           );
-    if ("error" in answer) return openBotToolFailure(answer.error);
-    if (!("posted" in answer) || !answer.ping) return openBotToolResult(answer);
+    if ("error" in answer) return starBotToolFailure(answer.error);
+    if (!("posted" in answer) || !answer.ping) return starBotToolResult(answer);
     const { ping, ...result } = answer;
     const threadKey = call.tool === "messaging_post" ? (ping.threadKey ?? call.replyTo ?? result.messageId) : null;
     if (call.tool === "messaging_post" && threadKey)
@@ -467,7 +467,7 @@ export class MessagingThreads {
         agentId,
         text: ping.text,
       });
-    return openBotToolResult(result);
+    return starBotToolResult(result);
   });
 
   readonly recordPings = Effect.fn("MessagingThreads.recordPings")(function* (
@@ -547,13 +547,13 @@ export class MessagingThreads {
     callId: string,
     tool: string,
     args: unknown,
-  ): Effect.fn.Return<OpenBotToolResponse> {
+  ): Effect.fn.Return<StarBotToolResponse> {
     const call = parseMessagingTool(tool, args);
-    if ("error" in call) return openBotToolFailure(call.error);
+    if ("error" in call) return starBotToolFailure(call.error);
     switch (call.tool) {
       case "messaging_remember": {
         if (link.isDirect)
-          return openBotToolFailure(
+          return starBotToolFailure(
             "A direct message is private. Facts from it are not saved for the whole workspace.",
           );
         const saved = Result.try(() =>
@@ -565,8 +565,8 @@ export class MessagingThreads {
           }),
         );
         if (Result.isFailure(saved))
-          return openBotToolFailure(saved.failure instanceof Error ? saved.failure.message : String(saved.failure));
-        return openBotToolResult({
+          return starBotToolFailure(saved.failure instanceof Error ? saved.failure.message : String(saved.failure));
+        return starBotToolResult({
           accepted: true,
           memoryId: saved.success.id,
           count: this.memories.count(link.connectionId),
@@ -575,8 +575,8 @@ export class MessagingThreads {
       }
       case "messaging_forget_memory":
         return this.memories.delete(link.connectionId, call.memoryId)
-          ? openBotToolResult({ accepted: true })
-          : openBotToolResult({ accepted: false, reason: "No saved fact of this workspace has that memoryId." });
+          ? starBotToolResult({ accepted: true })
+          : starBotToolResult({ accepted: false, reason: "No saved fact of this workspace has that memoryId." });
       case "messaging_history": {
         const source = this.#historySource;
         const history = source
@@ -586,8 +586,8 @@ export class MessagingThreads {
               Effect.catch(() => Effect.succeed(null)),
             )
           : null;
-        if (!history) return openBotToolFailure(HISTORY_NO_ANSWER);
-        if (!history.value) return openBotToolFailure(MESSAGING_NOT_RUNNING);
+        if (!history) return starBotToolFailure(HISTORY_NO_ANSWER);
+        if (!history.value) return starBotToolFailure(MESSAGING_NOT_RUNNING);
         return historyResult(history.value, call.scope);
       }
     }

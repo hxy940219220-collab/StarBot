@@ -1,15 +1,15 @@
-import { canAdministerServer, parseApplyAgentImportInput } from "@openbot/contracts/ipc";
+import { canAdministerServer, parseApplyAgentImportInput } from "@starbot/contracts/ipc";
 import {
   AGENT_IMPORT_CAPABILITY,
   AGENT_IMPORT_ROUTES,
   AGENT_IMPORT_UPLOAD_BYTES,
-} from "@openbot/contracts/team-protocol/agent-import-v1";
+} from "@starbot/contracts/team-protocol/agent-import-v1";
 import {
   AGENT_IMPORT_V2_CAPABILITY,
   AGENT_IMPORT_V2_CHUNK_BYTES,
   AGENT_IMPORT_V2_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-import-v2";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/agent-import-v2";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAgentImport } from "./dependencies";

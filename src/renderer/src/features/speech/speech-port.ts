@@ -1,8 +1,8 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface SpeechPort {
   voice: Pick<
-    OpenBotDesktopApi["voice"],
+    StarBotDesktopApi["voice"],
     | "getSpeechSettings"
     | "setSpeechSettings"
     | "getSpeechModelStatus"
@@ -15,9 +15,9 @@ export interface SpeechPort {
     | "getServer"
     | "onServerSettings"
   >;
-  agent: Pick<OpenBotDesktopApi["agent"], "readConversationPage" | "discardDraftAttachment">;
+  agent: Pick<StarBotDesktopApi["agent"], "readConversationPage" | "discardDraftAttachment">;
 }
 
 export function speechPort(): SpeechPort {
-  return window.openbot;
+  return window.starbot;
 }

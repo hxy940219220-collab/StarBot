@@ -41,7 +41,7 @@ private struct AgentAvatar: View {
 
 @available(iOS 26.0, *)
 struct AgentListSnippetIntent: SnippetIntent {
-  static let title: LocalizedStringResource = "OpenBot Agents"
+  static let title: LocalizedStringResource = "StarBot Agents"
   static let isDiscoverable = false
 
   func perform() async throws -> some IntentResult & ShowsSnippetView {
@@ -90,8 +90,8 @@ private struct AgentRow: View {
   let agent: ShortcutDirectory.Agent
   let directory: ShortcutDirectory?
 
-  private var openChat: OpenOpenBotIntent {
-    OpenOpenBotIntent(screen: "chat", agentId: agent.id)
+  private var openChat: OpenStarBotIntent {
+    OpenStarBotIntent(screen: "chat", agentId: agent.id)
   }
 
   var body: some View {
@@ -138,7 +138,7 @@ private struct AgentRow: View {
 /// The result of Send Message, or the reason why a shortcut cannot run.
 @available(iOS 26.0, *)
 struct ShortcutCardSnippetIntent: SnippetIntent {
-  static let title: LocalizedStringResource = "OpenBot Shortcut"
+  static let title: LocalizedStringResource = "StarBot Shortcut"
   static let isDiscoverable = false
 
   /// A `ShortcutNotice`.
@@ -229,13 +229,13 @@ private struct SendResultView: View {
 
   /// A message that did not go opens in the composer of the chat, where the user sends it. A
   /// message that can be in the chat does not: a second send would repeat it.
-  private var action: (label: String, intent: OpenOpenBotIntent) {
+  private var action: (label: String, intent: OpenStarBotIntent) {
     outcome == .failed
       ? (
         text("mobile.settings.shortcuts.send.inApp"),
-        OpenOpenBotIntent(draft: message, for: agent)
+        OpenStarBotIntent(draft: message, for: agent)
       )
-      : (text("mobile.settings.shortcuts.send.openChat"), OpenOpenBotIntent(screen: "chat", agentId: agent.id))
+      : (text("mobile.settings.shortcuts.send.openChat"), OpenStarBotIntent(screen: "chat", agentId: agent.id))
   }
 
   var body: some View {
@@ -307,13 +307,13 @@ private struct NoticeView: View {
   }
 
   /// Where the button goes: the place that fixes the reason.
-  private var destination: OpenOpenBotIntent {
+  private var destination: OpenStarBotIntent {
     switch notice {
-    case .noAgent: return OpenOpenBotIntent(screen: "settings")
+    case .noAgent: return OpenStarBotIntent(screen: "settings")
     case .locked:
-      if let agent = directory?.agent { return OpenOpenBotIntent(screen: "chat", agentId: agent.id) }
-      return OpenOpenBotIntent(screen: "home")
-    case .setUp: return OpenOpenBotIntent(screen: "home")
+      if let agent = directory?.agent { return OpenStarBotIntent(screen: "chat", agentId: agent.id) }
+      return OpenStarBotIntent(screen: "home")
+    case .setUp: return OpenStarBotIntent(screen: "home")
     }
   }
 

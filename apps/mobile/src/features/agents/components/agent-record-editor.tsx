@@ -1,6 +1,6 @@
 import { Host } from "@expo/ui";
-import { eventFilterDraftsValid, eventFiltersFromDrafts } from "@openbot/contracts/event-filter-value";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { eventFilterDraftsValid, eventFiltersFromDrafts } from "@starbot/contracts/event-filter-value";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentMemorySelectionState,
   type CreateRoutineInput,
@@ -14,16 +14,16 @@ import {
   type SaveEventRoutineInput,
   type UpdateRoutineInput,
   type RoutineWebhookTrigger as WebhookTriggerFields,
-} from "@openbot/contracts/ipc";
-import type { EventRoutineOwner } from "@openbot/contracts/ipc-events";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@starbot/contracts/ipc";
+import type { EventRoutineOwner } from "@starbot/contracts/ipc-events";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import {
   type RoutineScheduleDraft,
   routineDraftProblemCode,
   routineScheduleFromDraft,
   routineScheduleToDraft,
   switchDraftKind,
-} from "@openbot/team-client/routine-schedule-draft";
+} from "@starbot/team-client/routine-schedule-draft";
 import { type QueryKey, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { Typography } from "heroui-native";
@@ -151,7 +151,7 @@ export function MemoryEditor({
   const action = useRecordAction(port?.queryKey);
   const inclusion = useRecordAction();
   const selected = selection?.selections.find((entry) => entry.memoryId === memory?.id);
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   const [editedText, setEditedText] = useState<string | undefined>();
   const text = editedText ?? memory?.text ?? "";
   const [savedText, setSavedText] = useState<string | null>(null);
@@ -354,7 +354,7 @@ export function RoutineEditor({
     });
   }
   const { theme } = useUniwind();
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   const [finished, setFinished] = useState(false);
   const [savedDraft, setSavedDraft] = useState<string | null>(null);
   const [edits, setEdits] = useState<{

@@ -1,99 +1,99 @@
 .mcp-connect-card {
   display: flex;
   flex-direction: column;
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-grouped);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-grouped);
 }
 
 .mcp-connect-row {
   position: relative;
   margin: 0;
-  padding: var(--openbot-space-3);
+  padding: var(--starbot-space-3);
 }
 
 .mcp-connect-row + .mcp-connect-row {
-  border-top: 1px solid var(--openbot-border-grouped);
+  border-top: 1px solid var(--starbot-border-grouped);
 }
 
 .mcp-local-heading {
   margin: 0;
-  padding-inline-end: var(--openbot-space-6);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-semibold);
-  line-height: var(--openbot-leading-sm);
+  padding-inline-end: var(--starbot-space-6);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-semibold);
+  line-height: var(--starbot-leading-sm);
 }
 
 .mcp-local-steps {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-2);
-  margin: var(--openbot-space-2) 0 0;
-  padding-inline-start: var(--openbot-space-4);
+  gap: var(--starbot-space-2);
+  margin: var(--starbot-space-2) 0 0;
+  padding-inline-start: var(--starbot-space-4);
   list-style: decimal;
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
 }
 
 .mcp-local-steps > li::marker {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .mcp-local-address {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: var(--openbot-space-3);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  gap: var(--starbot-space-3);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
 }
 
 .mcp-local-address > code {
   overflow-wrap: anywhere;
-  color: var(--openbot-text-primary);
-  font-family: var(--openbot-font-mono);
+  color: var(--starbot-text-primary);
+  font-family: var(--starbot-font-mono);
 }
 
 .mcp-connect-docs {
   position: absolute;
-  top: var(--openbot-space-3);
-  inset-inline-end: var(--openbot-space-3);
-  gap: var(--openbot-space-1-5);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  top: var(--starbot-space-3);
+  inset-inline-end: var(--starbot-space-3);
+  gap: var(--starbot-space-1-5);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
 }
 
 .mcp-connect-docs > svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
   flex: 0 0 auto;
-  stroke-width: var(--openbot-icon-stroke);
+  stroke-width: var(--starbot-icon-stroke);
 }
 
 .mcp-connect-privacy {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-sm);
+  gap: var(--starbot-space-2);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-sm);
 }
 
 .mcp-connect-privacy svg {
   flex: none;
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
-  color: var(--openbot-text-muted);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
+  color: var(--starbot-text-muted);
 }
 
 .mcp-sign-in-page {
   position: relative;
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-surface);
 }
 
 .mcp-sign-in-page-note {
@@ -103,8 +103,8 @@
 
 .mcp-sign-in-relay-open {
   display: flex;
-  gap: var(--openbot-space-2);
-  margin-top: var(--openbot-space-4);
+  gap: var(--starbot-space-2);
+  margin-top: var(--starbot-space-4);
 }
 
 .provider-code-login-body > .mcp-sign-in-relay-open > :first-child {
@@ -112,7 +112,7 @@
 }
 
 .mcp-sign-in-relay-form {
-  margin-top: var(--openbot-space-4);
+  margin-top: var(--starbot-space-4);
 }
 
 :is(.integration-wizard-body, .provider-code-login-body) > :is(.mcp-sign-in-relay-open, .mcp-sign-in-relay-form) {
@@ -125,7 +125,7 @@
 
 .mcp-sign-in-relay-row {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .mcp-sign-in-relay-row > .ui-input {
@@ -137,12 +137,12 @@
 .starbot-auth-flow-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 16%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 16%, var(--starbot-border));
   border-radius: 18px;
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--openbot-accent) 5%, var(--openbot-bg-surface)) 0%,
-    color-mix(in srgb, var(--openbot-bg-grouped) 65%, var(--openbot-bg-surface)) 100%
+    color-mix(in srgb, var(--starbot-accent) 5%, var(--starbot-bg-surface)) 0%,
+    color-mix(in srgb, var(--starbot-bg-grouped) 65%, var(--starbot-bg-surface)) 100%
   );
   overflow: hidden;
   transition:
@@ -151,8 +151,8 @@
 }
 
 .starbot-auth-flow-card[data-busy] {
-  border-color: color-mix(in srgb, var(--openbot-accent) 42%, var(--openbot-border));
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--openbot-accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--starbot-accent) 42%, var(--starbot-border));
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--starbot-accent) 10%, transparent);
 }
 
 .starbot-auth-flow-head {
@@ -161,14 +161,14 @@
   justify-content: space-between;
   gap: 12px;
   padding: 11px 16px;
-  border-bottom: 1px solid color-mix(in srgb, var(--openbot-border) 75%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--starbot-border) 75%, transparent);
 }
 
 .starbot-auth-flow-label {
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   letter-spacing: 0.02em;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-auth-flow-link {
@@ -179,7 +179,7 @@
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   font-size: 12px;
   cursor: pointer;
   transition:
@@ -188,8 +188,8 @@
 }
 
 .starbot-auth-flow-link:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-accent);
+  background: var(--starbot-hover);
+  color: var(--starbot-accent);
 }
 
 .starbot-auth-flow-link > svg {
@@ -216,7 +216,7 @@
 }
 
 .starbot-auth-step-item[data-active] {
-  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-surface));
 }
 
 .starbot-auth-step-badge {
@@ -227,26 +227,26 @@
   margin-top: 1px;
   place-items: center;
   border-radius: 999px;
-  border: 1px solid var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-muted);
+  border: 1px solid var(--starbot-border-strong);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-muted);
   font-size: 12px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   font-variant-numeric: tabular-nums;
   transition: all 160ms ease;
 }
 
 .starbot-auth-step-item[data-active] .starbot-auth-step-badge {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
-  color: var(--openbot-text-on-accent);
-  box-shadow: 0 3px 10px color-mix(in srgb, var(--openbot-accent) 32%, transparent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
+  color: var(--starbot-text-on-accent);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--starbot-accent) 32%, transparent);
 }
 
 .starbot-auth-step-item[data-done] .starbot-auth-step-badge {
-  border-color: var(--openbot-success);
-  background: color-mix(in srgb, var(--openbot-success) 14%, var(--openbot-bg-surface));
-  color: var(--openbot-success);
+  border-color: var(--starbot-success);
+  background: color-mix(in srgb, var(--starbot-success) 14%, var(--starbot-bg-surface));
+  color: var(--starbot-success);
 }
 
 .starbot-auth-step-copy {
@@ -258,20 +258,20 @@
 
 .starbot-auth-step-copy > strong {
   font-size: 13.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   line-height: 1.38;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-auth-step-copy > span {
   font-size: 12px;
   line-height: 1.45;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-auth-flow-card[data-busy] .starbot-auth-step-item[data-active] .starbot-auth-step-copy > span {
-  color: var(--openbot-accent);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-accent);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .mcp-auth-submit-btn {

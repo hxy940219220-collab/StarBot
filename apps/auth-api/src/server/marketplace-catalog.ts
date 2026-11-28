@@ -3,7 +3,7 @@ import {
   type MarketplaceAgentSummary,
   type MarketplaceSkillSummary,
   type SkillCategory,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { runApiEffect } from "./effect-runtime";
 
 const PAGE_LIMIT = 50;

@@ -1,11 +1,11 @@
-import type { ChannelSummary, SidebarLayoutAction, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
+import type { ChannelSummary, SidebarLayoutAction, SidebarLayoutSnapshot } from "@starbot/contracts/ipc";
 import {
   SIDEBAR_UNASSIGNED_SECTION_ID,
   sidebarFolderAncestors,
   sidebarFolderParents,
   sidebarFolderPath,
-} from "@openbot/contracts/ipc";
-import type { MobileTranslate } from "@openbot/i18n/mobile";
+} from "@starbot/contracts/ipc";
+import type { MobileTranslate } from "@starbot/i18n/mobile";
 import { currentText } from "@/shared/lib/text";
 import type { MobileAgent } from "./workspace-types";
 

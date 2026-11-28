@@ -1,6 +1,6 @@
-import type { AboveAppsSupport } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@openbot/ui";
+import type { AboveAppsSupport } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { Button, Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@starbot/ui";
 import { createSignal, Show } from "solid-js";
 import { useI18n } from "../../i18n-context";
 

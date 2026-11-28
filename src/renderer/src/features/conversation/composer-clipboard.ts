@@ -2,17 +2,17 @@ import {
   attachmentReferenceIds,
   expandAttachmentReferences,
   serializeAttachmentReference,
-} from "@openbot/contracts/attachment-references";
-import { expandChatTagReferences } from "@openbot/contracts/chat-tag-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AttachmentSummary, FilePreview } from "@openbot/contracts/ipc";
-import { expandComposerMentions } from "@openbot/ui/features/conversation/ComposerEditor";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/attachment-references";
+import { expandChatTagReferences } from "@starbot/contracts/chat-tag-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { AttachmentSummary, FilePreview } from "@starbot/contracts/ipc";
+import { expandComposerMentions } from "@starbot/ui/features/conversation/ComposerEditor";
+import { currentText } from "@starbot/ui/text";
 import { Option, Schema } from "effect";
 import { writeClipboardText } from "../../clipboard";
 import { keptSpaces } from "../../selection-copy";
 
-const HTML_ATTRIBUTE = "data-openbot-composer-fragment";
+const HTML_ATTRIBUTE = "data-starbot-composer-fragment";
 const decodeFragment = Schema.decodeUnknownOption(
   Schema.fromJsonString(
     Schema.Struct({
@@ -139,7 +139,7 @@ export async function copyMessageWithAttachments(
 export function readComposerCopy(clipboard: DataTransfer): PastedComposerCopy | null {
   const html = clipboard.getData("text/html");
   if (html.length > INPUT_LIMITS.messageText * 12) return null;
-  const encoded = /data-openbot-composer-fragment=["']([^"']+)["']/u.exec(html)?.[1];
+  const encoded = /data-starbot-composer-fragment=["']([^"']+)["']/u.exec(html)?.[1];
   if (!encoded) return null;
   let raw: string;
   try {

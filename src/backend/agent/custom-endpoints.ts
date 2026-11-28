@@ -1,4 +1,4 @@
-import type { AgentModelOption, AgentReasoningEffort, AgentSummary, UpdateAgentInput } from "@openbot/contracts/ipc";
+import type { AgentModelOption, AgentReasoningEffort, AgentSummary, UpdateAgentInput } from "@starbot/contracts/ipc";
 import {
   CUSTOM_AGENT_DEFAULT_MODEL,
   CUSTOM_PROVIDER_HARNESSES,
@@ -10,8 +10,8 @@ import {
   isReasoningEffort,
   PICKER_PROVIDERS,
   savedCustomModelId,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Exit, Schema, Semaphore } from "effect";
 import type { AgentProvider } from "../agent-client";
 import { type AgentStore, DEFAULT_AGENT_PROVIDER } from "../agent-store";

@@ -1,6 +1,6 @@
-import { Button, buttonVariants, ChevronDown, Folder, X } from "@openbot/ui";
-import type { AgentProfile } from "@openbot/ui/data";
-import { useText } from "@openbot/ui/text";
+import { Button, buttonVariants, ChevronDown, Folder, X } from "@starbot/ui";
+import type { AgentProfile } from "@starbot/ui/data";
+import { useText } from "@starbot/ui/text";
 import { onSettled, Show } from "solid-js";
 import { createScrollFades } from "../../components/createScrollFades";
 import { AgentPicker, type AgentPickerAgent } from "../agents/AgentPicker";

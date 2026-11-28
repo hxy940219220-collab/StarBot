@@ -3,9 +3,9 @@ import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { ChannelRoutine, Routine } from "@openbot/contracts/ipc";
-import { redactText } from "@openbot/logging";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+import type { ChannelRoutine, Routine } from "@starbot/contracts/ipc";
+import { redactText } from "@starbot/logging";
+import { RoutineInputError } from "@starbot/team-client/routine-schedule";
 import { Effect } from "effect";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { RoutineScheduler } from "../src/backend/agent/routine-scheduler";
@@ -18,7 +18,7 @@ import { ChannelStore } from "../src/backend/channel-store";
 import { databaseRows, requiredStringColumn } from "../src/backend/database/database-rows";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { RoutineTimer } from "../src/backend/routine-timer";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -52,12 +52,12 @@ const SOURCES = [
   "packages/contracts/src/ipc-chat-channels.ts",
   "src/backend/agent/routine-scheduler.ts",
   "src/backend/mailbox-store.ts",
-  "src/backend/openbot-database.ts",
+  "src/backend/starbot-database.ts",
   "packages/team-client/src/routine-schedule.ts",
 ];
 
 interface Fixture {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   store: AgentStore;
   mailbox: MailboxStore;
   conversation: ConversationRuntime;
@@ -118,7 +118,7 @@ function message(error: unknown): string {
 }
 
 async function openFixture(root: string): Promise<Fixture> {
-  const database = new OpenBotDatabase(join(root, "state"));
+  const database = new StarBotDatabase(join(root, "state"));
   const store = new AgentStore(join(root, "state"), join(root, "home"), database);
   const mailbox = new MailboxStore(join(root, "state"), store.sharedRoot, database);
   let conversation: ConversationRuntime | undefined;
@@ -499,7 +499,7 @@ async function runCase(name: string, work: (fixture: Fixture, row: CaseResult) =
   let root: string | undefined;
   let fixture: Fixture | undefined;
   try {
-    root = await mkdtemp(join(tmpdir(), "openbot-cron-syntax-"));
+    root = await mkdtemp(join(tmpdir(), "starbot-cron-syntax-"));
     roots.push(root);
     fixture = await openFixture(root);
     await work(fixture, row);
@@ -539,7 +539,7 @@ async function runCase(name: string, work: (fixture: Fixture, row: CaseResult) =
 const phaseArgument = process.argv.find((value) => value.startsWith("--phase="));
 const requestedPhase = phaseArgument?.slice("--phase=".length) ?? "before";
 const phase = /^[a-zA-Z0-9_-]+$/.test(requestedPhase) ? requestedPhase : "invalid-phase";
-const out = join(ROOT, ".openbot-build", "routine-cron-syntax-e2e", phase);
+const out = join(ROOT, ".starbot-build", "routine-cron-syntax-e2e", phase);
 try {
   assert.notEqual(phase, "invalid-phase", "Phase must be a folder name.");
   for (const path of SOURCES) {
@@ -583,6 +583,6 @@ try {
     `${safe(JSON.stringify({ phase, passed, fatal, sources: hashes, expectedCases, cases }, null, 2))}\n`,
     { mode: 0o600 },
   );
-  process.stdout.write(`${passed ? "PASS" : "FAIL"}: .openbot-build/routine-cron-syntax-e2e/${phase}/report.json\n`);
+  process.stdout.write(`${passed ? "PASS" : "FAIL"}: .starbot-build/routine-cron-syntax-e2e/${phase}/report.json\n`);
   if (!passed) process.exitCode = 1;
 }

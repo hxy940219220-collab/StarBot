@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { CreateAgentInput } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { CreateAgentInput } from "@starbot/contracts/ipc";
 import { router } from "expo-router";
 import { Typography } from "heroui-native";
 import { useEffect, useRef, useState } from "react";

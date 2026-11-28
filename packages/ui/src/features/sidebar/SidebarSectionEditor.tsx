@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { ChevronDown, Input } from "@openbot/ui";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { ChevronDown, Input } from "@starbot/ui";
 import { onCleanup, Show } from "solid-js";
 import { useText } from "../../text";
 import { useSidebarScope } from "./sidebar-scope";

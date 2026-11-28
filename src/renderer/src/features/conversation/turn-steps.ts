@@ -1,8 +1,8 @@
-import { analyticsTokens, type ConversationTurnTrace } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import type { AgentStep, AgentStepsFacts } from "@openbot/ui/features/conversation/AgentSteps";
-import { silentAgentAnswer } from "@openbot/ui/features/conversation/new-message-tally";
-import type { TraceSpan } from "@openbot/ui/features/conversation/TraceWaterfall";
+import { analyticsTokens, type ConversationTurnTrace } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
+import type { AgentStep, AgentStepsFacts } from "@starbot/ui/features/conversation/AgentSteps";
+import { silentAgentAnswer } from "@starbot/ui/features/conversation/new-message-tally";
+import type { TraceSpan } from "@starbot/ui/features/conversation/TraceWaterfall";
 import { createMemo } from "solid-js";
 import type { TurnStepLines } from "./turn-step-lines";
 

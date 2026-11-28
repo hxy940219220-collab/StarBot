@@ -3,12 +3,12 @@ import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "./runti
 
 export const MCP_SERVERS_CAPABILITY = "mcp-servers-v1";
 
-export const RESERVED_MCP_SERVER_NAMES = ["openbot", "openbot_browser"] as const;
+export const RESERVED_MCP_SERVER_NAMES = ["starbot", "starbot_browser"] as const;
 
 export const COMPUTER_USE_MCP_SERVER_NAME = "computer_use";
-export const COMPUTER_USE_MCP_SERVER_ID = "openbot-computer-use";
+export const COMPUTER_USE_MCP_SERVER_ID = "starbot-computer-use";
 
-export const GITHUB_CONNECTOR_MCP_SERVER_ID = "openbot-github";
+export const GITHUB_CONNECTOR_MCP_SERVER_ID = "starbot-github";
 export const GITHUB_CONNECTOR_MCP_SERVER_NAME = "github";
 export const GITHUB_CONNECTOR_MCP_SERVER_URL = "https://api.githubcopilot.com/mcp/";
 

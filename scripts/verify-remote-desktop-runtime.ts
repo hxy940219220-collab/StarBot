@@ -1,12 +1,12 @@
 import { createHash } from "node:crypto";
 import { access, readdir, readFile } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { bundledLibraryLicense, isPortableLoadPath, readMachOLoadPaths } from "./mac-runtime-dylibs";
 import { createRemoteDesktopInputDigest, loadNativeRuntimeLock } from "./native-runtime-lock";
 import { runtimeTarget } from "./remote-desktop-runtime-release";
 
-const logger = createOpenBotLogger("verify-remote-desktop-runtime");
+const logger = createStarBotLogger("verify-remote-desktop-runtime");
 
 const platform = process.argv.includes("--windows") ? "win32" : process.argv.includes("--linux") ? "linux" : "darwin";
 const architecture = platform === "win32" ? "x64" : process.arch;
@@ -45,7 +45,7 @@ await Promise.all([
   access(resolve("build/remote-desktop-runtime/sources", sunshinePatch)),
   access(
     resolve(
-      `build/remote-desktop-runtime/sources/moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-openbot-source.tar.gz`,
+      `build/remote-desktop-runtime/sources/moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-starbot-source.tar.gz`,
     ),
   ),
   access(resolve("build/remote-desktop-runtime/sources", moonlightPatch)),

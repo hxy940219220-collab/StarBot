@@ -1,4 +1,4 @@
-import { type HostSkillLearning, isSkillLearningMode, type OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import { type HostSkillLearning, isSkillLearningMode, type StarBotDesktopApi } from "@starbot/contracts/ipc";
 import {
   Item,
   ItemActions,
@@ -10,11 +10,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal, Show, untrack } from "solid-js";
 
-export type HostSkillLearningCalls = Pick<OpenBotDesktopApi["hostAdmin"], "getSkillLearning" | "setSkillLearning">;
+export type HostSkillLearningCalls = Pick<StarBotDesktopApi["hostAdmin"], "getSkillLearning" | "setSkillLearning">;
 
 export interface ServerSkillLearningOptions {
   calls?: HostSkillLearningCalls;
@@ -31,7 +31,7 @@ export function ServerSkillLearningSetting(
   },
 ) {
   const { t, errorMessage } = useText();
-  const calls = (): HostSkillLearningCalls => props.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostSkillLearningCalls => props.calls ?? window.starbot.hostAdmin;
   const [settings, setSettings] = createSignal<HostSkillLearning | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);
   let generation = 0;

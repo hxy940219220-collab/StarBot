@@ -1,5 +1,5 @@
 ---
-name: openbot-export
+name: starbot-export
 description: Export the user's Grok Bot agents into one .zip file that StarBot imports, with instructions, avatars, skills, routines, memories, group chats, and optional workspace files. Use when the user asks to export, move, or migrate their agents to StarBot.
 example-prompt: Export my agents for StarBot
 ---
@@ -23,8 +23,8 @@ file when the manifest is invalid, so follow the format below exactly.
    - workspace files, only if the user agrees (step 2).
 
    Do not export the agent that runs this skill. It exists only to make the export, so leave it out
-   of the agent list and out of `openbot-import.json`, even when the user asks for all agents. Also
-   leave this skill (`openbot-export`) out of every agent's skills.
+   of the agent list and out of `starbot-import.json`, even when the user asks for all agents. Also
+   leave this skill (`starbot-export`) out of every agent's skills.
 
    Also list every group chat, where several agents talk together. StarBot imports a group chat as a
    channel. For each group chat, collect:
@@ -56,7 +56,7 @@ file when the manifest is invalid, so follow the format below exactly.
    `<ask the user for …>`. StarBot rejects the archive if it contains a file named `.env*` or
    `*private*key*`, or a nested archive (`.zip`, `.tar`, `.gz`, `.7z`, `.rar`), so leave those out.
 
-5. **Build the folder** (see Format) and write `openbot-import.json` last.
+5. **Build the folder** (see Format) and write `starbot-import.json` last.
 
    StarBot puts the files of `agents/<key>/files/` in `imported/` in the agent's workspace. In
    instructions and routine instructions, change each absolute path to a file that you export to
@@ -65,8 +65,8 @@ file when the manifest is invalid, so follow the format below exactly.
    user about it in step 7.
 
 6. **Check it** with the checklist below. Then zip the folder contents into
-   `~/Downloads/.openbot-export-<YYYY-MM-DD>.zip.part`. When the zip is complete, rename it to
-   `~/Downloads/openbot-export-<YYYY-MM-DD>.zip`. The rename replaces an older export with the
+   `~/Downloads/.starbot-export-<YYYY-MM-DD>.zip.part`. When the zip is complete, rename it to
+   `~/Downloads/starbot-export-<YYYY-MM-DD>.zip`. The rename replaces an older export with the
    same name in one step, so StarBot never reads a half-written file.
 
 7. **Tell the user**, only after the rename, the path, the number of agents and group chats, and
@@ -77,7 +77,7 @@ file when the manifest is invalid, so follow the format below exactly.
 ## Format
 
 ```
-openbot-import.json
+starbot-import.json
 agents/<key>/avatar.png                 optional; PNG, JPEG, or WebP, 512 KB or less
 agents/<key>/skills/<skill>/SKILL.md    one folder for each skill
 agents/<key>/files/…                    optional workspace files
@@ -88,11 +88,11 @@ agents/<key>/files/…                    optional workspace files
 hyphen. When you make a key from a long agent name, keep only the first words. All paths for an
 agent must start with `agents/<key>/`.
 
-`openbot-import.json`:
+`starbot-import.json`:
 
 ```json
 {
-  "format": "openbot-agent-import",
+  "format": "starbot-agent-import",
   "version": 1,
   "source": { "app": "grok-bot", "exportedAt": "2026-09-23T10:00:00Z" },
   "agents": [
@@ -203,12 +203,12 @@ about each such task in step 7.
 
 ## Checklist
 
-- [ ] `openbot-import.json` is at the root of the zip, not inside a subfolder you added by mistake.
-- [ ] `format` is `openbot-agent-import` and `version` is `1`.
+- [ ] `starbot-import.json` is at the root of the zip, not inside a subfolder you added by mistake.
+- [ ] `format` is `starbot-agent-import` and `version` is `1`.
 - [ ] Each `key` is unique and 64 characters or fewer, and each path starts with `agents/<key>/`.
 - [ ] Each skill folder has `SKILL.md` with frontmatter.
-- [ ] The agent that runs this skill is not in `openbot-import.json`.
-- [ ] No agent has an `openbot-export` skill folder.
+- [ ] The agent that runs this skill is not in `starbot-import.json`.
+- [ ] No agent has an `starbot-export` skill folder.
 - [ ] Every group chat is in `channels`, unless none of its agents are exported.
 - [ ] Each channel has at least one `members` entry, each member is an agent `key` in this export, and
       `lead` is one of the members or `null`.

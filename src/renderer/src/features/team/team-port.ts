@@ -1,9 +1,9 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface TeamPort {
-  servers: Pick<OpenBotDesktopApi["servers"], "onPresence" | "setTyping">;
+  servers: Pick<StarBotDesktopApi["servers"], "onPresence" | "setTyping">;
 }
 
 export function teamPort(): TeamPort {
-  return window.openbot;
+  return window.starbot;
 }

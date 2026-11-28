@@ -1,9 +1,9 @@
 import { createRequire } from "node:module";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import type { BaseWindow, BrowserWindow } from "electron";
 import type * as Koffi from "koffi";
 
-const logger = createOpenBotLogger("mac-panel-activation");
+const logger = createStarBotLogger("mac-panel-activation");
 const requireModule = createRequire(import.meta.url);
 
 interface ObjcRuntime {

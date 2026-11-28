@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Shared by migration v36 and the separate new-database schema. IF NOT EXISTS throughout.
 //
@@ -25,7 +25,7 @@ export const MESSAGING_MEMORY_SCHEMA_SQL = `
     ON projection_messaging_memories(connection_id, updated_at DESC, memory_id);
 `;
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 36,
   name: "messaging-memory",
   // Only creates a table, so no foreign-key pause and no vacuum. No connection has memories yet.

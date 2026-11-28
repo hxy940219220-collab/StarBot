@@ -239,7 +239,7 @@ export const messages = {
     "Antworten in Threads melden, wenn ein Agent in einem Thread fertig ist oder mit einem Fehler anhält. Ohne sie meldet sich ein Thread weiter, wenn er deine Eingabe oder eine Genehmigung braucht.",
   "mobile.settings.notifications.sound": "Ton",
   "mobile.settings.notifications.playSound": "Ton abspielen",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Warm",
   "mobile.settings.notifications.sound.mech": "Mechanisch",
@@ -382,7 +382,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Meine letzten sechs Monate mit StarBot",
 
   "mobile.settings.profile.share.createFailed": "Das Bild konnte nicht erstellt werden.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Stimme",
   "mobile.settings.voice.sample": "Hallo. So lese ich dir meine Antworten vor.",
   "mobile.settings.voice.voice": "Stimme",

@@ -1,11 +1,11 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { AGENT_IMPORT_LIMITS, isAgentImportKey, isRoutineSchedule, type RoutineSchedule } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { AGENT_IMPORT_LIMITS, isAgentImportKey, isRoutineSchedule, type RoutineSchedule } from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { isUnsafeArchivePath } from "./skill-package";
 
-export const AGENT_IMPORT_MANIFEST = "openbot-import.json";
-const FORMAT = "openbot-agent-import";
+export const AGENT_IMPORT_MANIFEST = "starbot-import.json";
+const FORMAT = "starbot-agent-import";
 const VERSION = 1;
 
 interface ImportRoutine {

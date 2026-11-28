@@ -1,6 +1,6 @@
-import type { ServerClaim } from "@openbot/contracts/hosted-servers";
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import type { InstallServerStep } from "@openbot/ui/features/servers/InstallServerDialog";
+import type { ServerClaim } from "@starbot/contracts/hosted-servers";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import type { InstallServerStep } from "@starbot/ui/features/servers/InstallServerDialog";
 import { createMemo, createStore, Loading, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { InstallServerDialog } from "../../lazy-views";
 import { retryNewServer } from "./new-server-retry";

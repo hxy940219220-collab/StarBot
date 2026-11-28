@@ -32,7 +32,7 @@ export class AccountServicePlatform extends Context.Service<
     ): Effect.Effect<T, AccountRequestFailure>;
     openPage(url: string): Effect.Effect<void, AccountPageFailure>;
   }
->()("openbot/main/AccountServicePlatform") {
+>()("starbot/main/AccountServicePlatform") {
   static layer(auth: AccountRequestClient, openExternal: (url: string) => Promise<void>) {
     return Layer.succeed(
       AccountServicePlatform,

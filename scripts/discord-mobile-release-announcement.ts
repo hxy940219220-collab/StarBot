@@ -124,7 +124,7 @@ export interface Endpoints {
 async function getJson<T>(url: string, parse: (value: unknown) => T, token?: string): Promise<T> {
   const response = await fetch(url, {
     headers: token
-      ? { authorization: `Bearer ${token}`, accept: "application/vnd.github+json", "user-agent": "openbot-release" }
+      ? { authorization: `Bearer ${token}`, accept: "application/vnd.github+json", "user-agent": "starbot-release" }
       : {},
     signal: AbortSignal.timeout(20_000),
   });
@@ -202,7 +202,7 @@ async function createTag(endpoints: Endpoints, tag: string, sha: string): Promis
     headers: {
       authorization: `Bearer ${endpoints.token}`,
       accept: "application/vnd.github+json",
-      "user-agent": "openbot-release",
+      "user-agent": "starbot-release",
     },
     body: JSON.stringify({ ref: `refs/tags/${tag}`, sha }),
     signal: AbortSignal.timeout(20_000),
@@ -220,7 +220,7 @@ async function deleteTags(endpoints: Endpoints, tags: readonly string[]): Promis
       headers: {
         authorization: `Bearer ${endpoints.token}`,
         accept: "application/vnd.github+json",
-        "user-agent": "openbot-release",
+        "user-agent": "starbot-release",
       },
       signal: AbortSignal.timeout(20_000),
     }).catch(() => undefined);

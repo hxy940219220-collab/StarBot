@@ -496,7 +496,7 @@ function shellWord(value: string): string {
 
 export function installServerCommand(claim: string, name?: string): string {
   const named = name === undefined ? "" : ` -- --name ${shellWord(name)}`;
-  return `{ echo OPENBOT_CLAIM=${claim}; curl -fsSL ${INSTALL_SERVER_SCRIPT_URL}; } | sudo bash -s${named}`;
+  return `{ echo STARBOT_CLAIM=${claim}; curl -fsSL ${INSTALL_SERVER_SCRIPT_URL}; } | sudo bash -s${named}`;
 }
 
 const SERVER_INSTALL_ITEM_TYPE_PREFIX = "server-install:";

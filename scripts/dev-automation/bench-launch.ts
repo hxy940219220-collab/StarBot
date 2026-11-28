@@ -2,8 +2,8 @@ import { type ChildProcess, spawn } from "node:child_process";
 import { closeSync, existsSync, mkdirSync, openSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
-import { isString } from "@openbot/contracts/runtime-values";
-import type { Logger } from "@openbot/logging";
+import { isString } from "@starbot/contracts/runtime-values";
+import type { Logger } from "@starbot/logging";
 import { findAvailablePort } from "../dev-services";
 import { withoutElectronRuntimeFlags } from "../electron-spawn-env";
 import { withDevPortAllocation } from "./port-allocation";
@@ -81,10 +81,10 @@ export async function launchBenchApp(options: LaunchBenchAppOptions): Promise<Be
         stdio: logFile === null ? "ignore" : ["ignore", logFile, logFile],
         env: {
           ...withoutElectronRuntimeFlags(process.env),
-          OPENBOT_APP_VARIANT: "preview",
-          OPENBOT_DEV_PROFILE: "app",
-          OPENBOT_DEV_INSTANCE_ID: instanceId,
-          OPENBOT_DEV_REMOTE_DEBUGGING_PORT: String(remoteDebuggingPort),
+          STARBOT_APP_VARIANT: "preview",
+          STARBOT_DEV_PROFILE: "app",
+          STARBOT_DEV_INSTANCE_ID: instanceId,
+          STARBOT_DEV_REMOTE_DEBUGGING_PORT: String(remoteDebuggingPort),
           ...options.environment,
         },
       },

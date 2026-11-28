@@ -1,5 +1,5 @@
-import type { AgentStepActivity } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AgentStepActivity } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createUniqueId, Show } from "solid-js";
 import { Button } from "../../button";

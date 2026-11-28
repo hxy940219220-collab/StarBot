@@ -38,13 +38,13 @@ export const messages = {
   "island.action.openChat": "Apri la chat",
   "island.action.openDetails": "Apri i dettagli",
   "island.action.takeOver": "Intervieni",
-  "island.action.reviewInOpenBot": "Controlla in StarBot",
+  "island.action.reviewInStarBot": "Controlla in StarBot",
 
   "island.action.decline": "Rifiuta",
   "island.action.approve": "Approva",
   "island.action.later": "Più tardi",
   "island.action.dismiss": "Ignora",
-  "island.action.answerInOpenBot": "Rispondi in StarBot",
+  "island.action.answerInStarBot": "Rispondi in StarBot",
 
   "island.action.stopAgent": "Ferma {name}",
   "island.action.failed": "Non ha funzionato. Riprova.",

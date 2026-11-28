@@ -3,7 +3,7 @@ import {
   type UiBlockSpec,
   type UiBlockState,
   validateUiBlockResponse,
-} from "@openbot/contracts/ui-blocks";
+} from "@starbot/contracts/ui-blocks";
 
 export interface UiBlockProps<Spec extends UiBlockSpec> {
   spec: Spec;

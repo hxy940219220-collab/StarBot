@@ -1,17 +1,17 @@
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import type { AgentProviderId } from "@starbot/contracts/agent-providers";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { z } from "zod";
-import { BROWSER_DYNAMIC_TOOLS, BROWSER_TOOL_DEFINITIONS, OPENBOT_BROWSER_NAMESPACE } from "../browser-tools";
+import { BROWSER_DYNAMIC_TOOLS, BROWSER_TOOL_DEFINITIONS, STARBOT_BROWSER_NAMESPACE } from "../browser-tools";
 import { CHANNEL_TOOL_DEFINITIONS } from "../channel-tools";
 import type { DynamicToolNamespace } from "../local-mcp-bridge";
-import { OPENBOT_DYNAMIC_TOOLS, OPENBOT_TOOL_DEFINITIONS } from "../openbot-tools";
+import { STARBOT_DYNAMIC_TOOLS, STARBOT_TOOL_DEFINITIONS } from "../starbot-tools";
 import { type DynamicToolCallParams, isRecord, qualifiedToolName } from "../protocol";
 import { advertisedJsonSchema } from "./advertised-json-schema";
 import { withSchemaTypes } from "./schema-typed-arguments";
 import { toolGuidance } from "./tool-guidance";
 
-export const BUILTIN_TOOL_CATALOG = [OPENBOT_DYNAMIC_TOOLS, ...BROWSER_DYNAMIC_TOOLS].flatMap((namespace) =>
+export const BUILTIN_TOOL_CATALOG = [STARBOT_DYNAMIC_TOOLS, ...BROWSER_DYNAMIC_TOOLS].flatMap((namespace) =>
   namespace.tools.map((tool) => ({
     namespace: namespace.name,
     tool: tool.name,
@@ -40,7 +40,7 @@ const DIRECT_NAMES = new Set([
   "suggest_marketplace_app",
 ]);
 
-const BROWSER_SCRIPT_TOOL = requireTool(`${OPENBOT_BROWSER_NAMESPACE}.run_script`);
+const BROWSER_SCRIPT_TOOL = requireTool(`${STARBOT_BROWSER_NAMESPACE}.run_script`);
 
 const DIRECT_BROWSER_NAMES: ReadonlySet<string> = new Set(["open", "list_tabs", "run_script"]);
 
@@ -50,7 +50,7 @@ export const DIRECT_BROWSER_TOOL_DEFINITIONS = BROWSER_TOOL_DEFINITIONS.filter((
 
 const DIRECT_BROWSER_DYNAMIC_TOOLS = BROWSER_DYNAMIC_TOOLS.map((namespace) => ({
   ...namespace,
-  description: "StarBot's private, persistent browser. Run the other openbot_browser tools with openbot.tool_call.",
+  description: "StarBot's private, persistent browser. Run the other starbot_browser tools with starbot.tool_call.",
   tools: namespace.tools.filter((tool) => DIRECT_BROWSER_NAMES.has(tool.name)),
 }));
 
@@ -72,7 +72,7 @@ const OWN_WEB_SEARCH_PROVIDERS: ReadonlySet<AgentProviderId> = new Set([
   "mistral",
 ]);
 const OWN_WEB_SEARCH_CATALOG = BUILTIN_TOOL_CATALOG.filter(
-  (tool) => tool.name !== `${OPENBOT_DYNAMIC_TOOLS.name}.web_search`,
+  (tool) => tool.name !== `${STARBOT_DYNAMIC_TOOLS.name}.web_search`,
 );
 
 function catalogFor(provider: AgentProviderId) {
@@ -117,7 +117,7 @@ const TOOL_SEARCH_DESCRIPTION =
 
 function toolDefinitions(catalog: typeof BUILTIN_TOOL_CATALOG) {
   return [
-    ...OPENBOT_TOOL_DEFINITIONS.filter((tool) => DIRECT_NAMES.has(tool.name)),
+    ...STARBOT_TOOL_DEFINITIONS.filter((tool) => DIRECT_NAMES.has(tool.name)),
     {
       name: "tool_search",
       description: `${TOOL_SEARCH_DESCRIPTION} Catalog: ${catalogNames(catalog)}`,
@@ -141,7 +141,7 @@ function dynamicTools(definitions: ReturnType<typeof toolDefinitions>) {
   return [
     {
       type: "namespace" as const,
-      name: "openbot",
+      name: "starbot",
       description: "StarBot tools. Search, then call other built-in and browser tools.",
       tools: definitions.map((definition) => ({
         type: "function" as const,
@@ -193,7 +193,7 @@ const ANTIGRAVITY_DISCOVERY_TOOLS: DynamicToolNamespace["tools"] = [
 ];
 
 const ANTIGRAVITY_DYNAMIC_TOOLS = dynamicTools(toolDefinitions(catalogFor("antigravity"))).map((namespace) =>
-  namespace.name === OPENBOT_DYNAMIC_TOOLS.name
+  namespace.name === STARBOT_DYNAMIC_TOOLS.name
     ? {
         ...namespace,
         tools: namespace.tools.map(
@@ -218,7 +218,7 @@ export function visibleDynamicTools(provider: AgentProviderId) {
 }
 
 function mcpCatalogTools(catalog: typeof BUILTIN_TOOL_CATALOG): Map<string, DynamicToolNamespace["tools"][number]> {
-  const browserCore = new Set(toolGuidance(OPENBOT_BROWSER_NAMESPACE, "snapshot"));
+  const browserCore = new Set(toolGuidance(STARBOT_BROWSER_NAMESPACE, "snapshot"));
   return new Map(
     catalog.map((entry) => {
       const guidance = toolGuidance(entry.namespace, entry.tool)
@@ -247,7 +247,7 @@ export function withCatalogTools(
   mcpCatalogs.set(catalog, tools);
   return namespaces.map((namespace) => {
     const listed = namespace.tools
-      .filter((tool) => namespace.name !== OPENBOT_DYNAMIC_TOOLS.name || !OWN_SEARCH_TOOLS.has(tool.name))
+      .filter((tool) => namespace.name !== STARBOT_DYNAMIC_TOOLS.name || !OWN_SEARCH_TOOLS.has(tool.name))
       .map((tool) => tools.get(`${namespace.name}.${tool.name}`) ?? tool);
     const names = new Set(listed.map((tool) => tool.name));
     const added = catalog
@@ -258,7 +258,7 @@ export function withCatalogTools(
 }
 
 const CHANNEL_TOOL_NAMES: ReadonlySet<string> = new Set(
-  CHANNEL_TOOL_DEFINITIONS.map((definition) => `${OPENBOT_DYNAMIC_TOOLS.name}.${definition.name}`),
+  CHANNEL_TOOL_DEFINITIONS.map((definition) => `${STARBOT_DYNAMIC_TOOLS.name}.${definition.name}`),
 );
 
 export function withChannelTools(namespaces: readonly DynamicToolNamespace[]): DynamicToolNamespace[] {
@@ -266,14 +266,14 @@ export function withChannelTools(namespaces: readonly DynamicToolNamespace[]): D
   mcpCatalogs.set(BUILTIN_TOOL_CATALOG, tools);
   const channelTools = [...tools].flatMap(([name, tool]) => (CHANNEL_TOOL_NAMES.has(name) ? [tool] : []));
   return namespaces.map((namespace) => {
-    if (namespace.name !== OPENBOT_DYNAMIC_TOOLS.name) return namespace;
+    if (namespace.name !== STARBOT_DYNAMIC_TOOLS.name) return namespace;
     const names = new Set(namespace.tools.map((tool) => tool.name));
     return { ...namespace, tools: [...namespace.tools, ...channelTools.filter((tool) => !names.has(tool.name))] };
   });
 }
 
 export function claudeBridgedToolName(name: string, input: unknown): string {
-  if (name !== "mcp__openbot__tool_call") return name;
+  if (name !== "mcp__starbot__tool_call") return name;
   const called = bridgedName(input);
   const entry = called ? catalogEntry(BUILTIN_TOOL_CATALOG, called) : undefined;
   return entry ? `mcp__${entry.namespace}__${entry.tool}` : name;
@@ -286,10 +286,10 @@ function bridgedName(input: unknown): string | null {
 }
 
 const CALL_NOTE =
-  "Run each with openbot.tool_call {name, arguments}, or directly when you also have it as a direct tool.";
+  "Run each with starbot.tool_call {name, arguments}, or directly when you also have it as a direct tool.";
 
 const BROWSER_SEARCH_NOTE =
-  "No browser tool is in these results. A website or web app with no dedicated tool, such as mail or a calendar, is reached through openbot_browser. Call openbot_browser.list_tabs first: your signed-in tabs stay open across sessions.";
+  "No browser tool is in these results. A website or web app with no dedicated tool, such as mail or a calendar, is reached through starbot_browser. Call starbot_browser.list_tabs first: your signed-in tabs stay open across sessions.";
 
 export const DEFERRED_MCP_NOTE =
   "The tools of the MCP servers in <mcp_servers> are not in this catalog. Load them with the separate tool named exactly tool_search, then call them directly by their mcp__ names.";
@@ -301,7 +301,7 @@ export const OPENCODE_DEFERRED_MCP_NOTE =
   "The tools of your MCP servers are not in this catalog. They are in execute: when one is not listed there, find it with search(...) inside execute and call the path that it returns.";
 
 export const ANTIGRAVITY_DEFERRED_MCP_NOTE =
-  'The tools of your MCP servers are not in this catalog. When one is not in your tool list, read its schema in <appDataDir>/mcp/<server>/<tool>.json and run it with openbot.tool_call: {"name":"<server>.<tool>","arguments":{...}}.';
+  'The tools of your MCP servers are not in this catalog. When one is not in your tool list, read its schema in <appDataDir>/mcp/<server>/<tool>.json and run it with starbot.tool_call: {"name":"<server>.<tool>","arguments":{...}}.';
 
 function words(text: string): string[] {
   return text
@@ -316,14 +316,14 @@ const WORKFLOW_WORDS = new Set(["workflow", "workflows"]);
 const CANVAS_WORDS = new Set(["canvas", "canvases"]);
 const WORKFLOW_TOOLS = BUILTIN_TOOL_CATALOG.filter(
   (entry) =>
-    entry.namespace === OPENBOT_DYNAMIC_TOOLS.name && words(entry.tool).some((word) => WORKFLOW_WORDS.has(word)),
+    entry.namespace === STARBOT_DYNAMIC_TOOLS.name && words(entry.tool).some((word) => WORKFLOW_WORDS.has(word)),
 );
 
 const BROWSER_PRIMER_TOOLS = ["snapshot", "navigate", "click", "type", "wait_for"].map((tool) =>
-  requireTool(`${OPENBOT_BROWSER_NAMESPACE}.${tool}`),
+  requireTool(`${STARBOT_BROWSER_NAMESPACE}.${tool}`),
 );
 const DIRECT_BROWSER_CATALOG = [...DIRECT_BROWSER_NAMES].map((tool) =>
-  requireTool(`${OPENBOT_BROWSER_NAMESPACE}.${tool}`),
+  requireTool(`${STARBOT_BROWSER_NAMESPACE}.${tool}`),
 );
 
 export function browserToolsPrimer() {
@@ -335,7 +335,7 @@ export function browserToolsPrimer() {
 }
 
 export function givesBrowserSchemas(result: ReturnType<typeof discoverTools>): boolean {
-  return result.tools.some((tool) => "inputSchema" in tool && tool.name.startsWith(`${OPENBOT_BROWSER_NAMESPACE}.`));
+  return result.tools.some((tool) => "inputSchema" in tool && tool.name.startsWith(`${STARBOT_BROWSER_NAMESPACE}.`));
 }
 
 function requireTool(name: string, catalog = BUILTIN_TOOL_CATALOG) {
@@ -430,7 +430,7 @@ function calledName(call: { name?: string | undefined; tool?: string | undefined
 
 function callsDiscoveryTool(envelope: unknown): boolean {
   const named = bridgedName(envelope);
-  return named !== null && /^openbot\.tool_(?:search|describe)$/.test(qualifiedToolName(named));
+  return named !== null && /^starbot\.tool_(?:search|describe)$/.test(qualifiedToolName(named));
 }
 
 export function deferredCallArgumentsError(
@@ -546,7 +546,7 @@ export function discoverTools(params: DynamicToolCallParams, provider: AgentProv
         ready.add(entry);
       }
     }
-    if ([...ready].some((entry) => entry.namespace === OPENBOT_BROWSER_NAMESPACE)) {
+    if ([...ready].some((entry) => entry.namespace === STARBOT_BROWSER_NAMESPACE)) {
       if (!found.some(({ entry }) => entry === BROWSER_SCRIPT_TOOL))
         found.push({ entry: BROWSER_SCRIPT_TOOL, strong: true });
       ready.add(BROWSER_SCRIPT_TOOL);
@@ -562,7 +562,7 @@ export function discoverTools(params: DynamicToolCallParams, provider: AgentProv
       tools,
       ...(guidance.length > 0 ? { guidance } : {}),
     };
-    return workflowSearch || found.some(({ entry }) => entry.namespace === OPENBOT_BROWSER_NAMESPACE)
+    return workflowSearch || found.some(({ entry }) => entry.namespace === STARBOT_BROWSER_NAMESPACE)
       ? result
       : { ...result, note: BROWSER_SEARCH_NOTE };
   }
@@ -586,7 +586,7 @@ export function discoverTools(params: DynamicToolCallParams, provider: AgentProv
 }
 
 function isDiscoveryTool(name: string): boolean {
-  return /^openbot\.tool_(?:search|describe|call)$/.test(qualifiedToolName(name));
+  return /^starbot\.tool_(?:search|describe|call)$/.test(qualifiedToolName(name));
 }
 
 export function mayNameMcpTool(names: readonly string[]): boolean {

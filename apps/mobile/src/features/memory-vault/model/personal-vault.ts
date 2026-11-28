@@ -1,4 +1,4 @@
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 import * as Crypto from "expo-crypto";
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";

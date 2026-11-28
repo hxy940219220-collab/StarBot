@@ -2,10 +2,10 @@ import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { chmod, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { companySignInErrorKey } from "@openbot/contracts/company-sign-in";
-import { CREDIT_MEDIA_HOST_HEADER, CREDIT_MEDIA_HOST_TOKEN_HEADER } from "@openbot/contracts/credit-media";
-import type { HostKeyHandover } from "@openbot/contracts/host-key-handover";
-import { parseHostedServerClaim } from "@openbot/contracts/hosted-servers";
+import { companySignInErrorKey } from "@starbot/contracts/company-sign-in";
+import { CREDIT_MEDIA_HOST_HEADER, CREDIT_MEDIA_HOST_TOKEN_HEADER } from "@starbot/contracts/credit-media";
+import type { HostKeyHandover } from "@starbot/contracts/host-key-handover";
+import { parseHostedServerClaim } from "@starbot/contracts/hosted-servers";
 import type {
   AvatarColor,
   AvatarImageInput,
@@ -17,22 +17,22 @@ import type {
   MobileConnectedDevice,
   MobileConnectLink,
   MobileConnectTicket,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   decodeCompanySignInScimToken,
   decodeCompanySignInSettings,
   isSignalHomeId,
   type TestCompanySignInInput,
   type TestCompanySignInResult,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
-import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
+} from "@starbot/contracts/ipc";
+import { decodeRecord, requiredString } from "@starbot/contracts/ipc-decoding";
+import type { LiveActivityRelayPush } from "@starbot/contracts/live-activity-relay";
 import {
   createMobileConnectUrl,
   isMobileConnectDevelopmentHost,
   isMobileConnectHostBinding,
   type MobileConnectHostBinding,
-} from "@openbot/contracts/mobile-connect";
+} from "@starbot/contracts/mobile-connect";
 import {
   type AcceptedOwnerTransfer,
   decodeAcceptedOwnerTransfer,
@@ -40,28 +40,28 @@ import {
   decodeOwnerTransfer,
   decodePendingOwnerTransfer,
   type OwnerTransfer,
-} from "@openbot/contracts/owner-transfer";
+} from "@starbot/contracts/owner-transfer";
 import {
   decodeRemoteSession,
   decodeRemoteSessionTicket,
   type RemoteSession,
   type RemoteSessionTicket,
-} from "@openbot/contracts/remote-control-plane";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/remote-control-plane";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import {
   GITHUB_REPOSITORY_NAME_PATTERN,
   type GitHubRouteRepository,
-} from "@openbot/contracts/signal-protocol/github-route";
-import { TELEGRAM_LINK_CODE_PATTERN } from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@starbot/contracts/signal-protocol/github-route";
+import { TELEGRAM_LINK_CODE_PATTERN } from "@starbot/contracts/signal-protocol/telegram-route";
 import {
   REMOTE_TICKET_AUDIENCE,
   type RemoteMemberRole,
   type RemoteTicketClaims,
-} from "@openbot/contracts/signal-protocol/ticket";
-import type { ServerAppearance } from "@openbot/contracts/team-protocol/host-appearance-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
-import { referenceFrom, safeReference } from "@openbot/user-errors";
+} from "@starbot/contracts/signal-protocol/ticket";
+import type { ServerAppearance } from "@starbot/contracts/team-protocol/host-appearance-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
+import { referenceFrom, safeReference } from "@starbot/user-errors";
 import { Deferred, Duration, Effect, Exit, type Layer, Result, Schema, Semaphore } from "effect";
 import { createLocalJWKSet, jwtVerify } from "jose";
 import { z } from "zod";
@@ -125,7 +125,7 @@ interface StoredMobileConnectLink {
 
 const MOBILE_CONNECT_LINK_TOKEN = /^[A-Za-z0-9_-]{32,128}$/u;
 
-const logger = createOpenBotLogger("central-auth");
+const logger = createStarBotLogger("central-auth");
 
 type StoredSessionStage = "read" | "decrypt" | "decode" | "encrypt" | "write";
 
@@ -2641,7 +2641,7 @@ export function readCentralAuthApiUrl(value: string | undefined, fallback = "htt
   const url = new URL(value ?? fallback);
   const loopback = url.hostname === "127.0.0.1" || url.hostname === "localhost";
   if ((url.protocol !== "https:" && !(url.protocol === "http:" && loopback)) || url.pathname !== "/") {
-    throw new Error("OPENBOT_AUTH_API_URL must be HTTPS or an HTTP loopback origin.");
+    throw new Error("STARBOT_AUTH_API_URL must be HTTPS or an HTTP loopback origin.");
   }
   return url.origin;
 }

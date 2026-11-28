@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Uruchom przepływ pracy z GitHub: wyzwalacz GitHub działa przy nowych zgłoszeniach, komentarzach, pull requestach, recenzjach, nieudanych testach lub wzmiance o @openbotgit.",
+          "Uruchom przepływ pracy z GitHub: wyzwalacz GitHub działa przy nowych zgłoszeniach, komentarzach, pull requestach, recenzjach, nieudanych testach lub wzmiance o @starbotgit.",
           "Zmieniaj GitHub z przepływu pracy: komentuj, dodawaj etykiety, przypisuj, recenzuj, zamykaj lub twórz zgłoszenia jako StarBot GitHub App.",
           "Marketplace ma 17 nowych agentów StarBot, takich jak QA Tester, PR Shepherd i Chief of Staff, oraz 15 nowych umiejętności dla nich.",
           "Użycie pokazuje miesięczny limit OpenCode Go jako trzeci pasek."

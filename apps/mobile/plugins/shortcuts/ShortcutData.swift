@@ -94,12 +94,12 @@ struct ShortcutSession: Decodable {
 
   /// Nil when there is no session, or it is for another account than the directory.
   static func read(for directory: ShortcutDirectory) -> ShortcutSession? {
-    guard let accessGroup = Bundle.main.object(forInfoDictionaryKey: "OpenBotShareKeychainGroup") as? String else {
+    guard let accessGroup = Bundle.main.object(forInfoDictionaryKey: "StarBotShareKeychainGroup") as? String else {
       return nil
     }
     let query: [String: Any] = [
       kSecClass as String: kSecClassGenericPassword,
-      kSecAttrService as String: "openbot.share-extension",
+      kSecAttrService as String: "starbot.share-extension",
       kSecAttrAccount as String: "session",
       kSecAttrAccessGroup as String: accessGroup,
       kSecReturnData as String: true,
@@ -120,13 +120,13 @@ enum ShortcutText {
   static let fallback: [String: String] = [
     "mobile.settings.shortcuts.card.agents": "Agents",
     "mobile.settings.shortcuts.card.noAgents": "No agents yet",
-    "mobile.settings.shortcuts.card.setUp.title": "Open OpenBot to set up shortcuts",
-    "mobile.settings.shortcuts.card.setUp.action": "Open OpenBot",
+    "mobile.settings.shortcuts.card.setUp.title": "Open StarBot to set up shortcuts",
+    "mobile.settings.shortcuts.card.setUp.action": "Open StarBot",
     "mobile.settings.shortcuts.card.noAgent.title": "Choose an agent for shortcuts",
     "mobile.settings.shortcuts.card.noAgent.detail": "Shortcuts send to one agent.",
     "mobile.settings.shortcuts.card.noAgent.action": "Choose agent",
-    "mobile.settings.shortcuts.card.locked.title": "OpenBot is locked",
-    "mobile.settings.shortcuts.card.locked.action": "Open OpenBot",
+    "mobile.settings.shortcuts.card.locked.title": "StarBot is locked",
+    "mobile.settings.shortcuts.card.locked.action": "Open StarBot",
     "mobile.settings.shortcuts.card.message": "Message {name}",
     "mobile.settings.shortcuts.card.messagePrompt": "Message to {name}",
   ]

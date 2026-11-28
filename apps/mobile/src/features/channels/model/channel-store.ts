@@ -1,4 +1,4 @@
-import { isAvatarMimeType } from "@openbot/contracts/avatar-images";
+import { isAvatarMimeType } from "@starbot/contracts/avatar-images";
 import {
   CHANNEL_CHATS_CAPABILITY,
   CHANNEL_DELETE_CAPABILITY,
@@ -16,18 +16,18 @@ import {
   isAttachmentSummary,
   type RespondToPromptInput,
   type UpdateChannelRoutineInput,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   CHANNEL_PICTURE_CAPABILITY,
   CHANNEL_PICTURE_ROUTES,
-} from "@openbot/contracts/team-protocol/channel-picture-v1";
-import { CHANNEL_ROUTES } from "@openbot/contracts/team-protocol/channels-v1";
-import { CHAT_HISTORY_CAPABILITY, CHAT_HISTORY_ROUTES } from "@openbot/contracts/team-protocol/chat-history-v1";
-import { decodeTeamProtocolV2Json, type TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
-import { sourceText } from "@openbot/i18n/source";
-import type { RemoteFileUpload } from "@openbot/team-client/remote-peer";
+} from "@starbot/contracts/team-protocol/channel-picture-v1";
+import { CHANNEL_ROUTES } from "@starbot/contracts/team-protocol/channels-v1";
+import { CHAT_HISTORY_CAPABILITY, CHAT_HISTORY_ROUTES } from "@starbot/contracts/team-protocol/chat-history-v1";
+import { decodeTeamProtocolV2Json, type TeamProtocolV2Json } from "@starbot/contracts/team-protocol/v2";
+import { sourceText } from "@starbot/i18n/source";
+import type { RemoteFileUpload } from "@starbot/team-client/remote-peer";
 import { replaceEqualDeep } from "@tanstack/react-query";
 import { answeredPromptResolution } from "../../chat/model/question-prompt";
 import { saveChannelImage, savedChannelImage } from "../../workspace/model/agent-avatar-cache";

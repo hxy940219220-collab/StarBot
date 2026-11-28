@@ -6,16 +6,16 @@ import {
   type BillingInterval,
   type BillingPlanId,
   isBillingAmount,
-} from "@openbot/contracts/billing";
+} from "@starbot/contracts/billing";
 import {
   CREDIT_MEDIA_KINDS,
   CREDIT_MEDIA_WALLETS,
   type CreditMediaGenerationKind,
   type CreditMediaWallet,
   isCreditMediaModelId,
-} from "@openbot/contracts/credit-media";
-import type { CreditTransferDirection } from "@openbot/contracts/credits";
-import { FIRST_TOUCH_CAMPAIGN_FIELDS, type FirstTouch, parseFirstTouch } from "@openbot/contracts/first-touch";
+} from "@starbot/contracts/credit-media";
+import type { CreditTransferDirection } from "@starbot/contracts/credits";
+import { FIRST_TOUCH_CAMPAIGN_FIELDS, type FirstTouch, parseFirstTouch } from "@starbot/contracts/first-touch";
 import {
   HOSTED_SERVER_ENTRY_POINTS,
   HOSTED_SERVER_ERRORS,
@@ -23,9 +23,9 @@ import {
   type HostedServerEntryPoint,
   type HostedServerError,
   type HostedServerSize,
-} from "@openbot/contracts/hosted-servers";
-import { isOneOf } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
+} from "@starbot/contracts/hosted-servers";
+import { isOneOf } from "@starbot/contracts/runtime-values";
+import { normalizeEmailAddress } from "@starbot/contracts/validation";
 import { Effect, Schema } from "effect";
 import type { HostedPoolGroup } from "./hosted-pool-snapshot";
 

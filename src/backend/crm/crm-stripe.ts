@@ -1,5 +1,5 @@
-import { CRM_LIMITS, type CrmEvery } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { CRM_LIMITS, type CrmEvery } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema } from "effect";
 import { CrmError } from "./crm-handle";
 import { type CrmSourceAdapter, type SourceAccount, SourceFailure, type SourceSession } from "./crm-source";

@@ -13,7 +13,7 @@ import {
   type SetBrowserProfileProxyInput,
   type UpdateAgentBrowserProfileInput,
   type UpdateBrowserProfileInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 interface BrowserProxyCalls {
   list(): Promise<BrowserProxyList | null>;
@@ -42,7 +42,7 @@ export interface BrowserProfileCalls {
 }
 
 export function desktopBrowserProfileCalls(serverId?: string): BrowserProfileCalls {
-  const agent = () => window.openbot.agent;
+  const agent = () => window.starbot.agent;
   const eventServerId = serverId ?? LOCAL_SERVER_ID;
   return {
     list: () => agent().listBrowserProfiles(serverId),

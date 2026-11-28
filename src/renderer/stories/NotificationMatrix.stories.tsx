@@ -1,11 +1,11 @@
-import type { ServerNotificationLevel } from "@openbot/contracts/ipc";
-import { Heading, SettingsSection, Toaster } from "@openbot/ui";
+import type { ServerNotificationLevel } from "@starbot/contracts/ipc";
+import { Heading, SettingsSection, Toaster } from "@starbot/ui";
 import {
   NotificationMatrix,
   type NotificationMatrixAgent,
   type NotificationMatrixServer,
   NotificationScopeTitle,
-} from "@openbot/ui/features/settings/NotificationMatrix";
+} from "@starbot/ui/features/settings/NotificationMatrix";
 import { createStore } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

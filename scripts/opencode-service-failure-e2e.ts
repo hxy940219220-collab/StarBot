@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
@@ -10,7 +10,7 @@ import type { AgentClient } from "../src/backend/agent-client";
 import { AgentStore } from "../src/backend/agent-store";
 import type { AgentCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import {
   BUILT_IN_PROVIDER_DRIVERS,
   NO_PROVIDER_CREDENTIALS,
@@ -18,7 +18,7 @@ import {
 } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl, runTurn, startThread, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-service-failure-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-service-failure-e2e");
 const WAIT_MS = 30_000;
 
 interface StartReport {
@@ -35,7 +35,7 @@ interface Report {
   stuckPlugins?: StartReport;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-service-failure-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-opencode-service-failure-e2e-"));
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];
 
@@ -65,7 +65,7 @@ async function startWithActivationFailures(
   const store = new AgentStore(
     join(folder, "profile"),
     join(folder, "home"),
-    new OpenBotDatabase(join(folder, "profile")),
+    new StarBotDatabase(join(folder, "profile")),
   );
   const providers = new ProviderRuntime({
     offProviders: BUILT_IN_PROVIDER_DRIVERS.map((driver) => driver.id).filter((id) => id !== "opencode"),

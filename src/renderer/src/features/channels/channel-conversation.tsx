@@ -1,13 +1,13 @@
-import { leadingAddress } from "@openbot/contracts/chat-tag-references";
+import { leadingAddress } from "@starbot/contracts/chat-tag-references";
 import {
   type AgentApproval,
   type AgentEvent,
   type BrowserTakeoverRequest,
   channelBrowserAgent,
-} from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import { unloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
+import { unloadedHistory } from "@starbot/ui/features/conversation/ChatScrollRail";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo } from "solid-js";
 import { agentMessagesEqual } from "../../app-message-projection";
 import { channelAwaitingReplies } from "../../awaiting-replies";

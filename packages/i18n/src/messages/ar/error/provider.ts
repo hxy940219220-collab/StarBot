@@ -347,7 +347,7 @@ export const messages = {
 
   "error.provider.antigravityNotStarted": "عُثر على خادم Gemini، لكن تتعذّر قراءة إصداره.",
   "error.provider.antigravityOverrideInvalid":
-    "خادم Gemini في OPENBOT_ANTIGRAVITY_PATH غير موجود أو غير قابل للتنفيذ. صحّح المسار أو احذف المتغير، ثم أعد تشغيل StarBot.",
+    "خادم Gemini في STARBOT_ANTIGRAVITY_PATH غير موجود أو غير قابل للتنفيذ. صحّح المسار أو احذف المتغير، ثم أعد تشغيل StarBot.",
 
   "error.provider.antigravityVersionUnreadable": "تتعذّر قراءة إصدار خادم Gemini.",
   "error.provider.antigravitySignIn": "سجّل الدخول باستخدام Google لاستخدام Gemini.",

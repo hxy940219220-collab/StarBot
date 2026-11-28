@@ -1,9 +1,9 @@
-import type { BrowserPreview, BrowserTab } from "@openbot/contracts/ipc";
-import { Button, Maximize2, Monitor, Skeleton, X } from "@openbot/ui";
-import { PanelResizer } from "@openbot/ui/components/PanelResizer";
-import { SETTINGS_PANEL_DEFAULT } from "@openbot/ui/components/SettingsPanel";
-import { useText } from "@openbot/ui/text";
-import { holdFlag } from "@openbot/ui/utils";
+import type { BrowserPreview, BrowserTab } from "@starbot/contracts/ipc";
+import { Button, Maximize2, Monitor, Skeleton, X } from "@starbot/ui";
+import { PanelResizer } from "@starbot/ui/components/PanelResizer";
+import { SETTINGS_PANEL_DEFAULT } from "@starbot/ui/components/SettingsPanel";
+import { useText } from "@starbot/ui/text";
+import { holdFlag } from "@starbot/ui/utils";
 import { createEffect, createMemo, createSignal, createStore, For, onSettled, Show, untrack } from "solid-js";
 
 const BROWSER_PANEL_MIN = SETTINGS_PANEL_DEFAULT;

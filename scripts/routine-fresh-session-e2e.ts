@@ -12,13 +12,13 @@ import {
   COMPUTER_USE_MCP_SERVER_NAME,
   decodeUsageTokens,
   parseRoutineRunConversationEventItemType,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { getRecord, getString } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/routine-fresh-session-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-routine-session-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/routine-fresh-session-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-routine-session-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -27,14 +27,14 @@ const fakeHold = join(root, "hold");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const BASE_TOKENS = 3_000;
 const HISTORY_CHARACTERS = 45_000;
@@ -42,7 +42,7 @@ const ROUTINE_INPUT_LIMIT = 10_000;
 const ROUTINE_MARK = "ROUTINE-CHECK";
 const SECOND_MARK = "ROUTINE-SECOND";
 const SUBAGENT_MARK = "SUBAGENT-RUN";
-const VAULT_ORIGIN = "https://routine.openbot.test";
+const VAULT_ORIGIN = "https://routine.starbot.test";
 const VAULT_LOGIN = "routine-login";
 const PASSWORD = "fixture-routine-password";
 const CODE = "739182";
@@ -69,7 +69,7 @@ const callNext = (turn) => {
   waiting.set(id, { turn, tool: call.arguments.name ?? call.tool });
   write({ id, method: "item/tool/call", params: {
     threadId: turn.threadId, turnId: turn.turnId, callId: id,
-    namespace: "openbot", tool: call.tool, arguments: call.arguments,
+    namespace: "starbot", tool: call.tool, arguments: call.arguments,
   } });
 };
 const context = new Map();
@@ -134,7 +134,7 @@ const answer = (message) => {
         write({ method: "item/completed", params: { threadId: params.threadId, turnId, item } });
         write({ method: "turn/completed", params: { threadId: params.threadId, turn: { id: turnId, status: "completed" } } });
       };
-      const browserCall = (tool, args) => ({ tool: "tool_call", arguments: { name: "openbot_browser." + tool, arguments: args } });
+      const browserCall = (tool, args) => ({ tool: "tool_call", arguments: { name: "starbot_browser." + tool, arguments: args } });
       const secret = (method, withCode = false) => browserCall("submit_secret", {
         tabId: "routine-tab", loginId: ${JSON.stringify(VAULT_LOGIN)}, method, digits: 6,
         targets: [{ kind: "css", selector: "#secret" }, ...(withCode ? [{ kind: "css", selector: "#code" }] : [])],
@@ -149,7 +149,7 @@ const answer = (message) => {
         setTimeout(finish, 20);
       };
       const calls = routine ? [
-        { tool: "tool_describe", arguments: { names: ["openbot_browser.list_logins"] } },
+        { tool: "tool_describe", arguments: { names: ["starbot_browser.list_logins"] } },
         browserCall("open", { url: ${JSON.stringify(VAULT_ORIGIN)} }),
         browserCall("list_logins", { tabId: "routine-tab" }),
         secret("password"), secret("authenticator"),
@@ -341,7 +341,7 @@ function pass(name: string, condition: boolean, detail?: string) {
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({
@@ -576,7 +576,7 @@ try {
     "Each routine fills its saved password and authenticator code, also together in one form",
     fills.join() === "password,authenticator,password+code,password,authenticator,password+code",
   );
-  const listed = results.filter((entry) => entry.tool === "openbot_browser.list_logins");
+  const listed = results.filter((entry) => entry.tool === "starbot_browser.list_logins");
   pass(
     "Each routine can discover its saved login",
     listed.length === 2 &&
@@ -596,7 +596,7 @@ try {
   );
   const firstTurnText = (threadId: unknown) =>
     entries.find((entry) => entry.method === "turn/start" && entry.threadId === threadId)?.text ?? "";
-  const routineRule = "In a routine run, first check saved logins with openbot_browser.list_logins";
+  const routineRule = "In a routine run, first check saved logins with starbot_browser.list_logins";
   pass(
     "Routine sessions receive the saved-login rule",
     routineStarts.every(

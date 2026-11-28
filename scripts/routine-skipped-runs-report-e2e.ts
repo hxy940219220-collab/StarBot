@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { Routine, RoutineRun } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+import type { Routine, RoutineRun } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { Effect } from "effect";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { deliveryPromptInput, type SkippedRoutineRuns } from "../src/backend/agent/delivery-content";
@@ -15,11 +15,11 @@ import { AgentWaitStore } from "../src/backend/agent-waits/agent-wait-store";
 import { AgentWaits } from "../src/backend/agent-waits/agent-waits";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { RoutineTimer } from "../src/backend/routine-timer";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = join(ROOT, ".openbot-build", "routine-skipped-runs-report-e2e");
+const OUT = join(ROOT, ".starbot-build", "routine-skipped-runs-report-e2e");
 const STEP = 5 * 60_000;
 const NOTE_START = "StarBot note, not from the user:";
 const RUN_OPEN_REASON = sourceText("status.agent.routineSkippedRunOpen");
@@ -51,9 +51,9 @@ const ownedRoots: string[] = [];
 const cases: CaseResult[] = [];
 
 async function openFixture(): Promise<Fixture> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-routine-skipped-"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-routine-skipped-"));
   ownedRoots.push(root);
-  const database = new OpenBotDatabase(join(root, "state"));
+  const database = new StarBotDatabase(join(root, "state"));
   const store = new AgentStore(join(root, "state"), join(root, "home"), database);
   const mailbox = new MailboxStore(join(root, "state"), store.sharedRoot, database);
   await runCauseEffect(store.initialize());

@@ -1,7 +1,7 @@
-import type { GlobalSearchPage } from "@openbot/ui/components/GlobalSearch";
-import type { AgentMessage } from "@openbot/ui/data";
-import { DRAFT_THREAD_ID, MAIN_THREAD_ID } from "@openbot/ui/features/conversation/threads/thread-types";
-import { currentText } from "@openbot/ui/text";
+import type { GlobalSearchPage } from "@starbot/ui/components/GlobalSearch";
+import type { AgentMessage } from "@starbot/ui/data";
+import { DRAFT_THREAD_ID, MAIN_THREAD_ID } from "@starbot/ui/features/conversation/threads/thread-types";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createSignal, onSettled, untrack } from "solid-js";
 import { desktopAnalytics } from "./analytics";
 import { toAgentMessage } from "./app-message-projection";

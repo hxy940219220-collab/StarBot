@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { chromium, type Page } from "playwright-core";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/side-panel-panes-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/side-panel-panes-e2e");
 const STORY = "app--playground";
 const LISTED = ["Browser", "Files", "Agent settings"];
 const WAIT_MS = 15_000;

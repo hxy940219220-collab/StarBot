@@ -1,5 +1,5 @@
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import type { MarketplacePluginApp, MarketplacePluginDetail } from "@openbot/ui/features/settings/marketplace-plugins";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import type { MarketplacePluginApp, MarketplacePluginDetail } from "@starbot/ui/features/settings/marketplace-plugins";
 
 export function createPluginAppConfig(app: MarketplacePluginApp): McpServerConfig {
   return {
@@ -1931,7 +1931,7 @@ const TRYPOST: MarketplacePluginDetail = {
     "TryPost lets agents list your connected channels, and draft, schedule, queue and publish posts on X, LinkedIn, Instagram, Facebook, TikTok, YouTube, Threads, Bluesky, Mastodon, Pinterest and more. Agents can also read analytics, manage ideas and approvals, and set posting times. Sign in to your TryPost account through the browser and choose a workspace. Agents can publish a post immediately, so review each post before you approve it.",
   category: "automation",
   creatorName: "TryPost",
-  iconUrl: "https://app.trypost.it/images/integrations/openbot.png",
+  iconUrl: "https://app.trypost.it/images/integrations/starbot.png",
   version: "1.0.0",
   prompts: [
     { id: "prompt-week", text: "Which posts are scheduled for this week?" },
@@ -1943,7 +1943,7 @@ const TRYPOST: MarketplacePluginDetail = {
       id: "app-trypost-mcp",
       name: "TryPost",
       description: "Channels, posts, queue, ideas and analytics, over TryPost's MCP server with browser sign-in.",
-      iconUrl: "https://app.trypost.it/images/integrations/openbot.png",
+      iconUrl: "https://app.trypost.it/images/integrations/starbot.png",
       server: {
         name: "trypost",
         transport: "http",

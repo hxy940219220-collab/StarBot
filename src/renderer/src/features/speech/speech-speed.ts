@@ -1,6 +1,6 @@
-import { nextSpeechSpeed, type OpenBotDesktopApi, type SpeechSettings, type SpeechSpeed } from "@openbot/contracts/ipc";
-import { toast } from "@openbot/ui";
-import { currentText } from "@openbot/ui/text";
+import { nextSpeechSpeed, type StarBotDesktopApi, type SpeechSettings, type SpeechSpeed } from "@starbot/contracts/ipc";
+import { toast } from "@starbot/ui";
+import { currentText } from "@starbot/ui/text";
 import { createSignal } from "solid-js";
 import { setReplyPlaybackRate } from "./speech-playback";
 import { speechPort } from "./speech-port";
@@ -17,7 +17,7 @@ function apply(next: SpeechSpeed): void {
 }
 
 export function updateSpeechSettings(
-  voice: Pick<OpenBotDesktopApi["voice"], "getSpeechSettings" | "setSpeechSettings">,
+  voice: Pick<StarBotDesktopApi["voice"], "getSpeechSettings" | "setSpeechSettings">,
   patch: Partial<SpeechSettings>,
 ): Promise<SpeechSettings> {
   const next = saving.then(async () => voice.setSpeechSettings({ ...(await voice.getSpeechSettings()), ...patch }));

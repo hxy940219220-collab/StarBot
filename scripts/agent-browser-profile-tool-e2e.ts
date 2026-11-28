@@ -3,13 +3,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { ToolApprovalDecision } from "../src/backend/agent/attention-registry";
 import { agentBrowserProfileView, handleSetBrowserProfileTool } from "../src/backend/agent/browser-profile-tool";
 import { profileToolErrorMessage } from "../src/backend/agent/profile-tools";
-import { openBotToolFailure } from "../src/backend/agent/routine-tools";
+import { starBotToolFailure } from "../src/backend/agent/routine-tools";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { AgentService } from "../src/backend/agent-service";
 import { AgentStore } from "../src/backend/agent-store";
@@ -17,11 +17,11 @@ import { BrowserProfileStore } from "../src/backend/browser-profiles/browser-pro
 import { BrowserProxyStore } from "../src/backend/browser-profiles/browser-proxy-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { createBrowserProfileService } from "../src/main/browser-profile-service";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-browser-profile-tool-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-browser-profile-tool-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/agent-browser-profile-tool-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-browser-profile-tool-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 mkdirSync(home, { recursive: true });
@@ -69,7 +69,7 @@ const agentBrowser: AgentBrowserHost = {
   agentTab: () => null,
 };
 
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 let agents: AgentService | null = null;
@@ -115,7 +115,7 @@ try {
           threadId: "t",
           turnId: "turn",
           callId: "c",
-          namespace: "openbot",
+          namespace: "starbot",
           tool: "set_browser_profile",
           arguments: args,
         },
@@ -131,7 +131,7 @@ try {
             }),
           redactMcp: (text) => text,
         },
-      ).pipe(Effect.catch((failure) => Effect.succeed(openBotToolFailure(profileToolErrorMessage(failure.cause))))),
+      ).pipe(Effect.catch((failure) => Effect.succeed(starBotToolFailure(profileToolErrorMessage(failure.cause))))),
     );
     const item = response.contentItems[0];
     assert.ok(item && item.type === "inputText", "The answer is text.");

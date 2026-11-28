@@ -1,4 +1,4 @@
-import { validateProfileName } from "@openbot/contracts/validation";
+import { validateProfileName } from "@starbot/contracts/validation";
 import { useFonts } from "@shopify/react-native-skia";
 import { router } from "expo-router";
 import * as Sharing from "expo-sharing";
@@ -37,13 +37,13 @@ export function ProfileSettingsScreen() {
   const [error, setError] = useState<string | null>(null);
   const activity = useProfileActivity();
   const shareColors = {
-    surface: String(useCSSVariable("--openbot-paper")),
-    text: String(useCSSVariable("--openbot-paper-text")),
-    muted: String(useCSSVariable("--openbot-paper-text-muted")),
-    border: String(useCSSVariable("--openbot-paper-border")),
-    accent: String(useCSSVariable("--openbot-accent")),
-    logo: String(useCSSVariable("--openbot-logo-production")),
-    logoEye: String(useCSSVariable("--openbot-logo-eye")),
+    surface: String(useCSSVariable("--starbot-paper")),
+    text: String(useCSSVariable("--starbot-paper-text")),
+    muted: String(useCSSVariable("--starbot-paper-text-muted")),
+    border: String(useCSSVariable("--starbot-paper-border")),
+    accent: String(useCSSVariable("--starbot-accent")),
+    logo: String(useCSSVariable("--starbot-logo-production")),
+    logoEye: String(useCSSVariable("--starbot-logo-eye")),
   };
   const shareFonts = useFonts({ [APP_FONT]: [interMedium, interSemiBold] });
   if (!session) return null;

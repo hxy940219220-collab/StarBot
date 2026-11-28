@@ -1,4 +1,4 @@
-export const TELEGRAM_ROUTE_AUDIENCE = "openbot-telegram-route";
+export const TELEGRAM_ROUTE_AUDIENCE = "starbot-telegram-route";
 
 export const TELEGRAM_UPDATES_PATH = "/v1/telegram/updates";
 export const TELEGRAM_FILES_PATH = "/v1/telegram/files";

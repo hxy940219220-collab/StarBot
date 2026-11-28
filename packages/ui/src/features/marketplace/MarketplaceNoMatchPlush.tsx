@@ -1,4 +1,4 @@
-import type { AvatarHue } from "@openbot/contracts/ipc";
+import type { AvatarHue } from "@starbot/contracts/ipc";
 import { createSignal, For } from "solid-js";
 import { AgentAvatar } from "../agents/AgentAvatar";
 

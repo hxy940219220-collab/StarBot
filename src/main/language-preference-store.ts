@@ -1,5 +1,5 @@
-import { type AppLanguagePreference, DEFAULT_APP_LANGUAGE, isAppLanguage } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { type AppLanguagePreference, DEFAULT_APP_LANGUAGE, isAppLanguage } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import { readPreferenceFile, writePreferenceFile } from "./preference-file";
 

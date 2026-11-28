@@ -2,20 +2,20 @@ import type { FooterColumnId, FooterTextId } from "./site-text";
 
 export const EXTERNAL_LINK_REL = "noopener noreferrer";
 
-export const OPENBOT_DOWNLOAD_LINKS = {
+export const STARBOT_DOWNLOAD_LINKS = {
   macos: "/download/macos/latest",
   windows: "/download/windows/latest",
   linux: "/download/linux/latest",
 } as const;
 
-export const OPENBOT_ALTERNATE_DOWNLOAD_LINKS = {
+export const STARBOT_ALTERNATE_DOWNLOAD_LINKS = {
   macos: "/download/macos/latest?arch=x64",
   linux: "/download/linux/latest?arch=arm64",
 } as const;
 
-export const OPENBOT_ANDROID_APK_LINK = "/download/android/latest";
+export const STARBOT_ANDROID_APK_LINK = "/download/android/latest";
 
-export const OPENBOT_DOWNLOAD_PAGE_LINKS = {
+export const STARBOT_DOWNLOAD_PAGE_LINKS = {
   hub: "/download",
   macos: "/download/macos",
   windows: "/download/windows",
@@ -24,12 +24,12 @@ export const OPENBOT_DOWNLOAD_PAGE_LINKS = {
   android: "/download/android",
 } as const;
 
-export const OPENBOT_LINKS = {
+export const STARBOT_LINKS = {
   contact: "/contact",
-  x: "https://x.com/OpenBot_",
+  x: "https://x.com/StarBot_",
   threads: "https://www.threads.com/@starbot.app",
-  linkedin: "https://www.linkedin.com/company/openbot-si/",
-  reddit: "https://www.reddit.com/r/OpenBot_/",
+  linkedin: "https://www.linkedin.com/company/starbot-si/",
+  reddit: "https://www.reddit.com/r/StarBot_/",
   instagram: "https://www.instagram.com/starbot.app/",
   tiktok: "https://www.tiktok.com/@starbot.app",
   facebook: "https://www.facebook.com/profile.php?id=61595425259628",
@@ -39,18 +39,18 @@ export const OPENBOT_LINKS = {
   guides: "/guides",
   marketplace: "/marketplace",
   changelog: "/changelog",
-  releases: "https://github.com/nightly-labs/openbot/releases",
-  repository: "https://github.com/nightly-labs/openbot",
-  license: "https://github.com/nightly-labs/openbot/blob/main/LICENSE",
-  privacy: "https://github.com/nightly-labs/openbot/blob/main/PRIVACY.md",
-  documentation: "https://github.com/nightly-labs/openbot#readme",
-  troubleshooting: "https://github.com/nightly-labs/openbot/blob/main/docs/TROUBLESHOOTING.md",
+  releases: "https://github.com/nightly-labs/starbot/releases",
+  repository: "https://github.com/nightly-labs/starbot",
+  license: "https://github.com/nightly-labs/starbot/blob/main/LICENSE",
+  privacy: "https://github.com/nightly-labs/starbot/blob/main/PRIVACY.md",
+  documentation: "https://github.com/nightly-labs/starbot#readme",
+  troubleshooting: "https://github.com/nightly-labs/starbot/blob/main/docs/TROUBLESHOOTING.md",
   status: "https://status.starbot.app",
-  selfHostedServer: "https://github.com/nightly-labs/openbot/blob/main/docs/self-hosted-server.md",
-  dockerDocumentation: "https://github.com/nightly-labs/openbot/blob/main/docs/docker.md",
+  selfHostedServer: "https://github.com/nightly-labs/starbot/blob/main/docs/self-hosted-server.md",
+  dockerDocumentation: "https://github.com/nightly-labs/starbot/blob/main/docs/docker.md",
   dockerInstallUbuntu: "https://docs.docker.com/engine/install/ubuntu/",
-  architecture: "https://github.com/nightly-labs/openbot#architecture",
-  contributing: "https://github.com/nightly-labs/openbot/blob/main/CONTRIBUTING.md",
+  architecture: "https://github.com/nightly-labs/starbot#architecture",
+  contributing: "https://github.com/nightly-labs/starbot/blob/main/CONTRIBUTING.md",
   codex: "https://learn.chatgpt.com/docs/app-server",
   claude: "https://code.claude.com/docs/en/overview",
   anthropicAgents: "https://www.anthropic.com/engineering/building-effective-agents",
@@ -108,8 +108,8 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
       { label: { text: "pricing" }, external: false, to: "/pricing" },
       { label: { text: "contact" }, external: false, to: "/contact" },
       { label: { text: "brand" }, external: false, to: "/brand" },
-      { label: { text: "sourceCode" }, external: true, href: OPENBOT_LINKS.repository },
-      { label: { text: "license" }, external: true, href: OPENBOT_LINKS.license },
+      { label: { text: "sourceCode" }, external: true, href: STARBOT_LINKS.repository },
+      { label: { text: "license" }, external: true, href: STARBOT_LINKS.license },
       { label: { text: "privacy" }, external: false, to: "/privacy-policy" },
       { label: { text: "terms" }, external: false, to: "/terms" },
       { label: { text: "commercialLicense" }, external: false, to: "/commercial-license" },
@@ -120,15 +120,15 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
   {
     id: "resources",
     links: [
-      { label: { text: "documentation" }, external: true, href: OPENBOT_LINKS.documentation },
-      { label: { text: "troubleshooting" }, external: true, href: OPENBOT_LINKS.troubleshooting },
-      { label: { text: "status" }, external: true, href: OPENBOT_LINKS.status },
-      { label: { text: "selfHosted" }, external: true, href: OPENBOT_LINKS.selfHostedServer },
-      { label: { text: "architecture" }, external: true, href: OPENBOT_LINKS.architecture },
-      { label: { text: "contributing" }, external: true, href: OPENBOT_LINKS.contributing },
-      { label: "Codex", external: true, href: OPENBOT_LINKS.codex },
-      { label: "Claude Code", external: true, href: OPENBOT_LINKS.claude },
-      { label: "Discord", external: true, href: OPENBOT_LINKS.discord },
+      { label: { text: "documentation" }, external: true, href: STARBOT_LINKS.documentation },
+      { label: { text: "troubleshooting" }, external: true, href: STARBOT_LINKS.troubleshooting },
+      { label: { text: "status" }, external: true, href: STARBOT_LINKS.status },
+      { label: { text: "selfHosted" }, external: true, href: STARBOT_LINKS.selfHostedServer },
+      { label: { text: "architecture" }, external: true, href: STARBOT_LINKS.architecture },
+      { label: { text: "contributing" }, external: true, href: STARBOT_LINKS.contributing },
+      { label: "Codex", external: true, href: STARBOT_LINKS.codex },
+      { label: "Claude Code", external: true, href: STARBOT_LINKS.claude },
+      { label: "Discord", external: true, href: STARBOT_LINKS.discord },
     ],
   },
   {
@@ -148,17 +148,17 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
   {
     id: "compare",
     links: [
-      { label: "OpenBot vs Grok Bot", external: false, to: "/compare/$slug", slug: "grok-bot" },
-      { label: "OpenBot vs Hermes Agent", external: false, to: "/compare/$slug", slug: "hermes-agent" },
-      { label: "OpenBot vs Muse", external: false, to: "/compare/$slug", slug: "muse" },
-      { label: "OpenBot vs OpenClaw", external: false, to: "/compare/$slug", slug: "openclaw" },
-      { label: "OpenBot vs Claude Cowork", external: false, to: "/compare/$slug", slug: "claude-cowork" },
-      { label: "OpenBot vs ChatGPT dots", external: false, to: "/compare/$slug", slug: "chatgpt-dots" },
-      { label: "OpenBot vs Manus", external: false, to: "/compare/$slug", slug: "manus" },
-      { label: "OpenBot vs Devin", external: false, to: "/compare/$slug", slug: "devin" },
-      { label: "OpenBot vs Paperclip", external: false, to: "/compare/$slug", slug: "paperclip" },
-      { label: "OpenBot vs Viktor", external: false, to: "/compare/$slug", slug: "viktor" },
-      { label: "OpenBot vs Instinct", external: false, to: "/compare/$slug", slug: "instinct" },
+      { label: "StarBot vs Grok Bot", external: false, to: "/compare/$slug", slug: "grok-bot" },
+      { label: "StarBot vs Hermes Agent", external: false, to: "/compare/$slug", slug: "hermes-agent" },
+      { label: "StarBot vs Muse", external: false, to: "/compare/$slug", slug: "muse" },
+      { label: "StarBot vs OpenClaw", external: false, to: "/compare/$slug", slug: "openclaw" },
+      { label: "StarBot vs Claude Cowork", external: false, to: "/compare/$slug", slug: "claude-cowork" },
+      { label: "StarBot vs ChatGPT dots", external: false, to: "/compare/$slug", slug: "chatgpt-dots" },
+      { label: "StarBot vs Manus", external: false, to: "/compare/$slug", slug: "manus" },
+      { label: "StarBot vs Devin", external: false, to: "/compare/$slug", slug: "devin" },
+      { label: "StarBot vs Paperclip", external: false, to: "/compare/$slug", slug: "paperclip" },
+      { label: "StarBot vs Viktor", external: false, to: "/compare/$slug", slug: "viktor" },
+      { label: "StarBot vs Instinct", external: false, to: "/compare/$slug", slug: "instinct" },
       { label: { text: "bestApps" }, external: false, to: "/compare/$slug", slug: "best-ai-agent-apps" },
       { label: { text: "allComparisons" }, external: false, to: "/compare" },
     ],

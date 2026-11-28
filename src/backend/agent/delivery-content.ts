@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { expandAttachmentReferences } from "@openbot/contracts/attachment-references";
-import { chatTagReferences, expandChatTagReferences } from "@openbot/contracts/chat-tag-references";
+import { expandAttachmentReferences } from "@starbot/contracts/attachment-references";
+import { chatTagReferences, expandChatTagReferences } from "@starbot/contracts/chat-tag-references";
 import type {
   AgentSummary,
   AgentWait,
@@ -11,10 +11,10 @@ import type {
   QueueDelivery,
   RoutineRun,
   WorkflowRunSource,
-} from "@openbot/contracts/ipc";
-import { ROUTINE_MISSED_COUNT_LIMIT } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { redactSecrets, redactText } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { ROUTINE_MISSED_COUNT_LIMIT } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { redactSecrets, redactText } from "@starbot/logging";
 import { wokenWaitsPromptText } from "../agent-waits/agent-waits";
 import { homeSkillRoot, homeSkillTagSlug } from "../home-skills";
 import type { DeliveryContext } from "../mailbox-store";
@@ -218,7 +218,7 @@ const RESULT_FORMAT =
   "Reply in three lines: Status: done | partial | blocked, Result: <concrete outcome>, Evidence: <file, test, command, or none>.";
 const NO_ANSWER_REASON = ": the request to them ended before they answered. Do not wait for them.";
 const STILL_WORKING_FROM = "No answer yet from ";
-const EXTERNAL_CHAT_ANSWER = `This turn runs in an external chat, such as WhatsApp, Slack or Telegram. StarBot posts your written answer there, and the people in it read it. Put the result only in openbot.send_message. When only a person in that chat can give what you need, ask them for it in your written answer, in plain words. Otherwise answer only ${QUIET_ANSWER}: nothing is posted.`;
+const EXTERNAL_CHAT_ANSWER = `This turn runs in an external chat, such as WhatsApp, Slack or Telegram. StarBot posts your written answer there, and the people in it read it. Put the result only in starbot.send_message. When only a person in that chat can give what you need, ask them for it in your written answer, in plain words. Otherwise answer only ${QUIET_ANSWER}: nothing is posted.`;
 const STILL_WORKING_REASON = ": they still work on the request. Their answer comes in a later turn.";
 export const HANDOFF_START = "Continue this StarBot conversation.";
 export const HANDOFF_END = "--- end previous transcript ---";
@@ -329,7 +329,7 @@ function userFramedTeammateText(
   return [
     `${teammate} sent you this request through StarBot:`,
     displayText,
-    `Do it, then send the result to ${senderName} with openbot.send_message: recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", expectsReply false. ${RESULT_FORMAT}`,
+    `Do it, then send the result to ${senderName} with starbot.send_message: recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", expectsReply false. ${RESULT_FORMAT}`,
   ].join("\n");
 }
 
@@ -367,26 +367,26 @@ function taskReportFraming(taskId: string, report: TaskReportState | null, waiti
   const name = report ? `"${report.title}" (taskId ${taskId})` : `taskId ${taskId}`;
   const status =
     report?.outcome === "failed"
-      ? `Task report from StarBot: task ${name}, which you started with openbot.start_task, failed. The text below is its error or last answer.`
+      ? `Task report from StarBot: task ${name}, which you started with starbot.start_task, failed. The text below is its error or last answer.`
       : report?.outcome === "stopped"
-        ? `Task report from StarBot: the user stopped task ${name}, which you started with openbot.start_task. Do not start it again unless the user asks. The text below is its last answer, so part of the work can be done.`
+        ? `Task report from StarBot: the user stopped task ${name}, which you started with starbot.start_task. Do not start it again unless the user asks. The text below is its last answer, so part of the work can be done.`
         : report?.outcome === "interrupted"
-          ? `Task report from StarBot: task ${name}, which you started with openbot.start_task, stopped before it finished. The text below is its last answer, or its title when it gave none, so part of the work can be done.`
+          ? `Task report from StarBot: task ${name}, which you started with starbot.start_task, stopped before it finished. The text below is its last answer, or its title when it gave none, so part of the work can be done.`
           : report === null || report.closed
-            ? `Task report from StarBot: task ${name}, which you started with openbot.start_task, is closed. The text below is its last answer, or its title when it gave none.`
-            : `Task report from StarBot: task ${name}, which you started with openbot.start_task, ended its turn. The text below is its final answer.`;
+            ? `Task report from StarBot: task ${name}, which you started with starbot.start_task, is closed. The text below is its last answer, or its title when it gave none.`
+            : `Task report from StarBot: task ${name}, which you started with starbot.start_task, ended its turn. The text below is its final answer.`;
   const running = report?.stillRunning.length
     ? [`Still running: ${report.stillRunning.map((other) => `"${other.title}" (taskId ${other.taskId})`).join(", ")}.`]
     : [];
   return [
     status,
-    `The user can read the whole task in its tab. When the text ends with "${TASK_REPORT_CUT_MARK}", it is cut: openbot.history_read with this taskId gives the rest.`,
+    `The user can read the whole task in its tab. When the text ends with "${TASK_REPORT_CUT_MARK}", it is cut: starbot.history_read with this taskId gives the rest.`,
     ...running,
-    "While other tasks still run, tell the user in one line what is done, and give all results together after the last report. To continue a task, call openbot.message_task with {taskId, text}. To stop one, call openbot.close_task with {taskId}.",
+    "While other tasks still run, tell the user in one line what is done, and give all results together after the last report. To continue a task, call starbot.message_task with {taskId, text}. To stop one, call starbot.close_task with {taskId}.",
     ...(waiting.length === 0
       ? []
       : [
-          `${waiting.join(", ")} wait for the result of the request that you started this task for. StarBot sends your final answer of this turn to them as your reply, so write it for them. ${RESULT_FORMAT} Do not send it with openbot.send_message.`,
+          `${waiting.join(", ")} wait for the result of the request that you started this task for. StarBot sends your final answer of this turn to them as your reply, so write it for them. ${RESULT_FORMAT} Do not send it with starbot.send_message.`,
         ]),
   ];
 }
@@ -435,8 +435,8 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
     ].join("\n");
   } else if (delivery.sender.kind === "agent" && delivery.sender.agentId === delivery.recipientAgentId) {
     text = [
-      "This message comes from your own chat, which started this task with openbot.start_task. The task is a separate conversation beside that chat.",
-      "Do the work here, and do not end your turn while background work of yours still runs. End with a compact result that has the data your chat needs, without your steps: StarBot sends your final answer to your chat. Do not send it with openbot.send_message.",
+      "This message comes from your own chat, which started this task with starbot.start_task. The task is a separate conversation beside that chat.",
+      "Do the work here, and do not end your turn while background work of yours still runs. End with a compact result that has the data your chat needs, without your steps: StarBot sends your final answer to your chat. Do not send it with starbot.send_message.",
       COLLABORATOR_SEPARATOR,
       displayText,
     ].join("\n");
@@ -461,7 +461,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
           routine
             ? `This replies to a message you sent in a run of your routine "${routine.routineName}". That run has ended, so its task is below. Continue that task from this result now: do its next steps, such as a request to the next teammate, before you end this turn. Then give the result to the user naturally, starting with the teammate's name.`
             : "This replies to a message you sent. Give the result to the user naturally, starting with the teammate's name.",
-          "For partial or blocked work, you still own the request: finish the rest yourself, with a follow-up, or with a better teammate; do not repeat a failed call unchanged. Give the user the blocker and its Unblock action only when the user must act. When StarBot has a plugin for the service and it is not in your tools, call openbot.suggest_marketplace_app and end your answer with the next field of its result.",
+          "For partial or blocked work, you still own the request: finish the rest yourself, with a follow-up, or with a better teammate; do not repeat a failed call unchanged. Give the user the blocker and its Unblock action only when the user must act. When StarBot has a plugin for the service and it is not in your tools, call starbot.suggest_marketplace_app and end your answer with the next field of its result.",
           `Reply to the teammate only for another requested action or new information that unblocks its work, with replyToMessageId "${delivery.messageId}", never with the same request or an acknowledgement.`,
           USER_LANGUAGE_LINE,
         ]
@@ -475,13 +475,13 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
             USER_LANGUAGE_LINE,
           ]
         : [
-            `Finish the whole request, then send a concise result to ${senderName} with openbot.send_message: recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", expectsReply false.`,
+            `Finish the whole request, then send a concise result to ${senderName} with starbot.send_message: recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", expectsReply false.`,
             "When something fails, find the cause and try other ways first. Status: blocked only when the sender or the user must act.",
-            `${RESULT_FORMAT} When blocked, add Unblock: <the one action that unblocks the task>; when StarBot has a plugin for the service and it is not in your tools, call openbot.suggest_marketplace_app, and that action is the next field of its result.`,
+            `${RESULT_FORMAT} When blocked, add Unblock: <the one action that unblocks the task>; when StarBot has a plugin for the service and it is not in your tools, call starbot.suggest_marketplace_app, and that action is the next field of its result.`,
             "Never acknowledge without a Status line.",
             sources.externalChat
               ? EXTERNAL_CHAT_ANSWER
-              : "The user does not see your written answer to this request. When only the user can give what you need, call openbot.ask_user (Claude: AskUserQuestion) and wait; never ask the user in a written answer.",
+              : "The user does not see your written answer to this request. When only the user can give what you need, call starbot.ask_user (Claude: AskUserQuestion) and wait; never ask the user in a written answer.",
           ];
     text = [
       `${TEAMMATE_HEADER} ${senderName} (${senderAgentId}).`,
@@ -532,7 +532,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
       ...(canPause
         ? [
             "Do not create, delete, or test routines, and do not change other routines, during this run.",
-            `When the task says to stop after a condition and the condition is met, pause this routine: call openbot.update_routine with routineId "${delivery.sender.routineId}" and active false, then give your report. Make no other change to this routine.`,
+            `When the task says to stop after a condition and the condition is met, pause this routine: call starbot.update_routine with routineId "${delivery.sender.routineId}" and active false, then give your report. Make no other change to this routine.`,
             `A failure or a blocker, such as a file or a service that you cannot reach, is not a stop condition: keep this routine on, and call the ${ROUTINE_REPORT_FAILURE_TOOL} tool.`,
             `Nothing to report is not a stop condition either: keep this routine on. A run that pauses this routine must say so in a short report, so do not call the ${ROUTINE_NO_UPDATE_TOOL} tool after a pause.`,
           ]
@@ -541,7 +541,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
       ...(sources.skippedRoutineRuns ? [skippedRoutineRunsNote(sources.skippedRoutineRuns)] : []),
       "Nobody answers you during this run. Do all of the task in this turn: do not stop after a step to report progress or to ask whether to continue.",
       `A request to a teammate is not a failure: finish the parts that do not need its reply, then end this turn. The reply starts a turn that continues this task. Do not call the ${ROUTINE_REPORT_FAILURE_TOOL} tool only because a reply has not come yet.`,
-      "A task can tell you to remind the user or to send the user a message. When it names no other place, write that message as your final answer. StarBot shows your final answer to the user in this chat. openbot.send_message sends to other agents, not to the user.",
+      "A task can tell you to remind the user or to send the user a message. When it names no other place, write that message as your final answer. StarBot shows your final answer to the user in this chat. starbot.send_message sends to other agents, not to the user.",
       testRun
         ? "This is a manual Test run. Report the action and result even when a normal scheduled run would suppress a notification because there is no change."
         : sources.skippedRoutineRuns
@@ -652,7 +652,7 @@ function taggedAgentsNote(
   if (!agents.length) return null;
   return [
     `The user tagged these agents in this message: ${agents.join(", ")}. Only you received the message.`,
-    "When the user wants a tagged agent to do or know something, send that agent your own message with openbot.send_message, with its id in recipientAgentIds, and tell the user that you sent it. When the user only names the agent, send nothing.",
+    "When the user wants a tagged agent to do or know something, send that agent your own message with starbot.send_message, with its id in recipientAgentIds, and tell the user that you sent it. When the user only names the agent, send nothing.",
   ].join(" ");
 }
 
@@ -687,7 +687,7 @@ export function nextStepContinuationPrompt(count: number, limit: number): string
 
 export function finishCheckContinuationPrompt(gap: string, count: number, limit: number): string {
   return [
-    "OpenBot note, not a message from the user. A check of your last turn found that the request is not finished yet:",
+    "StarBot note, not a message from the user. A check of your last turn found that the request is not finished yet:",
     gap,
     "Do this work now, and continue until the request is done. Do not repeat finished work. Do not ask whether to continue. Before you say that the request is done, check the result. This note does not approve a risky action.",
     "The user already sees your last answer. Do not write it again, also not in different words. At the end, write only what this work found or changed. If it confirms your last answer, say so in one short line. If the check is wrong and the request is already done, say so in one short line and end your turn. If you must wait, need the user's input or approval, or are blocked, say so in one short line and end your turn.",
@@ -706,7 +706,7 @@ export function compactionContinuationPrompt(): string {
 
 export function providerExitContinuationPrompt(): string {
   return [
-    "OpenBot note, not a message from the user. Your last turn stopped because your provider process exited while you wrote your answer, so the user got only its first part.",
+    "StarBot note, not a message from the user. Your last turn stopped because your provider process exited while you wrote your answer, so the user got only its first part.",
     "Continue now: give the complete answer to the user's last message. Do not repeat finished work. An action that you started before the stop possibly finished or possibly still runs: check its result before you do it again, and if you cannot tell, say so instead of doing it again. This note does not approve a risky action. If you must wait, need the user's input or approval, or are blocked, say so in one short line and end your turn.",
     USER_LANGUAGE_LINE,
   ].join("\n");

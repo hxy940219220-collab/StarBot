@@ -6,26 +6,26 @@ import {
   AGENT_PROVIDERS,
   type ConversationSubagent,
   MCP_ELICITATION_DECISION_QUESTION_ID,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-subagent-steps-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-codex-subagent-steps-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-subagent-steps-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-codex-subagent-steps-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_CODEX = `#!/usr/bin/env node
 if (process.argv.includes("--version")) {
@@ -56,7 +56,7 @@ const readAgent = (threadId, turnId) =>
   new Promise((done) => {
     const id = "tool-" + ++toolCalls;
     answers.set(id, done);
-    write({ id, method: "item/tool/call", params: { threadId, turnId, callId: id, namespace: "openbot", tool: "read_agent", arguments: {} } });
+    write({ id, method: "item/tool/call", params: { threadId, turnId, callId: id, namespace: "starbot", tool: "read_agent", arguments: {} } });
   }).then((result) => (result && result.success ? JSON.parse(result.contentItems[0].text).id : "error"));
 async function runTurn(threadId, turnId) {
   const parent = (method, item) => write({ method, params: { threadId, turnId, item } });
@@ -216,7 +216,7 @@ async function waitFor<T>(label: string, read: () => T | null | undefined | fals
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

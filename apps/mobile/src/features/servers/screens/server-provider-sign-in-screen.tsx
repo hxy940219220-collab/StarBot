@@ -1,4 +1,4 @@
-import { type AgentProviderId, isAgentProvider, relayCallbackQuery } from "@openbot/contracts/ipc";
+import { type AgentProviderId, isAgentProvider, relayCallbackQuery } from "@starbot/contracts/ipc";
 import * as Clipboard from "expo-clipboard";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Spinner, Typography } from "heroui-native";
@@ -412,7 +412,7 @@ function SignInSection({
   onCancel: () => void;
 }) {
   const { t } = useText();
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   const waiting =
     signIn.kind === "starting"
       ? t("mobile.server.providers.starting")

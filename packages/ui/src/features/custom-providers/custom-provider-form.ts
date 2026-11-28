@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   CustomProviderApiFormat,
   CustomProviderHarness,
@@ -7,7 +7,7 @@ import type {
   CustomProviderSummary,
   SaveCustomProviderInput,
   UpdateCustomProviderInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_PROVIDERS,
   CUSTOM_PROVIDER_ID_PATTERN,
@@ -20,8 +20,8 @@ import {
   isCustomProviderContextWindow,
   isCustomProviderHeaderName,
   isCustomProviderMaxOutput,
-} from "@openbot/contracts/ipc";
-import type { AppFormat, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppFormat, AppTranslate } from "@starbot/i18n";
 import { currentText } from "../../text";
 
 export interface CustomModelDraft {

@@ -1,17 +1,17 @@
-import type { AgentStepActivity, WorkflowStepSettings } from "@openbot/contracts/ipc";
-import { Toaster } from "@openbot/ui";
-import { AgentNode } from "@openbot/ui/features/workflows/WorkflowAgentNode";
-import { ApprovalNode } from "@openbot/ui/features/workflows/WorkflowApprovalNode";
-import { AssetNode } from "@openbot/ui/features/workflows/WorkflowAssetNode";
-import { ConditionNode } from "@openbot/ui/features/workflows/WorkflowConditionNode";
-import { ImageNode } from "@openbot/ui/features/workflows/WorkflowImageNode";
-import { LlmNode } from "@openbot/ui/features/workflows/WorkflowLlmNode";
-import { NoteNode } from "@openbot/ui/features/workflows/WorkflowNoteNode";
-import { OutputNode } from "@openbot/ui/features/workflows/WorkflowOutputNode";
-import { PromptNode } from "@openbot/ui/features/workflows/WorkflowPromptNode";
-import { TextNode } from "@openbot/ui/features/workflows/WorkflowTextNode";
-import { TriggerNode } from "@openbot/ui/features/workflows/WorkflowTriggerNode";
-import type { WorkflowCatalogs } from "@openbot/ui/features/workflows/workflow-model";
+import type { AgentStepActivity, WorkflowStepSettings } from "@starbot/contracts/ipc";
+import { Toaster } from "@starbot/ui";
+import { AgentNode } from "@starbot/ui/features/workflows/WorkflowAgentNode";
+import { ApprovalNode } from "@starbot/ui/features/workflows/WorkflowApprovalNode";
+import { AssetNode } from "@starbot/ui/features/workflows/WorkflowAssetNode";
+import { ConditionNode } from "@starbot/ui/features/workflows/WorkflowConditionNode";
+import { ImageNode } from "@starbot/ui/features/workflows/WorkflowImageNode";
+import { LlmNode } from "@starbot/ui/features/workflows/WorkflowLlmNode";
+import { NoteNode } from "@starbot/ui/features/workflows/WorkflowNoteNode";
+import { OutputNode } from "@starbot/ui/features/workflows/WorkflowOutputNode";
+import { PromptNode } from "@starbot/ui/features/workflows/WorkflowPromptNode";
+import { TextNode } from "@starbot/ui/features/workflows/WorkflowTextNode";
+import { TriggerNode } from "@starbot/ui/features/workflows/WorkflowTriggerNode";
+import type { WorkflowCatalogs } from "@starbot/ui/features/workflows/workflow-model";
 import { createSignal, onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { NodeGallery } from "./workflow-node-gallery";
@@ -373,7 +373,7 @@ export const VideoCustomLength: Story = {
   ),
 };
 
-const UNAVAILABLE_VIDEO_MODEL = { id: "openbot-kling-4.0-omni", name: "Kling 4.0 · Omni", kinds: ["video"] } as const;
+const UNAVAILABLE_VIDEO_MODEL = { id: "starbot-kling-4.0-omni", name: "Kling 4.0 · Omni", kinds: ["video"] } as const;
 
 export const VideoModelUnavailable: Story = {
   name: "Video, model not available",
@@ -457,14 +457,14 @@ export const ImageBatchFailedTake: Story = {
 };
 
 const CREDITS_IMAGE_MODEL: WorkflowCatalogs["imageModels"][number] = {
-  id: "openbot-story-image",
-  provider: "openbot",
+  id: "starbot-story-image",
+  provider: "starbot",
   name: "Story Image",
   maker: "Northwind Labs",
   credits: true,
   kinds: ["image"],
   voices: false,
-  subscription: "OpenBot",
+  subscription: "StarBot",
   aspects: ["1:1", "16:9"],
 };
 
@@ -715,15 +715,15 @@ export const Trigger: Story = {
       selected="schedule"
       github={STORY_GITHUB}
       fields={{
-        github: { trigger: "github", repository: "openbot-preview/app", event: "issue.opened", filters: "notBot" },
+        github: { trigger: "github", repository: "starbot-preview/app", event: "issue.opened", filters: "notBot" },
         "github-empty": { trigger: "github", event: "issue.opened", filters: "notBot" },
         "github-many": {
           trigger: "github",
-          repository: "openbot-preview/app",
+          repository: "starbot-preview/app",
           repositories: [
-            "openbot-preview/app",
-            "openbot-preview/desktop-release-pipeline-and-installers",
-            "openbot-preview-labs/team-api-gateway",
+            "starbot-preview/app",
+            "starbot-preview/desktop-release-pipeline-and-installers",
+            "starbot-preview-labs/team-api-gateway",
           ].join("\n"),
           event: "issue.opened",
           filters: "notBot",
@@ -774,8 +774,8 @@ export const Output: Story = {
         { id: "docs>review:text", from: "docs", to: "review", type: "text" },
       ]}
       fields={{
-        issue: { trigger: "github", repository: "openbot-preview/app", event: "issue.opened", filters: "notBot" },
-        docs: { trigger: "github", repository: "openbot-preview/docs", event: "pr.opened", filters: "notBot" },
+        issue: { trigger: "github", repository: "starbot-preview/app", event: "issue.opened", filters: "notBot" },
+        docs: { trigger: "github", repository: "starbot-preview/docs", event: "pr.opened", filters: "notBot" },
         comment: { target: "github", action: "comment" },
         label: { target: "github", action: "label.add", labelsFrom: "agent", labels: "bug\nenhancement" },
         review: { target: "github", action: "review.approve" },

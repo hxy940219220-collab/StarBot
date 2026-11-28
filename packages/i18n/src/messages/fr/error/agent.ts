@@ -5,28 +5,28 @@ export const messages = {
   "error.agent.historyUnavailable":
     "L’historique n’est pas disponible pour cette demande. Relisez l’historique récent, ou utilisez channel_history pour le travail dans un canal.",
   "error.agent.historyArgumentsInvalid":
-    "Arguments d’historique incorrects : {detail} Corrige les arguments et réessaie. openbot.tool_describe donne le schéma.",
+    "Arguments d’historique incorrects : {detail} Corrige les arguments et réessaie. starbot.tool_describe donne le schéma.",
   "error.agent.toolRequestInvalid":
     "Arguments de découverte d’outils non valides. Utilisez le schéma déclaré et un nom d’outil qualifié d’origine.",
   "error.agent.toolCallArgumentsNotObject":
     "L’outil ne s’est pas exécuté. Dans tool_call, arguments doit être un objet JSON, pas du texte. Renvoyez l’appel avec arguments sous forme d’objet.",
   "error.agent.toolCallDiscoveryTool":
-    "L’outil ne s’est pas exécuté. tool_call ne peut pas exécuter openbot.tool_search ni openbot.tool_describe. Appelez-les directement avec les mêmes arguments.",
+    "L’outil ne s’est pas exécuté. tool_call ne peut pas exécuter starbot.tool_search ni starbot.tool_describe. Appelez-les directement avec les mêmes arguments.",
   "error.agent.toolCallEnvelopeKeys":
     "L’outil ne s’est pas exécuté. tool_call accepte seulement name et arguments. Mettez les arguments de l’outil dans arguments, sous forme d’objet, puis renvoyez l’appel.",
   "error.agent.toolCallMissingName":
-    "L’outil ne s’est pas exécuté. Le tool_call n’a pas de name. Mettez dans name le nom qualifié que donne tool_search, par exemple openbot.history_read, et envoyez l’appel à nouveau.",
+    "L’outil ne s’est pas exécuté. Le tool_call n’a pas de name. Mettez dans name le nom qualifié que donne tool_search, par exemple starbot.history_read, et envoyez l’appel à nouveau.",
   "error.agent.toolCallUnknownTool":
-    "L’outil ne s’est pas exécuté. tool_call n’a trouvé aucun outil avec ce nom. Utilisez le nom qualifié exact que donne tool_search, par exemple openbot_browser.snapshot.",
+    "L’outil ne s’est pas exécuté. tool_call n’a trouvé aucun outil avec ce nom. Utilisez le nom qualifié exact que donne tool_search, par exemple starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "L’outil ne s’est pas exécuté. tool_call n’a trouvé aucun outil avec ce nom. Le nom qualifié est peut-être {name}. Si c’est le cas, renvoyez l’appel avec ce nom.",
   "error.agent.toolDescribeUnknownNames":
-    "tool_describe n’a trouvé aucun outil StarBot nommé {names}. Il décrit uniquement les outils StarBot et du navigateur que liste openbot.tool_search, pas les outils MCP.",
+    "tool_describe n’a trouvé aucun outil StarBot nommé {names}. Il décrit uniquement les outils StarBot et du navigateur que liste starbot.tool_search, pas les outils MCP.",
 
   "error.agent.toolDescribeDiscoveryNames":
     "Appelle {names} directement. tool_describe ne décrit pas les outils de recherche.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "La planification de la routine n’est pas valide : {detail} Corrigez la planification et réessayez. openbot.tool_describe donne le schéma.",
+    "La planification de la routine n’est pas valide : {detail} Corrigez la planification et réessayez. starbot.tool_describe donne le schéma.",
   "error.agent.approvalWhileDeleting": "Impossible d’accorder l’approbation pendant la suppression de l’agent.",
   "error.agent.accessLocalOnly": "L’accès à l’agent ne peut être modifié que sur l’ordinateur qui exécute l’agent.",
   "error.agent.duplicateCleanupFailed":

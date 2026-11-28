@@ -7,7 +7,7 @@ import { join, resolve } from "node:path";
 import { getString, isRecord } from "../src/backend/protocol";
 
 const REPO = resolve(import.meta.dirname, "..");
-const OUT = join(REPO, ".openbot-build/hermes-server-e2e");
+const OUT = join(REPO, ".starbot-build/hermes-server-e2e");
 const REPLY = "HERMES_SERVER_E2E_OK";
 const MODEL = "mock-model";
 const BUN_VERSION = "1.4.2";
@@ -232,16 +232,16 @@ function startMockModel(requests: string[]) {
 async function host(): Promise<void> {
   const image = argument("--image") ?? "ghcr.io/hxy940219220-collab/StarBot-Desktop:latest";
   const tag = randomBytes(4).toString("hex");
-  const testImage = `openbot-hermes-server-e2e:${tag}`;
-  const volume = `openbot-hermes-server-e2e-${tag}`;
-  const server = `openbot-hermes-server-e2e-${tag}`;
+  const testImage = `starbot-hermes-server-e2e:${tag}`;
+  const volume = `starbot-hermes-server-e2e-${tag}`;
+  const server = `starbot-hermes-server-e2e-${tag}`;
   const checks: Check[] = [];
   const requests: string[] = [];
   const check = (name: string, ok: boolean, detail: string) => {
     checks.push({ name, ok, detail });
     process.stdout.write(`${ok ? "pass" : "FAIL"} ${name}: ${detail}\n`);
   };
-  const build = await mkdtemp(join(tmpdir(), "openbot-hermes-server-e2e-"));
+  const build = await mkdtemp(join(tmpdir(), "starbot-hermes-server-e2e-"));
   const mock = startMockModel(requests);
   const baseUrl = `http://host.docker.internal:${mock.port}/v1`;
   let failure: string | undefined;
@@ -249,7 +249,7 @@ async function host(): Promise<void> {
   await mkdir(OUT, { recursive: true });
 
   const oneShot = `${server}-shell`;
-  const asOpenBot = (script: string, extra: string[] = [], timeoutMs?: number) =>
+  const asStarBot = (script: string, extra: string[] = [], timeoutMs?: number) =>
     run(
       "docker",
       [
@@ -284,15 +284,15 @@ async function host(): Promise<void> {
         "USER root",
         "COPY packages.txt /tmp/packages.txt",
         "RUN apt-get update && sed -e '/^#/d' -e '/^$/d' -e '/^apparmor$/d' /tmp/packages.txt | xargs apt-get install --yes --no-install-recommends && rm -rf /var/lib/apt/lists/* /tmp/packages.txt",
-        "USER openbot",
+        "USER starbot",
         "",
       ].join("\n"),
     );
     await must("docker", ["build", "--quiet", "--tag", testImage, build]);
-    version = (await must("docker", ["run", "--rm", "--entrypoint", "openbot", testImage, "version"])).trim();
+    version = (await must("docker", ["run", "--rm", "--entrypoint", "starbot", testImage, "version"])).trim();
     check("image", true, `${image}, StarBot ${version}`);
 
-    const installed = await asOpenBot(
+    const installed = await asStarBot(
       `curl -fsSL https://bun.sh/install | bash -s bun-v${BUN_VERSION} >/dev/null 2>&1
       cd /src && ~/.bun/bin/bun scripts/hermes-server-e2e.ts --install
       ~/.local/bin/hermes --version
@@ -369,7 +369,7 @@ async function host(): Promise<void> {
     );
     await must("docker", ["stop", "--timeout", "60", server]);
 
-    const driven = await asOpenBot(
+    const driven = await asStarBot(
       "cd /src && ~/.bun/bin/bun scripts/hermes-server-e2e.ts --inside",
       ["-v", `${REPO}:/src:ro`],
       600_000,

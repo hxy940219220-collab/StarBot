@@ -1,6 +1,6 @@
-import { AGENT_IMPORT_LIMITS, type RemoteInstanceTransferResult } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { copiedTransferUpload } from "@openbot/team-client/team-api-requests";
+import { AGENT_IMPORT_LIMITS, type RemoteInstanceTransferResult } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { copiedTransferUpload } from "@starbot/team-client/team-api-requests";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";

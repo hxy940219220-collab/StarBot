@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch StarBot Remote TLS certificate
+
+[Path]
+PathChanged=/var/lib/docker/volumes/starbot-remote_acme-data/_data/certificates/signal.starbot.run.crt
+Unit=starbot-remote-nginx-reload.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,4 +1,4 @@
-import { type RemoteHostKeyStore, remoteHostFingerprint } from "@openbot/team-client";
+import { type RemoteHostKeyStore, remoteHostFingerprint } from "@starbot/team-client";
 import { accountScope } from "@/shared/lib/account-scope";
 import * as LockedKeychain from "@/shared/lib/locked-keychain";
 

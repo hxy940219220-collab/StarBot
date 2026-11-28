@@ -1,5 +1,5 @@
 ---
-name: openbot-export
+name: starbot-export
 description: Export the user's Hermes Agent profiles into one .zip file that StarBot imports, with each profile's persona, memories, skills, and cron jobs. Use when the user asks to export, move, or migrate their Hermes agents to StarBot.
 example-prompt: Export my agents for StarBot
 ---
@@ -28,7 +28,7 @@ the format below exactly.
    - `skills/`: each folder with a `SKILL.md`, at `skills/<name>/` or `skills/<category>/<name>/`.
      Skip folders whose name starts with `.`. Skip each skill whose frontmatter `name` is in
      `skills/.bundled_manifest` (one `name:hash` per line): those come with Hermes. Skip this skill
-     (`openbot-export`).
+     (`starbot-export`).
    - `cron/jobs.json`: `{"jobs": [...]}`. Each job has `name`, `prompt`, `schedule`, `enabled` and
      `state`.
 
@@ -38,7 +38,7 @@ the format below exactly.
 3. **Ask which profiles.** Show the profiles with their number of memories, skills and cron jobs.
    Ask: "Export all profiles, or only some?" Wait for the answer before you continue.
 
-4. **Map each profile** to one agent in `openbot-import.json` (see Format):
+4. **Map each profile** to one agent in `starbot-import.json` (see Format):
    - `key`: the profile name, with `_` changed to `-`. The `default` profile has the key `hermes`.
    - `name`: `Hermes` for the `default` profile. For a named profile, its name as words with the
      first letter in capitals: `research-desk` becomes `Research desk`.
@@ -60,14 +60,14 @@ the format below exactly.
    `__pycache__` folders in a skill: a tool makes them again.
 
 6. **Build the folder** in a new temporary folder outside the Hermes folder (see Format). Write
-   `openbot-import.json` last.
+   `starbot-import.json` last.
 
 7. **Check it** with the checklist below. Then zip the folder contents into
-   `~/Downloads/.openbot-export-hermes-<YYYY-MM-DD>.zip.part`, with `openbot-import.json` at the
+   `~/Downloads/.starbot-export-hermes-<YYYY-MM-DD>.zip.part`, with `starbot-import.json` at the
    root of the zip. Python works everywhere:
    `python3 -c "import shutil,sys; shutil.make_archive(sys.argv[1], 'zip', sys.argv[2])" <base> <folder>`
    writes `<base>.zip`, so rename it to the `.zip.part` name. When the zip is complete, rename it
-   to `~/Downloads/openbot-export-hermes-<YYYY-MM-DD>.zip`. The rename replaces an older export with
+   to `~/Downloads/starbot-export-hermes-<YYYY-MM-DD>.zip`. The rename replaces an older export with
    the same name in one step, so StarBot never reads a half-written file. Then delete the
    temporary folder.
 
@@ -79,7 +79,7 @@ the format below exactly.
 ## Format
 
 ```
-openbot-import.json
+starbot-import.json
 agents/<key>/skills/<skill>/SKILL.md    one folder for each skill
 agents/<key>/files/SOUL.md              only for a persona longer than 2,000 characters
 ```
@@ -87,11 +87,11 @@ agents/<key>/files/SOUL.md              only for a persona longer than 2,000 cha
 `<key>` is lowercase letters, digits and hyphens, 64 characters or fewer, and does not start or end
 with a hyphen. Each key is unique. All paths for an agent start with `agents/<key>/`.
 
-`openbot-import.json`:
+`starbot-import.json`:
 
 ```json
 {
-  "format": "openbot-agent-import",
+  "format": "starbot-agent-import",
   "version": 1,
   "source": { "app": "hermes-agent", "exportedAt": "2026-10-21T10:00:00Z" },
   "agents": [
@@ -149,10 +149,10 @@ schedule and tells the user; the rest of the agent still imports.
 
 ## Checklist
 
-- [ ] `openbot-import.json` is at the root of the zip, not inside a subfolder.
-- [ ] `format` is `openbot-agent-import`, `version` is `1`, and `source.app` is `hermes-agent`.
+- [ ] `starbot-import.json` is at the root of the zip, not inside a subfolder.
+- [ ] `format` is `starbot-agent-import`, `version` is `1`, and `source.app` is `hermes-agent`.
 - [ ] Each `key` is unique and 64 characters or fewer, and each path starts with `agents/<key>/`.
-- [ ] Each skill folder has `SKILL.md` with frontmatter, and no skill is `openbot-export`.
+- [ ] Each skill folder has `SKILL.md` with frontmatter, and no skill is `starbot-export`.
 - [ ] No skill that comes with Hermes is in the export.
 - [ ] No secrets, `.env` files, `auth.json`, keys or nested archives.
 - [ ] No `.git`, `node_modules`, `.venv`, `venv` or `__pycache__` folders.

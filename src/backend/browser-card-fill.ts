@@ -1,5 +1,5 @@
-import type { BrowserTarget } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import type { BrowserTarget } from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import type { VaultCardSecret } from "./vault-items";
 
 export const BROWSER_CARD_FIELDS = ["number", "securityCode", "expiry", "expMonth", "expYear", "nameOnCard"] as const;

@@ -1,4 +1,4 @@
-import type { QueueDelivery } from "@openbot/contracts/ipc";
+import type { QueueDelivery } from "@starbot/contracts/ipc";
 
 export function queuedMessagePreview(delivery: QueueDelivery): string {
   return delivery.text.trim() || delivery.attachments.map((file) => file.name).join(", ");

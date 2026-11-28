@@ -4,11 +4,11 @@ import {
   type HostAnalytics,
   providerDisplayName,
   WORKFLOWS_USAGE_ID,
-} from "@openbot/contracts/ipc";
-import { isKnownAgentProvider } from "@openbot/contracts/agent-providers";
-import { Bot, Cpu, MessageSquare, Sparkles, Zap } from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { type UsagePeriod, usagePeriods } from "@openbot/ui/features/usage/usage-format";
+} from "@starbot/contracts/ipc";
+import { isKnownAgentProvider } from "@starbot/contracts/agent-providers";
+import { Bot, Cpu, MessageSquare, Sparkles, Zap } from "@starbot/ui";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { type UsagePeriod, usagePeriods } from "@starbot/ui/features/usage/usage-format";
 import { createMemo, createSignal, For, Show } from "solid-js";
 
 const PERIOD_LABELS_ZH: Record<UsagePeriod, string> = {

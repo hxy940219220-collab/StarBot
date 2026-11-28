@@ -53,7 +53,7 @@ The Docker image needs no secret: the `docker-publish` job pushes with `GITHUB_T
 even when the source repository is public. A successful push does not confirm public access.
 
 After the first push, a package administrator must open the
-[StarBot package](https://github.com/orgs/nightly-labs/packages/container/package/openbot):
+[StarBot package](https://github.com/orgs/nightly-labs/packages/container/package/starbot):
 
 1. Open **Package settings** and set **Change visibility** to **Public**.
 2. Check that the package is linked to `hxy940219220-collab/StarBot-Desktop`. The Dockerfile sets the
@@ -86,7 +86,7 @@ place. Correct the package settings, then run the failed job again.
 ## Hosted-server snapshots
 
 After GitHub publication, `Publish boat server snapshot` builds the Linux x64 release into a boat
-named snapshot (`openbot-server-production-<version>` with dots replaced by hyphens), then selects
+named snapshot (`starbot-server-production-<version>` with dots replaced by hyphens), then selects
 it for new production servers. It uses the tagged hosting scripts,
 the published `SHA256SUMS-linux.txt`, and `https://api.starbot.app`. The builder checks the AppImage
 checksum and installed version and requires an empty host profile before saving the snapshot.
@@ -117,12 +117,12 @@ is saving or has an unknown status, any snapshot newer than the release, and eac
 `provider_template` of a production server that is not deleted and has no sandbox yet, because a
 create retry sends its first request again. The job reads these from the production D1
 database and stops if it cannot. Servers already made from a removed snapshot keep running. Names
-without the `openbot-server-production-` prefix are never removed; confirm that neither Worker nor
+without the `starbot-server-production-` prefix are never removed; confirm that neither Worker nor
 any pending create needs one before removing it by hand.
 
 A successful job reports the selected version in its Actions summary. Verify the first rollout by
 creating a temporary production server and checking its initial installed version. Record the
-result under `.openbot-build/`; remove only that temporary server after the check. This remote check
+result under `.starbot-build/`; remove only that temporary server after the check. This remote check
 is separate from local checks and requires production access.
 
 ## Windows signing
@@ -133,9 +133,9 @@ A tag build signs the Windows release with Azure Artifact Signing. It needs no s
   holds the Public Trust certificate profile `SYNTHETIFY`, issued to
   `SYNTHETIFY LABS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ`. Microsoft issues a new short-lived
   certificate each day with the same subject.
-- The Entra app registration `openbot-release-signing` has the **Artifact Signing Certificate Profile
+- The Entra app registration `starbot-release-signing` has the **Artifact Signing Certificate Profile
   Signer** role on that profile only. Its federated credential trusts the subject
-  `repo:nightly-labs@100160810/openbot@1332461149:environment:release`, because this repository uses
+  `repo:nightly-labs@100160810/starbot@1332461149:environment:release`, because this repository uses
   GitHub's immutable OIDC subject format. A dry run has no environment, so it cannot sign.
 - The `windows` job logs in with `azure/login`, caches a token for the signing service, and runs
   `bun run dist:win --config electron-builder.windows-signing.yml`, then runs `az account clear`, so
@@ -509,8 +509,8 @@ text requires a new app release. Missing entries do not cause a network fallback
 
 The installed desktop version comes from `AppInfo`, not an available update or a remote server.
 In development, `AppInfo` uses `package.json`; Electron otherwise reports its own version.
-The local app profile keeps the highest consumed version in `openbot:whats-new-version`. On the
-first launch of this feature, an existing `openbot:analytics-app-version` can supply the previous
+The local app profile keeps the highest consumed version in `starbot:whats-new-version`. On the
+first launch of this feature, an existing `starbot:analytics-app-version` can supply the previous
 version; the dialog does not enable analytics. A profile with no previous version gets a silent
 baseline, so onboarding is not covered by release notes. Stable `x.y.z` releases participate;
 unknown versions and prerelease builds do not advance the marker. Downgrades do not lower it.
@@ -634,7 +634,7 @@ The workflow:
    first rollout percentage into the four update manifests (see [Staged rollout](#staged-rollout)).
 10. builds a Docker image (`docker/Dockerfile`) from each Linux AppImage on a runner of that
     architecture, after it checks the AppImage against its `SHA256SUMS` file. It starts each image
-    with `docker/seccomp.json`, waits for `openbot status`, and stops it, which must exit with 0;
+    with `docker/seccomp.json`, waits for `starbot status`, and stops it, which must exit with 0;
 11. after the GitHub Release is published, pushes both images to `ghcr.io/hxy940219220-collab/StarBot-Desktop`
     with the tags `<version>-amd64` and `<version>-arm64`, joins them under `<version>`, `v<version>`,
     `latest` and `sha-<commit>`, and attests the build provenance of that image. It then checks
@@ -675,7 +675,7 @@ after a change to the Azure setup or to `electron-builder.windows-signing.yml`, 
 Installed StarBot builds check for updates shortly after launch and every four minutes. A new version
 goes to a part of the installs first (see [Staged rollout](#staged-rollout)). New versions
 download automatically while **Automatically download updates** is on, which is the default and is
-persisted per user in `openbot-update-preference-v1.json`; with the setting off, a download starts
+persisted per user in `starbot-update-preference-v1.json`; with the setting off, a download starts
 only on a user action. The update notice in the sidebar and Settings > Updates show the current
 state and let the user download an available version, then restart into it. The restart action appears as
 soon as the download completes, and no platform installs without that
@@ -813,7 +813,7 @@ do not change back.
 ### Servers and Docker
 
 Servers do not use the stage. Hosted and self-installed Linux servers update with
-`scripts/hosting/openbot-hosted-update` and `HostedUpdateAdapter`. They read `latest-linux.yml` or
+`scripts/hosting/starbot-hosted-update` and `HostedUpdateAdapter`. They read `latest-linux.yml` or
 `latest-linux-arm64.yml`, check for an update 5 minutes after start and then every 6 hours, and
 install a downloaded release at the next boot or when an owner, an admin or a permitted member installs
 it in Server Settings > Updates. A hosted server also installs it when it is idle and no client uses
@@ -877,7 +877,7 @@ MAIN="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")"
   bun scripts/release-health.ts <version>
 ```
 
-It prints a table per platform and for servers, and writes `.openbot-build/release-health/report.json`.
+It prints a table per platform and for servers, and writes `.starbot-build/release-health/report.json`.
 The metrics are finished starts, crashes, startup crashes, quit hangs, and update arrivals: the share
 of the computers that started an update install and then started a version other than the one that
 installed it, before the end of the window. An install of an older release that a computer downloaded
@@ -931,7 +931,7 @@ Before creating the first tag or any later release:
     `Restart and install` does start it, shows no installer page, and opens StarBot again. With
     StarBot closed and with it open, confirm that Open StarBot on a `/join` page opens StarBot and
     shows the invitation once, and that uninstall
-    removes `HKCU\Software\Classes\openbot`. Update from the previous release, then install to a
+    removes `HKCU\Software\Classes\starbot`. Update from the previous release, then install to a
     folder on a second disk. Confirm that the installer has no "All users" page, that an update
     installs to the same folder, that `icacls` on that folder lists only the user, `SYSTEM` and
     `Administrators`, and that the uninstaller removes only that folder. Choose
@@ -939,8 +939,8 @@ Before creating the first tag or any later release:
     `%USERPROFILE%\StarBot\StarBot` and that uninstall keeps the workspace. As a second account,
     make an empty `D:\StarBot`. As the first account, choose it, and confirm that StarBot installs to
     `D:\StarBot\StarBot` and that the second account cannot write there;
-13. on Ubuntu 24.04 x64 with the AppArmor profile from `build/linux/openbot.apparmor` installed,
-    confirm the AppImage starts with the sandbox on, that `xdg-open 'openbot://join?...'` focuses the
+13. on Ubuntu 24.04 x64 with the AppArmor profile from `build/linux/starbot.apparmor` installed,
+    confirm the AppImage starts with the sandbox on, that `xdg-open 'starbot://join?...'` focuses the
     running application, that a provider downloads in-app, that the page rail is drawn, and that the
     microphone control is absent;
 14. confirm `CHANGELOG.md` and `.github/release-announcement.json` describe the version and the
@@ -968,7 +968,7 @@ public release, starts it on a new profile, makes two agents with an answered ch
 channel and a custom agent, and quits it. It then installs the new build over it as an update does,
 starts it on the same profile, and checks the version, the schema version, every migration, table and
 column, `PRAGMA integrity_check`, the foreign keys, and that the seeded data is still there. A failure
-stops the release before `publish`. The report is `.openbot-build/release-upgrade-e2e/report.json`,
+stops the release before `publish`. The report is `.starbot-build/release-upgrade-e2e/report.json`,
 with counts only. The script does not use the real `electron-updater` download: its header says why.
 
 `Release upgrade history` (`.github/workflows/release-upgrade-history.yml`) runs the same script each
@@ -1022,7 +1022,7 @@ After verifying StarBot.app, the macOS job:
 
 1. runs native account tests without creating users;
 2. imports the application and installer certificates into a temporary, isolated keychain;
-3. compiles standalone ARM64 `host-manager` and `openbot-host` executables with Bun, and the native
+3. compiles standalone ARM64 `host-manager` and `starbot-host` executables with Bun, and the native
    account helper with Swift; no target-machine runtime or compiler is required;
 4. signs all executables with **Developer ID Application**, hardened runtime and timestamp, and
    checks their fixed identifiers and team `ZTRDTUL87R`;

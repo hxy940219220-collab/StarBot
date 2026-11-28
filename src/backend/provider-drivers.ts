@@ -13,9 +13,9 @@ import {
   type PromptCacheTtl,
   type ProviderEnvironmentProvider,
   type ProviderModelSource,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { AcpAgentClient, type AcpHistoryPersistence } from "./acp-client";
 import type { AcpModel } from "./acp-configuration";
@@ -140,7 +140,7 @@ interface ProviderCliCommand {
   readonly timeoutMs: number;
   readonly closeInput?: true;
   readonly acpLogout?: true | AcpExtensionMethod;
-  readonly windowsPageByOpenBot?: true;
+  readonly windowsPageByStarBot?: true;
   readonly failureText?: (output: string) => string | null;
 }
 
@@ -199,7 +199,7 @@ const CLAUDE_CODE_SIGN_IN: ProviderCliCommand = {
 };
 const GROK_CODE_SIGN_IN: ProviderCliCommand = {
   argv: ["--no-auto-update", "login", "--device-auth"],
-  env: () => ({ ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "openbot" }),
+  env: () => ({ ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "starbot" }),
   timeoutMs: CLI_LOGIN_TIMEOUT_MS,
 };
 function claudeSignInFailure(output: string): string | null {
@@ -209,7 +209,7 @@ const CLAUDE_SIGN_IN: ProviderCliCommand = {
   argv: ["auth", "login", "--claudeai"],
   env: CLAUDE_COMMAND_ENV,
   timeoutMs: CLI_LOGIN_TIMEOUT_MS,
-  windowsPageByOpenBot: true,
+  windowsPageByStarBot: true,
   failureText: claudeSignInFailure,
 };
 
@@ -1016,7 +1016,7 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
     catalog: { paged: true, modelFields: serviceTierFields, source: readCodexModelSource, relistWhileRunning: true },
     resolveCli: resolveCodexCli,
     createClient: (cli, requestTimeoutMs, context) => {
-      const { SSL_CERT_FILE: _openBotRoots, ...serverEnvironment } = context.serverEnvironment ?? {};
+      const { SSL_CERT_FILE: _starBotRoots, ...serverEnvironment } = context.serverEnvironment ?? {};
       const variables = context.providerEnvironment?.("codex") ?? {};
       const overrides = codexVariableOverrides(variables);
       return new CodexAppServerClient(
@@ -1079,7 +1079,7 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
       kind: "cli-command",
       command: {
         argv: ["--no-auto-update", "login"],
-        env: () => ({ ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "openbot" }),
+        env: () => ({ ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "starbot" }),
         timeoutMs: CLI_LOGIN_TIMEOUT_MS,
       },
     },
@@ -1088,7 +1088,7 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
       homeVariable: "GROK_HOME",
       signIn: {
         argv: ["--no-auto-update", "login"],
-        env: () => ({ ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "openbot" }),
+        env: () => ({ ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "starbot" }),
         timeoutMs: CLI_LOGIN_TIMEOUT_MS,
       },
       codeSignIn: { flow: "device", command: GROK_CODE_SIGN_IN },
@@ -1905,7 +1905,7 @@ export function savedCustomAgents(context: ProviderClientContext): readonly Cust
 let customAgentDiscoveryRoot: string | undefined;
 
 function discoveryFolder(agentId: string): string {
-  customAgentDiscoveryRoot ??= mkdtempSync(join(tmpdir(), "openbot-custom-agents-"));
+  customAgentDiscoveryRoot ??= mkdtempSync(join(tmpdir(), "starbot-custom-agents-"));
   const folder = join(customAgentDiscoveryRoot, agentId);
   mkdirSync(folder, { recursive: true, mode: 0o700 });
   return folder;

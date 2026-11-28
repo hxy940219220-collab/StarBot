@@ -5,8 +5,8 @@ import {
   isCrmOverview,
   isCrmPaymentPage,
   isCrmSettings,
-} from "@openbot/contracts/ipc";
-import { guardedDecoder } from "@openbot/contracts/ipc-decoding";
+} from "@starbot/contracts/ipc";
+import { guardedDecoder } from "@starbot/contracts/ipc-decoding";
 
 export const decodeCrmOverview = guardedDecoder(isCrmOverview, "CRM overview response");
 export const decodeCrmCustomerPage = guardedDecoder(isCrmCustomerPage, "CRM customers response");

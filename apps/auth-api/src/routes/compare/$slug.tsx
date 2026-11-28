@@ -28,7 +28,7 @@ export const Route = createFileRoute("/compare/$slug")({
       page.kind === "roundup"
         ? [
             roundupItemListStructuredData(page, loaderData.title, (app) =>
-              app.mark === "openbot" ? new URL("/", siteUrl).toString() : `${pageUrl}#${roundupAppAnchor(app)}`,
+              app.mark === "starbot" ? new URL("/", siteUrl).toString() : `${pageUrl}#${roundupAppAnchor(app)}`,
             ),
           ]
         : [];

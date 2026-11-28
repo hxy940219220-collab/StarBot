@@ -1,18 +1,18 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   QueueDelivery,
   QueueSnapshot,
   ReorderQueueInput,
   SteerQueuedMessageInput,
   UpdateQueuedMessageInput,
-} from "@openbot/contracts/ipc";
-import { TEAM_QUEUE_WINDOW_CAPABILITY } from "@openbot/contracts/team-protocol/current";
+} from "@starbot/contracts/ipc";
+import { TEAM_QUEUE_WINDOW_CAPABILITY } from "@starbot/contracts/team-protocol/current";
 import {
   decodeQueueEditRequest,
   QueueEditRejectedError,
   TEAM_QUEUE_EDIT_CAPABILITY,
-} from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { SteerUnsupportedError } from "../../backend/agent/queue-controls";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAgents } from "./dependencies";

@@ -1,4 +1,4 @@
-import type { ChatPreviewKind } from "@openbot/contracts/chat-preview";
+import type { ChatPreviewKind } from "@starbot/contracts/chat-preview";
 
 export interface CodePreviewEntry {
   kind: ChatPreviewKind | "markdown" | "text" | "pdf" | "spreadsheet";

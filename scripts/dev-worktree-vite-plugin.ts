@@ -3,12 +3,12 @@ import { dirname, join, resolve } from "node:path";
 import type { Plugin } from "vite";
 import { developmentWorktreeColor } from "../src/main/development-profile";
 
-const REQUEST_EVENT = "openbot:dev-worktree-request";
-const WORKTREE_EVENT = "openbot:dev-worktree";
+const REQUEST_EVENT = "starbot:dev-worktree-request";
+const WORKTREE_EVENT = "starbot:dev-worktree";
 
 export function devWorktree(projectRoot: string): Plugin {
   return {
-    name: "openbot-dev-worktree",
+    name: "starbot-dev-worktree",
     apply: "serve",
     configureServer(server) {
       const gitDirectory = findGitDirectory(projectRoot);

@@ -15,7 +15,7 @@ afterEach(async () => {
 });
 
 async function logOf(chunks: Array<string | Buffer>): Promise<string> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-remote-diagnostics-"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-remote-diagnostics-"));
   roots.push(root);
   const stream = new PassThrough();
   const writes: Promise<void>[] = [];

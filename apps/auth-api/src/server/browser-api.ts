@@ -1,25 +1,25 @@
-import { isAvatarMimeType } from "@openbot/contracts/avatar-images";
-import { parseBillingPortalRequest, parseBillingStorageRequest } from "@openbot/contracts/billing";
-import { parseBillingDetailsRequest } from "@openbot/contracts/billing-details";
-import { WEB_APP_COMPANY_SIGN_IN_ERROR_PARAM } from "@openbot/contracts/company-sign-in";
+import { isAvatarMimeType } from "@starbot/contracts/avatar-images";
+import { parseBillingPortalRequest, parseBillingStorageRequest } from "@starbot/contracts/billing";
+import { parseBillingDetailsRequest } from "@starbot/contracts/billing-details";
+import { WEB_APP_COMPANY_SIGN_IN_ERROR_PARAM } from "@starbot/contracts/company-sign-in";
 import {
   CREDITS_UNAVAILABLE_STATE,
   EMPTY_CREDIT_ACTIVITY,
   parseCreditCheckoutRequest,
   parseCreditTransferRequest,
-} from "@openbot/contracts/credits";
-import { parseHostedServerLifecycleInput } from "@openbot/contracts/hosted-servers";
+} from "@starbot/contracts/credits";
+import { parseHostedServerLifecycleInput } from "@starbot/contracts/hosted-servers";
 import {
   LICENSE_UNAVAILABLE_STATE,
   parseLicenseCheckoutRequest,
   parseLicensePlanRequest,
   parseLicenseRenewalRequest,
   parseLicenseUsersRequest,
-} from "@openbot/contracts/license";
-import { parsePromotionCode } from "@openbot/contracts/promotion-code";
-import { isReferralCode } from "@openbot/contracts/referral";
-import { type DynamicRecord, isBoolean, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/license";
+import { parsePromotionCode } from "@starbot/contracts/promotion-code";
+import { isReferralCode } from "@starbot/contracts/referral";
+import { type DynamicRecord, isBoolean, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Cause, Effect } from "effect";
 import { type AccountAttribution, requestFirstTouch } from "./account-attribution";
 import { type AuthService, AuthServiceError, readAnalyticsAnswer, readChatColor } from "./auth-service";
@@ -42,10 +42,10 @@ import { type RemoteControlPlane, RemoteControlPlaneError } from "./remote-contr
 import { sendTeamInviteEmail } from "./team-invite-email";
 import type { AuthUser, OwnerTransferEmailDelivery, TeamInviteEmailDelivery } from "./types";
 
-const COOKIE = "__Host-openbot-web";
+const COOKIE = "__Host-starbot-web";
 const PREFIX = "/api/browser/";
 const COOKIE_ATTRIBUTES = "Path=/; Secure; HttpOnly; SameSite=Lax";
-const COMPANY_COOKIE = "__Host-openbot-company";
+const COMPANY_COOKIE = "__Host-starbot-company";
 const COMPANY_FLOW_SECONDS = 600;
 
 export interface BrowserApiServices {
@@ -182,7 +182,7 @@ export function handleBrowserApi(request: Request, services: BrowserApiServices)
   if (
     request.method !== "GET" &&
     (request.headers.get("Origin") !== new URL(request.url).origin ||
-      request.headers.get("X-OpenBot-Browser") !== "1" ||
+      request.headers.get("X-StarBot-Browser") !== "1" ||
       !browserWriteContentTypeAllowed(request, path))
   )
     return Promise.resolve(failure(403, "browser_request_refused", "The browser request was refused."));

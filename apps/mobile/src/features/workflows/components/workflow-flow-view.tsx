@@ -1,4 +1,4 @@
-import type { WorkflowGraph, WorkflowNode, WorkflowStep } from "@openbot/contracts/ipc";
+import type { WorkflowGraph, WorkflowNode, WorkflowStep } from "@starbot/contracts/ipc";
 import { Typography } from "heroui-native";
 import CornerDownLeft from "lucide-react-native/icons/corner-down-left";
 import TriangleAlert from "lucide-react-native/icons/triangle-alert";
@@ -55,11 +55,11 @@ export function FlowStepCard({
 }) {
   const { t } = useText();
   const [control, grouped, danger, warning, accent] = useCSSVariable([
-    "--openbot-bg-control",
-    "--openbot-bg-grouped",
-    "--openbot-danger-text",
-    "--openbot-warning",
-    "--openbot-accent",
+    "--starbot-bg-control",
+    "--starbot-bg-grouped",
+    "--starbot-danger-text",
+    "--starbot-warning",
+    "--starbot-accent",
   ]);
   const status = run?.step?.status;
   const ring = problem
@@ -161,7 +161,7 @@ export function FlowStepCard({
 
 function FlowJump({ label, loop }: { label: string; loop: boolean }) {
   const { t } = useText();
-  const muted = String(useCSSVariable("--openbot-text-grouped-secondary"));
+  const muted = String(useCSSVariable("--starbot-text-grouped-secondary"));
   return (
     <View className="flex-row items-center justify-center gap-1.5 px-2 py-1" style={{ maxWidth: FLOW_CARD_WIDTH }}>
       <CornerDownLeft color={muted} size={14} strokeWidth={2} />

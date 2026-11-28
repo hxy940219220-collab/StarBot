@@ -1,6 +1,6 @@
-import { APP_LOGO_COLOR_HEX, APP_LOGO_COLORS, type AppLogoColor } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Button } from "@openbot/ui";
+import { APP_LOGO_COLOR_HEX, APP_LOGO_COLORS, type AppLogoColor } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { Button } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { For } from "solid-js";
 import { useText } from "../../text";

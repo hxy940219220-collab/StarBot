@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "远程控制",
   "remoteDesktop.displayLabel": "远程显示器",
   "remoteDesktop.selectDisplay": "选择显示器",
-  "remoteDesktop.backToOpenBot": "返回星友",
+  "remoteDesktop.backToStarBot": "返回星友",
   "remoteDesktop.disconnect": "断开连接",
   "remoteDesktop.viewerTitle": "Sunshine 远程桌面",
   "remoteDesktop.viewerLoadFailed": "Moonlight 查看器加载失败。",

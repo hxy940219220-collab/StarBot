@@ -20,7 +20,7 @@ import type {
   QueueSnapshot,
   SidebarLayoutSnapshot,
   UsageCredits,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   type AgentSessionSettings,
   type ChannelFolderChange,
@@ -69,14 +69,14 @@ import {
   isRoutineRun,
   isSidebarLayoutSnapshot,
   isSidebarPinsSnapshot,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, guardedDecoder, guardedListDecoder } from "@openbot/contracts/ipc-decoding";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { isAgentThreadBranchLinks } from "@openbot/contracts/team-protocol/agent-thread-branches-v1";
-import { isAgentThreadQueues } from "@openbot/contracts/team-protocol/agent-thread-queue-v1";
-import { isAgentThreadRequests } from "@openbot/contracts/team-protocol/agent-thread-requests-v1";
-import { isAgentUsageLimits } from "@openbot/contracts/team-protocol/agent-usage-limit-v1";
-import { decodeProviderUseResponse } from "@openbot/contracts/team-protocol/provider-use-v1";
+} from "@starbot/contracts/ipc";
+import { decodeRecord, guardedDecoder, guardedListDecoder } from "@starbot/contracts/ipc-decoding";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { isAgentThreadBranchLinks } from "@starbot/contracts/team-protocol/agent-thread-branches-v1";
+import { isAgentThreadQueues } from "@starbot/contracts/team-protocol/agent-thread-queue-v1";
+import { isAgentThreadRequests } from "@starbot/contracts/team-protocol/agent-thread-requests-v1";
+import { isAgentUsageLimits } from "@starbot/contracts/team-protocol/agent-usage-limit-v1";
+import { decodeProviderUseResponse } from "@starbot/contracts/team-protocol/provider-use-v1";
 
 export const decodeAgentHostSettingsFromHost = guardedDecoder(isAgentHostSettings, "agent host settings response");
 export const decodeRemoteAgentColors = guardedDecoder(isAgentColors, "agent colors response");

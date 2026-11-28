@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { type HostStatus, LOCAL_SERVER_ID, type ServerSummary } from "@openbot/contracts/ipc";
-import { OWNER_TRANSFER_CAPABILITY } from "@openbot/contracts/team-protocol/owner-transfer-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { type HostStatus, LOCAL_SERVER_ID, type ServerSummary } from "@starbot/contracts/ipc";
+import { OWNER_TRANSFER_CAPABILITY } from "@starbot/contracts/team-protocol/owner-transfer-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { CentralAuthManager } from "../central-auth-manager";

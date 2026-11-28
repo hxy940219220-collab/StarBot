@@ -1,5 +1,5 @@
-import type { AttachmentSummary, FilePreview, OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import type { AttachmentMediaSource } from "@openbot/ui/features/conversation/AttachmentCards";
+import type { AttachmentSummary, FilePreview, StarBotDesktopApi } from "@starbot/contracts/ipc";
+import type { AttachmentMediaSource } from "@starbot/ui/features/conversation/AttachmentCards";
 import type { ChannelMemoriesApi } from "../conversation/memories-port";
 import type { EventRoutinesApi } from "../conversation/routine-webhooks-api";
 import type { ChannelRoutinesApi } from "../conversation/routines-port";
@@ -7,7 +7,7 @@ import type { ChannelFoldersApi } from "./channel-folders-port";
 
 export interface ChannelsPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "channelCommand"
     | "chooseAttachments"
     | "listChannels"
@@ -20,24 +20,24 @@ export interface ChannelsPort {
   > &
     ChannelMemoriesApi &
     ChannelRoutinesApi &
-    Partial<Pick<OpenBotDesktopApi["agent"], "discardDraftAttachment" | "downloadAttachments">> &
-    Partial<Pick<OpenBotDesktopApi["agent"], "deleteChannelMessage">> &
-    Partial<Pick<OpenBotDesktopApi["agent"], "setChannelImage">> &
-    Partial<ChannelFoldersApi & Pick<OpenBotDesktopApi["agent"], "chooseChannelFolder">> &
-    Partial<Pick<OpenBotDesktopApi["agent"], "clearChannelContext" | "compactChannelContext" | "deleteChannelHistory">>;
+    Partial<Pick<StarBotDesktopApi["agent"], "discardDraftAttachment" | "downloadAttachments">> &
+    Partial<Pick<StarBotDesktopApi["agent"], "deleteChannelMessage">> &
+    Partial<Pick<StarBotDesktopApi["agent"], "setChannelImage">> &
+    Partial<ChannelFoldersApi & Pick<StarBotDesktopApi["agent"], "chooseChannelFolder">> &
+    Partial<Pick<StarBotDesktopApi["agent"], "clearChannelContext" | "compactChannelContext" | "deleteChannelHistory">>;
   eventRoutines?: EventRoutinesApi | undefined;
-  browser: Pick<OpenBotDesktopApi["browser"], "capturePreview">;
-  openUrl: OpenBotDesktopApi["openUrl"];
+  browser: Pick<StarBotDesktopApi["browser"], "capturePreview">;
+  openUrl: StarBotDesktopApi["openUrl"];
   fileActions: "native" | "browser";
   previewAttachment?: (attachment: AttachmentSummary) => Promise<FilePreview>;
   attachmentMedia?: AttachmentMediaSource;
   visualPage?: (attachment: AttachmentSummary) => Promise<string>;
   importAttachments?: (files: File[]) => Promise<AttachmentSummary[]>;
-  onAttachmentImport?: OpenBotDesktopApi["agent"]["onAttachmentImport"];
+  onAttachmentImport?: StarBotDesktopApi["agent"]["onAttachmentImport"];
 }
 
 export function channelsPort(): ChannelsPort {
-  const api = window.openbot;
+  const api = window.starbot;
   return {
     agent: api.agent,
     browser: api.browser,

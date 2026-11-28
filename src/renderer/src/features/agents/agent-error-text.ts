@@ -1,8 +1,8 @@
-import { agentProviderName, isAgentProvider } from "@openbot/contracts/ipc";
-import { matchingSourceKeys } from "@openbot/i18n";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
-import { currentText } from "@openbot/ui/text";
+import { agentProviderName, isAgentProvider } from "@starbot/contracts/ipc";
+import { matchingSourceKeys } from "@starbot/i18n";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
+import { currentText } from "@starbot/ui/text";
 
 const RETRY_NOTICE_KEYS: ReadonlySet<string> = new Set([
   "error.backend.providerRetrying",

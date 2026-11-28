@@ -1,4 +1,4 @@
-import type { MessagingPlatform } from "@openbot/contracts/ipc";
+import type { MessagingPlatform } from "@starbot/contracts/ipc";
 import { memoryPromptLine } from "../memory-store";
 
 export interface MessagingContextMessage {
@@ -98,15 +98,15 @@ function guidanceLines(input: MessagingPromptInput, words: (typeof PLATFORM_WORD
   const lines = [
     "Answer yourself when you can answer correctly in this turn from your knowledge, this conversation, the saved facts, or your tools: a greeting, a simple question, a fact, a short explanation, or the status of your own work. Ask an StarBot teammate only when the request needs its tools, accounts, files, or memory, or long work such as code changes or research.",
     "A teammate's work can change after its answer, for example when the StarBot user continues it in the app. To give the status of work that a teammate did, ask that teammate again for its current status, also when you know its earlier answer or your instructions say that you can answer the status of work you know. Do not give its earlier answer as the current status.",
-    "To send files, call openbot.attach_files_to_response. When you ask an StarBot teammate, ask one teammate and end this turn: its reply comes back to this conversation, and your answer to it is posted here.",
-    `Through openbot.tool_call: openbot.messaging_history reads more of this place; openbot.messaging_remember saves a fact that every conversation of this ${words.workspace} sees; openbot.messaging_forget_memory deletes one by its id; openbot.messaging_post posts to another place. Keep facts about this ${words.workspace} there, not in openbot.remember: your own memories are private to the StarBot user.`,
+    "To send files, call starbot.attach_files_to_response. When you ask an StarBot teammate, ask one teammate and end this turn: its reply comes back to this conversation, and your answer to it is posted here.",
+    `Through starbot.tool_call: starbot.messaging_history reads more of this place; starbot.messaging_remember saves a fact that every conversation of this ${words.workspace} sees; starbot.messaging_forget_memory deletes one by its id; starbot.messaging_post posts to another place. Keep facts about this ${words.workspace} there, not in starbot.remember: your own memories are private to the StarBot user.`,
     "Nobody can approve a tool in this chat. When a tool stops because its approval is not available here, do not try the same action another way: say which action needs approval, and that the StarBot user can approve it when they ask you in the StarBot app.",
   ];
   const mention = MENTION_GUIDANCE[input.platform];
   if (mention) lines.push(mention);
   if (!input.isDirect)
     lines.push(
-      `When a person gives a lasting fact or default of this ${words.workspace}, such as the repository or account to use or a person's role, save it with openbot.messaging_remember in the same turn. A new conversation, and a restart, keep only the saved facts.`,
+      `When a person gives a lasting fact or default of this ${words.workspace}, such as the repository or account to use or a person's role, save it with starbot.messaging_remember in the same turn. A new conversation, and a restart, keep only the saved facts.`,
     );
   if (input.platform === "slack" && !input.isDirect)
     lines.push(

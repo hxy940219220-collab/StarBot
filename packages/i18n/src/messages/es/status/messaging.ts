@@ -70,7 +70,7 @@ export const messages = {
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *StarBot está conectado*\n\nLas personas que permitas en StarBot ya pueden escribir a este número. Una persona nueva recibe un código: apruébalo en StarBot, en Solicitudes.\n\nEnvía *stop* para detener una solicitud.",
 
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "Otro StarBot está vinculado a este número de WhatsApp, así que puedes recibir dos respuestas. Para solucionarlo, abre Dispositivos vinculados en WhatsApp en tu teléfono y cierra la sesión del StarBot que no usas.",
 
   "status.messaging.whatsappPaused":

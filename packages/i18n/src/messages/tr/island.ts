@@ -38,13 +38,13 @@ export const messages = {
   "island.action.openChat": "Sohbeti aç",
   "island.action.openDetails": "Ayrıntıları aç",
   "island.action.takeOver": "Devral",
-  "island.action.reviewInOpenBot": "StarBot'ta incele",
+  "island.action.reviewInStarBot": "StarBot'ta incele",
 
   "island.action.decline": "Reddet",
   "island.action.approve": "Onayla",
   "island.action.later": "Daha sonra",
   "island.action.dismiss": "Kapat",
-  "island.action.answerInOpenBot": "StarBot'ta yanıtla",
+  "island.action.answerInStarBot": "StarBot'ta yanıtla",
 
   "island.action.stopAgent": "Durdur: {name}",
   "island.action.failed": "Bu işlem başarısız oldu. Tekrar deneyin.",

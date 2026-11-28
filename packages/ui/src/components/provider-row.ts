@@ -1,11 +1,11 @@
-import { agentProviderDescriptor, isInstallerProvider, isKeyOnlyProvider } from "@openbot/contracts/agent-providers";
+import { agentProviderDescriptor, isInstallerProvider, isKeyOnlyProvider } from "@starbot/contracts/agent-providers";
 import type {
   AgentProviderId,
   AgentProviderState,
   ProviderRuntimePhase,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
-import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@starbot/i18n";
 import { createSignal } from "solid-js";
 import { providerUpdateAvailable, providerVersionLabel } from "../features/provider-updates/provider-update";
 import { useText } from "../text";

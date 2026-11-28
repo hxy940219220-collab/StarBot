@@ -1,6 +1,6 @@
-import { sourceText } from "@openbot/i18n/source";
-import { bytesToBase64 } from "@openbot/team-client/base64";
-import type { RemoteFileUpload } from "@openbot/team-client/remote-peer";
+import { sourceText } from "@starbot/i18n/source";
+import { bytesToBase64 } from "@starbot/team-client/base64";
+import type { RemoteFileUpload } from "@starbot/team-client/remote-peer";
 import * as DocumentPicker from "expo-document-picker";
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";

@@ -1,15 +1,15 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import type { Logger } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import type { Logger } from "@starbot/logging";
 import type { Browser, Page } from "playwright-core";
 import type { MetricValues } from "./bench-stats";
 import type { InspectorClient } from "./inspector-client";
 
-export const PROBES_ENVIRONMENT = { OPENBOT_PERF_PROBES: "1" } as const;
+export const PROBES_ENVIRONMENT = { STARBOT_PERF_PROBES: "1" } as const;
 
-const MAIN_API = "globalThis.__openbotPerfProbes";
-const RENDERER_API = "window.__openbotPerfProbes";
+const MAIN_API = "globalThis.__starbotPerfProbes";
+const RENDERER_API = "window.__starbotPerfProbes";
 const RENDERER_READY_MS = 15_000;
 const PER_THOUSAND = 1_000;
 

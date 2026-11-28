@@ -1,5 +1,5 @@
-import { Button } from "@openbot/ui/button";
-import { useText } from "@openbot/ui/text";
+import { Button } from "@starbot/ui/button";
+import { useText } from "@starbot/ui/text";
 import { createSignal, onSettled, Show, untrack } from "solid-js";
 
 const SLOW_LOAD_MS = 10_000;

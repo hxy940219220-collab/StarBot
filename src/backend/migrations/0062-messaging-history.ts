@@ -1,4 +1,4 @@
-import type { OpenBotMigration } from "./migration";
+import type { StarBotMigration } from "./migration";
 
 // Shared by migration v62 and the separate new-database schema. IF NOT EXISTS throughout.
 //
@@ -32,7 +32,7 @@ export const MESSAGING_HISTORY_SCHEMA_SQL = `
     ON projection_messaging_history(saved_at);
 `;
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 62,
   name: "messaging-history",
   // Only creates a table and its indexes, so no foreign-key pause and no vacuum. No WhatsApp message

@@ -1,4 +1,4 @@
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   BROWSER_VIEW_CONTEXT_MENU_QUERY,
   BROWSER_VIEW_CURSOR_QUERY,
@@ -18,13 +18,13 @@ import {
   decodeBrowserViewSessionResponse,
   encodeBrowserViewInput,
   isBrowserViewUserAction,
-} from "@openbot/contracts/team-protocol/browser-view-v1";
+} from "@starbot/contracts/team-protocol/browser-view-v1";
 import {
   decodeRemoteDesktopSignalBinary,
   decodeRemoteDesktopSignalControl,
   encodeRemoteDesktopSignalControl,
-} from "@openbot/contracts/team-protocol/remote-stream-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/remote-stream-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { runTeamEffect } from "./effect-boundary";
 import { createTeamRequestId } from "./request-id";

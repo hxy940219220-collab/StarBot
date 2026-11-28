@@ -18,7 +18,7 @@ const COMMENT_MARKER = "<!-- cla -->";
 const COMMENT_AUTHOR = "github-actions[bot]";
 const MAX_COMMITS = 250;
 const SAVE_ATTEMPTS = 3;
-const REPORT_PATH = ".openbot-build/cla/report.json";
+const REPORT_PATH = ".starbot-build/cla/report.json";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");

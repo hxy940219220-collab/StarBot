@@ -1,5 +1,5 @@
 .agent-activity-content.channel-activity-content {
-  padding-inline-start: var(--openbot-space-0-5);
+  padding-inline-start: var(--starbot-space-0-5);
 }
 
 .channel-activity-faces {
@@ -9,16 +9,16 @@
 }
 .channel-activity-faces .agent-activity-avatar {
   transition:
-    transform var(--openbot-duration-overlay) var(--openbot-ease-out),
-    opacity var(--openbot-duration-overlay) var(--openbot-ease-out),
-    margin-inline-end var(--openbot-duration-overlay) var(--openbot-ease-in-out);
+    transform var(--starbot-duration-overlay) var(--starbot-ease-out),
+    opacity var(--starbot-duration-overlay) var(--starbot-ease-out),
+    margin-inline-end var(--starbot-duration-overlay) var(--starbot-ease-in-out);
 }
 .channel-activity-faces .agent-activity-avatar + .agent-activity-avatar {
-  margin-inline-start: calc(-1 * var(--openbot-space-2));
+  margin-inline-start: calc(-1 * var(--starbot-space-2));
 }
 
 .channel-activity-faces .channel-activity-face-leaving {
-  margin-inline-end: calc(-1 * var(--openbot-space-6));
+  margin-inline-end: calc(-1 * var(--starbot-space-6));
   opacity: 0;
   transform: translateY(4px) scale(0.6);
 }
@@ -31,16 +31,16 @@
 .channel-activity-names {
   flex: 0 1 auto;
   min-width: 0;
-  margin-inline-start: var(--openbot-space-2);
+  margin-inline-start: var(--starbot-space-2);
   overflow: hidden;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
   line-height: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .channel-activity-name {
-  color: var(--channel-activity-name-color, var(--openbot-text-muted));
+  color: var(--channel-activity-name-color, var(--starbot-text-muted));
 }
 .channel-activity-content .agent-activity-label {
   flex-shrink: 0;
@@ -50,14 +50,14 @@
   position: relative;
   max-height: 35dvh;
   overflow-y: auto;
-  margin: calc(-1 * var(--openbot-space-6)) var(--openbot-space-3) calc(-1 * var(--openbot-radius-lg));
-  border-radius: var(--openbot-radius-lg) var(--openbot-radius-lg) var(--openbot-radius-md) var(--openbot-radius-md);
-  background: var(--openbot-accent-strong);
-  box-shadow: 0 0 0 1px var(--openbot-accent-soft);
-  -webkit-backdrop-filter: blur(var(--openbot-space-3));
-  backdrop-filter: blur(var(--openbot-space-3));
-  padding-bottom: var(--openbot-radius-lg);
-  color: var(--openbot-accent-text);
+  margin: calc(-1 * var(--starbot-space-6)) var(--starbot-space-3) calc(-1 * var(--starbot-radius-lg));
+  border-radius: var(--starbot-radius-lg) var(--starbot-radius-lg) var(--starbot-radius-md) var(--starbot-radius-md);
+  background: var(--starbot-accent-strong);
+  box-shadow: 0 0 0 1px var(--starbot-accent-soft);
+  -webkit-backdrop-filter: blur(var(--starbot-space-3));
+  backdrop-filter: blur(var(--starbot-space-3));
+  padding-bottom: var(--starbot-radius-lg);
+  color: var(--starbot-accent-text);
 }
 
 .awaiting-replies + .channel-paused-tasks {
@@ -68,13 +68,13 @@
 .channel-paused-task {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   align-items: center;
   justify-content: space-between;
-  padding: var(--openbot-space-2) var(--openbot-space-3);
+  padding: var(--starbot-space-2) var(--starbot-space-3);
 }
 .channel-paused-task + .channel-paused-task {
-  border-top: 1px solid var(--openbot-accent-soft);
+  border-top: 1px solid var(--starbot-accent-soft);
 }
 .channel-paused-task-text {
   min-width: 0;
@@ -83,26 +83,26 @@
 .channel-paused-task-subject {
   margin: 0;
   overflow: hidden;
-  font-size: var(--openbot-text-sm);
+  font-size: var(--starbot-text-sm);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .channel-paused-task-reason {
   margin: 0;
   overflow-wrap: anywhere;
-  font-size: var(--openbot-text-sm);
+  font-size: var(--starbot-text-sm);
 }
 .channel-paused-task-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   align-items: center;
 }
 .channel-paused-task-actions .ui-button {
-  background: var(--openbot-surface-light);
-  color: var(--openbot-text-on-light);
+  background: var(--starbot-surface-light);
+  color: var(--starbot-text-on-light);
 }
 .channel-paused-task-actions .ui-button:hover {
-  background: var(--openbot-surface-light);
-  box-shadow: 0 0 0 1px var(--openbot-text-dim-on-light);
+  background: var(--starbot-surface-light);
+  box-shadow: 0 0 0 1px var(--starbot-text-dim-on-light);
 }

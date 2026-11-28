@@ -18,7 +18,7 @@ editor. The host must be online to receive requests.
 Each webhook routine has its own URL and secret. A host can have at most 64 webhook routines.
 
 You can also ask an agent in chat to make a webhook routine. The agent calls
-`openbot.create_webhook_routine` and tells you the URL and the request format. It does not get the
+`starbot.create_webhook_routine` and tells you the URL and the request format. It does not get the
 secret. A card in the chat shows the URL; press the regenerate button on the card to make the
 secret, then copy it. Only a person who can manage the host's webhook routines sees the card. When
 the agent makes the routine for another agent, get the secret in that agent's routine editor.
@@ -28,13 +28,13 @@ through an API. Press **Give the signing secret to <agent>** (the agent button n
 regenerate button) on the card or in the routine editor, and confirm. The host makes a new secret
 and saves it as an API key of that agent only, with a name such as `WEBHOOK_SECRET_3F2A…` (the routine ID in upper case, with no dashes). The old
 secret stops working immediately. Nobody copies the secret, and it does not show in the chat. The
-agent reads it from the key file (`openbot.list_api_keys` gives the path). When you regenerate the
+agent reads it from the key file (`starbot.list_api_keys` gives the path). When you regenerate the
 secret or use the sender's secret later, the host also updates the key. When you delete the
 routine or change its trigger to a schedule, the host deletes the key. A channel routine has no single agent, so it does not show the
 button.
 
 To change the event type or the filters from the chat, ask the agent: it calls
-`openbot.update_webhook_routine`. You can also change them on the card and press **Save**. The URL
+`starbot.update_webhook_routine`. You can also change them on the card and press **Save**. The URL
 and the secret stay the same. Only a person's message can start these tools: a routine run or
 another agent's message cannot make or change a webhook routine.
 
@@ -52,7 +52,7 @@ the same. Copy the new URL into the sending service.
 
 In the routine editor, select **Send test event**. The host makes an event that matches the event
 type and the filters, signs it with the routine secret, and receives it as it receives a relayed
-request. The event type is `openbot.test` when the routine accepts all types. The test shows in the
+request. The event type is `starbot.test` when the routine accepts all types. The test shows in the
 history, and a match starts one run. A paused routine does not run. The test does not go through
 the relay, so it does not show whether a sender can reach the URL.
 
@@ -108,10 +108,10 @@ import { createHmac, randomUUID } from "node:crypto";
 const body = JSON.stringify({ type: "deployment.completed", data: { environment: "production" } });
 const deliveryId = randomUUID(); // Keep this ID and the body for a retry.
 const timestamp = String(Math.floor(Date.now() / 1000));
-const signature = createHmac("sha256", process.env.OPENBOT_WEBHOOK_SECRET)
+const signature = createHmac("sha256", process.env.STARBOT_WEBHOOK_SECRET)
   .update(`${timestamp}.${deliveryId}.${body}`)
   .digest("hex");
-const response = await fetch(process.env.OPENBOT_WEBHOOK_URL, {
+const response = await fetch(process.env.STARBOT_WEBHOOK_URL, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

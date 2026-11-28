@@ -1,14 +1,14 @@
-import { serializeAttachmentReference } from "@openbot/contracts/attachment-references";
-import { serializeChatTagReference } from "@openbot/contracts/chat-tag-references";
-import type { AttachmentSummary } from "@openbot/contracts/ipc";
-import type { MessageCitation } from "@openbot/ui/data";
-import { RichMessageText } from "@openbot/ui/features/conversation/RichMessageText";
+import { serializeAttachmentReference } from "@starbot/contracts/attachment-references";
+import { serializeChatTagReference } from "@starbot/contracts/chat-tag-references";
+import type { AttachmentSummary } from "@starbot/contracts/ipc";
+import type { MessageCitation } from "@starbot/ui/data";
+import { RichMessageText } from "@starbot/ui/features/conversation/RichMessageText";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { requireFixture, STORY_AGENTS, STORY_ATTACHMENTS, STORY_INSTALLED_SKILLS } from "./fixtures";
 
 const args: Parameters<typeof RichMessageText>[0] = {
-  body: "Ask @Research to review https://openbot.run/docs before the launch.",
+  body: "Ask @Research to review https://starbot.run/docs before the launch.",
   agents: STORY_AGENTS,
   attachments: [],
   onSelectAgent: fn(),
@@ -149,7 +149,7 @@ export const InlineFileReferences: Story = {
 
 export const PlainFileReferences: Story = {
   args: {
-    body: `Here is ${firstStoryAttachment.name}. You can also review ~/OpenBot/Shared/brief.pdf.`,
+    body: `Here is ${firstStoryAttachment.name}. You can also review ~/StarBot/Shared/brief.pdf.`,
     attachments: [firstStoryAttachment],
     onOpenAttachment: fn(),
     onOpenSharedFile: fn(),
@@ -186,7 +186,7 @@ export const FileReferenceTypes: Story = {
 export const MixedReferencesStress: Story = {
   name: "Mixed references stress",
   args: {
-    body: `Ask @Research to compare ${serializeAttachmentReference(longAttachment.name, longAttachment.id)} with ${serializeAttachmentReference(secondFileTypeAttachment.name, secondFileTypeAttachment.id)} and https://openbot.run/docs. Keep the decision traceable to the primary paper [1], then verify the compressed handoff in ${serializeAttachmentReference(fourthFileTypeAttachment.name, fourthFileTypeAttachment.id)} before shipping [2].`,
+    body: `Ask @Research to compare ${serializeAttachmentReference(longAttachment.name, longAttachment.id)} with ${serializeAttachmentReference(secondFileTypeAttachment.name, secondFileTypeAttachment.id)} and https://starbot.run/docs. Keep the decision traceable to the primary paper [1], then verify the compressed handoff in ${serializeAttachmentReference(fourthFileTypeAttachment.name, fourthFileTypeAttachment.id)} before shipping [2].`,
     attachments: [longAttachment, secondFileTypeAttachment, fourthFileTypeAttachment],
     citations,
     onOpenAttachment: fn(),
@@ -234,9 +234,9 @@ const allChipKindsBody = [
   serializeAttachmentReference(logAttachment.name, logAttachment.id),
   serializeAttachmentReference(secondFileTypeAttachment.name, secondFileTypeAttachment.id),
   serializeAttachmentReference(fourthFileTypeAttachment.name, fourthFileTypeAttachment.id),
-  "and ~/OpenBot/Shared/brief.pdf, then compare",
+  "and ~/StarBot/Shared/brief.pdf, then compare",
   serializeAttachmentReference(longAttachment.name, longAttachment.id),
-  "with https://openbot.run/docs [1].",
+  "with https://starbot.run/docs [1].",
 ].join(" ");
 
 const allChipKindsArgs = {

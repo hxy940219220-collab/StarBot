@@ -4,9 +4,9 @@ import { access, lstat, open, realpath, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 import { basename, delimiter, dirname, extname, isAbsolute, join, posix, resolve, win32 } from "node:path";
 import { promisify, stripVTControlCharacters } from "node:util";
-import { type AgentProviderId, agentProviderName } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { type AgentProviderId, agentProviderName } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Deferred, Effect, Result } from "effect";
 import { providerCheckTimeoutMs } from "./disk-restore";
 import type { SignInRegion } from "./kimi-region";
@@ -360,7 +360,7 @@ export const resolveAntigravityCli: (input?: {
     input: { systemCandidates?: string[]; bundledExecutable?: string | null | undefined } = {},
   ): Effect.fn.Return<AntigravityCliInfo, ProviderClientOperationError> {
     const override = input.systemCandidates ?? [configuredCliPath("antigravity")].filter((path) => path !== null);
-    const sharedAntigravity = sharedOpenBotRuntimePaths("antigravity");
+    const sharedAntigravity = sharedStarBotRuntimePaths("antigravity");
     const candidates =
       override.length > 0
         ? override.map((executable) => ({ executable, source: "system" as const }))
@@ -1007,7 +1007,7 @@ function cliCommandName(provider: AgentProviderId): string {
 }
 
 export function configuredCliPath(provider: AgentProviderId): string | null {
-  return process.env[`OPENBOT_${provider.toUpperCase()}_PATH`]?.trim() || null;
+  return process.env[`STARBOT_${provider.toUpperCase()}_PATH`]?.trim() || null;
 }
 
 const cliCandidates = Effect.fn("Cli.candidates")(function* (
@@ -1298,7 +1298,7 @@ export function cliPathEnvironment(cli: { readonly launchPath?: string }): Recor
   return cli.launchPath ? { PATH: cli.launchPath } : {};
 }
 
-function sharedOpenBotRuntimePaths(
+function sharedStarBotRuntimePaths(
   provider: AgentProviderId,
   userHome = homedir(),
   platform: NodeJS.Platform = process.platform,
@@ -1337,7 +1337,7 @@ function posixFallbackPaths(
 ): string[] {
   const command = cliCommandName(provider);
   const paths = [
-    ...sharedOpenBotRuntimePaths(provider, userHome, platform),
+    ...sharedStarBotRuntimePaths(provider, userHome, platform),
     posix.join(userHome, ".local", "bin", command),
   ];
   if (command === "claude") paths.push(posix.join(userHome, ".claude", "local", "claude"));

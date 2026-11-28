@@ -13,19 +13,19 @@ With Docker Compose:
 curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/docker/compose.yaml
 curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/docker/seccomp.json
 docker compose up -d
-docker compose exec openbot openbot login
+docker compose exec starbot starbot login
 ```
 
 With `docker run`:
 
 ```sh
 curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/main/docker/seccomp.json
-docker run -d --name openbot --restart unless-stopped \
+docker run -d --name starbot --restart unless-stopped \
   --security-opt seccomp=seccomp.json --security-opt no-new-privileges:true \
   --shm-size 1g --stop-timeout 60 \
-  -v openbot-data:/data \
+  -v starbot-data:/data \
   ghcr.io/hxy940219220-collab/StarBot-Desktop:latest
-docker exec -it openbot openbot login
+docker exec -it starbot starbot login
 ```
 
 These commands get the files from `main` and run `latest`. To pin a release (see [Tags](#tags)),
@@ -39,8 +39,8 @@ curl -fsSLO https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Deskto
 Then set `image: ghcr.io/hxy940219220-collab/StarBot-Desktop:0.76.1` in `compose.yaml`, or use
 `ghcr.io/hxy940219220-collab/StarBot-Desktop:0.76.1` in `docker run`.
 
-`openbot login` asks for your email and the code that StarBot sends to it. An operator who sets up
-the container for somebody else can use `openbot login --claim` instead (see
+`starbot login` asks for your email and the code that StarBot sends to it. An operator who sets up
+the container for somebody else can use `starbot login --claim` instead (see
 [server claims](self-hosted-server.md#sign-in-with-a-server-claim)). After the sign-in, the
 server shows in the server list of that account. Then connect a provider from the app, as on a
 [hosted server](hosted-servers.md#providers).
@@ -48,7 +48,7 @@ server shows in the server list of that account. Then connect a provider from th
 To connect the phone app, show a Mobile Connect code in the terminal and scan it with the app:
 
 ```sh
-docker exec -it openbot openbot mobile-connect
+docker exec -it starbot starbot mobile-connect
 ```
 
 See [Phone app](self-hosted-server.md#phone-app).
@@ -60,14 +60,14 @@ The options in both examples are necessary:
 | `seccomp=seccomp.json` | The Electron sandbox makes user namespaces. The default seccomp profile of Docker refuses them, and the container stops with a message. See [Security](#security). |
 | `--shm-size 1g` | Chromium uses shared memory. The Docker default of 64 MB is too small. When `/dev/shm` is smaller than 1 GiB, Chromium uses `/tmp`, which is slower. |
 | `--stop-timeout 60` | StarBot stops its agents and closes its database before it exits. |
-| `-v openbot-data:/data` | All data is in `/data`. Without a volume, it goes away with the container. |
+| `-v starbot-data:/data` | All data is in `/data`. Without a volume, it goes away with the container. |
 
 For Amazon ECS, see [AWS ECS](aws-ecs.md).
 
 The container publishes no port. StarBot only connects out: to the account server, to the providers,
 and to Signal and TURN for remote use. The Team API listens on `127.0.0.1` in the container.
 The container does not serve a web interface, except the setup page of
-`OPENBOT_SETUP_PAGE_PORT` (see [Umbrel](umbrel.md#the-setup-page)). After `openbot login`, use
+`STARBOT_SETUP_PAGE_PORT` (see [Umbrel](umbrel.md#the-setup-page)). After `starbot login`, use
 [`starbot.app/app`](https://starbot.app/app) with the same account to select the server. A web
 client at your own origin is not included in this image. The
 [self-hosted account service](self-hosting.md#what-changes) is a separate deployment with its own
@@ -97,7 +97,7 @@ Host networking removes the network isolation of the container:
 
 Use it only on a host where you trust the other programs and users. Do not use it with
 [several instances on one host](#several-instances-on-one-host): their firewall works only on the
-`openbot` bridge network.
+`starbot` bridge network.
 
 ## Tags
 
@@ -115,19 +115,19 @@ Public images need no GHCR sign-in. If `latest` or a version without `v` returns
 
 ## Data
 
-`/data` is the home folder of the user `openbot` (UID 1000, GID 1000). StarBot and its agents run as
+`/data` is the home folder of the user `starbot` (UID 1000, GID 1000). StarBot and its agents run as
 that user and keep everything there:
 
 | Path | Contents |
 | --- | --- |
-| `/data/.config/StarBot` | The database `openbot.db`, logs, the downloaded provider runtimes and the browser data. |
+| `/data/.config/StarBot` | The database `starbot.db`, logs, the downloaded provider runtimes and the browser data. |
 | `/data/StarBot` | The agent workspaces (`Agents`), `Shared` and `Downloads`. |
-| `/data/.local/share/keyrings`, `/data/.config/openbot-container` | The keyring and its password. The keyring has the key of the encrypted data in `/data`. |
+| `/data/.local/share/keyrings`, `/data/.config/starbot-container` | The keyring and its password. The keyring has the key of the encrypted data in `/data`. |
 | `/data/.local/bin` | Programs that you or agents install, for example with `uv` or `pipx`. The image puts this folder on `PATH`. |
 | Other files in `/data` | Provider sign-ins and the files of agent tools, for example `~/.codex` and `~/.claude`. |
 
 An update makes a new container from the new image, so a package that you install outside `/data`,
-for example with `apt-get`, goes away. Install tools as the user `openbot` into `~/.local`. For
+for example with `apt-get`, goes away. Install tools as the user `starbot` into `~/.local`. For
 example, `curl -LsSf https://astral.sh/uv/install.sh | sh`, then `~/.local/bin/uv python install`,
 gives agents a Python that stays after updates.
 
@@ -137,7 +137,7 @@ open without its password file. Use one volume for one container at a time.
 For a bind mount, give the folder to the user of the image first:
 
 ```sh
-mkdir openbot-data && sudo chown 1000:1000 openbot-data
+mkdir starbot-data && sudo chown 1000:1000 starbot-data
 ```
 
 The data has your account session, your provider sign-ins and your conversations. Protect it as you
@@ -146,40 +146,40 @@ protect a home folder. To back it up, stop the container and copy the volume. An
 
 ## Commands
 
-In the container, `openbot status`, `login`, `mobile-connect`, `logout`, `name` and `version` work as on a
+In the container, `starbot status`, `login`, `mobile-connect`, `logout`, `name` and `version` work as on a
 [self-hosted server](self-hosted-server.md#commands). Do the other tasks with Docker on the host:
 
 | Task | Command |
 | --- | --- |
-| Read the log | `docker logs openbot` |
-| Stop, start, restart | `docker stop openbot`, `docker start openbot`, `docker restart openbot` |
+| Read the log | `docker logs starbot` |
+| Stop, start, restart | `docker stop starbot`, `docker start starbot`, `docker restart starbot` |
 | Upgrade | `docker compose pull && docker compose up -d`, or pull the image and make the container again with the same volume |
-| Remove | `docker exec openbot openbot logout`, then `docker stop openbot && docker rm openbot`. The data stays in the volume. `docker volume rm openbot-data` deletes it. |
+| Remove | `docker exec starbot starbot logout`, then `docker stop starbot && docker rm starbot`. The data stays in the volume. `docker volume rm starbot-data` deletes it. |
 
 ## Several instances on one host
 
 `docker/instances/` runs more than one StarBot container on one Linux host with systemd. Each
 instance has its own CPU, memory and disk limit, its own data and its own account. Copy the `docker`
-folder of the repository to the host, for example to `/opt/openbot-docker`, and run as root:
+folder of the repository to the host, for example to `/opt/starbot-docker`, and run as root:
 
 ```sh
-/opt/openbot-docker/instances/openbot-instance setup
-/opt/openbot-docker/instances/openbot-instance create main --cpus 8 --mem 32g --disk 200G
-/opt/openbot-docker/instances/openbot-instance run main login
+/opt/starbot-docker/instances/starbot-instance setup
+/opt/starbot-docker/instances/starbot-instance create main --cpus 8 --mem 32g --disk 200G
+/opt/starbot-docker/instances/starbot-instance run main login
 ```
 
 | Path | Contents |
 | --- | --- |
-| `instances/<name>.env` | The name and the limits of the instance. Change `OPENBOT_CPUS` or `OPENBOT_MEM`, then run `openbot-instance up <name>`. `OPENBOT_DISK` is for information only: a change to it does nothing. |
-| `/srv/openbot/<name>/data.img` | An ext4 image. Its size is the disk limit. `create` reserves all of it on the disk of the host, so the images can never need more space than the host has. |
-| `/srv/openbot/<name>/data` | The mount of the image, which is `/data` in the container. `/etc/fstab` mounts it before Docker starts. `X-fstrim.notrim` stops `fstrim.timer` from freeing the reserved space. |
-| `/srv/openbot/<name>/update-requests` | The update requests of the app. The container writes empty files here. It is a tmpfs of 64 KiB and 16 files, which `/etc/fstab` mounts. |
-| `/srv/openbot/<name>/update-status` | The state of an update, which root writes. The container can only read it. |
+| `instances/<name>.env` | The name and the limits of the instance. Change `STARBOT_CPUS` or `STARBOT_MEM`, then run `starbot-instance up <name>`. `STARBOT_DISK` is for information only: a change to it does nothing. |
+| `/srv/starbot/<name>/data.img` | An ext4 image. Its size is the disk limit. `create` reserves all of it on the disk of the host, so the images can never need more space than the host has. |
+| `/srv/starbot/<name>/data` | The mount of the image, which is `/data` in the container. `/etc/fstab` mounts it before Docker starts. `X-fstrim.notrim` stops `fstrim.timer` from freeing the reserved space. |
+| `/srv/starbot/<name>/update-requests` | The update requests of the app. The container writes empty files here. It is a tmpfs of 64 KiB and 16 files, which `/etc/fstab` mounts. |
+| `/srv/starbot/<name>/update-status` | The state of an update, which root writes. The container can only read it. |
 
-The container is `openbot-<name>`. Its root file system is read-only: the container layer is on the
+The container is `starbot-<name>`. Its root file system is read-only: the container layer is on the
 disk of the host, where Docker on ext4 cannot limit its size. Outside `/data`, the container writes
 only to `tmpfs` folders that count toward the memory limit: `/tmp` (8 GiB), `/var/tmp` (1 GiB),
-`/run/lock` and `/run/openbot`, and to the small tmpfs of its update requests. Before the image is mounted, root owns the folder, so the container cannot write to
+`/run/lock` and `/run/starbot`, and to the small tmpfs of its update requests. Before the image is mounted, root owns the folder, so the container cannot write to
 `/data` and stops. It never starts with an empty home folder.
 
 ### CPU and memory of the instances
@@ -187,8 +187,8 @@ only to `tmpfs` folders that count toward the memory limit: `/tmp` (8 GiB), `/va
 `--cpus` is a CPU time limit. The container still sees every CPU of the host in `/proc/cpuinfo` and
 `/proc/stat`, so a program that sizes itself from the CPU count starts too many workers: `next build`
 started 63 on a 64-CPU host that gives the instance 8, and two builds filled 32 GiB. `setup`
-installs LXCFS with `--enable-cfs` (`lxcfs-openbot.conf`) as its last step; when that fails, it
-prints a warning and the rest of the setup stays done. When LXCFS runs, `openbot-instance` adds
+installs LXCFS with `--enable-cfs` (`lxcfs-starbot.conf`) as its last step; when that fails, it
+prints a warning and the rest of the setup stays done. When LXCFS runs, `starbot-instance` adds
 `lxcfs.yaml`: the container then reads its own CPU limit in `/proc/cpuinfo`, and its memory limit in
 `/proc/meminfo` and `/proc/swaps`. On cgroup v2, LXCFS 5.0 does not limit the CPU lines of
 `/proc/stat`, which Node's `os.cpus()` counts, so StarBot limits the Node programs of agents itself
@@ -198,10 +198,10 @@ host. That file is not mounted: LXCFS lists CPUs 0 to limit-1 in it, but a proce
 CPU of the host, and the Gemini CLI then exits with SIGILL. Without LXCFS, an instance still starts
 (an update from the app must not fail), and `ready` prints a warning.
 
-An instance gets the LXCFS files when its container is made again: run `openbot-instance up <name>`
+An instance gets the LXCFS files when its container is made again: run `starbot-instance up <name>`
 after `setup`. A restart of LXCFS breaks its files in the containers that run, so `setup` does not
 restart it while a container uses it; each `setup` prints a warning until LXCFS runs with
-`--enable-cfs`. Docker starts after LXCFS (`docker-openbot.conf`).
+`--enable-cfs`. Docker starts after LXCFS (`docker-starbot.conf`).
 
 `start` also checks that the container cannot swap (`memory.swap.max` is 0), and prints a warning if
 it can, or if it cannot read the value. A container that swaps stops for seconds at a time when its memory is full, and its clients
@@ -210,20 +210,20 @@ lose the connection.
 ### Logs
 
 The container log goes through the `syslog` log driver to a socket of rsyslog,
-`/var/lib/openbot-docker/dev/log`, and not to the journal or `/var/log/syslog`, whose size limits
-other services share. rsyslog writes `/var/log/openbot/openbot-<name>.log`. logrotate rotates it each
-day, or sooner when it is larger than 200 MB. `openbot-logrotate.timer` checks every 5 minutes. It keeps
+`/var/lib/starbot-docker/dev/log`, and not to the journal or `/var/log/syslog`, whose size limits
+other services share. rsyslog writes `/var/log/starbot/starbot-<name>.log`. logrotate rotates it each
+day, or sooner when it is larger than 200 MB. `starbot-logrotate.timer` checks every 5 minutes. It keeps
 the 30 newest rotated files and none older than 30 days, so one instance keeps at most 31 files of
 about 200 MB. An instance that writes very much keeps less than 30 days. `docker logs` reads the local
 cache of Docker, which keeps
 only the recent lines. rsyslog cuts a line longer than 8 KB. `setup` installs the rsyslog and logrotate
-files and the timer. Its drop-in `docker.service.d/openbot.conf` makes Docker start after rsyslog, because
-a container does not start without the socket, and require `openbot-firewall.service`: when the
+files and the timer. Its drop-in `docker.service.d/starbot.conf` makes Docker start after rsyslog, because
+a container does not start without the socket, and require `starbot-firewall.service`: when the
 firewall fails, Docker does not start.
 
 ### Host settings
 
-`setup` also installs `/etc/sysctl.d/90-openbot-docker.conf`. With userns-remap, all containers run as
+`setup` also installs `/etc/sysctl.d/90-starbot-docker.conf`. With userns-remap, all containers run as
 one host user and share its inotify limits, so the file raises them. Each container may open 65536
 files (Docker gives 1024 by default). Add `"live-restore": true` to `/etc/docker/daemon.json`, then run
 `systemctl reload docker`: a restart or upgrade of Docker then does not stop the instances.
@@ -232,21 +232,21 @@ files (Docker gives 1024 by default). Add `"live-restore": true` to `/etc/docker
 
 Agents have full access in their container, so the host limits what a container can reach.
 
-- **Network.** `setup` makes the Docker network `openbot` (`172.30.0.0/16`, bridge `br-openbot`)
+- **Network.** `setup` makes the Docker network `starbot` (`172.30.0.0/16`, bridge `br-starbot`)
   with inter-container traffic off, so instances cannot reach each other. It installs
-  `openbot-firewall.service`, which runs `instances/openbot-firewall` before Docker starts. The
-  chain `OPENBOT-EGRESS` in `DOCKER-USER` drops traffic to private, local and multicast ranges and to
-  the addresses in `/etc/openbot-docker/deny`. A rule at the start of `INPUT` drops traffic from the
+  `starbot-firewall.service`, which runs `instances/starbot-firewall` before Docker starts. The
+  chain `STARBOT-EGRESS` in `DOCKER-USER` drops traffic to private, local and multicast ranges and to
+  the addresses in `/etc/starbot-docker/deny`. A rule at the start of `INPUT` drops traffic from the
   bridge to the host. The containers reach only the internet. `create`, `up` and `upgrade` refuse
   to start a container when the firewall is off.
 - **Other servers.** Traffic from a container leaves with the address of the host. Put servers that
-  trust that address in `/etc/openbot-docker/deny`, one per line, then run `setup` again.
+  trust that address in `/etc/starbot-docker/deny`, one per line, then run `setup` again.
 - **Users.** With `"userns-remap": "default"` in `/etc/docker/daemon.json`, UID 1000 in the
   container is the start of the `dockremap` range in `/etc/subuid` plus 1000 on the host, a user with
   no rights there. `create` gives the data to that user. This setting is for the whole Docker
   daemon: Docker then uses another data folder, so containers, images and networks made before are
   not visible until it is removed. To turn it on for existing instances: `down` each instance, add
-  the setting, restart Docker, run `setup`, `chown -R <uid>:<gid>` each `/srv/openbot/<name>/data`,
+  the setting, restart Docker, run `setup`, `chown -R <uid>:<gid>` each `/srv/starbot/<name>/data`,
   then `up` each instance. `setup` shows a warning when it is off.
 - **DNS.** Docker sends the DNS queries of a container from the network of the container, so the
   firewall also applies to them. When the host uses a resolver on a private or link-local address,
@@ -257,38 +257,38 @@ Agents have full access in their container, so the host limits what a container 
 
 | Task | Command |
 | --- | --- |
-| Show the instances | `openbot-instance list` |
-| Stop, start, restart | `openbot-instance down <name>`, `up <name>`, `restart <name>` |
-| Read the log | `openbot-instance logs <name> -f` (recent lines), or `/var/log/openbot/openbot-<name>.log*` (30 days) |
-| Upgrade | In the app (see [Updates from the app](#updates-from-the-app)), or `openbot-instance upgrade <name>` or `upgrade --all` |
-| `openbot` commands | `openbot-instance run <name> status`, `login`, `mobile-connect`, `name <name>` |
-| Make the disk larger | `down <name>`, `umount /srv/openbot/<name>/data`, `fallocate --length <new size> data.img`, `e2fsck -f data.img`, `resize2fs data.img`, `mount /srv/openbot/<name>/data`, `up <name>` |
+| Show the instances | `starbot-instance list` |
+| Stop, start, restart | `starbot-instance down <name>`, `up <name>`, `restart <name>` |
+| Read the log | `starbot-instance logs <name> -f` (recent lines), or `/var/log/starbot/starbot-<name>.log*` (30 days) |
+| Upgrade | In the app (see [Updates from the app](#updates-from-the-app)), or `starbot-instance upgrade <name>` or `upgrade --all` |
+| `starbot` commands | `starbot-instance run <name> status`, `login`, `mobile-connect`, `name <name>` |
+| Make the disk larger | `down <name>`, `umount /srv/starbot/<name>/data`, `fallocate --length <new size> data.img`, `e2fsck -f data.img`, `resize2fs data.img`, `mount /srv/starbot/<name>/data`, `up <name>` |
 
 There is no command to remove an instance. To remove one and delete its data: `run <name> logout`,
-`down <name>`, `systemctl disable --now openbot-instance-update@<name>.path`,
-`umount /srv/openbot/<name>/data /srv/openbot/<name>/update-requests`, delete its two lines in
-`/etc/fstab`, then delete `/srv/openbot/<name>` and `instances/<name>.env`.
+`down <name>`, `systemctl disable --now starbot-instance-update@<name>.path`,
+`umount /srv/starbot/<name>/data /srv/starbot/<name>/update-requests`, delete its two lines in
+`/etc/fstab`, then delete `/srv/starbot/<name>` and `instances/<name>.env`.
 
 ### Updates from the app
 
 The owner or an admin updates an instance in Server settings › Updates, or in the update dialog, as on a
 hosted server. The container never gets the Docker socket. StarBot writes an empty request file to
-`/srv/openbot/<name>/update-requests`. `openbot-instance-update@<name>.path` sees it and runs
-`openbot-instance update-request <name>` as root. Root only tests and removes the request; it never
+`/srv/starbot/<name>/update-requests`. `starbot-instance-update@<name>.path` sees it and runs
+`starbot-instance update-request <name>` as root. Root only tests and removes the request; it never
 reads or follows it. It pulls the image of the instance and writes its version to `update-status` only
 when it is newer than the container. For an install, it makes the container again from that image,
 with the same data. It writes the state of the request to `update-status`, which the container mounts
 read-only.
 
 `setup` installs the units. `create`, `up` and `upgrade` make the folders, add the tmpfs of the
-requests to `/etc/fstab` and enable the path unit of the instance. An instance with `OPENBOT_TAG` in
+requests to `/etc/fstab` and enable the path unit of the instance. An instance with `STARBOT_TAG` in
 its env file keeps that tag and offers no update in the app. An instance made before this release gets them with `setup`, then
-`openbot-instance upgrade <name>` once. A container started with `docker/compose.yaml` or
+`starbot-instance upgrade <name>` once. A container started with `docker/compose.yaml` or
 `docker run` has no request folders, so it offers no update in the app.
 
 ### Backups
 
-`openbot-instance backup <name>` copies all of `/data` of an instance into one archive: the
+`starbot-instance backup <name>` copies all of `/data` of an instance into one archive: the
 conversations, attachments, agents, routines, memories, skills, workspaces, `Shared` with the shared
 tables, both databases, the provider sign-ins and the keyring with its password. A restore of this
 archive gives back the same instance, with the same agent, conversation and memory IDs. It is not a
@@ -297,16 +297,16 @@ archive gives back the same instance, with the same agent, conversation and memo
 Set the folder of the backups in `instances/<name>.env`, then run the first backup as root:
 
 ```sh
-echo OPENBOT_BACKUP_DIR=/var/backups/openbot >>/opt/openbot-docker/instances/main.env
-/opt/openbot-docker/instances/openbot-instance backup main --verify
+echo STARBOT_BACKUP_DIR=/var/backups/starbot >>/opt/starbot-docker/instances/main.env
+/opt/starbot-docker/instances/starbot-instance backup main --verify
 ```
 
 | Setting | Use |
 | --- | --- |
-| `OPENBOT_BACKUP_DIR` | The folder of the backups. Each instance has the folder `<name>` in it. It must not be in the data of an instance, because a backup has the keys of the instance. Use another disk, or copy the folder to another computer. |
-| `OPENBOT_BACKUP_KEEP` | The number of complete backups to keep. The default is 7. An older backup is deleted only after a new one is complete, and with `--verify` only after the new one is verified. |
-| `OPENBOT_BACKUP_MAX_AGE` | Hours. When the newest complete backup is older, `backups` shows it as overdue and exits with 1. |
-| `OPENBOT_BACKUP_WORK` | The folder where `verify` unpacks a backup. The default is `/var/tmp`. It needs free space for the data, and the user of the data must be able to reach it. |
+| `STARBOT_BACKUP_DIR` | The folder of the backups. Each instance has the folder `<name>` in it. It must not be in the data of an instance, because a backup has the keys of the instance. Use another disk, or copy the folder to another computer. |
+| `STARBOT_BACKUP_KEEP` | The number of complete backups to keep. The default is 7. An older backup is deleted only after a new one is complete, and with `--verify` only after the new one is verified. |
+| `STARBOT_BACKUP_MAX_AGE` | Hours. When the newest complete backup is older, `backups` shows it as overdue and exits with 1. |
+| `STARBOT_BACKUP_WORK` | The folder where `verify` unpacks a backup. The default is `/var/tmp`. It needs free space for the data, and the user of the data must be able to reach it. |
 
 A backup stops the container, waits until StarBot closes its databases, writes the archive and starts
 the container again. The instance is offline while the archive is written. The output and the status
@@ -316,7 +316,7 @@ show how long. A running turn stops, as on a restart. Each backup is a folder `<
 | --- | --- |
 | `data.tar.zst` | `/data` without `lost+found`. With `gzip` (`data.tar.gz`) when the host has no `zstd`. |
 | `manifest.json` | The StarBot version and image, the size, the checksum of the archive, the folders in `/data`, the stop and the time offline. |
-| `required.sha256` | The checksums of `openbot.db`, the keyring, its password and `agent-data.db`. |
+| `required.sha256` | The checksums of `starbot.db`, the keyring, its password and `agent-data.db`. |
 | `instance.env` | A copy of the env file of the instance. |
 | `SHA256SUMS` | The checksums of the other files. |
 | `verified.json` | The result of the last verification, when there is one. |
@@ -325,9 +325,9 @@ The backup writes to `<UTC time>.partial` and renames the folder only when all f
 backup fails, and keeps the earlier backups, when a file cannot be read, the folder has less free space
 than the data uses, the copy stops, or the database or the keyring is missing.
 
-`openbot-instance verify <name> [<backup>]` checks the newest backup or the one given. It needs
+`starbot-instance verify <name> [<backup>]` checks the newest backup or the one given. It needs
 `sqlite3` 3.37 or later on the host. It compares the checksums, unpacks the archive into a temporary
-folder in `OPENBOT_BACKUP_WORK`, and checks that the database, the keyring and its password are there and
+folder in `STARBOT_BACKUP_WORK`, and checks that the database, the keyring and its password are there and
 are the files that were copied. It runs `PRAGMA integrity_check` on both databases, reads the schema
 version, counts agents, threads, messages, memories and shared tables, and finds shared tables whose
 owner is not an agent of the backup. Nothing in the folder runs: no routine starts and no message goes
@@ -336,18 +336,18 @@ out. Root does not unpack the archive or open a database, because agents can cha
 without user namespace remapping) can read the temporary folder until verification deletes it.
 Verification does not check each attachment file.
 
-`openbot-instance backups <name>` shows the backups and the last backup and verification, with the
+`starbot-instance backups <name>` shows the backups and the last backup and verification, with the
 error when one failed. `--json` gives the same for a monitor, with `lastBackup` and `lastVerify` set to
 `ok`, `failed`, `running`, `stopped` or `none`. `stopped` means that the run ended without a result, for
 example when it was killed or the host restarted. It exits with 1 when the last backup or verification
 failed or stopped, or the newest backup is overdue. Root keeps the state in
-`/srv/openbot/<name>/backup-status`.
+`/srv/starbot/<name>/backup-status`.
 
 A daily backup at 04:00, with a verification after it:
 
 ```sh
-systemctl enable --now openbot-instance-backup@main.timer
-systemctl edit openbot-instance-backup@main.timer   # another time: OnCalendar= under [Timer]
+systemctl enable --now starbot-instance-backup@main.timer
+systemctl edit starbot-instance-backup@main.timer   # another time: OnCalendar= under [Timer]
 ```
 
 The timer runs outside the container, so it also backs up an instance that does not work. `setup`
@@ -358,8 +358,8 @@ while another runs.
 To restore, the instance must exist. For a new host, `create` it with the same name first.
 
 ```sh
-openbot-instance restore main 20261014T040000Z --replace
-openbot-instance up main
+starbot-instance restore main 20261014T040000Z --replace
+starbot-instance up main
 ```
 
 `restore` checks the checksums and verifies the backup in a temporary folder before it stops the
@@ -371,7 +371,7 @@ the backup next to the data. Only when the archive is unpacked does it replace `
 instance has data, `restore` needs `--replace`, which deletes that data, so back it up first.
 Because the old data stays until the end, the disk of the instance needs free space for the data of
 the backup. When it has less, copy the old data to another disk, delete it from
-`/srv/openbot/<name>/data`, and restore into the empty folder.
+`/srv/starbot/<name>/data`, and restore into the empty folder.
 `restore` does not start the instance:
 
 - Start it only when the instance of the backup does not run anywhere else. Two copies would use the
@@ -400,7 +400,7 @@ open a database that a newer one migrated, so it does not start.
 
 `latest` follows the newest published release. The release workflow does not publish a floating
 minor tag such as `0.39`, or a separate `stable` tag. For a controlled upgrade, keep an exact
-version in your Compose file or `OPENBOT_TAG` in the instance env file.
+version in your Compose file or `STARBOT_TAG` in the instance env file.
 
 The [GitHub latest-release API](https://docs.github.com/en/rest/releases/releases#get-the-latest-release)
 is the machine-readable source for the newest full release. For example, this read-only command
@@ -423,15 +423,15 @@ Automation can poll that metadata and download an image. Installation needs thes
    container. The release workflow publishes the GitHub release before the image tags, so a new
    release can appear while its image is not available yet. A failed pull leaves installation pending.
 4. Back up the complete `/data` recovery unit, including the keyring and password file. For an
-   instance of `docker/instances`, run `openbot-instance backup <name> --verify`, see
+   instance of `docker/instances`, run `starbot-instance backup <name> --verify`, see
    [Backups](#backups). For a container from `docker/compose.yaml` or `docker run`, stop the
    container, confirm that it stopped, and copy the volume, see [Data](#data). Keep the previous
    complete backup.
 5. Replace the container with the chosen image and the same volume and runtime options. For an
-   instance of `docker/instances`, set `OPENBOT_TAG` in its env file and run
-   `openbot-instance upgrade <name>`. This command takes the lock of the instance, so no backup,
+   instance of `docker/instances`, set `STARBOT_TAG` in its env file and run
+   `starbot-instance upgrade <name>`. This command takes the lock of the instance, so no backup,
    restore or update from the app runs at the same time. A manual replacement does not take the
-   lock. Check `openbot status` and the container log before the upgrade is reported as complete.
+   lock. Check `starbot status` and the container log before the upgrade is reported as complete.
 
 An unattended image watcher does not perform these checks or make a consistent backup. Keep the
 installation step under operator control unless your own job implements them. A failed upgrade
@@ -447,7 +447,7 @@ message from a person starts first. The browser opens no new tab and unloads idl
 The memory ceiling is the smaller of the memory of the host and the memory limit of the container
 (`--memory`, or `mem_limit` in Compose). Without a limit, the ceiling is the memory of the host. A
 fixed number of turns run at the same time: 2 up to 5 GiB of ceiling, 8 up to 10 GiB, and 16 above.
-`/dev/shm` and the `tmpfs` folders count toward the limit too. `docker exec openbot openbot status`
+`/dev/shm` and the `tmpfs` folders count toward the limit too. `docker exec starbot starbot status`
 shows the ceiling, the free memory, the level (`ok`, `low` or `critical`) and the turn limit.
 
 The guard reads cgroup v2, which current Docker hosts use. On a host with cgroup v1, the container
@@ -467,11 +467,11 @@ environment of StarBot, so they can read these values.
 | Variable | Use |
 | --- | --- |
 | `XAI_API_KEY`, `CURSOR_API_KEY`, `CLINE_API_KEY` | A provider API key. |
-| `OPENBOT_CODEX_PATH`, `OPENBOT_CLAUDE_PATH`, `OPENBOT_GROK_PATH`, `OPENBOT_OPENCODE_PATH`, `OPENBOT_CURSOR_PATH`, `OPENBOT_CLINE_PATH`, `OPENBOT_KIMI_PATH`, `OPENBOT_DEVIN_PATH`, `OPENBOT_COPILOT_PATH`, `OPENBOT_MISTRAL_PATH`, `OPENBOT_ANTIGRAVITY_PATH`, `OPENBOT_PI_PATH`, `OPENBOT_MUSE_PATH`, `OPENBOT_HERMES_PATH` | Another provider executable. Mount it read-only in the container. With `OPENBOT_HERMES_PATH`, StarBot does not offer the Hermes download. |
-| `OPENBOT_AUTH_API_URL` | Another account server, for example a [self-hosted account service](self-hosting.md). |
-| `OPENBOT_REMOTE_SIGNAL_URL` | The Signal of a [self-hosted account service](self-hosting.md#4-start-the-app), as a `wss:` URL. Set it together with `OPENBOT_AUTH_API_URL`. Without that variable, StarBot does not start. |
-| `OPENBOT_DISPLAY_SIZE` | The size of the virtual display that computer use reads, as `WIDTHxHEIGHT` from 640x480 to 2576x2576. The default is 1280x800. A value that is not valid writes a warning in `docker logs`, and the container starts with 1280x800. See [Display size](self-hosted-server.md#display-size) for when to use 1920x1080. `docker/instances/compose.yaml` does not pass it, so an instance uses 1280x800. |
-| `OPENBOT_SETUP_PAGE_PORT` | A port from 1024 to 65535 for the [setup page](umbrel.md#the-setup-page), which signs the server in from a browser. The Umbrel app sets it. Publish the port only behind a proxy that asks for a password: any client that reaches it can sign in a server that is signed out. |
+| `STARBOT_CODEX_PATH`, `STARBOT_CLAUDE_PATH`, `STARBOT_GROK_PATH`, `STARBOT_OPENCODE_PATH`, `STARBOT_CURSOR_PATH`, `STARBOT_CLINE_PATH`, `STARBOT_KIMI_PATH`, `STARBOT_DEVIN_PATH`, `STARBOT_COPILOT_PATH`, `STARBOT_MISTRAL_PATH`, `STARBOT_ANTIGRAVITY_PATH`, `STARBOT_PI_PATH`, `STARBOT_MUSE_PATH`, `STARBOT_HERMES_PATH` | Another provider executable. Mount it read-only in the container. With `STARBOT_HERMES_PATH`, StarBot does not offer the Hermes download. |
+| `STARBOT_AUTH_API_URL` | Another account server, for example a [self-hosted account service](self-hosting.md). |
+| `STARBOT_REMOTE_SIGNAL_URL` | The Signal of a [self-hosted account service](self-hosting.md#4-start-the-app), as a `wss:` URL. Set it together with `STARBOT_AUTH_API_URL`. Without that variable, StarBot does not start. |
+| `STARBOT_DISPLAY_SIZE` | The size of the virtual display that computer use reads, as `WIDTHxHEIGHT` from 640x480 to 2576x2576. The default is 1280x800. A value that is not valid writes a warning in `docker logs`, and the container starts with 1280x800. See [Display size](self-hosted-server.md#display-size) for when to use 1920x1080. `docker/instances/compose.yaml` does not pass it, so an instance uses 1280x800. |
+| `STARBOT_SETUP_PAGE_PORT` | A port from 1024 to 65535 for the [setup page](umbrel.md#the-setup-page), which signs the server in from a browser. The Umbrel app sets it. Publish the port only behind a proxy that asks for a password: any client that reaches it can sign in a server that is signed out. |
 
 ## Security
 
@@ -507,14 +507,14 @@ checksums. `docker/Dockerfile` unpacks the AppImage to `/opt/StarBot/app` and in
 of a self-hosted server from that release. The workflow starts and stops each image once, and pushes
 the images to GHCR only after the GitHub Release is published.
 
-`tini` is process 1. It starts `resources/hosting/openbot-container` from the release, which checks
+`tini` is process 1. It starts `resources/hosting/starbot-container` from the release, which checks
 that it can make a user namespace, starts D-Bus, two virtual displays and the keyring, and then
-becomes StarBot with `OPENBOT_SERVER=1`. StarBot shows its windows on `:0`, at 1280x800. The agents
-work on `:1`, at the size of `OPENBOT_DISPLAY_SIZE`, which the script names in
-`OPENBOT_AGENT_DISPLAY`. Computer Use and remote desktop use `:1`, so they do not show the StarBot
-window. `:1` has a window manager (Openbox, from `openbot-desktop`), which tini adopts as it adopts
+becomes StarBot with `STARBOT_SERVER=1`. StarBot shows its windows on `:0`, at 1280x800. The agents
+work on `:1`, at the size of `STARBOT_DISPLAY_SIZE`, which the script names in
+`STARBOT_AGENT_DISPLAY`. Computer Use and remote desktop use `:1`, so they do not show the StarBot
+window. `:1` has a window manager (Openbox, from `starbot-desktop`), which tini adopts as it adopts
 Xvfb. On a stop, tini gives the signal to StarBot and waits for it.
-`/opt/StarBot/hosted/mode` is `container`, so the `openbot` command talks to the control socket and
+`/opt/StarBot/hosted/mode` is `container`, so the `starbot` command talks to the control socket and
 does not use systemd.
 
 ## Limits
@@ -532,10 +532,10 @@ does not use systemd.
 ## Not confirmed
 
 - Tested on Docker Desktop 4.45 (Docker Engine 28.3, `linux/arm64`) with the 0.29.0 AppImage and the
-  scripts of this image: the start with the sandbox on, `openbot status`, a restart, a new container
+  scripts of this image: the start with the sandbox on, `starbot status`, a restart, a new container
   on the same volume after a kill, a stop that exits with 0, and the messages for a missing seccomp
   profile and for a volume that the user cannot write. The release workflow also starts each image.
-- Not tested: a sign-in with `openbot login` in a container, remote use of a container from the app,
+- Not tested: a sign-in with `starbot login` in a container, remote use of a container from the app,
   Podman, Kubernetes, rootless Docker, and hosts that restrict user namespaces with AppArmor, such as
   Ubuntu 23.10 or newer. On such a host, the container can need an AppArmor profile that permits
   `userns`.
@@ -545,7 +545,7 @@ does not use systemd.
 - The two displays of the entrypoint were tested with a stand-in for StarBot: `:0` is 1280x800 and
   `:1` has the display size. Computer Use and remote desktop on `:1` were not tested.
 - The Openbox desktop on `:1` was tested in Ubuntu 24.04 and 26.04 containers (arm64) with the
-  steps of `openbot-container` and a stand-in for StarBot: the background, the menu, the terminal
+  steps of `starbot-container` and a stand-in for StarBot: the background, the menu, the terminal
   and the file manager, focus, Alt+Tab, Alt+F4, title bar drag, maximize, the close button, and a
   restart after a kill. The image itself was not built with it.
 - Not tested: a Codex agent with Workspace only access in a container. Codex runs its commands in

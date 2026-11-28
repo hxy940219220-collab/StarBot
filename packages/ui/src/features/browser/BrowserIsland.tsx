@@ -1,13 +1,13 @@
-import type { BrowserDockIsland, LocalBrowserSecretResponse } from "@openbot/contracts/ipc";
-import { Button, LoaderCircle, MousePointer2, X } from "@openbot/ui";
-import { QuestionPromptBubble } from "@openbot/ui/components/QuestionPromptBubble";
-import type { ComposerAgent } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { BrowserSecretCard, type BrowserSecretVault } from "@openbot/ui/features/conversation/BrowserSecretCard";
-import { ApprovalCard } from "@openbot/ui/features/conversation/ConversationPrompts";
-import { RichMessageText } from "@openbot/ui/features/conversation/RichMessageText";
-import type { SendShortcut } from "@openbot/ui/features/conversation/send-shortcut";
-import { useText } from "@openbot/ui/text";
+import type { BrowserDockIsland, LocalBrowserSecretResponse } from "@starbot/contracts/ipc";
+import { Button, LoaderCircle, MousePointer2, X } from "@starbot/ui";
+import { QuestionPromptBubble } from "@starbot/ui/components/QuestionPromptBubble";
+import type { ComposerAgent } from "@starbot/ui/data";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { BrowserSecretCard, type BrowserSecretVault } from "@starbot/ui/features/conversation/BrowserSecretCard";
+import { ApprovalCard } from "@starbot/ui/features/conversation/ConversationPrompts";
+import { RichMessageText } from "@starbot/ui/features/conversation/RichMessageText";
+import type { SendShortcut } from "@starbot/ui/features/conversation/send-shortcut";
+import { useText } from "@starbot/ui/text";
 import { Match, Show, Switch } from "solid-js";
 
 export type BrowserIslandContent = BrowserDockIsland;

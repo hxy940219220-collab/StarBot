@@ -1,5 +1,5 @@
-import type { SkillCategory } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { SkillCategory } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import type { JSX } from "@solidjs/web";
 import {
   BitwardenTile,

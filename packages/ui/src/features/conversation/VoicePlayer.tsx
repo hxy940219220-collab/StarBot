@@ -1,5 +1,5 @@
-import { Button, Pause, Play, SeekSlider } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { Button, Pause, Play, SeekSlider } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createSignal, For, Show } from "solid-js";
 
 const BAR_COUNT = 40;

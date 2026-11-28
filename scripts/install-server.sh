@@ -2,12 +2,12 @@
 set -euo pipefail
 export LC_ALL=C DEBIAN_FRONTEND=noninteractive
 
-RELEASES=https://github.com/nightly-labs/openbot/releases
+RELEASES=https://github.com/nightly-labs/starbot/releases
 service_user=""
 auth_api_url=""
 display_size=""
-claim=${OPENBOT_CLAIM:-}
-unset OPENBOT_CLAIM
+claim=${STARBOT_CLAIM:-}
+unset STARBOT_CLAIM
 server_name=""
 
 fail() {
@@ -21,28 +21,28 @@ fetch() {
 
 usage() {
   cat <<'EOF'
-Installs OpenBot as a self-hosted server on a Linux computer with no screen:
+Installs StarBot as a self-hosted server on a Linux computer with no screen:
 
-  curl -fsSL https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/install-server.sh | sudo bash
+  curl -fsSL https://raw.githubusercontent.com/nightly-labs/starbot/main/scripts/install-server.sh | sudo bash
 
 Options (after `sudo bash -s --`):
-  --user <name>             The user that runs OpenBot and its agents. Default: the user of the
-                            installed server, else openbot, which the install makes when it does
+  --user <name>             The user that runs StarBot and its agents. Default: the user of the
+                            installed server, else starbot, which the install makes when it does
                             not exist.
   --auth-api-url <origin>   Another account server, for development. Default: the one of the
                             installed server, else the one in the build.
   --display-size <W>x<H>    The size of the virtual display that computer use reads, from 640x480
                             to 2576x2576. Default: the one of the installed server, else 1280x800.
-  --name <name>             The server name, with a claim. Default: OpenBot.
+  --name <name>             The server name, with a claim. Default: StarBot.
 
 The command from the app (Add server, Other options, New server on another computer) puts a line
-OPENBOT_CLAIM=<claim> before this script on standard input. The install then signs in with that
+STARBOT_CLAIM=<claim> before this script on standard input. The install then signs in with that
 one-time claim, asks no questions, waits until the server is online, and ends with exit code 0
 only when the server is connected. The claim is not an argument, because sudo logs its arguments.
 
 This file only downloads the latest release and checks it against the release manifest, the
 manifest that the Linux desktop updater reads. The install steps come from that release
-(resources/hosting/openbot-server-setup), so they always match the build that they install.
+(resources/hosting/starbot-server-setup), so they always match the build that they install.
 See docs/self-hosted-server.md.
 EOF
 }
@@ -76,31 +76,31 @@ while [ "$#" -gt 0 ]; do
     *) fail "Unknown option: $1" ;;
   esac
 done
-[ -z "$server_name" ] || [ -n "$claim" ] || fail "Give --name only with the command from the app, or run: sudo openbot login --name <name>"
+[ -z "$server_name" ] || [ -n "$claim" ] || fail "Give --name only with the command from the app, or run: sudo starbot login --name <name>"
 
-[ "$(uname -s)" = Linux ] || fail "This install is for Linux. Download the desktop app at https://openbot.run."
+[ "$(uname -s)" = Linux ] || fail "This install is for Linux. Download the desktop app at https://starbot.run."
 [ "$(id -u)" -eq 0 ] || fail "Run this with sudo."
-[ -d /run/systemd/system ] || fail "OpenBot needs systemd."
-command -v apt-get >/dev/null || fail "OpenBot needs Ubuntu 24.04 or a newer Ubuntu or Debian."
+[ -d /run/systemd/system ] || fail "StarBot needs systemd."
+command -v apt-get >/dev/null || fail "StarBot needs Ubuntu 24.04 or a newer Ubuntu or Debian."
 # shellcheck disable=SC1091
 . /etc/os-release
 if [ "${ID:-}" != ubuntu ] || [ "${VERSION_ID:-}" != 24.04 ]; then
-  echo "OpenBot is tested on Ubuntu 24.04. This is ${PRETTY_NAME:-an unknown system}; the install continues." >&2
+  echo "StarBot is tested on Ubuntu 24.04. This is ${PRETTY_NAME:-an unknown system}; the install continues." >&2
 fi
 case $(uname -m) in
   x86_64) architecture=x86_64 manifest=latest-linux.yml ;;
   aarch64) architecture=arm64 manifest=latest-linux-arm64.yml ;;
-  *) fail "OpenBot has no release for this machine." ;;
+  *) fail "StarBot has no release for this machine." ;;
 esac
 
 refuse_signed_in() {
   local status
-  status=$(openbot status 2>/dev/null) || return 0
+  status=$(starbot status 2>/dev/null) || return 0
   if grep -q '^Account: [^ ]*@' <<<"$status"; then
-    fail "This server is signed in to an account. To add it to another account, run \"sudo openbot logout\" and then this command again."
+    fail "This server is signed in to an account. To add it to another account, run \"sudo starbot logout\" and then this command again."
   fi
 }
-if [ -n "$claim" ] && command -v openbot >/dev/null; then refuse_signed_in; fi
+if [ -n "$claim" ] && command -v starbot >/dev/null; then refuse_signed_in; fi
 
 missing=()
 for command in curl openssl; do command -v "$command" >/dev/null || missing+=("$command"); done
@@ -109,47 +109,47 @@ if [ "${#missing[@]}" -gt 0 ]; then
   apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends ca-certificates "${missing[@]}"
 fi
 
-work=$(mktemp -d /var/tmp/openbot-install.XXXXXX)
+work=$(mktemp -d /var/tmp/starbot-install.XXXXXX)
 trap 'rm -rf "$work"' EXIT
 manifest=$(fetch "$RELEASES/latest/download/$manifest")
 version=$(sed -n 's/^version: *//p' <<<"$manifest" | head -n 1)
 path=$(sed -n 's/^path: *//p' <<<"$manifest" | head -n 1)
 sha512=$(sed -n 's/^sha512: *//p' <<<"$manifest" | head -n 1)
 [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || fail "The release manifest has no valid version."
-[ "$path" = "OpenBot-$version-$architecture.AppImage" ] || fail "The release manifest names another file."
+[ "$path" = "StarBot-$version-$architecture.AppImage" ] || fail "The release manifest names another file."
 [[ $sha512 =~ ^[A-Za-z0-9+/]{86}==$ ]] || fail "The release manifest has no valid SHA-512."
 
-echo "Downloading OpenBot $version..."
-fetch --output "$work/OpenBot.AppImage" "$RELEASES/download/v$version/$path"
-[ "$(openssl dgst -sha512 -binary "$work/OpenBot.AppImage" | openssl base64 -A)" = "$sha512" ] ||
+echo "Downloading StarBot $version..."
+fetch --output "$work/StarBot.AppImage" "$RELEASES/download/v$version/$path"
+[ "$(openssl dgst -sha512 -binary "$work/StarBot.AppImage" | openssl base64 -A)" = "$sha512" ] ||
   fail "The download does not match the release manifest."
-chmod 0700 "$work/OpenBot.AppImage"
-(cd "$work" && ./OpenBot.AppImage --appimage-extract >/dev/null)
+chmod 0700 "$work/StarBot.AppImage"
+(cd "$work" && ./StarBot.AppImage --appimage-extract >/dev/null)
 
-setup="$work/squashfs-root/resources/hosting/openbot-server-setup"
-[ -f "$setup" ] || fail "OpenBot $version cannot install as a server. Try again after the next release."
-if [ -n "$display_size" ] && ! grep -q OPENBOT_DISPLAY_SIZE "$setup"; then
-  fail "OpenBot $version has no --display-size. Install without it, or try again after the next release."
+setup="$work/squashfs-root/resources/hosting/starbot-server-setup"
+[ -f "$setup" ] || fail "StarBot $version cannot install as a server. Try again after the next release."
+if [ -n "$display_size" ] && ! grep -q STARBOT_DISPLAY_SIZE "$setup"; then
+  fail "StarBot $version has no --display-size. Install without it, or try again after the next release."
 fi
 bash "$setup" "$service_user" "$work/squashfs-root" "$auth_api_url" ${display_size:+"$display_size"}
 
 if [ -n "$claim" ]; then
   refuse_signed_in
   echo
-  printf '%s\n' "$claim" | openbot login --claim ${server_name:+--name "$server_name"}
-  status=$(openbot status)
+  printf '%s\n' "$claim" | starbot login --claim ${server_name:+--name "$server_name"}
+  status=$(starbot status)
   grep -q '^Server: \(.* (\)\{0,1\}online)\{0,1\}$' <<<"$status" ||
-    fail "The server is not online. Run \"openbot status\" and \"openbot logs\" to see why."
+    fail "The server is not online. Run \"starbot status\" and \"starbot logs\" to see why."
   echo
-  echo "OpenBot is connected to your account."
+  echo "StarBot is connected to your account."
   exit 0
 fi
 
 cat <<'EOF'
 
-Next, sign in with your OpenBot account:
+Next, sign in with your StarBot account:
 
-  sudo openbot login
+  sudo starbot login
 
-Other commands: openbot status, openbot logs, sudo openbot update. Run "openbot help" for all.
+Other commands: starbot status, starbot logs, sudo starbot update. Run "starbot help" for all.
 EOF

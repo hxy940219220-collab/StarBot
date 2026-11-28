@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve, sep } from "node:path";
-import { sourceText } from "@openbot/i18n/source";
-import { teeLogLines } from "@openbot/logging";
+import { sourceText } from "@starbot/i18n/source";
+import { teeLogLines } from "@starbot/logging";
 import { Effect, Result } from "effect";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
@@ -11,7 +11,7 @@ import type { AgentClient, AgentProvider } from "../src/backend/agent-client";
 import { AgentStore } from "../src/backend/agent-store";
 import type { AgentCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import {
   BUILT_IN_PROVIDER_DRIVERS,
   NO_PROVIDER_CREDENTIALS,
@@ -19,7 +19,7 @@ import {
 } from "../src/backend/provider-drivers";
 import { sweepProviderTemp } from "../src/backend/provider-temp";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/antigravity-start-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/antigravity-start-e2e");
 const WAIT_MS = 15_000;
 const SLOW_UNPACK_MS = 7_000;
 const FIRST_INSTALL_START_TIMEOUT_MS = 4_000;
@@ -58,7 +58,7 @@ function handle(message) {
   if (message.method === "authenticate" && process.env.FAKE_AGY_KEY_AUTH === "hang") return;
   if (message.method === "authenticate" && process.env.FAKE_AGY_SIGN_IN === "wait") {
     const opener = path.join((process.env.PATH || "").split(path.delimiter)[0] || "", process.platform === "darwin" ? "open" : "xdg-open");
-    if (path.basename(path.dirname(opener)).startsWith("openbot-sign-in-") && fs.existsSync(opener)) {
+    if (path.basename(path.dirname(opener)).startsWith("starbot-sign-in-") && fs.existsSync(opener)) {
       require("node:child_process").spawn(opener, ["https://accounts.google.com/o/oauth2/auth?state=fake"], { stdio: "ignore" });
     } else process.stderr.write("StarBot's opener is not first on PATH." + NL);
     return;
@@ -172,7 +172,7 @@ interface Report {
   };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-antigravity-start-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-antigravity-start-e2e-"));
 const log = join(root, "agy.jsonl");
 const report: Report = { passed: false };
 process.env.FAKE_AGY_LOG = log;
@@ -212,7 +212,7 @@ function runtime(
   firstInstall = false,
   savedKey: string | null = null,
 ): { providers: ProviderRuntime; store: AgentStore } {
-  const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+  const store = new AgentStore(join(root, "profile"), join(root, "home"), new StarBotDatabase(join(root, "profile")));
   const providers = new ProviderRuntime({
     offProviders: BUILT_IN_PROVIDER_DRIVERS.map((driver) => driver.id).filter((id) => id !== "antigravity"),
     conversation: new ConversationRuntime(

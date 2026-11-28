@@ -1,5 +1,5 @@
-import { ProviderLogo } from "@openbot/brand";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { ProviderLogo } from "@starbot/brand";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import { createSignal, For, onSettled } from "solid-js";
 import { LANDING_NETWORK_AGENTS, LANDING_NETWORK_HUB, LANDING_PROVIDERS } from "../../lib/landing-content";
 import { createAgentNetworkEggs } from "./agent-network-eggs";
@@ -154,16 +154,16 @@ export function AgentNetworkSection() {
       marks: [],
       font: style.fontFamily,
       colors: {
-        hub: token("--openbot-logo-production"),
-        hubEye: token("--openbot-logo-production-eye"),
-        dot: token("--openbot-glass-border"),
-        badge: token("--openbot-bg-control-active"),
-        canvas: token("--openbot-bg-canvas"),
-        bubble: token("--openbot-bg-surface"),
-        bubbleBorder: token("--openbot-dialog-ring"),
-        bubbleText: token("--openbot-text-primary"),
-        label: token("--openbot-text-secondary"),
-        hubPulse: token("--openbot-text-primary"),
+        hub: token("--starbot-logo-production"),
+        hubEye: token("--starbot-logo-production-eye"),
+        dot: token("--starbot-glass-border"),
+        badge: token("--starbot-bg-control-active"),
+        canvas: token("--starbot-bg-canvas"),
+        bubble: token("--starbot-bg-surface"),
+        bubbleBorder: token("--starbot-dialog-ring"),
+        bubbleText: token("--starbot-text-primary"),
+        label: token("--starbot-text-secondary"),
+        hubPulse: token("--starbot-text-primary"),
       },
     };
 
@@ -309,7 +309,7 @@ export function AgentNetworkSection() {
         draw();
       })
       .catch(() => {});
-    void import("@openbot/ui/bloub-avatar")
+    void import("@starbot/ui/bloub-avatar")
       .then(({ AVATAR_HUE_CHOICES, avatarHeadColor, createStaticAvatarSvg }) => {
         if (disposed) return;
         const seeds = [

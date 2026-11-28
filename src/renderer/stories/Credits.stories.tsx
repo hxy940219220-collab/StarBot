@@ -1,11 +1,11 @@
-import type { BillingDetails } from "@openbot/contracts/billing-details";
-import type { CreditsState } from "@openbot/contracts/credits";
-import { CREDITS_UNAVAILABLE_STATE, EMPTY_CREDIT_ACTIVITY } from "@openbot/contracts/credits";
-import type { BillingDetailsCalls } from "@openbot/ui/features/billing/BillingDetailsFields";
-import { BuyCreditsPage } from "@openbot/ui/features/credits/BuyCreditsPage";
-import { CreditActivitySection } from "@openbot/ui/features/credits/CreditActivitySection";
-import { CreditsSection } from "@openbot/ui/features/credits/CreditsSection";
-import { type CreditsCalls, createCreditsStore } from "@openbot/ui/features/credits/credits-store";
+import type { BillingDetails } from "@starbot/contracts/billing-details";
+import type { CreditsState } from "@starbot/contracts/credits";
+import { CREDITS_UNAVAILABLE_STATE, EMPTY_CREDIT_ACTIVITY } from "@starbot/contracts/credits";
+import type { BillingDetailsCalls } from "@starbot/ui/features/billing/BillingDetailsFields";
+import { BuyCreditsPage } from "@starbot/ui/features/credits/BuyCreditsPage";
+import { CreditActivitySection } from "@starbot/ui/features/credits/CreditActivitySection";
+import { CreditsSection } from "@starbot/ui/features/credits/CreditsSection";
+import { type CreditsCalls, createCreditsStore } from "@starbot/ui/features/credits/credits-store";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { createMockCredits } from "../src/preview/mock-credits";
 

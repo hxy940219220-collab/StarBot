@@ -1,6 +1,6 @@
 import { readFile, rm, writeFile } from "node:fs/promises";
-import { isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isDynamicRecord, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import {
   assembleSection,
   FRAGMENT_DIR,
@@ -13,7 +13,7 @@ import {
   UNRELEASED,
 } from "./release-notes";
 
-const logger = createOpenBotLogger("prepare-release");
+const logger = createStarBotLogger("prepare-release");
 
 type Increment = "major" | "minor" | "patch";
 

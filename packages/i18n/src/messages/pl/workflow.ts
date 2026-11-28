@@ -321,7 +321,7 @@ export const messages = {
 
   "workflow.output.title": "Wyjście",
   "workflow.output.name": "wyjście",
-  "workflow.output.channel.openbot": "StarBot",
+  "workflow.output.channel.starbot": "StarBot",
 
   "workflow.output.channel.search": "Szukaj kanałów",
   "workflow.output.postsAs": "Publikuje jako",
@@ -410,8 +410,8 @@ export const messages = {
   "workflow.github.event.pr.checksFailed": "Kontrole nie przeszły",
   "workflow.github.event.pr.merged": "Pull request scalony",
   "workflow.github.event.comment": "Nowy komentarz",
-  "workflow.github.event.mention": "Wzmianka o @openbotgit",
-  "workflow.github.event.assigned": "Przypisano do @openbotgit",
+  "workflow.github.event.mention": "Wzmianka o @starbotgit",
+  "workflow.github.event.assigned": "Przypisano do @starbotgit",
   "workflow.github.trigger.event": "Zdarzenie",
   "workflow.github.trigger.labelAdded": "Dodana etykieta",
   "workflow.github.trigger.hasLabel": "Ma etykietę",

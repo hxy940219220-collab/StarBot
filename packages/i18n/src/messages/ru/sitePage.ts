@@ -258,7 +258,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "Нет навыков по запросу «{query}».",
   "sitePage.marketplace.emptyApps": "Нет подходящих приложений.",
   "sitePage.marketplace.breadcrumb": "Навигационная цепочка",
-  "sitePage.marketplace.addToOpenBot": "Добавить в StarBot",
+  "sitePage.marketplace.addToStarBot": "Добавить в StarBot",
 
   "sitePage.marketplace.addFromApp":
     "{name} добавляется в самом StarBot. Установите приложение и снова откройте эту ссылку.",
@@ -541,7 +541,7 @@ export const messages = {
   "sitePage.site.cta.title": "Знакомьтесь с первым коллегой",
   "sitePage.site.cta.description":
     "Запускайте Codex, Claude, Gemini, Grok или свою модель по подпискам, за которые вы уже платите, — у каждого агента своё рабочее пространство и контекст. Ваша работа остаётся на вашем компьютере.",
-  "sitePage.site.downloadOpenBot": "Скачать StarBot",
+  "sitePage.site.downloadStarBot": "Скачать StarBot",
 
   "sitePage.site.contact": "Контакты",
   "sitePage.site.footer.description":

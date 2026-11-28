@@ -7,9 +7,9 @@ import { resolveMobileFeatures } from "../packages/contracts/src/mobile-features
 import { isDynamicRecord, isString } from "../packages/contracts/src/runtime-values";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const REPORT = join(root, ".openbot-build", "mobile-release-announcement-e2e.json");
+const REPORT = join(root, ".starbot-build", "mobile-release-announcement-e2e.json");
 const ROLE_ID = "123456789012345678";
-const REPOSITORY = "example/openbot";
+const REPOSITORY = "example/starbot";
 
 type Store = "ios" | "android";
 
@@ -80,7 +80,7 @@ const server = Bun.serve({
 });
 const site = `http://127.0.0.1:${server.port}`;
 
-const work = mkdtempSync(join(tmpdir(), "openbot-mobile-release-e2e-"));
+const work = mkdtempSync(join(tmpdir(), "starbot-mobile-release-e2e-"));
 mkdirSync(join(work, "apps/mobile"), { recursive: true });
 mkdirSync(join(work, "apps/auth-api/src/server"), { recursive: true });
 writeFileSync(
@@ -293,7 +293,7 @@ try {
     "--version posts an older version",
     result.status === 0 &&
       state.posts.length === beforeOlder + 1 &&
-      lastPost().includes("OpenBot v1.4.6 is out on iOS"),
+      lastPost().includes("StarBot v1.4.6 is out on iOS"),
     result.output,
   );
   writeFileSync(
@@ -342,7 +342,7 @@ try {
     "an OTA section gets no post and no tag",
     result.status === 0 &&
       state.posts.length === postsBeforeOta + 1 &&
-      lastPost().includes("**OpenBot v1.4.7 is out on iOS and Android**") &&
+      lastPost().includes("**StarBot v1.4.7 is out on iOS and Android**") &&
       !result.output.includes("1.4.7.1") &&
       [...state.tags].sort().join() === "mobile-announced/v1.4.7/android,mobile-announced/v1.4.7/ios",
     { output: result.output, post: lastPost(), tags: [...state.tags] },

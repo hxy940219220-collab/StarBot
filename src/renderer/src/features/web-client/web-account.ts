@@ -1,6 +1,6 @@
-import type { AccountSession, AvatarColor, AvatarImageInput } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { currentText } from "@openbot/ui/text";
+import type { AccountSession, AvatarColor, AvatarImageInput } from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { currentText } from "@starbot/ui/text";
 
 export interface WebAccountCalls {
   updateName: (name: string) => Promise<void>;

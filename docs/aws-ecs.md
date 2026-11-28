@@ -33,19 +33,19 @@ version=<version>
 device=/dev/sdf
 # The data volume. mkfs runs only on a volume with no file system.
 blkid "$device" || mkfs -t xfs "$device"
-mkdir -p /srv/openbot-data
-echo "UUID=$(blkid -s UUID -o value "$device") /srv/openbot-data xfs defaults,nofail 0 2" >>/etc/fstab
-mount /srv/openbot-data
-chown 1000:1000 /srv/openbot-data
+mkdir -p /srv/starbot-data
+echo "UUID=$(blkid -s UUID -o value "$device") /srv/starbot-data xfs defaults,nofail 0 2" >>/etc/fstab
+mount /srv/starbot-data
+chown 1000:1000 /srv/starbot-data
 # The seccomp profile of that image version, and no-new-privileges, for each container.
 [ ! -e /etc/docker/daemon.json ] || { echo "Add the two keys to /etc/docker/daemon.json." >&2; exit 1; }
-curl -fsSL -o /etc/docker/openbot-seccomp.json \
+curl -fsSL -o /etc/docker/starbot-seccomp.json \
   "https://raw.githubusercontent.com/hxy940219220-collab/StarBot-Desktop/v$version/docker/seccomp.json"
 cat >/etc/docker/daemon.json <<'EOF'
-{ "seccomp-profile": "/etc/docker/openbot-seccomp.json", "no-new-privileges": true }
+{ "seccomp-profile": "/etc/docker/starbot-seccomp.json", "no-new-privileges": true }
 EOF
 systemctl restart docker
-echo ECS_CLUSTER=openbot >>/etc/ecs/ecs.config
+echo ECS_CLUSTER=starbot >>/etc/ecs/ecs.config
 ```
 
 The user data runs only on the first start of an instance. When you change the image version, get
@@ -55,15 +55,15 @@ the profile of that version again.
 
 ```json
 {
-  "family": "openbot",
+  "family": "starbot",
   "requiresCompatibilities": ["EC2"],
   "networkMode": "bridge",
-  "taskRoleArn": "arn:aws:iam::<account>:role/openbot-task",
-  "executionRoleArn": "arn:aws:iam::<account>:role/openbot-execution",
-  "volumes": [{ "name": "data", "host": { "sourcePath": "/srv/openbot-data" } }],
+  "taskRoleArn": "arn:aws:iam::<account>:role/starbot-task",
+  "executionRoleArn": "arn:aws:iam::<account>:role/starbot-execution",
+  "volumes": [{ "name": "data", "host": { "sourcePath": "/srv/starbot-data" } }],
   "containerDefinitions": [
     {
-      "name": "openbot",
+      "name": "starbot",
       "image": "ghcr.io/hxy940219220-collab/StarBot-Desktop:<version>",
       "essential": true,
       "memory": 4096,
@@ -73,9 +73,9 @@ the profile of that version again.
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/openbot",
+          "awslogs-group": "/ecs/starbot",
           "awslogs-region": "<region>",
-          "awslogs-stream-prefix": "openbot",
+          "awslogs-stream-prefix": "starbot",
           "awslogs-create-group": "true"
         }
       }
@@ -88,7 +88,7 @@ the profile of that version again.
 | --- | --- | --- |
 | `sharedMemorySize: 1024` | `--shm-size 1g` | Chromium uses shared memory. |
 | `stopTimeout: 60` | `--stop-timeout 60` | StarBot stops its agents and closes its database before it exits. |
-| `host.sourcePath` | `-v openbot-data:/data` | All data is in `/data`. |
+| `host.sourcePath` | `-v starbot-data:/data` | All data is in `/data`. |
 | `daemon.json` | `--security-opt` | See [Instance](#instance). |
 
 The image starts `tini` as process 1. Do not set `initProcessEnabled`.
@@ -118,17 +118,17 @@ ECS Exec opens a terminal in the container. The task role needs `ssmmessages:Cre
 then:
 
 ```sh
-aws ecs execute-command --cluster openbot --task <task ID> --container openbot \
-  --interactive --command "openbot login"
+aws ecs execute-command --cluster starbot --task <task ID> --container starbot \
+  --interactive --command "starbot login"
 ```
 
-`openbot status`, `logout` and `name` work in the same way. The log is in the CloudWatch log group
-`/ecs/openbot`, not in `openbot logs`.
+`starbot status`, `logout` and `name` work in the same way. The log is in the CloudWatch log group
+`/ecs/starbot`, not in `starbot logs`.
 
 ## Network
 
 The task only connects out. Allow HTTPS to the hosts in
-[A company firewall or proxy blocks StarBot](TROUBLESHOOTING.md#a-company-firewall-or-proxy-blocks-openbot),
+[A company firewall or proxy blocks StarBot](TROUBLESHOOTING.md#a-company-firewall-or-proxy-blocks-starbot),
 to your providers, and the UDP and TCP ports of the TURN relay for remote use. The security group
 needs no inbound rule.
 
@@ -157,5 +157,5 @@ Do not turn off the sandbox to use Fargate. Use EC2, or a [hosted server](hosted
 This setup was not tested on AWS. Not confirmed: the user data on the ECS-optimized Amazon Linux 2023
 AMI, a user namespace on that AMI with the profile of the image, the start of the image on Fargate,
 the user that ECS Exec uses, the `/dev/sdf` link to the NVMe device, and the effect of
-`no-new-privileges` in `daemon.json` on the ECS agent and ECS Exec. From its script, the `openbot` command works as root and as the
+`no-new-privileges` in `daemon.json` on the ECS agent and ECS Exec. From its script, the `starbot` command works as root and as the
 user of the image.

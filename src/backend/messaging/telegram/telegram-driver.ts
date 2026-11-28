@@ -6,8 +6,8 @@ import {
   type TelegramCallParams,
   type TelegramCallResult,
   type TelegramInlineKeyboard,
-} from "@openbot/contracts/signal-protocol/telegram-route";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/signal-protocol/telegram-route";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result } from "effect";
 import type { MessagingHistoryStore } from "../messaging-history-store";
 import type { MessagingAnswerFile } from "../messaging-threads";

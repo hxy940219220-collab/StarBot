@@ -4,7 +4,7 @@ import {
   type HostTurnLimits,
   type HostTurnLimitsInput,
   parseHostTurnLimitsInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export function createMockHostTurnLimits(): Pick<HostAdminDesktopApi, "getTurnLimits" | "setTurnLimits"> {
   let limits: HostTurnLimitsInput = { turnLimit: null, agentTaskLimit: null };

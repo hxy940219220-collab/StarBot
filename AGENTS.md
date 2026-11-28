@@ -25,7 +25,7 @@ and state which default you set aside. Do not argue by citing this file.
 
 ## Non-negotiable
 
-- **Migrations are irreversible.** No backup of `openbot.db` is made before an upgrade. Preserve all
+- **Migrations are irreversible.** No backup of `starbot.db` is made before an upgrade. Preserve all
   user data and support every shipped source schema. Never assume a backup exists.
 - **Team API support window.** Hosts and clients support the releases of the last 2 months (60 days);
   mobile has at least 2 months. Do not change the meaning of a wire protocol that a release in the
@@ -122,13 +122,13 @@ windows, its OS dialogs or its native notifications.
 
 ## Shared UI
 
-`packages/ui` (`@openbot/ui`) owns shared SolidJS controls and feature components used by
+`packages/ui` (`@starbot/ui`) owns shared SolidJS controls and feature components used by
 desktop, public web, and Storybook. Reuse these components before adding UI. Import primitives
-from `@openbot/ui` and feature components from explicit subpaths such as
-`@openbot/ui/features/sidebar/Sidebar`. Do not copy them back into an app.
+from `@starbot/ui` and feature components from explicit subpaths such as
+`@starbot/ui/features/sidebar/Sidebar`. Do not copy them back into an app.
 
 Keep shared components independent of application contexts, desktop storage, host connections,
-and `window.openbot`. Pass data and actions through typed props. Platform adapters and the main
+and `window.starbot`. Pass data and actions through typed props. Platform adapters and the main
 conversation controller stay in the renderer. Component extraction must preserve the existing
 UI, styles, and behavior unless the user requests a design change. Native mobile shares brand
 tokens and contracts; it does not render SolidJS DOM components.
@@ -164,7 +164,7 @@ commit message, the PR description or `docs/`.
 Only these remain, because a tool reads them: license headers, shebangs, `/// <reference>`,
 `@vitest-environment`, `@ts-expect-error`, `biome-ignore`, `#__PURE__`, `# shellcheck`,
 `# syntax=`, JSDoc types in plain `.js` files, file headers that a generator writes, the
-`// scope:` line of each GritQL rule, the `// flag` markers of lint fixtures, and the `# openbot-boat-pre-stop:` marker. Comments that are data
+`// scope:` line of each GritQL rule, the `// flag` markers of lint fixtures, and the `# starbot-boat-pre-stop:` marker. Comments that are data
 in a string stay too, such as a sample file or a task for a model.
 
 These files keep their comments: vendored code, fixtures, released schemas, released migrations
@@ -173,7 +173,7 @@ These files keep their comments: vendored code, fixtures, released schemas, rele
 
 ## Interface text
 
-Text that a user reads comes from `@openbot/i18n` catalog keys, on desktop, web and mobile. Do not
+Text that a user reads comes from `@starbot/i18n` catalog keys, on desktop, web and mobile. Do not
 write a literal. Errors that the main process, backend or team client send use `sourceText(key)`.
 Read [docs/i18n.md](docs/i18n.md) before adding a key or a language.
 
@@ -219,7 +219,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
 - Joined servers: the desktop with a joined server, the web client (`starbot.app/app`), and mobile.
   See [Joined servers](#joined-servers).
 - IPC contracts (`packages/contracts`) and their preview implementation
-  (`src/renderer/src/preview/mock-openbot.ts`).
+  (`src/renderer/src/preview/mock-starbot.ts`).
 - Reverse actions: snooze/unsnooze, pause/resume, revoke/reconnect, mute/unmute.
 - Migrations, which also build each new database.
 - Documentation: `README.md` commands, `docs/architecture/`, and `PRIVACY.md` when outbound data
@@ -236,7 +236,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
 - Use the development loader. It reads the development key from the shell; without the key,
   local development must work with generated defaults. Commands that need external secrets must
   stop before remote changes when those secrets are missing. An invalid key must fail safely.
-- Keep generated identity and saved local overrides in ignored `.openbot/dev-state.json`.
+- Keep generated identity and saved local overrides in ignored `.starbot/dev-state.json`.
   New manual overrides use shell variables. Do not add `.env.local` or `.env.generated`.
 - `.env.keys` stores decryption keys, not service settings. Keep it ignored. Preserve existing
   production key handling and CI/GitHub secrets unless the developer requests a change.
@@ -260,7 +260,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
   personal or production account. Load it the same way as `INCEPTION_API_KEY`, and never print it.
   Its X account uses the same email and password. A Google sign-in from a new browser gets a phone
   check that only the developer can do. To skip it, load the saved session into a new browser
-  context (Playwright `storageState`) from `~/.config/openbot/test-google-account.storage.json` on
+  context (Playwright `storageState`) from `~/.config/starbot/test-google-account.storage.json` on
   the developer's Mac. For the StarBot browser, open a tab over CDP and set the same cookies with
   `Network.setCookies` on that tab: agents share that session. If that session has expired, ask the
   developer to do the phone check, then save the session again.
@@ -336,7 +336,7 @@ risks since the last release.
 - Use E2E tests only. Do not add unit tests. An E2E test is a script under `scripts/` (such as
   `scripts/*-e2e.ts` or `scripts/*-smoke.ts`) that drives the real app, process or service. At the
   end, it writes a verifiable and repeatable artifact, such as a JSON report or a screenshot under
-  `.openbot-build/`.
+  `.starbot-build/`.
 - Vitest files are permitted only for these protected areas:
   - Database migrations: data-preservation fixtures for every affected released schema, plus the
     failure and rollback cases that [src/backend/AGENTS.md](src/backend/AGENTS.md) lists. A

@@ -1,4 +1,4 @@
-import type { AgentSummary, ConversationMessage, SkillConversationEvent } from "@openbot/contracts/ipc";
+import type { AgentSummary, ConversationMessage, SkillConversationEvent } from "@starbot/contracts/ipc";
 import { type Effect, Schema } from "effect";
 import type { SkillReviewSuggestion } from "./memory-review-prompt";
 import { chatTranscript, promptJson } from "./side-question";

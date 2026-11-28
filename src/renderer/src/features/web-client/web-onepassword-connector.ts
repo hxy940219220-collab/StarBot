@@ -1,6 +1,6 @@
-import { runTeamEffect } from "@openbot/team-client";
-import { onePasswordConnectorRequest } from "@openbot/team-client/team-admin-requests";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
+import { runTeamEffect } from "@starbot/team-client";
+import { onePasswordConnectorRequest } from "@starbot/team-client/team-admin-requests";
+import type { TeamApiRequest } from "@starbot/team-client/team-api-requests";
 import { Effect } from "effect";
 import {
   type OnePasswordConnectorPort,

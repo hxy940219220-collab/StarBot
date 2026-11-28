@@ -2,8 +2,8 @@ import type {
   CreditMediaGenerationKind,
   CreditMediaInputRole,
   CreditMediaJobStatus,
-} from "@openbot/contracts/credit-media";
-import { type DynamicRecord, isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/credit-media";
+import { type DynamicRecord, isDynamicRecord, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 
 const REQUEST_TIMEOUT_MS = 20_000;

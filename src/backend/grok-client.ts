@@ -5,9 +5,9 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import * as tls from "node:tls";
 import type { ClientSideConnection, ContentBlock, InitializeResponse } from "@agentclientprotocol/sdk";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { type DynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { type DynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { parse as parseToml } from "smol-toml";
 import { AcpAgentClient, type AcpHistoryPersistence } from "./acp-client";
@@ -69,7 +69,7 @@ export class GrokAgentClient extends AcpAgentClient {
         "agent",
         "stdio",
       ],
-      env: { ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "openbot" },
+      env: { ...overseasProviderProxyEnv(), GROK_OAUTH2_REFERRER: "starbot" },
       extraEnv: () => {
         const environment = { ...overseasProviderProxyEnv(), ...agentEnvironment?.() };
         const merged = { ...process.env, ...environment };

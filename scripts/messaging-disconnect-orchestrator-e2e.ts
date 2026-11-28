@@ -3,8 +3,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { MessagingPlatform, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { MessagingPlatform, SidebarLayoutSnapshot } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { AgentLifecycleFailed, AgentService } from "../src/backend/agent-service";
@@ -13,11 +13,11 @@ import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
 import { type MessagingCredentials, MessagingService } from "../src/backend/messaging/messaging-service";
 import type { MessagingIngress } from "../src/backend/messaging/messaging-types";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-disconnect-orchestrator-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-disconnect-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/messaging-disconnect-orchestrator-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-messaging-disconnect-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const SECTION = sourceText("status.messaging.integrationsSection");
@@ -88,7 +88,7 @@ async function boot<T>(
     busy: Set<string>;
   }) => Promise<T>,
 ): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
@@ -228,7 +228,7 @@ try {
           channelId: "group-1",
           draft: { name: "Group", title: "", instructions: "", members: [{ agentId: user.id }], leadAgentId: null },
         },
-        { id: "openbot", name: "StarBot" },
+        { id: "starbot", name: "StarBot" },
       ),
     );
     await runCauseEffect(

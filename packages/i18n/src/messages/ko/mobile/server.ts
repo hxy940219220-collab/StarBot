@@ -791,7 +791,7 @@ export const messages = {
   "mobile.server.connectors.slack.workspaceTitle": "워크스페이스",
   "mobile.server.connectors.slack.workspaceDescription": "@StarBot을 멘션하거나 다이렉트 메시지를 보내세요.",
   "mobile.server.connectors.slack.missingScopes":
-    "OpenBot에 Slack에서 다음 권한이 없어요: {scopes}. 워크스페이스 연결을 해제한 다음 다시 연결해 주세요.",
+    "StarBot에 Slack에서 다음 권한이 없어요: {scopes}. 워크스페이스 연결을 해제한 다음 다시 연결해 주세요.",
   "mobile.server.connectors.slack.retryAt": "Slack이 StarBot에 대기를 요청했어요. {time}에 다시 시도해요.",
   "mobile.server.connectors.slack.helpInvalidToken":
     "Slack이 이 워크스페이스에서 StarBot을 더 이상 허용하지 않아요. 앱이 삭제되었을 수 있어요. 워크스페이스를 다시 연결해 주세요.",
@@ -835,7 +835,7 @@ export const messages = {
   "mobile.server.connectors.discord.workspaceDescription":
     "채널에서 @StarBot을 멘션하세요. 이어가려면 StarBot의 메시지에 답장하세요.",
   "mobile.server.connectors.discord.missingScopes":
-    "OpenBot에 Discord에서 다음 권한이 없어요: {scopes}. Discord 서버 연결을 해제한 다음 다시 연결해 주세요.",
+    "StarBot에 Discord에서 다음 권한이 없어요: {scopes}. Discord 서버 연결을 해제한 다음 다시 연결해 주세요.",
   "mobile.server.connectors.discord.retryAt": "Discord가 StarBot에 대기를 요청했어요. {time}에 다시 시도해요.",
   "mobile.server.connectors.discord.helpInvalidToken":
     "Discord가 이 Discord 서버에서 StarBot을 더 이상 허용하지 않아요. 봇이 삭제되었을 수 있어요. Discord 서버를 다시 연결해 주세요.",
@@ -1361,7 +1361,7 @@ export const messages = {
   "mobile.server.update.path.hosted":
     "호스팅 서비스가 백그라운드에서 업데이트를 다운로드해요. 다운로드된 업데이트는 서버가 다음에 시작될 때 적용돼요. 서버를 중지했다가 재개하기 전에 진행 중인 작업이 끝나기를 기다리세요. 이전 버전에서 바뀌지 않으면 호스트 관리자에게 문의하세요.",
   "mobile.server.update.path.system":
-    "호스트에서 sudo openbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 StarBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다리세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
+    "호스트에서 sudo starbot update를 실행해 최신 릴리스를 설치하세요. 이 명령은 StarBot을 중지해요. 먼저 진행 중인 작업이 끝나기를 기다리세요. 자동 다운로드는 다음 부팅 때 설치돼요.",
   "mobile.server.update.path.container":
     "Docker 호스트에서 새 StarBot 이미지를 가져오고 같은 데이터 볼륨으로 컨테이너를 다시 만드세요. 먼저 진행 중인 작업이 끝나기를 기다리세요. 데이터를 보존하려면 기존 볼륨을 유지하세요.",
 

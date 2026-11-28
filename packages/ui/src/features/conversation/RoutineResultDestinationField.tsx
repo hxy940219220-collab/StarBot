@@ -1,5 +1,5 @@
-import type { RoutineResultConnectionOption, RoutineResultDestination } from "@openbot/contracts/ipc";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Text } from "@openbot/ui";
+import type { RoutineResultConnectionOption, RoutineResultDestination } from "@starbot/contracts/ipc";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Text } from "@starbot/ui";
 import { For } from "solid-js";
 import { useText } from "../../text";
 

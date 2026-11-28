@@ -3,7 +3,7 @@ import {
   DEFAULT_MODEL_SERVERS,
   type DefaultModelServerId,
   detectedModelServerKey,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import type { DiscoveredModel } from "./custom-provider-form";
 import type { DetectedProvider, ProviderDetection } from "./detected-providers";
 

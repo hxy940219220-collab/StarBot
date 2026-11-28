@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { createServer as createHttpServer } from "node:http";
 import { createServer } from "node:net";
 import { resolve } from "node:path";
-import { translateFor } from "@openbot/i18n";
+import { translateFor } from "@starbot/i18n";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import {
@@ -16,7 +16,7 @@ import {
 import { MCP_OAUTH_REDIRECT_PORT, startMcpOAuthRedirectServer } from "../src/main/mcp-oauth-redirect-server";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = resolve(ROOT, ".openbot-build/mcp-sign-in-https-relay-e2e");
+const OUT = resolve(ROOT, ".starbot-build/mcp-sign-in-https-relay-e2e");
 const META_ADS_MCP_URL = "https://mcp.facebook.com/ads";
 const META_APP_ID = "1479376854168579";
 const SAVED_APP_ID = "e2e-saved-meta-app";

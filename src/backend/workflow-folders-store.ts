@@ -11,14 +11,14 @@ import {
   WorkflowFolderRefusal,
   type WorkflowFolderRefusalReason,
   type WorkflowFoldersSnapshot,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Semaphore } from "effect";
 import { writeFileAtomically } from "./atomic-json-file";
 import { StoredStateFailure, storedIO, storedSync } from "./stored-state-effects";
 import { readVersionedJsonFile, type VersionedJsonFormat } from "./versioned-json-store";
 
-export const WORKFLOW_FOLDERS_FILE = "openbot-workflow-folders-v1.json";
+export const WORKFLOW_FOLDERS_FILE = "starbot-workflow-folders-v1.json";
 
 const STORED_VERSION = 1;
 

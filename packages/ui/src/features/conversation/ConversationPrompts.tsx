@@ -4,15 +4,15 @@ import type {
   BrowserTab,
   BrowserTakeoverRequest,
   LocalBrowserSecretResponse,
-} from "@openbot/contracts/ipc";
-import { type FeedbackApproval, feedbackApproval } from "@openbot/team-client/feedback-approval";
-import { approvalIsCut } from "@openbot/team-client/runtime-attention";
-import { classifyFailure } from "@openbot/telemetry";
-import { Button, LogIn, Maximize2, Monitor, toast } from "@openbot/ui";
-import { StandingApprovalConfirmation } from "@openbot/ui/components/StandingApprovalConfirmation";
-import { BrowserSecretCard, type BrowserSecretVault } from "@openbot/ui/features/conversation/BrowserSecretCard";
-import { BrowserTakeoverPreview } from "@openbot/ui/features/conversation/BrowserTakeoverPreview";
-import { type TextValue, useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { type FeedbackApproval, feedbackApproval } from "@starbot/team-client/feedback-approval";
+import { approvalIsCut } from "@starbot/team-client/runtime-attention";
+import { classifyFailure } from "@starbot/telemetry";
+import { Button, LogIn, Maximize2, Monitor, toast } from "@starbot/ui";
+import { StandingApprovalConfirmation } from "@starbot/ui/components/StandingApprovalConfirmation";
+import { BrowserSecretCard, type BrowserSecretVault } from "@starbot/ui/features/conversation/BrowserSecretCard";
+import { BrowserTakeoverPreview } from "@starbot/ui/features/conversation/BrowserTakeoverPreview";
+import { type TextValue, useText } from "@starbot/ui/text";
 import { createMemo, createSignal, For, Show } from "solid-js";
 import { UiBlockCard } from "./ui-blocks/UiBlockCard";
 

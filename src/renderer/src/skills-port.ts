@@ -3,14 +3,14 @@ import {
   type InstalledSkill,
   type InstallSkillInput,
   LOCAL_SERVER_ID,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type SetEnabledSkillInput,
   type UninstallSkillInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export interface SkillsPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "addMarketplaceAgent"
     | "cancelMcpSignIn"
     | "completeMcpSignInRelay"
@@ -39,11 +39,11 @@ export interface SkillsPort {
     | "testMcpServer"
     | "uninstallAgentSkill"
   >;
-  hostAdmin: Pick<OpenBotDesktopApi["hostAdmin"], "getAgentAccess">;
-  marketplaceAgents: Pick<OpenBotDesktopApi["marketplaceAgents"], "get" | "getListing" | "install" | "list">;
-  macAutomation: Pick<OpenBotDesktopApi["macAutomation"], "request">;
+  hostAdmin: Pick<StarBotDesktopApi["hostAdmin"], "getAgentAccess">;
+  marketplaceAgents: Pick<StarBotDesktopApi["marketplaceAgents"], "get" | "getListing" | "install" | "list">;
+  macAutomation: Pick<StarBotDesktopApi["macAutomation"], "request">;
   skills: Pick<
-    OpenBotDesktopApi["skills"],
+    StarBotDesktopApi["skills"],
     | "choosePackage"
     | "get"
     | "getBySlug"
@@ -60,7 +60,7 @@ export interface SkillsPort {
 }
 
 export function skillsPort(): SkillsPort {
-  return window.openbot;
+  return window.starbot;
 }
 
 export type SkillCatalogCalls = Pick<SkillsPort["skills"], "get" | "list">;

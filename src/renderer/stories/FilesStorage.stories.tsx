@@ -1,9 +1,9 @@
-import { SettingsLinkGroup, SettingsLinkRow } from "@openbot/ui/components/SettingsPanel";
-import AgentSettingsPanel from "@openbot/ui/features/conversation/AgentSettingsPanel";
-import { AgentFilesView, agentFilesLinkValue } from "@openbot/ui/features/files/AgentFilesView";
-import { ConversationFilesPanel } from "@openbot/ui/features/files/ConversationFilesPanel";
-import { FileList } from "@openbot/ui/features/files/FileList";
-import { StorageOverview } from "@openbot/ui/features/files/StorageOverview";
+import { SettingsLinkGroup, SettingsLinkRow } from "@starbot/ui/components/SettingsPanel";
+import AgentSettingsPanel from "@starbot/ui/features/conversation/AgentSettingsPanel";
+import { AgentFilesView, agentFilesLinkValue } from "@starbot/ui/features/files/AgentFilesView";
+import { ConversationFilesPanel } from "@starbot/ui/features/files/ConversationFilesPanel";
+import { FileList } from "@starbot/ui/features/files/FileList";
+import { StorageOverview } from "@starbot/ui/features/files/StorageOverview";
 import { createSignal, Show } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -118,7 +118,7 @@ export const StorageError: Story = {
       args={{
         ...overviewArgs(),
         state: "error",
-        error: "OpenBot could not read ~/OpenBot/Agents. Check the folder permissions and try again.",
+        error: "StarBot could not read ~/StarBot/Agents. Check the folder permissions and try again.",
         scannedAt: null,
         breakdown: [],
         agentUsage: [],
@@ -348,6 +348,6 @@ export const ListLoading: Story = {
 export const ListError: Story = {
   name: "File list: Error",
   render: () => (
-    <ListStage error="The attachment index is not available. Restart OpenBot and try again." onRetry={fn()} />
+    <ListStage error="The attachment index is not available. Restart StarBot and try again." onRetry={fn()} />
   ),
 };

@@ -4,11 +4,11 @@ import {
   attachmentMimeTypeForName,
   isSupportedAttachmentName,
   isSupportedAttachmentNameFor,
-} from "@openbot/contracts/attachment-files";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { TEAM_PROTOCOL_V2_MAX_FILE_BYTES } from "@openbot/contracts/team-protocol/v2";
-import { bytesToBase64 } from "@openbot/team-client/base64";
-import { MOBILE_ATTACHMENT_BYTES, type RemoteFileUpload } from "@openbot/team-client/remote-peer";
+} from "@starbot/contracts/attachment-files";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { TEAM_PROTOCOL_V2_MAX_FILE_BYTES } from "@starbot/contracts/team-protocol/v2";
+import { bytesToBase64 } from "@starbot/team-client/base64";
+import { MOBILE_ATTACHMENT_BYTES, type RemoteFileUpload } from "@starbot/team-client/remote-peer";
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
 import { Directory, File, Paths } from "expo-file-system";

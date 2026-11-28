@@ -7,15 +7,15 @@ import {
   type ProviderEnvironmentProvider,
   type ProviderEnvironmentUpdate,
   providerEnvironmentProblem,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Schema, Semaphore } from "effect";
 import { PreferenceStore } from "./preference-file";
 import {
   CredentialFileTooLarge,
   type CredentialStoreFailure,
-  type OpenBotSecretName,
+  type StarBotSecretName,
   type ProviderCredentialStore,
 } from "./provider-credential-store";
 
@@ -29,8 +29,8 @@ interface StoredEnvironment {
   providers: Partial<Record<ProviderEnvironmentProvider, StoredVariable[]>>;
 }
 
-export function providerEnvironmentSecret(provider: ProviderEnvironmentProvider, name: string): OpenBotSecretName {
-  return `openbot:provider-env:${provider}:${name}`;
+export function providerEnvironmentSecret(provider: ProviderEnvironmentProvider, name: string): StarBotSecretName {
+  return `starbot:provider-env:${provider}:${name}`;
 }
 
 function decodeVariable(value: unknown): StoredVariable | null {

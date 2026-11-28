@@ -8,10 +8,10 @@ import { Effect } from "effect";
 import { AgentStore } from "../src/backend/agent-store";
 import { claudeHistoryReader } from "../src/backend/claude-history";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { importProviderHistory } from "../src/backend/provider-history-import";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/claude-history-resume-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/claude-history-resume-e2e");
 const TURNS = 200;
 const SESSION = "11111111-2222-4333-8444-555555555555";
 const PROJECT = "-tmp-resume-project";
@@ -94,11 +94,11 @@ function turns(prefix: string, count: number): string {
 }
 
 async function run(): Promise<void> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-claude-history-resume-"));
+  const root = await mkdtemp(join(tmpdir(), "starbot-claude-history-resume-"));
   const projectDirectory = join(root, "claude", "projects", PROJECT);
   mkdirSync(projectDirectory, { recursive: true });
   const transcript = join(projectDirectory, `${SESSION}.jsonl`);
-  const database = new OpenBotDatabase(join(root, "state"));
+  const database = new StarBotDatabase(join(root, "state"));
   try {
     const agentStore = new AgentStore(join(root, "state"), join(root, "home"), database);
     await runCauseEffect(agentStore.initialize());

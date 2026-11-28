@@ -1,6 +1,6 @@
-import { type AgentProviderRef, isKeyOnlyProvider, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
-import { leadingAddress } from "@openbot/contracts/chat-tag-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { type AgentProviderRef, isKeyOnlyProvider, isKnownAgentProvider } from "@starbot/contracts/agent-providers";
+import { leadingAddress } from "@starbot/contracts/chat-tag-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   AGENT_DOCK_LIMITS,
   type AgentApproval,
@@ -29,25 +29,25 @@ import {
   type StarBotCompanionInfo,
   type StarBotCompanionModelChoice,
   sameAgentModelChoice,
-  withOpenBotSource,
-} from "@openbot/contracts/ipc";
-import { approvalIsCut } from "@openbot/team-client/runtime-attention";
-import type { AgentMessage, ComposerAgent } from "@openbot/ui/data";
+  withStarBotSource,
+} from "@starbot/contracts/ipc";
+import { approvalIsCut } from "@starbot/team-client/runtime-attention";
+import type { AgentMessage, ComposerAgent } from "@starbot/ui/data";
 import {
   type AgentDockChatModel,
   type AgentDockSendResult,
   type AgentDockChannel as AgentDockUiChannel,
   type AgentDockSeat as AgentDockUiSeat,
   agentDockSeatKey,
-} from "@openbot/ui/features/agent-dock/AgentDock";
-import { isDockMessage, isDockVisualReply } from "@openbot/ui/features/agent-dock/AgentDockChat";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import type { UsageLimitAskCardProps } from "@openbot/ui/features/conversation/BackupModels";
-import { markdownPlainText } from "@openbot/ui/features/conversation/MarkdownMessageText";
-import { sidebarAgentOrder } from "@openbot/ui/features/sidebar/sidebar-agent-order";
-import { sidebarChannelWaits, sidebarUnreadBadge } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import type { SidebarAgentState } from "@openbot/ui/features/sidebar/sidebar-types";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/agent-dock/AgentDock";
+import { isDockMessage, isDockVisualReply } from "@starbot/ui/features/agent-dock/AgentDockChat";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
+import type { UsageLimitAskCardProps } from "@starbot/ui/features/conversation/BackupModels";
+import { markdownPlainText } from "@starbot/ui/features/conversation/MarkdownMessageText";
+import { sidebarAgentOrder } from "@starbot/ui/features/sidebar/sidebar-agent-order";
+import { sidebarChannelWaits, sidebarUnreadBadge } from "@starbot/ui/features/sidebar/sidebar-agent-states";
+import type { SidebarAgentState } from "@starbot/ui/features/sidebar/sidebar-types";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, Match, onCleanup, onSettled, Show, Switch, untrack } from "solid-js";
 import { appPort } from "../../app-port";
 import { useNavigation } from "../../navigation";
@@ -927,7 +927,7 @@ function WindowAgentDock(props: { serverId: string }) {
       onSwitchModel={(agentId, provider, model) => {
         dock.switchAgentModel(agentId, provider, model);
       }}
-      onOpenBotChat={(agentId) => {
+      onStarBotChat={(agentId) => {
         selectAgent(agentId, dock.mainTabOf(agentId));
       }}
       onResizeSizePercent={(sizePercent) => {
@@ -1016,7 +1016,7 @@ function ScreenAgentDock(props: { serverId: string }) {
   onSettled(() => {
     const unsubscribe = agentDockPort().agentDock.onAction((action) => {
       if (action.type === "open-link") {
-        void appPort().openUrl(withOpenBotSource(action.url));
+        void appPort().openUrl(withStarBotSource(action.url));
         return;
       }
       if (action.type === "open-settings") {

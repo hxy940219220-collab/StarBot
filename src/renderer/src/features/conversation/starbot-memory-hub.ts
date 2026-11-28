@@ -1,11 +1,11 @@
-import { analyticsRange, LOCAL_SERVER_ID, type MemoryEntry } from "@openbot/contracts/ipc";
-import type { AgentProfile } from "@openbot/ui/data";
+import { analyticsRange, LOCAL_SERVER_ID, type MemoryEntry } from "@starbot/contracts/ipc";
+import type { AgentProfile } from "@starbot/ui/data";
 import {
   chiefStarBotAgentId,
   isManualChiefStarBot,
   setAutoChiefStarBotId,
   setManualChiefStarBotId,
-} from "@openbot/ui/features/agents/chief-starbot";
+} from "@starbot/ui/features/agents/chief-starbot";
 import { createSignal } from "solid-js";
 
 export { chiefStarBotAgentId, isManualChiefStarBot, setAutoChiefStarBotId, setManualChiefStarBotId };
@@ -177,11 +177,11 @@ export async function syncMemoriesToAgentInstructions(
   memories: readonly MemoryEntry[],
   serverId: string = LOCAL_SERVER_ID,
 ): Promise<boolean> {
-  if (!window.openbot?.agent?.readAgentInstructions || !window.openbot?.agent?.saveAgentInstructions) {
+  if (!window.starbot?.agent?.readAgentInstructions || !window.starbot?.agent?.saveAgentInstructions) {
     return false;
   }
   try {
-    const currentFile = await window.openbot.agent.readAgentInstructions(agentId, serverId);
+    const currentFile = await window.starbot.agent.readAgentInstructions(agentId, serverId);
     const existing = currentFile?.text ?? "";
     const blockRegex = new RegExp(`\\n?${MEMORY_SYNC_START}[\\s\\S]*?${MEMORY_SYNC_END}\\n?`, "gu");
     const stripped = existing.replace(blockRegex, "\n").trim();
@@ -190,7 +190,7 @@ export async function syncMemoriesToAgentInstructions(
     const syncBlock = [MEMORY_SYNC_START, mdBody.trim(), MEMORY_SYNC_END].join("\n");
     const nextText = stripped ? `${stripped}\n\n${syncBlock}\n` : `${syncBlock}\n`;
 
-    await window.openbot.agent.saveAgentInstructions(
+    await window.starbot.agent.saveAgentInstructions(
       {
         agentId,
         text: nextText,
@@ -293,10 +293,10 @@ export async function distillConversationMemories(
   agentId: string,
   serverId: string = LOCAL_SERVER_ID,
 ): Promise<DistillationResult> {
-  if (!window.openbot?.agent?.readConversationPage) {
+  if (!window.starbot?.agent?.readConversationPage) {
     return { summary: "无法读取当前会话记录", candidates: [], messageCount: 0 };
   }
-  const page = await window.openbot.agent.readConversationPage(
+  const page = await window.starbot.agent.readConversationPage(
     { agentId, anchor: { type: "latest" }, limit: 28 },
     serverId,
   );
@@ -311,7 +311,7 @@ export async function distillConversationMemories(
     return { summary: "当前对话已经很干净，暂无需要压缩的历史消息。", candidates: [], messageCount: 0 };
   }
 
-  if (window.openbot?.agent?.askSideQuestion) {
+  if (window.starbot?.agent?.askSideQuestion) {
     try {
       const transcript = rawMsgs
         .slice(-18)
@@ -327,7 +327,7 @@ export async function distillConversationMemories(
       ].join("\n");
 
       const answer = await Promise.race([
-        window.openbot.agent.askSideQuestion({ agentId, question: prompt, earlier: [] }, serverId),
+        window.starbot.agent.askSideQuestion({ agentId, question: prompt, earlier: [] }, serverId),
         new Promise<string>((_, reject) => setTimeout(() => reject(new Error("timeout")), 16_000)),
       ]);
       const parsed = parseJsonFromModelAnswer(answer);
@@ -451,10 +451,10 @@ export async function refreshChiefStarBotFromAnalytics(
 ): Promise<string | null> {
   if (agents.length === 0) return null;
   let bestId: string | null = null;
-  if (window.openbot?.agent?.getHostAnalytics) {
+  if (window.starbot?.agent?.getHostAnalytics) {
     try {
       const { startDate, endDate, timeZone } = analyticsRange("", 30);
-      const res = await window.openbot.agent.getHostAnalytics({ startDate, endDate, timeZone }, serverId);
+      const res = await window.starbot.agent.getHostAnalytics({ startDate, endDate, timeZone }, serverId);
       if (res?.agents && res.agents.length > 0) {
         const existingIds = new Set(agents.map((a) => a.id));
         const ranked = [...res.agents]
@@ -487,7 +487,7 @@ export async function runStarBotNightlyDream(options: {
   const serverId = options.serverId ?? LOCAL_SERVER_ID;
   const today = localTodayDateString();
   if (!options.manual && hasDreamedToday()) return null;
-  if (options.agents.length === 0 || !window.openbot?.agent?.readConversationPage) return null;
+  if (options.agents.length === 0 || !window.starbot?.agent?.readConversationPage) return null;
 
   dreamSingletonLock = true;
   setDreamRunningSignal(true);
@@ -506,7 +506,7 @@ export async function runStarBotNightlyDream(options: {
 
     for (const ag of options.agents.slice(0, 4)) {
       try {
-        const page = await window.openbot.agent.readConversationPage(
+        const page = await window.starbot.agent.readConversationPage(
           { agentId: ag.id, anchor: { type: "latest" }, limit: 12 },
           serverId,
         );
@@ -531,7 +531,7 @@ export async function runStarBotNightlyDream(options: {
     let summaryText = "";
     let extractedItems: Array<{ category: StarBotMemoryCategory; text: string }> = [];
 
-    if (window.openbot.agent.askSideQuestion) {
+    if (window.starbot.agent.askSideQuestion) {
       try {
         const dreamPrompt = [
           `你是用户的主星友「${chiefAgent.name}」，现在正在执行每晚一次的「星夜梦境记忆沉淀」。`,
@@ -543,7 +543,7 @@ export async function runStarBotNightlyDream(options: {
         ].join("\n");
 
         const rawAns = await Promise.race([
-          window.openbot.agent.askSideQuestion(
+          window.starbot.agent.askSideQuestion(
             { agentId: chiefAgent.id, question: dreamPrompt, earlier: [] },
             serverId,
           ),
@@ -574,7 +574,7 @@ export async function runStarBotNightlyDream(options: {
     }
 
     // Deduplicate and persist into Chief StarBot's memories + Global Profile + MEMORY.md instructions
-    const existingMemories = await window.openbot.agent.listMemories(chiefAgent.id, serverId).catch(() => []);
+    const existingMemories = await window.starbot.agent.listMemories(chiefAgent.id, serverId).catch(() => []);
     const existingCleanSet = new Set(existingMemories.map((m) => parseMemoryCategory(m.text).cleanText));
     const newlySaved: Array<{ category: StarBotMemoryCategory; text: string }> = [];
 
@@ -583,7 +583,7 @@ export async function runStarBotNightlyDream(options: {
       existingCleanSet.add(item.text);
       const tagged = formatTaggedMemory(item.category, item.text);
       try {
-        await window.openbot.agent.createMemory({ agentId: chiefAgent.id, text: tagged }, serverId);
+        await window.starbot.agent.createMemory({ agentId: chiefAgent.id, text: tagged }, serverId);
         if (item.category === "profile") {
           addGlobalUserProfileItem(item.text);
         }
@@ -591,7 +591,7 @@ export async function runStarBotNightlyDream(options: {
       } catch {}
     }
 
-    const updatedMemories = await window.openbot.agent
+    const updatedMemories = await window.starbot.agent
       .listMemories(chiefAgent.id, serverId)
       .catch(() => existingMemories);
     await syncMemoriesToAgentInstructions(chiefAgent.id, chiefAgent.name, updatedMemories, serverId);

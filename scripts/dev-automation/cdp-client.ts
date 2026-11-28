@@ -1,7 +1,7 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import type { Logger } from "@openbot/logging";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import type { Logger } from "@starbot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { PROCESS_TABLE_PS_ARGS, parseProcessTable } from "./cpu-sampling";
 import { describeTarget, findMainPages } from "./page-url";
@@ -28,7 +28,7 @@ export function resolveAutomationPort(
   const port = Number(source);
   if (!Number.isInteger(port) || port < MIN_DEV_AUTOMATION_PORT || port > MAX_DEV_AUTOMATION_PORT) {
     throw new Error(
-      `OPENBOT_DEV_REMOTE_DEBUGGING_PORT must be an integer from ${MIN_DEV_AUTOMATION_PORT} to ${MAX_DEV_AUTOMATION_PORT}.`,
+      `STARBOT_DEV_REMOTE_DEBUGGING_PORT must be an integer from ${MIN_DEV_AUTOMATION_PORT} to ${MAX_DEV_AUTOMATION_PORT}.`,
     );
   }
   return { port, explicit: true };
@@ -53,7 +53,7 @@ export function assertMutationAllowed(gate: MutationGate): void {
       `${gate.command} changes the live dev app, and the instance was inferred${
         gate.target ? ` (${gate.target})` : ""
       }, not named. Run \`bun run dev:automation instances\` and re-run with ` +
-        "--instance=<id> or --port=<OPENBOT_DEV_REMOTE_DEBUGGING_PORT>.",
+        "--instance=<id> or --port=<STARBOT_DEV_REMOTE_DEBUGGING_PORT>.",
     );
   }
 }
@@ -151,7 +151,7 @@ export interface RendererCandidate {
   evaluate: (probe: string) => Promise<unknown>;
 }
 
-const BRIDGE_PROBE = "typeof window.openbot";
+const BRIDGE_PROBE = "typeof window.starbot";
 
 export async function findRendererPages<T extends RendererCandidate>(
   pages: T[],
@@ -265,7 +265,7 @@ export async function openDevBrowser(
     if (ownerPid === null || !(await verifyBrowserOwnership(browser, ownerPid))) {
       await browser.close();
       throw new ForeignBrowserError(
-        `Port ${port} does not belong to StarBot. Pass --port=<OPENBOT_DEV_REMOTE_DEBUGGING_PORT> of the instance you mean to drive.`,
+        `Port ${port} does not belong to StarBot. Pass --port=<STARBOT_DEV_REMOTE_DEBUGGING_PORT> of the instance you mean to drive.`,
       );
     }
     logger.info(`Port :${port} belongs to the recorded instance process.`);

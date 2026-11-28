@@ -7,11 +7,11 @@ import {
   agentProviderDescriptor,
   agentSteersTurns,
   customAgentIdOfModel,
-} from "@openbot/contracts/agent-providers";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { developmentStartingModel } from "@openbot/contracts/development-defaults";
-import type { FeedbackFacts } from "@openbot/contracts/feedback";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@starbot/contracts/agent-providers";
+import { sortConversationMessages } from "@starbot/contracts/conversation-order";
+import { developmentStartingModel } from "@starbot/contracts/development-defaults";
+import type { FeedbackFacts } from "@starbot/contracts/feedback";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentAccessLevel,
   AgentAnalyticsInput,
@@ -139,7 +139,7 @@ import type {
   VoiceLiveStart,
   WithdrawFeedbackInput,
   WithdrawFeedbackResult,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_TASK_LIMIT_DEFAULT,
   type AgentDefaults,
@@ -179,17 +179,17 @@ import {
   type WorkflowMediaSpecs,
   workflowCatalogSource,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { AGENT_THREAD_READS_LIMIT } from "@openbot/contracts/team-protocol/agent-thread-reads-v1";
-import { CLAUDE_API_KEY_ACCOUNT_ID } from "@openbot/contracts/team-protocol/claude-api-key-v1";
-import { ContextCompactRefusedError } from "@openbot/contracts/team-protocol/context-compact-v1";
-import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
-import type { QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
-import { workflowMediaCreditsOf, workflowMediaProvidersOf } from "@openbot/team-client/workflow-decoding";
-import { type CauseCode, classifyFailure, isCauseCode } from "@openbot/telemetry";
+} from "@starbot/contracts/ipc";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
+import { AGENT_THREAD_READS_LIMIT } from "@starbot/contracts/team-protocol/agent-thread-reads-v1";
+import { CLAUDE_API_KEY_ACCOUNT_ID } from "@starbot/contracts/team-protocol/claude-api-key-v1";
+import { ContextCompactRefusedError } from "@starbot/contracts/team-protocol/context-compact-v1";
+import { ContextResetBusyError } from "@starbot/contracts/team-protocol/context-reset-v1";
+import type { QueueEditRequest } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
+import { workflowMediaCreditsOf, workflowMediaProvidersOf } from "@starbot/team-client/workflow-decoding";
+import { type CauseCode, classifyFailure, isCauseCode } from "@starbot/telemetry";
 import { Cause, Deferred, Effect, Exit, Fiber, Result, Schema, Scope, Semaphore } from "effect";
 import { AgentMemories } from "./agent/agent-memories";
 import { AgentRemoval, AgentRemovalFailed } from "./agent/agent-removal";
@@ -262,8 +262,8 @@ import {
   type AgentMessageSteer,
   type AgentServerClaims,
   type McpServerOwnerHooks,
-  OpenBotToolRouter,
-} from "./agent/openbot-tool-router";
+  StarBotToolRouter,
+} from "./agent/starbot-tool-router";
 import { PlanContinuation } from "./agent/plan-continuation";
 import { ProfileClients } from "./agent/profile-clients";
 import {
@@ -384,10 +384,10 @@ import {
   resolveWorkspaceFile,
 } from "./workspace-paths";
 
-const logger = createOpenBotLogger("agent-service");
+const logger = createStarBotLogger("agent-service");
 
-const routingLogger = createOpenBotLogger("channel-routing");
-const errorLogger = createOpenBotLogger("agent-error");
+const routingLogger = createStarBotLogger("channel-routing");
+const errorLogger = createStarBotLogger("agent-error");
 
 const MEDIA_SERVICE_HOSTS: Readonly<Record<WorkflowCatalogProvider, string>> = {
   sunra: SUNRA_MCP_HOST,
@@ -593,7 +593,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
   readonly #compaction: ContextCompaction;
   readonly #duplication: DuplicationGate;
   readonly #removal: AgentRemoval;
-  readonly #tools: OpenBotToolRouter;
+  readonly #tools: StarBotToolRouter;
   readonly #sidebarLayout: AgentSidebar | null;
   readonly #libraryFolders: AgentLibraryFolders | null;
   readonly #localSkillTools: (() => LocalSkillTools) | undefined;
@@ -915,7 +915,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
               if (threadId && notification.method === "turn/started") this.#codexIdleSessions.busy(threadId, client);
               else if (threadId) this.#codexIdleSessions.idle(threadId, client);
             }
-            if (notification.method === "openbot/sessionSettings/updated") {
+            if (notification.method === "starbot/sessionSettings/updated") {
               const threadId = getString(notification.params, "threadId");
               const agentId = threadId ? this.#conversation.agentForThread(threadId) : undefined;
               if (agentId) this.#emit({ type: "agent-session-settings-changed", agentId });
@@ -1993,7 +1993,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
       compaction: this.#compaction,
       apiKeys: options.agentApiKeys ?? null,
       deleteWithRevokedApproval: options.deleteWithRevokedApproval ?? ((_agentId, remove) => remove()),
-      logger: createOpenBotLogger("agent-removal"),
+      logger: createStarBotLogger("agent-removal"),
       hooks: {
         emit: (event) => this.#emit(event),
         listAgents: () => this.listAgents(),
@@ -2039,7 +2039,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
         settleModelMoves: () => this.#endpoints.runExclusive(() => Effect.void),
       },
     });
-    this.#tools = new OpenBotToolRouter({
+    this.#tools = new StarBotToolRouter({
       capturedSteps: (session) => this.#threads.capturedWorkSteps(session).pipe(toToolOperationFailed),
       store,
       mailbox,
@@ -3074,11 +3074,11 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
   ) {
     if (this.#stopping) return { models: [] } satisfies WorkflowMediaCatalog;
     const credit =
-      this.#creditMedia && (only === undefined || only === "openbot")
+      this.#creditMedia && (only === undefined || only === "starbot")
         ? this.#creditMedia.catalog()
         : Effect.succeed({ models: [], unavailable: [] } satisfies WorkflowMediaCatalog);
     const services =
-      only === "openbot"
+      only === "starbot"
         ? Effect.succeed({ models: [] } satisfies WorkflowMediaCatalog)
         : this.#mediaCatalog.catalog(only);
     const [listed, credits] = yield* Effect.all([services, credit], { concurrency: "unbounded" });
@@ -3095,7 +3095,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
     request: WorkflowMediaPriceRequest,
   ) {
     if (this.#stopping) return { credits: null } satisfies WorkflowMediaPrice;
-    if (workflowCatalogSource(request.model) === "openbot")
+    if (workflowCatalogSource(request.model) === "starbot")
       return {
         credits: this.#creditMedia ? yield* this.#creditMedia.price(request) : null,
       } satisfies WorkflowMediaPrice;
@@ -3105,7 +3105,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
   workflowMediaProviders(): WorkflowMediaProviders {
     return {
       ...workflowMediaProvidersOf(this.#mediaServiceAccounts().map(({ account }) => account)),
-      openbot: this.#creditMedia?.available() === true,
+      starbot: this.#creditMedia?.available() === true,
     };
   }
 
@@ -3114,10 +3114,10 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
     only?: WorkflowCatalogSource,
   ) {
     if (this.#stopping) return { sunra: null, higgsfield: null, accounts: null } satisfies WorkflowMediaCredits;
-    const openbot =
-      this.#creditMedia && (only === undefined || only === "openbot") ? yield* this.#creditMedia.credits() : null;
-    if (only === "openbot")
-      return { sunra: null, higgsfield: null, accounts: null, openbot } satisfies WorkflowMediaCredits;
+    const starbot =
+      this.#creditMedia && (only === undefined || only === "starbot") ? yield* this.#creditMedia.credits() : null;
+    if (only === "starbot")
+      return { sunra: null, higgsfield: null, accounts: null, starbot } satisfies WorkflowMediaCredits;
     const all = this.#mediaServiceAccounts();
     const accounts = only ? all.filter((account) => account.provider === only).slice(0, 1) : all;
     const orNull = <A>(read: Effect.Effect<A, { readonly message: string }>, service: string) =>
@@ -3139,7 +3139,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
     return {
       ...workflowMediaCreditsOf(listed),
       accounts: only ? null : listed,
-      ...(only ? {} : { openbot }),
+      ...(only ? {} : { starbot }),
     } satisfies WorkflowMediaCredits;
   }).bind(this);
 
@@ -3164,7 +3164,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
       const pictures = input.images.filter(
         (image): image is { role: MediaPictureRole; attachmentId: string } => image.role !== "file",
       );
-      if (input.provider === "openbot") {
+      if (input.provider === "starbot") {
         if (this.#stopping) return yield* failed(sourceText("error.backend.shuttingDown"));
         if (!this.#creditMedia) return yield* failed(sourceText("error.billing.mediaSignInRequired"));
         return yield* this.#creditMedia

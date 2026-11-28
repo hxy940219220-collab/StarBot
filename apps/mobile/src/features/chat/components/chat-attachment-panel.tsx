@@ -174,15 +174,15 @@ export function ChatAttachmentPanel({
   const [keyboardInset] = useState(() => Math.max(0, (Keyboard.metrics()?.height ?? 0) - keyboardOffset));
   const rowCount = 3 + (onUseSkill ? 1 : 0) + (context ? 1 : 0);
   const roomTop = height - insets.top - keyboardInset - CAMERA_TOP_GAP;
-  const openBottom = Math.max(
+  const starBottom = Math.max(
     anchor.bottom,
     Math.min(
       anchor.barTop + MENU_GAP,
       roomTop - Math.max(MIN_CAMERA_HEIGHT, optionsHeight(rowCount, Boolean(context))),
     ),
   );
-  const rise = openBottom - anchor.bottom;
-  const cameraHeight = Math.min(height * 0.58, roomTop - openBottom);
+  const rise = starBottom - anchor.bottom;
+  const cameraHeight = Math.min(height * 0.58, roomTop - starBottom);
   const optionsShift = anchor.barStart - anchor.left;
   const cameraShift = startInset + (safeWidth - cameraWidth) / 2 - anchor.left;
   const maxListWidth = Math.max(

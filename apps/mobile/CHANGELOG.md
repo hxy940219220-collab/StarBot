@@ -15,7 +15,7 @@ the [root changelog](../../CHANGELOG.md).
 
 ### Changed
 
-- Removed external App Store update prompts, third-party analytics endpoints, and legacy OpenBot branding across mobile and desktop.
+- Removed external App Store update prompts, third-party analytics endpoints, and legacy StarBot branding across mobile and desktop.
 
 ## [1.4.12] - 2026-11-20
 
@@ -990,7 +990,7 @@ the [root changelog](../../CHANGELOG.md).
 - With Reduce Motion on, the group of characters fades away when you continue from the welcome
   screen. Before, it flew off the screen.
 - The blinking StarBot logo uses less battery: it draws no frames between blinks.
-- When another app, such as a keyboard or Safari, opens `openbot://` while StarBot runs, the app
+- When another app, such as a keyboard or Safari, opens `starbot://` while StarBot runs, the app
   comes back on the same screen. Before, every server connected again and again until the
   connection service stopped the app for 60 seconds.
 - Each chat and channel keeps its unsent text. Go to another agent and come back, and the text you typed is still in the message box.
@@ -1922,7 +1922,7 @@ the [root changelog](../../CHANGELOG.md).
   logo.
 - Haptic feedback when you open and close screens, pick options, save, and when an action succeeds
   or fails. Turn it off with the Haptics setting.
-- Open a shared agent link (`https://starbot.app/agents/...` or `openbot://agents/...`) in the app.
+- Open a shared agent link (`https://starbot.app/agents/...` or `starbot://agents/...`) in the app.
   You see the agent before you add it, and you choose the server where you are owner or admin.
   Before, the link opened Safari or showed "Link unavailable".
 - Manage the skills of an agent from Agent info > Skills. An owner or admin can turn a skill on or

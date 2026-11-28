@@ -1,11 +1,11 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import { readScriptArguments } from "../script-arguments";
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
-const BENCH_ROOT = join(PROJECT_ROOT, ".openbot-build", "dev-automation", "bench");
+const BENCH_ROOT = join(PROJECT_ROOT, ".starbot-build", "dev-automation", "bench");
 const TOP = 15;
 const PROFILE_TOP = 25;
 

@@ -1,6 +1,6 @@
-import type { AgentMessage } from "@openbot/ui/data";
-import { currentText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+import type { AgentMessage } from "@starbot/ui/data";
+import { currentText } from "@starbot/ui/text";
+import { errorReference } from "@starbot/user-errors";
 import { createSignal } from "solid-js";
 import { formatMessageTime } from "./app-message-projection";
 import { agentConversationKey } from "./features/conversation/conversation-keys";

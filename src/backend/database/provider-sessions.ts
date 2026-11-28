@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { type AgentProviderId, isAgentProvider } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { type AgentProviderId, isAgentProvider } from "@starbot/contracts/ipc";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import type { DatabaseCore } from "./database-core";
 import { databaseRow, databaseRows, optionalStringColumn, requiredStringColumn } from "./database-rows";
 
@@ -35,7 +35,7 @@ export interface ProviderSessionsOptions {
   core: DatabaseCore;
 }
 
-const logger = createOpenBotLogger("provider-sessions");
+const logger = createStarBotLogger("provider-sessions");
 
 export class ProviderSessions {
   readonly #core: DatabaseCore;

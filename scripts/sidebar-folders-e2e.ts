@@ -9,23 +9,23 @@ import {
   SIDEBAR_PEOPLE_SECTION_ID,
   SIDEBAR_UNASSIGNED_SECTION_ID,
   type SidebarLayoutSnapshot,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+} from "@starbot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_CAPABILITIES_HEADER,
   TEAM_PROTOCOL_V1_WEBSOCKET,
   TEAM_PROTOCOL_VERSION_HEADER,
-} from "@openbot/contracts/team-protocol";
-import { teamCapabilitiesForProtocol } from "@openbot/contracts/team-protocol/current";
+} from "@starbot/contracts/team-protocol";
+import { teamCapabilitiesForProtocol } from "@starbot/contracts/team-protocol/current";
 import {
   SIDEBAR_FOLDERS_CODECS,
   SIDEBAR_FOLDERS_ROUTES,
   sidebarFoldersEvent,
-} from "@openbot/contracts/team-protocol/sidebar-folders-v1";
-import { TEAM_PROTOCOL_V7 } from "@openbot/contracts/team-protocol/v7";
-import { TEAM_PROTOCOL_V9 } from "@openbot/contracts/team-protocol/v9";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/sidebar-folders-v1";
+import { TEAM_PROTOCOL_V7 } from "@starbot/contracts/team-protocol/v7";
+import { TEAM_PROTOCOL_V9 } from "@starbot/contracts/team-protocol/v9";
+import { sourceText } from "@starbot/i18n/source";
 import { plugin } from "bun";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -33,11 +33,11 @@ import { AgentService } from "../src/backend/agent-service";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import type { TeamApiBrowser } from "../src/main/team-api/dependencies";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/sidebar-folders-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/sidebar-folders-e2e");
 const HOST_VERSION = "0.0.0-e2e";
 const OWNER = { username: "owner-user", password: "owner-password-123" };
 const MEMBER = { username: "member-user", password: "member-password-123" };
@@ -180,12 +180,12 @@ const teamBrowser: TeamApiBrowser = {
   importSignIn: unused,
 };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-sidebar-folders-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-sidebar-folders-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 
 interface Host {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   agents: AgentService;
   access: InstanceType<typeof AgentAccessStore>;
   sidebar: SidebarLayoutStore;
@@ -198,11 +198,11 @@ let host: Host | null = null;
 const sockets: WebSocket[] = [];
 
 async function startHost(): Promise<Host> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const agentStore = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
-  const team = new TeamStore(join(userData, "openbot-team-server-v2.json"));
+  const team = new TeamStore(join(userData, "starbot-team-server-v2.json"));
   const access = new AgentAccessStore(join(userData, AGENT_ACCESS_FILE));
   await runCauseEffect(sidebar.initialize());
   await runCauseEffect(agentStore.initialize());
@@ -339,7 +339,7 @@ interface EventSocket {
 async function openEvents(token: string, protocol: number): Promise<EventSocket> {
   const socket = new WebSocket(`ws://127.0.0.1:${current().port}${TEAM_API_ROUTES.events}`, [
     TEAM_PROTOCOL_V1_WEBSOCKET,
-    `openbot-token.${token}`,
+    `starbot-token.${token}`,
   ]);
   sockets.push(socket);
   const received: unknown[] = [];

@@ -2,7 +2,7 @@ import { createHash, createHmac } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { createStarBotLogger, registerSecretValue } from "@starbot/logging";
 import { Schema } from "effect";
 import {
   CheckResult,
@@ -16,7 +16,7 @@ import {
   serviceName,
 } from "../src/model";
 
-const logger = createOpenBotLogger("status-notify");
+const logger = createStarBotLogger("status-notify");
 
 const { values: args } = parseArgs({
   options: {
@@ -38,7 +38,7 @@ const NOW_MS = Date.parse(NOW);
 if (Number.isNaN(NOW_MS)) throw new Error(`--now: "${NOW}" is not a time.`);
 const IN_ACTIONS = process.env.GITHUB_ACTIONS === "true";
 
-const SITE_URL = "https://status.openbot.run";
+const SITE_URL = "https://status.starbot.run";
 const TIMEOUT_MS = 10_000;
 const RETRY_MINUTES = [5, 10, 20, 40, 80, 160, 320] as const;
 const MAX_ATTEMPTS = RETRY_MINUTES.length + 1;
@@ -341,7 +341,7 @@ function message(event: WebhookEvent): { headline: string; lines: string[]; link
       link: SITE_URL,
     };
   }
-  return { headline: "Test event from the OpenBot status page", lines: ["The webhook works."], link: SITE_URL };
+  return { headline: "Test event from the StarBot status page", lines: ["The webhook works."], link: SITE_URL };
 }
 
 const slackText = (text: string) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -370,16 +370,16 @@ async function send(subscription: Subscription, delivery: Delivery): Promise<Out
   const timestamp = String(Math.floor(Date.now() / 1000));
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    "User-Agent": "openbot-status-webhook",
-    "x-openbot-event": delivery.event.type,
-    "x-openbot-delivery-id": delivery.id,
-    "x-openbot-timestamp": timestamp,
+    "User-Agent": "starbot-status-webhook",
+    "x-starbot-event": delivery.event.type,
+    "x-starbot-delivery-id": delivery.id,
+    "x-starbot-timestamp": timestamp,
   };
   if (subscription.secret) {
     const signature = createHmac("sha256", subscription.secret)
       .update(`${timestamp}.${delivery.id}.${body}`)
       .digest("hex");
-    headers["x-openbot-signature"] = `sha256=${signature}`;
+    headers["x-starbot-signature"] = `sha256=${signature}`;
   }
   try {
     const response = await fetch(subscription.url, {

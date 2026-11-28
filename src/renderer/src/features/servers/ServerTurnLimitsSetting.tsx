@@ -4,8 +4,8 @@ import {
   type HostTurnLimit,
   type HostTurnLimits,
   type HostTurnLimitsInput,
-  type OpenBotDesktopApi,
-} from "@openbot/contracts/ipc";
+  type StarBotDesktopApi,
+} from "@starbot/contracts/ipc";
 import {
   Item,
   ItemActions,
@@ -17,11 +17,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal, Show, untrack } from "solid-js";
 
-export type HostTurnLimitsCalls = Pick<OpenBotDesktopApi["hostAdmin"], "getTurnLimits" | "setTurnLimits">;
+export type HostTurnLimitsCalls = Pick<StarBotDesktopApi["hostAdmin"], "getTurnLimits" | "setTurnLimits">;
 
 export interface ServerTurnLimitsOptions {
   calls?: HostTurnLimitsCalls;
@@ -70,7 +70,7 @@ export function ServerTurnLimitsSetting(
   },
 ) {
   const { t, errorMessage, format } = useText();
-  const calls = (): HostTurnLimitsCalls => props.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostTurnLimitsCalls => props.calls ?? window.starbot.hostAdmin;
   const [settings, setSettings] = createSignal<HostTurnLimits | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);
   const [loaded, setLoaded] = createSignal(false);

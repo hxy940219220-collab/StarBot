@@ -3,8 +3,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createInviteUrl, parseInviteUrl } from "@openbot/contracts/invite-links";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+import { createInviteUrl, parseInviteUrl } from "@starbot/contracts/invite-links";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_CAPABILITIES_HEADER,
@@ -12,7 +12,7 @@ import {
   TEAM_PROTOCOL_V7,
   TEAM_PROTOCOL_V7_CAPABILITIES,
   TEAM_PROTOCOL_VERSION_HEADER,
-} from "@openbot/contracts/team-protocol";
+} from "@starbot/contracts/team-protocol";
 import { plugin } from "bun";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -20,11 +20,11 @@ import { AgentService } from "../src/backend/agent-service";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import type { TeamApiBrowser, TeamApiOptions } from "../src/main/team-api/dependencies";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/team-session-revoke-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/team-session-revoke-e2e");
 const HOST_VERSION = "0.0.0-e2e";
 const OWNER = { username: "owner-user", password: "owner-password-123" };
 const MEMBER = { username: "member-user", password: "member-password-123" };
@@ -118,11 +118,11 @@ async function runHost(root: string, configure: boolean): Promise<void> {
   const send = (message: HostMessage) => process.stdout.write(`${HOST_LINE}${JSON.stringify(message)}\n`);
 
   const userData = join(root, "user-data");
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const agentStore = new AgentStore(userData, join(root, "home"), database);
   const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
-  const team = new TeamStore(join(userData, "openbot-team-server-v2.json"));
+  const team = new TeamStore(join(userData, "starbot-team-server-v2.json"));
   await runCauseEffect(sidebar.initialize());
   await runCauseEffect(agentStore.initialize());
   await runCauseEffect(mailbox.initialize());
@@ -242,7 +242,7 @@ function assertRefused(status: number, label: string): void {
   assert.ok(status >= 400 && status < 500, `${label} returned ${status}, not a refusal.`);
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-team-revoke-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-team-revoke-"));
 let host: { process: Bun.Subprocess<"pipe", "pipe", "inherit">; exited: Promise<number> } | null = null;
 let port = 0;
 const sockets: WebSocket[] = [];
@@ -352,7 +352,7 @@ async function loginDevice(ownerToken: string): Promise<{ token: string; session
 async function openEvents(token: string): Promise<{ closed: Promise<number>; close: () => void }> {
   const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
     TEAM_PROTOCOL_V1_WEBSOCKET,
-    `openbot-token.${token}`,
+    `starbot-token.${token}`,
   ]);
   sockets.push(socket);
   const closed = new Promise<number>((resolveClose) =>

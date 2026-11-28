@@ -3,10 +3,10 @@ import type {
   BrowserDockIsland,
   BrowserLiveViewEvent,
   BrowserTab,
-} from "@openbot/contracts/ipc";
-import { BrowserDock } from "@openbot/ui/features/browser/BrowserDock";
-import BrowserFullView from "@openbot/ui/features/browser/BrowserFullView";
-import type { BrowserViewRuntime } from "@openbot/ui/features/browser/BrowserLiveView";
+} from "@starbot/contracts/ipc";
+import { BrowserDock } from "@starbot/ui/features/browser/BrowserDock";
+import BrowserFullView from "@starbot/ui/features/browser/BrowserFullView";
+import type { BrowserViewRuntime } from "@starbot/ui/features/browser/BrowserLiveView";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -16,8 +16,8 @@ const chief = requireFixture(STORY_AGENTS[0], "Story agent 0");
 
 const tab: BrowserTab = {
   id: "tab-docs",
-  title: "OpenBot documentation",
-  url: "https://openbot.run/docs",
+  title: "StarBot documentation",
+  url: "https://starbot.run/docs",
   loading: false,
   ownerThreadId: "thread-chief",
   ownerAgentId: chief.id,
@@ -27,8 +27,8 @@ const tab: BrowserTab = {
 
 const tabs: BrowserTab[] = [
   tab,
-  { ...tab, id: "tab-changelog", title: "Changelog", url: "https://openbot.run/changelog" },
-  { ...tab, id: "tab-pricing", title: "Pricing", url: "https://openbot.run/pricing", loading: true },
+  { ...tab, id: "tab-changelog", title: "Changelog", url: "https://starbot.run/changelog" },
+  { ...tab, id: "tab-pricing", title: "Pricing", url: "https://starbot.run/pricing", loading: true },
   {
     ...tab,
     id: "tab-search",
@@ -58,8 +58,8 @@ const meta = {
     tabs,
     activeTab: tab,
     history: [
-      { url: "https://openbot.run/docs", title: "OpenBot documentation", visits: 3 },
-      { url: "https://openbot.run/docs/browser", title: "Browser · OpenBot documentation", visits: 1 },
+      { url: "https://starbot.run/docs", title: "StarBot documentation", visits: 3 },
+      { url: "https://starbot.run/docs/browser", title: "Browser · StarBot documentation", visits: 1 },
     ],
     canReopen: true,
     controlForTab: () => undefined,
@@ -192,7 +192,7 @@ export const AgentNeedsApproval: Story = {
             turnId: "turn-1",
             kind: "command",
             command: "curl -s https://trattoria-roma.example/api/slots > slots.json",
-            cwd: "~/OpenBot/Agents/chief",
+            cwd: "~/StarBot/Agents/chief",
             reason: "Save the free tables to a file in the workspace.",
             grantRoot: null,
             permissions: null,
@@ -245,9 +245,9 @@ function remoteLiveViewRuntime(): BrowserViewRuntime {
       const context = canvas.getContext("2d");
       const theme = getComputedStyle(document.documentElement);
       if (context) {
-        context.fillStyle = theme.getPropertyValue("--openbot-bg-surface");
+        context.fillStyle = theme.getPropertyValue("--starbot-bg-surface");
         context.fillRect(0, 0, width, height);
-        context.fillStyle = theme.getPropertyValue("--openbot-text-primary");
+        context.fillStyle = theme.getPropertyValue("--starbot-text-primary");
         context.font = "48px sans-serif";
         context.fillText("Page on the host", 64, 128);
       }

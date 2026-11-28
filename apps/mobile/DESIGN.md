@@ -65,10 +65,10 @@ large title does not work under the custom scroll edge effect on iOS 27, and And
   blur described below (the surface solid under the bar and a 32 dp fade below it before Android 12),
   a 22 dp regular small title on the 72 dp line, and 48 dp icon buttons with a round ripple: a 40 dp filled circle on full screens, the plain icon in sheets.
 - Android has no Liquid Glass. The search fields and the bar buttons are plain: the opaque HeroUI
-  `default` fill (`--openbot-bg-control`) of the chat composer and its buttons, with no edge, shadow,
+  `default` fill (`--starbot-bg-control`) of the chat composer and its buttons, with no edge, shadow,
   sheen or blur. `GlassCapsule` and `useChromeGlass()` give them that fill. iOS without Liquid Glass
   keeps the solid `default` capsule with a soft shadow for the search fields, and the solid glass of
-  the design (`--openbot-bg-chrome-glass`) for the bar buttons.
+  the design (`--starbot-bg-chrome-glass`) for the bar buttons.
 - Android 12 and later blur the content under the bar with `AndroidHeaderBlur`
   (`src/shared/components/android-header-blur.tsx`): the scroll content is in an `AndroidBlurTarget`
   on the surface color. The bar draws the usual Expo progressive blur: a `BlurView` of the target
@@ -196,7 +196,7 @@ a standalone sheet with a native title is:
 }
 ```
 
-Resolve `sheetBackground` from `--openbot-bg-sheet`, as in `src/app/(app)/_layout.tsx`.
+Resolve `sheetBackground` from `--starbot-bg-sheet`, as in `src/app/(app)/_layout.tsx`.
 Keep `headerShadowVisible: false` from the parent stack. A headerless sheet uses
 `headerShown: false`; do not add a fake navigation bar. Full-height detents are appropriate for
 search or similarly large content, not the default for a short form.
@@ -405,7 +405,7 @@ sticky header would stick under the native bar.
 The backdrop of Settings › Appearance (`features/settings/model/chat-backdrop.ts`) is the desktop
 window backdrop in the Ambient look: a quiet layer, not a wallpaper.
 
-- The built-in scenes come from `@openbot/brand/chat-backdrop-scenes`, the same painters as the
+- The built-in scenes come from `@starbot/brand/chat-backdrop-scenes`, the same painters as the
   desktop. `ChatBackdropSceneView` draws them with Skia in 6 pt cells at about 15 frames each second.
   A scene stops on a hidden screen (also under a sheet), in the background and with reduced motion.
   A stop keeps the frame that shows, and the scene goes on from that time; a new screen goes on from

@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { sourceText } from "@starbot/i18n/source";
 
 const TELEGRAM_ORCHESTRATOR_DESCRIPTION = `You are the Telegram Orchestrator of this StarBot team. Every message that people send to the StarBot bot in Telegram comes to you first: a mention of the bot or a reply to it in a group, or any message in a direct chat. Telegram shows your replies as the StarBot bot.
 

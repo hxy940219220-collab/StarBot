@@ -1,14 +1,14 @@
-import { rankAgentMentions } from "@openbot/contracts/agent-mention-rank";
-import { attachmentReferenceIds, expandAttachmentReferences } from "@openbot/contracts/attachment-references";
+import { rankAgentMentions } from "@starbot/contracts/agent-mention-rank";
+import { attachmentReferenceIds, expandAttachmentReferences } from "@starbot/contracts/attachment-references";
 import {
   EVERYONE_MENTION,
   expandChatTagReferences,
   serializeChatTagReference,
-} from "@openbot/contracts/chat-tag-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { DraftAttachment } from "@openbot/contracts/ipc";
-import { AppWindow, Badge, Blocks, Listbox, Puzzle, Split, UsersRound } from "@openbot/ui";
-import { usesTouchLayout } from "@openbot/ui/utils";
+} from "@starbot/contracts/chat-tag-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { DraftAttachment } from "@starbot/contracts/ipc";
+import { AppWindow, Badge, Blocks, Listbox, Puzzle, Split, UsersRound } from "@starbot/ui";
+import { usesTouchLayout } from "@starbot/ui/utils";
 import { Dynamic, type JSX, Portal } from "@solidjs/web";
 import {
   createEffect,

@@ -157,7 +157,7 @@ export const messages = {
   "server.install.offline": "{name} ist offline.",
   "server.install.expired": "Dieser Befehl ist abgelaufen. Erstelle einen neuen.",
   "server.install.agentPrompt":
-    'Installiere OpenBot auf diesem Linux-Server und melde ihn bei meinem OpenBot-Konto an.\nFühre diesen Befehl als root aus. Er stellt keine Fragen und dauert einige Minuten:\n\n{command}\n\nEr endet mit der Zeile "StarBot is connected to your account." und dem Exit-Code 0.\nDer Befehl funktioniert einmal, 15 Minuten lang. Speichere ihn nirgends.',
+    'Installiere StarBot auf diesem Linux-Server und melde ihn bei meinem StarBot-Konto an.\nFühre diesen Befehl als root aus. Er stellt keine Fragen und dauert einige Minuten:\n\n{command}\n\nEr endet mit der Zeile "StarBot is connected to your account." und dem Exit-Code 0.\nDer Befehl funktioniert einmal, 15 Minuten lang. Speichere ihn nirgends.',
   "server.install.setUpWithAgent": "Mit einem Agenten einrichten",
   "server.install.sshAgentPrompt":
     "Verbinde dich per SSH mit meinem Linux-Server und installiere dort StarBot als Server.\n\nSSH-Adresse (user@host):",
@@ -687,7 +687,7 @@ export const messages = {
   "server.update.path.hosted":
     "Der gehostete Dienst lädt Updates im Hintergrund herunter. Ein heruntergeladenes Update startet beim nächsten Serverstart. Warte, bis aktive Aufgaben beendet sind, bevor du den Server stoppst und fortsetzt. Bleibt er bei einer alten Version, kontaktiere den Host-Administrator.",
   "server.update.path.system":
-    "Führe auf dem Host sudo openbot update aus, um die neueste Version zu installieren. Dieser Befehl beendet StarBot. Warte zuerst, bis aktive Aufgaben beendet sind. Automatische Downloads werden beim nächsten Systemstart installiert.",
+    "Führe auf dem Host sudo starbot update aus, um die neueste Version zu installieren. Dieser Befehl beendet StarBot. Warte zuerst, bis aktive Aufgaben beendet sind. Automatische Downloads werden beim nächsten Systemstart installiert.",
 
   "server.update.path.container":
     "Lade auf dem Docker-Host das neue StarBot-Image herunter und erstelle den Container mit denselben Datenvolumes neu. Warte zuerst, bis aktive Aufgaben beendet sind. Behalte die vorhandenen Volumes, um deine Daten zu erhalten.",

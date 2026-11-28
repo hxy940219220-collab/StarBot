@@ -5,8 +5,8 @@ import {
   type AvatarColor,
   QUIT_GUARDS,
   type QuitGuard,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Item,
   ItemActions,
@@ -22,27 +22,27 @@ import {
   SettingsSection,
   SwitchField,
   toast,
-} from "@openbot/ui";
-import { documentColorScheme } from "@openbot/ui/document-color-scheme";
-import { AppearanceSelect } from "@openbot/ui/features/settings/AppearanceSelect";
-import type { GeneralSettingsValue } from "@openbot/ui/features/settings/app-settings";
-import { ChatBackgroundSetting } from "@openbot/ui/features/settings/ChatBackgroundSetting";
-import { ChatBubbleStyleSelect } from "@openbot/ui/features/settings/ChatBubbleStyleSelect";
-import { OwnChatColorTrigger } from "@openbot/ui/features/settings/ChatColorSetting";
-import { FontSelect } from "@openbot/ui/features/settings/FontSelect";
-import { LanguageSelect } from "@openbot/ui/features/settings/LanguageSelect";
-import { LogoColorPicker } from "@openbot/ui/features/settings/LogoColorPicker";
-import { SendShortcutSelect } from "@openbot/ui/features/settings/SendShortcutSelect";
-import { SidebarChatOrderSelect } from "@openbot/ui/features/settings/SidebarChatOrderSelect";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { documentColorScheme } from "@starbot/ui/document-color-scheme";
+import { AppearanceSelect } from "@starbot/ui/features/settings/AppearanceSelect";
+import type { GeneralSettingsValue } from "@starbot/ui/features/settings/app-settings";
+import { ChatBackgroundSetting } from "@starbot/ui/features/settings/ChatBackgroundSetting";
+import { ChatBubbleStyleSelect } from "@starbot/ui/features/settings/ChatBubbleStyleSelect";
+import { OwnChatColorTrigger } from "@starbot/ui/features/settings/ChatColorSetting";
+import { FontSelect } from "@starbot/ui/features/settings/FontSelect";
+import { LanguageSelect } from "@starbot/ui/features/settings/LanguageSelect";
+import { LogoColorPicker } from "@starbot/ui/features/settings/LogoColorPicker";
+import { SendShortcutSelect } from "@starbot/ui/features/settings/SendShortcutSelect";
+import { SidebarChatOrderSelect } from "@starbot/ui/features/settings/SidebarChatOrderSelect";
+import { useText } from "@starbot/ui/text";
 import { createUniqueId, Show } from "solid-js";
 import { useInstalledFonts } from "../../app-fonts";
 import { useAppearanceChoice } from "../../appearance-choice";
 import { useChatBackdrop } from "../../chat-backdrop-preference";
 import { setChatBubbleStyle, useChatBubbleStyle } from "../../chat-bubble-style-preference";
-import { ChatBackdrop } from "@openbot/ui/features/conversation/ChatBackdrop";
-import { isChatBackdropScene } from "@openbot/ui/features/conversation/chat-backdrop";
-import { solidBubbleTakesDarkText } from "@openbot/ui/features/conversation/own-bubble";
+import { ChatBackdrop } from "@starbot/ui/features/conversation/ChatBackdrop";
+import { isChatBackdropScene } from "@starbot/ui/features/conversation/chat-backdrop";
+import { solidBubbleTakesDarkText } from "@starbot/ui/features/conversation/own-bubble";
 import { useI18n } from "../../i18n-context";
 import { useInterfaceSizeChoice } from "../../interface-size";
 import { useLayout } from "../../layout";
@@ -295,7 +295,7 @@ function AppearanceRows(props: SettingsGeneralTabProps) {
       };
     }
     return {
-      background: `color-mix(in srgb, ${color} 26%, var(--openbot-bg-surface-raised))`,
+      background: `color-mix(in srgb, ${color} 26%, var(--starbot-bg-surface-raised))`,
       "border-color": `color-mix(in srgb, ${color} 46%, transparent)`,
     };
   };

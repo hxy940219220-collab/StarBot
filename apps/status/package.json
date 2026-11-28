@@ -1,5 +1,5 @@
 {
-  "name": "@openbot/status",
+  "name": "@starbot/status",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@fontsource-variable/inter": "catalog:",
-    "@openbot/brand": "workspace:*",
-    "@openbot/logging": "workspace:*",
+    "@starbot/brand": "workspace:*",
+    "@starbot/logging": "workspace:*",
     "@solidjs/web": "catalog:",
     "effect": "catalog:",
     "lucide-solid": "catalog:",

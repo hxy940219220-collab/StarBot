@@ -3,14 +3,14 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { DISCORD_GATEWAY_INTENTS, DISCORD_MESSAGE_CONTENT_INTENT } from "@openbot/contracts/discord-app";
-import { isDiscordRoleList } from "@openbot/contracts/ipc";
+import { DISCORD_GATEWAY_INTENTS, DISCORD_MESSAGE_CONTENT_INTENT } from "@starbot/contracts/discord-app";
+import { isDiscordRoleList } from "@starbot/contracts/ipc";
 import {
   decodeDiscordApiError,
   decodeDiscordChannels,
   decodeDiscordDelivery,
   decodeDiscordHistory,
-} from "@openbot/contracts/signal-protocol/discord-api";
+} from "@starbot/contracts/signal-protocol/discord-api";
 import { Effect } from "effect";
 import { type DiscordRestRequest, DiscordTransportError, makeDiscordApi } from "../remote/api/src/discord-api";
 import { DiscordState } from "../remote/api/src/discord-events";
@@ -28,13 +28,13 @@ import {
   MessagingAdapterError,
   type MessagingIngress,
 } from "../src/backend/messaging/messaging-types";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { parseSetDiscordAccessInput } from "../src/main/ipc/messaging-inputs";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-discord-access-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/messaging-discord-access-e2e");
 const REPORT = join(OUT, "report.json");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-discord-access-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-messaging-discord-access-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const APP = "300000000000000001";
@@ -272,7 +272,7 @@ interface Booted {
 }
 
 async function boot<T>(use: (services: Booted) => Promise<T>): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
@@ -1083,7 +1083,7 @@ try {
         await received(id);
         assert.match(
           await promptOf(services, GUILD_ONE, id, CHANNEL_ONE),
-          /--- the message this one replies to \(context\) ---\n\[2026-10-19T11:40:00\.000Z\] Ticket Tool: @Bob Welcome\n\(Embed\)\nSupport will be with you shortly\. Opened by @Kamil\.\nFooter: TicketTool\.xyz - Ticketing without clutter\n\(Embed\)\nWhat do you need\?: ```Bug```\nOpenBot version: ```0\.59\.0```\n--- message ---\nplease look at this ticket/u,
+          /--- the message this one replies to \(context\) ---\n\[2026-10-19T11:40:00\.000Z\] Ticket Tool: @Bob Welcome\n\(Embed\)\nSupport will be with you shortly\. Opened by @Kamil\.\nFooter: TicketTool\.xyz - Ticketing without clutter\n\(Embed\)\nWhat do you need\?: ```Bug```\nStarBot version: ```0\.59\.0```\n--- message ---\nplease look at this ticket/u,
         );
 
         channelOne.push({
@@ -1114,7 +1114,7 @@ try {
           await received(asked);
           assert.match(
             await promptOf(services, GUILD_ONE, asked, CHANNEL_ONE),
-            /--- earlier messages \(context, oldest first, with their message id\) ---\n\[2026-10-19T11:46:00\.000Z\] \(id \d+\) tomek: \(Embed\)\nLogin fails after the update\nLink: https:\/\/github\.com\/nightly-labs\/openbot\/issues\/1\nThe app closes at start\.\n/u,
+            /--- earlier messages \(context, oldest first, with their message id\) ---\n\[2026-10-19T11:46:00\.000Z\] \(id \d+\) tomek: \(Embed\)\nLogin fails after the update\nLink: https:\/\/github\.com\/nightly-labs\/starbot\/issues\/1\nThe app closes at start\.\n/u,
           );
         } finally {
           channelOne.length = 0;

@@ -48,13 +48,13 @@ export const messages = {
   "island.action.openChat": "Открыть чат",
   "island.action.openDetails": "Подробнее",
   "island.action.takeOver": "Взять управление",
-  "island.action.reviewInOpenBot": "Проверить в StarBot",
+  "island.action.reviewInStarBot": "Проверить в StarBot",
 
   "island.action.decline": "Отклонить",
   "island.action.approve": "Одобрить",
   "island.action.later": "Позже",
   "island.action.dismiss": "Закрыть",
-  "island.action.answerInOpenBot": "Ответить в StarBot",
+  "island.action.answerInStarBot": "Ответить в StarBot",
 
   "island.action.stopAgent": "Остановить {name}",
   "island.action.failed": "Не получилось. Повторите попытку.",

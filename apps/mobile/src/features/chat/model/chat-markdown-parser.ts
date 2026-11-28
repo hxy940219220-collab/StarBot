@@ -4,8 +4,8 @@ import {
   chatMathBlockStart,
   chatMathStart,
   inlineChatMath,
-} from "@openbot/contracts/chat-math";
-import { chatTagReferences } from "@openbot/contracts/chat-tag-references";
+} from "@starbot/contracts/chat-math";
+import { chatTagReferences } from "@starbot/contracts/chat-tag-references";
 import { replaceEqualDeep } from "@tanstack/react-query";
 import { Marked, type Token, type TokensList } from "marked";
 import { nextPhoneNumberIndex, phoneNumberAtStart } from "./chat-phone-number";

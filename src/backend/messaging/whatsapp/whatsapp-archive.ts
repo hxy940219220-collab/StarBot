@@ -1,15 +1,15 @@
 import { createHash } from "node:crypto";
 import { mkdirSync, renameSync, rmSync, statSync } from "node:fs";
 import { join, resolve, sep } from "node:path";
-import { ATTACHMENT_LIMITS } from "@openbot/contracts/input-limits";
-import { createOpenBotLogger } from "@openbot/logging";
-import type { WAMessage } from "@openbot/whatsapp/baileys";
+import { ATTACHMENT_LIMITS } from "@starbot/contracts/input-limits";
+import { createStarBotLogger } from "@starbot/logging";
+import type { WAMessage } from "@starbot/whatsapp/baileys";
 import type { MessagingHistoryStore } from "../messaging-history-store";
 import type { ContextEntry, HistoryFilter, InboundFile } from "../messaging-types";
 import { downloadWhatsAppMedia } from "./whatsapp-media";
 import type { WhatsAppSession } from "./whatsapp-session";
 
-const logger = createOpenBotLogger("whatsapp");
+const logger = createStarBotLogger("whatsapp");
 
 export const WHATSAPP_HISTORY_KEEP_MS = 90 * 24 * 60 * 60_000;
 const WHATSAPP_FILES_MAX_BYTES = 2 * 1024 ** 3;

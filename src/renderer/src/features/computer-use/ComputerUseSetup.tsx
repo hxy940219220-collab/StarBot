@@ -1,5 +1,5 @@
-import type { ComputerUseState, MacPermissionId } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { ComputerUseState, MacPermissionId } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Alert,
   AlertActions,
@@ -24,8 +24,8 @@ import {
   SettingsSection,
   Skeleton,
   TriangleAlert,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createSignal, For, onCleanup, onSettled, Show } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { idleRestartTarget } from "../updates/updates-port";

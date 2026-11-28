@@ -16,7 +16,7 @@ import { request as httpRequest } from "node:http";
 import { homedir, tmpdir } from "node:os";
 import { join, parse, resolve } from "node:path";
 import { isDeepStrictEqual } from "node:util";
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AccountUsageLimit,
   AGENT_PROVIDERS,
@@ -93,168 +93,168 @@ import {
   withWhatsAppReadOnly,
   withWhatsAppStatusReactions,
   withWhatsAppWorkingMessages,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES, WORKSPACE_FILE_EXACT_PATH_QUERY } from "@openbot/contracts/team-api-routes";
-import { TEAM_PROTOCOL_V1_WEBSOCKET } from "@openbot/contracts/team-protocol";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES, WORKSPACE_FILE_EXACT_PATH_QUERY } from "@starbot/contracts/team-api-routes";
+import { TEAM_PROTOCOL_V1_WEBSOCKET } from "@starbot/contracts/team-protocol";
 import {
   AGENT_ACTIVE_QUEUE_DELIVERY_LIMIT,
   AGENT_ACTIVE_QUEUES_CAPABILITY,
   AGENT_ACTIVE_QUEUES_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-active-queues-v1";
+} from "@starbot/contracts/team-protocol/agent-active-queues-v1";
 import {
   AGENT_ARCHIVED_THREADS_CAPABILITY,
   AGENT_ARCHIVED_THREADS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-archived-threads-v1";
+} from "@starbot/contracts/team-protocol/agent-archived-threads-v1";
 import {
   AGENT_BACKUP_MODELS_CAPABILITY,
   AGENT_BACKUP_MODELS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-backup-models-v1";
+} from "@starbot/contracts/team-protocol/agent-backup-models-v1";
 import {
   AGENT_BUILTIN_MEMORY_CAPABILITY,
   AGENT_BUILTIN_MEMORY_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-builtin-memory-v1";
-import { AGENT_COLORS_CAPABILITY, AGENT_COLORS_ROUTES } from "@openbot/contracts/team-protocol/agent-colors-v1";
-import { AGENT_DEFAULTS_CAPABILITY, AGENT_DEFAULTS_ROUTES } from "@openbot/contracts/team-protocol/agent-defaults-v1";
+} from "@starbot/contracts/team-protocol/agent-builtin-memory-v1";
+import { AGENT_COLORS_CAPABILITY, AGENT_COLORS_ROUTES } from "@starbot/contracts/team-protocol/agent-colors-v1";
+import { AGENT_DEFAULTS_CAPABILITY, AGENT_DEFAULTS_ROUTES } from "@starbot/contracts/team-protocol/agent-defaults-v1";
 import {
   AGENT_FAST_MODE_CAPABILITY,
   AGENT_FAST_MODE_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-fast-mode-v1";
-import { AGENT_FOLDERS_CAPABILITY, AGENT_FOLDERS_ROUTES } from "@openbot/contracts/team-protocol/agent-folders-v1";
-import { AGENT_HIDDEN_CAPABILITY, AGENT_HIDDEN_ROUTES } from "@openbot/contracts/team-protocol/agent-hidden-v1";
-import { AGENT_IMPORT_CAPABILITY, AGENT_IMPORT_ROUTES } from "@openbot/contracts/team-protocol/agent-import-v1";
+} from "@starbot/contracts/team-protocol/agent-fast-mode-v1";
+import { AGENT_FOLDERS_CAPABILITY, AGENT_FOLDERS_ROUTES } from "@starbot/contracts/team-protocol/agent-folders-v1";
+import { AGENT_HIDDEN_CAPABILITY, AGENT_HIDDEN_ROUTES } from "@starbot/contracts/team-protocol/agent-hidden-v1";
+import { AGENT_IMPORT_CAPABILITY, AGENT_IMPORT_ROUTES } from "@starbot/contracts/team-protocol/agent-import-v1";
 import {
   AGENT_IMPORT_V2_CAPABILITY,
   AGENT_IMPORT_V2_CHUNK_BYTES,
   AGENT_IMPORT_V2_ROUTES,
   agentImportV2ChunkPath,
-} from "@openbot/contracts/team-protocol/agent-import-v2";
+} from "@starbot/contracts/team-protocol/agent-import-v2";
 import {
   AGENT_INSTRUCTIONS_CAPABILITY,
   AGENT_INSTRUCTIONS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-instructions-v1";
-import { AGENT_NEW_CHAT_CAPABILITY, AGENT_NEW_CHAT_ROUTES } from "@openbot/contracts/team-protocol/agent-new-chat-v1";
+} from "@starbot/contracts/team-protocol/agent-instructions-v1";
+import { AGENT_NEW_CHAT_CAPABILITY, AGENT_NEW_CHAT_ROUTES } from "@starbot/contracts/team-protocol/agent-new-chat-v1";
 import {
   AGENT_NOTIFICATION_LEVELS_CAPABILITY,
   AGENT_NOTIFICATION_LEVELS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-notification-levels-v1";
+} from "@starbot/contracts/team-protocol/agent-notification-levels-v1";
 import {
   AGENT_PENDING_RUNTIME_CAPABILITY,
   AGENT_PENDING_RUNTIME_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-pending-runtime-v1";
+} from "@starbot/contracts/team-protocol/agent-pending-runtime-v1";
 import {
   AGENT_PLAN_CARD_CAPABILITY,
   AGENT_PLAN_CARD_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-plan-card-v1";
+} from "@starbot/contracts/team-protocol/agent-plan-card-v1";
 import {
   AGENT_QUEUE_TASK_CAPABILITY,
   AGENT_QUEUE_TASK_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-queue-task-v1";
-import { AGENT_SPEED_CAPABILITY, AGENT_SPEED_ROUTES } from "@openbot/contracts/team-protocol/agent-speed-v1";
+} from "@starbot/contracts/team-protocol/agent-queue-task-v1";
+import { AGENT_SPEED_CAPABILITY, AGENT_SPEED_ROUTES } from "@starbot/contracts/team-protocol/agent-speed-v1";
 import {
   AGENT_TASK_LIMIT_CAPABILITY,
   AGENT_TASK_LIMIT_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-task-limit-v1";
-import { AGENT_TASKS_CAPABILITY, AGENT_TASKS_ROUTES } from "@openbot/contracts/team-protocol/agent-tasks-v1";
+} from "@starbot/contracts/team-protocol/agent-task-limit-v1";
+import { AGENT_TASKS_CAPABILITY, AGENT_TASKS_ROUTES } from "@starbot/contracts/team-protocol/agent-tasks-v1";
 import {
   AGENT_THREAD_FILES_CAPABILITY,
   AGENT_THREAD_FILES_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-thread-files-v1";
+} from "@starbot/contracts/team-protocol/agent-thread-files-v1";
 import {
   AGENT_THREAD_PAGES_CAPABILITY,
   AGENT_THREAD_PAGES_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-thread-pages-v1";
+} from "@starbot/contracts/team-protocol/agent-thread-pages-v1";
 import {
   AGENT_THREAD_QUEUE_CAPABILITY,
   AGENT_THREAD_QUEUE_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-thread-queue-v1";
+} from "@starbot/contracts/team-protocol/agent-thread-queue-v1";
 import {
   AGENT_THREAD_REPLIES_CAPABILITY,
   AGENT_THREAD_REPLIES_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-thread-replies-v1";
+} from "@starbot/contracts/team-protocol/agent-thread-replies-v1";
 import {
   AGENT_THREAD_REQUESTS_CAPABILITY,
   AGENT_THREAD_REQUESTS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-thread-requests-v1";
+} from "@starbot/contracts/team-protocol/agent-thread-requests-v1";
 import {
   AGENT_USAGE_LIMIT_CAPABILITY,
   AGENT_USAGE_LIMIT_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-usage-limit-v1";
+} from "@starbot/contracts/team-protocol/agent-usage-limit-v1";
 import {
   AGENT_WAITS_CAPABILITY,
   AGENT_WAITS_REQUEST_TEXT_LIMIT,
   AGENT_WAITS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-waits-v1";
-import { ANTIGRAVITY_CODE_SIGN_IN_CAPABILITY } from "@openbot/contracts/team-protocol/antigravity-code-sign-in-v1";
-import { ATTACHMENT_PREVIEW_CAPABILITY } from "@openbot/contracts/team-protocol/attachment-preview-v1";
+} from "@starbot/contracts/team-protocol/agent-waits-v1";
+import { ANTIGRAVITY_CODE_SIGN_IN_CAPABILITY } from "@starbot/contracts/team-protocol/antigravity-code-sign-in-v1";
+import { ATTACHMENT_PREVIEW_CAPABILITY } from "@starbot/contracts/team-protocol/attachment-preview-v1";
 import {
   BACKGROUND_PROCESS_COMMAND_LIMIT,
   BACKGROUND_PROCESSES_CAPABILITY,
   BACKGROUND_PROCESSES_ROUTES,
-} from "@openbot/contracts/team-protocol/background-processes-v1";
+} from "@starbot/contracts/team-protocol/background-processes-v1";
 import {
   BITWARDEN_CONNECTOR_CAPABILITY,
   BITWARDEN_CONNECTOR_ROUTES,
-} from "@openbot/contracts/team-protocol/bitwarden-connector-v1";
+} from "@starbot/contracts/team-protocol/bitwarden-connector-v1";
 import {
   BROWSER_PROFILES_CAPABILITY,
   BROWSER_PROFILES_ROUTES,
-} from "@openbot/contracts/team-protocol/browser-profiles-v1";
+} from "@starbot/contracts/team-protocol/browser-profiles-v1";
 import {
   BROWSER_SECRET_VAULT_CAPABILITY,
   BROWSER_SECRET_VAULT_ROUTES,
-} from "@openbot/contracts/team-protocol/browser-secret-vault-v1";
+} from "@starbot/contracts/team-protocol/browser-secret-vault-v1";
 import {
   BROWSER_SIGN_IN_STORAGE_CAPABILITY,
   BROWSER_SIGN_IN_STORAGE_ROUTES,
   decodeBrowserSignInStorageResult,
-} from "@openbot/contracts/team-protocol/browser-sign-in-storage-v1";
+} from "@starbot/contracts/team-protocol/browser-sign-in-storage-v1";
 import {
   BROWSER_TEACH_CAPABILITY,
   BROWSER_TEACH_ROUTES,
   decodeBrowserTeachSteps,
-} from "@openbot/contracts/team-protocol/browser-teach-v1";
+} from "@starbot/contracts/team-protocol/browser-teach-v1";
 import {
   BROWSING_MEMORY_CAPABILITY,
   BROWSING_MEMORY_ROUTES,
-} from "@openbot/contracts/team-protocol/browsing-memory-v1";
+} from "@starbot/contracts/team-protocol/browsing-memory-v1";
 import {
   CACHE_EXPIRY_COMPACTION_CAPABILITY,
   CACHE_EXPIRY_COMPACTION_CODECS,
   CACHE_EXPIRY_COMPACTION_ROUTES,
-} from "@openbot/contracts/team-protocol/cache-expiry-compaction-v1";
+} from "@starbot/contracts/team-protocol/cache-expiry-compaction-v1";
 import {
   CHANNEL_FOLDERS_CAPABILITY,
   CHANNEL_FOLDERS_ROUTES,
-} from "@openbot/contracts/team-protocol/channel-folders-v1";
+} from "@starbot/contracts/team-protocol/channel-folders-v1";
 import {
   CHANNEL_PICTURE_CAPABILITY,
   CHANNEL_PICTURE_ROUTES,
-} from "@openbot/contracts/team-protocol/channel-picture-v1";
-import { CHANNEL_ROUTES } from "@openbot/contracts/team-protocol/channels-v1";
-import { CHAT_COLORS_CAPABILITY, CHAT_COLORS_ROUTES } from "@openbot/contracts/team-protocol/chat-colors-v1";
-import { CHAT_HISTORY_CAPABILITY, CHAT_HISTORY_ROUTES } from "@openbot/contracts/team-protocol/chat-history-v1";
+} from "@starbot/contracts/team-protocol/channel-picture-v1";
+import { CHANNEL_ROUTES } from "@starbot/contracts/team-protocol/channels-v1";
+import { CHAT_COLORS_CAPABILITY, CHAT_COLORS_ROUTES } from "@starbot/contracts/team-protocol/chat-colors-v1";
+import { CHAT_HISTORY_CAPABILITY, CHAT_HISTORY_ROUTES } from "@starbot/contracts/team-protocol/chat-history-v1";
 import {
   CLAUDE_COMPACT_WINDOW_CAPABILITY,
   CLAUDE_COMPACT_WINDOW_CODECS,
   CLAUDE_COMPACT_WINDOW_ROUTES,
-} from "@openbot/contracts/team-protocol/claude-compact-window-v1";
+} from "@starbot/contracts/team-protocol/claude-compact-window-v1";
 import {
   CLAUDE_USER_SETUP_CAPABILITY,
   CLAUDE_USER_SETUP_CODECS,
   CLAUDE_USER_SETUP_ROUTES,
-} from "@openbot/contracts/team-protocol/claude-user-setup-v1";
-import { CODEX_API_KEY_CAPABILITY } from "@openbot/contracts/team-protocol/codex-api-key-v1";
+} from "@starbot/contracts/team-protocol/claude-user-setup-v1";
+import { CODEX_API_KEY_CAPABILITY } from "@starbot/contracts/team-protocol/codex-api-key-v1";
 import {
   CONTEXT_COMPACT_CAPABILITY,
   CONTEXT_COMPACT_ROUTES,
   ContextCompactRefusedError,
-} from "@openbot/contracts/team-protocol/context-compact-v1";
-import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
+} from "@starbot/contracts/team-protocol/context-compact-v1";
+import { ContextResetBusyError } from "@starbot/contracts/team-protocol/context-reset-v1";
 import {
   CONVERSATION_UNREAD_FROM_CAPABILITY,
   CONVERSATION_UNREAD_FROM_ROUTE,
-} from "@openbot/contracts/team-protocol/conversation-unread-from-v1";
+} from "@starbot/contracts/team-protocol/conversation-unread-from-v1";
 import {
   AGENT_HIDDEN_WORK_CAPABILITY,
   decodeTeamProtocolSupportExpanded,
@@ -262,266 +262,266 @@ import {
   TEAM_USAGE_GROUPS_CAPABILITY,
   TEAM_USAGE_READ_FAILED_CAPABILITY,
   teamCapabilityHeaders,
-} from "@openbot/contracts/team-protocol/current";
+} from "@starbot/contracts/team-protocol/current";
 import {
   CUSTOM_AGENTS_CAPABILITY,
   CUSTOM_AGENTS_CODECS,
   CUSTOM_AGENTS_ROUTES,
-} from "@openbot/contracts/team-protocol/custom-agents-v1";
+} from "@starbot/contracts/team-protocol/custom-agents-v1";
 import {
   CUSTOM_PROVIDER_EDIT_CAPABILITY,
   CUSTOM_PROVIDER_EDIT_CODECS,
   CUSTOM_PROVIDER_EDIT_ROUTES,
-} from "@openbot/contracts/team-protocol/custom-provider-edit-v1";
+} from "@starbot/contracts/team-protocol/custom-provider-edit-v1";
 import {
   CUSTOM_PROVIDER_HARNESS_CHOICE_CAPABILITY,
   CUSTOM_PROVIDER_HARNESS_CHOICE_CODECS,
   CUSTOM_PROVIDER_HARNESS_CHOICE_ROUTES,
-} from "@openbot/contracts/team-protocol/custom-provider-harness-choice-v1";
+} from "@starbot/contracts/team-protocol/custom-provider-harness-choice-v1";
 import {
   CUSTOM_PROVIDER_HARNESS_CAPABILITY,
   CUSTOM_PROVIDER_HARNESS_CODECS,
   CUSTOM_PROVIDER_HARNESS_ROUTES,
-} from "@openbot/contracts/team-protocol/custom-provider-harness-v1";
+} from "@starbot/contracts/team-protocol/custom-provider-harness-v1";
 import {
   decodeFeedbackWithdrawResult,
   FEEDBACK_WITHDRAW_CAPABILITY,
   FEEDBACK_WITHDRAW_ROUTES,
-} from "@openbot/contracts/team-protocol/feedback-withdraw-v1";
-import { GITHUB_SKILLS_CAPABILITY, GITHUB_SKILLS_ROUTES } from "@openbot/contracts/team-protocol/github-skills-v1";
-import { HERMES_IMPORT_CAPABILITY, HERMES_IMPORT_ROUTES } from "@openbot/contracts/team-protocol/hermes-import-v1";
+} from "@starbot/contracts/team-protocol/feedback-withdraw-v1";
+import { GITHUB_SKILLS_CAPABILITY, GITHUB_SKILLS_ROUTES } from "@starbot/contracts/team-protocol/github-skills-v1";
+import { HERMES_IMPORT_CAPABILITY, HERMES_IMPORT_ROUTES } from "@starbot/contracts/team-protocol/hermes-import-v1";
 import {
   HOST_APPEARANCE_CAPABILITY,
   HOST_APPEARANCE_EVENT,
   HOST_APPEARANCE_ROUTES,
   type ServerAppearance,
   serverAppearanceOrNull,
-} from "@openbot/contracts/team-protocol/host-appearance-v1";
+} from "@starbot/contracts/team-protocol/host-appearance-v1";
 import {
   HOST_KEY_ROTATION_CAPABILITY,
   HOST_KEY_ROTATION_ROUTES,
-} from "@openbot/contracts/team-protocol/host-key-rotation-v1";
-import { HOST_RESTART_CAPABILITY, HOST_RESTART_ROUTES } from "@openbot/contracts/team-protocol/host-restart-v1";
+} from "@starbot/contracts/team-protocol/host-key-rotation-v1";
+import { HOST_RESTART_CAPABILITY, HOST_RESTART_ROUTES } from "@starbot/contracts/team-protocol/host-restart-v1";
 import {
   HOST_SIGNAL_HOME_CAPABILITY,
   HOST_SIGNAL_HOME_ROUTES,
-} from "@openbot/contracts/team-protocol/host-signal-home-v1";
+} from "@starbot/contracts/team-protocol/host-signal-home-v1";
 import {
   HOST_TURN_LIMITS_CAPABILITY,
   HOST_TURN_LIMITS_ROUTES,
-} from "@openbot/contracts/team-protocol/host-turn-limits-v1";
+} from "@starbot/contracts/team-protocol/host-turn-limits-v1";
 import {
   HOST_VOICE_MODEL_CAPABILITY,
   HOST_VOICE_MODEL_ROUTES,
-} from "@openbot/contracts/team-protocol/host-voice-model-v1";
+} from "@starbot/contracts/team-protocol/host-voice-model-v1";
 import {
   INSTANCE_TRANSFER_CHUNK_BYTES,
   INSTANCE_TRANSFER_CHUNKS_CAPABILITY,
   INSTANCE_TRANSFER_CHUNKS_ROUTES,
-} from "@openbot/contracts/team-protocol/instance-transfer-chunks-v1";
+} from "@starbot/contracts/team-protocol/instance-transfer-chunks-v1";
 import {
   INSTANCE_TRANSFER_FULL_COPY_CAPABILITY,
   INSTANCE_TRANSFER_FULL_COPY_ROUTES,
-} from "@openbot/contracts/team-protocol/instance-transfer-full-copy-v1";
+} from "@starbot/contracts/team-protocol/instance-transfer-full-copy-v1";
 import {
   INSTANCE_TRANSFER_CAPABILITY,
   INSTANCE_TRANSFER_ROUTES,
-} from "@openbot/contracts/team-protocol/instance-transfer-v1";
-import { LIBRARY_FOLDERS_EVENTS_CAPABILITY } from "@openbot/contracts/team-protocol/library-folders-events-v1";
+} from "@starbot/contracts/team-protocol/instance-transfer-v1";
+import { LIBRARY_FOLDERS_EVENTS_CAPABILITY } from "@starbot/contracts/team-protocol/library-folders-events-v1";
 import {
   LIBRARY_FOLDERS_CAPABILITY,
   LIBRARY_FOLDERS_ROUTES,
-} from "@openbot/contracts/team-protocol/library-folders-v1";
+} from "@starbot/contracts/team-protocol/library-folders-v1";
 import {
   decodeLiveVoiceAccount,
   LIVE_VOICE_ACCOUNT_CAPABILITY,
   LIVE_VOICE_ACCOUNT_ROUTES,
-} from "@openbot/contracts/team-protocol/live-voice-account-v1";
+} from "@starbot/contracts/team-protocol/live-voice-account-v1";
 import {
   LIVE_VOICE_CAPABILITY,
   LIVE_VOICE_ROUTES,
   type LiveVoiceEvent,
   liveVoiceEvent,
-} from "@openbot/contracts/team-protocol/live-voice-v1";
-import { LOCAL_SERVERS_CAPABILITY, LOCAL_SERVERS_ROUTES } from "@openbot/contracts/team-protocol/local-servers-v1";
-import { MAC_APPS_LIMIT_CAPABILITY } from "@openbot/contracts/team-protocol/mac-apps-limit-v1";
+} from "@starbot/contracts/team-protocol/live-voice-v1";
+import { LOCAL_SERVERS_CAPABILITY, LOCAL_SERVERS_ROUTES } from "@starbot/contracts/team-protocol/local-servers-v1";
+import { MAC_APPS_LIMIT_CAPABILITY } from "@starbot/contracts/team-protocol/mac-apps-limit-v1";
 import {
   MACHINE_RESOURCES_CAPABILITY,
   MACHINE_RESOURCES_ROUTES,
   type MachineAlertEvent,
   machineAlertEvent,
-} from "@openbot/contracts/team-protocol/machine-resources-v1";
-import { MEMORY_REVIEW_CAPABILITY, MEMORY_REVIEW_ROUTES } from "@openbot/contracts/team-protocol/memory-review-v1";
-import { MESSAGE_DELETE_CAPABILITY, MESSAGE_DELETE_ROUTES } from "@openbot/contracts/team-protocol/message-delete-v1";
-import { MESSAGE_PINS_CAPABILITY, MESSAGE_PINS_ROUTES } from "@openbot/contracts/team-protocol/message-pins-v1";
-import { MISTRAL_CODE_SIGN_IN_CAPABILITY } from "@openbot/contracts/team-protocol/mistral-code-sign-in-v1";
-import { MODEL_STEERING_CAPABILITY, MODEL_STEERING_ROUTES } from "@openbot/contracts/team-protocol/model-steering-v1";
+} from "@starbot/contracts/team-protocol/machine-resources-v1";
+import { MEMORY_REVIEW_CAPABILITY, MEMORY_REVIEW_ROUTES } from "@starbot/contracts/team-protocol/memory-review-v1";
+import { MESSAGE_DELETE_CAPABILITY, MESSAGE_DELETE_ROUTES } from "@starbot/contracts/team-protocol/message-delete-v1";
+import { MESSAGE_PINS_CAPABILITY, MESSAGE_PINS_ROUTES } from "@starbot/contracts/team-protocol/message-pins-v1";
+import { MISTRAL_CODE_SIGN_IN_CAPABILITY } from "@starbot/contracts/team-protocol/mistral-code-sign-in-v1";
+import { MODEL_STEERING_CAPABILITY, MODEL_STEERING_ROUTES } from "@starbot/contracts/team-protocol/model-steering-v1";
 import {
   MODEL_VISIBILITY_KEPT_CAPABILITY,
   MODEL_VISIBILITY_KEPT_ROUTES,
-} from "@openbot/contracts/team-protocol/model-visibility-kept-v1";
+} from "@starbot/contracts/team-protocol/model-visibility-kept-v1";
 import {
   MODEL_VISIBILITY_CAPABILITY,
   MODEL_VISIBILITY_ROUTES,
-} from "@openbot/contracts/team-protocol/model-visibility-v1";
+} from "@starbot/contracts/team-protocol/model-visibility-v1";
 import {
   PASSWORD_MANAGERS_CAPABILITY,
   PASSWORD_MANAGERS_CODECS,
   PASSWORD_MANAGERS_ROUTES,
-} from "@openbot/contracts/team-protocol/password-managers-v1";
+} from "@starbot/contracts/team-protocol/password-managers-v1";
 import {
   PENDING_APPROVAL_CAPABILITY,
   PENDING_APPROVAL_ROUTES,
-} from "@openbot/contracts/team-protocol/pending-approval-v1";
+} from "@starbot/contracts/team-protocol/pending-approval-v1";
 import {
   PENDING_PROMPTS_CAPABILITY,
   PENDING_PROMPTS_ROUTES,
-} from "@openbot/contracts/team-protocol/pending-prompts-v1";
-import { PHONE_FEEDBACK_CAPABILITY, PHONE_FEEDBACK_ROUTES } from "@openbot/contracts/team-protocol/phone-feedback-v1";
+} from "@starbot/contracts/team-protocol/pending-prompts-v1";
+import { PHONE_FEEDBACK_CAPABILITY, PHONE_FEEDBACK_ROUTES } from "@starbot/contracts/team-protocol/phone-feedback-v1";
 import {
   PROMPT_CACHE_TTL_CAPABILITY,
   PROMPT_CACHE_TTL_PI_CAPABILITY,
-} from "@openbot/contracts/team-protocol/prompt-cache-ttl-v1";
+} from "@starbot/contracts/team-protocol/prompt-cache-ttl-v1";
 import {
   PROVIDER_ACCOUNT_CODE_CAPABILITY,
   PROVIDER_ACCOUNT_CODE_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-code-v1";
+} from "@starbot/contracts/team-protocol/provider-account-code-v1";
 import {
   PROVIDER_ACCOUNT_KEYS_CAPABILITY,
   PROVIDER_ACCOUNT_KEYS_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-keys-v1";
+} from "@starbot/contracts/team-protocol/provider-account-keys-v1";
 import {
   PROVIDER_ACCOUNT_MODELS_CAPABILITY,
   PROVIDER_ACCOUNT_MODELS_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-models-v1";
+} from "@starbot/contracts/team-protocol/provider-account-models-v1";
 import {
   PROVIDER_ACCOUNT_POOL_CAPABILITY,
   PROVIDER_ACCOUNT_POOL_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-pool-v1";
+} from "@starbot/contracts/team-protocol/provider-account-pool-v1";
 import {
   PROVIDER_DEFAULT_CAPABILITY,
   PROVIDER_DEFAULT_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-default-v1";
+} from "@starbot/contracts/team-protocol/provider-default-v1";
 import {
   PROVIDER_DETECTION_CAPABILITY,
   PROVIDER_DETECTION_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-detection-v1";
+} from "@starbot/contracts/team-protocol/provider-detection-v1";
 import {
   PROVIDER_ENVIRONMENT_CAPABILITY,
   PROVIDER_ENVIRONMENT_CODECS,
   PROVIDER_ENVIRONMENT_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-environment-v1";
+} from "@starbot/contracts/team-protocol/provider-environment-v1";
 import {
   PROVIDER_MODEL_SOURCE_CAPABILITY,
   PROVIDER_MODEL_SOURCE_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-model-source-v1";
+} from "@starbot/contracts/team-protocol/provider-model-source-v1";
 import {
   PROVIDER_USAGE_RESET_CAPABILITY,
   PROVIDER_USAGE_RESET_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-usage-reset-v1";
+} from "@starbot/contracts/team-protocol/provider-usage-reset-v1";
 import {
   PROVIDER_USE_CAPABILITY,
   PROVIDER_USE_CODECS,
   PROVIDER_USE_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-use-v1";
-import { PROVIDERS_ADMIN_CAPABILITY, PROVIDERS_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/providers-v1";
-import { PROVIDERS_V5_CAPABILITY, PROVIDERS_V5_ROUTES } from "@openbot/contracts/team-protocol/providers-v5";
-import { PROVIDERS_V8_CAPABILITY, PROVIDERS_V8_ROUTES } from "@openbot/contracts/team-protocol/providers-v8";
-import { QueueEditRejectedError, TEAM_QUEUE_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { QUEUE_HOLD_CAPABILITY, QUEUE_HOLD_SIGN_IN_CAPABILITY } from "@openbot/contracts/team-protocol/queue-hold-v1";
+} from "@starbot/contracts/team-protocol/provider-use-v1";
+import { PROVIDERS_ADMIN_CAPABILITY, PROVIDERS_ADMIN_ROUTES } from "@starbot/contracts/team-protocol/providers-v1";
+import { PROVIDERS_V5_CAPABILITY, PROVIDERS_V5_ROUTES } from "@starbot/contracts/team-protocol/providers-v5";
+import { PROVIDERS_V8_CAPABILITY, PROVIDERS_V8_ROUTES } from "@starbot/contracts/team-protocol/providers-v8";
+import { QueueEditRejectedError, TEAM_QUEUE_EDIT_CAPABILITY } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { QUEUE_HOLD_CAPABILITY, QUEUE_HOLD_SIGN_IN_CAPABILITY } from "@starbot/contracts/team-protocol/queue-hold-v1";
 import {
   ROUTINE_PAUSE_REASONS_CAPABILITY,
   ROUTINE_PAUSE_REASONS_ROUTES,
-} from "@openbot/contracts/team-protocol/routine-pause-reasons-v1";
-import { ROUTINE_QUIET_ANSWERS_CAPABILITY } from "@openbot/contracts/team-protocol/routine-quiet-answers-v1";
+} from "@starbot/contracts/team-protocol/routine-pause-reasons-v1";
+import { ROUTINE_QUIET_ANSWERS_CAPABILITY } from "@starbot/contracts/team-protocol/routine-quiet-answers-v1";
 import {
   ROUTINE_RESULTS_CAPABILITY,
   ROUTINE_RESULTS_ROUTES,
-} from "@openbot/contracts/team-protocol/routine-results-v1";
-import { ROUTINE_RESULTS_WHATSAPP_CAPABILITY } from "@openbot/contracts/team-protocol/routine-results-whatsapp-v1";
+} from "@starbot/contracts/team-protocol/routine-results-v1";
+import { ROUTINE_RESULTS_WHATSAPP_CAPABILITY } from "@starbot/contracts/team-protocol/routine-results-whatsapp-v1";
 import {
   decodeRoutineRunCommandResponse,
   ROUTINE_RUN_COMMAND_CAPABILITY,
   ROUTINE_RUN_COMMAND_ROUTES,
-} from "@openbot/contracts/team-protocol/routine-run-command-v1";
+} from "@starbot/contracts/team-protocol/routine-run-command-v1";
 import {
   ROUTINE_RUN_PLACE_CAPABILITY,
   ROUTINE_RUN_PLACE_ROUTES,
-} from "@openbot/contracts/team-protocol/routine-run-place-v1";
-import { ROUTINES_ONCE_CAPABILITY, ROUTINES_ONCE_ROUTES } from "@openbot/contracts/team-protocol/routines-once-v1";
-import { SETTING_LINK_MARKERS_CAPABILITY } from "@openbot/contracts/team-protocol/setting-link-markers-v1";
+} from "@starbot/contracts/team-protocol/routine-run-place-v1";
+import { ROUTINES_ONCE_CAPABILITY, ROUTINES_ONCE_ROUTES } from "@starbot/contracts/team-protocol/routines-once-v1";
+import { SETTING_LINK_MARKERS_CAPABILITY } from "@starbot/contracts/team-protocol/setting-link-markers-v1";
 import {
   SIDE_QUESTION_CAPABILITY,
   SIDE_QUESTION_ROUTES,
   SIDE_QUESTION_THREADS_CAPABILITY,
-} from "@openbot/contracts/team-protocol/side-question-v1";
-import { teamSideRouteCodec } from "@openbot/contracts/team-protocol/side-routes";
-import { SIDEBAR_PINS_CAPABILITY, SIDEBAR_PINS_ROUTES } from "@openbot/contracts/team-protocol/sidebar-pins-v1";
-import { SKILL_LEARNING_CAPABILITY, SKILL_LEARNING_ROUTES } from "@openbot/contracts/team-protocol/skill-learning-v1";
-import { SKILL_PROBLEMS_CAPABILITY } from "@openbot/contracts/team-protocol/skill-problems-v1";
-import { SKILLS_ADMIN_CAPABILITY, SKILLS_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/skills-admin-v1";
-import { STORAGE_DISK_CAPABILITY, STORAGE_DISK_ROUTES } from "@openbot/contracts/team-protocol/storage-disk-v1";
+} from "@starbot/contracts/team-protocol/side-question-v1";
+import { teamSideRouteCodec } from "@starbot/contracts/team-protocol/side-routes";
+import { SIDEBAR_PINS_CAPABILITY, SIDEBAR_PINS_ROUTES } from "@starbot/contracts/team-protocol/sidebar-pins-v1";
+import { SKILL_LEARNING_CAPABILITY, SKILL_LEARNING_ROUTES } from "@starbot/contracts/team-protocol/skill-learning-v1";
+import { SKILL_PROBLEMS_CAPABILITY } from "@starbot/contracts/team-protocol/skill-problems-v1";
+import { SKILLS_ADMIN_CAPABILITY, SKILLS_ADMIN_ROUTES } from "@starbot/contracts/team-protocol/skills-admin-v1";
+import { STORAGE_DISK_CAPABILITY, STORAGE_DISK_ROUTES } from "@starbot/contracts/team-protocol/storage-disk-v1";
 import {
   STORAGE_USER_FILES_CAPABILITY,
   STORAGE_USER_FILES_ROUTES,
-} from "@openbot/contracts/team-protocol/storage-user-files-v1";
-import { STORAGE_ROUTES } from "@openbot/contracts/team-protocol/storage-v1";
+} from "@starbot/contracts/team-protocol/storage-user-files-v1";
+import { STORAGE_ROUTES } from "@starbot/contracts/team-protocol/storage-v1";
 import {
   THREAD_MESSAGE_SEARCH_CAPABILITY,
   THREAD_MESSAGE_SEARCH_ROUTES,
-} from "@openbot/contracts/team-protocol/thread-message-search-v1";
-import { UI_BLOCK_PREVIEW_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/ui-block-preview-edit-v1";
-import { USAGE_CREDITS_CAPABILITY, USAGE_CREDITS_ROUTES } from "@openbot/contracts/team-protocol/usage-credits-v1";
+} from "@starbot/contracts/team-protocol/thread-message-search-v1";
+import { UI_BLOCK_PREVIEW_EDIT_CAPABILITY } from "@starbot/contracts/team-protocol/ui-block-preview-edit-v1";
+import { USAGE_CREDITS_CAPABILITY, USAGE_CREDITS_ROUTES } from "@starbot/contracts/team-protocol/usage-credits-v1";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_CAPABILITIES_HEADER,
   TEAM_PROTOCOL_VERSION_HEADER,
-} from "@openbot/contracts/team-protocol/v1";
-import { decodeTeamProtocolV8CurrentHttpResponse } from "@openbot/contracts/team-protocol/v8-adapter";
+} from "@starbot/contracts/team-protocol/v1";
+import { decodeTeamProtocolV8CurrentHttpResponse } from "@starbot/contracts/team-protocol/v8-adapter";
 import {
   decodeTeamProtocolV8BaseCurrentEvent,
   encodeTeamProtocolV8BaseCurrentEvent,
-} from "@openbot/contracts/team-protocol/v8-base-adapter";
-import { TEAM_LONG_CAPABILITY_LISTS_CAPABILITY, TEAM_PROTOCOL_V9 } from "@openbot/contracts/team-protocol/v9";
-import { encodeTeamProtocolV9WebRtcHttpRequest } from "@openbot/contracts/team-protocol/v9-webrtc-adapter";
-import { TEAM_PROTOCOL_V10 } from "@openbot/contracts/team-protocol/v10";
-import { VAULT_IMPORT_CAPABILITY, VAULT_IMPORT_ROUTES } from "@openbot/contracts/team-protocol/vault-import-v1";
-import { VAULT_MEMBER_SAVE_CAPABILITY } from "@openbot/contracts/team-protocol/vault-member-save-v1";
-import { VAULT_CAPABILITY, VAULT_ROUTES } from "@openbot/contracts/team-protocol/vault-v1";
-import { VAULT_V2_CAPABILITY, VAULT_V2_ROUTES } from "@openbot/contracts/team-protocol/vault-v2";
-import { VAULT_V3_CAPABILITY, VAULT_V3_ROUTES } from "@openbot/contracts/team-protocol/vault-v3";
-import { VAULT_V4_CAPABILITY, VAULT_V4_ROUTES } from "@openbot/contracts/team-protocol/vault-v4";
+} from "@starbot/contracts/team-protocol/v8-base-adapter";
+import { TEAM_LONG_CAPABILITY_LISTS_CAPABILITY, TEAM_PROTOCOL_V9 } from "@starbot/contracts/team-protocol/v9";
+import { encodeTeamProtocolV9WebRtcHttpRequest } from "@starbot/contracts/team-protocol/v9-webrtc-adapter";
+import { TEAM_PROTOCOL_V10 } from "@starbot/contracts/team-protocol/v10";
+import { VAULT_IMPORT_CAPABILITY, VAULT_IMPORT_ROUTES } from "@starbot/contracts/team-protocol/vault-import-v1";
+import { VAULT_MEMBER_SAVE_CAPABILITY } from "@starbot/contracts/team-protocol/vault-member-save-v1";
+import { VAULT_CAPABILITY, VAULT_ROUTES } from "@starbot/contracts/team-protocol/vault-v1";
+import { VAULT_V2_CAPABILITY, VAULT_V2_ROUTES } from "@starbot/contracts/team-protocol/vault-v2";
+import { VAULT_V3_CAPABILITY, VAULT_V3_ROUTES } from "@starbot/contracts/team-protocol/vault-v3";
+import { VAULT_V4_CAPABILITY, VAULT_V4_ROUTES } from "@starbot/contracts/team-protocol/vault-v4";
 import {
   WEBHOOK_AGENT_SECRET_CAPABILITY,
   WEBHOOK_AGENT_SECRET_ROUTES,
-} from "@openbot/contracts/team-protocol/webhook-agent-secret-v1";
+} from "@starbot/contracts/team-protocol/webhook-agent-secret-v1";
 import {
   WHATSAPP_CONNECTOR_CAPABILITY,
   WHATSAPP_CONNECTOR_CODECS,
   WHATSAPP_CONNECTOR_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-connector-v1";
+} from "@starbot/contracts/team-protocol/whatsapp-connector-v1";
 import {
   WHATSAPP_READ_ONLY_CAPABILITY,
   WHATSAPP_READ_ONLY_CODECS,
   WHATSAPP_READ_ONLY_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-read-only-v1";
+} from "@starbot/contracts/team-protocol/whatsapp-read-only-v1";
 import {
   WHATSAPP_STATUS_REACTIONS_CAPABILITY,
   WHATSAPP_STATUS_REACTIONS_CODECS,
   WHATSAPP_STATUS_REACTIONS_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-status-reactions-v1";
+} from "@starbot/contracts/team-protocol/whatsapp-status-reactions-v1";
 import {
   WHATSAPP_WORKING_MESSAGE_CAPABILITY,
   WHATSAPP_WORKING_MESSAGE_CODECS,
   WHATSAPP_WORKING_MESSAGE_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-working-message-v1";
-import { WORKSPACE_ONLY_PROCESS_LIMIT_CAPABILITY } from "@openbot/contracts/team-protocol/workspace-only-process-limit-v1";
-import { parseTwoStepKey, twoStepCode } from "@openbot/contracts/two-step-code";
-import { UI_CONFIRM_PREVIEW_ANSWER_ID } from "@openbot/contracts/ui-blocks";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
-import { planLimitRows } from "@openbot/team-client/plan-limits";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@starbot/contracts/team-protocol/whatsapp-working-message-v1";
+import { WORKSPACE_ONLY_PROCESS_LIMIT_CAPABILITY } from "@starbot/contracts/team-protocol/workspace-only-process-limit-v1";
+import { parseTwoStepKey, twoStepCode } from "@starbot/contracts/two-step-code";
+import { UI_CONFIRM_PREVIEW_ANSWER_ID } from "@starbot/contracts/ui-blocks";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
+import { planLimitRows } from "@starbot/team-client/plan-limits";
+import { RoutineInputError } from "@starbot/team-client/routine-schedule";
 import { Effect } from "effect";
 import { strToU8, unzipSync, zipSync } from "fflate";
 import { ForbiddenAttentionAnswer, InactiveAttentionRequest } from "../src/backend/agent/inactive-attention-request";
@@ -539,7 +539,7 @@ import { LIBRARY_FOLDERS_FILE, LibraryFoldersStore } from "../src/backend/librar
 import { MailboxStore } from "../src/backend/mailbox-store";
 import { MessageDeleteRefused } from "../src/backend/message-delete";
 import { MessagePinRefused } from "../src/backend/message-pins";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { canConfineProcesses } from "../src/backend/process-confinement";
 import { RoutineResultError } from "../src/backend/routine-results/routine-results";
 import type { OwnedRoutineRecord } from "../src/backend/routine-store";
@@ -624,7 +624,7 @@ import { VaultService } from "../src/main/vault-service";
 import { VaultStore } from "../src/main/vault-store";
 import { emptyInstanceTransferService } from "./instance-transfer-e2e-fixture";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/team-api-routes-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/team-api-routes-e2e");
 const APP_VERSION = "0.43.0";
 const MIB = 1024 * 1024;
 
@@ -664,7 +664,7 @@ interface RecordedCall {
 }
 
 mkdirSync(OUT, { recursive: true });
-const root = mkdtempSync(join(tmpdir(), "openbot-team-api-routes-"));
+const root = mkdtempSync(join(tmpdir(), "starbot-team-api-routes-"));
 const agentDefaultsPath = join(root, "agent-defaults.json");
 const agentDefaultsPreferences = createAgentDefaultsPreferenceStore(agentDefaultsPath);
 const busyMessageModePreferences = new BusyMessageModePreferenceStore(join(root, "busy-message-mode.json"));
@@ -1899,7 +1899,7 @@ const fakeAgentTasks: TeamApiAgentTasks = {
           kind: "file",
           mimeType: "text/plain",
           previewKind: "text",
-          previewUrl: "openbot-attachment://attachment-thread",
+          previewUrl: "starbot-attachment://attachment-thread",
         },
       ],
     };
@@ -2139,7 +2139,7 @@ const BW_SESSION_KEY = ["bw", "e2e", "session"].join("-");
 const BW_LOGIN_PASSWORD = ["bw", "e2e", "login", "password"].join("-");
 const BW_SECRETS = [BW_CLIENT_SECRET, BW_MASTER_PASSWORD, BW_SESSION_KEY, BW_LOGIN_PASSWORD];
 const bitwardenData = join(root, "bitwarden-host");
-const bitwardenFile = join(root, "openbot-bitwarden-connector-v1.json");
+const bitwardenFile = join(root, "starbot-bitwarden-connector-v1.json");
 const bitwardenCalls: { args: string[]; env: Record<string, string> }[] = [];
 let bitwardenUnlockGate: { started: () => void; released: Promise<void> } | null = null;
 let bitwardenServerRefusesBackfill = false;
@@ -2403,7 +2403,7 @@ const connectors: TeamApiConnectors = {
   },
   messaging: whatsappMessaging,
 };
-const vaultFile = join(root, "openbot-vault-v1.json");
+const vaultFile = join(root, "starbot-vault-v1.json");
 const vault = new VaultService({ store: new VaultStore(vaultFile, fakeCipher), canPersist: () => true });
 await Effect.runPromise(vault.load());
 const providerCredentials = new ProviderCredentialStore(join(root, "provider-credentials.json"), fakeCipher);
@@ -2580,7 +2580,7 @@ const machine = new MachineAlertMonitor({
   members: () => store.listMembers(),
   onError: (message) => logged.push(message),
 });
-const database = new OpenBotDatabase(join(root, "user-data"));
+const database = new StarBotDatabase(join(root, "user-data"));
 let server: TeamApiServer | null = null;
 let channelHost: TeamApiServer | null = null;
 let channelService: ChannelService | null = null;
@@ -2945,7 +2945,7 @@ try {
           record("automationRunCommand", input);
           if (input.agentId !== "agent-ada") throw new Error(sourceText("error.agent.automationOff"));
           if (input.routineId !== "routine-ada") throw new Error(sourceText("error.backend.routineGone"));
-          return `openbot-run ${input.agentId} ${input.routineId}`;
+          return `starbot-run ${input.agentId} ${input.routineId}`;
         },
       },
       providers: {
@@ -3256,7 +3256,7 @@ try {
         return accountUsers[ticket] ?? null;
       }),
     now: () => clock,
-    logger: createOpenBotLogger("team-api-e2e", (line) => logged.push(line)),
+    logger: createStarBotLogger("team-api-e2e", (line) => logged.push(line)),
   });
   const port = await Effect.runPromise(server.start());
   const base = `http://127.0.0.1:${port}`;
@@ -5435,7 +5435,7 @@ try {
 
     const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
       TEAM_PROTOCOL_V1_WEBSOCKET,
-      `openbot-token.${bobToken}`,
+      `starbot-token.${bobToken}`,
     ]);
     const events: unknown[] = [];
     const waiters = new Set<() => void>();
@@ -8294,7 +8294,7 @@ try {
     const openLevelsSocket = async (token: string) => {
       const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
         TEAM_PROTOCOL_V1_WEBSOCKET,
-        `openbot-token.${token}`,
+        `starbot-token.${token}`,
       ]);
       const events: unknown[] = [];
       const waiters = new Set<() => void>();
@@ -8520,7 +8520,7 @@ try {
     const openPinsSocket = async (token: string) => {
       const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
         TEAM_PROTOCOL_V1_WEBSOCKET,
-        `openbot-token.${token}`,
+        `starbot-token.${token}`,
       ]);
       const events: unknown[] = [];
       const waiters = new Set<() => void>();
@@ -8605,7 +8605,7 @@ try {
     const openInvalidationSocket = async (token: string) => {
       const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
         TEAM_PROTOCOL_V1_WEBSOCKET,
-        `openbot-token.${token}`,
+        `starbot-token.${token}`,
       ]);
       const revisions: number[] = [];
       const waiters = new Set<() => void>();
@@ -9073,7 +9073,7 @@ try {
     const first = await firstAlert;
     const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
       TEAM_PROTOCOL_V1_WEBSOCKET,
-      `openbot-token.${adaToken}`,
+      `starbot-token.${adaToken}`,
     ]);
     await new Promise<void>((resolveOpen, reject) => {
       socket.addEventListener("open", () => resolveOpen(), { once: true });
@@ -9631,7 +9631,7 @@ try {
       list(field(compatibility.body, "capabilities")).includes(ROUTINE_RUN_COMMAND_CAPABILITY) &&
         !list(field(older.body, "capabilities")).includes(ROUTINE_RUN_COMMAND_CAPABILITY) &&
         owner.status === 200 &&
-        decodeRoutineRunCommandResponse(owner.body) === "openbot-run agent-ada routine-ada" &&
+        decodeRoutineRunCommandResponse(owner.body) === "starbot-run agent-ada routine-ada" &&
         errorIs(gone, 409, sourceText("error.backend.routineGone")) &&
         errorIs(off, 409, sourceText("error.agent.automationOff")),
       [summary(owner), summary(gone), summary(off)],
@@ -9692,7 +9692,7 @@ try {
       browser,
       channels: pictures,
       now: () => clock,
-      logger: createOpenBotLogger("team-api-e2e-channels", (line) => logged.push(line)),
+      logger: createStarBotLogger("team-api-e2e-channels", (line) => logged.push(line)),
     });
     const at = `http://127.0.0.1:${await Effect.runPromise(channelHost.start())}`;
     const channelId = "channel-pictures";
@@ -13103,7 +13103,7 @@ try {
     const openVoiceSocket = async (token: string) => {
       const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
         TEAM_PROTOCOL_V1_WEBSOCKET,
-        `openbot-token.${token}`,
+        `starbot-token.${token}`,
       ]);
       const events: LiveVoiceEvent[] = [];
       const waiters = new Set<() => void>();
@@ -13477,9 +13477,9 @@ try {
     const asMember = { token: bobToken, capabilities: importCapabilities, protocol: TEAM_PROTOCOL_V9 };
     const exported = zipSync(
       {
-        "grok-export/openbot-import.json": strToU8(
+        "grok-export/starbot-import.json": strToU8(
           JSON.stringify({
-            format: "openbot-agent-import",
+            format: "starbot-agent-import",
             version: 1,
             source: { app: "grok-bot", exportedAt: "2026-11-09T10:00:00Z" },
             agents: [
@@ -13940,7 +13940,7 @@ try {
   const openEventSocket = async (scope: readonly string[] | null) => {
     const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
       TEAM_PROTOCOL_V1_WEBSOCKET,
-      `openbot-token.${bobToken}`,
+      `starbot-token.${bobToken}`,
     ]);
     const events: DynamicRecord[] = [];
     const waiters = new Set<() => void>();
@@ -15139,7 +15139,7 @@ try {
 
     const socket = new WebSocket(`ws://127.0.0.1:${port}${TEAM_API_ROUTES.events}`, [
       TEAM_PROTOCOL_V1_WEBSOCKET,
-      `openbot-token.${bobToken}`,
+      `starbot-token.${bobToken}`,
     ]);
     const looks: Array<ServerAppearance | null> = [];
     const waiters = new Set<() => void>();

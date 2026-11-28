@@ -1,8 +1,8 @@
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Result } from "effect";
 import { type PasswordVault, PasswordVaultError, type VaultLogin } from "./password-vault";
 
-const logger = createOpenBotLogger("password-vault");
+const logger = createStarBotLogger("password-vault");
 
 export interface PasswordVaultSource {
   prefix: string;

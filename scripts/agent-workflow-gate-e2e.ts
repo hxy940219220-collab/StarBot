@@ -3,14 +3,14 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import type { WorkflowsHandle } from "../src/backend/workflows/workflows";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-workflow-gate-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-workflow-gate-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/agent-workflow-gate-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-workflow-gate-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -18,14 +18,14 @@ const fakeLog = join(root, "codex.jsonl");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 const { WorkflowGitHubStore } = await import("../src/backend/workflows/workflow-github-store");
 const { WorkflowRunStore } = await import("../src/backend/workflows/workflow-run-store");
 const { WorkflowStore } = await import("../src/backend/workflows/workflow-store");
@@ -94,9 +94,9 @@ const answer = (message) => {
           threadId: params.threadId,
           turnId,
           callId: "call-" + turnId,
-          namespace: "openbot",
+          namespace: "starbot",
           tool: "tool_call",
-          arguments: { name: "openbot." + __tool, arguments: args },
+          arguments: { name: "starbot." + __tool, arguments: args },
         },
       });
     }
@@ -204,7 +204,7 @@ const report: {
 } = { calls: [], checks: [], passed: false };
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 let workflows: WorkflowsHandle | null = null;

@@ -1,4 +1,4 @@
-import { AppLogo } from "@openbot/brand";
+import { AppLogo } from "@starbot/brand";
 import ChevronDown from "lucide-solid/icons/chevron-down";
 import Rss from "lucide-solid/icons/rss";
 import { createMemo, createSignal, createUniqueId, For, Show } from "solid-js";
@@ -32,8 +32,8 @@ import {
 } from "./model";
 import "./status.css";
 
-export const ISSUES_URL = "https://github.com/nightly-labs/openbot/issues?q=label%3Astatus";
-const SITE_URL = "https://openbot.run";
+export const ISSUES_URL = "https://github.com/nightly-labs/starbot/issues?q=label%3Astatus";
+const SITE_URL = "https://starbot.run";
 const LATE_CHECK_MS = 30 * 60_000;
 
 type Range = 30 | 90;
@@ -164,15 +164,15 @@ export function StatusPage(props: StatusPageProps) {
   return (
     <div class="status-page">
       <header class="status-header">
-        <a class="status-brand" href={SITE_URL} aria-label="OpenBot home">
+        <a class="status-brand" href={SITE_URL} aria-label="StarBot home">
           <AppLogo variant="production" class="status-brand-logo" />
-          <span>OpenBot</span>
+          <span>StarBot</span>
         </a>
       </header>
 
       <main class="status-main">
         <header class="status-hero">
-          <h1 class="status-title">OpenBot status</h1>
+          <h1 class="status-title">StarBot status</h1>
           <div class="status-hero-actions">
             <a class="status-button" href="feed.xml" type="application/atom+xml">
               <Rss class="status-button-icon" aria-hidden="true" />
@@ -274,7 +274,7 @@ export function StatusPage(props: StatusPageProps) {
 
       <footer class="status-footer">
         <a class="status-link" href={SITE_URL}>
-          openbot.run
+          starbot.run
         </a>
         <span class="status-muted">Times are in UTC. The page updates every minute.</span>
       </footer>

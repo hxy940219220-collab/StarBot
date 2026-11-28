@@ -16,9 +16,9 @@ import {
   type CrmSource,
   type CrmStatus,
   type CrmTag,
-  type OpenBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import { type SourceMessages, sourceText } from "@openbot/i18n/source";
+  type StarBotDesktopApi,
+} from "@starbot/contracts/ipc";
+import { type SourceMessages, sourceText } from "@starbot/i18n/source";
 
 export type MockCrmCustomer = Omit<CrmCustomer, "paidMinor" | "openMinor" | "lateMinor" | "nextDueOn" | "lastPaidAt">;
 
@@ -67,7 +67,7 @@ function fail(key: CrmErrorKey): never {
   throw new MockCrmError(key);
 }
 
-export function mockCrm(seed: MockCrmSeed, emit: () => void): OpenBotDesktopApi["crm"] {
+export function mockCrm(seed: MockCrmSeed, emit: () => void): StarBotDesktopApi["crm"] {
   const statuses: CrmStatus[] = [
     ...CRM_BUILTIN_STATUS_IDS.map((id) => ({ id, label: null, tone: BUILTIN_TONES[id] })),
     ...structuredClone(seed.statuses ?? []),

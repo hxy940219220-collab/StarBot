@@ -7,7 +7,7 @@ import {
   libraryFolderOfFile,
   libraryFolderPath,
   type StoredFileRow,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { useSyncExternalStore } from "react";
 
 export type LibraryPlace =

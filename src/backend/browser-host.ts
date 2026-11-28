@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { existsSync } from "node:fs";
 import { isIP } from "node:net";
 import { basename, extname, join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentBrowserProfile,
   BrowserBounds,
@@ -22,21 +22,21 @@ import type {
   BrowserTeachStep,
   BrowserViewTarget,
   BrowserVisibilityInput,
-} from "@openbot/contracts/ipc";
-import { isNumber, isString } from "@openbot/contracts/runtime-values";
-import type { BrowserSignInStorage } from "@openbot/contracts/team-protocol/browser-sign-in-storage-v1";
+} from "@starbot/contracts/ipc";
+import { isNumber, isString } from "@starbot/contracts/runtime-values";
+import type { BrowserSignInStorage } from "@starbot/contracts/team-protocol/browser-sign-in-storage-v1";
 import {
   type BrowserSignInCookie,
   browserSignInCookieFitsHost,
-} from "@openbot/contracts/team-protocol/browser-sign-in-v1";
+} from "@starbot/contracts/team-protocol/browser-sign-in-v1";
 import {
   BROWSER_VIEW_CONTEXT_MENU_URL_MAX_LENGTH,
   type BrowserViewContextMenu,
   type BrowserViewCursor,
   type BrowserViewViewport,
-} from "@openbot/contracts/team-protocol/browser-view-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/team-protocol/browser-view-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Exit, Fiber, Option, Result, Scope, Semaphore } from "effect";
 import {
   app,
@@ -328,7 +328,7 @@ interface BrowserConsoleMessageDetails {
   sourceId: string;
 }
 
-const logger = createOpenBotLogger("browser-host");
+const logger = createStarBotLogger("browser-host");
 const BROWSER_WEB_PREFERENCES = {
   sandbox: true,
   contextIsolation: true,
@@ -617,7 +617,7 @@ export class BrowserHost {
     this.#downloadsRoot = downloadsRoot;
     this.#statePath = statePath;
     this.#stateWritePath = statePath;
-    this.#session = session.fromPartition("persist:openbot-browser", { cache: true });
+    this.#session = session.fromPartition("persist:starbot-browser", { cache: true });
     this.#recorder = new BrowserRecorder(
       downloadsRoot,
       (tabId, recording) => {
@@ -974,7 +974,7 @@ export class BrowserHost {
     this: BrowserHost,
     url: string,
   ): Effect.fn.Return<BrowserTab, BrowserOperationError> {
-    const privateSession = session.fromPartition(`openbot-private-${randomUUID()}`, { cache: false });
+    const privateSession = session.fromPartition(`starbot-private-${randomUUID()}`, { cache: false });
     this.#configureSession(privateSession);
     return yield* this.#open(url, null, null, false, true, privateSession);
   }).bind(this);

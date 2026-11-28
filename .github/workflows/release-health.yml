@@ -20,7 +20,7 @@ concurrency:
 jobs:
   check:
     name: Check the newest release
-    if: github.repository == 'nightly-labs/openbot'
+    if: github.repository == 'nightly-labs/starbot'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: analytics
@@ -129,4 +129,4 @@ jobs:
           if [ -S "$dir/control" ]; then
             ssh -q -F /dev/null -S "$dir/control" -O exit tunnel || true
           fi
-          rm -rf "$RUNNER_TEMP/release-health-ssh" .openbot-build/release-health
+          rm -rf "$RUNNER_TEMP/release-health-ssh" .starbot-build/release-health

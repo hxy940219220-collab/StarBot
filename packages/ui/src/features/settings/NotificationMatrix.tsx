@@ -1,6 +1,6 @@
-import { SERVER_NOTIFICATION_LEVELS, type ServerNotificationLevel } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { classifyFailure } from "@openbot/telemetry";
+import { SERVER_NOTIFICATION_LEVELS, type ServerNotificationLevel } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { classifyFailure } from "@starbot/telemetry";
 import {
   Badge,
   Bell,
@@ -19,7 +19,7 @@ import {
   SlidingTabs,
   toast,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createStore, For, onCleanup, Show, untrack } from "solid-js";
 import type { AgentProfile } from "../../data";

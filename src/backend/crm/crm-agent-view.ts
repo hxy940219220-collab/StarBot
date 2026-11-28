@@ -10,9 +10,9 @@ import {
   type CrmPrivateField,
   type CrmTextField,
   isCrmProposedChange,
-} from "@openbot/contracts/ipc";
-import { isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import type { Effect } from "effect";
 import { databaseRows } from "../database/database-rows";
 import { CrmError } from "./crm-handle";

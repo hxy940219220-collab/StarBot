@@ -1,4 +1,4 @@
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import type { DynamicRecord } from "@starbot/contracts/runtime-values";
 import { z } from "zod";
 
 export function parseBrowserToolText(text: string) {

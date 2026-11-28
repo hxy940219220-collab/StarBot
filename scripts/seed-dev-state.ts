@@ -4,10 +4,10 @@ import { lstat, mkdir, mkdtemp, readFile, readlink, rename, rm, writeFile } from
 import { homedir } from "node:os";
 import { dirname, join, parse, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { serializeAttachmentReference } from "@openbot/contracts/attachment-references";
-import { serializeChatTagReference } from "@openbot/contracts/chat-tag-references";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { DEVELOPMENT_CLAUDE_DEFAULT, DEVELOPMENT_FREE_DEFAULT } from "@openbot/contracts/development-defaults";
+import { serializeAttachmentReference } from "@starbot/contracts/attachment-references";
+import { serializeChatTagReference } from "@starbot/contracts/chat-tag-references";
+import { sortConversationMessages } from "@starbot/contracts/conversation-order";
+import { DEVELOPMENT_CLAUDE_DEFAULT, DEVELOPMENT_FREE_DEFAULT } from "@starbot/contracts/development-defaults";
 import type {
   AgentModelId,
   AgentProviderId,
@@ -18,9 +18,9 @@ import type {
   ChannelTask,
   ConversationMessage,
   Routine,
-} from "@openbot/contracts/ipc";
-import { channelRoutingConversationEventItemType } from "@openbot/contracts/ipc";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { channelRoutingConversationEventItemType } from "@starbot/contracts/ipc";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { strToU8, zipSync } from "fflate";
 import { z } from "zod";
 import { agentNamesById, displayMessageReferences } from "../src/backend/agent/delivery-content";
@@ -34,7 +34,7 @@ import { resolveClaudeCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { isMissingFileError } from "../src/backend/file-errors";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { TeamChatStore } from "../src/backend/team-chat-store";
 import { developmentUserDataName, readDevelopmentInstanceId } from "../src/main/development-profile";
 import { ProviderRuntimeManager, providerRuntimeRoot } from "../src/main/provider-runtime-manager";
@@ -44,13 +44,13 @@ import { resolveDevelopmentAppDataRoot } from "./development-state-paths";
 import { readScriptArguments } from "./script-arguments";
 import { NO_SCALE, parseSeedScale, type SeedScale, seedScale } from "./seed-dev-scale";
 
-export const DEVELOPMENT_SEED_MANIFEST_FILE = "openbot-dev-seed-v1.json";
+export const DEVELOPMENT_SEED_MANIFEST_FILE = "starbot-dev-seed-v1.json";
 
-const logger = createOpenBotLogger("seed-dev-state");
+const logger = createStarBotLogger("seed-dev-state");
 
-const TEAM_FILE = "openbot-team-server-v2.json";
-const LEGACY_TEAM_FILE = "openbot-team-server-v1.json";
-const SETUP_FILE = "openbot-setup-v2.json";
+const TEAM_FILE = "starbot-team-server-v2.json";
+const LEGACY_TEAM_FILE = "starbot-team-server-v1.json";
+const SETUP_FILE = "starbot-setup-v2.json";
 const SEED_VERSION = 1;
 const MINUTE = 60_000;
 const HOUR = 60 * MINUTE;
@@ -91,7 +91,7 @@ function managedClaudeExecutable(appDataRoot: string): string | null {
 
 const GENERATED_DIRECTORY_PATTERN =
   /^generated\/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
-const SHOWCASE_IMAGE_PATH = resolve(process.cwd(), "src", "renderer", "src", "assets", "openbot-logo-dev.png");
+const SHOWCASE_IMAGE_PATH = resolve(process.cwd(), "src", "renderer", "src", "assets", "starbot-logo-dev.png");
 
 function previewPdf(): string {
   const stream = "BT /F1 18 Tf 24 150 Td (StarBot file preview) Tj ET";
@@ -269,7 +269,7 @@ export async function seedDevelopmentState(options: DevelopmentSeedOptions = {})
   }
 
   await mkdir(appDataRoot, { recursive: true, mode: 0o700 });
-  const stagingProfile = await mkdtemp(join(appDataRoot, ".openbot-dev-seed-"));
+  const stagingProfile = await mkdtemp(join(appDataRoot, ".starbot-dev-seed-"));
   const newTransferDirectories: string[] = [];
   try {
     await buildSeedProfile(stagingProfile, homeDirectory, newTransferDirectories, agentModel, scale);
@@ -338,7 +338,7 @@ async function buildSeedProfile(
   agentModel: SeededAgentModel,
   scale: SeedScale,
 ): Promise<void> {
-  const agentStore = new AgentStore(profilePath, homeDirectory, new OpenBotDatabase(profilePath));
+  const agentStore = new AgentStore(profilePath, homeDirectory, new StarBotDatabase(profilePath));
   await runCauseEffect(agentStore.initialize());
   const mailbox = new MailboxStore(profilePath, agentStore.sharedRoot, agentStore.database);
   await runCauseEffect(mailbox.initialize());
@@ -427,7 +427,7 @@ function seedMemories(agentStore: AgentStore): void {
   }
 }
 
-const SEED_WEBHOOK_SECRET_PLACEHOLDER = Buffer.from("openbot-dev-seed: regenerate this secret").toString("base64");
+const SEED_WEBHOOK_SECRET_PLACEHOLDER = Buffer.from("starbot-dev-seed: regenerate this secret").toString("base64");
 
 async function seedRoutines(agentStore: AgentStore, mailbox: MailboxStore, clock: SeedClock): Promise<void> {
   const routines = new AgentRoutineStore(agentStore.database);
@@ -750,7 +750,7 @@ async function seedAttachments(
       bytes: bytes(`${JSON.stringify({ sources: 8, verified: 7, needsReview: 1 }, null, 2)}\n`),
     }),
     image: await store(launch, {
-      name: "openbot-launch-concept.png",
+      name: "starbot-launch-concept.png",
       mimeType: "image/png",
       sourcePath: SHOWCASE_IMAGE_PATH,
     }),
@@ -1507,15 +1507,15 @@ async function seedTeam(profilePath: string, agentStore: AgentStore, clock: Seed
   const team = new TeamStore(join(profilePath, TEAM_FILE), join(profilePath, LEGACY_TEAM_FILE));
   await runCauseEffect(team.initialize());
   const owner = {
-    id: "openbot-dev-owner",
-    email: "openbot-dev-host@example.com",
+    id: "starbot-dev-owner",
+    email: "starbot-dev-host@example.com",
     name: "Dev Owner",
     avatarUrl: null,
   };
   const teamIdentity = await runCauseEffect(team.configureWithAccount("StarBot Dev Team", owner));
   const joined = [];
   for (const member of [
-    { id: "openbot-dev-alice", email: "alice@example.com", name: "Alice Chen", role: "admin" as const },
+    { id: "starbot-dev-alice", email: "alice@example.com", name: "Alice Chen", role: "admin" as const },
   ]) {
     const invite = await runCauseEffect(team.createInvite(member.role, member.email));
     joined.push(
@@ -1553,7 +1553,7 @@ async function seedTeam(profilePath: string, agentStore: AgentStore, clock: Seed
 }
 
 async function replaceDevelopmentProfile(target: string, staging: string, homeDirectory: string): Promise<void> {
-  const backup = resolve(dirname(target), `.openbot-dev-backup-${randomUUID()}`);
+  const backup = resolve(dirname(target), `.starbot-dev-backup-${randomUUID()}`);
   const targetExists = await pathExists(target);
   if (targetExists) await rename(target, backup);
   try {
@@ -1710,7 +1710,7 @@ async function main(): Promise<void> {
     dryRun,
     ifMissing: parsed.values["if-missing"] ?? false,
     scale: parsed.values.scale === undefined ? undefined : parseSeedScale(parsed.values.scale),
-    instanceId: readDevelopmentInstanceId(process.env.OPENBOT_DEV_INSTANCE_ID),
+    instanceId: readDevelopmentInstanceId(process.env.STARBOT_DEV_INSTANCE_ID),
   });
   logger.info(dryRun ? "StarBot development seed dry run:" : "StarBot development state seeded:");
   logger.info(`- profile: ${summary.targetProfile}`);

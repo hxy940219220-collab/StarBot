@@ -109,10 +109,10 @@ nobody, even if the incident text contains `@everyone`.
 
 | Header | Value |
 | --- | --- |
-| `x-openbot-event` | The event type. |
-| `x-openbot-delivery-id` | 32 hexadecimal characters. The same for each try of one event to one subscription. |
-| `x-openbot-timestamp` | The send time, in Unix seconds. |
-| `x-openbot-signature` | `sha256=<hex>`, when the subscription has a secret. |
+| `x-starbot-event` | The event type. |
+| `x-starbot-delivery-id` | 32 hexadecimal characters. The same for each try of one event to one subscription. |
+| `x-starbot-timestamp` | The send time, in Unix seconds. |
+| `x-starbot-signature` | `sha256=<hex>`, when the subscription has a secret. |
 
 The signature is the HMAC-SHA256, with the secret as key, of `<timestamp>.<delivery>.<body>`. This
 is the same format as [StarBot webhook routines](webhooks.md#headers-and-signature). A receiver must:
@@ -126,10 +126,10 @@ is the same format as [StarBot webhook routines](webhooks.md#headers-and-signatu
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 function verify(headers: Headers, body: string, secret: string) {
-  const timestamp = headers.get("x-openbot-timestamp") ?? "";
-  const delivery = headers.get("x-openbot-delivery-id") ?? "";
+  const timestamp = headers.get("x-starbot-timestamp") ?? "";
+  const delivery = headers.get("x-starbot-delivery-id") ?? "";
   const expected = `sha256=${createHmac("sha256", secret).update(`${timestamp}.${delivery}.${body}`).digest("hex")}`;
-  const actual = headers.get("x-openbot-signature") ?? "";
+  const actual = headers.get("x-starbot-signature") ?? "";
   const fresh = Math.abs(Date.now() / 1000 - Number(timestamp)) <= 300;
   return fresh && actual.length === expected.length && timingSafeEqual(Buffer.from(actual), Buffer.from(expected));
 }

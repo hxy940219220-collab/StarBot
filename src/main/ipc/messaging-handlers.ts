@@ -21,29 +21,29 @@ import {
   withWhatsAppReadOnly,
   withWhatsAppStatusReactions,
   withWhatsAppWorkingMessages,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, nullableString } from "@openbot/contracts/ipc-decoding";
-import { CONNECTORS_CAPABILITY, CONNECTORS_ROUTES } from "@openbot/contracts/team-protocol/connectors-v1";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { DISCORD_ACCESS_CAPABILITY, DISCORD_ACCESS_ROUTES } from "@openbot/contracts/team-protocol/discord-access-v1";
-import type { TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
+} from "@starbot/contracts/ipc";
+import { decodeRecord, nullableString } from "@starbot/contracts/ipc-decoding";
+import { CONNECTORS_CAPABILITY, CONNECTORS_ROUTES } from "@starbot/contracts/team-protocol/connectors-v1";
+import type { TeamCurrentCapability } from "@starbot/contracts/team-protocol/current";
+import { DISCORD_ACCESS_CAPABILITY, DISCORD_ACCESS_ROUTES } from "@starbot/contracts/team-protocol/discord-access-v1";
+import type { TeamProtocolV2Json } from "@starbot/contracts/team-protocol/v2";
 import {
   WHATSAPP_CONNECTOR_CAPABILITY,
   WHATSAPP_CONNECTOR_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-connector-v1";
+} from "@starbot/contracts/team-protocol/whatsapp-connector-v1";
 import {
   WHATSAPP_READ_ONLY_CAPABILITY,
   WHATSAPP_READ_ONLY_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-read-only-v1";
+} from "@starbot/contracts/team-protocol/whatsapp-read-only-v1";
 import {
   WHATSAPP_STATUS_REACTIONS_CAPABILITY,
   WHATSAPP_STATUS_REACTIONS_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-status-reactions-v1";
+} from "@starbot/contracts/team-protocol/whatsapp-status-reactions-v1";
 import {
   WHATSAPP_WORKING_MESSAGE_CAPABILITY,
   WHATSAPP_WORKING_MESSAGE_ROUTES,
-} from "@openbot/contracts/team-protocol/whatsapp-working-message-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/whatsapp-working-message-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { MessagingService } from "../../backend/messaging/messaging-service";

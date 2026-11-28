@@ -13,8 +13,8 @@ import {
   SettingsSection,
   Switch,
   Text,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createStore, Show } from "solid-js";
 import { McpRelaySignIn } from "./McpRelaySignIn";
 import { asksForSignIn, type McpServerTools, type SettledTest, useMcpRuns } from "./mcp-server-tools";

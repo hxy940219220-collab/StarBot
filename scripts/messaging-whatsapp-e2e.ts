@@ -5,15 +5,15 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { Boom } from "@hapi/boom";
-import type { MessagingConnection, WhatsAppLinkState } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import type { MessagingConnection, WhatsAppLinkState } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import {
   newStoreKey,
   WhatsAppAuthStore,
   WhatsAppStoreLocked,
   WhatsAppStoreUnreadable,
-} from "@openbot/whatsapp/auth-store";
+} from "@starbot/whatsapp/auth-store";
 import {
   type AnyMessageContent,
   type BaileysEventMap,
@@ -23,7 +23,7 @@ import {
   proto,
   type UserFacingSocketConfig,
   type WAMessage,
-} from "@openbot/whatsapp/baileys";
+} from "@starbot/whatsapp/baileys";
 import { gc } from "bun";
 import { Effect, Scope } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
@@ -47,13 +47,13 @@ import {
   WhatsAppSession,
   type WhatsAppSocket,
 } from "../src/backend/messaging/whatsapp/whatsapp-session";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { parseStartWhatsAppLinkInput, parseWhatsAppSenderInput } from "../src/main/ipc/messaging-inputs";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-whatsapp-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/messaging-whatsapp-e2e");
 const REPORT = join(OUT, "report.json");
-const root = await mkdtemp(join(tmpdir(), "openbot-whatsapp-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-whatsapp-e2e-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const whatsappRoot = join(userData, "whatsapp");
@@ -393,11 +393,11 @@ interface Booted {
   messaging: MessagingService;
   runtime: WhatsAppRuntime;
   mailbox: MailboxStore;
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
 }
 
 async function boot<T>(use: (services: Booted) => Promise<T>): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new StarBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
@@ -751,7 +751,7 @@ try {
         assert.equal(received(agents, OWNER_JID, other.key.id ?? ""), false, "Another StarBot's post was a request.");
       const told = () => phone.textsTo(OWNER_JID).filter((text) => text.startsWith("Another StarBot is linked")).length;
       await until(() => told() === 1, "one notice about the other StarBot");
-      return { echoId: own.id, otherOpenBotNotices: told() };
+      return { echoId: own.id, otherStarBotNotices: told() };
     });
 
     await step(
@@ -1094,7 +1094,7 @@ try {
     await step(
       "posts: one file takes the text as its caption, and a post lost with its socket goes again (#12211)",
       async () => {
-        const folder = await mkdtemp(join(tmpdir(), "openbot-wa-post-"));
+        const folder = await mkdtemp(join(tmpdir(), "starbot-wa-post-"));
         const png = join(folder, "offer.png");
         writeFileSync(
           png,

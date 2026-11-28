@@ -1,6 +1,6 @@
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
-import { classifyFailure } from "@openbot/telemetry";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
+import { classifyFailure } from "@starbot/telemetry";
 import type { AgentProvider } from "../agent-client";
 import { providerLabel } from "./thread-items";
 

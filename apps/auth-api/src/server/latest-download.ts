@@ -1,6 +1,6 @@
 import { Effect, Schema } from "effect";
 import { androidApkRelease, androidApkVersion } from "../lib/android-apk";
-import { OPENBOT_LINKS } from "../lib/landing-links";
+import { STARBOT_LINKS } from "../lib/landing-links";
 
 export type AvailableDownloadPlatform = "linux" | "macos" | "windows";
 
@@ -11,7 +11,7 @@ interface DownloadManifestConfig {
   manifest: "latest-linux-arm64.yml" | "latest-linux.yml" | "latest-mac.yml" | "latest.yml";
 }
 
-const RELEASES_BASE_URL = "https://github.com/nightly-labs/openbot/releases";
+const RELEASES_BASE_URL = "https://github.com/nightly-labs/starbot/releases";
 
 const DOWNLOAD_PLATFORMS = ["linux", "macos", "windows"] as const satisfies readonly AvailableDownloadPlatform[];
 
@@ -71,7 +71,7 @@ export function androidApkResponse(): Response {
 
 function fallbackToReleases(platform: AvailableDownloadPlatform, reason: string): Response {
   console.warn(`latest-download: serving the releases page for ${platform} (${reason})`);
-  return redirect(OPENBOT_LINKS.releases);
+  return redirect(STARBOT_LINKS.releases);
 }
 
 class DownloadManifestError extends Schema.TaggedError<DownloadManifestError>()("DownloadManifestError", {}) {}

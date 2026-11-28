@@ -5,16 +5,16 @@ import {
   type ExportInstanceInput,
   INSTANCE_TRANSFER_LIMITS,
   type InstanceTransferPreview,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import {
   INSTANCE_TRANSFER_CHUNK_BYTES,
   INSTANCE_TRANSFER_CHUNKS_ROUTES,
-} from "@openbot/contracts/team-protocol/instance-transfer-chunks-v1";
-import { INSTANCE_TRANSFER_FULL_COPY_ROUTES } from "@openbot/contracts/team-protocol/instance-transfer-full-copy-v1";
-import { INSTANCE_TRANSFER_REMOTE_BYTES } from "@openbot/contracts/team-protocol/instance-transfer-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { decodeInstanceTransferExportState, fullCopyExportBody } from "@openbot/team-client/team-api-requests";
+} from "@starbot/contracts/team-protocol/instance-transfer-chunks-v1";
+import { INSTANCE_TRANSFER_FULL_COPY_ROUTES } from "@starbot/contracts/team-protocol/instance-transfer-full-copy-v1";
+import { INSTANCE_TRANSFER_REMOTE_BYTES } from "@starbot/contracts/team-protocol/instance-transfer-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { decodeInstanceTransferExportState, fullCopyExportBody } from "@starbot/team-client/team-api-requests";
 import { Effect, Schedule } from "effect";
 import { type ArchiveOperationError, archiveCall, archiveFailure } from "./archive-effects";
 import { readFully, sha256Hex, writeFully } from "./instance-transfer-chunks";

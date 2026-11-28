@@ -4,10 +4,10 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, registerSecretValue, toLogValue } from "@starbot/logging";
 import { z } from "zod";
 
-const logger = createOpenBotLogger("create-github-app");
+const logger = createStarBotLogger("create-github-app");
 const WAIT_MS = 30 * 60_000;
 const MANIFEST_PATH = resolve(import.meta.dirname, "github-app/manifest.json");
 
@@ -62,7 +62,7 @@ async function convert(code: string): Promise<Conversion> {
 }
 
 async function saveSecrets(conversion: Conversion): Promise<string> {
-  const directory = join(homedir(), ".config", "openbot");
+  const directory = join(homedir(), ".config", "starbot");
   await mkdir(directory, { recursive: true, mode: 0o700 });
   const secrets = {
     id: conversion.id,
@@ -174,7 +174,7 @@ async function main(): Promise<void> {
   logger.info("Do these steps in the app settings. A manifest cannot do them:");
   logger.info("  1. General > Identifying and authorizing users: select Enable Device Flow.");
   logger.info("  2. Optional features: opt out of User-to-server token expiration.");
-  if (conversion.slug !== "openbotgit") {
+  if (conversion.slug !== "starbotgit") {
     logger.info(`GitHub gave the slug ${conversion.slug}. Put it in GITHUB_APP_SLUG too.`);
   }
 }

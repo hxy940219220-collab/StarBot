@@ -4,12 +4,12 @@ import {
   type LibraryFolderRefusalReason,
   type LibraryFoldersSnapshot,
   parseLibraryFolderAction,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   LIBRARY_FOLDERS_CAPABILITY,
   LIBRARY_FOLDERS_ROUTES,
-} from "@openbot/contracts/team-protocol/library-folders-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/library-folders-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { LibraryFolderChangeRefused } from "../../backend/library-folders-store";
 import type { LibraryFolderActionAgents } from "../library-folders-service";

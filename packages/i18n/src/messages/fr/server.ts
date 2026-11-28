@@ -157,7 +157,7 @@ export const messages = {
   "server.install.offline": "{name} est hors ligne.",
   "server.install.expired": "Cette commande a expiré. Créez-en une nouvelle.",
   "server.install.agentPrompt":
-    'Installe OpenBot sur ce serveur Linux et connecte-le à mon compte OpenBot.\nExécute cette commande en root. Elle ne pose aucune question et prend quelques minutes :\n\n{command}\n\nElle se termine par la ligne "StarBot is connected to your account." et le code de sortie 0.\nLa commande fonctionne une fois, pendant 15 minutes. Ne l’enregistre nulle part.',
+    'Installe StarBot sur ce serveur Linux et connecte-le à mon compte StarBot.\nExécute cette commande en root. Elle ne pose aucune question et prend quelques minutes :\n\n{command}\n\nElle se termine par la ligne "StarBot is connected to your account." et le code de sortie 0.\nLa commande fonctionne une fois, pendant 15 minutes. Ne l’enregistre nulle part.',
   "server.install.setUpWithAgent": "Configurer avec un agent",
   "server.install.sshAgentPrompt":
     "Connecte-toi en SSH à mon serveur Linux et installe StarBot dessus comme serveur.\n\nAdresse SSH (user@host) :",
@@ -678,7 +678,7 @@ export const messages = {
   "server.update.path.hosted":
     "Le service hébergé télécharge les mises à jour en arrière-plan. Une mise à jour téléchargée s’applique au prochain démarrage du serveur. Attendez la fin du travail en cours avant d’arrêter puis de reprendre le serveur. S’il reste sur une ancienne version, contactez l’administrateur de l’hôte.",
   "server.update.path.system":
-    "Sur l’hôte, exécutez sudo openbot update pour installer la dernière version. Cette commande arrête StarBot. Attendez d’abord la fin du travail en cours. Les téléchargements automatiques s’installent au prochain démarrage.",
+    "Sur l’hôte, exécutez sudo starbot update pour installer la dernière version. Cette commande arrête StarBot. Attendez d’abord la fin du travail en cours. Les téléchargements automatiques s’installent au prochain démarrage.",
 
   "server.update.path.container":
     "Sur l’hôte Docker, récupérez la nouvelle image StarBot et recréez le conteneur avec les mêmes volumes de données. Attendez d’abord la fin du travail en cours. Conservez les volumes existants pour préserver vos données.",

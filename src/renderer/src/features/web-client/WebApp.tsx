@@ -1,25 +1,25 @@
-import { agentTemplateIdFromWebAppSearch, WEB_APP_AGENT_TEMPLATE_PARAM } from "@openbot/contracts/agent-template-links";
-import { companySignInErrorKey, WEB_APP_COMPANY_SIGN_IN_ERROR_PARAM } from "@openbot/contracts/company-sign-in";
-import { type FirstTouch, readFirstTouch } from "@openbot/contracts/first-touch";
-import { inviteUrlFromWebAppSearch, WEB_APP_INVITE_FIELDS } from "@openbot/contracts/invite-links";
-import { type AppVariant, type CentralAuthState, type CentralAuthUser, isAvatarColor } from "@openbot/contracts/ipc";
+import { agentTemplateIdFromWebAppSearch, WEB_APP_AGENT_TEMPLATE_PARAM } from "@starbot/contracts/agent-template-links";
+import { companySignInErrorKey, WEB_APP_COMPANY_SIGN_IN_ERROR_PARAM } from "@starbot/contracts/company-sign-in";
+import { type FirstTouch, readFirstTouch } from "@starbot/contracts/first-touch";
+import { inviteUrlFromWebAppSearch, WEB_APP_INVITE_FIELDS } from "@starbot/contracts/invite-links";
+import { type AppVariant, type CentralAuthState, type CentralAuthUser, isAvatarColor } from "@starbot/contracts/ipc";
 import {
   type MarketplaceListingLink,
   marketplaceListingFromWebAppSearch,
   WEB_APP_MARKETPLACE_AGENT_PARAM,
   WEB_APP_MARKETPLACE_SKILL_PARAM,
-} from "@openbot/contracts/marketplace-links";
-import { pluginSlugFromWebAppSearch, WEB_APP_PLUGIN_PARAM } from "@openbot/contracts/plugin-links";
-import { forgetReferralCode, readReferralCode } from "@openbot/contracts/referral";
-import { isBoolean, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { formatLocale, resolveLocale } from "@openbot/i18n";
-import { sourceText } from "@openbot/i18n/source";
-import { markRemoteSync } from "@openbot/team-client/sync-profile";
-import { classifyFailure } from "@openbot/telemetry";
-import { NotificationObserver, Toaster, toast } from "@openbot/ui";
-import { AccountLogin } from "@openbot/ui/features/account/AccountLogin";
-import { AppLoadingScreen } from "@openbot/ui/features/account/AppLoadingScreen";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/marketplace-links";
+import { pluginSlugFromWebAppSearch, WEB_APP_PLUGIN_PARAM } from "@starbot/contracts/plugin-links";
+import { forgetReferralCode, readReferralCode } from "@starbot/contracts/referral";
+import { isBoolean, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { formatLocale, resolveLocale } from "@starbot/i18n";
+import { sourceText } from "@starbot/i18n/source";
+import { markRemoteSync } from "@starbot/team-client/sync-profile";
+import { classifyFailure } from "@starbot/telemetry";
+import { NotificationObserver, Toaster, toast } from "@starbot/ui";
+import { AccountLogin } from "@starbot/ui/features/account/AccountLogin";
+import { AppLoadingScreen } from "@starbot/ui/features/account/AppLoadingScreen";
+import { currentText } from "@starbot/ui/text";
 import { Dynamic } from "@solidjs/web";
 import { createEffect, createSignal, createStore, onSettled, Show } from "solid-js";
 import type { DesktopAnalyticsProperties } from "../../analytics";
@@ -535,7 +535,7 @@ function WebAppContent(props: { createRuntime?: WebRuntimeFactory }) {
     channel?.postMessage("session-changed");
   }
   onSettled(() => {
-    channel = new BroadcastChannel("openbot.web.session");
+    channel = new BroadcastChannel("starbot.web.session");
     channel.onmessage = () => {
       clearSession();
       void checkSession();

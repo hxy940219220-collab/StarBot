@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
-import type { HostReleaseStatus, UpdateStatus } from "@openbot/contracts/ipc";
-import { isNewerRelease, isValidSemver } from "@openbot/contracts/release-version";
+import type { HostReleaseStatus, UpdateStatus } from "@starbot/contracts/ipc";
+import { isNewerRelease, isValidSemver } from "@starbot/contracts/release-version";
 import { Deferred, Effect, Exit, Schema } from "effect";
 
 class ReleaseCheckFailed extends Schema.TaggedError<ReleaseCheckFailed>()("ReleaseCheckFailed", {}) {}
@@ -76,7 +76,7 @@ export class HostReleaseService {
     if (this.#options.platform === "linux") {
       if (this.#options.updateStatus().phase !== "unsupported") return "self-update";
       if (this.#options.installationMode === "container") return "container";
-      if (this.#options.environment.OPENBOT_HOSTED_SERVER === "1") return "hosted";
+      if (this.#options.environment.STARBOT_HOSTED_SERVER === "1") return "hosted";
       if (this.#options.installationMode === "self") return "system";
     }
     return this.#options.updateStatus().phase === "unsupported" ? "manual" : "self-update";

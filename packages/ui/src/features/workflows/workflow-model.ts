@@ -1,5 +1,5 @@
-import type { ProviderLogoVariant } from "@openbot/brand";
-import { isKnownAgentProvider } from "@openbot/contracts/agent-providers";
+import type { ProviderLogoVariant } from "@starbot/brand";
+import { isKnownAgentProvider } from "@starbot/contracts/agent-providers";
 import {
   type AgentProviderRef,
   type AgentStatus,
@@ -20,7 +20,7 @@ import {
   type WorkflowOutputTarget,
   type WorkflowStepSettings,
   type WorkflowTriggerType,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { providerOffersModels } from "../../components/provider-model-options";
 import type { AgentProfile } from "../../data";
 

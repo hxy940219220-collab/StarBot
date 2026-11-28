@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import type { Page } from "playwright-core";
 import { argument } from "./channel-e2e-support";
 import { type Spread, spread } from "./dev-automation/bench-stats";
@@ -15,7 +15,7 @@ const PICTURE_SIDE = 1024;
 const COLUMNS = 4;
 const SPACING = 380;
 const WAIT_MS = 120_000;
-const logger = createOpenBotLogger(NAME);
+const logger = createStarBotLogger(NAME);
 
 const pictureCount = Number(argument("pictures") ?? "12");
 const runs = Number(argument("runs") ?? "3");
@@ -23,7 +23,7 @@ const label = argument("label") ?? "run";
 const clients = (argument("clients") ?? "remote,local").split(",").filter(Boolean);
 const compare = argument("compare");
 const allowMutations = process.argv.includes("--allow-mutations");
-const outDir = join(ROOT, ".openbot-build", NAME, label);
+const outDir = join(ROOT, ".starbot-build", NAME, label);
 
 interface PictureTimes {
   mountMs: number;
@@ -125,9 +125,9 @@ async function makePicture(host: Page, name: string): Promise<string> {
       context.putImageData(image, 0, 0);
       const blob = await canvas.convertToBlob({ type: "image/png" });
       const bytes = new Uint8Array(await blob.arrayBuffer());
-      const [draft] = await window.openbot.agent.importAttachmentData([{ name, mimeType: "image/png", bytes }]);
+      const [draft] = await window.starbot.agent.importAttachmentData([{ name, mimeType: "image/png", bytes }]);
       if (!draft) throw new Error("The host kept no draft.");
-      return window.openbot.workflows.keepPicture(draft.id);
+      return window.starbot.workflows.keepPicture(draft.id);
     },
     { name, side: PICTURE_SIDE },
   );
@@ -148,7 +148,7 @@ async function seedWorkflow(host: Page, title: string) {
     const name = `${title}-${index}.png`.replaceAll(" ", "-");
     nodes.push(assetNode(index, await makePicture(host, name), name));
   }
-  const created = await host.evaluate((input) => window.openbot.workflows.create(input), {
+  const created = await host.evaluate((input) => window.starbot.workflows.create(input), {
     title,
     graph: { nodes, edges: [], strokes: [] },
   });
@@ -234,9 +234,9 @@ async function newResult(host: Page, client: Page, workflowId: string, title: st
   const fileId = await makePicture(host, name);
   const savedAt = await host.evaluate(
     async ({ workflowId, node }) => {
-      const detail = await window.openbot.workflows.get(workflowId);
+      const detail = await window.starbot.workflows.get(workflowId);
       const graph = { ...detail.graph, nodes: [...detail.graph.nodes, node] };
-      const answer = await window.openbot.workflows.saveGraph({ workflowId, baseRevision: detail.revision, graph });
+      const answer = await window.starbot.workflows.saveGraph({ workflowId, baseRevision: detail.revision, graph });
       if (!answer.ok) throw new Error("The save had a conflict.");
       return Date.now();
     },
@@ -265,9 +265,9 @@ async function measureClient(clientName: string): Promise<ClientReport> {
   try {
     await openWorkflows(page, HOST_NAME);
     const other = `Perf other ${label}`;
-    const listed = await host.evaluate(() => window.openbot.workflows.list());
+    const listed = await host.evaluate(() => window.starbot.workflows.list());
     if (!listed.some((summary) => summary.title === other))
-      await host.evaluate((title) => window.openbot.workflows.create({ title }), other);
+      await host.evaluate((title) => window.starbot.workflows.create({ title }), other);
     const result: ClientRun[] = [];
     for (let run = 0; run < runs; run += 1) {
       const title = `Perf ${label} ${clientName} ${Date.now()}`;

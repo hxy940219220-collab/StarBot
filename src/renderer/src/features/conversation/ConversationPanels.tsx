@@ -1,20 +1,20 @@
-import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { WORKSPACE_DIRECTORY_CAPABILITY } from "@openbot/contracts/team-protocol/workspace-directory-v1";
-import { PanelResizer } from "@openbot/ui/components/PanelResizer";
-import { settingsPanelMaxWidth } from "@openbot/ui/components/SettingsPanel";
-import { BROWSER_NEW_TAB_URL } from "@openbot/ui/features/browser/browser-suggestions";
+import { LOCAL_SERVER_ID } from "@starbot/contracts/ipc";
+import { WORKSPACE_DIRECTORY_CAPABILITY } from "@starbot/contracts/team-protocol/workspace-directory-v1";
+import { PanelResizer } from "@starbot/ui/components/PanelResizer";
+import { settingsPanelMaxWidth } from "@starbot/ui/components/SettingsPanel";
+import { BROWSER_NEW_TAB_URL } from "@starbot/ui/features/browser/browser-suggestions";
 import {
   SidePanelHeader,
   SidePanelLauncher,
   type SidePanelPane,
   type SidePanelPaneBadge,
-} from "@openbot/ui/features/conversation/SidePanel";
-import { SideQuestionPanel } from "@openbot/ui/features/conversation/SideQuestionPanel";
-import { SubagentPanel } from "@openbot/ui/features/conversation/Subagents";
-import { ThreadsPane } from "@openbot/ui/features/conversation/threads/ThreadsPane";
-import { VoicePill } from "@openbot/ui/features/conversation/VoicePill";
-import { McpSignInRelayDialog } from "@openbot/ui/features/settings/McpSignInPage";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/SidePanel";
+import { SideQuestionPanel } from "@starbot/ui/features/conversation/SideQuestionPanel";
+import { SubagentPanel } from "@starbot/ui/features/conversation/Subagents";
+import { ThreadsPane } from "@starbot/ui/features/conversation/threads/ThreadsPane";
+import { VoicePill } from "@starbot/ui/features/conversation/VoicePill";
+import { McpSignInRelayDialog } from "@starbot/ui/features/settings/McpSignInPage";
+import { useText } from "@starbot/ui/text";
 import { useChatBubbleStyle } from "../../chat-bubble-style-preference";
 import {
   readSidePanelWidth,
@@ -43,7 +43,7 @@ import type { VoiceConversationKind } from "./stores/voice-session-store";
 import { useVoiceTalkKey } from "./voice-talk-key";
 import { setVoiceTalkMode, useVoiceTalkMode } from "./voice-talk-mode";
 
-import { type HostFolderPick, HostFolderPicker } from "@openbot/ui/features/conversation/HostFolderPicker";
+import { type HostFolderPick, HostFolderPicker } from "@starbot/ui/features/conversation/HostFolderPicker";
 import { Portal } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, Loading, lazy, onSettled, Show, untrack } from "solid-js";
 import { browseHostFolders } from "./agent-folders-port";

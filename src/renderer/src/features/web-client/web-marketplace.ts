@@ -1,8 +1,8 @@
-import { agentTemplateShareOrigin } from "@openbot/contracts/agent-template-links";
-import type { McpServerConfig, McpTestResult } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n";
-import { runTeamEffect } from "@openbot/team-client";
-import { createMarketplaceCatalog } from "@openbot/team-client/marketplace-catalog";
+import { agentTemplateShareOrigin } from "@starbot/contracts/agent-template-links";
+import type { McpServerConfig, McpTestResult } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n";
+import { runTeamEffect } from "@starbot/team-client";
+import { createMarketplaceCatalog } from "@starbot/team-client/marketplace-catalog";
 import {
   cancelMcpSignIn,
   getHostAgentAccess,
@@ -27,9 +27,9 @@ import {
   startMcpSignIn,
   testMcpServer,
   uninstallAgentSkill,
-} from "@openbot/team-client/team-admin-requests";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/team-client/team-admin-requests";
+import type { TeamApiRequest } from "@starbot/team-client/team-api-requests";
+import { currentText } from "@starbot/ui/text";
 import { Effect } from "effect";
 import type { AgentTemplateInstallCalls } from "../agent-templates/agent-templates-port";
 import type { MarketplaceCalls } from "../settings/marketplace-calls";

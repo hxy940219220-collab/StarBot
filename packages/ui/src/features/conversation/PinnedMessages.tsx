@@ -1,7 +1,7 @@
-import { Button, buttonVariants, Pin, PinOff, Popover } from "@openbot/ui";
-import type { AgentProfile } from "@openbot/ui/data";
-import { ReplyQuote } from "@openbot/ui/features/conversation/ReplyQuote";
-import { useText } from "@openbot/ui/text";
+import { Button, buttonVariants, Pin, PinOff, Popover } from "@starbot/ui";
+import type { AgentProfile } from "@starbot/ui/data";
+import { ReplyQuote } from "@starbot/ui/features/conversation/ReplyQuote";
+import { useText } from "@starbot/ui/text";
 import { createSignal, createUniqueId, For, Show } from "solid-js";
 
 export interface PinnedMessageItem {

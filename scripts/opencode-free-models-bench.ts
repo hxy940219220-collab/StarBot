@@ -6,7 +6,7 @@ import { dirname, join, relative, resolve } from "node:path";
 import { Schema } from "effect";
 import { isFreeOpencodeModel } from "../packages/contracts/src/agent-providers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-free-models-bench");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-free-models-bench");
 const NL = "\n";
 const print = (line: string) => process.stdout.write(`${line}${NL}`);
 const RUN_TIMEOUT_MS = 300_000;

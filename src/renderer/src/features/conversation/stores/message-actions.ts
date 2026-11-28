@@ -2,16 +2,16 @@ import {
   attachmentReferenceIds,
   expandAttachmentReferences,
   removeAttachmentReferences,
-} from "@openbot/contracts/attachment-references";
+} from "@starbot/contracts/attachment-references";
 import {
   chatTagReferences,
   expandChatTagReferences,
   limitedQuoteText,
   serializeChatTagReference,
-} from "@openbot/contracts/chat-tag-references";
-import type { InstalledSkill, MessageReaction } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/chat-tag-references";
+import type { InstalledSkill, MessageReaction } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
+import { currentText } from "@starbot/ui/text";
 import { desktopAnalytics } from "../../../analytics";
 import { writeClipboardText } from "../../../clipboard";
 import { copiedFileRead, copyMessageWithAttachments } from "../composer-clipboard";

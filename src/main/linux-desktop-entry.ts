@@ -3,15 +3,15 @@ import { mkdir, readdir, readFile, realpath, writeFile } from "node:fs/promises"
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect, Schema } from "effect";
 import { causeHelpers } from "../backend/effect-boundary";
 
-const logger = createOpenBotLogger("linux-desktop-entry");
+const logger = createStarBotLogger("linux-desktop-entry");
 
-const DESKTOP_FILE_NAME = "openbot.desktop";
-const ICON_FILE_NAME = "openbot.png";
-const WM_CLASS = "openbot";
+const DESKTOP_FILE_NAME = "starbot.desktop";
+const ICON_FILE_NAME = "starbot.png";
+const WM_CLASS = "starbot";
 const LAUNCHER_READ_CONCURRENCY = 16;
 const GSETTINGS_TIMEOUT_MS = 2_000;
 const execFileAsync = promisify(execFile);

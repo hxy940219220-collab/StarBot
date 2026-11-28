@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { type AgentMemoryOrigin, MEMORY_SITE_MAX_LENGTH, type MemoryEntry } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { type AgentMemoryOrigin, MEMORY_SITE_MAX_LENGTH, type MemoryEntry } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { databaseRow, databaseRows, requiredStringColumn } from "./database/database-rows";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 
 export interface MemoryTables {
   table: string;
@@ -40,7 +40,7 @@ export class MemoryStore {
   readonly #columns: string;
 
   constructor(
-    readonly database: OpenBotDatabase,
+    readonly database: StarBotDatabase,
     protected readonly tables: MemoryTables,
   ) {
     this.#columns = `memory_id, text, origin, source_turn_id, created_at, updated_at${tables.siteColumn ? ", site" : ""}`;

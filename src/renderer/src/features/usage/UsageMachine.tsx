@@ -1,8 +1,8 @@
-import { hostedPlanMachineMetrics } from "@openbot/contracts/hosted-servers";
-import type { MachineMetrics, OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import { MACHINE_RESOURCES_CAPABILITY } from "@openbot/contracts/team-protocol/machine-resources-v1";
-import { STORAGE_USER_FILES_CAPABILITY } from "@openbot/contracts/team-protocol/storage-user-files-v1";
-import { UsageMachineMeter } from "@openbot/ui/features/usage/UsageMachineMeter";
+import { hostedPlanMachineMetrics } from "@starbot/contracts/hosted-servers";
+import type { MachineMetrics, StarBotDesktopApi } from "@starbot/contracts/ipc";
+import { MACHINE_RESOURCES_CAPABILITY } from "@starbot/contracts/team-protocol/machine-resources-v1";
+import { STORAGE_USER_FILES_CAPABILITY } from "@starbot/contracts/team-protocol/storage-user-files-v1";
+import { UsageMachineMeter } from "@starbot/ui/features/usage/UsageMachineMeter";
 import { createMemo, createSignal, Show, untrack } from "solid-js";
 import { createUsageRefreshPoll } from "../account/usage-refresh-poll";
 import { canManageStorage, hostedPlanStorageGb } from "../files/storage-usage";
@@ -15,10 +15,10 @@ const MACHINE_REFRESH_CHECK_MS = 1_000;
 const USER_FILES_REFRESH_MS = 60_000;
 const USER_FILES_REFRESH_CHECK_MS = 5_000;
 
-type MachinePort = Pick<OpenBotDesktopApi["storage"], "getMachineMetrics" | "getDisk">;
+type MachinePort = Pick<StarBotDesktopApi["storage"], "getMachineMetrics" | "getDisk">;
 
 function machinePort(): MachinePort {
-  return window.openbot.storage;
+  return window.starbot.storage;
 }
 
 export function UsageMachine(props: { serverId: string }) {

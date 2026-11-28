@@ -1,5 +1,5 @@
-import { Button } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { Button } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createSignal, onCleanup, Show } from "solid-js";
 import { TalkKeyCaps } from "../conversation/TalkKeyCaps";

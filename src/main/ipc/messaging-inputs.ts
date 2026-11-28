@@ -19,7 +19,7 @@ import type {
   SetWhatsAppWorkingMessageInput,
   StartWhatsAppLinkInput,
   WhatsAppSenderInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   CONNECTOR_MESSAGING_PLATFORMS,
   isAgentModel,
@@ -29,8 +29,8 @@ import {
   parseDiscordAllowedRoles,
   parseWhatsAppPhoneNumber,
   parseWhatsAppRequestCode,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isOneOf } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isOneOf } from "@starbot/contracts/runtime-values";
 import { isObject, requireString } from "./validation";
 
 export function parseMessagingWorkspaceInput(value: unknown): MessagingWorkspaceInput {

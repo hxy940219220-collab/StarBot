@@ -29,10 +29,10 @@ import {
 } from "@modelcontextprotocol/sdk/shared/auth.js";
 import { checkResourceAllowed, resourceUrlFromServerUrl } from "@modelcontextprotocol/sdk/shared/auth-utils.js";
 import type { FetchLike } from "@modelcontextprotocol/sdk/shared/transport.js";
-import { MCP_SIGN_IN_TIMEOUT_MS, relayCallbackQuery } from "@openbot/contracts/ipc";
-import { mcpAccountFragment } from "@openbot/contracts/mcp-accounts";
-import { sourceText } from "@openbot/i18n/source";
-import type { Logger } from "@openbot/logging";
+import { MCP_SIGN_IN_TIMEOUT_MS, relayCallbackQuery } from "@starbot/contracts/ipc";
+import { mcpAccountFragment } from "@starbot/contracts/mcp-accounts";
+import { sourceText } from "@starbot/i18n/source";
+import type { Logger } from "@starbot/logging";
 import { Deferred, Effect, Exit, Fiber, Result, Scope } from "effect";
 import { getDomain } from "tldts";
 import { z } from "zod";

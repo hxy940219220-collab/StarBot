@@ -2,10 +2,10 @@ import { UnauthorizedError } from "@modelcontextprotocol/sdk/client/auth.js";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport, StreamableHTTPError } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
-import { ATTACHMENT_LIMITS } from "@openbot/contracts/input-limits";
-import type { WorkflowMediaKind } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { ATTACHMENT_LIMITS } from "@starbot/contracts/input-limits";
+import type { WorkflowMediaKind } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { type Duration, Effect, Schema } from "effect";
 import { readLimitedBody } from "../limited-body";
 import { secureOAuthFetch } from "../mcp-oauth-provider";
@@ -87,7 +87,7 @@ function connect(url: string, token: string) {
   return Effect.acquireRelease(
     Effect.tryPromise({
       try: async (signal) => {
-        const client = new Client({ name: "openbot", version: "1" }, { capabilities: {} });
+        const client = new Client({ name: "starbot", version: "1" }, { capabilities: {} });
         const transport = new StreamableHTTPClientTransport(new URL(url), {
           fetch: secureOAuthFetch({ resource: url, mcpTraffic: true }),
           requestInit: { headers: { Authorization: `Bearer ${token}` } },

@@ -4,10 +4,10 @@ import type {
   CentralAuthUser,
   CompanySignInSettings,
   MobileConnectLink,
-  OpenBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import type { OwnerTransfer } from "@openbot/contracts/owner-transfer";
-import { sourceText } from "@openbot/i18n/source";
+  StarBotDesktopApi,
+} from "@starbot/contracts/ipc";
+import type { OwnerTransfer } from "@starbot/contracts/owner-transfer";
+import { sourceText } from "@starbot/i18n/source";
 import { clone, type Listener, type MockRuntime } from "./mock-support";
 
 export interface MockAuthOptions {
@@ -65,7 +65,7 @@ export function createMockAuth(options: MockAuthOptions, { emit }: MockRuntime) 
   let companySignIn: CompanySignInSettings = {
     redirectUri: "https://api.starbot.app/v1/auth/company/callback",
     scimUrl: "https://api.starbot.app/scim/v2",
-    domainRecord: { name: "_openbot", value: "openbot-domain=preview" },
+    domainRecord: { name: "_starbot", value: "starbot-domain=preview" },
     domainCheck: false,
     connection: null,
   };
@@ -76,7 +76,7 @@ export function createMockAuth(options: MockAuthOptions, { emit }: MockRuntime) 
     emit(authListeners, state);
   }
 
-  const auth: OpenBotDesktopApi["auth"] = {
+  const auth: StarBotDesktopApi["auth"] = {
     getState: async () => clone(authState),
     retry: async () => clone(authState),
     requestEmailCode: async (email) => {
@@ -124,14 +124,14 @@ export function createMockAuth(options: MockAuthOptions, { emit }: MockRuntime) 
     },
     createMobileConnect: async () => ({
       qrData:
-        "openbot://mobile-connect?api=https%3A%2F%2Fapi.starbot.app&ticket=preview-mobile-ticket_1234567890abcdef",
+        "starbot://mobile-connect?api=https%3A%2F%2Fapi.starbot.app&ticket=preview-mobile-ticket_1234567890abcdef",
       expiresAt: Date.now() + 120_000,
     }),
     cancelMobileConnect: async () => undefined,
     getMobileConnectLink: async () => clone(mobileConnectLink),
     createMobileConnectLink: async () => {
       mobileConnectLink = {
-        url: `openbot://mobile-connect?api=https%3A%2F%2Fapi.starbot.app&ticket=preview-mobile-link_${crypto.randomUUID().replaceAll("-", "")}`,
+        url: `starbot://mobile-connect?api=https%3A%2F%2Fapi.starbot.app&ticket=preview-mobile-link_${crypto.randomUUID().replaceAll("-", "")}`,
         createdAt: Date.now(),
       };
       return clone(mobileConnectLink);

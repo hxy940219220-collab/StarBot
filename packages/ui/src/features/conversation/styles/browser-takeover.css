@@ -1,35 +1,35 @@
 .browser-takeover-card {
   width: min(540px, 100%);
-  margin: var(--openbot-space-3) 0 var(--openbot-space-6);
-  animation: browser-takeover-in var(--openbot-duration-slow) var(--openbot-ease-out) both;
+  margin: var(--starbot-space-3) 0 var(--starbot-space-6);
+  animation: browser-takeover-in var(--starbot-duration-slow) var(--starbot-ease-out) both;
 }
 
 .browser-takeover-preview {
   min-width: 0;
   overflow: hidden;
   margin: 0;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-canvas);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-canvas);
 }
 
 .browser-takeover-preview-bar {
   display: flex;
-  height: var(--openbot-control-sm);
+  height: var(--starbot-control-sm);
   min-width: 0;
   align-items: center;
-  gap: var(--openbot-space-1-5);
-  border-bottom: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-surface-raised);
-  padding: 0 var(--openbot-space-3);
-  color: var(--openbot-text-secondary);
+  gap: var(--starbot-space-1-5);
+  border-bottom: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-surface-raised);
+  padding: 0 var(--starbot-space-3);
+  color: var(--starbot-text-secondary);
 }
 
 .browser-takeover-preview-bar svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
   flex: 0 0 auto;
-  stroke-width: var(--openbot-icon-stroke);
+  stroke-width: var(--starbot-icon-stroke);
 }
 
 .browser-takeover-preview-bar span,
@@ -42,14 +42,14 @@
 .browser-takeover-preview-bar span {
   min-width: 0;
   flex: 1;
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .browser-takeover-preview-bar small {
   max-width: 42%;
-  color: var(--openbot-text-readable);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-readable);
+  font-size: var(--starbot-text-sm);
 }
 
 .browser-takeover-preview-viewport {
@@ -57,7 +57,7 @@
   aspect-ratio: 16 / 10;
   overflow: hidden;
   place-items: stretch;
-  background: var(--openbot-bg-control);
+  background: var(--starbot-bg-control);
 }
 
 .browser-takeover-preview-open.ui-button {
@@ -78,22 +78,22 @@
   align-items: center;
   justify-self: center;
   align-self: center;
-  gap: var(--openbot-space-1);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-canvas);
-  padding: var(--openbot-space-2) var(--openbot-space-3);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
+  gap: var(--starbot-space-1);
+  border-radius: var(--starbot-radius-pill);
+  background: var(--starbot-bg-canvas);
+  padding: var(--starbot-space-2) var(--starbot-space-3);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-sm);
   line-height: 1;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--openbot-duration-fast) var(--openbot-ease-out);
+  transition: opacity var(--starbot-duration-fast) var(--starbot-ease-out);
 }
 
 .browser-takeover-preview-open-label > svg {
-  width: var(--openbot-icon-xs);
-  height: var(--openbot-icon-xs);
-  stroke-width: var(--openbot-icon-stroke);
+  width: var(--starbot-icon-xs);
+  height: var(--starbot-icon-xs);
+  stroke-width: var(--starbot-icon-stroke);
 }
 
 .browser-takeover-preview-open:hover .browser-takeover-preview-open-label,
@@ -118,25 +118,25 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: var(--openbot-space-1);
-  color: var(--openbot-text-muted);
-  padding: var(--openbot-space-6);
+  gap: var(--starbot-space-1);
+  color: var(--starbot-text-muted);
+  padding: var(--starbot-space-6);
   text-align: center;
 }
 
 .browser-takeover-preview-fallback svg {
-  width: var(--openbot-icon-lg);
-  height: var(--openbot-icon-lg);
-  margin-bottom: var(--openbot-space-1);
-  stroke-width: var(--openbot-icon-stroke-lg);
+  width: var(--starbot-icon-lg);
+  height: var(--starbot-icon-lg);
+  margin-bottom: var(--starbot-space-1);
+  stroke-width: var(--starbot-icon-stroke-lg);
 }
 
 .browser-takeover-preview-fallback strong {
   max-width: 100%;
   overflow: hidden;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-medium);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -144,8 +144,8 @@
 .browser-takeover-preview-fallback span {
   max-width: 100%;
   overflow: hidden;
-  color: var(--openbot-text-readable);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-readable);
+  font-size: var(--starbot-text-sm);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -165,16 +165,16 @@
 .approval-card {
   display: flex;
   width: min(540px, 100%);
-  margin: var(--openbot-space-3) 0 var(--openbot-space-6);
+  margin: var(--starbot-space-3) 0 var(--starbot-space-6);
   flex-direction: column;
-  gap: var(--openbot-space-4);
-  animation: approval-card-in var(--openbot-duration-slow) var(--openbot-ease-out) both;
+  gap: var(--starbot-space-4);
+  animation: approval-card-in var(--starbot-duration-slow) var(--starbot-ease-out) both;
 }
 
 .approval-button {
-  border-radius: var(--openbot-radius-pill);
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-regular);
+  border-radius: var(--starbot-radius-pill);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-regular);
 }
 
 .approval-command-block,
@@ -182,62 +182,62 @@
 .approval-permissions {
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-surface-raised);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-surface-raised);
 }
 
 .approval-command-block code {
   display: block;
   overflow-x: auto;
-  padding: var(--openbot-space-3);
-  color: var(--openbot-text-secondary);
-  font-family: var(--openbot-font-mono);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-md);
+  padding: var(--starbot-space-3);
+  color: var(--starbot-text-secondary);
+  font-family: var(--starbot-font-mono);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-md);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
 .approval-cwd {
-  border-bottom: 1px solid var(--openbot-border);
-  padding: var(--openbot-space-2) var(--openbot-space-3);
-  color: var(--openbot-text-muted);
-  font-family: var(--openbot-font-mono);
-  font-size: var(--openbot-text-sm);
+  border-bottom: 1px solid var(--starbot-border);
+  padding: var(--starbot-space-2) var(--starbot-space-3);
+  color: var(--starbot-text-muted);
+  font-family: var(--starbot-font-mono);
+  font-size: var(--starbot-text-sm);
   overflow-wrap: anywhere;
 }
 
 .approval-detail-row {
   display: grid;
-  gap: var(--openbot-space-1);
-  padding: var(--openbot-space-3);
+  gap: var(--starbot-space-1);
+  padding: var(--starbot-space-3);
 }
 
 .approval-detail-label {
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
 }
 
 .approval-cut-note {
   margin: 0;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  line-height: var(--openbot-leading-md);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  line-height: var(--starbot-leading-md);
 }
 
 .approval-detail-row strong {
-  color: var(--openbot-text-secondary);
-  font-family: var(--openbot-font-mono);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-text-secondary);
+  font-family: var(--starbot-font-mono);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-medium);
   overflow-wrap: anywhere;
 }
 
 .approval-permissions {
   display: grid;
-  gap: var(--openbot-space-2);
-  padding: var(--openbot-space-3);
+  gap: var(--starbot-space-2);
+  padding: var(--starbot-space-3);
 }
 
 .approval-permissions:empty {
@@ -245,8 +245,8 @@
 }
 
 .approval-permissions span {
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
   overflow-wrap: anywhere;
 }
 

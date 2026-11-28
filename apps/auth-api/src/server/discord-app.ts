@@ -1,7 +1,7 @@
-import { DISCORD_BOT_PERMISSIONS } from "@openbot/contracts/discord-app";
-import { sealDiscordGuildGrant } from "@openbot/contracts/discord-guild-grant";
-import { isRawP256PublicKey } from "@openbot/contracts/host-grant";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { DISCORD_BOT_PERMISSIONS } from "@starbot/contracts/discord-app";
+import { sealDiscordGuildGrant } from "@starbot/contracts/discord-guild-grant";
+import { isRawP256PublicKey } from "@starbot/contracts/host-grant";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import { hmacSha256 } from "./crypto";
 import type { RemoteFailure } from "./remote-control-plane";
@@ -69,7 +69,7 @@ export class DiscordAppService {
     const clientSecret = bindings.DISCORD_CLIENT_SECRET?.trim();
     const stateSecret = bindings.DISCORD_STATE_SECRET?.trim();
     if (!clientId || !clientSecret || !stateSecret || new TextEncoder().encode(stateSecret).byteLength < 32) {
-      throw new DiscordAppError(503, "discord_not_configured", "The OpenBot Discord app is not configured.");
+      throw new DiscordAppError(503, "discord_not_configured", "The StarBot Discord app is not configured.");
     }
     this.#database = bindings.DB;
     this.#clientId = clientId;
@@ -172,7 +172,7 @@ export class DiscordAppService {
       return yield* new DiscordAppError(
         409,
         "discord_guild_taken",
-        "Another OpenBot server answers this Discord server. Disconnect it there first.",
+        "Another StarBot server answers this Discord server. Disconnect it there first.",
       );
     }
     return {

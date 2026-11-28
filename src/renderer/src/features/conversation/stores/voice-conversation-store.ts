@@ -9,9 +9,9 @@ import {
   VOICE_STREAM_LIMITS,
   type VoiceModelId,
   type VoiceModelStatus,
-} from "@openbot/contracts/ipc";
-import type { VoicePhase, VoiceTalkMode } from "@openbot/ui/features/conversation/VoicePill";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { VoicePhase, VoiceTalkMode } from "@starbot/ui/features/conversation/VoicePill";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createStore, onCleanup } from "solid-js";
 import { desktopAnalytics } from "../../../analytics";
 import { encodePcm16, recordingToSamples, recordingToWav } from "../../../voice-recording";

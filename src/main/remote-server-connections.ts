@@ -1,4 +1,4 @@
-import type { ServerCompatibility, ServerConnectionIssue, ServerSummary } from "@openbot/contracts/ipc";
+import type { ServerCompatibility, ServerConnectionIssue, ServerSummary } from "@starbot/contracts/ipc";
 import {
   checkingCompatibility,
   classifyConnectFailure,

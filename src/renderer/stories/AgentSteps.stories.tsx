@@ -1,5 +1,5 @@
-import { AgentActivityIndicator } from "@openbot/ui/features/conversation/AgentActivity";
-import { type AgentStep, AgentStepsDisclosure } from "@openbot/ui/features/conversation/AgentSteps";
+import { AgentActivityIndicator } from "@starbot/ui/features/conversation/AgentActivity";
+import { type AgentStep, AgentStepsDisclosure } from "@starbot/ui/features/conversation/AgentSteps";
 import { createSignal, onSettled } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { STORY_AGENTS } from "./fixtures";

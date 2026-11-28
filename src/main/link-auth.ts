@@ -1,5 +1,5 @@
 import { hostname } from "node:os";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { z } from "zod";
 import { LinkOperationError, linkCall, linkDecode } from "./link-effects";

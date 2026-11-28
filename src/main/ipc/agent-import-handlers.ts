@@ -8,21 +8,21 @@ import {
   parseApplyAgentImportInput,
   parseApplyHermesImportInput,
   resolveRemoteAgentImportResult,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+} from "@starbot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   AGENT_IMPORT_CAPABILITY,
   AGENT_IMPORT_ROUTES,
   AGENT_IMPORT_UPLOAD_BYTES,
-} from "@openbot/contracts/team-protocol/agent-import-v1";
-import { AGENT_IMPORT_V2_CAPABILITY } from "@openbot/contracts/team-protocol/agent-import-v2";
+} from "@starbot/contracts/team-protocol/agent-import-v1";
+import { AGENT_IMPORT_V2_CAPABILITY } from "@starbot/contracts/team-protocol/agent-import-v2";
 import {
   decodeHermesImportReadResponse,
   HERMES_IMPORT_CAPABILITY,
   HERMES_IMPORT_ROUTES,
-} from "@openbot/contracts/team-protocol/hermes-import-v1";
-import type { AppTranslate } from "@openbot/i18n";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/hermes-import-v1";
+import type { AppTranslate } from "@starbot/i18n";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { app, type BrowserWindow, dialog, type OpenDialogOptions, type SaveDialogOptions } from "electron";
 import { runCauseEffect } from "../../backend/effect-boundary";

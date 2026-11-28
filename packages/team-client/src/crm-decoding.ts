@@ -5,8 +5,8 @@ import {
   isCrmOverview,
   isCrmPaymentPage,
   isCrmSettings,
-} from "@openbot/contracts/ipc";
-import { guardedDecoder } from "@openbot/contracts/ipc-decoding";
+} from "@starbot/contracts/ipc";
+import { guardedDecoder } from "@starbot/contracts/ipc-decoding";
 
 export const decodeRemoteCrmOverview = guardedDecoder(isCrmOverview, "remote CRM overview");
 export const decodeRemoteCrmCustomerPage = guardedDecoder(isCrmCustomerPage, "remote CRM customers");

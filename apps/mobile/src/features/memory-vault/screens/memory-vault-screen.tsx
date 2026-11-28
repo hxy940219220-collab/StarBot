@@ -1,4 +1,4 @@
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { useQueries, useQueryClient } from "@tanstack/react-query";
 import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
@@ -90,8 +90,8 @@ export function MemoryVaultScreen() {
 
   const [foreground, muted] = useThemeColor(["foreground", "muted"]);
   const cardBg = dark ? "#1f1f26" : "#ffffff";
-  const sheetBg = String(useCSSVariable("--openbot-bg-sheet") ?? "#ffffff");
-  const borderColor = String(useCSSVariable("--openbot-border-grouped") ?? "rgba(15,23,42,0.08)");
+  const sheetBg = String(useCSSVariable("--starbot-bg-sheet") ?? "#ffffff");
+  const borderColor = String(useCSSVariable("--starbot-border-grouped") ?? "rgba(15,23,42,0.08)");
   const iconMutedColor = String(foreground);
 
   const localItems = usePersonalVaultStore((state) => state.items);

@@ -6,10 +6,10 @@ import {
   avatarFileExtension,
   isAvatarMimeType,
   isValidAvatarImage,
-} from "@openbot/contracts/avatar-images";
-import type { AvatarImageInput, Channel } from "@openbot/contracts/ipc";
-import { isUuidV4 } from "@openbot/contracts/validation";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/avatar-images";
+import type { AvatarImageInput, Channel } from "@starbot/contracts/ipc";
+import { isUuidV4 } from "@starbot/contracts/validation";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { writeFileAtomically } from "./atomic-json-file";
 import { channelFailure } from "./channel-effects";
@@ -67,7 +67,7 @@ export class ChannelImages {
 }
 
 function channelImageUrl(channelId: string, version: string, mimeType: AvatarMimeType): string {
-  const url = new URL(`openbot-avatar://channel/${encodeURIComponent(channelId)}`);
+  const url = new URL(`starbot-avatar://channel/${encodeURIComponent(channelId)}`);
   url.searchParams.set("v", version);
   url.searchParams.set("type", mimeType);
   return url.toString();
@@ -83,7 +83,7 @@ function parseChannelImageUrl(
     const version = url.searchParams.get("v") ?? "";
     const mimeType = url.searchParams.get("type") ?? "";
     if (
-      url.protocol !== "openbot-avatar:" ||
+      url.protocol !== "starbot-avatar:" ||
       url.hostname !== "channel" ||
       channelId !== expectedChannelId ||
       !isUuidV4(version) ||

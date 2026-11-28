@@ -1,4 +1,4 @@
-import type { AgentContextCategory } from "@openbot/contracts/ipc";
+import type { AgentContextCategory } from "@starbot/contracts/ipc";
 import { useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
 import { View } from "react-native";
@@ -27,13 +27,13 @@ const BAR_HEIGHT = 10;
 
 function useCategoryColors(): Record<AgentContextCategory, string> {
   const [systemPrompt, memoryFiles, tools, skills, toolResults, messages, other] = useCSSVariable([
-    "--openbot-chart-storage-workspaces",
-    "--openbot-chart-storage-chats",
-    "--openbot-chart-storage-downloads",
-    "--openbot-chart-storage-runtimes",
-    "--openbot-chart-storage-files",
-    "--openbot-text-secondary",
-    "--openbot-text-dim",
+    "--starbot-chart-storage-workspaces",
+    "--starbot-chart-storage-chats",
+    "--starbot-chart-storage-downloads",
+    "--starbot-chart-storage-runtimes",
+    "--starbot-chart-storage-files",
+    "--starbot-text-secondary",
+    "--starbot-text-dim",
   ]);
   return {
     systemPrompt: String(systemPrompt),
@@ -66,7 +66,7 @@ export function ContextUsageScreen() {
   );
   const viewOnly = useAgentViewOnly(serverId, agentId);
   const colors = useCategoryColors();
-  const [warning, danger, dim] = useCSSVariable(["--openbot-warning-text", "--openbot-danger", "--openbot-text-dim"]);
+  const [warning, danger, dim] = useCSSVariable(["--starbot-warning-text", "--starbot-danger", "--starbot-text-dim"]);
   if (!usage)
     return (
       <SettingsContent>

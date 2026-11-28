@@ -1,16 +1,16 @@
 services:
-  openbot:
-    image: ghcr.io/nightly-labs/openbot:${OPENBOT_TAG:-latest}
-    container_name: openbot-${OPENBOT_NAME:?}
+  starbot:
+    image: ghcr.io/nightly-labs/starbot:${STARBOT_TAG:-latest}
+    container_name: starbot-${STARBOT_NAME:?}
     restart: unless-stopped
     security_opt:
       - seccomp=../seccomp.json
       - no-new-privileges:true
     shm_size: 1g
     stop_grace_period: 60s
-    cpus: ${OPENBOT_CPUS:?}
-    mem_limit: ${OPENBOT_MEM:?}
-    memswap_limit: ${OPENBOT_MEM:?}
+    cpus: ${STARBOT_CPUS:?}
+    mem_limit: ${STARBOT_MEM:?}
+    memswap_limit: ${STARBOT_MEM:?}
     pids_limit: 8192
     ulimits:
       nofile:
@@ -18,24 +18,24 @@ services:
         hard: 524288
     read_only: true
     tmpfs:
-      - /tmp:exec,mode=1777,size=${OPENBOT_TMP:-8g}
+      - /tmp:exec,mode=1777,size=${STARBOT_TMP:-8g}
       - /var/tmp:exec,mode=1777,size=1g
       - /run/lock:mode=1777,size=1m
-      - /run/openbot:mode=0700,uid=1000,gid=1000,size=64m
+      - /run/starbot:mode=0700,uid=1000,gid=1000,size=64m
     volumes:
-      - /srv/openbot/${OPENBOT_NAME:?}/data:/data
-      - /srv/openbot/${OPENBOT_NAME:?}/update-requests:/var/lib/openbot-update/requests
-      - /srv/openbot/${OPENBOT_NAME:?}/update-status:/var/lib/openbot-update/status:ro
+      - /srv/starbot/${STARBOT_NAME:?}/data:/data
+      - /srv/starbot/${STARBOT_NAME:?}/update-requests:/var/lib/starbot-update/requests
+      - /srv/starbot/${STARBOT_NAME:?}/update-status:/var/lib/starbot-update/status:ro
     networks:
-      - openbot
+      - starbot
     logging:
       driver: syslog
       options:
-        syslog-address: unixgram:///var/lib/openbot-docker/dev/log
+        syslog-address: unixgram:///var/lib/starbot-docker/dev/log
         tag: "{{.Name}}"
         mode: non-blocking
         max-buffer-size: 4m
 
 networks:
-  openbot:
+  starbot:
     external: true

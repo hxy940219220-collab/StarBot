@@ -1,4 +1,4 @@
-import { isKeyOnlyProvider } from "@openbot/contracts/agent-providers";
+import { isKeyOnlyProvider } from "@starbot/contracts/agent-providers";
 import {
   BILLING_CURRENCIES,
   BILLING_INTERVALS,
@@ -6,8 +6,8 @@ import {
   type BillingCurrency,
   type BillingInterval,
   type BillingPlanId,
-} from "@openbot/contracts/billing";
-import { HOSTED_SERVER_ENTRY_POINTS, type HostedServerEntryPoint } from "@openbot/contracts/hosted-servers";
+} from "@starbot/contracts/billing";
+import { HOSTED_SERVER_ENTRY_POINTS, type HostedServerEntryPoint } from "@starbot/contracts/hosted-servers";
 import {
   AGENT_PROVIDERS,
   AGENT_REASONING_EFFORTS,
@@ -21,10 +21,10 @@ import {
   type SpeechVoice,
   WORKFLOW_NODE_KINDS,
   type WorkflowNodeKind,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isFunction, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
-import { ANALYTICS_GENERATIONS } from "@openbot/telemetry";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isFunction, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { normalizeEmailAddress } from "@starbot/contracts/validation";
+import { ANALYTICS_GENERATIONS } from "@starbot/telemetry";
 import { OpenPanelBase, type OpenPanelOptions } from "@openpanel/web";
 import {
   ANALYTICS_SCHEMA_VERSION,
@@ -37,7 +37,7 @@ import { MARKETPLACE_PLUGINS } from "./features/settings/marketplace-plugin-cata
 const OPENPANEL_API_URL = "";
 const OPENPANEL_CLIENT_ID = "";
 const MAX_PENDING_EVENTS = 100;
-const CURATED_LISTING_PATTERN = /^openbot-curated-(?:skill|agent)-([a-z0-9][a-z0-9-]{0,63})$/u;
+const CURATED_LISTING_PATTERN = /^starbot-curated-(?:skill|agent)-([a-z0-9][a-z0-9-]{0,63})$/u;
 const PLUGIN_SLUGS = new Set(MARKETPLACE_PLUGINS.map((plugin) => plugin.slug));
 
 type ServerKind = "local" | "remote" | "unknown";

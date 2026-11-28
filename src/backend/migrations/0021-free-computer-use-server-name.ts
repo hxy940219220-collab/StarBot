@@ -1,12 +1,12 @@
 import type { DatabaseSync } from "node:sqlite";
-import { createOpenBotLogger } from "@openbot/logging";
-import type { OpenBotMigration } from "./migration";
+import { createStarBotLogger } from "@starbot/logging";
+import type { StarBotMigration } from "./migration";
 import { isDynamicRecord, isString } from "./runtime-values";
 
-// The value of `COMPUTER_USE_MCP_SERVER_NAME` in `@openbot/contracts/ipc` when this migration shipped.
+// The value of `COMPUTER_USE_MCP_SERVER_NAME` in `@starbot/contracts/ipc` when this migration shipped.
 const COMPUTER_USE_MCP_SERVER_NAME = "computer_use";
 
-const logger = createOpenBotLogger("openbot-database-schema");
+const logger = createStarBotLogger("starbot-database-schema");
 
 /**
  * Moves a saved MCP server off the name the Computer Use driver now takes.
@@ -52,7 +52,7 @@ function freeServerName(taken: ReadonlySet<string>): string {
   }
 }
 
-export const migration: OpenBotMigration = {
+export const migration: StarBotMigration = {
   version: 21,
   name: "free-computer-use-server-name",
   // Renames rows only, so no foreign-key pause, no vacuum, and nothing to mirror in the latest

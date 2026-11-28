@@ -3,13 +3,13 @@ import { readdirSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { licensePeriodAmount } from "@openbot/contracts/license";
+import { licensePeriodAmount } from "@starbot/contracts/license";
 import { Effect } from "effect";
 import { createHostedBilling } from "../src/server/hosted-billing";
 import { sqliteD1 } from "./sqlite-d1";
 
 const ROOT = resolve(import.meta.dirname, "../../..");
-const OUT = join(ROOT, ".openbot-build", "purchase-alert-e2e");
+const OUT = join(ROOT, ".starbot-build", "purchase-alert-e2e");
 const MIGRATIONS = join(ROOT, "apps", "auth-api", "migrations");
 const ALERT_URL = "https://alerts.example/webhook";
 const WEBHOOK_SECRET = "whsec_test";
@@ -43,7 +43,7 @@ function subscriptions(periodEnd: number) {
         status: "active",
         currency: "usd",
         cancel_at_period_end: false,
-        metadata: { openbot_user_id: SERVER_BUYER.id, openbot_server_id: SERVER_ID },
+        metadata: { starbot_user_id: SERVER_BUYER.id, starbot_server_id: SERVER_ID },
         items: {
           data: [
             {
@@ -51,7 +51,7 @@ function subscriptions(periodEnd: number) {
               current_period_end: periodEnd,
               price: {
                 id: "price_standard",
-                lookup_key: "openbot_standard_month",
+                lookup_key: "starbot_standard_month",
                 metadata: {},
                 currency: "usd",
                 unit_amount: 3500,
@@ -66,7 +66,7 @@ function subscriptions(periodEnd: number) {
         status: "active",
         currency: "pln",
         cancel_at_period_end: false,
-        metadata: { openbot_user_id: LICENSE_BUYER.id },
+        metadata: { starbot_user_id: LICENSE_BUYER.id },
         items: {
           data: [
             {
@@ -75,7 +75,7 @@ function subscriptions(periodEnd: number) {
               quantity: 7,
               price: {
                 id: "price_license_year",
-                lookup_key: "openbot_license_year",
+                lookup_key: "starbot_license_year",
                 metadata: {},
                 currency: "pln",
                 unit_amount: null,
@@ -272,13 +272,13 @@ async function purchasesAlertTheOperator() {
     "each subscription has one start claim, one end claim, and one claim for each cancel request",
     claims.map((claim) => claim.event_id).join() ===
       [
-        "openbot_purchase:sub_license",
-        "openbot_purchase:sub_server",
-        `openbot_purchase_cancel:sub_license:${LICENSE_CANCEL}`,
-        `openbot_purchase_cancel:sub_server:${FIRST_CANCEL}`,
-        `openbot_purchase_cancel:sub_server:${SECOND_CANCEL}`,
-        "openbot_purchase_end:sub_license",
-        "openbot_purchase_end:sub_server",
+        "starbot_purchase:sub_license",
+        "starbot_purchase:sub_server",
+        `starbot_purchase_cancel:sub_license:${LICENSE_CANCEL}`,
+        `starbot_purchase_cancel:sub_server:${FIRST_CANCEL}`,
+        `starbot_purchase_cancel:sub_server:${SECOND_CANCEL}`,
+        "starbot_purchase_end:sub_license",
+        "starbot_purchase_end:sub_server",
       ].join(),
     claims,
   );

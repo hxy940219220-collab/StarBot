@@ -1,4 +1,4 @@
-import { parseLicenseUsersRequest } from "@openbot/contracts/license";
+import { parseLicenseUsersRequest } from "@starbot/contracts/license";
 import { createFileRoute } from "@tanstack/solid-router";
 import { Effect } from "effect";
 import { runApiResponse } from "../../../../server/effect-runtime";

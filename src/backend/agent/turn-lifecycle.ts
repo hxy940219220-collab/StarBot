@@ -1,6 +1,6 @@
-import { type AgentProviderId, agentProviderName, KEY_ONLY_PROVIDERS } from "@openbot/contracts/agent-providers";
-import { isNarrationItemId } from "@openbot/contracts/conversation-narration";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { type AgentProviderId, agentProviderName, KEY_ONLY_PROVIDERS } from "@starbot/contracts/agent-providers";
+import { isNarrationItemId } from "@starbot/contracts/conversation-narration";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentEvent,
   type AgentStepActivity,
@@ -25,12 +25,12 @@ import {
   PLAN_CONTINUATION_ITEM_TYPE,
   type QueueDelivery,
   SIGN_IN_FAILURE_ITEM_TYPE_PREFIX,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText } from "@openbot/logging";
-import { type CauseCode, classifyFailure, isCauseCode } from "@openbot/telemetry";
-import { userErrorMessage } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText } from "@starbot/logging";
+import { type CauseCode, classifyFailure, isCauseCode } from "@starbot/telemetry";
+import { userErrorMessage } from "@starbot/user-errors";
 import { Cause, Deferred, Effect, Exit, Schedule, Schema, Scope } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -117,7 +117,7 @@ import { shellReadPaths, shellWorkFolders, ThreadFileHistory } from "./thread-fi
 import {
   isNonActionableCodexWarning,
   isToolItem,
-  openBotTool,
+  starBotTool,
   refusedSessionFailure,
   type ToolUsageSignal,
   toolActivity,
@@ -134,7 +134,7 @@ import { type ToolOutcome, TurnTraces, traceMessage } from "./turn-traces";
 import { collectProviderUsage } from "./usage-collection";
 import { USAGE_LIMIT_METHOD, type UsageLimitGate } from "./usage-limit-gate";
 
-const logger = createOpenBotLogger("turn-lifecycle");
+const logger = createStarBotLogger("turn-lifecycle");
 const RETRY_NOTICE_ATTEMPTS = 3;
 const CAPACITY_CAUSE: CauseCode = "provider_unavailable";
 const MODEL_AT_CAPACITY = /\bmodel is at capacity\b/iu;
@@ -1250,7 +1250,7 @@ export class TurnLifecycle {
     if (
       threadId &&
       agentId &&
-      ["turn/started", "thread/tokenUsage/updated", "openbot/usage", "model/rerouted"].includes(notification.method)
+      ["turn/started", "thread/tokenUsage/updated", "starbot/usage", "model/rerouted"].includes(notification.method)
     ) {
       const usage = this.#usageSession(agentId, threadId, source);
       if (usage) {
@@ -1545,7 +1545,7 @@ export class TurnLifecycle {
           );
         return;
       }
-      case "openbot/turn-continues": {
+      case "starbot/turn-continues": {
         const turnId = getString(params, "turnId") ?? "";
         const running = this.#runningTurns.get(turnId);
         if (!running) return;
@@ -1555,7 +1555,7 @@ export class TurnLifecycle {
           this.#noteSelfStartedOrigins(turnId, [...(this.#selfStartedOrigins.get(turnId) ?? []), origin]);
         return;
       }
-      case "openbot/background-work": {
+      case "starbot/background-work": {
         if (!threadId || !agentId) return;
         const runs = isRecord(params) && params.running === true;
         if (runs)
@@ -1569,7 +1569,7 @@ export class TurnLifecycle {
         this.#hooks.emitRuntimeSnapshot();
         return;
       }
-      case "openbot/context-compaction": {
+      case "starbot/context-compaction": {
         if (!threadId || !agentId || this.#conversation.openClientFor(threadId) !== source) return;
         const status = getString(params, "status");
         if (status !== "running" && status !== "completed" && status !== "failed") return;
@@ -1577,7 +1577,7 @@ export class TurnLifecycle {
         this.#compaction.observeCompaction(threadId, status, "none");
         return;
       }
-      case "openbot/turn-progress": {
+      case "starbot/turn-progress": {
         const turnId = getString(params, "turnId");
         const detail = getString(params, "detail");
         if (!threadId || !agentId || !turnId || !detail || !this.#runningTurns.has(turnId)) return;
@@ -3656,22 +3656,22 @@ const NARRATION_KEEPING_TOOLS = new Set([
 function keepsNarration(item: DynamicRecord, completed: boolean): boolean {
   const threadItem = toThreadItem(item);
   if (threadItem === null) return false;
-  const tool = openBotTool(threadItem);
+  const tool = starBotTool(threadItem);
   if (tool !== null) return NARRATION_KEEPING_TOOLS.has(tool);
   if (threadItem.type !== "toolCall" || getString(threadItem, "name") !== "execute") return false;
   if (!completed) return true;
   const calls = getArray(getRecord(getRecord(threadItem, "result"), "metadata"), "toolCalls");
-  return calls.length > 0 && calls.every((call) => NARRATION_KEEPING_TOOLS.has(codeModeOpenBotTool(call) ?? ""));
+  return calls.length > 0 && calls.every((call) => NARRATION_KEEPING_TOOLS.has(codeModeStarBotTool(call) ?? ""));
 }
 
 const CHANNEL_RESULT_NAME = /(?:^|[._])channel_result$/u;
 const BRIDGE_TOOL = /(?:^|[._])(?:tool_call|use_tool)$/u;
-const CODE_CHANNEL_RESULT_CALL = /\bchannel_result\s*\(|["'`]openbot\.channel_result["'`]/u;
+const CODE_CHANNEL_RESULT_CALL = /\bchannel_result\s*\(|["'`]starbot\.channel_result["'`]/u;
 
 function channelNoteStep(item: DynamicRecord): "result" | "other" | null {
   const threadItem = toThreadItem(item);
   if (threadItem === null || !isToolItem(threadItem)) return null;
-  if (openBotTool(threadItem) === "channel_result") return "result";
+  if (starBotTool(threadItem) === "channel_result") return "result";
   if (threadItem.type !== "toolCall") return "other";
   const name = getString(threadItem, "name") ?? "";
   if (name === "execute") {
@@ -3686,15 +3686,15 @@ function channelNoteStep(item: DynamicRecord): "result" | "other" | null {
   return CHANNEL_RESULT_NAME.test(called) ? "result" : "other";
 }
 
-function codeModeOpenBotTool(call: unknown): string | null {
+function codeModeStarBotTool(call: unknown): string | null {
   const tool = getString(call, "tool");
-  const name = tool === "openbot.tool_call" ? getString(getRecord(call, "input"), "name") : tool;
-  return name?.startsWith("openbot.") ? name.slice("openbot.".length) : null;
+  const name = tool === "starbot.tool_call" ? getString(getRecord(call, "input"), "name") : tool;
+  return name?.startsWith("starbot.") ? name.slice("starbot.".length) : null;
 }
 
 function isUserReactionCall(item: DynamicRecord): boolean {
   const threadItem = toThreadItem(item);
-  return threadItem !== null && openBotTool(threadItem) === "react_to_user_message";
+  return threadItem !== null && starBotTool(threadItem) === "react_to_user_message";
 }
 
 function isEmptyAnswer(item: { type?: unknown; phase?: unknown; text?: unknown }): boolean {

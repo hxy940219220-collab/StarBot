@@ -1,10 +1,10 @@
-import { OPENBOT_COMMIT_TRAILER } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { STARBOT_COMMIT_TRAILER } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { DynamicToolCallParams } from "../protocol";
 import type { ToolApprovalDecision } from "./attention-registry";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "./routine-tools";
+import { type StarBotToolResponse, starBotToolFailure, starBotToolResult } from "./routine-tools";
 import { ToolOperationFailed, toToolOperationFailed } from "./tool-operation";
 
 export const setCommitCoAuthorToolSchema = z.strictObject({
@@ -26,33 +26,33 @@ export const handleSetCommitCoAuthorTool = Effect.fn("SetCommitCoAuthorTool.hand
   function* (
     params: DynamicToolCallParams,
     options: SetCommitCoAuthorToolOptions,
-  ): Effect.fn.Return<OpenBotToolResponse, ToolOperationFailed> {
+  ): Effect.fn.Return<StarBotToolResponse, ToolOperationFailed> {
     const { enabled } = setCommitCoAuthorToolSchema.parse(params.arguments, { reportInput: true });
-    if (options.current() === enabled) return openBotToolResult({ status: "unchanged", enabled });
+    if (options.current() === enabled) return starBotToolResult({ status: "unchanged", enabled });
     if (!options.requestedByPerson)
-      return openBotToolFailure(
+      return starBotToolFailure(
         `Only a message from the owner of this StarBot, in your chat or a thread they opened, can change this setting. When a person asked for it, tell them that the owner can change it in ${SETTING_PLACE}.`,
       );
     const decision = yield* options.approve(
       sourceText(enabled ? "status.agent.commitCoAuthorOn" : "status.agent.commitCoAuthorOff"),
     );
     if (decision === "cancel")
-      return openBotToolResult({
+      return starBotToolResult({
         status: "cancelled",
         next: "Nobody answered the card, so the setting did not change.",
       });
     if (decision !== "accept")
-      return openBotToolResult({
+      return starBotToolResult({
         status: "declined",
         next: "The user selected Deny, so the setting did not change. Do not ask again for this request.",
       });
     yield* options.set(enabled).pipe(toToolOperationFailed);
-    return openBotToolResult({
+    return starBotToolResult({
       status: "changed",
       enabled,
       next: enabled
         ? `Agents add the trailer to the commits that they make from their next turn. The user can change it in ${SETTING_PLACE}.`
-        : `Agents no longer add the trailer. Do not add it in this turn either: "${OPENBOT_COMMIT_TRAILER}". The commits made before keep it; change them only when the user asks. The user can change it in ${SETTING_PLACE}.`,
+        : `Agents no longer add the trailer. Do not add it in this turn either: "${STARBOT_COMMIT_TRAILER}". The commits made before keep it; change them only when the user asks. The user can change it in ${SETTING_PLACE}.`,
     });
   },
   Effect.catchDefect((cause) => Effect.fail(new ToolOperationFailed({ cause }))),

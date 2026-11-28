@@ -8,10 +8,10 @@ import type {
   CrmProposal,
   CrmProposedChange,
   CrmSourceKind,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { CalendarClock, CircleCheck, Pencil, Repeat, Split, Tag, UserRoundPlus, type UsersRound } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { CalendarClock, CircleCheck, Pencil, Repeat, Split, Tag, UserRoundPlus, type UsersRound } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import {
   daysBetween,
   daysLate,

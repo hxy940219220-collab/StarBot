@@ -1,4 +1,4 @@
-import type { WorkflowSummary } from "@openbot/contracts/ipc";
+import type { WorkflowSummary } from "@starbot/contracts/ipc";
 import { Typography } from "heroui-native";
 import ChevronRight from "lucide-react-native/icons/chevron-right";
 import Pin from "lucide-react-native/icons/pin";
@@ -45,10 +45,10 @@ export function WorkflowRow({
   const { t, format } = useText();
   const { theme } = useUniwind();
   const [muted, control, iconColor, iconBackground] = useCSSVariable([
-    "--openbot-text-grouped-secondary",
-    "--openbot-bg-control",
-    "--openbot-file-default",
-    "--openbot-file-default-soft",
+    "--starbot-text-grouped-secondary",
+    "--starbot-bg-control",
+    "--starbot-file-default",
+    "--starbot-file-default-soft",
   ]);
   const menu = useRef<MenuComponentRef | null>(null);
   const [width, setWidth] = useState<number>();

@@ -3,7 +3,7 @@ import {
   type OnePasswordConnectorDesktopApi,
   type OnePasswordConnectorStatus,
   type OnePasswordSetup,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 const MOCK_INSTALL_MS = 1_500;
 const MOCK_CONNECT_MS = 1_500;

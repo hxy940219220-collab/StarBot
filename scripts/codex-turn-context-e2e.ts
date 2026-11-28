@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { createServer, type Server as HttpServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { type AgentMemory, type AgentSummary, DEFAULT_AGENT_DEFAULTS } from "@openbot/contracts/ipc";
+import { type AgentMemory, type AgentSummary, DEFAULT_AGENT_DEFAULTS } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import {
   developerInstructions,
@@ -17,14 +17,14 @@ import { resolveCodexCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { decodeRecordResponse, getRecord, getString } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-turn-context-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-turn-context-e2e");
 const NL = String.fromCharCode(10);
 const DEADLINE_MS = 60_000;
-const MEMORY_FULL = "<openbot_saved_memories>";
-const MEMORY_UPDATE = "<openbot_saved_memories_update>";
-const TEAMMATES = "<openbot_section_teammates>";
-const SAVED_LOGINS = "<openbot_saved_logins>";
-const LOGIN_RULE = "before request_takeover for a signed-out site, call openbot_browser.list_logins";
+const MEMORY_FULL = "<starbot_saved_memories>";
+const MEMORY_UPDATE = "<starbot_saved_memories_update>";
+const TEAMMATES = "<starbot_section_teammates>";
+const SAVED_LOGINS = "<starbot_saved_logins>";
+const LOGIN_RULE = "before request_takeover for a signed-out site, call starbot_browser.list_logins";
 const CHANGED_MARKER = "MARKER-CHANGED-MEMORY";
 
 interface ResponsesRequest {
@@ -245,7 +245,7 @@ class Session {
     await runCauseEffect(
       this.client.request(
         "initialize",
-        { clientInfo: { name: "openbot_e2e", title: "StarBot E2E", version: "0.0.0" }, capabilities: {} },
+        { clientInfo: { name: "starbot_e2e", title: "StarBot E2E", version: "0.0.0" }, capabilities: {} },
         decodeRecordResponse,
       ),
     );
@@ -364,7 +364,7 @@ await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 const cli = await runCauseEffect(resolveCodexCli());
 const model = await startFakeModel();
-const root = await mkdtemp(join(tmpdir(), "openbot-codex-turn-context-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-codex-turn-context-e2e-"));
 const report: {
   passed: boolean;
   codexVersion: string;

@@ -1,13 +1,13 @@
-import { canPreviewAttachment } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { classifyFailure } from "@openbot/telemetry";
-import { Input } from "@openbot/ui";
-import type { AgentMessage } from "@openbot/ui/data";
-import { ChatSearch } from "@openbot/ui/features/conversation/ChatSearch";
-import { contextUsageView } from "@openbot/ui/features/conversation/ContextUsage";
-import { AgentThreadView } from "@openbot/ui/features/conversation/threads/AgentThreadView";
-import type { AgentThreadBranchSource } from "@openbot/ui/features/conversation/threads/BranchDivider";
-import { useText } from "@openbot/ui/text";
+import { canPreviewAttachment } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { classifyFailure } from "@starbot/telemetry";
+import { Input } from "@starbot/ui";
+import type { AgentMessage } from "@starbot/ui/data";
+import { ChatSearch } from "@starbot/ui/features/conversation/ChatSearch";
+import { contextUsageView } from "@starbot/ui/features/conversation/ContextUsage";
+import { AgentThreadView } from "@starbot/ui/features/conversation/threads/AgentThreadView";
+import type { AgentThreadBranchSource } from "@starbot/ui/features/conversation/threads/BranchDivider";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createProjection, createSignal, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { useShowAgentSteps } from "../../agent-steps-preference";
@@ -230,7 +230,7 @@ export function ConversationThread() {
       {(current) => (
         <>
           <Show when={current().threads.acceptsFiles}>
-            <Input ref={setPicker} type="file" multiple hidden tabindex={-1} data-openbot-attachment-picker="true" />
+            <Input ref={setPicker} type="file" multiple hidden tabindex={-1} data-starbot-attachment-picker="true" />
           </Show>
           <Show when={threadSearchOpen()}>
             <ChatSearch

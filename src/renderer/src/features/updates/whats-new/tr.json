@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "GitHub'dan bir iş akışı başlatın: GitHub tetikleyicisi yeni sorunlarda, yorumlarda, çekme isteklerinde, incelemelerde, başarısız kontrollerde veya @openbotgit bahsetmesinde çalışır.",
+          "GitHub'dan bir iş akışı başlatın: GitHub tetikleyicisi yeni sorunlarda, yorumlarda, çekme isteklerinde, incelemelerde, başarısız kontrollerde veya @starbotgit bahsetmesinde çalışır.",
           "Bir iş akışından GitHub'ı değiştirin: StarBot GitHub App olarak yorum yapın, etiket ekleyin, atayın, inceleyin, bir sorunu kapatın veya oluşturun.",
           "Pazaryeri'nde QA Tester, PR Shepherd ve Chief of Staff gibi 17 yeni StarBot ajanı ve bunlar için 15 yeni beceri var.",
           "Kullanım, OpenCode Go aylık limitini üçüncü bir çubuk olarak gösterir."

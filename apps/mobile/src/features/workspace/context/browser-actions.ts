@@ -1,4 +1,4 @@
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   TEAM_BROWSER_VIEW_CLIPBOARD_CAPABILITY,
   TEAM_BROWSER_VIEW_CONTEXT_MENU_CAPABILITY,
@@ -6,8 +6,8 @@ import {
   TEAM_BROWSER_VIEW_FRAME_POINT_CAPABILITY,
   TEAM_BROWSER_VIEW_PAGE_COPY_CAPABILITY,
   TEAM_BROWSER_VIEW_VIEWPORT_CAPABILITY,
-} from "@openbot/contracts/team-protocol/browser-view-v1";
-import { TEAM_BROWSER_NAVIGATION_CAPABILITY } from "@openbot/contracts/team-protocol/current";
+} from "@starbot/contracts/team-protocol/browser-view-v1";
+import { TEAM_BROWSER_NAVIGATION_CAPABILITY } from "@starbot/contracts/team-protocol/current";
 import {
   decodeMobileBrowserTab,
   decodeMobileBrowserTabs,

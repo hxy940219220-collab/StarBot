@@ -1,4 +1,4 @@
-import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
+import type { AvatarColor, AvatarHue } from "@starbot/contracts/ipc";
 import { Stack } from "expo-router";
 import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
@@ -31,7 +31,7 @@ export const AgentChoiceRow = memo(function AgentChoiceRow({
   selected: boolean;
   onToggle: (id: string) => void;
 }) {
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   return (
     <SettingsRow
       checked={selected}

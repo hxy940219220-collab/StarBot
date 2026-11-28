@@ -236,7 +236,7 @@ export const messages = {
     "Les réponses dans les fils vous préviennent quand un agent termine ou s’arrête sur une erreur dans un fil. Sans elles, un fil vous prévient toujours quand il attend votre réponse ou une approbation.",
   "mobile.settings.notifications.sound": "Son",
   "mobile.settings.notifications.playSound": "Jouer un son",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Chaleureux",
   "mobile.settings.notifications.sound.mech": "Mécanique",
@@ -378,7 +378,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Mes six derniers mois avec StarBot",
 
   "mobile.settings.profile.share.createFailed": "Impossible de créer l’image.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Voix",
   "mobile.settings.voice.sample": "Bonjour. Voici comment je lirai mes réponses.",
   "mobile.settings.voice.voice": "Voix",

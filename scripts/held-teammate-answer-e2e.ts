@@ -5,9 +5,9 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/held-teammate-answer-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/held-teammate-answer-e2e");
 const FAST_TEAMMATE = "teammate-fast";
 const STUCK_TEAMMATE = "teammate-stuck";
 
@@ -128,9 +128,9 @@ async function checkReleasedAfterTurnThatEndedBeforeAnswer(mailbox: MailboxStore
   report.checks.push("Later turn ended before the answer: the answer starts at once");
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-held-teammate-answer-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-held-teammate-answer-"));
 const path = join(root, "profile");
-const database = new OpenBotDatabase(path);
+const database = new StarBotDatabase(path);
 try {
   const mailbox = new MailboxStore(path, join(root, "shared"), database);
   await runCauseEffect(mailbox.initialize());

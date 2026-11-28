@@ -1,5 +1,5 @@
-import type { ConversationQuestionPrompt } from "@openbot/contracts/ipc";
-import { type ConversationUiBlock, UI_CHOICE_QUESTION_ID } from "@openbot/contracts/ui-blocks";
+import type { ConversationQuestionPrompt } from "@starbot/contracts/ipc";
+import { type ConversationUiBlock, UI_CHOICE_QUESTION_ID } from "@starbot/contracts/ui-blocks";
 import { Button, Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import Check from "lucide-react-native/icons/check";

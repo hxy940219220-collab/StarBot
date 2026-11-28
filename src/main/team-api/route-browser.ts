@@ -1,31 +1,31 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { type BrowserControlState, canAdministerServer, type TeamRole } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { type BrowserControlState, canAdministerServer, type TeamRole } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isBoolean } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
 import {
   BROWSER_PAGE_STATE_CAPABILITY,
   BROWSER_PAGE_STATE_ROUTES,
-} from "@openbot/contracts/team-protocol/browser-page-state-v1";
+} from "@starbot/contracts/team-protocol/browser-page-state-v1";
 import {
   BROWSER_SIGN_IN_STORAGE_CAPABILITY,
   BROWSER_SIGN_IN_STORAGE_ROUTES,
   decodeBrowserSignInStorageImport,
-} from "@openbot/contracts/team-protocol/browser-sign-in-storage-v1";
+} from "@starbot/contracts/team-protocol/browser-sign-in-storage-v1";
 import {
   BROWSER_SIGN_IN_CAPABILITY,
   BROWSER_SIGN_IN_ROUTES,
   decodeBrowserSignInImport,
-} from "@openbot/contracts/team-protocol/browser-sign-in-v1";
+} from "@starbot/contracts/team-protocol/browser-sign-in-v1";
 import {
   BROWSER_TEACH_CAPABILITY,
   BROWSER_TEACH_MAX_STEPS,
   BROWSER_TEACH_ROUTES,
-} from "@openbot/contracts/team-protocol/browser-teach-v1";
+} from "@starbot/contracts/team-protocol/browser-teach-v1";
 import {
   BROWSER_USER_CONTROL_CAPABILITY,
   BROWSER_USER_CONTROL_ROUTES,
-} from "@openbot/contracts/team-protocol/browser-user-control-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/browser-user-control-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiBrowser, TeamApiBrowserView } from "./dependencies";
 import { HttpError } from "./http-error";

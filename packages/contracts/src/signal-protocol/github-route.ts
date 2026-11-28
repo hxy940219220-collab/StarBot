@@ -1,4 +1,4 @@
-export const GITHUB_ROUTE_AUDIENCE = "openbot-github-route";
+export const GITHUB_ROUTE_AUDIENCE = "starbot-github-route";
 
 export const GITHUB_EVENTS_PATH = "/v1/github/events";
 

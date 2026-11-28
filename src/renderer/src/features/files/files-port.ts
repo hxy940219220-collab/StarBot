@@ -1,11 +1,11 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface FilesPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "listAgents">;
-  storage: Pick<OpenBotDesktopApi["storage"], "clear" | "deleteFile" | "getUsage" | "openFile"> &
+  agent: Pick<StarBotDesktopApi["agent"], "listAgents">;
+  storage: Pick<StarBotDesktopApi["storage"], "clear" | "deleteFile" | "getUsage" | "openFile"> &
     Partial<
       Pick<
-        OpenBotDesktopApi["storage"],
+        StarBotDesktopApi["storage"],
         | "getRemovableRuntimes"
         | "removeRemovableRuntimes"
         | "getMachineMetrics"
@@ -14,13 +14,13 @@ export interface FilesPort {
         | "changeLibraryFolders"
       >
     >;
-  hostAdmin?: Pick<OpenBotDesktopApi["hostAdmin"], "getMachineAlerts" | "setMachineAlerts">;
-  backgroundProcesses?: Pick<OpenBotDesktopApi["backgroundProcesses"], "list" | "stop">;
+  hostAdmin?: Pick<StarBotDesktopApi["hostAdmin"], "getMachineAlerts" | "setMachineAlerts">;
+  backgroundProcesses?: Pick<StarBotDesktopApi["backgroundProcesses"], "list" | "stop">;
   onLibraryFoldersChanged?: (serverId: string, listener: () => void) => () => void;
 }
 
 export function filesPort(): FilesPort {
-  const api = window.openbot;
+  const api = window.starbot;
   return {
     agent: api.agent,
     storage: api.storage,

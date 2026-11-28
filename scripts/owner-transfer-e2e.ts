@@ -3,12 +3,12 @@ import { createHash, randomBytes } from "node:crypto";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_TEAM_MEMBER_LIMIT } from "@openbot/contracts/input-limits";
+import { DEFAULT_TEAM_MEMBER_LIMIT } from "@starbot/contracts/input-limits";
 import { z } from "zod";
 import { developmentChildEnvironment } from "./development-environment";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const REPORT = join(ROOT, ".openbot-build", "owner-transfer-e2e.json");
+const REPORT = join(ROOT, ".starbot-build", "owner-transfer-e2e.json");
 const DAY = 86_400_000;
 const PREFIX = "e2e-owner-transfer";
 const ACCOUNT_NAMES = ["owner", "admin", "recipient", "stranger"] as const;
@@ -31,7 +31,7 @@ const sessionSchema = z.object({ sessionToken: z.string(), user: z.object({ id: 
 function d1<T>(sql: string, schema: z.ZodType<T>): T[] {
   const result = spawnSync(
     join(ROOT, "node_modules/.bin/wrangler"),
-    ["d1", "execute", "openbot-auth", "--local", "--json", "--command", sql],
+    ["d1", "execute", "starbot-auth", "--local", "--json", "--command", sql],
     { cwd: join(ROOT, "apps/auth-api"), encoding: "utf8", env: developmentChildEnvironment(process.env, "app") },
   );
   if (result.status !== 0) {

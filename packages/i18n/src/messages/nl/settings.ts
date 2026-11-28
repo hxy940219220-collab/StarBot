@@ -124,7 +124,7 @@ export const messages = {
   "settings.externalLinks.title": "Open externe links in",
   "settings.externalLinks.description": "Links in chats, inlogpagina’s en betaalpagina’s openen hier.",
   "settings.externalLinks.defaultBrowser": "Standaardbrowser",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
 
   "settings.externalLinks.defaultBrowserNamed": "Standaard ({name})",
   "settings.externalLinks.otherApp": "Andere app…",
@@ -469,10 +469,10 @@ export const messages = {
   "settings.mobileConnect.route.description":
     "Voor telefoons, andere computers en teamleden die met deze computer verbinden.",
   "settings.mobileConnect.route.chipLabel": "Hoe apparaten verbinden: {route}",
-  "settings.mobileConnect.route.openbot.title": "Via StarBot",
+  "settings.mobileConnect.route.starbot.title": "Via StarBot",
 
-  "settings.mobileConnect.route.openbot.badge": "Aanbevolen",
-  "settings.mobileConnect.route.openbot.description":
+  "settings.mobileConnect.route.starbot.badge": "Aanbevolen",
+  "settings.mobileConnect.route.starbot.description":
     "Werkt op elk netwerk. Chats en bestanden zijn versleuteld tussen je apparaten.",
   "settings.mobileConnect.route.private.title": "Privénetwerk",
   "settings.mobileConnect.route.private.tailscale": "Tailscale gevonden",
@@ -521,7 +521,7 @@ export const messages = {
   "settings.profile.share.copied": "Afbeelding gekopieerd",
   "settings.profile.share.copyFailed": "Kan de afbeelding niet kopiëren.",
   "settings.profile.share.createFailed": "Kan de afbeelding niet maken.",
-  "settings.profile.share.fileName": "openbot-activiteit.png",
+  "settings.profile.share.fileName": "starbot-activiteit.png",
   "settings.profile.share.caption": "Mijn laatste zes maanden met StarBot",
 
   "settings.profile.activity.title": "Activiteit op deze computer",

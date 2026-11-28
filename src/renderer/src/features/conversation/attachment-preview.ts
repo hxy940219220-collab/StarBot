@@ -1,15 +1,15 @@
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import { type AttachmentSummary, type FilePreview, filePreviewKindForFile } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { currentText } from "@openbot/ui/text";
+import { attachmentMimeTypeForName } from "@starbot/contracts/attachment-files";
+import { type AttachmentSummary, type FilePreview, filePreviewKindForFile } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { currentText } from "@starbot/ui/text";
 
 const URL_PREVIEW_KINDS = new Set<FilePreview["previewKind"]>(["image", "pdf", "audio", "video"]);
 
 const attachmentUnavailable = () => sourceText("error.attachment.unavailable");
 
-const LOCAL_ATTACHMENT_URL = /^openbot-attachment:/u;
+const LOCAL_ATTACHMENT_URL = /^starbot-attachment:/u;
 
-const REMOTE_ATTACHMENT_PROTOCOL = "openbot-remote-attachment:";
+const REMOTE_ATTACHMENT_PROTOCOL = "starbot-remote-attachment:";
 
 export function remoteAttachmentUrlWith(url: string, flag: "preview" | "open"): string {
   try {

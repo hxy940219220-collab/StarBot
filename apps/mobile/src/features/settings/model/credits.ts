@@ -1,4 +1,4 @@
-import type { CreditTransferRequest } from "@openbot/contracts/credits";
+import type { CreditTransferRequest } from "@starbot/contracts/credits";
 import { skipToken, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { MobileSessionExpiredError } from "@/features/auth/api/mobile-auth";
 import { useMobileSession, useQueryScope } from "@/features/auth/context/mobile-session-context";

@@ -13,7 +13,7 @@ self-hosted account service with its own keys. See
 
 - Accounts on your service are separate from accounts on `starbot.app`. Each person signs in again.
 - Each desktop and phone that connects to a host must use the same service.
-- Invitations are `openbot://join` links. Copy a link from the app and send it yourself. The app
+- Invitations are `starbot://join` links. Copy a link from the app and send it yourself. The app
   does not send an invitation by email.
 - The browser client at `starbot.app/app` does not work with your service.
 - Hosted servers, the StarBot GitHub App, Slack, the StarBot Telegram bot and the iPhone Live
@@ -57,10 +57,10 @@ Keep the private JWK secret. With it, a person can open each host that uses your
    bun install --frozen-lockfile
    cd apps/auth-api
    bunx wrangler login
-   bunx wrangler d1 create openbot-auth
-   bunx wrangler r2 bucket create openbot-avatars
-   bunx wrangler r2 bucket create openbot-skills
-   bunx wrangler r2 bucket create openbot-sites
+   bunx wrangler d1 create starbot-auth
+   bunx wrangler r2 bucket create starbot-avatars
+   bunx wrangler r2 bucket create starbot-skills
+   bunx wrangler r2 bucket create starbot-sites
    ```
 
 2. Edit the top level of `apps/auth-api/wrangler.jsonc`. Do not change the `env` section.
@@ -128,30 +128,30 @@ Do these steps on each computer that hosts or connects.
 
 1. If you signed in to `starbot.app` before, sign out in the app. Otherwise the app sends the old
    session token to your service.
-2. Quit the app. Then start it with the two variables. `OPENBOT_REMOTE_SIGNAL_URL` must be equal to
+2. Quit the app. Then start it with the two variables. `STARBOT_REMOTE_SIGNAL_URL` must be equal to
    the `REMOTE_SIGNAL_URL` of your Worker.
 
    macOS:
 
    ```sh
-   OPENBOT_AUTH_API_URL=https://api.example.com \
-   OPENBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
+   STARBOT_AUTH_API_URL=https://api.example.com \
+   STARBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
    /Applications/StarBot.app/Contents/MacOS/StarBot
    ```
 
    Linux:
 
    ```sh
-   OPENBOT_AUTH_API_URL=https://api.example.com \
-   OPENBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
+   STARBOT_AUTH_API_URL=https://api.example.com \
+   STARBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
    ./StarBot-<version>-x86_64.AppImage
    ```
 
    Windows (PowerShell):
 
    ```powershell
-   $env:OPENBOT_AUTH_API_URL = "https://api.example.com"
-   $env:OPENBOT_REMOTE_SIGNAL_URL = "wss://signal.example.com/v1/signal"
+   $env:STARBOT_AUTH_API_URL = "https://api.example.com"
+   $env:STARBOT_REMOTE_SIGNAL_URL = "wss://signal.example.com/v1/signal"
    & "$env:LOCALAPPDATA\Programs\StarBot\StarBot.exe"
    ```
 
@@ -165,8 +165,8 @@ Do these steps on each computer that hosts or connects.
 Set the variables each time that you start the app. Without them, the app uses `starbot.app` and
 sends your session token there. To go back to `starbot.app`, sign out first.
 
-The app does not start, and shows an error, if `OPENBOT_REMOTE_SIGNAL_URL` is not a `wss:` URL, has
-a user name or password, or is set without `OPENBOT_AUTH_API_URL`.
+The app does not start, and shows an error, if `STARBOT_REMOTE_SIGNAL_URL` is not a `wss:` URL, has
+a user name or password, or is set without `STARBOT_AUTH_API_URL`.
 
 ## Updates
 

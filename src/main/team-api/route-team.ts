@@ -1,9 +1,9 @@
 import { readFile } from "node:fs/promises";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { TeamPresenceSnapshot } from "@openbot/contracts/ipc";
-import { isBoolean } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { TeamPresenceSnapshot } from "@starbot/contracts/ipc";
+import { isBoolean } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { memberAuditName } from "../server-audit-store";
 import type { TeamStore } from "../team-store";

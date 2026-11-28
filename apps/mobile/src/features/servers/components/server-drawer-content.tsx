@@ -1,4 +1,4 @@
-import type { MobileTranslate } from "@openbot/i18n/mobile";
+import type { MobileTranslate } from "@starbot/i18n/mobile";
 import type { Href } from "expo-router";
 import { Typography } from "heroui-native";
 import type { LucideIcon } from "lucide-react-native";
@@ -173,7 +173,7 @@ export const ServerDrawerContent = memo(function ServerDrawerContent({
   const displayName = mobileUserName(session.user);
   const avatarUrl = session.user.avatarUrl ? new URL(session.user.avatarUrl, session.apiUrl).toString() : null;
   const mutedColor = String(muted);
-  const controlColor = useCSSVariable("--openbot-bg-control");
+  const controlColor = useCSSVariable("--starbot-bg-control");
   const [editing, setEditing] = useState(false);
   const [editingTools, setEditingTools] = useState(false);
   const [dragging, setDragging] = useState(false);
@@ -842,7 +842,7 @@ function DrawerEditRow({
   onPinnedChange: (pinned: boolean) => void;
 }) {
   const { t } = useText();
-  const [secondary, foreground] = useCSSVariable(["--openbot-text-secondary", "--openbot-text-primary"]);
+  const [secondary, foreground] = useCSSVariable(["--starbot-text-secondary", "--starbot-text-primary"]);
   return (
     <View className="flex-row items-center gap-3 pl-3" style={{ height: DRAWER_ROW_HEIGHT }}>
       <View
@@ -979,7 +979,7 @@ const DrawerRow = memo(function DrawerRow({
   onAccessibilityAction?: (name: string) => void;
   onLongPress?: () => void;
 }) {
-  const [secondary, control] = useCSSVariable(["--openbot-text-secondary", "--openbot-bg-control"]);
+  const [secondary, control] = useCSSVariable(["--starbot-text-secondary", "--starbot-bg-control"]);
   return (
     <Pressable
       accessibilityRole="button"

@@ -1,5 +1,5 @@
-import type { AppFormat, AppTranslate } from "@openbot/i18n";
-import { currentText } from "@openbot/ui/text";
+import type { AppFormat, AppTranslate } from "@starbot/i18n";
+import { currentText } from "@starbot/ui/text";
 
 export interface DayMarkerOptions {
   now?: Date;

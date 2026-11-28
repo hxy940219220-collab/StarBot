@@ -1,5 +1,5 @@
-import { ProviderLogo } from "@openbot/brand";
-import { isAgentProvider } from "@openbot/contracts/ipc";
+import { ProviderLogo } from "@starbot/brand";
+import { isAgentProvider } from "@starbot/contracts/ipc";
 import { Show } from "solid-js";
 
 export function UsageProviderMark(props: { provider: string }) {

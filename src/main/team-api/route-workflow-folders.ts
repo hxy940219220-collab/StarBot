@@ -5,13 +5,13 @@ import {
   type WorkflowFoldersSnapshot,
   type WorkflowGraph,
   workflowFolderActionWorkflowIds,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   WORKFLOW_FOLDERS_CAPABILITY,
   WORKFLOW_FOLDERS_ROUTES,
-} from "@openbot/contracts/team-protocol/workflow-folders-v1";
-import { WORKFLOWS_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/workflow-folders-v1";
+import { WORKFLOWS_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { WorkflowFolderChangeRefused } from "../../backend/workflow-folders-store";
 import type { TeamApiAgents, TeamApiWorkflowFolders, TeamApiWorkflows } from "./dependencies";
 import { HttpError } from "./http-error";

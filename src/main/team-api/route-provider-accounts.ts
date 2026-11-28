@@ -1,36 +1,36 @@
-import { isString } from "@openbot/contracts/runtime-values";
-import { CLAUDE_API_KEY_ACCOUNT_ID } from "@openbot/contracts/team-protocol/claude-api-key-v1";
+import { isString } from "@starbot/contracts/runtime-values";
+import { CLAUDE_API_KEY_ACCOUNT_ID } from "@starbot/contracts/team-protocol/claude-api-key-v1";
 import {
   decodeLiveVoiceAccount,
   LIVE_VOICE_ACCOUNT_CAPABILITY,
   LIVE_VOICE_ACCOUNT_ROUTES,
-} from "@openbot/contracts/team-protocol/live-voice-account-v1";
+} from "@starbot/contracts/team-protocol/live-voice-account-v1";
 import {
   PROVIDER_ACCOUNT_CODE_CAPABILITY,
   PROVIDER_ACCOUNT_CODE_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-code-v1";
+} from "@starbot/contracts/team-protocol/provider-account-code-v1";
 import {
   PROVIDER_ACCOUNT_KEYS_CAPABILITY,
   PROVIDER_ACCOUNT_KEYS_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-keys-v1";
+} from "@starbot/contracts/team-protocol/provider-account-keys-v1";
 import {
   PROVIDER_ACCOUNT_MODELS_CAPABILITY,
   PROVIDER_ACCOUNT_MODELS_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-models-v1";
+} from "@starbot/contracts/team-protocol/provider-account-models-v1";
 import {
   PROVIDER_ACCOUNT_POOL_CAPABILITY,
   PROVIDER_ACCOUNT_POOL_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-account-pool-v1";
+} from "@starbot/contracts/team-protocol/provider-account-pool-v1";
 import {
   PROVIDER_ACCOUNTS_CAPABILITY,
   PROVIDER_ACCOUNTS_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-accounts-v1";
+} from "@starbot/contracts/team-protocol/provider-accounts-v1";
 import {
   PROVIDER_FROZEN_ACCOUNTS_LIMIT,
   PROVIDER_MANY_ACCOUNTS_CAPABILITY,
-} from "@openbot/contracts/team-protocol/provider-many-accounts-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText, registerSecretValue } from "@openbot/logging";
+} from "@starbot/contracts/team-protocol/provider-many-accounts-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText, registerSecretValue } from "@starbot/logging";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { parseProviderId } from "../ipc/app-inputs";
 import type { TeamApiProviderAccounts } from "./dependencies";

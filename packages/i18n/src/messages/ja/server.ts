@@ -153,7 +153,7 @@ export const messages = {
   "server.install.offline": "{name} はオフラインです。",
   "server.install.expired": "このコマンドは期限切れです。新しいコマンドを作成してください。",
   "server.install.agentPrompt":
-    'この Linux サーバーに OpenBot をインストールし、私の OpenBot アカウントにサインインさせてください。\nこのコマンドを root で実行してください。質問はなく、数分かかります:\n\n{command}\n\n最後に "StarBot is connected to your account." という行が出力され、終了コード 0 で終わります。\nこのコマンドは 15 分間、1 回だけ使えます。どこにも保存しないでください。',
+    'この Linux サーバーに StarBot をインストールし、私の StarBot アカウントにサインインさせてください。\nこのコマンドを root で実行してください。質問はなく、数分かかります:\n\n{command}\n\n最後に "StarBot is connected to your account." という行が出力され、終了コード 0 で終わります。\nこのコマンドは 15 分間、1 回だけ使えます。どこにも保存しないでください。',
   "server.install.setUpWithAgent": "エージェントで設定",
   "server.install.sshAgentPrompt":
     "SSH で私の Linux サーバーに接続し、StarBot をサーバーとしてインストールしてください。\n\nSSH アドレス (user@host):",
@@ -658,7 +658,7 @@ export const messages = {
   "server.update.path.hosted":
     "ホスティングサービスはバックグラウンドでアップデートをダウンロードします。ダウンロードしたアップデートは、次にサーバーが起動したときに適用されます。サーバーを停止して再開する前に、実行中の作業が終わるのを待ってください。古いバージョンのままの場合は、ホストの管理者に連絡してください。",
   "server.update.path.system":
-    "ホストで sudo openbot update を実行して、最新のリリースをインストールしてください。このコマンドは StarBot を停止します。先に実行中の作業が終わるのを待ってください。自動ダウンロードされたアップデートは次回の起動時にインストールされます。",
+    "ホストで sudo starbot update を実行して、最新のリリースをインストールしてください。このコマンドは StarBot を停止します。先に実行中の作業が終わるのを待ってください。自動ダウンロードされたアップデートは次回の起動時にインストールされます。",
 
   "server.update.path.container":
     "Docker ホストで新しい StarBot イメージを pull し、同じデータボリュームでコンテナーを再作成してください。先に実行中の作業が終わるのを待ってください。データを保持するため、既存のボリュームはそのまま残してください。",

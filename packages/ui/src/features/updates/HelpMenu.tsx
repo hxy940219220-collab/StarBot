@@ -1,4 +1,4 @@
-import { BookOpen, DropdownMenu, Megaphone, MotionTooltip, Sparkles } from "@openbot/ui";
+import { BookOpen, DropdownMenu, Megaphone, MotionTooltip, Sparkles } from "@starbot/ui";
 import { createSignal } from "solid-js";
 import { useText } from "../../text";
 import { StarbotHelpIcon } from "../window/StarbotNavIcons";

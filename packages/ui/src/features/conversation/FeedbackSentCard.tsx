@@ -1,6 +1,6 @@
-import type { WithdrawFeedbackStatus } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Badge, Button, buttonVariants, Check, ExternalLink, Pencil, Trash2 } from "@openbot/ui";
+import type { WithdrawFeedbackStatus } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { Badge, Button, buttonVariants, Check, ExternalLink, Pencil, Trash2 } from "@starbot/ui";
 import { createSignal, createUniqueId, Show } from "solid-js";
 import { useText } from "../../text";
 

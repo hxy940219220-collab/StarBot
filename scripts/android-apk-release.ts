@@ -9,7 +9,7 @@ import { androidApkRelease, androidApkVersion } from "../apps/auth-api/src/lib/a
 import { parseStoreBuilds } from "./mobile-ota-lib";
 
 const run = promisify(execFile);
-const PACKAGE = "run.openbot.mobile";
+const PACKAGE = "run.starbot.mobile";
 const INSTALL_PAGE = "https://starbot.app/download/android";
 
 class UsageError extends Error {}
@@ -169,7 +169,7 @@ async function commandStage(args: readonly string[]) {
     `- Commit: ${commit}\n- SHA-256 of the file: \`${sha256}\`\n- SHA-256 of the signing certificate: \`${certificate}\``,
   ].join("\n\n");
 
-  const directory = await mkdtemp(join(tmpdir(), "openbot-apk-"));
+  const directory = await mkdtemp(join(tmpdir(), "starbot-apk-"));
   try {
     const asset = join(directory, release.asset);
     await copyFile(apk, asset);

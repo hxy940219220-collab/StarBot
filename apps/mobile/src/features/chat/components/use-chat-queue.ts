@@ -1,13 +1,13 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentTask,
   type ConversationMessage,
   isQueuedAgentReply,
   type QueueDelivery,
   routineRunsTurn,
-} from "@openbot/contracts/ipc";
-import { isQueueEditRejected } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { type MobileTextKey, sourceText } from "@openbot/i18n/mobile";
+} from "@starbot/contracts/ipc";
+import { isQueueEditRejected } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { type MobileTextKey, sourceText } from "@starbot/i18n/mobile";
 import { replaceEqualDeep, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as Crypto from "expo-crypto";
 import * as SecureStore from "expo-secure-store";

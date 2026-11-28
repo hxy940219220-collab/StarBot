@@ -1,9 +1,9 @@
-import type { AgentProviderRef } from "@openbot/contracts/agent-providers";
-import { chatVisualReply } from "@openbot/contracts/chat-visual";
-import { isNarrationItemId, showsNarration } from "@openbot/contracts/conversation-narration";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { itemTypeCountsAsUnread } from "@openbot/contracts/conversation-read";
-import { coordinatorText } from "@openbot/contracts/coordinator-text";
+import type { AgentProviderRef } from "@starbot/contracts/agent-providers";
+import { chatVisualReply } from "@starbot/contracts/chat-visual";
+import { isNarrationItemId, showsNarration } from "@starbot/contracts/conversation-narration";
+import { sortConversationMessages } from "@starbot/contracts/conversation-order";
+import { itemTypeCountsAsUnread } from "@starbot/contracts/conversation-read";
+import { coordinatorText } from "@starbot/contracts/coordinator-text";
 import type {
   AgentExchangeSummary,
   AttachmentSummary,
@@ -21,7 +21,7 @@ import type {
   RoutineConversationEventAction,
   RoutineRunStatus,
   VideoGenerationInfo,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   CONVERSATION_MEMORY_CHANGES_ITEM_TYPE,
   CONVERSATION_PLAN_ITEM_TYPE,
@@ -38,9 +38,9 @@ import {
   routineConversationEvent,
   routineRunConversationEvent,
   SETTING_LINK_ITEM_TYPE_PREFIX,
-} from "@openbot/contracts/ipc";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@starbot/contracts/ipc";
+import type { ConversationUiBlock } from "@starbot/contracts/ui-blocks";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { MOBILE_PLUGINS } from "@/features/marketplace/model/plugin-catalog.generated";
 import { isMobileConnectorId } from "@/features/servers/model/connectors";
 import { thinkingRowId } from "./turn-thinking";

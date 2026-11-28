@@ -1,22 +1,22 @@
-import { parseBillingSessionUrl, parseBillingState } from "@openbot/contracts/billing";
-import { parseBillingDetails } from "@openbot/contracts/billing-details";
-import { parseCreditActivity, parseCreditCheckoutUrl, parseCreditsState } from "@openbot/contracts/credits";
+import { parseBillingSessionUrl, parseBillingState } from "@starbot/contracts/billing";
+import { parseBillingDetails } from "@starbot/contracts/billing-details";
+import { parseCreditActivity, parseCreditCheckoutUrl, parseCreditsState } from "@starbot/contracts/credits";
 import {
   PRICING_ORDER_PARAMS,
   type PricingOrder,
   parseLicenseCheckoutUrl,
   parseLicenseState,
   parsePricingOrder,
-} from "@openbot/contracts/license";
-import { readPromotionCode } from "@openbot/contracts/promotion-code";
-import { parseReferralState } from "@openbot/contracts/referral";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import type { BillingDetailsCalls } from "@openbot/ui/features/billing/BillingDetailsFields";
-import type { BillingCalls } from "@openbot/ui/features/billing/billing-store";
-import type { LicenseCalls } from "@openbot/ui/features/billing/license-store";
-import type { CreditsCalls } from "@openbot/ui/features/credits/credits-store";
-import type { ReferralCalls } from "@openbot/ui/features/referral/referral-store";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/license";
+import { readPromotionCode } from "@starbot/contracts/promotion-code";
+import { parseReferralState } from "@starbot/contracts/referral";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import type { BillingDetailsCalls } from "@starbot/ui/features/billing/BillingDetailsFields";
+import type { BillingCalls } from "@starbot/ui/features/billing/billing-store";
+import type { LicenseCalls } from "@starbot/ui/features/billing/license-store";
+import type { CreditsCalls } from "@starbot/ui/features/credits/credits-store";
+import type { ReferralCalls } from "@starbot/ui/features/referral/referral-store";
+import { currentText } from "@starbot/ui/text";
 
 const REQUEST_TIMEOUT_MS = 15_000;
 

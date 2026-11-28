@@ -228,7 +228,7 @@ export const messages = defineMessages("sitePage", {
   "sitePage.marketplace.emptySkillsQuery": "No skills match “{query}”.",
   "sitePage.marketplace.emptyApps": "No app matches.",
   "sitePage.marketplace.breadcrumb": "Breadcrumb",
-  "sitePage.marketplace.addToOpenBot": "Add to StarBot",
+  "sitePage.marketplace.addToStarBot": "Add to StarBot",
   "sitePage.marketplace.addFromApp": "{name} is added from inside StarBot. Get the app, then open this link again.",
   "sitePage.marketplace.downloadFor": "Download for {platform}",
   "sitePage.marketplace.copyLink": "Copy link",
@@ -470,7 +470,7 @@ export const messages = defineMessages("sitePage", {
   "sitePage.site.cta.title": "Meet your first teammate",
   "sitePage.site.cta.description":
     "Run Codex, Claude, Gemini, Grok or your own model with the plans you already pay for, each with its own workspace and context. Your work stays on your computer.",
-  "sitePage.site.downloadOpenBot": "Download StarBot",
+  "sitePage.site.downloadStarBot": "Download StarBot",
   "sitePage.site.contact": "Contact",
   "sitePage.site.footer.description":
     "Persistent AI teammates on your own computer. Run Codex, Claude, Gemini, Grok, Muse Code, Pi or your own model with the plans you already pay for.",

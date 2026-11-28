@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Inicie um fluxo de trabalho pelo GitHub: um gatilho do GitHub é executado com novas issues, comentários, pull requests, revisões, verificações com falha ou uma menção a @openbotgit.",
+          "Inicie um fluxo de trabalho pelo GitHub: um gatilho do GitHub é executado com novas issues, comentários, pull requests, revisões, verificações com falha ou uma menção a @starbotgit.",
           "Altere o GitHub a partir de um fluxo de trabalho: comente, adicione rótulos, atribua, revise, feche ou crie uma issue como o GitHub App do StarBot.",
           "A Loja tem 17 novos agentes do StarBot, como QA Tester, PR Shepherd e Chief of Staff, e 15 novas habilidades para eles.",
           "Uso mostra o limite mensal do OpenCode Go como uma terceira barra."

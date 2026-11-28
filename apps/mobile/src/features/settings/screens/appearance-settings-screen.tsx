@@ -1,4 +1,4 @@
-import { APP_INTERFACE_SIZES, type AppInterfaceSize } from "@openbot/contracts/ipc";
+import { APP_INTERFACE_SIZES, type AppInterfaceSize } from "@starbot/contracts/ipc";
 import { Typography } from "heroui-native";
 import { useEffect, useRef, useState } from "react";
 import { View } from "react-native";

@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import { createEffect, createStore } from "solid-js";
 
 const EDGE_ZONE_PX = 40;

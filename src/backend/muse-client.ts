@@ -7,10 +7,10 @@ import {
   type SpawnedMspConnection,
   spawnMspConnection,
 } from "@muse-code/sdk";
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import { isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+import { attachmentMimeTypeForName } from "@starbot/contracts/attachment-files";
+import { isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { Effect, Exit, Fiber, Option, Schema, Scope } from "effect";
 import { shownFailureDetail } from "./acp-flavor";
 import { secretElicitationField } from "./agent/prompts";
@@ -389,7 +389,7 @@ export class MuseAgentClient extends EventEmitter<ClientEvents> implements Agent
   ): Effect.fn.Return<SpawnedMspConnection, ProviderClientOperationError> {
     const host = yield* providerCall(() =>
       handshake.initialize({
-        clientInfo: { name: "openbot", version: "1" },
+        clientInfo: { name: "starbot", version: "1" },
         capabilities: { requestedCapabilities: ["sessionMcp"] },
       }),
     ).pipe(
@@ -882,7 +882,7 @@ export class MuseAgentClient extends EventEmitter<ClientEvents> implements Agent
     }
     if (method === "session/tokenUsage") {
       const usage = yield* this.#decode(MuseUsage, params);
-      this.#emit("openbot/usage", {
+      this.#emit("starbot/usage", {
         threadId: thread.id,
         turnId: usage.turnId,
         usage: {

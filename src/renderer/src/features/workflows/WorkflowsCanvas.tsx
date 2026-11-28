@@ -9,17 +9,17 @@ import {
   type WorkflowMediaUnavailableModel,
   workflowCatalogMediaModel,
   workflowCatalogSource,
-} from "@openbot/contracts/ipc";
-import { Spinner } from "@openbot/ui";
-import { providerAvailability, providerTurnedOff } from "@openbot/ui/components/provider-model-options";
-import { WorkflowCanvas } from "@openbot/ui/features/workflows/WorkflowCanvas";
-import type { WorkflowAgentProgress } from "@openbot/ui/features/workflows/workflow-board";
+} from "@starbot/contracts/ipc";
+import { Spinner } from "@starbot/ui";
+import { providerAvailability, providerTurnedOff } from "@starbot/ui/components/provider-model-options";
+import { WorkflowCanvas } from "@starbot/ui/features/workflows/WorkflowCanvas";
+import type { WorkflowAgentProgress } from "@starbot/ui/features/workflows/workflow-board";
 import {
   WORKFLOW_FEATURES_V1,
   type WorkflowCatalogs,
   type WorkflowFeatures,
-} from "@openbot/ui/features/workflows/workflow-model";
-import { currentText, useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/workflows/workflow-model";
+import { currentText, useText } from "@starbot/ui/text";
 import { createEffect, createMemo, createSignal, onCleanup, Show, untrack } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { mediaServiceAccountName, noteMediaStepEnded } from "./workflow-media-credits";
@@ -46,7 +46,7 @@ export function WorkflowsCanvas(props: {
   );
   const [sunra, setSunra] = createSignal(false);
   const [higgsfield, setHiggsfield] = createSignal(false);
-  const [openbot, setOpenbot] = createSignal(false);
+  const [starbot, setStarbot] = createSignal(false);
   const [serviceAccounts, setServiceAccounts] = createSignal<readonly WorkflowMediaServiceAccount[] | null>(null);
   const [catalog, setCatalog] = createSignal<readonly WorkflowMediaCatalogModel[]>([]);
   const [providersRead, setProvidersRead] = createSignal(false);
@@ -62,7 +62,7 @@ export function WorkflowsCanvas(props: {
     void props.host.workflows
       .mediaCredits()
       .then((answer) => {
-        if (!disposed && sent === balanceRequest) setCreditBalance(answer.openbot?.available ?? null);
+        if (!disposed && sent === balanceRequest) setCreditBalance(answer.starbot?.available ?? null);
       })
       .catch(() => undefined);
   };
@@ -74,10 +74,10 @@ export function WorkflowsCanvas(props: {
         if (disposed) return;
         setSunra(providers.sunra);
         setHiggsfield(providers.higgsfield);
-        setOpenbot(providers.openbot === true);
+        setStarbot(providers.starbot === true);
         setServiceAccounts(providers.accounts);
         setProvidersRead(true);
-        if (providers.openbot === true) readCreditBalance();
+        if (providers.starbot === true) readCreditBalance();
       })
       .catch(() => undefined);
     void props.host.workflows
@@ -137,7 +137,7 @@ export function WorkflowsCanvas(props: {
       }
       if (!ended) return;
       noteMediaStepEnded();
-      if (openbot()) readCreditBalance();
+      if (starbot()) readCreditBalance();
     },
   );
   window.addEventListener("focus", readMediaProviders);
@@ -173,7 +173,7 @@ export function WorkflowsCanvas(props: {
     get imageModels() {
       if (!props.host.mediaSupported()) return [];
       const fixed = WORKFLOW_MEDIA_MODELS.flatMap((model) => {
-        if (model.provider === "sunra" || model.provider === "higgsfield" || model.provider === "openbot") return [];
+        if (model.provider === "sunra" || model.provider === "higgsfield" || model.provider === "starbot") return [];
         if (providerTurnedOff(props.status, model.provider)) return [];
         const status = providerAvailability(props.status, props.models, model.provider, currentText().t);
         if (status.state !== "available") return [];
@@ -199,9 +199,9 @@ export function WorkflowsCanvas(props: {
           ...(accounts ? { accounts } : {}),
         }));
       };
-      const credit = openbot()
+      const credit = starbot()
         ? catalog()
-            .filter((entry) => entry.provider === "openbot")
+            .filter((entry) => entry.provider === "starbot")
             .flatMap((entry) => workflowCatalogMediaModel(entry) ?? [])
         : [];
       return [...credit, ...fixed, ...service("sunra", sunra()), ...service("higgsfield", higgsfield())];
@@ -211,10 +211,10 @@ export function WorkflowsCanvas(props: {
     },
     get unavailableModels() {
       if (!props.host.mediaSupported()) return [];
-      const hidden = openbot()
+      const hidden = starbot()
         ? []
         : catalog()
-            .filter((entry) => entry.provider === "openbot")
+            .filter((entry) => entry.provider === "starbot")
             .map(({ id, name, kinds }) => ({ id, name, kinds }));
       return [...unavailable(), ...hidden];
     },
@@ -222,7 +222,7 @@ export function WorkflowsCanvas(props: {
       return props.host.mediaSupported() ? props.host.workflows.mediaPrice : undefined;
     },
     get creditBalance() {
-      return openbot() ? creditBalance() : null;
+      return starbot() ? creditBalance() : null;
     },
     get mediaSize() {
       return props.host.mediaSizeSupported();

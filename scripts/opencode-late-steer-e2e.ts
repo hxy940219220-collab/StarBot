@@ -3,14 +3,14 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { chmod, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { readJsonl } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-steer-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-steer-e2e");
 const STEERED_MESSAGE = "Use the other branch.";
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-late-steer-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-opencode-late-steer-"));
 const home = join(root, "home");
 
 process.env.HOME = home;
@@ -24,7 +24,7 @@ const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 interface LogEntry {
   event: string;
@@ -92,9 +92,9 @@ async function race(order: Order): Promise<RaceResult> {
     ].join("\n"),
   );
   await chmod(executable, 0o755);
-  process.env.OPENBOT_OPENCODE_PATH = executable;
+  process.env.STARBOT_OPENCODE_PATH = executable;
 
-  const database = new OpenBotDatabase(join(folder, "user-data"));
+  const database = new StarBotDatabase(join(folder, "user-data"));
   const store = new AgentStore(join(folder, "user-data"), home, database);
   const mailbox = new MailboxStore(join(folder, "user-data"), store.sharedRoot, store.database);
   const agents = new AgentService({

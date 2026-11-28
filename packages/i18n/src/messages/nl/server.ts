@@ -147,7 +147,7 @@ export const messages = {
   "server.install.offline": "{name} is offline.",
   "server.install.expired": "Deze opdracht is verlopen. Maak een nieuwe.",
   "server.install.agentPrompt":
-    'Installeer OpenBot op deze Linux-server en meld hem aan bij mijn OpenBot-account.\nVoer deze opdracht uit als root. Hij stelt geen vragen en duurt een paar minuten:\n\n{command}\n\nHij eindigt met de regel "StarBot is connected to your account." en exitcode 0.\nDe opdracht werkt één keer, 15 minuten lang. Sla hem nergens op.',
+    'Installeer StarBot op deze Linux-server en meld hem aan bij mijn StarBot-account.\nVoer deze opdracht uit als root. Hij stelt geen vragen en duurt een paar minuten:\n\n{command}\n\nHij eindigt met de regel "StarBot is connected to your account." en exitcode 0.\nDe opdracht werkt één keer, 15 minuten lang. Sla hem nergens op.',
   "server.install.setUpWithAgent": "Instellen met een agent",
   "server.install.sshAgentPrompt":
     "Maak via SSH verbinding met mijn Linux-server en installeer StarBot daarop als server.\n\nSSH-adres (user@host):",
@@ -745,7 +745,7 @@ export const messages = {
   "server.update.path.hosted":
     "De hostingdienst downloadt updates op de achtergrond. Een gedownloade update start de volgende keer dat de server start. Wacht tot actief werk klaar is voordat je de server stopt en hervat. Blijft hij op een oude versie, neem dan contact op met de beheerder van de host.",
   "server.update.path.system":
-    "Voer op de host sudo openbot update uit om de nieuwste release te installeren. Deze opdracht stopt StarBot. Wacht eerst tot actief werk klaar is. Automatische downloads worden bij de volgende opstart geïnstalleerd.",
+    "Voer op de host sudo starbot update uit om de nieuwste release te installeren. Deze opdracht stopt StarBot. Wacht eerst tot actief werk klaar is. Automatische downloads worden bij de volgende opstart geïnstalleerd.",
 
   "server.update.path.container":
     "Haal op de Docker-host de nieuwe StarBot-image op en maak de container opnieuw met dezelfde datavolumes. Wacht eerst tot actief werk klaar is. Behoud de bestaande volumes om je gegevens te bewaren.",

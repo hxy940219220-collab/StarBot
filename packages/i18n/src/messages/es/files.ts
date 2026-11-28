@@ -136,7 +136,7 @@ export const messages = {
   "files.storage.allFiles": "Todos los archivos",
   "files.storage.allFilesOn": "Todos los archivos de {host}",
   "files.storage.allFilesDescription": "Archivos de todos los agentes y chats",
-  "files.storage.openBotOn": "StarBot en {host}",
+  "files.storage.starBotOn": "StarBot en {host}",
 
   "files.storage.measuring": "Calculando…",
   "files.storage.measureAgain": "Volver a calcular",

@@ -2,14 +2,14 @@ import { createHash, randomBytes, verify } from "node:crypto";
 import { openAsBlob } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
-import { BROWSER_SECRET_RESPONSE_PATH } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_BACKGROUND_WORK_CAPABILITY } from "@openbot/contracts/team-protocol/agent-background-work-v1";
-import { AGENT_PENDING_RUNTIME_CAPABILITY } from "@openbot/contracts/team-protocol/agent-pending-runtime-v1";
-import { AGENT_TASK_UI_BLOCKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-task-ui-blocks-v1";
-import { browserViewStreamSessionId } from "@openbot/contracts/team-protocol/browser-view-v1";
-import { TEAM_PROTOCOL_CAPABILITY_LIMITS } from "@openbot/contracts/team-protocol/capability-limits";
+import { BROWSER_SECRET_RESPONSE_PATH } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { AGENT_BACKGROUND_WORK_CAPABILITY } from "@starbot/contracts/team-protocol/agent-background-work-v1";
+import { AGENT_PENDING_RUNTIME_CAPABILITY } from "@starbot/contracts/team-protocol/agent-pending-runtime-v1";
+import { AGENT_TASK_UI_BLOCKS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-task-ui-blocks-v1";
+import { browserViewStreamSessionId } from "@starbot/contracts/team-protocol/browser-view-v1";
+import { TEAM_PROTOCOL_CAPABILITY_LIMITS } from "@starbot/contracts/team-protocol/capability-limits";
 import {
   BROWSER_SIGN_IN_CAPABILITY,
   BROWSER_VAULT_SKIP_CAPABILITY,
@@ -35,36 +35,36 @@ import {
   TEAM_USAGE_READ_FAILED_CAPABILITY,
   TEAM_USAGE_TERTIARY_CAPABILITY,
   TEAM_VIDEO_GENERATION_CAPABILITY,
-} from "@openbot/contracts/team-protocol/current";
-import { toWireAgentKeysObjectForPath } from "@openbot/contracts/team-protocol/current-agent-keys";
-import { MCP_MANY_SERVERS_CAPABILITY } from "@openbot/contracts/team-protocol/mcp-many-servers-v1";
-import { optionalTeamEvent } from "@openbot/contracts/team-protocol/optional-events";
-import { PROVIDER_MANY_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-many-accounts-v1";
-import { QUEUE_HOLD_CAPABILITY, QUEUE_HOLD_SIGN_IN_CAPABILITY } from "@openbot/contracts/team-protocol/queue-hold-v1";
-import { ROUTINE_RESULTS_WHATSAPP_CAPABILITY } from "@openbot/contracts/team-protocol/routine-results-whatsapp-v1";
-import { teamSideRouteCodec } from "@openbot/contracts/team-protocol/side-routes";
+} from "@starbot/contracts/team-protocol/current";
+import { toWireAgentKeysObjectForPath } from "@starbot/contracts/team-protocol/current-agent-keys";
+import { MCP_MANY_SERVERS_CAPABILITY } from "@starbot/contracts/team-protocol/mcp-many-servers-v1";
+import { optionalTeamEvent } from "@starbot/contracts/team-protocol/optional-events";
+import { PROVIDER_MANY_ACCOUNTS_CAPABILITY } from "@starbot/contracts/team-protocol/provider-many-accounts-v1";
+import { QUEUE_HOLD_CAPABILITY, QUEUE_HOLD_SIGN_IN_CAPABILITY } from "@starbot/contracts/team-protocol/queue-hold-v1";
+import { ROUTINE_RESULTS_WHATSAPP_CAPABILITY } from "@starbot/contracts/team-protocol/routine-results-whatsapp-v1";
+import { teamSideRouteCodec } from "@starbot/contracts/team-protocol/side-routes";
 import {
   addSkillSuggestionNames,
   SKILL_LEARNING_CAPABILITY,
   withSkillSuggestionNames,
-} from "@openbot/contracts/team-protocol/skill-learning-v1";
-import { STORAGE_WORKFLOW_FILES_CAPABILITY } from "@openbot/contracts/team-protocol/storage-workflow-files-v1";
+} from "@starbot/contracts/team-protocol/skill-learning-v1";
+import { STORAGE_WORKFLOW_FILES_CAPABILITY } from "@starbot/contracts/team-protocol/storage-workflow-files-v1";
 import {
   addUiBlockAutoAnswers,
   TEAM_UI_BLOCK_AUTO_ANSWER_CAPABILITY,
   withUiBlockAutoAnswers,
-} from "@openbot/contracts/team-protocol/ui-block-auto-answer-v1";
+} from "@starbot/contracts/team-protocol/ui-block-auto-answer-v1";
 import {
   addUiBlockLocationRequests,
   TEAM_UI_BLOCK_LOCATION_CAPABILITY,
   withUiBlockLocationRequests,
-} from "@openbot/contracts/team-protocol/ui-block-location-v1";
+} from "@starbot/contracts/team-protocol/ui-block-location-v1";
 import {
   addUiBlockVaultRequests,
   TEAM_UI_BLOCK_VAULT_CAPABILITY,
   withUiBlockVaultRequests,
-} from "@openbot/contracts/team-protocol/ui-block-vault-v1";
-import { encodeTeamProtocolV1ClientEvent } from "@openbot/contracts/team-protocol/v1";
+} from "@starbot/contracts/team-protocol/ui-block-vault-v1";
+import { encodeTeamProtocolV1ClientEvent } from "@starbot/contracts/team-protocol/v1";
 import {
   decodeTeamProtocolV2AuthFrame,
   decodeTeamProtocolV2EventFrame,
@@ -74,42 +74,42 @@ import {
   type TeamProtocolV2Json,
   type TeamProtocolV2RpcFrame,
   teamProtocolV2AuthenticationTranscript,
-} from "@openbot/contracts/team-protocol/v2";
-import { createTeamProtocolV2Event } from "@openbot/contracts/team-protocol/v2-adapter";
+} from "@starbot/contracts/team-protocol/v2";
+import { createTeamProtocolV2Event } from "@starbot/contracts/team-protocol/v2-adapter";
 import {
   createTeamProtocolV4Event,
   decodeTeamProtocolV4WebRtcHttpRequest,
   encodeTeamProtocolV4WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v4-webrtc-adapter";
-import { TEAM_LOCAL_PROVIDERS_CAPABILITY } from "@openbot/contracts/team-protocol/v5";
+} from "@starbot/contracts/team-protocol/v4-webrtc-adapter";
+import { TEAM_LOCAL_PROVIDERS_CAPABILITY } from "@starbot/contracts/team-protocol/v5";
 import {
   createTeamProtocolV5Event,
   decodeTeamProtocolV5WebRtcHttpRequest,
   encodeTeamProtocolV5WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v5-webrtc-adapter";
-import { TEAM_CURSOR_CLINE_CAPABILITY } from "@openbot/contracts/team-protocol/v6";
+} from "@starbot/contracts/team-protocol/v5-webrtc-adapter";
+import { TEAM_CURSOR_CLINE_CAPABILITY } from "@starbot/contracts/team-protocol/v6";
 import {
   createTeamProtocolV6Event,
   decodeTeamProtocolV6WebRtcHttpRequest,
   encodeTeamProtocolV6WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v6-webrtc-adapter";
-import { TEAM_PI_MUSE_CAPABILITY } from "@openbot/contracts/team-protocol/v7";
+} from "@starbot/contracts/team-protocol/v6-webrtc-adapter";
+import { TEAM_PI_MUSE_CAPABILITY } from "@starbot/contracts/team-protocol/v7";
 import {
   createTeamProtocolV7Event,
   decodeTeamProtocolV7WebRtcHttpRequest,
   encodeTeamProtocolV7WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v7-webrtc-adapter";
-import { TEAM_OPEN_PROVIDERS_CAPABILITY } from "@openbot/contracts/team-protocol/v8";
+} from "@starbot/contracts/team-protocol/v7-webrtc-adapter";
+import { TEAM_OPEN_PROVIDERS_CAPABILITY } from "@starbot/contracts/team-protocol/v8";
 import {
   createTeamProtocolV8Event,
   decodeTeamProtocolV8WebRtcHttpRequest,
   encodeTeamProtocolV8WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v8-webrtc-adapter";
+} from "@starbot/contracts/team-protocol/v8-webrtc-adapter";
 import {
   decodeTeamProtocolSupportV9,
   TEAM_LONG_CAPABILITY_LISTS_CAPABILITY,
-} from "@openbot/contracts/team-protocol/v9";
-import { decodeTeamProtocolV9WebRtcHttpRequest } from "@openbot/contracts/team-protocol/v9-webrtc-adapter";
+} from "@starbot/contracts/team-protocol/v9";
+import { decodeTeamProtocolV9WebRtcHttpRequest } from "@starbot/contracts/team-protocol/v9-webrtc-adapter";
 import {
   decodeTeamProtocolSupportV10,
   readTeamCapabilitiesV10,
@@ -117,8 +117,8 @@ import {
   TEAM_CAPABILITY_BASELINE_CAPABILITY,
   TEAM_PROTOCOL_V10,
   TEAM_PROTOCOL_V10_ABSENT_LIMIT,
-} from "@openbot/contracts/team-protocol/v10";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/v10";
+import { sourceText } from "@starbot/i18n/source";
 import { Context, Deferred, Effect, Exit, Fiber, Layer, ManagedRuntime } from "effect";
 import type * as Ws from "ws";
 import type { VerifiedRemoteSessionTicket } from "./central-auth-manager";
@@ -173,7 +173,7 @@ class HostPeerTransport extends Context.Service<
     send(...args: Parameters<TeamWebRtcBridge["send"]>): Effect.Effect<void, RemoteWorkflowError>;
     fetch(input: URL, init: RequestInit): Effect.Effect<Response, RemoteWorkflowError>;
   }
->()("openbot/main/HostPeerTransport") {}
+>()("starbot/main/HostPeerTransport") {}
 
 export class TeamWebRtcHostPeer {
   readonly #bridge: TeamWebRtcBridge;
@@ -887,8 +887,8 @@ export class TeamWebRtcHostPeer {
     if (!this.#localApiPort) return;
     this.#eventsSocket?.close();
     const socket = new webSockets.WebSocket(`ws://127.0.0.1:${this.#localApiPort}${TEAM_API_ROUTES.events}`, [
-      "openbot-team-v1",
-      `openbot-token.${token}`,
+      "starbot-team-v1",
+      `starbot-token.${token}`,
     ]);
     this.#eventsSocket = socket;
     socket.once("open", () => {

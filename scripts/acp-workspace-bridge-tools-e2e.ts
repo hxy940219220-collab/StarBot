@@ -5,7 +5,7 @@ import { join, resolve } from "node:path";
 import { AcpAgentClient } from "../src/backend/acp-client";
 import { type AcpFlavor, customAgentFlavor, DEFAULT_ACP_FLAVOR } from "../src/backend/acp-flavor";
 import { ANTIGRAVITY_ACP_FLAVOR } from "../src/backend/acp-flavor-antigravity";
-import { openBotTool, toolActivity, toolUsage, toThreadItem } from "../src/backend/agent/thread-items";
+import { starBotTool, toolActivity, toolUsage, toThreadItem } from "../src/backend/agent/thread-items";
 import type { AgentClient } from "../src/backend/agent-client";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import {
@@ -17,33 +17,33 @@ import {
 } from "../src/backend/protocol";
 import { installFakeAgent, readJsonl, runTurn, stopClients } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/acp-workspace-bridge-tools-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/acp-workspace-bridge-tools-e2e");
 
 const BRIDGE_CALLS = [
-  { toolCallId: "agy-title", title: "Run mcp_openbot_send_message", kind: "other" },
-  { toolCallId: "agy-browser-title", title: "Run mcp_openbot_browser_open?", kind: "other" },
+  { toolCallId: "agy-title", title: "Run mcp_starbot_send_message", kind: "other" },
+  { toolCallId: "agy-browser-title", title: "Run mcp_starbot_browser_open?", kind: "other" },
   {
     toolCallId: "agy-server-name",
     title: "MCP Tool send_message",
     kind: "execute",
-    rawInput: { ServerName: "openbot", ToolName: "send_message" },
+    rawInput: { ServerName: "starbot", ToolName: "send_message" },
   },
-  { toolCallId: "grok-title", title: "openbot__send_message", kind: "other" },
+  { toolCallId: "grok-title", title: "starbot__send_message", kind: "other" },
   {
     toolCallId: "agy-meta-call",
     title: "MCP Tool tool_call",
     kind: "execute",
-    rawInput: { ServerName: "openbot", ToolName: "tool_call", Arguments: { name: "openbot.send_message" } },
+    rawInput: { ServerName: "starbot", ToolName: "tool_call", Arguments: { name: "starbot.send_message" } },
   },
 ];
 
 const CONFINED_COMMANDS = [
-  { toolCallId: "title-command", title: "Run mcp_openbot_send_message", kind: "execute" },
+  { toolCallId: "title-command", title: "Run mcp_starbot_send_message", kind: "execute" },
   {
     toolCallId: "command-line",
-    title: "Run mcp_openbot_send_message",
+    title: "Run mcp_starbot_send_message",
     kind: "execute",
-    rawInput: { CommandLine: "Run mcp_openbot_send_message" },
+    rawInput: { CommandLine: "Run mcp_starbot_send_message" },
   },
   { toolCallId: "shell", title: "ls attachments", kind: "execute" },
 ];
@@ -61,19 +61,19 @@ const OTHER_CALLS = [
     toolCallId: "unknown-tool",
     title: "MCP Tool delete_everything",
     kind: "execute",
-    rawInput: { ServerName: "openbot", ToolName: "delete_everything" },
+    rawInput: { ServerName: "starbot", ToolName: "delete_everything" },
   },
   {
     toolCallId: "server-name-edit",
     title: "Edit notes.md",
     kind: "edit",
-    rawInput: { TargetFile: "/tmp/notes.md", ServerName: "openbot", ToolName: "send_message" },
+    rawInput: { TargetFile: "/tmp/notes.md", ServerName: "starbot", ToolName: "send_message" },
   },
   {
     toolCallId: "server-name-command-line",
     title: "MCP Tool send_message",
     kind: "execute",
-    rawInput: { ServerName: "openbot", ToolName: "send_message", CommandLine: "rm -rf build" },
+    rawInput: { ServerName: "starbot", ToolName: "send_message", CommandLine: "rm -rf build" },
   },
 ];
 
@@ -89,7 +89,7 @@ const KIMI_CALLS = [
     rawInput: { command: "ls attachments" },
     idOnlyPermission: true,
   },
-  { toolCallId: "kimi-openbot-tool", title: "mcp__openbot__send_message", kind: "other", idOnlyPermission: true },
+  { toolCallId: "kimi-starbot-tool", title: "mcp__starbot__send_message", kind: "other", idOnlyPermission: true },
   {
     toolCallId: "kimi-write",
     title: "Write",
@@ -105,7 +105,7 @@ const bridgeIds = new Set(BRIDGE_CALLS.map((call) => call.toolCallId));
 const DYNAMIC_TOOLS = [
   {
     type: "namespace",
-    name: "openbot",
+    name: "starbot",
     description: "StarBot tools",
     tools: [
       { type: "function", name: "send_message", description: "Send a message", inputSchema: { type: "object" } },
@@ -114,7 +114,7 @@ const DYNAMIC_TOOLS = [
   },
   {
     type: "namespace",
-    name: "openbot_browser",
+    name: "starbot_browser",
     description: "StarBot browser",
     tools: [{ type: "function", name: "open", description: "Open a page", inputSchema: { type: "object" } }],
   },
@@ -139,7 +139,7 @@ interface Report {
   failure?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-acp-workspace-bridge-tools-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-acp-workspace-bridge-tools-e2e-"));
 process.env.GEMINI_HOME = join(root, "gemini");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];
@@ -236,10 +236,10 @@ try {
   for (const [toolCallId, tool] of Object.entries(readAs)) {
     const item = unconfined.items[toolCallId];
     assert.ok(item, `${toolCallId} has a tool item.`);
-    assert.equal(openBotTool(item), tool, `${toolCallId} is read as the StarBot tool ${tool}.`);
+    assert.equal(starBotTool(item), tool, `${toolCallId} is read as the StarBot tool ${tool}.`);
     assert.deepEqual(
       toolUsage(item),
-      { kind: "mcp", server: "openbot", tool, failed: false },
+      { kind: "mcp", server: "starbot", tool, failed: false },
       `${toolCallId} counts as an StarBot MCP call, not a command.`,
     );
   }
@@ -248,10 +248,10 @@ try {
   assert.equal(toolActivity(browserItem, false), "browsing", "A running Gemini browser call shows as browsing.");
   const metaCall = unconfined.items["agy-meta-call"];
   assert.ok(metaCall, "The tool_call call has a tool item.");
-  assert.equal(openBotTool(metaCall), "send_message", "A Gemini tool_call reads the StarBot tool that it calls.");
+  assert.equal(starBotTool(metaCall), "send_message", "A Gemini tool_call reads the StarBot tool that it calls.");
   const shell = unconfined.items.shell;
   assert.ok(shell, "The shell call has a tool item.");
-  assert.equal(openBotTool(shell), null, "A shell command is not read as an StarBot tool.");
+  assert.equal(starBotTool(shell), null, "A shell command is not read as an StarBot tool.");
 
   const otherUnconfined = await run("other-flavor-unconfined", false, DEFAULT_ACP_FLAVOR);
   report.otherUnconfined = otherUnconfined;
@@ -278,7 +278,7 @@ try {
   report.kimi = kimi;
   assert.equal(kimi.status, "completed", "The confined Kimi turn completes.");
   assert.equal(kimi.outcomes["kimi-bash"], "allow", "A Kimi command runs in the sandbox without a card.");
-  assert.equal(kimi.outcomes["kimi-openbot-tool"], "allow", "A Kimi call of an StarBot tool runs without a card.");
+  assert.equal(kimi.outcomes["kimi-starbot-tool"], "allow", "A Kimi call of an StarBot tool runs without a card.");
   assert.deepEqual(
     kimi.requests,
     [

@@ -9,11 +9,11 @@ import type {
   SetMcpServerEnabledInput,
   SignOutMcpServerInput,
   TestMcpServerInput,
-} from "@openbot/contracts/ipc";
-import { GITHUB_CONNECTOR_MCP_SERVER_ID, mcpConfigErrors, normalizeMcpConfig } from "@openbot/contracts/ipc";
-import { mcpAccountFragment, withoutMcpAccountFragment } from "@openbot/contracts/mcp-accounts";
-import { matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { type Logger, redactSecrets, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { GITHUB_CONNECTOR_MCP_SERVER_ID, mcpConfigErrors, normalizeMcpConfig } from "@starbot/contracts/ipc";
+import { mcpAccountFragment, withoutMcpAccountFragment } from "@starbot/contracts/mcp-accounts";
+import { matchingSourceKeys, sourceText } from "@starbot/i18n/source";
+import { type Logger, redactSecrets, toLogValue } from "@starbot/logging";
 import { Effect, Exit, Result, Schema, Scope } from "effect";
 import type { AgentProvider } from "../agent-client";
 import { causeHelpers } from "../effect-boundary";

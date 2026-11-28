@@ -1,6 +1,6 @@
-import { Button, IconButton, MessageCirclePlus, PanelRight } from "@openbot/ui";
-import { sidebarMessageTime } from "@openbot/ui/features/sidebar/sidebar-filtering";
-import { useText } from "@openbot/ui/text";
+import { Button, IconButton, MessageCirclePlus, PanelRight } from "@starbot/ui";
+import { sidebarMessageTime } from "@starbot/ui/features/sidebar/sidebar-filtering";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { For, Show } from "solid-js";
 import { ThreadStemMark } from "./ThreadMenu";

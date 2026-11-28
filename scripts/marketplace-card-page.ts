@@ -1,7 +1,7 @@
 import { BloubBot } from "@norbert_bodziony/bloub";
-import { APP_LOGO_CORNER, APP_LOGO_EYE_POINTS, APP_LOGO_SIZE } from "@openbot/brand/app-logo-shape";
-import { bloubAvatarProfile } from "@openbot/brand/bloub-avatar";
-import type { AvatarHue } from "@openbot/contracts/ipc";
+import { APP_LOGO_CORNER, APP_LOGO_EYE_POINTS, APP_LOGO_SIZE } from "@starbot/brand/app-logo-shape";
+import { bloubAvatarProfile } from "@starbot/brand/bloub-avatar";
+import type { AvatarHue } from "@starbot/contracts/ipc";
 import { render } from "@solidjs/web";
 import { flush } from "solid-js";
 
@@ -18,7 +18,7 @@ export interface MarketplaceCardJob {
 
 declare global {
   interface Window {
-    openBotMarketplaceCard?: { render: (job: MarketplaceCardJob) => Promise<string> };
+    starBotMarketplaceCard?: { render: (job: MarketplaceCardJob) => Promise<string> };
   }
 }
 
@@ -49,7 +49,7 @@ const BLOCKS_PATHS = [
   "M15 2h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z",
 ];
 
-window.openBotMarketplaceCard = { render: renderMarketplaceCard };
+window.starBotMarketplaceCard = { render: renderMarketplaceCard };
 
 async function renderMarketplaceCard(job: MarketplaceCardJob): Promise<string> {
   await Promise.all([

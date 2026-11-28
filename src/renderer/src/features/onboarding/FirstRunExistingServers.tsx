@@ -1,7 +1,7 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { Button, ChevronRight, Spinner } from "@openbot/ui";
-import { ServerMark } from "@openbot/ui/features/servers/ServerRail";
-import { useText } from "@openbot/ui/text";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { Button, ChevronRight, Spinner } from "@starbot/ui";
+import { ServerMark } from "@starbot/ui/features/servers/ServerRail";
+import { useText } from "@starbot/ui/text";
 import { For, Show } from "solid-js";
 import { ConsentNotice } from "./AnalyticsConsent";
 

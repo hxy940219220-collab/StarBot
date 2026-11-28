@@ -1,4 +1,4 @@
-import { Badge } from "@openbot/ui";
+import { Badge } from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { Show } from "solid-js";
 import { SidebarRowTooltip } from "./SidebarRowTooltip";

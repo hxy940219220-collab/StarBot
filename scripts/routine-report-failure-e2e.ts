@@ -11,13 +11,13 @@ import {
   type RoutineRun,
   routineQuietStepsItemId,
   routineRunConversationEvent,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/routine-report-failure-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-routine-failure-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/routine-report-failure-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-routine-failure-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -25,7 +25,7 @@ const fakeLog = join(root, "codex.jsonl");
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
@@ -33,7 +33,7 @@ const { AgentRoutineStore } = await import("../src/backend/agent-routine-store")
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 const { routineFlowRoutines } = await import("../src/backend/routine-flows/routine-flow-routines");
 const { RoutineFlowStore } = await import("../src/backend/routine-flows/routine-flow-store");
 const { createRoutineFlows } = await import("../src/backend/routine-flows/routine-flows");
@@ -120,7 +120,7 @@ const callNext = (turn) => {
   write({
     id,
     method: "item/tool/call",
-    params: { threadId: turn.threadId, turnId: turn.turnId, callId: "call-" + id, namespace: "openbot", tool: call.tool, arguments: call.arguments || {} },
+    params: { threadId: turn.threadId, turnId: turn.turnId, callId: "call-" + id, namespace: "starbot", tool: call.tool, arguments: call.arguments || {} },
   });
 };
 const answer = (message) => {
@@ -165,7 +165,7 @@ const answer = (message) => {
         write({ method: "item/completed", params: { threadId: params.threadId, turnId, item: { ...command, status: "completed", aggregatedOutput: "", exitCode: 0 } } });
       }
       if (task.includes("NO-UPDATE-ITEM")) {
-        const call = { type: "dynamicToolCall", id: "no-update-" + turnId, namespace: "openbot", tool: "routine_no_update", arguments: {}, status: "inProgress" };
+        const call = { type: "dynamicToolCall", id: "no-update-" + turnId, namespace: "starbot", tool: "routine_no_update", arguments: {}, status: "inProgress" };
         write({ method: "item/started", params: { threadId: params.threadId, turnId, item: call } });
         write({ method: "item/completed", params: { threadId: params.threadId, turnId, item: { ...call, status: "completed", success: true, contentItems: [] } } });
       }
@@ -275,7 +275,7 @@ function pass(name: string, condition: boolean, detail?: unknown) {
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

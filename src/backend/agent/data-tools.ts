@@ -1,10 +1,10 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import { Effect } from "effect";
 import { z } from "zod";
 import { AGENT_DATABASE_LIMITS } from "../agent-data/agent-database-protocol";
 import { checkAgentParameters } from "../agent-data/agent-database-rules";
 import type { AgentDatabaseQueryResult, AgentTables } from "../agent-data/agent-tables";
-import { openBotToolFailure, openBotToolResult } from "./routine-tools";
+import { starBotToolFailure, starBotToolResult } from "./routine-tools";
 import { ToolOperationFailed, toolStep } from "./tool-operation";
 
 const sql = z.string().min(1).max(AGENT_DATABASE_LIMITS.maxSqlLength);
@@ -46,34 +46,34 @@ export const handleDataTool = Effect.fn("DataTools.handle")(function* (
   tables: AgentTables | null,
 ) {
   if (!DATA_TOOL_DEFINITIONS.some((definition) => definition.name === tool)) return null;
-  if (!tables) return openBotToolFailure("Shared data is unavailable.");
+  if (!tables) return starBotToolFailure("Shared data is unavailable.");
 
   switch (tool) {
     case "list_tables": {
       const listed = yield* tables.list().pipe(Effect.mapError((cause) => new ToolOperationFailed({ cause })));
-      return listed.ok ? openBotToolResult({ tables: listed.value }) : openBotToolFailure(listed.message);
+      return listed.ok ? starBotToolResult({ tables: listed.value }) : starBotToolFailure(listed.message);
     }
     case "delete_table": {
       const input = yield* toolStep(() => tableNameSchema.parse(args));
       const removed = yield* tables
         .remove(agentId, input.name)
         .pipe(Effect.mapError((cause) => new ToolOperationFailed({ cause })));
-      return removed.ok ? openBotToolResult({ deleted: removed.value }) : openBotToolFailure(removed.message);
+      return removed.ok ? starBotToolResult({ deleted: removed.value }) : starBotToolFailure(removed.message);
     }
     default: {
       const statement = yield* toolStep(() => dataStatementSchema.parse(args));
       const parameters = checkAgentParameters(statement.params, statement.sql);
-      if (!parameters.ok) return openBotToolFailure(parameters.message);
+      if (!parameters.ok) return starBotToolFailure(parameters.message);
       if (tool === "execute_data") {
         const written = yield* tables
           .execute(agentId, statement.sql, parameters.value)
           .pipe(Effect.mapError((cause) => new ToolOperationFailed({ cause })));
-        return written.ok ? openBotToolResult(written.value) : openBotToolFailure(written.message);
+        return written.ok ? starBotToolResult(written.value) : starBotToolFailure(written.message);
       }
       const rows = yield* tables
         .query(statement.sql, parameters.value)
         .pipe(Effect.mapError((cause) => new ToolOperationFailed({ cause })));
-      return rows.ok ? openBotToolResult(readResult(rows.value)) : openBotToolFailure(rows.message);
+      return rows.ok ? starBotToolResult(readResult(rows.value)) : starBotToolFailure(rows.message);
     }
   }
 });

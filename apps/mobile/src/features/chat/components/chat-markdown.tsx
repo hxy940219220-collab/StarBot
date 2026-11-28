@@ -4,12 +4,12 @@ import {
   fileReferenceName,
   fileReferenceTone,
   isFileReference,
-} from "@openbot/brand/file-reference";
-import { chatMathStart } from "@openbot/contracts/chat-math";
-import { chatPreviewKind } from "@openbot/contracts/chat-preview";
-import { chatTagReferences } from "@openbot/contracts/chat-tag-references";
-import { markdownInlinePlainText } from "@openbot/contracts/markdown-preview-text";
-import type { MobileTranslate } from "@openbot/i18n/mobile";
+} from "@starbot/brand/file-reference";
+import { chatMathStart } from "@starbot/contracts/chat-math";
+import { chatPreviewKind } from "@starbot/contracts/chat-preview";
+import { chatTagReferences } from "@starbot/contracts/chat-tag-references";
+import { markdownInlinePlainText } from "@starbot/contracts/markdown-preview-text";
+import type { MobileTranslate } from "@starbot/i18n/mobile";
 import * as Linking from "expo-linking";
 import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
@@ -198,14 +198,14 @@ function sourceEntries<T>(values: T[], source: (value: T) => string) {
 }
 
 const FILE_TONE_COLORS: Record<FileReferenceTone, [string, string]> = {
-  source: ["--openbot-file-blue", "--openbot-file-blue-soft"],
-  script: ["--openbot-file-yellow", "--openbot-file-yellow-soft"],
-  markup: ["--openbot-file-orange", "--openbot-file-orange-soft"],
-  style: ["--openbot-file-teal", "--openbot-file-teal-soft"],
-  data: ["--openbot-file-green", "--openbot-file-green-soft"],
-  document: ["--openbot-file-red", "--openbot-file-red-soft"],
-  media: ["--openbot-file-pink", "--openbot-file-pink-soft"],
-  default: ["--openbot-file-default", "--openbot-file-default-soft"],
+  source: ["--starbot-file-blue", "--starbot-file-blue-soft"],
+  script: ["--starbot-file-yellow", "--starbot-file-yellow-soft"],
+  markup: ["--starbot-file-orange", "--starbot-file-orange-soft"],
+  style: ["--starbot-file-teal", "--starbot-file-teal-soft"],
+  data: ["--starbot-file-green", "--starbot-file-green-soft"],
+  document: ["--starbot-file-red", "--starbot-file-red-soft"],
+  media: ["--starbot-file-pink", "--starbot-file-pink-soft"],
+  default: ["--starbot-file-default", "--starbot-file-default-soft"],
 };
 
 function CodeFileReference({
@@ -691,11 +691,11 @@ function withAlpha(color: string, alpha: string): string {
 
 function MarkdownTable({ token, presentation }: { token: Tokens.Table; presentation: TextPresentation }) {
   const [canvas, textColor = "", control = "", headerText, text] = useCSSVariable([
-    "--openbot-bg-native-canvas",
-    "--openbot-text-primary",
-    "--openbot-bg-control",
-    "--openbot-data-table-header-text",
-    "--openbot-data-table-text",
+    "--starbot-bg-native-canvas",
+    "--starbot-text-primary",
+    "--starbot-bg-control",
+    "--starbot-data-table-header-text",
+    "--starbot-data-table-text",
   ]).map((value) => (value === undefined ? "" : String(value)));
   const { tone } = presentation;
   const solidCard = useSolidChatFill(PLAIN_BUBBLE_SHARE);
@@ -1120,7 +1120,7 @@ export const ChatMarkdown = memo(function ChatMarkdown({
   );
   const { tokens: visibleTokens, flushed } = useReplyPlayback(reveal, playback);
   const themeForeground = useThemeColor("foreground");
-  const textColor = String(useCSSVariable("--openbot-text-primary"));
+  const textColor = String(useCSSVariable("--starbot-text-primary"));
   const chipBackground = tone?.chip ?? withAlpha(textColor, "14");
   const codeColor = tone?.foreground ?? themeForeground;
   const { t } = useText();

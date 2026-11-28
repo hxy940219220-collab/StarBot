@@ -67,9 +67,9 @@ export const messages = {
     "👋 *StarBot bağlandı*\n\nAjanlarına sormak için buraya yaz. WhatsApp Orchestrator yanıtlar ya da işi doğru ajana verir.\n\nBir isteği durdurmak için *stop* gönder.",
 
   "status.messaging.whatsappWelcomeDedicated":
-    "👋 *StarBot bağlandı*\n\nOpenBot'ta izin verdiğin kişiler artık bu numaraya yazabilir. Yeni bir kişi bir kod alır: StarBot'ta İstekler altında onayla.\n\nBir isteği durdurmak için *stop* gönder.",
+    "👋 *StarBot bağlandı*\n\nStarBot'ta izin verdiğin kişiler artık bu numaraya yazabilir. Yeni bir kişi bir kod alır: StarBot'ta İstekler altında onayla.\n\nBir isteği durdurmak için *stop* gönder.",
 
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "Bu WhatsApp numarasına başka bir StarBot da bağlı, bu yüzden iki yanıt alabilirsin. Düzeltmek için telefonundaki WhatsApp'ta Bağlı cihazlar'ı aç ve kullanmadığın StarBot'tan çıkış yap.",
 
   "status.messaging.whatsappPaused":

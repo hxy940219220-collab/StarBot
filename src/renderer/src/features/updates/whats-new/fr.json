@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Lancez un workflow depuis GitHub : un déclencheur GitHub s’exécute sur les nouveaux tickets, commentaires, pull requests, revues, vérifications échouées ou une mention de @openbotgit.",
+          "Lancez un workflow depuis GitHub : un déclencheur GitHub s’exécute sur les nouveaux tickets, commentaires, pull requests, revues, vérifications échouées ou une mention de @starbotgit.",
           "Modifiez GitHub depuis un workflow : commentez, étiquetez, assignez, relisez, fermez ou créez un ticket en tant qu’app GitHub StarBot.",
           "La Marketplace a 17 nouveaux agents StarBot, comme QA Tester, PR Shepherd et Chief of Staff, et 15 nouvelles compétences pour eux.",
           "Utilisation affiche la limite mensuelle d’OpenCode Go dans une troisième barre."

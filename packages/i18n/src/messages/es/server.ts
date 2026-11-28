@@ -156,7 +156,7 @@ export const messages = {
   "server.install.offline": "{name} está sin conexión.",
   "server.install.expired": "Este comando caducó. Crea uno nuevo.",
   "server.install.agentPrompt":
-    'Instala OpenBot en este servidor Linux e inicia sesión en mi cuenta de OpenBot.\nEjecuta este comando como root. No hace preguntas y tarda unos minutos:\n\n{command}\n\nTermina con la línea "StarBot is connected to your account." y el código de salida 0.\nEl comando funciona una vez, durante 15 minutos. No lo guardes en ningún sitio.',
+    'Instala StarBot en este servidor Linux e inicia sesión en mi cuenta de StarBot.\nEjecuta este comando como root. No hace preguntas y tarda unos minutos:\n\n{command}\n\nTermina con la línea "StarBot is connected to your account." y el código de salida 0.\nEl comando funciona una vez, durante 15 minutos. No lo guardes en ningún sitio.',
   "server.install.setUpWithAgent": "Configurar con un agente",
   "server.install.sshAgentPrompt":
     "Conéctate por SSH a mi servidor Linux e instala StarBot en él como servidor.\n\nDirección SSH (user@host):",
@@ -682,7 +682,7 @@ export const messages = {
   "server.update.path.hosted":
     "El servicio alojado descarga actualizaciones en segundo plano. Una actualización descargada se inicia cuando el servidor vuelve a iniciarse. Espera a que termine el trabajo activo antes de detener y reanudar el servidor. Si continúa con una versión antigua, contacta con el administrador del host.",
   "server.update.path.system":
-    "En el host, ejecuta sudo openbot update para instalar la versión más reciente. Este comando detiene StarBot. Espera primero a que termine el trabajo activo. Las descargas automáticas se instalan en el siguiente arranque.",
+    "En el host, ejecuta sudo starbot update para instalar la versión más reciente. Este comando detiene StarBot. Espera primero a que termine el trabajo activo. Las descargas automáticas se instalan en el siguiente arranque.",
 
   "server.update.path.container":
     "En el host de Docker, descarga la nueva imagen de StarBot y vuelve a crear el contenedor con los mismos volúmenes de datos. Espera primero a que termine el trabajo activo. Conserva los volúmenes existentes para preservar tus datos.",

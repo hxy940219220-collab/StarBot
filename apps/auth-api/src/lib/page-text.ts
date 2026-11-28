@@ -1,5 +1,5 @@
-import type { AppTranslate, LayoutDirection, TranslatedLocale } from "@openbot/i18n";
-import { appLanguageOption } from "@openbot/i18n/languages";
+import type { AppTranslate, LayoutDirection, TranslatedLocale } from "@starbot/i18n";
+import { appLanguageOption } from "@starbot/i18n/languages";
 
 export interface PageText<Text> {
   lang: string;
@@ -12,7 +12,7 @@ export async function loadPageText<Text>(
   locale: TranslatedLocale,
   build: (t: AppTranslate) => Text,
 ): Promise<PageText<Text>> {
-  const { loadLocale, localeDirection, localeLoaded, translateFor } = await import("@openbot/i18n");
+  const { loadLocale, localeDirection, localeLoaded, translateFor } = await import("@starbot/i18n");
   await loadLocale(locale).catch(() => undefined);
   const shown = localeLoaded(locale) ? locale : "en";
   return {

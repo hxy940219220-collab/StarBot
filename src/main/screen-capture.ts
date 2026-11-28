@@ -1,5 +1,5 @@
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import {
   ScreenCaptureFailed,
@@ -10,7 +10,7 @@ import {
   type ScreenCaptureSources,
 } from "../backend/agent/screen-capture";
 
-const logger = createOpenBotLogger("screen-capture");
+const logger = createStarBotLogger("screen-capture");
 
 const MAX_CAPTURE_PIXELS = 4_194_304;
 const MAX_LISTED_WINDOWS = 100;

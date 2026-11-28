@@ -1,9 +1,9 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface DynamicIslandPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "acknowledgeFailedTurn" | "importAttachmentData" | "onScopedEvent">;
+  agent: Pick<StarBotDesktopApi["agent"], "acknowledgeFailedTurn" | "importAttachmentData" | "onScopedEvent">;
   dynamicIsland: Pick<
-    OpenBotDesktopApi["dynamicIsland"],
+    StarBotDesktopApi["dynamicIsland"],
     | "getPreference"
     | "getPresentation"
     | "onAction"
@@ -19,5 +19,5 @@ export interface DynamicIslandPort {
 }
 
 export function dynamicIslandPort(): DynamicIslandPort {
-  return window.openbot;
+  return window.starbot;
 }

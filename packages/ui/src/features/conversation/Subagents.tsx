@@ -2,8 +2,8 @@ import type {
   ConversationSubagent,
   ConversationSubagentStatus,
   ConversationSubagentStepKind,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Badge,
   Brain,
@@ -22,9 +22,9 @@ import {
   Search,
   TriangleAlert,
   X,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
+import { prefersReducedMotion } from "@starbot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createUniqueId, For, Match, Show, Switch } from "solid-js";
 import { ActivityShine } from "./ActivityShine";

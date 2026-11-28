@@ -1,7 +1,7 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { BROWSER_SECRET_VAULT_CAPABILITY } from "@openbot/contracts/team-protocol/browser-secret-vault-v1";
-import { VAULT_MEMBER_SAVE_CAPABILITY } from "@openbot/contracts/team-protocol/vault-member-save-v1";
-import type { BrowserSecretVault } from "@openbot/ui/features/conversation/BrowserSecretCard";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { BROWSER_SECRET_VAULT_CAPABILITY } from "@starbot/contracts/team-protocol/browser-secret-vault-v1";
+import { VAULT_MEMBER_SAVE_CAPABILITY } from "@starbot/contracts/team-protocol/vault-member-save-v1";
+import type { BrowserSecretVault } from "@starbot/ui/features/conversation/BrowserSecretCard";
 import { serverRoleCanAdminister, serverSupportsCapability } from "../servers/server-capabilities";
 
 export function browserSecretVault(server: ServerSummary | undefined): BrowserSecretVault | undefined {

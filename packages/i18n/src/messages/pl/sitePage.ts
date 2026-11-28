@@ -256,7 +256,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "Żadna umiejętność nie pasuje do „{query}”.",
   "sitePage.marketplace.emptyApps": "Żadna aplikacja nie pasuje.",
   "sitePage.marketplace.breadcrumb": "Ścieżka nawigacji",
-  "sitePage.marketplace.addToOpenBot": "Dodaj do StarBot",
+  "sitePage.marketplace.addToStarBot": "Dodaj do StarBot",
 
   "sitePage.marketplace.addFromApp":
     "{name} dodajesz w StarBot. Pobierz aplikację, a potem otwórz ten link jeszcze raz.",
@@ -538,7 +538,7 @@ export const messages = {
   "sitePage.site.cta.title": "Poznaj swojego pierwszego współpracownika",
   "sitePage.site.cta.description":
     "Uruchamiaj Codex, Claude, Gemini, Grok albo własny model w planach, za które już płacisz, każdy z własnym obszarem roboczym i kontekstem. Twoja praca zostaje na twoim komputerze.",
-  "sitePage.site.downloadOpenBot": "Pobierz StarBot",
+  "sitePage.site.downloadStarBot": "Pobierz StarBot",
 
   "sitePage.site.contact": "Kontakt",
   "sitePage.site.footer.description":

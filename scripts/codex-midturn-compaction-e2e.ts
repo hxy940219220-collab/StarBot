@@ -3,14 +3,14 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { agentProviderName } from "@openbot/contracts/agent-providers";
-import { AGENT_PROVIDERS, type AgentEvent, PLAN_CONTINUATION_ITEM_TYPE } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { agentProviderName } from "@starbot/contracts/agent-providers";
+import { AGENT_PROVIDERS, type AgentEvent, PLAN_CONTINUATION_ITEM_TYPE } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/codex-midturn-compaction-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-midturn-compaction-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/codex-midturn-compaction-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-midturn-compaction-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const fakeCodex = join(root, "codex");
@@ -21,14 +21,14 @@ const COMPACTION_TIMEOUT_MS = 200;
 
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
+process.env.STARBOT_CODEX_PATH = fakeCodex;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 type FakeTurn = "ok" | "fail" | "stall" | "loop";
 const turns = (...list: FakeTurn[]) => `<<TURNS${JSON.stringify(list)}TURNS>>`;
@@ -231,7 +231,7 @@ async function check(name: string, run: () => Promise<unknown>) {
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const service = new AgentService({

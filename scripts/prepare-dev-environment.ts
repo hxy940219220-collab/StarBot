@@ -17,9 +17,9 @@ export type DevelopmentCommandRunner = (
 
 export const supportedBunVersion = "1.4.2";
 
-const INSTALL_STAMP = join("node_modules", ".openbot-install-stamp");
+const INSTALL_STAMP = join("node_modules", ".starbot-install-stamp");
 const LOCAL_D1_STATE = join("apps", "auth-api", ".wrangler", "state", "v3", "d1");
-const MIGRATION_STAMP = join(LOCAL_D1_STATE, ".openbot-migrate-local-stamp");
+const MIGRATION_STAMP = join(LOCAL_D1_STATE, ".starbot-migrate-local-stamp");
 const MIGRATIONS_DIRECTORY = join("apps", "auth-api", "migrations");
 
 export interface DevelopmentPreparationInput {
@@ -146,7 +146,7 @@ export function prepareDevelopmentWorktree(input: DevelopmentPreparationInput = 
 
   run(executable, ["run", "dev:seed", "--if-missing"], {
     ...options,
-    env: { ...process.env, OPENBOT_DEV_INSTANCE_ID: instanceId },
+    env: { ...process.env, STARBOT_DEV_INSTANCE_ID: instanceId },
   });
   run(executable, ["run", "marketplace:seed:local"], options);
   return stateOutcome;

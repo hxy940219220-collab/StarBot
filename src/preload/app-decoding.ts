@@ -1,16 +1,16 @@
-import { isAgentTemplateId } from "@openbot/contracts/agent-template-links";
-import { type BillingState, parseBillingState } from "@openbot/contracts/billing";
-import { type BillingDetails, parseBillingDetails } from "@openbot/contracts/billing-details";
+import { isAgentTemplateId } from "@starbot/contracts/agent-template-links";
+import { type BillingState, parseBillingState } from "@starbot/contracts/billing";
+import { type BillingDetails, parseBillingDetails } from "@starbot/contracts/billing-details";
 import {
   type CreditActivity,
   type CreditsState,
   parseCreditActivity,
   parseCreditsState,
-} from "@openbot/contracts/credits";
+} from "@starbot/contracts/credits";
 import {
   type CustomServerCheckoutResult,
   parseCustomServerCheckoutResult,
-} from "@openbot/contracts/custom-server-plans";
+} from "@starbot/contracts/custom-server-plans";
 import {
   type HostedServerCatalog,
   type HostedServerList,
@@ -20,8 +20,8 @@ import {
   parseHostedServerSummary,
   parseServerClaim,
   type ServerClaim,
-} from "@openbot/contracts/hosted-servers";
-import { parseHostedSiteList, parseHostedSiteSummary } from "@openbot/contracts/hosted-sites";
+} from "@starbot/contracts/hosted-servers";
+import { parseHostedSiteList, parseHostedSiteSummary } from "@starbot/contracts/hosted-sites";
 import {
   type AccountSession,
   AGENT_DEFAULT_KEYS,
@@ -143,7 +143,7 @@ import {
   type VoiceStreamTranscript,
   type VoiceTranscriptionResult,
   type WorkflowNotificationOpenedEvent,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   decodeList,
   decodeRecord,
@@ -155,16 +155,16 @@ import {
   requiredBoolean,
   requiredNumber,
   requiredString,
-} from "@openbot/contracts/ipc-decoding";
-import { type LicenseState, parseLicenseState } from "@openbot/contracts/license";
+} from "@starbot/contracts/ipc-decoding";
+import { type LicenseState, parseLicenseState } from "@starbot/contracts/license";
 import {
   isMarketplaceAgentId,
   isMarketplaceSkillSlug,
   type MarketplaceListingLink,
-} from "@openbot/contracts/marketplace-links";
-import { decodeOwnerTransfer, type OwnerTransfer } from "@openbot/contracts/owner-transfer";
-import { isPluginSlug } from "@openbot/contracts/plugin-links";
-import { parseReferralState, type ReferralState } from "@openbot/contracts/referral";
+} from "@starbot/contracts/marketplace-links";
+import { decodeOwnerTransfer, type OwnerTransfer } from "@starbot/contracts/owner-transfer";
+import { isPluginSlug } from "@starbot/contracts/plugin-links";
+import { parseReferralState, type ReferralState } from "@starbot/contracts/referral";
 import {
   type DynamicRecord,
   isBoolean,
@@ -172,7 +172,7 @@ import {
   isNumber,
   isOneOf,
   isString,
-} from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/runtime-values";
 
 export function decodeAppInfo(value: unknown): AppInfo {
   const info = decodeRecord(value, "app info");

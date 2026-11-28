@@ -154,7 +154,7 @@ export const messages = {
   "server.install.offline": "{name} è offline.",
   "server.install.expired": "Questo comando è scaduto. Creane uno nuovo.",
   "server.install.agentPrompt":
-    'Installa OpenBot su questo server Linux e collegalo al mio account OpenBot.\nEsegui questo comando come root. Non fa domande e richiede alcuni minuti:\n\n{command}\n\nTermina con la riga "StarBot is connected to your account." e il codice di uscita 0.\nIl comando funziona una volta, per 15 minuti. Non salvarlo da nessuna parte.',
+    'Installa StarBot su questo server Linux e collegalo al mio account StarBot.\nEsegui questo comando come root. Non fa domande e richiede alcuni minuti:\n\n{command}\n\nTermina con la riga "StarBot is connected to your account." e il codice di uscita 0.\nIl comando funziona una volta, per 15 minuti. Non salvarlo da nessuna parte.',
   "server.install.setUpWithAgent": "Configura con un agente",
   "server.install.sshAgentPrompt":
     "Connettiti via SSH al mio server Linux e installa StarBot come server.\n\nIndirizzo SSH (user@host):",
@@ -670,7 +670,7 @@ export const messages = {
   "server.update.path.hosted":
     "Il servizio ospitato scarica gli aggiornamenti in background. Un aggiornamento scaricato parte al prossimo avvio del server. Attendi la fine del lavoro in corso prima di fermare e riprendere il server. Se resta su una versione vecchia, contatta l'amministratore dell'host.",
   "server.update.path.system":
-    "Sull'host, esegui sudo openbot update per installare l'ultima versione. Questo comando ferma StarBot. Attendi prima la fine del lavoro in corso. Gli aggiornamenti scaricati automaticamente si installano al prossimo avvio.",
+    "Sull'host, esegui sudo starbot update per installare l'ultima versione. Questo comando ferma StarBot. Attendi prima la fine del lavoro in corso. Gli aggiornamenti scaricati automaticamente si installano al prossimo avvio.",
 
   "server.update.path.container":
     "Sull'host Docker, scarica la nuova immagine di StarBot e crea di nuovo il container con gli stessi volumi di dati. Attendi prima la fine del lavoro in corso. Mantieni i volumi esistenti per conservare i tuoi dati.",

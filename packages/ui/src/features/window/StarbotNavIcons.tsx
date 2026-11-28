@@ -188,9 +188,9 @@ export function StarbotSettingsIcon(props: NavIconProps) {
     >
       <rect x="3.5" y="3.5" width="17" height="17" rx="5.5" fill="currentColor" fill-opacity="0.12" />
       <path d="M7.5 9.2h9" />
-      <circle cx="10.2" cy="9.2" r="1.9" fill="var(--openbot-bg-surface, #ffffff)" />
+      <circle cx="10.2" cy="9.2" r="1.9" fill="var(--starbot-bg-surface, #ffffff)" />
       <path d="M7.5 14.8h9" />
-      <circle cx="14.2" cy="14.8" r="1.9" fill="var(--openbot-bg-surface, #ffffff)" />
+      <circle cx="14.2" cy="14.8" r="1.9" fill="var(--starbot-bg-surface, #ffffff)" />
     </svg>
   );
 }

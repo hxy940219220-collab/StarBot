@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Inicia un flujo de trabajo desde GitHub: un activador de GitHub se ejecuta con issues nuevos, comentarios, pull requests, revisiones, comprobaciones fallidas o una mención de @openbotgit.",
+          "Inicia un flujo de trabajo desde GitHub: un activador de GitHub se ejecuta con issues nuevos, comentarios, pull requests, revisiones, comprobaciones fallidas o una mención de @starbotgit.",
           "Cambia GitHub desde un flujo de trabajo: comenta, etiqueta, asigna, revisa, cierra o crea un issue como la GitHub App de StarBot.",
           "El Marketplace tiene 17 agentes nuevos de StarBot, como QA Tester, PR Shepherd y Chief of Staff, y 15 habilidades nuevas para ellos.",
           "Uso muestra el límite mensual de OpenCode Go como una tercera barra."

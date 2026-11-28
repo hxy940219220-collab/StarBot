@@ -1,11 +1,11 @@
 import { chmodSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { Schema } from "effect";
 
-const logger = createOpenBotLogger("umbrel-app");
+const logger = createStarBotLogger("umbrel-app");
 const ROOT = resolve(import.meta.dirname, "..");
-const TEMPLATE = join(ROOT, "docker/umbrel/openbot");
+const TEMPLATE = join(ROOT, "docker/umbrel/starbot");
 const IMAGE = "hxy940219220-collab/StarBot-Desktop";
 const decodePullToken = Schema.decodeUnknownSync(Schema.fromJsonString(Schema.Struct({ token: Schema.String })));
 const INDEX_TYPES = [
@@ -18,16 +18,16 @@ if (!version || !/^\d+\.\d+\.\d+$/u.test(version)) {
   throw new Error("Give the release as --version <x.y.z>.");
 }
 const official = process.argv.includes("--official");
-const appId = argument("id") ?? "openbot";
-if (official && appId !== "openbot") throw new Error("The official app has the id openbot. Remove --id.");
+const appId = argument("id") ?? "starbot";
+if (official && appId !== "starbot") throw new Error("The official app has the id starbot. Remove --id.");
 const submission = argument("submission") ?? "";
 if (submission && !/^https:\/\/github\.com\/getumbrel\/umbrel-apps\/pull\/\d+$/u.test(submission)) {
   throw new Error("Give --submission as the URL of a pull request to getumbrel/umbrel-apps.");
 }
 if (!/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u.test(appId)) {
-  throw new Error("Give the app id as lowercase letters, digits and dashes, such as --id openbot-server.");
+  throw new Error("Give the app id as lowercase letters, digits and dashes, such as --id starbot-server.");
 }
-const out = resolve(ROOT, argument("out") ?? `.openbot-build/umbrel/${appId}`);
+const out = resolve(ROOT, argument("out") ?? `.starbot-build/umbrel/${appId}`);
 
 const notAppFolder = existsSync(out) && readdirSync(out).length > 0 && !existsSync(join(out, "umbrel-app.yml"));
 if (out === TEMPLATE || notAppFolder) {

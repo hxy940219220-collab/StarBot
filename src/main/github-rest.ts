@@ -4,11 +4,11 @@ import type {
   WorkflowGitHubEvent,
   WorkflowGitHubLabel,
   WorkflowGitHubRepositoryOptions,
-} from "@openbot/contracts/ipc";
-import { WORKFLOW_GITHUB_OPTION_LIMIT } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { WORKFLOW_GITHUB_OPTION_LIMIT } from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { redactText } from "@starbot/logging";
 import { Effect, Option } from "effect";
 import { z } from "zod";
 import type { MessagingAdapterError } from "../backend/messaging/messaging-types";
@@ -36,7 +36,7 @@ const GITHUB_STATE_REASONS: Record<WorkflowGitHubCloseReason, string> = {
   notPlanned: "not_planned",
 };
 
-const FILES_BRANCH = "openbot-attachments";
+const FILES_BRANCH = "starbot-attachments";
 const FILE_BYTES_LIMIT = 25 * 1024 * 1024;
 const FILES_BYTES_LIMIT = 50 * 1024 * 1024;
 const FILE_TRANSFER_TIMEOUT_MS = 2 * 60 * 1000;

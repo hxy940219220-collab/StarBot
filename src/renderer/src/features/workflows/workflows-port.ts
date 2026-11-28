@@ -1,8 +1,8 @@
-import { ATTACHMENT_LIMITS } from "@openbot/contracts/input-limits";
+import { ATTACHMENT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentAccessLevels,
   MESSAGING_LIMITS,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type ServerSummary,
   STORAGE_CAPABILITY,
   type StorageUsage,
@@ -11,25 +11,25 @@ import {
   type WorkflowFolderAction,
   type WorkflowFoldersSnapshot,
   type WorkflowMediaKind,
-} from "@openbot/contracts/ipc";
-import { ATTACHMENT_PREVIEW_CAPABILITY } from "@openbot/contracts/team-protocol/attachment-preview-v1";
-import { WORKFLOW_FOLDERS_CAPABILITY } from "@openbot/contracts/team-protocol/workflow-folders-v1";
-import { WORKFLOWS_AGENT_FILES_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-agent-files-v1";
-import { WORKFLOWS_ANSWERS_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-answers-v1";
-import { WORKFLOWS_MEDIA_ACCOUNT_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-media-account-v1";
-import { WORKFLOWS_MEDIA_SIZE_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-media-size-v1";
-import { WORKFLOWS_MEDIA_TRANSPARENT_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-media-transparent-v1";
-import { WORKFLOWS_PAUSE_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-pause-v1";
-import { WORKFLOWS_PORTABLE_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-portable-v1";
-import { WORKFLOWS_STEP_SETTINGS_CAPABILITY } from "@openbot/contracts/team-protocol/workflows-step-settings-v1";
+} from "@starbot/contracts/ipc";
+import { ATTACHMENT_PREVIEW_CAPABILITY } from "@starbot/contracts/team-protocol/attachment-preview-v1";
+import { WORKFLOW_FOLDERS_CAPABILITY } from "@starbot/contracts/team-protocol/workflow-folders-v1";
+import { WORKFLOWS_AGENT_FILES_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-agent-files-v1";
+import { WORKFLOWS_ANSWERS_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-answers-v1";
+import { WORKFLOWS_MEDIA_ACCOUNT_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-media-account-v1";
+import { WORKFLOWS_MEDIA_SIZE_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-media-size-v1";
+import { WORKFLOWS_MEDIA_TRANSPARENT_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-media-transparent-v1";
+import { WORKFLOWS_PAUSE_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-pause-v1";
+import { WORKFLOWS_PORTABLE_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-portable-v1";
+import { WORKFLOWS_STEP_SETTINGS_CAPABILITY } from "@starbot/contracts/team-protocol/workflows-step-settings-v1";
 import type {
   WorkflowChannel,
   WorkflowDiscordServer,
   WorkflowPlace,
   WorkflowSlackWorkspace,
   WorkflowTelegramChat,
-} from "@openbot/ui/features/workflows/workflow-model";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/workflows/workflow-model";
+import { currentText } from "@starbot/ui/text";
 import {
   type GitHubConnectorPort,
   githubConnectorPort,
@@ -37,7 +37,7 @@ import {
 } from "../connectors/github-connector-port";
 import { serverCanAdminister, serverRoleCanAdminister, serverSupportsCapability } from "../servers/server-capabilities";
 
-type WorkflowsApi = OpenBotDesktopApi["workflows"];
+type WorkflowsApi = StarBotDesktopApi["workflows"];
 type NoInputMethod = "list" | "githubCatalog" | "mediaProviders" | "mediaCredits" | "mediaCatalog" | "folders";
 type BoundWorkflowsApi = {
   [Name in Exclude<keyof WorkflowsApi, NoInputMethod>]: (
@@ -110,18 +110,18 @@ export function keptPicture(fileId: string, file: File, previewUrl: string | nul
 }
 
 export function desktopMediaCredits(serverId: string) {
-  return window.openbot.workflows.mediaCredits(serverId);
+  return window.starbot.workflows.mediaCredits(serverId);
 }
 
 export function desktopWorkflowHost(serverId: string, server: () => ServerSummary | undefined): WorkflowHost {
-  const api = () => window.openbot.workflows;
+  const api = () => window.starbot.workflows;
   const local = () => server()?.kind !== "remote";
   const placesSupported = () => local() || serverCanAdminister(server(), "routine-results-v1");
   const chatsSupported = () => local() || (placesSupported() && serverCanAdminister(server(), "workflows-chats-v1"));
   const channelsSupported = () => local() || serverCanAdminister(server(), "workflows-channels-v1");
-  let optionsCall: ReturnType<OpenBotDesktopApi["routineResults"]["options"]> | undefined;
+  let optionsCall: ReturnType<StarBotDesktopApi["routineResults"]["options"]> | undefined;
   const options = () => {
-    optionsCall ??= window.openbot.routineResults.options(serverId).finally(() => {
+    optionsCall ??= window.starbot.routineResults.options(serverId).finally(() => {
       optionsCall = undefined;
     });
     return optionsCall;
@@ -139,8 +139,8 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
   const hostGitHub = hostGitHubConnectorPort(() => (githubSupported() ? serverId : undefined));
   const mediaUrl = (attachmentId: string) =>
     local()
-      ? `openbot-attachment://file/${encodeURIComponent(attachmentId)}`
-      : `openbot-remote-attachment://${encodeURIComponent(serverId)}/${encodeURIComponent(attachmentId)}`;
+      ? `starbot-attachment://file/${encodeURIComponent(attachmentId)}`
+      : `starbot-remote-attachment://${encodeURIComponent(serverId)}/${encodeURIComponent(attachmentId)}`;
   const mediaPreviewUrl = (attachmentId: string) =>
     !local() && serverSupportsCapability(server(), ATTACHMENT_PREVIEW_CAPABILITY)
       ? `${mediaUrl(attachmentId)}?preview=1`
@@ -181,12 +181,12 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
       folderAction: (action) => api().folderAction(action, serverId),
     },
     onChanged(changed) {
-      const unsubscribe = window.openbot.agent.onScopedEvent((scoped) => {
+      const unsubscribe = window.starbot.agent.onScopedEvent((scoped) => {
         if (scoped.serverId !== serverId) return;
         if (scoped.event.type === "workflows-changed") changed(scoped.event.workflowId, scoped.event.agentId);
         else if (scoped.event.type === "agent-access-changed") changed(null);
       });
-      const reconnect = window.openbot.servers.onEvent((servers) => {
+      const reconnect = window.starbot.servers.onEvent((servers) => {
         if (servers.some((server) => server.id === serverId && server.state === "online")) changed(null);
       });
       return () => {
@@ -198,7 +198,7 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
     folders: () => api().folders(serverId),
     folderAction: (action) => api().folderAction(action, serverId),
     onFoldersChanged: (changed) =>
-      window.openbot.agent.onScopedEvent((scoped) => {
+      window.starbot.agent.onScopedEvent((scoped) => {
         if (scoped.serverId === serverId && scoped.event.type === "workflow-folders-changed") changed();
       }),
     async places() {
@@ -217,12 +217,12 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
     },
     async channels() {
       if (!channelsSupported()) return [];
-      const channels = await window.openbot.agent.listChannels(serverId);
+      const channels = await window.starbot.agent.listChannels(serverId);
       return channels.filter((channel) => !channel.archived).map((channel) => ({ id: channel.id, name: channel.name }));
     },
     async discordServers() {
       if (!local()) return [];
-      const [connections, overview] = await Promise.all([options(), window.openbot.messaging.getDiscordOverview()]);
+      const [connections, overview] = await Promise.all([options(), window.starbot.messaging.getDiscordOverview()]);
       const discord = connections.filter((option) => option.platform === "discord");
       return Promise.all(
         discord.map(async (option) => {
@@ -231,7 +231,7 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
           );
           const guild = guilds.length === 1 ? guilds[0] : undefined;
           const roles = guild
-            ? await window.openbot.messaging.listDiscordRoles({ workspaceId: guild.workspaceId }).then(
+            ? await window.starbot.messaging.listDiscordRoles({ workspaceId: guild.workspaceId }).then(
                 (list) => list.roles,
                 () => [],
               )
@@ -263,16 +263,16 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
     },
     async agentLevels() {
       if (local() || serverRoleCanAdminister(server())) return null;
-      return (await window.openbot.hostAdmin.getAgentAccess(serverId)).mine;
+      return (await window.starbot.hostAdmin.getAgentAccess(serverId)).mine;
     },
     async pictures() {
       if (!mediaSupported() || !(local() || serverSupportsCapability(server(), STORAGE_CAPABILITY))) return [];
-      return libraryPictures(await window.openbot.storage.getUsage({ scope: "host" }, serverId));
+      return libraryPictures(await window.starbot.storage.getUsage({ scope: "host" }, serverId));
     },
     async uploadPicture(file) {
       checkPicture(file, ATTACHMENT_LIMITS.fileBytes);
       const bytes = new Uint8Array(await file.arrayBuffer());
-      const [draft] = await window.openbot.agent.importAttachmentData(
+      const [draft] = await window.starbot.agent.importAttachmentData(
         [{ name: file.name, mimeType: file.type, bytes }],
         serverId,
       );
@@ -280,13 +280,13 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
       const fileId = await api()
         .keepPicture(draft.id, serverId)
         .catch(async (error: unknown) => {
-          await window.openbot.agent.discardDraftAttachment(draft.id, serverId).catch(() => undefined);
+          await window.starbot.agent.discardDraftAttachment(draft.id, serverId).catch(() => undefined);
           throw error;
         });
       return keptPicture(fileId, file, mediaUrl(fileId));
     },
     downloadMedia: (attachmentId) =>
-      window.openbot.agent.openAttachment({ attachmentId, action: "download" }, serverId),
+      window.starbot.agent.openAttachment({ attachmentId, action: "download" }, serverId),
     githubSupported,
     mediaSupported,
     mediaAccountSupported,
@@ -303,6 +303,6 @@ export function desktopWorkflowHost(serverId: string, server: () => ServerSummar
       return local() ? githubConnectorPort() : hostGitHub;
     },
     hostName: () => (local() ? undefined : server()?.name),
-    openUrl: (url) => window.openbot.openUrl(url),
+    openUrl: (url) => window.starbot.openUrl(url),
   };
 }

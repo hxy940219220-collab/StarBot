@@ -1,6 +1,6 @@
-import { canAdministerServer, type ServerSummary, type TeamPresenceMember } from "@openbot/contracts/ipc";
-import { SidebarMachineCard } from "@openbot/ui/features/sidebar/SidebarMachineCard";
-import { SidebarStorageCard } from "@openbot/ui/features/sidebar/SidebarStorageCard";
+import { canAdministerServer, type ServerSummary, type TeamPresenceMember } from "@starbot/contracts/ipc";
+import { SidebarMachineCard } from "@starbot/ui/features/sidebar/SidebarMachineCard";
+import { SidebarStorageCard } from "@starbot/ui/features/sidebar/SidebarStorageCard";
 import { createMemo, Show } from "solid-js";
 import { createMachineCard } from "./machine-card";
 import { type SidebarCardsPort, sidebarPort } from "./sidebar-port";

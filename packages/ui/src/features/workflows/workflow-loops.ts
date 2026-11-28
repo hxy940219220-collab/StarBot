@@ -1,4 +1,4 @@
-import { type WorkflowEdge, type WorkflowGraph, workflowLoopEdges } from "@openbot/contracts/ipc";
+import { type WorkflowEdge, type WorkflowGraph, workflowLoopEdges } from "@starbot/contracts/ipc";
 
 export interface WorkflowLoop {
   body: readonly string[];

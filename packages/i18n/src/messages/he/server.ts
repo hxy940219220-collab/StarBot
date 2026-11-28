@@ -150,7 +150,7 @@ export const messages = {
   "server.install.offline": "{name} לא מחובר.",
   "server.install.expired": "תוקף הפקודה הזו פג. צרו פקודה חדשה.",
   "server.install.agentPrompt":
-    'התקן את OpenBot בשרת ה-Linux הזה וחבר אותו לחשבון OpenBot שלי.\nהרץ את הפקודה הזו כ-root. היא לא שואלת שאלות ולוקחת כמה דקות:\n\n{command}\n\nהיא מסתיימת בשורה "StarBot is connected to your account." ובקוד יציאה 0.\nהפקודה עובדת פעם אחת, במשך 15 דקות. אל תשמור אותה בשום מקום.',
+    'התקן את StarBot בשרת ה-Linux הזה וחבר אותו לחשבון StarBot שלי.\nהרץ את הפקודה הזו כ-root. היא לא שואלת שאלות ולוקחת כמה דקות:\n\n{command}\n\nהיא מסתיימת בשורה "StarBot is connected to your account." ובקוד יציאה 0.\nהפקודה עובדת פעם אחת, במשך 15 דקות. אל תשמור אותה בשום מקום.',
   "server.install.setUpWithAgent": "הגדרה עם סוכן",
   "server.install.sshAgentPrompt": "התחבר ב-SSH לשרת ה-Linux שלי והתקן עליו את StarBot כשרת.\n\nכתובת SSH (user@host):",
 
@@ -778,7 +778,7 @@ export const messages = {
   "server.update.path.hosted":
     "השירות המתארח מוריד עדכונים ברקע. עדכון שהורד מתחיל כשהשרת מופעל בפעם הבאה. יש להמתין לסיום עבודה פעילה לפני עצירת השרת והמשכו. אם הוא נשאר בגרסה ישנה, יש ליצור קשר עם מנהל המארח.",
   "server.update.path.system":
-    "במארח, יש להריץ sudo openbot update כדי להתקין את הגרסה האחרונה. הפקודה עוצרת את StarBot. יש להמתין קודם לסיום עבודה פעילה. הורדות אוטומטיות מותקנות באתחול הבא.",
+    "במארח, יש להריץ sudo starbot update כדי להתקין את הגרסה האחרונה. הפקודה עוצרת את StarBot. יש להמתין קודם לסיום עבודה פעילה. הורדות אוטומטיות מותקנות באתחול הבא.",
 
   "server.update.path.container":
     "במארח Docker, יש למשוך את תמונת StarBot החדשה וליצור את הקונטיינר מחדש עם אותם כרכי נתונים. יש להמתין קודם לסיום עבודה פעילה. יש לשמור את הכרכים הקיימים כדי לשמור על הנתונים.",

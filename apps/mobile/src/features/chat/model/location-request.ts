@@ -1,8 +1,8 @@
 import {
   SHARED_LOCATION_ACCURACY_LIMIT,
   type SharedLocation,
-} from "@openbot/contracts/team-protocol/ui-block-location-v1";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
+} from "@starbot/contracts/team-protocol/ui-block-location-v1";
+import type { ConversationUiBlock } from "@starbot/contracts/ui-blocks";
 import * as Location from "expo-location";
 import type { ChatMessage } from "@/features/chat/model/chat-messages";
 

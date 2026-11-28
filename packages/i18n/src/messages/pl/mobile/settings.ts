@@ -243,7 +243,7 @@ export const messages = {
     "Odpowiedzi w wątkach powiadomią cię, gdy agent skończy albo zatrzyma się z błędem w wątku. Bez nich wątek nadal powiadomi cię, gdy będzie potrzebować twojej odpowiedzi lub zatwierdzenia.",
   "mobile.settings.notifications.sound": "Dźwięk",
   "mobile.settings.notifications.playSound": "Odtwarzaj dźwięk",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "Ciepły",
   "mobile.settings.notifications.sound.mech": "Mechaniczny",
@@ -393,7 +393,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "Moje ostatnie pół roku z StarBot",
 
   "mobile.settings.profile.share.createFailed": "Nie udało się utworzyć obrazu.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "Głos",
   "mobile.settings.voice.sample": "Cześć. Tak będę czytać Ci moje odpowiedzi.",
   "mobile.settings.voice.voice": "Głos",

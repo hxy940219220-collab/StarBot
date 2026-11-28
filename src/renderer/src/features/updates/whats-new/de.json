@@ -749,7 +749,7 @@
       {
         "type": "added",
         "items": [
-          "Starte einen Workflow von GitHub aus: Ein GitHub-Auslöser läuft bei neuen Issues, Kommentaren, Pull Requests, Reviews, fehlgeschlagenen Checks oder einer Erwähnung von @openbotgit.",
+          "Starte einen Workflow von GitHub aus: Ein GitHub-Auslöser läuft bei neuen Issues, Kommentaren, Pull Requests, Reviews, fehlgeschlagenen Checks oder einer Erwähnung von @starbotgit.",
           "Ändere GitHub aus einem Workflow: Kommentiere, setze Labels, weise zu, prüfe, schließe oder erstelle ein Issue als StarBot GitHub App.",
           "Der Marketplace hat 17 neue StarBot-Agenten, etwa QA Tester, PR Shepherd und Chief of Staff, und 15 neue Fähigkeiten für sie.",
           "Nutzung zeigt das monatliche Limit von OpenCode Go als dritten Balken."

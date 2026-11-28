@@ -123,7 +123,7 @@ export const messages = {
   "settings.externalLinks.description":
     "Sohbetlerdeki, oturum açma ve faturalandırma sayfalarındaki bağlantılar burada açılır.",
   "settings.externalLinks.defaultBrowser": "Varsayılan tarayıcı",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
 
   "settings.externalLinks.defaultBrowserNamed": "Varsayılan tarayıcı ({name})",
   "settings.externalLinks.otherApp": "Başka uygulama…",
@@ -461,10 +461,10 @@ export const messages = {
   "settings.mobileConnect.route.description":
     "Bu bilgisayara bağlanan telefonlar, diğer bilgisayarlar ve ekip üyeleri için.",
   "settings.mobileConnect.route.chipLabel": "Cihazlar nasıl bağlanır: {route}",
-  "settings.mobileConnect.route.openbot.title": "StarBot üzerinden",
+  "settings.mobileConnect.route.starbot.title": "StarBot üzerinden",
 
-  "settings.mobileConnect.route.openbot.badge": "Önerilen",
-  "settings.mobileConnect.route.openbot.description":
+  "settings.mobileConnect.route.starbot.badge": "Önerilen",
+  "settings.mobileConnect.route.starbot.description":
     "Her ağda çalışır. Sohbetler ve dosyalar cihazlarınız arasında şifrelenir.",
   "settings.mobileConnect.route.private.title": "Özel ağ",
   "settings.mobileConnect.route.private.tailscale": "Tailscale bulundu",
@@ -512,7 +512,7 @@ export const messages = {
   "settings.profile.share.copied": "Görüntü kopyalandı",
   "settings.profile.share.copyFailed": "Görüntü kopyalanamadı.",
   "settings.profile.share.createFailed": "Görüntü oluşturulamadı.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "starbot-activity.png",
   "settings.profile.share.caption": "StarBot ile son altı ayım",
 
   "settings.profile.activity.title": "Bu bilgisayardaki etkinlik",

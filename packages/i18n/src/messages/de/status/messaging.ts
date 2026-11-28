@@ -71,7 +71,7 @@ export const messages = {
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *StarBot ist verbunden*\n\nDie Personen, die du in StarBot erlaubst, können dieser Nummer jetzt schreiben. Eine neue Person bekommt einen Code: Genehmige ihn in StarBot unter Anfragen.\n\nSende *stop*, um eine Anfrage zu stoppen.",
 
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "Ein anderer StarBot ist mit dieser WhatsApp-Nummer verknüpft, darum bekommst du vielleicht zwei Antworten. Öffne dazu in WhatsApp auf deinem Handy „Verknüpfte Geräte“ und melde den StarBot ab, den du nicht nutzt.",
 
   "status.messaging.whatsappPaused":

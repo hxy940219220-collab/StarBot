@@ -1,4 +1,4 @@
-import { isString } from "@openbot/contracts/runtime-values";
+import { isString } from "@starbot/contracts/runtime-values";
 import { accountScope } from "@/shared/lib/account-scope";
 
 const SERVER_ACCENTS = ["#74b9ff", "#f0a06a", "#6bc7d9", "#d98ac9", "#31cf76"] as const;

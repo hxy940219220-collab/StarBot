@@ -1,4 +1,4 @@
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AppVariant,
   AttachmentDataInput,
@@ -6,13 +6,13 @@ import type {
   DynamicIslandAgentIdentity,
   DynamicIslandPreference,
   DynamicIslandPresentation,
-} from "@openbot/contracts/ipc";
-import { DEFAULT_DYNAMIC_ISLAND_PREFERENCE, IDLE_DYNAMIC_ISLAND_PRESENTATION } from "@openbot/contracts/ipc";
-import type { DynamicIslandNotchSize, DynamicIslandStateChangeReason, DynamicIslandViewState } from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { OpenBotDynamicIsland } from "@openbot/ui/features/dynamic-island/OpenBotDynamicIsland";
-import { useText } from "@openbot/ui/text";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { DEFAULT_DYNAMIC_ISLAND_PREFERENCE, IDLE_DYNAMIC_ISLAND_PRESENTATION } from "@starbot/contracts/ipc";
+import type { DynamicIslandNotchSize, DynamicIslandStateChangeReason, DynamicIslandViewState } from "@starbot/ui";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { StarBotDynamicIsland } from "@starbot/ui/features/dynamic-island/StarBotDynamicIsland";
+import { useText } from "@starbot/ui/text";
+import { errorReference, type UserErrorDetails } from "@starbot/user-errors";
 import { createEffect, createMemo, createSignal, For, onSettled, Show } from "solid-js";
 import { currentDevicePlatform } from "../../send-shortcut-preference";
 import { windowShape } from "../../window-shape";
@@ -576,7 +576,7 @@ export function DynamicIslandSurface() {
               <Show
                 when={gravityToast()}
                 fallback={
-                  <OpenBotDynamicIsland
+                  <StarBotDynamicIsland
                     presentation={presentation()}
                     state={viewState()}
                     displayMode={displayMode}

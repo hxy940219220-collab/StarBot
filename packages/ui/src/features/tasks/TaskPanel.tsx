@@ -1,9 +1,9 @@
-import type { AgentTask } from "@openbot/contracts/ipc";
-import { isAgentTaskActive } from "@openbot/team-client/agent-tasks";
-import { Archive, ArchiveRestore, Button, MessageSquare, X } from "@openbot/ui";
-import { AgentTaskMark, type AgentTaskWait } from "@openbot/ui/features/conversation/AgentTasks";
-import { UiBlockCard } from "@openbot/ui/features/conversation/ui-blocks/UiBlockCard";
-import { useText } from "@openbot/ui/text";
+import type { AgentTask } from "@starbot/contracts/ipc";
+import { isAgentTaskActive } from "@starbot/team-client/agent-tasks";
+import { Archive, ArchiveRestore, Button, MessageSquare, X } from "@starbot/ui";
+import { AgentTaskMark, type AgentTaskWait } from "@starbot/ui/features/conversation/AgentTasks";
+import { UiBlockCard } from "@starbot/ui/features/conversation/ui-blocks/UiBlockCard";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { Show } from "solid-js";
 

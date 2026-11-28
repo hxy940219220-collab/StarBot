@@ -1,17 +1,17 @@
-import type { ClientAgentSummary } from "@openbot/contracts/ipc";
-import { AGENT_WELCOME_CAPABILITY, TEAM_AGENT_CREATE_MODEL_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import type { AgentProfile } from "@openbot/ui/data";
+import type { ClientAgentSummary } from "@starbot/contracts/ipc";
+import { AGENT_WELCOME_CAPABILITY, TEAM_AGENT_CREATE_MODEL_CAPABILITY } from "@starbot/contracts/team-protocol/current";
+import { classifyFailure } from "@starbot/telemetry";
+import { toast } from "@starbot/ui";
+import type { AgentProfile } from "@starbot/ui/data";
 import {
   AGENT_DELETE_UNDO_MS,
   AgentDeleteUndoToast,
   startUndoCountdown,
   type UndoCountdown,
-} from "@openbot/ui/features/agents/AgentDeleteUndoToast";
-import type { FirstAgentDraft } from "@openbot/ui/features/agents/FirstAgentSetup";
-import { duplicateSection as duplicateSectionWith } from "@openbot/ui/features/sidebar/duplicate-section";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/agents/AgentDeleteUndoToast";
+import type { FirstAgentDraft } from "@starbot/ui/features/agents/FirstAgentSetup";
+import { duplicateSection as duplicateSectionWith } from "@starbot/ui/features/sidebar/duplicate-section";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createSignal, onCleanup, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { desktopAnalytics } from "../../analytics";

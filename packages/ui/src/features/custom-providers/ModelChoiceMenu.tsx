@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, DropdownMenu } from "@openbot/ui";
+import { Check, ChevronsUpDown, DropdownMenu } from "@starbot/ui";
 import { createUniqueId, For, Show } from "solid-js";
 import { useText } from "../../text";
 

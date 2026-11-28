@@ -3,8 +3,8 @@ import {
   eventFilterDraft,
   eventFilterDraftsValid,
   eventFiltersFromDrafts,
-} from "@openbot/contracts/event-filter-value";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@starbot/contracts/event-filter-value";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   ROUTINE_LIMIT_POLICIES,
   ROUTINE_MISSED_POLICIES,
@@ -16,9 +16,9 @@ import {
   type RoutineRunFields,
   type RoutineRunPlace,
   type RoutineSchedule,
-} from "@openbot/contracts/ipc";
-import type { RoutineWebhookTriggerInput, WebhookTestResult } from "@openbot/contracts/ipc-events";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { RoutineWebhookTriggerInput, WebhookTestResult } from "@starbot/contracts/ipc-events";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   Button,
   CircleCheck,
@@ -39,25 +39,25 @@ import {
   Textarea,
   toast,
   Webhook,
-} from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
-import { SettingsBackIcon, SettingsForwardIcon } from "@openbot/ui/components/SettingsPanel";
+} from "@starbot/ui";
+import { createScrollFades } from "@starbot/ui/components/createScrollFades";
+import { SettingsBackIcon, SettingsForwardIcon } from "@starbot/ui/components/SettingsPanel";
 import {
   type RoutineResultChoice,
   RoutineResultDestinationField,
-} from "@openbot/ui/features/conversation/RoutineResultDestinationField";
-import { RoutineRunHistory } from "@openbot/ui/features/conversation/RoutineRunHistory";
-import { RoutineSchedulePicker } from "@openbot/ui/features/conversation/RoutineSchedulePicker";
-import { RoutineTriggerMenu } from "@openbot/ui/features/conversation/RoutineTriggerMenu";
+} from "@starbot/ui/features/conversation/RoutineResultDestinationField";
+import { RoutineRunHistory } from "@starbot/ui/features/conversation/RoutineRunHistory";
+import { RoutineSchedulePicker } from "@starbot/ui/features/conversation/RoutineSchedulePicker";
+import { RoutineTriggerMenu } from "@starbot/ui/features/conversation/RoutineTriggerMenu";
 import {
   RoutineWebhookTrigger,
   type RoutineWebhookTriggerProps,
-} from "@openbot/ui/features/conversation/RoutineWebhookTrigger";
+} from "@starbot/ui/features/conversation/RoutineWebhookTrigger";
 import {
   ROUTINE_EVERY_DAY,
   type RoutineScheduleDraft,
   switchDraftKind,
-} from "@openbot/ui/features/conversation/routine-schedule-draft";
+} from "@starbot/ui/features/conversation/routine-schedule-draft";
 import {
   ROUTINE_LOCAL_DRAFT_KINDS,
   ROUTINE_SAVED_DRAFT_KINDS,
@@ -66,8 +66,8 @@ import {
   routineOncePassed,
   routineScheduleFromDraft,
   routineScheduleToDraft,
-} from "@openbot/ui/features/conversation/routine-schedule-saved";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/routine-schedule-saved";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createStore, For, onCleanup, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";

@@ -2,7 +2,7 @@ import {
   DISCONNECTED_GITHUB_CONNECTOR,
   type GitHubConnectorDesktopApi,
   type GitHubConnectorStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import type { GitHubConnectorPort } from "../features/connectors/github-connector-port";
 
 const MOCK_CODE_MS = 800;

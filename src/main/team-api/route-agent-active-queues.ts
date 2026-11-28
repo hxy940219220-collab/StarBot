@@ -1,11 +1,11 @@
-import type { QueueSnapshot } from "@openbot/contracts/ipc";
+import type { QueueSnapshot } from "@starbot/contracts/ipc";
 import {
   AGENT_ACTIVE_QUEUE_DELIVERY_LIMIT,
   AGENT_ACTIVE_QUEUES_CAPABILITY,
   AGENT_ACTIVE_QUEUES_LIMIT,
   AGENT_ACTIVE_QUEUES_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-active-queues-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/agent-active-queues-v1";
+import { sourceText } from "@starbot/i18n/source";
 import type { TeamApiAgents } from "./dependencies";
 import { HttpError } from "./http-error";
 import type { RouteOutcome, TeamApiRequestContext } from "./request-context";

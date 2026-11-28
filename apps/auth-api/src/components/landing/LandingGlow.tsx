@@ -16,12 +16,12 @@ const RISE_MS = 1100;
 const RETURN_DELAY_MS = 450;
 
 const landingGlowStops: readonly LandingGlowStop[] = [
-  { offset: 0, color: "var(--openbot-logo-production)" },
-  { offset: 0.22, color: "var(--openbot-logo-production)" },
-  { offset: 0.42, color: "var(--openbot-logo-dev)" },
-  { offset: 0.62, color: "var(--openbot-logo-preview)" },
-  { offset: 0.82, color: "var(--openbot-logo-production)" },
-  { offset: 1, color: "var(--openbot-logo-production)", opacity: 0 },
+  { offset: 0, color: "var(--starbot-logo-production)" },
+  { offset: 0.22, color: "var(--starbot-logo-production)" },
+  { offset: 0.42, color: "var(--starbot-logo-dev)" },
+  { offset: 0.62, color: "var(--starbot-logo-preview)" },
+  { offset: 0.82, color: "var(--starbot-logo-production)" },
+  { offset: 1, color: "var(--starbot-logo-production)", opacity: 0 },
 ];
 
 function landingGlowHeights(): number[] {

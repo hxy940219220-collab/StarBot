@@ -1,5 +1,5 @@
-import { AGENT_INSTRUCTION_FILE_NAMES } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+import { AGENT_INSTRUCTION_FILE_NAMES } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
 import {
   agentIdentityUpdate,
   type InstructionsFileText,

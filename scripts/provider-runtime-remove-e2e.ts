@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 import { chmod, mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
-import type { AgentProviderId, ManagedProviderId } from "@openbot/contracts/agent-providers";
+import type { AgentProviderId, ManagedProviderId } from "@starbot/contracts/agent-providers";
 import { chooseInstalledFirst, resolveCodexCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { INSTALL_RECORD } from "../src/main/provider-runtime-descriptors";
 import { ProviderRuntimeManager } from "../src/main/provider-runtime-manager";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-runtime-remove-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-runtime-remove-e2e");
 const DAY_MS = 24 * 60 * 60 * 1000;
 const OFF: ManagedProviderId = "cursor";
 const ON: ManagedProviderId = "opencode";
@@ -17,7 +17,7 @@ const SIBLING: ManagedProviderId = "cline";
 const TURNED_OFF: ManagedProviderId = "grok";
 const SHARED: ManagedProviderId = "antigravity";
 const CONFIGURED: ManagedProviderId = "claude";
-const CONFIGURED_ENV = `OPENBOT_${CONFIGURED.toUpperCase()}_PATH`;
+const CONFIGURED_ENV = `STARBOT_${CONFIGURED.toUpperCase()}_PATH`;
 const PI: ManagedProviderId = "pi";
 const HELD: ManagedProviderId = "muse";
 const READY: ManagedProviderId = "codex";
@@ -58,7 +58,7 @@ interface Report {
   choice?: Record<string, { source: string; version: string; passedOver: string | null }>;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-runtime-remove-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-provider-runtime-remove-e2e-"));
 const store = join(root, "provider-runtimes");
 const downloads = join(root, "downloads");
 const report: Report = { passed: false };

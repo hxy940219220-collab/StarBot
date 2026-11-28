@@ -229,7 +229,7 @@ export const messages = {
     "תשובות בשרשורים מודיעות כשסוכן מסיים או נעצר בשגיאה בשרשור. בלעדיהן, שרשור עדיין מודיע כשהוא צריך קלט או אישור.",
   "mobile.settings.notifications.sound": "צליל",
   "mobile.settings.notifications.playSound": "השמעת צליל",
-  "mobile.settings.notifications.sound.openbot": "StarBot",
+  "mobile.settings.notifications.sound.starbot": "StarBot",
 
   "mobile.settings.notifications.sound.warm": "חם",
   "mobile.settings.notifications.sound.mech": "מכני",
@@ -370,7 +370,7 @@ export const messages = {
   "mobile.settings.profile.share.caption": "ששת החודשים האחרונים שלי עם StarBot",
 
   "mobile.settings.profile.share.createFailed": "לא ניתן ליצור את התמונה.",
-  "mobile.settings.profile.share.fileName": "openbot-activity.png",
+  "mobile.settings.profile.share.fileName": "starbot-activity.png",
   "mobile.settings.voice.title": "קול",
   "mobile.settings.voice.sample": "שלום. כך אקרא לך את התשובות שלי.",
   "mobile.settings.voice.voice": "קול",

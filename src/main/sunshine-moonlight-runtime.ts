@@ -13,8 +13,8 @@ import type {
   RemoteDesktopIceServer,
   RemoteDesktopSetupStatus,
   RemoteDesktopTestStatus,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { runCauseEffect } from "../backend/effect-boundary";
 import { agentDisplayEnvironment } from "./agent-display";
@@ -337,7 +337,7 @@ export class SunshineMoonlightRuntime {
   #moonlight: ChildProcess | null = null;
   #iceServer: Server | null = null;
   #iceToken = "";
-  readonly #pairingName = `openbot-remote-${randomBytes(16).toString("hex")}`;
+  readonly #pairingName = `starbot-remote-${randomBytes(16).toString("hex")}`;
   #state: SunshineMoonlightRuntimeState | null = null;
   #screenCaptureDenied = false;
   #windowsCaptureDenied = false;
@@ -408,7 +408,7 @@ export class SunshineMoonlightRuntime {
   > {
     return yield* sunshineJsonEffect(
       yield* desktopSync(() => this.#requireSunshineHttpsPort()),
-      "/api/openbot/setup",
+      "/api/starbot/setup",
       this.#options.credentials,
       join(this.#options.stateDirectory, "sunshine-cert.pem"),
       sunshineSetupSchema,
@@ -424,14 +424,14 @@ export class SunshineMoonlightRuntime {
     if (action !== "status")
       yield* sunshineRequestEffect(
         port,
-        "/api/openbot/test",
+        "/api/starbot/test",
         this.#options.credentials,
         certificate,
         JSON.stringify({ action, displayId: this.#selectedDisplayId ?? "" }),
       );
     return yield* sunshineJsonEffect(
       port,
-      "/api/openbot/test",
+      "/api/starbot/test",
       this.#options.credentials,
       certificate,
       sunshineTestSchema,
@@ -699,7 +699,7 @@ export class SunshineMoonlightRuntime {
         ice_servers: [],
         ice_server_script: join(
           this.#options.stateDirectory,
-          this.#options.platform === "win32" ? "openbot-ice-helper.cmd" : "openbot-ice-helper.sh",
+          this.#options.platform === "win32" ? "starbot-ice-helper.cmd" : "starbot-ice-helper.sh",
         ),
         port_range: { min: webRtcRange.min, max: webRtcRange.max },
         nat_1to1: null,
@@ -738,12 +738,12 @@ export class SunshineMoonlightRuntime {
   ): Effect.fn.Return<void, RemoteDesktopOperationError> {
     const path = join(
       this.#options.stateDirectory,
-      this.#options.platform === "win32" ? "openbot-ice-helper.cmd" : "openbot-ice-helper.sh",
+      this.#options.platform === "win32" ? "starbot-ice-helper.cmd" : "starbot-ice-helper.sh",
     );
     const contents =
       this.#options.platform === "win32"
-        ? "@powershell.exe -NoProfile -NonInteractive -Command \"(Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=('Bearer ' + $env:OPENBOT_ICE_HELPER_TOKEN)} -Uri $env:OPENBOT_ICE_HELPER_URL).Content\"\r\n"
-        : `#!/bin/sh\nprintf 'header = "Authorization: Bearer %s"\\nurl = "%s"\\n' "$OPENBOT_ICE_HELPER_TOKEN" "$OPENBOT_ICE_HELPER_URL" | /usr/bin/curl --fail --silent --show-error --config -\n`;
+        ? "@powershell.exe -NoProfile -NonInteractive -Command \"(Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=('Bearer ' + $env:STARBOT_ICE_HELPER_TOKEN)} -Uri $env:STARBOT_ICE_HELPER_URL).Content\"\r\n"
+        : `#!/bin/sh\nprintf 'header = "Authorization: Bearer %s"\\nurl = "%s"\\n' "$STARBOT_ICE_HELPER_TOKEN" "$STARBOT_ICE_HELPER_URL" | /usr/bin/curl --fail --silent --show-error --config -\n`;
     yield* desktopCall(() => writeFile(path, contents, { mode: 0o700 }));
     if (this.#options.platform !== "win32") yield* desktopCall(() => chmod(path, 0o700));
   });
@@ -795,7 +795,7 @@ export class SunshineMoonlightRuntime {
     this.#sunshine = yield* desktopSync(() =>
       this.#spawn(executable, [join(windowsShortPath(this.#options.stateDirectory), "sunshine.conf")], {
         cwd: dirname(executable),
-        env: { ...process.env, ...agentDisplayEnvironment(this.#options.platform), OPENBOT_REMOTE_SETUP: "1" },
+        env: { ...process.env, ...agentDisplayEnvironment(this.#options.platform), STARBOT_REMOTE_SETUP: "1" },
         stdio: ["ignore", "pipe", "pipe"],
         windowsHide: true,
       }),
@@ -826,8 +826,8 @@ export class SunshineMoonlightRuntime {
         cwd: dirname(this.#options.paths.moonlightWebServer),
         env: {
           ...process.env,
-          OPENBOT_ICE_HELPER_URL: iceEndpoint,
-          OPENBOT_ICE_HELPER_TOKEN: this.#iceToken,
+          STARBOT_ICE_HELPER_URL: iceEndpoint,
+          STARBOT_ICE_HELPER_TOKEN: this.#iceToken,
         },
         stdio: ["ignore", "pipe", "pipe"],
         windowsHide: true,
@@ -925,7 +925,7 @@ export class SunshineMoonlightRuntime {
   ): Effect.fn.Return<RemoteDesktopDisplay[], RemoteDesktopOperationError> {
     const native = yield* sunshineJsonEffect(
       yield* desktopSync(() => this.#requireSunshineHttpsPort()),
-      "/api/openbot/displays",
+      "/api/starbot/displays",
       this.#options.credentials,
       join(this.#options.stateDirectory, "sunshine-cert.pem"),
       sunshineDisplaysSchema,
@@ -1440,7 +1440,7 @@ function arrayUrls(urls: string | string[]): string[] {
 }
 
 function moonlightSlotUser(slot: number): string {
-  return `openbot-remote-slot-${slot}`;
+  return `starbot-remote-slot-${slot}`;
 }
 
 function sunshinePasswordHash(password: string, salt: string): string {

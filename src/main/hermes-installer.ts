@@ -4,16 +4,16 @@ import { EventEmitter } from "node:events";
 import { mkdir, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import type { AgentProviderStatus, ProviderRuntimeStatus } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText, toLogValue } from "@openbot/logging";
+import type { AgentProviderStatus, ProviderRuntimeStatus } from "@starbot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText, toLogValue } from "@starbot/logging";
 import { Deferred, Effect, Exit, Fiber, Scope } from "effect";
 import { configuredCliPath, resolveHermesCli } from "../backend/cli";
 import { ProviderRuntimeFailure, runtimeIO, runtimeSync } from "./provider-runtime-effects";
 import { readLimitedBody } from "./provider-runtime-releases";
 
-const logger = createOpenBotLogger("hermes-installer");
+const logger = createStarBotLogger("hermes-installer");
 
 const HERMES_INSTALLER = {
   version: "0.22.7",

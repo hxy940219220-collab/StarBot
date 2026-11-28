@@ -4,16 +4,16 @@ import {
   type McpSignInState,
   normalizeMcpConfig,
   type ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
-import { type AppTextKey, type AppTranslate, matchingSourceKeys, sourceTextValues } from "@openbot/i18n";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import { type AppTextKey, type AppTranslate, matchingSourceKeys, sourceTextValues } from "@starbot/i18n";
+import { currentText } from "@starbot/ui/text";
 
 export type {
   McpServerConfig,
   McpSignInState,
   McpTestResult,
-} from "@openbot/contracts/ipc";
-export { isMcpHeaderName, mcpConfigErrors, mcpConfigIsValid, normalizeMcpConfig } from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
+export { isMcpHeaderName, mcpConfigErrors, mcpConfigIsValid, normalizeMcpConfig } from "@starbot/contracts/ipc";
 
 export type McpStatusVariant = "success-light" | "destructive-light" | "warning-light" | "secondary";
 

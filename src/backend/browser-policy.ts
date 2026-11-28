@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { sourceText } from "@starbot/i18n/source";
 import { app } from "electron";
 import { browserClientHints, browserHighEntropyClientHints, browserRequestUserAgent } from "./browser-identity";
 import { isPersistableBrowserUrl } from "./browser-state";

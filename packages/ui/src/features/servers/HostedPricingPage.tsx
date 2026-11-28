@@ -1,7 +1,7 @@
-import { BILLING_PLANS, type BillingCurrency, type BillingPlanId } from "@openbot/contracts/billing";
-import { isWithdrawalConsumer } from "@openbot/contracts/billing-details";
-import type { HostedServerCatalogPlan } from "@openbot/contracts/hosted-servers";
-import { LICENSE_MAX_USERS, type LicenseTier, type PricingOrder } from "@openbot/contracts/license";
+import { BILLING_PLANS, type BillingCurrency, type BillingPlanId } from "@starbot/contracts/billing";
+import { isWithdrawalConsumer } from "@starbot/contracts/billing-details";
+import type { HostedServerCatalogPlan } from "@starbot/contracts/hosted-servers";
+import { LICENSE_MAX_USERS, type LicenseTier, type PricingOrder } from "@starbot/contracts/license";
 import {
   Alert,
   AlertActions,
@@ -17,8 +17,8 @@ import {
   Monitor,
   OctagonX,
   TriangleAlert,
-} from "@openbot/ui";
-import type { UserErrorDetails } from "@openbot/user-errors";
+} from "@starbot/ui";
+import type { UserErrorDetails } from "@starbot/user-errors";
 import { type Accessor, createEffect, createSignal, createUniqueId, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import { type BillingDetailsDraft, BillingDetailsFields, billingDetailsRequest } from "../billing/BillingDetailsFields";

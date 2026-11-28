@@ -1,4 +1,4 @@
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
 import * as SecureStore from "expo-secure-store";
 import { useEffect, useState } from "react";
 import { accountScope } from "@/shared/lib/account-scope";

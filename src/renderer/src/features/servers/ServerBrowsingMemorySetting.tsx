@@ -1,9 +1,9 @@
-import type { HostBrowsingMemory, OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle, Switch } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { HostBrowsingMemory, StarBotDesktopApi } from "@starbot/contracts/ipc";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle, Switch } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal, Show, untrack } from "solid-js";
 
-export type HostBrowsingMemoryCalls = Pick<OpenBotDesktopApi["hostAdmin"], "getBrowsingMemory" | "setBrowsingMemory">;
+export type HostBrowsingMemoryCalls = Pick<StarBotDesktopApi["hostAdmin"], "getBrowsingMemory" | "setBrowsingMemory">;
 
 export interface ServerBrowsingMemoryOptions {
   calls?: HostBrowsingMemoryCalls;
@@ -19,7 +19,7 @@ export function ServerBrowsingMemorySetting(
   },
 ) {
   const { t, errorMessage } = useText();
-  const calls = (): HostBrowsingMemoryCalls => props.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostBrowsingMemoryCalls => props.calls ?? window.starbot.hostAdmin;
   const [settings, setSettings] = createSignal<HostBrowsingMemory | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);
   let generation = 0;

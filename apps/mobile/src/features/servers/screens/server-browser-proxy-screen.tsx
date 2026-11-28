@@ -7,7 +7,7 @@ import {
   editableBrowserProxyAddress,
   parseBrowserProxyAddress,
   type SaveBrowserProxyInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Typography } from "heroui-native";
 import Check from "lucide-react-native/icons/check";
@@ -42,7 +42,7 @@ function stackOf(agentId: string | undefined): BrowserProfileStack {
 }
 
 function ProxyIcon({ kind }: { kind: BrowserProxyChoice["kind"] }) {
-  const muted = String(useCSSVariable("--openbot-text-grouped-secondary"));
+  const muted = String(useCSSVariable("--starbot-text-grouped-secondary"));
   const Icon = kind === "computer" ? Monitor : Waypoints;
   return (
     <View className="size-8 items-center justify-center">
@@ -53,7 +53,7 @@ function ProxyIcon({ kind }: { kind: BrowserProxyChoice["kind"] }) {
 
 export function BrowserProxiesSection({ serverId, stack }: { serverId: string; stack: BrowserProfileStack }) {
   const { t, errorMessage } = useText();
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   const proxies = useServerBrowserProxies(serverId);
   const choices = useBrowserProxyChoices(proxies.list);
   const state = useBrowserProxyState();
@@ -330,7 +330,7 @@ export function ServerBrowserProxyScreen() {
 
 export function BrowserProfileProxyScreen() {
   const { t, errorMessage } = useText();
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--starbot-accent"));
   const { serverId, profileId, agentId } = useLocalSearchParams<{
     serverId: string;
     profileId: string;

@@ -1,4 +1,4 @@
-import { Button, CircleFadingArrowUp, PanelLeft, Puzzle } from "@openbot/ui";
+import { Button, CircleFadingArrowUp, PanelLeft, Puzzle } from "@starbot/ui";
 import { Show } from "solid-js";
 import { useText } from "../../text";
 import { ServerMenu } from "../servers/ServerMenu";

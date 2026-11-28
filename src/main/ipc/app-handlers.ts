@@ -1,6 +1,6 @@
-import { bugReportFormUrl } from "@openbot/contracts/feedback";
-import { HOSTED_SERVER_CONTACT_URL } from "@openbot/contracts/hosted-servers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { bugReportFormUrl } from "@starbot/contracts/feedback";
+import { HOSTED_SERVER_CONTACT_URL } from "@starbot/contracts/hosted-servers";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AnalyticsPreference,
   type AppInfo,
@@ -11,9 +11,9 @@ import {
   type ExternalLinkBrowser,
   externalLinkAppName,
   GROK_BOT_EXPORT_URL,
-} from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
-import { analyticsOnByDefault } from "@openbot/telemetry";
+} from "@starbot/contracts/ipc";
+import type { AppTranslate } from "@starbot/i18n";
+import { analyticsOnByDefault } from "@starbot/telemetry";
 import { Effect } from "effect";
 import { app, type BrowserWindow, dialog, type OpenDialogOptions, type WebContents } from "electron";
 import { version as developmentVersion } from "../../../package.json";
@@ -35,7 +35,7 @@ import type { LanguageService } from "../language-service";
 import { aboveAppsScreenSupport } from "../linux-wayland-output";
 import type { LogoColorService } from "../logo-color-service";
 import { MAC_PERMISSION_URLS } from "../mac-permission-urls";
-import { exportDiagnostics, exportOpenBotData } from "../maintenance-service";
+import { exportDiagnostics, exportStarBotData } from "../maintenance-service";
 import { isTailscaleConnected } from "../private-network-detection";
 import type { RemoteNetworkRoutePreferenceStore } from "../remote-network-route-preference-store";
 import type { RemoteSessionCache } from "../remote-session-cache";
@@ -312,7 +312,7 @@ export function appIpcHandlers({
     maintenance: {
       exportData: handler(() =>
         runCauseEffect(
-          exportOpenBotData({ service, mailbox, parentWindow: getMainWindow(), translate: language.translate }),
+          exportStarBotData({ service, mailbox, parentWindow: getMainWindow(), translate: language.translate }),
         ),
       ),
       exportDiagnostics: handler(() =>

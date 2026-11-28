@@ -6,17 +6,17 @@ import type {
   MessagingDesktopApi,
   MessagingOverview,
   MessagingRole,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import type { AgentProfile } from "@openbot/ui/data";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import type { AgentProfile } from "@starbot/ui/data";
 import type {
   DiscordAccessControl,
   SlackOrchestratorChoice,
   SlackOrchestratorModels,
   WorkspacePlatform,
-} from "@openbot/ui/features/settings/SlackIntegrationPanel";
-import type { TelegramChatPlace } from "@openbot/ui/features/settings/TelegramIntegrationPanel";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/settings/SlackIntegrationPanel";
+import type { TelegramChatPlace } from "@starbot/ui/features/settings/TelegramIntegrationPanel";
+import { currentText } from "@starbot/ui/text";
 import { createSignal, createStore, untrack } from "solid-js";
 import {
   type ConnectorAnalyticsAction,
@@ -43,7 +43,7 @@ export interface MessagingApi {
   setDiscordAccess: (workspaceId: string, allowedRoles: MessagingRole[]) => Promise<DiscordAccess>;
 }
 
-export function localMessagingApi(messaging: () => MessagingDesktopApi = () => window.openbot.messaging): MessagingApi {
+export function localMessagingApi(messaging: () => MessagingDesktopApi = () => window.starbot.messaging): MessagingApi {
   return {
     overview: (platform) =>
       platform === "slack"

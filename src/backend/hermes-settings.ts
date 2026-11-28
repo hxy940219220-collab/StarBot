@@ -1,12 +1,12 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import { parse as parseYaml, stringify as stringifyYaml } from "yaml";
 import { hermesHome } from "./process-confinement";
 
-const logger = createOpenBotLogger("provider-runtime");
+const logger = createStarBotLogger("provider-runtime");
 
 export interface HermesAgentSettings {
   readonly coding_context?: "auto" | "focus" | "on" | "off";

@@ -1,4 +1,4 @@
-import { isMobileConnectDevelopmentHost } from "@openbot/contracts/mobile-connect";
+import { isMobileConnectDevelopmentHost } from "@starbot/contracts/mobile-connect";
 
 export function buildContentSecurityPolicy(
   packaged: boolean,
@@ -15,12 +15,12 @@ export function buildContentSecurityPolicy(
     "default-src 'self'",
     "script-src 'self'",
     "style-src 'self' 'unsafe-inline'",
-    `img-src 'self' data: openbot-attachment: openbot-remote-attachment: openbot-avatar: openbot-remote-avatar: openbot-server-logo: openbot-remote-server-logo: https:${developmentImageSources}`,
+    `img-src 'self' data: starbot-attachment: starbot-remote-attachment: starbot-avatar: starbot-remote-avatar: starbot-server-logo: starbot-remote-server-logo: https:${developmentImageSources}`,
     "font-src 'self' data:",
-    "media-src 'self' blob: data: openbot-app: openbot-attachment: openbot-remote-attachment:",
-    `connect-src 'self' openbot-attachment: openbot-remote-attachment: ws://127.0.0.1:*${selfHostedSignalSource}${developmentSources}`,
+    "media-src 'self' blob: data: starbot-app: starbot-attachment: starbot-remote-attachment:",
+    `connect-src 'self' starbot-attachment: starbot-remote-attachment: ws://127.0.0.1:*${selfHostedSignalSource}${developmentSources}`,
     "object-src 'none'",
-    "frame-src 'self' openbot-attachment: openbot-remote-attachment: openbot-visual: openbot-remote-visual: http://127.0.0.1:* http://localhost:*",
+    "frame-src 'self' starbot-attachment: starbot-remote-attachment: starbot-visual: starbot-remote-visual: http://127.0.0.1:* http://localhost:*",
     "base-uri 'none'",
   ].join("; ");
 }
@@ -30,7 +30,7 @@ export function readSelfHostedSignalOrigin(
   signalUrl: string | undefined,
 ): string | null {
   if (!signalUrl) return null;
-  if (!authApiUrl) throw new Error("OPENBOT_REMOTE_SIGNAL_URL needs OPENBOT_AUTH_API_URL.");
+  if (!authApiUrl) throw new Error("STARBOT_REMOTE_SIGNAL_URL needs STARBOT_AUTH_API_URL.");
   const api = new URL(authApiUrl);
   const url = new URL(signalUrl);
   const localDevPair =
@@ -38,7 +38,7 @@ export function readSelfHostedSignalOrigin(
     isMobileConnectDevelopmentHost(api.hostname) &&
     isMobileConnectDevelopmentHost(url.hostname);
   if ((url.protocol !== "wss:" && !localDevPair) || url.username !== "" || url.password !== "") {
-    throw new Error("OPENBOT_REMOTE_SIGNAL_URL must be a wss: URL without credentials.");
+    throw new Error("STARBOT_REMOTE_SIGNAL_URL must be a wss: URL without credentials.");
   }
   return url.origin;
 }

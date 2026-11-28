@@ -6,16 +6,16 @@ import {
   type CustomAgentUsage,
   type DeleteCustomAgentInput,
   LOCAL_SERVER_ID,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type SaveCustomAgentInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 interface CustomAgentsPort {
-  customAgents: OpenBotDesktopApi["customAgents"];
+  customAgents: StarBotDesktopApi["customAgents"];
 }
 
 function customAgentsPort(): CustomAgentsPort {
-  return window.openbot;
+  return window.starbot;
 }
 
 export interface CustomAgentsEndpointApi {

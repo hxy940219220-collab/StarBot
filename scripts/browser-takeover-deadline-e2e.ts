@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { AgentEvent, BrowserTab, ConversationSnapshot } from "@openbot/contracts/ipc";
-import { uiBlockAnswersFromResponse } from "@openbot/contracts/ui-blocks";
+import type { AgentEvent, BrowserTab, ConversationSnapshot } from "@starbot/contracts/ipc";
+import { uiBlockAnswersFromResponse } from "@starbot/contracts/ui-blocks";
 import { Effect } from "effect";
 import { AttentionRegistry } from "../src/backend/agent/attention-registry";
 import { vaultRequestFormSpec } from "../src/backend/agent/prompts";
@@ -15,7 +15,7 @@ import type { RequestId } from "../src/backend/protocol";
 import { VaultService } from "../src/main/vault-service";
 import { VaultStore } from "../src/main/vault-store";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/browser-takeover-deadline-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/browser-takeover-deadline-e2e");
 const AGENT = "agent-1";
 const THREAD = "thread-1";
 const TAB = "tab-1";
@@ -152,7 +152,7 @@ function callOn(
         threadId: THREAD,
         turnId,
         callId: `call-${id}`,
-        namespace: "openbot_browser",
+        namespace: "starbot_browser",
         tool,
         arguments: { tabId: TAB },
       },
@@ -305,7 +305,7 @@ try {
         threadId: THREAD,
         turnId: "turn-7",
         callId: `call-${id}`,
-        namespace: "openbot",
+        namespace: "starbot",
         tool: "ask_user",
         arguments: { questions: [{ id: "q1", header: "Plan", question: "Which plan?" }] },
       },
@@ -319,10 +319,10 @@ try {
   });
 
   await step("a Vault request card stays open past its call, and its late answer has no secret", async () => {
-    const root = await mkdtemp(join(tmpdir(), "openbot-takeover-deadline-e2e-"));
+    const root = await mkdtemp(join(tmpdir(), "starbot-takeover-deadline-e2e-"));
     try {
       const vault = new VaultService({
-        store: new VaultStore(join(root, "openbot-vault.json"), {
+        store: new VaultStore(join(root, "starbot-vault.json"), {
           encrypt: (value: string) => Buffer.from(value, "utf8").reverse(),
           decrypt: (value: Buffer) => Buffer.from(value).reverse().toString("utf8"),
         }),
@@ -370,7 +370,7 @@ try {
           threadId: THREAD,
           turnId: "turn-8",
           callId: `call-${id}`,
-          namespace: "openbot_browser",
+          namespace: "starbot_browser",
           tool: "request_vault_item",
           arguments: args,
         },
@@ -580,7 +580,7 @@ try {
         threadId: THREAD,
         turnId: "turn-limit-7",
         callId: `call-${id}`,
-        namespace: "openbot",
+        namespace: "starbot",
         tool: "ask_user",
         arguments: { questions: [{ id: "q1", header: "Plan", question: "Which plan?" }] },
       },
@@ -601,7 +601,7 @@ try {
         threadId: THREAD,
         turnId,
         callId: `call-${id}`,
-        namespace: "openbot",
+        namespace: "starbot",
         tool: "ask_user",
         arguments: { questions: [{ id: "q1", header: "Plan", question: "Which plan?", isSecret }] },
       },
@@ -694,14 +694,14 @@ try {
     );
     assert.equal(
       answer.secureInput,
-      "OpenBot could not finish entering the value. Authentication submit button is not ready. The page went to the user.",
+      "StarBot could not finish entering the value. Authentication submit button is not ready. The page went to the user.",
     );
     return answer;
   });
 
   await step("a failed fill with another error tells the agent no page text", async () => {
     const answer = await failedFill("turn-10", new Error(`ERR_ABORTED loading https://example.test/?code=${SECRET}`));
-    assert.equal(answer.secureInput, "OpenBot could not finish entering the value. The page went to the user.");
+    assert.equal(answer.secureInput, "StarBot could not finish entering the value. The page went to the user.");
     return answer;
   });
 
@@ -752,9 +752,9 @@ try {
           connected: () => true,
           loginsFor: () =>
             Effect.succeed([
-              { id: "openbot:a", title: "Account A", username: savedUsername, hasOneTimePassword: false },
+              { id: "starbot:a", title: "Account A", username: savedUsername, hasOneTimePassword: false },
             ]),
-          secretFor: (loginId) => Effect.succeed(loginId === "openbot:a" ? VAULT_SECRET : null),
+          secretFor: (loginId) => Effect.succeed(loginId === "starbot:a" ? VAULT_SECRET : null),
         },
       });
       const cards = () => vaultEvents.filter((event) => event.type === "browser-takeover-requested").length;
@@ -768,7 +768,7 @@ try {
               threadId: THREAD,
               turnId: `turn-vault-${id}`,
               callId: `call-${id}`,
-              namespace: "openbot_browser",
+              namespace: "starbot_browser",
               tool: "submit_secret",
               arguments: {
                 tabId: TAB,
@@ -870,9 +870,9 @@ try {
           connected: () => true,
           loginsFor: () =>
             Effect.succeed([
-              { id: "openbot:a", title: "Account A", username: "a@example.test", hasOneTimePassword: false },
+              { id: "starbot:a", title: "Account A", username: "a@example.test", hasOneTimePassword: false },
             ]),
-          secretFor: (loginId) => Effect.succeed(loginId === "openbot:a" ? VAULT_SECRET : null),
+          secretFor: (loginId) => Effect.succeed(loginId === "starbot:a" ? VAULT_SECRET : null),
         },
       });
       const cards = () => vaultEvents.filter((event) => event.type === "browser-takeover-requested").length;
@@ -886,7 +886,7 @@ try {
               threadId: THREAD,
               turnId: `turn-scripted-${id}`,
               callId: `call-${id}`,
-              namespace: "openbot_browser",
+              namespace: "starbot_browser",
               tool: "submit_secret",
               arguments: {
                 tabId: TAB,
@@ -901,7 +901,7 @@ try {
         );
       };
       const cancelledBefore = browserLog.filter((entry) => entry === "secret-cancelled").length;
-      const scripted = signIn("openbot:a");
+      const scripted = signIn("starbot:a");
       let answered = false;
       void scripted.finally(() => {
         answered = true;

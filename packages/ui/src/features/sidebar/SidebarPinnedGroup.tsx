@@ -1,5 +1,5 @@
-import { coordinatorText } from "@openbot/contracts/coordinator-text";
-import { Badge, buttonVariants, ContextMenu } from "@openbot/ui";
+import { coordinatorText } from "@starbot/contracts/coordinator-text";
+import { Badge, buttonVariants, ContextMenu } from "@starbot/ui";
 import { createMemo, createSignal, For, Match, Show, Switch } from "solid-js";
 import { useText } from "../../text";
 import { isChiefStarBot } from "../agents/chief-starbot";

@@ -2,9 +2,9 @@ import type {
   HostReleaseStatus,
   HostUpdateSettingsChange,
   HostUpdateStatus,
-  OpenBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
+  StarBotDesktopApi,
+} from "@starbot/contracts/ipc";
+import { classifyFailure } from "@starbot/telemetry";
 import {
   Alert,
   AlertActions,
@@ -25,18 +25,18 @@ import {
   SettingsSection,
   SwitchField,
   TriangleAlert,
-} from "@openbot/ui";
-import { restartReasonKey } from "@openbot/ui/features/updates/restart-reasons";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { restartReasonKey } from "@starbot/ui/features/updates/restart-reasons";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal, onCleanup, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { openServerUpdate, serverUpdateStatus } from "./server-update-flow";
 
 export type HostUpdateCalls = Pick<
-  OpenBotDesktopApi["hostAdmin"],
+  StarBotDesktopApi["hostAdmin"],
   "getUpdateStatus" | "checkForUpdate" | "startUpdate" | "cancelUpdate" | "setUpdateSettings"
 > &
-  Partial<Pick<OpenBotDesktopApi["hostAdmin"], "getReleaseStatus" | "checkRelease">>;
+  Partial<Pick<StarBotDesktopApi["hostAdmin"], "getReleaseStatus" | "checkRelease">>;
 
 export interface ServerUpdateOptions {
   canManage?: boolean;
@@ -50,7 +50,7 @@ export function ServerUpdatePanel(
   props: ServerUpdateOptions & { serverId: string; hostName: string; actionsAvailable: boolean },
 ) {
   const { t, format, errorMessage } = useText();
-  const calls = (): HostUpdateCalls => props.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostUpdateCalls => props.calls ?? window.starbot.hostAdmin;
   const [release, setRelease] = createSignal<HostReleaseStatus | null>(null);
   const [status, setStatus] = createSignal<HostUpdateStatus | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);

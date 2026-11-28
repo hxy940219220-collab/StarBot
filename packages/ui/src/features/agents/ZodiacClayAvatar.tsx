@@ -6,7 +6,7 @@ import {
   type ZodiacEyeSpec,
   type ZodiacId,
   zodiacForShape,
-} from "@openbot/brand/bloub-avatar";
+} from "@starbot/brand/bloub-avatar";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createUniqueId, onCleanup, onSettled, Show } from "solid-js";
 // Articulated multi-part clay WebPs (back-to-front per zodiac)

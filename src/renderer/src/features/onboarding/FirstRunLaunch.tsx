@@ -1,6 +1,6 @@
-import type { AppLogoVariant } from "@openbot/brand";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { useText } from "@openbot/ui/text";
+import type { AppLogoVariant } from "@starbot/brand";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { useText } from "@starbot/ui/text";
 import { For } from "solid-js";
 import type { OnboardingAvatarVariant } from "./onboarding-avatars";
 

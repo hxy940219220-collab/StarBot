@@ -1,7 +1,7 @@
-import type { AgentSummary } from "@openbot/contracts/ipc";
-import { BrowserProfilesPanel } from "@openbot/ui/features/browser/BrowserProfilesPanel";
-import type { BrowserProfileProxies } from "@openbot/ui/features/browser/BrowserProxies";
-import { useText } from "@openbot/ui/text";
+import type { AgentSummary } from "@starbot/contracts/ipc";
+import { BrowserProfilesPanel } from "@starbot/ui/features/browser/BrowserProfilesPanel";
+import type { BrowserProfileProxies } from "@starbot/ui/features/browser/BrowserProxies";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal } from "solid-js";
 import { actionToast } from "../../action-toast";
 import type { BrowserProfilesStore } from "./stores/browser-profiles-store";

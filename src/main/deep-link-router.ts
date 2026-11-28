@@ -1,7 +1,7 @@
-import { parseAgentTemplateUrl } from "@openbot/contracts/agent-template-links";
-import { type InviteLinkOptions, parseInviteUrl } from "@openbot/contracts/invite-links";
-import { type MarketplaceListingLink, parseMarketplaceUrl } from "@openbot/contracts/marketplace-links";
-import { parsePluginUrl } from "@openbot/contracts/plugin-links";
+import { parseAgentTemplateUrl } from "@starbot/contracts/agent-template-links";
+import { type InviteLinkOptions, parseInviteUrl } from "@starbot/contracts/invite-links";
+import { type MarketplaceListingLink, parseMarketplaceUrl } from "@starbot/contracts/marketplace-links";
+import { parsePluginUrl } from "@starbot/contracts/plugin-links";
 
 export type DeepLink =
   | { kind: "invite"; url: string }
@@ -14,7 +14,7 @@ export type DeepLink =
 
 export const MCP_OAUTH_REDIRECT_URL = "starbot://mcp-auth";
 
-const DEEP_LINK_PROTOCOLS = new Set(["starbot:", "openbot:"]);
+const DEEP_LINK_PROTOCOLS = new Set(["starbot:", "starbot:"]);
 const MCP_OAUTH_HOST = "mcp-auth";
 const SLACK_WORKSPACE_HOST = "slack-workspace";
 const DISCORD_GUILD_HOST = "discord-guild";

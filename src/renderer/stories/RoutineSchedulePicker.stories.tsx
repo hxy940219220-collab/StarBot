@@ -1,11 +1,11 @@
-import { Text } from "@openbot/ui";
-import { RoutineSchedulePicker } from "@openbot/ui/features/conversation/RoutineSchedulePicker";
+import { Text } from "@starbot/ui";
+import { RoutineSchedulePicker } from "@starbot/ui/features/conversation/RoutineSchedulePicker";
 import {
   ROUTINE_EVERY_DAY,
   ROUTINE_WORKDAYS,
   type RoutineScheduleDraft,
   routineDraftSummary,
-} from "@openbot/ui/features/conversation/routine-schedule-draft";
+} from "@starbot/ui/features/conversation/routine-schedule-draft";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -25,10 +25,10 @@ function PickerStage(props: PickerArgs) {
     <main
       style={{
         display: "grid",
-        gap: "var(--openbot-space-3)",
+        gap: "var(--starbot-space-3)",
         width: props.width === "panel" ? "296px" : "640px",
-        padding: "var(--openbot-space-4)",
-        background: "var(--openbot-bg-canvas)",
+        padding: "var(--starbot-space-4)",
+        background: "var(--starbot-bg-canvas)",
       }}
     >
       <RoutineSchedulePicker

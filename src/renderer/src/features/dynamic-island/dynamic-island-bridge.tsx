@@ -1,7 +1,7 @@
-import type { DynamicIslandAction, DynamicIslandAgentIdentity } from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
-import { sidebarAgentOrder } from "@openbot/ui/features/sidebar/sidebar-agent-order";
-import { useText } from "@openbot/ui/text";
+import type { DynamicIslandAction, DynamicIslandAgentIdentity } from "@starbot/contracts/ipc";
+import { classifyFailure } from "@starbot/telemetry";
+import { sidebarAgentOrder } from "@starbot/ui/features/sidebar/sidebar-agent-order";
+import { useText } from "@starbot/ui/text";
 import { createEffect, onSettled, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { withoutAgent } from "../../app-message-projection";

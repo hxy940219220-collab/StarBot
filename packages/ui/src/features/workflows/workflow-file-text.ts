@@ -3,8 +3,8 @@ import {
   type WorkflowFileExportProblem,
   type WorkflowFileImportProblem,
   type WorkflowNode,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@starbot/i18n";
 import { KIND_LABEL } from "./WorkflowAddMenu";
 
 const LISTED_FIELDS = 6;

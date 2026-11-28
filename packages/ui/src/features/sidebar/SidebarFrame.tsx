@@ -16,9 +16,9 @@ export function SidebarFrame(props: ParentProps<{ compact?: boolean }>) {
 }
 
 const SIDEBAR_PLUSH_RINGS = [
-  { id: "sidebar-plush-ring", color: "var(--openbot-bg-sidebar)" },
-  { id: "sidebar-plush-ring-raised", color: "var(--openbot-bg-control)" },
-  { id: "sidebar-plush-ring-hover", color: "var(--openbot-bg-control-hover)" },
+  { id: "sidebar-plush-ring", color: "var(--starbot-bg-sidebar)" },
+  { id: "sidebar-plush-ring-raised", color: "var(--starbot-bg-control)" },
+  { id: "sidebar-plush-ring-hover", color: "var(--starbot-bg-control-hover)" },
   { id: "sidebar-plush-ring-selected", color: "var(--sidebar-row-selected)" },
 ] as const;
 

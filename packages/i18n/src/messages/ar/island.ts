@@ -52,13 +52,13 @@ export const messages = {
   "island.action.openChat": "فتح الدردشة",
   "island.action.openDetails": "فتح التفاصيل",
   "island.action.takeOver": "تولٍّ",
-  "island.action.reviewInOpenBot": "المراجعة في StarBot",
+  "island.action.reviewInStarBot": "المراجعة في StarBot",
 
   "island.action.decline": "رفض",
   "island.action.approve": "موافقة",
   "island.action.later": "لاحقًا",
   "island.action.dismiss": "تجاهل",
-  "island.action.answerInOpenBot": "الإجابة في StarBot",
+  "island.action.answerInStarBot": "الإجابة في StarBot",
 
   "island.action.stopAgent": "إيقاف {name}",
   "island.action.failed": "لم ينجح ذلك. أعد المحاولة.",

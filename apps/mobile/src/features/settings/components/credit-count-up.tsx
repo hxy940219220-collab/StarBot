@@ -51,7 +51,7 @@ export function CreditCountUp({
 }: CreditCountUpProps) {
   const { format } = useText();
   const reducedMotion = useReducedMotion();
-  const fill = String(useCSSVariable("--openbot-credit-star-fill"));
+  const fill = String(useCSSVariable("--starbot-credit-star-fill"));
   const [shown, setShown] = useState(from ?? value);
   const tint = useSharedValue(0);
   const scale = useSharedValue(1);

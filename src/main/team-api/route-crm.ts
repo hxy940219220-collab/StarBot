@@ -1,6 +1,6 @@
-import type { CrmActor, CrmCustomerPage, CrmOverview } from "@openbot/contracts/ipc";
-import { CRM_CAPABILITY, CRM_ROUTES } from "@openbot/contracts/team-protocol/crm-v1";
-import { sourceText } from "@openbot/i18n/source";
+import type { CrmActor, CrmCustomerPage, CrmOverview } from "@starbot/contracts/ipc";
+import { CRM_CAPABILITY, CRM_ROUTES } from "@starbot/contracts/team-protocol/crm-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { CrmError } from "../../backend/crm/crm-handle";
 import {

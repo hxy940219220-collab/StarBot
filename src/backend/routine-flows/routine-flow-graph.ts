@@ -1,4 +1,4 @@
-import type { RoutineFlowLink } from "@openbot/contracts/ipc";
+import type { RoutineFlowLink } from "@starbot/contracts/ipc";
 
 export type RoutineFlowConnectProblem = "same-agent" | "into-owner" | "not-on-path" | "duplicate" | "cycle";
 

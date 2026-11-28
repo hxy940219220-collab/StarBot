@@ -1,4 +1,4 @@
-import { limitedQuoteText } from "@openbot/contracts/chat-tag-references";
+import { limitedQuoteText } from "@starbot/contracts/chat-tag-references";
 import type {
   AgentApproval,
   AgentTask,
@@ -8,11 +8,11 @@ import type {
   InstalledSkill,
   QueueDelivery,
   ResponseStyle,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { isAgentTaskActive } from "@openbot/team-client/agent-tasks";
-import { Button, CopyButton, toast } from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { isAgentTaskActive } from "@starbot/team-client/agent-tasks";
+import { Button, CopyButton, toast } from "@starbot/ui";
+import { createScrollFades } from "@starbot/ui/components/createScrollFades";
 import type {
   AgentMessage,
   AgentProfile,
@@ -20,68 +20,68 @@ import type {
   ComposerBrowserTab,
   ComposerMcpServer,
   ComposerThread,
-} from "@openbot/ui/data";
+} from "@starbot/ui/data";
 import {
   AgentActivityIndicator,
   type AgentActivityLabel,
   nextAgentActivityLabel,
-} from "@openbot/ui/features/conversation/AgentActivity";
+} from "@starbot/ui/features/conversation/AgentActivity";
 import {
   type AgentStep,
   AgentStepsDisclosure,
   type AgentStepsFacts,
   type AgentStepsTrace,
-} from "@openbot/ui/features/conversation/AgentSteps";
+} from "@starbot/ui/features/conversation/AgentSteps";
 import {
   AttachmentCards,
   type AttachmentDownloads,
   type AttachmentMediaSource,
-} from "@openbot/ui/features/conversation/AttachmentCards";
-import { AwaitingReplies, type AwaitingReplyItem } from "@openbot/ui/features/conversation/AwaitingReplies";
-import { agentActivityExitDuration } from "@openbot/ui/features/conversation/activity-timing";
-import { branchPointIds } from "@openbot/ui/features/conversation/branch-points";
-import { type ChangeMarkerActions, ChatActionMarker } from "@openbot/ui/features/conversation/ChatActionMarker";
-import { type ChatMessageAuthor, ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ComposerAddMenu } from "@openbot/ui/features/conversation/ComposerAddMenu";
+} from "@starbot/ui/features/conversation/AttachmentCards";
+import { AwaitingReplies, type AwaitingReplyItem } from "@starbot/ui/features/conversation/AwaitingReplies";
+import { agentActivityExitDuration } from "@starbot/ui/features/conversation/activity-timing";
+import { branchPointIds } from "@starbot/ui/features/conversation/branch-points";
+import { type ChangeMarkerActions, ChatActionMarker } from "@starbot/ui/features/conversation/ChatActionMarker";
+import { type ChatMessageAuthor, ChatMessageRow } from "@starbot/ui/features/conversation/ChatMessageRow";
+import { ComposerAddMenu } from "@starbot/ui/features/conversation/ComposerAddMenu";
 import {
   ComposerAttachmentRow,
   type ComposerPendingImage,
-} from "@openbot/ui/features/conversation/ComposerAttachmentRow";
+} from "@starbot/ui/features/conversation/ComposerAttachmentRow";
 import {
   ComposerEditor,
   type ComposerPasteResult,
   type ComposerSelection,
   type QuoteRequest,
-} from "@openbot/ui/features/conversation/ComposerEditor";
-import { ComposerNotice } from "@openbot/ui/features/conversation/ComposerNotice";
-import { ComposerReplyPreview } from "@openbot/ui/features/conversation/ComposerReplyPreview";
-import { ComposerSendControl } from "@openbot/ui/features/conversation/ComposerSendControl";
-import { ComposerStackCard } from "@openbot/ui/features/conversation/ComposerStackCard";
-import { ContextUsageMeter, type ContextUsageView } from "@openbot/ui/features/conversation/ContextUsage";
-import { ApprovalCard } from "@openbot/ui/features/conversation/ConversationPrompts";
-import { dayMarkerLabel } from "@openbot/ui/features/conversation/chat-day-markers";
-import { CHAT_TIME_GAP_MS, continuesSenderRun } from "@openbot/ui/features/conversation/chat-grouping";
+} from "@starbot/ui/features/conversation/ComposerEditor";
+import { ComposerNotice } from "@starbot/ui/features/conversation/ComposerNotice";
+import { ComposerReplyPreview } from "@starbot/ui/features/conversation/ComposerReplyPreview";
+import { ComposerSendControl } from "@starbot/ui/features/conversation/ComposerSendControl";
+import { ComposerStackCard } from "@starbot/ui/features/conversation/ComposerStackCard";
+import { ContextUsageMeter, type ContextUsageView } from "@starbot/ui/features/conversation/ContextUsage";
+import { ApprovalCard } from "@starbot/ui/features/conversation/ConversationPrompts";
+import { dayMarkerLabel } from "@starbot/ui/features/conversation/chat-day-markers";
+import { CHAT_TIME_GAP_MS, continuesSenderRun } from "@starbot/ui/features/conversation/chat-grouping";
 import {
   preferredMessageScrollBehavior,
   ScrollToLatestButton,
-} from "@openbot/ui/features/conversation/MessageNavigation";
+} from "@starbot/ui/features/conversation/MessageNavigation";
 import {
   DeleteMessageDialog,
   MessageActions,
   MessageMenu,
   MessageMenuItems,
   type MessageMenuItemsProps,
-} from "@openbot/ui/features/conversation/MessageRendering";
-import { type ChatBubbleStyle, ownMessageAuthor } from "@openbot/ui/features/conversation/own-bubble";
-import { QueuePanel } from "@openbot/ui/features/conversation/QueuePanel";
+} from "@starbot/ui/features/conversation/MessageRendering";
+import { type ChatBubbleStyle, ownMessageAuthor } from "@starbot/ui/features/conversation/own-bubble";
+import { QueuePanel } from "@starbot/ui/features/conversation/QueuePanel";
 import {
   MessageSelectionActions,
   type QuoteShortcutModifier,
-} from "@openbot/ui/features/conversation/SelectionActions";
-import { SubagentGroup } from "@openbot/ui/features/conversation/Subagents";
-import type { SendShortcut } from "@openbot/ui/features/conversation/send-shortcut";
-import { ComposerVoiceControls, type VoicePhase } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { type TextValue, useText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/SelectionActions";
+import { SubagentGroup } from "@starbot/ui/features/conversation/Subagents";
+import type { SendShortcut } from "@starbot/ui/features/conversation/send-shortcut";
+import { ComposerVoiceControls, type VoicePhase } from "@starbot/ui/features/conversation/VoiceRecordingMorph";
+import { type TextValue, useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import {
   children,

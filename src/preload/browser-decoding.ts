@@ -23,7 +23,7 @@ import {
   type BrowserWindowModel,
   type BrowserWindowTabDetails,
   isAvatarColor,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   decodeList,
   decodeRecord,
@@ -31,8 +31,8 @@ import {
   requiredBoolean,
   requiredNumber,
   requiredString,
-} from "@openbot/contracts/ipc-decoding";
-import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/ipc-decoding";
+import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
 
 const CONTROL_PHASES = ["acting", "waiting"] as const;
 const VIEWPORT_MODES = ["fill", "custom"] as const;

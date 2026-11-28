@@ -1,11 +1,11 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface ComputerUsePort {
-  computerUse: OpenBotDesktopApi["computerUse"];
-  remoteDesktop: Pick<OpenBotDesktopApi["remoteDesktop"], "checkSetup">;
-  update: Pick<OpenBotDesktopApi["update"], "getStatus" | "restartWhenIdle">;
+  computerUse: StarBotDesktopApi["computerUse"];
+  remoteDesktop: Pick<StarBotDesktopApi["remoteDesktop"], "checkSetup">;
+  update: Pick<StarBotDesktopApi["update"], "getStatus" | "restartWhenIdle">;
 }
 
 export function computerUsePort(): ComputerUsePort {
-  return window.openbot;
+  return window.starbot;
 }

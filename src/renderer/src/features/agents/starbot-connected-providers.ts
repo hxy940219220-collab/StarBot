@@ -1,4 +1,4 @@
-import { type AgentProviderId, isAgentProvider, STARBOT_CORE_PROVIDERS } from "@openbot/contracts/ipc";
+import { type AgentProviderId, isAgentProvider, STARBOT_CORE_PROVIDERS } from "@starbot/contracts/ipc";
 import { createSignal } from "solid-js";
 
 const STORAGE_KEY = "starbot:actively-connected-providers:v1";

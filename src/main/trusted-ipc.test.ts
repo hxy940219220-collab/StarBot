@@ -16,13 +16,13 @@ vi.mock("electron", () => ({
   },
 }));
 
-const TRUSTED_EVENT = { senderFrame: { url: "openbot-app://app/index.html" } };
+const TRUSTED_EVENT = { senderFrame: { url: "starbot-app://app/index.html" } };
 const UNTRUSTED_EVENT = { senderFrame: { url: "https://evil.example/index.html" } };
 
 describe("trusted IPC renderer boundary", () => {
   it("accepts only the packaged StarBot application origin", () => {
-    expect(isTrustedRendererUrl("openbot-app://app/index.html", undefined)).toBe(true);
-    expect(isTrustedRendererUrl("openbot-app://other/index.html", undefined)).toBe(false);
+    expect(isTrustedRendererUrl("starbot-app://app/index.html", undefined)).toBe(true);
+    expect(isTrustedRendererUrl("starbot-app://other/index.html", undefined)).toBe(false);
     expect(isTrustedRendererUrl("https://app.example/index.html", undefined)).toBe(false);
     expect(isTrustedRendererUrl(null, undefined)).toBe(false);
   });

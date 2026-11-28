@@ -1,0 +1,9 @@
+[Unit]
+Description=Update requests of StarBot instance %i
+
+[Path]
+PathExists=/srv/starbot/%i/update-requests/update-stage
+PathExists=/srv/starbot/%i/update-requests/update-install
+
+[Install]
+WantedBy=paths.target

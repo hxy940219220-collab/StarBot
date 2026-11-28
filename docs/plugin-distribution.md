@@ -23,7 +23,7 @@ Two things are not decided:
 - where the list of available plugins comes from;
 - what a shared plugin link opens.
 
-`Copy link` also copies `https://openbot.app/plugins/<slug>`. That host does not exist. The
+`Copy link` also copies `https://starbot.app/plugins/<slug>`. That host does not exist. The
 canonical site is `https://starbot.app` (`packages/contracts/src/invite-links.ts`).
 
 This document answers three questions:
@@ -54,7 +54,7 @@ A plugin is one developer's bundle. It contains:
   developer's website, privacy policy and terms links.
 
 The types in `packages/ui/src/features/settings/marketplace-plugins.ts` are the start shape.
-`@openbot/ui` owns them today, and the renderer imports them from there. They are not in
+`@starbot/ui` owns them today, and the renderer imports them from there. They are not in
 `packages/contracts`.
 
 ## 2. Catalog delivery
@@ -219,7 +219,7 @@ does over `packages/contracts/src/ipc-mcp-servers.ts`.
 
 New channels: `plugins:list`, `plugins:get`, `plugins:install-state`, `plugins:install`,
 `plugins:uninstall`. Each one gets a decoder in `src/preload/index.ts` and a mirror in
-`src/renderer/src/preview/mock-openbot.ts`. `src/main/ipc-channel-coverage.test.ts` enforces the
+`src/renderer/src/preview/mock-starbot.ts`. `src/main/ipc-channel-coverage.test.ts` enforces the
 mirror.
 
 ## 3. What "Install plugin" does
@@ -254,7 +254,7 @@ again from the store.
 `plugins:install-state` does not trust the receipt. For each plugin it tests:
 
 - the app is installed when the MCP record still exists. The user can delete it in settings;
-- a skill is installed when the agent's `<workspace>/.openbot/skills-lock.json` still lists it.
+- a skill is installed when the agent's `<workspace>/.starbot/skills-lock.json` still lists it.
 
 A newer version in the index makes the button show "Update". If the receipt is lost, the app can
 find a probable install, but it then offers "Reinstall" and not a version.
@@ -334,7 +334,7 @@ The page has one main button, `Open in StarBot`, and a second button, `Download 
 
 ```
 https://starbot.app/plugins/<slug>    the link a person shares and the app copies
-openbot://plugins/<slug>              the link the page button opens
+starbot://plugins/<slug>              the link the page button opens
 ```
 
 A new `packages/contracts/src/plugin-links.ts` holds these. `packages/contracts/src/invite-links.ts`
@@ -347,7 +347,7 @@ identifier, so a path segment is sufficient. A query form would invite growth, s
 
 The parser accepts a URL only when:
 
-- the protocol is `openbot:` with the host `plugins`, or the origin is exactly
+- the protocol is `starbot:` with the host `plugins`, or the origin is exactly
   `https://starbot.app` with the path prefix `/plugins/`;
 - there is exactly one path segment after the prefix;
 - the search, the hash, the port, the user name and the password are empty;
@@ -364,10 +364,10 @@ export type DeepLink = { kind: "invite"; url: string } | { kind: "plugin"; slug:
 
 | Kind | Custom scheme | Effect |
 | --- | --- | --- |
-| `invite` | `openbot://join?…` | Opens the join dialog, as today. |
-| `plugin` | `openbot://plugins/<slug>` | Opens the marketplace listing. |
-| `agent-template` | `openbot://agents/<id>` | Opens the agent template preview. See [architecture/agents.md](architecture/agents.md#agent-templates). |
-| `mcp-auth`, `slack-workspace`, `discord-guild` | `openbot://mcp-auth?…`, `openbot://slack-workspace?…`, `openbot://discord-guild?…` | Returns an MCP sign-in or a Slack or Discord grant to the app. |
+| `invite` | `starbot://join?…` | Opens the join dialog, as today. |
+| `plugin` | `starbot://plugins/<slug>` | Opens the marketplace listing. |
+| `agent-template` | `starbot://agents/<id>` | Opens the agent template preview. See [architecture/agents.md](architecture/agents.md#agent-templates). |
+| `mcp-auth`, `slack-workspace`, `discord-guild` | `starbot://mcp-auth?…`, `starbot://slack-workspace?…`, `starbot://discord-guild?…` | Returns an MCP sign-in or a Slack or Discord grant to the app. |
 | other | — | The URL is dropped without a message, as today. |
 
 The invite parser runs first, so an invite URL never reaches the plugin parser. `src/main/index.ts`
@@ -415,9 +415,9 @@ never opens a window. This design adds nothing to the navigation policy.
 | Attack | Control |
 | --- | --- |
 | A link installs a plugin without agreement | The link opens the listing only. The install is a separate press with an agent choice. A test enforces this. |
-| A path attack, such as `openbot://plugins/../join?…` | One path segment, and the slug pattern. The invite parser owns `join`. |
+| A path attack, such as `starbot://plugins/../join?…` | One path segment, and the slug pattern. The invite parser owns `join`. |
 | Extra fields in the link, such as `?install=1` | The search and the hash must be empty. |
-| A similar host, such as `openbot.app` or `starbot.app.example.com` | The origin is compared as a whole string. No `endsWith` and no expression on the host name. |
+| A similar host, such as `starbot.app` or `starbot.app.example.com` | The origin is compared as a whole string. No `endsWith` and no expression on the host name. |
 | A `javascript:` or `file:` URL in catalog data | `safeBrowserUrl` accepts `http:` and `https:` only, and the share URL is built and not read. |
 | The slug used as a file path | The slug is checked at the IPC boundary, and it never builds a path. |
 | Many links raise the window | One pending link is kept. A second link replaces the first. |
@@ -459,7 +459,7 @@ Ordered by cost.
    order, or keep the numbers by hand and say so.
 6. One index file is sufficient for now. A larger catalog needs a split by category, which the
    `schemaVersion` permits.
-7. A version in the deep link (`openbot://plugins/<slug>@1.2.0`) is deferred. It needs an answer for
+7. A version in the deep link (`starbot://plugins/<slug>@1.2.0`) is deferred. It needs an answer for
    a version that is no longer published.
 8. A social card for each plugin is deferred. Version 1 uses the site card.
 
@@ -489,7 +489,7 @@ Ordered by cost.
    Uninstall is done as well: see 3.3. The MCP settings panel and the agent's skills panel still
    remove one piece at a time, for a user who wants only one of them.
 8. ~~The deep-link router and the share link.~~ Done. `src/main/deep-link-router.ts` decides which
-   kind an `openbot://` link is, `openbot://plugins/<slug>` opens that app's page in the Apps tab
+   kind an `starbot://` link is, `starbot://plugins/<slug>` opens that app's page in the Apps tab
    and installs nothing, and `starbot.app/plugins/<slug>` now answers, so the detail page offers
    `Copy link` again. The public pages read the same catalog source as the tab, through the generated
    `apps/auth-api/src/lib/plugin-catalog.generated.ts`.

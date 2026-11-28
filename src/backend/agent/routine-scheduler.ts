@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { sortConversationMessages } from "@starbot/contracts/conversation-order";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentEvent,
   AgentSummary,
@@ -19,17 +19,17 @@ import type {
   TestRoutineInput,
   UpdateRoutineInput,
   WorkflowRunSource,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   ROUTINE_MISSED_COUNT_LIMIT,
   routineConversationEventItemType,
   routineRunConversationEventItemType,
-} from "@openbot/contracts/ipc";
-import type { EventRoutine } from "@openbot/contracts/ipc-events";
-import { type DynamicRecord, isBoolean } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText } from "@openbot/logging";
-import { collapseMissedOccurrences, RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@starbot/contracts/ipc";
+import type { EventRoutine } from "@starbot/contracts/ipc-events";
+import { type DynamicRecord, isBoolean } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText } from "@starbot/logging";
+import { collapseMissedOccurrences, RoutineInputError } from "@starbot/team-client/routine-schedule";
 import { Effect, Schema } from "effect";
 import { AgentRoutineStore } from "../agent-routine-store";
 import type { AgentStore } from "../agent-store";
@@ -56,9 +56,9 @@ import { failedRunReason, routineStatusForDelivery, type SkippedRoutineRuns } fr
 import { quietRoutineRun } from "./routine-quiet-runs";
 import {
   localTimezone,
-  type OpenBotToolResponse,
-  openBotToolFailure,
-  openBotToolResult,
+  type StarBotToolResponse,
+  starBotToolFailure,
+  starBotToolResult,
   ROUTINE_LIST_TRUNCATION_NOTE,
   routineListInstruction,
   routineToolAgentId,
@@ -107,7 +107,7 @@ export interface RoutineHooks {
   routineDeleted(agentId: string, routineId: string): Effect.Effect<void>;
 }
 
-const logger = createOpenBotLogger("routine-scheduler");
+const logger = createStarBotLogger("routine-scheduler");
 
 const DELIVERY_TIMEZONE_LIMIT = 10_000;
 const SKIPPED_WHILE_CLOSED = "Skipped: StarBot was closed at the scheduled time.";
@@ -603,12 +603,12 @@ export class RoutineScheduler implements RoutineDueSource {
     params: DynamicToolCallParams,
     senderAgentId: string,
     requestedByPerson: () => boolean,
-  ): Effect.Effect<OpenBotToolResponse | null, RoutineOperationFailed> {
+  ): Effect.Effect<StarBotToolResponse | null, RoutineOperationFailed> {
     return this.#handleTool(params, senderAgentId, requestedByPerson).pipe(
       Effect.catchDefect((cause) => Effect.fail(new RoutineOperationFailed({ cause }))),
       Effect.catch((failure) =>
         failure.cause instanceof RoutineInputError
-          ? Effect.succeed(openBotToolFailure(failure.cause.message))
+          ? Effect.succeed(starBotToolFailure(failure.cause.message))
           : Effect.fail(failure),
       ),
     );
@@ -656,7 +656,7 @@ export class RoutineScheduler implements RoutineDueSource {
           ...(onlyId === null ? routineListInstruction(routine.instruction) : {}),
           lastRun: this.#lastRun(agentId, routine.id),
         }));
-      return openBotToolResult({
+      return starBotToolResult({
         routines,
         ...(routines.some((routine) => "instructionTruncated" in routine)
           ? { truncatedInstructions: ROUTINE_LIST_TRUNCATION_NOTE }
@@ -720,7 +720,7 @@ export class RoutineScheduler implements RoutineDueSource {
         },
         this.#toolMutationOptions(agentId, senderAgentId, params),
       );
-      return openBotToolResult(routine);
+      return starBotToolResult(routine);
     }
 
     if (params.tool === CREATE_WEBHOOK_ROUTINE_TOOL) {
@@ -750,7 +750,7 @@ export class RoutineScheduler implements RoutineDueSource {
       });
       const turnId = agentId === senderAgentId ? params.turnId : undefined;
       const recorded = this.#recordWebhookEvent(agentId, "created", routine, turnId);
-      return openBotToolResult(webhookRoutineToolResult(routine, recorded && turnId !== undefined));
+      return starBotToolResult(webhookRoutineToolResult(routine, recorded && turnId !== undefined));
     }
 
     if (params.tool === UPDATE_WEBHOOK_ROUTINE_TOOL) {
@@ -798,7 +798,7 @@ export class RoutineScheduler implements RoutineDueSource {
       });
       const turnId = agentId === senderAgentId ? params.turnId : undefined;
       const recorded = this.#recordWebhookEvent(agentId, "updated", routine, turnId);
-      return openBotToolResult(webhookRoutineToolResult(routine, recorded && turnId !== undefined, true));
+      return starBotToolResult(webhookRoutineToolResult(routine, recorded && turnId !== undefined, true));
     }
 
     if (params.tool === "update_routine") {
@@ -846,7 +846,7 @@ export class RoutineScheduler implements RoutineDueSource {
       if (this.#requireToolRoutine(input.agentId, input.routineId).trigger.kind === "webhook") {
         throw new RoutineInputError(`Routine ${input.routineId} is a webhook routine. Use update_webhook_routine.`);
       }
-      return openBotToolResult(this.update(input, this.#toolMutationOptions(input.agentId, senderAgentId, params)));
+      return starBotToolResult(this.update(input, this.#toolMutationOptions(input.agentId, senderAgentId, params)));
     }
 
     if (params.tool === "delete_routine") {
@@ -863,7 +863,7 @@ export class RoutineScheduler implements RoutineDueSource {
       } else {
         yield* this.delete({ agentId, routineId }, agentId === senderAgentId ? { turnId: params.turnId } : {});
       }
-      return openBotToolResult({ deleted: true, agentId, routineId });
+      return starBotToolResult({ deleted: true, agentId, routineId });
     }
 
     if (params.tool === "test_routine") {
@@ -880,7 +880,7 @@ export class RoutineScheduler implements RoutineDueSource {
           `Routine ${routineId} is a webhook routine. Only the user tests it, in Routines settings. Tell the user to do it there.`,
         );
       }
-      return openBotToolResult(yield* this.test({ agentId, routineId }));
+      return starBotToolResult(yield* this.test({ agentId, routineId }));
     }
 
     return null;

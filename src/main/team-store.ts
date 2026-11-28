@@ -11,10 +11,10 @@ import { constants } from "node:fs";
 import { copyFile, mkdir, readFile, rm } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { promisify } from "node:util";
-import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { type HostKeyHandover, hostKeyHandoverStatement } from "@openbot/contracts/host-key-handover";
-import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { permanentInviteExpiresAt } from "@openbot/contracts/invite-links";
+import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@starbot/contracts/avatar-images";
+import { type HostKeyHandover, hostKeyHandoverStatement } from "@starbot/contracts/host-key-handover";
+import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { permanentInviteExpiresAt } from "@starbot/contracts/invite-links";
 import {
   type AvatarColor,
   type AvatarImageInput,
@@ -24,11 +24,11 @@ import {
   type TeamMemberSummary,
   type TeamRole,
   type TeamSessionSummary,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { type ServerAppearance, serverAppearanceOrNull } from "@openbot/contracts/team-protocol/host-appearance-v1";
-import { normalizeEmailAddress, slugifyTeamServerName } from "@openbot/contracts/validation";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { type ServerAppearance, serverAppearanceOrNull } from "@starbot/contracts/team-protocol/host-appearance-v1";
+import { normalizeEmailAddress, slugifyTeamServerName } from "@starbot/contracts/validation";
+import { sourceText } from "@starbot/i18n/source";
 import { Context, Deferred, Effect, Layer, Result, Schema } from "effect";
 import {
   isEmptyStoredFile,
@@ -53,7 +53,7 @@ class TeamStoreFiles extends Context.Service<
       options?: WriteJsonFileOptions,
     ): Effect.Effect<void, RemoteWorkflowError>;
   }
->()("openbot/main/TeamStoreFiles") {
+>()("starbot/main/TeamStoreFiles") {
   static readonly layer = Layer.succeed(
     TeamStoreFiles,
     TeamStoreFiles.of({
@@ -71,8 +71,8 @@ class TeamStoreFiles extends Context.Service<
 }
 
 const scrypt = promisify(scryptCallback);
-export const TEAM_STORE_FILE = "openbot-team-server-v2.json";
-export const LEGACY_TEAM_STORE_FILE = "openbot-team-server-v1.json";
+export const TEAM_STORE_FILE = "starbot-team-server-v2.json";
+export const LEGACY_TEAM_STORE_FILE = "starbot-team-server-v1.json";
 const INVITE_TTL_MS = 24 * 60 * 60 * 1_000;
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1_000;
 

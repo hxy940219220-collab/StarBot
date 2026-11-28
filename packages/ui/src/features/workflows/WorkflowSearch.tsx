@@ -1,5 +1,5 @@
-import type { WorkflowNodeKind } from "@openbot/contracts/ipc";
-import { Button, Input, Search, X } from "@openbot/ui";
+import type { WorkflowNodeKind } from "@starbot/contracts/ipc";
+import { Button, Input, Search, X } from "@starbot/ui";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
 import { AddItemLabel, addItem } from "./WorkflowAddMenu";

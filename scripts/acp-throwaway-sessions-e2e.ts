@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { type AgentModelOption, isAgentModel } from "@openbot/contracts/ipc";
+import { type AgentModelOption, isAgentModel } from "@starbot/contracts/ipc";
 import { generateTextWithoutTools } from "../src/backend/agent/profile-generation";
 import type { AgentClient } from "../src/backend/agent-client";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -10,7 +10,7 @@ import { requireProviderDriver } from "../src/backend/provider-drivers";
 import { CustomAgentStore } from "../src/main/custom-agent-store";
 import { installFakeAgent, readJsonl, runTurn, startThread, stopClients, xorCipher } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/acp-throwaway-sessions-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/acp-throwaway-sessions-e2e");
 const AGENTS = ["deletes", "keeps"] as const;
 type AgentName = (typeof AGENTS)[number];
 
@@ -26,7 +26,7 @@ interface Case {
   deleted: string[];
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-acp-throwaway-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-acp-throwaway-e2e-"));
 const report: { passed: boolean; cases: Case[] } = { passed: false, cases: [] };
 const clients: AgentClient[] = [];
 const logPath = (agent: AgentName) => join(root, `${agent}.jsonl`);

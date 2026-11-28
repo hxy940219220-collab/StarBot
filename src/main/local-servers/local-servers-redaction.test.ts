@@ -3,8 +3,8 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { PassThrough } from "node:stream";
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import type { ServerSummary } from "@starbot/contracts/ipc";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { formatLocalServerReady, LOCAL_SERVER_ENVIRONMENT } from "../local-server-child";
@@ -74,7 +74,7 @@ function summary(input: LocalServerAttachInput): ServerSummary {
 let root: string;
 
 beforeEach(async () => {
-  root = await mkdtemp(join(tmpdir(), "openbot-local-servers-"));
+  root = await mkdtemp(join(tmpdir(), "starbot-local-servers-"));
 });
 
 afterEach(async () => {
@@ -87,7 +87,7 @@ function servers(
   spawned: Spawned[],
   platform: NodeJS.Platform = "darwin",
 ): LocalServers {
-  const logger = createOpenBotLogger("local-servers", onLine);
+  const logger = createStarBotLogger("local-servers", onLine);
   const options: LocalServersOptions = {
     registryPath: join(root, LOCAL_SERVERS_FILE),
     userDataRoot: join(root, "local-servers"),

@@ -1,4 +1,4 @@
-import { type AgentProviderId, providerDisplayName } from "@openbot/contracts/agent-providers";
+import { type AgentProviderId, providerDisplayName } from "@starbot/contracts/agent-providers";
 import { router } from "expo-router";
 import { Typography } from "heroui-native";
 import { Pressable, View } from "react-native";

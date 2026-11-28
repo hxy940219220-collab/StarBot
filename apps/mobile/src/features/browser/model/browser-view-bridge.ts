@@ -1,13 +1,13 @@
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import {
   type BrowserViewFrame,
   type BrowserViewHostMessage,
   type BrowserViewInput,
   decodeBrowserViewInputValue,
-} from "@openbot/contracts/team-protocol/browser-view-v1";
-import { runTeamEffect } from "@openbot/team-client";
-import { bytesToBase64 } from "@openbot/team-client/base64";
-import { createRemoteBrowserView, type RemoteBrowserView } from "@openbot/team-client/browser-view";
+} from "@starbot/contracts/team-protocol/browser-view-v1";
+import { runTeamEffect } from "@starbot/team-client";
+import { bytesToBase64 } from "@starbot/team-client/base64";
+import { createRemoteBrowserView, type RemoteBrowserView } from "@starbot/team-client/browser-view";
 import { failureText } from "@/shared/lib/failure-text";
 
 export const BROWSER_VIEW_PAGE_SIZE = { width: 1_280, height: 800 };

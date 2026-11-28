@@ -1,7 +1,7 @@
-import { buttonVariants, ChevronDown } from "@openbot/ui";
-import { SwapLabel, type SwapMotion } from "@openbot/ui/components/SwapLabel";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { useText } from "@openbot/ui/text";
+import { buttonVariants, ChevronDown } from "@starbot/ui";
+import { SwapLabel, type SwapMotion } from "@starbot/ui/components/SwapLabel";
+import { AgentAvatar } from "@starbot/ui/features/agents/AgentAvatar";
+import { useText } from "@starbot/ui/text";
 import { For, untrack } from "solid-js";
 import { AgentPicker, type AgentPickerAgent } from "./AgentPicker";
 

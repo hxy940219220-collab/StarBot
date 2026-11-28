@@ -1,6 +1,6 @@
-import type { AgentProviderId } from "@openbot/contracts/ipc";
-import type { ProviderCodeLoginState } from "@openbot/ui/components/ProviderCodeLoginDialog";
-import type { ProviderConnection } from "@openbot/ui/components/ProviderPicker";
+import type { AgentProviderId } from "@starbot/contracts/ipc";
+import type { ProviderCodeLoginState } from "@starbot/ui/components/ProviderCodeLoginDialog";
+import type { ProviderConnection } from "@starbot/ui/components/ProviderPicker";
 
 export type ProviderCodeLoginOpener = "composer";
 

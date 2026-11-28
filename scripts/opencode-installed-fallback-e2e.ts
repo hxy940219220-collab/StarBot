@@ -7,11 +7,11 @@ import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { BUILT_IN_PROVIDER_DRIVERS, NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 import { installFakeAgent, readJsonl } from "./provider-fakes/host";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-installed-fallback-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/opencode-installed-fallback-e2e");
 const WAIT_MS = 60_000;
 const COPY = "2.3.0";
 const INSTALLED = "1.19.5";
@@ -29,7 +29,7 @@ interface Report {
   copyChosen?: { copyStarts: number };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-installed-fallback-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-opencode-installed-fallback-e2e-"));
 const log = join(root, "starts.jsonl");
 const report: Report = { passed: false };
 const userBin = join(root, "user-bin");
@@ -57,7 +57,7 @@ await installFakeAgent(join(userBin, "opencode"), "opencode-start-failure", {
 });
 
 let savedChoices = 0;
-const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+const store = new AgentStore(join(root, "profile"), join(root, "home"), new StarBotDatabase(join(root, "profile")));
 const providers = new ProviderRuntime({
   offProviders: BUILT_IN_PROVIDER_DRIVERS.map((driver) => driver.id).filter((id) => id !== "opencode"),
   conversation: new ConversationRuntime(

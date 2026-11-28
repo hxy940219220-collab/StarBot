@@ -230,13 +230,13 @@ development app's signing secret.
 1. Install `cloudflared` (`brew install cloudflared`).
 2. Write `.env.slack-dev` in the worktree root. Git ignores it.
    ```
-   OPENBOT_DEV_SLACK_SIGNING_SECRET='…'
+   STARBOT_DEV_SLACK_SIGNING_SECRET='…'
    ```
    The value is the signing secret of `StarBot (dev)` (`A0C5G5XGS83`), under **Basic Information**
    at <https://api.slack.com/apps>.
 3. Export `SLACK_ROUTE_PRIVATE_JWK` in the shell with the same value as
-   `REMOTE_TICKET_PRIVATE_JWK` in `.openbot/dev-state.json`, and export
-   `SLACK_ROUTE_KEY_ID=openbot-remote-1`. Development only: the
+   `REMOTE_TICKET_PRIVATE_JWK` in `.starbot/dev-state.json`, and export
+   `SLACK_ROUTE_KEY_ID=starbot-remote-1`. Development only: the
    ticket key's public key is already in the JWKS that Signal loads.
 4. Run `bun run dev:slack` (add `--shared` for the shared `StarBot Dev` profile). Set the printed addresses
    as the development app's request URL, for events and interactivity, and its redirect URL. They
@@ -244,7 +244,7 @@ development app's signing secret.
 
 The install returns through the account API tunnel. The local account API needs the development
 app's `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET` and `SLACK_STATE_SECRET` in local development state.
-The dev app gets the grant on a loopback port, not through `openbot://`, so an installed StarBot on
+The dev app gets the grant on a loopback port, not through `starbot://`, so an installed StarBot on
 the same computer does not get it. Not confirmed: this install end to end.
 
 ## Troubleshooting
@@ -265,8 +265,8 @@ The workspace row says what is wrong.
 
 Each connection (a Slack workspace, a Discord server, a Telegram chat or a WhatsApp number) has its own
 list of facts.
-The agent that answers saves a fact with `openbot.messaging_remember` and deletes one with
-`openbot.messaging_forget_memory`. Every prompt of every conversation of that connection shows the
+The agent that answers saves a fact with `starbot.messaging_remember` and deletes one with
+`starbot.messaging_forget_memory`. Every prompt of every conversation of that connection shows the
 whole list, with the ID of each fact. The prompt marks the facts as data, not instructions.
 
 - A connection keeps at most 32 facts of 500 characters each.
@@ -274,12 +274,12 @@ whole list, with the ID of each fact. The prompt marks the facts as data, not in
   A fact saved in a private channel is not refused: every channel and direct message of the
   workspace sees it too. Anyone who can reach StarBot in the workspace, in a direct message too,
   can ask the agent to forget a fact.
-- The agent's own memories (`openbot.remember`) stay separate. They are private to the StarBot user.
+- The agent's own memories (`starbot.remember`) stay separate. They are private to the StarBot user.
 - A disconnect keeps the facts. When you connect the same workspace again, the agent sees them again.
 - StarBot has no screen for these facts yet. Ask the agent in the workspace to forget a fact.
 
-`openbot.messaging_history` reads the newest messages of the conversation's own channel or thread:
-30 by default, 100 at most. With `connection` and `place` from `openbot.messaging_list_places`, it
+`starbot.messaging_history` reads the newest messages of the conversation's own channel or thread:
+30 by default, 100 at most. With `connection` and `place` from `starbot.messaging_list_places`, it
 reads that place in the user's own chat or in a routine, for example a routine that summarizes a
 chat each morning. It reads only a place that the list shows. A turn that answers an external chat,
 or a teammate's turn on a request from it, cannot read a different place: a person there is not the
@@ -300,11 +300,11 @@ Any agent can post to a connected place on its own initiative, in any turn: in t
 in a routine run, or in a turn that answers a platform message. Tell it where in the request or the
 routine prompt, for example "post the summary to #bot-inflow on Discord".
 
-- `openbot.messaging_list_places` with no arguments lists the enabled connections and their IDs.
+- `starbot.messaging_list_places` with no arguments lists the enabled connections and their IDs.
   With `connection`, it lists the places StarBot can post in: the Slack channels it is a member of,
   the Discord text and announcement channels and active threads that its permissions let it view
   and post in, or the Telegram chat itself.
-- `openbot.messaging_post` posts markdown as StarBot to `place`. `replyTo` puts the post in a
+- `starbot.messaging_post` posts markdown as StarBot to `place`. `replyTo` puts the post in a
   thread: a Slack thread ts, a Discord message ID, a Telegram message ID, or `t<topic ID>` for a
   Telegram forum topic. The text is redacted before it leaves this computer. A Slack or Discord
   `<@user ID>` or a Telegram `@username` notifies that person. A Telegram connection posts only in

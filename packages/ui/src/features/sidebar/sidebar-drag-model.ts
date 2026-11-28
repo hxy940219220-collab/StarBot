@@ -1,4 +1,4 @@
-import { SIDEBAR_PEOPLE_SECTION_ID } from "@openbot/contracts/ipc";
+import { SIDEBAR_PEOPLE_SECTION_ID } from "@starbot/contracts/ipc";
 
 export interface DragSlot {
   bottom: number;

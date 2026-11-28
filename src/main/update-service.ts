@@ -9,20 +9,20 @@ import type {
   UpdateBusyPhase,
   UpdateFailureCode,
   UpdateStatus,
-} from "@openbot/contracts/ipc";
-import { isUpdateBusyPhase } from "@openbot/contracts/ipc";
-import { isNewerRelease } from "@openbot/contracts/release-version";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { isUpdateBusyPhase } from "@starbot/contracts/ipc";
+import { isNewerRelease } from "@starbot/contracts/release-version";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Cause, Deferred, Effect, Exit, Fiber, Result, Schema, Scope, Semaphore } from "effect";
 import type { ProgressInfo, UpdateInfo } from "electron-updater";
 import type { HostUpdateState } from "../../packages/contracts/src/host-manager";
 import { causeHelpers } from "../backend/effect-boundary";
 import { writeUpdateHandover, writeUpdateInstallRecord } from "./update-install-guard";
-import type { OpenBotSiblingInstance, SiblingScanFailed } from "./update-sibling-instances";
+import type { StarBotSiblingInstance, SiblingScanFailed } from "./update-sibling-instances";
 import { verifyWindowsUpdateSignature } from "./windows-update-signature";
 
-const logger = createOpenBotLogger("update");
+const logger = createStarBotLogger("update");
 
 export type UpdateCancellationToken = {
   readonly cancelled: boolean;
@@ -87,7 +87,7 @@ export function electronUpdaterCacheDirectory(): string {
       : process.platform === "darwin"
         ? join(homedir(), "Library", "Caches")
         : process.env.XDG_CACHE_HOME || join(homedir(), ".cache");
-  return join(root, "openbot-updater");
+  return join(root, "starbot-updater");
 }
 
 type UpdateOperation = "check" | "download" | "install";
@@ -102,7 +102,7 @@ interface UpdateServiceOptions {
   enabled: boolean;
   autoDownload: boolean;
   beforeInstall: () => Promise<void>;
-  checkSiblingInstances?: (() => Effect.Effect<readonly OpenBotSiblingInstance[], SiblingScanFailed>) | undefined;
+  checkSiblingInstances?: (() => Effect.Effect<readonly StarBotSiblingInstance[], SiblingScanFailed>) | undefined;
   currentUid?: number | undefined;
   platform?: NodeJS.Platform;
   appBundlePath?: string | undefined;
@@ -565,7 +565,7 @@ export class UpdateService extends EventEmitter<UpdateServiceEvents> {
     return Effect.gen({ self: this }, function* () {
       this.#pendingInstallRequests += 1;
       const siblings = yield* Effect.suspend(
-        () => this.#options.checkSiblingInstances?.() ?? Effect.succeed<readonly OpenBotSiblingInstance[]>([]),
+        () => this.#options.checkSiblingInstances?.() ?? Effect.succeed<readonly StarBotSiblingInstance[]>([]),
       ).pipe(
         Effect.mapError(({ cause }) => new UpdateOperationFailure({ cause })),
         Effect.ensuring(
@@ -639,7 +639,7 @@ export class UpdateService extends EventEmitter<UpdateServiceEvents> {
     }).pipe(Effect.uninterruptible);
   }
 
-  #siblingSessionMessage(siblings: readonly OpenBotSiblingInstance[]): string {
+  #siblingSessionMessage(siblings: readonly StarBotSiblingInstance[]): string {
     const currentUid = this.#options.currentUid;
     if (currentUid !== undefined && siblings.every((sibling) => sibling.uid === currentUid)) {
       return sourceText("error.update.siblingSessionSameAccount");

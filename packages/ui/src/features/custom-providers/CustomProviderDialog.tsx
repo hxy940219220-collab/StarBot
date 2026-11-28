@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   CustomProviderApiFormat,
   CustomProviderHarness,
@@ -6,7 +6,7 @@ import type {
   CustomProviderReasoningEffort,
   ProviderRuntimeStatus,
   SaveCustomProviderInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   CUSTOM_PROVIDER_DEFAULT_INPUTS,
   CUSTOM_PROVIDER_HARNESS_INPUT_KINDS,
@@ -14,8 +14,8 @@ import {
   CUSTOM_PROVIDER_REASONING_EFFORTS,
   DEFAULT_CUSTOM_PROVIDER_API_FORMAT,
   DEFAULT_CUSTOM_PROVIDER_HARNESS,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
 import {
   ArrowLeft,
   Button,
@@ -35,7 +35,7 @@ import {
   Text,
   Trash2,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createEffect, createSignal, createStore, For, Match, onSettled, Show, Switch, untrack } from "solid-js";
 import { createScrollFades } from "../../components/createScrollFades";
 import { REASONING_LABEL } from "../../components/ProviderModelPicker";
@@ -590,13 +590,13 @@ export function CustomProviderDialog(props: CustomProviderDialogProps) {
                               cursor: "pointer",
                               border:
                                 draft.baseUrl === preset.baseUrl
-                                  ? "1.5px solid var(--openbot-accent, #7c5cff)"
-                                  : "1px solid var(--openbot-border, rgba(120, 115, 150, 0.25))",
+                                  ? "1.5px solid var(--starbot-accent, #7c5cff)"
+                                  : "1px solid var(--starbot-border, rgba(120, 115, 150, 0.25))",
                               background:
                                 draft.baseUrl === preset.baseUrl
-                                  ? "color-mix(in srgb, var(--openbot-accent, #7c5cff) 12%, transparent)"
-                                  : "var(--openbot-bg-surface, rgba(255,255,255,0.6))",
-                              color: "var(--openbot-text-primary)",
+                                  ? "color-mix(in srgb, var(--starbot-accent, #7c5cff) 12%, transparent)"
+                                  : "var(--starbot-bg-surface, rgba(255,255,255,0.6))",
+                              color: "var(--starbot-text-primary)",
                             }}
                           >
                             + {preset.label}

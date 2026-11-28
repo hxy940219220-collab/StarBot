@@ -1,10 +1,10 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentMemorySelectionState,
   MemoryEntry,
-  OpenBotDesktopApi,
+  StarBotDesktopApi,
   SetAgentMemoryInclusionInput,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export interface MemoriesPort {
   ownerId: string;
@@ -24,7 +24,7 @@ export interface MemoriesPort {
 }
 
 export type AgentMemoriesApi = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   | "listMemories"
   | "getMemorySelection"
   | "setMemoryInclusion"
@@ -39,7 +39,7 @@ export function agentMemoriesPort(
   agentId: string,
   agentName: string,
   limit: number | null,
-  api: AgentMemoriesApi = window.openbot.agent,
+  api: AgentMemoriesApi = window.starbot.agent,
 ): MemoriesPort {
   return {
     ownerId: agentId,
@@ -67,7 +67,7 @@ export function agentMemoriesPort(
 }
 
 export type ChannelMemoriesApi = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   | "listChannelMemories"
   | "createChannelMemory"
   | "updateChannelMemory"
@@ -79,7 +79,7 @@ export type ChannelMemoriesApi = Pick<
 export function channelMemoriesPort(
   channelId: string,
   channelName: string,
-  api: ChannelMemoriesApi = window.openbot.agent,
+  api: ChannelMemoriesApi = window.starbot.agent,
 ): MemoriesPort {
   return {
     ownerId: channelId,

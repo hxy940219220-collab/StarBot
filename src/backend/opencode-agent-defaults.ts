@@ -1,11 +1,11 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Option, Schema } from "effect";
 import { openCodeDatabasePath, readOpenCodeDatabase } from "./opencode-usage";
 
-const logger = createOpenBotLogger("opencode-agent-defaults");
+const logger = createStarBotLogger("opencode-agent-defaults");
 
 type OpenCodeAction = "allow" | "ask" | "deny";
 
@@ -25,7 +25,7 @@ const WEB_SEARCH_ANSWER_KEY = "websearch:provider";
 
 const GLOBAL_CONFIG_FILES = ["config.json", "opencode.json", "opencode.jsonc"] as const;
 
-const DEFAULTS_FILE = "openbot-agent-defaults.json";
+const DEFAULTS_FILE = "starbot-agent-defaults.json";
 
 interface UserRules {
   readonly tools: string[];

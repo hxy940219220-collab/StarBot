@@ -12,7 +12,7 @@ import { Effect, Schema } from "effect";
  */
 
 const VERIFY_TIMEOUT_MS = 60_000;
-const FILE_ENV = "OPENBOT_UPDATE_SIGNATURE_FILE";
+const FILE_ENV = "STARBOT_UPDATE_SIGNATURE_FILE";
 
 class SignatureCheckFailed extends Schema.TaggedError<SignatureCheckFailed>()("SignatureCheckFailed", {
   reason: Schema.String,

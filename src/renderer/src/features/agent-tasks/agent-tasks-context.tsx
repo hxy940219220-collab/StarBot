@@ -1,7 +1,7 @@
-import { AGENT_ARCHIVED_THREADS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-archived-threads-v1";
-import { AGENT_THREAD_PAGES_CAPABILITY } from "@openbot/contracts/team-protocol/agent-thread-pages-v1";
-import { MESSAGE_DELETE_CAPABILITY } from "@openbot/contracts/team-protocol/message-delete-v1";
-import { MESSAGE_PINS_CAPABILITY } from "@openbot/contracts/team-protocol/message-pins-v1";
+import { AGENT_ARCHIVED_THREADS_CAPABILITY } from "@starbot/contracts/team-protocol/agent-archived-threads-v1";
+import { AGENT_THREAD_PAGES_CAPABILITY } from "@starbot/contracts/team-protocol/agent-thread-pages-v1";
+import { MESSAGE_DELETE_CAPABILITY } from "@starbot/contracts/team-protocol/message-delete-v1";
+import { MESSAGE_PINS_CAPABILITY } from "@starbot/contracts/team-protocol/message-pins-v1";
 import { untrack } from "solid-js";
 import { createSimpleContext } from "../../simple-context";
 import { useAgents } from "../agents/agents-context";

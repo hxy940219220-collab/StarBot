@@ -1,5 +1,5 @@
-import { HOST_RESTART_CAPABILITY, HOST_RESTART_ROUTES } from "@openbot/contracts/team-protocol/host-restart-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { HOST_RESTART_CAPABILITY, HOST_RESTART_ROUTES } from "@starbot/contracts/team-protocol/host-restart-v1";
+import { sourceText } from "@starbot/i18n/source";
 import type { TeamApiAdmin } from "./dependencies";
 import { HttpError } from "./http-error";
 import type { RouteOutcome, TeamApiRequestContext } from "./request-context";

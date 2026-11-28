@@ -3,13 +3,13 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { AGENT_PROVIDERS } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/antigravity-refused-history-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-antigravity-refused-history-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/antigravity-refused-history-e2e");
+const root = await mkdtemp(join(tmpdir(), "starbot-antigravity-refused-history-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const install = join(root, "antigravity");
@@ -18,7 +18,7 @@ const logPath = join(root, "agy.jsonl");
 
 process.env.HOME = home;
 process.env.GEMINI_HOME = join(home, ".gemini");
-process.env.OPENBOT_ANTIGRAVITY_PATH = fakeAgy;
+process.env.STARBOT_ANTIGRAVITY_PATH = fakeAgy;
 process.env.FAKE_AGY_LOG = logPath;
 mkdirSync(home, { recursive: true });
 
@@ -27,7 +27,7 @@ const { AgentStore } = await import("../src/backend/agent-store");
 const { providerLabel } = await import("../src/backend/agent/thread-items");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { StarBotDatabase } = await import("../src/backend/starbot-database");
 
 const FAKE_AGY = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -154,7 +154,7 @@ function prompts(): Prompt[] {
 
 await mkdir(join(install, "1.5.4", "bin"), { recursive: true });
 await writeFile(fakeAgy, FAKE_AGY, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

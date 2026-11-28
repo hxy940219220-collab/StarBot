@@ -1,6 +1,6 @@
-import type { BillingCurrency } from "@openbot/contracts/billing";
-import { chargesVat, isWithdrawalConsumer, VAT_TAX_RATE, vatAmount } from "@openbot/contracts/billing-details";
-import { type CreditStop, creditRegularPrice, creditStopPrice, creditTier } from "@openbot/contracts/credits";
+import type { BillingCurrency } from "@starbot/contracts/billing";
+import { chargesVat, isWithdrawalConsumer, VAT_TAX_RATE, vatAmount } from "@starbot/contracts/billing-details";
+import { type CreditStop, creditRegularPrice, creditStopPrice, creditTier } from "@starbot/contracts/credits";
 import {
   Alert,
   AlertContent,
@@ -12,7 +12,7 @@ import {
   IconButton,
   TriangleAlert,
   X,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import type { JSX } from "@solidjs/web";
 import { createMemo, createSignal, createUniqueId, Show, untrack } from "solid-js";
 import { useText } from "../../text";

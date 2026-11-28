@@ -1,5 +1,5 @@
-import { FEEDBACK_LIMITS, FEEDBACK_REPOSITORY, feedbackSearchTerms } from "@openbot/contracts/feedback";
-import { isString } from "@openbot/contracts/runtime-values";
+import { FEEDBACK_LIMITS, FEEDBACK_REPOSITORY, feedbackSearchTerms } from "@starbot/contracts/feedback";
+import { isString } from "@starbot/contracts/runtime-values";
 import { createFileRoute } from "@tanstack/solid-router";
 import { Effect } from "effect";
 import { runApiResponse } from "../../../server/effect-runtime";

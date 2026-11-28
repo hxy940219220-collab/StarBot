@@ -1,19 +1,19 @@
 import {
   EMPTY_VAULT,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type VaultItemSummary,
   type VaultSaveInput,
   type VaultSecretField,
   type VaultState,
   type VaultTwoStepCode,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   normalizeTwoStepKey,
   parseTwoStepKey,
   twoStepCode,
   twoStepRemainingMs,
-} from "@openbot/contracts/two-step-code";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/two-step-code";
+import { sourceText } from "@starbot/i18n/source";
 
 function brandOf(number: string): "visa" | "mastercard" | "amex" | "discover" | null {
   if (number.startsWith("4")) return "visa";
@@ -23,7 +23,7 @@ function brandOf(number: string): "visa" | "mastercard" | "amex" | "discover" | 
   return null;
 }
 
-export function createMockVault(): OpenBotDesktopApi["vault"] {
+export function createMockVault(): StarBotDesktopApi["vault"] {
   let state: VaultState = { ...EMPTY_VAULT, agentScope: true };
   const secrets = new Map<string, Partial<Record<VaultSecretField, string>>>();
   const twoStepKeys = new Map<string, string>();

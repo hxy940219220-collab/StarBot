@@ -2,10 +2,10 @@ import { type ChildProcessWithoutNullStreams, spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { StringDecoder } from "node:string_decoder";
-import type { KeyOnlyProviderId } from "@openbot/contracts/agent-providers";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import type { KeyOnlyProviderId } from "@starbot/contracts/agent-providers";
+import { type DynamicRecord, isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import { RequestTimeoutError } from "./agent-client";
 import type { SpawnTarget } from "./process-confinement";
@@ -22,7 +22,7 @@ import { stopWindowsProcessTree } from "./windows-process-tree";
 const PI_RECORD_LIMIT_BYTES = 256 * 1024 * 1024;
 
 export const PI_REQUEST_TIMEOUT_MS = 30_000;
-const logger = createOpenBotLogger("provider-runtime");
+const logger = createStarBotLogger("provider-runtime");
 
 function piRecord(line: string): DynamicRecord | null {
   let value: unknown;

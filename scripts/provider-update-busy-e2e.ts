@@ -7,11 +7,11 @@ import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { BUILT_IN_PROVIDER_DRIVERS, NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 import { checkProviderAccountReload } from "./provider-account-reload-e2e";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-update-busy-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/provider-update-busy-e2e");
 const WAIT_MS = 15_000;
 const INSTALLED = "1.5.3";
 const NEWER = "1.5.4";
@@ -80,7 +80,7 @@ interface Report {
   };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-update-busy-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-provider-update-busy-e2e-"));
 const log = join(root, "agy.log");
 const report: Report = { passed: false };
 process.env.FAKE_AGY_LOG = log;
@@ -121,7 +121,7 @@ function install(executable: string, hold = false) {
     });
 }
 
-const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+const store = new AgentStore(join(root, "profile"), join(root, "home"), new StarBotDatabase(join(root, "profile")));
 const installedExecutable = await installVersion(INSTALLED);
 const newerExecutable = await installVersion(NEWER);
 const providers = new ProviderRuntime({

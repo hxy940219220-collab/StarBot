@@ -1,32 +1,32 @@
 .skills-marketplace {
-  --marketplace-inset: var(--openbot-space-6);
+  --marketplace-inset: var(--starbot-space-6);
   display: grid;
   grid-template-columns: max(var(--left-panel-width, 280px), 220px) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr);
   width: 100%;
   height: 100%;
   overflow: hidden;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .marketplace-menu {
-  z-index: calc(var(--openbot-layer-dialog-host) + 1);
+  z-index: calc(var(--starbot-layer-dialog-host) + 1);
 }
 
 body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wizard-dialog):not([data-nested]) {
-  z-index: calc(var(--openbot-layer-dialog-host) + 1);
+  z-index: calc(var(--starbot-layer-dialog-host) + 1);
 }
 
 .skills-marketplace-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
   grid-column: 1 / -1;
   min-height: 48px;
-  padding-block: var(--openbot-space-2);
-  padding-inline: var(--marketplace-inset) var(--openbot-space-2);
-  border-bottom: 1px solid var(--openbot-border);
+  padding-block: var(--starbot-space-2);
+  padding-inline: var(--marketplace-inset) var(--starbot-space-2);
+  border-bottom: 1px solid var(--starbot-border);
 }
 
 .marketplace-nav {
@@ -36,19 +36,19 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   min-width: 0;
   min-height: 0;
   flex-direction: column;
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
   overflow-y: auto;
-  padding: var(--openbot-space-4) var(--openbot-space-3) var(--openbot-space-3);
-  border-inline-end: 1px solid var(--openbot-border);
+  padding: var(--starbot-space-4) var(--starbot-space-3) var(--starbot-space-3);
+  border-inline-end: 1px solid var(--starbot-border);
 }
 
 .marketplace-nav-title {
-  margin: 0 0 var(--openbot-space-3);
-  padding: 0 var(--openbot-space-2);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-semibold);
-  line-height: var(--openbot-leading-lg);
+  margin: 0 0 var(--starbot-space-3);
+  padding: 0 var(--starbot-space-2);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-semibold);
+  line-height: var(--starbot-leading-lg);
 }
 
 .marketplace-nav-title:focus {
@@ -62,23 +62,23 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-nav-item {
-  grid-template-columns: var(--openbot-icon-lg) minmax(0, 1fr) auto;
+  grid-template-columns: var(--starbot-icon-lg) minmax(0, 1fr) auto;
 }
 
 .ui-button.marketplace-nav-item {
   font: inherit;
-  font-size: var(--openbot-text-md);
+  font-size: var(--starbot-text-md);
   white-space: normal;
 }
 
 .ui-button.marketplace-nav-item[aria-current] {
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .marketplace-nav-item[aria-current="location"] {
-  background: var(--openbot-bg-control-hover);
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-medium);
+  background: var(--starbot-bg-control-hover);
+  color: var(--starbot-text-primary);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .marketplace-nav-item > svg:first-child {
@@ -86,34 +86,34 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-nav-count {
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-regular);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-regular);
   font-variant-numeric: tabular-nums;
 }
 
 .marketplace-nav-heading {
-  margin: var(--openbot-space-4) 0 var(--openbot-space-1);
-  padding: 0 var(--openbot-space-2);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
-  line-height: var(--openbot-leading-sm);
+  margin: var(--starbot-space-4) 0 var(--starbot-space-1);
+  padding: 0 var(--starbot-space-2);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-sm);
+  font-weight: var(--starbot-weight-medium);
+  line-height: var(--starbot-leading-sm);
 }
 
 .marketplace-nav-mark {
   display: grid;
-  width: var(--openbot-icon-lg);
-  height: var(--openbot-icon-lg);
+  width: var(--starbot-icon-lg);
+  height: var(--starbot-icon-lg);
   place-items: center;
   overflow: hidden;
-  border-radius: var(--openbot-radius-xs);
+  border-radius: var(--starbot-radius-xs);
 }
 
 .marketplace-nav-mark > :is(svg, img) {
   width: 100%;
   height: 100%;
-  stroke-width: var(--openbot-icon-stroke-lg);
+  stroke-width: var(--starbot-icon-stroke-lg);
 }
 
 .marketplace-nav-name {
@@ -123,7 +123,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-nav-item > .marketplace-nav-warning {
-  color: var(--openbot-warning-text);
+  color: var(--starbot-warning-text);
 }
 
 .skills-marketplace-body {
@@ -135,7 +135,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-frame {
-  padding: calc(var(--openbot-space-8) + var(--openbot-space-2)) var(--marketplace-inset) var(--openbot-space-8);
+  padding: calc(var(--starbot-space-8) + var(--starbot-space-2)) var(--marketplace-inset) var(--starbot-space-8);
 }
 
 .marketplace-frame > * {
@@ -145,20 +145,20 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .skills-marketplace-error {
   position: sticky;
-  bottom: var(--openbot-space-4);
+  bottom: var(--starbot-space-4);
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   width: fit-content;
   max-width: calc(100% - 32px);
-  margin: 0 auto var(--openbot-space-4);
-  padding-block: var(--openbot-space-1);
-  padding-inline: var(--openbot-space-3) var(--openbot-space-1);
-  border: 1px solid var(--openbot-danger);
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-bg-control);
-  color: var(--openbot-danger);
-  box-shadow: 0 12px 32px var(--openbot-shadow-dialog);
+  margin: 0 auto var(--starbot-space-4);
+  padding-block: var(--starbot-space-1);
+  padding-inline: var(--starbot-space-3) var(--starbot-space-1);
+  border: 1px solid var(--starbot-danger);
+  border-radius: var(--starbot-radius-md);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-danger);
+  box-shadow: 0 12px 32px var(--starbot-shadow-dialog);
 }
 
 .marketplace-visually-hidden {
@@ -182,14 +182,14 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-stack {
   display: grid;
   align-content: start;
-  gap: var(--openbot-space-6);
+  gap: var(--starbot-space-6);
   min-width: 0;
 }
 
 .marketplace-head {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
 }
 
 .marketplace-app-reason {
@@ -198,23 +198,23 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .marketplace-command {
   overflow-wrap: anywhere;
-  color: var(--openbot-text-primary);
-  font-family: var(--openbot-font-mono);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-primary);
+  font-family: var(--starbot-font-mono);
+  font-size: var(--starbot-text-sm);
 }
 
 .marketplace-browse {
-  gap: var(--openbot-space-8);
+  gap: var(--starbot-space-8);
 }
 
 .marketplace-browse-head {
   display: grid;
-  gap: var(--openbot-space-6);
+  gap: var(--starbot-space-6);
 }
 
 .marketplace-browse-copy {
   display: grid;
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
 }
 
 .marketplace-browse-copy > p {
@@ -223,13 +223,13 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .marketplace-browse-title {
   margin: 0;
-  font-size: var(--openbot-text-3xl);
+  font-size: var(--starbot-text-3xl);
 }
 
 .marketplace-toolbar {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .marketplace-search {
@@ -275,21 +275,21 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   width: 20px;
   height: 20px;
   overflow: hidden;
-  border-radius: var(--openbot-radius-xs);
-  background: var(--openbot-bg-control);
-  color: var(--openbot-text-muted);
+  border-radius: var(--starbot-radius-xs);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-text-muted);
 }
 
 .marketplace-skill-mark[data-size="row"] {
   width: 36px;
   height: 36px;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--starbot-radius-md);
 }
 
 .marketplace-skill-mark[data-size="md"] {
   width: 40px;
   height: 40px;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--starbot-radius-md);
 }
 
 .skills-marketplace-icon {
@@ -299,10 +299,10 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   width: 42px;
   height: 42px;
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-control);
-  color: var(--openbot-accent-text);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-control);
+  color: var(--starbot-accent-text);
 }
 
 .skills-marketplace-icon:has(img) {
@@ -319,7 +319,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .skills-marketplace-icon svg {
   width: 20px;
   height: 20px;
-  stroke-width: var(--openbot-icon-stroke-lg);
+  stroke-width: var(--starbot-icon-stroke-lg);
 }
 
 .marketplace-skill-mark[data-kind="icon"] > img {
@@ -335,7 +335,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .marketplace-card {
@@ -343,22 +343,22 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   display: grid;
   min-width: 0;
   grid-template-rows: auto 1fr auto;
-  gap: var(--openbot-space-3);
-  padding: var(--openbot-space-4);
-  border: 1px solid var(--openbot-border-grouped);
-  border-radius: var(--openbot-radius-card);
-  background: var(--openbot-bg-grouped);
-  transition: background var(--openbot-duration-fast) var(--openbot-ease-out);
+  gap: var(--starbot-space-3);
+  padding: var(--starbot-space-4);
+  border: 1px solid var(--starbot-border-grouped);
+  border-radius: var(--starbot-radius-card);
+  background: var(--starbot-bg-grouped);
+  transition: background var(--starbot-duration-fast) var(--starbot-ease-out);
 }
 
 .marketplace-card:hover:not(.marketplace-card-skeleton) {
-  background: var(--openbot-bg-control-hover);
+  background: var(--starbot-bg-control-hover);
 }
 
 .marketplace-card-head {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
   min-width: 0;
 }
 
@@ -375,7 +375,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   display: inline-flex;
   flex: 0 1 auto;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   min-width: 0;
   max-width: 60%;
 }
@@ -384,7 +384,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -393,7 +393,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-card-foot {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   min-height: 16px;
   font-variant-numeric: tabular-nums;
 }
@@ -419,7 +419,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-skeleton-mark {
   width: 40px;
   height: 40px;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--starbot-radius-md);
 }
 
 .marketplace-skeleton-line {
@@ -434,9 +434,9 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-done {
   display: inline-flex;
   align-items: center;
-  gap: var(--openbot-space-1);
-  color: var(--openbot-success-text);
-  font-size: var(--openbot-text-sm);
+  gap: var(--starbot-space-1);
+  color: var(--starbot-success-text);
+  font-size: var(--starbot-text-sm);
   white-space: nowrap;
 }
 
@@ -448,33 +448,33 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .marketplace-app-group {
   display: grid;
-  gap: var(--openbot-space-3);
-  padding-top: var(--openbot-space-4);
-  border-top: 1px solid var(--openbot-border);
+  gap: var(--starbot-space-3);
+  padding-top: var(--starbot-space-4);
+  border-top: 1px solid var(--starbot-border);
 }
 
 .marketplace-app-group-title {
   display: flex;
   align-items: baseline;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   margin: 0;
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-semibold);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .marketplace-app-group-count {
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
-  font-weight: var(--openbot-weight-regular);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-md);
+  font-weight: var(--starbot-weight-regular);
   font-variant-numeric: tabular-nums;
 }
 
 .marketplace-app-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  column-gap: var(--openbot-space-6);
-  row-gap: var(--openbot-space-1);
+  column-gap: var(--starbot-space-6);
+  row-gap: var(--starbot-space-1);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -485,18 +485,18 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   display: flex;
   min-width: 0;
   align-items: center;
-  gap: var(--openbot-space-3);
-  padding: var(--openbot-space-2);
-  border-radius: var(--openbot-radius-lg);
+  gap: var(--starbot-space-3);
+  padding: var(--starbot-space-2);
+  border-radius: var(--starbot-radius-lg);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .marketplace-app-row:hover {
-    background: var(--openbot-bg-control-hover);
+    background: var(--starbot-bg-control-hover);
   }
 
   .marketplace-app-row:hover .marketplace-app-action[data-variant="secondary"]:not([data-disabled]) {
-    background: var(--openbot-bg-control-active);
+    background: var(--starbot-bg-control-active);
   }
 }
 
@@ -523,23 +523,23 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   display: grid;
   flex: 1;
   min-width: 0;
-  gap: var(--openbot-space-0-5);
+  gap: var(--starbot-space-0-5);
   pointer-events: none;
 }
 
 .marketplace-app-row-name {
   overflow: hidden;
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-text-primary);
+  font-size: var(--starbot-text-lg);
+  font-weight: var(--starbot-weight-medium);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .marketplace-app-row-tagline {
   overflow: hidden;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-md);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -551,23 +551,23 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-app-row-status > .marketplace-done {
-  height: var(--openbot-control-md);
-  gap: var(--openbot-space-1-5);
-  padding-inline: var(--openbot-space-2);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
-  --marketplace-done-icon: var(--openbot-icon-md);
-  --marketplace-done-mark: var(--openbot-success);
+  height: var(--starbot-control-md);
+  gap: var(--starbot-space-1-5);
+  padding-inline: var(--starbot-space-2);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-md);
+  --marketplace-done-icon: var(--starbot-icon-md);
+  --marketplace-done-mark: var(--starbot-success);
 }
 
 .marketplace-props {
   display: grid;
-  gap: var(--openbot-space-0-5);
+  gap: var(--starbot-space-0-5);
   margin: 0;
 }
 
 .marketplace-props > dd {
-  margin: 0 0 var(--openbot-space-3);
+  margin: 0 0 var(--starbot-space-3);
 }
 
 .marketplace-props > dd:last-child {
@@ -576,8 +576,8 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .marketplace-info {
   grid-template-columns: minmax(120px, max-content) minmax(0, 1fr);
-  column-gap: var(--openbot-space-6);
-  row-gap: var(--openbot-space-2);
+  column-gap: var(--starbot-space-6);
+  row-gap: var(--starbot-space-2);
 }
 
 .marketplace-info > dd {
@@ -587,25 +587,25 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .skills-marketplace .marketplace-link {
   height: auto;
   padding: 0;
-  font-size: var(--openbot-text-md);
+  font-size: var(--starbot-text-md);
 }
 
 .marketplace-try {
   display: grid;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .skill-preview-card.marketplace-try-card {
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .marketplace-try-card .skill-preview-request {
   width: min(100%, 560px);
-  line-height: var(--openbot-space-6);
+  line-height: var(--starbot-space-6);
 }
 
 .marketplace-try-card .skill-preview-chip {
-  margin-inline-end: var(--openbot-space-0-5);
+  margin-inline-end: var(--starbot-space-0-5);
   vertical-align: top;
 }
 
@@ -616,10 +616,10 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .marketplace-doc {
   min-width: 0;
-  padding: var(--openbot-space-4) var(--openbot-space-6);
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-card);
-  font-size: var(--openbot-text-sm);
+  padding: var(--starbot-space-4) var(--starbot-space-6);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-card);
+  font-size: var(--starbot-text-sm);
   overflow-wrap: anywhere;
 }
 
@@ -638,7 +638,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   justify-content: center;
   gap: 10px;
   padding: 20px 16px;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   text-align: center;
 }
 
@@ -710,18 +710,18 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-empty > .ui-button {
-  margin-top: var(--openbot-space-2);
+  margin-top: var(--starbot-space-2);
 }
 
 .marketplace-empty-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .marketplace-skill-attention {
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
 }
 
 .marketplace-skill-row > .marketplace-skill-mark {
@@ -731,60 +731,60 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-skill-row-actions {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .marketplace-skill-group-head {
   display: flex;
-  min-height: var(--openbot-control-md);
+  min-height: var(--starbot-control-md);
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .marketplace-github-trust {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
   margin: 0;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-secondary);
+  font-size: var(--starbot-text-sm);
 }
 
 .marketplace-github-trust > svg {
-  width: var(--openbot-space-4);
-  height: var(--openbot-space-4);
+  width: var(--starbot-space-4);
+  height: var(--starbot-space-4);
   flex: none;
-  color: var(--openbot-warning-text);
+  color: var(--starbot-warning-text);
 }
 
 .marketplace-github {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
 }
 
 .marketplace-skill-empty {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-3);
-  border: 1px dashed var(--openbot-border);
-  border-radius: var(--openbot-radius-lg);
-  padding: var(--openbot-space-4);
+  gap: var(--starbot-space-3);
+  border: 1px dashed var(--starbot-border);
+  border-radius: var(--starbot-radius-lg);
+  padding: var(--starbot-space-4);
 }
 
 .marketplace-skill-empty.starbot-unified-skill-empty {
   justify-content: space-between;
   gap: 20px;
   padding: 18px 24px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 22%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 22%, var(--starbot-border));
   border-radius: 18px;
   background: linear-gradient(
     115deg,
-    color-mix(in srgb, var(--openbot-accent) 6%, var(--openbot-bg-surface)) 0%,
-    color-mix(in srgb, var(--openbot-accent) 14%, var(--openbot-bg-surface)) 100%
+    color-mix(in srgb, var(--starbot-accent) 6%, var(--starbot-bg-surface)) 0%,
+    color-mix(in srgb, var(--starbot-accent) 14%, var(--starbot-bg-surface)) 100%
   );
-  box-shadow: 0 4px 18px color-mix(in srgb, var(--openbot-accent) 8%, transparent);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--starbot-accent) 8%, transparent);
 }
 
 .starbot-unified-skill-empty-copy {
@@ -796,15 +796,15 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .starbot-unified-skill-empty-copy h4 {
   margin: 0;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 15px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   line-height: 1.4;
 }
 
 .starbot-unified-skill-empty-copy p {
   margin: 0;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 13px;
   line-height: 1.55;
 }
@@ -826,13 +826,13 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   padding: 0 16px;
   border: 0;
   border-radius: 999px;
-  background: var(--openbot-accent);
+  background: var(--starbot-accent);
   color: #ffffff;
   font-size: 13.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 3px 10px color-mix(in srgb, var(--openbot-accent) 28%, transparent);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--starbot-accent) 28%, transparent);
   transition:
     filter 140ms ease,
     transform 120ms ease;
@@ -861,7 +861,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   padding: 0 14px;
   border-radius: 10px;
   font-size: 13.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   cursor: pointer;
 }
 
@@ -869,7 +869,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .starbot-skill-import-backdrop {
   position: fixed;
   inset: 0;
-  z-index: calc(var(--openbot-layer-dialog-host) + 10);
+  z-index: calc(var(--starbot-layer-dialog-host) + 10);
   display: grid;
   place-items: center;
   padding: 20px;
@@ -883,10 +883,10 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   flex-direction: column;
   gap: 16px;
   padding: 22px 24px 24px;
-  border: 1px solid var(--openbot-border);
+  border: 1px solid var(--starbot-border);
   border-radius: 20px;
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-bg-surface);
+  color: var(--starbot-text-primary);
   box-shadow: 0 24px 56px rgba(20, 14, 44, 0.22);
 }
 
@@ -899,7 +899,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .starbot-skill-import-head h3 {
   margin: 0;
   font-size: 16px;
-  font-weight: var(--openbot-weight-bold);
+  font-weight: var(--starbot-weight-bold);
 }
 
 .starbot-skill-import-close {
@@ -910,13 +910,13 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
   cursor: pointer;
 }
 
 .starbot-skill-import-close:hover {
-  background: var(--openbot-hover);
-  color: var(--openbot-text-primary);
+  background: var(--starbot-hover);
+  color: var(--starbot-text-primary);
 }
 
 .starbot-skill-import-dropzone {
@@ -928,10 +928,10 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   justify-content: center;
   gap: 12px;
   padding: 20px;
-  border: 1.5px dashed var(--openbot-border-strong);
+  border: 1.5px dashed var(--starbot-border-strong);
   border-radius: 14px;
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 60%, var(--openbot-bg-surface));
-  color: var(--openbot-text-primary);
+  background: color-mix(in srgb, var(--starbot-bg-canvas) 60%, var(--starbot-bg-surface));
+  color: var(--starbot-text-primary);
   cursor: pointer;
   transition:
     border-color 140ms ease,
@@ -940,24 +940,24 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .starbot-skill-import-dropzone:hover:not(:disabled),
 .starbot-skill-import-dropzone.is-dragging {
-  border-color: var(--openbot-accent);
-  background: color-mix(in srgb, var(--openbot-accent) 7%, var(--openbot-bg-surface));
+  border-color: var(--starbot-accent);
+  background: color-mix(in srgb, var(--starbot-accent) 7%, var(--starbot-bg-surface));
 }
 
 .starbot-skill-import-icon {
-  color: var(--openbot-text-muted);
+  color: var(--starbot-text-muted);
 }
 
 .starbot-skill-import-drop-text {
   font-size: 14px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
 }
 
 .starbot-skill-import-check {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 13px;
   cursor: pointer;
   user-select: none;
@@ -970,15 +970,15 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   height: 17px;
   flex: 0 0 17px;
   place-items: center;
-  border: 1.5px solid var(--openbot-border-strong);
+  border: 1.5px solid var(--starbot-border-strong);
   border-radius: 5px;
-  background: var(--openbot-bg-surface);
+  background: var(--starbot-bg-surface);
   color: #ffffff;
 }
 
 .starbot-skill-import-checkbox.is-checked {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
+  border-color: var(--starbot-accent);
+  background: var(--starbot-accent);
 }
 
 .starbot-skill-import-checkbox input {
@@ -995,9 +995,9 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   justify-content: space-between;
   gap: 12px;
   padding: 12px 14px;
-  border: 1px solid color-mix(in srgb, var(--openbot-accent) 30%, var(--openbot-border));
+  border: 1px solid color-mix(in srgb, var(--starbot-accent) 30%, var(--starbot-border));
   border-radius: 12px;
-  background: color-mix(in srgb, var(--openbot-accent) 6%, var(--openbot-bg-surface));
+  background: color-mix(in srgb, var(--starbot-accent) 6%, var(--starbot-bg-surface));
 }
 
 .starbot-skill-import-preview strong {
@@ -1007,7 +1007,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 
 .starbot-skill-import-preview p {
   margin: 2px 0 0;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 12px;
 }
 
@@ -1015,8 +1015,8 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   margin: 0;
   padding: 9px 12px;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--openbot-danger) 10%, var(--openbot-bg-surface));
-  color: var(--openbot-danger);
+  background: color-mix(in srgb, var(--starbot-danger) 10%, var(--starbot-bg-surface));
+  color: var(--starbot-danger);
   font-size: 12.5px;
 }
 
@@ -1029,7 +1029,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .starbot-skill-import-reqs h4 {
   margin: 0;
   font-size: 13.5px;
-  font-weight: var(--openbot-weight-semibold);
+  font-weight: var(--starbot-weight-semibold);
 }
 
 .starbot-skill-import-reqs ul {
@@ -1038,7 +1038,7 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   gap: 4px;
   margin: 0;
   padding-inline-start: 18px;
-  color: var(--openbot-text-secondary);
+  color: var(--starbot-text-secondary);
   font-size: 13px;
   line-height: 1.5;
 }
@@ -1052,26 +1052,26 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
   font-size: 13.5px;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--starbot-weight-medium);
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;
 }
 
 .starbot-skill-import-zip-link:hover {
-  color: var(--openbot-accent-text);
+  color: var(--starbot-accent-text);
 }
 
 :is(.marketplace-skill-picker-search, .marketplace-skill-page-search) > svg {
-  width: var(--openbot-space-4);
-  height: var(--openbot-space-4);
+  width: var(--starbot-space-4);
+  height: var(--starbot-space-4);
   flex: none;
 }
 
 .marketplace-skill-agents-trigger {
-  gap: var(--openbot-space-1-5);
+  gap: var(--starbot-space-1-5);
 }
 
 .marketplace-skill-stack {
@@ -1079,25 +1079,25 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-skill-stack > :not(:first-child) {
-  margin-inline-start: calc(var(--openbot-space-1) * -1);
+  margin-inline-start: calc(var(--starbot-space-1) * -1);
 }
 
 .marketplace-skill-picker {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-1);
-  font-size: var(--openbot-text-md);
+  gap: var(--starbot-space-1);
+  font-size: var(--starbot-text-md);
 }
 
 .marketplace-skill-picker-search {
-  margin-block-end: var(--openbot-space-1);
+  margin-block-end: var(--starbot-space-1);
 }
 
 .marketplace-skill-picker-list {
   --marketplace-skill-fade-top: 0px;
   --marketplace-skill-fade-bottom: 0px;
   display: flex;
-  max-height: calc(var(--openbot-space-1) * 90);
+  max-height: calc(var(--starbot-space-1) * 90);
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -1106,10 +1106,10 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   scrollbar-width: none;
   mask-image: linear-gradient(
     to bottom,
-    var(--openbot-transparent),
-    var(--openbot-text-primary) var(--marketplace-skill-fade-top),
-    var(--openbot-text-primary) calc(100% - var(--marketplace-skill-fade-bottom)),
-    var(--openbot-transparent)
+    var(--starbot-transparent),
+    var(--starbot-text-primary) var(--marketplace-skill-fade-top),
+    var(--starbot-text-primary) calc(100% - var(--marketplace-skill-fade-bottom)),
+    var(--starbot-transparent)
   );
 }
 
@@ -1118,11 +1118,11 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 }
 
 .marketplace-skill-picker-list.scroll-fade-top {
-  --marketplace-skill-fade-top: calc(var(--openbot-space-1) * 6);
+  --marketplace-skill-fade-top: calc(var(--starbot-space-1) * 6);
 }
 
 .marketplace-skill-picker-list.scroll-fade-bottom {
-  --marketplace-skill-fade-bottom: calc(var(--openbot-space-1) * 6);
+  --marketplace-skill-fade-bottom: calc(var(--starbot-space-1) * 6);
 }
 
 .marketplace-skill-picker-list:has(label.marketplace-skill-picker-row) {
@@ -1132,19 +1132,19 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
 .marketplace-skill-picker-row {
   display: flex;
   width: 100%;
-  min-height: calc(var(--openbot-space-1) * 9);
+  min-height: calc(var(--starbot-space-1) * 9);
   align-items: center;
   justify-content: flex-start;
-  gap: var(--openbot-space-2);
-  border-radius: var(--openbot-radius-md);
-  padding-inline: var(--openbot-space-2);
+  gap: var(--starbot-space-2);
+  border-radius: var(--starbot-radius-md);
+  padding-inline: var(--starbot-space-2);
   cursor: pointer;
   font-weight: inherit;
   text-align: start;
 }
 
 label.marketplace-skill-picker-row:hover {
-  background: var(--openbot-hover);
+  background: var(--starbot-hover);
 }
 
 .marketplace-skill-picker-list[data-dragging] label.marketplace-skill-picker-row:hover {
@@ -1152,11 +1152,11 @@ label.marketplace-skill-picker-row:hover {
 }
 
 .marketplace-skill-picker-row[aria-current="true"] {
-  background: var(--openbot-bg-control-active);
+  background: var(--starbot-bg-control-active);
 }
 
 .marketplace-skill-picker-all {
-  border-block-end: 1px solid var(--openbot-border);
+  border-block-end: 1px solid var(--starbot-border);
   border-end-start-radius: 0;
   border-end-end-radius: 0;
 }
@@ -1174,7 +1174,7 @@ label.marketplace-skill-picker-row:hover {
   min-width: 0;
   flex: 1;
   align-items: center;
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
 }
 
 .marketplace-skill-picker-agent:has(.agent-role-badge) {
@@ -1182,20 +1182,20 @@ label.marketplace-skill-picker-row:hover {
 
   display: grid;
   grid-template-columns:
-    fit-content(calc(100% - var(--agent-role-badge-collapsed-width) - var(--openbot-space-1)))
+    fit-content(calc(100% - var(--agent-role-badge-collapsed-width) - var(--starbot-space-1)))
     minmax(var(--agent-role-badge-collapsed-width), 1fr);
 }
 
 .marketplace-skill-picker-none {
-  padding: var(--openbot-space-2);
+  padding: var(--starbot-space-2);
 }
 
 .marketplace-skill-dialog-head {
   display: flex;
   min-width: 0;
   align-items: center;
-  gap: var(--openbot-space-3);
-  margin-block: calc(var(--openbot-space-2) * -1) calc(var(--openbot-space-1) * -1);
+  gap: var(--starbot-space-3);
+  margin-block: calc(var(--starbot-space-2) * -1) calc(var(--starbot-space-1) * -1);
 }
 
 .marketplace-skill-dialog-head h2 {
@@ -1250,86 +1250,86 @@ label.marketplace-skill-picker-row:hover {
 }
 
 .marketplace-skill-page-search {
-  width: calc(var(--openbot-space-1) * 56);
+  width: calc(var(--starbot-space-1) * 56);
 }
 
 .marketplace-skill-name {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
   min-width: 0;
 }
 
 .marketplace-skill-verified {
   flex: none;
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
-  color: var(--openbot-text-secondary);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
+  color: var(--starbot-text-secondary);
 }
 
 .marketplace-skill-head-row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
 }
 
 .marketplace-skill-source .ui-sliding-tabs-trigger {
   display: inline-flex;
   align-items: center;
-  gap: var(--openbot-space-1);
+  gap: var(--starbot-space-1);
   white-space: nowrap;
 }
 
 .marketplace-skill-group-page {
   display: grid;
   align-content: start;
-  gap: var(--openbot-space-4);
+  gap: var(--starbot-space-4);
 }
 
 .marketplace-skill-group-bar {
   position: sticky;
   z-index: 1;
   top: 0;
-  padding-block: var(--openbot-space-3);
-  border-bottom: 1px solid var(--openbot-border);
-  background: var(--openbot-bg-canvas);
+  padding-block: var(--starbot-space-3);
+  border-bottom: 1px solid var(--starbot-border);
+  background: var(--starbot-bg-canvas);
 }
 
 .marketplace-skill-group-list {
   display: grid;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .marketplace-skill-featured {
   display: grid;
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .marketplace-skill-featured-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--openbot-space-3);
+  gap: var(--starbot-space-3);
 }
 
 .marketplace-skill-feature {
   isolation: isolate;
   grid-template-rows: auto auto 1fr auto;
-  padding: var(--openbot-space-3);
+  padding: var(--starbot-space-3);
 }
 
 .marketplace-skill-feature > :not(.marketplace-hitarea, .marketplace-skill-feature-art) {
-  padding-inline: var(--openbot-space-1);
+  padding-inline: var(--starbot-space-1);
 }
 
 .marketplace-skill-feature-art {
   position: relative;
   display: grid;
   place-items: center;
-  height: calc(var(--openbot-space-1) * 24);
+  height: calc(var(--starbot-space-1) * 24);
   overflow: hidden;
   isolation: isolate;
-  border-radius: var(--openbot-radius-xl);
+  border-radius: var(--starbot-radius-xl);
 }
 
 .marketplace-skill-feature-art > :not(.skill-preview-gradient) {
@@ -1338,7 +1338,7 @@ label.marketplace-skill-picker-row:hover {
 
 .marketplace-skill-feature .marketplace-skill-verified {
   display: inline-block;
-  margin-inline-start: var(--openbot-space-1);
+  margin-inline-start: var(--starbot-space-1);
   vertical-align: text-bottom;
 }
 
@@ -1353,7 +1353,7 @@ label.marketplace-skill-picker-row:hover {
 
 .marketplace-agent-feature-copy {
   display: grid;
-  gap: var(--openbot-space-0-5);
+  gap: var(--starbot-space-0-5);
   min-width: 0;
 }
 
@@ -1364,7 +1364,7 @@ label.marketplace-skill-picker-row:hover {
 
 .marketplace-agent-feature .marketplace-skill-verified {
   display: inline-block;
-  margin-inline-start: var(--openbot-space-1);
+  margin-inline-start: var(--starbot-space-1);
   vertical-align: text-bottom;
 }
 
@@ -1372,8 +1372,8 @@ label.marketplace-skill-picker-row:hover {
   flex: 0 100 auto;
   min-width: 0;
   overflow: hidden;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-md);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1392,19 +1392,19 @@ label.marketplace-skill-picker-row:hover {
 
 .marketplace-agent-trust {
   display: flex;
-  gap: var(--openbot-space-1-5);
+  gap: var(--starbot-space-1-5);
   align-items: center;
 }
 
 .marketplace-agent-trust svg {
   flex: none;
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
 }
 
 html:active-view-transition-type(marketplace-forward, marketplace-back, marketplace-tab, marketplace-swap) {
-  --marketplace-skill-blur: calc(var(--openbot-space-0-5) * 1.5);
-  --marketplace-skill-blur-small: var(--openbot-space-0-5);
+  --marketplace-skill-blur: calc(var(--starbot-space-0-5) * 1.5);
+  --marketplace-skill-blur-small: var(--starbot-space-0-5);
 }
 
 html:active-view-transition-type(marketplace-forward, marketplace-back, marketplace-tab, marketplace-swap)
@@ -1430,60 +1430,60 @@ html:active-view-transition-type(
 )::view-transition-group(root),
 ::view-transition-group(marketplace-page),
 ::view-transition-group(marketplace-crumbs) {
-  animation-duration: var(--openbot-duration-overlay);
-  animation-timing-function: var(--openbot-ease-out);
+  animation-duration: var(--starbot-duration-overlay);
+  animation-timing-function: var(--starbot-ease-out);
 }
 
 html:active-view-transition-type(marketplace-forward)::view-transition-old(marketplace-page) {
-  --marketplace-skill-to: calc(var(--openbot-space-2) * -1);
-  animation: marketplace-skill-page-out var(--openbot-duration-normal) var(--openbot-ease-out) both;
+  --marketplace-skill-to: calc(var(--starbot-space-2) * -1);
+  animation: marketplace-skill-page-out var(--starbot-duration-normal) var(--starbot-ease-out) both;
 }
 
 html:active-view-transition-type(marketplace-forward)::view-transition-new(marketplace-page) {
-  --marketplace-skill-from: var(--openbot-space-2);
-  animation: marketplace-skill-page-in var(--openbot-duration-overlay) var(--openbot-ease-out) both;
+  --marketplace-skill-from: var(--starbot-space-2);
+  animation: marketplace-skill-page-in var(--starbot-duration-overlay) var(--starbot-ease-out) both;
 }
 
 html:active-view-transition-type(marketplace-back)::view-transition-old(marketplace-page) {
-  --marketplace-skill-to: var(--openbot-space-2);
-  animation: marketplace-skill-page-out var(--openbot-duration-normal) var(--openbot-ease-out) both;
+  --marketplace-skill-to: var(--starbot-space-2);
+  animation: marketplace-skill-page-out var(--starbot-duration-normal) var(--starbot-ease-out) both;
 }
 
 html:active-view-transition-type(marketplace-back)::view-transition-new(marketplace-page) {
-  --marketplace-skill-from: calc(var(--openbot-space-2) * -1);
-  animation: marketplace-skill-page-in var(--openbot-duration-overlay) var(--openbot-ease-out) both;
+  --marketplace-skill-from: calc(var(--starbot-space-2) * -1);
+  animation: marketplace-skill-page-in var(--starbot-duration-overlay) var(--starbot-ease-out) both;
 }
 
 html:dir(rtl):active-view-transition-type(marketplace-forward)::view-transition-old(marketplace-page) {
-  --marketplace-skill-to: var(--openbot-space-2);
+  --marketplace-skill-to: var(--starbot-space-2);
 }
 
 html:dir(rtl):active-view-transition-type(marketplace-forward)::view-transition-new(marketplace-page) {
-  --marketplace-skill-from: calc(var(--openbot-space-2) * -1);
+  --marketplace-skill-from: calc(var(--starbot-space-2) * -1);
 }
 
 html:dir(rtl):active-view-transition-type(marketplace-back)::view-transition-old(marketplace-page) {
-  --marketplace-skill-to: calc(var(--openbot-space-2) * -1);
+  --marketplace-skill-to: calc(var(--starbot-space-2) * -1);
 }
 
 html:dir(rtl):active-view-transition-type(marketplace-back)::view-transition-new(marketplace-page) {
-  --marketplace-skill-from: var(--openbot-space-2);
+  --marketplace-skill-from: var(--starbot-space-2);
 }
 
 html:active-view-transition-type(marketplace-tab)::view-transition-old(marketplace-page) {
-  animation: marketplace-skill-blur-out var(--openbot-duration-normal) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-out var(--starbot-duration-normal) var(--starbot-ease-out) both;
 }
 
 html:active-view-transition-type(marketplace-tab)::view-transition-new(marketplace-page) {
-  animation: marketplace-skill-rise-in var(--openbot-duration-overlay) var(--openbot-ease-out) both;
+  animation: marketplace-skill-rise-in var(--starbot-duration-overlay) var(--starbot-ease-out) both;
 }
 
 html:active-view-transition-type(marketplace-swap)::view-transition-old(marketplace-page) {
-  animation: marketplace-skill-blur-out var(--openbot-duration-fast) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-out var(--starbot-duration-fast) var(--starbot-ease-out) both;
 }
 
 html:active-view-transition-type(marketplace-swap)::view-transition-new(marketplace-page) {
-  animation: marketplace-skill-blur-in var(--openbot-duration-normal) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-in var(--starbot-duration-normal) var(--starbot-ease-out) both;
 }
 
 ::view-transition-old(marketplace-skill-source) {
@@ -1532,8 +1532,8 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 ::view-transition-group(marketplace-group-row-4),
 ::view-transition-group(marketplace-group-row-5),
 ::view-transition-group(marketplace-group-row-6) {
-  animation-duration: var(--openbot-duration-overlay);
-  animation-timing-function: var(--openbot-ease-out);
+  animation-duration: var(--starbot-duration-overlay);
+  animation-timing-function: var(--starbot-ease-out);
 }
 
 ::view-transition-old(marketplace-group-title),
@@ -1543,11 +1543,11 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 }
 
 ::view-transition-old(marketplace-group-title) {
-  animation: marketplace-skill-blur-out var(--openbot-duration-fast) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-out var(--starbot-duration-fast) var(--starbot-ease-out) both;
 }
 
 ::view-transition-new(marketplace-group-title) {
-  animation: marketplace-skill-blur-in var(--openbot-duration-normal) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-in var(--starbot-duration-normal) var(--starbot-ease-out) both;
 }
 
 ::view-transition-old(marketplace-group-row-1),
@@ -1565,15 +1565,15 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 ::view-transition-new(marketplace-group-row-4),
 ::view-transition-new(marketplace-group-row-5),
 ::view-transition-new(marketplace-group-row-6) {
-  animation: marketplace-skill-blur-in var(--openbot-duration-overlay) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-in var(--starbot-duration-overlay) var(--starbot-ease-out) both;
 }
 
 ::view-transition-old(marketplace-crumbs) {
-  animation: marketplace-skill-blur-out var(--openbot-duration-fast) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-out var(--starbot-duration-fast) var(--starbot-ease-out) both;
 }
 
 ::view-transition-new(marketplace-crumbs) {
-  animation: marketplace-skill-blur-in var(--openbot-duration-normal) var(--openbot-ease-out) both;
+  animation: marketplace-skill-blur-in var(--starbot-duration-normal) var(--starbot-ease-out) both;
 }
 
 @keyframes marketplace-skill-page-out {
@@ -1595,7 +1595,7 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 @keyframes marketplace-skill-rise-in {
   from {
     opacity: 0;
-    transform: translateY(var(--openbot-space-2));
+    transform: translateY(var(--starbot-space-2));
     filter: blur(var(--marketplace-skill-blur));
   }
 }
@@ -1649,9 +1649,9 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
   .marketplace-nav {
     grid-row: 2;
     overflow-x: auto;
-    padding: var(--openbot-space-2) var(--openbot-space-3);
+    padding: var(--starbot-space-2) var(--starbot-space-3);
     border-inline-end: 0;
-    border-bottom: 1px solid var(--openbot-border);
+    border-bottom: 1px solid var(--starbot-border);
   }
 
   .marketplace-nav-title,
@@ -1672,7 +1672,7 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 
 @media (max-width: 860px) {
   .skills-marketplace {
-    --marketplace-inset: var(--openbot-space-4);
+    --marketplace-inset: var(--starbot-space-4);
   }
 
   .marketplace-head {
@@ -1687,7 +1687,7 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 }
 
 .marketplace-app-action[data-status="attention"] > svg {
-  color: var(--openbot-warning-text);
+  color: var(--starbot-warning-text);
 }
 
 :is(.marketplace-skill-agents-trigger, .marketplace-skill-picker-row) .agent-avatar > svg {
@@ -1696,15 +1696,15 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 }
 
 .marketplace-skill-source .ui-sliding-tabs-trigger svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--starbot-icon-sm);
+  height: var(--starbot-icon-sm);
   flex: none;
 }
 
 .marketplace-agent-update-frame {
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-control);
+  border: 1px solid var(--starbot-border);
+  border-radius: var(--starbot-radius-lg);
+  background: var(--starbot-bg-control);
   overflow: hidden;
 }
 
@@ -1712,7 +1712,7 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
   --marketplace-agent-update-fade-top: 0px;
   --marketplace-agent-update-fade-bottom: 0px;
   display: flex;
-  max-height: calc(var(--openbot-space-8) * 7);
+  max-height: calc(var(--starbot-space-8) * 7);
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -1725,10 +1725,10 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
   scrollbar-width: none;
   mask-image: linear-gradient(
     to bottom,
-    var(--openbot-transparent),
-    var(--openbot-text-primary) var(--marketplace-agent-update-fade-top),
-    var(--openbot-text-primary) calc(100% - var(--marketplace-agent-update-fade-bottom)),
-    var(--openbot-transparent)
+    var(--starbot-transparent),
+    var(--starbot-text-primary) var(--marketplace-agent-update-fade-top),
+    var(--starbot-text-primary) calc(100% - var(--marketplace-agent-update-fade-bottom)),
+    var(--starbot-transparent)
   );
 }
 
@@ -1737,23 +1737,23 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 }
 
 .marketplace-agent-update-list.scroll-fade-top {
-  --marketplace-agent-update-fade-top: calc(var(--openbot-space-1) * 6);
+  --marketplace-agent-update-fade-top: calc(var(--starbot-space-1) * 6);
 }
 
 .marketplace-agent-update-list.scroll-fade-bottom {
-  --marketplace-agent-update-fade-bottom: calc(var(--openbot-space-1) * 6);
+  --marketplace-agent-update-fade-bottom: calc(var(--starbot-space-1) * 6);
 }
 
 .marketplace-agent-update-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-3);
-  padding: var(--openbot-space-2) var(--openbot-space-3);
+  gap: var(--starbot-space-3);
+  padding: var(--starbot-space-2) var(--starbot-space-3);
 }
 
 .marketplace-agent-update-row + .marketplace-agent-update-row {
-  border-top: 1px solid var(--openbot-border);
+  border-top: 1px solid var(--starbot-border);
 }
 
 .marketplace-agent-update-text {
@@ -1763,19 +1763,19 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 
 .marketplace-agent-update-name {
   overflow: hidden;
-  color: var(--openbot-text-secondary);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--starbot-text-secondary);
+  font-weight: var(--starbot-weight-medium);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .marketplace-agent-update-state {
-  color: var(--openbot-text-dim);
-  font-size: var(--openbot-text-sm);
+  color: var(--starbot-text-dim);
+  font-size: var(--starbot-text-sm);
 }
 
 .marketplace-agent-update-row[data-replace] .marketplace-agent-update-state {
-  color: var(--openbot-warning-text);
+  color: var(--starbot-warning-text);
 }
 
 .marketplace-agent-update-choice {
@@ -1783,9 +1783,9 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
   flex: none;
   align-items: center;
   gap: 3px;
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-tabs-bar-bg);
-  box-shadow: inset 0 0 0 1px var(--openbot-border);
+  border-radius: var(--starbot-radius-md);
+  background: var(--starbot-tabs-bar-bg);
+  box-shadow: inset 0 0 0 1px var(--starbot-border);
   padding: 3px;
 }
 
@@ -1795,39 +1795,39 @@ html:active-view-transition-type(marketplace-group) [data-marketplace-shared] .m
 
 .marketplace-agent-update-option-label {
   display: inline-flex;
-  height: var(--openbot-control-sm);
+  height: var(--starbot-control-sm);
   align-items: center;
-  border-radius: var(--openbot-radius-sm);
-  padding: 0 var(--openbot-space-3);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
-  font-weight: var(--openbot-weight-medium);
+  border-radius: var(--starbot-radius-sm);
+  padding: 0 var(--starbot-space-3);
+  color: var(--starbot-text-muted);
+  font-size: var(--starbot-text-md);
+  font-weight: var(--starbot-weight-medium);
   white-space: nowrap;
   cursor: pointer;
   transition:
-    background-color var(--openbot-duration-fast) ease,
-    color var(--openbot-duration-fast) ease;
+    background-color var(--starbot-duration-fast) ease,
+    color var(--starbot-duration-fast) ease;
 }
 
 .marketplace-agent-update-option-label:hover,
 .marketplace-agent-update-option[data-checked] .marketplace-agent-update-option-label {
-  color: var(--openbot-text-primary);
+  color: var(--starbot-text-primary);
 }
 
 .marketplace-agent-update-option[data-checked] .marketplace-agent-update-option-label {
-  background: var(--openbot-tabs-pill-bg);
+  background: var(--starbot-tabs-pill-bg);
 }
 
 .marketplace-agent-update-option:has(input:focus-visible) .marketplace-agent-update-option-label {
-  box-shadow: var(--openbot-focus-ring);
+  box-shadow: var(--starbot-focus-ring);
 }
 
 .marketplace-agent-update-option[data-choice="replace"][data-checked] .marketplace-agent-update-option-label {
-  color: var(--openbot-warning-text);
+  color: var(--starbot-warning-text);
 }
 
 .marketplace-agent-update-others {
-  margin: var(--openbot-space-2) 0 0;
-  color: var(--openbot-text-dim);
-  font-size: var(--openbot-text-sm);
+  margin: var(--starbot-space-2) 0 0;
+  color: var(--starbot-text-dim);
+  font-size: var(--starbot-text-sm);
 }

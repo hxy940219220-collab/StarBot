@@ -1,8 +1,8 @@
-import { isOpenBotTeamApiHostname } from "./validation";
+import { isStarBotTeamApiHostname } from "./validation";
 
-export const OPENBOT_INVITE_ORIGIN = "https://starbot.app";
-export const OPENBOT_INVITE_PATH = "/join";
-export const OPENBOT_CONTROL_PLANE_ORIGIN = "https://api.starbot.app";
+export const STARBOT_INVITE_ORIGIN = "https://starbot.app";
+export const STARBOT_INVITE_PATH = "/join";
+export const STARBOT_CONTROL_PLANE_ORIGIN = "https://api.starbot.app";
 
 export const PERMANENT_INVITE_EXPIRES_AT_MS = 8_640_000_000_000_000;
 
@@ -45,7 +45,7 @@ export function selfHostedApiOrigin(apiUrl: string | undefined): string | undefi
   if (!apiUrl) return undefined;
   try {
     const { protocol, origin } = new URL(apiUrl);
-    return protocol === "https:" && origin !== OPENBOT_INVITE_ORIGIN && !isValidRemoteApiUrl(`${origin}/`)
+    return protocol === "https:" && origin !== STARBOT_INVITE_ORIGIN && !isValidRemoteApiUrl(`${origin}/`)
       ? origin
       : undefined;
   } catch {
@@ -55,25 +55,25 @@ export function selfHostedApiOrigin(apiUrl: string | undefined): string | undefi
 
 export function createInviteUrl(payload: InviteLinkPayload, options: InviteLinkOptions = {}): string {
   validatePayload(payload, options);
-  if (isSelfHostedApiUrl(new URL(payload.apiUrl), options)) return createOpenBotInviteUrl(payload, options);
-  const url = new URL(OPENBOT_INVITE_PATH, OPENBOT_INVITE_ORIGIN);
+  if (isSelfHostedApiUrl(new URL(payload.apiUrl), options)) return createStarBotInviteUrl(payload, options);
+  const url = new URL(STARBOT_INVITE_PATH, STARBOT_INVITE_ORIGIN);
   writePayload(url, payload);
   return url.toString();
 }
 
-export function createOpenBotInviteUrl(payload: InviteLinkPayload, options: InviteLinkOptions = {}): string {
+export function createStarBotInviteUrl(payload: InviteLinkPayload, options: InviteLinkOptions = {}): string {
   validatePayload(payload, options);
   const url = new URL("starbot://join");
   writePayload(url, payload);
   return url.toString();
 }
 
-export function toOpenBotInviteUrl(value: string, options: InviteLinkOptions = {}): string {
-  return createOpenBotInviteUrl(parseInviteUrl(value, options), options);
+export function toStarBotInviteUrl(value: string, options: InviteLinkOptions = {}): string {
+  return createStarBotInviteUrl(parseInviteUrl(value, options), options);
 }
 
 export function createWebAppInvitePath(value: string, options: InviteLinkOptions = {}): string {
-  const url = new URL("/app", OPENBOT_INVITE_ORIGIN);
+  const url = new URL("/app", STARBOT_INVITE_ORIGIN);
   writePayload(url, parseInviteUrl(value, options));
   return `${url.pathname}${url.search}`;
 }
@@ -83,7 +83,7 @@ export const WEB_APP_INVITE_FIELDS: readonly string[] = INVITE_FIELDS;
 export function inviteUrlFromWebAppSearch(search: string, options: InviteLinkOptions = {}): string | null {
   const params = new URLSearchParams(search);
   if (!INVITE_FIELDS.some((field) => params.has(field))) return null;
-  const url = new URL(OPENBOT_INVITE_PATH, OPENBOT_INVITE_ORIGIN);
+  const url = new URL(STARBOT_INVITE_PATH, STARBOT_INVITE_ORIGIN);
   for (const field of INVITE_FIELDS) for (const value of params.getAll(field)) url.searchParams.append(field, value);
   try {
     return createInviteUrl(parseInviteUrl(url.toString(), options), options);
@@ -96,7 +96,7 @@ export function isCanonicalInviteUrl(value: string, options: InviteLinkOptions =
   try {
     parseInviteUrl(value, options);
     const url = new URL(value);
-    return url.origin === OPENBOT_INVITE_ORIGIN && url.pathname === OPENBOT_INVITE_PATH;
+    return url.origin === STARBOT_INVITE_ORIGIN && url.pathname === STARBOT_INVITE_PATH;
   } catch {
     return false;
   }
@@ -111,9 +111,9 @@ export function parseInviteUrl(value: string, options: InviteLinkOptions = {}): 
   }
 
   const canonical =
-    url.protocol === "https:" && url.origin === OPENBOT_INVITE_ORIGIN && url.pathname === OPENBOT_INVITE_PATH;
+    url.protocol === "https:" && url.origin === STARBOT_INVITE_ORIGIN && url.pathname === STARBOT_INVITE_PATH;
   const customScheme =
-    (url.protocol === "starbot:" || url.protocol === "openbot:") &&
+    (url.protocol === "starbot:" || url.protocol === "starbot:") &&
     url.hostname === "join" &&
     (url.pathname === "" || url.pathname === "/");
   if (
@@ -155,9 +155,9 @@ export function isValidRemoteApiUrl(value: string, options: InviteLinkOptions = 
         isSelfHostedApiUrl(url, options) ||
         (url.protocol === "https:" &&
           url.port === "" &&
-          (url.origin === OPENBOT_CONTROL_PLANE_ORIGIN ||
+          (url.origin === STARBOT_CONTROL_PLANE_ORIGIN ||
             TRY_CLOUDFLARE_HOST_PATTERN.test(url.hostname) ||
-            isOpenBotTeamApiHostname(url.hostname))))
+            isStarBotTeamApiHostname(url.hostname))))
     );
   } catch {
     return false;

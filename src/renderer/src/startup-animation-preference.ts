@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 
-const LEGACY_STARTUP_ANIMATION_KEY = "openbot:startup-animation";
+const LEGACY_STARTUP_ANIMATION_KEY = "starbot:startup-animation";
 const STARTUP_ANIMATION_CONFIG_KEY = "starbot:startup-animation-config:v1";
 
 export type StartupAnimationMode = "always" | "every_n_days" | "first_login_only" | "off";

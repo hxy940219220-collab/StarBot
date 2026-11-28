@@ -287,7 +287,7 @@ address with `?ref=CODE`), the website saves the code and the time in its `local
 When you sign in on the web, the web client sends the code to the account service and removes it from
 `localStorage`. On the desktop, on the web and on the phone, you can also type an invite link or code
 on the sign-in screen; the app sends only the code. The account service uses a code only for a new account. It is not sent to analytics. The invite page shows the first name from the profile of the account that made the link to anyone who opens the link. It shows no other name, picture or email. When you choose a language on the website, it saves
-the language code, and nothing else, in the `openbot_lang` cookie for one year, so that the next
+the language code, and nothing else, in the `starbot_lang` cookie for one year, so that the next
 pages open in that language. The browser sends this cookie only to starbot.app. OpenPanel can also derive
 session, device, browser, operating-system, network, and approximate geographic metadata from a
 request. The analytics service runs on StarBot's self-hosted infrastructure and receives events
@@ -545,7 +545,7 @@ secret that it encrypted then cannot be read, and you must sign in again or save
 
 The desktop app also keeps, for each joined server, the ID of its logical remote session and the
 Signal address, so that the next start asks only for a new ticket. The file
-(`openbot-remote-sessions-v1.bin`) is encrypted with the same storage protection and is not written
+(`starbot-remote-sessions-v1.bin`) is encrypted with the same storage protection and is not written
 when that protection is unavailable. It names only the account that signed in. A session ID gives no
 access without that account's session token. The app removes the file at sign-out or when another
 account signs in, when it starts with no account signed in, and forgets a server's session when it
@@ -554,7 +554,7 @@ service for the next start; signing out or disconnecting the device's sign-in en
 Settings → General → Fast connection to servers turns this off. Off, the app removes the file at
 once, keeps nothing on disk, and ends each session when it quits. Turned on during a run, it keeps the
 sessions that are open at that time. The setting is on by default and is stored
-in `openbot-remote-session-reuse-preference-v1.json`.
+in `starbot-remote-session-reuse-preference-v1.json`.
 
 The desktop app and the web client keep a copy of the agent and channel pictures that they loaded
 from a joined server, so that the agent pictures show while the server is offline, for example during its
@@ -600,8 +600,8 @@ stores the ID and receive time of each boat webhook delivery for 7 days. The acc
 not receive the server's conversations, files or commands, and its boat key cannot read them.
 
 The account service gives each sandbox a name in boat, so that an operator can find a server in the
-boat dashboard: `openbot-`, the plan, your account email with each other character as `-`, and the
-first 8 characters of the server ID, such as `openbot-starter-ada-example-com-1a2b3c4d`. boat keeps
+boat dashboard: `starbot-`, the plan, your account email with each other character as `-`, and the
+first 8 characters of the server ID, such as `starbot-starter-ada-example-com-1a2b3c4d`. boat keeps
 the name with the sandbox.
 
 A new hosted server of each plan starts on a virtual server that StarBot rents from
@@ -855,14 +855,14 @@ person types there. The account service then connects to the provider: it reads 
 discovery document and signing keys, and sends the code, the client ID and the client secret to the
 provider's token endpoint. From the ID token, it uses only the subject ID and the email address. On
 a production account service, a test also asks Cloudflare DNS over HTTPS (`cloudflare-dns.com`) for
-the TXT record `_openbot.<domain>` of each domain.
+the TXT record `_starbot.<domain>` of each domain.
 
 A person who signs in this way gets an StarBot account for the email address, or the account that
 already has it, and joins the server as a member with no invitation, while the server has a free
 seat. A person whom the owner removed, or who left, stays out.
 
 The web app at `/app` keeps the state and the verifier of a sign-in in an HttpOnly cookie
-(`__Host-openbot-company`) for 10 minutes. The return removes it.
+(`__Host-starbot-company`) for 10 minutes. The return removes it.
 
 With SCIM, the company's provider sends the email address, the external ID and the on or off state of
 each person to `/scim/v2/Users`. The service does not store other SCIM attributes. Turning a person
@@ -971,7 +971,7 @@ and the path, without the query or the hash, and with each path part that looks 
 replaced), its title, and the kind and the label of each control
 you click. It does not record what you type, field values, password fields, card or one-time code
 fields, secret tabs, or private sign-ins. The steps stay on this computer in
-`openbot-browsing-steps-v1.json`. The next memory review of that agent sends them, with secrets
+`starbot-browsing-steps-v1.json`. The next memory review of that agent sends them, with secrets
 redacted, to the agent's own provider, as part of the review above, and then deletes them. Steps that
 no review reads are deleted after 30 days. Turning the setting off deletes all recorded steps.
 
@@ -998,9 +998,9 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   the client registration and the access and refresh tokens. Removing the server in settings, or
   choosing Sign out on it, deletes its record. These values are redacted from logs, exports and diagnostics.
   The port and secret of the local MCP sign-in server are kept in
-  `~/Library/Application Support/StarBot/openbot-mcp-oauth-proxy-v1.json`, encrypted in the same way.
+  `~/Library/Application Support/StarBot/starbot-mcp-oauth-proxy-v1.json`, encrypted in the same way.
 - The GitHub connection (Marketplace › Apps › GitHub) is kept in
-  `~/Library/Application Support/StarBot/openbot-github-connector-v1.json`, encrypted by the operating
+  `~/Library/Application Support/StarBot/starbot-github-connector-v1.json`, encrypted by the operating
   system's secret storage. It holds the GitHub access and refresh tokens, the account name, ID and
   avatar address, and the port and secret of the local GitHub MCP server.
   While the connection is on, `provider-state/github` in the same folder holds the access token and
@@ -1008,7 +1008,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   agent tools. StarBot deletes that folder when you disconnect and when the app closes; after a crash
   it stays until the next start. The tokens are redacted from logs, exports and diagnostics.
 - The Link payment account (Server settings › Vault › Cards) is kept in
-  `~/Library/Application Support/StarBot/openbot-link-account-v1.json`, encrypted by the operating
+  `~/Library/Application Support/StarBot/starbot-link-account-v1.json`, encrypted by the operating
   system's secret storage. It holds the Link access and refresh tokens and the account email.
   Disconnect deletes the file and asks Link to revoke the sign-in. A one-time Link card is not
   stored: StarBot reads it from Link for each fill and types it into the page. The tokens and the
@@ -1025,7 +1025,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   `~/Library/Application Support/StarBot/crm-stripe-key.json` on the computer that runs StarBot (on a
   joined server, on that server), encrypted by the operating system's secret storage. The app window
   receives only its last four characters. The customers, plans and payments that the sync copies from
-  Stripe go in the CRM tables of `openbot.db`, as rows that a person adds. Disconnect on the CRM page
+  Stripe go in the CRM tables of `starbot.db`, as rows that a person adds. Disconnect on the CRM page
   deletes the key file; the copied rows stay until a person deletes them. The key is redacted from
   logs, exports and diagnostics.
 - The xAI API key for spoken replies is kept in
@@ -1047,14 +1047,14 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   An owner or admin of a joined server can connect that server's Bitwarden or Vaultwarden in
   Marketplace › Apps › Bitwarden with the server address, the personal API key and the master password. They
   go once, over the encrypted connection, to the server, which keeps them in
-  `openbot-bitwarden-connector-v1.json` in its application data folder, encrypted by its operating
+  `starbot-bitwarden-connector-v1.json` in its application data folder, encrypted by its operating
   system's secret storage, so it can unlock again after a restart. Its CLI keeps its own encrypted
   vault cache in `provider-state/bitwarden-host` in the same folder. The computer that sent them does
   not keep them, and no answer from the server carries them. Disconnect deletes the file and the
   cache. The API key and the master password can open the whole vault, not only the shared folder.
   They are redacted from logs, exports and diagnostics.
 - The 1Password connection (Marketplace > 1Password) is kept in
-  `~/Library/Application Support/StarBot/openbot-onepassword-connector-v1.json`, encrypted by the
+  `~/Library/Application Support/StarBot/starbot-onepassword-connector-v1.json`, encrypted by the
   operating system's secret storage. It holds the service account token and the account ID only.
   StarBot keeps the list of logins (titles and web addresses) in memory, never on disk. A password
   or a one-time code is read from 1Password when the browser fills it, goes only to that page, and
@@ -1067,7 +1067,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   StarBot downloads from proton.me and checks against a pinned SHA-256. The computer or server talks
   to Proton directly. A sign-in on Proton's web page makes an agent access key that reads only the
   vault `Shared with StarBot`; you can also paste an agent access key that you made. StarBot keeps
-  only that access key, in `openbot-protonpass-connector-v1.json` in its application data folder,
+  only that access key, in `starbot-protonpass-connector-v1.json` in its application data folder,
   encrypted by the operating system's secret storage, and the CLI's session in
   `provider-state/protonpass-host` in the same folder. An extra password goes to the CLI once,
   through a pipe, and is not saved. StarBot keeps the list of logins (titles, user names and web
@@ -1081,7 +1081,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   the session; the agent access key stays on your Proton account until it ends after one year or
   you remove it in Proton Pass.
 - The Vault (Server settings › Vault) is kept in
-  `~/Library/Application Support/StarBot/openbot-vault-v1.json`, encrypted by the operating system's
+  `~/Library/Application Support/StarBot/starbot-vault-v1.json`, encrypted by the operating system's
   secret storage. It holds the logins, payment cards (number, expiry, security code, name), contact
   info and API keys (variable name, key, notes) that the user saves. A login can also keep a two-step
   (authenticator) setup key. StarBot makes its sign-in codes on this computer; the key itself never
@@ -1151,7 +1151,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   Do not attach a dump to a public issue. At the next start, StarBot counts the dumps that a run
   left after its last sign of life, by file name and time only, and the analytics event below sends
   that count, never a dump, a name or a path.
-- `~/Library/Application Support/StarBot/openbot-run-marker-v1.json` holds the app version, the
+- `~/Library/Application Support/StarBot/starbot-run-marker-v1.json` holds the app version, the
   start time and the last sign of life of the current run, written once a minute, whether the
   computer slept, and whether a quit started or ended. At the next start, a run that did not quit
   cleanly sends one product analytics event: the phase, the previous app version, a coarse uptime
@@ -1161,7 +1161,7 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   the app windows, the main process delay and its phase, the number of
   agent database statements, active turns and browser tabs. It holds no process IDs, program names,
   command lines or paths. It is kept to two files of 1 MB each and is never sent.
-  `~/Library/Application Support/StarBot/openbot-resource-summary-v1.json` holds the totals of
+  `~/Library/Application Support/StarBot/starbot-resource-summary-v1.json` holds the totals of
   today and of the previous day for the daily analytics summary and the diagnostics export.
 - `~/Library/Application Support/StarBot/logs/stall-profiles.ndjson` holds one line for a minute in
   which the main process froze for 2 seconds or more, twice in a row: the functions of StarBot's code
@@ -1169,19 +1169,19 @@ no review reads are deleted after 30 days. Turning the setting off deletes all r
   file, package names and Node module names. It holds no directories, arguments, values, queries or
   text of the user. It is kept to two files of 256 KB each. The five heaviest functions of a line
   also go out as one product analytics event, at most once in 6 hours.
-- `~/Library/Application Support/StarBot/openbot-push-notifications-v1.json` holds, for each member
+- `~/Library/Application Support/StarBot/starbot-push-notifications-v1.json` holds, for each member
   phone that gets notifications from this host, the session ID, the member ID, the Apple or Firebase
   push token, the secret that seals the notifications, the interface language, and the notification
   choices. Only the user can read the file, and it is not in the diagnostics export or the data
   export. See [iPhone notifications](#iphone-notifications) and
   [Android notifications](#android-notifications).
-- `~/Library/Application Support/StarBot/openbot-agent-notification-levels-v1.json` holds the
+- `~/Library/Application Support/StarBot/starbot-agent-notification-levels-v1.json` holds the
   notification level that the owner and each member of this host chose for the whole server and for
   each agent ("All activity", "Only when it needs me" or "Nothing"), by member ID and agent ID. Each member reads and
   sets only their own levels, and the host applies them to the desktop notifications of this computer
   and to the notifications that it sends to that member's phones. A removed member's levels are
   deleted. It is never sent to the StarBot account service.
-- `~/Library/Application Support/StarBot/openbot-sidebar-pins-v1.json` holds the agents and channels
+- `~/Library/Application Support/StarBot/starbot-sidebar-pins-v1.json` holds the agents and channels
   that the owner and each member of this host pinned, in their order, by member ID, with agent and
   channel IDs only. Each member reads and sets only their own list, so their desktop app, web client
   and phones show the same pins. A removed member's list is deleted. It is never sent to the StarBot
@@ -1261,7 +1261,7 @@ Network traffic can also occur when:
 - a user or an agent visits a page in the embedded browser;
 - a user submits text that is not a web address in the browser address bar, which sends the query to Google Search;
 - a user clicks a web link in a chat of the desktop app or the web client, and it opens in the
-  system browser or a new browser tab. StarBot adds `utm_source=openbot` to the address, so the
+  system browser or a new browser tab. StarBot adds `utm_source=starbot` to the address, so the
   site can see that the visit came from StarBot. It adds nothing else. It does not change a link that already has a `utm_source`,
   a link to a local or private address, or a link with sign-in or signature values such as `state`,
   `code`, `token` or `X-Amz-Signature`;
@@ -1273,7 +1273,7 @@ Network traffic can also occur when:
   Agents reach a server that StarBot signed in to through a local server on `127.0.0.1`, which adds
   the token to each call, so the token does not go to the agent's process.
   That local server tells the MCP server that the client is StarBot: it sends
-  `User-Agent: StarBot/<version>` and, when a session starts, the client name `openbot`, the
+  `User-Agent: StarBot/<version>` and, when a session starts, the client name `starbot`, the
   StarBot version and the title `<agent name> (StarBot)`, so the server can show which agent made a
   change. Nothing else about the user's agents, conversations or files is sent in those requests. The
   registration names StarBot's logo at `starbot.app`; an authorization service that shows it on its
@@ -1368,13 +1368,13 @@ Network traffic can also occur when:
   agent goes into the chat as the member's message, and the agent's text answer goes to OpenAI to be
   spoken. The live transcript goes only to that member's devices and is not saved. The session stops
   when the member ends it, closes the app or loses access;
-- an agent uses the `openbot.web_search` tool. Only agents on a provider with no web search tool of
+- an agent uses the `starbot.web_search` tool. Only agents on a provider with no web search tool of
   its own get it. StarBot starts a separate Codex App Server process, which sends the agent's question
   to OpenAI through the default Codex sign-in of this computer. OpenAI searches the web and returns a
   short answer with source URLs to the agent. Only the question and short StarBot instructions go to
   OpenAI, not the agent's chat, files or instructions, and not the agent's own provider account.
   OpenAI handles the question under its own policy and the user's ChatGPT plan;
-- an agent uses the `openbot.read_video` tool on a video link. The first time, StarBot downloads the
+- an agent uses the `starbot.read_video` tool on a video link. The first time, StarBot downloads the
   yt-dlp release that it pins from `github.com`, checks its SHA-256, and keeps it in `runtimes` in the
   application data folder. yt-dlp then requests the video page and the video file from the site of the
   link, as a browser does, with no cookies or sign-in. The file goes to a temporary folder on this
@@ -1549,7 +1549,7 @@ graph, or ID.
 - **GitHub outputs** make the change through the StarBot GitHub App: a comment, a label, a person, a
   review, a close or a new issue. The text goes to GitHub. When a Discord mention started the run, a
   new issue or a comment also keeps those files: the computer downloads each file of up to 25 MB, and
-  up to 50 MB for each change, from Discord and commits it to the `openbot-attachments` branch of the target repository,
+  up to 50 MB for each change, from Discord and commits it to the `starbot-attachments` branch of the target repository,
   under `discord/<message ID>/`. The text links the files there. Everyone who can read the repository
   can read them, also after the issue or the comment is deleted; delete that branch to delete
   them. A file that the computer cannot copy is linked at its Discord address.
@@ -2152,7 +2152,7 @@ first 90 seconds while the server does not answer. When the server is Ollama, St
 `POST <origin>/api/show` with the model ID for each such model, to learn if the model can reason.
 These requests contain the stored key and headers and no conversation or file data. StarBot does not
 follow a redirect and does not save the answers. Local detection can be turned off in Settings. Its switch, addresses, folders and hidden
-rows are in `openbot-provider-detection-v1.json` in the app profile.
+rows are in `starbot-provider-detection-v1.json` in the app profile.
 
 ### Provider variables
 
@@ -2160,7 +2160,7 @@ An owner or admin can give Claude, Codex and Gemini environment variables on eac
 Server settings → Providers. When the variables name another address, such as a proxy like
 CLIProxyAPI, the model requests of that provider, with the conversation, attachments and tool results
 that they carry, go to that address and not to Anthropic, OpenAI or Google. What that address sends
-on is its own choice. Names and plain values are in `openbot-provider-environment-v1.json` in the app
+on is its own choice. Names and plain values are in `starbot-provider-environment-v1.json` in the app
 profile. A value marked sensitive is in the encrypted provider key file, goes only to that provider's
 processes, and is not in a screen, log, export, or diagnostics report. The commands that agents run
 can read the variables.
@@ -2243,7 +2243,7 @@ only text, so a host cannot use it to send an ordinary notification. Apple can k
 
 The buttons in the view open the app. A button that changes host state, such as Approve or an
 answer, has a signature made with a key that only the phone and the host have, so another app
-cannot start the action with an `openbot://` link. The app shows the command again before it
+cannot start the action with an `starbot://` link. The app shows the command again before it
 approves it.
 
 Settings > Notifications > Live Activities turns this off. The phone then removes its token from the

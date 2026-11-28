@@ -1,13 +1,13 @@
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { CustomProviderApiFormat, CustomProviderReasoningEffort } from "@openbot/contracts/ipc";
+import type { CustomProviderApiFormat, CustomProviderReasoningEffort } from "@starbot/contracts/ipc";
 import { Effect } from "effect";
 import { type CustomProviderConfig, customModelOutputLimit, isMistralApi } from "./opencode-config";
 import type { PiMcpExtension } from "./pi-mcp";
 import { providerCall } from "./provider-client-effects";
 
-const VARIABLE = "OPENBOT_PI_CUSTOM_ENDPOINTS";
+const VARIABLE = "STARBOT_PI_CUSTOM_ENDPOINTS";
 
 const DEFAULT_CONTEXT_WINDOW = 128_000;
 
@@ -83,7 +83,7 @@ function thinkingLevelMap(efforts: readonly CustomProviderReasoningEffort[]): Pi
 }
 
 const SOURCE = `export default function (pi) {
-  const slot = Symbol.for("openbot.pi.customEndpoints");
+  const slot = Symbol.for("starbot.pi.customEndpoints");
   globalThis[slot] ??= process.env.${VARIABLE};
   delete process.env.${VARIABLE};
   const payload = globalThis[slot];
@@ -153,7 +153,7 @@ export const createPiCustomEndpointExtension = Effect.fn("PiCustomEndpoints.crea
   if (usable.length === 0) return null;
   const root = directory ?? tmpdir();
   yield* providerCall(() => mkdir(root, { recursive: true, mode: 0o700 }));
-  const folder = yield* providerCall(() => mkdtemp(join(root, "openbot-pi-")));
+  const folder = yield* providerCall(() => mkdtemp(join(root, "starbot-pi-")));
   const path = join(folder, "custom-endpoints.mjs");
   yield* providerCall(() => writeFile(path, SOURCE, { mode: 0o600 })).pipe(
     Effect.onError(() => providerCall(() => rm(folder, { recursive: true, force: true })).pipe(Effect.orDie)),

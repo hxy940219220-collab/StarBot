@@ -5,10 +5,10 @@ import type {
   BrowserBounds,
   BrowserTab,
   MarketplaceSkillDetail,
-} from "@openbot/contracts/ipc";
-import type { AgentActivityLabel } from "@openbot/ui/features/conversation/AgentActivity";
-import { currentText } from "@openbot/ui/text";
-import type { UserErrorDetails } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import type { AgentActivityLabel } from "@starbot/ui/features/conversation/AgentActivity";
+import { currentText } from "@starbot/ui/text";
+import type { UserErrorDetails } from "@starbot/user-errors";
 import { createEffect, createSignal, createStore, onCleanup, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { readSidePanelWidth } from "../../components/side-panel-width";

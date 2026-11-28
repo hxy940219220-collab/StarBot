@@ -1,5 +1,5 @@
-import type { CreditMediaInputRole, CreditMediaJobStatus } from "@openbot/contracts/credit-media";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import type { CreditMediaInputRole, CreditMediaJobStatus } from "@starbot/contracts/credit-media";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import { Effect } from "effect";
 import {
   inputsOf,

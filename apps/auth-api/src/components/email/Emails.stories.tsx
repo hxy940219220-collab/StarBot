@@ -1,4 +1,4 @@
-import { licensePeriodAmount } from "@openbot/contracts/license";
+import { licensePeriodAmount } from "@starbot/contracts/license";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import {
   type LicenseEmailInput,
@@ -10,7 +10,7 @@ import {
 } from "../../server/email-templates";
 
 const INVITE_URL =
-  "https://openbot.run/join?api=https%3A%2F%2Fstudio-mac-k7m4q2pz-host.openbot.run%2F&server=00000000-0000-4000-8000-000000000000&fingerprint=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&invite=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+  "https://starbot.run/join?api=https%3A%2F%2Fstudio-mac-k7m4q2pz-host.starbot.run%2F&server=00000000-0000-4000-8000-000000000000&fingerprint=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&invite=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 
 const TEAM_LICENSE: LicenseEmailInput = {
   kind: "welcome",

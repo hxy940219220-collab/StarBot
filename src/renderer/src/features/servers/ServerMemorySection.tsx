@@ -1,6 +1,6 @@
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { ItemGroup, SettingsSection } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { TeamCurrentCapability } from "@starbot/contracts/team-protocol/current";
+import { ItemGroup, SettingsSection } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { type Accessor, Show } from "solid-js";
 import { ServerBrowsingMemorySetting } from "./ServerBrowsingMemorySetting";

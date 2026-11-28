@@ -1,29 +1,29 @@
-import { agentSteersTurns } from "@openbot/contracts/agent-providers";
-import { rasterImageMimeType } from "@openbot/contracts/attachment-files";
+import { agentSteersTurns } from "@starbot/contracts/agent-providers";
+import { rasterImageMimeType } from "@starbot/contracts/attachment-files";
 import {
   attachmentReferenceIds,
   expandAttachmentReferences,
   rewriteAttachmentReferences,
   serializeAttachmentReference,
-} from "@openbot/contracts/attachment-references";
-import { fileQuoteTarget } from "@openbot/contracts/chat-tag-references";
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@starbot/contracts/attachment-references";
+import { fileQuoteTarget } from "@starbot/contracts/chat-tag-references";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AttachmentDataInput,
   type DraftAttachment,
   LOCAL_SERVER_ID,
   type QueueDelivery,
-} from "@openbot/contracts/ipc";
-import { TEAM_MESSAGE_CLIENT_ID_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { isQueueEditRejected, TEAM_QUEUE_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import type { QuestionPromptComposerAnswer } from "@openbot/ui/components/QuestionPromptBubble";
-import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
+} from "@starbot/contracts/ipc";
+import { TEAM_MESSAGE_CLIENT_ID_CAPABILITY } from "@starbot/contracts/team-protocol/current";
+import { isQueueEditRejected, TEAM_QUEUE_EDIT_CAPABILITY } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import type { QuestionPromptComposerAnswer } from "@starbot/ui/components/QuestionPromptBubble";
+import { playKawaiiCue } from "@starbot/ui/features/agents/starbot-kawaii-audio";
 import {
   type ComposerPasteResult,
   type ComposerSelection,
   expandComposerMentions,
-} from "@openbot/ui/features/conversation/ComposerEditor";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/ComposerEditor";
+import { currentText } from "@starbot/ui/text";
 import { playActionSound } from "../../../action-sounds";
 import { claimDictatedSend, forgetDictatedMessage } from "../../speech/speech-replies";
 import { rememberAttachmentKinds } from "../attachment-analytics";

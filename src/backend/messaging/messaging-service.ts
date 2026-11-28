@@ -1,8 +1,8 @@
 import { randomBytes, randomUUID } from "node:crypto";
 import { mkdir, rm } from "node:fs/promises";
 import { basename, join } from "node:path";
-import { DISCORD_ORCHESTRATOR_AVATAR } from "@openbot/contracts/discord-app";
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { DISCORD_ORCHESTRATOR_AVATAR } from "@starbot/contracts/discord-app";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AddMessagingOrchestratorInput,
   AddTelegramOrchestratorInput,
@@ -26,16 +26,16 @@ import type {
   WhatsAppLinkState,
   WhatsAppOverview,
   WhatsAppSender,
-} from "@openbot/contracts/ipc";
-import { MESSAGING_CONNECTION_STATES, MESSAGING_LIMITS } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import type { DiscordEmbed } from "@openbot/contracts/signal-protocol/discord-api";
-import { TELEGRAM_LINK_CODE_TTL_SECONDS } from "@openbot/contracts/signal-protocol/telegram-route";
-import { SLACK_ORCHESTRATOR_AVATAR } from "@openbot/contracts/slack-app";
-import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@openbot/contracts/telegram-app";
-import { WHATSAPP_ORCHESTRATOR_AVATAR } from "@openbot/contracts/whatsapp-app";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactPostText, redactText } from "@openbot/logging";
+} from "@starbot/contracts/ipc";
+import { MESSAGING_CONNECTION_STATES, MESSAGING_LIMITS } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import type { DiscordEmbed } from "@starbot/contracts/signal-protocol/discord-api";
+import { TELEGRAM_LINK_CODE_TTL_SECONDS } from "@starbot/contracts/signal-protocol/telegram-route";
+import { SLACK_ORCHESTRATOR_AVATAR } from "@starbot/contracts/slack-app";
+import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@starbot/contracts/telegram-app";
+import { WHATSAPP_ORCHESTRATOR_AVATAR } from "@starbot/contracts/whatsapp-app";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactPostText, redactText } from "@starbot/logging";
 import { Deferred, Effect, Exit, Result, Schedule, Schema, Scope } from "effect";
 import type { AgentLifecycleFailed } from "../agent-service";
 import { causeHelpers } from "../effect-boundary";
@@ -95,7 +95,7 @@ import { WhatsAppConnect } from "./whatsapp/whatsapp-connect";
 import { whatsAppOrchestratorMemories, whatsAppOrchestratorProfile } from "./whatsapp/whatsapp-orchestrator";
 import type { WhatsAppRuntime } from "./whatsapp/whatsapp-runtime";
 
-const logger = createOpenBotLogger("messaging");
+const logger = createStarBotLogger("messaging");
 
 export interface MessagingCredentials {
   keys(): string[];
@@ -1639,7 +1639,7 @@ export class MessagingService {
       if (!place)
         return {
           error:
-            "This connection has no place with that id. Call openbot.messaging_list_places with the connection for the ids.",
+            "This connection has no place with that id. Call starbot.messaging_list_places with the connection for the ids.",
         };
       const recent = yield* filteredRecent(live.adapter, placeId, null, limit, filter);
       return { history: { platform, place: place.name, ...recent } };
@@ -2441,7 +2441,7 @@ function refusal(failure: MessagingAdapterError): string {
     cause instanceof SlackApiError || cause instanceof DiscordApiError || cause instanceof TelegramCallError
       ? cause.code
       : "no_answer";
-  return `The platform refused the call: ${code}. Check the connection and place ids with openbot.messaging_list_places.`;
+  return `The platform refused the call: ${code}. Check the connection and place ids with starbot.messaging_list_places.`;
 }
 
 function roleName(name: string): string {

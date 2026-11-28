@@ -1,0 +1,7 @@
+abi <abi/4.0>,
+include <tunables/global>
+
+profile starbot "/{home/*/{Applications,Desktop,Downloads,.local/bin},opt/StarBot}/StarBot*.AppImage" flags=(unconfined) {
+  userns,
+  include if exists <local/starbot>
+}

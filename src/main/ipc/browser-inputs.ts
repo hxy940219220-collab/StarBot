@@ -1,4 +1,4 @@
-import { AVATAR_IMAGE_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { AVATAR_IMAGE_LIMITS, INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   AVATAR_HUES,
   type AvatarHue,
@@ -19,9 +19,9 @@ import {
   type BrowserWindowModel,
   type BrowserWindowTabDetails,
   isAvatarColor,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isNumber, isOneOf } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isBoolean, isNumber, isOneOf } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { decodeBrowserTabs } from "../remote-device-decoding";
 import { isObject, requireString } from "./validation";
 

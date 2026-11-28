@@ -3,9 +3,9 @@ import {
   type RemoteDesktopSession,
   remoteControlAllowsRole,
   type TeamMemberSummary,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { sourceText } from "@starbot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { parseRemoteDesktopTest } from "../ipc/server-inputs";
 import { RemoteScreenError } from "../remote-screen-gateway";

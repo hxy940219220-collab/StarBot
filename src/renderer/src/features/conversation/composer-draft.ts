@@ -1,11 +1,11 @@
-import { attachmentReferenceIds } from "@openbot/contracts/attachment-references";
-import { serializeChatTagReference } from "@openbot/contracts/chat-tag-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { type DraftAttachment, isAttachmentSummary, type MarketplaceSkillDetail } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { decodeQueueEditRequest, type QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { skillExamplePrompt } from "@openbot/ui/components/SkillPreview";
-import type { ComposerSelection } from "@openbot/ui/features/conversation/ComposerEditor";
+import { attachmentReferenceIds } from "@starbot/contracts/attachment-references";
+import { serializeChatTagReference } from "@starbot/contracts/chat-tag-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { type DraftAttachment, isAttachmentSummary, type MarketplaceSkillDetail } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { decodeQueueEditRequest, type QueueEditRequest } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import { skillExamplePrompt } from "@starbot/ui/components/SkillPreview";
+import type { ComposerSelection } from "@starbot/ui/features/conversation/ComposerEditor";
 import type { ComposerDraft } from "./conversation-types";
 
 export const EMPTY_DRAFT: ComposerDraft = {
@@ -35,7 +35,7 @@ export function appendSkillExample(
 export function appendSkillCreationRequest(draft: ComposerDraft): ComposerDraft {
   return appendDraftLine(
     draft,
-    `${serializeChatTagReference("skill", "skill-creator", "openbot-skill-creator")} 请帮我创建一个可以实现「......」的skill`,
+    `${serializeChatTagReference("skill", "skill-creator", "starbot-skill-creator")} 请帮我创建一个可以实现「......」的skill`,
   );
 }
 
@@ -55,7 +55,7 @@ function appendDraftLine(draft: ComposerDraft, line: string): ComposerDraft {
   return { ...draft, text: draft.text ? `${draft.text}\n${line}` : line };
 }
 
-export const QUEUE_EDIT_STORAGE_KEY = "openbot:queue-edit";
+export const QUEUE_EDIT_STORAGE_KEY = "starbot:queue-edit";
 type StoredQueueSave = Extract<QueueEditRequest, { action: "save" }>;
 export interface StoredQueueEdit {
   agentId: string;
@@ -163,7 +163,7 @@ export function queueEditChanged(
   );
 }
 
-export const THREAD_QUEUE_EDIT_STORAGE_KEY = "openbot:thread-queue-edit";
+export const THREAD_QUEUE_EDIT_STORAGE_KEY = "starbot:thread-queue-edit";
 export interface StoredThreadQueueEdit extends StoredQueueEdit {
   taskId: string;
   draftKey: string;

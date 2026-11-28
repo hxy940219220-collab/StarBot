@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import { sourceText } from "@starbot/i18n/source";
 
 const WHATSAPP_ORCHESTRATOR_DESCRIPTION = `You are the WhatsApp Orchestrator of this StarBot team. Every WhatsApp message that reaches the StarBot user's agents comes to you first: a message in the owner's own "Message yourself" chat, a direct message from a person the owner allowed, or a mention or a reply in a group the owner allowed. WhatsApp shows your replies as the linked WhatsApp number.
 

@@ -1,9 +1,9 @@
-import type { DeleteSharedTableInput, OpenBotDesktopApi, SharedTable } from "@openbot/contracts/ipc";
+import type { DeleteSharedTableInput, StarBotDesktopApi, SharedTable } from "@starbot/contracts/ipc";
 
 export interface ConversationPort {
-  dynamicIsland: Pick<OpenBotDesktopApi["dynamicIsland"], "openBrowserTakeover">;
+  dynamicIsland: Pick<StarBotDesktopApi["dynamicIsland"], "openBrowserTakeover">;
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     | "addPreviewPage"
     | "readAgentSessionSettings"
     | "listAgentNotificationLevels"
@@ -28,7 +28,7 @@ export interface ConversationPort {
     | "withdrawFeedback"
   >;
   browser: Pick<
-    OpenBotDesktopApi["browser"],
+    StarBotDesktopApi["browser"],
     | "capturePreview"
     | "closeWindow"
     | "finishLocalSignIn"
@@ -40,7 +40,7 @@ export interface ConversationPort {
     | "stopLiveView"
   >;
   servers: Pick<
-    OpenBotDesktopApi["servers"],
+    StarBotDesktopApi["servers"],
     | "listDirectThreads"
     | "markDirectRead"
     | "onDirectMessage"
@@ -49,13 +49,13 @@ export interface ConversationPort {
     | "sendDirectMessage"
     | "setDirectTyping"
   >;
-  storage: Pick<OpenBotDesktopApi["storage"], "openLocation">;
-  hostAdmin: Pick<OpenBotDesktopApi["hostAdmin"], "getAgentAccess">;
-  browserDock: Pick<OpenBotDesktopApi["browserDock"], "publishPresentation" | "onAction" | "onShown">;
+  storage: Pick<StarBotDesktopApi["storage"], "openLocation">;
+  hostAdmin: Pick<StarBotDesktopApi["hostAdmin"], "getAgentAccess">;
+  browserDock: Pick<StarBotDesktopApi["browserDock"], "publishPresentation" | "onAction" | "onShown">;
 }
 
 export function conversationPort(): ConversationPort {
-  return window.openbot;
+  return window.starbot;
 }
 
 export function releaseFilePreviewPage(pageUrl: string | undefined): void {

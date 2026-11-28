@@ -1,4 +1,4 @@
-import type { AgentTasksSnapshot } from "@openbot/contracts/ipc";
+import type { AgentTasksSnapshot } from "@starbot/contracts/ipc";
 import { useQueryClient } from "@tanstack/react-query";
 import { router, useGlobalSearchParams, useSegments } from "expo-router";
 import { Stack } from "expo-router/stack";
@@ -75,7 +75,7 @@ function AuthenticatedStack() {
   const chatAnimation = useSplitLayout() ? "fade" : pushAnimation;
   const { t } = useText();
   const background = useThemeColor("background");
-  const sheetBackground = String(useCSSVariable("--openbot-bg-sheet") ?? background);
+  const sheetBackground = String(useCSSVariable("--starbot-bg-sheet") ?? background);
   const nativeBarOptions = {
     headerShown: isIOS,
     headerBackVisible: false,

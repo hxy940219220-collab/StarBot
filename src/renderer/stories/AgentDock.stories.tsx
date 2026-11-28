@@ -4,9 +4,9 @@ import {
   type AgentDockTakeover,
   type AgentDockUsageLimit,
   AVATAR_HUES,
-} from "@openbot/contracts/ipc";
-import type { AvatarMood } from "@openbot/ui/bloub-avatar";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
+} from "@starbot/contracts/ipc";
+import type { AvatarMood } from "@starbot/ui/bloub-avatar";
+import type { AgentMessage, AgentProfile } from "@starbot/ui/data";
 import {
   AgentDock,
   type AgentDockChannel,
@@ -16,8 +16,8 @@ import {
   type AgentDockSeatRef,
   type AgentDockShelfResult,
   agentDockSeatKey,
-} from "@openbot/ui/features/agent-dock/AgentDock";
-import type { SidebarAgentState } from "@openbot/ui/features/sidebar/sidebar-types";
+} from "@starbot/ui/features/agent-dock/AgentDock";
+import type { SidebarAgentState } from "@starbot/ui/features/sidebar/sidebar-types";
 import { createSignal, createStore, onCleanup, onSettled, Show } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { AgentDockEdgeStrip } from "../src/features/agent-dock/AgentDockEdgeStrip";
@@ -164,7 +164,7 @@ const APPROVAL: AgentApproval = {
   turnId: "chief-turn",
   kind: "command",
   command: "git push origin launch-plan",
-  cwd: "~/OpenBot/Chief",
+  cwd: "~/StarBot/Chief",
   reason: "Push the launch plan branch so Research can review it.",
   grantRoot: null,
   permissions: null,
@@ -396,7 +396,7 @@ function AgentDockStory(props: {
   };
 
   return (
-    <div style={{ height: "100vh", background: "var(--openbot-bg-canvas)" }}>
+    <div style={{ height: "100vh", background: "var(--starbot-bg-canvas)" }}>
       <AgentDock
         seats={seats()}
         available={AGENTS.filter((agent) => !state.seats.includes(agentDockSeatKey({ kind: "agent", id: agent.id })))}

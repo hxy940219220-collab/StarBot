@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { Button, ErrorReference } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { AppLogo } from "@starbot/brand";
+import { Button, ErrorReference } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { usePlatform } from "../../platform";
 import { useSetup } from "./onboarding-context";
 

@@ -1,6 +1,6 @@
-export const OPENBOT_MARKETPLACE_ORIGIN = "https://starbot.app";
-export const OPENBOT_MARKETPLACE_PATH = "/marketplace";
-export const OPENBOT_MARKETPLACE_HOST = "marketplace";
+export const STARBOT_MARKETPLACE_ORIGIN = "https://starbot.app";
+export const STARBOT_MARKETPLACE_PATH = "/marketplace";
+export const STARBOT_MARKETPLACE_HOST = "marketplace";
 export const WEB_APP_MARKETPLACE_AGENT_PARAM = "marketplaceAgent";
 export const WEB_APP_MARKETPLACE_SKILL_PARAM = "marketplaceSkill";
 
@@ -36,19 +36,19 @@ function assertListing(link: MarketplaceListingLink): void {
 
 export function marketplaceListingPath(link: MarketplaceListingLink): string {
   assertListing(link);
-  return `${OPENBOT_MARKETPLACE_PATH}/${LISTING_SEGMENTS[link.kind]}/${link.id}`;
+  return `${STARBOT_MARKETPLACE_PATH}/${LISTING_SEGMENTS[link.kind]}/${link.id}`;
 }
 
 export function createMarketplaceShareUrl(
   link: MarketplaceListingLink,
-  origin: string = OPENBOT_MARKETPLACE_ORIGIN,
+  origin: string = STARBOT_MARKETPLACE_ORIGIN,
 ): string {
   if (!isMarketplaceShareOrigin(origin)) throw new Error("The StarBot Marketplace link origin is invalid.");
   return `${origin}${marketplaceListingPath(link)}`;
 }
 
 function isMarketplaceShareOrigin(origin: string): boolean {
-  if (origin === OPENBOT_MARKETPLACE_ORIGIN) return true;
+  if (origin === STARBOT_MARKETPLACE_ORIGIN) return true;
   try {
     const url = new URL(origin);
     return (
@@ -61,9 +61,9 @@ function isMarketplaceShareOrigin(origin: string): boolean {
   }
 }
 
-export function createOpenBotMarketplaceUrl(link: MarketplaceListingLink): string {
+export function createStarBotMarketplaceUrl(link: MarketplaceListingLink): string {
   assertListing(link);
-  return `starbot://${OPENBOT_MARKETPLACE_HOST}/${LISTING_SEGMENTS[link.kind]}/${link.id}`;
+  return `starbot://${STARBOT_MARKETPLACE_HOST}/${LISTING_SEGMENTS[link.kind]}/${link.id}`;
 }
 
 export function createWebAppMarketplacePath(link: MarketplaceListingLink): string {
@@ -89,11 +89,11 @@ export function parseMarketplaceUrl(value: string): MarketplaceListingLink {
     throw new Error("The StarBot Marketplace link is invalid.");
   }
 
-  const prefix = `${OPENBOT_MARKETPLACE_PATH}/`;
+  const prefix = `${STARBOT_MARKETPLACE_PATH}/`;
   const canonical =
-    url.protocol === "https:" && url.origin === OPENBOT_MARKETPLACE_ORIGIN && url.pathname.startsWith(prefix);
+    url.protocol === "https:" && url.origin === STARBOT_MARKETPLACE_ORIGIN && url.pathname.startsWith(prefix);
   const customScheme =
-    (url.protocol === "starbot:" || url.protocol === "openbot:") && url.hostname === OPENBOT_MARKETPLACE_HOST;
+    (url.protocol === "starbot:" || url.protocol === "starbot:") && url.hostname === STARBOT_MARKETPLACE_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||

@@ -1,5 +1,5 @@
-import { attachmentMimeTypeForName, playableMediaKind } from "@openbot/contracts/attachment-files";
-import { type AttachmentSummary, canPreviewAttachment } from "@openbot/contracts/ipc";
+import { attachmentMimeTypeForName, playableMediaKind } from "@starbot/contracts/attachment-files";
+import { type AttachmentSummary, canPreviewAttachment } from "@starbot/contracts/ipc";
 import {
   AudioLines,
   Button,
@@ -12,7 +12,7 @@ import {
   RadialProgress,
   RefreshCw,
   Square,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createSignal, For, Match, Show, Switch } from "solid-js";
 import { useText } from "../../text";
 import { attachmentReferenceTone } from "./AttachmentReference";
@@ -35,7 +35,7 @@ export interface AttachmentDownloads {
   retry(attachment: AttachmentSummary): void;
 }
 
-const REMOTE_PREVIEW_URL = /^openbot-remote-attachment:/;
+const REMOTE_PREVIEW_URL = /^starbot-remote-attachment:/;
 
 export function AttachmentCards(props: {
   attachments: AttachmentSummary[];

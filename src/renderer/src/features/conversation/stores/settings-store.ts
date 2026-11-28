@@ -1,11 +1,11 @@
-import { isKnownAgentProvider } from "@openbot/contracts/agent-providers";
-import type { AgentModelId, AgentProviderId, AgentReasoningEffort, UpdateAgentInput } from "@openbot/contracts/ipc";
-import { findModelOption } from "@openbot/ui/components/provider-accounts";
+import { isKnownAgentProvider } from "@starbot/contracts/agent-providers";
+import type { AgentModelId, AgentProviderId, AgentReasoningEffort, UpdateAgentInput } from "@starbot/contracts/ipc";
+import { findModelOption } from "@starbot/ui/components/provider-accounts";
 import type {
   AgentRuntimeSettings,
   AgentRuntimeSettingsPatch,
-} from "@openbot/ui/features/conversation/AgentSettingsPanel";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/conversation/AgentSettingsPanel";
+import { currentText } from "@starbot/ui/text";
 import { agentConversationKey } from "../conversation-keys";
 import type { ConversationProps, ConversationTarget } from "../conversation-types";
 

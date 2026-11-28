@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { EventEmitter } from "node:events";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import type { UpdateStatus } from "@openbot/contracts/ipc";
-import { createOpenBotLogger } from "@openbot/logging";
+import type { UpdateStatus } from "@starbot/contracts/ipc";
+import { createStarBotLogger } from "@starbot/logging";
 import { Effect } from "effect";
 import type { ProgressInfo, UpdateInfo } from "electron-updater";
 import {
@@ -13,8 +13,8 @@ import {
   UpdateService,
 } from "../src/main/update-service";
 
-const logger = createOpenBotLogger("update-host-takeover-e2e");
-const OUT = resolve(import.meta.dirname, "../.openbot-build/update-host-takeover-e2e");
+const logger = createStarBotLogger("update-host-takeover-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/update-host-takeover-e2e");
 const CURRENT = "1.0.0";
 const TENANT_RELEASE = "1.1.0";
 const HOST_RELEASE = "1.2.0";

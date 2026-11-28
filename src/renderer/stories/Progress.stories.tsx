@@ -1,4 +1,4 @@
-import { Heading, Progress, RadialProgress, Text } from "@openbot/ui";
+import { Heading, Progress, RadialProgress, Text } from "@starbot/ui";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 
 const meta = {

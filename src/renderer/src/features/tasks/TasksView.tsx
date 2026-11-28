@@ -2,8 +2,8 @@ import {
   expandAttachmentReferences,
   removeAttachmentReferences,
   serializeAttachmentReference,
-} from "@openbot/contracts/attachment-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@starbot/contracts/attachment-references";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   AgentApproval,
   AgentTask,
@@ -14,19 +14,19 @@ import type {
   ConversationSnapshot,
   DraftAttachment,
   ResponseStyle,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { plainTaskTitle, taskApproval } from "@openbot/team-client/agent-tasks";
-import { retryOperationIds } from "@openbot/team-client/retry-operation-id";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import type { AgentTaskWait } from "@openbot/ui/features/conversation/AgentTasks";
-import type { AttachmentDownloads, AttachmentMediaSource } from "@openbot/ui/features/conversation/AttachmentCards";
-import type { ComposerPasteResult, ComposerSelection } from "@openbot/ui/features/conversation/ComposerEditor";
-import type { SendShortcut } from "@openbot/ui/features/conversation/send-shortcut";
-import { AgentThreadView, type AgentThreadVoice } from "@openbot/ui/features/conversation/threads/AgentThreadView";
-import { TaskAnswerCard, TaskPanel } from "@openbot/ui/features/tasks/TaskPanel";
-import { TASKS_SIDE_DEFAULT, TASKS_SIDE_MIN, TasksPage, type TasksVoice } from "@openbot/ui/features/tasks/TasksPage";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { plainTaskTitle, taskApproval } from "@starbot/team-client/agent-tasks";
+import { retryOperationIds } from "@starbot/team-client/retry-operation-id";
+import type { AgentMessage, AgentProfile } from "@starbot/ui/data";
+import type { AgentTaskWait } from "@starbot/ui/features/conversation/AgentTasks";
+import type { AttachmentDownloads, AttachmentMediaSource } from "@starbot/ui/features/conversation/AttachmentCards";
+import type { ComposerPasteResult, ComposerSelection } from "@starbot/ui/features/conversation/ComposerEditor";
+import type { SendShortcut } from "@starbot/ui/features/conversation/send-shortcut";
+import { AgentThreadView, type AgentThreadVoice } from "@starbot/ui/features/conversation/threads/AgentThreadView";
+import { TaskAnswerCard, TaskPanel } from "@starbot/ui/features/tasks/TaskPanel";
+import { TASKS_SIDE_DEFAULT, TASKS_SIDE_MIN, TasksPage, type TasksVoice } from "@starbot/ui/features/tasks/TasksPage";
+import { currentText } from "@starbot/ui/text";
 import {
   createEffect,
   createMemo,
@@ -57,8 +57,8 @@ import { createPageHeaderFrame } from "../window/page-header-frame";
 import type { TaskEvent, TasksSource } from "./tasks-port";
 
 const UNDO_MS = 6_000;
-const TASK_AGENT_STORAGE_KEY = "openbot:task-agent:v1";
-const TASK_PANEL_WIDTH_STORAGE_KEY = "openbot:task-panel-width";
+const TASK_AGENT_STORAGE_KEY = "starbot:task-agent:v1";
+const TASK_PANEL_WIDTH_STORAGE_KEY = "starbot:task-panel-width";
 
 export interface TasksVoiceControls {
   serverId: () => string;

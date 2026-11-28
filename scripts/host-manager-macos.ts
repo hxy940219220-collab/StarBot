@@ -2,7 +2,7 @@ import { execFile } from "node:child_process";
 import { chmod, lstat, mkdir, readdir, readlink, rename, rm } from "node:fs/promises";
 import { dirname, join, resolve, sep } from "node:path";
 import { promisify } from "node:util";
-import { isNewerRelease as isNewerSharedRelease } from "@openbot/contracts/release-version";
+import { isNewerRelease as isNewerSharedRelease } from "@starbot/contracts/release-version";
 import { z } from "zod";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import type { HostManagerOperations } from "../src/main/host-manager";
@@ -10,10 +10,10 @@ import { HOST_MANAGER_DIRECTORY, verifyHostDirectory } from "../src/main/host-up
 
 const exec = promisify(execFile);
 export const SHARED_APP = "/Applications/StarBot.app";
-const STAGING = "/Applications/.openbot-host-stage";
+const STAGING = "/Applications/.starbot-host-stage";
 const PRIVATE = join(HOST_MANAGER_DIRECTORY, "private");
 const SIGNING_REQUIREMENT =
-  '=anchor apple generic and identifier "app.openbot.desktop" and certificate leaf[subject.OU] = "ZTRDTUL87R"';
+  '=anchor apple generic and identifier "app.starbot.desktop" and certificate leaf[subject.OU] = "ZTRDTUL87R"';
 const releaseSchema = z.object({
   tag_name: z.string().regex(/^v?\d+\.\d+\.\d+$/),
   draft: z.literal(false),
@@ -137,13 +137,13 @@ export async function bundleProcesses(): Promise<Array<{ uid: number; pid: numbe
   return processes;
 }
 
-export async function runningOpenBotProcesses(): Promise<Array<{ uid: number; pid: number }>> {
+export async function runningStarBotProcesses(): Promise<Array<{ uid: number; pid: number }>> {
   return (await bundleProcesses()).filter((process) => process.main).map(({ uid, pid }) => ({ uid, pid }));
 }
 
 export function macHostOperations(): HostManagerOperations {
   return {
-    runningTenants: runningOpenBotProcesses,
+    runningTenants: runningStarBotProcesses,
     applicationInUse: async () => (await bundleProcesses()).length !== 0,
     installedVersion: async () => {
       await verifyBundleTree(SHARED_APP, true);

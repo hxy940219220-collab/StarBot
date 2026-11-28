@@ -1,5 +1,5 @@
-import { ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
+import { ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@starbot/contracts/ipc";
+import type { AgentMessage } from "@starbot/ui/data";
 
 export interface TimelineRow {
   id: string;

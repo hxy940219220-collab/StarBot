@@ -7,10 +7,10 @@ import { withDatabaseTransaction } from "../src/backend/agent/conversation-runti
 import { databaseRows, requiredNumberColumn, requiredStringColumn } from "../src/backend/database/database-rows";
 import { withTransaction, withTransactionAsync } from "../src/backend/database/sqlite-transaction";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/with-transaction");
-const root = await mkdtemp(join(tmpdir(), "openbot-with-transaction-"));
+const OUT = resolve(import.meta.dirname, "../.starbot-build/with-transaction");
+const root = await mkdtemp(join(tmpdir(), "starbot-with-transaction-"));
 const userData = join(root, "user-data");
 
 interface CaseResult {
@@ -28,10 +28,10 @@ const report: { cases: CaseResult[]; reopenedRows?: string[]; passed: boolean; f
 
 class ForcedFailure extends Error {}
 
-const database = new OpenBotDatabase(userData);
+const database = new StarBotDatabase(userData);
 const db = () => database.connection;
 const write = (label: string) => db().prepare("INSERT INTO probe(label) VALUES (?)").run(label);
-const rowsOf = (target: OpenBotDatabase) =>
+const rowsOf = (target: StarBotDatabase) =>
   databaseRows(target.connection.prepare("SELECT label FROM probe ORDER BY id").all()).map((row) =>
     requiredStringColumn(row, "label"),
   );
@@ -176,7 +176,7 @@ try {
   assert.equal(requiredStringColumn(pragma("integrity_check"), "integrity_check"), "ok");
   database.close();
 
-  const reopened = new OpenBotDatabase(userData);
+  const reopened = new StarBotDatabase(userData);
   await runCauseEffect(reopened.initialize());
   report.reopenedRows = rowsOf(reopened);
   reopened.close();

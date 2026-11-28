@@ -5,7 +5,7 @@ import type {
   WorkflowGitHubRepository,
   WorkflowGitHubRepositoryOptions,
   WorkflowRunStatus,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import type { GitHubConnection } from "../settings/GitHubConnectorPanel";
 
 export interface WorkflowGitHubRun {

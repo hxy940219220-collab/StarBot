@@ -9,7 +9,7 @@ export const messages = {
   "remoteDesktop.workspaceLabel": "リモート操作",
   "remoteDesktop.displayLabel": "リモートディスプレイ",
   "remoteDesktop.selectDisplay": "ディスプレイを選択",
-  "remoteDesktop.backToOpenBot": "StarBot に戻る",
+  "remoteDesktop.backToStarBot": "StarBot に戻る",
 
   "remoteDesktop.disconnect": "切断",
   "remoteDesktop.viewerTitle": "Sunshine リモートデスクトップ",

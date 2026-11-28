@@ -1,7 +1,7 @@
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import { AccountUpdateIsland } from "@openbot/ui/features/account/AccountUpdateIsland";
-import { useText } from "@openbot/ui/text";
+import { classifyFailure } from "@starbot/telemetry";
+import { toast } from "@starbot/ui";
+import { AccountUpdateIsland } from "@starbot/ui/features/account/AccountUpdateIsland";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createSignal } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { beam } from "../../theme-sweep";

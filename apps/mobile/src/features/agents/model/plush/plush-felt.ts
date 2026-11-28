@@ -8,7 +8,7 @@ import {
   STATE_BY_ID,
   type StateId,
 } from "@norbert_bodziony/bloub";
-import type { AvatarMood } from "@openbot/brand/bloub-avatar-motion";
+import type { AvatarMood } from "@starbot/brand/bloub-avatar-motion";
 
 const clamp01 = (value: number) => (value < 0 ? 0 : value > 1 ? 1 : value);
 const lerp = (from: number, to: number, t: number) => from + (to - from) * t;

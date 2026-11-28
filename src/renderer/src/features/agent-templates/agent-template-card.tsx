@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { AGENT_TEMPLATE_CARD, type AgentTemplatePreview } from "@openbot/contracts/ipc";
-import { avatarHeadColor, createStaticAvatarSvg } from "@openbot/ui/bloub-avatar";
+import { AppLogo } from "@starbot/brand";
+import { AGENT_TEMPLATE_CARD, type AgentTemplatePreview } from "@starbot/contracts/ipc";
+import { avatarHeadColor, createStaticAvatarSvg } from "@starbot/ui/bloub-avatar";
 import { render } from "@solidjs/web";
 import { flush } from "solid-js";
 import { loadImage, loadSvg, withAlpha } from "../../avatar-canvas";
@@ -48,12 +48,12 @@ function themeColors(): ThemeColors {
     return value;
   };
   return {
-    canvas: token("--openbot-bg-native-canvas"),
-    primary: token("--openbot-text-primary"),
-    secondary: token("--openbot-text-secondary"),
-    muted: token("--openbot-text-muted"),
-    logo: token("--openbot-logo-production"),
-    logoEye: token("--openbot-logo-production-eye"),
+    canvas: token("--starbot-bg-native-canvas"),
+    primary: token("--starbot-text-primary"),
+    secondary: token("--starbot-text-secondary"),
+    muted: token("--starbot-text-muted"),
+    logo: token("--starbot-logo-production"),
+    logoEye: token("--starbot-logo-production-eye"),
   };
 }
 

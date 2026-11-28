@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import type {
   RoutineFields,
   RoutineLimitPolicy,
@@ -10,7 +10,7 @@ import type {
   RoutineRunSource,
   RoutineRunStatus,
   RoutineSchedule,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   isRoutinePausedByRun,
   isRoutineSchedule,
@@ -19,10 +19,10 @@ import {
   ROUTINE_MISSED_POLICIES,
   ROUTINE_RUN_PLACES,
   ROUTINE_RUN_SOURCES,
-} from "@openbot/contracts/ipc";
-import type { EventFilter, EventJsonValue, EventRoutineOwner } from "@openbot/contracts/ipc-events";
-import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import type { EventFilter, EventJsonValue, EventRoutineOwner } from "@starbot/contracts/ipc-events";
+import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import {
   nextRoutineOccurrence,
   nextValidRoutineOccurrence,
@@ -31,7 +31,7 @@ import {
   routineOnceInstant,
   validateRoutineSchedule,
   validateStoredRoutineSchedule,
-} from "@openbot/team-client/routine-schedule";
+} from "@starbot/team-client/routine-schedule";
 import {
   databaseRow,
   databaseRows,
@@ -39,7 +39,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { StarBotDatabase } from "./starbot-database";
 import { hasWebhookReceipt, insertWebhookReceipt, revokeRoutineWebhooks } from "./webhook-route-store";
 import { parseEventFilters, validateWebhookTrigger, webhookMismatch, webhookRunInstruction } from "./webhook-trigger";
 
@@ -165,7 +165,7 @@ export interface RoutineHoldWindow {
 
 export class RoutineStore {
   constructor(
-    protected readonly database: OpenBotDatabase,
+    protected readonly database: StarBotDatabase,
     protected readonly tables: RoutineTables,
   ) {}
 
@@ -1063,7 +1063,7 @@ export class RoutineStore {
   }
 
   #insertRun(
-    db: OpenBotDatabase["connection"],
+    db: StarBotDatabase["connection"],
     runId: string,
     routine: RunSource,
     triggerId: string | null,
@@ -1192,7 +1192,7 @@ export class RoutineStore {
     return { runIn };
   }
 
-  #writeRunIn(db: OpenBotDatabase["connection"], routineId: string, runIn: RoutineRunPlace): void {
+  #writeRunIn(db: StarBotDatabase["connection"], routineId: string, runIn: RoutineRunPlace): void {
     if (!this.tables.runInColumn) return;
     db.prepare(`UPDATE ${this.tables.routineTable} SET run_in = ? WHERE routine_id = ?`).run(runIn, routineId);
   }
@@ -1285,7 +1285,7 @@ export class RoutineStore {
   #mutateRun(
     runId: string,
     eventType: string,
-    mutate: (db: OpenBotDatabase["connection"], sequence: number, now: string) => void,
+    mutate: (db: StarBotDatabase["connection"], sequence: number, now: string) => void,
   ): OwnedRoutineRun {
     const current = this.#requireRun(runId);
     return this.database.dispatch(
@@ -1299,7 +1299,7 @@ export class RoutineStore {
   }
 
   #insertTrigger(
-    db: OpenBotDatabase["connection"],
+    db: StarBotDatabase["connection"],
     routineId: string,
     timezone: string,
     schedule: RoutineSchedule,

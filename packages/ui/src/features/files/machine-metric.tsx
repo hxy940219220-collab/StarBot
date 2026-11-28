@@ -1,7 +1,7 @@
-import type { MachineMetric, MachineMetrics } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Cpu, HardDrive, MemoryStick } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { MachineMetric, MachineMetrics } from "@starbot/contracts/ipc";
+import type { AppTextKey } from "@starbot/i18n";
+import { Cpu, HardDrive, MemoryStick } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import type { JSX } from "@solidjs/web";
 
 export const MACHINE_METRIC_LABELS = {

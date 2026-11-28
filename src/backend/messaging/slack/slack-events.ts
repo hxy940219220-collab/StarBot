@@ -1,10 +1,10 @@
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import type { InboundAction, InboundFile, InboundMessage } from "../messaging-types";
 
 export const SLACK_ACTION_IDS = {
-  accept: "openbot_accept",
-  decline: "openbot_decline",
-  stop: "openbot_stop",
+  accept: "starbot_accept",
+  decline: "starbot_decline",
+  stop: "starbot_stop",
 } as const;
 
 export function slackInboundMessage(payload: unknown, workspaceId: string, botUserId: string): InboundMessage | null {

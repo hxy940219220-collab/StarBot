@@ -1,10 +1,10 @@
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, registerSecretValue, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { GitHubFetch } from "./github-device-flow";
 import { GitHubOperationError, githubCall, githubDecode } from "./github-effects";
 
-const logger = createOpenBotLogger("github-bot-tokens");
+const logger = createStarBotLogger("github-bot-tokens");
 
 const RENEW_MARGIN_MS = 10 * 60_000;
 const RETRY_MS = 15 * 60_000;

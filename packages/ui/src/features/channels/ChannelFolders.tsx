@@ -3,9 +3,9 @@ import {
   CHANNEL_FOLDER_LIMIT,
   type ChannelFolderChange,
   type ChannelFolderList,
-} from "@openbot/contracts/ipc";
-import { Button, Plus, toast, UsersRound } from "@openbot/ui";
-import { SettingsLinkGroup, SettingsLinkRow } from "@openbot/ui/components/SettingsPanel";
+} from "@starbot/contracts/ipc";
+import { Button, Plus, toast, UsersRound } from "@starbot/ui";
+import { SettingsLinkGroup, SettingsLinkRow } from "@starbot/ui/components/SettingsPanel";
 import { createStore, For, onSettled, Show } from "solid-js";
 import { useText } from "../../text";
 import { FolderRow } from "../conversation/AgentFolders";

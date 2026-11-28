@@ -2,9 +2,9 @@ import {
   disconnectedPasswordManager,
   type PasswordManagerConnectMethod,
   type PasswordManagerStatus,
-} from "@openbot/contracts/ipc";
-import type { ProtonPassConnectorPanelProps } from "@openbot/ui/features/settings/ProtonPassConnectorPanel";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/contracts/ipc";
+import type { ProtonPassConnectorPanelProps } from "@starbot/ui/features/settings/ProtonPassConnectorPanel";
+import { currentText } from "@starbot/ui/text";
 import { createSignal, onCleanup, onSettled } from "solid-js";
 import {
   type ConnectorAnalyticsAction,

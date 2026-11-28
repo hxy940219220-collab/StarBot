@@ -9,9 +9,9 @@ import {
   isKeyOnlyProvider,
   isManagedRuntimeProvider,
   type ManagedProviderId,
-} from "@openbot/contracts/agent-providers";
-import { leadingAddress } from "@openbot/contracts/chat-tag-references";
-import { selfHostedApiOrigin } from "@openbot/contracts/invite-links";
+} from "@starbot/contracts/agent-providers";
+import { leadingAddress } from "@starbot/contracts/chat-tag-references";
+import { selfHostedApiOrigin } from "@starbot/contracts/invite-links";
 import type {
   AgentProviderStatus,
   AgentStatus,
@@ -27,7 +27,7 @@ import type {
   VoiceModelStatus,
   VoiceServerSettings,
   VoiceStreamTranscript,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   agentBrowserProfile,
   agentMemoryEnabled,
@@ -43,19 +43,19 @@ import {
   isUpdateBusyPhase,
   LOCAL_SERVER_ID,
   latestTurnAnswer,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
-import { isValidSemver } from "@openbot/contracts/release-version";
-import { CHANNEL_ROUTES } from "@openbot/contracts/team-protocol/channels-v1";
-import { localeDirection } from "@openbot/i18n";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactSecrets, registerSecretValue, toLogValue } from "@openbot/logging";
-import { REMOTE_ACCOUNT_CHECK_INTERVAL_MS } from "@openbot/team-client";
-import { installRemoteSyncProfileSink } from "@openbot/team-client/sync-profile";
-import { ANALYTICS_GENERATIONS, openPanelTransport, ReportQueue } from "@openbot/telemetry";
-import { fileReportStorage } from "@openbot/telemetry/node";
-import { makeWASocket } from "@openbot/whatsapp/baileys";
-import { makeOpenBotSignalRepository } from "@openbot/whatsapp/signal-repository";
+} from "@starbot/contracts/ipc";
+import { decodeRecord, requiredString } from "@starbot/contracts/ipc-decoding";
+import { isValidSemver } from "@starbot/contracts/release-version";
+import { CHANNEL_ROUTES } from "@starbot/contracts/team-protocol/channels-v1";
+import { localeDirection } from "@starbot/i18n";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactSecrets, registerSecretValue, toLogValue } from "@starbot/logging";
+import { REMOTE_ACCOUNT_CHECK_INTERVAL_MS } from "@starbot/team-client";
+import { installRemoteSyncProfileSink } from "@starbot/team-client/sync-profile";
+import { ANALYTICS_GENERATIONS, openPanelTransport, ReportQueue } from "@starbot/telemetry";
+import { fileReportStorage } from "@starbot/telemetry/node";
+import { makeWASocket } from "@starbot/whatsapp/baileys";
+import { makeStarBotSignalRepository } from "@starbot/whatsapp/signal-repository";
 import { Effect, Fiber, Schema } from "effect";
 import {
   app,
@@ -110,7 +110,7 @@ import { slackDriver } from "../backend/messaging/slack/slack-driver";
 import { telegramDriver } from "../backend/messaging/telegram/telegram-driver";
 import { whatsAppDriver } from "../backend/messaging/whatsapp/whatsapp-driver";
 import { WhatsAppRuntime } from "../backend/messaging/whatsapp/whatsapp-runtime";
-import { OpenBotDatabase } from "../backend/openbot-database";
+import { StarBotDatabase } from "../backend/starbot-database";
 import { PASSWORD_MANAGER_BRANDS } from "../backend/password-vault";
 import { passwordVaultRouter } from "../backend/password-vault-router";
 import { perfTime } from "../backend/perf-probe-hooks";
@@ -488,7 +488,7 @@ import {
   type UpdateAdapter,
   UpdateService,
 } from "./update-service";
-import { listSiblingOpenBotInstances } from "./update-sibling-instances";
+import { listSiblingStarBotInstances } from "./update-sibling-instances";
 import { VaultService } from "./vault-service";
 import { VaultStore } from "./vault-store";
 import { VideoReader } from "./video-reader";
@@ -516,65 +516,65 @@ import { createWorkflowFileExporter, type WorkflowFileExporter } from "./workflo
 import { WorkflowFoldersService } from "./workflow-folders-service";
 import { sizeWorkflowPicture } from "./workflow-picture-size";
 
-const logger = createOpenBotLogger("application-services");
-const SETUP_FILE = "openbot-setup-v2.json";
-const ANALYTICS_PREFERENCE_FILE = "openbot-analytics-preference-v1.json";
-const ANALYTICS_INVENTORY_FILE = "openbot-analytics-inventory-v1.json";
-const ANALYTICS_INSTALL_ID_FILE = "openbot-analytics-install-id-v1.json";
-const APPROVAL_AUTOMATION_FILE = "openbot-approval-automation-v3.json";
-const V2_APPROVAL_AUTOMATION_FILE = "openbot-approval-automation-v2.json";
-const ROUTINE_FEED_FILE = "openbot-routine-feed-v1.json";
-const LEGACY_APPROVAL_AUTOMATION_FILE = "openbot-approval-automation-v1.json";
-const LANGUAGE_PREFERENCE_FILE = "openbot-language-preference-v1.json";
-const LOGO_COLOR_PREFERENCE_FILE = "openbot-logo-color-preference-v1.json";
-export const APPEARANCE_PREFERENCE_FILE = "openbot-appearance-preference-v1.json";
-const INTERFACE_SIZE_PREFERENCE_FILE = "openbot-interface-size-preference-v1.json";
-const NOTIFICATION_PREFERENCE_FILE = "openbot-notification-preference-v1.json";
-const PUSH_NOTIFICATION_FILE = "openbot-push-notifications-v1.json";
-const BUSY_MESSAGE_MODE_PREFERENCE_FILE = "openbot-busy-message-mode-v1.json";
-const AGENT_DEFAULTS_PREFERENCE_FILE = "openbot-agent-defaults-v1.json";
-const AGENT_MEMORY_LIMIT_PREFERENCE_FILE = "openbot-agent-memory-limit-v1.json";
-const MEMORY_REVIEW_PREFERENCE_FILE = "openbot-memory-review-v1.json";
-const SKILL_LEARNING_PREFERENCE_FILE = "openbot-skill-learning-v1.json";
-const BROWSING_MEMORY_PREFERENCE_FILE = "openbot-browsing-memory-v1.json";
-const USER_BROWSING_FILE = "openbot-browsing-steps-v1.json";
-const AGENT_NOTIFICATION_LEVELS_FILE = "openbot-agent-notification-levels-v1.json";
-const SIDEBAR_PINS_FILE = "openbot-sidebar-pins-v1.json";
-const HOST_TURN_LIMITS_PREFERENCE_FILE = "openbot-host-turn-limits-v1.json";
-const SERVER_PERSONALITY_PREFERENCE_FILE = "openbot-server-personality-v1.json";
-const PROMPT_CACHE_TTL_PREFERENCE_FILE = "openbot-prompt-cache-ttl-v1.json";
-const CLAUDE_USER_SETUP_PREFERENCE_FILE = "openbot-claude-user-setup-v1.json";
-const CACHE_EXPIRY_COMPACTION_PREFERENCE_FILE = "openbot-cache-expiry-compaction-v1.json";
-const CRM_PREFERENCE_FILE = "openbot-crm-v1.json";
-const CLAUDE_COMPACT_WINDOW_PREFERENCE_FILE = "openbot-claude-compact-window-v1.json";
-const PROVIDER_ENVIRONMENT_PREFERENCE_FILE = "openbot-provider-environment-v1.json";
-const MODEL_VISIBILITY_PREFERENCE_FILE = "openbot-model-visibility-v1.json";
-const REMOTE_SESSION_REUSE_PREFERENCE_FILE = "openbot-remote-session-reuse-preference-v1.json";
-const EXTERNAL_LINK_PREFERENCE_FILE = "openbot-external-link-preference-v1.json";
-const REMOTE_NETWORK_ROUTE_PREFERENCE_FILE = "openbot-remote-network-route-v1.json";
-const REMOTE_CONTROL_POLICY_FILE = "openbot-remote-control-policy-v1.json";
-const APP_BEHAVIOR_PREFERENCE_FILE = "openbot-app-behavior-preference-v1.json";
-const DYNAMIC_ISLAND_PREFERENCE_FILE = "openbot-dynamic-island-preference-v1.json";
-const BROWSER_STATE_FILE = "openbot-browser-state-v1.json";
-const SIDEBAR_LAYOUT_FILE = "openbot-sidebar-layout-v1.json";
-const REMOTE_SERVERS_FILE = "openbot-remote-servers-v1.json";
-const REMOTE_SESSIONS_FILE = "openbot-remote-sessions-v1.bin";
-const LEGACY_REMOTE_DESKTOP_CREDENTIAL_FILE = "openbot-remote-desktop-credential-v1.json";
-const CUSTOM_PROVIDERS_FILE = "openbot-custom-providers-v1.json";
-const PROVIDER_CREDENTIAL_FILE = "openbot-provider-credentials-v1.json";
-const MESSAGING_CREDENTIAL_FILE = "openbot-messaging-credentials-v1.json";
-const INGRESS_QUEUE_KEY_FILE = "openbot-ingress-queue-key-v1.json";
-const MCP_OAUTH_FILE = "openbot-mcp-oauth-v1.json";
-const MCP_OAUTH_PROXY_FILE = "openbot-mcp-oauth-proxy-v1.json";
-const GITHUB_CONNECTOR_FILE = "openbot-github-connector-v1.json";
-const LINK_ACCOUNT_FILE = "openbot-link-account-v1.json";
-const ONEPASSWORD_CONNECTOR_FILE = "openbot-onepassword-connector-v1.json";
-const BITWARDEN_CONNECTOR_FILE = "openbot-bitwarden-connector-v1.json";
-const PROTONPASS_CONNECTOR_FILE = "openbot-protonpass-connector-v1.json";
-const VAULT_FILE = "openbot-vault-v1.json";
-const HERMES_IMPORT_LINKS_FILE = "openbot-hermes-imports-v1.json";
+const logger = createStarBotLogger("application-services");
+const SETUP_FILE = "starbot-setup-v2.json";
+const ANALYTICS_PREFERENCE_FILE = "starbot-analytics-preference-v1.json";
+const ANALYTICS_INVENTORY_FILE = "starbot-analytics-inventory-v1.json";
+const ANALYTICS_INSTALL_ID_FILE = "starbot-analytics-install-id-v1.json";
+const APPROVAL_AUTOMATION_FILE = "starbot-approval-automation-v3.json";
+const V2_APPROVAL_AUTOMATION_FILE = "starbot-approval-automation-v2.json";
+const ROUTINE_FEED_FILE = "starbot-routine-feed-v1.json";
+const LEGACY_APPROVAL_AUTOMATION_FILE = "starbot-approval-automation-v1.json";
+const LANGUAGE_PREFERENCE_FILE = "starbot-language-preference-v1.json";
+const LOGO_COLOR_PREFERENCE_FILE = "starbot-logo-color-preference-v1.json";
+export const APPEARANCE_PREFERENCE_FILE = "starbot-appearance-preference-v1.json";
+const INTERFACE_SIZE_PREFERENCE_FILE = "starbot-interface-size-preference-v1.json";
+const NOTIFICATION_PREFERENCE_FILE = "starbot-notification-preference-v1.json";
+const PUSH_NOTIFICATION_FILE = "starbot-push-notifications-v1.json";
+const BUSY_MESSAGE_MODE_PREFERENCE_FILE = "starbot-busy-message-mode-v1.json";
+const AGENT_DEFAULTS_PREFERENCE_FILE = "starbot-agent-defaults-v1.json";
+const AGENT_MEMORY_LIMIT_PREFERENCE_FILE = "starbot-agent-memory-limit-v1.json";
+const MEMORY_REVIEW_PREFERENCE_FILE = "starbot-memory-review-v1.json";
+const SKILL_LEARNING_PREFERENCE_FILE = "starbot-skill-learning-v1.json";
+const BROWSING_MEMORY_PREFERENCE_FILE = "starbot-browsing-memory-v1.json";
+const USER_BROWSING_FILE = "starbot-browsing-steps-v1.json";
+const AGENT_NOTIFICATION_LEVELS_FILE = "starbot-agent-notification-levels-v1.json";
+const SIDEBAR_PINS_FILE = "starbot-sidebar-pins-v1.json";
+const HOST_TURN_LIMITS_PREFERENCE_FILE = "starbot-host-turn-limits-v1.json";
+const SERVER_PERSONALITY_PREFERENCE_FILE = "starbot-server-personality-v1.json";
+const PROMPT_CACHE_TTL_PREFERENCE_FILE = "starbot-prompt-cache-ttl-v1.json";
+const CLAUDE_USER_SETUP_PREFERENCE_FILE = "starbot-claude-user-setup-v1.json";
+const CACHE_EXPIRY_COMPACTION_PREFERENCE_FILE = "starbot-cache-expiry-compaction-v1.json";
+const CRM_PREFERENCE_FILE = "starbot-crm-v1.json";
+const CLAUDE_COMPACT_WINDOW_PREFERENCE_FILE = "starbot-claude-compact-window-v1.json";
+const PROVIDER_ENVIRONMENT_PREFERENCE_FILE = "starbot-provider-environment-v1.json";
+const MODEL_VISIBILITY_PREFERENCE_FILE = "starbot-model-visibility-v1.json";
+const REMOTE_SESSION_REUSE_PREFERENCE_FILE = "starbot-remote-session-reuse-preference-v1.json";
+const EXTERNAL_LINK_PREFERENCE_FILE = "starbot-external-link-preference-v1.json";
+const REMOTE_NETWORK_ROUTE_PREFERENCE_FILE = "starbot-remote-network-route-v1.json";
+const REMOTE_CONTROL_POLICY_FILE = "starbot-remote-control-policy-v1.json";
+const APP_BEHAVIOR_PREFERENCE_FILE = "starbot-app-behavior-preference-v1.json";
+const DYNAMIC_ISLAND_PREFERENCE_FILE = "starbot-dynamic-island-preference-v1.json";
+const BROWSER_STATE_FILE = "starbot-browser-state-v1.json";
+const SIDEBAR_LAYOUT_FILE = "starbot-sidebar-layout-v1.json";
+const REMOTE_SERVERS_FILE = "starbot-remote-servers-v1.json";
+const REMOTE_SESSIONS_FILE = "starbot-remote-sessions-v1.bin";
+const LEGACY_REMOTE_DESKTOP_CREDENTIAL_FILE = "starbot-remote-desktop-credential-v1.json";
+const CUSTOM_PROVIDERS_FILE = "starbot-custom-providers-v1.json";
+const PROVIDER_CREDENTIAL_FILE = "starbot-provider-credentials-v1.json";
+const MESSAGING_CREDENTIAL_FILE = "starbot-messaging-credentials-v1.json";
+const INGRESS_QUEUE_KEY_FILE = "starbot-ingress-queue-key-v1.json";
+const MCP_OAUTH_FILE = "starbot-mcp-oauth-v1.json";
+const MCP_OAUTH_PROXY_FILE = "starbot-mcp-oauth-proxy-v1.json";
+const GITHUB_CONNECTOR_FILE = "starbot-github-connector-v1.json";
+const LINK_ACCOUNT_FILE = "starbot-link-account-v1.json";
+const ONEPASSWORD_CONNECTOR_FILE = "starbot-onepassword-connector-v1.json";
+const BITWARDEN_CONNECTOR_FILE = "starbot-bitwarden-connector-v1.json";
+const PROTONPASS_CONNECTOR_FILE = "starbot-protonpass-connector-v1.json";
+const VAULT_FILE = "starbot-vault-v1.json";
+const HERMES_IMPORT_LINKS_FILE = "starbot-hermes-imports-v1.json";
 
-const PACKAGED_BUNDLE_IDENTIFIER = "app.openbot.desktop";
+const PACKAGED_BUNDLE_IDENTIFIER = "app.starbot.desktop";
 const DEVELOPMENT_BUNDLE_IDENTIFIER = "com.github.Electron";
 
 const TEARDOWN_ORDER = {
@@ -871,11 +871,11 @@ async function createMessagingServices({
   teardown.push(TEARDOWN_ORDER.signalIngress, "the Signal ingress socket", () =>
     Effect.runPromise(signalIngress.dispose()),
   );
-  const developmentSlackCallbackPort = app.isPackaged ? 0 : Number(process.env.OPENBOT_DEV_SLACK_CALLBACK_PORT ?? 0);
+  const developmentSlackCallbackPort = app.isPackaged ? 0 : Number(process.env.STARBOT_DEV_SLACK_CALLBACK_PORT ?? 0);
   const whatsapp = new WhatsAppRuntime({
     root: join(app.getPath("userData"), "whatsapp"),
     createSocket: (config) => makeWASocket(config),
-    makeSignalRepository: makeOpenBotSignalRepository,
+    makeSignalRepository: makeStarBotSignalRepository,
   });
   const messaging = new MessagingService({
     threads: service.messaging,
@@ -901,7 +901,7 @@ async function createMessagingServices({
       whatsAppDriver({ runtime: whatsapp }),
     ],
     downloadsRoot: join(app.getPath("userData"), "messaging-downloads"),
-    statusPath: join(app.getPath("userData"), "openbot-messaging-status-v1.json"),
+    statusPath: join(app.getPath("userData"), "starbot-messaging-status-v1.json"),
     ingress: signalIngress,
     whatsapp,
     sidebar: sidebarLayout,
@@ -1042,7 +1042,7 @@ export async function createApplicationServices({
   prepareForUpdateInstall,
   quitting,
 }: ApplicationServiceContext): Promise<ApplicationServices> {
-  performance.mark("openbot:services.start");
+  performance.mark("starbot:services.start");
   teardown.push(
     TEARDOWN_ORDER.providerLog,
     "the provider log",
@@ -1242,37 +1242,37 @@ export async function createApplicationServices({
   );
   await runCauseEffect(agentDefaults.load());
   const workspaceRoot =
-    !app.isPackaged && app.commandLine.hasSwitch("openbot-replica")
+    !app.isPackaged && app.commandLine.hasSwitch("starbot-replica")
       ? join(app.getPath("userData"), "Workspace")
       : join(homedir(), "StarBot");
   const store = new AgentStore(
     app.getPath("userData"),
     homedir(),
-    new OpenBotDatabase(app.getPath("userData"), checkDatabaseIntegrityInHost),
+    new StarBotDatabase(app.getPath("userData"), checkDatabaseIntegrityInHost),
     () => agentDefaults.get(),
     localServerChild?.agentRoot ?? workspaceRoot,
   );
-  performance.mark("openbot:services.pre-store");
+  performance.mark("starbot:services.pre-store");
   await runCauseEffect(store.initialize());
-  performance.mark("openbot:services.store");
+  performance.mark("starbot:services.store");
   teardown.push(TEARDOWN_ORDER.database, "the database", () => store.database.close(), { afterAbandonedSteps: true });
   const managedSkills = new ManagedSkillService(
     app.isPackaged
-      ? join(process.resourcesPath, "managed-skills", "openbot-site-hosting", "SKILL.md")
-      : resolve(__dirname, "../../resources/managed-skills/openbot-site-hosting/SKILL.md"),
+      ? join(process.resourcesPath, "managed-skills", "starbot-site-hosting", "SKILL.md")
+      : resolve(__dirname, "../../resources/managed-skills/starbot-site-hosting/SKILL.md"),
   );
   const skillCreator = new ManagedSkillService(
     app.isPackaged
-      ? join(process.resourcesPath, "managed-skills", "openbot-skill-creator", "SKILL.md")
-      : resolve(__dirname, "../../resources/managed-skills/openbot-skill-creator/SKILL.md"),
+      ? join(process.resourcesPath, "managed-skills", "starbot-skill-creator", "SKILL.md")
+      : resolve(__dirname, "../../resources/managed-skills/starbot-skill-creator/SKILL.md"),
     undefined,
     undefined,
     SKILL_CREATOR_SKILL_SLUG,
   );
   const dataSkill = new ManagedSkillService(
     app.isPackaged
-      ? join(process.resourcesPath, "managed-skills", "openbot-data", "SKILL.md")
-      : resolve(__dirname, "../../resources/managed-skills/openbot-data/SKILL.md"),
+      ? join(process.resourcesPath, "managed-skills", "starbot-data", "SKILL.md")
+      : resolve(__dirname, "../../resources/managed-skills/starbot-data/SKILL.md"),
     undefined,
     undefined,
     DATA_SKILL_SLUG,
@@ -1294,7 +1294,7 @@ export async function createApplicationServices({
       },
     ),
   );
-  performance.mark("openbot:services.skills");
+  performance.mark("starbot:services.skills");
   const hostedSites = new HostedSiteDesktopService(centralAuth, () => {
     const hostId = teamStore.getIdentity()?.serverId;
     return hostId ? centralAuth.hostSiteCredential(hostId) : null;
@@ -1334,7 +1334,7 @@ export async function createApplicationServices({
   const developmentUrl = process.env.ELECTRON_RENDERER_URL;
   const teamWebRtcBridge = new TeamWebRtcBridge({
     developmentUrl: developmentUrl ?? null,
-    iceTransportPolicy: developmentUrl && process.env.OPENBOT_DEV_ICE_TRANSPORT_POLICY === "relay" ? "relay" : "all",
+    iceTransportPolicy: developmentUrl && process.env.STARBOT_DEV_ICE_TRANSPORT_POLICY === "relay" ? "relay" : "all",
   });
   teamWebRtcBridge.on("accountProfileChanged", refreshAccountProfile);
   teardown.push(TEARDOWN_ORDER.teamWebRtcBridge, "the team WebRTC bridge", () =>
@@ -1427,7 +1427,7 @@ export async function createApplicationServices({
   });
   teardown.push(TEARDOWN_ORDER.browser, "the browser", () => runCauseEffect(browser.destroy()));
   await runCauseEffect(browser.restore(store.list().map((agent) => ({ id: agent.id, threadId: agent.threadId }))));
-  performance.mark("openbot:services.browser");
+  performance.mark("starbot:services.browser");
   const browserPictureInPicture = new BrowserPictureInPicture({
     mainWindow,
     browser,
@@ -1641,9 +1641,9 @@ export async function createApplicationServices({
     ),
     knownAgentIds: () => store.list().map((agent) => agent.id),
   });
-  const providerUse = new ProviderUseSettingsStore(join(app.getPath("userData"), "openbot-provider-use-v1.json"));
+  const providerUse = new ProviderUseSettingsStore(join(app.getPath("userData"), "starbot-provider-use-v1.json"));
   const providerAccounts = new ProviderAccountStore(
-    join(app.getPath("userData"), "openbot-provider-accounts-v1.json"),
+    join(app.getPath("userData"), "starbot-provider-accounts-v1.json"),
     join(app.getPath("userData"), "provider-accounts"),
   );
   await Promise.all([runCauseEffect(providerUse.load()), runCauseEffect(providerAccounts.load())]);
@@ -1709,7 +1709,7 @@ export async function createApplicationServices({
   const providerDetectionSettings = new ProviderDetectionSettingsStore(
     join(app.getPath("userData"), PROVIDER_DETECTION_SETTINGS_FILE),
   );
-  performance.mark("openbot:services.preferences");
+  performance.mark("starbot:services.preferences");
   await runCauseEffect(providerDetectionSettings.load());
   const modelReleaseCatalog = new ModelReleaseCatalog();
   const providerDetection = await Effect.runPromise(
@@ -1727,7 +1727,7 @@ export async function createApplicationServices({
     join(app.getPath("userData"), PROVIDER_CREDENTIAL_FILE),
     secretCipher,
   );
-  performance.mark("openbot:services.provider-detection");
+  performance.mark("starbot:services.provider-detection");
   const credentialLoadError = await Effect.runPromise(providerCredentials.load());
   if (credentialLoadError) {
     logger.warn(`StarBot could not read the provider key file (${credentialLoadError.name}). It was left unchanged.`);
@@ -1760,7 +1760,7 @@ export async function createApplicationServices({
   }
   let mcpOAuthAuthority: McpOAuth | null = null;
   const mcpOAuthDeepLink = () =>
-    (process.platform === "linux" || app.isPackaged) && app.isDefaultProtocolClient("openbot")
+    (process.platform === "linux" || app.isPackaged) && app.isDefaultProtocolClient("starbot")
       ? MCP_OAUTH_REDIRECT_URL
       : undefined;
   const signInRelayClient = new SignInRelayClient({
@@ -1772,7 +1772,7 @@ export async function createApplicationServices({
         ? { port: Number(new URL(mcpOAuthRedirect.redirectUrl).port), paths: MCP_OAUTH_REDIRECT_PATHS }
         : null,
   });
-  performance.mark("openbot:services.mcp-sign-in-file");
+  performance.mark("starbot:services.mcp-sign-in-file");
   const mcpOAuthRedirect = await startMcpOAuthRedirectServer({
     language,
     preferredPort: MCP_OAUTH_REDIRECT_PORT,
@@ -1804,7 +1804,7 @@ export async function createApplicationServices({
     openExternal: openLink,
     redirectUrl: mcpOAuthRedirect?.redirectUrl ?? MCP_OAUTH_REDIRECT_URL,
     deepLinkRedirectUrl: mcpOAuthDeepLink,
-    logger: createOpenBotLogger("mcp-oauth"),
+    logger: createStarBotLogger("mcp-oauth"),
   });
   mcpOAuthAuthority = mcpOAuth;
   teardown.push(TEARDOWN_ORDER.mcpOAuth, "MCP token refresh", () => Effect.runPromise(mcpOAuth.close()));
@@ -1862,7 +1862,7 @@ export async function createApplicationServices({
     openExternal: openLink,
   });
   await runCauseEffect(onePasswordConnector.load());
-  performance.mark("openbot:services.connectors");
+  performance.mark("starbot:services.connectors");
   teardown.push(TEARDOWN_ORDER.onePasswordConnector, "the 1Password connection", () =>
     runCauseEffect(onePasswordConnector.dispose()),
   );
@@ -1918,7 +1918,7 @@ export async function createApplicationServices({
       architecture: process.arch,
       homeDirectory: homedir(),
       pathVariable: process.env.PATH ?? null,
-      overrides: [process.env.OPENBOT_CUA_DRIVER_PATH, process.env.CUA_DRIVER_PATH],
+      overrides: [process.env.STARBOT_CUA_DRIVER_PATH, process.env.CUA_DRIVER_PATH],
       ...(installDirectory === undefined ? {} : { installDirectory }),
       ...(localAppDataDirectory === undefined ? {} : { localAppDataDirectory }),
       applicationsDirectory: "/Applications",
@@ -2018,7 +2018,7 @@ export async function createApplicationServices({
     computerUsePermissionHelp.close();
   });
   const providerTempDirectory = join(app.getPath("userData"), "provider-temp");
-  performance.mark("openbot:services.computer-use");
+  performance.mark("starbot:services.computer-use");
   if (process.platform === "win32") await Effect.runPromise(sweepProviderTemp(providerTempDirectory));
   const agentApiKeys = new AgentApiKeys(join(app.getPath("userData"), "agent-api-keys"), vault.items);
   await Effect.runPromise(agentApiKeys.registerSaved());
@@ -2253,7 +2253,7 @@ export async function createApplicationServices({
       { prefix: "", name: PASSWORD_MANAGER_BRANDS.onepassword, vault: onePasswordConnector },
       { prefix: "bitwarden:", name: PASSWORD_MANAGER_BRANDS.bitwarden, vault: bitwardenConnector },
       ...passwordManagers.routes(),
-      { prefix: "openbot:", name: "the StarBot Vault", vault: vault.logins },
+      { prefix: "starbot:", name: "the StarBot Vault", vault: vault.logins },
     ]),
     vaultItems: vault.items,
     linkWallet: linkAccount,
@@ -2552,9 +2552,9 @@ export async function createApplicationServices({
         adapters: [
           stripeSource({
             fetch: (input, init) => net.fetch(input.href, init),
-            ...(app.isPackaged || !process.env.OPENBOT_DEV_STRIPE_API_BASE
+            ...(app.isPackaged || !process.env.STARBOT_DEV_STRIPE_API_BASE
               ? {}
-              : { apiBase: process.env.OPENBOT_DEV_STRIPE_API_BASE }),
+              : { apiBase: process.env.STARBOT_DEV_STRIPE_API_BASE }),
           }),
         ],
       },
@@ -2597,7 +2597,7 @@ export async function createApplicationServices({
   await Effect.runPromise(routineFeed.start());
   teardown.push(TEARDOWN_ORDER.routineFeed, "the routine feed", () => Effect.runPromise(routineFeed.stop()));
   let ingressHostId: () => string | null = () => null;
-  performance.mark("openbot:services.routines");
+  performance.mark("starbot:services.routines");
   const githubRelay = new GitHubRelay({
     account: centralAuth,
     githubToken: () => githubConnector.accessToken(),
@@ -2653,7 +2653,7 @@ export async function createApplicationServices({
   });
   if (!setupState.completed || service.enabledMcpServers().length > 0)
     Effect.runFork(providerRuntimes.ensureToolRuntimes());
-  performance.mark("openbot:services.messaging");
+  performance.mark("starbot:services.messaging");
   await runCauseEffect(sidebarLayout.reconcileAgents(service.sidebarChatIds()));
   libraryFolders.onChanged(() => service.notifyLibraryFoldersChanged());
   workflowFolders.onChanged(() => service.notifyWorkflowFoldersChanged());
@@ -2747,7 +2747,7 @@ export async function createApplicationServices({
     join(app.getPath("userData"), LEGACY_TEAM_STORE_FILE),
   );
   await runCauseEffect(teamStore.initialize());
-  performance.mark("openbot:services.team");
+  performance.mark("starbot:services.team");
   const machineAlertStore = new MachineAlertPreferenceStore(
     join(app.getPath("userData"), MACHINE_ALERTS_PREFERENCE_FILE),
   );
@@ -2839,8 +2839,8 @@ export async function createApplicationServices({
       applyDevelopmentRemoteAccount({
         role: developmentRemoteRole,
         testClientEnabled: developmentTestClientEnabled,
-        clientTransport: readDevelopmentClientTransport(process.env.OPENBOT_DEV_CLIENT_TRANSPORT),
-        hostEmail: readDevelopmentHostEmail(process.env.OPENBOT_DEV_HOST_EMAIL),
+        clientTransport: readDevelopmentClientTransport(process.env.STARBOT_DEV_CLIENT_TRANSPORT),
+        hostEmail: readDevelopmentHostEmail(process.env.STARBOT_DEV_HOST_EMAIL),
         centralAuth,
         teamStore,
         setupFile,
@@ -2883,7 +2883,7 @@ export async function createApplicationServices({
   }
 
   const teamChatStore = new TeamChatStore(store.database);
-  performance.mark("openbot:services.hosted");
+  performance.mark("starbot:services.hosted");
   const remoteDesktopRuntime = await Effect.runPromise(
     resolveRemoteDesktopRuntime({
       isPackaged: app.isPackaged,
@@ -2891,9 +2891,9 @@ export async function createApplicationServices({
       sourceRoot: resolve(__dirname, "../.."),
       platform: process.platform === "darwin" || process.platform === "win32" ? process.platform : "linux",
       architecture: process.arch,
-      ...(process.env.OPENBOT_REMOTE_DESKTOP_RUNTIME_PATH === undefined
+      ...(process.env.STARBOT_REMOTE_DESKTOP_RUNTIME_PATH === undefined
         ? {}
-        : { overrideRoot: process.env.OPENBOT_REMOTE_DESKTOP_RUNTIME_PATH }),
+        : { overrideRoot: process.env.STARBOT_REMOTE_DESKTOP_RUNTIME_PATH }),
     }),
   );
   const agentAdminSettings = createAgentAdminSettings({ agents: service, approvalAutomation });
@@ -3205,7 +3205,7 @@ export async function createApplicationServices({
         ? Effect.succeed(localServersForTeam)
         : Effect.fail(new RemoteWorkflowError({ cause: new Error(sourceText("error.team.localServersUnsupported")) })),
     );
-  const awaySeconds = app.isPackaged ? Number.NaN : Number(process.env.OPENBOT_DEV_AWAY_SECONDS);
+  const awaySeconds = app.isPackaged ? Number.NaN : Number(process.env.STARBOT_DEV_AWAY_SECONDS);
   const awayAfterMs = Number.isInteger(awaySeconds) && awaySeconds > 0 ? awaySeconds * 1_000 : DESKTOP_USE_MS;
   const computerIdle = createComputerIdle(
     (contents) =>
@@ -3233,7 +3233,7 @@ export async function createApplicationServices({
       }),
     remove: (mcpServerId) => mcpAccessStore.remove(mcpServerId),
   };
-  const remoteDesktopRuntimeCredentials = { username: "openbot", password: randomBytes(32).toString("base64url") };
+  const remoteDesktopRuntimeCredentials = { username: "starbot", password: randomBytes(32).toString("base64url") };
   const attachmentPreviews = new AttachmentPreviews(join(app.getPath("userData"), "attachment-previews"));
   const host = new HostService({
     appVersion: app.getVersion(),
@@ -3571,7 +3571,7 @@ export async function createApplicationServices({
   if (analyticsPlatform !== "darwin" && analyticsPlatform !== "win32" && analyticsPlatform !== "linux") {
     throw new Error(`Unsupported analytics platform: ${analyticsPlatform}`);
   }
-  performance.mark("openbot:services.remote-desktop");
+  performance.mark("starbot:services.remote-desktop");
   const analyticsEnabled = (app.isPackaged && appVariant === "production") || analyticsCaptureUrl !== null;
   const analyticsInstallId = analyticsEnabled
     ? await Effect.runPromise(
@@ -3580,10 +3580,10 @@ export async function createApplicationServices({
     : null;
   const failureReports = analyticsEnabled
     ? new ReportQueue(
-        fileReportStorage(join(app.getPath("userData"), "openbot-error-reports-v1.json")),
+        fileReportStorage(join(app.getPath("userData"), "starbot-error-reports-v1.json")),
         openPanelTransport({
           clientId: "6c989975-87ef-4f0c-857e-ab449a65b5c2",
-          origin: "openbot-app://app",
+          origin: "starbot-app://app",
           ...(analyticsCaptureUrl ? { endpoint: `${analyticsCaptureUrl}/track` } : {}),
         }),
         {
@@ -3707,12 +3707,12 @@ export async function createApplicationServices({
     (span) => trace.record(span),
     (summary) => analytics.handleRemoteConnect(summary),
   );
-  const developmentRoundTripMs = app.isPackaged ? 0 : Math.max(0, Number(process.env.OPENBOT_DEV_RTT_MS) || 0);
-  const developmentDownlinkKbps = app.isPackaged ? 0 : Math.max(0, Number(process.env.OPENBOT_DEV_DOWNLINK_KBPS) || 0);
+  const developmentRoundTripMs = app.isPackaged ? 0 : Math.max(0, Number(process.env.STARBOT_DEV_RTT_MS) || 0);
+  const developmentDownlinkKbps = app.isPackaged ? 0 : Math.max(0, Number(process.env.STARBOT_DEV_DOWNLINK_KBPS) || 0);
   installRemoteSyncProfileSink(
     remoteSyncProfileFile({
       isPackaged: app.isPackaged,
-      setting: process.env.OPENBOT_DEV_SYNC_PROFILE,
+      setting: process.env.STARBOT_DEV_SYNC_PROFILE,
       userData: app.getPath("userData"),
       roundTripMs: developmentRoundTripMs,
     }),
@@ -3806,7 +3806,7 @@ export async function createApplicationServices({
     remoteServers.off("changed", browserEgressClient.reconcile);
     browserEgressClient.dispose();
   });
-  performance.mark("openbot:services.plugin-catalog");
+  performance.mark("starbot:services.plugin-catalog");
   const localServers =
     localServerChild || serverModeEnvironment || hostedServer
       ? null
@@ -3862,7 +3862,7 @@ export async function createApplicationServices({
     await Effect.runPromise(localServers.load());
   }
   await runCauseEffect(remoteServers.initialize());
-  performance.mark("openbot:services.remote-servers");
+  performance.mark("starbot:services.remote-servers");
   criticalActionTargets = { agents: service, host, remoteServers };
   if (developmentRemoteRole) {
     await runCauseEffect(remoteServers.awaitHostDirectory());
@@ -3870,7 +3870,7 @@ export async function createApplicationServices({
       startDevelopmentRemoteRole({
         role: developmentRemoteRole,
         testClientEnabled: developmentTestClientEnabled,
-        clientTransport: readDevelopmentClientTransport(process.env.OPENBOT_DEV_CLIENT_TRANSPORT),
+        clientTransport: readDevelopmentClientTransport(process.env.STARBOT_DEV_CLIENT_TRANSPORT),
         host,
         remoteServers,
       }),
@@ -3973,23 +3973,23 @@ export async function createApplicationServices({
   const voiceModelFetch = (input: string | URL | Request, init?: RequestInit) =>
     net.fetch(input instanceof URL ? input.href : input, init);
   const voice = new VoiceTranscriptionService({
-    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".openbot-build/voice"),
+    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".starbot-build/voice"),
     modelDirectories: {
       "parakeet-tdt-0.6b-v3": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", PARAKEET_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice/model"),
+        : resolve(".starbot-build/voice/model"),
       "parakeet-unified-en-0.6b": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", PARAKEET_UNIFIED_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice", PARAKEET_UNIFIED_MODEL_DIRECTORY),
+        : resolve(".starbot-build/voice", PARAKEET_UNIFIED_MODEL_DIRECTORY),
       "bark-3.0-plus": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", BARK_PLUS_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice", BARK_PLUS_MODEL_DIRECTORY),
+        : resolve(".starbot-build/voice", BARK_PLUS_MODEL_DIRECTORY),
       "whisper-turbo": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", WHISPER_TURBO_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice", WHISPER_TURBO_MODEL_DIRECTORY),
+        : resolve(".starbot-build/voice", WHISPER_TURBO_MODEL_DIRECTORY),
       "cohere-transcribe-03-2026": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", COHERE_TRANSCRIBE_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice", COHERE_TRANSCRIBE_MODEL_DIRECTORY),
+        : resolve(".starbot-build/voice", COHERE_TRANSCRIBE_MODEL_DIRECTORY),
     },
     preferences: voicePreferences,
     apiKeys: { elevenlabs: voiceApiKeys, groq: groqVoiceKeys },
@@ -4017,10 +4017,10 @@ export async function createApplicationServices({
   });
   await runCauseEffect(xaiSpeechKeys.load());
   const speech = new VoiceSpeechService({
-    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".openbot-build/voice"),
+    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".starbot-build/voice"),
     modelDirectory: app.isPackaged
       ? join(app.getPath("userData"), "runtimes", SUPERTONIC_MODEL_DIRECTORY)
-      : resolve(".openbot-build/voice", SUPERTONIC_MODEL_DIRECTORY),
+      : resolve(".starbot-build/voice", SUPERTONIC_MODEL_DIRECTORY),
     preferences: speechPreferences,
     spawnHost: spawnVoiceSpeechHost,
     apiKeys: { elevenlabs: voiceApiKeys, xai: xaiSpeechKeys },
@@ -4048,7 +4048,7 @@ export async function createApplicationServices({
     containerInstaller ||
     (app.isPackaged &&
       process.platform === "linux" &&
-      (process.env.OPENBOT_HOSTED_SERVER === "1" || (serverModeEnvironment !== null && installationMode === "self")) &&
+      (process.env.STARBOT_HOSTED_SERVER === "1" || (serverModeEnvironment !== null && installationMode === "self")) &&
       existsSync(HOSTED_UPDATE_TRIGGER));
   const updatesEnabled =
     !localServerChild &&
@@ -4087,7 +4087,7 @@ export async function createApplicationServices({
     ...(app.isPackaged
       ? {
           checkSiblingInstances: () =>
-            listSiblingOpenBotInstances({
+            listSiblingStarBotInstances({
               executablePath: app.getPath("exe"),
               currentPid: process.pid,
               platform: process.platform,
@@ -4318,7 +4318,7 @@ export async function createApplicationServices({
     const setupPagePort = serverModeEnvironment?.setupPagePort ?? null;
     let setupPage: ServerSetupPage | null = null;
     if (setupPagePort !== null && installationMode !== "container") {
-      logger.warn("OPENBOT_SETUP_PAGE_PORT works only in the StarBot container. The setup page did not start.");
+      logger.warn("STARBOT_SETUP_PAGE_PORT works only in the StarBot container. The setup page did not start.");
     } else if (setupPagePort !== null) {
       const page = new ServerSetupPage({
         port: setupPagePort,
@@ -4340,9 +4340,9 @@ export async function createApplicationServices({
       await Effect.runPromise(serverMode.close());
     });
   }
-  performance.mark("openbot:services.updates");
+  performance.mark("starbot:services.updates");
   await runCauseEffect(hostUpdateCoordinator.tick());
-  performance.mark("openbot:services.host-update");
+  performance.mark("starbot:services.host-update");
   hostUpdateCoordinator.start();
   teardown.push(TEARDOWN_ORDER.hostUpdateCoordinator, "the host update coordinator", () =>
     Effect.runPromise(hostUpdateCoordinator.stop()),

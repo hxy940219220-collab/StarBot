@@ -1,16 +1,16 @@
-import type { InstanceTransferResult, OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { InstanceTransferResult, StarBotDesktopApi } from "@starbot/contracts/ipc";
 import type {
   CopyAgentsAgent,
   CopyAgentsPhase,
   CopyAgentsServer,
-} from "@openbot/ui/features/transfer/CopyAgentsDialog";
-import type { TransferUploadState } from "@openbot/ui/features/transfer/InstanceTransferView";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/transfer/CopyAgentsDialog";
+import type { TransferUploadState } from "@starbot/ui/features/transfer/InstanceTransferView";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createStore, onCleanup, untrack } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 
-export type ServerCopyCalls = Pick<OpenBotDesktopApi["instanceTransfer"], "summary" | "copy"> &
-  Partial<Pick<OpenBotDesktopApi["instanceTransfer"], "onUploadProgress">>;
+export type ServerCopyCalls = Pick<StarBotDesktopApi["instanceTransfer"], "summary" | "copy"> &
+  Partial<Pick<StarBotDesktopApi["instanceTransfer"], "onUploadProgress">>;
 
 interface ServerCopyState {
   fromId: string;

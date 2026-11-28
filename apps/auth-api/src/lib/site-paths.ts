@@ -1,5 +1,5 @@
-import type { TranslatedLocale } from "@openbot/i18n";
-import { appLanguageOption } from "@openbot/i18n/languages";
+import type { TranslatedLocale } from "@starbot/i18n";
+import { appLanguageOption } from "@starbot/i18n/languages";
 
 export const SITE_LOCALES = [
   "en",
@@ -75,7 +75,7 @@ export function localizedPath<Path extends string>(path: Path, locale: SiteLocal
   return locale !== "en" && hasLocalizedCopy(path) ? localizedPagePath(locale, path) : path;
 }
 
-export const SITE_LOCALE_COOKIE = "openbot_lang";
+export const SITE_LOCALE_COOKIE = "starbot_lang";
 
 export function chosenSiteLocale(value: string | undefined): SiteLocale | undefined {
   return SITE_LOCALES.find((locale) => locale === value);

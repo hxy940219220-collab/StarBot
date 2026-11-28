@@ -13,7 +13,7 @@ import {
   type CreditMediaUnavailableModel,
   creditMediaCost,
   creditMediaRequiredInput,
-} from "@openbot/contracts/credit-media";
+} from "@starbot/contracts/credit-media";
 import {
   WORKFLOW_CREDIT_MODEL_PREFIX,
   WORKFLOW_MEDIA_ASPECTS,
@@ -26,9 +26,9 @@ import {
   type WorkflowMediaKind,
   type WorkflowMediaPriceRequest,
   type WorkflowMediaSpecs,
-} from "@openbot/contracts/ipc";
-import { isOneOf } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isOneOf } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Duration, Effect, Schema, Semaphore } from "effect";
 import { type McpMediaDependencies, mediaFail, mediaFailed } from "./mcp-media";
 import type { MediaPictureRole } from "./workflow-walk";
@@ -116,7 +116,7 @@ export function creditWorkflowModel(model: CreditMediaModel): WorkflowMediaCatal
   const defaultDuration = durations.find((value) => value === model.defaultDuration);
   return {
     id: creditWorkflowModelId(model.id),
-    provider: "openbot",
+    provider: "starbot",
     providerModel: model.id,
     name: creditWorkflowModelName(model),
     maker: model.maker,
@@ -427,7 +427,7 @@ export class CreditMediaWorkflows {
         ?.replace(/[^a-z0-9]/giu, "")
         .slice(0, 8) || "bin";
     const stored = yield* dependencies
-      .store({ bytes, kind: request.kind, name: `openbot-${request.kind}.${extension}`, mimeType: output.mimeType })
+      .store({ bytes, kind: request.kind, name: `starbot-${request.kind}.${extension}`, mimeType: output.mimeType })
       .pipe(Effect.mapError(() => mediaFailed()));
     return stored.id;
   }).bind(this);

@@ -2,10 +2,10 @@ import { readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { set } from "@dotenvx/dotenvx";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 import { setDevelopmentOverrides } from "./development-secrets";
 
-const logger = createOpenBotLogger("dev-apns-key");
+const logger = createStarBotLogger("dev-apns-key");
 
 if (import.meta.main) {
   const args = process.argv.slice(2);

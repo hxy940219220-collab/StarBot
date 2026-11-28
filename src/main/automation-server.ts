@@ -2,7 +2,7 @@ import { randomBytes, timingSafeEqual } from "node:crypto";
 import { chmod, mkdir, rm } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
 import {
   type AgentDefaults,
   type AgentModelOption,
@@ -16,12 +16,12 @@ import {
   type Routine,
   type RoutineRun,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, type LogValue, registerSecretValue, toLogValue } from "@openbot/logging";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { ContextResetBusyError } from "@starbot/contracts/team-protocol/context-reset-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, type LogValue, registerSecretValue, toLogValue } from "@starbot/logging";
+import { RoutineInputError } from "@starbot/team-client/routine-schedule";
 import { Effect, Exit, Schema, Scope, Semaphore } from "effect";
 import { AgentSettingsRefused } from "../backend/agent/agent-settings-refused";
 import { ForbiddenAttentionAnswer, InactiveAttentionRequest } from "../backend/agent/inactive-attention-request";
@@ -40,7 +40,7 @@ import { listenLoopback } from "./listen-loopback";
 import { HttpError } from "./team-api/http-error";
 import { approvalDecision, promptAnswers } from "./team-api/request-helpers";
 
-const logger = createOpenBotLogger("automation");
+const logger = createStarBotLogger("automation");
 
 const HOUR_MS = 60 * 60 * 1000;
 const BODY_LIMIT_BYTES = 32 * 1024;
@@ -250,7 +250,7 @@ export class AutomationServer {
         ...pending,
         prompts: pending.prompts.map((prompt) => ({
           ...prompt,
-          questions: prompt.requiresOpenBot
+          questions: prompt.requiresStarBot
             ? []
             : prompt.questions.map(({ id, header, question, options }) => ({ id, header, question, options })),
         })),

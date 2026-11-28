@@ -5,9 +5,9 @@ import type {
   CustomAgentSummary,
   CustomAgentUsage,
   SaveCustomAgentInput,
-} from "@openbot/contracts/ipc";
-import { isNewCustomAgentId } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { isNewCustomAgentId } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Semaphore } from "effect";
 import { checkAcpAgent } from "../backend/acp-agent-check";
 import { assertAgentArgs, assertWindowsScriptArgs, resolveAgentCommand } from "../backend/acp-agent-command";

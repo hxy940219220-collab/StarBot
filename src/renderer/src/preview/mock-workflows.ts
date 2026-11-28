@@ -3,7 +3,7 @@ import {
   EMPTY_WORKFLOW_FOLDERS,
   isWorkflowStepKind,
   nodeAgentId,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   prunedWorkflowFolders,
   type StartWorkflowRunInput,
   WORKFLOW_AUTO_VERSION_INTERVAL_MS,
@@ -33,18 +33,18 @@ import {
   workflowFixedCatalogModel,
   workflowGitHubTriggerRepositories,
   workflowGraphFormat,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { nextValidRoutineOccurrence } from "@openbot/team-client/routine-schedule";
-import { workflowMediaCreditsOf, workflowMediaProvidersOf } from "@openbot/team-client/workflow-decoding";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { nextValidRoutineOccurrence } from "@starbot/team-client/routine-schedule";
+import { workflowMediaCreditsOf, workflowMediaProvidersOf } from "@starbot/team-client/workflow-decoding";
 
 const PREVIEW_HOOKS = "https://hooks.starbot.app/wf";
 
 const PREVIEW_GITHUB_CATALOG: WorkflowGitHubCatalog = {
   connected: true,
   repositories: [
-    { fullName: "openbot-preview/app", private: false, canWrite: true, events: true },
-    { fullName: "openbot-preview/docs", private: true, canWrite: false, events: true },
+    { fullName: "starbot-preview/app", private: false, canWrite: true, events: true },
+    { fullName: "starbot-preview/docs", private: true, canWrite: false, events: true },
   ],
 };
 
@@ -60,7 +60,7 @@ const PREVIEW_GITHUB_OPTIONS: WorkflowGitHubRepositoryOptions = {
 function previewItem(node: WorkflowNode, number: number, title: string): WorkflowGitHubItem {
   const repositories = workflowGitHubTriggerRepositories(node.fields);
   return {
-    repository: repositories[number % Math.max(repositories.length, 1)] ?? "openbot-preview/app",
+    repository: repositories[number % Math.max(repositories.length, 1)] ?? "starbot-preview/app",
     number,
     pullRequest: false,
     title,
@@ -196,7 +196,7 @@ export function mockWorkflows(
   seeds: readonly MockWorkflowSeed[],
   emit: (workflowId: string) => void,
   emitFolders: () => void = () => undefined,
-): OpenBotDesktopApi["workflows"] {
+): StarBotDesktopApi["workflows"] {
   const records = new Map<string, MockWorkflowRecord>();
   const stamp = () => new Date().toISOString();
   const webhooks = new Set<string>();

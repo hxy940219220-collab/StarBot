@@ -23,7 +23,7 @@ import type {
   ProviderCodeLoginStart,
   ProviderUsageResetOutcome,
   ProviderUsageResets,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   AGENT_PROVIDERS,
   accountUsageCoversModel,
@@ -38,14 +38,14 @@ import {
   isKeyOnlyProvider,
   usageQuotaForModel,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import { matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText } from "@openbot/logging";
-import { classifyFailure } from "@openbot/telemetry";
-import { classifyUserError } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { matchingSourceKeys, sourceText } from "@starbot/i18n/source";
+import { createStarBotLogger, redactText } from "@starbot/logging";
+import { classifyFailure } from "@starbot/telemetry";
+import { classifyUserError } from "@starbot/user-errors";
 import { Deferred, Effect, Exit, Fiber, Result, Schema, Scope, Semaphore } from "effect";
 import { isOpenCodeInternalFailure, isOpenCodeStarting, OPENCODE_INTERNAL_FAILURE } from "./../acp-flavor-opencode";
-import { devinSignInPageRelayed, googleSignInByOpenBot, startAcpAuthentication } from "./../acp-sign-in";
+import { devinSignInPageRelayed, googleSignInByStarBot, startAcpAuthentication } from "./../acp-sign-in";
 import {
   type AgentClient,
   AgentProcessExitError,
@@ -100,7 +100,7 @@ import { recordRestartActivity } from "../restart-activity";
 import { shortenDiagnostic } from "./../stderr-diagnostics";
 import { stopProcessTree } from "../windows-process-tree";
 import { normalizeAccountUsage, usageWindowHasReset, usageWindowResetSince } from "./account-usage";
-import { captureBrowser, signInPageByOpenBot } from "./browser-capture";
+import { captureBrowser, signInPageByStarBot } from "./browser-capture";
 import { CliCodeLoginFailed, type CliCodePrompt, PROMPT_TIMEOUT_MS, startCliCodeLogin } from "./cli-code-login";
 import { CliLoginFailed, CliLoginFlow, toCliLoginFailed } from "./cli-login-flow";
 import { CodexLoginFlow, toCodexLoginFailed } from "./codex-login";
@@ -145,8 +145,8 @@ import { providerForAgent, providerLabel } from "./thread-items";
 import { UsageReadGate } from "./usage-read-gate";
 import { checkAgentFolders, workspaceExcludedFolders, workspaceWritableRoots } from "./workspace-sandbox";
 
-const logger = createOpenBotLogger("provider-runtime");
-const stderrLogger = createOpenBotLogger("provider-stderr");
+const logger = createStarBotLogger("provider-runtime");
+const stderrLogger = createStarBotLogger("provider-stderr");
 
 const ACCOUNT_USAGE_READ_TIMEOUT_MS = 30_000;
 const CUSTOM_AGENT_USAGE_REUSE_MS = 60_000;
@@ -1652,7 +1652,7 @@ export class ProviderRuntime implements ProviderPort {
         yield* this.#cliLogin
           .start(provider, (cli) =>
             Effect.gen(function* () {
-              const browser = signInPageByOpenBot(onHost, signIn.command) ? yield* captureBrowser(openExternal) : {};
+              const browser = signInPageByStarBot(onHost, signIn.command) ? yield* captureBrowser(openExternal) : {};
               const { argv, savedSignIn } = signIn.command;
               const target = cliSpawnTarget(
                 cli.executable,
@@ -1711,7 +1711,7 @@ export class ProviderRuntime implements ProviderPort {
                   }
                 : {}),
               privateTemp: temp && { ...temp, provider: providerLabel(provider) },
-              ...(provider === "antigravity" && googleSignInByOpenBot(onHost)
+              ...(provider === "antigravity" && googleSignInByStarBot(onHost)
                 ? { openSignInPage: { site: "google", open: openExternal } }
                 : {}),
               ...(provider === "devin" && onHost && devinSignInPageRelayed()
@@ -3206,7 +3206,7 @@ export class ProviderRuntime implements ProviderPort {
       .request(
         "initialize",
         {
-          clientInfo: { name: "openbot", title: "StarBot", version: "0.1.0" },
+          clientInfo: { name: "starbot", title: "StarBot", version: "0.1.0" },
           capabilities: { experimentalApi: true, mcpServerOpenaiFormElicitation: true },
         },
         decodeRecordResponse,
@@ -4076,7 +4076,7 @@ export class ProviderRuntime implements ProviderPort {
     const message = shortenDiagnostic(this.#redactMcp(getString(params, "error") ?? ""));
     const rows = this.#credentials.mcpServers();
     const config =
-      rows.find((row) => key === `openbot_${providerMcpServerName(row.name)}`) ??
+      rows.find((row) => key === `starbot_${providerMcpServerName(row.name)}`) ??
       rows.find((row) => key === providerMcpServerName(row.name)) ??
       rows.find((row) => key === row.name);
     const builtIn = config?.id === COMPUTER_USE_MCP_SERVER_ID || config?.id === GITHUB_CONNECTOR_MCP_SERVER_ID;
@@ -4087,7 +4087,7 @@ export class ProviderRuntime implements ProviderPort {
       message,
     });
     const githubKey =
-      client.provider === "codex" ? `openbot_${providerMcpServerName(config?.name ?? "")}` : config?.name;
+      client.provider === "codex" ? `starbot_${providerMcpServerName(config?.name ?? "")}` : config?.name;
     if (config?.id === GITHUB_CONNECTOR_MCP_SERVER_ID && key === githubKey)
       this.#reportGitHubToolsFailure(client.provider);
     if (!config || !server) return;
@@ -4205,7 +4205,7 @@ export class ProviderRuntime implements ProviderPort {
     if (waitsForUser) this.#startWaitsForUser.add(provider);
     else this.#startWaitsForUser.delete(provider);
     if (failures === START_FAILURE_LIMIT || waitsForUser)
-      logger.warn("OpenBot stopped starting a provider by itself.", { provider, failures, waitsForUser });
+      logger.warn("StarBot stopped starting a provider by itself.", { provider, failures, waitsForUser });
     return true;
   }
 
@@ -4224,7 +4224,7 @@ export class ProviderRuntime implements ProviderPort {
       this.#installedFallback.has(cliProvider)
     )
       return false;
-    logger.warn("OpenBot's provider CLI did not start, so the installed CLI runs.", {
+    logger.warn("StarBot's provider CLI did not start, so the installed CLI runs.", {
       provider,
       version: cli.version,
       installedVersion: installed.version,

@@ -1,6 +1,6 @@
-import type { CrmActor } from "@openbot/contracts/ipc";
-import { CRM_CAPABILITY, CRM_ROUTES } from "@openbot/contracts/team-protocol/crm-v1";
-import { sourceText } from "@openbot/i18n/source";
+import type { CrmActor } from "@starbot/contracts/ipc";
+import { CRM_CAPABILITY, CRM_ROUTES } from "@starbot/contracts/team-protocol/crm-v1";
+import { sourceText } from "@starbot/i18n/source";
 import {
   decodeRemoteCrmActivityPage,
   decodeRemoteCrmApplyResult,
@@ -8,7 +8,7 @@ import {
   decodeRemoteCrmOverview,
   decodeRemoteCrmPaymentPage,
   decodeRemoteCrmSettings,
-} from "@openbot/team-client/crm-decoding";
+} from "@starbot/team-client/crm-decoding";
 import { Effect } from "effect";
 import type { CrmPeopleOperations } from "../../backend/crm/crm-handle";
 import { runCauseEffect } from "../../backend/effect-boundary";

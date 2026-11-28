@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 import { closeSync, type FSWatcher, fstatSync, openSync, readSync, watch } from "node:fs";
 import { join } from "node:path";
 import { promisify } from "node:util";
-import type { AppTranslate } from "@openbot/i18n";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import type { AppTranslate } from "@starbot/i18n";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Option, Schema } from "effect";
 import { dialog, shell } from "electron";
 import { DOWNLOAD_URL } from "./download-url";
 
-const logger = createOpenBotLogger("app-archive");
+const logger = createStarBotLogger("app-archive");
 const SETTLE_MS = 2_000;
 
 const decodePlistIntegrity = Schema.decodeUnknownOption(

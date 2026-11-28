@@ -44,7 +44,7 @@ export const messages = {
   "status.messaging.telegramLinked":
     "StarBot이 이 채팅에 연결되었어요. {bot}을(를) 멘션하거나 StarBot의 메시지에 답장해서 에이전트에게 요청하세요.",
   "status.messaging.telegramNotLinked":
-    "OpenBot이 이 채팅에 연결되어 있지 않아요. 연결하려면 StarBot 앱을 열고 마켓플레이스 → 앱 → Telegram에서 '그룹에 추가' 또는 '1:1 채팅 열기'를 선택하세요.",
+    "StarBot이 이 채팅에 연결되어 있지 않아요. 연결하려면 StarBot 앱을 열고 마켓플레이스 → 앱 → Telegram에서 '그룹에 추가' 또는 '1:1 채팅 열기'를 선택하세요.",
 
   "status.messaging.telegramOrchestratorName": "Telegram Orchestrator",
   "status.messaging.telegramOrchestratorTitle": "Telegram에서 답변하고 팀에 요청해요",
@@ -60,7 +60,7 @@ export const messages = {
     "👋 *StarBot이 연결되었습니다*\n\n여기에 써서 에이전트에게 요청하세요. WhatsApp Orchestrator가 답하거나 알맞은 에이전트에게 작업을 넘깁니다.\n\n요청을 중지하려면 *stop*을 보내세요.",
   "status.messaging.whatsappWelcomeDedicated":
     "👋 *StarBot이 연결되었습니다*\n\nStarBot에서 허용한 사람은 이제 이 번호로 쓸 수 있습니다. 새로운 사람은 코드를 받습니다. StarBot의 요청에서 승인하세요.\n\n요청을 중지하려면 *stop*을 보내세요.",
-  "status.messaging.whatsappOtherOpenBot":
+  "status.messaging.whatsappOtherStarBot":
     "이 WhatsApp 번호에 다른 StarBot도 연결되어 있어 답변이 두 개 올 수 있습니다. 해결하려면 휴대폰의 WhatsApp에서 ‘연결된 기기’를 열고 사용하지 않는 StarBot을 로그아웃하세요.",
   "status.messaging.whatsappPaused":
     "짧은 시간에 메시지가 너무 많이 와서 StarBot이 10분 동안 여기서 답변을 멈췄습니다. 이 번호에 다른 StarBot도 연결되어 있다면 휴대폰의 WhatsApp에서 ‘연결된 기기’를 열고 사용하지 않는 StarBot을 로그아웃하세요.",

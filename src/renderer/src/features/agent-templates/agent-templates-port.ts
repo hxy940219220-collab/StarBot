@@ -1,11 +1,11 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface AgentTemplatesPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     "addTemplateAgent" | "previewAgentTemplate" | "publishAgentTemplate" | "unpublishAgentTemplate"
   >;
-  agentTemplates: Pick<OpenBotDesktopApi["agentTemplates"], "get" | "install" | "preview" | "publish" | "unpublish">;
+  agentTemplates: Pick<StarBotDesktopApi["agentTemplates"], "get" | "install" | "preview" | "publish" | "unpublish">;
 }
 
 export type AgentTemplatePublishCalls = Pick<AgentTemplatesPort["agentTemplates"], "preview" | "publish" | "unpublish">;
@@ -16,5 +16,5 @@ export interface AgentTemplateInstallCalls {
 }
 
 export function agentTemplatesPort(): AgentTemplatesPort {
-  return window.openbot;
+  return window.starbot;
 }

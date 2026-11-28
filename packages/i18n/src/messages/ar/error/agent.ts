@@ -5,26 +5,26 @@ export const messages = {
   "error.agent.historyUnavailable":
     "السجل غير متاح لهذا الطلب. اقرأ السجل الحديث مرة أخرى، أو استخدم channel_history لعمل القنوات.",
   "error.agent.historyArgumentsInvalid":
-    "وسائط السجل غير صحيحة: {detail} صحّح الوسائط وحاول مرة أخرى. يعطي openbot.tool_describe المخطط.",
+    "وسائط السجل غير صحيحة: {detail} صحّح الوسائط وحاول مرة أخرى. يعطي starbot.tool_describe المخطط.",
   "error.agent.toolRequestInvalid": "وسائط اكتشاف الأدوات غير صالحة. استخدم المخطط المُعلَن واسم الأداة المؤهَّل الأصلي.",
   "error.agent.toolCallArgumentsNotObject":
     "لم تعمل الأداة. في tool_call يجب أن تكون arguments كائن JSON وليست نصًا. أرسل الاستدعاء مرة أخرى مع arguments ككائن.",
   "error.agent.toolCallDiscoveryTool":
-    "لم تعمل الأداة. لا يمكن لـ tool_call تشغيل openbot.tool_search أو openbot.tool_describe. استدعهما مباشرةً بالوسائط نفسها.",
+    "لم تعمل الأداة. لا يمكن لـ tool_call تشغيل starbot.tool_search أو starbot.tool_describe. استدعهما مباشرةً بالوسائط نفسها.",
   "error.agent.toolCallEnvelopeKeys":
     "لم تعمل الأداة. لا يقبل tool_call إلا name وarguments. ضع وسائط الأداة في arguments ككائن، ثم أرسل الاستدعاء مرة أخرى.",
   "error.agent.toolCallMissingName":
-    "لم تعمل الأداة. لا يحتوي tool_call على name. ضع في name الاسم المؤهل الذي يعطيه tool_search، مثل openbot.history_read، ثم أرسل الاستدعاء مرة أخرى.",
+    "لم تعمل الأداة. لا يحتوي tool_call على name. ضع في name الاسم المؤهل الذي يعطيه tool_search، مثل starbot.history_read، ثم أرسل الاستدعاء مرة أخرى.",
   "error.agent.toolCallUnknownTool":
-    "لم تعمل الأداة. لم يجد tool_call أداة بهذا الاسم. استخدم الاسم المؤهل الدقيق الذي يعطيه tool_search، مثل openbot_browser.snapshot.",
+    "لم تعمل الأداة. لم يجد tool_call أداة بهذا الاسم. استخدم الاسم المؤهل الدقيق الذي يعطيه tool_search، مثل starbot_browser.snapshot.",
   "error.agent.toolCallUnknownToolSuggest":
     "لم تعمل الأداة. لم يجد tool_call أداة بهذا الاسم. قد يكون الاسم المؤهل {name}. إذا كان كذلك، فأرسل الاستدعاء مرة أخرى بهذا الاسم.",
   "error.agent.toolDescribeUnknownNames":
-    "لم يعثر tool_describe على أداة StarBot باسم {names}. يصف فقط أدوات StarBot والمتصفح التي يسردها openbot.tool_search، وليس أدوات MCP.",
+    "لم يعثر tool_describe على أداة StarBot باسم {names}. يصف فقط أدوات StarBot والمتصفح التي يسردها starbot.tool_search، وليس أدوات MCP.",
 
   "error.agent.toolDescribeDiscoveryNames": "استدعِ {names} مباشرةً. لا يصف tool_describe أدوات البحث.",
   "error.agent.routineScheduleArgumentsInvalid":
-    "جدول المهمة الدورية غير صالح: {detail} صحّح الجدول وحاول مرة أخرى. يعطي openbot.tool_describe المخطط.",
+    "جدول المهمة الدورية غير صالح: {detail} صحّح الجدول وحاول مرة أخرى. يعطي starbot.tool_describe المخطط.",
   "error.agent.approvalWhileDeleting": "لا يمكن منح الموافقة أثناء حذف الوكيل.",
   "error.agent.accessLocalOnly": "لا يمكن تغيير وصول الوكيل إلا على الحاسوب الذي يشغّل الوكيل.",
   "error.agent.duplicateCleanupFailed": "فشل تكرار الوكيل وتعذّرت إزالة النسخة غير المكتملة.",

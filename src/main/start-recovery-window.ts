@@ -1,6 +1,6 @@
-import type { AppTranslate, TranslatedLocale } from "@openbot/i18n";
-import { localeDirection } from "@openbot/i18n";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import type { AppTranslate, TranslatedLocale } from "@starbot/i18n";
+import { localeDirection } from "@starbot/i18n";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { app, BrowserWindow, nativeTheme, session, shell } from "electron";
 import { runCauseEffect } from "../backend/effect-boundary";
 import { DOWNLOAD_URL, RELEASES_URL } from "./download-url";
@@ -8,8 +8,8 @@ import { exportStartDiagnostics } from "./maintenance-service";
 import type { StartAttemptsSummary } from "./start-attempts";
 import { recoveryPlushSvg } from "./start-recovery-plush";
 
-const logger = createOpenBotLogger("start-recovery");
-const ACTION_ORIGIN = "https://openbot.invalid";
+const logger = createStarBotLogger("start-recovery");
+const ACTION_ORIGIN = "https://starbot.invalid";
 const ACTIONS = [
   "retry",
   "previous-version",
@@ -19,7 +19,7 @@ const ACTIONS = [
   "quit",
 ] as const;
 type RecoveryAction = (typeof ACTIONS)[number];
-const PARTITION = "openbot-start-recovery";
+const PARTITION = "starbot-start-recovery";
 
 type RecoveryChoice = "retry" | "quit";
 

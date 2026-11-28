@@ -1529,7 +1529,7 @@ export const messages = {
   "mobile.server.update.path.hosted":
     "Barındırılan hizmet güncellemeleri arka planda indirir. İndirilen bir güncelleme, sunucu bir sonraki başlatılışında başlar. Sunucuyu durdurup sürdürmeden önce etkin çalışmanın bitmesini bekleyin. Sunucu eski bir sürümde kalırsa ana makine yöneticisiyle iletişime geçin.",
   "mobile.server.update.path.system":
-    "En son sürümü yüklemek için ana makinede sudo openbot update komutunu çalıştırın. Bu komut StarBot'u durdurur. Önce etkin çalışmanın bitmesini bekleyin. Otomatik indirmeler bir sonraki önyüklemede yüklenir.",
+    "En son sürümü yüklemek için ana makinede sudo starbot update komutunu çalıştırın. Bu komut StarBot'u durdurur. Önce etkin çalışmanın bitmesini bekleyin. Otomatik indirmeler bir sonraki önyüklemede yüklenir.",
 
   "mobile.server.update.path.container":
     "Docker ana makinesinde yeni StarBot görüntüsünü çekin ve kapsayıcıyı aynı veri birimleriyle yeniden oluşturun. Önce etkin çalışmanın bitmesini bekleyin. Verilerinizi korumak için mevcut birimleri saklayın.",

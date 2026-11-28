@@ -233,7 +233,7 @@ export const messages = {
   "sitePage.marketplace.emptySkillsQuery": "“{query}”와 일치하는 스킬이 없어요.",
   "sitePage.marketplace.emptyApps": "일치하는 앱이 없어요.",
   "sitePage.marketplace.breadcrumb": "이동 경로",
-  "sitePage.marketplace.addToOpenBot": "StarBot에 추가",
+  "sitePage.marketplace.addToStarBot": "StarBot에 추가",
   "sitePage.marketplace.addFromApp": "{name}은(는) StarBot 안에서 추가해요. 앱을 받은 다음 이 링크를 다시 여세요.",
 
   "sitePage.marketplace.downloadFor": "{platform}용 다운로드",
@@ -486,7 +486,7 @@ export const messages = {
   "sitePage.site.cta.title": "첫 번째 팀원을 만나 보세요",
   "sitePage.site.cta.description":
     "이미 결제 중인 요금제로 Codex, Claude, Gemini, Grok 또는 나만의 모델을 실행하세요. 각각 자신만의 워크스페이스와 컨텍스트를 가져요. 작업은 내 컴퓨터에 남아요.",
-  "sitePage.site.downloadOpenBot": "StarBot 다운로드",
+  "sitePage.site.downloadStarBot": "StarBot 다운로드",
 
   "sitePage.site.contact": "문의",
   "sitePage.site.footer.description":

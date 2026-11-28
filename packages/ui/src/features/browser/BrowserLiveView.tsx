@@ -2,10 +2,10 @@ import {
   BROWSER_LIVE_VIEW_MAX_PASTE_TEXT,
   type BrowserDesktopApi,
   type BrowserLiveViewInput,
-} from "@openbot/contracts/ipc";
-import { ErrorReference, toast } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+} from "@starbot/contracts/ipc";
+import { ErrorReference, toast } from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
+import { errorReference } from "@starbot/user-errors";
 import { createEffect, createSignal, createStore, onCleanup, Show } from "solid-js";
 
 const ALT = 1;

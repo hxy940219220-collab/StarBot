@@ -1,9 +1,9 @@
-import { chatVisualDocument } from "@openbot/contracts/chat-visual";
-import logoUrl from "../src/assets/openbot-logo-production.png?inline";
+import { chatVisualDocument } from "@starbot/contracts/chat-visual";
+import logoUrl from "../src/assets/starbot-logo-production.png?inline";
 import takeoverUrl from "./assets/browser-takeover-preview.svg?inline";
 import macMockUrl from "./assets/remote-desktop-mac-mock.png?inline";
 
-const PAGES_ROUTE = "/__openbot/chat-visual";
+const PAGES_ROUTE = "/__starbot/chat-visual";
 
 export async function publishChatVisualPage(html: string): Promise<string> {
   const response = await fetch(PAGES_ROUTE, { method: "POST", body: chatVisualDocument(html) });
@@ -150,7 +150,7 @@ export const IMAGE_COLLAGE = `<!doctype html>
 <div class="grid">
   <figure class="wide"><img src="${macMockUrl}" alt="Remote desktop on a Mac"><figcaption>Remote desktop, full screen</figcaption></figure>
   <figure><img src="${takeoverUrl}" alt="Browser takeover"><figcaption>Browser takeover</figcaption></figure>
-  <figure><img src="${logoUrl}" alt="OpenBot logo" style="object-fit: contain"><figcaption>App logo</figcaption></figure>
+  <figure><img src="${logoUrl}" alt="StarBot logo" style="object-fit: contain"><figcaption>App logo</figcaption></figure>
 </div>
 </body></html>`;
 
@@ -183,15 +183,15 @@ export const INTERACTIVE_CHOICE = `<!doctype html>
   document.getElementById("chart").src = canvas.toDataURL("image/png");
   let count = 0;
   for (const button of document.querySelectorAll("[data-plan]")) {
-    button.addEventListener("click", () => openbotPage.sendMessage("I pick plan " + button.dataset.plan + "."));
+    button.addEventListener("click", () => starbotPage.sendMessage("I pick plan " + button.dataset.plan + "."));
   }
   document.getElementById("count").addEventListener("click", (event) => {
     count += 1;
     event.currentTarget.textContent = "Count: " + count;
-    openbotPage.setContext("The counter shows " + count + ".");
+    starbotPage.setContext("The counter shows " + count + ".");
   });
   document.getElementById("large").addEventListener("click", () =>
-    openbotPage.displayMode === "fullscreen" ? openbotPage.exitFullscreen() : openbotPage.requestFullscreen(),
+    starbotPage.displayMode === "fullscreen" ? starbotPage.exitFullscreen() : starbotPage.requestFullscreen(),
   );
 </script>
 </body></html>`;

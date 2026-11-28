@@ -1,56 +1,56 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 import type { CompanySignInCalls } from "./features/servers/ServerCompanySignInSection";
 
 export interface AppPort {
-  getAppInfo: OpenBotDesktopApi["getAppInfo"];
-  getAppAppearancePreference: OpenBotDesktopApi["getAppAppearancePreference"];
-  getAppInterfaceSizePreference: OpenBotDesktopApi["getAppInterfaceSizePreference"];
-  getAppLanguagePreference: OpenBotDesktopApi["getAppLanguagePreference"];
-  getAppLogoColorPreference: OpenBotDesktopApi["getAppLogoColorPreference"];
-  listInstalledFonts: OpenBotDesktopApi["listInstalledFonts"];
-  onAppAppearancePreference: OpenBotDesktopApi["onAppAppearancePreference"];
-  onAppInterfaceSizePreference: OpenBotDesktopApi["onAppInterfaceSizePreference"];
-  onAppLanguagePreference: OpenBotDesktopApi["onAppLanguagePreference"];
-  onAppLogoColorPreference: OpenBotDesktopApi["onAppLogoColorPreference"];
-  openExternal: OpenBotDesktopApi["openExternal"];
-  getSentMessageStats: OpenBotDesktopApi["getSentMessageStats"];
-  reportRendererTiming: OpenBotDesktopApi["reportRendererTiming"];
-  openUrl: OpenBotDesktopApi["openUrl"];
-  openChatWindow: OpenBotDesktopApi["openChatWindow"];
-  getChatWindows: OpenBotDesktopApi["getChatWindows"];
-  onChatWindows: OpenBotDesktopApi["onChatWindows"];
-  onQuitShortcutHint: OpenBotDesktopApi["onQuitShortcutHint"];
-  setAppAppearancePreference: OpenBotDesktopApi["setAppAppearancePreference"];
-  setAppInterfaceSizePreference: OpenBotDesktopApi["setAppInterfaceSizePreference"];
-  setAppLanguagePreference: OpenBotDesktopApi["setAppLanguagePreference"];
-  setAppLogoColorPreference: OpenBotDesktopApi["setAppLogoColorPreference"];
+  getAppInfo: StarBotDesktopApi["getAppInfo"];
+  getAppAppearancePreference: StarBotDesktopApi["getAppAppearancePreference"];
+  getAppInterfaceSizePreference: StarBotDesktopApi["getAppInterfaceSizePreference"];
+  getAppLanguagePreference: StarBotDesktopApi["getAppLanguagePreference"];
+  getAppLogoColorPreference: StarBotDesktopApi["getAppLogoColorPreference"];
+  listInstalledFonts: StarBotDesktopApi["listInstalledFonts"];
+  onAppAppearancePreference: StarBotDesktopApi["onAppAppearancePreference"];
+  onAppInterfaceSizePreference: StarBotDesktopApi["onAppInterfaceSizePreference"];
+  onAppLanguagePreference: StarBotDesktopApi["onAppLanguagePreference"];
+  onAppLogoColorPreference: StarBotDesktopApi["onAppLogoColorPreference"];
+  openExternal: StarBotDesktopApi["openExternal"];
+  getSentMessageStats: StarBotDesktopApi["getSentMessageStats"];
+  reportRendererTiming: StarBotDesktopApi["reportRendererTiming"];
+  openUrl: StarBotDesktopApi["openUrl"];
+  openChatWindow: StarBotDesktopApi["openChatWindow"];
+  getChatWindows: StarBotDesktopApi["getChatWindows"];
+  onChatWindows: StarBotDesktopApi["onChatWindows"];
+  onQuitShortcutHint: StarBotDesktopApi["onQuitShortcutHint"];
+  setAppAppearancePreference: StarBotDesktopApi["setAppAppearancePreference"];
+  setAppInterfaceSizePreference: StarBotDesktopApi["setAppInterfaceSizePreference"];
+  setAppLanguagePreference: StarBotDesktopApi["setAppLanguagePreference"];
+  setAppLogoColorPreference: StarBotDesktopApi["setAppLogoColorPreference"];
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    StarBotDesktopApi["agent"],
     "readConversationPage" | "searchConversationMessages" | "searchConversationFiles" | "listRoutines" | "listAgents"
   >;
-  agentTemplates: Pick<OpenBotDesktopApi["agentTemplates"], "onOpenLink" | "takePendingLink">;
-  acpRegistry: OpenBotDesktopApi["acpRegistry"];
-  hostedSites: OpenBotDesktopApi["hostedSites"];
-  billing: OpenBotDesktopApi["billing"];
-  credits: OpenBotDesktopApi["credits"];
-  referral: OpenBotDesktopApi["referral"];
-  license: OpenBotDesktopApi["license"];
+  agentTemplates: Pick<StarBotDesktopApi["agentTemplates"], "onOpenLink" | "takePendingLink">;
+  acpRegistry: StarBotDesktopApi["acpRegistry"];
+  hostedSites: StarBotDesktopApi["hostedSites"];
+  billing: StarBotDesktopApi["billing"];
+  credits: StarBotDesktopApi["credits"];
+  referral: StarBotDesktopApi["referral"];
+  license: StarBotDesktopApi["license"];
   auth: CompanySignInCalls &
     Pick<
-      OpenBotDesktopApi["auth"],
+      StarBotDesktopApi["auth"],
       "listOwnerTransfers" | "acceptOwnerTransfer" | "declineOwnerTransfer" | "onOwnerTransfersChanged"
     >;
-  hostedServers: OpenBotDesktopApi["hostedServers"];
-  routineFeed: OpenBotDesktopApi["routineFeed"];
-  events: OpenBotDesktopApi["events"];
-  plugins: Pick<OpenBotDesktopApi["plugins"], "onOpenListing" | "takePendingListing">;
-  marketplace: Pick<OpenBotDesktopApi["marketplace"], "onOpenListing" | "takePendingListing">;
+  hostedServers: StarBotDesktopApi["hostedServers"];
+  routineFeed: StarBotDesktopApi["routineFeed"];
+  events: StarBotDesktopApi["events"];
+  plugins: Pick<StarBotDesktopApi["plugins"], "onOpenListing" | "takePendingListing">;
+  marketplace: Pick<StarBotDesktopApi["marketplace"], "onOpenListing" | "takePendingListing">;
   servers: Pick<
-    OpenBotDesktopApi["servers"],
+    StarBotDesktopApi["servers"],
     "onInvite" | "takePendingInvite" | "getOwnerTransfer" | "startOwnerTransfer" | "cancelOwnerTransfer"
   >;
 }
 
 export function appPort(): AppPort {
-  return window.openbot;
+  return window.starbot;
 }

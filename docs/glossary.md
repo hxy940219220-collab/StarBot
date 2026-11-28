@@ -14,7 +14,7 @@ table, IPC channel or product string, or when a term in the code disagrees with 
   no listing.
 - **browser profile**: a named, persistent browser session on the computer that runs the agents
   (`browser_profiles`, `BrowserProfileSummary`, `AgentBrowserProfile`, `agent:admin:*-browser-profile*`,
-  `persist:openbot-browser-profile-<id>`). The built-in choices "Shared" and "Only this agent" (shown
+  `persist:starbot-browser-profile-<id>`). The built-in choices "Shared" and "Only this agent" (shown
   only to an agent that already uses it) are also profiles in the UI, but they have no row. It is not an **agent profile** (`AgentProfile`, the
   display data of an agent) or the account profile (`v1/me/profile`).
 - **bot**: do not use for new product code. Keep released names: Team API v1-v3
@@ -38,9 +38,9 @@ table, IPC channel or product string, or when a term in the code disagrees with 
   answers in its own execution thread (`projection_messaging_threads`, `MessagingLink`). A Slack
   channel is a `platformChannelId`, never a **channel**.
 - **StarBot credits**: prepaid points that an account buys with Stripe Checkout for its own balance
-  or for a server, and that an owner moves between the two (`@openbot/contracts/credits`,
+  or for a server, and that an owner moves between the two (`@starbot/contracts/credits`,
   `CreditsState`, `CreditServerWallet`, `credits.*` IPC, `v1/me/credits`, D1 `credit_purchases` and
-  `credit_ledger`, Stripe lookup keys `openbot_credits_<n>`). They are not the Stripe customer
+  `credit_ledger`, Stripe lookup keys `starbot_credits_<n>`). They are not the Stripe customer
   credit of invite links (`billing-referral.ts`), the usage credits of `usage-credits-v1`, or the media credits of a provider
   (`mediaCredits`).
 - **server**: a joined team server (`ServerSummary`, `servers:*`), the local Team API host
@@ -58,7 +58,7 @@ table, IPC channel or product string, or when a term in the code disagrees with 
   copy of another thread through one finished turn (`AgentTaskBranch`, `branch_*` columns). It is
   not a git branch.
 - **role**: a custom role of a server that sets which agents its members can use, and at which
-  level (`AgentAccessRole`, `agent-access-v1`, `openbot-agent-access-v1.json`). The **Everyone** role
+  level (`AgentAccessRole`, `agent-access-v1`, `starbot-agent-access-v1.json`). The **Everyone** role
   applies to every member. It is not the team role (`TeamRole`: owner, admin, member), which the UI
   calls the server role. **agent access** in the agent settings is the agent's own runtime access;
   the `agent-access-v1` levels are the access of members to agents.
@@ -81,7 +81,7 @@ table, IPC channel or product string, or when a term in the code disagrees with 
   (`workflow_versions`). A **workflow webhook trigger** is a trigger node with a webhook route of
   the `workflow` owner kind (`workflow_trigger_webhooks`).
 - **shared table**: a table an agent created in the one file every agent shares
-  (`~/StarBot/Shared/Data/agent-data.db`, `SharedTable`, `AgentTables`). `openbot.db` is the
+  (`~/StarBot/Shared/Data/agent-data.db`, `SharedTable`, `AgentTables`). `starbot.db` is the
   application's database and holds none of these. **owner**: the agent whose id
-  `openbot_metadata` records for a table, and the only agent that can drop or alter it; every other
+  `starbot_metadata` records for a table, and the only agent that can drop or alter it; every other
   agent can still read and write its rows, and the user can delete any table in agent settings.

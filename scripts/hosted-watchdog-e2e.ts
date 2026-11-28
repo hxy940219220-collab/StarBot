@@ -3,14 +3,14 @@ import { type ChildProcess, spawn, spawnSync } from "node:child_process";
 import { mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createStarBotLogger } from "@starbot/logging";
 
 const NAME = "hosted-watchdog-e2e";
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = join(ROOT, ".openbot-build", NAME);
-const LAUNCHER = join(ROOT, "scripts", "hosting", "openbot-hosted-server");
-const RUN_MARKER = "openbot-run-marker-v1.json";
-const START_ATTEMPTS = "openbot-start-attempts-v1.json";
+const OUT = join(ROOT, ".starbot-build", NAME);
+const LAUNCHER = join(ROOT, "scripts", "hosting", "starbot-hosted-server");
+const RUN_MARKER = "starbot-run-marker-v1.json";
+const START_ATTEMPTS = "starbot-start-attempts-v1.json";
 const INTERVAL_SECONDS = 1;
 const LIMIT = 3;
 const BEATS_BEFORE_FREEZE = 3;
@@ -19,12 +19,12 @@ const POLL_MS = 50;
 const HEARTBEAT_LOOP =
   'i=0; while :; do i=$((i + 1)); printf \'{"state":"%s","beat":%s}\\n\' "$2" "$i" >"$1.tmp" && /bin/mv -f "$1.tmp" "$1"; sleep 0.2; done';
 const IDLE_LOOP = "while :; do sleep 0.2; done";
-const logger = createOpenBotLogger(NAME);
+const logger = createStarBotLogger(NAME);
 
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
-symlinkSync("/bin/bash", join(OUT, "openbot"));
-symlinkSync("/bin/bash", join(OUT, "not-openbot"));
+symlinkSync("/bin/bash", join(OUT, "starbot"));
+symlinkSync("/bin/bash", join(OUT, "not-starbot"));
 
 interface Exit {
   code: number | null;
@@ -32,7 +32,7 @@ interface Exit {
 }
 
 interface CaseOptions {
-  binary: "openbot" | "not-openbot";
+  binary: "starbot" | "not-starbot";
   beats: boolean;
   state: "running" | "quitting";
   startFinished: boolean;
@@ -82,7 +82,7 @@ async function startCase(name: string, options: CaseOptions): Promise<Case> {
   const userData = join(OUT, name);
   mkdirSync(userData);
   const heartbeat = join(userData, RUN_MARKER);
-  const pidFile = join(userData, "openbot.pid");
+  const pidFile = join(userData, "starbot.pid");
   writeFileSync(heartbeat, '{"state":"running","beat":"previous run"}\n');
   writeFileSync(
     join(userData, START_ATTEMPTS),
@@ -125,32 +125,32 @@ const started = async (name: string, options: CaseOptions): Promise<Case> => {
 };
 
 try {
-  const healthy = await started("healthy", { binary: "openbot", beats: true, state: "running", startFinished: true });
+  const healthy = await started("healthy", { binary: "starbot", beats: true, state: "running", startFinished: true });
   const neverArmed = await started("never-armed", {
-    binary: "openbot",
+    binary: "starbot",
     beats: false,
     state: "running",
     startFinished: true,
   });
   const otherProcess = await started("other-process", {
-    binary: "not-openbot",
+    binary: "not-starbot",
     beats: true,
     state: "running",
     startFinished: true,
   });
   const starting = await started("starting", {
-    binary: "openbot",
+    binary: "starbot",
     beats: true,
     state: "running",
     startFinished: false,
   });
   const quitting = await started("quitting", {
-    binary: "openbot",
+    binary: "starbot",
     beats: true,
     state: "quitting",
     startFinished: true,
   });
-  const frozen = await started("frozen", { binary: "openbot", beats: true, state: "running", startFinished: true });
+  const frozen = await started("frozen", { binary: "starbot", beats: true, state: "running", startFinished: true });
   const notKilled = [healthy, neverArmed, otherProcess, starting, quitting];
 
   for (const testCase of [otherProcess, starting, quitting, frozen]) await freezeAfterBeats(testCase);
@@ -160,7 +160,7 @@ try {
   const frozenMessage = frozen.stderr.join("");
 
   const later = await started("frozen-later", {
-    binary: "openbot",
+    binary: "starbot",
     beats: true,
     state: "running",
     startFinished: true,

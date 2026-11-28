@@ -1,4 +1,4 @@
-import { MAX_PLAN_START_AFTER_MS, MIN_PLAN_START_AFTER_MS } from "@openbot/contracts/ipc";
+import { MAX_PLAN_START_AFTER_MS, MIN_PLAN_START_AFTER_MS } from "@starbot/contracts/ipc";
 import {
   Button,
   Input,
@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
   SlidingTabs,
-} from "@openbot/ui";
+} from "@starbot/ui";
 import { createMemo, createStore } from "solid-js";
 import { useText } from "../../text";
 

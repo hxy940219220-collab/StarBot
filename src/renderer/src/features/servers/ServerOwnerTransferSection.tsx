@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import type { OwnerTransfer } from "@openbot/contracts/owner-transfer";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
+import type { OwnerTransfer } from "@starbot/contracts/owner-transfer";
+import { normalizeEmailAddress } from "@starbot/contracts/validation";
 import {
   Button,
   ConfirmDialog,
@@ -16,14 +16,14 @@ import {
   ItemTitle,
   SettingsSection,
   TriangleAlert,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@starbot/ui";
+import { useText } from "@starbot/ui/text";
 import { createEffect, createStore, Show } from "solid-js";
 import { serverRoleCanAdminister } from "./server-capabilities";
 import type { ServerSettingsSectionHost } from "./server-settings-section";
 
 export type OwnerTransferCalls = Pick<
-  OpenBotDesktopApi["servers"],
+  StarBotDesktopApi["servers"],
   "getOwnerTransfer" | "startOwnerTransfer" | "cancelOwnerTransfer"
 >;
 

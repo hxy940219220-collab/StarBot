@@ -38,13 +38,13 @@ export const messages = {
   "island.action.openChat": "チャットを開く",
   "island.action.openDetails": "詳細を開く",
   "island.action.takeOver": "引き継ぐ",
-  "island.action.reviewInOpenBot": "StarBot で確認",
+  "island.action.reviewInStarBot": "StarBot で確認",
 
   "island.action.decline": "拒否",
   "island.action.approve": "承認",
   "island.action.later": "後で",
   "island.action.dismiss": "閉じる",
-  "island.action.answerInOpenBot": "StarBot で回答",
+  "island.action.answerInStarBot": "StarBot で回答",
 
   "island.action.stopAgent": "{name} を停止",
   "island.action.failed": "うまくいきませんでした。もう一度お試しください。",

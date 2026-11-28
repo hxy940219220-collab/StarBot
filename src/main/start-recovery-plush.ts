@@ -1,9 +1,9 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 
-const logger = createOpenBotLogger("start-recovery");
+const logger = createStarBotLogger("start-recovery");
 const CHARACTER = "cloe";
 
 export function recoveryPlushSvg(): string | null {

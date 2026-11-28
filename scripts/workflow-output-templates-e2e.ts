@@ -10,11 +10,11 @@ import {
   type WorkflowRunDetail,
   workflowAnswerProblems,
   workflowGraphFormat,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import type { WorkflowGitHubApi, WorkflowGitHubChange } from "../src/backend/workflows/workflow-github-api";
 import { WorkflowGitHubStore } from "../src/backend/workflows/workflow-github-store";
 import { WorkflowRunStore } from "../src/backend/workflows/workflow-run-store";
@@ -23,7 +23,7 @@ import { handleWorkflowTool } from "../src/backend/workflows/workflow-tools";
 import { workflowScheduleDueAt } from "../src/backend/workflows/workflow-triggers";
 import { createWorkflows, type WorkflowNotice, type WorkflowsHandle } from "../src/backend/workflows/workflows";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/workflow-output-templates-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/workflow-output-templates-e2e");
 const WAIT_MS = 5_000;
 const REPOSITORY = "acme/app";
 const ANSWER = "priority: high|normal|low\nsummary: text\ntags: list\nowner: text";
@@ -69,8 +69,8 @@ const typedGraph = (outputs: readonly WorkflowNode[], replyNode = true): Workflo
   strokes: [],
 });
 
-const directory = await mkdtemp(join(tmpdir(), "openbot-workflow-output-templates-"));
-const database = new OpenBotDatabase(directory);
+const directory = await mkdtemp(join(tmpdir(), "starbot-workflow-output-templates-"));
+const database = new StarBotDatabase(directory);
 let service: WorkflowsHandle | null = null;
 let modelReplies: string[] = [];
 

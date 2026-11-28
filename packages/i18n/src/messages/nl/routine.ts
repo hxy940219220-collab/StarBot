@@ -324,7 +324,7 @@ export const messages = {
     "De afzender ondertekent elk verzoek met dit geheim. StarBot weigert een verzoek zonder geldige handtekening.",
 
   "routine.webhook.howToSign": "Een verzoek ondertekenen",
-  "routine.webhook.howToSignHint": "Bewaar het geheim in OPENBOT_WEBHOOK_SECRET bij de afzender. Zet het niet in code.",
+  "routine.webhook.howToSignHint": "Bewaar het geheim in STARBOT_WEBHOOK_SECRET bij de afzender. Zet het niet in code.",
   "routine.webhook.stepTest": "Stuur een testevent",
   "routine.webhook.stepTestHint":
     "StarBot ondertekent een event dat bij deze routine past en ontvangt het als echt verzoek. De routine draait één keer.",

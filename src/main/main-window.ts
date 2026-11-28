@@ -10,8 +10,8 @@ import {
   LOCAL_SERVER_ID,
   type MacPermissionId,
   type QuitGuard,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate, LayoutDirection } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import type { AppTextKey, AppTranslate, LayoutDirection } from "@starbot/i18n";
 import { Effect } from "effect";
 import {
   app,
@@ -312,7 +312,7 @@ export function createMainWindowController({
     followWindowGlass(window, MAIN_WINDOW_DARK_BACKGROUND);
 
     window.once("ready-to-show", () => {
-      performance.mark("openbot:window-ready");
+      performance.mark("starbot:window-ready");
       if (
         !windowsKeptHidden &&
         shouldShowDevelopmentWindow({
@@ -819,7 +819,7 @@ export function createComputerUsePermissionHelpWindow(
 }
 
 function appRendererUrl(developmentUrl: string | undefined): URL {
-  return developmentUrl ? new URL(developmentUrl) : new URL("openbot-app://app/index.html");
+  return developmentUrl ? new URL(developmentUrl) : new URL("starbot-app://app/index.html");
 }
 
 function chatWindowKey(target: ChatWindowTarget): string {
@@ -858,7 +858,7 @@ function replacementLoad(contents: WebContents, replaced: Error): Promise<void> 
 }
 
 function helperRendererUrl(developmentUrl: string | undefined): URL {
-  return developmentUrl ? new URL("helper.html", `${developmentUrl}/`) : new URL("openbot-app://app/helper.html");
+  return developmentUrl ? new URL("helper.html", `${developmentUrl}/`) : new URL("starbot-app://app/helper.html");
 }
 
 export function loadComputerUsePermissionHelpRenderer(

@@ -1,6 +1,6 @@
-import { parseAgentAccessChange } from "@openbot/contracts/ipc";
-import { AGENT_ACCESS_CAPABILITY, AGENT_ACCESS_ROUTES } from "@openbot/contracts/team-protocol/agent-access-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { parseAgentAccessChange } from "@starbot/contracts/ipc";
+import { AGENT_ACCESS_CAPABILITY, AGENT_ACCESS_ROUTES } from "@starbot/contracts/team-protocol/agent-access-v1";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result } from "effect";
 import { agentAccessSnapshot } from "../agent-access-store";
 import { memberAuditName } from "../server-audit-store";

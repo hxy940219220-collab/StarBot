@@ -1,15 +1,15 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
-import type { ChannelFolderCalls } from "@openbot/ui/features/channels/ChannelFolders";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
+import type { ChannelFolderCalls } from "@starbot/ui/features/channels/ChannelFolders";
 
 export type ChannelFoldersApi = Pick<
-  OpenBotDesktopApi["agent"],
+  StarBotDesktopApi["agent"],
   "listChannelFolders" | "addChannelFolder" | "removeChannelFolder" | "browseChannelFolders"
 >;
 
 export type ChannelFoldersMode = "local" | "remote";
 
 export function localChannelFolderCalls(
-  api: ChannelFoldersApi & Pick<OpenBotDesktopApi["agent"], "chooseChannelFolder">,
+  api: ChannelFoldersApi & Pick<StarBotDesktopApi["agent"], "chooseChannelFolder">,
 ): ChannelFolderCalls {
   return {
     list: (channelId) => api.listChannelFolders(channelId),

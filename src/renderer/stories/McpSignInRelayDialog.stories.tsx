@@ -1,4 +1,4 @@
-import { McpSignInRelayDialog } from "@openbot/ui/features/settings/McpSignInPage";
+import { McpSignInRelayDialog } from "@starbot/ui/features/settings/McpSignInPage";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

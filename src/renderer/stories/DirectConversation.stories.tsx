@@ -1,5 +1,5 @@
-import type { DirectMessage } from "@openbot/contracts/ipc";
-import { DirectConversation } from "@openbot/ui/features/conversation/DirectConversation";
+import type { DirectMessage } from "@starbot/contracts/ipc";
+import { DirectConversation } from "@starbot/ui/features/conversation/DirectConversation";
 import { createEffect, createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

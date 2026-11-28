@@ -43,9 +43,9 @@ import {
   type CrmTone,
   isCrmChange,
   isCrmProposedChange,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { type SourceMessages, sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isNumber, isOneOf, isString } from "@starbot/contracts/runtime-values";
+import { type SourceMessages, sourceText } from "@starbot/i18n/source";
 import {
   checkedColumn,
   databaseRow,
@@ -55,7 +55,7 @@ import {
   requiredStringColumn,
 } from "../database/database-rows";
 import { withTransaction } from "../database/sqlite-transaction";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { StarBotDatabase } from "../starbot-database";
 import { CrmError } from "./crm-handle";
 
 type CrmErrorKey = Exclude<Extract<keyof SourceMessages, `error.crm.${string}`>, "error.crm.amountDecimals">;
@@ -371,12 +371,12 @@ export const CRM_PAYMENT_SELECT = `SELECT p.*, c.currency, c.number AS customer_
 const ACTIVITY_PAGE_SIZE = 100;
 
 export interface CrmStoreOptions {
-  database: OpenBotDatabase;
+  database: StarBotDatabase;
   now: () => Date;
 }
 
 export class CrmStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: StarBotDatabase;
   readonly #now: () => Date;
 
   constructor(options: CrmStoreOptions) {

@@ -1,5 +1,5 @@
-import type { BrowserTeachStep } from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+import type { BrowserTeachStep } from "@starbot/contracts/ipc";
+import type { AppTranslate } from "@starbot/i18n";
 
 const TEACH_FILE_NAME = "recorded-task.txt";
 

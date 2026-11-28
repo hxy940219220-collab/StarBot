@@ -4,7 +4,7 @@ import {
   type CustomProviderHeader,
   type CustomProviderModel,
   customModelKey,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 
 export interface CustomProviderConfig {
   readonly id: string;

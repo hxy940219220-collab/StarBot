@@ -5,30 +5,30 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { isMissingFileError } from "../src/backend/file-errors";
 import { elfSearchPaths, ORIGIN_SEARCH_PATH } from "./elf-search-paths";
 
-const logger = createOpenBotLogger("verify-linux-package");
+const logger = createStarBotLogger("verify-linux-package");
 
 const launchStepLimitMs = 5 * 60_000;
 
 const HOSTED_SCRIPTS = [
-  "openbot-hosted-server",
-  "openbot-hosted-env",
-  "openbot-hosted-update",
-  "openbot",
-  "openbot-boat-pre-stop",
-  "openbot-server-setup",
+  "starbot-hosted-server",
+  "starbot-hosted-env",
+  "starbot-hosted-update",
+  "starbot",
+  "starbot-boat-pre-stop",
+  "starbot-server-setup",
 ];
 const HOSTED_UNITS = [
-  "openbot.service",
-  "openbot-update.service",
-  "openbot-update.timer",
-  "openbot-update-apply.service",
-  "openbot-update-request.path",
-  "openbot-update-request.service",
+  "starbot.service",
+  "starbot-update.service",
+  "starbot-update.timer",
+  "starbot-update-apply.service",
+  "starbot-update-request.path",
+  "starbot-update-request.service",
 ];
 
 const FUSE_DISABLED = 48;
@@ -53,7 +53,7 @@ const appPathArgument = process.argv.slice(2).find((argument) => !argument.start
 const appPath = resolve(
   appPathArgument ?? (architecture === "x64" ? "dist/linux-unpacked" : "dist/linux-arm64-unpacked"),
 );
-const executablePath = resolve(appPath, "openbot");
+const executablePath = resolve(appPath, "starbot");
 const resourcesPath = resolve(appPath, "resources");
 const asarPath = resolve(resourcesPath, "app.asar");
 const voiceRuntimePath = resolve(resourcesPath, "voice/runtime");
@@ -76,12 +76,12 @@ await Promise.all([
   access(voiceSessionSettingsPath),
   access(voiceHostPath),
   access(speechHostPath),
-  ...["packages.txt", "optional-packages.txt", "openbot-hosted.apparmor", ...HOSTED_UNITS].map((file) =>
+  ...["packages.txt", "optional-packages.txt", "starbot-hosted.apparmor", ...HOSTED_UNITS].map((file) =>
     access(resolve(resourcesPath, "hosting", file)),
   ),
   ...HOSTED_SCRIPTS.map((file) => access(resolve(resourcesPath, "hosting", file), constants.X_OK)),
-  access(resolve(resourcesPath, "hosting/openbot-desktop"), constants.X_OK),
-  ...["openbox/openbot-rc.xml", "openbox/openbot-menu.xml", "themes/StarBot/openbox-3/themerc", "openbot-logo.png"].map(
+  access(resolve(resourcesPath, "hosting/starbot-desktop"), constants.X_OK),
+  ...["openbox/starbot-rc.xml", "openbox/starbot-menu.xml", "themes/StarBot/openbox-3/themerc", "starbot-logo.png"].map(
     (file) => access(resolve(resourcesPath, "hosting/desktop", file)),
   ),
   access(resolve(resourcesPath, `cua-driver/linux/${architecture}/cua-driver`)),
@@ -160,7 +160,7 @@ if (!isString(packageJson.version)) throw new Error("package.json version is mis
 
 const packagedManifest = JSON.parse(await readAsarFile(asarPath, "package.json"));
 if (!isDynamicRecord(packagedManifest)) throw new Error("The packaged package.json is not a JSON object.");
-expectEqual(packagedManifest.name, "openbot", "packaged name");
+expectEqual(packagedManifest.name, "starbot", "packaged name");
 expectEqual(packagedManifest.productName, "StarBot", "packaged product name");
 expectEqual(packagedManifest.version, packageJson.version, "packaged version");
 
@@ -259,7 +259,7 @@ async function verifyLaunch(executable: string): Promise<void> {
   if (!process.env.DISPLAY && !process.env.WAYLAND_DISPLAY) {
     throw new Error("The launch check needs a display. Run it under `xvfb-run -a`.");
   }
-  const userDataPath = await mkdtemp(join(tmpdir(), "openbot-package-smoke-"));
+  const userDataPath = await mkdtemp(join(tmpdir(), "starbot-package-smoke-"));
   const child = spawn(executable, [`--user-data-dir=${userDataPath}`], {
     env: launchEnvironment(userDataPath),
     stdio: ["ignore", "ignore", "pipe"],
@@ -317,9 +317,9 @@ function launchEnvironment(userDataPath: string): NodeJS.ProcessEnv {
     ...process.env,
     CODEX_HOME: join(userDataPath, "codex-home"),
     CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-    OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
-    OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
-    OPENBOT_GROK_PATH: join(userDataPath, "missing-grok"),
+    STARBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
+    STARBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
+    STARBOT_GROK_PATH: join(userDataPath, "missing-grok"),
   };
 }
 

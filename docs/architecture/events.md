@@ -22,7 +22,7 @@ The flow is: signed request → route → routine → run.
 | Route ID → host and owner account, link time, revoke time | Account service D1 | `webhook_routes` |
 | Route ID → ingress socket | Signal memory | `SignalService` |
 
-Schema v30 (`src/backend/openbot-database-schema.ts`) only adds these tables. Existing routines and
+Schema v30 (`src/backend/starbot-database-schema.ts`) only adds these tables. Existing routines and
 runs do not change.
 
 - `RoutineStore` (`src/backend/routine-store.ts`) writes the trigger row with the routine, in the
@@ -124,7 +124,7 @@ handle time and, for a request with a valid signature, the delivery age. The app
 send it as `system_webhook_delivery`, at most 60 each minute (`HostAnalytics.handleWebhookDelivery`).
 The report has no route ID, delivery ID, secret, event type or body. A request that Signal refuses
 before the host does not reach it: Signal counts its answers by status and its waits for the host in
-`/metrics` (`openbot_remote_webhook_*`), and the capacity reporter sends the change of each 5 minutes
+`/metrics` (`starbot_remote_webhook_*`), and the capacity reporter sends the change of each 5 minutes
 in `signal_capacity`. `bun run test:webhook-analytics` checks the host side. See
 [ANALYTICS.md](../../ANALYTICS.md).
 
@@ -292,8 +292,8 @@ Controls:
 - A removed trigger revokes its route in the same transaction, and the relay revocation retries
   until it succeeds.
 - Only the events surface, which needs a host administrator, can change, test, or delete a webhook
-  routine. An agent can create one with `openbot.create_webhook_routine`, and change its events,
-  name, instruction or active state with `openbot.update_webhook_routine`, but only in a turn that a
+  routine. An agent can create one with `starbot.create_webhook_routine`, and change its events,
+  name, instruction or active state with `starbot.update_webhook_routine`, but only in a turn that a
   person's message started: a routine run can carry a webhook body, which is untrusted. The tool saves through
   `HostEventsService`, so the route limit, the encryption and the relay sync are the same. The tool
   drops the first secret: the result goes to the model provider. The chat card makes a new secret

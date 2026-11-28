@@ -121,7 +121,7 @@ export const messages = {
   "settings.externalLinks.title": "外部リンクの開き方",
   "settings.externalLinks.description": "チャット、サインインページ、請求ページのリンクをここで開きます。",
   "settings.externalLinks.defaultBrowser": "既定のブラウザー",
-  "settings.externalLinks.openbot": "StarBot",
+  "settings.externalLinks.starbot": "StarBot",
 
   "settings.externalLinks.defaultBrowserNamed": "既定のブラウザー（{name}）",
   "settings.externalLinks.otherApp": "その他のアプリ…",
@@ -462,10 +462,10 @@ export const messages = {
   "settings.mobileConnect.route.description":
     "このコンピューターに接続するスマートフォン、ほかのコンピューター、チームメンバー向けです。",
   "settings.mobileConnect.route.chipLabel": "デバイスの接続方法: {route}",
-  "settings.mobileConnect.route.openbot.title": "StarBot 経由",
+  "settings.mobileConnect.route.starbot.title": "StarBot 経由",
 
-  "settings.mobileConnect.route.openbot.badge": "推奨",
-  "settings.mobileConnect.route.openbot.description":
+  "settings.mobileConnect.route.starbot.badge": "推奨",
+  "settings.mobileConnect.route.starbot.description":
     "どのネットワークでも使えます。チャットとファイルはデバイス間で暗号化されます。",
   "settings.mobileConnect.route.private.title": "プライベートネットワーク",
   "settings.mobileConnect.route.private.tailscale": "Tailscale を検出",
@@ -513,7 +513,7 @@ export const messages = {
   "settings.profile.share.copied": "画像をコピーしました",
   "settings.profile.share.copyFailed": "画像をコピーできませんでした。",
   "settings.profile.share.createFailed": "画像を作成できませんでした。",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "starbot-activity.png",
   "settings.profile.share.caption": "StarBot と過ごした直近 6 か月",
 
   "settings.profile.activity.title": "このコンピューターでのアクティビティ",

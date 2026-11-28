@@ -1,5 +1,5 @@
-import { agentProviderName, analyticsTokens, isAgentProvider } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import { agentProviderName, analyticsTokens, isAgentProvider } from "@starbot/contracts/ipc";
+import type { MobileTextKey } from "@starbot/i18n/mobile";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams } from "expo-router";
 import { Button, Spinner, Typography } from "heroui-native";
@@ -121,7 +121,7 @@ export function ServerUsageScreen() {
   const [selectedBotId, setSelectedBotId] = useState<string | null>(null);
 
   const cardBg = dark ? "#1f1f26" : "#ffffff";
-  const borderColor = String(useCSSVariable("--openbot-border-grouped") ?? "rgba(15,23,42,0.08)");
+  const borderColor = String(useCSSVariable("--starbot-border-grouped") ?? "rgba(15,23,42,0.08)");
 
   useEffect(() => {
     mobileAnalytics.track("usage_viewed", { scope: "server" });

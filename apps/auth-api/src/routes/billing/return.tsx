@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { readFirstTouch } from "@openbot/contracts/first-touch";
-import { isDynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { AppLogo } from "@starbot/brand";
+import { readFirstTouch } from "@starbot/contracts/first-touch";
+import { isDynamicRecord, isOneOf } from "@starbot/contracts/runtime-values";
 import { createFileRoute } from "@tanstack/solid-router";
 import { onSettled, Show } from "solid-js";
 import { billingReturnText } from "../../components/transactional/page-text";
@@ -46,7 +46,7 @@ function sendCheckoutAttribution(): void {
     cache: "no-store",
     keepalive: true,
     referrerPolicy: "same-origin",
-    headers: { "Content-Type": "application/json", "X-OpenBot-Browser": "1" },
+    headers: { "Content-Type": "application/json", "X-StarBot-Browser": "1" },
     body: JSON.stringify({ sessionId, firstTouch }),
   }).catch(() => undefined);
 }

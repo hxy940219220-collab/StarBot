@@ -1,5 +1,5 @@
-import type { McpLocalFlow } from "@openbot/contracts/mcp-connect-flows";
-import { Alert, AlertContent, AlertDescription, AlertIcon, Button, Check, ExternalLink, Info, Text } from "@openbot/ui";
+import type { McpLocalFlow } from "@starbot/contracts/mcp-connect-flows";
+import { Alert, AlertContent, AlertDescription, AlertIcon, Button, Check, ExternalLink, Info, Text } from "@starbot/ui";
 import { createMemo, For, onSettled, Show } from "solid-js";
 import { useText } from "../../text";
 import { createConnectRun, type McpConnectBaseProps, McpConnectShell } from "./McpConnectShell";

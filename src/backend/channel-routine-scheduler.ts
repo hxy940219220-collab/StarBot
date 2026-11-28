@@ -9,9 +9,9 @@ import {
   type ListChannelRoutineRunsInput,
   type TestChannelRoutineInput,
   type UpdateChannelRoutineInput,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { collapseMissedOccurrences } from "@openbot/team-client/routine-schedule";
+} from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { collapseMissedOccurrences } from "@starbot/team-client/routine-schedule";
 import { Effect, Result, Schema } from "effect";
 import { failedRunReason } from "./agent/delivery-content";
 import { quietRoutineRun } from "./agent/routine-quiet-runs";

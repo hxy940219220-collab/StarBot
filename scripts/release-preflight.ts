@@ -1,14 +1,14 @@
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { createStarBotLogger } from "@starbot/logging";
 import { roleIdProblems } from "./discord-announcement";
 import { ANNOUNCEMENT_FILE, announcementProblems, ROLE_VARIABLE } from "./discord-release-announcement";
 import { unpublishedCatalogEntries } from "./publish-production-catalog";
 import { releaseNotesProblems } from "./release-notes";
 import { whatsNewTranslationProblems } from "./whats-new-translations";
 
-const logger = createOpenBotLogger("release-preflight");
+const logger = createStarBotLogger("release-preflight");
 
 const packageJson = JSON.parse(await readFile("package.json", "utf8"));
 if (!isDynamicRecord(packageJson) || !isString(packageJson.version)) {

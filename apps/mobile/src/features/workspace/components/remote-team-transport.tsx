@@ -1,20 +1,20 @@
-import { BROWSER_SECRET_RESPONSE_PATH } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { BROWSER_SECRET_VAULT_ROUTES } from "@openbot/contracts/team-protocol/browser-secret-vault-v1";
+import { BROWSER_SECRET_RESPONSE_PATH } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isString } from "@starbot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@starbot/contracts/team-api-routes";
+import { BROWSER_SECRET_VAULT_ROUTES } from "@starbot/contracts/team-protocol/browser-secret-vault-v1";
 import {
   INSTANCE_TRANSFER_REMOTE_BYTES,
   INSTANCE_TRANSFER_ROUTES,
-} from "@openbot/contracts/team-protocol/instance-transfer-v1";
-import { LIVE_VOICE_ROUTES } from "@openbot/contracts/team-protocol/live-voice-v1";
-import { PENDING_APPROVAL_ROUTES } from "@openbot/contracts/team-protocol/pending-approval-v1";
-import { PHONE_FEEDBACK_ROUTES } from "@openbot/contracts/team-protocol/phone-feedback-v1";
-import { isQueueEditRoute, QueueEditRejectedError } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import type { TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
-import { sourceText } from "@openbot/i18n/source";
-import type { RemoteTeamDirectoryClient } from "@openbot/team-client";
-import { runTeamEffect } from "@openbot/team-client";
-import { bytesToBase64 } from "@openbot/team-client/base64";
+} from "@starbot/contracts/team-protocol/instance-transfer-v1";
+import { LIVE_VOICE_ROUTES } from "@starbot/contracts/team-protocol/live-voice-v1";
+import { PENDING_APPROVAL_ROUTES } from "@starbot/contracts/team-protocol/pending-approval-v1";
+import { PHONE_FEEDBACK_ROUTES } from "@starbot/contracts/team-protocol/phone-feedback-v1";
+import { isQueueEditRoute, QueueEditRejectedError } from "@starbot/contracts/team-protocol/queue-edit-v1";
+import type { TeamProtocolV2Json } from "@starbot/contracts/team-protocol/v2";
+import { sourceText } from "@starbot/i18n/source";
+import type { RemoteTeamDirectoryClient } from "@starbot/team-client";
+import { runTeamEffect } from "@starbot/team-client";
+import { bytesToBase64 } from "@starbot/team-client/base64";
 import {
   createRemoteCommandMailbox,
   type RemoteDownloadProgress,
@@ -27,9 +27,9 @@ import {
   type RemoteTeamDiagnostic,
   type RemoteTeamEvent,
   type RemoteUploadProgress,
-} from "@openbot/team-client/remote-peer";
-import { remoteWorkspaceReadTimeout } from "@openbot/team-client/remote-recovery";
-import { referenceFrom } from "@openbot/user-errors";
+} from "@starbot/team-client/remote-peer";
+import { remoteWorkspaceReadTimeout } from "@starbot/team-client/remote-recovery";
+import { referenceFrom } from "@starbot/user-errors";
 import type { DOMProps } from "expo/dom";
 import * as Crypto from "expo-crypto";
 import { File, FileMode } from "expo-file-system";

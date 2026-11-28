@@ -1,12 +1,12 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { StarBotDesktopApi } from "@starbot/contracts/ipc";
 
 export interface RemoteDesktopPort {
   remoteDesktop: Pick<
-    OpenBotDesktopApi["remoteDesktop"],
+    StarBotDesktopApi["remoteDesktop"],
     "connect" | "disconnect" | "list" | "onEvent" | "selectDisplay"
   >;
 }
 
 export function remoteDesktopPort(): RemoteDesktopPort {
-  return window.openbot;
+  return window.starbot;
 }

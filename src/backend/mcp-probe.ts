@@ -20,10 +20,10 @@ import {
 } from "@modelcontextprotocol/sdk/server/auth/errors.js";
 import type { FetchLike, Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { type CallToolRequest, ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@starbot/contracts/input-limits";
+import type { McpServerConfig } from "@starbot/contracts/ipc";
+import { isDynamicRecord } from "@starbot/contracts/runtime-values";
+import { sourceText } from "@starbot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { z } from "zod";
 import { causeHelpers } from "./effect-boundary";
@@ -146,7 +146,7 @@ export const callMcpServerTool = Effect.fnUntraced(function* (
     Effect.acquireUseRelease(
       Effect.try({
         try: () => ({
-          client: new Client({ name: "openbot", version: "1" }, { capabilities: {} }),
+          client: new Client({ name: "starbot", version: "1" }, { capabilities: {} }),
           transport: createTransport(server, null, () => undefined),
         }),
         catch: (cause) => new McpProbeFailure({ cause }),
@@ -335,7 +335,7 @@ function probeSecrets(server: UsableMcpServer, signIn: McpSignIn | null): string
   return [...values, ...(signIn?.secrets() ?? [])];
 }
 
-const PROBE_CLIENT_INFO = { name: "openbot-probe", version: "1" };
+const PROBE_CLIENT_INFO = { name: "starbot-probe", version: "1" };
 
 const connectAndCountEffect = Effect.fnUntraced(function* (
   server: ResolvedMcpServer,

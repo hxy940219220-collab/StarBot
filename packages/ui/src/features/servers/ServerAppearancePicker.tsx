@@ -1,11 +1,11 @@
-import { AVATAR_COLOR_CHOICES } from "@openbot/brand/bloub-avatar";
+import { AVATAR_COLOR_CHOICES } from "@starbot/brand/bloub-avatar";
 import {
   isServerAppearanceColor,
   SERVER_APPEARANCE_SHAPES,
   type ServerAppearance,
   type ServerAppearanceShape,
-} from "@openbot/contracts/team-protocol/host-appearance-v1";
-import { Button, IconButton, RotateCcw } from "@openbot/ui";
+} from "@starbot/contracts/team-protocol/host-appearance-v1";
+import { Button, IconButton, RotateCcw } from "@starbot/ui";
 import { For, Show } from "solid-js";
 import { ServerPlushLogo } from "../../server-plush-logo";
 import { useText } from "../../text";

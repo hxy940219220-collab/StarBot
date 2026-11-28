@@ -11,14 +11,14 @@ import {
   type ProviderRuntimesDesktopApi,
   type ServerSummary,
   STARBOT_CORE_PROVIDERS,
-} from "@openbot/contracts/ipc";
-import { matchingSourceKeys } from "@openbot/i18n";
+} from "@starbot/contracts/ipc";
+import { matchingSourceKeys } from "@starbot/i18n";
 import {
   type ProviderUpdate,
   providerUpdateAvailable,
   providerUpdatesToAnnounce,
-} from "@openbot/ui/features/provider-updates/provider-update";
-import { currentText } from "@openbot/ui/text";
+} from "@starbot/ui/features/provider-updates/provider-update";
+import { currentText } from "@starbot/ui/text";
 import { createEffect, createSignal, flush, onSettled } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { FALLBACK_PROVIDER_RUNTIMES } from "../../app-defaults";

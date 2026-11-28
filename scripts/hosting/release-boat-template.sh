@@ -13,8 +13,8 @@ if [[ ! $RELEASE_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   exit 1
 fi
 version=${RELEASE_TAG#v}
-name="openbot-server-production-${version//./-}"
-asset="OpenBot-$version-x86_64.AppImage"
+name="starbot-server-production-${version//./-}"
+asset="StarBot-$version-x86_64.AppImage"
 
 require_latest() {
   local latest
@@ -49,7 +49,7 @@ bun scripts/hosting/build-boat-template.ts \
   "--in-use=$in_use" \
   "--appimage-url=https://github.com/$GITHUB_REPOSITORY/releases/download/$RELEASE_TAG/$asset" \
   "--appimage-sha256=$sha" \
-  --auth-api-url=https://api.openbot.run
+  --auth-api-url=https://api.starbot.run
 
 require_latest
 printf '%s\n' "$name" | node_modules/.bin/wrangler secret put HOSTED_SERVER_TEMPLATE \

@@ -8,15 +8,15 @@ import {
   type CreditMediaGenerationKind,
   isCreditMediaModelId,
   isCreditMediaSpecValue,
-} from "@openbot/contracts/credit-media";
+} from "@starbot/contracts/credit-media";
 import {
   CREDIT_CLIP_SECONDS,
   CREDIT_MODEL_COSTS,
   CREDIT_MODEL_MAKERS,
   type CreditModelCost,
   creditUnitRate,
-} from "@openbot/contracts/credits";
-import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/credits";
+import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import { ROUTER_MEDIA_UPSTREAM } from "../src/server/media-upstream";
 
 const AUTH_API_ROOT = resolve(import.meta.dirname, "..");
@@ -163,7 +163,7 @@ function sql(value: string | number | null): string {
 }
 
 function wranglerArgs(options: Options): string[] {
-  const database = options.target === "test" ? "openbot-auth-test" : "openbot-auth";
+  const database = options.target === "test" ? "starbot-auth-test" : "starbot-auth";
   const mode = options.target === "local" ? ["--local"] : ["--remote"];
   const environment = options.target === "test" ? ["--env", "test"] : [];
   const persist = options.persistTo ? ["--persist-to", options.persistTo] : [];
@@ -197,7 +197,7 @@ async function execute(options: Options, statements: string[], summary: string):
     process.stdout.write(`Dry run on ${options.target}: ${summary}. Add --apply to write.\n`);
     return;
   }
-  const directory = await mkdtemp(join(tmpdir(), "openbot-media-catalog-"));
+  const directory = await mkdtemp(join(tmpdir(), "starbot-media-catalog-"));
   try {
     const file = join(directory, "change.sql");
     await writeFile(file, `${statements.join("\n")}\n`, { mode: 0o600 });

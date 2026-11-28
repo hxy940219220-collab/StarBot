@@ -16,7 +16,7 @@ import {
 } from "../src/backend/agent-data/agent-database-supervisor";
 import { AgentTables } from "../src/backend/agent-data/agent-tables";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-database-host-start-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/agent-database-host-start-e2e");
 const HOST = resolve(import.meta.dirname, "../src/backend/agent-data/agent-database-host.ts");
 const STATEMENT_DEADLINE_MS = 1_000;
 const READY_DELAY_MS = 2_000;
@@ -50,7 +50,7 @@ interface Report {
   failure?: string;
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-agent-database-host-start-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-agent-database-host-start-e2e-"));
 const report: Report = { passed: false };
 const children: ChildProcess[] = [];
 
@@ -257,7 +257,7 @@ try {
     );
     assert.match(await execute("B", "DROP TRIGGER item_revision_no_update"), new RegExp(OTHER_AGENT));
     assert.notEqual(
-      await execute("A", "CREATE TRIGGER owners AFTER INSERT ON openbot_metadata BEGIN SELECT 1; END"),
+      await execute("A", "CREATE TRIGGER owners AFTER INSERT ON starbot_metadata BEGIN SELECT 1; END"),
       "ok",
       "a trigger was added to the owner record",
     );
@@ -278,7 +278,7 @@ try {
     assert.equal(
       await execute(
         "A",
-        "CREATE TRIGGER take AFTER DELETE ON child BEGIN UPDATE openbot_metadata SET owner_agent_id = 'A' WHERE table_name = 'b_table'; END",
+        "CREATE TRIGGER take AFTER DELETE ON child BEGIN UPDATE starbot_metadata SET owner_agent_id = 'A' WHERE table_name = 'b_table'; END",
       ),
       "ok",
     );

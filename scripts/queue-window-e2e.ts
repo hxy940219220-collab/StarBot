@@ -4,39 +4,39 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { isQueueSnapshot, type QueueSnapshot } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber } from "@openbot/contracts/runtime-values";
+import { isQueueSnapshot, type QueueSnapshot } from "@starbot/contracts/ipc";
+import { isDynamicRecord, isNumber } from "@starbot/contracts/runtime-values";
 import {
   supportsTeamSemanticTags,
   TEAM_HISTORY_EXTENT_CAPABILITY,
   TEAM_QUEUE_WINDOW_CAPABILITY,
   teamCapabilitiesForProtocol,
-} from "@openbot/contracts/team-protocol/current";
-import { teamHttpCodec } from "@openbot/contracts/team-protocol/http-codecs";
-import { TEAM_CAPABILITIES_HEADER, TEAM_PROTOCOL_VERSION_HEADER } from "@openbot/contracts/team-protocol/v1";
+} from "@starbot/contracts/team-protocol/current";
+import { teamHttpCodec } from "@starbot/contracts/team-protocol/http-codecs";
+import { TEAM_CAPABILITIES_HEADER, TEAM_PROTOCOL_VERSION_HEADER } from "@starbot/contracts/team-protocol/v1";
 import {
   decodeTeamProtocolV2RpcFrame,
   encodeTeamProtocolV2Frame,
   TEAM_PROTOCOL_V2_MAX_JSON_FRAME_BYTES,
-} from "@openbot/contracts/team-protocol/v2";
+} from "@starbot/contracts/team-protocol/v2";
 import {
   decodeTeamProtocolV6WebRtcHttpResponse,
   encodeTeamProtocolV6WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v6-webrtc-adapter";
+} from "@starbot/contracts/team-protocol/v6-webrtc-adapter";
 import {
   decodeTeamProtocolV7WebRtcHttpResponse,
   encodeTeamProtocolV7WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v7-webrtc-adapter";
+} from "@starbot/contracts/team-protocol/v7-webrtc-adapter";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { StarBotDatabase } from "../src/backend/starbot-database";
 import { HttpError } from "../src/main/team-api/http-error";
 import type { TeamApiRequestContext } from "../src/main/team-api/request-context";
 import { requestCapabilities, requestProtocol } from "../src/main/team-api/request-helpers";
 import { type AgentQueueRouteDependencies, routeAgentQueue } from "../src/main/team-api/route-agent-queue";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/queue-window-e2e");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/queue-window-e2e");
 const HISTORY_AGENT = "agent-history";
 const MIXED_AGENT = "agent-mixed";
 const HISTORY = 700;
@@ -417,9 +417,9 @@ async function checkMixed(origin: string, mailbox: MailboxStore): Promise<void> 
   report.checks.push("mixed without queue-window-v1: the full list, larger than one frame");
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-queue-window-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-queue-window-"));
 const path = join(root, "profile");
-const database = new OpenBotDatabase(path);
+const database = new StarBotDatabase(path);
 let host: { origin: string; close(): void } | null = null;
 try {
   const mailbox = new MailboxStore(path, join(root, "shared"), database);

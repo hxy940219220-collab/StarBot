@@ -1,6 +1,6 @@
-export const OPENBOT_AGENT_TEMPLATE_ORIGIN = "https://starbot.app";
-export const OPENBOT_AGENT_TEMPLATE_PATH_PREFIX = "/agents/";
-export const OPENBOT_AGENT_TEMPLATE_HOST = "agents";
+export const STARBOT_AGENT_TEMPLATE_ORIGIN = "https://starbot.app";
+export const STARBOT_AGENT_TEMPLATE_PATH_PREFIX = "/agents/";
+export const STARBOT_AGENT_TEMPLATE_HOST = "agents";
 export const WEB_APP_AGENT_TEMPLATE_PARAM = "agent";
 
 const AGENT_TEMPLATE_ID_PATTERN = /^[A-Za-z0-9_-]{22}$/u;
@@ -10,7 +10,7 @@ export function isAgentTemplateId(value: string): boolean {
 }
 
 export function isAgentTemplateShareOrigin(origin: string): boolean {
-  if (origin === OPENBOT_AGENT_TEMPLATE_ORIGIN) return true;
+  if (origin === STARBOT_AGENT_TEMPLATE_ORIGIN) return true;
   try {
     const url = new URL(origin);
     return (
@@ -24,15 +24,15 @@ export function isAgentTemplateShareOrigin(origin: string): boolean {
 }
 
 export function agentTemplateShareOrigin(apiOrigin: string): string {
-  return apiOrigin !== OPENBOT_AGENT_TEMPLATE_ORIGIN && isAgentTemplateShareOrigin(apiOrigin)
+  return apiOrigin !== STARBOT_AGENT_TEMPLATE_ORIGIN && isAgentTemplateShareOrigin(apiOrigin)
     ? apiOrigin
-    : OPENBOT_AGENT_TEMPLATE_ORIGIN;
+    : STARBOT_AGENT_TEMPLATE_ORIGIN;
 }
 
-export function createAgentTemplateShareUrl(id: string, origin: string = OPENBOT_AGENT_TEMPLATE_ORIGIN): string {
+export function createAgentTemplateShareUrl(id: string, origin: string = STARBOT_AGENT_TEMPLATE_ORIGIN): string {
   assertAgentTemplateId(id);
   if (!isAgentTemplateShareOrigin(origin)) throw new Error("The StarBot agent link origin is invalid.");
-  return `${origin}${OPENBOT_AGENT_TEMPLATE_PATH_PREFIX}${id}`;
+  return `${origin}${STARBOT_AGENT_TEMPLATE_PATH_PREFIX}${id}`;
 }
 
 export function createWebAppAgentTemplatePath(id: string): string {
@@ -45,9 +45,9 @@ export function agentTemplateIdFromWebAppSearch(search: string): string | null {
   return id !== null && isAgentTemplateId(id) ? id : null;
 }
 
-export function createOpenBotAgentTemplateUrl(id: string): string {
+export function createStarBotAgentTemplateUrl(id: string): string {
   assertAgentTemplateId(id);
-  return `starbot://${OPENBOT_AGENT_TEMPLATE_HOST}/${id}`;
+  return `starbot://${STARBOT_AGENT_TEMPLATE_HOST}/${id}`;
 }
 
 export function parseAgentTemplateUrl(value: string): string {
@@ -60,10 +60,10 @@ export function parseAgentTemplateUrl(value: string): string {
 
   const canonical =
     url.protocol === "https:" &&
-    url.origin === OPENBOT_AGENT_TEMPLATE_ORIGIN &&
-    url.pathname.startsWith(OPENBOT_AGENT_TEMPLATE_PATH_PREFIX);
+    url.origin === STARBOT_AGENT_TEMPLATE_ORIGIN &&
+    url.pathname.startsWith(STARBOT_AGENT_TEMPLATE_PATH_PREFIX);
   const customScheme =
-    (url.protocol === "starbot:" || url.protocol === "openbot:") && url.hostname === OPENBOT_AGENT_TEMPLATE_HOST;
+    (url.protocol === "starbot:" || url.protocol === "starbot:") && url.hostname === STARBOT_AGENT_TEMPLATE_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||
@@ -76,7 +76,7 @@ export function parseAgentTemplateUrl(value: string): string {
   }
 
   const rest = canonical
-    ? url.pathname.slice(OPENBOT_AGENT_TEMPLATE_PATH_PREFIX.length)
+    ? url.pathname.slice(STARBOT_AGENT_TEMPLATE_PATH_PREFIX.length)
     : url.pathname.replace(/^\//u, "");
   const segments = rest.split("/");
   if (segments.length !== 1) throw new Error("The StarBot agent link is invalid.");

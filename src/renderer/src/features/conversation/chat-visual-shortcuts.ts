@@ -1,5 +1,5 @@
-import type { ChatVisualKey } from "@openbot/contracts/chat-visual";
-import { SHORTCUT_COMMANDS } from "@openbot/ui/features/settings/keyboard-shortcuts";
+import type { ChatVisualKey } from "@starbot/contracts/chat-visual";
+import { SHORTCUT_COMMANDS } from "@starbot/ui/features/settings/keyboard-shortcuts";
 import { matchesShortcut } from "../../keyboard-shortcut-preference";
 import { isOpenSettingsShortcut } from "../settings/settings-shortcut";
 

@@ -1,11 +1,11 @@
-import type { ConversationSearchPage } from "@openbot/contracts/ipc";
-import { isNumber, isString } from "@openbot/contracts/runtime-values";
+import type { ConversationSearchPage } from "@starbot/contracts/ipc";
+import { isNumber, isString } from "@starbot/contracts/runtime-values";
 import {
   THREAD_MESSAGE_SEARCH_CAPABILITY,
   THREAD_MESSAGE_SEARCH_PAGE_LIMIT,
   THREAD_MESSAGE_SEARCH_ROUTES,
-} from "@openbot/contracts/team-protocol/thread-message-search-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@starbot/contracts/team-protocol/thread-message-search-v1";
+import { sourceText } from "@starbot/i18n/source";
 import type { TeamApiAgents } from "./dependencies";
 import { HttpError } from "./http-error";
 import type { RouteOutcome, TeamApiRequestContext } from "./request-context";

@@ -1,12 +1,12 @@
 import { randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createStarBotLogger, toLogValue } from "@starbot/logging";
 import { Effect } from "effect";
 import { parseBrowserToolCall } from "../browser-tools";
 import type { DynamicToolResult } from "../protocol";
 
-const logger = createOpenBotLogger("browser-screenshot-file");
+const logger = createStarBotLogger("browser-screenshot-file");
 
 export const saveBrowserScreenshot = Effect.fn("saveBrowserScreenshot")(function* (
   workspacePath: () => string,
@@ -27,7 +27,7 @@ export const saveBrowserScreenshot = Effect.fn("saveBrowserScreenshot")(function
     await writeFile(path, Buffer.from(png, "base64"), { flag: "wx", mode: 0o600 });
     return withNote(
       result,
-      `Saved as ${path}. To show it to the user, pass this path to openbot.attach_files_to_response.`,
+      `Saved as ${path}. To show it to the user, pass this path to starbot.attach_files_to_response.`,
     );
   }).pipe(
     Effect.catch((failure) =>

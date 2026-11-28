@@ -5,7 +5,7 @@ import {
   type StorageDesktopApi,
   type StorageUsage,
   type StoredFileRow,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   FILES_AGENT_USAGE,
   FILES_BREAKDOWN,

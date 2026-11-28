@@ -1,6 +1,6 @@
-import { type AgentAccessLevel, canAdministerServer, graphAgentIds, type WorkflowGraph } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+import { type AgentAccessLevel, canAdministerServer, graphAgentIds, type WorkflowGraph } from "@starbot/contracts/ipc";
+import { sourceText } from "@starbot/i18n/source";
+import { RoutineInputError } from "@starbot/team-client/routine-schedule";
 import type { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { WorkflowStoreError } from "../../backend/workflows/workflow-store";

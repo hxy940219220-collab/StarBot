@@ -1,16 +1,16 @@
-import { type CustomServerPlan, optionalCustomServerPayment } from "@openbot/contracts/custom-server-plans";
-import { type HostKeyHandover, optionalHostKeyHandovers } from "@openbot/contracts/host-key-handover";
+import { type CustomServerPlan, optionalCustomServerPayment } from "@starbot/contracts/custom-server-plans";
+import { type HostKeyHandover, optionalHostKeyHandovers } from "@starbot/contracts/host-key-handover";
 import {
   createInviteUrl,
   type InviteLinkOptions,
   inviteUseCount,
   isPermanentInvite,
-  OPENBOT_CONTROL_PLANE_ORIGIN,
-  OPENBOT_INVITE_ORIGIN,
+  STARBOT_CONTROL_PLANE_ORIGIN,
+  STARBOT_INVITE_ORIGIN,
   parseInviteUrl,
   selfHostedApiOrigin,
-} from "@openbot/contracts/invite-links";
-import type { MobileConnectHostBinding } from "@openbot/contracts/mobile-connect";
+} from "@starbot/contracts/invite-links";
+import type { MobileConnectHostBinding } from "@starbot/contracts/mobile-connect";
 import {
   type AcceptedOwnerTransfer,
   decodeAcceptedOwnerTransfer,
@@ -18,15 +18,15 @@ import {
   decodeOwnerTransfer,
   decodePendingOwnerTransfer,
   type OwnerTransfer,
-} from "@openbot/contracts/owner-transfer";
-import { decodeRemoteSession, decodeRemoteSessionTicket } from "@openbot/contracts/remote-control-plane";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+} from "@starbot/contracts/owner-transfer";
+import { decodeRemoteSession, decodeRemoteSessionTicket } from "@starbot/contracts/remote-control-plane";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@starbot/contracts/runtime-values";
 import {
   optionalServerAppearanceField,
   type ServerAppearance,
-} from "@openbot/contracts/team-protocol/host-appearance-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { referenceFrom, safeReference } from "@openbot/user-errors/reference";
+} from "@starbot/contracts/team-protocol/host-appearance-v1";
+import { sourceText } from "@starbot/i18n/source";
+import { referenceFrom, safeReference } from "@starbot/user-errors/reference";
 import { Deferred, Effect, Schema, Semaphore } from "effect";
 import { runTeamEffect } from "./effect-boundary";
 import {
@@ -471,8 +471,8 @@ export class RemoteTeamDirectoryClient {
 
   #inviteApiUrl(): string {
     const url = new URL(this.#apiUrl);
-    return this.#authentication.kind === "browser" && url.origin === OPENBOT_INVITE_ORIGIN
-      ? new URL(OPENBOT_CONTROL_PLANE_ORIGIN).toString()
+    return this.#authentication.kind === "browser" && url.origin === STARBOT_INVITE_ORIGIN
+      ? new URL(STARBOT_CONTROL_PLANE_ORIGIN).toString()
       : url.toString();
   }
 

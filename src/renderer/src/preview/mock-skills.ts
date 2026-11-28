@@ -8,9 +8,9 @@ import {
   type MarketplaceSkillPage,
   type MarketplaceSkillQuery,
   type MarketplaceSkillSummary,
-  type OpenBotDesktopApi,
+  type StarBotDesktopApi,
   type SkillSubmission,
-} from "@openbot/contracts/ipc";
+} from "@starbot/contracts/ipc";
 import {
   STORY_INSTALLED_SKILLS,
   STORY_MARKETPLACE_SKILL_DETAILS,
@@ -139,7 +139,7 @@ export function createMockSkills(options: MockSkillsOptions, onChanged: (agentId
     onChanged(agentId);
   }
 
-  const skills: OpenBotDesktopApi["skills"] = {
+  const skills: StarBotDesktopApi["skills"] = {
     localList: async () => clone(localSkills),
     localGet: async ({ skillId, revision }) => {
       const skill = revision

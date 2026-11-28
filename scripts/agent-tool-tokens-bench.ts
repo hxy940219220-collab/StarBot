@@ -6,23 +6,23 @@ import { join, resolve } from "node:path";
 import { createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
-import { type AgentSummary, DEFAULT_AGENT_DEFAULTS } from "@openbot/contracts/ipc";
+import { type AgentSummary, DEFAULT_AGENT_DEFAULTS } from "@starbot/contracts/ipc";
 import { developerInstructions } from "../src/backend/agent/developer-instructions";
 import { CODEX_FEATURES_CONFIG } from "../src/backend/agent/thread-lifecycle";
 import { discoverTools, visibleDynamicTools } from "../src/backend/agent/tool-catalog";
 import { CodexAppServerClient } from "../src/backend/app-server-client";
-import { OPENBOT_BROWSER_NAMESPACE } from "../src/backend/browser-tools";
-import { claudeBrowserTools, claudeOpenBotTools } from "../src/backend/claude-client";
+import { STARBOT_BROWSER_NAMESPACE } from "../src/backend/browser-tools";
+import { claudeBrowserTools, claudeStarBotTools } from "../src/backend/claude-client";
 import { resolveCodexCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { decodeRecordResponse, getRecord, getString } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-tool-tokens-bench");
+const OUT = resolve(import.meta.dirname, "../.starbot-build/agent-tool-tokens-bench");
 const NL = String.fromCharCode(10);
 const DEADLINE_MS = 60_000;
 
 type Encode = (text: string) => number[];
-const tokenizerPath = process.env.OPENBOT_O200K_TOKENIZER;
+const tokenizerPath = process.env.STARBOT_O200K_TOKENIZER;
 const encode: Encode | null = tokenizerPath ? (await import(tokenizerPath)).encode : null;
 
 const text = (value: unknown) => (typeof value === "string" ? value : JSON.stringify(value));
@@ -153,7 +153,7 @@ function deadline(what: string): Promise<never> {
   });
 }
 
-const OPENBOT_NAMES = new Set(visibleDynamicTools("codex").flatMap((namespace) => [namespace.name]));
+const STARBOT_NAMES = new Set(visibleDynamicTools("codex").flatMap((namespace) => [namespace.name]));
 
 async function codexRequest(root: string) {
   const cli = await runCauseEffect(resolveCodexCli());
@@ -186,7 +186,7 @@ async function codexRequest(root: string) {
         client.request(
           "initialize",
           {
-            clientInfo: { name: "openbot_bench", title: "StarBot Bench", version: "0.0.0" },
+            clientInfo: { name: "starbot_bench", title: "StarBot Bench", version: "0.0.0" },
             capabilities: { experimentalApi: true },
           },
           decodeRecordResponse,
@@ -203,7 +203,7 @@ async function codexRequest(root: string) {
             model: "fake-model",
             config: CODEX_FEATURES_CONFIG,
             developerInstructions: instructions("codex"),
-            serviceName: "openbot",
+            serviceName: "starbot",
             dynamicTools: visibleDynamicTools("codex"),
           },
           decodeRecordResponse,
@@ -220,15 +220,15 @@ async function codexRequest(root: string) {
     }
     const request = model.requests.sort((a, b) => b.body.length - a.body.length)[0];
     assert(request, "Codex sent no model request.");
-    const openbotTools = request.tools.filter((tool) => OPENBOT_NAMES.has(tool.name ?? ""));
-    assert(openbotTools.length > 0, "Codex sent no openbot tools.");
+    const starbotTools = request.tools.filter((tool) => STARBOT_NAMES.has(tool.name ?? ""));
+    assert(starbotTools.length > 0, "Codex sent no starbot tools.");
     const ownInstructions = request.developer.filter((part) => part.includes("persistent local StarBot teammate"));
     assert(ownInstructions.length > 0, "Codex sent no StarBot instructions.");
-    await writeFile(join(OUT, "codex-openbot-tools.json"), `${JSON.stringify(openbotTools, null, 2)}${NL}`);
+    await writeFile(join(OUT, "codex-starbot-tools.json"), `${JSON.stringify(starbotTools, null, 2)}${NL}`);
     return {
       codexVersion: cli.version,
       request: count(request.body),
-      openbotTools: count(openbotTools),
+      starbotTools: count(starbotTools),
       instructions: count(ownInstructions.join(NL)),
     };
   } finally {
@@ -240,13 +240,13 @@ async function claudeTools() {
   const empty = async () => ({ content: [] });
   const listed = [];
   for (const [name, tools] of [
-    ["openbot", claudeOpenBotTools(empty)],
-    [OPENBOT_BROWSER_NAMESPACE, claudeBrowserTools(empty)],
+    ["starbot", claudeStarBotTools(empty)],
+    [STARBOT_BROWSER_NAMESPACE, claudeBrowserTools(empty)],
   ] as const) {
     const server = createSdkMcpServer({ name, version: "0.1.0", tools: [...tools] });
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
     await server.instance.connect(serverTransport);
-    const client = new Client({ name: "openbot-bench", version: "0.0.0" });
+    const client = new Client({ name: "starbot-bench", version: "0.0.0" });
     await client.connect(clientTransport);
     try {
       const { tools: own } = await client.listTools();
@@ -256,7 +256,7 @@ async function claudeTools() {
       await server.instance.close();
     }
   }
-  await writeFile(join(OUT, "claude-openbot-tools.json"), `${JSON.stringify(listed, null, 2)}${NL}`);
+  await writeFile(join(OUT, "claude-starbot-tools.json"), `${JSON.stringify(listed, null, 2)}${NL}`);
   const byName = Object.fromEntries(listed.map((tool) => [tool.name, count(tool).tokens ?? count(tool).bytes]));
   return {
     tools: count(listed.map(({ name, description, inputSchema }) => ({ name, description, inputSchema }))),
@@ -276,7 +276,7 @@ function searchResults() {
             threadId: "t",
             turnId: "t",
             callId: "c",
-            namespace: "openbot",
+            namespace: "starbot",
             tool: "tool_search",
             arguments: { query },
           },
@@ -289,7 +289,7 @@ function searchResults() {
 
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
-const root = await mkdtemp(join(tmpdir(), "openbot-tool-tokens-"));
+const root = await mkdtemp(join(tmpdir(), "starbot-tool-tokens-"));
 type Count = ReturnType<typeof count>;
 const report: {
   passed: boolean;
