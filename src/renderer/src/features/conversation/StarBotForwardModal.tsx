@@ -47,9 +47,7 @@ export function StarBotForwardModal(props: {
   const [jumpAfterSend, setJumpAfterSend] = createSignal(true);
   const [sending, setSending] = createSignal(false);
 
-  const candidateBots = createMemo(() =>
-    props.agents.filter((a) => a.id !== props.currentAgent?.id),
-  );
+  const candidateBots = createMemo(() => props.agents.filter((a) => a.id !== props.currentAgent?.id));
 
   createEffect(
     () => props.request,
@@ -167,12 +165,7 @@ export function StarBotForwardModal(props: {
                 <strong>{modeTitle()}</strong>
                 <span>支持多选星友一键同步上下文</span>
               </div>
-              <button
-                type="button"
-                class="starbot-inspector-close"
-                onClick={() => props.onClose()}
-                aria-label="关闭"
-              >
+              <button type="button" class="starbot-inspector-close" onClick={() => props.onClose()} aria-label="关闭">
                 <X class="size-4" />
               </button>
             </div>

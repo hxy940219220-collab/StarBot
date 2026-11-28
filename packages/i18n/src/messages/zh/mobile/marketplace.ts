@@ -64,8 +64,7 @@ export const messages = {
   "mobile.marketplace.facts.accessNone": "无需登录",
   "mobile.marketplace.facts.accessMac": "仅限 Mac",
   "mobile.marketplace.permission.admin": "只有所有者和管理员可以从市场安装。",
-  "mobile.marketplace.permission.unavailable":
-    "该服务器已离线，或其星友版本过旧。请更新运行它的电脑上的星友。",
+  "mobile.marketplace.permission.unavailable": "该服务器已离线，或其星友版本过旧。请更新运行它的电脑上的星友。",
   "mobile.marketplace.error.agentUnsupported": "请更新服务器上的星友，才能从市场添加助手。",
   "mobile.marketplace.error.agentUpdateUnsupported": "请更新服务器上的星友，才能从市场更新助手。",
   "mobile.marketplace.error.signInUnsupported": "请更新服务器上的星友，才能在手机上登录应用。",
@@ -111,8 +110,7 @@ export const messages = {
   "mobile.marketplace.app.docs": "获取密钥",
   "mobile.marketplace.app.local": "该应用运行在装有星友的电脑上。请在那台电脑上设置。",
   "mobile.marketplace.app.needsMac": "此应用仅在运行星友的 Mac 上可用，而此服务器不是 Mac。",
-  "mobile.marketplace.app.relayUnsupported":
-    "该应用需要在浏览器中登录。请更新服务器上的星友，或在电脑上连接该应用。",
+  "mobile.marketplace.app.relayUnsupported": "该应用需要在浏览器中登录。请更新服务器上的星友，或在电脑上连接该应用。",
   "mobile.marketplace.app.waiting": "正在等待登录页面…",
   "mobile.marketplace.app.openAgain": "重新打开登录页面",
   "mobile.marketplace.app.pasteHint": "最后，页面会打开一个无法加载的地址。请复制该地址并粘贴到下方。",

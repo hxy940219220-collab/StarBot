@@ -37,5 +37,4 @@ export const messages = {
 
   "error.auth.deliveryUnknown":
     "StarBot giriş kodunun gönderilip gönderilmediğini onaylayamadı. Tekrar göndermeden önce teslimatı kontrol edin.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -1528,8 +1528,7 @@ export function ConversationTimeline() {
                     if (currentMessage) void copyMessage(currentMessage);
                   },
                 };
-                const stepsInRow = () =>
-                  author().kind === "agent" && !message()?.questionPrompt && Boolean(channel);
+                const stepsInRow = () => author().kind === "agent" && !message()?.questionPrompt && Boolean(channel);
                 const actionsBeside = () => stepsInRow() || author().kind === "you";
                 const stepsDisclosure = () => (
                   <Show when={turnSteps.stepsAbove(message()?.id)}>

@@ -20,8 +20,7 @@ export const messages = {
     "{provider} 在没有星友工具的情况下处理了这条消息，因此智能体无法联系队友、使用浏览器或附加文件。请重试。",
   "error.provider.acpOwnMcpServerFailed":
     "{provider} 无法启动 MCP 服务器 {name}，因此回复已停止。此服务器位于你自己的 {provider} 设置中，而不在星友中。请在那里移除或修复该服务器，然后开始新的聊天。",
-  "error.provider.endpointsReadOnly":
-    "已保存的端点由更新版本的星友写入，或文件无法读取。请更新星友后再修改。",
+  "error.provider.endpointsReadOnly": "已保存的端点由更新版本的星友写入，或文件无法读取。请更新星友后再修改。",
   "error.provider.endpointNoSecureStorage":
     "该电脑没有安全存储，无法保存 API 密钥或请求头。请移除它们，或改用无需凭据的端点。",
   "error.provider.endpointDuplicate": "已存在使用该服务商 ID 的端点。请先移除它，或改用其他 ID。",
@@ -36,8 +35,7 @@ export const messages = {
   "error.provider.discoveryHttp": "{host} 返回了 HTTP {status}。",
   "error.provider.discoveryTooLarge": "{host} 的模型列表过大。",
   "error.provider.discoveryInvalid": "{host} 未返回兼容 OpenAI 的模型列表。",
-  "error.provider.detectionSettingsReadOnly":
-    "检测设置由更新版本的星友写入，或文件无法读取。请更新星友后再修改。",
+  "error.provider.detectionSettingsReadOnly": "检测设置由更新版本的星友写入，或文件无法读取。请更新星友后再修改。",
   "error.provider.detectionEntryInvalid": "地址必须是 http:// 或 https:// 开头且不含密码的 URL，文件夹必须是绝对路径。",
   "error.provider.detectionEntriesTooMany": "地址或文件夹数量过多。",
   "error.provider.credentialFileUnreadable": "服务商凭据文件无法读取。",
@@ -177,8 +175,7 @@ export const messages = {
   "error.provider.codeLoginBadCode": "请粘贴登录页显示的验证码。",
   "error.provider.codeLoginRefused": "服务商未接受该验证码，请重新开始登录。",
   "error.provider.codeLoginUnsupported": "该服务器不支持用粘贴验证码的方式登录。请在服务器电脑的浏览器中登录。",
-  "error.provider.claudeLoginNotSaved":
-    "Claude 无法在 Mac 上保存登录信息。请重启运行星友的 Mac，然后重新连接 Claude。",
+  "error.provider.claudeLoginNotSaved": "Claude 无法在 Mac 上保存登录信息。请重启运行星友的 Mac，然后重新连接 Claude。",
   "error.provider.cliBusyRetry": "{provider} CLI 正在处理对话，请等它结束后重试。",
   "error.provider.cliSigningIn": "{provider} CLI 正在登录，请完成或取消登录后再更新。",
   "error.provider.cliBusyUpdate": "{provider} CLI 正在处理对话，请等它结束后再更新。",
@@ -246,8 +243,7 @@ export const messages = {
   "error.provider.opencodeModelNotServed": "模型服务商目前不向你的账号提供此模型。请选择其他模型，然后重新发送消息。",
   "error.provider.opencodeSafetyBlocked":
     "模型服务商因其安全规则拦截了此消息。请换一种说法重新发送你的请求。如果后续消息也被拦截，请开始新的聊天或选择其他模型。",
-  "error.provider.opencodeNetwork":
-    "OpenCode 无法连接模型服务商。请检查运行星友的电脑的网络连接后重试。\n{detail}",
+  "error.provider.opencodeNetwork": "OpenCode 无法连接模型服务商。请检查运行星友的电脑的网络连接后重试。\n{detail}",
   "error.provider.codexStateBusy": "ChatGPT 仍在为上一次启动准备本地历史记录。请等几分钟，然后重试。",
   "error.provider.codexThreadInUse":
     "另一个 Codex 应用（例如 Codex 桌面应用、Codex CLI 或 IDE 扩展）打开了此聊天。同一时间只有一个应用可以写入 Codex 聊天。请在该应用中关闭此聊天，然后重新发送消息。",
@@ -453,8 +449,7 @@ export const messages = {
   "error.provider.customAgentNone": "尚未保存任何自定义助手。",
   "error.provider.customAgentMissing": "该自定义助手当前未保存。请改用其他模型。",
   "error.provider.customAgentSignIn": "请用该助手自带的命令登录后重试。",
-  "error.provider.customAgentsReadOnly":
-    "已保存的自定义助手由更新版本的星友写入，或文件无法读取。请更新星友后再修改。",
+  "error.provider.customAgentsReadOnly": "已保存的自定义助手由更新版本的星友写入，或文件无法读取。请更新星友后再修改。",
   "error.provider.customAgentNoSecureStorage": "该电脑没有安全存储，无法保存环境变量值。请移除它们后重试。",
   "error.provider.customAgentNotSaved": "该自定义助手未保存，请刷新列表后重试。",
   "error.provider.customAgentWorkspaceOnly": "{reason}。“仅工作区”阻止了此操作。请尝试“完全访问”。",
@@ -476,8 +471,7 @@ export const messages = {
   "error.provider.accountDefault": "第一个 {provider} 账号无法移除。",
   "error.provider.accountUsesKey":
     "此 {provider} 账号使用已保存的 API 密钥，没有登录。请在服务器设置 → 服务商中更改密钥。",
-  "error.provider.accountNeedsKey":
-    "新的 {provider} 账号需要 API 密钥。请更新这台设备上的星友，然后重新添加该账号。",
+  "error.provider.accountNeedsKey": "新的 {provider} 账号需要 API 密钥。请更新这台设备上的星友，然后重新添加该账号。",
   "error.provider.accountKeyRefused": "{provider} 未接受该 API 密钥。请检查密钥后重试。",
   "error.provider.accountKeyUnreachable": "星友无法连接 {provider} 来检查 API 密钥。请检查网络连接后重试。",
   "error.provider.accountKeySignedOut": "{provider} 不再接受该账号的 API 密钥。请为该账号提供新密钥。",

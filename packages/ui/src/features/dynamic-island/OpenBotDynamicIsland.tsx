@@ -19,7 +19,6 @@ import {
 import type { AppTextKey, AppTranslate } from "@openbot/i18n";
 import {
   ArrowUp,
-  Badge,
   Button,
   Check,
   DYNAMIC_ISLAND_COMPACT_EAR_TRACK_WIDTH,
@@ -115,25 +114,25 @@ const QUESTION_SWAP_ENTER_DURATION = 320;
 const QUESTION_SWAP_BLUR = 6;
 const QUESTION_SWAP_MIDPOINT_OPACITY = 0.55;
 const OPENBOT_COMPACT_HOVER_MOTION = {
-  leadingScale: 1.22,
-  trailingScale: 1.08,
-  outwardTranslateX: 10,
-  translateY: 4,
+  leadingScale: 1.07,
+  trailingScale: 1.04,
+  outwardTranslateX: 4,
+  translateY: 1,
 } as const;
 const QUESTION_PROGRESS_DURATION = 300;
 const QUESTION_PROGRESS_BLUR = 2;
 const COMPACT_LEADING_SIZE = 20;
-const STATUS_COMPACT_BASE_WIDTH = { notch: 412, island: 280 } as const;
+const STATUS_COMPACT_BASE_WIDTH = { notch: 476, island: 320 } as const;
 const STATUS_COMPACT_NOTCH_WIDTH = 192;
 const STATUS_COMPACT_AVATAR_WIDTH = 20;
 const STATUS_COMPACT_IDENTITY_GAP = 6;
 const STATUS_COMPACT_AVATAR_OVERLAP = 6;
-const STATUS_COMPACT_NOTCH_EDGE_PADDING = 12;
-const STATUS_COMPACT_ISLAND_INLINE_PADDING = 8;
-const STATUS_COMPACT_BADGE_CHROME_WIDTH = 32;
-const STATUS_COMPACT_NOTCH_MIN_WIDTH = 360;
-const STATUS_COMPACT_ISLAND_MIN_WIDTH = 212;
-const STATUS_COMPACT_NAME_MAX_WIDTH = { notch: 72, island: 96 } as const;
+const STATUS_COMPACT_NOTCH_EDGE_PADDING = 20;
+const STATUS_COMPACT_NOTCH_INNER_GAP = 10;
+const STATUS_COMPACT_ISLAND_INLINE_PADDING = 12;
+const STATUS_COMPACT_NOTCH_MIN_WIDTH = 396;
+const STATUS_COMPACT_ISLAND_MIN_WIDTH = 224;
+const STATUS_COMPACT_NAME_MAX_WIDTH = { notch: 76, island: 96 } as const;
 const IDLE_COMPACT_NOTCH_EAR_MIN_WIDTH = COMPACT_LEADING_SIZE + 20;
 const IDLE_COMPACT_NO_NOTCH_MIN_WIDTH = 16 + COMPACT_LEADING_SIZE + 16 + 16 + 16;
 const IDLE_COMPACT_ISLAND_MIN_WIDTH = 74;
@@ -274,10 +273,18 @@ const OPENBOT_ISLAND_MODE_CONFIG: Record<DynamicIslandPresentation["mode"], Open
 };
 
 function compactStatusGeometry(
-  t: AppTranslate,
+  _t: AppTranslate,
   presentation: DynamicIslandPresentation,
   physicalNotchWidth = STATUS_COMPACT_NOTCH_WIDTH,
 ): StatusCompactGeometry | undefined {
+  if (presentation.recording) {
+    const notchW = Math.max(428, Math.ceil((physicalNotchWidth + 236) / 2) * 2);
+    const islandW = 276;
+    return {
+      notch: { width: notchW, minimum: notchW },
+      island: { width: islandW, minimum: islandW },
+    };
+  }
   const mode = statusMode(presentation.mode);
   if (!mode) return undefined;
 
@@ -288,7 +295,9 @@ function compactStatusGeometry(
 
   const badge = OPENBOT_ISLAND_MODE_CONFIG[mode].badge;
   if (!badge) return undefined;
-  const badgeWidth = Math.ceil(measureCompactText(t(badge.label), 600) + STATUS_COMPACT_BADGE_CHROME_WIDTH);
+  const moodLabel = STARBOT_STATUS_MOOD_LABELS[mode];
+  const badgeChromeWidth = mode === "working" ? 56 : 40;
+  const badgeWidth = Math.ceil(measureCompactText(moodLabel, 600) + badgeChromeWidth);
   const measuredNameWidth = agent ? measureCompactText(agent.name, 600) : 0;
   const notchNameWidth = Math.min(STATUS_COMPACT_NAME_MAX_WIDTH.notch, Math.ceil(measuredNameWidth));
   const islandNameWidth = Math.min(STATUS_COMPACT_NAME_MAX_WIDTH.island, Math.ceil(measuredNameWidth));
@@ -301,8 +310,9 @@ function compactStatusGeometry(
   const islandLeadingContentWidth = agent
     ? STATUS_COMPACT_AVATAR_WIDTH + STATUS_COMPACT_IDENTITY_GAP + islandNameWidth
     : workingAvatarStackWidth;
-  const notchLeadingWidth = STATUS_COMPACT_NOTCH_EDGE_PADDING + notchLeadingContentWidth;
-  const notchTrailingWidth = STATUS_COMPACT_NOTCH_EDGE_PADDING + badgeWidth;
+  const notchLeadingWidth =
+    STATUS_COMPACT_NOTCH_EDGE_PADDING + notchLeadingContentWidth + STATUS_COMPACT_NOTCH_INNER_GAP;
+  const notchTrailingWidth = STATUS_COMPACT_NOTCH_EDGE_PADDING + badgeWidth + STATUS_COMPACT_NOTCH_INNER_GAP;
   const notchWidthDelta = physicalNotchWidth - STATUS_COMPACT_NOTCH_WIDTH;
   const notchContentWidth = physicalNotchWidth + 2 * Math.max(notchLeadingWidth, notchTrailingWidth);
   const notchWidth = clampCompactWidth(
@@ -582,9 +592,19 @@ export function OpenBotDynamicIsland(props: OpenBotDynamicIslandProps): JSX.Elem
   });
 
   function changeState(next: DynamicIslandViewState, reason: DynamicIslandStateChangeReason): void {
-    if (props.presentation.mode === "idle" && next === "expanded") {
-      void props.onAction({ type: "open-app" });
+    if (props.presentation.recording && next === "expanded") {
+      if (reason === "pointer" || reason === "keyboard") {
+        void props.onAction({ type: "open-app" });
+      }
       return;
+    }
+    if (props.presentation.mode === "idle" && next === "expanded") {
+      // Only let explicit pointer clicks open the slide-down bot switcher in idle mode
+      if (reason !== "pointer" && reason !== "keyboard") return;
+      if ((props.presentation.agents?.length ?? 0) === 0) {
+        void props.onAction({ type: "open-app" });
+        return;
+      }
     }
     props.onStateChange(next, reason);
   }
@@ -616,14 +636,15 @@ export function OpenBotDynamicIsland(props: OpenBotDynamicIslandProps): JSX.Elem
             leading: sharedLeading()?.[props.displayMode === "island" ? "island" : "notch"],
             trailing: sharedTrailing()?.[props.displayMode === "island" ? "island" : "notch"],
           }}
-          hoverBehavior={config().badge ? "expand" : "grow"}
+          hoverBehavior={visiblePresentation().recording ? "grow" : config().badge ? "expand" : "grow"}
           hoverContentMotion={OPENBOT_COMPACT_HOVER_MOTION}
           onHoverChange={setHovered}
-          pointerToggle={config().badge ? false : undefined}
+          pointerToggle={undefined}
           class={[
             "openbot-dynamic-island",
             `dynamic-island-${visiblePresentation().mode === "message" ? "message-first" : visiblePresentation().mode}`,
-            config().badge ? "dynamic-island-status" : undefined,
+            config().badge || visiblePresentation().recording ? "dynamic-island-status" : undefined,
+            visiblePresentation().recording ? "dynamic-island-recording" : undefined,
             idleFoldedIntoNotch() ? "dynamic-island-idle-in-notch" : undefined,
             visiblePresentation().mode !== "idle" && visiblePresentation().mode !== "working"
               ? "dynamic-island-panel-wide"
@@ -734,6 +755,8 @@ function CompactLeading(props: {
 }): JSX.Element {
   const statusAgent = () => compactStatusAgent(props.presentation);
   const working = () => (props.presentation.mode === "working" ? props.presentation.working : []);
+  const recording = () => props.presentation.recording ?? null;
+  const activeIdleAgent = () => props.presentation.activeAgent ?? props.presentation.agents?.[0] ?? null;
   const ambientMotion = useAmbientMotion();
   const logoAnimation = () => (ambientMotion() ? "blink" : "none");
   return (
@@ -741,14 +764,34 @@ function CompactLeading(props: {
       <Switch
         fallback={
           <span class="dynamic-island-surface-leading-anchor" data-island-spatial-anchor="center">
-            <AppLogo
-              variant={props.variant ?? "production"}
-              animation={logoAnimation()}
-              class="dynamic-island-surface-logo"
-            />
+            <Show
+              when={activeIdleAgent()}
+              fallback={
+                <AppLogo
+                  variant={props.variant ?? "production"}
+                  animation={logoAnimation()}
+                  class="dynamic-island-surface-logo"
+                />
+              }
+            >
+              {(bot) => <IslandAvatar agent={bot()} />}
+            </Show>
           </span>
         }
       >
+        <Match when={recording()}>
+          {(rec) => (
+            <span
+              class="dynamic-island-surface-leading-anchor dynamic-island-surface-compact-identity starbot-island-rec-leading"
+              data-island-spatial-anchor="center"
+            >
+              <Show when={rec().agent ?? activeIdleAgent()}>{(bot) => <IslandAvatar agent={bot()} working />}</Show>
+              <span class="dynamic-island-surface-compact-name starbot-island-rec-label" data-island-motion-content>
+                {rec().phase === "transcribing" ? "转文字…" : "正在录音"}
+              </span>
+            </span>
+          )}
+        </Match>
         <Match when={props.presentation.mode === "working"}>
           <span
             class="dynamic-island-surface-leading-anchor dynamic-island-surface-compact-identity"
@@ -780,13 +823,44 @@ function CompactLeading(props: {
   );
 }
 
+function formatRecTimer(sec: number): string {
+  const s = Math.max(0, Math.floor(sec));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+}
+
 function CompactTrailing(props: { presentation: DynamicIslandPresentation; hovered: boolean }): JSX.Element {
+  const recording = () => props.presentation.recording ?? null;
   return (
-    <IslandContentSwap contentKey={props.presentation.mode} class="dynamic-island-surface-compact-swap">
+    <IslandContentSwap
+      contentKey={recording() ? "recording" : props.presentation.mode}
+      class="dynamic-island-surface-compact-swap"
+    >
       <Switch>
+        <Match when={recording()}>
+          {(rec) => (
+            <span class="starbot-island-rec-trailing" data-island-spatial-anchor="end" data-island-motion-content>
+              <span class="starbot-island-rec-bars" aria-hidden="true">
+                <For each={[0, 1, 2, 3, 4]}>
+                  {(idx) => {
+                    const lv = () => {
+                      const arr = rec().levels;
+                      const raw = arr[arr.length - 5 + idx] ?? 0.25;
+                      return Math.max(0.22, Math.min(1, raw * 1.4 + 0.18));
+                    };
+                    return <i style={{ "--bar-scale": String(lv()) }} />;
+                  }}
+                </For>
+              </span>
+              <span class="starbot-island-rec-time">{formatRecTimer(rec().elapsedSeconds)}</span>
+            </span>
+          )}
+        </Match>
         <Match when={statusMode(props.presentation.mode)}>{(mode) => <CompactStatusBadge mode={mode()} />}</Match>
         <Match when={props.presentation.mode === "idle"}>
-          <IdleGreetingEmoji moving={props.hovered} />
+          <span class="starbot-island-constellation-idle" data-island-spatial-anchor="end" aria-hidden="true">
+            <i class="is-main">✦</i>
+            <i class="is-sub">✦</i>
+          </span>
         </Match>
       </Switch>
     </IslandContentSwap>
@@ -823,24 +897,39 @@ function CompactAgentName(props: { name: string; displayMode?: "notch" | "island
   );
 }
 
+const STARBOT_STATUS_MOOD_LABELS: Record<StatusMode, string> = {
+  working: "思考中",
+  message: "新回复",
+  question: "待回答",
+  approval: "待确认",
+  takeover: "需协助",
+  failed: "需处理",
+};
+
 function CompactStatusBadge(props: { mode: StatusMode }): JSX.Element {
-  const { t } = useText();
-  const config = () => OPENBOT_ISLAND_MODE_CONFIG[props.mode].badge;
   return (
-    <Show when={config()}>
-      {(badge) => (
-        <Badge
-          variant={badge().variant}
-          class={["dynamic-island-surface-status-badge", badge().className].join(" ")}
-          data-island-spatial-anchor="end"
-          data-island-motion-content
-          aria-hidden="true"
-        >
-          {badge().icon()}
-          <span class="dynamic-island-surface-status-badge-label">{t(badge().label)}</span>
-        </Badge>
-      )}
-    </Show>
+    <span
+      class={`starbot-island-mood-pill is-${props.mode}`}
+      data-island-spatial-anchor="end"
+      data-island-motion-content
+      aria-hidden="true"
+    >
+      <Show
+        when={props.mode === "working"}
+        fallback={
+          <span class="starbot-island-mood-glint" aria-hidden="true">
+            ✦
+          </span>
+        }
+      >
+        <span class="starbot-island-star-wave" aria-hidden="true">
+          <i>✦</i>
+          <i>✦</i>
+          <i>✦</i>
+        </span>
+      </Show>
+      <span class="starbot-island-mood-text">{STARBOT_STATUS_MOOD_LABELS[props.mode]}</span>
+    </span>
   );
 }
 
@@ -970,6 +1059,52 @@ function ExpandedContent(props: {
   const unreadCount = () => (props.presentation.mode === "message" ? props.presentation.unreadCount : 0);
   return (
     <Switch>
+      <Match when={props.presentation.mode === "idle"}>
+        <div class="dynamic-island-surface-panel starbot-island-switcher-panel">
+          <div class="starbot-island-switcher-header">
+            <span class="starbot-island-switcher-title">切换当前星友</span>
+            <button
+              type="button"
+              class="starbot-island-open-main-btn"
+              onClick={() => void props.onAction({ type: "open-app" })}
+            >
+              打开主窗口 ↗
+            </button>
+          </div>
+          <div class="starbot-island-switcher-list">
+            <For each={props.presentation.agents ?? []}>
+              {(bot) => {
+                const isCurrent = () => props.presentation.activeAgent?.id === bot.id;
+                return (
+                  <button
+                    type="button"
+                    class={`starbot-island-bot-option${isCurrent() ? " is-active" : ""}`}
+                    onClick={() => {
+                      props.onHaptic?.();
+                      void props.onAction({
+                        type: "select-agent",
+                        serverId: props.presentation.serverId,
+                        agentId: bot.id,
+                      });
+                      props.onClose();
+                    }}
+                  >
+                    <span class="starbot-island-bot-avatar">
+                      <AgentAvatar agent={bot} motion="hover" mood="idle" />
+                    </span>
+                    <span class="starbot-island-bot-name">{bot.name}</span>
+                    <Show when={isCurrent()}>
+                      <span class="starbot-island-bot-check">
+                        <Check aria-hidden="true" />
+                      </span>
+                    </Show>
+                  </button>
+                );
+              }}
+            </For>
+          </div>
+        </div>
+      </Match>
       <Match when={props.presentation.mode === "working"}>
         <div class="dynamic-island-surface-panel">
           <div class="dynamic-island-surface-list">
@@ -1759,12 +1894,14 @@ function ApprovalContext(props: { item: DynamicIslandApprovalItem }): JSX.Elemen
 
 function IslandAvatar(props: { agent: DynamicIslandAgentIdentity; working?: boolean | undefined }): JSX.Element {
   return (
-    <AgentAvatar
-      agent={props.agent}
-      motion="hover"
-      mood={props.working ? "working" : "idle"}
-      class="dynamic-island-surface-avatar"
-    />
+    <span class={`starbot-island-avatar-wrap${props.working ? " is-working" : ""}`}>
+      <AgentAvatar agent={props.agent} motion="hover" mood="idle" class="dynamic-island-surface-avatar" />
+      <Show when={props.working}>
+        <span class="starbot-island-orbit-star" aria-hidden="true">
+          ✦
+        </span>
+      </Show>
+    </span>
   );
 }
 

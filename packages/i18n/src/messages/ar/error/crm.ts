@@ -45,5 +45,4 @@ export const messages = {
 
   "error.crm.off": "CRM متوقف. يمكن للمالك أو المسؤول تشغيله من إعدادات الخادم > تجريبي.",
   "error.crm.settingsSaveFailed": "لا يستطيع StarBot حفظ إعداد CRM على هذا الخادم.",
-
 } as const satisfies PartialTranslation<typeof source>;

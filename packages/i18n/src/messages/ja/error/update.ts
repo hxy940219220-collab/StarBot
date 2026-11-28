@@ -51,5 +51,4 @@ export const messages = {
   "error.update.restartStarted": "StarBot はアップデートをインストールするため、すでに再起動しています。",
 
   "error.update.alreadyRestarting": "StarBot はすでに再起動しています。",
-
 } as const satisfies PartialTranslation<typeof source>;

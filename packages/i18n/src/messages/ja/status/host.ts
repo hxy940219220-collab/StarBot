@@ -16,5 +16,4 @@ export const messages = {
   "status.host.private": "この StarBot は非公開です。",
 
   "status.host.removed": "この StarBot はアカウントから削除されました。共有するには、もう一度公開してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

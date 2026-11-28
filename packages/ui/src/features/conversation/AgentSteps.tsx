@@ -188,11 +188,7 @@ function stepsSummary(steps: readonly AgentStep[], text: TextValue, failedCount 
   );
   const fallback = steps.find((step) => step.kind === "memory-summary");
   const workLabel =
-    work > 0
-      ? failedCount > 0
-        ? `${work} 个步骤已执行`
-        : text.t("chat.steps.count", { count: work })
-      : null;
+    work > 0 ? (failedCount > 0 ? `${work} 个步骤已执行` : text.t("chat.steps.count", { count: work })) : null;
   return [
     workLabel,
     changes.length > 0 ? text.t("chat.steps.memory", { changes: memory }) : null,

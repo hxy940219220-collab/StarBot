@@ -521,5 +521,4 @@ export const messages = {
   "error.backend.taskMessageFailed": "StarBot nie może wysłać wiadomości do zadania. Spróbuj ponownie później.",
 
   "error.backend.taskStartFailed": "StarBot nie może rozpocząć zadania. Zamiast tego wykonaj pracę w tej turze.",
-
 } as const satisfies PartialTranslation<typeof source>;

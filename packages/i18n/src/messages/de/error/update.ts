@@ -53,5 +53,4 @@ export const messages = {
   "error.update.restartStarted": "StarBot startet bereits zur Installation der Aktualisierung neu.",
 
   "error.update.alreadyRestarting": "StarBot startet bereits neu.",
-
 } as const satisfies PartialTranslation<typeof source>;

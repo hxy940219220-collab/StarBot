@@ -22,6 +22,7 @@ export interface AgentDockPreference {
   sizePercent: number;
   results: boolean;
   activeSeats: boolean;
+  shortcut: string | null;
   offsets: AgentDockOffset[];
 }
 
@@ -35,6 +36,7 @@ const DEFAULT_PREFERENCE: AgentDockPreference = {
   sizePercent: AGENT_DOCK_SIZE_LIMITS.default,
   results: true,
   activeSeats: false,
+  shortcut: "Alt+Shift+S",
   offsets: [],
 };
 
@@ -65,11 +67,13 @@ const preferenceSchema = z
       .catch(DEFAULT_PREFERENCE.sizePercent),
     results: z.boolean().catch(DEFAULT_PREFERENCE.results),
     activeSeats: z.boolean().catch(DEFAULT_PREFERENCE.activeSeats),
+    shortcut: z.string().trim().min(1).max(80).nullable().catch(DEFAULT_PREFERENCE.shortcut),
     offsets: z
       .array(
         z.object({
           displayId: z.number().int().nonnegative(),
           offset: z.number().min(0).max(1),
+          xOffset: z.number().min(0).max(1).optional().catch(undefined),
           bounds: z
             .object({
               x: z.number().int().min(-DISPLAY_EXTENT).max(DISPLAY_EXTENT),
@@ -176,7 +180,12 @@ export function setAgentDockPreference(patch: Partial<AgentDockPreference>): voi
 
 export function saveAgentDockOffset(moved: AgentDockOffset): void {
   const others = preference().offsets.filter((item) => item.displayId !== moved.displayId);
-  const saved = { displayId: moved.displayId, offset: moved.offset, ...(moved.bounds && { bounds: moved.bounds }) };
+  const saved: AgentDockOffset = {
+    displayId: moved.displayId,
+    offset: moved.offset,
+    ...(moved.xOffset !== undefined ? { xOffset: moved.xOffset } : {}),
+    ...(moved.bounds ? { bounds: moved.bounds } : {}),
+  };
   setAgentDockPreference({
     offsets: [...others, saved].slice(-AGENT_DOCK_LIMITS.displays),
   });

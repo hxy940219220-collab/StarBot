@@ -163,10 +163,7 @@ function AppList(props: { scope: MarketplaceScope; lists: BrowseLists }) {
   const otherApps = () =>
     props.lists
       .apps()
-      .filter(
-        (app) =>
-          app.kind === "custom" && !DOMESTIC_CURATED_IDS.has(app.id) && !OVERSEAS_CURATED_IDS.has(app.id),
-      );
+      .filter((app) => app.kind === "custom" && !DOMESTIC_CURATED_IDS.has(app.id) && !OVERSEAS_CURATED_IDS.has(app.id));
   const usesCuratedShelves = () => domesticApps().length > 0 || overseasApps().length > 0;
 
   return (

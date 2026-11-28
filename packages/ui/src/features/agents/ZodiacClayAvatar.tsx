@@ -9,8 +9,6 @@ import {
 } from "@openbot/brand/bloub-avatar";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createUniqueId, onCleanup, onSettled, Show } from "solid-js";
-import { playKawaiiCue } from "./starbot-kawaii-audio";
-
 // Articulated multi-part clay WebPs (back-to-front per zodiac)
 import aquariusBase from "../../assets/zodiac/parts/aquarius-base.webp";
 import aquariusLeft from "../../assets/zodiac/parts/aquarius-left.webp";
@@ -44,6 +42,7 @@ import virgoBase from "../../assets/zodiac/parts/virgo-base.webp";
 import virgoLeft from "../../assets/zodiac/parts/virgo-left.webp";
 import virgoRight from "../../assets/zodiac/parts/virgo-right.webp";
 import virgoTop from "../../assets/zodiac/parts/virgo-top.webp";
+import { playKawaiiCue } from "./starbot-kawaii-audio";
 
 type PartSlot = "back" | "left" | "right" | "base" | "top";
 
@@ -152,7 +151,7 @@ function computeRigPoses(
   switch (zodiacId) {
     case "aries": {
       // Cute sheep ear twitch (periodic double-twitch + gentle idle flutter)
-      const twitchBurst = Math.pow(Math.max(0, Math.sin(t * 1.1)), 10) * Math.sin(t * 16) * 8.5;
+      const twitchBurst = Math.max(0, Math.sin(t * 1.1)) ** 10 * Math.sin(t * 16) * 8.5;
       const flutter = Math.sin(t * 2.6) * 3.4;
       const lift = (flutter + twitchBurst) * amp;
       parts.left = { px: -44, py: -1, rot: lift };
@@ -161,8 +160,8 @@ function computeRigPoses(
     }
     case "taurus": {
       // Relaxed ear flap with occasional happy bounce
-      const flapL = (Math.sin(t * 2.2) * 5.2 + Math.pow(Math.max(0, Math.sin(t * 0.85)), 8) * 6.5) * amp;
-      const flapR = (Math.sin(t * 2.2 + 0.45) * 5.2 + Math.pow(Math.max(0, Math.sin(t * 0.85)), 8) * 6.5) * amp;
+      const flapL = (Math.sin(t * 2.2) * 5.2 + Math.max(0, Math.sin(t * 0.85)) ** 8 * 6.5) * amp;
+      const flapR = (Math.sin(t * 2.2 + 0.45) * 5.2 + Math.max(0, Math.sin(t * 0.85)) ** 8 * 6.5) * amp;
       parts.left = { px: -46, py: -6, rot: flapL };
       parts.right = { px: 46, py: -6, rot: -flapR };
       break;
@@ -512,7 +511,11 @@ const EXPRESSION_PRESETS: Readonly<Record<ExpressionId, ExpressionPreset>> = {
   },
 };
 
-function rot2(u: [number, number, number], v: [number, number, number], rad: number): [[number, number, number], [number, number, number]] {
+function rot2(
+  u: [number, number, number],
+  v: [number, number, number],
+  rad: number,
+): [[number, number, number], [number, number, number]] {
   const c = Math.cos(rad);
   const s = Math.sin(rad);
   return [
@@ -648,6 +651,16 @@ function computeBodyTintFilter(customColor: string | null | undefined, baseHue: 
   return `hue-rotate(${delta}deg) saturate(${sat}) brightness(${bri})`;
 }
 
+export type ZodiacCuteEmote =
+  | "jelly-tilt"
+  | "starry-eyes"
+  | "shy-peek"
+  | "sleepy-bubble"
+  | "dizzy-swirl"
+  | "music-groove"
+  | "curious-peek"
+  | "combo-hearts";
+
 interface EyeDomNode {
   grp: EyeGroup;
   gIdx: number;
@@ -661,6 +674,8 @@ interface EyeDomNode {
   g1: SVGCircleElement;
   g2: SVGCircleElement;
   arc: SVGPathElement;
+  star: SVGPathElement;
+  swirl: SVGPathElement;
   curW: number;
   curH: number;
   curTilt: number;
@@ -677,6 +692,7 @@ export interface ZodiacClayAvatarProps {
   shape: SupportedAvatarSilhouetteId;
   expression?: ExpressionId | undefined;
   state?: PlushState | undefined;
+  cuteEmote?: ZodiacCuteEmote | null | undefined;
   customColor?: string | null | undefined;
   follow?: boolean | undefined;
   hoverFollow?: boolean | undefined;
@@ -714,6 +730,34 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
   let petPopGroup: SVGGElement | undefined;
   let petHeartEl: SVGTextElement | undefined;
   let petNoteEl: SVGTextElement | undefined;
+  // 8 approved cute animation SVG effect layers (pre-mounted, zero per-frame allocations)
+  let auraCircleEl: SVGCircleElement | undefined;
+  let grooveRing1El: SVGCircleElement | undefined;
+  let grooveRing2El: SVGCircleElement | undefined;
+  let jellySparkleEl: SVGPathElement | undefined;
+  let starryMote0El: SVGPathElement | undefined;
+  let starryMote1El: SVGPathElement | undefined;
+  let starryMote2El: SVGPathElement | undefined;
+  let shyGroupEl: SVGGElement | undefined;
+  let shyHeartEl: SVGTextElement | undefined;
+  let sleepBubbleGroupEl: SVGGElement | undefined;
+  let sleepBubbleCircleEl: SVGCircleElement | undefined;
+  let sleepBubbleGlintEl: SVGEllipseElement | undefined;
+  let sleepBubblePopEl: SVGGElement | undefined;
+  let dizzyGroupEl: SVGGElement | undefined;
+  let dizzyStar0El: SVGPathElement | undefined;
+  let dizzyStar1El: SVGPathElement | undefined;
+  let dizzyStar2El: SVGPathElement | undefined;
+  let grooveNotesGroupEl: SVGGElement | undefined;
+  let grooveNote1El: SVGTextElement | undefined;
+  let grooveNote2El: SVGTextElement | undefined;
+  let curiousGlassEl: SVGGElement | undefined;
+  let comboGroupEl: SVGGElement | undefined;
+  let comboP0El: SVGTextElement | undefined;
+  let comboP1El: SVGTextElement | undefined;
+  let comboP2El: SVGTextElement | undefined;
+  let comboP3El: SVGTextElement | undefined;
+  let comboP4El: SVGTextElement | undefined;
   let longHoverTimer: ReturnType<typeof setTimeout> | undefined;
 
   const meta = createMemo(() => zodiacForShape(props.shape));
@@ -752,6 +796,18 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
     perkAt: 0,
     purrActive: false,
     purrAt: 0,
+    shyActive: false,
+    shyAt: 0,
+    hoverReactionCount: 0,
+    pokeCombo: 0,
+    comboUntil: 0,
+    dizzyUntil: 0,
+    lastDizzySoundAt: 0,
+    bubblePopAt: 0,
+    autoIdleEmote: null as ZodiacCuteEmote | null,
+    autoIdleUntil: 0,
+    nextAutoIdleAt: 0,
+    lastUserInteractionAt: 0,
   };
 
   function rebuildEyesDom(currentMeta: ZodiacAvatarMeta): void {
@@ -807,8 +863,28 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         arc.setAttribute("stroke-linecap", "round");
         arc.setAttribute("opacity", "0");
 
+        const star = document.createElementNS(SVG_NS, "path");
+        star.setAttribute(
+          "d",
+          "M0 -10 C1.8 -3 3 -1.8 10 0 C3 1.8 1.8 3 0 10 C-1.8 3 -3 1.8 -10 0 C-3 -1.8 -1.8 -3 0 -10 Z",
+        );
+        star.setAttribute("fill", "#ffe45e");
+        star.setAttribute("stroke", "#fff8d6");
+        star.setAttribute("stroke-width", "0.9");
+        star.setAttribute("opacity", "0");
+
+        const swirl = document.createElementNS(SVG_NS, "path");
+        swirl.setAttribute("d", "M0 0 C2 -3 6 -2 6 2 C6 7 -1 9 -6 6 C-11 3 -10 -6 -4 -9 C3 -12 11 -7 11 1");
+        swirl.setAttribute("fill", "none");
+        swirl.setAttribute("stroke", "#241b2c");
+        swirl.setAttribute("stroke-width", "2.6");
+        swirl.setAttribute("stroke-linecap", "round");
+        swirl.setAttribute("opacity", "0");
+
         g.appendChild(openG);
         g.appendChild(arc);
+        g.appendChild(star);
+        g.appendChild(swirl);
         eyesLayer?.appendChild(g);
 
         eyeNodes.push({
@@ -824,6 +900,8 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
           g1,
           g2,
           arc,
+          star,
+          swirl,
           curW: REST_EYE.w,
           curH: REST_EYE.h,
           curTilt: eye.tilt,
@@ -953,33 +1031,139 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
     const isPoked = !snap && pokeElapsed < 620;
     const isPerked = !snap && !isPoked && perkElapsed < 340;
     const isPetting = !snap && (isPoked || anim.purrActive);
+    const largeEnoughForFx = !snap && (anim.rectW === 0 || anim.rectW >= 34);
+
+    // Trigger dizzy-swirl automatically if the user rapidly shakes the mouse right over a medium/large mascot!
+    if (
+      largeEnoughForFx &&
+      sharedPointer.active &&
+      sharedPointer.speed > 1250 &&
+      anim.near > 0.55 &&
+      state === "idle" &&
+      now > anim.dizzyUntil - 600
+    ) {
+      anim.dizzyUntil = now + 2_200;
+      if (now - anim.lastDizzySoundAt > 2_600) {
+        anim.lastDizzySoundAt = now;
+        void playKawaiiCue("mascot-dizzy", { zodiac: meta().id, subtle: true });
+      }
+    }
+
+    // Gentle autonomous idle cute moments on medium/large idle mascots (jelly-tilt, shy-peek, sleepy-bubble)
+    if (largeEnoughForFx && state === "idle" && !props.cuteEmote && !isPoked && !anim.purrActive && !anim.shyActive) {
+      if (anim.lastUserInteractionAt === 0) anim.lastUserInteractionAt = now;
+      if (anim.nextAutoIdleAt === 0) anim.nextAutoIdleAt = now + 6_500 + Math.random() * 5_500;
+      if (now >= anim.nextAutoIdleAt && now > anim.autoIdleUntil) {
+        const idleSince = now - anim.lastUserInteractionAt;
+        if (idleSince > 24_000 && Math.random() < 0.42) {
+          anim.autoIdleEmote = "sleepy-bubble";
+          anim.autoIdleUntil = now + 4_600;
+        } else if (Math.random() < 0.65) {
+          anim.autoIdleEmote = "jelly-tilt";
+          anim.autoIdleUntil = now + 2_600;
+        } else {
+          anim.autoIdleEmote = "shy-peek";
+          anim.autoIdleUntil = now + 2_600;
+        }
+        anim.nextAutoIdleAt = anim.autoIdleUntil + 7_500 + Math.random() * 7_500;
+      }
+    } else if (state !== "idle") {
+      anim.autoIdleEmote = null;
+      anim.autoIdleUntil = 0;
+    }
+
+    // Resolve active cute emote across all 8 approved animations
+    let activeEmote: ZodiacCuteEmote | null = null;
+    if (!snap) {
+      if (now < anim.comboUntil) activeEmote = "combo-hearts";
+      else if (now < anim.dizzyUntil || state === "failed") activeEmote = "dizzy-swirl";
+      else if (props.cuteEmote) activeEmote = props.cuteEmote;
+      else if (anim.shyActive || exprId === "timide") activeEmote = "shy-peek";
+      else if (state === "asleep" || exprId === "somnolent") activeEmote = "sleepy-bubble";
+      else if (exprId === "excite" || exprId === "hilare") activeEmote = "starry-eyes";
+      else if (isPerked) activeEmote = "jelly-tilt";
+      else if (now < anim.autoIdleUntil && anim.autoIdleEmote) activeEmote = anim.autoIdleEmote;
+    }
 
     const rig = computeRigPoses(
       meta().id,
       anim.phase,
       tSec,
       state,
-      isPetting ? "heureux" : exprId,
+      isPetting || activeEmote === "combo-hearts" || activeEmote === "music-groove" ? "heureux" : exprId,
       Math.max(anim.near, isPetting ? 0.85 : 0),
       snap,
     );
 
+    let extraDx = 0;
     let extraDy = 0;
     let extraRot = 0;
     let extraSx = 1;
     let extraSy = 1;
-    if (isPoked) {
+    if (activeEmote === "combo-hearts") {
+      const hop = Math.abs(Math.sin(tSec * 7.2));
+      extraDy = -hop * 16;
+      extraRot = Math.sin(tSec * 7.2) * 8.5;
+      extraSx = 1 + (1 - hop) * 0.13;
+      extraSy = 1 - (1 - hop) * 0.11;
+    } else if (activeEmote === "dizzy-swirl") {
+      extraDx = Math.sin(tSec * 4.4) * 6.5;
+      extraDy = Math.sin(tSec * 8.8) * 3;
+      extraRot = Math.sin(tSec * 4.4) * 11;
+    } else if (activeEmote === "music-groove") {
+      const beat = tSec * 4.0 * Math.PI;
+      const bounce = Math.abs(Math.sin(beat * 0.5));
+      extraDy = -bounce * 9.5;
+      extraRot = Math.sin(beat * 0.25) * 10;
+      extraSx = 1 + (1 - bounce) * 0.085;
+      extraSy = 1 - (1 - bounce) * 0.075;
+    } else if (activeEmote === "curious-peek") {
+      const lean = 0.5 + 0.5 * Math.sin(tSec * 2.2);
+      const sc = 1.05 + lean * 0.08;
+      extraSx = sc;
+      extraSy = sc;
+      extraDy = -lean * 5;
+      extraRot = -6.5 + Math.sin(tSec * 2.2) * 5.5;
+    } else if (activeEmote === "starry-eyes") {
+      extraDy = -2.5 - Math.abs(Math.sin(tSec * 3.8)) * 5.5;
+      extraRot = Math.sin(tSec * 3.8) * 4;
+      extraSx = 1 - Math.sin(tSec * 7.6) * 0.03;
+      extraSy = 1 + Math.sin(tSec * 7.6) * 0.03;
+    } else if (activeEmote === "shy-peek") {
+      const sway = Math.sin(tSec * 2.0);
+      extraDy = 7.5 + Math.sin(tSec * 4.0) * 1.8;
+      extraDx = sway * 4.2;
+      extraRot = sway * 7.5;
+      extraSx = 1.04;
+      extraSy = 0.94;
+    } else if (activeEmote === "sleepy-bubble") {
+      const popElapsed = anim.bubblePopAt > 0 ? now - anim.bubblePopAt : 99999;
+      if (popElapsed < 420) {
+        const u = popElapsed / 420;
+        extraDy = -13 * Math.sin(u * Math.PI);
+        extraSx = 1 - 0.07 * Math.sin(u * Math.PI);
+        extraSy = 1 + 0.09 * Math.sin(u * Math.PI);
+      } else {
+        const breath = Math.sin(tSec * 1.9);
+        extraDy = 3.5 + breath * 2.8;
+        extraRot = -4.5 + Math.sin(tSec * 1.1) * 2.5;
+        extraSx = 1.02 - breath * 0.022;
+        extraSy = 0.98 + breath * 0.022;
+      }
+    } else if (activeEmote === "jelly-tilt") {
+      const cyc = (tSec * 0.65) % 1;
+      const wobble = Math.sin(cyc * Math.PI * 5) * Math.exp(-cyc * 2.2);
+      extraRot = Math.sin(tSec * 2.4) * 12.5 + wobble * 5.5;
+      extraSx = 1 + wobble * 0.11 + Math.sin(tSec * 4.8) * 0.025;
+      extraSy = 1 - wobble * 0.11 - Math.sin(tSec * 4.8) * 0.025;
+      extraDy = -Math.abs(Math.sin(tSec * 2.4)) * 5.5;
+    } else if (isPoked) {
       const u = pokeElapsed / 620;
       const bounce = Math.sin(u * Math.PI) * (1 - u * 0.35);
       extraDy = -16 * bounce;
       extraSx = 1 + Math.sin(u * Math.PI * 3) * 0.09 * (1 - u);
       extraSy = 1 - Math.sin(u * Math.PI * 3) * 0.09 * (1 - u);
       extraRot = Math.sin(u * Math.PI * 2) * 6.5 * (1 - u);
-    } else if (isPerked) {
-      const u = perkElapsed / 340;
-      extraDy = -5.5 * Math.sin(u * Math.PI);
-      extraSx = 1 - 0.03 * Math.sin(u * Math.PI);
-      extraSy = 1 + 0.035 * Math.sin(u * Math.PI);
     } else if (anim.purrActive) {
       extraDy = Math.sin(tSec * 4.2) * 2.2;
       extraRot = Math.sin(tSec * 3.1) * 4.2;
@@ -993,7 +1177,7 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
       } else {
         rigGroup.setAttribute(
           "transform",
-          `translate(${rig.bodyDx.toFixed(2)},${(42 + rig.bodyDy + extraDy).toFixed(2)}) rotate(${(rig.bodyRot + extraRot).toFixed(2)}) scale(${(rig.bodySx * extraSx).toFixed(4)},${(rig.bodySy * extraSy).toFixed(4)}) translate(0,-42)`,
+          `translate(${(rig.bodyDx + extraDx).toFixed(2)},${(42 + rig.bodyDy + extraDy).toFixed(2)}) rotate(${(rig.bodyRot + extraRot).toFixed(2)}) scale(${(rig.bodySx * extraSx).toFixed(4)},${(rig.bodySy * extraSy).toFixed(4)}) translate(0,-42)`,
         );
       }
     }
@@ -1037,7 +1221,15 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
       anim.blinkStart = null;
     }
 
-    const showBlush = state === "wink" || preset.blush === true || isPetting;
+    const showBlush =
+      state === "wink" ||
+      preset.blush === true ||
+      isPetting ||
+      activeEmote === "jelly-tilt" ||
+      activeEmote === "starry-eyes" ||
+      activeEmote === "shy-peek" ||
+      activeEmote === "music-groove" ||
+      activeEmote === "combo-hearts";
     for (let k = 0; k < cheekNodes.length; k += 1) {
       const ck = cheekNodes[k];
       if (!ck) continue;
@@ -1061,8 +1253,37 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         let th = REST_EYE.h;
         let tt = node.eye.tilt;
         let arcType: ArcKind = null;
+        let showStarEye = false;
+        let showSwirlEye = false;
 
-        if (state === "asleep") {
+        if (activeEmote === "dizzy-swirl") {
+          showSwirlEye = true;
+        } else if (activeEmote === "combo-hearts" || activeEmote === "music-groove") {
+          arcType = "happy";
+        } else if (activeEmote === "sleepy-bubble") {
+          const popElapsed = anim.bubblePopAt > 0 ? now - anim.bubblePopAt : 99999;
+          if (popElapsed < 420) {
+            tw = 0.78;
+            th = 0.88;
+            tt = 0;
+          } else {
+            arcType = "asleep";
+          }
+        } else if (activeEmote === "starry-eyes") {
+          tw = 0.68;
+          th = 0.96;
+          tt = 0;
+          showStarEye = true;
+        } else if (activeEmote === "curious-peek") {
+          const isBig = grp.isPair ? li === 0 : node.gIdx === 0;
+          tw = isBig ? 0.74 : 0.54;
+          th = isBig ? 1.04 : 0.62;
+          tt = isBig ? -3 : 6;
+        } else if (activeEmote === "shy-peek") {
+          tw = 0.5;
+          th = 0.78;
+          tt = node.eye.tilt;
+        } else if (state === "asleep") {
           arcType = "asleep";
         } else if (state === "wink") {
           const isWinkEye = grp.isPair ? li === 1 : node.gIdx === 1;
@@ -1137,8 +1358,18 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         );
         node.g.setAttribute("opacity", Math.min(1, Math.max(0, pr.depth / 0.14)).toFixed(3));
 
-        if (arcType) {
+        if (showSwirlEye) {
           node.openG.setAttribute("opacity", "0");
+          node.arc.setAttribute("opacity", "0");
+          node.star.setAttribute("opacity", "0");
+          node.swirl.setAttribute("opacity", "1");
+          const sc = (node.unit / 23).toFixed(2);
+          const rot = (tSec * 330 * (li % 2 === 0 ? 1 : -1)).toFixed(0);
+          node.swirl.setAttribute("transform", `rotate(${rot}) scale(${sc})`);
+        } else if (arcType) {
+          node.openG.setAttribute("opacity", "0");
+          node.star.setAttribute("opacity", "0");
+          node.swirl.setAttribute("opacity", "0");
           node.arc.setAttribute("opacity", "1");
           const aw = node.unit * 0.36;
           const strokeW = node.unit * 0.148;
@@ -1162,8 +1393,9 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         } else {
           node.openG.setAttribute("opacity", "1");
           node.arc.setAttribute("opacity", "0");
+          node.swirl.setAttribute("opacity", "0");
 
-          const open = anim.blinkOpen;
+          const open = showStarEye ? 1 : anim.blinkOpen;
           const ew = node.unit * node.curW * (1 + (1 - open) * 0.12);
           const eh = Math.max(node.unit * 0.11, node.unit * node.curH * open);
           const rx = Math.min(ew, eh) / 2;
@@ -1180,24 +1412,34 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
           node.sh.setAttribute("height", eh.toFixed(2));
           node.sh.setAttribute("rx", rx.toFixed(2));
 
-          const glOp = Math.max(0, Math.min(1, (open - 0.35) / 0.65));
-          const minDim = Math.min(ew, eh);
-          const g1x = -ew * 0.17 + (anim.yaw / 35) * ew * 0.1;
-          const g1y = -eh * 0.21 - (anim.pitch / 25) * eh * 0.08;
-          const g1r = minDim * 0.195;
-          const g2x = ew * 0.15 + (anim.yaw / 35) * ew * 0.05;
-          const g2y = eh * 0.2 - (anim.pitch / 25) * eh * 0.04;
-          const g2r = minDim * 0.088;
+          if (showStarEye) {
+            node.g1.setAttribute("opacity", "0");
+            node.g2.setAttribute("opacity", "0");
+            node.star.setAttribute("opacity", "1");
+            const sc = ((node.unit / 23) * (0.9 + Math.sin(tSec * 7 + li) * 0.14)).toFixed(2);
+            const rot = (Math.sin(tSec * 4) * 20).toFixed(1);
+            node.star.setAttribute("transform", `rotate(${rot}) scale(${sc})`);
+          } else {
+            node.star.setAttribute("opacity", "0");
+            const glOp = Math.max(0, Math.min(1, (open - 0.35) / 0.65));
+            const minDim = Math.min(ew, eh);
+            const g1x = -ew * 0.17 + (anim.yaw / 35) * ew * 0.1;
+            const g1y = -eh * 0.21 - (anim.pitch / 25) * eh * 0.08;
+            const g1r = minDim * 0.195;
+            const g2x = ew * 0.15 + (anim.yaw / 35) * ew * 0.05;
+            const g2y = eh * 0.2 - (anim.pitch / 25) * eh * 0.04;
+            const g2r = minDim * 0.088;
 
-          node.g1.setAttribute("cx", g1x.toFixed(2));
-          node.g1.setAttribute("cy", g1y.toFixed(2));
-          node.g1.setAttribute("r", g1r.toFixed(2));
-          node.g1.setAttribute("opacity", (0.96 * glOp).toFixed(2));
+            node.g1.setAttribute("cx", g1x.toFixed(2));
+            node.g1.setAttribute("cy", g1y.toFixed(2));
+            node.g1.setAttribute("r", g1r.toFixed(2));
+            node.g1.setAttribute("opacity", (0.96 * glOp).toFixed(2));
 
-          node.g2.setAttribute("cx", g2x.toFixed(2));
-          node.g2.setAttribute("cy", g2y.toFixed(2));
-          node.g2.setAttribute("r", g2r.toFixed(2));
-          node.g2.setAttribute("opacity", (0.52 * glOp).toFixed(2));
+            node.g2.setAttribute("cx", g2x.toFixed(2));
+            node.g2.setAttribute("cy", g2y.toFixed(2));
+            node.g2.setAttribute("r", g2r.toFixed(2));
+            node.g2.setAttribute("opacity", (0.52 * glOp).toFixed(2));
+          }
         }
       }
     }
@@ -1212,7 +1454,10 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         const u = Math.min(1, pokeElapsed / 620);
         const op = u < 0.7 ? 1 : (1 - u) / 0.3;
         petPopGroup.setAttribute("opacity", op.toFixed(2));
-        petHeartEl?.setAttribute("transform", `translate(52 ${( -58 - u * 26).toFixed(1)}) scale(${(0.85 + Math.sin(u * Math.PI) * 0.3).toFixed(2)})`);
+        petHeartEl?.setAttribute(
+          "transform",
+          `translate(52 ${(-58 - u * 26).toFixed(1)}) scale(${(0.85 + Math.sin(u * Math.PI) * 0.3).toFixed(2)})`,
+        );
         petNoteEl?.setAttribute("opacity", "0");
       } else if (anim.purrActive) {
         const p = ((now - anim.purrAt) * 0.0009) % 1;
@@ -1220,7 +1465,10 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         petPopGroup.setAttribute("opacity", "1");
         petHeartEl?.setAttribute("transform", "translate(52 -999)");
         petNoteEl?.setAttribute("opacity", op.toFixed(2));
-        petNoteEl?.setAttribute("transform", `translate(${(46 + Math.sin(p * Math.PI * 2) * 7).toFixed(1)} ${(-54 - p * 24).toFixed(1)})`);
+        petNoteEl?.setAttribute(
+          "transform",
+          `translate(${(46 + Math.sin(p * Math.PI * 2) * 7).toFixed(1)} ${(-54 - p * 24).toFixed(1)})`,
+        );
       } else {
         petPopGroup.setAttribute("opacity", "0");
       }
@@ -1249,6 +1497,154 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
       const s2 = snap ? 1 : 0.84 + Math.cos(tSec * 5.8) * 0.18;
       spk1El?.setAttribute("transform", `translate(-62 -64) scale(${s1.toFixed(2)})`);
       spk2El?.setAttribute("transform", `translate(66 -62) scale(${s2.toFixed(2)})`);
+    }
+
+    // Update the 8 cute animation overlay effects (only on medium/large interactive avatars for crisp small icons)
+    const showFx = largeEnoughForFx && activeEmote !== null;
+    if (auraCircleEl) {
+      if (showFx && (activeEmote === "starry-eyes" || activeEmote === "combo-hearts")) {
+        auraCircleEl.setAttribute("opacity", "1");
+        auraCircleEl.setAttribute("r", (72 + Math.sin(tSec * 6) * 5).toFixed(1));
+        auraCircleEl.setAttribute(
+          "fill",
+          activeEmote === "combo-hearts" ? "rgba(255,112,174,0.18)" : "rgba(255,220,104,0.14)",
+        );
+      } else {
+        auraCircleEl.setAttribute("opacity", "0");
+      }
+    }
+    if (grooveRing1El && grooveRing2El) {
+      if (showFx && activeEmote === "music-groove") {
+        const rp1 = (tSec * 1.1) % 1;
+        const rp2 = (tSec * 1.1 + 0.5) % 1;
+        grooveRing1El.setAttribute("r", (56 + rp1 * 36).toFixed(1));
+        grooveRing1El.setAttribute("opacity", ((1 - rp1) * 0.55).toFixed(2));
+        grooveRing2El.setAttribute("r", (56 + rp2 * 36).toFixed(1));
+        grooveRing2El.setAttribute("opacity", ((1 - rp2) * 0.55).toFixed(2));
+      } else {
+        grooveRing1El.setAttribute("opacity", "0");
+        grooveRing2El.setAttribute("opacity", "0");
+      }
+    }
+    if (jellySparkleEl) {
+      if (showFx && activeEmote === "jelly-tilt") {
+        const sc = (0.75 + 0.3 * Math.sin(tSec * 3.6)).toFixed(2);
+        const op = (0.45 + 0.55 * Math.abs(Math.sin(tSec * 3.6))).toFixed(2);
+        jellySparkleEl.setAttribute("opacity", op);
+        jellySparkleEl.setAttribute("transform", `translate(62 -56) scale(${sc})`);
+      } else {
+        jellySparkleEl.setAttribute("opacity", "0");
+      }
+    }
+    const starryMotes = [starryMote0El, starryMote1El, starryMote2El];
+    const starryConfigs: readonly [number, number, number, number][] = [
+      [0, -64, -10, 0.92],
+      [0.35, 66, -22, 0.78],
+      [0.7, 16, -54, 0.86],
+    ];
+    starryMotes.forEach((el, idx) => {
+      if (!el) return;
+      if (showFx && activeEmote === "starry-eyes") {
+        const [off, bx, by, sc] = starryConfigs[idx]!;
+        const p = (tSec * 0.72 + off) % 1;
+        el.setAttribute("opacity", Math.sin(p * Math.PI).toFixed(2));
+        el.setAttribute(
+          "transform",
+          `translate(${bx} ${(by - p * 40).toFixed(1)}) rotate(${(p * 180).toFixed(0)}) scale(${sc})`,
+        );
+      } else {
+        el.setAttribute("opacity", "0");
+      }
+    });
+    if (shyGroupEl && shyHeartEl) {
+      if (showFx && activeEmote === "shy-peek") {
+        const hp = (tSec * 0.65) % 1;
+        shyGroupEl.setAttribute("opacity", "1");
+        shyHeartEl.setAttribute("opacity", Math.sin(hp * Math.PI).toFixed(2));
+        shyHeartEl.setAttribute("transform", `translate(52 ${(-42 - hp * 24).toFixed(1)})`);
+      } else {
+        shyGroupEl.setAttribute("opacity", "0");
+      }
+    }
+    if (sleepBubbleGroupEl && sleepBubbleCircleEl && sleepBubbleGlintEl && sleepBubblePopEl) {
+      const popElapsed = anim.bubblePopAt > 0 ? now - anim.bubblePopAt : 99999;
+      if (showFx && popElapsed < 420) {
+        const u = popElapsed / 420;
+        sleepBubbleGroupEl.setAttribute("opacity", "0");
+        sleepBubblePopEl.setAttribute("opacity", Math.max(0, 1 - u * 1.15).toFixed(2));
+        sleepBubblePopEl.setAttribute("transform", `translate(34 22) scale(${(0.7 + u * 0.9).toFixed(2)})`);
+      } else if (showFx && activeEmote === "sleepy-bubble") {
+        const cyc = (tSec * 0.32) % 1;
+        const r = 10 + cyc * 17 + Math.sin(tSec * 4.5) * 1.6;
+        sleepBubblePopEl.setAttribute("opacity", "0");
+        sleepBubbleGroupEl.setAttribute("opacity", "1");
+        sleepBubbleCircleEl.setAttribute("cx", (r * 0.52).toFixed(1));
+        sleepBubbleCircleEl.setAttribute("r", r.toFixed(1));
+        sleepBubbleGlintEl.setAttribute("cx", (r * 0.24).toFixed(1));
+        sleepBubbleGlintEl.setAttribute("cy", (-r * 0.3).toFixed(1));
+        sleepBubbleGlintEl.setAttribute("rx", (r * 0.26).toFixed(1));
+        sleepBubbleGlintEl.setAttribute("ry", (r * 0.15).toFixed(1));
+      } else {
+        sleepBubbleGroupEl.setAttribute("opacity", "0");
+        sleepBubblePopEl.setAttribute("opacity", "0");
+      }
+    }
+    if (dizzyGroupEl) {
+      if (showFx && activeEmote === "dizzy-swirl") {
+        dizzyGroupEl.setAttribute("opacity", "1");
+        [dizzyStar0El, dizzyStar1El, dizzyStar2El].forEach((el, k) => {
+          if (!el) return;
+          const ang = tSec * 3.8 + k * ((Math.PI * 2) / 3);
+          const sx = (Math.cos(ang) * 50).toFixed(1);
+          const sy = (-72 + Math.sin(ang) * 13).toFixed(1);
+          const sc = (0.7 + (0.35 * (Math.sin(ang) + 1)) / 2).toFixed(2);
+          el.setAttribute("transform", `translate(${sx} ${sy}) scale(${sc})`);
+        });
+      } else {
+        dizzyGroupEl.setAttribute("opacity", "0");
+      }
+    }
+    if (grooveNotesGroupEl && grooveNote1El && grooveNote2El) {
+      if (showFx && activeEmote === "music-groove") {
+        const n1 = (tSec * 0.78) % 1;
+        const n2 = (tSec * 0.78 + 0.5) % 1;
+        grooveNotesGroupEl.setAttribute("opacity", "1");
+        grooveNote1El.setAttribute("opacity", Math.sin(n1 * Math.PI).toFixed(2));
+        grooveNote1El.setAttribute(
+          "transform",
+          `translate(${(-60 - Math.sin(n1 * 6) * 5).toFixed(1)} ${(-20 - n1 * 42).toFixed(1)})`,
+        );
+        grooveNote2El.setAttribute("opacity", Math.sin(n2 * Math.PI).toFixed(2));
+        grooveNote2El.setAttribute(
+          "transform",
+          `translate(${(62 + Math.sin(n2 * 6) * 5).toFixed(1)} ${(-26 - n2 * 40).toFixed(1)})`,
+        );
+      } else {
+        grooveNotesGroupEl.setAttribute("opacity", "0");
+      }
+    }
+    if (curiousGlassEl) {
+      if (showFx && activeEmote === "curious-peek") {
+        curiousGlassEl.setAttribute("opacity", "1");
+        curiousGlassEl.setAttribute("transform", `translate(56 -50) rotate(${(Math.sin(tSec * 3) * 11).toFixed(1)})`);
+      } else {
+        curiousGlassEl.setAttribute("opacity", "0");
+      }
+    }
+    if (comboGroupEl) {
+      if (showFx && activeEmote === "combo-hearts") {
+        comboGroupEl.setAttribute("opacity", "1");
+        [comboP0El, comboP1El, comboP2El, comboP3El, comboP4El].forEach((el, k) => {
+          if (!el) return;
+          const p = (tSec * 0.98 + k * 0.2) % 1;
+          const x = (-50 + k * 25 + Math.sin(p * 6 + k) * 8).toFixed(1);
+          const y = (-26 - p * 66).toFixed(1);
+          el.setAttribute("opacity", Math.sin(p * Math.PI).toFixed(2));
+          el.setAttribute("transform", `translate(${x} ${y})`);
+        });
+      } else {
+        comboGroupEl.setAttribute("opacity", "0");
+      }
     }
 
     anim.initialized = true;
@@ -1314,20 +1710,40 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
     clearTimeout(longHoverTimer);
   });
 
+  let lastPokeSoundAt = 0;
+
   function isInteractiveSize(): boolean {
     if (!svgEl || props.paused || props.frozenAt !== undefined) return false;
-    return svgEl.getBoundingClientRect().width >= 34;
+    return svgEl.getBoundingClientRect().width >= 26;
   }
 
   function handlePointerEnter(): void {
     if (!isInteractiveSize()) return;
-    anim.perkAt = performance.now();
-    void playKawaiiCue("mascot-hover");
+    const now = performance.now();
+    const zodiacId = meta().id;
+    // If sleeping with a bubble, wake up with a cute bubble pop!
+    if (anim.autoIdleEmote === "sleepy-bubble" && now < anim.autoIdleUntil) {
+      anim.bubblePopAt = now;
+      anim.autoIdleEmote = null;
+      anim.autoIdleUntil = 0;
+      void playKawaiiCue("mascot-bubble-pop", { zodiac: zodiacId, subtle: true });
+    } else {
+      anim.perkAt = now;
+      void playKawaiiCue("mascot-hover", { zodiac: zodiacId });
+    }
+    anim.lastUserInteractionAt = now;
     clearTimeout(longHoverTimer);
     longHoverTimer = setTimeout(() => {
-      anim.purrActive = true;
-      anim.purrAt = performance.now();
-      void playKawaiiCue("mascot-purr");
+      anim.hoverReactionCount += 1;
+      if (anim.hoverReactionCount % 2 === 0) {
+        anim.shyActive = true;
+        anim.shyAt = performance.now();
+        void playKawaiiCue("mascot-purr", { zodiac: meta().id, subtle: true });
+      } else {
+        anim.purrActive = true;
+        anim.purrAt = performance.now();
+        void playKawaiiCue("mascot-purr", { zodiac: meta().id });
+      }
     }, 1500);
   }
 
@@ -1335,12 +1751,30 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
     clearTimeout(longHoverTimer);
     longHoverTimer = undefined;
     anim.purrActive = false;
+    anim.shyActive = false;
   }
 
   function handlePointerDown(event: PointerEvent): void {
     if (event.button !== 0 || !isInteractiveSize()) return;
-    anim.pokeAt = performance.now();
-    void playKawaiiCue("mascot-poke");
+    const now = performance.now();
+    anim.lastUserInteractionAt = now;
+    if (anim.autoIdleEmote === "sleepy-bubble" && now < anim.autoIdleUntil) {
+      anim.bubblePopAt = now;
+      anim.autoIdleEmote = null;
+      anim.autoIdleUntil = 0;
+    }
+    const isRapid = now - lastPokeSoundAt < 720;
+    anim.pokeCombo = isRapid ? anim.pokeCombo + 1 : 1;
+    lastPokeSoundAt = now;
+    anim.pokeAt = now;
+    if (anim.pokeCombo >= 3) {
+      anim.comboUntil = now + 2_200;
+      void playKawaiiCue("mascot-double-poke", { zodiac: meta().id });
+    } else {
+      void playKawaiiCue(anim.pokeCombo === 2 ? "mascot-double-poke" : "mascot-poke", {
+        zodiac: meta().id,
+      });
+    }
   }
 
   return (
@@ -1366,36 +1800,77 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
           <stop offset="0%" stop-color="rgba(255,108,148,0.72)" />
           <stop offset="100%" stop-color="rgba(255,108,148,0)" />
         </radialGradient>
+        <radialGradient id={`${uid}-bubble`} cx="32%" cy="28%" r="70%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.95)" />
+          <stop offset="45%" stop-color="rgba(182,235,255,0.58)" />
+          <stop offset="85%" stop-color="rgba(216,180,254,0.42)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0.75)" />
+        </radialGradient>
         <filter id={`${uid}-sh`} x="-60%" y="-60%" width="220%" height="220%">
           <feGaussianBlur stdDeviation="1.15" />
         </filter>
       </defs>
 
+      {/* Back FX layer (aura & rhythm soundwave rings) */}
+      <g style={{ "pointer-events": "none" }}>
+        <circle ref={(el) => (auraCircleEl = el)} cx="0" cy="0" r="72" fill="rgba(255,220,104,0.14)" opacity="0" />
+        <circle
+          ref={(el) => (grooveRing1El = el)}
+          cx="0"
+          cy="4"
+          r="64"
+          fill="none"
+          stroke="#f472b6"
+          stroke-width="3"
+          opacity="0"
+        />
+        <circle
+          ref={(el) => (grooveRing2El = el)}
+          cx="0"
+          cy="4"
+          r="64"
+          fill="none"
+          stroke="#a78bfa"
+          stroke-width="3"
+          opacity="0"
+        />
+      </g>
+
       <g ref={(el) => (rigGroup = el)}>
         <g style={bodyFilter() ? { filter: bodyFilter() } : undefined}>
           <g ref={(el) => (partBackG = el)}>
             <Show when={parts().back}>
-              {(src) => <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />}
+              {(src) => (
+                <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />
+              )}
             </Show>
           </g>
           <g ref={(el) => (partLeftG = el)}>
             <Show when={parts().left}>
-              {(src) => <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />}
+              {(src) => (
+                <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />
+              )}
             </Show>
           </g>
           <g ref={(el) => (partRightG = el)}>
             <Show when={parts().right}>
-              {(src) => <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />}
+              {(src) => (
+                <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />
+              )}
             </Show>
           </g>
           <g ref={(el) => (partBaseG = el)}>
             <Show when={parts().base}>
-              {(src) => <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />}
+              {(src) => (
+                <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />
+              )}
             </Show>
           </g>
           <g ref={(el) => (partTopG = el)}>
             <Show when={parts().top}>
-              {(src) => <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />}
+              {(src) => (
+                <image href={src()} x="-100" y="-100" width="200" height="200" preserveAspectRatio="xMidYMid meet" />
+              )}
             </Show>
           </g>
         </g>
@@ -1405,7 +1880,16 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
       </g>
 
       <g ref={(el) => (thinkingGroup = el)} opacity="0">
-        <rect x="26" y="-86" width="60" height="32" rx="16" fill="rgba(255,253,249,0.95)" stroke="rgba(40,32,48,0.16)" stroke-width="2" />
+        <rect
+          x="26"
+          y="-86"
+          width="60"
+          height="32"
+          rx="16"
+          fill="rgba(255,253,249,0.95)"
+          stroke="rgba(40,32,48,0.16)"
+          stroke-width="2"
+        />
         <circle ref={(el) => (dot0 = el)} cx="41" cy="-70" r="5.2" fill="#2d2534" />
         <circle ref={(el) => (dot1 = el)} cx="56" cy="-70" r="5.2" fill="#2d2534" />
         <circle ref={(el) => (dot2 = el)} cx="71" cy="-70" r="5.2" fill="#2d2534" />
@@ -1501,6 +1985,233 @@ export function ZodiacClayAvatar(props: ZodiacClayAvatarProps): JSX.Element {
         >
           ♪
         </text>
+      </g>
+
+      {/* 8 Approved Cute Animation Foreground FX Layers */}
+      <g style={{ "pointer-events": "none" }}>
+        {/* 1. Jelly-tilt sparkle */}
+        <path
+          ref={(el) => (jellySparkleEl = el)}
+          opacity="0"
+          d="M0 -13 C2 -4 4 -2 13 0 C4 2 2 4 0 13 C-2 4 -4 2 -13 0 C-4 -2 -2 -4 0 -13 Z"
+          fill="#ffe27a"
+          stroke="#fffdf9"
+          stroke-width="2.2"
+        />
+        {/* 2. Starry-eyes floating motes */}
+        <path
+          ref={(el) => (starryMote0El = el)}
+          opacity="0"
+          d="M0 -12 C2 -4 4 -2 12 0 C4 2 2 4 0 12 C-2 4 -4 2 -12 0 C-4 -2 -2 -4 0 -12 Z"
+          fill="#ffe45e"
+        />
+        <path
+          ref={(el) => (starryMote1El = el)}
+          opacity="0"
+          d="M0 -12 C2 -4 4 -2 12 0 C4 2 2 4 0 12 C-2 4 -4 2 -12 0 C-4 -2 -2 -4 0 -12 Z"
+          fill="#ff9ed2"
+        />
+        <path
+          ref={(el) => (starryMote2El = el)}
+          opacity="0"
+          d="M0 -12 C2 -4 4 -2 12 0 C4 2 2 4 0 12 C-2 4 -4 2 -12 0 C-4 -2 -2 -4 0 -12 Z"
+          fill="#7ef7e6"
+        />
+        {/* 3. Shy-peek blush marks & floating heart */}
+        <g ref={(el) => (shyGroupEl = el)} opacity="0">
+          <g stroke="#ff74a8" stroke-width="2.6" stroke-linecap="round">
+            <line x1="-66" y1="-34" x2="-58" y2="-44" />
+            <line x1="-59" y1="-32" x2="-51" y2="-42" />
+          </g>
+          <text
+            ref={(el) => (shyHeartEl = el)}
+            x="0"
+            y="0"
+            font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+            font-weight="900"
+            font-size="22"
+            fill="#ff7eb6"
+            stroke="#fffdf9"
+            stroke-width="3.6"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ♥
+          </text>
+        </g>
+        {/* 4. Sleepy-bubble iridescent bubble & pop lines */}
+        <g ref={(el) => (sleepBubbleGroupEl = el)} opacity="0" transform="translate(22 24)">
+          <circle
+            ref={(el) => (sleepBubbleCircleEl = el)}
+            cx="8"
+            cy="0"
+            r="14"
+            fill={`url(#${uid}-bubble)`}
+            stroke="rgba(255,255,255,0.85)"
+            stroke-width="2"
+          />
+          <ellipse
+            ref={(el) => (sleepBubbleGlintEl = el)}
+            cx="4"
+            cy="-4"
+            rx="4"
+            ry="2.2"
+            fill="rgba(255,255,255,0.9)"
+          />
+        </g>
+        <g ref={(el) => (sleepBubblePopEl = el)} opacity="0" stroke="#c4f1ff" stroke-width="3" stroke-linecap="round">
+          <line x1="0" y1="-22" x2="0" y2="-13" />
+          <line x1="22" y1="0" x2="13" y2="0" />
+          <line x1="0" y1="22" x2="0" y2="13" />
+          <line x1="-22" y1="0" x2="-13" y2="0" />
+          <line x1="15" y1="-15" x2="9" y2="-9" />
+        </g>
+        {/* 5. Dizzy-swirl orbiting star halo */}
+        <g ref={(el) => (dizzyGroupEl = el)} opacity="0">
+          <ellipse
+            cx="0"
+            cy="-72"
+            rx="50"
+            ry="13"
+            fill="none"
+            stroke="rgba(255,224,112,0.38)"
+            stroke-width="2"
+            stroke-dasharray="6 5"
+          />
+          <path
+            ref={(el) => (dizzyStar0El = el)}
+            d="M0 -11 C1.8 -3.5 3.5 -1.8 11 0 C3.5 1.8 1.8 3.5 0 11 C-1.8 3.5 -3.5 1.8 -11 0 C-3.5 -1.8 -1.8 -3.5 0 -11 Z"
+            fill="#ffd84d"
+            stroke="#fffdf9"
+            stroke-width="1.8"
+          />
+          <path
+            ref={(el) => (dizzyStar1El = el)}
+            d="M0 -11 C1.8 -3.5 3.5 -1.8 11 0 C3.5 1.8 1.8 3.5 0 11 C-1.8 3.5 -3.5 1.8 -11 0 C-3.5 -1.8 -1.8 -3.5 0 -11 Z"
+            fill="#ffd84d"
+            stroke="#fffdf9"
+            stroke-width="1.8"
+          />
+          <path
+            ref={(el) => (dizzyStar2El = el)}
+            d="M0 -11 C1.8 -3.5 3.5 -1.8 11 0 C3.5 1.8 1.8 3.5 0 11 C-1.8 3.5 -3.5 1.8 -11 0 C-3.5 -1.8 -1.8 -3.5 0 -11 Z"
+            fill="#ffd84d"
+            stroke="#fffdf9"
+            stroke-width="1.8"
+          />
+        </g>
+        {/* 6. Music-groove floating notes */}
+        <g ref={(el) => (grooveNotesGroupEl = el)} opacity="0">
+          <text
+            ref={(el) => (grooveNote1El = el)}
+            x="0"
+            y="0"
+            font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+            font-weight="900"
+            font-size="24"
+            fill="#ff8ac4"
+            stroke="#fffdf9"
+            stroke-width="3.6"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ♪
+          </text>
+          <text
+            ref={(el) => (grooveNote2El = el)}
+            x="0"
+            y="0"
+            font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+            font-weight="900"
+            font-size="25"
+            fill="#6ef3df"
+            stroke="#fffdf9"
+            stroke-width="3.6"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ♫
+          </text>
+        </g>
+        {/* 7. Curious-peek detective magnifying glass */}
+        <g ref={(el) => (curiousGlassEl = el)} opacity="0">
+          <circle cx="0" cy="0" r="15" fill="rgba(110,243,223,0.22)" stroke="#7ef7e6" stroke-width="3.4" />
+          <line x1="10.5" y1="10.5" x2="21" y2="21" stroke="#7ef7e6" stroke-width="4.2" stroke-linecap="round" />
+          <path d="M-6 -4 Q-2.5 -8.5 3 -5.5" fill="none" stroke="#fffdf9" stroke-width="2.2" stroke-linecap="round" />
+        </g>
+        {/* 8. Combo-hearts fountain particles */}
+        <g ref={(el) => (comboGroupEl = el)} opacity="0">
+          <text
+            ref={(el) => (comboP0El = el)}
+            x="0"
+            y="0"
+            font-size="22"
+            font-weight="900"
+            fill="#ff6b9d"
+            stroke="#fffdf9"
+            stroke-width="3.2"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ♥
+          </text>
+          <text
+            ref={(el) => (comboP1El = el)}
+            x="0"
+            y="0"
+            font-size="18"
+            font-weight="900"
+            fill="#ffd24c"
+            stroke="#fffdf9"
+            stroke-width="3"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ✦
+          </text>
+          <text
+            ref={(el) => (comboP2El = el)}
+            x="0"
+            y="0"
+            font-size="23"
+            font-weight="900"
+            fill="#ff6b9d"
+            stroke="#fffdf9"
+            stroke-width="3.2"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ♥
+          </text>
+          <text
+            ref={(el) => (comboP3El = el)}
+            x="0"
+            y="0"
+            font-size="18"
+            font-weight="900"
+            fill="#ffd24c"
+            stroke="#fffdf9"
+            stroke-width="3"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ✦
+          </text>
+          <text
+            ref={(el) => (comboP4El = el)}
+            x="0"
+            y="0"
+            font-size="22"
+            font-weight="900"
+            fill="#ff6b9d"
+            stroke="#fffdf9"
+            stroke-width="3.2"
+            paint-order="stroke"
+            text-anchor="middle"
+          >
+            ♥
+          </text>
+        </g>
       </g>
     </svg>
   );

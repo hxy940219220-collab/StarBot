@@ -85,5 +85,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "El inicio de sesión de Proton tardó demasiado. Vuelve a conectar.",
   "error.connector.protonPassSetupFailed":
     "No se pudo crear la bóveda Shared with StarBot ni su clave de acceso en Proton Pass. Vuelve a conectar.",
-
 } as const satisfies PartialTranslation<typeof source>;

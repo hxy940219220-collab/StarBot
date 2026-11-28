@@ -97,8 +97,7 @@ export const messages = {
     "该助手接收来自 Slack 的所有请求。简单的问题它自己回答，其余的交给合适的助手处理，并把答案发在话题中。",
   "connector.slack.orchestratorNone": "还没有助手回答",
   "connector.slack.orchestratorNoneDescription": "请添加 Slack 调度助手，否则 Slack 中不会有人回答。",
-  "connector.slack.inviteNote":
-    "星友会自动加入每个公开频道以及之后新建的公开频道。私有频道需要邀请：/invite @星友。",
+  "connector.slack.inviteNote": "星友会自动加入每个公开频道以及之后新建的公开频道。私有频道需要邀请：/invite @星友。",
   "connector.slack.stepWorkspace": "工作区",
   "connector.slack.stepAgent": "助手",
   "connector.slack.connectTitle": "连接 Slack 工作区",
@@ -132,8 +131,7 @@ export const messages = {
   "connector.slack.limitReached": { other: "最多可连接 {count} 个工作区。" },
   "connector.slack.summaryMany": { other: "{count} 个工作区 · 由 Slack 调度助手回答" },
   "connector.discord.title": "Discord",
-  "connector.discord.description":
-    "人们在 Discord 服务器的频道中提及 @星友，Discord 调度助手会找到合适的助手来回答。",
+  "connector.discord.description": "人们在 Discord 服务器的频道中提及 @星友，Discord 调度助手会找到合适的助手来回答。",
   "connector.discord.statusConnected": "已连接",
   "connector.discord.statusAttention": "需要关注",
   "connector.discord.summaryConnected": "{workspace} · 由 Discord 调度助手回答",
@@ -151,8 +149,7 @@ export const messages = {
   "connector.discord.disconnectWorkspace": "断开连接",
   "connector.discord.disconnectAllTitle": "断开 Discord",
   "connector.discord.disconnectAllSummary": "所有服务器都将断开，其他人无法再通过 @星友联系你的助手。",
-  "connector.discord.disconnectAllSummaryOrchestrator":
-    "所有服务器都将断开，Discord 调度助手及其对话将从星友中删除。",
+  "connector.discord.disconnectAllSummaryOrchestrator": "所有服务器都将断开，Discord 调度助手及其对话将从星友中删除。",
   "connector.discord.missingScopes": "星友在 Discord 中缺少这些权限：{scopes}。请断开该 Discord 服务器后重新连接。",
   "connector.discord.retryAt": "Discord 要求星友等待，将于 {time} 重试。",
   "connector.discord.reconnect": "重新连接",
@@ -249,8 +246,7 @@ export const messages = {
   "connector.telegram.disconnectChat": "断开连接",
   "connector.telegram.disconnectAllTitle": "断开 Telegram",
   "connector.telegram.disconnectAllSummary": "所有聊天都将断开，其他人无法再通过星友机器人联系你的助手。",
-  "connector.telegram.disconnectAllSummaryOrchestrator":
-    "所有聊天都将断开，Telegram 调度助手及其对话将从星友中删除。",
+  "connector.telegram.disconnectAllSummaryOrchestrator": "所有聊天都将断开，Telegram 调度助手及其对话将从星友中删除。",
   "connector.telegram.rowAction": "{action}：{name}",
   "connector.telegram.linkChat": "关联聊天",
   "connector.telegram.addToGroup": "加入群组",
@@ -264,15 +260,13 @@ export const messages = {
   "connector.telegram.stepChat": "聊天",
   "connector.telegram.stepAgent": "助手",
   "connector.telegram.connectTitle": "关联 Telegram 聊天",
-  "connector.telegram.connectDescription":
-    "把星友机器人加入群组，或与它开启私聊。一个机器人即可服务你的所有聊天。",
+  "connector.telegram.connectDescription": "把星友机器人加入群组，或与它开启私聊。一个机器人即可服务你的所有聊天。",
   "connector.telegram.connectStepBrowser": "Telegram 会在浏览器中打开",
   "connector.telegram.connectStepPick": "选择群组，或在私聊中点击“开始”",
   "connector.telegram.connectStepReturn": "聊天关联完成后该对话框会继续",
   "connector.telegram.connectWaiting": "正在等待 Telegram，请在 Telegram 中选择聊天。",
   "connector.telegram.agentStepTitle": "添加 Telegram 调度助手",
-  "connector.telegram.agentStepDescription":
-    "这个新助手会回答 {chat} 中以及你之后关联的每个聊天中发给星友的消息。",
+  "connector.telegram.agentStepDescription": "这个新助手会回答 {chat} 中以及你之后关联的每个聊天中发给星友的消息。",
   "connector.telegram.orchestratorName": "Telegram 调度助手",
   "connector.telegram.orchestratorRole": "在 Telegram 中回答并调度团队",
   "connector.telegram.orchestratorDoesReceive": "优先接收所有发给星友的 Telegram 消息",
@@ -327,8 +321,7 @@ export const messages = {
   "connector.whatsapp.disconnect": "断开连接",
   "connector.whatsapp.disconnectAllTitle": "断开 WhatsApp",
   "connector.whatsapp.disconnectAllSummary": "所有号码都将断开，其他人无法再通过 WhatsApp 联系你的助手。",
-  "connector.whatsapp.disconnectAllSummaryOrchestrator":
-    "所有号码都将断开，WhatsApp 调度助手及其对话将从星友中删除。",
+  "connector.whatsapp.disconnectAllSummaryOrchestrator": "所有号码都将断开，WhatsApp 调度助手及其对话将从星友中删除。",
   "connector.whatsapp.rowAction": "{action}：{name}",
   "connector.whatsapp.ownNumber": "个人号码",
   "connector.whatsapp.ownNumberDescription":
@@ -352,8 +345,7 @@ export const messages = {
   "connector.whatsapp.connectDescriptionHost": "选择号码，然后在手机上的 WhatsApp 中关联这台服务器。",
   "connector.whatsapp.kindLabel": "号码",
   "connector.whatsapp.kindPersonal": "我的个人号码",
-  "connector.whatsapp.kindPersonalDescription":
-    "星友只回答你的“给自己发消息”聊天和你允许的人。其他人不会收到回复。",
+  "connector.whatsapp.kindPersonalDescription": "星友只回答你的“给自己发消息”聊天和你允许的人。其他人不会收到回复。",
   "connector.whatsapp.kindDedicated": "星友专用号码",
   "connector.whatsapp.kindDedicatedDescription":
     "星友会用这个号码回复每个陌生人一个代码，需要把它交给你。你在这里批准他们。",
@@ -384,8 +376,7 @@ export const messages = {
   "connector.whatsapp.failedUnavailable": "星友无法连接 WhatsApp。请检查网络连接。",
   "connector.whatsapp.tryAgain": "重试",
   "connector.whatsapp.agentStepTitle": "添加 WhatsApp 调度助手",
-  "connector.whatsapp.agentStepDescription":
-    "这个新助手会回答 {number} 以及你之后关联的每个号码上发给星友的消息。",
+  "connector.whatsapp.agentStepDescription": "这个新助手会回答 {number} 以及你之后关联的每个号码上发给星友的消息。",
   "connector.whatsapp.orchestratorName": "WhatsApp 调度助手",
   "connector.whatsapp.orchestratorRole": "在 WhatsApp 中回答并调度团队",
   "connector.whatsapp.orchestratorDoesReceive": "优先接收所有发给星友的 WhatsApp 消息",

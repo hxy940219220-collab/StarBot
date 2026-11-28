@@ -49,5 +49,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "לא ניתן לקרוא את הסוכן המשותף. יש לנסות שוב.",
   "mobile.link.template.error.unsupported":
     "השרת הזה לא יכול להוסיף סוכנים משותפים. יש לעדכן את StarBot במחשב שמריץ את השרת.",
-
 } as const satisfies PartialTranslation<typeof source>;

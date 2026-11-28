@@ -417,5 +417,4 @@ export const messages = {
   "crm.source.disconnectTitle": "Отключить {source}?",
   "crm.source.disconnectBody":
     "StarBot остановит синхронизацию и удалит ключ. Импортированные строки останутся, и вы сможете их менять.",
-
 } as const satisfies PartialTranslation<typeof source>;

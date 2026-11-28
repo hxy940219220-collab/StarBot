@@ -85,5 +85,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "Het aanmelden bij Proton duurde te lang. Verbind opnieuw.",
   "error.connector.protonPassSetupFailed":
     "Kan de kluis Shared with StarBot of de toegangssleutel ervan niet maken in Proton Pass. Verbind opnieuw.",
-
 } as const satisfies PartialTranslation<typeof source>;

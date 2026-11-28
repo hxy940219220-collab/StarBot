@@ -1514,10 +1514,7 @@ export class ThreadLifecycle {
             const rawInput = Array.isArray(params.input) ? params.input : [];
             const nextInput =
               handoff && rawInput.length > 0 && isDynamicRecord(rawInput[0]) && typeof rawInput[0].text === "string"
-                ? [
-                    { ...rawInput[0], text: `${handoff}\n\n---\n\n${rawInput[0].text}` },
-                    ...rawInput.slice(1),
-                  ]
+                ? [{ ...rawInput[0], text: `${handoff}\n\n---\n\n${rawInput[0].text}` }, ...rawInput.slice(1)]
                 : rawInput;
             this.#hooks.logRecovery(agent.id, client.provider, "replaced");
             return yield* client

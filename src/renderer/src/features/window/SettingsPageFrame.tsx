@@ -9,6 +9,7 @@ import { flush, onSettled, Show } from "solid-js";
 export function SettingsPageFrame(props: {
   heading: JSX.Element;
   children?: JSX.Element;
+  sections?: JSX.Element;
   sectionsHidden?: boolean;
   footer?: JSX.Element;
   onMounts: (mounts: SettingsPagePlacement | undefined) => void;
@@ -46,8 +47,12 @@ export function SettingsPageFrame(props: {
       <div class="settings-page-nav">
         {props.heading}
         {props.children}
-        <div class="settings-page-sections" ref={nav} hidden={props.sectionsHidden} />
-        <div class="settings-page-footer">{props.footer}</div>
+        <div class="settings-page-sections" ref={nav} hidden={props.sectionsHidden}>
+          {props.sections}
+        </div>
+        <Show when={props.footer}>
+          <div class="settings-page-footer">{props.footer}</div>
+        </Show>
       </div>
       <div class="settings-page-path-row" ref={path} />
       <Button

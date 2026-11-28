@@ -743,13 +743,11 @@ export const messages = {
   "mobile.server.connectors.slack.limit": { other: "最多可连接 {count} 个工作区。" },
   "mobile.server.connectors.slack.workspaceTitle": "工作区",
   "mobile.server.connectors.slack.workspaceDescription": "人们提及 @星友或给它发私信。",
-  "mobile.server.connectors.slack.missingScopes":
-    "星友在 Slack 中缺少这些权限：{scopes}。请断开该工作区后重新连接。",
+  "mobile.server.connectors.slack.missingScopes": "星友在 Slack 中缺少这些权限：{scopes}。请断开该工作区后重新连接。",
   "mobile.server.connectors.slack.retryAt": "Slack 要求星友等待，将于 {time} 重试。",
   "mobile.server.connectors.slack.helpInvalidToken":
     "Slack 不再接受星友访问该工作区，可能已被卸载。请重新连接该工作区。",
-  "mobile.server.connectors.slack.helpSecretStorage":
-    "星友无法读取 {host} 上已保存的令牌。请断开该工作区后重新连接。",
+  "mobile.server.connectors.slack.helpSecretStorage": "星友无法读取 {host} 上已保存的令牌。请断开该工作区后重新连接。",
   "mobile.server.connectors.slack.helpRelay":
     "{host} 上的星友无法接收 Slack 事件。请在 {host} 上登录，在“服务器设置”中为服务器命名，并保持星友打开。",
   "mobile.server.connectors.slack.helpNotLinked": "此工作区未关联到 {host}。轻点“重新连接”进行关联。",
@@ -761,8 +759,7 @@ export const messages = {
   "mobile.server.connectors.slack.note":
     "星友会自动加入所有公开频道，包括之后新建的。私有频道需要邀请它：/invite @星友。",
   "mobile.server.connectors.slack.disconnectTitle": "断开 {workspace}？",
-  "mobile.server.connectors.slack.disconnectBody":
-    "星友将停止在 {workspace} 中回答，并从 {host} 删除其 Slack 令牌。",
+  "mobile.server.connectors.slack.disconnectBody": "星友将停止在 {workspace} 中回答，并从 {host} 删除其 Slack 令牌。",
   "mobile.server.connectors.slack.disconnectKept": "对话和 Slack 调度助手会保留在星友中。",
   "mobile.server.connectors.slack.disconnectDeleted": "Slack 调度助手及其对话将从星友中删除。",
   "mobile.server.connectors.slack.agentPromptTitle": "添加 Slack 调度助手？",
@@ -796,8 +793,7 @@ export const messages = {
   "mobile.server.connectors.discord.addAgent": "添加 Discord 调度助手",
   "mobile.server.connectors.discord.note": "星友能看到其角色可见的频道。",
   "mobile.server.connectors.discord.disconnectTitle": "断开 {workspace}？",
-  "mobile.server.connectors.discord.disconnectBody":
-    "星友将停止在 {workspace} 中回答，并从 {host} 移除 Discord 连接。",
+  "mobile.server.connectors.discord.disconnectBody": "星友将停止在 {workspace} 中回答，并从 {host} 移除 Discord 连接。",
   "mobile.server.connectors.discord.disconnectKept": "对话和 Discord 调度助手会保留在星友中。",
   "mobile.server.connectors.discord.disconnectDeleted": "Discord 调度助手及其对话将从星友中删除。",
   "mobile.server.connectors.discord.agentPromptTitle": "添加 Discord 调度助手？",
@@ -1259,8 +1255,7 @@ export const messages = {
     "星友 Host Manager 会在所有用户空闲时安装更新。如果更新没有开始，请联系主机管理员检查 Host Manager 状态。",
   "mobile.server.update.path.hosted":
     "托管服务会在后台下载更新。已下载的更新会在服务器下次启动时生效。停止并恢复服务器前请先等待进行中的工作结束。如果版本一直停留在旧版，请联系主机管理员。",
-  "mobile.server.update.path.system":
-    "请在本机更新星友最新版本。更新会重启星友，请先等待进行中的工作结束。",
+  "mobile.server.update.path.system": "请在本机更新星友最新版本。更新会重启星友，请先等待进行中的工作结束。",
   "mobile.server.update.path.container":
     "请拉取新的星友镜像，并使用相同的数据卷重新创建容器。请先等待进行中的工作结束。保留原有数据卷，以免数据丢失。",
   "mobile.server.update.path.manual":

@@ -28,7 +28,6 @@ export const messages = {
 
   "marketplace.plugins.missing": "התוסף הזה אינו בקטלוג של StarBot.",
 
-
   "marketplace.agents.loadingDetail": "טוען פרטי סוכן…",
   "marketplace.agents.skills": "מיומנויות",
   "marketplace.agents.routines": "שגרות",

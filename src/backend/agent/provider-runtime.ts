@@ -3099,11 +3099,7 @@ export class ProviderRuntime implements ProviderPort {
     return this.status();
   }, Effect.uninterruptible);
 
-  readonly #readProviderAccount = (
-    provider: AgentProvider,
-    client: AgentClient,
-    timeoutMs?: number,
-  ) => {
+  readonly #readProviderAccount = (provider: AgentProvider, client: AgentClient, timeoutMs?: number) => {
     const decoder = accountReadDecoder(provider);
     const first = client.request("account/read", { refreshToken: false }, decoder, timeoutMs);
     if (provider !== "codex") return first.pipe(toProviderOperationFailed);

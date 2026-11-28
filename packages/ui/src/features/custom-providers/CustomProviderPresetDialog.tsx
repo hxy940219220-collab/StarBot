@@ -14,11 +14,7 @@ import {
 import type { JSX } from "@solidjs/web";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
-import {
-  type CustomProviderPresetId,
-  type LocalServerProbe,
-  THIRD_PARTY_API_PRESETS,
-} from "./custom-provider-presets";
+import { type CustomProviderPresetId, type LocalServerProbe, THIRD_PARTY_API_PRESETS } from "./custom-provider-presets";
 
 interface CustomProviderPresetDialogProps {
   open: boolean;
@@ -152,16 +148,8 @@ export function CustomProviderPresetDialog(props: CustomProviderPresetDialogProp
                 <div class="starbot-api-preset-grid">
                   <For each={THIRD_PARTY_API_PRESETS}>
                     {(preset) => (
-                      <button
-                        type="button"
-                        class="starbot-api-preset-card"
-                        onClick={() => props.onChoose(preset.id)}
-                      >
-                        <span
-                          class="starbot-api-preset-badge"
-                          style={{ background: preset.accent }}
-                          aria-hidden="true"
-                        >
+                      <button type="button" class="starbot-api-preset-card" onClick={() => props.onChoose(preset.id)}>
+                        <span class="starbot-api-preset-badge" style={{ background: preset.accent }} aria-hidden="true">
                           {preset.badge}
                         </span>
                         <span class="starbot-api-preset-info">

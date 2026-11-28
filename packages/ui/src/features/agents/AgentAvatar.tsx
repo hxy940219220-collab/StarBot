@@ -16,7 +16,9 @@ import type { AgentProfile } from "../../data";
 import { documentFocused } from "../../document-focus";
 import { documentStillFaces } from "../../document-rendering";
 import { observeOnScreen } from "../../on-screen";
-import { ZodiacClayAvatar } from "./ZodiacClayAvatar";
+import { ZodiacClayAvatar, type ZodiacCuteEmote } from "./ZodiacClayAvatar";
+
+export type { ZodiacCuteEmote };
 
 const AVATAR_FPS = 80;
 
@@ -87,6 +89,7 @@ interface AgentAvatarProps {
   url?: string | null | undefined;
   motion?: AvatarMotion;
   mood?: AvatarMood;
+  cuteEmote?: ZodiacCuteEmote | null | undefined;
   animationOffset?: number;
   shape?: SupportedAvatarSilhouetteId;
   expression?: ExpressionId;
@@ -133,6 +136,7 @@ export function AgentAvatar(props: AgentAvatarProps) {
           color={color()}
           motion={motion()}
           mood={mood()}
+          cuteEmote={props.cuteEmote}
           animationOffset={props.animationOffset}
           shape={props.shape}
           expression={props.expression}
@@ -171,6 +175,7 @@ function GeneratedAvatar(props: {
   color: AvatarColor | null;
   motion: AvatarMotion;
   mood: AvatarMood;
+  cuteEmote?: ZodiacCuteEmote | null | undefined;
   animationOffset?: number | undefined;
   shape?: SupportedAvatarSilhouetteId | undefined;
   expression?: ExpressionId | undefined;
@@ -251,7 +256,19 @@ function GeneratedAvatar(props: {
     const amount = flatBreathe();
     return amount ? { ...props.style, "--agent-avatar-breathe": amount } : props.style;
   };
+  const resolvedCuteEmote = (): ZodiacCuteEmote | null => {
+    if (props.cuteEmote) return props.cuteEmote;
+    if (props.mood === "responded") return "starry-eyes";
+    if (
+      props.mood === "working" &&
+      (shownActivity() === "searching" || shownActivity() === "browsing" || shownActivity() === "reading")
+    ) {
+      return "curious-peek";
+    }
+    return null;
+  };
   const animated = () =>
+    resolvedCuteEmote() !== null ||
     (props.followPointer && documentFocused() && onScreen()) ||
     (plushMood().busy && ambientMotion()) ||
     (!STATIC_MOTIONS.has(props.motion) && documentFocused()) ||
@@ -336,6 +353,7 @@ function GeneratedAvatar(props: {
       customColor={customColor()}
       expression={appearance().expression}
       state={appearance().state}
+      cuteEmote={resolvedCuteEmote()}
       paused={!animated()}
       initialPhase={props.animationOffset ?? avatarAnimationPhase(props.seed)}
       follow={props.followPointer}

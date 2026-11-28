@@ -16,5 +16,4 @@ export const messages = {
   "status.host.private": "Bu StarBot özel.",
 
   "status.host.removed": "Bu StarBot hesabınızdan kaldırıldı. Paylaşmak için yeniden yayımlayın.",
-
 } as const satisfies PartialTranslation<typeof source>;

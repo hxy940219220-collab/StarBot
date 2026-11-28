@@ -248,5 +248,4 @@ export const messages = {
   "error.remote.localServerLimit": "يمكنك امتلاك {limit} خادم كحد أقصى على هذا الحاسوب. احذف واحدًا لإنشاء آخر.",
   "error.remote.localServersReadOnly":
     "لا يستطيع هذا الإصدار من StarBot قراءة قائمة الخوادم على هذا الحاسوب. حدّث StarBot.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -94,5 +94,4 @@ export const messages = {
   "import.hermes.notFoundServer": "No hay perfiles de Hermes en este servidor",
   "import.hermes.notFoundServerNote":
     "StarBot lee la carpeta de Hermes del servidor. Para importar Hermes desde este ordenador, exporta un archivo .zip desde Hermes.",
-
 } as const satisfies PartialTranslation<typeof source>;

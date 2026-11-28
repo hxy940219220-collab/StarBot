@@ -23,5 +23,4 @@ export const messages = {
 
   "messaging.discordHelp.not_linked":
     "Bu Discord sunucusu bu StarBot sunucusuna bağlı değil. Bağlamak için Yeniden bağlan'ı seçin.",
-
 } as const satisfies PartialTranslation<typeof source>;

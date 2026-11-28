@@ -845,7 +845,9 @@ export function CustomProviderDialog(props: CustomProviderDialogProps) {
                                 when={
                                   props.contextWindows &&
                                   draft.models.some((row) =>
-                                    models().some((model) => model.id === row.id.trim() && holdsFoundValues(row, model)),
+                                    models().some(
+                                      (model) => model.id === row.id.trim() && holdsFoundValues(row, model),
+                                    ),
                                   )
                                 }
                               >

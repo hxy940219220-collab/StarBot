@@ -28,7 +28,6 @@ export const messages = {
 
   "marketplace.plugins.missing": "Bu eklenti StarBot kataloğunda yok.",
 
-
   "marketplace.agents.loadingDetail": "Ajan ayrıntıları yükleniyor…",
   "marketplace.agents.skills": "Beceriler",
   "marketplace.agents.routines": "Rutinler",

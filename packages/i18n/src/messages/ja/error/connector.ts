@@ -86,5 +86,4 @@ export const messages = {
     "Proton へのサインインに時間がかかりすぎました。もう一度接続してください。",
   "error.connector.protonPassSetupFailed":
     "Proton Pass で保管庫 Shared with StarBot またはそのアクセスキーを作成できませんでした。もう一度接続してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

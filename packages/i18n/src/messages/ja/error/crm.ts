@@ -49,5 +49,4 @@ export const messages = {
 
   "error.crm.off": "CRM はオフです。オーナーまたは管理者が「サーバー設定 > 試験運用」でオンにできます。",
   "error.crm.settingsSaveFailed": "StarBot はこのサーバーで CRM の設定を保存できません。",
-
 } as const satisfies PartialTranslation<typeof source>;

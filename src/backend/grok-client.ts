@@ -261,7 +261,10 @@ function nearWeeklyDuration(durationMins: number): boolean {
 
 const DEFAULT_GROK_BILLING_ORIGIN = "https://cli-chat-proxy.grok.com/v1";
 
-function readGrokBearerAndOrigin(env: NodeJS.ProcessEnv, home = homedir()): { token: string; billingUrl: string } | null {
+function readGrokBearerAndOrigin(
+  env: NodeJS.ProcessEnv,
+  home = homedir(),
+): { token: string; billingUrl: string } | null {
   const grokHome = grokHomeDirectory(env, home);
   let origin = DEFAULT_GROK_BILLING_ORIGIN;
   try {
@@ -343,7 +346,12 @@ function httpsGetJsonDirect(urlStr: string, token: string, timeoutMs = 5_500): P
   });
 }
 
-function httpsGetJsonViaHttpProxy(urlStr: string, token: string, proxyUrlStr: string, timeoutMs = 6_500): Promise<unknown> {
+function httpsGetJsonViaHttpProxy(
+  urlStr: string,
+  token: string,
+  proxyUrlStr: string,
+  timeoutMs = 6_500,
+): Promise<unknown> {
   return new Promise((resolve, reject) => {
     const target = new URL(urlStr);
     const proxy = new URL(proxyUrlStr);

@@ -51,8 +51,7 @@ export const messages = {
   "server.compatibility.safeModeTitle": "{name} 无法启动",
   "server.compatibility.updateClientDescription": "该应用支持的协议版本比主机更旧，请先更新该应用再重试。",
   "server.compatibility.updateHostDescription": "主机支持的协议版本比该应用更旧，请先更新主机再重试。",
-  "server.compatibility.unsafeDataDescription":
-    "由于某个已知载荷无效，星友中止了这次连接。当前工作区数据未被更改。",
+  "server.compatibility.unsafeDataDescription": "由于某个已知载荷无效，星友中止了这次连接。当前工作区数据未被更改。",
   "server.compatibility.clientVersion": "客户端版本",
   "server.compatibility.hostVersion": "主机版本",
   "server.compatibility.negotiatedProtocol": "协商协议",
@@ -235,8 +234,7 @@ export const messages = {
   "server.plan.status": "套餐已结束，将于 {date} 删除",
   "server.plan.deletedOn": "将于 {date} 删除",
   "server.plan.dialogTitle": "别让你的智能体离开",
-  "server.plan.dialogDescription":
-    "{name} 已停止，因为套餐已结束。{date}，星友将删除它的智能体及其所有聊天和文件。",
+  "server.plan.dialogDescription": "{name} 已停止，因为套餐已结束。{date}，星友将删除它的智能体及其所有聊天和文件。",
   "server.plan.dialogDaysLeft": {
     one: "还剩 {count} 天",
     other: "还剩 {count} 天",
@@ -655,12 +653,10 @@ export const messages = {
     "星友 Host Manager 会在所有用户空闲时安装更新。如果更新没有开始，请联系主机管理员检查 Host Manager 状态。",
   "server.update.path.hosted":
     "托管服务会在后台下载更新。已下载的更新会在服务器下次启动时生效。停止并恢复服务器前请先等待进行中的工作结束。如果版本一直停留在旧版，请联系主机管理员。",
-  "server.update.path.system":
-    "请在本机更新星友最新版本。更新会重启星友，请先等待进行中的工作结束。",
+  "server.update.path.system": "请在本机更新星友最新版本。更新会重启星友，请先等待进行中的工作结束。",
   "server.update.path.container":
     "请拉取新的星友镜像，并使用相同的数据卷重新创建容器。请先等待进行中的工作结束。保留原有数据卷，以免数据丢失。",
-  "server.update.path.manual":
-    "该安装方式无法自我更新。请重新下载并安装最新版星友，现有的本地星友数据会自动保留。",
+  "server.update.path.manual": "该安装方式无法自我更新。请重新下载并安装最新版星友，现有的本地星友数据会自动保留。",
   "server.update.path.unavailable": "这是开发构建。请使用已安装的星友正式版本检查更新。",
   "server.update.check": "检查更新",
   "server.update.start": "空闲时更新",
@@ -688,8 +684,7 @@ export const messages = {
   "server.update.hostAction": "更新主机",
   "server.update.dialog.offerTitle": "将 {name} 更新到星友 {version}",
   "server.update.dialog.offerDescription": "{name} 当前使用星友 {current}。它会先下载更新，然后重启。",
-  "server.update.dialog.offerReadyDescription":
-    "{name} 当前使用星友 {current}。更新已下载，{name} 将重启以安装它。",
+  "server.update.dialog.offerReadyDescription": "{name} 当前使用星友 {current}。更新已下载，{name} 将重启以安装它。",
   "server.update.dialog.progressTitle": "正在更新 {name}",
   "server.update.dialog.progressDescription": "{time} · 你可以隐藏该窗口。",
   "server.update.dialog.doneTitle": "{name} 已运行星友 {version}",

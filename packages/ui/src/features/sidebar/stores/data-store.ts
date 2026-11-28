@@ -10,6 +10,7 @@ import {
 import { createMemo, createSignal } from "solid-js";
 import type { AgentProfile } from "../../../data";
 import { currentText } from "../../../text";
+import { chiefStarBotAgentId } from "../../agents/chief-starbot";
 import { teamMemberName } from "../../team/TeamPersonAvatar";
 import { sidebarSectionResolver, sortByLayoutOrder } from "../sidebar-agent-order";
 import {
@@ -85,6 +86,14 @@ export function createSidebarDataStore(deps: {
       }
     }
     pinnedItemCache = nextCache;
+    const chiefId = chiefStarBotAgentId();
+    if (chiefId) {
+      const idx = items.findIndex((entry) => entry.chat.kind === "agent" && entry.chat.id === chiefId);
+      if (idx > 0) {
+        const [chief] = items.splice(idx, 1);
+        if (chief) items.unshift(chief);
+      }
+    }
     return items;
   });
   const listedAgents = createMemo(() =>
@@ -270,16 +279,25 @@ export function createSidebarDataStore(deps: {
     const activity = activityById();
     return [...items].sort((left, right) => (activity.get(right.id) ?? 0) - (activity.get(left.id) ?? 0));
   };
+  const pinChiefFirst = (items: SidebarChatItem[]): SidebarChatItem[] => {
+    const chiefId = chiefStarBotAgentId();
+    if (!chiefId) return items;
+    const idx = items.findIndex((item) => item.kind === "agent" && item.id === chiefId);
+    if (idx <= 0) return items;
+    const next = items.slice();
+    const [chief] = next.splice(idx, 1);
+    return chief ? [chief, ...next] : items;
+  };
   const filteredChats = createChatItems(
     () => ({ channels: filteredChannels(), agents: filteredAgents() }),
     (items) => {
-      if (chatOrder() === "recent") return byRecent(items);
-      if (chatOrder() !== "unread-first") return items;
+      if (chatOrder() === "recent") return pinChiefFirst(byRecent(items));
+      if (chatOrder() !== "unread-first") return pinChiefFirst(items);
       const recent = byRecent(items);
-      return [
+      return pinChiefFirst([
         ...recent.filter((item) => unreadIds().has(item.id)),
         ...recent.filter((item) => !unreadIds().has(item.id)),
-      ];
+      ]);
     },
   );
   const waitingChats = createChatItems(() => ({

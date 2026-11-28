@@ -1,9 +1,9 @@
 import { LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
+import { Button, Check, ChevronDown, Dialog, Input, Plus, Switch, X } from "@openbot/ui";
 import type { AgentProfile } from "@openbot/ui/data";
 import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
 import { isChiefStarBot } from "@openbot/ui/features/agents/chief-starbot";
 import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import { Button, Check, ChevronDown, Dialog, Input, Plus, Switch, X } from "@openbot/ui";
 import { createEffect, createMemo, createSignal, For, onCleanup, onSettled, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { useNavigation } from "../../navigation";
@@ -47,7 +47,10 @@ export function StarBotWorkspaceCapsules() {
   // Refresh Chief StarBot ranking once when agent list settles
   let rankedOnceKey = "";
   createEffect(
-    () => agentList().map((a) => a.id).join(","),
+    () =>
+      agentList()
+        .map((a) => a.id)
+        .join(","),
     (idsKey) => {
       if (!idsKey || idsKey === rankedOnceKey) return;
       rankedOnceKey = idsKey;
@@ -84,6 +87,7 @@ export function StarBotWorkspaceCapsules() {
       setTargetAgentId(preferred);
       setBotDropdownOpen(false);
       setQuickCaptureOpen(true);
+      void playKawaiiCue("drawer-open");
     };
     const isTypingInNonEmptyField = (target: EventTarget | null): boolean => {
       if (!(target instanceof HTMLElement)) return false;
@@ -171,13 +175,10 @@ export function StarBotWorkspaceCapsules() {
         return;
       }
 
-      const prompt =
-        action === "ask"
-          ? content
-          : `请帮我把以下想法拆解为清晰可执行的下一步待办清单：\n\n${content}`;
+      const prompt = action === "ask" ? content : `请帮我把以下想法拆解为清晰可执行的下一步待办清单：\n\n${content}`;
 
       await window.openbot.agent.sendMessage({ agentId: target.id, text: prompt }, serverId());
-      void playKawaiiCue("select");
+      void playKawaiiCue("message-send");
       selectAgent(target.id);
       setCaptureText("");
       setQuickCaptureOpen(false);
@@ -358,7 +359,9 @@ export function StarBotWorkspaceCapsules() {
           <Dialog.Overlay class="starbot-modal-backdrop">
             <Dialog.Content as="section" class="starbot-daily-digest-modal" aria-label="星夜梦境与共享画像">
               <Dialog.Title class="sr-only">星夜梦境与共享画像</Dialog.Title>
-              <Dialog.Description class="sr-only">主星友夜间自动归纳今日对话记忆，以及跨星友共享个人画像。</Dialog.Description>
+              <Dialog.Description class="sr-only">
+                主星友夜间自动归纳今日对话记忆，以及跨星友共享个人画像。
+              </Dialog.Description>
 
               <div class="starbot-minimal-modal-top">
                 <div class="starbot-minimal-seg-tabs" role="tablist">

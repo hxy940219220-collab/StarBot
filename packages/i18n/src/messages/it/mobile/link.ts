@@ -54,5 +54,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "Impossibile leggere l'agente condiviso. Riprova.",
   "mobile.link.template.error.unsupported":
     "Questo server non può aggiungere agenti condivisi. Aggiorna StarBot sul computer su cui gira il server.",
-
 } as const satisfies PartialTranslation<typeof source>;

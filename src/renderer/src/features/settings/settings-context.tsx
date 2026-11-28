@@ -435,7 +435,7 @@ const Settings = createSimpleContext({
     function openAppSettings(trigger?: HTMLElement | null, tab?: SettingsTab): void {
       const target = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
       appSettingsRestoreTarget = target;
-      setAppSettingsTab(tab);
+      setAppSettingsTab((current) => tab ?? current ?? "general");
       setAppSettingsOpen(true);
       setAppSettingsOpenRequest((count) => count + 1);
     }

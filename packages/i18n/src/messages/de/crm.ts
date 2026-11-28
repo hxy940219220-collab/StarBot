@@ -373,5 +373,4 @@ export const messages = {
   "crm.source.disconnectTitle": "{source} trennen?",
   "crm.source.disconnectBody":
     "StarBot beendet die Synchronisierung und löscht den Schlüssel. Die importierten Zeilen bleiben, und du kannst sie ändern.",
-
 } as const satisfies PartialTranslation<typeof source>;

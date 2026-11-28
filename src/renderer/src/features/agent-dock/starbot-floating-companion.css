@@ -1,0 +1,854 @@
+/* ==========================================================================
+   StarBot Full-Screen Floating Companion Character & Smooth Orbital Arc Menu
+   Pure naked 3D clay mascot (zero background plate), outward tooltips,
+   clear card spacing, and provider-grouped model switcher
+   ========================================================================== */
+
+:root[data-surface="agent-dock"],
+:root[data-surface="agent-dock"] body,
+:root[data-surface="agent-dock"] #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+}
+
+.starbot-companion-stage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  font-family: var(--openbot-font-sans, -apple-system, BlinkMacSystemFont, "Hiragino Sans GB", sans-serif);
+}
+
+.starbot-companion-stage.is-in-window {
+  inset: auto;
+  right: 32px;
+  bottom: 80px;
+  width: var(--bot-size, 69px);
+  height: var(--bot-size, 69px);
+  z-index: 60;
+}
+
+.starbot-companion-anchor {
+  position: relative;
+  width: var(--bot-size, 69px);
+  height: var(--bot-size, 69px);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+/* Pure Naked 3D Clay Floating Bot Character (Zero Background Circle!) */
+.starbot-companion-orb {
+  position: relative;
+  z-index: 5;
+  width: var(--bot-size, 69px);
+  height: var(--bot-size, 69px);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  pointer-events: auto;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 8px 18px rgba(10, 7, 26, 0.34));
+  animation: starbot-companion-float 3.6s ease-in-out infinite;
+  transition:
+    transform 220ms cubic-bezier(0.34, 1.5, 0.64, 1),
+    filter 220ms ease,
+    width 180ms ease,
+    height 180ms ease;
+}
+
+.starbot-companion-orb:active {
+  cursor: grabbing;
+  transform: scale(0.94);
+}
+
+.starbot-companion-orb:hover {
+  transform: scale(1.07);
+  filter: drop-shadow(0 10px 22px rgba(138, 102, 255, 0.44));
+}
+
+@keyframes starbot-companion-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+.starbot-companion-avatar {
+  width: var(--bot-size, 69px);
+  height: var(--bot-size, 69px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: transparent !important;
+}
+
+.starbot-companion-avatar > .agent-avatar {
+  width: var(--bot-size, 69px);
+  height: var(--bot-size, 69px);
+  --agent-avatar-optical-offset: 0px;
+}
+
+.starbot-companion-avatar > .agent-avatar > .bloub-avatar-svg,
+.starbot-companion-avatar > .agent-avatar > img {
+  width: 100%;
+  height: 100%;
+}
+
+.starbot-companion-aura {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px dashed transparent;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+/* Thinking Constellation Halo Animation (around naked character) */
+.starbot-companion-orb.is-thinking {
+  animation: starbot-companion-float 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(110, 243, 223, 0.48));
+}
+
+.starbot-companion-orb.is-thinking .starbot-companion-aura {
+  opacity: 1;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: #6ef3df;
+  border-right-color: #b494ff;
+  animation: starbot-aura-spin 1.15s linear infinite;
+}
+
+/* Recording Rose-Pink Pulse Animation */
+.starbot-companion-orb.is-recording {
+  filter: drop-shadow(0 8px 22px rgba(244, 114, 182, 0.62));
+}
+
+.starbot-companion-orb.is-recording .starbot-companion-aura {
+  opacity: 1;
+  border-style: solid;
+  border-color: rgba(255, 132, 202, 0.72);
+  animation: starbot-rec-ripple 1.2s ease-out infinite;
+}
+
+@keyframes starbot-aura-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes starbot-rec-ripple {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.26);
+    opacity: 0;
+  }
+}
+
+/* 5 Smooth Orbital Arc Circular Buttons (Strictly Fixed Size — Never Scales With Character!) */
+.starbot-companion-arc {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.starbot-arc-btn {
+  appearance: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  margin-top: -15px;
+  border-radius: 50%;
+  border: 1px solid rgba(188, 166, 255, 0.38);
+  background: rgba(24, 19, 46, 0.92);
+  backdrop-filter: blur(14px);
+  color: #eee9ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(0, 0) scale(0.28);
+  box-shadow: 0 6px 16px rgba(8, 6, 22, 0.46);
+  transition:
+    transform 320ms cubic-bezier(0.34, 1.54, 0.64, 1) var(--arc-delay, 0ms),
+    opacity 200ms ease var(--arc-delay, 0ms),
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.starbot-companion-arc.is-open .starbot-arc-btn {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate(var(--arc-x, 0px), var(--arc-y, 0px)) scale(1);
+}
+
+.starbot-companion-arc.is-open .starbot-arc-btn:hover {
+  z-index: 40;
+  background: rgba(138, 102, 255, 0.36);
+  border-color: rgba(218, 198, 255, 0.9);
+  color: #ffffff;
+  transform: translate(var(--arc-x, 0px), var(--arc-y, 0px)) scale(1.14);
+}
+
+.starbot-arc-btn.is-active {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  border-color: rgba(232, 218, 255, 0.92);
+  color: #ffffff;
+}
+
+.starbot-arc-btn.is-voice.is-active {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  border-color: #fbcfe8;
+}
+
+.starbot-companion-arc.is-open .starbot-arc-btn.is-hide:hover {
+  background: rgba(244, 63, 94, 0.34);
+  border-color: rgba(253, 164, 175, 0.88);
+  color: #ffe4e6;
+}
+
+.starbot-arc-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Outward-facing Tooltip (never occluded by sibling arc buttons or bot!) */
+.starbot-arc-tooltip {
+  position: absolute;
+  top: 50%;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: rgba(14, 11, 28, 0.96);
+  border: 1px solid rgba(182, 158, 255, 0.42);
+  box-shadow: 0 6px 16px rgba(6, 4, 18, 0.55);
+  color: #f6f3ff;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.starbot-companion-anchor.is-side-left .starbot-arc-tooltip {
+  right: calc(100% + 10px);
+  transform: translateY(-50%) translateX(4px);
+}
+
+.starbot-companion-anchor.is-side-left .starbot-arc-btn:hover .starbot-arc-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.starbot-companion-anchor.is-side-right .starbot-arc-tooltip {
+  left: calc(100% + 10px);
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.starbot-companion-anchor.is-side-right .starbot-arc-btn:hover .starbot-arc-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Hide hover tooltips while a sub-panel card is already open */
+.starbot-companion-arc.has-open-panel .starbot-arc-tooltip {
+  display: none;
+}
+
+/* Floating Sub-Panel Cards (Switch Bot / Grouped Models / Usage) */
+.starbot-companion-card {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 248px;
+  max-height: 310px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 18px;
+  background: rgba(20, 16, 40, 0.96);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(174, 148, 255, 0.4);
+  box-shadow: 0 16px 38px rgba(6, 4, 18, 0.65);
+  color: #f4f0ff;
+  pointer-events: auto;
+  z-index: 25;
+  animation: starbot-card-pop 220ms cubic-bezier(0.34, 1.42, 0.64, 1);
+}
+
+/* Placed cleanly outside the dynamic orbital arc so zero buttons are covered at any character size */
+.starbot-companion-anchor.is-side-left .starbot-companion-card {
+  right: calc(50% + var(--card-offset, 84px));
+}
+
+.starbot-companion-anchor.is-side-right .starbot-companion-card {
+  left: calc(50% + var(--card-offset, 84px));
+}
+
+@keyframes starbot-card-pop {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.starbot-companion-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(214, 204, 248, 0.92);
+  padding: 0 2px;
+}
+
+.starbot-companion-card-close {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  color: rgba(196, 186, 232, 0.75);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.starbot-companion-card-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.starbot-companion-card-close svg {
+  width: 14px;
+  height: 14px;
+}
+
+.starbot-companion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+  max-height: 210px;
+  padding-right: 2px;
+}
+
+/* Segmented Source Filter: 本机模型 vs API 模型 */
+.starbot-model-source-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 3px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.starbot-model-source-tab {
+  appearance: none;
+  border: 0;
+  border-radius: 8px;
+  padding: 5px 8px;
+  background: transparent;
+  color: rgba(204, 196, 238, 0.78);
+  font-size: 11.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    color 140ms ease;
+}
+
+.starbot-model-source-tab small {
+  font-size: 10px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(214, 206, 248, 0.85);
+}
+
+.starbot-model-source-tab:hover {
+  color: #ffffff;
+}
+
+.starbot-model-source-tab.is-active {
+  background: rgba(138, 102, 255, 0.34);
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(196, 174, 255, 0.45);
+}
+
+.starbot-model-source-tab.is-active small {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+/* Compact Provider Filter Chips */
+.starbot-provider-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 2px 0;
+}
+
+.starbot-provider-chip {
+  appearance: none;
+  border: 1px solid rgba(186, 166, 255, 0.22);
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(216, 208, 248, 0.86);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.starbot-provider-chip:hover {
+  background: rgba(138, 102, 255, 0.2);
+  color: #ffffff;
+}
+
+.starbot-provider-chip.is-active {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.52), rgba(109, 40, 217, 0.52));
+  border-color: rgba(214, 196, 255, 0.82);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.starbot-provider-chip.has-current::before {
+  content: "✦ ";
+  font-size: 9px;
+  color: #fde047;
+}
+
+/* Provider-Grouped Model Sections */
+.starbot-model-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.starbot-model-group + .starbot-model-group {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.starbot-model-group-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(186, 168, 246, 0.82);
+}
+
+.starbot-model-group-dot {
+  font-size: 9.5px;
+  color: #b794ff;
+}
+
+.starbot-model-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.starbot-companion-row {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f4f0ff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease;
+}
+
+.starbot-companion-row.is-model-row {
+  padding: 6px 10px;
+}
+
+.starbot-companion-row:hover {
+  background: rgba(142, 106, 255, 0.18);
+}
+
+.starbot-companion-row.is-current {
+  background: rgba(138, 102, 255, 0.25);
+  border-color: rgba(186, 158, 255, 0.5);
+}
+
+.starbot-companion-row-avatar {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.starbot-companion-row-avatar .agent-avatar {
+  width: 26px;
+  height: 26px;
+}
+
+.starbot-companion-row-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.starbot-companion-row-meta strong {
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.starbot-companion-row-meta small {
+  font-size: 10.5px;
+  color: rgba(190, 182, 224, 0.72);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.starbot-companion-row-check {
+  width: 14px;
+  height: 14px;
+  color: #cbb6ff;
+  display: inline-flex;
+}
+
+.starbot-companion-row-check svg {
+  width: 14px;
+  height: 14px;
+}
+
+.starbot-companion-empty {
+  padding: 14px 8px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(188, 180, 222, 0.72);
+}
+
+/* Telemetry Usage Sections */
+.starbot-usage-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 9px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.starbot-usage-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: rgba(206, 198, 240, 0.88);
+}
+
+.starbot-usage-row-top strong {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  max-width: 128px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.starbot-usage-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+
+.starbot-usage-bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #8b5cf6 0%, #38bdf8 100%);
+  transition: width 240ms ease;
+}
+
+.starbot-usage-bar.is-quota > i {
+  background: linear-gradient(90deg, #f472b6 0%, #fbbf24 100%);
+}
+
+.starbot-usage-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: rgba(182, 174, 218, 0.78);
+}
+
+/* Recording Status Pill, Thinking Pill & Bounded Reply Dialog Box */
+.starbot-companion-rec-pill,
+.starbot-companion-thinking-pill,
+.starbot-companion-error-pill {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px;
+  border-radius: 16px;
+  background: rgba(22, 18, 44, 0.96);
+  border: 1px solid rgba(244, 114, 182, 0.55);
+  box-shadow: 0 10px 26px rgba(10, 8, 26, 0.55);
+  color: #fff0f8;
+  font-size: 12px;
+  pointer-events: auto;
+  z-index: 20;
+  max-width: 236px;
+  cursor: pointer;
+}
+
+.starbot-companion-thinking-pill {
+  border-color: rgba(110, 243, 223, 0.46);
+  color: #e2fff9;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.starbot-companion-error-pill {
+  border-color: rgba(248, 113, 113, 0.55);
+  color: #fee2e2;
+  cursor: default;
+}
+
+.starbot-companion-anchor.is-side-left
+  :is(
+    .starbot-companion-rec-pill,
+    .starbot-companion-thinking-pill,
+    .starbot-companion-error-pill,
+    .starbot-companion-reply-bubble
+  ) {
+  right: calc(50% + var(--card-offset, 84px));
+}
+
+.starbot-companion-anchor.is-side-right
+  :is(
+    .starbot-companion-rec-pill,
+    .starbot-companion-thinking-pill,
+    .starbot-companion-error-pill,
+    .starbot-companion-reply-bubble
+  ) {
+  left: calc(50% + var(--card-offset, 84px));
+}
+
+.starbot-companion-rec-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: #f472b6;
+  box-shadow: 0 0 8px #f472b6;
+  animation: starbot-rec-bar-pulse 520ms ease-in-out infinite alternate;
+}
+
+.starbot-companion-rec-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+  text-align: left;
+}
+
+.starbot-companion-rec-copy strong {
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.starbot-companion-rec-copy small {
+  font-size: 11px;
+  color: rgba(255, 224, 242, 0.82);
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.starbot-thinking-dots {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.starbot-thinking-dots > i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6ef3df;
+  animation: starbot-dot-bounce 900ms ease-in-out infinite;
+}
+
+.starbot-thinking-dots > i:nth-child(2) {
+  animation-delay: 150ms;
+}
+.starbot-thinking-dots > i:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes starbot-dot-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/* Bounded Reply Bubble - Click anywhere to jump straight into desktop chat */
+.starbot-companion-reply-bubble {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 248px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 11px 13px;
+  border-radius: 18px;
+  background: rgba(22, 18, 44, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(176, 150, 255, 0.46);
+  box-shadow: 0 14px 36px rgba(8, 5, 24, 0.62);
+  color: #f5f2ff;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 25;
+  animation: starbot-card-pop 240ms cubic-bezier(0.34, 1.45, 0.64, 1);
+  transition:
+    border-color 150ms ease,
+    transform 160ms ease;
+}
+
+.starbot-companion-reply-bubble:hover {
+  border-color: rgba(216, 196, 255, 0.88);
+}
+
+.starbot-companion-reply-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.starbot-companion-reply-author {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #d6c6ff;
+}
+
+.starbot-companion-reply-author em {
+  font-style: normal;
+  color: #6ef3df;
+  font-weight: 500;
+}
+
+.starbot-companion-reply-dismiss {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  color: rgba(196, 186, 232, 0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.starbot-companion-reply-dismiss:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.starbot-companion-reply-dismiss svg {
+  width: 13px;
+  height: 13px;
+}
+
+.starbot-companion-reply-body {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.48;
+  color: rgba(246, 243, 255, 0.95);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.starbot-companion-reply-foot {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(176, 152, 255, 0.88);
+}

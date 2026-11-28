@@ -34,7 +34,6 @@ export const messages = {
   "provider.gemini.hostSignIn":
     "Gemini を接続するには、ホストで StarBot を開き、「サーバーの設定」>「プロバイダー」で「接続」を選択してください。Google へのサインインには、そのホストのブラウザーが必要です。リモートでのサインインには対応していません。",
 
-
   "provider.key.free": "無料",
 
   "provider.action.connect": "接続",

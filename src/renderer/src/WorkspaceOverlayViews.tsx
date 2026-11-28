@@ -106,7 +106,8 @@ export function MarketplaceOverlay(props: {
   );
   const resolveTargetAgentId = (requestedId: string): string | null => {
     if (requestedId && props.agents.some((agent) => agent.id === requestedId)) return requestedId;
-    if (props.activeAgentId && props.agents.some((agent) => agent.id === props.activeAgentId)) return props.activeAgentId;
+    if (props.activeAgentId && props.agents.some((agent) => agent.id === props.activeAgentId))
+      return props.activeAgentId;
     return props.agents[0]?.id ?? null;
   };
   const appendExample = (agentId: string, append: (target: { serverId: string; agentId: string }) => void) => {

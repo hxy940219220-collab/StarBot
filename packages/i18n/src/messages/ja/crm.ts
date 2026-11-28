@@ -350,5 +350,4 @@ export const messages = {
   "crm.source.disconnect": "接続を解除",
   "crm.source.disconnectTitle": "{source} の接続を解除しますか？",
   "crm.source.disconnectBody": "StarBot は同期を停止し、キーを削除します。インポート済みの行は残り、変更できます。",
-
 } as const satisfies PartialTranslation<typeof source>;

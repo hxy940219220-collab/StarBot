@@ -9,7 +9,9 @@ let currentSessionToken = 0;
 const CJK_REGEX = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
 
 export function isNativeTtsSupported(): boolean {
-  return typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+  return (
+    typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined"
+  );
 }
 
 export function nativeReadingMessageId(): string | null {

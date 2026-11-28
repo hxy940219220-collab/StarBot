@@ -53,5 +53,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "共有エージェントを読み込めませんでした。もう一度お試しください。",
   "mobile.link.template.error.unsupported":
     "このサーバーは共有エージェントを追加できません。サーバーを実行しているコンピューターの StarBot を更新してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

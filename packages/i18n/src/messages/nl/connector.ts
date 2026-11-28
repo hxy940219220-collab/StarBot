@@ -75,7 +75,6 @@ export const messages = {
   "connector.statusUnknown": "Onbekend",
   "connector.readFailed": "StarBot kan de status van deze verbinding niet lezen.",
 
-
   "connector.slack.title": "Slack",
   "connector.slack.description":
     "Mensen noemen @StarBot in Slack of sturen het een direct bericht. De Slack Orchestrator vraagt de juiste agent en antwoordt.",
@@ -284,7 +283,6 @@ export const messages = {
   "connector.discord.accessRoleDeleted": "{role} (verwijderd)",
   "connector.discord.accessSave": "Opslaan",
   "connector.discord.accessHostUpdate": "Werk StarBot bij op {host} om rollen te kiezen.",
-
 
   "connector.telegram.title": "Telegram",
   "connector.telegram.description":
@@ -750,5 +748,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "Loskoppelen",
   "connector.protonPass.actionFailed": "StarBot kon de Proton Pass-verbinding niet wijzigen.",
-
 } as const satisfies PartialTranslation<typeof source>;

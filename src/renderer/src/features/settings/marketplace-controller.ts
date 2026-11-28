@@ -1040,10 +1040,7 @@ export function createMarketplaceController(
   }
 
   async function startedApp(app: MarketplacePluginApp, config: McpServerConfig): Promise<McpServerConfig | null> {
-    const [result] = await Promise.all([
-      testPluginApp(config),
-      new Promise((resolve) => setTimeout(resolve, 750)),
-    ]);
+    const [result] = await Promise.all([testPluginApp(config), new Promise((resolve) => setTimeout(resolve, 750))]);
     if (!result.error) return config;
     setError(t("marketplace.error.appNotConnected", { name: app.name, reason: sourceText(result.error) }));
     return null;

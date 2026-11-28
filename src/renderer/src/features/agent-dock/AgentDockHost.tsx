@@ -1,4 +1,4 @@
-import type { AgentProviderRef } from "@openbot/contracts/agent-providers";
+import { type AgentProviderRef, isKeyOnlyProvider, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
 import { leadingAddress } from "@openbot/contracts/chat-tag-references";
 import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
 import {
@@ -21,16 +21,19 @@ import {
   type AgentDockUsageLimit,
   type ChannelPage,
   type ChannelSummary,
+  customProviderOfModel,
+  DEFAULT_PROVIDER_ACCOUNT_ID,
   isAttachmentSummary,
   LOCAL_SERVER_ID,
+  providerDisplayName,
+  type StarBotCompanionInfo,
+  type StarBotCompanionModelChoice,
   sameAgentModelChoice,
   withOpenBotSource,
 } from "@openbot/contracts/ipc";
 import { approvalIsCut } from "@openbot/team-client/runtime-attention";
 import type { AgentMessage, ComposerAgent } from "@openbot/ui/data";
 import {
-  AgentDock,
-  type AgentDockChatAnswers,
   type AgentDockChatModel,
   type AgentDockSendResult,
   type AgentDockChannel as AgentDockUiChannel,
@@ -38,6 +41,7 @@ import {
   agentDockSeatKey,
 } from "@openbot/ui/features/agent-dock/AgentDock";
 import { isDockMessage, isDockVisualReply } from "@openbot/ui/features/agent-dock/AgentDockChat";
+import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import type { UsageLimitAskCardProps } from "@openbot/ui/features/conversation/BackupModels";
 import { markdownPlainText } from "@openbot/ui/features/conversation/MarkdownMessageText";
 import { sidebarAgentOrder } from "@openbot/ui/features/sidebar/sidebar-agent-order";
@@ -48,6 +52,7 @@ import { createEffect, createMemo, createSignal, Match, onCleanup, onSettled, Sh
 import { appPort } from "../../app-port";
 import { useNavigation } from "../../navigation";
 import { usePlatform } from "../../platform";
+import { useProviders } from "../../providers";
 import { useTurns } from "../../turns";
 import { useAuth } from "../account/account-context";
 import { useAgentTasks } from "../agent-tasks/agent-tasks-context";
@@ -69,6 +74,7 @@ import { latestVisibleAgentMessageId } from "../conversation/conversation-read-s
 import { createAgentMessageDeleteAccess, desktopAgentMessageDeleteAccess } from "../conversation/message-delete-access";
 import { narrationRows, placeTurnRowsByTime } from "../conversation/narration-rows";
 import { usageLimitAskFrom } from "../conversation/usage-limit-ask";
+import { publishVoiceIslandState } from "../dynamic-island/voice-island-bridge";
 import { serverSupportsCapability } from "../servers/server-capabilities";
 import { useServers } from "../servers/servers-context";
 import { useSettings } from "../settings/settings-context";
@@ -86,6 +92,7 @@ import {
   useAgentDockPreference,
 } from "./agent-dock-preference";
 import { createAgentDockVoice } from "./agent-dock-voice";
+import { StarBotFloatingCompanion } from "./StarBotFloatingCompanion";
 
 export function useAgentDockPlacement(): () => AgentDockPlacement | null {
   const platform = usePlatform();
@@ -143,6 +150,30 @@ export function AgentDockHost() {
       if (hidden) hideScreenDock();
     },
   );
+
+  // Sync global summon/hide shortcut with Electron main process
+  createEffect(
+    () => preference().shortcut,
+    (shortcut) => {
+      void agentDockPort()
+        .agentDock.setShortcut({ shortcut })
+        .catch(() => undefined);
+    },
+  );
+
+  // Listen globally for shortcut toggle & hide even when the floating companion is currently hidden
+  onSettled(() => {
+    return agentDockPort().agentDock.onAction((action) => {
+      if (action.type === "toggle") {
+        const nextShown = !preference().shown;
+        void playKawaiiCue("drawer-open", { subtle: true });
+        setAgentDockPreference({ shown: nextShown });
+      } else if (action.type === "hide") {
+        setAgentDockPreference({ shown: false });
+      }
+    });
+  });
+
   onCleanup(() => {
     if (placement() === "screen") hideScreenDock();
   });
@@ -174,6 +205,7 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
   const channels = useChannels();
   const {
     approvals,
+    contextStates,
     pendingPrompts,
     respondToApprovalRequest,
     answerPromptRequest,
@@ -187,6 +219,7 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
   const { readerMemberId } = usePresence();
   const auth = useAuth();
   const { activeServer } = useServers();
+  const { activeCustomProviders } = useProviders();
   const { browserTabs } = useBrowserTabs();
   const { t, errorMessage, sourceText } = useText();
   const preference = useAgentDockPreference();
@@ -604,12 +637,157 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
     return all.sort((a, b) => a.at - b.at).slice(-AGENT_DOCK_LIMITS.results);
   });
 
+  const [companionSelectedId, setCompanionSelectedId] = createSignal<string | null>(null);
+  createEffect(
+    () => activeAgentId(),
+    (aid) => {
+      if (aid) setCompanionSelectedId(aid);
+    },
+  );
+
+  const orderedShownAgents = createMemo(() =>
+    sidebarAgentOrder(agentList(), {
+      layout: sidebarLayout(),
+      pinnedItems: pinnedSidebarItems(),
+      hiddenAgentIds: userHiddenAgentIds(),
+    }),
+  );
+
+  const companionAgentId = createMemo<string | null>(() => {
+    const list = orderedShownAgents();
+    if (list.length === 0) return null;
+    const wanted = companionSelectedId() || activeAgentId();
+    return list.find((a) => a.id === wanted)?.id ?? list[0]?.id ?? null;
+  });
+
+  createEffect(
+    () => companionAgentId(),
+    (cid) => {
+      if (cid && !conversations[cid]?.messages?.length) {
+        void loadLatestAgentMessages(cid).catch(() => undefined);
+      }
+    },
+  );
+
+  const formatProviderGroupLabel = (provider: AgentProviderRef): string => {
+    if (isKnownAgentProvider(provider)) return providerDisplayName(provider);
+    const raw = String(provider).trim();
+    const lower = raw.toLowerCase();
+    const map: Record<string, string> = {
+      antigravity: "Antigravity",
+      opencode: "OpenCode",
+      openai: "OpenAI",
+      anthropic: "Anthropic",
+      google: "Google Gemini",
+      gemini: "Google Gemini",
+      xai: "xAI Grok",
+      deepseek: "DeepSeek",
+      openrouter: "OpenRouter",
+    };
+    return map[lower] ?? raw.charAt(0).toUpperCase() + raw.slice(1);
+  };
+
+  const isLoopbackEndpointUrl = (url: string | null | undefined): boolean =>
+    Boolean(url && /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)(:|\/|$)/i.test(url.trim()));
+
+  const companionModelChoices = createMemo<StarBotCompanionModelChoice[]>(() => {
+    const seen = new Set<string>();
+    const out: StarBotCompanionModelChoice[] = [];
+    const customEps = activeCustomProviders();
+    const providerRows = agentStatus().providers ?? [];
+    for (const opt of modelOptions()) {
+      const key = `${String(opt.provider)}::${opt.id}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const customEp = customProviderOfModel(opt.id, customEps);
+      const provStatus = providerRows.find((row) => row.id === opt.provider);
+      const source: "local" | "api" = customEp
+        ? isLoopbackEndpointUrl(customEp.baseUrl)
+          ? "local"
+          : "api"
+        : isKeyOnlyProvider(opt.provider) || provStatus?.apiKeyInUse === true
+          ? "api"
+          : "local";
+      const providerLabel = (customEp?.name?.trim() || formatProviderGroupLabel(opt.provider)).slice(0, 120);
+      out.push({
+        provider: String(opt.provider).slice(0, 120),
+        providerLabel,
+        source,
+        model: opt.id.slice(0, 240),
+        label: (opt.name || opt.id).slice(0, 240),
+      });
+      if (out.length >= 120) break;
+    }
+    return out;
+  });
+
+  const companionBots = createMemo<StarBotCompanionInfo[]>(() => {
+    const opts = modelOptions();
+    const ctxMap = contextStates();
+    const acctLimits = auth.accountUsage()?.limits ?? [];
+    return orderedShownAgents()
+      .slice(0, INPUT_LIMITS.agents)
+      .map((agent): StarBotCompanionInfo => {
+        const msgs = conversations[agent.id]?.messages ?? [];
+        let latestReplyId: string | null = null;
+        let latestReplyText: string | null = null;
+        for (let i = msgs.length - 1; i >= 0; i -= 1) {
+          const m = msgs[i];
+          if (m && m.author === "agent" && m.kind === "text" && m.body.trim().length > 0) {
+            latestReplyId = m.id.slice(0, INPUT_LIMITS.identifier);
+            latestReplyText = markdownPlainText(m.body).trim().slice(0, 1_200) || m.body.trim().slice(0, 1_200);
+            break;
+          }
+        }
+        const ctx = ctxMap[agent.id]?.usage;
+        const estimatedChars = msgs.reduce((sum, m) => sum + m.body.length, 0);
+        const contextUsedTokens = ctx ? ctx.usedTokens : Math.round(estimatedChars * 0.6);
+        const contextWindowTokens = ctx && ctx.windowTokens > 0 ? ctx.windowTokens : 128_000;
+        const contextEstimated = ctx ? Boolean(ctx.estimated) : true;
+        const turnCount = msgs.filter((m) => m.author === "agent" && m.kind === "text").length;
+        const acctId = agent.providerAccountId ?? DEFAULT_PROVIDER_ACCOUNT_ID;
+        const matchedLimit = acctLimits.find(
+          (lim) => lim.id === String(agent.provider) && (lim.accountId ?? DEFAULT_PROVIDER_ACCOUNT_ID) === acctId,
+        );
+        const win = matchedLimit?.primary ?? matchedLimit?.secondary ?? null;
+        const modelMatch = opts.find((o) => o.provider === agent.provider && o.id === agent.model);
+        const modelLabel = (modelMatch?.name || agent.model || agent.title || "默认模型").slice(0, 240);
+
+        return {
+          agent: dockAgent(agent),
+          mood: agentMoods()[agent.id] ?? "idle",
+          working: Boolean(workingTurns()[agent.id]),
+          provider: String(agent.provider || "openai").slice(0, 120),
+          model: String(agent.model || "default").slice(0, 240),
+          modelLabel,
+          latestReplyId,
+          latestReplyText,
+          usage: {
+            contextUsedTokens,
+            contextWindowTokens,
+            contextEstimated,
+            messageCount: Math.min(AGENT_DOCK_LIMITS.count, msgs.length),
+            turnCount: Math.min(AGENT_DOCK_LIMITS.count, turnCount),
+            quotaPercentUsed: win ? win.usedPercent : null,
+            quotaResetsAt: win ? win.resetsAt : null,
+          },
+        };
+      });
+  });
+
   return {
     agents: agentList,
     seats,
     available,
     availableChannels,
     results,
+    companionAgentId,
+    companionBots,
+    companionModelChoices,
+    setCompanionSelectedId,
+    switchAgentModel(agentId: string, provider: string, model: string) {
+      void updateAgent(agentId, { provider: provider as AgentProviderRef, model }).catch(() => undefined);
+    },
     chat,
     channelMessages,
     agentMessages,
@@ -718,50 +896,35 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
 function WindowAgentDock(props: { serverId: string }) {
   const { sendMessage } = useConversation();
   const { selectAgent } = useNavigation();
-  const channels = useChannels();
-  const { openAppSettings } = useSettings();
+  const preference = useAgentDockPreference();
   const dock = createServerDock(props.serverId, { readWhenHidden: false });
   const voice = createAgentDockVoice(() => props.serverId);
-  const openTakeoverPage = useTakeoverPageOpener((agentId) => dock.mainTabOf(agentId));
-  const answers: AgentDockChatAnswers = {
-    approval: (approval, decision) => dock.respondToApproval(approval.agentId, approval.requestId, decision),
-    prompt: (prompt, values) => dock.answerPrompt(prompt.agentId, prompt.threadId, prompt.requestId, values),
-    takeover: ({ request }, decision) =>
-      dock.respondToTakeover(request.agentId, request.threadId, request.requestId, decision),
-    takeoverDone: ({ request }) => props.serverId === LOCAL_SERVER_ID || request.reason !== "sign-in-blocked",
-    openTakeover: ({ request }) => openTakeoverPage(request.agentId, request.tabId),
-    secret: (_takeover, input) => agentDockPort().agent.respondToBrowserSecret(input, props.serverId),
-    usageLimitSend: (limit, option, remember) => dock.sendOnBackup(limit.agentId, option.key, remember),
-    usageLimitWait: (limit) => dock.waitForReset(limit.agentId),
-  };
 
   return (
-    <AgentDock
-      seats={dock.seats()}
-      available={dock.available()}
-      availableChannels={dock.availableChannels()}
-      chat={dock.chat}
-      onOpenChange={dock.openChat}
-      onAdd={dock.add}
-      onRemove={dock.remove}
-      onMove={dock.move}
-      onSend={(seat, text) =>
-        seat.kind === "channel"
-          ? dock.sendToChannel(seat.id, text)
-          : sendMessage(text, [], null, { agentId: seat.id, serverId: props.serverId })
-      }
-      onOpenInMain={(seat) =>
-        seat.kind === "channel" ? void channels.open(seat.id) : selectAgent(seat.id, dock.mainTabOf(seat.id))
-      }
-      onOpenWindow={(agentId) => void appPort().openChatWindow({ serverId: props.serverId, agentId })}
-      answers={answers}
+    <StarBotFloatingCompanion
+      inWindow
+      bots={dock.companionBots()}
+      activeBotId={dock.companionAgentId()}
+      modelChoices={dock.companionModelChoices()}
+      sizePercent={preference().sizePercent}
+      expandSide="left"
       voice={voice}
-      agents={dock.agents()}
-      onSelectAgent={(agentId) => selectAgent(agentId)}
-      onOpenLink={(url) => void appPort().openUrl(withOpenBotSource(url))}
-      onOpenSettings={() => openAppSettings(null, "agent-dock")}
-      onHide={() => setAgentDockPreference({ shown: false })}
-      results={dock.results()}
+      onSelectBot={(agentId) => {
+        dock.setCompanionSelectedId(agentId);
+        selectAgent(agentId);
+      }}
+      onSendVoiceText={async (agentId, text) => {
+        await sendMessage(text, [], null, { agentId, serverId: props.serverId });
+      }}
+      onSwitchModel={(agentId, provider, model) => {
+        dock.switchAgentModel(agentId, provider, model);
+      }}
+      onOpenBotChat={(agentId) => {
+        selectAgent(agentId, dock.mainTabOf(agentId));
+      }}
+      onHide={() => {
+        setAgentDockPreference({ shown: false });
+      }}
     />
   );
 }
@@ -810,6 +973,9 @@ function ScreenAgentDock(props: { serverId: string }) {
         seat.kind === "channel" ? dock.channelMessages() : dock.agentMessages(seat.id),
       ),
       results: dock.results(),
+      companionAgentId: dock.companionAgentId(),
+      companionBots: dock.companionBots(),
+      companionModelChoices: dock.companionModelChoices(),
     }),
   );
 
@@ -854,6 +1020,27 @@ function ScreenAgentDock(props: { serverId: string }) {
       switch (action.type) {
         case "open-chat":
           dock.openChat(action.seat);
+          return;
+        case "select-companion":
+          dock.setCompanionSelectedId(action.agentId);
+          selectAgent(action.agentId);
+          return;
+        case "switch-model":
+          dock.switchAgentModel(action.agentId, action.provider, action.model);
+          return;
+        case "voice-sync":
+          if (!action.active) {
+            publishVoiceIslandState(null);
+          } else {
+            publishVoiceIslandState({
+              phase: action.phase ?? "recording",
+              elapsedSeconds: action.elapsedSeconds ?? 0,
+              liveText: action.liveText ?? "",
+              levels: action.levels ?? [],
+              agentId: action.agentId ?? dock.companionAgentId(),
+              serverId: action.serverId,
+            });
+          }
           return;
         case "add":
           dock.add(action.seat);

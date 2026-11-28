@@ -231,8 +231,7 @@ export const messages = {
     "服务器未接受此次登录。请重新登录。如果问题仍然存在，请确认你的账号与此应用位于同一站点或区域。",
   "error.backend.mcpSignInAccountRefused":
     "服务器拒绝了你登录所用的账号。请确认该账号可以使用此服务。要使用其他账号，请先退出登录，再重新登录。",
-  "error.backend.mcpSignInClientRefused":
-    "完成登录时，登录服务器未接受星友。请重新登录，星友会重新向服务器注册。",
+  "error.backend.mcpSignInClientRefused": "完成登录时，登录服务器未接受星友。请重新登录，星友会重新向服务器注册。",
   "error.backend.mcpSignInAppRefused":
     "登录服务器未接受该服务器的登录应用。请检查登录应用的客户端 ID 和客户端密钥，然后重新登录。",
   "error.backend.mcpCommandNotFound": "未找到命令：{command}",

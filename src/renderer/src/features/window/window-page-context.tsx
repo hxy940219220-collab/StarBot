@@ -143,7 +143,11 @@ const context = createSimpleContext({
       createMemo<SettingsPagePlacement | undefined>(() => {
         const mounts = settingsMounts();
         if (!mounts || page() !== (kind === "personal" ? "settings" : "server-settings")) return undefined;
-        return { ...mounts, onBack: (back) => (kind === "personal" ? setPersonalBack(back) : setServerBack(back)) };
+        return {
+          ...mounts,
+          unifiedNav: true,
+          onBack: (back) => (kind === "personal" ? setPersonalBack(back) : setServerBack(back)),
+        };
       });
     const placements = { personal: placementFor("personal"), server: placementFor("server") };
 

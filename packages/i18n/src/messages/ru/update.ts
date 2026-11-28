@@ -61,7 +61,6 @@ export const messages = {
   "update.idleRestart.requestFailed": "Не удалось запланировать перезапуск.",
   "update.idleRestart.failedTitle": "StarBot не перезапустился",
 
-
   "update.whatsNew.title": "Что нового в StarBot",
 
   "update.whatsNew.description": "Новые функции и изменения в этой версии StarBot.",

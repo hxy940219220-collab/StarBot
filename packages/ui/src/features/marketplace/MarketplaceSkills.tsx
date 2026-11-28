@@ -27,7 +27,18 @@ import {
 import { SkillGradient } from "@openbot/ui/skill-gradient";
 import { useText } from "@openbot/ui/text";
 import type { JSX } from "@solidjs/web";
-import { createEffect, createMemo, createSignal, createStore, For, Match, onCleanup, Show, Switch, untrack } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  createStore,
+  For,
+  Match,
+  onCleanup,
+  Show,
+  Switch,
+  untrack,
+} from "solid-js";
 import { ImportSkillDialog } from "./ImportSkillDialog";
 import { DialogAgents, type DialogSkill } from "./MarketplaceAgentsDialog";
 import { useInstalls } from "./MarketplaceCards";
@@ -375,7 +386,8 @@ function NoSkills() {
       <div class="starbot-unified-skill-empty-copy">
         <h4>还没有星友拥有技能</h4>
         <p>
-          技能可以教会星友完成专项工作。你可以直接从下方高人气主流技能中一键分配，或点击右上角「+ 添加技能」查找、上传压缩包与创建专属技能。
+          技能可以教会星友完成专项工作。你可以直接从下方高人气主流技能中一键分配，或点击右上角「+
+          添加技能」查找、上传压缩包与创建专属技能。
         </p>
       </div>
       <MarketplaceNoMatchPlush />
@@ -407,11 +419,7 @@ function AddSkillMenu(props: { scope: MarketplaceScope }) {
             >
               查找技能
             </DropdownMenu.Item>
-            <DropdownMenu.Item
-              class="starbot-add-skill-item"
-              closeOnSelect
-              onSelect={() => setUploadOpen(true)}
-            >
+            <DropdownMenu.Item class="starbot-add-skill-item" closeOnSelect onSelect={() => setUploadOpen(true)}>
               上传技能
             </DropdownMenu.Item>
             <DropdownMenu.Item

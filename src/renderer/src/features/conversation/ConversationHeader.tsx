@@ -8,22 +8,36 @@ import {
   providerDisplayName,
   workspaceAccessEnforced,
 } from "@openbot/contracts/ipc";
+import {
+  buttonVariants,
+  ChevronRight,
+  DropdownMenu,
+  History,
+  MessageCirclePlus,
+  MessagesSquare,
+  Sparkles,
+} from "@openbot/ui";
 import { reasoningLabel } from "@openbot/ui/components/ProviderModelPicker";
 import { findModelOption, providerAccountName } from "@openbot/ui/components/provider-accounts";
+import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import { ConversationHeader as SharedConversationHeader } from "@openbot/ui/features/conversation/ConversationHeader";
 import { ThreadHeader } from "@openbot/ui/features/conversation/threads/ThreadHeader";
-import { DRAFT_THREAD_ID, MAIN_THREAD_ID } from "@openbot/ui/features/conversation/threads/thread-types";
-import { Show } from "solid-js";
+import {
+  DRAFT_THREAD_ID,
+  MAIN_THREAD_ID,
+  type ThreadItem,
+} from "@openbot/ui/features/conversation/threads/thread-types";
+import { sidebarMessageTime } from "@openbot/ui/features/sidebar/sidebar-filtering";
+import { useText } from "@openbot/ui/text";
+import { createEffect, createMemo, For, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
+import { usePlatform } from "../../platform";
+import { setActiveConversationPins } from "./active-pins-bridge";
 import { useConversationViewScope } from "./conversation-scope";
 import { agentMemoriesPort } from "./memories-port";
 import { setStarbotInspectorOpen, starbotInspectorOpen, toggleStarbotInspector } from "./StarBotInspectorPanel";
 import { StarBotMemoryCleanModal } from "./StarBotMemoryCleanModal";
-import {
-  cleanModalAgentId,
-  closeMemoryCleanModal,
-  openMemoryCleanModal,
-} from "./starbot-memory-hub";
+import { cleanModalAgentId, closeMemoryCleanModal, openMemoryCleanModal } from "./starbot-memory-hub";
 
 const loadAgentSettingsPanel = () => import("./AgentSettingsPanel");
 
@@ -34,10 +48,19 @@ interface BadgeRuntime {
   providerAccountId?: string | undefined;
 }
 
-import { useText } from "@openbot/ui/text";
+interface FlyoutSessionEntry {
+  id: string;
+  title: string;
+  updatedAt: string;
+  archived: boolean;
+  isMain: boolean;
+  unread: number;
+  working: boolean;
+}
 
 export function ConversationHeader() {
-  const { t } = useText();
+  const { t, format } = useText();
+  const platform = usePlatform();
   const {
     actingBrowserControl,
     agentActivity,
@@ -64,6 +87,7 @@ export function ConversationHeader() {
     moveThreadToPanel,
     startNewThread,
   } = useConversationViewScope();
+
   const runningThreads = () => props.threads?.running ?? 0;
   const openMainChat = () => {
     const header = props.threads?.header;
@@ -71,6 +95,7 @@ export function ConversationHeader() {
   };
   const titleSelected = () => (props.threads ? !sideThreadOpen() : undefined);
   const viewTaskId = () => (sideThreadOpen() ? (props.threads?.open?.id ?? DRAFT_THREAD_ID) : undefined);
+
   let pinOpens = 0;
   async function openPin(key: string): Promise<void> {
     const pin = messagePins.pin(key);
@@ -84,6 +109,7 @@ export function ConversationHeader() {
     actionToast.error(t("chat.pins.missing"));
     messagePins.load();
   }
+
   const pinnedMessages = () => {
     if (!messagePins.available()) return undefined;
     return {
@@ -99,6 +125,65 @@ export function ConversationHeader() {
       },
     };
   };
+
+  // Move the pinned messages trigger to the left sidebar topbar in main workspace windows
+  createEffect(
+    () => (platform.chatWindow ? undefined : pinnedMessages()),
+    (pins) => {
+      if (platform.chatWindow) return;
+      setActiveConversationPins(pins);
+      return () => {
+        setActiveConversationPins(undefined);
+      };
+    },
+  );
+
+  const allBotSessions = createMemo<FlyoutSessionEntry[]>(() => {
+    const agent = props.agent;
+    if (!agent) return [];
+    const header = props.threads?.header;
+    const list: FlyoutSessionEntry[] = [
+      {
+        id: MAIN_THREAD_ID,
+        title: "主对话",
+        updatedAt: agent.updatedAt,
+        archived: false,
+        isMain: true,
+        unread: 0,
+        working: agentActivity() === "Working",
+      },
+    ];
+    if (!header) return list;
+    const pushItem = (item: ThreadItem, archived: boolean) => {
+      if (item.id === MAIN_THREAD_ID || item.id === DRAFT_THREAD_ID) return;
+      list.push({
+        id: item.id,
+        title: item.title.trim() || "未命名对话",
+        updatedAt: item.updatedAt,
+        archived,
+        isMain: false,
+        unread: item.unread ?? 0,
+        working: item.status.kind === "working" || item.status.kind === "queued",
+      });
+    };
+    for (const thread of header.threads) pushItem(thread, false);
+    for (const thread of header.archived) pushItem(thread, true);
+    return list;
+  });
+
+  const activeThreadId = () => props.threads?.header.activeId ?? MAIN_THREAD_ID;
+
+  function openSessionInTabBar(entry: FlyoutSessionEntry): void {
+    const header = props.threads?.header;
+    if (!header) return;
+    void playKawaiiCue("tab-switch");
+    if (entry.archived) {
+      header.onRestore(entry.id);
+    } else {
+      header.onOpen(entry.id);
+    }
+  }
+
   const working = () => agentActivity() === "Working";
   const providerName = (provider: AgentProviderRef) =>
     isKnownAgentProvider(provider) ? providerDisplayName(provider) : String(provider);
@@ -138,6 +223,7 @@ export function ConversationHeader() {
       return undefined;
     return { running: runtimeLabel(running, next), next: runtimeLabel(next, running) };
   };
+
   return (
     <>
       <SharedConversationHeader
@@ -160,89 +246,177 @@ export function ConversationHeader() {
         extraActions={
           <Show when={props.agent}>
             {(ag) => (
-              <button
-                type="button"
-                class="starbot-header-clean-btn"
-                title="清空历史记录，或压缩提炼记忆后清爽重聊"
-                onClick={() => openMemoryCleanModal(ag().id)}
+              <DropdownMenu.Root
+                placement="bottom-end"
+                gutter={6}
+                onOpenChange={(isOpen) => {
+                  if (isOpen) void playKawaiiCue("drawer-open", { subtle: true });
+                }}
               >
-                整理对话
-              </button>
+                <DropdownMenu.Trigger
+                  class={`${buttonVariants({ variant: "ghost" })} header-panel-toggle starbot-header-menu-trigger no-drag`}
+                  aria-label="对话与记忆"
+                  title="全部对话与提炼记忆"
+                  data-starbot-silent=""
+                >
+                  <MessagesSquare aria-hidden="true" class="size-[15px]" />
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Portal>
+                  <DropdownMenu.Content class="ui-action-menu starbot-header-dropdown">
+                    <DropdownMenu.Sub gutter={6} overlap={false}>
+                      <DropdownMenu.SubTrigger class="starbot-header-dropdown-item">
+                        <History class="starbot-header-dropdown-icon" aria-hidden="true" />
+                        <span class="starbot-header-dropdown-label">全部对话</span>
+                        <Show when={allBotSessions().length > 1}>
+                          <span class="starbot-header-dropdown-count">{allBotSessions().length}</span>
+                        </Show>
+                        <ChevronRight class="starbot-header-dropdown-chevron" aria-hidden="true" />
+                      </DropdownMenu.SubTrigger>
+                      <DropdownMenu.Portal>
+                        <DropdownMenu.SubContent class="ui-action-menu starbot-threads-flyout">
+                          <div class="starbot-threads-flyout-list" role="group" aria-label="全部对话列表">
+                            <For each={allBotSessions()}>
+                              {(session) => {
+                                const isCurrent = () => !session.archived && activeThreadId() === session.id;
+                                return (
+                                  <DropdownMenu.Item
+                                    class="starbot-threads-flyout-item"
+                                    aria-current={isCurrent() ? "true" : undefined}
+                                    data-current={isCurrent() ? "true" : undefined}
+                                    onSelectAfterClose={() => openSessionInTabBar(session)}
+                                  >
+                                    <span
+                                      class={[
+                                        "starbot-threads-flyout-dot",
+                                        {
+                                          "is-current": isCurrent(),
+                                          "is-working": session.working,
+                                          "is-unread": session.unread > 0,
+                                        },
+                                      ]}
+                                      aria-hidden="true"
+                                    />
+                                    <span class="starbot-threads-flyout-title" title={session.title}>
+                                      {session.title}
+                                    </span>
+                                    <Show when={session.archived}>
+                                      <span class="starbot-threads-flyout-tag">已归档</span>
+                                    </Show>
+                                    <span class="starbot-threads-flyout-time">
+                                      {sidebarMessageTime(session.updatedAt, format)}
+                                    </span>
+                                  </DropdownMenu.Item>
+                                );
+                              }}
+                            </For>
+                          </div>
+                          <Show when={allBotSessions().length > 10}>
+                            <div class="starbot-threads-flyout-scroll-hint">下滑查看更多历史会话</div>
+                          </Show>
+                          <Show when={props.threads}>
+                            <DropdownMenu.Separator />
+                            <DropdownMenu.Item
+                              class="starbot-threads-flyout-new"
+                              onSelectAfterClose={() => {
+                                void playKawaiiCue("open", { subtle: true });
+                                startNewThread();
+                              }}
+                            >
+                              <MessageCirclePlus class="size-3.5" aria-hidden="true" />
+                              <span>新建子对话</span>
+                            </DropdownMenu.Item>
+                          </Show>
+                        </DropdownMenu.SubContent>
+                      </DropdownMenu.Portal>
+                    </DropdownMenu.Sub>
+
+                    <DropdownMenu.Item
+                      class="starbot-header-dropdown-item"
+                      onSelectAfterClose={() => openMemoryCleanModal(ag().id)}
+                    >
+                      <Sparkles class="starbot-header-dropdown-icon" aria-hidden="true" />
+                      <span class="starbot-header-dropdown-label">提炼记忆</span>
+                    </DropdownMenu.Item>
+                  </DropdownMenu.Content>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
             )}
           </Show>
         }
         modelPicker={{
-        provider: settingsProvider(),
-        foreignProvider: props.agent ? foreignProvider(props.agent.provider) : undefined,
-        value: settingsModel(),
-        reasoningEffort: settingsReasoning(),
-        modelOptions: props.modelOptions,
-        agentStatus: props.agentStatus,
-        runtimeStatuses: props.providerRuntimeStatuses,
-        customProviders: props.customProviders,
-        customAgents: props.customAgents,
-        onDownloadProvider: props.onDownloadProvider,
-        onCancelProviderDownload: props.onCancelProviderDownload,
-        onConnectProvider: props.onConnectProvider,
-        canConnectProvider: props.canConnectProvider,
-        onManageProviders: props.onManageProviders,
-        disabledReason: t("conversation.header.modelsUnavailable"),
-        accountChoice: true,
-        providerAccountId: props.agent ? agentNextProviderAccountId(props.agent) : undefined,
-        workspaceOnly: props.agent ? workspaceAccessEnforced(props.agent) : false,
-        accountUsage: props.accountUsage,
-        onChange: (model, provider, accountId, effort) =>
-          void selectAndConfirmModel(model, provider, accountId, effort),
-        onReasoningEffortChange: (effort) => void selectAndConfirmReasoning(effort),
-        fastMode: fastMode(),
-        ultrafast: ultrafast(),
-        onFastModeChange: fastModeChange(),
-      }}
-      remoteControl={
-        props.remoteDesktopEnabled !== false && props.server?.kind === "remote"
-          ? {
-              enabled: Boolean(props.remoteDesktopSessionActive || props.server.state === "online"),
-              active: Boolean(props.remoteDesktopSessionActive),
-              visible: Boolean(props.remoteDesktopVisible),
-              onOpen: (trigger) => {
-                if (props.server) void props.onOpenRemoteDesktop(props.server.id, trigger);
-              },
-            }
-          : undefined
-      }
-      threads={
-        <Show when={props.threads}>
-          {(threads) => <ThreadHeader {...threads().header} onNew={startNewThread} onMoveToSide={moveThreadToPanel} />}
-        </Show>
-      }
-      pinnedMessages={pinnedMessages()}
-      sidePanel={
-        channel?.readOnly()
-          ? undefined
-          : channel
+          provider: settingsProvider(),
+          foreignProvider: props.agent ? foreignProvider(props.agent.provider) : undefined,
+          value: settingsModel(),
+          reasoningEffort: settingsReasoning(),
+          modelOptions: props.modelOptions,
+          agentStatus: props.agentStatus,
+          runtimeStatuses: props.providerRuntimeStatuses,
+          customProviders: props.customProviders,
+          customAgents: props.customAgents,
+          onDownloadProvider: props.onDownloadProvider,
+          onCancelProviderDownload: props.onCancelProviderDownload,
+          onConnectProvider: props.onConnectProvider,
+          canConnectProvider: props.canConnectProvider,
+          onManageProviders: props.onManageProviders,
+          disabledReason: t("conversation.header.modelsUnavailable"),
+          accountChoice: true,
+          providerAccountId: props.agent ? agentNextProviderAccountId(props.agent) : undefined,
+          workspaceOnly: props.agent ? workspaceAccessEnforced(props.agent) : false,
+          accountUsage: props.accountUsage,
+          onChange: (model, provider, accountId, effort) =>
+            void selectAndConfirmModel(model, provider, accountId, effort),
+          onReasoningEffortChange: (effort) => void selectAndConfirmReasoning(effort),
+          fastMode: fastMode(),
+          ultrafast: ultrafast(),
+          onFastModeChange: fastModeChange(),
+        }}
+        remoteControl={
+          props.remoteDesktopEnabled !== false && props.server?.kind === "remote"
             ? {
-                open: sidePanelOpen(),
-                actingAgentName: actingBrowserControl()
-                  ? (browserControlAgent()?.name ?? t("conversation.header.agentFallback"))
-                  : undefined,
-                onToggle: toggleSidePanel,
-              }
-            : {
-                open: starbotInspectorOpen() || filePreviewOpen() || browserSidebarOpen(),
-                actingAgentName: actingBrowserControl()
-                  ? (browserControlAgent()?.name ?? t("conversation.header.agentFallback"))
-                  : undefined,
-                onToggle: () => {
-                  if (filePreviewOpen() || browserSidebarOpen()) {
-                    setActiveRightPanel("none");
-                    setStarbotInspectorOpen(true);
-                  } else {
-                    setActiveRightPanel("none");
-                    toggleStarbotInspector();
-                  }
+                enabled: Boolean(props.remoteDesktopSessionActive || props.server.state === "online"),
+                active: Boolean(props.remoteDesktopSessionActive),
+                visible: Boolean(props.remoteDesktopVisible),
+                onOpen: (trigger) => {
+                  if (props.server) void props.onOpenRemoteDesktop(props.server.id, trigger);
                 },
               }
-      }
+            : undefined
+        }
+        threads={
+          <Show when={props.threads}>
+            {(threads) => (
+              <ThreadHeader {...threads().header} onNew={startNewThread} onMoveToSide={moveThreadToPanel} />
+            )}
+          </Show>
+        }
+        pinnedMessages={platform.chatWindow ? pinnedMessages() : undefined}
+        sidePanel={
+          channel?.readOnly()
+            ? undefined
+            : channel
+              ? {
+                  open: sidePanelOpen(),
+                  actingAgentName: actingBrowserControl()
+                    ? (browserControlAgent()?.name ?? t("conversation.header.agentFallback"))
+                    : undefined,
+                  onToggle: toggleSidePanel,
+                }
+              : {
+                  open: starbotInspectorOpen() || filePreviewOpen() || browserSidebarOpen(),
+                  actingAgentName: actingBrowserControl()
+                    ? (browserControlAgent()?.name ?? t("conversation.header.agentFallback"))
+                    : undefined,
+                  onToggle: () => {
+                    if (filePreviewOpen() || browserSidebarOpen()) {
+                      setActiveRightPanel("none");
+                      setStarbotInspectorOpen(true);
+                    } else {
+                      setActiveRightPanel("none");
+                      toggleStarbotInspector();
+                    }
+                  },
+                }
+        }
       />
       <Show when={props.agent && cleanModalAgentId() === props.agent.id ? props.agent : null}>
         {(ag) => (

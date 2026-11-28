@@ -1,8 +1,4 @@
-import {
-  type KawaiiCue,
-  playKawaiiCue,
-  unlockKawaiiAudio,
-} from "@openbot/ui/features/agents/starbot-kawaii-audio";
+import { type KawaiiCue, playKawaiiCue, unlockKawaiiAudio } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import { SOUND_THEMES, type SoundChoice, type SoundTheme } from "@openbot/ui/features/settings/app-settings";
 import type { PlayOptions, SoundName } from "cuelume";
 
@@ -98,6 +94,9 @@ const CLICK_ATTRS = [
 
 const CLICK_SELECTOR = CLICK_ATTRS.map((a) => `[${a}]`).join(",");
 
+const SEMANTIC_INTERACTIVE_SELECTOR =
+  'button, a[href], [role="button"], [role="tab"], [role="switch"], [role="menuitem"], [role="option"], [role="radio"], summary';
+
 function bindKawaiiDomInteractions(): void {
   if (typeof document === "undefined") return;
 
@@ -108,35 +107,77 @@ function bindKawaiiDomInteractions(): void {
       if (event.button !== 0 || !isActionSoundEnabled()) return;
       const target = event.target;
       if (!(target instanceof Element)) return;
-      const el = target.closest(CLICK_SELECTOR);
-      if (!el || el.matches(":disabled, [aria-disabled='true']")) return;
+      // Avoid double-firing when poking an interactive zodiac mascot SVG
+      if (target.closest(".bloub-avatar-svg")) return;
 
-      const subtle = el.getAttribute("data-cuelume-emphasis") === "subtle";
-      if (el.hasAttribute("data-cuelume-toggle")) {
-        const checked =
-          (el instanceof HTMLInputElement && el.checked) || el.getAttribute("aria-checked") === "true";
-        void playKawaiiCue(checked ? "toggle-off" : "toggle-on", { subtle });
+      const el = target.closest(CLICK_SELECTOR);
+      if (el) {
+        if (el.matches(":disabled, [aria-disabled='true']")) return;
+        const subtle = el.getAttribute("data-cuelume-emphasis") === "subtle";
+        if (el.hasAttribute("data-cuelume-toggle")) {
+          const checked = (el instanceof HTMLInputElement && el.checked) || el.getAttribute("aria-checked") === "true";
+          void playKawaiiCue(checked ? "toggle-off" : "toggle-on", { subtle });
+          return;
+        }
+        if (el.hasAttribute("data-cuelume-open")) {
+          const val = el.getAttribute("data-cuelume-open");
+          void playKawaiiCue(val === "close" ? "close" : "open", { subtle });
+          return;
+        }
+        if (el.hasAttribute("data-cuelume-close")) {
+          void playKawaiiCue("close", { subtle });
+          return;
+        }
+        if (el.hasAttribute("data-cuelume-select")) {
+          void playKawaiiCue("select", { subtle });
+          return;
+        }
+        if (el.hasAttribute("data-cuelume-navigate")) {
+          void playKawaiiCue("navigate", { subtle });
+          return;
+        }
+        const tapKind = el.getAttribute("data-cuelume-tap") || "tap";
+        void playKawaiiCue(mapSoundNameToKawaiiCue(tapKind), { subtle });
         return;
       }
-      if (el.hasAttribute("data-cuelume-open")) {
-        const val = el.getAttribute("data-cuelume-open");
-        void playKawaiiCue(val === "close" ? "close" : "open", { subtle });
+
+      // Semantic fallback so all StarBot tabs, switches, modals, copy/delete & custom buttons sound alive!
+      const interactive = target.closest(SEMANTIC_INTERACTIVE_SELECTOR);
+      if (!interactive || interactive.matches(":disabled, [aria-disabled='true'], [data-starbot-silent]")) return;
+
+      const role = interactive.getAttribute("role");
+      const ariaLabel = (interactive.getAttribute("aria-label") ?? "").toLowerCase();
+      if (role === "switch") {
+        const checked = interactive.getAttribute("aria-checked") === "true";
+        void playKawaiiCue(checked ? "toggle-off" : "toggle-on");
         return;
       }
-      if (el.hasAttribute("data-cuelume-close")) {
-        void playKawaiiCue("close", { subtle });
+      if (role === "tab" || interactive.classList.contains("starbot-tour-dot")) {
+        void playKawaiiCue("tab-switch");
         return;
       }
-      if (el.hasAttribute("data-cuelume-select")) {
-        void playKawaiiCue("select", { subtle });
+      if (role === "menuitem" || role === "option" || role === "radio") {
+        void playKawaiiCue("select", { subtle: true });
         return;
       }
-      if (el.hasAttribute("data-cuelume-navigate")) {
-        void playKawaiiCue("navigate", { subtle });
+      if (ariaLabel.includes("复制") || ariaLabel.includes("copy") || interactive.hasAttribute("data-copy")) {
+        void playKawaiiCue("copy");
         return;
       }
-      const tapKind = el.getAttribute("data-cuelume-tap") || "tap";
-      void playKawaiiCue(mapSoundNameToKawaiiCue(tapKind), { subtle });
+      if (ariaLabel.includes("删除") || ariaLabel.includes("移除") || ariaLabel.includes("delete")) {
+        void playKawaiiCue("delete");
+        return;
+      }
+      if (
+        ariaLabel.includes("关闭") ||
+        ariaLabel.includes("close") ||
+        interactive.classList.contains("starbot-inspector-close") ||
+        interactive.classList.contains("starbot-tour-floating-close")
+      ) {
+        void playKawaiiCue("drawer-close");
+        return;
+      }
+      void playKawaiiCue("tap", { subtle: true });
     },
     { capture: true },
   );

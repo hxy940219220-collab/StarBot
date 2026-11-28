@@ -27,7 +27,7 @@ import {
   ItemGroup,
   Monitor,
   RefreshCw,
-  Settings,
+  type Settings,
   SettingsSection,
   ShieldCheck,
   Sparkles,
@@ -263,6 +263,7 @@ const REMOVED_SERVER_SECTIONS: ReadonlySet<Section> = new Set<Section>([
   "members",
   "roles",
   "audit",
+  "import",
   "transfer",
   "experimental",
 ]);

@@ -46,5 +46,4 @@ export const messages = {
 
   "error.crm.off": "ה-CRM כבוי. בעלים או מנהל יכולים להפעיל אותו בהגדרות השרת > ניסיוני.",
   "error.crm.settingsSaveFailed": "StarBot לא יכול לשמור את הגדרת ה-CRM בשרת הזה.",
-
 } as const satisfies PartialTranslation<typeof source>;

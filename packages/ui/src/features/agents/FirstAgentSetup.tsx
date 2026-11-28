@@ -40,8 +40,10 @@ import {
   requestFirstAgentTourReplay,
   shouldAutoRunFirstAgentTour,
 } from "./FirstAgentTour";
+import { playKawaiiCue } from "./starbot-kawaii-audio";
 
 export { requestFirstAgentTourReplay };
+
 import { InstructionsLimit, instructionsTooLong } from "./InstructionsLimit";
 
 export interface FirstAgentDraft {
@@ -625,8 +627,11 @@ export function FirstAgentSetup(props: FirstAgentSetupProps) {
                             : t("agent.setup.faceOption", { number: index() + 1 })
                         }
                         aria-pressed={props.value.avatarSeed === seed ? "true" : "false"}
-                        data-cuelume-tap="select"
-                        onClick={() => updateDraft({ avatarSeed: seed })}
+                        data-starbot-silent=""
+                        onClick={() => {
+                          void playKawaiiCue("mascot-poke", { zodiac: zodiac()?.id });
+                          updateDraft({ avatarSeed: seed });
+                        }}
                       >
                         <AgentAvatar
                           seed={seed}

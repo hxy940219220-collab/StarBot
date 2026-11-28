@@ -2,12 +2,13 @@ import type { ChatWindowTarget } from "@openbot/contracts/ipc";
 import { AGENT_NOTIFICATION_LEVELS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-notification-levels-v1";
 import { CONVERSATION_UNREAD_FROM_CAPABILITY } from "@openbot/contracts/team-protocol/conversation-unread-from-v1";
 import { AGENT_HIDDEN_CAPABILITY } from "@openbot/contracts/team-protocol/current";
+import { PinnedMessages } from "@openbot/ui/features/conversation/PinnedMessages";
 import { MAIN_THREAD_ID } from "@openbot/ui/features/conversation/threads/thread-types";
 import { Sidebar } from "@openbot/ui/features/sidebar/Sidebar";
 import { sidebarChannelWaits } from "@openbot/ui/features/sidebar/sidebar-agent-states";
 import { teamMemberName } from "@openbot/ui/features/team/TeamPersonAvatar";
 import { useText } from "@openbot/ui/text";
-import { createEffect, createMemo, createSignal, onSettled } from "solid-js";
+import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { appPort } from "../../app-port";
 import { type ChatHistoryEntry, chatHistoryKeys } from "../../chat-history";
 import { useLayout } from "../../layout";
@@ -23,6 +24,7 @@ import { useAgentActions } from "../agents/agent-actions";
 import { createAgentActivity } from "../agents/agent-activity";
 import { useAgents } from "../agents/agents-context";
 import { useChannels } from "../channels/channels-context";
+import { activeConversationPins } from "../conversation/active-pins-bridge";
 import { useConversation } from "../conversation/conversation-context";
 import { useDirectMessages } from "../conversation/direct-messages-context";
 import { useServerActions } from "../servers/server-actions";
@@ -209,6 +211,13 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
           const badge = server ? serverUpdateBadge(server.id) : null;
           return server && badge ? { ...badge, onOpen: () => void showServerUpdate(server.id) } : undefined;
         })()}
+        topbarLeadingActions={
+          <Show when={activeConversationPins()}>
+            {(pins) => (
+              <PinnedMessages {...pins()} placement="bottom-start" triggerClass="sidebar-icon-button no-drag" />
+            )}
+          </Show>
+        }
         topbarDetail={<DevWorktreeLabel />}
         serverMenu={
           platform.appInfo()

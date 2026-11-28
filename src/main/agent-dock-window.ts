@@ -3,7 +3,6 @@ import type {
   AgentDockAction,
   AgentDockDisplayInfo,
   AgentDockDragPhase,
-  AgentDockEdge,
   AgentDockExtent,
   AgentDockInputRect,
   AgentDockPresentation,
@@ -27,7 +26,11 @@ import type { WindowsTopmostKeeper } from "./windows-topmost-keeper";
 
 const logger = createOpenBotLogger("agent-dock-window");
 
-const AGENT_DOCK_WINDOW_SIZE = { width: 502, height: 640 } as const;
+const AGENT_DOCK_WINDOW_SIZE = { width: 860, height: 560 } as const;
+const DEFAULT_COMPANION_X_OFFSET = 0.91;
+const DEFAULT_COMPANION_Y_OFFSET = 0.74;
+const COMPANION_EDGE_MARGIN_X = 52;
+const COMPANION_EDGE_MARGIN_Y = 58;
 
 const DOCK_REOPEN_MAX = 3;
 const DOCK_REOPEN_WINDOW_MS = 60_000;
@@ -53,6 +56,8 @@ export interface AgentDockWindowControllerOptions {
   sendMessage: (action: AgentDockSendAction) => Effect.Effect<void, AgentDockFailed>;
   pointerForwarding?: PointerForwardingGate | null;
   topmost?: WindowsTopmostKeeper | null;
+  registerShortcut?: (shortcut: string, onTrigger: () => void) => boolean;
+  unregisterShortcut?: (shortcut: string) => void;
   logger?: Logger;
 }
 
@@ -74,10 +79,11 @@ export class AgentDockWindowController {
   #chatOwner: number | null = null;
   readonly #sends = new Map<string, Deferred.Deferred<void, AgentDockFailed>>();
   readonly #reconciliation = Semaphore.makeUnsafe(1);
-  #offsets = new Map<number, number>();
-  #drag: { rendererId: number; pointerY: number; windowY: number } | null = null;
+  #offsets = new Map<number, { xOffset: number; offset: number }>();
+  #drag: { rendererId: number; pointerX: number; pointerY: number; centerX: number; centerY: number } | null = null;
   readonly #followedWindows = new WeakSet<BrowserWindow>();
   #reopens: number[] = [];
+  #registeredShortcut: string | null = null;
   #destroyed = false;
 
   constructor(options: AgentDockWindowControllerOptions) {
@@ -112,7 +118,12 @@ export class AgentDockWindowController {
       }
       const dragged = this.#draggedDisplayId();
       const dragOffset = dragged === null ? undefined : this.#offsets.get(dragged);
-      this.#offsets = new Map((presentation?.offsets ?? []).map(({ displayId, offset }) => [displayId, offset]));
+      this.#offsets = new Map(
+        (presentation?.offsets ?? []).map(({ displayId, offset, xOffset }) => [
+          displayId,
+          { xOffset: xOffset ?? DEFAULT_COMPANION_X_OFFSET, offset },
+        ]),
+      );
       if (dragged !== null && dragOffset !== undefined) this.#offsets.set(dragged, dragOffset);
       const moved =
         (previous === null) !== (presentation === null) ||
@@ -226,11 +237,17 @@ export class AgentDockWindowController {
   drag(rendererId: number, phase: AgentDockDragPhase): void {
     const entry = this.#liveWindows().find((item) => item.rendererId === rendererId);
     if (!entry) return;
-    const pointerY = this.#options.screen.getCursorScreenPoint().y;
+    const cursor = this.#options.screen.getCursorScreenPoint();
     if (phase === "start") {
       const start = this.#displayOf(entry);
-      const windowY = start ? this.#boundsFor(start).y : entry.window.getBounds().y;
-      this.#drag = { rendererId, pointerY, windowY };
+      const rect = start ? this.#boundsFor(start) : entry.window.getBounds();
+      this.#drag = {
+        rendererId,
+        pointerX: cursor.x,
+        pointerY: cursor.y,
+        centerX: rect.x + rect.width / 2,
+        centerY: rect.y + rect.height / 2,
+      };
       return;
     }
     const drag = this.#drag;
@@ -238,24 +255,27 @@ export class AgentDockWindowController {
     const display = this.#displayOf(entry);
     if (display) {
       const area = display.workArea;
-      const room = area.height - agentDockWindowHeight(display, this.#zoom());
-      const y = drag.windowY + pointerY - drag.pointerY;
-      const offset = room > 0 ? Math.min(1, Math.max(0, (y - area.y) / room)) : 0.5;
-      this.#offsets.set(entry.displayId, offset);
+      const minX = area.x + COMPANION_EDGE_MARGIN_X;
+      const maxX = Math.max(minX, area.x + area.width - COMPANION_EDGE_MARGIN_X);
+      const minY = area.y + COMPANION_EDGE_MARGIN_Y;
+      const maxY = Math.max(minY, area.y + area.height - COMPANION_EDGE_MARGIN_Y);
+      const nextCx = Math.min(maxX, Math.max(minX, drag.centerX + cursor.x - drag.pointerX));
+      const nextCy = Math.min(maxY, Math.max(minY, drag.centerY + cursor.y - drag.pointerY));
+      const xOffset = maxX > minX ? (nextCx - minX) / (maxX - minX) : DEFAULT_COMPANION_X_OFFSET;
+      const offset = maxY > minY ? (nextCy - minY) / (maxY - minY) : DEFAULT_COMPANION_Y_OFFSET;
+      this.#offsets.set(entry.displayId, { xOffset, offset });
       const bounds = this.#placedBounds(entry, display);
       if (!isDeepStrictEqual(entry.window.getBounds(), bounds)) entry.window.setBounds(bounds, false);
     }
     if (phase !== "end") return;
     this.#drag = null;
-    if (entry.reportedExtent !== undefined && entry.reportedExtent !== entry.extent) {
-      this.#fit(entry, entry.reportedExtent);
-    }
-    const offset = this.#offsets.get(entry.displayId);
+    const pos = this.#offsets.get(entry.displayId);
     const main = this.#options.getMainWindow();
-    if (offset !== undefined && main && !main.isDestroyed()) {
+    if (pos !== undefined && main && !main.isDestroyed()) {
       sendToRenderer(main, IPC_ENDPOINTS.agentDock.moved, {
         displayId: entry.displayId,
-        offset,
+        offset: pos.offset,
+        xOffset: pos.xOffset,
         ...(display && { bounds: display.bounds }),
       });
     }
@@ -272,33 +292,36 @@ export class AgentDockWindowController {
   }
 
   #boundsFor(display: Display): Rectangle {
-    return agentDockWindowBounds(display, this.#presentation?.edge ?? "right", this.#offsetFor(display), this.#zoom());
+    const pos = this.#positionFor(display);
+    return companionWindowBounds(display, pos.xOffset, pos.offset, this.#zoom());
   }
 
-  #placedBounds(entry: DockWindow, display: Display): Rectangle {
-    const bounds = this.#boundsFor(display);
-    if (this.#options.windowKind !== "panel" || !entry.extent) return bounds;
-    return fittedAgentDockBounds(bounds, this.#presentation?.edge ?? "right", entry.extent, this.#zoom());
+  #placedBounds(_entry: DockWindow, display: Display): Rectangle {
+    return this.#boundsFor(display);
   }
 
-  #offsetFor(display: Display): number {
+  #positionFor(display: Display): { xOffset: number; offset: number } {
     const saved = this.#offsets.get(display.id);
     if (saved !== undefined) return saved;
     const connected = new Set(this.#options.screen.getAllDisplays().map(({ id }) => id));
     const renamed = (this.#presentation?.offsets ?? []).findLast(
       (item) => !connected.has(item.displayId) && sameAgentDockDisplayBounds(item.bounds, display.bounds),
     );
-    return renamed?.offset ?? 0.5;
+    return {
+      xOffset: renamed?.xOffset ?? DEFAULT_COMPANION_X_OFFSET,
+      offset: renamed?.offset ?? DEFAULT_COMPANION_Y_OFFSET,
+    };
   }
 
   #zoom(): number {
-    return (this.#presentation?.sizePercent ?? AGENT_DOCK_SIZE_LIMITS.default) / 100;
+    // Keep helper window at 100% zoom so orbital action buttons, icons, and cards stay crisp fixed-size;
+    // sizePercent scales ONLY the floating StarBot character inside StarBotFloatingCompanion.
+    return 1;
   }
 
   #applyZoom(entry: DockWindow): void {
-    const zoom = this.#zoom();
-    if (entry.window.webContents.getZoomFactor() === zoom) return;
-    entry.window.webContents.setZoomFactor(zoom);
+    if (entry.window.webContents.getZoomFactor() === 1) return;
+    entry.window.webContents.setZoomFactor(1);
     this.#applyShape(entry);
   }
 
@@ -323,6 +346,7 @@ export class AgentDockWindowController {
         ) {
           this.#options.presentMainWindow(window);
         }
+        // Note: select-companion, switch-model, and voice-sync forward quietly to main renderer without stealing focus!
         if (!sendToRenderer(window, IPC_ENDPOINTS.agentDock.action, action)) {
           return yield* new AgentDockFailed({
             cause: new Error(sourceText("error.backend.windowTemporarilyUnavailable")),
@@ -449,8 +473,16 @@ export class AgentDockWindowController {
           if (!owned() || this.#presentation === null) return;
           this.#show(window);
         });
-        window.on("move", () => {
+        window.on("blur", () => {
           if (!owned()) return;
+          if (entry.keyboard) {
+            entry.keyboard = false;
+            window.setFocusable(false);
+          }
+          sendToRenderer(window, IPC_ENDPOINTS.agentDock.closeChat);
+        });
+        window.on("move", () => {
+          if (!owned() || this.#drag?.rendererId === entry.rendererId) return;
           const display = this.#displayOf(entry);
           if (!display) return;
           const expected = this.#placedBounds(entry, display);
@@ -488,7 +520,40 @@ export class AgentDockWindowController {
 
   destroy(): void {
     this.#destroyed = true;
+    this.setShortcut(null);
     this.#destroyWindow();
+  }
+
+  setShortcut(shortcut: string | null): void {
+    const clean = shortcut?.trim() || null;
+    if (this.#registeredShortcut === clean) return;
+    if (this.#registeredShortcut) {
+      try {
+        this.#options.unregisterShortcut?.(this.#registeredShortcut);
+      } catch {}
+      this.#registeredShortcut = null;
+    }
+    if (this.#destroyed || !clean || !this.#options.registerShortcut) return;
+    try {
+      const ok = this.#options.registerShortcut(clean, () => {
+        const main = this.#options.getMainWindow();
+        if (main && !main.isDestroyed()) {
+          sendToRenderer(main, IPC_ENDPOINTS.agentDock.action, { type: "toggle" });
+          return;
+        }
+        if (this.#options.ensureMainWindow) {
+          void this.#options
+            .ensureMainWindow()
+            .then((win) => {
+              if (!win.isDestroyed()) {
+                sendToRenderer(win, IPC_ENDPOINTS.agentDock.action, { type: "toggle" });
+              }
+            })
+            .catch(() => undefined);
+        }
+      });
+      if (ok) this.#registeredShortcut = clean;
+    } catch {}
   }
 
   #destroyWindow(): void {
@@ -520,36 +585,26 @@ export class AgentDockWindowController {
   }
 }
 
-function agentDockWindowHeight(display: Pick<Display, "workArea">, zoom: number): number {
-  return Math.min(Math.round(AGENT_DOCK_WINDOW_SIZE.height * zoom), display.workArea.height);
-}
-
-function agentDockWindowBounds(
+function companionWindowBounds(
   display: Pick<Display, "workArea">,
-  edge: AgentDockEdge,
-  offset: number,
+  xOffset: number,
+  yOffset: number,
   zoom: number,
 ): Rectangle {
   const area = display.workArea;
-  const width = Math.round((AGENT_DOCK_WINDOW_SIZE.width * AGENT_DOCK_SIZE_LIMITS.max) / 100);
-  const height = agentDockWindowHeight(display, zoom);
+  const width = Math.round(AGENT_DOCK_WINDOW_SIZE.width * Math.max(1, zoom));
+  const height = Math.round(AGENT_DOCK_WINDOW_SIZE.height * Math.max(1, zoom));
+  const minX = area.x + COMPANION_EDGE_MARGIN_X;
+  const maxX = Math.max(minX, area.x + area.width - COMPANION_EDGE_MARGIN_X);
+  const minY = area.y + COMPANION_EDGE_MARGIN_Y;
+  const maxY = Math.max(minY, area.y + area.height - COMPANION_EDGE_MARGIN_Y);
+  const cx = minX + (maxX - minX) * Math.min(1, Math.max(0, xOffset));
+  const cy = minY + (maxY - minY) * Math.min(1, Math.max(0, yOffset));
   return {
-    x: edge === "left" ? area.x : area.x + area.width - width,
-    y: Math.round(area.y + (area.height - height) * offset),
+    x: Math.round(cx - width / 2),
+    y: Math.round(cy - height / 2),
     width,
     height,
-  };
-}
-
-function fittedAgentDockBounds(full: Rectangle, edge: AgentDockEdge, extent: AgentDockExtent, zoom: number): Rectangle {
-  const width = Math.min(full.width, Math.max(1, Math.ceil(extent.inward * zoom)));
-  const half = Math.max(1, Math.ceil(Math.max(extent.above, extent.below) * zoom));
-  const trim = Math.floor(Math.max(0, full.height - half * 2) / 2);
-  return {
-    x: edge === "left" ? full.x : full.x + full.width - width,
-    y: full.y + trim,
-    width,
-    height: full.height - trim * 2,
   };
 }
 

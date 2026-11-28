@@ -77,5 +77,4 @@ export const messages = {
   "skill.marketplace.confirmAgents": "Ajanlar: {agents}.",
   "skill.marketplace.limitReason": "Bir ajanın en fazla {limit} becerisi olabilir.",
   "skill.marketplace.cannotRemove": "StarBot yerleşik bir beceriyi veya kendisinin kurmadığı bir beceriyi kaldıramaz.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -52,5 +52,4 @@ export const messages = {
   "error.update.restartStarted": "StarBot herstart al om de update te installeren.",
 
   "error.update.alreadyRestarting": "StarBot herstart al.",
-
 } as const satisfies PartialTranslation<typeof source>;

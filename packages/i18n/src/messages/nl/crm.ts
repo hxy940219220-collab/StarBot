@@ -372,5 +372,4 @@ export const messages = {
   "crm.source.disconnectTitle": "Verbinding met {source} verbreken?",
   "crm.source.disconnectBody":
     "StarBot stopt de synchronisatie en verwijdert de sleutel. De geïmporteerde rijen blijven staan en je kunt ze wijzigen.",
-
 } as const satisfies PartialTranslation<typeof source>;

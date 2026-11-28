@@ -49,7 +49,6 @@ export const messages = {
   "provider.gemini.hostSignIn":
     "Aby połączyć Gemini, otwórz StarBot na hoście i wybierz „Połącz” w sekcji Ustawienia serwera > Dostawcy. Logowanie Google wymaga przeglądarki na tym hoście. Zdalne logowanie nie jest obsługiwane.",
 
-
   "provider.key.free": "Darmowy",
 
   "provider.action.connect": "Połącz",

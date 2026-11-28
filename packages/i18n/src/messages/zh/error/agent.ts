@@ -120,8 +120,7 @@ export const messages = {
   "error.agent.saveOtherAgent": "该保存操作属于另一个助手。",
   "error.agent.savedGone": "已保存的助手已不存在。",
   "error.agent.storedProfileUnreadable": "某个已保存的助手资料中“{field}”的值无法读取，请先更新数据再启动星友。",
-  "error.agent.storedProfileUnreadableId":
-    "已保存的助手资料 {id} 中“{field}”的值无法读取，请先更新数据再启动星友。",
+  "error.agent.storedProfileUnreadableId": "已保存的助手资料 {id} 中“{field}”的值无法读取，请先更新数据再启动星友。",
   "error.agent.queueEditRejected": "队列编辑被拒绝：{reason}",
   "error.agent.computerUseLocalOnly": "Computer Use 只能在运行该助手的电脑上更改。",
   "error.agent.automationLocalOnly": "本地脚本只能在运行该助手的电脑上允许。",

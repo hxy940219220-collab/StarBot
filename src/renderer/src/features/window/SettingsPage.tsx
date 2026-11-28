@@ -1,32 +1,26 @@
+import type { ServerSummary } from "@openbot/contracts/ipc";
 import type { AppTextKey } from "@openbot/i18n";
-import { Button, Server, Store } from "@openbot/ui";
+import { Bot, Brain, Button, HardDrive, Monitor, RefreshCw, Server, Sparkles, Store } from "@openbot/ui";
 import { CONNECTOR_LISTINGS } from "@openbot/ui/features/connectors/connector-catalog";
 import type { ConnectorId } from "@openbot/ui/features/connectors/connectors";
 import { waitForSettingRow } from "@openbot/ui/features/conversation/agent-setting-links";
-import { createEffect, createSignal, For, flush, onCleanup, Show } from "solid-js";
+import { SettingsNavGroupLabel } from "@openbot/ui/features/settings/SettingsDialogShell";
+import { createEffect, createMemo, createSignal, For, flush, onCleanup, Show } from "solid-js";
 import { useI18n } from "../../i18n-context";
 import { usePlatform } from "../../platform";
-import { useAuth } from "../account/account-context";
 import { useConnectors } from "../connectors/connectors-context";
-import { canManageStorage, serverHasBackgroundProcesses } from "../files/storage-usage";
+import { canManageStorage, serverHasBackgroundProcesses, serverHasStorage } from "../files/storage-usage";
 import type { ServerSettingsSection } from "../servers/ServerSettingsModal";
 import {
   activeServerHasProviderSettings,
+  serverCanAdminister,
   serverHasAgentDefaults,
-  serverSupportsCapability,
 } from "../servers/server-capabilities";
 import { useServerSettings } from "../servers/server-settings";
 import { useServers } from "../servers/servers-context";
 import { useSettings } from "../settings/settings-context";
 import { navItem, navItems, type SettingsTab, settingsRowShown, settingsTabShown } from "../settings/settings-tabs";
-import {
-  openFirstSettingsSection,
-  PersonalSettingsLink,
-  ServerSettingsLink,
-  ServerSettingsPageTitle,
-  SettingsPageFrame,
-  SettingsSearchField,
-} from "./SettingsPageFrame";
+import { SettingsPageFrame, SettingsSearchField } from "./SettingsPageFrame";
 import { type SettingsKind, useWindowPage } from "./window-page-context";
 
 type PersonalRow = {
@@ -43,6 +37,16 @@ type MarketplaceRow = { app: ConnectorId | null; titleKey: AppTextKey; descripti
 
 type SearchRow = PersonalRow | ServerRow | MarketplaceRow;
 
+type UnifiedNavEntry =
+  | { kind: "server"; section: ServerSettingsSection; titleKey: AppTextKey; icon: typeof Sparkles }
+  | { kind: "personal"; tab: SettingsTab; titleKey: AppTextKey; icon: typeof Sparkles };
+
+type UnifiedNavGroup = {
+  id: string;
+  label: string;
+  items: UnifiedNavEntry[];
+};
+
 const SEARCH_ROWS: ReadonlyArray<PersonalRow> = navItems.flatMap((item) => [
   { tab: item.value, titleKey: item.titleKey, descriptionKey: item.descriptionKey },
   ...item.rows.map((row) => ({ tab: item.value, ...row, anchor: row.titleKey })),
@@ -54,10 +58,22 @@ const PROVIDERS_ROW: ServerRow = {
   descriptionKey: "server.settings.providersDescription",
 };
 
-const IMPORT_ROW: ServerRow = {
-  section: "import",
-  titleKey: "server.settings.importTitle",
-  descriptionKey: "server.settings.importDescription",
+const MEMORY_ROW: ServerRow = {
+  section: "memory",
+  titleKey: "server.settings.memoryTitle",
+  descriptionKey: "server.settings.memoryDescription",
+};
+
+const STORAGE_ROW: ServerRow = {
+  section: "storage",
+  titleKey: "server.settings.storageTitle",
+  descriptionKey: "server.settings.storageDescription",
+};
+
+const DESKTOP_ROW: ServerRow = {
+  section: "desktop",
+  titleKey: "server.settings.desktopTitle",
+  descriptionKey: "server.settings.desktopDescription",
 };
 
 const AGENTS_ROWS: ReadonlyArray<ServerRow> = [
@@ -80,7 +96,18 @@ const BACKGROUND_PROCESSES_ROW: ServerRow = {
 
 const MARKETPLACE_APPS_ROW: MarketplaceRow = { app: null, titleKey: "app.settingsPage.marketplaceApps" };
 
-const SEARCH_LIMIT = 12;
+const SEARCH_LIMIT = 14;
+
+function serverHasMemorySettings(server: ServerSummary): boolean {
+  const actionsAvailable = server.kind === "local" || server.state === "online";
+  if (!actionsAvailable) return false;
+  return (
+    serverCanAdminister(server, "agent-memory-limit-v1") ||
+    serverCanAdminister(server, "memory-review-v1") ||
+    serverCanAdminister(server, "skill-learning-v1") ||
+    serverCanAdminister(server, "browsing-memory-v1")
+  );
+}
 
 function rankRows(query: string, rows: ReadonlyArray<SearchRow>, text: (key: AppTextKey) => string): SearchRow[] {
   const needle = query.toLocaleLowerCase();
@@ -98,6 +125,10 @@ function rankRows(query: string, rows: ReadonlyArray<SearchRow>, text: (key: App
     .map((entry) => entry.row);
 }
 
+const ACCOUNT_TABS: readonly SettingsTab[] = ["profile", "mobile-connect"];
+const DESKTOP_TABS: readonly SettingsTab[] = ["agent-dock", "dynamic-island", "computer-use"];
+const GENERAL_TABS: readonly SettingsTab[] = ["general", "appearance", "notifications", "voice", "keyboard", "updates"];
+
 export function SettingsPage(props: { kind: SettingsKind }) {
   const i18n = useI18n();
   const windowPage = useWindowPage();
@@ -106,30 +137,111 @@ export function SettingsPage(props: { kind: SettingsKind }) {
   const platform = usePlatform();
   const connectors = useConnectors();
   const { activeServer } = useServers();
-  const { signedInAccount } = useAuth();
-  const [personalQuery, setPersonalQuery] = createSignal("");
-  const query = () => (props.kind === "personal" ? personalQuery() : windowPage.serverSettingsQuery());
-  const setQuery = (value: string) =>
-    props.kind === "personal" ? setPersonalQuery(value) : windowPage.setServerSettingsQuery(value);
+  const [query, setQuery] = createSignal("");
   onCleanup(() => windowPage.setServerSettingsQuery(""));
+
+  const targetServer = () =>
+    (props.kind === "server" ? serverSettings.serverSettingsTarget() : activeServer()) ?? activeServer();
+
   const tabShown = (tab: SettingsTab) =>
     settingsTabShown(tab, { platform: platform.appInfo()?.platform, chatWindow: platform.chatWindow !== null });
+
+  const serverNavItems = createMemo<UnifiedNavEntry[]>(() => {
+    const server = targetServer();
+    if (!server) return [];
+    const items: UnifiedNavEntry[] = [];
+    if (activeServerHasProviderSettings(server)) {
+      items.push({ kind: "server", section: "providers", titleKey: "server.settings.providersTitle", icon: Sparkles });
+    }
+    if (serverHasAgentDefaults(server)) {
+      items.push({ kind: "server", section: "agents", titleKey: "server.settings.agentDefaultsTitle", icon: Bot });
+    }
+    if (serverHasMemorySettings(server)) {
+      items.push({ kind: "server", section: "memory", titleKey: "server.settings.memoryTitle", icon: Brain });
+    }
+    if (serverHasStorage(server)) {
+      items.push({ kind: "server", section: "storage", titleKey: "server.settings.storageTitle", icon: HardDrive });
+    }
+    const plat = platform.appInfo()?.platform ?? "darwin";
+    if (plat === "darwin" || server.kind === "local") {
+      items.push({ kind: "server", section: "desktop", titleKey: "server.settings.desktopTitle", icon: Monitor });
+    }
+    if (server.kind === "remote") {
+      items.push({ kind: "server", section: "updates", titleKey: "server.settings.updatesTitle", icon: RefreshCw });
+    }
+    return items;
+  });
+
+  const personalEntries = (tabs: readonly SettingsTab[]): UnifiedNavEntry[] =>
+    tabs
+      .filter((tab) => tabShown(tab))
+      .map((tab) => {
+        const meta = navItem(tab);
+        return { kind: "personal", tab, titleKey: meta.titleKey, icon: meta.icon };
+      });
+
+  const navGroups = createMemo<UnifiedNavGroup[]>(() => {
+    const groups: UnifiedNavGroup[] = [];
+    const accountItems = personalEntries(ACCOUNT_TABS);
+    if (accountItems.length > 0) {
+      groups.push({ id: "account", label: "账号管理", items: accountItems });
+    }
+    const serverItems = serverNavItems();
+    if (serverItems.length > 0) {
+      groups.push({ id: "workspace", label: "模型与星友", items: serverItems });
+    }
+    const desktopItems = personalEntries(DESKTOP_TABS);
+    if (desktopItems.length > 0) {
+      groups.push({ id: "desktop", label: "桌面互动", items: desktopItems });
+    }
+    const generalItems = personalEntries(GENERAL_TABS);
+    if (generalItems.length > 0) {
+      groups.push({ id: "general", label: "通用与偏好", items: generalItems });
+    }
+    return groups;
+  });
+
+  const activeServerSection = () =>
+    serverSettings.serverSettingsShownSection() ?? serverSettings.serverSettingsSection() ?? "providers";
+
+  const activePersonalTab = () => {
+    const tab = settings.appSettingsTab() ?? "general";
+    return tab === "app-behavior" ? "general" : tab;
+  };
+
+  const isEntryActive = (entry: UnifiedNavEntry): boolean =>
+    entry.kind === "server"
+      ? props.kind === "server" && activeServerSection() === entry.section
+      : props.kind === "personal" && activePersonalTab() === entry.tab;
+
+  const openEntry = (entry: UnifiedNavEntry) => {
+    if (entry.kind === "server") {
+      const server = targetServer();
+      if (server) serverSettings.openServerSettings(server.id, null, entry.section);
+      return;
+    }
+    settings.openAppSettings(null, entry.tab);
+  };
+
   const searchRows = (): SearchRow[] => {
-    const server = activeServer();
+    const server = targetServer();
     const personal = SEARCH_ROWS.filter(
       (row) => tabShown(row.tab) && settingsRowShown(row, platform.appInfo()?.platform),
     );
     if (!server) return personal;
+    const plat = platform.appInfo()?.platform ?? "darwin";
     return [
-      ...personal,
       ...(activeServerHasProviderSettings(server) ? [PROVIDERS_ROW] : []),
-      ...(serverSupportsCapability(server, "agent-import-v1") ? [IMPORT_ROW] : []),
       ...(serverHasAgentDefaults(server) ? AGENTS_ROWS : []),
+      ...(serverHasMemorySettings(server) ? [MEMORY_ROW] : []),
+      ...(serverHasStorage(server) ? [STORAGE_ROW] : []),
+      ...(plat === "darwin" || server.kind === "local" ? [DESKTOP_ROW] : []),
       ...(serverHasBackgroundProcesses(server) &&
       canManageStorage(server) &&
       (server.kind === "local" || server.state === "online")
         ? [BACKGROUND_PROCESSES_ROW]
         : []),
+      ...personal,
       MARKETPLACE_APPS_ROW,
       ...connectors.active.available().map(
         ({ id }): MarketplaceRow => ({
@@ -140,8 +252,9 @@ export function SettingsPage(props: { kind: SettingsKind }) {
       ),
     ];
   };
-  const results = () =>
-    props.kind === "personal" && query().trim() ? rankRows(query().trim(), searchRows(), (key) => i18n.t(key)) : null;
+
+  const results = () => (query().trim() ? rankRows(query().trim(), searchRows(), (key) => i18n.t(key)) : null);
+
   const resultStatus = () => {
     const rows = results();
     if (!rows) return "";
@@ -149,9 +262,9 @@ export function SettingsPage(props: { kind: SettingsKind }) {
       ? i18n.t("app.settingsPage.resultCount", { count: rows.length })
       : i18n.t("app.settingsPage.noResults");
   };
+
   let content: HTMLElement | undefined;
   const [contentElement, setContentElement] = createSignal<HTMLElement | undefined>();
-  let nav: HTMLElement | undefined;
 
   const openResult = (row: SearchRow) => {
     setQuery("");
@@ -162,12 +275,10 @@ export function SettingsPage(props: { kind: SettingsKind }) {
       return;
     }
     if ("section" in row) {
-      const server = activeServer();
+      const server = targetServer();
       if (server) serverSettings.openServerSettings(server.id, null, row.section);
       return;
     }
-    settings.openAppSettings(null, undefined);
-    flush();
     settings.openAppSettings(null, row.tab);
     flush();
     if (!content) return;
@@ -201,44 +312,45 @@ export function SettingsPage(props: { kind: SettingsKind }) {
   return (
     <SettingsPageFrame
       heading={
-        <Show
-          when={props.kind === "personal"}
-          fallback={
-            <Show when={serverSettings.serverSettingsTarget()}>
-              {(server) => <ServerSettingsPageTitle server={server()} />}
-            </Show>
-          }
-        >
-          <h1 class="settings-page-title" tabindex={-1}>
-            {i18n.t("app.settingsPage.title")}
-          </h1>
-        </Show>
+        <h1 class="settings-page-title" tabindex={-1}>
+          设置
+        </h1>
       }
       sectionsHidden={results() !== null}
-      footer={
-        <Show
-          when={props.kind === "personal"}
-          fallback={
-            <PersonalSettingsLink
-              account={signedInAccount()}
-              onOpen={() => settings.openAppSettings(serverSettings.serverSettingsRestoreTarget())}
-            />
-          }
-        >
-          <Show when={activeServer()}>
-            {(server) => (
-              <ServerSettingsLink
-                server={server()}
-                onOpen={() => serverSettings.openServerSettings(server().id, settings.appSettingsRestoreTarget())}
-              />
-            )}
-          </Show>
-        </Show>
+      sections={
+        <div class="settings-page-nav-group">
+          <nav class="settings-modal-nav" aria-label="设置导航">
+            <For each={navGroups()}>
+              {(group) => (
+                <>
+                  <SettingsNavGroupLabel label={group.label} />
+                  <For each={group.items}>
+                    {(entry) => {
+                      const Icon = entry.icon;
+                      const selected = () => isEntryActive(entry);
+                      return (
+                        <button
+                          type="button"
+                          class="settings-modal-nav-item"
+                          data-selected={selected() ? "" : undefined}
+                          aria-current={selected() ? "page" : undefined}
+                          onClick={() => openEntry(entry)}
+                        >
+                          <Icon aria-hidden="true" />
+                          <span>{i18n.t(entry.titleKey)}</span>
+                        </button>
+                      );
+                    }}
+                  </For>
+                </>
+              )}
+            </For>
+          </nav>
+        </div>
       }
       onMounts={(mounts) => {
         content = mounts?.content;
         setContentElement(mounts?.content);
-        nav = mounts?.nav;
         windowPage.setSettingsMounts(mounts);
       }}
       onEscape={() => {
@@ -251,62 +363,50 @@ export function SettingsPage(props: { kind: SettingsKind }) {
         value={query()}
         onInput={setQuery}
         onEnter={() => {
-          if (props.kind === "server") {
-            openFirstSettingsSection(nav, windowPage.openFirstServerSection, query);
-            return;
-          }
           const top = results()?.[0];
           if (top) openResult(top);
         }}
       />
-      <Show when={props.kind === "personal"}>
-        <span class="sr-only" role="status">
-          {resultStatus()}
-        </span>
-        <Show when={results()}>
-          {(rows) => (
-            <Show
-              when={rows().length > 0}
-              fallback={<p class="settings-page-empty">{i18n.t("app.settingsPage.noResults")}</p>}
-            >
-              <ul class="settings-page-results" aria-label={i18n.t("app.settingsPage.results")}>
-                <For each={rows()}>
-                  {(row) => {
-                    const tab = "section" in row || "app" in row ? null : navItem(row.tab);
-                    const marketplace = "app" in row;
-                    const PlaceIcon = tab ? tab.icon : marketplace ? Store : Server;
-                    const place = () =>
-                      tab
-                        ? i18n.t(tab.titleKey)
-                        : marketplace
-                          ? i18n.t("marketplace.title")
-                          : activeServer()?.kind === "local"
-                            ? "星友空间"
-                            : (activeServer()?.name ?? "");
-                    const titleKey =
-                      "section" in row || "app" in row || row.anchor ? row.titleKey : navItem(row.tab).descriptionKey;
-                    return (
-                      <li>
-                        <Button
-                          variant="ghost"
-                          type="button"
-                          class="settings-page-result"
-                          onClick={() => openResult(row)}
-                        >
-                          <span class="settings-page-result-section">
-                            <PlaceIcon aria-hidden="true" />
-                            {place()}
-                          </span>
-                          <span class="settings-page-result-title">{i18n.t(titleKey)}</span>
-                        </Button>
-                      </li>
-                    );
-                  }}
-                </For>
-              </ul>
-            </Show>
-          )}
-        </Show>
+      <span class="sr-only" role="status">
+        {resultStatus()}
+      </span>
+      <Show when={results()}>
+        {(rows) => (
+          <Show
+            when={rows().length > 0}
+            fallback={<p class="settings-page-empty">{i18n.t("app.settingsPage.noResults")}</p>}
+          >
+            <ul class="settings-page-results" aria-label={i18n.t("app.settingsPage.results")}>
+              <For each={rows()}>
+                {(row) => {
+                  const tab = "section" in row || "app" in row ? null : navItem(row.tab);
+                  const marketplace = "app" in row;
+                  const PlaceIcon = tab ? tab.icon : marketplace ? Store : Server;
+                  const place = () =>
+                    tab ? i18n.t(tab.titleKey) : marketplace ? i18n.t("marketplace.title") : "模型与星友";
+                  const titleKey =
+                    "section" in row || "app" in row || row.anchor ? row.titleKey : navItem(row.tab).descriptionKey;
+                  return (
+                    <li>
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        class="settings-page-result"
+                        onClick={() => openResult(row)}
+                      >
+                        <span class="settings-page-result-section">
+                          <PlaceIcon aria-hidden="true" />
+                          {place()}
+                        </span>
+                        <span class="settings-page-result-title">{i18n.t(titleKey)}</span>
+                      </Button>
+                    </li>
+                  );
+                }}
+              </For>
+            </ul>
+          </Show>
+        )}
       </Show>
     </SettingsPageFrame>
   );

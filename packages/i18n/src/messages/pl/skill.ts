@@ -82,5 +82,4 @@ export const messages = {
   "skill.marketplace.limitReason": "Agent może mieć najwyżej {limit} umiejętności.",
   "skill.marketplace.cannotRemove":
     "StarBot nie może usunąć wbudowanej umiejętności ani umiejętności, której nie zainstalował.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -9,8 +9,7 @@ export const messages = {
   "error.connector.githubClientUnknown": "GitHub 不认识该 GitHub App 的客户端 ID。",
   "error.connector.githubUnexpected": "GitHub 返回了意外的响应：{detail}",
   "error.connector.githubUnreachable": "星友无法连接 GitHub：{detail}",
-  "error.connector.githubOffline":
-    "星友无法连接 GitHub。请检查运行星友的电脑或服务器的网络连接和 DNS 设置，然后重试。",
+  "error.connector.githubOffline": "星友无法连接 GitHub。请检查运行星友的电脑或服务器的网络连接和 DNS 设置，然后重试。",
   "error.connector.githubExpired": "GitHub 连接已过期，请重新连接 GitHub。",
   "error.connector.githubFileUnreadable": "GitHub 连接文件无法读取。",
   "error.connector.githubFileTooLarge": "GitHub 连接文件过大。",
@@ -28,8 +27,7 @@ export const messages = {
   "error.connector.onePasswordUnreachable": "星友无法连接到 1Password，请检查网络连接后重试。",
   "error.connector.onePasswordRateLimited": "1Password 收到的请求过多，请等待几分钟后重试。",
   "error.connector.onePasswordNoVault": "该服务账号无法读取任何保险库。请授予其保险库访问权限后重试。",
-  "error.connector.onePasswordReadFailed":
-    "星友无法读取你在 1Password 中的登录信息。请断开 1Password，然后重新连接。",
+  "error.connector.onePasswordReadFailed": "星友无法读取你在 1Password 中的登录信息。请断开 1Password，然后重新连接。",
   "error.connector.onePasswordFileUnreadable": "1Password 连接文件无法读取。",
   "error.connector.onePasswordFileTooLarge": "1Password 连接文件过大。",
   "error.connector.bitwardenFailed":
@@ -60,6 +58,5 @@ export const messages = {
   "error.connector.protonPassExtraPasswordNotAsked": "Proton Pass 没有要求额外密码。",
   "error.connector.protonPassFileUnreadable": "无法读取 Proton Pass 连接文件。",
   "error.connector.protonPassSignInTimeout": "Proton 登录用时过长。请重新连接。",
-  "error.connector.protonPassSetupFailed":
-    "无法在 Proton Pass 中创建保管库 Shared with 星友或其访问密钥。请重新连接。",
+  "error.connector.protonPassSetupFailed": "无法在 Proton Pass 中创建保管库 Shared with 星友或其访问密钥。请重新连接。",
 } as const satisfies PartialTranslation<typeof source>;

@@ -36,5 +36,4 @@ export const messages = {
 
   "error.auth.deliveryUnknown":
     "StarBot non ha potuto confermare se il codice di accesso è stato inviato. Controlla la consegna prima di inviarlo di nuovo.",
-
 } as const satisfies PartialTranslation<typeof source>;

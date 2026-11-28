@@ -37,5 +37,4 @@ export const messages = {
 
   "error.auth.deliveryUnknown":
     "サインインコードが送信されたかどうかを StarBot が確認できませんでした。再送信する前に配信を確認してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

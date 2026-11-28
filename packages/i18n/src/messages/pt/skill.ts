@@ -78,5 +78,4 @@ export const messages = {
   "skill.marketplace.confirmAgents": "Agentes: {agents}.",
   "skill.marketplace.limitReason": "Um agente pode ter até {limit} habilidades.",
   "skill.marketplace.cannotRemove": "O StarBot não pode remover uma habilidade integrada nem uma que ele não instalou.",
-
 } as const satisfies PartialTranslation<typeof source>;

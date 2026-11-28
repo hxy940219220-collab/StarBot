@@ -370,5 +370,4 @@ export const messages = {
   "crm.source.disconnectTitle": "{source} bağlantısı kesilsin mi?",
   "crm.source.disconnectBody":
     "StarBot senkronizasyonu durdurur ve anahtarı siler. İçe aktarılan satırlar kalır ve bunları değiştirebilirsiniz.",
-
 } as const satisfies PartialTranslation<typeof source>;

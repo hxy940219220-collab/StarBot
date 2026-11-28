@@ -137,7 +137,13 @@ export function SettingsModal(props: SettingsModalProps) {
   const [activeTab, setActiveTab] = createSignal<SettingsTab>(
     untrack(() => {
       const initial = props.initialTab;
-      if (!initial || initial === "hosted-servers" || initial === "billing" || initial === "referral") {
+      if (
+        !initial ||
+        initial === "hosted-servers" ||
+        initial === "billing" ||
+        initial === "referral" ||
+        initial === "app-behavior"
+      ) {
         return "general";
       }
       return initial;
@@ -190,7 +196,9 @@ export function SettingsModal(props: SettingsModalProps) {
   createEffect(
     () => {
       const tab = props.open ? props.openTab : undefined;
-      if (tab === "hosted-servers" || tab === "billing" || tab === "referral") return "general";
+      if (tab === "hosted-servers" || tab === "billing" || tab === "referral" || tab === "app-behavior") {
+        return "general";
+      }
       return tab;
     },
     (tab) => {

@@ -51,5 +51,4 @@ export const messages = {
   "error.update.restartStarted": "StarBot redémarre déjà pour installer la mise à jour.",
 
   "error.update.alreadyRestarting": "StarBot redémarre déjà.",
-
 } as const satisfies PartialTranslation<typeof source>;

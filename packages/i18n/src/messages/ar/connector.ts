@@ -95,7 +95,6 @@ export const messages = {
   "connector.statusUnknown": "غير معروف",
   "connector.readFailed": "تعذّر على StarBot قراءة حالة هذا الاتصال.",
 
-
   "connector.slack.title": "Slack",
   "connector.slack.description":
     "يذكر الأشخاص @StarBot في Slack أو يرسلون إليه رسالة مباشرة. يسأل Slack Orchestrator الوكيل المناسب ويجيب.",
@@ -323,7 +322,6 @@ export const messages = {
   "connector.discord.accessRoleDeleted": "{role} (محذوف)",
   "connector.discord.accessSave": "حفظ",
   "connector.discord.accessHostUpdate": "حدّث StarBot على {host} لاختيار الأدوار.",
-
 
   "connector.telegram.title": "Telegram",
   "connector.telegram.description":
@@ -808,5 +806,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "قطع الاتصال",
   "connector.protonPass.actionFailed": "تعذّر على StarBot تغيير اتصال Proton Pass.",
-
 } as const satisfies PartialTranslation<typeof source>;

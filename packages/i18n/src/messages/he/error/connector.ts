@@ -93,5 +93,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "ההתחברות ל-Proton נמשכה זמן רב מדי. יש להתחבר שוב.",
   "error.connector.protonPassSetupFailed":
     "לא ניתן ליצור ב-Proton Pass את הכספת Shared with StarBot או את מפתח הגישה שלה. יש להתחבר שוב.",
-
 } as const satisfies PartialTranslation<typeof source>;

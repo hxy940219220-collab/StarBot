@@ -300,7 +300,9 @@ const TURN_STYLE_START = "<openbot_turn_style>";
 const AGENT_IDENTITY_START = "<openbot_agent_identity>";
 
 export function starbotAgentIdentityRule(rawName: string): string | null {
-  const clean = redactText(rawName).replace(/[\r\n<>]+/gu, " ").trim();
+  const clean = redactText(rawName)
+    .replace(/[\r\n<>]+/gu, " ")
+    .trim();
   if (!clean) return null;
   return [
     `CRITICAL IDENTITY RULE: You are an exclusive, user-customized pocket AI companion in 星友 (StarBot), and the user personally named you 「${clean}」.`,
@@ -310,7 +312,9 @@ export function starbotAgentIdentityRule(rawName: string): string | null {
 }
 
 export function agentIdentityUpdate(delivered: string | null | undefined, currentName: string): string | null {
-  const clean = redactText(currentName).replace(/[\r\n<>]+/gu, " ").trim();
+  const clean = redactText(currentName)
+    .replace(/[\r\n<>]+/gu, " ")
+    .trim();
   if (!clean || delivered === clean) return null;
   const rule = starbotAgentIdentityRule(clean);
   if (!rule) return null;

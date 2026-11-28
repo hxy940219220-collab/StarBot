@@ -54,5 +54,4 @@ export const messages = {
   "computerUse.help.revealFailed": "Uygulama Finder'da gösterilemedi.",
   "computerUse.help.dragFailed": "Uygulama sürüklenemedi.",
   "computerUse.highlight.working": "StarBot {title} içinde çalışıyor",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -103,11 +103,7 @@ export function ensureStarBotConnectorBridge(): void {
     mkdirSync(STARBOT_CONNECTOR_ROOT, { recursive: true });
     mkdirSync(STARBOT_PACKAGED_BIN_DIR, { recursive: true });
     const playwrightCorePath = resolvePlaywrightCoreEntry();
-    writeFileSync(
-      STARBOT_RUNTIME_PATHS_FILE,
-      JSON.stringify({ playwrightCorePath }, null, 2),
-      { encoding: "utf8" },
-    );
+    writeFileSync(STARBOT_RUNTIME_PATHS_FILE, JSON.stringify({ playwrightCorePath }, null, 2), { encoding: "utf8" });
     writeFileSync(STARBOT_JIMENG_CLI_PATH, JIMENG_CLI_WRAPPER_SOURCE, { encoding: "utf8", mode: 0o755 });
     chmodSync(STARBOT_JIMENG_CLI_PATH, 0o755);
     writeFileSync(STARBOT_CLI_MCP_BRIDGE_PATH, BRIDGE_SCRIPT_SOURCE, { encoding: "utf8", mode: 0o755 });

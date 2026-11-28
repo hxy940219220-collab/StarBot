@@ -5,5 +5,4 @@ export const messages = {
   "error.storage.unsupported": "השרת הזה אינו תומך באחסון.",
   "error.storage.agentMissing": "הסוכן אינו קיים.",
   "error.storage.unreadableFile": "StarBot לא יכול לקרוא את {path}. הקובץ פגום.",
-
 } as const satisfies PartialTranslation<typeof source>;

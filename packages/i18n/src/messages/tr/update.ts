@@ -60,7 +60,6 @@ export const messages = {
   "update.idleRestart.requestFailed": "Yeniden başlatma zamanlanamadı.",
   "update.idleRestart.failedTitle": "StarBot yeniden başlatılmadı",
 
-
   "update.whatsNew.title": "StarBot'taki yenilikler",
 
   "update.whatsNew.description": "StarBot'un bu sürümündeki yeni özellikler ve değişiklikler.",

@@ -247,5 +247,4 @@ export const messages = {
   "error.remote.localServerLimit": "אפשר לקיים עד {limit} שרתים במחשב הזה. יש למחוק אחד כדי ליצור שרת נוסף.",
   "error.remote.localServersReadOnly":
     "הגרסה הזו של StarBot לא יכולה לקרוא את רשימת השרתים במחשב הזה. יש לעדכן את StarBot.",
-
 } as const satisfies PartialTranslation<typeof source>;

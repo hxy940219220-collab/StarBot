@@ -373,5 +373,4 @@ export const messages = {
   "crm.source.disconnect": "ניתוק",
   "crm.source.disconnectTitle": "לנתק את {source}?",
   "crm.source.disconnectBody": "StarBot מפסיק את הסנכרון ומוחק את המפתח. השורות שיובאו נשארות, ואפשר לשנות אותן.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -53,5 +53,4 @@ export const messages = {
   "computerUse.help.revealFailed": "アプリケーションを Finder に表示できませんでした。",
   "computerUse.help.dragFailed": "アプリケーションをドラッグできませんでした。",
   "computerUse.highlight.working": "StarBot が {title} で作業しています",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -58,6 +58,7 @@ export interface SidebarProps {
   serverMenu?: Omit<ServerMenuProps, "serverName" | "compact"> | undefined;
   chatHistory?: SidebarChatHistory | undefined;
   serverUpdate?: { version: string; running: boolean; onOpen: () => void } | undefined;
+  topbarLeadingActions?: JSX.Element | undefined;
   topbarDetail?: JSX.Element | undefined;
   agents: AgentProfile[];
   activeAgentId: string;

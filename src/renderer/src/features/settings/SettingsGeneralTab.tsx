@@ -80,81 +80,69 @@ export function SettingsGeneralTab(props: SettingsGeneralTabProps) {
         <AppearanceRows {...props} />
       </Show>
 
-      <Show when={props.part === "general"}>
-        <SettingsSection title={i18n.t("settings.conversations.title")}>
-          <ItemGroup class="settings-modal-card">
-            <Item data-settings-row="settings.sendShortcut.title" class="settings-modal-row">
-              <ItemContent>
-                <ItemTitle>{i18n.t("settings.sendShortcut.title")}</ItemTitle>
-                <ItemDescription>{i18n.t("settings.sendShortcut.description")}</ItemDescription>
-              </ItemContent>
-              <ItemActions>
-                <SendShortcutSelect
-                  value={props.value.sendShortcut}
-                  onChange={(mode) => props.onUpdateSetting("sendShortcut", mode)}
-                  devicePlatform={props.platform ?? "darwin"}
-                  mount={props.selectMount}
-                />
-              </ItemActions>
-            </Item>
-            <Item data-settings-row="sidebar.order.title" class="settings-modal-row">
-              <ItemContent>
-                <ItemTitle>{i18n.t("sidebar.order.title")}</ItemTitle>
-                <ItemDescription>{i18n.t("settings.chatOrder.description")}</ItemDescription>
-              </ItemContent>
-              <ItemActions>
-                <SidebarChatOrderSelect
-                  value={layout.sidebarChatOrder()}
-                  onChange={layout.setSidebarChatOrder}
-                  mount={props.selectMount}
-                />
-              </ItemActions>
-            </Item>
-            <SwitchField
-              data-settings-row="settings.showAgentSteps.title"
-              checked={props.value.showAgentSteps}
-              onChange={(checked) => props.onUpdateSetting("showAgentSteps", checked)}
-              label={i18n.t("settings.showAgentSteps.title")}
-              description={i18n.t("settings.showAgentSteps.description")}
-            />
-            <SwitchField
-              data-settings-row="settings.compactMessageActions.title"
-              checked={props.value.compactMessageActions}
-              onChange={(checked) => props.onUpdateSetting("compactMessageActions", checked)}
-              label={i18n.t("settings.compactMessageActions.title")}
-              description={i18n.t("settings.compactMessageActions.description")}
-            />
-            <Item data-settings-row="settings.externalLinks.title" class="settings-modal-row">
-              <ItemContent>
-                <ItemTitle>{i18n.t("settings.externalLinks.title")}</ItemTitle>
-                <ItemDescription>{i18n.t("settings.externalLinks.description")}</ItemDescription>
-              </ItemContent>
-              <ItemActions>
-                <ExternalLinkSelect
-                  target={props.value.externalLinkTarget}
-                  platform={props.platform}
-                  mount={props.selectMount}
-                  onChange={(target) => props.onUpdateSetting("externalLinkTarget", target)}
-                />
-              </ItemActions>
-            </Item>
-          </ItemGroup>
-        </SettingsSection>
+      <Show when={props.part === "general" || props.part === "app-behavior"}>
+        <Show when={props.part === "general"}>
+          <SettingsSection title={i18n.t("settings.conversations.title")}>
+            <ItemGroup class="settings-modal-card">
+              <Item data-settings-row="settings.sendShortcut.title" class="settings-modal-row">
+                <ItemContent>
+                  <ItemTitle>{i18n.t("settings.sendShortcut.title")}</ItemTitle>
+                  <ItemDescription>{i18n.t("settings.sendShortcut.description")}</ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                  <SendShortcutSelect
+                    value={props.value.sendShortcut}
+                    onChange={(mode) => props.onUpdateSetting("sendShortcut", mode)}
+                    devicePlatform={props.platform ?? "darwin"}
+                    mount={props.selectMount}
+                  />
+                </ItemActions>
+              </Item>
+              <Item data-settings-row="sidebar.order.title" class="settings-modal-row">
+                <ItemContent>
+                  <ItemTitle>{i18n.t("sidebar.order.title")}</ItemTitle>
+                  <ItemDescription>{i18n.t("settings.chatOrder.description")}</ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                  <SidebarChatOrderSelect
+                    value={layout.sidebarChatOrder()}
+                    onChange={layout.setSidebarChatOrder}
+                    mount={props.selectMount}
+                  />
+                </ItemActions>
+              </Item>
+              <SwitchField
+                data-settings-row="settings.showAgentSteps.title"
+                checked={props.value.showAgentSteps}
+                onChange={(checked) => props.onUpdateSetting("showAgentSteps", checked)}
+                label={i18n.t("settings.showAgentSteps.title")}
+                description={i18n.t("settings.showAgentSteps.description")}
+              />
+              <SwitchField
+                data-settings-row="settings.compactMessageActions.title"
+                checked={props.value.compactMessageActions}
+                onChange={(checked) => props.onUpdateSetting("compactMessageActions", checked)}
+                label={i18n.t("settings.compactMessageActions.title")}
+                description={i18n.t("settings.compactMessageActions.description")}
+              />
+              <Item data-settings-row="settings.externalLinks.title" class="settings-modal-row">
+                <ItemContent>
+                  <ItemTitle>{i18n.t("settings.externalLinks.title")}</ItemTitle>
+                  <ItemDescription>{i18n.t("settings.externalLinks.description")}</ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                  <ExternalLinkSelect
+                    target={props.value.externalLinkTarget}
+                    platform={props.platform}
+                    mount={props.selectMount}
+                    onChange={(target) => props.onUpdateSetting("externalLinkTarget", target)}
+                  />
+                </ItemActions>
+              </Item>
+            </ItemGroup>
+          </SettingsSection>
+        </Show>
 
-        <SettingsSection title={i18n.t("settings.permissions.title")}>
-          <ItemGroup class="settings-modal-card">
-            <SwitchField
-              data-settings-row="settings.analytics.title"
-              checked={props.value.productAnalytics}
-              onChange={(checked) => props.onUpdateSetting("productAnalytics", checked)}
-              label={i18n.t("settings.analytics.title")}
-              description={i18n.t("settings.analytics.description")}
-            />
-          </ItemGroup>
-        </SettingsSection>
-      </Show>
-
-      <Show when={props.part === "app-behavior"}>
         <SettingsSection title={i18n.t("settings.appBehavior.startTitle")}>
           <ItemGroup class="settings-modal-card">
             <Show when={props.value.launchAtLogin !== null}>
@@ -242,6 +230,20 @@ export function SettingsGeneralTab(props: SettingsGeneralTabProps) {
                   description={i18n.t("settings.keepAwakeOnBattery.description")}
                 />
               </Show>
+            </ItemGroup>
+          </SettingsSection>
+        </Show>
+
+        <Show when={props.part === "general"}>
+          <SettingsSection title={i18n.t("settings.permissions.title")}>
+            <ItemGroup class="settings-modal-card">
+              <SwitchField
+                data-settings-row="settings.analytics.title"
+                checked={props.value.productAnalytics}
+                onChange={(checked) => props.onUpdateSetting("productAnalytics", checked)}
+                label={i18n.t("settings.analytics.title")}
+                description={i18n.t("settings.analytics.description")}
+              />
             </ItemGroup>
           </SettingsSection>
         </Show>

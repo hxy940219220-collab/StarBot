@@ -48,5 +48,4 @@ export const messages = {
   "error.crm.off":
     "CRM выключена. Владелец или администратор может включить её в разделе «Настройки сервера > Экспериментальные».",
   "error.crm.settingsSaveFailed": "StarBot не может сохранить настройку CRM на этом сервере.",
-
 } as const satisfies PartialTranslation<typeof source>;

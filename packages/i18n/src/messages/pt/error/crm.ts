@@ -48,5 +48,4 @@ export const messages = {
   "error.crm.off":
     "O CRM está desativado. Um proprietário ou administrador pode ativá-lo em Configurações do servidor > Experimental.",
   "error.crm.settingsSaveFailed": "O StarBot não consegue salvar a configuração do CRM neste servidor.",
-
 } as const satisfies PartialTranslation<typeof source>;

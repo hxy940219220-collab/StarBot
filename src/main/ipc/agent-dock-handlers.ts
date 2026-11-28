@@ -9,6 +9,7 @@ import {
   parseAgentDockInputRegion,
   parseAgentDockInteractive,
   parseAgentDockPresentation,
+  parseAgentDockShortcut,
   parseAgentDockXWayland,
 } from "./app-inputs";
 import { authorizedHandler, eventHandler, type IpcGroupHandlers } from "./define-ipc-group";
@@ -26,7 +27,9 @@ export interface AgentDockIpcDependencies {
     | "setExtent"
     | "listDisplays"
     | "drag"
-  >;
+  > & {
+    setShortcut?: (shortcut: string | null) => void;
+  };
   setXWayland: (enabled: boolean) => Effect.Effect<void, { readonly cause: unknown }>;
 }
 
@@ -66,6 +69,9 @@ export function agentDockIpcHandlers({
       setXWayland: authorizedHandler(fromMainRenderer, parseAgentDockXWayland, (_event, input) =>
         runCauseEffect(setXWayland(input.enabled)),
       ),
+      setShortcut: authorizedHandler(fromMainRenderer, parseAgentDockShortcut, (_event, input) => {
+        agentDock.setShortcut?.(input.shortcut);
+      }),
       listDisplays: eventHandler((event) => {
         fromMainRenderer(event);
         return agentDock.listDisplays();

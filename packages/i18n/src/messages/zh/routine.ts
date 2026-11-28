@@ -325,8 +325,7 @@ export const messages = {
   "routine.webhook.howToSign": "如何为请求签名",
   "routine.webhook.howToSignHint": "在发送方把密钥保存在 OPENBOT_WEBHOOK_SECRET 中，不要写进代码。",
   "routine.webhook.stepTest": "发送测试事件",
-  "routine.webhook.stepTestHint":
-    "星友会为匹配该自动化任务的事件签名，并像真实请求一样接收它。自动化任务会运行一次。",
+  "routine.webhook.stepTestHint": "星友会为匹配该自动化任务的事件签名，并像真实请求一样接收它。自动化任务会运行一次。",
   "routine.webhook.sendTest": "发送测试事件",
   "routine.webhook.sendingTest": "正在发送…",
   "routine.webhook.testStarted": "测试事件 {eventType} 已启动一次运行，可在运行历史中查看。",

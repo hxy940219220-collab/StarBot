@@ -28,7 +28,6 @@ export const messages = {
 
   "marketplace.plugins.missing": "هذه الإضافة ليست في كتالوج StarBot.",
 
-
   "marketplace.agents.loadingDetail": "جارٍ تحميل تفاصيل الوكيل…",
   "marketplace.agents.skills": "المهارات",
   "marketplace.agents.routines": "المهام الدورية",

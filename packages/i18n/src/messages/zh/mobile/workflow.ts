@@ -362,8 +362,7 @@ export const messages = {
   "mobile.workflow.github.output.agentLabelsHint": "代理会从仓库的标签中选择标签。",
   "mobile.workflow.github.reason.completed": "已完成",
   "mobile.workflow.github.reason.notPlanned": "不计划",
-  "mobile.workflow.discord.hostOnly":
-    "只有运行星友的电脑上有 Discord 服务器。请在那台电脑上的星友中更改此步骤。",
+  "mobile.workflow.discord.hostOnly": "只有运行星友的电脑上有 Discord 服务器。请在那台电脑上的星友中更改此步骤。",
   "mobile.workflow.discord.triggerComputerOnly": "请在运行此触发器的电脑上的星友中更改它。",
   "mobile.workflow.discord.outputSummary": "Discord · {action}",
   "mobile.workflow.discord.server": "服务器",
@@ -390,8 +389,7 @@ export const messages = {
   "mobile.workflow.discord.emoji": "表情",
   "mobile.workflow.slack.outputSummary": "Slack · {action}",
   "mobile.workflow.slack.action.reply": "在消息列中回复",
-  "mobile.workflow.telegram.hostOnly":
-    "只有运行星友的电脑上有 Telegram 聊天。请在那台电脑上的星友中更改此步骤。",
+  "mobile.workflow.telegram.hostOnly": "只有运行星友的电脑上有 Telegram 聊天。请在那台电脑上的星友中更改此步骤。",
   "mobile.workflow.telegram.outputSummary": "Telegram · {action}",
   "mobile.workflow.telegram.chat": "聊天",
   "mobile.workflow.telegram.anyChat": "任意已关联的聊天",
@@ -411,8 +409,7 @@ export const messages = {
   "mobile.workflow.telegram.emoji": "表情",
   "mobile.workflow.chats.adminOnly": "只有所有者或管理员可以更改此步骤。",
   "mobile.workflow.chats.loadFailed": "未能加载此服务器的聊天。请稍后重试。",
-  "mobile.workflow.slack.hostOnly":
-    "只有运行星友的计算机才有 Slack 工作区。请在那台计算机上的星友中更改此步骤。",
+  "mobile.workflow.slack.hostOnly": "只有运行星友的计算机才有 Slack 工作区。请在那台计算机上的星友中更改此步骤。",
   "mobile.workflow.slack.workspace": "工作区",
   "mobile.workflow.slack.chooseWorkspace": "选择工作区",
   "mobile.workflow.slack.oneWorkspace": "一个工作区",

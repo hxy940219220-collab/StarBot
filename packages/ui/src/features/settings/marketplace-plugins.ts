@@ -52,9 +52,7 @@ export function isPluginAppConfig(config: McpServerConfig, app: MarketplacePlugi
   ) {
     return true;
   }
-  return (
-    isStarBotCliBridgeServer(config.command, config.args) && isStarBotCliBridgeServer(server.command, server.args)
-  );
+  return isStarBotCliBridgeServer(config.command, config.args) && isStarBotCliBridgeServer(server.command, server.args);
 }
 
 export function currentPluginAppConfig(config: McpServerConfig, app: MarketplacePluginApp): McpServerConfig {

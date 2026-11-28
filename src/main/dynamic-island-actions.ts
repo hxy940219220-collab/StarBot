@@ -12,7 +12,7 @@ import type { RemoteWorkflowError } from "./remote-service-effects";
 
 export type CriticalAction = Extract<
   DynamicIslandAction,
-  { type: "answer-prompt" | "respond-approval" | "send-message" | "stop-agent" }
+  { type: "answer-prompt" | "respond-approval" | "send-message" | "drop-feed" | "stop-agent" }
 >;
 
 export interface DynamicIslandActionAgent {
@@ -48,8 +48,14 @@ export const performDynamicIslandCriticalAction = Effect.fn("DynamicIsland.criti
   sender: () => ConversationMessageSender | undefined,
 ) {
   const { decodeVoid, decodeQueuedMessageReceipt } = decoders;
-  if (action.type === "send-message") {
-    const input = { agentId: action.agentId, text: action.text, clientMessageId: action.clientMessageId };
+  if (action.type === "send-message" || action.type === "drop-feed") {
+    const attachmentDraftIds = action.attachmentDraftIds?.length ? action.attachmentDraftIds : undefined;
+    const input: SendMessageInput = {
+      agentId: action.agentId,
+      text: action.text,
+      clientMessageId: action.clientMessageId,
+      ...(attachmentDraftIds ? { attachmentDraftIds } : {}),
+    };
     return yield* action.serverId === LOCAL_SERVER_ID
       ? local.sendMessage(input, sender()).pipe(Effect.asVoid)
       : remote

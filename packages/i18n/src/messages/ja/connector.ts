@@ -77,7 +77,6 @@ export const messages = {
   "connector.statusUnknown": "不明",
   "connector.readFailed": "StarBot はこの接続の状態を読み取れませんでした。",
 
-
   "connector.slack.title": "Slack",
   "connector.slack.description":
     "Slack で @StarBot をメンションするか、ダイレクトメッセージを送ります。Slack Orchestrator が適切なエージェントに依頼して回答します。",
@@ -284,7 +283,6 @@ export const messages = {
   "connector.discord.accessRoleDeleted": "{role}（削除済み）",
   "connector.discord.accessSave": "保存",
   "connector.discord.accessHostUpdate": "ロールを選択するには、{host} の StarBot を更新してください。",
-
 
   "connector.telegram.title": "Telegram",
   "connector.telegram.description":
@@ -745,5 +743,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "切断",
   "connector.protonPass.actionFailed": "StarBot は Proton Pass の接続を変更できませんでした。",
-
 } as const satisfies PartialTranslation<typeof source>;

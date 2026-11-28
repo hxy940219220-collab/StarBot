@@ -27,5 +27,4 @@ export const messages = {
 
   "mobile.share.extension.unconfirmed": "لم يؤكد الخادم الرسالة. تحقّق من الدردشة قبل أن ترسلها مرة أخرى.",
   "mobile.share.extension.openApp": "فتح StarBot",
-
 } as const satisfies PartialTranslation<typeof source>;

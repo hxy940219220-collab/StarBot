@@ -297,6 +297,7 @@ const developmentRemoteDebuggingPort = !app.isPackaged
   : null;
 const analyticsCaptureUrl = !app.isPackaged ? readAnalyticsCaptureUrl(process.env.OPENBOT_ANALYTICS_CAPTURE_URL) : null;
 app.commandLine.appendSwitch("disable-features", "FedCm");
+app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
 if (developmentRemoteDebuggingPort) {
   app.commandLine.appendSwitch("remote-debugging-port", developmentRemoteDebuggingPort);
   app.commandLine.appendSwitch("remote-debugging-address", "127.0.0.1");

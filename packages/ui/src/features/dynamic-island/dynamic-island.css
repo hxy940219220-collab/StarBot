@@ -87,6 +87,7 @@
 .dynamic-island-silhouette-body {
   position: absolute;
   inset: 0 var(--dynamic-island-shoulder-size);
+  overflow: hidden;
   border-radius: 0 0 var(--dynamic-island-bottom-radius) var(--dynamic-island-bottom-radius);
   background: var(--openbot-bg-notch);
   box-shadow: inset 0 -1px 0 var(--openbot-shadow-ring);
@@ -348,12 +349,12 @@
 .dynamic-island.dynamic-island-idle:not(.dynamic-island-external) .dynamic-island-ear-leading {
   justify-content: flex-start;
   padding-right: 0;
-  padding-left: var(--openbot-space-4);
+  padding-left: 18px;
 }
 
 .dynamic-island.dynamic-island-idle:not(.dynamic-island-external) .dynamic-island-ear-trailing {
   justify-content: flex-end;
-  padding-right: var(--openbot-space-4);
+  padding-right: 18px;
   padding-left: 0;
 }
 
@@ -396,14 +397,14 @@
 
 .dynamic-island-status:not(.dynamic-island-external) .dynamic-island-ear-leading {
   justify-content: flex-start;
-  padding-right: 0;
-  padding-left: 12px;
+  padding-right: 8px;
+  padding-left: 18px;
 }
 
 .dynamic-island-status:not(.dynamic-island-external) .dynamic-island-ear-trailing {
   justify-content: flex-end;
-  padding-right: 12px;
-  padding-left: 0;
+  padding-right: 18px;
+  padding-left: 8px;
 }
 
 .dynamic-island-status:not(.dynamic-island-external) .dynamic-island-trailing-compact {

@@ -1,21 +1,15 @@
 import { isUpdateActivePhase } from "@openbot/contracts/ipc";
 import { CRM_CAPABILITY } from "@openbot/contracts/team-protocol/crm-v1";
-import { Button, MotionTooltip } from "@openbot/ui";
 import { requestFirstAgentTourReplay } from "@openbot/ui/features/agents/FirstAgentSetup";
-import { ServerMark } from "@openbot/ui/features/servers/ServerRail";
 import { PageRail, type PageRailPage } from "@openbot/ui/features/window/PageRail";
 import { useText } from "@openbot/ui/text";
-import { Show } from "solid-js";
 import { appPort } from "../../app-port";
 import { useLayout } from "../../layout";
 import { usePlatform } from "../../platform";
 import { useAgents } from "../agents/agents-context";
 import { useCustomAgents } from "../custom-agents/custom-agents-context";
 import { serverHasStorage } from "../files/storage-usage";
-import {
-  activeServerHasProviderSettings,
-  serverCanAdminister,
-} from "../servers/server-capabilities";
+import { activeServerHasProviderSettings, serverCanAdminister } from "../servers/server-capabilities";
 import { useServerSettings } from "../servers/server-settings";
 import { useServers } from "../servers/servers-context";
 import { useSettings } from "../settings/settings-context";
@@ -78,7 +72,7 @@ export function WorkspacePageRail(props: { hidden: boolean }) {
     if (page === "server-settings") {
       const providers =
         serverSettingsShownSection() === "providers" && serverSettingsTarget()?.id === activeServer()?.id;
-      return providers ? "providers" : null;
+      return providers ? "providers" : "settings";
     }
     return page === "pricing" ? null : page;
   };
@@ -113,25 +107,6 @@ export function WorkspacePageRail(props: { hidden: boolean }) {
       onSettings={(button) => (updateNotice() ? openAppSettings(button, "updates") : windowPage.openSettings(button))}
       settingsNotice={updateNotice()}
       logo={logo()}
-      server={
-        <Show when={platform.appInfo() ? activeServer() : undefined}>
-          {(server) => (
-            <MotionTooltip content="星友空间与模型设置">
-              <Button
-                variant="ghost"
-                type="button"
-                class="window-rail-button window-rail-server"
-                aria-label="星友空间与模型设置"
-                onClick={(event) => openServerSettings(server().id, event.currentTarget, "providers")}
-              >
-                <span class="server-menu-mark" aria-hidden="true">
-                  <ServerMark server={server()} />
-                </span>
-              </Button>
-            </MotionTooltip>
-          )}
-        </Show>
-      }
       help={
         <RailHelpMenu
           version={whatsNew.state.version}

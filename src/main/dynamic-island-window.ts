@@ -26,10 +26,10 @@ import type { WindowsTopmostKeeper } from "./windows-topmost-keeper";
 
 const logger = createOpenBotLogger("dynamic-island-window");
 
-const DYNAMIC_ISLAND_WINDOW_SIZE = { width: 614, height: 380 } as const;
+const DYNAMIC_ISLAND_WINDOW_SIZE = { width: 620, height: 480 } as const;
 const DYNAMIC_ISLAND_COMPACT_WINDOW_HEIGHT = 50;
 const DYNAMIC_ISLAND_COMPACT_WINDOW_HOVER_ROOM = 18;
-const DYNAMIC_ISLAND_COLLAPSE_SETTLE_MS = 700;
+const DYNAMIC_ISLAND_COLLAPSE_SETTLE_MS = 720;
 
 const MACBOOK_NOTCH_REFERENCE = {
   displayWidth: 1512,
@@ -55,6 +55,7 @@ export interface DynamicIslandWindowControllerOptions {
   loadWindow: (window: BrowserWindow, display: Display) => Promise<void>;
   getDisplays: () => Display[];
   getPrimaryDisplay: () => Display;
+  getCursorScreenPoint?: () => { x: number; y: number };
   getMainWindow: () => BrowserWindow | null;
   getFocusedWindow: () => BrowserWindow | null;
   ensureMainWindow?: () => Promise<BrowserWindow>;
@@ -81,6 +82,9 @@ export class DynamicIslandWindowController {
   readonly #keyboardReturn = new Map<number, BrowserWindow | null>();
   readonly #preferenceMutation = Semaphore.makeUnsafe(1);
   readonly #windowReconciliation = Semaphore.makeUnsafe(1);
+  readonly #hoverGateActive = new Set<number>();
+  readonly #outsideInteractiveTicks = new Map<number, number>();
+  #hoverGateTimer: ReturnType<typeof setInterval> | undefined;
   #destroyed = false;
 
   constructor(options: DynamicIslandWindowControllerOptions) {
@@ -277,13 +281,16 @@ export class DynamicIslandWindowController {
         action.type === "answer-prompt" ||
         action.type === "respond-approval" ||
         action.type === "send-message" ||
+        action.type === "drop-feed" ||
         action.type === "stop-agent"
       ) {
         return this.#performCriticalAction(action);
       }
       return Effect.gen({ self: this }, function* () {
         const window = yield* this.#ensureMainWindow();
-        if (action.type !== "dismiss-failure") this.#options.presentMainWindow(window);
+        if (action.type !== "dismiss-failure" && action.type !== "select-agent") {
+          this.#options.presentMainWindow(window);
+        }
         if (action.type !== "open-app" && !sendToRenderer(window, IPC_ENDPOINTS.dynamicIsland.action, action)) {
           return yield* new DynamicIslandFailed({
             cause: new Error(sourceText("error.backend.windowTemporarilyUnavailable")),
@@ -354,6 +361,7 @@ export class DynamicIslandWindowController {
       if (displayIds.has(displayId) && !window.isDestroyed()) continue;
       this.#windows.delete(displayId);
       this.#interactiveDisplays.delete(displayId);
+      this.#outsideInteractiveTicks.delete(displayId);
       this.#notchSizes.delete(displayId);
       this.#inputRegions.delete(displayId);
       this.#keyboardReturn.delete(displayId);
@@ -394,7 +402,94 @@ export class DynamicIslandWindowController {
         ),
       );
     }
+    this.#syncHoverGateTimer();
   }).bind(this);
+
+  #syncHoverGateTimer(): void {
+    const shouldRun =
+      !this.#destroyed &&
+      this.#options.windowKind === "panel" &&
+      Boolean(this.#options.getCursorScreenPoint) &&
+      this.#windows.size > 0;
+    if (shouldRun && this.#hoverGateTimer === undefined) {
+      this.#hoverGateTimer = setInterval(() => this.#pollNotchHoverGate(), 100);
+    } else if (!shouldRun && this.#hoverGateTimer !== undefined) {
+      clearInterval(this.#hoverGateTimer);
+      this.#hoverGateTimer = undefined;
+      this.#hoverGateActive.clear();
+      this.#outsideInteractiveTicks.clear();
+    }
+  }
+
+  #pollNotchHoverGate(): void {
+    const getCursor = this.#options.getCursorScreenPoint;
+    if (!getCursor) return;
+    const cursor = getCursor();
+    for (const [displayId, window] of this.#windows) {
+      if (window.isDestroyed()) continue;
+      const display = this.#options.getDisplays().find((d) => d.id === displayId);
+      if (!display) continue;
+      const cx = display.bounds.x + display.bounds.width / 2;
+      const topY = display.bounds.y;
+      const notchHeight = this.#notchSize(display)?.height ?? 28;
+      const wasOver = this.#hoverGateActive.has(displayId);
+      // Wake only inside the top notch/menu-bar strip so browser tabs below y=34 are never blocked;
+      // hold slightly wider while already peeking so compact hover never flickers.
+      const overCenterNotch = wasOver
+        ? Math.abs(cursor.x - cx) <= 175 && cursor.y >= topY && cursor.y <= topY + 42
+        : Math.abs(cursor.x - cx) <= 125 && cursor.y >= topY && cursor.y <= topY + Math.min(34, notchHeight + 2);
+
+      if (this.#interactiveDisplays.has(displayId)) {
+        if (overCenterNotch) this.#hoverGateActive.add(displayId);
+        // Guard against fast cursor flicks out of an unfocused macOS panel missing pointerleave
+        if (!window.isFocused()) {
+          const b = window.getBounds();
+          const insideWindow =
+            cursor.x >= b.x - 12 &&
+            cursor.x <= b.x + b.width + 12 &&
+            cursor.y >= b.y - 8 &&
+            cursor.y <= b.y + b.height + 12;
+          if (!insideWindow) {
+            const ticks = (this.#outsideInteractiveTicks.get(displayId) ?? 0) + 1;
+            if (ticks >= 2) {
+              this.#outsideInteractiveTicks.delete(displayId);
+              this.#hoverGateActive.delete(displayId);
+              void window.webContents
+                .executeJavaScript("window.dispatchEvent(new CustomEvent('starbot-cursor-left-window'))")
+                .catch(() => undefined);
+            } else {
+              this.#outsideInteractiveTicks.set(displayId, ticks);
+            }
+          } else {
+            this.#outsideInteractiveTicks.delete(displayId);
+          }
+        } else {
+          this.#outsideInteractiveTicks.delete(displayId);
+        }
+        continue;
+      }
+
+      this.#outsideInteractiveTicks.delete(displayId);
+      if (overCenterNotch !== wasOver) {
+        if (overCenterNotch) {
+          this.#hoverGateActive.add(displayId);
+          this.#cancelCollapse(displayId);
+          window.setBounds(this.#islandBounds(display), false);
+          letPointerThrough(this.#options.pointerForwarding, window, false);
+          void window.webContents
+            .executeJavaScript("window.dispatchEvent(new CustomEvent('starbot-notch-peek', { detail: true }))")
+            .catch(() => undefined);
+        } else {
+          this.#hoverGateActive.delete(displayId);
+          void window.webContents
+            .executeJavaScript("window.dispatchEvent(new CustomEvent('starbot-notch-peek', { detail: false }))")
+            .catch(() => undefined);
+          letPointerThrough(this.#options.pointerForwarding, window, true);
+          this.#scheduleCollapse(displayId, window);
+        }
+      }
+    }
+  }
 
   #show(window: BrowserWindow): void {
     window.showInactive();
@@ -462,6 +557,7 @@ export class DynamicIslandWindowController {
       if (this.#windows.get(display.id) === window) {
         this.#windows.delete(display.id);
         this.#interactiveDisplays.delete(display.id);
+        this.#outsideInteractiveTicks.delete(display.id);
         this.#notchSizes.delete(display.id);
         this.#inputRegions.delete(display.id);
         this.#keyboardReturn.delete(display.id);
@@ -499,6 +595,12 @@ export class DynamicIslandWindowController {
   }
 
   private destroyWindows(): void {
+    if (this.#hoverGateTimer !== undefined) {
+      clearInterval(this.#hoverGateTimer);
+      this.#hoverGateTimer = undefined;
+    }
+    this.#hoverGateActive.clear();
+    this.#outsideInteractiveTicks.clear();
     for (const displayId of [...this.#collapseTimers.keys()]) this.#cancelCollapse(displayId);
     const windows = [...this.#windows.values()];
     this.#windows.clear();
@@ -536,7 +638,7 @@ function notchSizeChanged(
 
 function criticalActionKey(action: CriticalAction): string {
   const id =
-    action.type === "send-message"
+    action.type === "send-message" || action.type === "drop-feed"
       ? action.clientMessageId
       : action.type === "stop-agent"
         ? action.turnId

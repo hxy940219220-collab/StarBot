@@ -57,5 +57,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "Der geteilte Agent konnte nicht gelesen werden. Versuche es erneut.",
   "mobile.link.template.error.unsupported":
     "Dieser Server kann keine geteilten Agenten hinzufügen. Aktualisiere StarBot auf dem Computer, auf dem der Server läuft.",
-
 } as const satisfies PartialTranslation<typeof source>;

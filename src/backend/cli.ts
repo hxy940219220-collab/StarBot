@@ -73,8 +73,7 @@ export interface WorkBuddyCliInfo extends ResolvedCli {
 export const WORKBUDDY_MAC_CLI_SCRIPT =
   "/Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/dist/codebuddy-lite-wb.mjs";
 
-const WORKBUDDY_MAC_CLI_PKG =
-  "/Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/package.json";
+const WORKBUDDY_MAC_CLI_PKG = "/Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/package.json";
 
 export type AgentCliInfo =
   | CodexCliInfo
@@ -1345,10 +1344,7 @@ function posixFallbackPaths(
   if (command === "opencode") paths.push(posix.join(userHome, ".opencode", "bin", "opencode"));
   if (command === "grok") paths.push(posix.join(userHome, ".grok", "bin", "grok"));
   if (command === "kimi") {
-    paths.push(
-      posix.join(userHome, ".kimi-code", "bin", "kimi"),
-      posix.join(userHome, ".kimi", "bin", "kimi"),
-    );
+    paths.push(posix.join(userHome, ".kimi-code", "bin", "kimi"), posix.join(userHome, ".kimi", "bin", "kimi"));
   }
   if (command === "cursor-agent") {
     paths.push(

@@ -61,7 +61,6 @@ export const messages = {
   "update.idleRestart.requestFailed": "Impossibile programmare il riavvio.",
   "update.idleRestart.failedTitle": "StarBot non si è riavviato",
 
-
   "update.whatsNew.title": "Novità di StarBot",
 
   "update.whatsNew.description": "Le nuove funzioni e le modifiche di questa versione di StarBot.",

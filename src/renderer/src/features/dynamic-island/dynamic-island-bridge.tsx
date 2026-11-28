@@ -1,5 +1,6 @@
-import type { DynamicIslandAction } from "@openbot/contracts/ipc";
+import type { DynamicIslandAction, DynamicIslandAgentIdentity } from "@openbot/contracts/ipc";
 import { classifyFailure } from "@openbot/telemetry";
+import { sidebarAgentOrder } from "@openbot/ui/features/sidebar/sidebar-agent-order";
 import { useText } from "@openbot/ui/text";
 import { createEffect, onSettled, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
@@ -16,18 +17,40 @@ import { useServerScope } from "../servers/server-scope";
 import { useServerSelection } from "../servers/server-selection";
 import { useServerSwitch } from "../servers/server-switch";
 import { useServers } from "../servers/servers-context";
+import { useSidebar } from "../sidebar/sidebar-context";
 import { useDynamicIsland } from "./dynamic-island-context";
 import { dynamicIslandPort } from "./dynamic-island-port";
+import { voiceIslandSnapshot } from "./voice-island-bridge";
+
+function toIslandIdentity(agent: {
+  id: string;
+  name: string;
+  avatarSeed: string;
+  avatarHue?: DynamicIslandAgentIdentity["avatarHue"] | undefined;
+  avatarColor?: DynamicIslandAgentIdentity["avatarColor"] | undefined;
+  avatarUrl?: string | null | undefined;
+}): DynamicIslandAgentIdentity {
+  return {
+    id: agent.id,
+    name: agent.name.slice(0, 120),
+    avatarSeed: agent.avatarSeed.slice(0, 160),
+    avatarHue: agent.avatarHue ?? null,
+    ...(agent.avatarColor ? { avatarColor: agent.avatarColor } : {}),
+    avatarUrl: agent.avatarUrl && agent.avatarUrl.length <= 2_048 ? agent.avatarUrl : null,
+  };
+}
 
 export function DynamicIslandBridge() {
   const { t, errorMessage } = useText();
   const platform = usePlatform();
   const { activeServerId } = useServers();
-  const { dynamicIslandCoordinator, publishDynamicIslandPresentation } = useDynamicIsland();
+  const { dynamicIslandCoordinator, publishDynamicIslandPresentation, setDynamicIslandOverlayMeta } =
+    useDynamicIsland();
   const { selectServer } = useServerSelection();
   const { loaded } = useServerScope();
   const { pendingIslandAction, setPendingIslandAction } = useServerSwitch();
-  const { agentList, appendUiError } = useAgents();
+  const { activeAgentId, agentList, userHiddenAgentIds, appendUiError } = useAgents();
+  const { sidebarLayout, pinnedSidebarItems } = useSidebar();
   const {
     activeTurns,
     queues,
@@ -74,6 +97,40 @@ export function DynamicIslandBridge() {
     },
   );
 
+  // Sync active bot identity, ordered bot list, and live voice recording state to Dynamic Island
+  createEffect(
+    () => {
+      if (platform.landingPreview || !loaded()) return null;
+      const ordered = sidebarAgentOrder(agentList(), {
+        layout: sidebarLayout(),
+        pinnedItems: pinnedSidebarItems(),
+        hiddenAgentIds: userHiddenAgentIds(),
+      }).slice(0, 24);
+      const currentId = activeAgentId();
+      const chosen = ordered.find((a) => a.id === currentId) ?? ordered[0] ?? null;
+      const voice = voiceIslandSnapshot();
+      const voiceAgent = voice?.agentId ? (ordered.find((a) => a.id === voice.agentId) ?? chosen) : chosen;
+      return {
+        activeAgent: chosen ? toIslandIdentity(chosen) : null,
+        agents: ordered.map(toIslandIdentity),
+        recording: voice
+          ? {
+              phase: voice.phase,
+              elapsedSeconds: voice.elapsedSeconds,
+              liveText: voice.liveText.slice(0, 1_000),
+              levels: voice.levels.slice(0, 16),
+              agent: voiceAgent ? toIslandIdentity(voiceAgent) : null,
+            }
+          : null,
+      };
+    },
+    (meta) => {
+      if (!meta) return;
+      setDynamicIslandOverlayMeta(meta);
+      publishDynamicIslandPresentation();
+    },
+  );
+
   createEffect(
     () => ({ action: pendingIslandAction(), ready: loaded() }),
     ({ action, ready }) => {
@@ -104,7 +161,13 @@ export function DynamicIslandBridge() {
   });
 
   async function handleDynamicIslandAction(action: DynamicIslandAction): Promise<void> {
-    if (action.type === "open-app" || action.type === "send-message" || action.type === "stop-agent") return;
+    if (
+      action.type === "open-app" ||
+      action.type === "send-message" ||
+      action.type === "drop-feed" ||
+      action.type === "stop-agent"
+    )
+      return;
     if (action.type === "answer-prompt") {
       dynamicIslandCoordinator.resolveAction(action);
       const prompt = attentionOfAgent(pendingPrompts(), action.agentId).find(

@@ -924,7 +924,10 @@ export function AgentThreadView(props: AgentThreadViewProps) {
               };
               const rowSelectable = () => canDeleteRow(message());
               const rowBatchSelected = () => batchSelectMode() && selectedBatchIds().has(message().id);
-              const deletableThreadIds = () => shownRows().filter(canDeleteRow).map((m) => m.id);
+              const deletableThreadIds = () =>
+                shownRows()
+                  .filter(canDeleteRow)
+                  .map((m) => m.id);
               return (
                 <div
                   class={[
@@ -1151,7 +1154,9 @@ export function AgentThreadView(props: AgentThreadViewProps) {
                   class="starbot-batch-btn"
                   disabled={batchDeleting()}
                   onClick={() => {
-                    const ids = shownRows().filter(canDeleteRow).map((m) => m.id);
+                    const ids = shownRows()
+                      .filter(canDeleteRow)
+                      .map((m) => m.id);
                     setSelectedBatchIds(new Set(ids));
                     if (ids.length > 0 && !batchAnchorId()) setBatchAnchorId(ids[0]!);
                   }}
@@ -1165,7 +1170,13 @@ export function AgentThreadView(props: AgentThreadViewProps) {
                   type="button"
                   class="starbot-batch-btn is-danger"
                   disabled={selectedBatchIds().size === 0 || batchDeleting()}
-                  onClick={() => void executeThreadBatchDelete(shownRows().filter(canDeleteRow).map((m) => m.id))}
+                  onClick={() =>
+                    void executeThreadBatchDelete(
+                      shownRows()
+                        .filter(canDeleteRow)
+                        .map((m) => m.id),
+                    )
+                  }
                 >
                   {batchDeleting() ? "正在删除…" : `一键删除 (${selectedBatchIds().size})`}
                 </button>

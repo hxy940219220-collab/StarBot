@@ -3,7 +3,10 @@ import { createOpenBotLogger } from "@openbot/logging";
 
 const ALLOWED_DIRECTORIES = [
   "build/",
+  "docs/images/",
+  "packages/brand/src/assets/",
   "src/renderer/src/assets/",
+  "src/renderer/src/features/window/assets/",
   "src/renderer/stories/assets/",
   "packages/ui/src/assets/",
   "apps/mobile/assets/",

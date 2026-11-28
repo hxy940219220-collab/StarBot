@@ -312,7 +312,6 @@ export const messages = {
   "connector.discord.accessSave": "Zapisz",
   "connector.discord.accessHostUpdate": "Zaktualizuj StarBot na {host}, aby wybrać role.",
 
-
   "connector.telegram.title": "Telegram",
   "connector.telegram.description":
     "Dodaj bota StarBot do grupy Telegram lub otwórz z nim czat prywatny. Telegram Orchestrator pyta odpowiedniego agenta i odpowiada.",
@@ -794,5 +793,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "Odłącz",
   "connector.protonPass.actionFailed": "StarBot nie mógł zmienić połączenia z Proton Pass.",
-
 } as const satisfies PartialTranslation<typeof source>;

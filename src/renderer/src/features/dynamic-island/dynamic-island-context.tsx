@@ -1,4 +1,8 @@
-import { isDynamicIslandServerVisible } from "@openbot/contracts/ipc";
+import {
+  type DynamicIslandAgentIdentity,
+  type DynamicIslandRecordingState,
+  isDynamicIslandServerVisible,
+} from "@openbot/contracts/ipc";
 import { DynamicIslandCoordinator } from "@openbot/team-client/dynamic-island-coordinator";
 import type { DynamicIslandText } from "@openbot/team-client/dynamic-island-presentation";
 import { currentText } from "@openbot/ui/text";
@@ -23,6 +27,19 @@ const DynamicIsland = createSimpleContext({
     let publishedPresentation: string | undefined;
     let lastPublishedAt = Number.NEGATIVE_INFINITY;
     let publishTimer: ReturnType<typeof setTimeout> | undefined;
+    let overlayMeta: {
+      activeAgent: DynamicIslandAgentIdentity | null;
+      agents: DynamicIslandAgentIdentity[];
+      recording: DynamicIslandRecordingState | null;
+    } = {
+      activeAgent: null,
+      agents: [],
+      recording: null,
+    };
+
+    function setOverlayMeta(next: typeof overlayMeta): void {
+      overlayMeta = next;
+    }
 
     function serverOrder(): string[] {
       const activeId = activeServerId();
@@ -54,7 +71,13 @@ const DynamicIsland = createSimpleContext({
         presentationScheduled = false;
         publishTimer = undefined;
         lastPublishedAt = performance.now();
-        const presentation = coordinator.presentation(serverOrder());
+        const base = coordinator.presentation(serverOrder());
+        const presentation = {
+          ...base,
+          activeAgent: overlayMeta.activeAgent,
+          agents: overlayMeta.agents,
+          recording: overlayMeta.recording,
+        };
         const serialized = JSON.stringify(presentation);
         if (serialized === publishedPresentation) return;
         publishedPresentation = serialized;
@@ -114,6 +137,7 @@ const DynamicIsland = createSimpleContext({
     return {
       dynamicIslandCoordinator: coordinator,
       publishDynamicIslandPresentation: publishPresentation,
+      setDynamicIslandOverlayMeta: setOverlayMeta,
     };
   },
 });

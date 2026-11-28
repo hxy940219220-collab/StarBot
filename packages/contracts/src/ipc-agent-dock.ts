@@ -194,7 +194,38 @@ export interface AgentDockDisplayBounds {
 export interface AgentDockOffset {
   displayId: number;
   offset: number;
+  xOffset?: number | undefined;
   bounds?: AgentDockDisplayBounds | undefined;
+}
+
+export interface StarBotCompanionModelChoice {
+  provider: string;
+  providerLabel?: string | undefined;
+  source?: "local" | "api" | undefined;
+  model: string;
+  label: string;
+}
+
+export interface StarBotCompanionUsage {
+  contextUsedTokens: number;
+  contextWindowTokens: number;
+  contextEstimated: boolean;
+  messageCount: number;
+  turnCount: number;
+  quotaPercentUsed: number | null;
+  quotaResetsAt: number | null;
+}
+
+export interface StarBotCompanionInfo {
+  agent: AgentDockAgent;
+  mood: AgentDockMood;
+  working: boolean;
+  provider: string;
+  model: string;
+  modelLabel: string;
+  latestReplyId: string | null;
+  latestReplyText: string | null;
+  usage: StarBotCompanionUsage;
 }
 
 export function sameAgentDockDisplayBounds(
@@ -224,10 +255,25 @@ export interface AgentDockPresentation {
   agents: AgentDockAgent[];
   chats: AgentDockChat[];
   results: AgentDockResult[];
+  companionAgentId?: string | null | undefined;
+  companionBots?: StarBotCompanionInfo[] | undefined;
+  companionModelChoices?: StarBotCompanionModelChoice[] | undefined;
 }
 
 export type AgentDockAction =
   | { type: "open-chat"; serverId: string; seat: AgentDockSeatRef | null }
+  | { type: "select-companion"; serverId: string; agentId: string }
+  | { type: "switch-model"; serverId: string; agentId: string; provider: string; model: string }
+  | {
+      type: "voice-sync";
+      serverId: string;
+      active: boolean;
+      phase?: "preparing" | "requesting" | "recording" | "transcribing" | undefined;
+      elapsedSeconds?: number | undefined;
+      liveText?: string | undefined;
+      levels?: number[] | undefined;
+      agentId?: string | null | undefined;
+    }
   | { type: "add"; serverId: string; seat: AgentDockSeatRef }
   | { type: "remove"; serverId: string; seat: AgentDockSeatRef }
   | { type: "move"; serverId: string; seat: AgentDockSeatRef; before: AgentDockSeatRef | null }
@@ -263,7 +309,12 @@ export type AgentDockAction =
   | { type: "usage-limit-wait"; serverId: string; agentId: string }
   | { type: "open-link"; url: string }
   | { type: "open-settings" }
-  | { type: "hide" };
+  | { type: "hide" }
+  | { type: "toggle" };
+
+export interface SetAgentDockShortcutInput {
+  shortcut: string | null;
+}
 
 export type AboveAppsSupport = "restart" | "unsupported";
 
@@ -304,18 +355,42 @@ export function isAgentDockPresentation(value: unknown): value is AgentDockPrese
     isList(value.availableChannels, AGENT_DOCK_LIMITS.channels, isChannel) &&
     isList(value.agents, INPUT_LIMITS.agents, isAgent) &&
     isList(value.chats, AGENT_DOCK_LIMITS.seats, isChat) &&
-    isList(value.results, AGENT_DOCK_LIMITS.results, isResult)
+    isList(value.results, AGENT_DOCK_LIMITS.results, isResult) &&
+    (value.companionAgentId === undefined || value.companionAgentId === null || isIdentifier(value.companionAgentId)) &&
+    (value.companionBots === undefined || isList(value.companionBots, INPUT_LIMITS.agents, isCompanionInfo)) &&
+    (value.companionModelChoices === undefined || isList(value.companionModelChoices, 128, isCompanionModelChoice))
   );
 }
 
 export function isAgentDockAction(value: unknown): value is AgentDockAction {
   if (!isDynamicRecord(value) || !isString(value.type)) return false;
   if (value.type === "open-link") return isBoundedString(value.url, INPUT_LIMITS.browserUrl) && value.url.length > 0;
-  if (value.type === "open-settings" || value.type === "hide") return true;
+  if (value.type === "open-settings" || value.type === "hide" || value.type === "toggle") return true;
   if (!isIdentifier(value.serverId)) return false;
   switch (value.type) {
     case "open-chat":
       return value.seat === null || isSeatRef(value.seat);
+    case "select-companion":
+      return isIdentifier(value.agentId);
+    case "switch-model":
+      return (
+        isIdentifier(value.agentId) &&
+        isBoundedString(value.provider, 120) &&
+        value.provider.length > 0 &&
+        isBoundedString(value.model, 240) &&
+        value.model.length > 0
+      );
+    case "voice-sync":
+      return (
+        isBoolean(value.active) &&
+        (value.phase === undefined ||
+          isOneOf(["preparing", "requesting", "recording", "transcribing"] as const, value.phase)) &&
+        (value.elapsedSeconds === undefined || (isFiniteNumber(value.elapsedSeconds) && value.elapsedSeconds >= 0)) &&
+        (value.liveText === undefined || isBoundedString(value.liveText, 1_200)) &&
+        (value.levels === undefined ||
+          (Array.isArray(value.levels) && value.levels.length <= 32 && value.levels.every(isFiniteNumber))) &&
+        (value.agentId === undefined || value.agentId === null || isIdentifier(value.agentId))
+      );
     case "add":
     case "remove":
       return isSeatRef(value.seat);
@@ -381,6 +456,13 @@ export function isAgentDockXWayland(value: unknown): value is SetAgentDockXWayla
   return isDynamicRecord(value) && isBoolean(value.enabled);
 }
 
+export function isAgentDockShortcut(value: unknown): value is SetAgentDockShortcutInput {
+  return (
+    isDynamicRecord(value) &&
+    (value.shortcut === null || (isBoundedString(value.shortcut, 80) && value.shortcut.trim().length > 0))
+  );
+}
+
 export function isAgentDockExtent(value: unknown): value is AgentDockExtent | null {
   return (
     value === null ||
@@ -411,7 +493,49 @@ export function isAgentDockOffset(value: unknown): value is AgentDockOffset {
     isFiniteNumber(value.offset) &&
     value.offset >= 0 &&
     value.offset <= 1 &&
+    (value.xOffset === undefined || (isFiniteNumber(value.xOffset) && value.xOffset >= 0 && value.xOffset <= 1)) &&
     (value.bounds === undefined || isAgentDockDisplayBounds(value.bounds))
+  );
+}
+
+function isCompanionModelChoice(value: unknown): value is StarBotCompanionModelChoice {
+  return (
+    isDynamicRecord(value) &&
+    isBoundedString(value.provider, 120) &&
+    value.provider.length > 0 &&
+    (value.providerLabel === undefined || isBoundedString(value.providerLabel, 120)) &&
+    (value.source === undefined || value.source === "local" || value.source === "api") &&
+    isBoundedString(value.model, 240) &&
+    value.model.length > 0 &&
+    isBoundedString(value.label, 240)
+  );
+}
+
+function isCompanionUsage(value: unknown): value is StarBotCompanionUsage {
+  return (
+    isDynamicRecord(value) &&
+    isFiniteNumber(value.contextUsedTokens) &&
+    isFiniteNumber(value.contextWindowTokens) &&
+    isBoolean(value.contextEstimated) &&
+    isCount(value.messageCount) &&
+    isCount(value.turnCount) &&
+    (value.quotaPercentUsed === null || isFiniteNumber(value.quotaPercentUsed)) &&
+    (value.quotaResetsAt === null || isFiniteNumber(value.quotaResetsAt))
+  );
+}
+
+function isCompanionInfo(value: unknown): value is StarBotCompanionInfo {
+  return (
+    isDynamicRecord(value) &&
+    isAgent(value.agent) &&
+    isOneOf(AGENT_DOCK_MOODS, value.mood) &&
+    isBoolean(value.working) &&
+    isBoundedString(value.provider, 120) &&
+    isBoundedString(value.model, 240) &&
+    isBoundedString(value.modelLabel, 240) &&
+    isNullableBoundedString(value.latestReplyId, INPUT_LIMITS.identifier) &&
+    isNullableBoundedString(value.latestReplyText, INPUT_LIMITS.messageText) &&
+    isCompanionUsage(value.usage)
   );
 }
 

@@ -173,9 +173,10 @@ export const startAcpAuthentication = Effect.fnUntraced(function* (options: {
         }
         if (!isDynamicRecord(message)) return;
         if (message.method === "_codebuddy.ai/authUrl" && signInPage?.site === "workbuddy") {
-          const rawUrl = isDynamicRecord(message.params) && typeof message.params.authUrl === "string"
-            ? message.params.authUrl.trim()
-            : "";
+          const rawUrl =
+            isDynamicRecord(message.params) && typeof message.params.authUrl === "string"
+              ? message.params.authUrl.trim()
+              : "";
           const parsed = rawUrl ? URL.parse(rawUrl) : null;
           if (!parsed || !SIGN_IN_PAGES.workbuddy(parsed) || parsed.username || parsed.password) {
             return browserFailed();

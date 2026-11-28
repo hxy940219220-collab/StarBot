@@ -788,7 +788,11 @@
     -webkit-app-region: drag;
   }
 
-  .app-window > .app-frame-edge > .window-page .skills-marketplace-topbar :is(button, a, .page-header-back, .page-header-parent) {
+  .app-window
+    > .app-frame-edge
+    > .window-page
+    .skills-marketplace-topbar
+    :is(button, a, .page-header-back, .page-header-parent) {
     pointer-events: auto;
     -webkit-app-region: no-drag;
   }
@@ -1024,6 +1028,10 @@
 
 .settings-page-nav-group .settings-modal-nav {
   gap: var(--openbot-space-0-5);
+}
+
+.settings-page-nav-group .settings-modal-nav > .settings-modal-nav-heading:first-child {
+  margin-top: var(--openbot-space-1);
 }
 
 .settings-page-nav-group .settings-modal-nav-item,

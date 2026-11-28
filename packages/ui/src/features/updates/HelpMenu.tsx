@@ -44,7 +44,9 @@ export function HelpMenu(props: HelpMenuProps) {
             <BookOpen class="agent-context-icon size-4" aria-hidden="true" />
             <span>使用指南</span>
           </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => (props.onStartOnboardingTour ? props.onStartOnboardingTour() : props.onOpenGuides())}>
+          <DropdownMenu.Item
+            onSelect={() => (props.onStartOnboardingTour ? props.onStartOnboardingTour() : props.onOpenGuides())}
+          >
             <Sparkles class="agent-context-icon size-4" aria-hidden="true" />
             <span>新手指引</span>
           </DropdownMenu.Item>

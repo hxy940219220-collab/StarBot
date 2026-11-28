@@ -55,5 +55,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "Kan de gedeelde agent niet lezen. Probeer opnieuw.",
   "mobile.link.template.error.unsupported":
     "Deze server kan geen gedeelde agents toevoegen. Werk StarBot bij op de computer waarop de server draait.",
-
 } as const satisfies PartialTranslation<typeof source>;

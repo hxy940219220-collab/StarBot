@@ -48,5 +48,4 @@ export const messages = {
   "error.crm.off":
     "CRM jest wyłączony. Właściciel lub administrator może go włączyć w Ustawieniach serwera > Eksperymentalne.",
   "error.crm.settingsSaveFailed": "StarBot nie może zapisać ustawienia CRM na tym serwerze.",
-
 } as const satisfies PartialTranslation<typeof source>;

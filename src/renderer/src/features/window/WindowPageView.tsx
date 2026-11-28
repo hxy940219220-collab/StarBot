@@ -31,8 +31,8 @@ export function WindowPageView() {
         <Show
           when={settingsKind() ? null : usage.state.serverId}
           fallback={
-            <Show when={settingsKind()} keyed fallback={<SkillsMarketplace />}>
-              {(kind) => <SettingsPage kind={kind} />}
+            <Show when={settingsKind()} fallback={<SkillsMarketplace />}>
+              {(kind) => <SettingsPage kind={kind()} />}
             </Show>
           }
         >

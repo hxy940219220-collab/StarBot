@@ -53,5 +53,4 @@ export const messages = {
   "computerUse.help.revealFailed": "Kan de app niet tonen in Finder.",
   "computerUse.help.dragFailed": "Kan de app niet slepen.",
   "computerUse.highlight.working": "StarBot werkt in {title}",
-
 } as const satisfies PartialTranslation<typeof source>;

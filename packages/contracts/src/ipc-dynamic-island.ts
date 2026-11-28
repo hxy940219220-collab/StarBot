@@ -35,7 +35,7 @@ export type SetDynamicIslandPreferenceInput = DynamicIslandPreference;
 export const DEFAULT_DYNAMIC_ISLAND_PREFERENCE = {
   enabled: true,
   hapticsEnabled: true,
-  idleVisible: true,
+  idleVisible: false,
   additionalDisplaysEnabled: true,
   widthPercent: 100,
   heightPercent: 100,
@@ -121,8 +121,19 @@ export interface DynamicIslandFailureItem {
   detail: string | null;
 }
 
+export interface DynamicIslandRecordingState {
+  phase: "preparing" | "requesting" | "recording" | "transcribing";
+  elapsedSeconds: number;
+  liveText: string;
+  levels: number[];
+  agent: DynamicIslandAgentIdentity | null;
+}
+
 interface DynamicIslandPresentationBase {
   serverId: string;
+  activeAgent?: DynamicIslandAgentIdentity | null | undefined;
+  agents?: DynamicIslandAgentIdentity[] | undefined;
+  recording?: DynamicIslandRecordingState | null | undefined;
 }
 
 export type DynamicIslandPresentation =
@@ -145,8 +156,24 @@ export type DynamicIslandPresentation =
 export type DynamicIslandAction =
   | { type: "open-app" }
   | { type: "open-agent"; serverId: string; agentId: string }
+  | { type: "select-agent"; serverId: string; agentId: string }
   | { type: "open-message"; serverId: string; agentId: string; messageId: string }
-  | { type: "send-message"; serverId: string; agentId: string; text: string; clientMessageId: string }
+  | {
+      type: "send-message";
+      serverId: string;
+      agentId: string;
+      text: string;
+      clientMessageId: string;
+      attachmentDraftIds?: string[] | undefined;
+    }
+  | {
+      type: "drop-feed";
+      serverId: string;
+      agentId: string;
+      text: string;
+      attachmentDraftIds: string[];
+      clientMessageId: string;
+    }
   | { type: "stop-agent"; serverId: string; agentId: string; turnId: string }
   | { type: "open-failure"; serverId: string; agentId: string; turnId: string }
   | { type: "dismiss-failure"; serverId: string; agentId: string; turnId: string }
@@ -237,8 +264,36 @@ export function isDynamicIslandNotchSize(value: unknown): value is DynamicIsland
   return isDynamicRecord(value) && isPositiveFiniteNumber(value.width) && isPositiveFiniteNumber(value.height);
 }
 
+function isRecordingState(value: unknown): value is DynamicIslandRecordingState {
+  return (
+    isDynamicRecord(value) &&
+    (value.phase === "preparing" ||
+      value.phase === "requesting" ||
+      value.phase === "recording" ||
+      value.phase === "transcribing") &&
+    isNumber(value.elapsedSeconds) &&
+    Number.isFinite(value.elapsedSeconds) &&
+    value.elapsedSeconds >= 0 &&
+    isString(value.liveText) &&
+    value.liveText.length <= 1_200 &&
+    Array.isArray(value.levels) &&
+    value.levels.length <= 32 &&
+    value.levels.every((lv) => isNumber(lv) && Number.isFinite(lv)) &&
+    (value.agent === null || isAgentIdentity(value.agent))
+  );
+}
+
 export function isDynamicIslandPresentation(value: unknown): value is DynamicIslandPresentation {
   if (!isDynamicRecord(value) || !isShortString(value.serverId, 160)) return false;
+  if (value.activeAgent !== undefined && value.activeAgent !== null && !isAgentIdentity(value.activeAgent))
+    return false;
+  if (
+    value.agents !== undefined &&
+    (!Array.isArray(value.agents) || value.agents.length > 32 || !value.agents.every(isAgentIdentity))
+  ) {
+    return false;
+  }
+  if (value.recording !== undefined && value.recording !== null && !isRecordingState(value.recording)) return false;
   if (value.mode === "idle") return true;
   if (value.mode === "working") {
     return Array.isArray(value.working) && value.working.length <= 3 && value.working.every(isWorkingItem);
@@ -255,12 +310,27 @@ export function isDynamicIslandAction(value: unknown): value is DynamicIslandAct
   if (!isDynamicRecord(value) || !isString(value.type)) return false;
   if (value.type === "open-app") return true;
   if (!isShortString(value.serverId, 160) || !isShortString(value.agentId, 160)) return false;
-  if (value.type === "open-agent") return true;
+  if (value.type === "open-agent" || value.type === "select-agent") return true;
   if (value.type === "open-message") return isShortString(value.messageId, 160);
   if (value.type === "send-message") {
     return (
       isShortString(value.text, INPUT_LIMITS.directMessageText) &&
       value.text.trim().length > 0 &&
+      isShortString(value.clientMessageId, INPUT_LIMITS.identifier) &&
+      (value.attachmentDraftIds === undefined ||
+        (Array.isArray(value.attachmentDraftIds) &&
+          value.attachmentDraftIds.length <= INPUT_LIMITS.attachments &&
+          value.attachmentDraftIds.every((id) => isShortString(id, INPUT_LIMITS.identifier))))
+    );
+  }
+  if (value.type === "drop-feed") {
+    return (
+      isString(value.text) &&
+      value.text.length <= INPUT_LIMITS.directMessageText &&
+      Array.isArray(value.attachmentDraftIds) &&
+      value.attachmentDraftIds.length <= INPUT_LIMITS.attachments &&
+      value.attachmentDraftIds.every((id) => isShortString(id, INPUT_LIMITS.identifier)) &&
+      (value.text.trim().length > 0 || value.attachmentDraftIds.length > 0) &&
       isShortString(value.clientMessageId, INPUT_LIMITS.identifier)
     );
   }

@@ -6,6 +6,7 @@ import { desktopAnalytics } from "../../../analytics";
 import { unlockCompletionSound } from "../../../completion-sound";
 import { playVoiceLimitStop, playVoiceLimitWarning } from "../../../voice-limit-sound";
 import { appendVoiceTranscript, encodePcm16, recordingToSamples, recordingToWav } from "../../../voice-recording";
+import { patchVoiceIslandState, publishVoiceIslandState } from "../../dynamic-island/voice-island-bridge";
 import { forgetDictatedMessage, noteDictatedMessage, stopSpokenReply } from "../../speech/speech-replies";
 import { EMPTY_DRAFT } from "../composer-draft";
 import { composerDraftKey } from "../conversation-keys";
@@ -108,6 +109,42 @@ interface VoiceThreadHooks {
 }
 
 export function createVoiceStore(deps: VoiceStoreDeps) {
+  const rawSetPhase = deps.setVoicePhase;
+  const rawSetElapsed = deps.setVoiceElapsedSeconds;
+  const rawSetLiveTranscript = deps.setVoiceLiveTranscript;
+  const rawSetLevels = deps.setVoiceLevels;
+
+  deps = {
+    ...deps,
+    setVoicePhase: (phase) => {
+      rawSetPhase(phase);
+      if (phase === "idle") {
+        publishVoiceIslandState(null);
+      } else {
+        publishVoiceIslandState({
+          phase,
+          elapsedSeconds: deps.voiceElapsedSeconds(),
+          liveText: "",
+          levels: [],
+          agentId: resources.voiceAgentId ?? conversationOwnerId(deps.props) ?? null,
+          serverId: resources.voiceServerId ?? deps.props.server?.id ?? "local",
+        });
+      }
+    },
+    setVoiceElapsedSeconds: (seconds) => {
+      rawSetElapsed(seconds);
+      patchVoiceIslandState({ elapsedSeconds: seconds });
+    },
+    setVoiceLiveTranscript: (transcript) => {
+      rawSetLiveTranscript(transcript);
+      patchVoiceIslandState({ liveText: transcript?.text ?? "" });
+    },
+    setVoiceLevels: (levels) => {
+      rawSetLevels(levels);
+      patchVoiceIslandState({ levels: levels.slice(-8) });
+    },
+  };
+
   const { resources } = deps;
   let preparingModelId: VoiceModelId | null = null;
   let stoppedAtLimit = false;

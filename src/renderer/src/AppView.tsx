@@ -207,10 +207,7 @@ export function AppAccessGate() {
         />
       </Show>
       <Show when={splashPreviewOpen()}>
-        <div
-          role="presentation"
-          style={{ position: "fixed", inset: "0", "z-index": "9999" }}
-        >
+        <div role="presentation" style={{ position: "fixed", inset: "0", "z-index": "9999" }}>
           <AppLoadingScreen
             label="开屏盲盒动画预览"
             title="StarBot · 星友"

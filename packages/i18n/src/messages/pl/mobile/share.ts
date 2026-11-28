@@ -28,5 +28,4 @@ export const messages = {
 
   "mobile.share.extension.unconfirmed": "Serwer nie potwierdził wiadomości. Sprawdź czat, zanim wyślesz ją ponownie.",
   "mobile.share.extension.openApp": "Otwórz StarBot",
-
 } as const satisfies PartialTranslation<typeof source>;

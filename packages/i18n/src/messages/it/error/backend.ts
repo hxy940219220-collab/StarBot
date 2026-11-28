@@ -536,5 +536,4 @@ export const messages = {
 
   "error.backend.taskStartFailed":
     "StarBot non è riuscito ad avviare l'attività. Esegui invece il lavoro in questo turno.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -91,5 +91,4 @@ export const messages = {
   "skill.marketplace.confirmAgents": "الوكلاء: {agents}.",
   "skill.marketplace.limitReason": "يمكن أن يملك الوكيل حتى {limit} مهارة.",
   "skill.marketplace.cannotRemove": "لا يمكن لـ StarBot إزالة مهارة مدمجة أو مهارة لم يثبّتها.",
-
 } as const satisfies PartialTranslation<typeof source>;

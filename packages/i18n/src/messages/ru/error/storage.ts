@@ -5,5 +5,4 @@ export const messages = {
   "error.storage.unsupported": "Этот сервер не поддерживает хранилище.",
   "error.storage.agentMissing": "Агента не существует.",
   "error.storage.unreadableFile": "StarBot не может прочитать {path}. Файл повреждён.",
-
 } as const satisfies PartialTranslation<typeof source>;

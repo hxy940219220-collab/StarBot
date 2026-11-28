@@ -370,11 +370,13 @@ export function createProviderRuntimeStore(
         if (providerUpdateOfferClosed(update.provider, update.availableVersion)) continue;
         const curMajor = Number.parseInt((update.runtime.version ?? "").replace(/^v/iu, ""), 10);
         const nextMajor = Number.parseInt((update.availableVersion ?? "").replace(/^v/iu, ""), 10);
-        const isMinorOrPatch =
-          Number.isFinite(curMajor) && Number.isFinite(nextMajor) && nextMajor <= curMajor;
+        const isMinorOrPatch = Number.isFinite(curMajor) && Number.isFinite(nextMajor) && nextMajor <= curMajor;
         // Prefer silent background update for StarBot-managed runtimes without bothering the user with popups
         if (update.runtime.phase === "ready" && isDownloadableProvider(update.provider) && api()) {
-          void api()?.download(update.provider).then((snap) => applyFrom(api()!, snap)).catch(() => undefined);
+          void api()
+            ?.download(update.provider)
+            .then((snap) => applyFrom(api()!, snap))
+            .catch(() => undefined);
           continue;
         }
         // Suppress frequent minor/patch update toast reminders (e.g. v2.4.1 -> v2.4.2)

@@ -19,12 +19,15 @@ import {
 import { avatarSeedForFace, ZODIAC_AVATAR_LIST } from "@openbot/ui/bloub-avatar";
 import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
 import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
-import tourCompanionAnim from "./assets/tour-companion.webp";
-import tourForwardAnim from "./assets/tour-forward.webp";
-import tourQuickAskAnim from "./assets/tour-quick-ask.webp";
 import { Portal } from "@solidjs/web";
-import { createMemo, createSignal, For, Show } from "solid-js";
+import { createEffect, createMemo, createSignal, For, Show } from "solid-js";
 import { actionToast } from "../../action-toast";
+import tourChatActionsAnim from "./assets/tour-chat-actions.webp";
+import tourCompanionAnim from "./assets/tour-companion.webp";
+import tourCreateBotAnim from "./assets/tour-create-bot.webp";
+import tourForwardAnim from "./assets/tour-forward.webp";
+import tourGroupChatAnim from "./assets/tour-group-chat.webp";
+import tourSelectionAskAnim from "./assets/tour-selection-ask.webp";
 
 const GUIDE_MASCOT = {
   id: "starbot-guide-mascot",
@@ -136,9 +139,7 @@ const GUIDE_SECTIONS: readonly GuideSection[] = [
           "如果暂时没想好怎么写，直接点击页面底部的「收件箱助手 / 行程规划师 / 写作搭档 / 学习教练」等预设卡片，即可自动填入成熟人设并在此基础上微调。",
       },
     ],
-    tips: [
-      "创建完成后，你依然可以随时在右侧「星友设定 → 名称 / 角色身份」中修改它的称呼与职责说明，失焦自动保存。",
-    ],
+    tips: ["创建完成后，你依然可以随时在右侧「星友设定 → 名称 / 角色身份」中修改它的称呼与职责说明，失焦自动保存。"],
   },
   {
     id: "chat-skills",
@@ -160,19 +161,17 @@ const GUIDE_SECTIONS: readonly GuideSection[] = [
           "在聊天框输入「/」或点击「+ → 技能」可插入已安装的技能胶囊（如 superpowers、frontend-design、xlsx），让星友严格按专业工作流执行任务。",
       },
       {
-        title: "气泡快捷复制、中英文语音朗读与引用",
+        title: "长按 / 右键消息：引用回复、复制、转发与删除",
         detail:
-          "星友回复气泡正下方常驻「😊 表情回应」「↩ 引用」「📋 一键复制」快捷按钮；右键点击星友消息还可直接选择「朗读」，调用本机自然语音流畅朗读中英文回复。",
+          "长按（电脑端可右键）任意消息气泡即可弹出快捷操作菜单，支持引用回复、一键复制、语音朗读、单条转发，也可进入「多选 / 批量删除」（按住 Shift 连选整段）进行逐条/合并转发或一键清理。",
       },
       {
-        title: "微信式单条转发、逐条转发、合并转发与批量删除",
+        title: "划词快速追问与一键新建多星友群聊",
         detail:
-          "右键任意消息可点击「转发」一键发给其他星友协作；也可点击「多选 / 批量删除」（支持按住 Shift 连选整段对话），通过底部工具栏选择「逐条转发」「合并转发聊天记录」给其他星友，或一键批量删除！",
+          "在回复或文档中拖选任意字句，立即浮现快捷操作栏直接向当前星友追问、引用、解释或优化（跨页还可按 Shift + Space 随手问）；点击左侧「新建群聊」更能把多位星友拉进同一群聊，随时 @ 指定星友协同讨论。",
       },
     ],
-    tips: [
-      "进入批量选择模式后，按键盘 Esc 键可随时退出选择；也可以点击底部工具栏的「全选当前页」快速清理。",
-    ],
+    tips: ["进入批量选择模式后，按键盘 Esc 键可随时退出选择；也可以点击底部工具栏的「全选当前页」快速清理。"],
   },
   {
     id: "inspector-tune",
@@ -233,9 +232,7 @@ const GUIDE_SECTIONS: readonly GuideSection[] = [
           "无论是新建星友时，还是在聊天右侧「星友设定 → 模型」胶囊中，都可以随时为不同星友指定最擅长该领域的模型与推理档位。",
       },
     ],
-    tips: [
-      "若 WorkBuddy 或其他 Agent 点击连接后弹出浏览器登录页，完成扫码/授权后回到星友会自动变为绿灯「已连接」。",
-    ],
+    tips: ["若 WorkBuddy 或其他 Agent 点击连接后弹出浏览器登录页，完成扫码/授权后回到星友会自动变为绿灯「已连接」。"],
   },
   {
     id: "marketplace",
@@ -262,9 +259,7 @@ const GUIDE_SECTIONS: readonly GuideSection[] = [
           "在技能搜索框直接粘贴任意 GitHub 技能仓库链接即可实时解析安装；点击右上角「+ 添加技能」还能通过查找、拖拽上传 .zip/文件夹或让星友帮你创作专属技能。",
       },
     ],
-    tips: [
-      "点击任意技能卡片即可预览完整中文导读与原版英文指令，点击「+ 添加」即可勾选要分配给哪几只星友。",
-    ],
+    tips: ["点击任意技能卡片即可预览完整中文导读与原版英文指令，点击「+ 添加」即可勾选要分配给哪几只星友。"],
   },
   {
     id: "schedule-usage",
@@ -286,9 +281,7 @@ const GUIDE_SECTIONS: readonly GuideSection[] = [
           "打开左侧「算力看板」（图标似柱状图），顶部支持切换「全部星友总览」或筛选任意「单个星友」，清晰查看近 30 天每日 Token 趋势柱状图、预估 API 花费、对话轮次以及具体调用的驱动模型占比。",
       },
     ],
-    tips: [
-      "在右侧「星友设定 → 用量」中也可以快速瞥一眼当前星友近 30 天的消耗摘要，并一键跳转全屏看板。",
-    ],
+    tips: ["在右侧「星友设定 → 用量」中也可以快速瞥一眼当前星友近 30 天的消耗摘要，并一键跳转全屏看板。"],
   },
 ];
 
@@ -305,13 +298,7 @@ export function StarBotGuideModal(props: {
     const q = searchQuery().trim().toLowerCase();
     if (!q) return GUIDE_SECTIONS;
     return GUIDE_SECTIONS.filter((sec) => {
-      const hay = [
-        sec.navTitle,
-        sec.title,
-        sec.subtitle,
-        ...sec.steps.flatMap((s) => [s.title, s.detail]),
-        ...sec.tips,
-      ]
+      const hay = [sec.navTitle, sec.title, sec.subtitle, ...sec.steps.flatMap((s) => [s.title, s.detail]), ...sec.tips]
         .join(" ")
         .toLowerCase();
       return hay.includes(q);
@@ -466,7 +453,9 @@ export function StarBotGuideModal(props: {
                     >
                       <ChevronLeft class="size-4" aria-hidden="true" />
                       <span>
-                        {currentIndex() > 0 ? `上一节：${filteredSections()[currentIndex() - 1]!.navTitle}` : "已是第一节"}
+                        {currentIndex() > 0
+                          ? `上一节：${filteredSections()[currentIndex() - 1]!.navTitle}`
+                          : "已是第一节"}
                       </span>
                     </button>
 
@@ -674,21 +663,65 @@ export function StarBotFeatureTourModal(props: {
 
   const slides = [
     {
-      anim: tourQuickAskAnim,
-      title: "划选文字，按 Shift + Space 随手问",
-      desc: "跨页面一键唤起悬浮窗，直接向星友提问或存入长期记忆。",
+      anim: tourCreateBotAnim,
+      title: "创建专属星座星友，定制形象与大脑",
+      desc: "从 12 星座软陶中挑选专属形象、起好名字并选择驱动模型，几秒打造你的第一个 AI 伙伴。",
+    },
+    {
+      anim: tourChatActionsAnim,
+      title: "长按或右键消息，引用、回复与删除",
+      desc: "在聊天中长按（电脑端可右键）任意气泡弹出快捷菜单，轻松引用回复、复制、多选或删除消息。",
+    },
+    {
+      anim: tourSelectionAskAnim,
+      title: "划词即问，选中文字快速追问星友",
+      desc: "拖选对话中的任意字句立即浮现快捷栏，直接追问、引用、解释或优化；跨页也可按 Shift + Space 随手问。",
+    },
+    {
+      anim: tourGroupChatAnim,
+      title: "一键新建群聊，和多位星友一起聊",
+      desc: "把不同专长的星友拉进同一个群聊，随时 @ 指定星友接力脑暴、分工完成复杂任务。",
     },
     {
       anim: tourForwardAnim,
       title: "多选聊天记录，一键合并转发",
-      desc: "像微信一样勾选多条对话，逐条或合并转发给另一只星友接力。",
+      desc: "像微信一样勾选多条对话，逐条或合并转发给另一只星友接力，也可以一键批量删除。",
     },
     {
       anim: tourCompanionAnim,
       title: "戳一戳软陶星友，随心切换性格",
-      desc: "轻触或点击触发专属软萌音效，支持温柔、毒舌、热血三种性格。",
+      desc: "轻触或连戳触发 12 星座专属软萌音效，支持随时切换温柔、毒舌、热血三种性格。",
     },
   ] as const;
+
+  createEffect(
+    () => props.open,
+    (isOpen) => {
+      if (!isOpen) return;
+      setStep(0);
+      void playKawaiiCue("drawer-open");
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          void playKawaiiCue("drawer-close");
+          props.onClose();
+        } else if (e.key === "ArrowRight") {
+          setStep((s) => {
+            if (s >= slides.length - 1) return s;
+            void playKawaiiCue("slide-next");
+            return s + 1;
+          });
+        } else if (e.key === "ArrowLeft") {
+          setStep((s) => {
+            if (s <= 0) return s;
+            void playKawaiiCue("slide-prev");
+            return s - 1;
+          });
+        }
+      };
+      window.addEventListener("keydown", onKeyDown);
+      return () => window.removeEventListener("keydown", onKeyDown);
+    },
+  );
 
   return (
     <Show when={props.open}>
@@ -702,6 +735,9 @@ export function StarBotFeatureTourModal(props: {
             onClick={(e) => e.stopPropagation()}
           >
             <div class="starbot-tour-video-hero">
+              <span class="starbot-tour-step-pill" aria-hidden="true">
+                {step() + 1} / {slides.length}
+              </span>
               <button
                 type="button"
                 class="starbot-tour-floating-close"
@@ -713,12 +749,7 @@ export function StarBotFeatureTourModal(props: {
               <For each={slides}>
                 {(slide, idx) => (
                   <Show when={step() === idx()}>
-                    <img
-                      class="starbot-tour-video"
-                      src={slide.anim}
-                      alt={slide.title}
-                      draggable={false}
-                    />
+                    <img class="starbot-tour-video" src={slide.anim} alt={slide.title} draggable={false} />
                   </Show>
                 )}
               </For>
@@ -731,11 +762,7 @@ export function StarBotFeatureTourModal(props: {
               </div>
 
               <div class="starbot-tour-minimal-footer">
-                <button
-                  type="button"
-                  class="starbot-tour-skip-link"
-                  onClick={() => props.onClose()}
-                >
+                <button type="button" class="starbot-tour-skip-link" onClick={() => props.onClose()}>
                   跳过引导
                 </button>
 
@@ -746,8 +773,9 @@ export function StarBotFeatureTourModal(props: {
                         type="button"
                         class={`starbot-tour-dot${step() === idx() ? " is-active" : ""}`}
                         aria-label={`第 ${idx() + 1} 步`}
+                        data-starbot-silent=""
                         onClick={() => {
-                          void playKawaiiCue("toggle-on");
+                          void playKawaiiCue(idx() > step() ? "slide-next" : "slide-prev");
                           setStep(idx());
                         }}
                       />
@@ -761,7 +789,11 @@ export function StarBotFeatureTourModal(props: {
                       type="button"
                       variant="ghost"
                       size="sm"
-                      onClick={() => setStep((s) => Math.max(0, s - 1))}
+                      data-starbot-silent=""
+                      onClick={() => {
+                        void playKawaiiCue("slide-prev");
+                        setStep((s) => Math.max(0, s - 1));
+                      }}
                     >
                       上一步
                     </Button>
@@ -772,6 +804,7 @@ export function StarBotFeatureTourModal(props: {
                       <Button
                         type="button"
                         size="sm"
+                        data-starbot-silent=""
                         onClick={() => {
                           void playKawaiiCue("success");
                           props.onClose();
@@ -784,8 +817,9 @@ export function StarBotFeatureTourModal(props: {
                     <Button
                       type="button"
                       size="sm"
+                      data-starbot-silent=""
                       onClick={() => {
-                        void playKawaiiCue("toggle-on");
+                        void playKawaiiCue("slide-next");
                         setStep((s) => Math.min(slides.length - 1, s + 1));
                       }}
                     >

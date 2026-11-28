@@ -17,6 +17,7 @@ import {
 import { TEAM_MESSAGE_CLIENT_ID_CAPABILITY } from "@openbot/contracts/team-protocol/current";
 import { isQueueEditRejected, TEAM_QUEUE_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/queue-edit-v1";
 import type { QuestionPromptComposerAnswer } from "@openbot/ui/components/QuestionPromptBubble";
+import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import {
   type ComposerPasteResult,
   type ComposerSelection,
@@ -849,7 +850,10 @@ export function createComposerActions(deps: ComposerActionsDeps) {
     steer = false,
   ): void {
     const onScreen = () => targetShown(target);
-    if (onScreen()) deps.followSentMessage();
+    if (onScreen()) {
+      deps.followSentMessage();
+      void playKawaiiCue("message-send");
+    }
     const queued = sendWaits(target);
     const send = deps.props.onSendMessage;
     const steerQueued = agentSteers() ? deps.props.onSteerQueuedMessage : deps.props.onSendQueuedMessageNow;

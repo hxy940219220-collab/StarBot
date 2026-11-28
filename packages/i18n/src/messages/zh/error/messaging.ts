@@ -7,8 +7,7 @@ export const messages = {
   "error.messaging.relayUnavailable": "星友无法在这台电脑上接收 Slack 事件。请登录，为这台电脑命名后重试。",
   "error.messaging.discordNotConnected": "该 Discord 服务器未连接。",
   "error.messaging.discordUnsupported": "这台电脑无法连接 Discord。",
-  "error.messaging.discordRelayUnavailable":
-    "星友无法在这台电脑上接收 Discord 事件。请登录，为这台电脑命名后重试。",
+  "error.messaging.discordRelayUnavailable": "星友无法在这台电脑上接收 Discord 事件。请登录，为这台电脑命名后重试。",
   "error.messaging.discordRolesUnsupported": "星友暂时无法列出 Discord 角色，请稍后重试。",
   "error.messaging.telegramNotConnected": "该 Telegram 聊天未连接。",
   "error.messaging.telegramUnsupported": "这台电脑无法连接 Telegram。",

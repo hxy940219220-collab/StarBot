@@ -33,5 +33,4 @@ export const messages = {
     "Claude respondió a la velocidad estándar. Claude Code no pudo usar el modo rápido en este turno.",
   "status.provider.claudeOwnApiKey":
     "Claude Code está configurado para usar una clave de API de Anthropic. Anthropic cobra cada solicitud al crédito de API de la clave, no a tu plan de Claude. Para usar tu plan, quita la clave de la configuración de Claude Code o de las variables de entorno y luego reinicia StarBot.",
-
 } as const satisfies PartialTranslation<typeof source>;

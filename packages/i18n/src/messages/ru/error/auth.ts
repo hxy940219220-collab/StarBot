@@ -37,5 +37,4 @@ export const messages = {
 
   "error.auth.deliveryUnknown":
     "StarBot не смог подтвердить, отправлен ли код входа. Проверьте доставку, прежде чем отправлять снова.",
-
 } as const satisfies PartialTranslation<typeof source>;

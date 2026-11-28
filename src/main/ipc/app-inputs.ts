@@ -43,6 +43,7 @@ import type {
   ReplaceHostedSiteInput,
   SaveSetupInput,
   SetAgentDockInteractiveInput,
+  SetAgentDockShortcutInput,
   SetAgentDockXWaylandInput,
   SetAnalyticsPreferenceInput,
   SetAppAppearancePreferenceInput,
@@ -68,6 +69,7 @@ import {
   isAgentDockInputRegion,
   isAgentDockInteractive,
   isAgentDockPresentation,
+  isAgentDockShortcut,
   isAgentDockXWayland,
   isAgentMemoryLimit,
   isAgentModel,
@@ -370,6 +372,11 @@ export function parseAgentDockXWayland(input: unknown): SetAgentDockXWaylandInpu
   throw new Error("Agent dock XWayland state is required.");
 }
 
+export function parseAgentDockShortcut(input: unknown): SetAgentDockShortcutInput {
+  if (isAgentDockShortcut(input)) return input;
+  throw new Error("Agent dock shortcut is invalid.");
+}
+
 export function parseAgentDockInputRegion(input: unknown): AgentDockInputRect[] {
   if (isAgentDockInputRegion(input)) return input;
   throw new Error("Agent dock input region is invalid.");
@@ -541,11 +548,7 @@ export function parseImportSkillPackage(input: unknown): ImportLocalSkillPackage
     input.bundleBytes instanceof Uint8Array
       ? input.bundleBytes
       : ArrayBuffer.isView(input.bundleBytes)
-        ? new Uint8Array(
-            input.bundleBytes.buffer,
-            input.bundleBytes.byteOffset,
-            input.bundleBytes.byteLength,
-          )
+        ? new Uint8Array(input.bundleBytes.buffer, input.bundleBytes.byteOffset, input.bundleBytes.byteLength)
         : undefined;
   if (!draftId && !bundleBytes) throw new Error("Skill package requires draftId or bundleBytes.");
   const agentIds = Array.isArray(input.agentIds)

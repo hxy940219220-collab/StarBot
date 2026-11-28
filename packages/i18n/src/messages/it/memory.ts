@@ -43,7 +43,6 @@ export const messages = {
   "memory.clearDescription":
     "StarBot rimuoverà definitivamente tutte le {total} memorie salvate per {name}. I messaggi originali resteranno nella cronologia della conversazione.",
 
-
   "memory.loadFailed": "Impossibile caricare le memorie.",
   "memory.saveFailed": "Impossibile salvare la memoria.",
   "memory.updateFailed": "Impossibile aggiornare la memoria.",

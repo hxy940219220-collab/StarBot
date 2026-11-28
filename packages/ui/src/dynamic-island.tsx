@@ -112,6 +112,7 @@ export function DynamicIsland(props: DynamicIslandProps): JSX.Element {
   let pointerInside = false;
   let initialHoverReady = !local.suppressInitialHover;
   let hoverOpenedState: Exclude<DynamicIslandViewState, "compact"> | null = null;
+  let hoverExpandedAt = 0;
   const [isHovering, setHoverSignal] = createSignal(false);
   function setIsHovering(hovering: boolean): void {
     setHoverSignal(hovering);
@@ -140,6 +141,10 @@ export function DynamicIsland(props: DynamicIslandProps): JSX.Element {
 
   function toggle(reason: "pointer" | "keyboard"): void {
     clearHoverTimers();
+    if (isExpanded() && hoverOpenedState === "expanded" && performance.now() - hoverExpandedAt < 240) {
+      hoverOpenedState = null;
+      return;
+    }
     hoverOpenedState = null;
     setState(isExpanded() ? "compact" : "expanded", reason);
   }
@@ -171,6 +176,7 @@ export function DynamicIsland(props: DynamicIslandProps): JSX.Element {
       hoverExpandTimer = undefined;
       if (!isHovering() || viewState() === "expanded") return;
       hoverOpenedState = "expanded";
+      hoverExpandedAt = performance.now();
       setState("expanded", "hover");
     }, HOVER_EXPAND_DELAY);
   }
@@ -297,11 +303,19 @@ export function DynamicIsland(props: DynamicIslandProps): JSX.Element {
     const resetHover = () => {
       clearHoverTimers();
       pointerInside = false;
+      const openedByHover = hoverOpenedState;
       hoverOpenedState = null;
       setIsHovering(false);
+      if (openedByHover && viewState() === openedByHover) {
+        setState("compact", "hover-exit");
+      }
     };
     window.addEventListener("blur", resetHover);
-    return () => window.removeEventListener("blur", resetHover);
+    window.addEventListener("starbot-cursor-left-window", resetHover);
+    return () => {
+      window.removeEventListener("blur", resetHover);
+      window.removeEventListener("starbot-cursor-left-window", resetHover);
+    };
   });
   onCleanup(() => {
     clearHoverTimers();

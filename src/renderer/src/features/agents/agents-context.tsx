@@ -319,9 +319,7 @@ const Agents = createSimpleContext({
         if (!codexReady || hermesReady) return null;
         const codexModels = modelOptions().filter((m) => m.provider === "codex" && m.listing !== "kept");
         if (codexModels.length === 0) return null;
-        const broken = agentList().filter(
-          (a) => a.provider === "hermes" && !healedHermesGptIds.has(a.id),
-        );
+        const broken = agentList().filter((a) => a.provider === "hermes" && !healedHermesGptIds.has(a.id));
         return broken.length > 0 ? { broken, codexModels } : null;
       },
       (target) => {

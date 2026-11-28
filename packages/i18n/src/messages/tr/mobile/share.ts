@@ -28,5 +28,4 @@ export const messages = {
 
   "mobile.share.extension.unconfirmed": "Sunucu mesajı onaylamadı. Yeniden göndermeden önce sohbete bak.",
   "mobile.share.extension.openApp": "StarBot'u aç",
-
 } as const satisfies PartialTranslation<typeof source>;

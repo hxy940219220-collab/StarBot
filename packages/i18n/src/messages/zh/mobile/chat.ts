@@ -378,15 +378,13 @@ export const messages = {
   "mobile.chat.browserSecret.submitFailed": "无法完成该请求，请检查网络后重试。",
   "mobile.chat.browserSecret.vaultSkip.agentScript":
     "由于助手在此页面上运行了脚本，星友没有使用你保存的登录信息。如需使用，请让助手重新加载页面后再试一次。",
-  "mobile.chat.browserSecret.vaultSkip.fieldKind":
-    "由于助手在页面上选择了错误的字段，星友没有使用你保存的登录信息。",
+  "mobile.chat.browserSecret.vaultSkip.fieldKind": "由于助手在页面上选择了错误的字段，星友没有使用你保存的登录信息。",
   "mobile.chat.browserSecret.vaultSkip.loginChoice":
     "由于助手没有选择此网站已保存的任何一个登录信息，星友没有使用已保存的登录信息。请告诉助手要使用哪个账户。",
   "mobile.chat.browserSecret.vaultSkip.noPassword": "由于你保存的登录信息中没有此网站的密码，星友没有使用它。",
   "mobile.chat.browserSecret.vaultSkip.noAuthenticatorKey":
     "由于你保存的登录信息中没有身份验证器密钥，星友没有使用它。",
-  "mobile.chat.browserSecret.vaultSkip.vaultUnreadable":
-    "由于无法读取你的密码管理器，星友没有使用已保存的登录信息。",
+  "mobile.chat.browserSecret.vaultSkip.vaultUnreadable": "由于无法读取你的密码管理器，星友没有使用已保存的登录信息。",
   "mobile.chat.browserSecret.submit": "提交",
   "mobile.chat.browserSecret.takeOver": "接管",
   "mobile.chat.starter.title": "我们先一起做什么？",

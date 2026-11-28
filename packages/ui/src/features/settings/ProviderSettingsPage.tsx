@@ -106,10 +106,7 @@ import { useText } from "../../text";
 import { toast } from "../../toast";
 import { AccountUsageWindowList } from "../account/AccountUsageDetails";
 import type { AccountUsageProviderRow, AccountUsageWindowRow } from "../account/account-usage-view";
-import {
-  THIRD_PARTY_API_PRESETS,
-  type ThirdPartyApiPresetId,
-} from "../custom-providers/custom-provider-presets";
+import { THIRD_PARTY_API_PRESETS, type ThirdPartyApiPresetId } from "../custom-providers/custom-provider-presets";
 import { type DetectedProvider, detectedLocation } from "../custom-providers/detected-providers";
 import { providerUpdateAvailable, providerVersionLabel } from "../provider-updates/provider-update";
 import { DangerZone, DetailHeader, type IntegrationStatus } from "./IntegrationLayout";
@@ -427,7 +424,8 @@ function ProviderList(props: ProviderSettingsPageProps & { onOpen: (id: PageId) 
               </span>
             </div>
             <p class="starbot-api-hub-desc">
-              直接扫描并接入本机已安装或已订阅的 Agent（支持 GPT、Grok、Claude、Gemini、Pi、Hermes、Muse、DeepSeek、OpenCode、OpenClaw、WorkBuddy）。
+              直接扫描并接入本机已安装或已订阅的 Agent（支持
+              GPT、Grok、Claude、Gemini、Pi、Hermes、Muse、DeepSeek、OpenCode、OpenClaw、WorkBuddy）。
             </p>
           </div>
           <div class="starbot-api-hub-actions">
@@ -464,13 +462,7 @@ function ProviderList(props: ProviderSettingsPageProps & { onOpen: (id: PageId) 
               <label class="server-settings-search">
                 <Search aria-hidden="true" />
                 <span class="sr-only">搜索本地 Agent</span>
-                <Input
-                  size="sm"
-                  type="search"
-                  placeholder="搜索 Agent..."
-                  value={query()}
-                  onValueChange={setQuery}
-                />
+                <Input size="sm" type="search" placeholder="搜索 Agent..." value={query()} onValueChange={setQuery} />
               </label>
             </>
           }
@@ -641,15 +633,9 @@ function ProviderList(props: ProviderSettingsPageProps & { onOpen: (id: PageId) 
                   type="button"
                   class="starbot-inline-preset-card"
                   disabled={props.disabled || !engineReady()}
-                  onClick={() =>
-                    props.onSelectApiPreset ? props.onSelectApiPreset(preset.id) : openCustomApi()
-                  }
+                  onClick={() => (props.onSelectApiPreset ? props.onSelectApiPreset(preset.id) : openCustomApi())}
                 >
-                  <span
-                    class="starbot-api-preset-badge"
-                    style={{ background: preset.accent }}
-                    aria-hidden="true"
-                  >
+                  <span class="starbot-api-preset-badge" style={{ background: preset.accent }} aria-hidden="true">
                     {preset.badge}
                   </span>
                   <span class="starbot-api-preset-info">

@@ -1,6 +1,6 @@
 import { agentProviderDescriptor, isKnownAgentProvider } from "@openbot/contracts/agent-providers";
 import { DEFAULT_AGENT_ACCESS } from "@openbot/contracts/ipc";
-import { ConfirmDialog, Sparkles } from "@openbot/ui";
+import { ConfirmDialog } from "@openbot/ui";
 import { AgentFolderDropOverlay, createAgentFolders } from "@openbot/ui/features/conversation/AgentFolders";
 import { MessageSelectionActions } from "@openbot/ui/features/conversation/SelectionActions";
 import { CoveredVoiceRecording } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
@@ -16,11 +16,7 @@ import { ConversationThread } from "./ConversationThread";
 import { ConversationTimeline } from "./ConversationTimeline";
 import { ConversationViewScopeContext, createConversationViewScope } from "./conversation-scope";
 import type { ConversationProps } from "./conversation-types";
-import {
-  setStarbotInspectorOpen,
-  StarBotInspectorPanel,
-  starbotInspectorOpen,
-} from "./StarBotInspectorPanel";
+import { StarBotInspectorPanel, setStarbotInspectorOpen, starbotInspectorOpen } from "./StarBotInspectorPanel";
 import { conversationOwnerId } from "./stores/composer-store";
 
 function isDragLeavingConversation(currentTarget: HTMLElement, relatedTarget: EventTarget | null): boolean {
@@ -65,15 +61,6 @@ export function ConversationView(props: ConversationProps) {
         !browserSidebarOpen() &&
         !sideThreadOpen() &&
         starbotInspectorOpen(),
-    );
-  const canReopenInspector = () =>
-    Boolean(
-      isAgentChat() &&
-        !sidePanelOpen() &&
-        !filePreviewOpen() &&
-        !browserSidebarOpen() &&
-        !sideThreadOpen() &&
-        !starbotInspectorOpen(),
     );
   const sidePanelUsesBrowserWidth = () => {
     const mode = activeRightPanel();
@@ -164,21 +151,7 @@ export function ConversationView(props: ConversationProps) {
 
         <ConversationPanels onOpenUsage={props.onOpenUsage} />
         <Show when={showInspector()}>
-          <StarBotInspectorPanel
-            onClose={() => setStarbotInspectorOpen(false)}
-            onOpenUsage={props.onOpenUsage}
-          />
-        </Show>
-        <Show when={canReopenInspector()}>
-          <button
-            type="button"
-            class="starbot-inspector-reopen"
-            aria-label="展开星友设定"
-            onClick={() => setStarbotInspectorOpen(true)}
-          >
-            <Sparkles class="size-3.5" aria-hidden="true" />
-            <span>星友设定</span>
-          </button>
+          <StarBotInspectorPanel onClose={() => setStarbotInspectorOpen(false)} onOpenUsage={props.onOpenUsage} />
         </Show>
         <Show when={props.workspaceCovered && voicePhase() === "recording"}>
           <Portal>

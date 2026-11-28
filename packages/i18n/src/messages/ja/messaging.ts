@@ -24,5 +24,4 @@ export const messages = {
 
   "messaging.discordHelp.not_linked":
     "この Discord サーバーはこの StarBot サーバーにリンクされていません。リンクするには「再接続」を選択してください。",
-
 } as const satisfies PartialTranslation<typeof source>;

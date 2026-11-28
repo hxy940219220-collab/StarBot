@@ -11,10 +11,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  max-width: 480px;
+  gap: 12px;
+  max-width: 380px;
   width: 100%;
-  padding: 30px 28px 26px;
+  padding: 28px 24px 26px;
   border: 1px solid color-mix(in srgb, var(--openbot-accent) 16%, var(--openbot-border));
   border-radius: 26px;
   background:
@@ -78,10 +78,14 @@
 
 .starbot-welcome-subtitle {
   margin: 0;
-  max-width: 390px;
-  font-size: 13.5px;
-  line-height: 1.65;
+  max-width: 320px;
+  font-size: 13px;
+  line-height: 1.55;
   color: var(--openbot-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   text-wrap: balance;
 }
 

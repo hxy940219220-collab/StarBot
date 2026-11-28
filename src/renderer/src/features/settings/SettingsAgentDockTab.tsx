@@ -1,9 +1,4 @@
-import {
-  AGENT_DOCK_SIZE_LIMITS,
-  type AgentDockDisplay,
-  type AgentDockDisplayInfo,
-  type AgentDockEdge,
-} from "@openbot/contracts/ipc";
+import { AGENT_DOCK_SIZE_LIMITS, type AgentDockDisplay, type AgentDockDisplayInfo } from "@openbot/contracts/ipc";
 import type { AppTextKey } from "@openbot/i18n";
 import {
   Item,
@@ -11,7 +6,6 @@ import {
   ItemContent,
   ItemDescription,
   ItemGroup,
-  ItemMedia,
   ItemTitle,
   Select,
   SelectContent,
@@ -20,21 +14,17 @@ import {
   SelectValue,
   SettingsSection,
   SliderField,
-  Switch,
   SwitchField,
 } from "@openbot/ui";
 import type { ComposerAgent } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
 import type { JSX } from "@solidjs/web";
-import { createMemo, createSignal, createUniqueId, For, onSettled, Show } from "solid-js";
+import { createMemo, createSignal, onSettled } from "solid-js";
 import { useI18n } from "../../i18n-context";
 import { usePlatform } from "../../platform";
 import { agentDockPort } from "../agent-dock/agent-dock-port";
 import {
   type AgentDockPlacement,
-  agentDockSeats,
   setAgentDockPreference,
-  setAgentDockSeats,
   useAgentDockPreference,
 } from "../agent-dock/agent-dock-preference";
 import { XWaylandRestartRow } from "./XWaylandRestartRow";
@@ -50,10 +40,15 @@ const PLACEMENT_LABEL = {
   window: "settings.agentDock.placement.window",
 } as const satisfies Record<AgentDockPlacement, AppTextKey>;
 
-const EDGE_LABEL = {
-  right: "settings.agentDock.edge.right",
-  left: "settings.agentDock.edge.left",
-} as const satisfies Record<AgentDockEdge, AppTextKey>;
+const SHORTCUT_CHOICES = ["Alt+Shift+S", "Alt+Space", "CommandOrControl+Shift+B", "off"] as const;
+type ShortcutChoice = (typeof SHORTCUT_CHOICES)[number];
+
+const SHORTCUT_LABELS: Record<ShortcutChoice, string> = {
+  "Alt+Shift+S": "⌥ + ⇧ + S（推荐）",
+  "Alt+Space": "⌥ + 空格",
+  "CommandOrControl+Shift+B": "⌘ + ⇧ + B",
+  off: "关闭快捷键",
+};
 
 export function SettingsAgentDockTab(props: { model: AgentDockSettingsModel; selectMount?: HTMLElement | undefined }) {
   const i18n = useI18n();
@@ -62,195 +57,92 @@ export function SettingsAgentDockTab(props: { model: AgentDockSettingsModel; sel
   const screenSupport = () =>
     preference().shown && preference().placement === "screen" ? platform.appInfo()?.aboveAppsSupport : undefined;
   const aboveApps = () => preference().shown && preference().placement === "screen";
-  const seats = createMemo(() => {
-    const server = props.model.server;
-    return server
-      ? agentDockSeats(server.id, () => props.model.agents.map((agent) => agent.id), props.model.hiddenAgentIds)
-      : [];
-  });
-
-  function setOnDock(serverId: string, agentId: string, onDock: boolean): void {
-    const current = seats();
-    setAgentDockSeats(
-      serverId,
-      onDock
-        ? [...current, { kind: "agent", id: agentId }]
-        : current.filter((seat) => seat.kind !== "agent" || seat.id !== agentId),
-    );
-  }
 
   return (
-    <>
-      <SettingsSection title={i18n.t("settings.agentDock.title")}>
-        <ItemGroup class="settings-modal-card">
-          <SwitchField
-            data-settings-row="settings.agentDock.show.title"
-            checked={preference().shown}
-            onChange={(shown) => setAgentDockPreference({ shown })}
-            label={i18n.t("settings.agentDock.show.title")}
-            description={i18n.t("settings.agentDock.show.description")}
-          />
-          <Item data-settings-row="settings.agentDock.placement.title" class="settings-modal-row">
-            <ItemContent>
-              <ItemTitle>{i18n.t("settings.agentDock.placement.title")}</ItemTitle>
-              <ItemDescription>{i18n.t("settings.agentDock.placement.description")}</ItemDescription>
-            </ItemContent>
-            <ItemActions>
-              <ChoiceSelect
-                value={preference().placement}
-                text={(placement) => i18n.t(PLACEMENT_LABEL[placement])}
-                choices={["screen", "window"]}
-                label={i18n.t("settings.agentDock.placement.title")}
-                disabled={!preference().shown}
-                mount={props.selectMount}
-                onChange={(placement) => setAgentDockPreference({ placement })}
-              />
-            </ItemActions>
-          </Item>
-          <XWaylandRestartRow
-            support={screenSupport()}
-            keys={{
-              title: "settings.agentDock.xwayland.title",
-              description: "settings.agentDock.xwayland.description",
-              unsupported: "settings.agentDock.xwayland.unsupported",
-              restart: "settings.agentDock.xwayland.restart",
-            }}
-            onRestart={() => agentDockPort().agentDock.setXWayland({ enabled: true })}
-          />
-          <Item data-settings-row="settings.agentDock.display.title" class="settings-modal-row">
-            <ItemContent>
-              <ItemTitle>{i18n.t("settings.agentDock.display.title")}</ItemTitle>
-              <ItemDescription>{i18n.t("settings.agentDock.display.description")}</ItemDescription>
-            </ItemContent>
-            <ItemActions>
-              <DisplaySelect
-                value={preference().display}
-                disabled={!aboveApps()}
-                mount={props.selectMount}
-                onChange={(display) => setAgentDockPreference({ display })}
-              />
-            </ItemActions>
-          </Item>
-          <Item data-settings-row="settings.agentDock.edge.title" class="settings-modal-row">
-            <ItemContent>
-              <ItemTitle>{i18n.t("settings.agentDock.edge.title")}</ItemTitle>
-              <ItemDescription>{i18n.t("settings.agentDock.edge.description")}</ItemDescription>
-            </ItemContent>
-            <ItemActions>
-              <ChoiceSelect
-                value={preference().edge}
-                text={(edge) => i18n.t(EDGE_LABEL[edge])}
-                choices={["right", "left"]}
-                label={i18n.t("settings.agentDock.edge.title")}
-                disabled={!aboveApps()}
-                mount={props.selectMount}
-                onChange={(edge) => setAgentDockPreference({ edge })}
-              />
-            </ItemActions>
-          </Item>
-          <div data-settings-row="settings.agentDock.size.title" class="settings-agent-dock-size">
-            <SliderField
-              label={i18n.t("settings.agentDock.size.title")}
-              description={i18n.t("settings.agentDock.size.description")}
-              value={preference().sizePercent}
-              minValue={AGENT_DOCK_SIZE_LIMITS.min}
-              maxValue={AGENT_DOCK_SIZE_LIMITS.max}
-              step={AGENT_DOCK_SIZE_LIMITS.step}
-              disabled={!aboveApps()}
-              formatValue={(value) => `${value}%`}
-              onChange={(sizePercent) => setAgentDockPreference({ sizePercent })}
+    <SettingsSection title={i18n.t("settings.agentDock.title")}>
+      <ItemGroup class="settings-modal-card">
+        <SwitchField
+          data-settings-row="settings.agentDock.show.title"
+          checked={preference().shown}
+          onChange={(shown) => setAgentDockPreference({ shown })}
+          label={i18n.t("settings.agentDock.show.title")}
+          description={i18n.t("settings.agentDock.show.description")}
+        />
+        <Item class="settings-modal-row">
+          <ItemContent>
+            <ItemTitle>呼出 / 隐藏快捷键</ItemTitle>
+            <ItemDescription>随时一键调出或关闭桌面悬浮星友。</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <ChoiceSelect<ShortcutChoice>
+              value={
+                SHORTCUT_CHOICES.includes((preference().shortcut ?? "off") as ShortcutChoice)
+                  ? ((preference().shortcut ?? "off") as ShortcutChoice)
+                  : "Alt+Shift+S"
+              }
+              text={(val) => SHORTCUT_LABELS[val]}
+              choices={SHORTCUT_CHOICES}
+              label="呼出与隐藏快捷键"
+              disabled={false}
+              mount={props.selectMount}
+              onChange={(choice) => setAgentDockPreference({ shortcut: choice === "off" ? null : choice })}
             />
-          </div>
-          <SwitchField
-            data-settings-row="settings.agentDock.autoHide.title"
-            checked={preference().autoHide}
-            disabled={!aboveApps()}
-            onChange={(autoHide) => setAgentDockPreference({ autoHide })}
-            label={i18n.t("settings.agentDock.autoHide.title")}
-            description={i18n.t("settings.agentDock.autoHide.description")}
-          />
-          <SwitchField
-            data-settings-row="settings.agentDock.edgeStrip.title"
-            checked={preference().edgeStrip}
-            disabled={!aboveApps() || !preference().autoHide}
-            onChange={(edgeStrip) => setAgentDockPreference({ edgeStrip })}
-            label={i18n.t("settings.agentDock.edgeStrip.title")}
-            description={i18n.t("settings.agentDock.edgeStrip.description")}
-          />
-          <SwitchField
-            data-settings-row="settings.agentDock.results.title"
-            checked={preference().results}
+          </ItemActions>
+        </Item>
+        <Item data-settings-row="settings.agentDock.placement.title" class="settings-modal-row">
+          <ItemContent>
+            <ItemTitle>{i18n.t("settings.agentDock.placement.title")}</ItemTitle>
+            <ItemDescription>{i18n.t("settings.agentDock.placement.description")}</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <ChoiceSelect
+              value={preference().placement}
+              text={(placement) => i18n.t(PLACEMENT_LABEL[placement])}
+              choices={["screen", "window"]}
+              label={i18n.t("settings.agentDock.placement.title")}
+              disabled={!preference().shown}
+              mount={props.selectMount}
+              onChange={(placement) => setAgentDockPreference({ placement })}
+            />
+          </ItemActions>
+        </Item>
+        <XWaylandRestartRow
+          support={screenSupport()}
+          keys={{
+            title: "settings.agentDock.xwayland.title",
+            description: "settings.agentDock.xwayland.description",
+            unsupported: "settings.agentDock.xwayland.unsupported",
+            restart: "settings.agentDock.xwayland.restart",
+          }}
+          onRestart={() => agentDockPort().agentDock.setXWayland({ enabled: true })}
+        />
+        <Item data-settings-row="settings.agentDock.display.title" class="settings-modal-row">
+          <ItemContent>
+            <ItemTitle>{i18n.t("settings.agentDock.display.title")}</ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <DisplaySelect
+              value={preference().display}
+              disabled={!aboveApps()}
+              mount={props.selectMount}
+              onChange={(display) => setAgentDockPreference({ display })}
+            />
+          </ItemActions>
+        </Item>
+        <div data-settings-row="settings.agentDock.size.title" class="settings-agent-dock-size">
+          <SliderField
+            label={i18n.t("settings.agentDock.size.title")}
+            value={preference().sizePercent}
+            minValue={AGENT_DOCK_SIZE_LIMITS.min}
+            maxValue={AGENT_DOCK_SIZE_LIMITS.max}
+            step={AGENT_DOCK_SIZE_LIMITS.step}
             disabled={!preference().shown}
-            onChange={(results) => setAgentDockPreference({ results })}
-            label={i18n.t("settings.agentDock.results.title")}
-            description={i18n.t("settings.agentDock.results.description")}
+            formatValue={(value) => `${value}%`}
+            onChange={(sizePercent) => setAgentDockPreference({ sizePercent })}
           />
-          <SwitchField
-            data-settings-row="settings.agentDock.activeSeats.title"
-            checked={preference().activeSeats}
-            disabled={!preference().shown}
-            onChange={(activeSeats) => setAgentDockPreference({ activeSeats })}
-            label={i18n.t("settings.agentDock.activeSeats.title")}
-            description={i18n.t("settings.agentDock.activeSeats.description")}
-          />
-        </ItemGroup>
-      </SettingsSection>
-
-      <Show when={props.model.server}>
-        {(server) => (
-          <SettingsSection
-            data-settings-row="settings.agentDock.agents.title"
-            title={i18n.t("settings.agentDock.agents.title")}
-            description={i18n.t("settings.agentDock.agents.description", { server: server().name })}
-          >
-            <ItemGroup class="settings-modal-card">
-              <For
-                each={props.model.agents}
-                fallback={
-                  <Item>
-                    <ItemContent>
-                      <ItemDescription>{i18n.t("settings.agentDock.agents.empty")}</ItemDescription>
-                    </ItemContent>
-                  </Item>
-                }
-              >
-                {(agent) => (
-                  <DockAgentRow
-                    agent={agent}
-                    onDock={seats().some((seat) => seat.kind === "agent" && seat.id === agent.id)}
-                    disabled={!preference().shown}
-                    onChange={(onDock) => setOnDock(server().id, agent.id, onDock)}
-                  />
-                )}
-              </For>
-            </ItemGroup>
-          </SettingsSection>
-        )}
-      </Show>
-    </>
-  );
-}
-
-function DockAgentRow(props: {
-  agent: ComposerAgent;
-  onDock: boolean;
-  disabled: boolean;
-  onChange: (onDock: boolean) => void;
-}): JSX.Element {
-  const titleId = createUniqueId();
-  return (
-    <Item>
-      <ItemMedia class="settings-agent-dock-avatar" aria-hidden="true">
-        <AgentAvatar agent={props.agent} motion="idle" />
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle id={titleId}>{props.agent.name}</ItemTitle>
-        <Show when={props.agent.title}>{(title) => <ItemDescription>{title()}</ItemDescription>}</Show>
-      </ItemContent>
-      <ItemActions>
-        <Switch checked={props.onDock} disabled={props.disabled} onChange={props.onChange} aria-labelledby={titleId} />
-      </ItemActions>
-    </Item>
+        </div>
+      </ItemGroup>
+    </SettingsSection>
   );
 }
 

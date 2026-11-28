@@ -13,6 +13,32 @@ messaging in one desktop app.
 
 StarBot is ready for production use. A new release ships almost every day.
 
+## StarBot Desktop（星友桌面端 · macOS / Windows / Linux）
+
+StarBot Desktop 是专为十二星座私人 AI 伙伴打造的本地优先桌面工作台，深度融合 **顶部刘海灵动岛、无背景全屏悬浮星友、十二星座 3D 软陶互动动效、一键语音转文字与提炼记忆**，让每一位星友随时随地在桌面上陪伴协作。
+
+<p align="center">
+  <img src="docs/images/desktop/hero-workspace.jpg" alt="StarBot Desktop 总览：主星友自动置顶、全量对话侧滑菜单、记忆提炼与直接语音转文字输入" width="100%" />
+</p>
+
+### 1. 顶部刘海灵动岛 & 全屏无背景悬浮星友
+
+- **顶部刘海灵动岛**：默认空闲自动隐身，鼠标靠近刘海顺滑弹出星友胶囊并支持点击下拉切换当前星友、点击外部任意区域自动收起；录音时实时联动声波计时，思考与新回复时呈现星轨徽章动效，并支持文件/文本重力拖拽投喂。
+- **全屏无背景悬浮星友**：纯粹 3D 星座软陶角色桌面自由悬浮（支持快捷键一键呼出/隐藏与尺寸调节），鼠标靠近顺滑展开五颗圆弧功能键（隐藏悬浮窗、模型与上下文用量、按「本机模型 / API 模型」与服务商两级筛选切换模型、语音直发对话气泡、快速切换星友），点击面板外任意位置自动收起。
+
+<p align="center">
+  <img src="docs/images/desktop/floating-and-island.jpg" alt="灵动岛靠近呼出、语音声波联动与无背景全屏悬浮星友圆弧菜单、本机与 API 模型筛选" width="100%" />
+</p>
+
+### 2. 8 款星座软陶可爱互动动效 & 极简设置中心
+
+- **8 款软陶角色专属动效**：桌面端与手机端共用零分配 SVG 软陶引擎，内置 **Q 弹麻薯歪头杀、星星眼崇拜闪耀、害羞脸红躲猫猫、犯困吹泡泡（靠近戳破惊醒）、晕乎乎蚊香眼（快速晃动触发）、节拍摇摆听歌（录音联动）、好奇放大镜侦查（工具检索中）、连戳暴走爱心喷泉** 及配套软萌合成音效。
+- **极简设置中心**：「账号管理」置顶直达个人资料与手机配对，「应用行为」与「通用」合二为一，「更新」归入「通用与偏好」，全站界面层级清爽统一。
+
+<p align="center">
+  <img src="docs/images/desktop/emotes-and-settings.jpg" alt="8 款十二星座软陶可爱动效与全新极简设置导航" width="100%" />
+</p>
+
 ## StarBot Mobile（星友手机端 · iOS）
 
 StarBot Mobile 是专为多星友私人 AI 伙伴打造的极简 iOS 客户端，通过 `starbot://` 局域网/远程加密 WebRTC 直连你的电脑桌面端，支持单手语音滑选星友、月历方格任务日程、实时账单排行、群聊协作与轻盈浮窗交互。详情见 [StarBot Mobile 文档](apps/mobile/README.md)。
@@ -423,12 +449,6 @@ Ask an agent to create a skill from a reusable workflow. It prepares a folder wi
 Agents can use `list_local_skills`, `read_local_skill`, `revise_skill`, and `install_local_skill`. Revisions require the version read by the agent and retain previous versions. Updating a library skill does not update installed copies: use the Update chip or install an exact revision. Modified installed files are protected. To publish a local skill, submit its folder separately through the marketplace.
 
 Optional scripts, references, and assets follow the Codex skill folder structure. A PNG at `assets/icon.png` supplies the local preview logo. The built-in `openbot-skill-creator` guide explains the format and validation limits. Registration does not run scripts.
-
-## Import agents from Grok Bot
-
-Open **Server settings → Import** on this computer, or on a joined server in the desktop app or the browser client. Every member of a server can import, not only an owner or admin. Add the [StarBot export agent](https://x.ai/bot/pOUBH2kQK8CKvM7nW8stG) to Grok Bot and say "Export my agents for StarBot". It saves one `.zip` file to Downloads. Choose that file in StarBot, select the agents, and import them.
-
-The import adds each agent's name, instructions, avatar, skills, routines, and memories. Workspace files are copied to `imported/` in the agent's workspace if you included them. Chat history is not copied: the export agent keeps the important facts as memories. For this computer, the file is read here and is not uploaded, and it has no size limit: StarBot reads it from disk one file at a time and skips an agent whose files do not fit in the free disk space. For a joined server, the file goes to the computer that runs that server through the encrypted host connection, in parts, so it has no size limit either; the server must have free disk space for it. A server on an older version of StarBot takes a file of at most 100 MB. A member's import uses a skill that the server already has instead of changing it. The export skill and its format are in [`resources/agent-import/grok-bot/SKILL.md`](resources/agent-import/grok-bot/SKILL.md).
 
 ## Commands
 

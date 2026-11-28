@@ -85,5 +85,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "O login no Proton demorou demais. Conecte novamente.",
   "error.connector.protonPassSetupFailed":
     "Não foi possível criar o cofre Shared with StarBot ou a chave de acesso dele no Proton Pass. Conecte novamente.",
-
 } as const satisfies PartialTranslation<typeof source>;

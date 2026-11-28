@@ -12,12 +12,7 @@ export function PlushMascot(props: { face?: PlushMascotFace; class?: string }) {
   return (
     <span class={cx("ui-plush-mascot", props.class)} data-face={props.face ?? "idle"} aria-hidden="true">
       <span class="ui-plush-body">
-        <ZodiacClayAvatar
-          shape="pentagone"
-          state={faceState()}
-          expression={faceExpr()}
-          class="ui-plush-body-image"
-        />
+        <ZodiacClayAvatar shape="pentagone" state={faceState()} expression={faceExpr()} class="ui-plush-body-image" />
       </span>
     </span>
   );

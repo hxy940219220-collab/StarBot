@@ -1,14 +1,6 @@
 import { AppLogo, type AppLogoVariant, ProviderLogo } from "@openbot/brand";
 import { usageTone } from "@openbot/team-client/plan-limits";
-import {
-  BriefcaseBusiness,
-  Button,
-  buttonVariants,
-  ContextMenu,
-  MotionTooltip,
-  Plug,
-  Waypoints,
-} from "@openbot/ui";
+import { BriefcaseBusiness, Button, buttonVariants, ContextMenu, MotionTooltip, Plug, Waypoints } from "@openbot/ui";
 import { AccountUsageDetails, AccountUsageWindowList } from "@openbot/ui/features/account/AccountUsageDetails";
 import { type AccountUsageProviderRow, accountUsageRowKey } from "@openbot/ui/features/account/account-usage-view";
 import { useText } from "@openbot/ui/text";
@@ -26,7 +18,10 @@ import {
   StarbotUsageIcon,
 } from "./StarbotNavIcons";
 
-type RailIconComponent = (props: { class?: string | undefined; "aria-hidden"?: "true" | "false" | undefined }) => JSX.Element;
+type RailIconComponent = (props: {
+  class?: string | undefined;
+  "aria-hidden"?: "true" | "false" | undefined;
+}) => JSX.Element;
 
 interface RailMenuItem {
   label: string;

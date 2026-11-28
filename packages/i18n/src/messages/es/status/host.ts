@@ -16,5 +16,4 @@ export const messages = {
   "status.host.private": "Este StarBot es privado.",
 
   "status.host.removed": "Este StarBot se quitó de tu cuenta. Publícalo de nuevo para compartirlo.",
-
 } as const satisfies PartialTranslation<typeof source>;

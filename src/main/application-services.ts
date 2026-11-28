@@ -62,6 +62,7 @@ import {
   BrowserWindow,
   clipboard,
   desktopCapturer,
+  globalShortcut,
   Menu,
   Notification,
   nativeImage,
@@ -1083,6 +1084,7 @@ export async function createApplicationServices({
     loadWindow: (window, display) => loadDynamicIslandRenderer(window, display, appVariant),
     getDisplays: () => screen.getAllDisplays(),
     getPrimaryDisplay: () => screen.getPrimaryDisplay(),
+    getCursorScreenPoint: () => screen.getCursorScreenPoint(),
     getMainWindow: windows.getMainWindow,
     getFocusedWindow: () => BrowserWindow.getFocusedWindow(),
     ensureMainWindow: windows.ensureMainWindow,
@@ -1132,6 +1134,8 @@ export async function createApplicationServices({
     presentMainWindow: showMainWindow,
     pointerForwarding,
     topmost,
+    registerShortcut: (accelerator, onTrigger) => globalShortcut.register(accelerator, onTrigger),
+    unregisterShortcut: (accelerator) => globalShortcut.unregister(accelerator),
     sendMessage: (action) =>
       Effect.suspend(() => {
         if (!criticalActionTargets) {

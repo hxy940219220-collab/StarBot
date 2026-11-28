@@ -243,7 +243,9 @@ export class ProviderRuntimeManager extends EventEmitter<ProviderRuntimeManagerE
         const automatic = this.#updatesAutomatically(provider, this.#target);
         const isCore = (STARBOT_CORE_PROVIDERS as readonly string[]).includes(provider);
         providers[provider].availableVersion =
-          isCore && offer && !configuredCliPath(provider) && !automatic && this.#isProviderOn(provider) ? version : null;
+          isCore && offer && !configuredCliPath(provider) && !automatic && this.#isProviderOn(provider)
+            ? version
+            : null;
       }
     }
     const hermes = this.#hermesInstaller?.status();

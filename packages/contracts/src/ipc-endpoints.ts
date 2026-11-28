@@ -53,6 +53,7 @@ import type {
   AgentDockOffset,
   AgentDockPresentation,
   SetAgentDockInteractiveInput,
+  SetAgentDockShortcutInput,
   SetAgentDockXWaylandInput,
 } from "./ipc-agent-dock";
 import type { AgentIpcRequest, ScopedAgentEvent } from "./ipc-agent-events";
@@ -548,11 +549,11 @@ import type { SetSidebarPinsInput, SidebarPinsSnapshot } from "./ipc-sidebar-pin
 import type {
   CreateLocalSkillInput,
   HostSkillLearning,
+  ImportLocalSkillPackageInput,
   InstalledSkill,
   InstallLocalSkillInput,
   InstallSkillInput,
   LocalSkillRevisionInput,
-  ImportLocalSkillPackageInput,
   MarketplaceSkillDetail,
   MarketplaceSkillPage,
   MarketplaceSkillQuery,
@@ -944,6 +945,7 @@ export const IPC_ENDPOINTS = {
     setInputRegion: request<AgentDockInputRect[], void>()("agent-dock:set-input-region"),
     setExtent: request<AgentDockExtent | null, void>()("agent-dock:set-extent"),
     setXWayland: request<SetAgentDockXWaylandInput, void>()("agent-dock:set-xwayland"),
+    setShortcut: request<SetAgentDockShortcutInput, void>()("agent-dock:set-shortcut"),
     closeChat: event<undefined>()("agent-dock:close-chat"),
     listDisplays: request<undefined, AgentDockDisplayInfo[]>()("agent-dock:list-displays"),
     drag: request<AgentDockDragPhase, void>()("agent-dock:drag"),

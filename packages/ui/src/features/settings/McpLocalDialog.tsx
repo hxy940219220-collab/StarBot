@@ -126,11 +126,7 @@ export function McpLocalDialog(props: McpLocalDialogProps) {
             <span class="starbot-auth-flow-label">授权绑定步骤</span>
             <Show when={docs()}>
               {(page) => (
-                <button
-                  type="button"
-                  class="starbot-auth-flow-link"
-                  onClick={() => props.onOpenUrl?.(page().url)}
-                >
+                <button type="button" class="starbot-auth-flow-link" onClick={() => props.onOpenUrl?.(page().url)}>
                   <span>访问官网</span>
                   <ExternalLink aria-hidden="true" />
                 </button>

@@ -85,5 +85,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "Die Proton-Anmeldung hat zu lange gedauert. Verbinde erneut.",
   "error.connector.protonPassSetupFailed":
     "Der Tresor Shared with StarBot oder sein Zugriffsschlüssel konnte in Proton Pass nicht erstellt werden. Verbinde erneut.",
-
 } as const satisfies PartialTranslation<typeof source>;

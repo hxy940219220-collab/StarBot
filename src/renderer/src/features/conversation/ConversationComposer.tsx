@@ -180,8 +180,9 @@ export function ConversationComposer() {
     if (composerHasContent() || editingDeliveryId() || sharedVoicePhase() !== "idle") return undefined;
     if (attachmentBusy() || uploadFailed() || submitting() || !agentReady() || providerUpdateRequired())
       return undefined;
-    if (voiceConversationOpen()) return "end";
-    return sendStarting() ? undefined : "start";
+    // Keep composer voice simple: only show "end" if a live voice session is already open;
+    // clicking the microphone button directly starts inline record-to-text transcription.
+    return voiceConversationOpen() ? "end" : undefined;
   };
   const savePending = () => Boolean(editingDeliveryId() && editingPendingSave());
   const uploadFiles = createMemo(() =>
@@ -863,9 +864,6 @@ export function ConversationComposer() {
               onAttach={openAttachmentPicker}
               onPickSkill={pickSkill()}
               onTeach={teachTask()}
-              onSideQuestion={askSideQuestion()}
-              onVoice={openVoiceConversation()}
-              newChat={newChatMenuItem()}
             />
             <div class="composer-primary-actions">
               <Show when={contextUsageView(context())}>

@@ -1,4 +1,5 @@
 import { Button, Play, SwitchField } from "@openbot/ui";
+import { unlockKawaiiAudio } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import { useText } from "@openbot/ui/text";
 import { For, Show } from "solid-js";
 import { setMotionEffect, useMotionEffect } from "../../motion-preference";
@@ -89,7 +90,11 @@ export function MotionSwitches() {
             variant="outline"
             size="sm"
             style={{ "flex-shrink": "0" }}
-            onClick={() => triggerStartupSplashPreview()}
+            data-starbot-silent=""
+            onClick={() => {
+              unlockKawaiiAudio();
+              triggerStartupSplashPreview();
+            }}
           >
             <Play class="size-3.5" aria-hidden="true" />
             立即预览动画
@@ -123,9 +128,7 @@ export function MotionSwitches() {
                     "border-radius": "12px",
                     "text-align": "left",
                     cursor: "pointer",
-                    border: active()
-                      ? "1.5px solid var(--openbot-accent)"
-                      : "1px solid var(--openbot-border-strong)",
+                    border: active() ? "1.5px solid var(--openbot-accent)" : "1px solid var(--openbot-border-strong)",
                     background: active()
                       ? "color-mix(in srgb, var(--openbot-accent) 10%, var(--openbot-bg-surface))"
                       : "var(--openbot-bg-canvas)",

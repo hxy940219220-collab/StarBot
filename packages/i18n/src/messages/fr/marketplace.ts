@@ -28,7 +28,6 @@ export const messages = {
 
   "marketplace.plugins.missing": "Ce plugin n’est pas dans le catalogue StarBot.",
 
-
   "marketplace.agents.loadingDetail": "Chargement des détails de l’agent…",
   "marketplace.agents.skills": "Compétences",
   "marketplace.agents.routines": "Routines",

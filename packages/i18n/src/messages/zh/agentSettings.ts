@@ -206,8 +206,7 @@ export const messages = {
     "“仅工作区”只限制写入该助手的工作区、共享文件夹和临时文件夹，读取与网络仍可用。",
   "agentSettings.runtime.workspaceEnforcedCommand": "需要在外部写入的命令会先询问你。",
   "agentSettings.runtime.workspaceEnforcedClaude": "在工作区外编辑文件会先询问你；命令无法在外部写入。",
-  "agentSettings.runtime.workspaceUnlimited":
-    "Computer Use 和星友浏览器不受该限制；你可以在下方关闭 Computer Use。",
+  "agentSettings.runtime.workspaceUnlimited": "Computer Use 和星友浏览器不受该限制；你可以在下方关闭 Computer Use。",
   "agentSettings.computerUse.title": "Computer Use",
   "agentSettings.computerUse.description": "允许该助手控制这台电脑上的应用",
   "agentSettings.automation.title": "本地脚本",

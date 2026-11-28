@@ -188,10 +188,7 @@ const DOMESTIC_PLUGINS: MarketplacePluginDetail[] = [
     websiteUrl: "https://www.feishu.cn/",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.feishu,
     category: "productivity",
-    prompts: [
-      "帮我把今天的会议讨论要点整理成一篇飞书云文档。",
-      "查询我飞书多维表格里的本周项目排期并汇总风险项。",
-    ],
+    prompts: ["帮我把今天的会议讨论要点整理成一篇飞书云文档。", "查询我飞书多维表格里的本周项目排期并汇总风险项。"],
   }),
   buildCliBridgeApp({
     slug: "jimeng-ai",
@@ -233,10 +230,7 @@ const DOMESTIC_PLUGINS: MarketplacePluginDetail[] = [
     websiteUrl: "https://www.dingtalk.com/",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.dingtalk,
     category: "productivity",
-    prompts: [
-      "查看我钉钉里今天的待办事项与下午的会议日程安排。",
-      "把这份周报草稿同步整理到我的钉钉文档。",
-    ],
+    prompts: ["查看我钉钉里今天的待办事项与下午的会议日程安排。", "把这份周报草稿同步整理到我的钉钉文档。"],
   }),
   buildCliBridgeApp({
     slug: "wecom",
@@ -248,10 +242,7 @@ const DOMESTIC_PLUGINS: MarketplacePluginDetail[] = [
     websiteUrl: "https://work.weixin.qq.com/",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.wecom,
     category: "productivity",
-    prompts: [
-      "帮我检查企业微信 CLI 授权状态并梳理今日客户跟进纪要。",
-      "起草一份部门通知并准备同步到企业微信微文档。",
-    ],
+    prompts: ["帮我检查企业微信 CLI 授权状态并梳理今日客户跟进纪要。", "起草一份部门通知并准备同步到企业微信微文档。"],
   }),
   buildCliBridgeApp({
     slug: "tencent-docs",
@@ -332,16 +323,12 @@ const DOMESTIC_PLUGINS: MarketplacePluginDetail[] = [
     slug: "qq-mail",
     name: "QQ 邮箱",
     tagline: "一键连接邮箱工作台 · 商务邮件起草、中英润色与附件核对",
-    description:
-      "连接腾讯 QQ 邮箱，配合星友快速提炼往来邮件重点、起草得体的商务合作/汇报邮件并一键打开 QQ 邮箱发送。",
+    description: "连接腾讯 QQ 邮箱，配合星友快速提炼往来邮件重点、起草得体的商务合作/汇报邮件并一键打开 QQ 邮箱发送。",
     creatorName: "腾讯 · QQ 邮箱",
     websiteUrl: "https://mail.qq.com/",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.qqMail,
     category: "productivity",
-    prompts: [
-      "帮我起草一封给合作方的合同确认邮件并打开 QQ 邮箱。",
-      "把这段中文项目进度翻译成地道英文商务邮件。",
-    ],
+    prompts: ["帮我起草一封给合作方的合同确认邮件并打开 QQ 邮箱。", "把这段中文项目进度翻译成地道英文商务邮件。"],
   }),
   buildCliBridgeApp({
     slug: "xmind",
@@ -380,10 +367,7 @@ const DOMESTIC_PLUGINS: MarketplacePluginDetail[] = [
       "通过滴答清单（Dida365）官方 MCP 服务拉起浏览器一键授权登录你的个人账号，免填任何密钥，支持自然语言查询今日待办、添加提醒事项与复盘完成记录。",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.dida365,
     authLabel: "跳转滴答清单授权",
-    prompts: [
-      "帮我看看滴答清单里今天有哪些到期的重要待办？",
-      "把刚刚聊到的三项跟进任务添加到我的滴答清单收件箱。",
-    ],
+    prompts: ["帮我看看滴答清单里今天有哪些到期的重要待办？", "把刚刚聊到的三项跟进任务添加到我的滴答清单收件箱。"],
   }),
   localizedUpstream("apple-apps", {
     name: "Mac 原生办公全家桶",
@@ -431,7 +415,8 @@ const OVERSEAS_FROM_CATALOG: MarketplacePluginDetail[] = [
   localizedUpstream("figma", {
     name: "Figma",
     tagline: "桌面端免密直连 · 读取设计稿图层结构、组件规范与色板",
-    description: "直接连接本机已打开的 Figma 桌面应用内置 MCP 服务，免填 Token 即可读取设计稿布局、间距与样式变量并转化为前端代码。",
+    description:
+      "直接连接本机已打开的 Figma 桌面应用内置 MCP 服务，免填 Token 即可读取设计稿布局、间距与样式变量并转化为前端代码。",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.figma,
     prompts: [
       "读取当前 Figma 设计稿页面中的组件层级、字号与颜色规范。",
@@ -441,13 +426,11 @@ const OVERSEAS_FROM_CATALOG: MarketplacePluginDetail[] = [
   localizedUpstream("canva", {
     name: "Canva 可画",
     tagline: "网页一键登录授权 · 海报配图、社媒视觉与演示文稿导出",
-    description: "通过浏览器一键登录 Canva 账号授权，在对话中检索你的设计库、套用视觉模板生成配图或演示文稿并导出 PNG / PDF。",
+    description:
+      "通过浏览器一键登录 Canva 账号授权，在对话中检索你的设计库、套用视觉模板生成配图或演示文稿并导出 PNG / PDF。",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.canva,
     authLabel: "跳转 Canva 网页授权",
-    prompts: [
-      "打开我最近编辑的 Canva 海报设计并导出高清图片。",
-      "基于今天的产品亮点在 Canva 生成一套社媒宣传配图。",
-    ],
+    prompts: ["打开我最近编辑的 Canva 海报设计并导出高清图片。", "基于今天的产品亮点在 Canva 生成一套社媒宣传配图。"],
   }),
   localizedUpstream("linear", {
     name: "Linear",
@@ -466,21 +449,16 @@ const OVERSEAS_FROM_CATALOG: MarketplacePluginDetail[] = [
     description: "通过浏览器一键登录你的 Vercel 账号授权，直接查看最新部署进度、预览链接、环境变量与运行错误日志。",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.vercel,
     authLabel: "跳转 Vercel 网页授权",
-    prompts: [
-      "查看我最近的 Vercel 部署列表，排查上一次构建失败的原因。",
-      "检查当前生产环境部署项目的最新运行日志。",
-    ],
+    prompts: ["查看我最近的 Vercel 部署列表，排查上一次构建失败的原因。", "检查当前生产环境部署项目的最新运行日志。"],
   }),
   localizedUpstream("cloudflare", {
     name: "Cloudflare",
     tagline: "网页一键登录授权 · Workers、DNS 解析、R2 存储与日志",
-    description: "通过浏览器一键登录 Cloudflare 账号授权，轻松查询域名 DNS 记录、Workers 部署状态、D1/KV 存储与线上报错日志。",
+    description:
+      "通过浏览器一键登录 Cloudflare 账号授权，轻松查询域名 DNS 记录、Workers 部署状态、D1/KV 存储与线上报错日志。",
     iconUrl: STARBOT_OFFICIAL_APP_ICONS.cloudflare,
     authLabel: "跳转 Cloudflare 授权",
-    prompts: [
-      "列出我 Cloudflare 账号下正在运行的 Workers 服务及最近错误日志。",
-      "查看当前主域名的全部 DNS 解析记录。",
-    ],
+    prompts: ["列出我 Cloudflare 账号下正在运行的 Workers 服务及最近错误日志。", "查看当前主域名的全部 DNS 解析记录。"],
   }),
 ].filter((item): item is MarketplacePluginDetail => item !== null);
 

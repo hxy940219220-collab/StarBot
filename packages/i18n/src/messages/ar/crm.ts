@@ -440,5 +440,4 @@ export const messages = {
   "crm.source.disconnect": "فصل الربط",
   "crm.source.disconnectTitle": "فصل ربط {source}؟",
   "crm.source.disconnectBody": "يوقف StarBot المزامنة ويحذف المفتاح. تبقى الصفوف المستوردة ويمكنك تغييرها.",
-
 } as const satisfies PartialTranslation<typeof source>;

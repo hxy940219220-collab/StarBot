@@ -1,15 +1,11 @@
 import { requestFirstAgentTourReplay } from "@openbot/ui/features/agents/FirstAgentSetup";
 import { HelpMenu } from "@openbot/ui/features/updates/HelpMenu";
 import { createSignal, onCleanup, onSettled } from "solid-js";
-import {
-  StarBotFeatureTourModal,
-  StarBotFeedbackModal,
-  StarBotGuideModal,
-} from "./StarBotHelpModals";
+import { StarBotFeatureTourModal, StarBotFeedbackModal, StarBotGuideModal } from "./StarBotHelpModals";
 
 type HelpLink = "changelog" | "guides" | "discord" | "report-problem" | "feedback";
 
-const FEATURE_TOUR_SEEN_KEY = "starbot:feature-tour-v021-video-seen";
+const FEATURE_TOUR_SEEN_KEY = "starbot:feature-tour-v022-video-seen";
 
 export function RailHelpMenu(props: {
   version: string | null;

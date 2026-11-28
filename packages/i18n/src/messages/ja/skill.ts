@@ -79,5 +79,4 @@ export const messages = {
   "skill.marketplace.confirmAgents": "エージェント: {agents}。",
   "skill.marketplace.limitReason": "エージェントに追加できるスキルは {limit} 個までです。",
   "skill.marketplace.cannotRemove": "組み込みのスキルと、StarBot がインストールしていないスキルは削除できません。",
-
 } as const satisfies PartialTranslation<typeof source>;

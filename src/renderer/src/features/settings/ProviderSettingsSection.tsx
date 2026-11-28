@@ -61,10 +61,7 @@ import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createStore, Show, untrack } from "solid-js";
 import { ProviderSignInDialogs } from "../../components/ProviderSignInDialogs";
 import type { ProviderConnectionApi } from "../../components/provider-connection-api";
-import {
-  markProviderActivelyConnected,
-  unmarkProviderActivelyConnected,
-} from "../agents/starbot-connected-providers";
+import { markProviderActivelyConnected, unmarkProviderActivelyConnected } from "../agents/starbot-connected-providers";
 import { createCustomProviderHostState } from "../custom-providers/custom-provider-host-state";
 import {
   createProviderClaudeCompactWindow,

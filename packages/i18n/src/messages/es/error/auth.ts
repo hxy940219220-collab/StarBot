@@ -38,5 +38,4 @@ export const messages = {
 
   "error.auth.deliveryUnknown":
     "StarBot no pudo confirmar si se envió el código de inicio de sesión. Comprueba la entrega antes de enviarlo de nuevo.",
-
 } as const satisfies PartialTranslation<typeof source>;

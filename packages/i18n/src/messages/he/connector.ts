@@ -80,7 +80,6 @@ export const messages = {
   "connector.statusUnknown": "לא ידוע",
   "connector.readFailed": "StarBot לא הצליח לקרוא את מצב החיבור הזה.",
 
-
   "connector.slack.title": "Slack",
   "connector.slack.description":
     "אפשר לתייג את @StarBot ב-Slack או לשלוח לו הודעה ישירה. מתזמר Slack פונה לסוכן המתאים ועונה.",
@@ -286,7 +285,6 @@ export const messages = {
   "connector.discord.accessRoleDeleted": "{role} (נמחק)",
   "connector.discord.accessSave": "שמירה",
   "connector.discord.accessHostUpdate": "יש לעדכן את StarBot ב-{host} כדי לבחור תפקידים.",
-
 
   "connector.telegram.title": "Telegram",
   "connector.telegram.description":
@@ -733,5 +731,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "ניתוק",
   "connector.protonPass.actionFailed": "StarBot לא הצליח לשנות את החיבור ל-Proton Pass.",
-
 } as const satisfies PartialTranslation<typeof source>;

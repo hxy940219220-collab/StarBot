@@ -58,6 +58,7 @@ export function SidebarTopbar() {
         {(serverMenu) => <ServerMenu {...serverMenu()} serverName={props.serverName} compact={props.compact} />}
       </Show>
       <div class="sidebar-topbar-actions">
+        <Show when={!props.compact}>{props.topbarLeadingActions}</Show>
         <Show when={!props.compact}>{updateButton()}</Show>
         <Show when={props.compact || props.onCollapse}>
           <Button

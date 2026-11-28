@@ -56,5 +56,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "Nie udało się odczytać udostępnionego agenta. Spróbuj ponownie.",
   "mobile.link.template.error.unsupported":
     "Ten serwer nie może dodawać udostępnionych agentów. Zaktualizuj StarBot na komputerze, na którym działa serwer.",
-
 } as const satisfies PartialTranslation<typeof source>;

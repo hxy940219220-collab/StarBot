@@ -105,12 +105,16 @@
   inset: 0;
   border-radius: inherit;
   background: linear-gradient(180deg, #8b6cff 0%, #6844eb 100%);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35), inset 0 -1px 2px rgba(42, 22, 108, 0.28);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px rgba(42, 22, 108, 0.28);
   content: "";
 }
 .agent-row-agent-status-waiting::before {
   background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(120, 53, 15, 0.25);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(120, 53, 15, 0.25);
 }
 
 .sidebar .channel-avatar-cluster .channel-avatar-count {

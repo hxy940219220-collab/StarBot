@@ -180,7 +180,9 @@ export interface MarketplaceModel {
   createSkill?: ((agentId: string) => void) | undefined;
   findSkill?: ((agentId: string) => void) | undefined;
   chooseSkillPackage?: (() => Promise<SkillPackagePreview | null>) | undefined;
-  importStagedSkill?: ((draftId: string, autoInstall: boolean) => Promise<MarketplaceSkillDetail | undefined>) | undefined;
+  importStagedSkill?:
+    | ((draftId: string, autoInstall: boolean) => Promise<MarketplaceSkillDetail | undefined>)
+    | undefined;
   importSkillFiles?: (
     files: readonly { relativePath: string; bytes: Uint8Array }[],
     autoInstall: boolean,

@@ -1,10 +1,9 @@
-import { bloubAvatarProfile, zodiacForShape } from "@openbot/ui/bloub-avatar";
 import { foreignProvider } from "@openbot/contracts/agent-providers";
 import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
 import {
+  type AgentMemorySelection,
   agentComputerUseEnabled,
   agentMemoryEnabled,
-  type AgentMemorySelection,
   agentNextProviderAccountId,
   analyticsRange,
   assignedSkillCount,
@@ -35,6 +34,7 @@ import {
   Trash2,
   X,
 } from "@openbot/ui";
+import { bloubAvatarProfile, zodiacForShape } from "@openbot/ui/bloub-avatar";
 import { ProviderModelPicker } from "@openbot/ui/components/ProviderModelPicker";
 import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
 import {
@@ -42,6 +42,7 @@ import {
   isManualChiefStarBot,
   setManualChiefStarBotId,
 } from "@openbot/ui/features/agents/chief-starbot";
+import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import {
   routineScheduleFromDraft,
   routineScheduleToDraft,
@@ -64,9 +65,9 @@ import {
   formatTaggedMemory,
   openMemoryCleanModal,
   parseMemoryCategory,
-  setDailyDigestOpen,
   STARBOT_MEMORY_CATEGORIES,
   type StarBotMemoryCategory,
+  setDailyDigestOpen,
   syncMemoriesToAgentInstructions,
 } from "./starbot-memory-hub";
 
@@ -138,22 +139,16 @@ function writePersonaTone(agentId: string, tone: StarBotPersonaTone): void {
 }
 
 function injectPersonaToneIntoInstructions(existingText: string, tone: StarBotPersonaTone): string {
-  const blockRegex = new RegExp(
-    `\\n?${PERSONA_TONE_BLOCK_START}[\\s\\S]*?${PERSONA_TONE_BLOCK_END}\\n?`,
-    "gu",
-  );
+  const blockRegex = new RegExp(`\\n?${PERSONA_TONE_BLOCK_START}[\\s\\S]*?${PERSONA_TONE_BLOCK_END}\\n?`, "gu");
   const cleaned = existingText.replace(blockRegex, "\n").trim();
   if (tone === "default") {
     return cleaned ? `${cleaned}\n` : "";
   }
   const opt = PERSONA_TONE_OPTIONS.find((item) => item.id === tone);
   if (!opt) return cleaned ? `${cleaned}\n` : "";
-  const block = [
-    PERSONA_TONE_BLOCK_START,
-    "## 星友专属对话性格风格",
-    opt.promptDirective,
-    PERSONA_TONE_BLOCK_END,
-  ].join("\n");
+  const block = [PERSONA_TONE_BLOCK_START, "## 星友专属对话性格风格", opt.promptDirective, PERSONA_TONE_BLOCK_END].join(
+    "\n",
+  );
   return cleaned ? `${cleaned}\n\n${block}\n` : `${block}\n`;
 }
 
@@ -205,11 +200,7 @@ function readProactiveCareConfig(agentId: string): ProactiveCareConfig {
       followupDelayUnit: unit,
       stalledRecoveryEnabled: parsed.stalledRecoveryEnabled === true,
       idleCareEnabled: parsed.idleCareEnabled === true,
-      times: [
-        validTime(rawTimes[0], "09:00"),
-        validTime(rawTimes[1], "12:30"),
-        validTime(rawTimes[2], "21:00"),
-      ],
+      times: [validTime(rawTimes[0], "09:00"), validTime(rawTimes[1], "12:30"), validTime(rawTimes[2], "21:00")],
       ...(typeof parsed.lastRemindedMessageId === "string"
         ? { lastRemindedMessageId: parsed.lastRemindedMessageId }
         : {}),
@@ -443,6 +434,8 @@ export function StarBotInspectorPanel(props: {
     const current = agent();
     if (!current || savingStyle()) return;
     const nextTone: StarBotPersonaTone = personaTone() === clickedId ? "default" : clickedId;
+    const zodiacId = zodiacForShape(bloubAvatarProfile(current.avatarSeed ?? current.id, current.avatarHue).shape).id;
+    void playKawaiiCue(nextTone === "default" ? "toggle-off" : "mascot-happy", { zodiac: zodiacId });
     const serverId = convProps.server?.id ?? LOCAL_SERVER_ID;
     setSavingStyle(true);
     setPersonaTone(nextTone);
@@ -502,11 +495,7 @@ export function StarBotInspectorPanel(props: {
           extracted[1] ?? prev.times[1],
           extracted[2] ?? prev.times[2],
         ];
-        if (
-          nextTimes[0] === prev.times[0] &&
-          nextTimes[1] === prev.times[1] &&
-          nextTimes[2] === prev.times[2]
-        ) {
+        if (nextTimes[0] === prev.times[0] && nextTimes[1] === prev.times[1] && nextTimes[2] === prev.times[2]) {
           return prev;
         }
         const next = { ...prev, times: nextTimes };
@@ -594,12 +583,11 @@ export function StarBotInspectorPanel(props: {
     setSavingBrowserProfile(true);
     try {
       const calls = desktopBrowserProfileCalls(convProps.server?.id ?? LOCAL_SERVER_ID);
-      const profile =
-        !rawVal
-          ? ({ kind: "shared" } as const)
-          : rawVal === "__agent__"
-            ? ({ kind: "agent" } as const)
-            : ({ kind: "profile", profileId: rawVal } as const);
+      const profile = !rawVal
+        ? ({ kind: "shared" } as const)
+        : rawVal === "__agent__"
+          ? ({ kind: "agent" } as const)
+          : ({ kind: "profile", profileId: rawVal } as const);
       const updated = await calls.updateAgent({ agentId: current.id, profile });
       setAgentBrowserProfileId(
         updated.kind === "shared" ? "" : updated.kind === "agent" ? "__agent__" : updated.profileId,
@@ -1310,15 +1298,8 @@ export function StarBotInspectorPanel(props: {
             />
             {/* Top Header */}
             <div class="starbot-inspector-topbar">
-              <Show
-                when={subView() !== "main"}
-                fallback={<span class="starbot-inspector-topbar-title">星友档案</span>}
-              >
-                <button
-                  type="button"
-                  class="starbot-inspector-back-btn"
-                  onClick={() => setSubView("main")}
-                >
+              <Show when={subView() !== "main"} fallback={<span class="starbot-inspector-topbar-title">星友档案</span>}>
+                <button type="button" class="starbot-inspector-back-btn" onClick={() => setSubView("main")}>
                   <ChevronLeft class="size-4" aria-hidden="true" />
                   <span>返回</span>
                 </button>
@@ -1503,11 +1484,7 @@ export function StarBotInspectorPanel(props: {
                       </span>
                     </button>
 
-                    <button
-                      type="button"
-                      class="starbot-inspector-link-row"
-                      onClick={() => setSkillsModalOpen(true)}
-                    >
+                    <button type="button" class="starbot-inspector-link-row" onClick={() => setSkillsModalOpen(true)}>
                       <span class="starbot-inspector-row-left">
                         <Puzzle class="size-4" aria-hidden="true" />
                         <span>装备技能</span>
@@ -1859,12 +1836,7 @@ export function StarBotInspectorPanel(props: {
 
                 <Show when={props.onOpenUsage ?? convProps.onOpenUsage}>
                   {(openUsageFn) => (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={(e) => openUsageFn()(e.currentTarget)}
-                    >
+                    <Button type="button" variant="outline" size="sm" onClick={(e) => openUsageFn()(e.currentTarget)}>
                       <Gauge class="size-4" />
                       打开全屏算力看板查看趋势
                     </Button>
@@ -1936,7 +1908,9 @@ export function StarBotInspectorPanel(props: {
                             }),
                           )
                             .then(() => {
-                              actionToast.success(checked ? "已开启本机屏幕与浏览器控制" : "已切换为仅使用星友独立浏览器");
+                              actionToast.success(
+                                checked ? "已开启本机屏幕与浏览器控制" : "已切换为仅使用星友独立浏览器",
+                              );
                             })
                             .catch(() => {
                               actionToast.error("更新桌面控制权限失败");
@@ -1954,7 +1928,10 @@ export function StarBotInspectorPanel(props: {
                     <div class="starbot-inspector-toggle-row" style={{ "align-items": "center" }}>
                       <div>
                         <strong>沙盒浏览器登录态档案</strong>
-                        <span>管理星友内置独立浏览器的 Cookie 与站点登录态（需要读取本机日常 Chrome/Safari 请开启上方开关）。</span>
+                        <span>
+                          管理星友内置独立浏览器的 Cookie 与站点登录态（需要读取本机日常 Chrome/Safari
+                          请开启上方开关）。
+                        </span>
                       </div>
                       <select
                         class="starbot-capsule-select"
@@ -1965,9 +1942,7 @@ export function StarBotInspectorPanel(props: {
                       >
                         <option value="">默认共享档案</option>
                         <option value="__agent__">此星友专属独立档案</option>
-                        <For each={browserProfiles()}>
-                          {(prof) => <option value={prof.id}>{prof.name}</option>}
-                        </For>
+                        <For each={browserProfiles()}>{(prof) => <option value={prof.id}>{prof.name}</option>}</For>
                       </select>
                     </div>
                   </div>
@@ -1977,7 +1952,10 @@ export function StarBotInspectorPanel(props: {
                   {(wsPath) => (
                     <div class="starbot-inspector-group" style={{ "margin-top": "14px" }}>
                       <span class="starbot-inspector-group-title">专属工作区目录</span>
-                      <div class="starbot-inspector-card" style={{ display: "flex", "flex-direction": "column", gap: "8px" }}>
+                      <div
+                        class="starbot-inspector-card"
+                        style={{ display: "flex", "flex-direction": "column", gap: "8px" }}
+                      >
                         <code
                           style={{
                             "font-size": "11.5px",
@@ -2028,7 +2006,8 @@ export function StarBotInspectorPanel(props: {
                 <div class="starbot-inspector-subhead">
                   <h3>主动关怀与待办提醒</h3>
                   <p>
-                    不只是机械定时发消息——当聊天里有未完成的任务或卡点时，「{current().name}」会主动跟进提醒，也可自定义每日陪伴时间。
+                    不只是机械定时发消息——当聊天里有未完成的任务或卡点时，「{current().name}
+                    」会主动跟进提醒，也可自定义每日陪伴时间。
                   </p>
                 </div>
 
@@ -2083,7 +2062,10 @@ export function StarBotInspectorPanel(props: {
                                   class={proactiveCare().followupDelayUnit === "hours" ? "is-active" : ""}
                                   onClick={() => {
                                     if (proactiveCare().followupDelayUnit === "hours") return;
-                                    const nextHours = Math.max(1, Math.round(proactiveCare().taskFollowupDelayMinutes / 60));
+                                    const nextHours = Math.max(
+                                      1,
+                                      Math.round(proactiveCare().taskFollowupDelayMinutes / 60),
+                                    );
                                     updateProactiveCarePatch({
                                       followupDelayUnit: "hours",
                                       taskFollowupDelayMinutes: clampDelayMinutes(nextHours * 60, 120),
@@ -2176,8 +2158,7 @@ export function StarBotInspectorPanel(props: {
                         <Show when={slotCountForFrequency(proactiveFrequency()) >= 1}>
                           <div class="starbot-inspector-routine-time-row">
                             <span class="starbot-inspector-time-label">
-                              <Clock3 class="size-3.5" />
-                              第 1 次问候时间
+                              <Clock3 class="size-3.5" />第 1 次问候时间
                             </span>
                             <input
                               type="time"
@@ -2191,8 +2172,7 @@ export function StarBotInspectorPanel(props: {
                         <Show when={slotCountForFrequency(proactiveFrequency()) >= 2}>
                           <div class="starbot-inspector-routine-time-row">
                             <span class="starbot-inspector-time-label">
-                              <Clock3 class="size-3.5" />
-                              第 2 次问候时间
+                              <Clock3 class="size-3.5" />第 2 次问候时间
                             </span>
                             <input
                               type="time"
@@ -2206,8 +2186,7 @@ export function StarBotInspectorPanel(props: {
                         <Show when={slotCountForFrequency(proactiveFrequency()) >= 3}>
                           <div class="starbot-inspector-routine-time-row">
                             <span class="starbot-inspector-time-label">
-                              <Clock3 class="size-3.5" />
-                              第 3 次问候时间
+                              <Clock3 class="size-3.5" />第 3 次问候时间
                             </span>
                             <input
                               type="time"

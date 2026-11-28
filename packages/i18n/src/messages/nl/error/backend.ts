@@ -538,5 +538,4 @@ export const messages = {
   "error.backend.taskMessageFailed": "StarBot kon het bericht niet naar de taak sturen. Probeer het later opnieuw.",
 
   "error.backend.taskStartFailed": "StarBot kon de taak niet starten. Doe het werk in plaats daarvan in deze beurt.",
-
 } as const satisfies PartialTranslation<typeof source>;

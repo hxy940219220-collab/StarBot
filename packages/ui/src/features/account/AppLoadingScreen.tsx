@@ -2,9 +2,9 @@ import { createEffect, createSignal, onSettled, Show, untrack } from "solid-js";
 import starbotBadge from "../../assets/zodiac/starbot-badge.webp";
 import starbotSplashVideo from "../../assets/zodiac/starbot-splash.mp4";
 import { documentStillFaces } from "../../document-rendering";
-import { playKawaiiCue } from "../agents/starbot-kawaii-audio";
 import { useText } from "../../text";
 import { prefersReducedMotion } from "../../utils";
+import { isKawaiiActionSoundEnabled, playKawaiiCue } from "../agents/starbot-kawaii-audio";
 
 const MIN_SPLASH_MS = 5350;
 const EXIT_LIMIT_MS = 1800;
@@ -32,21 +32,23 @@ export function AppLoadingScreen(props: AppLoadingScreenProps) {
   const scene = untrack(() => props.scene ?? "pile");
   const pileScene = scene === "pile";
   const playThrough = untrack(() => isPreview || props.quickExit === false);
+  const wantSound = untrack(() => isKawaiiActionSoundEnabled());
   const start = performance.now();
   const [phase, setPhase] = createSignal<Phase>("loading");
   const [videoDone, setVideoDone] = createSignal(false);
 
   let exitTimer: ReturnType<typeof setTimeout> | undefined;
   let holdTimer: ReturnType<typeof setTimeout> | undefined;
-  let splashSoundTimer: ReturnType<typeof setTimeout> | undefined;
+  let fallbackSoundTimer: ReturnType<typeof setTimeout> | undefined;
   let exited = false;
   let viewsMounted = false;
   let root: HTMLElement | undefined;
+  let videoEl: HTMLVideoElement | undefined;
 
-  if (!reducedMotion && pileScene) {
-    splashSoundTimer = setTimeout(() => {
-      void playKawaiiCue("splash-pop");
-    }, 1150);
+  if (reducedMotion && pileScene && wantSound) {
+    fallbackSoundTimer = setTimeout(() => {
+      void playKawaiiCue("splash-theme");
+    }, 140);
   }
 
   function mountViews(): void {
@@ -60,6 +62,10 @@ export function AppLoadingScreen(props: AppLoadingScreenProps) {
     exited = true;
     clearTimeout(exitTimer);
     clearTimeout(holdTimer);
+    clearTimeout(fallbackSoundTimer);
+    if (videoEl) {
+      videoEl.pause();
+    }
     mountViews();
     props.onExited?.();
   }
@@ -120,10 +126,30 @@ export function AppLoadingScreen(props: AppLoadingScreenProps) {
   );
 
   onSettled(() => {
+    if (!reducedMotion && videoEl) {
+      videoEl.muted = !wantSound;
+      videoEl.volume = 0.88;
+      const playPromise = videoEl.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        void playPromise.catch(() => {
+          // If browser autoplay policy blocks unmuted playback (e.g. strict web client),
+          // seamlessly retry muted so the animation never stalls and layer Web Audio fallback.
+          if (!videoEl || exited) return;
+          videoEl.muted = true;
+          void videoEl.play().catch(() => setVideoDone(true));
+          if (wantSound && pileScene) {
+            fallbackSoundTimer = setTimeout(() => {
+              void playKawaiiCue("splash-pop");
+            }, 1150);
+          }
+        });
+      }
+    }
     return () => {
       clearTimeout(exitTimer);
       clearTimeout(holdTimer);
-      clearTimeout(splashSoundTimer);
+      clearTimeout(fallbackSoundTimer);
+      videoEl?.pause();
     };
   });
 
@@ -157,7 +183,13 @@ export function AppLoadingScreen(props: AppLoadingScreenProps) {
           <div class="app-loading-stage starbot-splash-stage">
             <img class="starbot-splash-static-badge" src={starbotBadge} alt="" draggable={false} />
             <div class="starbot-splash-brand is-light">
-              <h1 class="starbot-splash-title">StarBot · 星友</h1>
+              <h1 class="starbot-splash-title">
+                <span>StarBot</span>
+                <span class="starbot-splash-title-star" aria-hidden="true">
+                  ✦
+                </span>
+                <span>星友</span>
+              </h1>
               <p class="starbot-splash-subtitle">你的星座 AI 伙伴</p>
             </div>
           </div>
@@ -165,10 +197,13 @@ export function AppLoadingScreen(props: AppLoadingScreenProps) {
       >
         <div class="starbot-splash-video-frame" aria-hidden="true">
           <video
+            ref={(el) => {
+              videoEl = el;
+            }}
             class="starbot-splash-video"
             src={starbotSplashVideo}
             autoplay
-            muted
+            muted={!wantSound}
             playsinline
             preload="auto"
             onEnded={() => setVideoDone(true)}
@@ -180,8 +215,10 @@ export function AppLoadingScreen(props: AppLoadingScreenProps) {
         <button
           type="button"
           class="starbot-splash-skip-btn"
+          data-starbot-silent=""
           onClick={(e) => {
             e.stopPropagation();
+            void playKawaiiCue("drawer-close");
             finishExit();
           }}
         >

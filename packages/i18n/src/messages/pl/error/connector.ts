@@ -85,5 +85,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "Logowanie do Proton trwało zbyt długo. Połącz ponownie.",
   "error.connector.protonPassSetupFailed":
     "Nie udało się utworzyć sejfu Shared with StarBot ani jego klucza dostępu w Proton Pass. Połącz ponownie.",
-
 } as const satisfies PartialTranslation<typeof source>;

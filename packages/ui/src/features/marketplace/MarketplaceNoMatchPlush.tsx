@@ -34,12 +34,7 @@ export function MarketplaceNoMatchPlush() {
             data-lead={index() === LEAD_INDEX ? "" : undefined}
             style={{ "--starbot-crew-index": String(index()) }}
           >
-            <AgentAvatar
-              agent={member}
-              motion="idle"
-              followPointer={hovered()}
-              class="starbot-skills-crew-avatar"
-            />
+            <AgentAvatar agent={member} motion="idle" followPointer={hovered()} class="starbot-skills-crew-avatar" />
           </span>
         )}
       </For>

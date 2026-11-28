@@ -78,5 +78,4 @@ export const messages = {
   "skill.marketplace.confirmAgents": "סוכנים: {agents}.",
   "skill.marketplace.limitReason": "לסוכן יכולות להיות עד {limit} מיומנויות.",
   "skill.marketplace.cannotRemove": "StarBot לא יכול להסיר מיומנות מובנית או מיומנות שהוא לא התקין.",
-
 } as const satisfies PartialTranslation<typeof source>;

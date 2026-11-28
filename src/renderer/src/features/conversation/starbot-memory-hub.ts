@@ -232,9 +232,7 @@ export interface DistillationResult {
 }
 
 function heuristicExtractCandidates(messages: ReadonlyArray<{ author: string; text: string }>): DistillationResult {
-  const userTexts = messages
-    .filter((m) => m.author === "user" && m.text.trim().length >= 4)
-    .map((m) => m.text.trim());
+  const userTexts = messages.filter((m) => m.author === "user" && m.text.trim().length >= 4).map((m) => m.text.trim());
   const candidates: DistilledCandidate[] = [];
   const seen = new Set<string>();
 
@@ -272,7 +270,9 @@ function heuristicExtractCandidates(messages: ReadonlyArray<{ author: string; te
   return { summary, candidates, messageCount: messages.length };
 }
 
-function parseJsonFromModelAnswer(answer: string): { summary?: string; items?: Array<{ category?: string; text?: string }> } | null {
+function parseJsonFromModelAnswer(
+  answer: string,
+): { summary?: string; items?: Array<{ category?: string; text?: string }> } | null {
   const trimmed = answer.trim();
   const fenceMatch = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/iu);
   const candidate = fenceMatch?.[1]?.trim() ?? trimmed;
@@ -350,7 +350,8 @@ export async function distillConversationMemories(
           });
         if (candidates.length > 0) {
           return {
-            summary: parsed.summary?.trim() || `已从 ${rawMsgs.length} 条对话中智能蒸馏出 ${candidates.length} 条核心记忆。`,
+            summary:
+              parsed.summary?.trim() || `已从 ${rawMsgs.length} 条对话中智能蒸馏出 ${candidates.length} 条核心记忆。`,
             candidates,
             messageCount: rawMsgs.length,
           };
@@ -398,9 +399,7 @@ function readDreamJournal(): DreamJournalEntry[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw) as unknown;
     if (!Array.isArray(parsed)) return [];
-    return (parsed as DreamJournalEntry[])
-      .filter((e) => !e.summary?.includes("你能帮我看看"))
-      .slice(0, 14);
+    return (parsed as DreamJournalEntry[]).filter((e) => !e.summary?.includes("你能帮我看看")).slice(0, 14);
   } catch {
     return [];
   }
@@ -544,7 +543,10 @@ export async function runStarBotNightlyDream(options: {
         ].join("\n");
 
         const rawAns = await Promise.race([
-          window.openbot.agent.askSideQuestion({ agentId: chiefAgent.id, question: dreamPrompt, earlier: [] }, serverId),
+          window.openbot.agent.askSideQuestion(
+            { agentId: chiefAgent.id, question: dreamPrompt, earlier: [] },
+            serverId,
+          ),
           new Promise<string>((_, reject) => setTimeout(() => reject(new Error("dream-timeout")), 18_000)),
         ]);
         const parsed = parseJsonFromModelAnswer(rawAns);
@@ -589,7 +591,9 @@ export async function runStarBotNightlyDream(options: {
       } catch {}
     }
 
-    const updatedMemories = await window.openbot.agent.listMemories(chiefAgent.id, serverId).catch(() => existingMemories);
+    const updatedMemories = await window.openbot.agent
+      .listMemories(chiefAgent.id, serverId)
+      .catch(() => existingMemories);
     await syncMemoriesToAgentInstructions(chiefAgent.id, chiefAgent.name, updatedMemories, serverId);
 
     const entry: DreamJournalEntry = {
@@ -599,8 +603,7 @@ export async function runStarBotNightlyDream(options: {
       chiefAgentId: chiefAgent.id,
       chiefAgentName: chiefAgent.name,
       summary:
-        summaryText ||
-        `主星友「${chiefAgent.name}」已在星夜梦境中回顾今日对话，沉淀了 ${newlySaved.length} 条新记忆。`,
+        summaryText || `主星友「${chiefAgent.name}」已在星夜梦境中回顾今日对话，沉淀了 ${newlySaved.length} 条新记忆。`,
       savedItems: newlySaved.length > 0 ? newlySaved : extractedItems.slice(0, 3),
     };
 

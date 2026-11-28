@@ -49,7 +49,6 @@ export const messages = {
   "provider.gemini.hostSignIn":
     "Чтобы подключить Gemini, откройте StarBot на хосте и нажмите «Подключить» в разделе «Настройки сервера» > «Провайдеры». Для входа в Google на этом хосте нужен браузер. Удалённый вход не поддерживается.",
 
-
   "provider.key.free": "Бесплатно",
 
   "provider.action.connect": "Подключить",

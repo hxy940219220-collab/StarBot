@@ -81,7 +81,6 @@ export const messages = {
   "connector.statusUnknown": "Bilinmiyor",
   "connector.readFailed": "StarBot bu bağlantının durumunu okuyamadı.",
 
-
   "connector.slack.title": "Slack",
   "connector.slack.description":
     "Kullanıcılar Slack'te @StarBot'tan bahseder veya doğrudan mesaj gönderir. Slack Düzenleyicisi doğru ajana sorar ve yanıtlar.",
@@ -758,5 +757,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "Bağlantıyı kes",
   "connector.protonPass.actionFailed": "StarBot, Proton Pass bağlantısını değiştiremedi.",
-
 } as const satisfies PartialTranslation<typeof source>;

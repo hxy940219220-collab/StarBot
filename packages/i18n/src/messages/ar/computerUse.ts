@@ -53,5 +53,4 @@ export const messages = {
   "computerUse.help.revealFailed": "تعذّر إظهار التطبيق في Finder.",
   "computerUse.help.dragFailed": "تعذّر سحب التطبيق.",
   "computerUse.highlight.working": "يعمل StarBot في {title}",
-
 } as const satisfies PartialTranslation<typeof source>;

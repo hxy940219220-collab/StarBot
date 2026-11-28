@@ -38,5 +38,4 @@ export const messages = {
 
   "error.auth.deliveryUnknown":
     "StarBot kon niet bevestigen of de inlogcode is verstuurd. Controleer de bezorging voordat je opnieuw verstuurt.",
-
 } as const satisfies PartialTranslation<typeof source>;

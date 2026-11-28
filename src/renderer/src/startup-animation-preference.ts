@@ -66,11 +66,7 @@ const [startupConfig, setStartupConfig] = createSignal<StartupAnimationConfig>(r
 const [splashPreviewOpenSignal, setSplashPreviewOpenSignal] = createSignal(false);
 
 function readStorageIntoSignal(event: StorageEvent): void {
-  if (
-    event.key !== null &&
-    event.key !== STARTUP_ANIMATION_CONFIG_KEY &&
-    event.key !== LEGACY_STARTUP_ANIMATION_KEY
-  ) {
+  if (event.key !== null && event.key !== STARTUP_ANIMATION_CONFIG_KEY && event.key !== LEGACY_STARTUP_ANIMATION_KEY) {
     return;
   }
   setStartupConfig(readStartupAnimationConfig());

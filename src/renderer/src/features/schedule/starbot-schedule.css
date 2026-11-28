@@ -321,7 +321,9 @@
   color: var(--openbot-accent-text);
   opacity: 0;
   cursor: pointer;
-  transition: opacity 140ms ease, transform 140ms ease;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
 }
 
 .starbot-cal-cell:hover .starbot-cal-cell-add,

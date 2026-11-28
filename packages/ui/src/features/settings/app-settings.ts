@@ -66,7 +66,7 @@ export const DEFAULT_GENERAL_SETTINGS: GeneralSettingsValue = {
   notificationPreview: true,
   macBookNotch: true,
   macBookNotchHaptics: true,
-  macBookNotchIdle: true,
+  macBookNotchIdle: false,
   macBookNotchAdditionalDisplays: true,
   macBookNotchWidthPercent: 100,
   macBookNotchHeightPercent: 100,

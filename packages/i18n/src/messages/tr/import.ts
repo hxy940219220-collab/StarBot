@@ -77,5 +77,4 @@ export const messages = {
   "import.hermes.notFoundServer": "Bu sunucuda Hermes profili yok",
   "import.hermes.notFoundServerNote":
     "StarBot, sunucunun Hermes klasörünü okur. Hermes'i bu bilgisayardan içe aktarmak için Hermes'ten bir .zip dosyası dışa aktarın.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -84,5 +84,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "L’accesso a Proton ha richiesto troppo tempo. Connetti di nuovo.",
   "error.connector.protonPassSetupFailed":
     "Impossibile creare la cassaforte Shared with StarBot o la sua chiave di accesso in Proton Pass. Connetti di nuovo.",
-
 } as const satisfies PartialTranslation<typeof source>;

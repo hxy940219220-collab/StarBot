@@ -23,5 +23,4 @@ export const messages = {
 
   "messaging.discordHelp.not_linked":
     "Questo server Discord non è collegato a questo server StarBot. Seleziona Riconnetti per collegarlo.",
-
 } as const satisfies PartialTranslation<typeof source>;

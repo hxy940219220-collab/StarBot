@@ -39,12 +39,7 @@ import { isHeldTargetError, writeFileAtomically } from "../backend/atomic-json-f
 import { causeHelpers } from "../backend/effect-boundary";
 import { toArrayBuffer } from "./agent-marketplace-service";
 import type { CentralAuthManager } from "./central-auth-manager";
-import {
-  buildCuratedSkillBundle,
-  getCuratedSkillDetail,
-  isCuratedSkillId,
-  listCuratedSkills,
-} from "./curated-skills";
+import { buildCuratedSkillBundle, getCuratedSkillDetail, isCuratedSkillId, listCuratedSkills } from "./curated-skills";
 import type { GithubSkillSourceReader } from "./github-skill-source";
 import { type LocalSkillLibrary, quotedSkillMarkdown } from "./local-skill-library";
 import { listManagedSkillsForChat, MANAGED_SKILL_SLUGS } from "./managed-skill-service";
@@ -115,9 +110,7 @@ export class SkillMarketplaceService {
 
   list(query: MarketplaceSkillQuery = {}): Effect.Effect<MarketplaceSkillPage, SkillMarketplaceFailure> {
     return Effect.gen({ self: this }, function* (): Effect.fn.Return<MarketplaceSkillPage, SkillMarketplaceFailure> {
-      const localSkills = this.localLibrary
-        ? yield* Effect.orElseSucceed(this.localLibrary.list(), () => [])
-        : [];
+      const localSkills = this.localLibrary ? yield* Effect.orElseSucceed(this.localLibrary.list(), () => []) : [];
       const fallback = listCuratedSkills(query, localSkills);
       if (query.cursor) return fallback;
       const params = marketplaceQueryParams(query);
@@ -636,11 +629,7 @@ export class SkillMarketplaceService {
       if (replacedId) delete lock.skills[replacedId];
       lock.skills[detail.id] = entry;
       yield* writeLock(agent.workspacePath, lock);
-      if (
-        !detail.id.startsWith("local-skill-") &&
-        !isCuratedSkillId(detail.id) &&
-        !isGithubSkillId(detail.id)
-      )
+      if (!detail.id.startsWith("local-skill-") && !isCuratedSkillId(detail.id) && !isGithubSkillId(detail.id))
         yield* this.auth
           .requestAuthorized(
             `/v1/skills/${encodeURIComponent(detail.id)}/install`,

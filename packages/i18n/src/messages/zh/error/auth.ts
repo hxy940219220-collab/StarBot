@@ -4,8 +4,7 @@ import type { messages as source } from "../../en/error/auth";
 export const messages = {
   "error.auth.serviceUnavailable": "星友无法连接账号服务。请确认 API 正在运行后重试。",
   "error.auth.sessionTimeout": "星友未及时响应。请检查网络连接，然后重试。",
-  "error.auth.networkBlocked":
-    "该网络中的防火墙或代理阻止了星友访问 {host}。请让网络管理员放行 {host}，然后重试。",
+  "error.auth.networkBlocked": "该网络中的防火墙或代理阻止了星友访问 {host}。请让网络管理员放行 {host}，然后重试。",
   "error.auth.signInFirst": "请先登录星友。",
   "error.auth.signInRequired": "需要先登录。",
   "error.auth.chatColorUnavailable": "账户服务暂不支持聊天颜色。请稍后重试。",

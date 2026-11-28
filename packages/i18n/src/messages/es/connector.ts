@@ -768,5 +768,4 @@ export const messages = {
 
   "connector.protonPass.disconnect": "Desconectar",
   "connector.protonPass.actionFailed": "StarBot no pudo cambiar la conexión de Proton Pass.",
-
 } as const satisfies PartialTranslation<typeof source>;

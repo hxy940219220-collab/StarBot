@@ -47,5 +47,4 @@ export const messages = {
 
   "error.crm.off": "CRM kapalı. Bir sahip veya yönetici bunu Sunucu Ayarları > Deneysel bölümünden açabilir.",
   "error.crm.settingsSaveFailed": "StarBot bu sunucuda CRM ayarını kaydedemiyor.",
-
 } as const satisfies PartialTranslation<typeof source>;

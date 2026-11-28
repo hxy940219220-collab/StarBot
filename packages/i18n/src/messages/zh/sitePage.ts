@@ -36,11 +36,9 @@ export const messages = {
   "sitePage.connect.failure.takenDiscord":
     "另一台星友服务器已在响应该 Discord 服务器。请先在那台服务器上断开连接，然后重试。",
   "sitePage.connect.failure.unavailable": "星友现在无法连接 {name}。请稍后重试。",
-  "sitePage.connect.failure.tabClosed":
-    "发起 {name} 连接的星友标签页没有响应。请在浏览器中打开星友，再次连接 {name}。",
+  "sitePage.connect.failure.tabClosed": "发起 {name} 连接的星友标签页没有响应。请在浏览器中打开星友，再次连接 {name}。",
   "sitePage.connect.failure.failed": "{name} 未完成连接。请重试。",
-  "sitePage.connect.restartHint":
-    "在星友中打开“{marketplace}”，再打开“{apps}”，然后打开“{name}”并选择“{connect}”。",
+  "sitePage.connect.restartHint": "在星友中打开“{marketplace}”，再打开“{apps}”，然后打开“{name}”并选择“{connect}”。",
   "sitePage.connect.notOpened": "请启动星友，然后重试。如果这台电脑上没有星友，请下载并在应用中连接 {name}。",
   "sitePage.openApp.title": "没有打开？",
   "sitePage.openApp.dismiss": "暂不",
@@ -86,8 +84,7 @@ export const messages = {
   "sitePage.pricing.consent.earlyStart":
     "我要求在 14 天撤回期结束前开始提供托管服务。我知悉：如果我在服务完全履行前撤回合同，我需要支付截至撤回时已提供的服务费用；服务完全履行后，我将失去撤回合同的权利。",
   "sitePage.teams.title": "星友团队版",
-  "sitePage.teams.description":
-    "在托管基础设施上运行星友，或由我们围绕你的团队、工作流和现有系统，为你设计定制部署。",
+  "sitePage.teams.description": "在托管基础设施上运行星友，或由我们围绕你的团队、工作流和现有系统，为你设计定制部署。",
   "sitePage.teams.imageAlt": "宏图大计，携手更好。两个星友助手由一座纸桥相连",
   "sitePage.teams.hero.heading": "把一支 {team} AI 同事团队带进你的公司",
   "sitePage.teams.setups.heading": "选择适合你团队的方案",
@@ -162,13 +159,11 @@ export const messages = {
   "sitePage.contact.sentBody": "我们会回复到 {email}。",
   "sitePage.contact.sendAnother": "再发一条消息",
   "sitePage.marketplace.agents.title": "助手 — 星友市场",
-  "sitePage.marketplace.agents.description":
-    "其他人在星友中创建的助手。将助手连同技能和自动化任务一起添加到星友。",
+  "sitePage.marketplace.agents.description": "其他人在星友中创建的助手。将助手连同技能和自动化任务一起添加到星友。",
   "sitePage.marketplace.skills.title": "技能 — 星友市场",
   "sitePage.marketplace.skills.description": "星友助手可以使用的技能。将技能添加到星友。",
   "sitePage.marketplace.apps.title": "应用 — 星友市场",
-  "sitePage.marketplace.apps.description":
-    "星友助手可以使用的应用和工具。在星友中打开应用，并在那里决定它连接什么。",
+  "sitePage.marketplace.apps.description": "星友助手可以使用的应用和工具。在星友中打开应用，并在那里决定它连接什么。",
   "sitePage.marketplace.agentTitle": "{name} — 星友助手",
   "sitePage.marketplace.skillTitle": "{name} — 星友技能",
   "sitePage.marketplace.agentImageAlt": "{name}，由 {creator} 创建的星友助手",
@@ -198,8 +193,7 @@ export const messages = {
   "sitePage.marketplace.downloadFor": "下载 {platform} 版",
   "sitePage.marketplace.copyLink": "复制链接",
   "sitePage.marketplace.copied": "已复制",
-  "sitePage.marketplace.trust.agentReviewed":
-    "由其他星友用户创建。星友在发布前审核过。添加后，它可以代表你操作。",
+  "sitePage.marketplace.trust.agentReviewed": "由其他星友用户创建。星友在发布前审核过。添加后，它可以代表你操作。",
   "sitePage.marketplace.trust.agentPending": "创建者在星友审核前分享了它。添加后，它可以代表你操作。",
   "sitePage.marketplace.trust.skillReviewed": "由其他星友用户创建。星友在发布前审核过。",
   "sitePage.marketplace.source.verified": "由星友验证",

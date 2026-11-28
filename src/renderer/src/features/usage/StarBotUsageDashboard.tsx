@@ -8,10 +8,7 @@ import {
 import { isKnownAgentProvider } from "@openbot/contracts/agent-providers";
 import { Bot, Cpu, MessageSquare, Sparkles, Zap } from "@openbot/ui";
 import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import {
-  type UsagePeriod,
-  usagePeriods,
-} from "@openbot/ui/features/usage/usage-format";
+import { type UsagePeriod, usagePeriods } from "@openbot/ui/features/usage/usage-format";
 import { createMemo, createSignal, For, Show } from "solid-js";
 
 const PERIOD_LABELS_ZH: Record<UsagePeriod, string> = {
@@ -64,7 +61,7 @@ export function StarBotUsageDashboard(props: StarBotUsageDashboardProps) {
   const [hoveredDate, setHoveredDate] = createSignal<string | null>(null);
 
   const selectedAgent = createMemo(() =>
-    props.selectedAgentId ? props.agents.find((a) => a.id === props.selectedAgentId) ?? null : null,
+    props.selectedAgentId ? (props.agents.find((a) => a.id === props.selectedAgentId) ?? null) : null,
   );
 
   const totals = () => props.analytics.totals;
@@ -285,7 +282,8 @@ export function StarBotUsageDashboard(props: StarBotUsageDashboardProps) {
               <Show when={hoveredPoint()}>
                 {(pt) => (
                   <p>
-                    {formatShortDate(pt().date)}：消耗 <strong>{formatCompactTokens(pt().processedTokens)}</strong> Token
+                    {formatShortDate(pt().date)}：消耗 <strong>{formatCompactTokens(pt().processedTokens)}</strong>{" "}
+                    Token
                     {" · "}
                     {pt().turns} 轮对话
                     <Show when={pt().estimatedCostUsd !== null && (pt().estimatedCostUsd ?? 0) > 0}>
@@ -420,11 +418,7 @@ export function StarBotUsageDashboard(props: StarBotUsageDashboardProps) {
             <div class="starbot-usage-agent-table">
               <For each={agentCards()}>
                 {(item) => (
-                  <button
-                    type="button"
-                    class="starbot-usage-agent-row"
-                    onClick={() => props.onSelectAgent(item.id)}
-                  >
+                  <button type="button" class="starbot-usage-agent-row" onClick={() => props.onSelectAgent(item.id)}>
                     <div class="starbot-usage-agent-cell-main">
                       <Show
                         when={item.profile}

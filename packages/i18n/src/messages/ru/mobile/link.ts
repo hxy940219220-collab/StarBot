@@ -53,5 +53,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "Не удалось прочитать общего агента. Повторите попытку.",
   "mobile.link.template.error.unsupported":
     "Этот сервер не может добавлять общих агентов. Обновите StarBot на компьютере, где работает сервер.",
-
 } as const satisfies PartialTranslation<typeof source>;

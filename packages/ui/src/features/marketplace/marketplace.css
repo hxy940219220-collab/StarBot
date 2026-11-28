@@ -833,7 +833,9 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   white-space: nowrap;
   cursor: pointer;
   box-shadow: 0 3px 10px color-mix(in srgb, var(--openbot-accent) 28%, transparent);
-  transition: filter 140ms ease, transform 120ms ease;
+  transition:
+    filter 140ms ease,
+    transform 120ms ease;
 }
 
 .starbot-add-skill-trigger:hover {
@@ -931,7 +933,9 @@ body[data-skills-marketplace] :is(.integration-dialog-backdrop, .integration-wiz
   background: color-mix(in srgb, var(--openbot-bg-canvas) 60%, var(--openbot-bg-surface));
   color: var(--openbot-text-primary);
   cursor: pointer;
-  transition: border-color 140ms ease, background-color 140ms ease;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
 }
 
 .starbot-skill-import-dropzone:hover:not(:disabled),

@@ -381,7 +381,9 @@ export class AcpConfiguration {
       if (!selected && category === "model" && values.length > 0) {
         // Gracefully fall back if a previously saved preview model (e.g. grok-4.7-build-fast) was retired upstream
         const prefixMatch = values.find(
-          (candidate) => wanted.startsWith(`${candidate.value}-`) || candidate.value.startsWith(wanted.split("-").slice(0, 2).join("-")),
+          (candidate) =>
+            wanted.startsWith(`${candidate.value}-`) ||
+            candidate.value.startsWith(wanted.split("-").slice(0, 2).join("-")),
         );
         const fallbackModel = prefixMatch?.value ?? option.currentValue ?? values[0]?.value;
         if (fallbackModel) {

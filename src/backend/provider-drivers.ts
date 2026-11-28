@@ -500,8 +500,7 @@ function makeWorkBuddyAcpModel(id: string, name: string, description: string): A
   };
 }
 
-const WORKBUDDY_MAC_PRODUCT_JSON =
-  "/Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/product.json";
+const WORKBUDDY_MAC_PRODUCT_JSON = "/Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/product.json";
 const STARBUDDY_CLI_AUTH_ID = "starbot-workbuddy-cli";
 
 function starbotWorkBuddyCliDir(): string {
@@ -553,10 +552,7 @@ function ensureStarBotWorkBuddyProductJson(): string | null {
 }
 
 function readWorkBuddyLatestModels(): AcpModel[] {
-  const storageDirs = [
-    join(starbotWorkBuddyCliDir(), "local_storage"),
-    join(homedir(), ".workbuddy", "local_storage"),
-  ];
+  const storageDirs = [join(starbotWorkBuddyCliDir(), "local_storage"), join(homedir(), ".workbuddy", "local_storage")];
   try {
     for (const storageDir of storageDirs) {
       if (!existsSync(storageDir)) continue;
@@ -1020,20 +1016,20 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
       const { SSL_CERT_FILE: _openBotRoots, ...serverEnvironment } = context.serverEnvironment ?? {};
       const variables = context.providerEnvironment?.("codex") ?? {};
       const overrides = codexVariableOverrides(variables);
-        return new CodexAppServerClient(
-          cli.executable,
-          requestTimeoutMs,
-          {
-            ...cliPathEnvironment(cli),
-            ...overseasProviderProxyEnv(),
-            ...serverEnvironment,
-            ...context.accountEnvironment,
-            ...variables,
-          },
-          context.codexTurnContext,
-          overrides,
-          overrides.length > 0 ? CODEX_ADDRESS_VARIABLE : undefined,
-        );
+      return new CodexAppServerClient(
+        cli.executable,
+        requestTimeoutMs,
+        {
+          ...cliPathEnvironment(cli),
+          ...overseasProviderProxyEnv(),
+          ...serverEnvironment,
+          ...context.accountEnvironment,
+          ...variables,
+        },
+        context.codexTurnContext,
+        overrides,
+        overrides.length > 0 ? CODEX_ADDRESS_VARIABLE : undefined,
+      );
     },
     authState: (account) => ({ kind: "chatgpt", email: account?.email ?? null }),
     validateAccount: (account) => {

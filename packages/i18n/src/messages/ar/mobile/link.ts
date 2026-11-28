@@ -48,5 +48,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "تعذّرت قراءة الوكيل المشترك. أعد المحاولة.",
   "mobile.link.template.error.unsupported":
     "لا يمكن لهذا الخادم إضافة وكلاء مشتركين. حدّث StarBot على الحاسوب الذي يشغّل الخادم.",
-
 } as const satisfies PartialTranslation<typeof source>;

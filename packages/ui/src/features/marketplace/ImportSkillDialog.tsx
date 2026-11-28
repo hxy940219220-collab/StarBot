@@ -9,10 +9,7 @@ interface FileEntryPayload {
   bytes: Uint8Array;
 }
 
-async function readDirectoryEntryRecursive(
-  entry: FileSystemEntry,
-  prefix = "",
-): Promise<FileEntryPayload[]> {
+async function readDirectoryEntryRecursive(entry: FileSystemEntry, prefix = ""): Promise<FileEntryPayload[]> {
   if (entry.isFile) {
     const fileEntry = entry as FileSystemFileEntry;
     const file = await new Promise<File>((resolve, reject) => fileEntry.file(resolve, reject));
@@ -24,9 +21,7 @@ async function readDirectoryEntryRecursive(
     const reader = dirEntry.createReader();
     const allEntries: FileSystemEntry[] = [];
     while (true) {
-      const batch = await new Promise<FileSystemEntry[]>((resolve, reject) =>
-        reader.readEntries(resolve, reject),
-      );
+      const batch = await new Promise<FileSystemEntry[]>((resolve, reject) => reader.readEntries(resolve, reject));
       if (batch.length === 0) break;
       allEntries.push(...batch);
     }
@@ -48,9 +43,7 @@ export function ImportSkillDialog(props: {
   const [busy, setBusy] = createSignal(false);
   const [errorMsg, setErrorMsg] = createSignal<string | null>(null);
   const [pendingPreview, setPendingPreview] = createSignal<
-    | { kind: "staged"; preview: SkillPackagePreview }
-    | { kind: "files"; name: string; files: FileEntryPayload[] }
-    | null
+    { kind: "staged"; preview: SkillPackagePreview } | { kind: "files"; name: string; files: FileEntryPayload[] } | null
   >(null);
 
   let zipInputRef: HTMLInputElement | undefined;
@@ -199,15 +192,15 @@ export function ImportSkillDialog(props: {
             if (e.target === e.currentTarget) resetAndClose();
           }}
         >
-          <div class="starbot-skill-import-modal" role="dialog" aria-modal="true" aria-labelledby="starbot-import-skill-title">
+          <div
+            class="starbot-skill-import-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="starbot-import-skill-title"
+          >
             <header class="starbot-skill-import-head">
               <h3 id="starbot-import-skill-title">导入技能</h3>
-              <button
-                type="button"
-                class="starbot-skill-import-close"
-                aria-label="关闭"
-                onClick={resetAndClose}
-              >
+              <button type="button" class="starbot-skill-import-close" aria-label="关闭" onClick={resetAndClose}>
                 <X class="size-4" />
               </button>
             </header>
@@ -292,7 +285,11 @@ export function ImportSkillDialog(props: {
             </Show>
 
             <Show when={errorMsg()}>
-              {(msg) => <p class="starbot-skill-import-error" role="alert">{msg()}</p>}
+              {(msg) => (
+                <p class="starbot-skill-import-error" role="alert">
+                  {msg()}
+                </p>
+              )}
             </Show>
 
             <div class="starbot-skill-import-reqs">

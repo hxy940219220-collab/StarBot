@@ -12,6 +12,7 @@ import { reconcileQueuesWithRuntimeWork } from "@openbot/team-client/dynamic-isl
 import { approvalIsCut } from "@openbot/team-client/runtime-attention";
 import { classifyFailure } from "@openbot/telemetry";
 import { toast } from "@openbot/ui";
+import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio";
 import { currentText } from "@openbot/ui/text";
 import { classifyUserError } from "@openbot/user-errors";
 import { flush, onSettled } from "solid-js";
@@ -327,7 +328,12 @@ export function AgentEventBridge() {
         setActiveTurns((current) =>
           current[event.agentId] === event.turnId ? current : { ...current, [event.agentId]: event.turnId },
         );
-        if (soundLevel(event.agentId) === "all" && !platform.chatWindow) prepareCompletionSound();
+        if (soundLevel(event.agentId) === "all" && !platform.chatWindow) {
+          prepareCompletionSound();
+          if (isMainThread(event.agentId, event.threadId)) {
+            void playKawaiiCue("reply-start", { subtle: true });
+          }
+        }
         return;
       case "turn-completed": {
         completedTurnByAgent.set(event.agentId, event.turnId);

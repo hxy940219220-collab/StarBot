@@ -17,8 +17,7 @@ export const messages = {
   "menu.quitConfirm": "退出",
   "menu.quitHint": "按住 ⌘Q 或按两次以退出",
   "menu.closeWorkingTitle": { other: "{count} 个智能体仍在工作" },
-  "menu.closeWorkingBody":
-    "退出星友后，智能体会停止。请让它继续运行，以便它们完成工作。要再次显示窗口，请打开星友。",
+  "menu.closeWorkingBody": "退出星友后，智能体会停止。请让它继续运行，以便它们完成工作。要再次显示窗口，请打开星友。",
   "menu.closeKeepRunning": "继续运行",
   "menu.trayOpen": "打开星友",
   "menu.trayQuit": "退出星友",

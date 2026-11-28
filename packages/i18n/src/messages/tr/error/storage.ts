@@ -5,5 +5,4 @@ export const messages = {
   "error.storage.unsupported": "Depolama bu sunucu tarafından desteklenmiyor.",
   "error.storage.agentMissing": "Ajan mevcut değil.",
   "error.storage.unreadableFile": "StarBot {path} dosyasını okuyamıyor. Dosya bozuk.",
-
 } as const satisfies PartialTranslation<typeof source>;

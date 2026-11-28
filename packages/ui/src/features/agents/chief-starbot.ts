@@ -13,9 +13,7 @@ function readStoredId(key: string): string | null {
   }
 }
 
-const [manualChiefAgentId, setManualChiefAgentIdSignal] = createSignal<string | null>(
-  readStoredId(CHIEF_OVERRIDE_KEY),
-);
+const [manualChiefAgentId, setManualChiefAgentIdSignal] = createSignal<string | null>(readStoredId(CHIEF_OVERRIDE_KEY));
 const [autoChiefAgentId, setAutoChiefAgentIdSignal] = createSignal<string | null>(readStoredId(CHIEF_AUTO_KEY));
 
 export function chiefStarBotAgentId(): string | null {

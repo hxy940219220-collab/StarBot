@@ -52,5 +52,4 @@ export const messages = {
   "mobile.link.template.error.loadFailed": "Paylaşılan ajan okunamadı. Tekrar deneyin.",
   "mobile.link.template.error.unsupported":
     "Bu sunucu paylaşılan ajanları ekleyemiyor. Sunucuyu çalıştıran bilgisayardaki StarBot'u güncelleyin.",
-
 } as const satisfies PartialTranslation<typeof source>;

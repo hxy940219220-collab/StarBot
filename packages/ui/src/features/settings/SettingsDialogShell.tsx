@@ -7,6 +7,7 @@ export interface SettingsPagePlacement {
   nav: HTMLElement;
   content: HTMLElement;
   path: HTMLElement;
+  unifiedNav?: boolean;
   onBack?: (back: SettingsPageBack | null) => void;
 }
 
@@ -188,9 +189,11 @@ export function SettingsDialogShell(props: SettingsDialogShellProps) {
     <Show when={props.open && props.page}>
       {(page) => (
         <>
-          <Portal mount={page().nav}>
-            <div class="settings-page-nav-group">{props.sidebar}</div>
-          </Portal>
+          <Show when={!page().unifiedNav}>
+            <Portal mount={page().nav}>
+              <div class="settings-page-nav-group">{props.sidebar}</div>
+            </Portal>
+          </Show>
           <Portal mount={page().content}>
             <section
               ref={(element) => props.onContentElement?.(element)}

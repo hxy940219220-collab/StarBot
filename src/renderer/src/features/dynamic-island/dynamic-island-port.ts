@@ -1,7 +1,7 @@
 import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
 
 export interface DynamicIslandPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "acknowledgeFailedTurn" | "onScopedEvent">;
+  agent: Pick<OpenBotDesktopApi["agent"], "acknowledgeFailedTurn" | "importAttachmentData" | "onScopedEvent">;
   dynamicIsland: Pick<
     OpenBotDesktopApi["dynamicIsland"],
     | "getPreference"

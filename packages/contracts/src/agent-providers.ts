@@ -610,7 +610,11 @@ export const STARBOT_CORE_PROVIDERS = [
   "muse",
 ] as const satisfies readonly AgentProviderId[];
 
-export const STARBOT_REMOVED_PROVIDERS = ["opencode", "deepseek", "copilot"] as const satisfies readonly AgentProviderId[];
+export const STARBOT_REMOVED_PROVIDERS = [
+  "opencode",
+  "deepseek",
+  "copilot",
+] as const satisfies readonly AgentProviderId[];
 
 export const PICKER_PROVIDERS: readonly AgentProviderId[] = [...STARBOT_CORE_PROVIDERS];
 

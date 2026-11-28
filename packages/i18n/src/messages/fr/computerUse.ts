@@ -55,5 +55,4 @@ export const messages = {
   "computerUse.help.revealFailed": "Impossible d’afficher l’application dans le Finder.",
   "computerUse.help.dragFailed": "Impossible de faire glisser l’application.",
   "computerUse.highlight.working": "StarBot travaille dans {title}",
-
 } as const satisfies PartialTranslation<typeof source>;

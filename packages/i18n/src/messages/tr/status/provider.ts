@@ -31,5 +31,4 @@ export const messages = {
     "Claude standart hızda yanıt verdi. Claude Code bu turda hızlı modu kullanamadı.",
   "status.provider.claudeOwnApiKey":
     "Claude Code bir Anthropic API anahtarı kullanacak şekilde ayarlı. Anthropic her isteği Claude planınızdan değil, anahtarın API kredisinden ücretlendirir. Planınızı kullanmak için anahtarı Claude Code ayarlarından veya ortam değişkenlerinden kaldırın, ardından StarBot'u yeniden başlatın.",
-
 } as const satisfies PartialTranslation<typeof source>;

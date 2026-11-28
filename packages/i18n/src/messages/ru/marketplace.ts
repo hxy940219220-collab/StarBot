@@ -28,7 +28,6 @@ export const messages = {
 
   "marketplace.plugins.missing": "Этого плагина нет в каталоге StarBot.",
 
-
   "marketplace.agents.loadingDetail": "Загрузка сведений об агенте…",
   "marketplace.agents.skills": "Навыки",
   "marketplace.agents.routines": "Регулярные задачи",

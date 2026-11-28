@@ -92,5 +92,4 @@ export const messages = {
   "error.connector.protonPassSignInTimeout": "استغرق تسجيل الدخول إلى Proton وقتًا طويلاً. اتصل مرة أخرى.",
   "error.connector.protonPassSetupFailed":
     "تعذّر إنشاء الخزنة Shared with StarBot أو مفتاح الوصول الخاص بها في Proton Pass. اتصل مرة أخرى.",
-
 } as const satisfies PartialTranslation<typeof source>;

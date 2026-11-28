@@ -19,6 +19,8 @@ export interface PinnedMessagesProps {
   onOpenChange?: ((open: boolean) => void) | undefined;
   onJump: (id: string) => void;
   onUnpin: (id: string) => void;
+  placement?: "bottom-start" | "bottom-end" | undefined;
+  triggerClass?: string | undefined;
 }
 
 export function PinnedMessages(props: PinnedMessagesProps) {
@@ -45,9 +47,9 @@ export function PinnedMessages(props: PinnedMessagesProps) {
   const metaId = (pin: PinnedMessageItem, index: number) => (meta(pin) ? `${listId}-${index}` : undefined);
 
   return (
-    <Popover.Root open={open()} onOpenChange={change} placement="bottom-end" gutter={6}>
+    <Popover.Root open={open()} onOpenChange={change} placement={props.placement ?? "bottom-end"} gutter={6}>
       <Popover.Trigger
-        class={`${buttonVariants({ variant: "ghost" })} header-panel-toggle no-drag`}
+        class={`${buttonVariants({ variant: "ghost" })} ${props.triggerClass ?? "header-panel-toggle no-drag"}`}
         aria-label={t("chat.pins.title")}
         title={t("chat.pins.title")}
       >

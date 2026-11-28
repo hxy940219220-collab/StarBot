@@ -52,5 +52,4 @@ export const messages = {
   "error.update.restartStarted": "O StarBot já está reiniciando para instalar a atualização.",
 
   "error.update.alreadyRestarting": "O StarBot já está reiniciando.",
-
 } as const satisfies PartialTranslation<typeof source>;

@@ -1,11 +1,7 @@
 import { attachmentReferenceIds } from "@openbot/contracts/attachment-references";
 import { serializeChatTagReference } from "@openbot/contracts/chat-tag-references";
 import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import {
-  type DraftAttachment,
-  isAttachmentSummary,
-  type MarketplaceSkillDetail,
-} from "@openbot/contracts/ipc";
+import { type DraftAttachment, isAttachmentSummary, type MarketplaceSkillDetail } from "@openbot/contracts/ipc";
 import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
 import { decodeQueueEditRequest, type QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
 import { skillExamplePrompt } from "@openbot/ui/components/SkillPreview";
