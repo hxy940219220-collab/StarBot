@@ -1,11 +1,9 @@
 import { requestFirstAgentTourReplay } from "@starbot/ui/features/agents/FirstAgentSetup";
 import { HelpMenu } from "@starbot/ui/features/updates/HelpMenu";
-import { createSignal, onCleanup, onSettled } from "solid-js";
+import { createSignal } from "solid-js";
 import { StarBotFeatureTourModal, StarBotFeedbackModal, StarBotGuideModal } from "./StarBotHelpModals";
 
 type HelpLink = "changelog" | "guides" | "discord" | "report-problem" | "feedback";
-
-const FEATURE_TOUR_SEEN_KEY = "starbot:feature-tour-v022-video-seen";
 
 export function RailHelpMenu(props: {
   version: string | null;
@@ -16,18 +14,6 @@ export function RailHelpMenu(props: {
   const [guideOpen, setGuideOpen] = createSignal(false);
   const [feedbackOpen, setFeedbackOpen] = createSignal(false);
   const [featureTourOpen, setFeatureTourOpen] = createSignal(false);
-
-  onSettled(() => {
-    try {
-      if (!window.localStorage.getItem(FEATURE_TOUR_SEEN_KEY)) {
-        const timer = window.setTimeout(() => {
-          window.localStorage.setItem(FEATURE_TOUR_SEEN_KEY, "1");
-          setFeatureTourOpen(true);
-        }, 2800);
-        onCleanup(() => window.clearTimeout(timer));
-      }
-    } catch {}
-  });
 
   function startTour(): void {
     setFeatureTourOpen(true);

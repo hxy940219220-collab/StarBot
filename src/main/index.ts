@@ -1673,16 +1673,29 @@ if (!hasSingleInstanceLock) {
         app.quit();
       });
       registerIpcHandlers(built);
-      const renewHostSignal = () =>
+      const renewHostSignal = () => {
         void runCauseEffect(built.teamWebRtcBridge.renewHostSignal()).catch((error) =>
-          logger.warn("Unable to renew the host Signal connection after sleep:", toLogValue(error)),
+          logger.warn("Unable to renew the host Signal connection after wake:", toLogValue(error)),
         );
+        const teamIdentity = teamStore.getIdentity();
+        if (
+          !built.serverMode &&
+          teamIdentity?.enabledOnLaunch &&
+          host.getStatus().phase !== "online" &&
+          host.getStatus().phase !== "starting"
+        ) {
+          void runCauseEffect(built.centralAuthInitialization.pipe(Effect.flatMap(() => host.start(true)))).catch(
+            (error) => logger.warn("Unable to republish StarBot host after wake:", toLogValue(error)),
+          );
+        }
+      };
       if (localServerChild) {
         const childRoutineWake = new RoutineWake({ routines: service, isOnline: () => net.isOnline() });
         powerMonitor.on("suspend", () => childRoutineWake.suspend());
         powerMonitor.on("resume", () => childRoutineWake.resume());
         powerMonitor.on("resume", () => built.messaging.resume());
         powerMonitor.on("resume", renewHostSignal);
+        powerMonitor.on("unlock-screen", renewHostSignal);
         teardown.push(0, "routine wake", () => childRoutineWake.dispose());
         void runCauseEffect(built.agentInitialization.start()).catch((error) => {
           logger.error("Unable to initialize the local agent backend:", toLogValue(error));
@@ -1815,6 +1828,8 @@ if (!hasSingleInstanceLock) {
       powerMonitor.on("resume", () => void Effect.runPromise(remoteServers.wake()));
       powerMonitor.on("resume", () => built.messaging.resume());
       powerMonitor.on("resume", renewHostSignal);
+      powerMonitor.on("unlock-screen", () => void Effect.runPromise(remoteServers.wake()));
+      powerMonitor.on("unlock-screen", renewHostSignal);
       const routineWake = new RoutineWake({ routines: service, isOnline: () => net.isOnline() });
       powerMonitor.on("suspend", () => routineWake.suspend());
       powerMonitor.on("resume", () => routineWake.resume());

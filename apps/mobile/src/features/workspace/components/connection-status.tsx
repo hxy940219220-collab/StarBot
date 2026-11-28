@@ -19,11 +19,19 @@ function ConnectionStatusText({ server: shown, note }: { server: MobileServer; n
   const { t, sourceText } = useText();
   const server = useLiveServerRecovery(shown);
   const recovery = server.recoveryStatus;
-  const reconnecting = recovery && recovery.phase !== "online" && recovery.phase !== "suspended";
-  const title = reconnecting ? t("mobile.workspace.status.reconnecting") : serverStatusLabel(server, t);
-  const detail = reconnecting
-    ? t("mobile.workspace.status.attempt", { attempt: recoveryAttempt(recovery), limit: REMOTE_RETRY_LIMIT })
-    : server.connectionMessage && sourceText(server.connectionMessage);
+  const stoppedAfterRetries = recovery?.phase === "cooldown" && recovery.remainingSeconds <= 0;
+  const reconnecting =
+    recovery && recovery.phase !== "online" && recovery.phase !== "suspended" && !stoppedAfterRetries;
+  const title = stoppedAfterRetries
+    ? "连接已断开"
+    : reconnecting
+      ? t("mobile.workspace.status.reconnecting")
+      : serverStatusLabel(server, t);
+  const detail = stoppedAfterRetries
+    ? `重试 ${REMOTE_RETRY_LIMIT} 次失败，请确认电脑在线后点击重试或重新扫码`
+    : reconnecting
+      ? t("mobile.workspace.status.attempt", { attempt: recoveryAttempt(recovery), limit: REMOTE_RETRY_LIMIT })
+      : server.connectionMessage && sourceText(server.connectionMessage);
   const remainingSeconds = reconnecting ? recoveryCountdown(recovery) : null;
 
   return (

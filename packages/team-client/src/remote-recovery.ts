@@ -146,6 +146,11 @@ export function remoteRecoveryMessage(status: RemoteRecoveryStatus, failure?: st
       : sourceText("error.remote.mobileUpdateRequired");
   }
   if (status.phase === "cooldown") {
+    if (status.remainingSeconds <= 0) {
+      return detail
+        ? `已重试 ${REMOTE_RETRY_LIMIT} 次均连接失败，已停止重试（${detail}）。请确认电脑端已打开，可点击重试或重新扫码。`
+        : `已重试 ${REMOTE_RETRY_LIMIT} 次均连接失败，已停止重试。请确认电脑端已打开，可点击重试或重新扫码。`;
+    }
     const minutes = Math.floor(status.remainingSeconds / 60);
     const seconds = String(status.remainingSeconds % 60).padStart(2, "0");
     const params = { limit: REMOTE_RETRY_LIMIT, minutes, seconds };
@@ -201,6 +206,20 @@ export function createRemoteConnectionRecovery(
 
   function scheduleRetry(start: () => void = startRun) {
     if (disposed || suspended) return;
+    // Stop looping once the retry limit is reached so mobile/desktop clients don't burn battery & CPU endlessly.
+    // Users can manually tap Retry, re-scan QR, or return to the app / restore network to trigger a fresh attempt.
+    if (attempt >= REMOTE_RETRY_LIMIT) {
+      cancelTimer();
+      retryAt = null;
+      retryDelay = null;
+      retryRequested = false;
+      onStatus({
+        phase: "cooldown",
+        attempt: REMOTE_RETRY_LIMIT,
+        remainingSeconds: 0,
+      });
+      return;
+    }
     const startingDelay = startingRetryDelay();
     retryAt ??= Date.now() + (startingDelay ?? retryDelay ?? remoteRetryDelay(attempt));
     if (startingDelay !== null) retryAt = Math.min(retryAt, Date.now() + startingDelay);
@@ -209,12 +228,11 @@ export function createRemoteConnectionRecovery(
     const remaining = Math.max(0, retryAt - Date.now());
     if (remaining === 0 && !running) {
       retryAt = null;
-      if (attempt >= REMOTE_RETRY_LIMIT) attempt = 0;
       start();
       return;
     }
     onStatus({
-      phase: attempt >= REMOTE_RETRY_LIMIT ? "cooldown" : "waiting",
+      phase: "waiting",
       attempt,
       remainingSeconds: Math.ceil(remaining / 1000),
     });
@@ -325,7 +343,8 @@ export function createRemoteConnectionRecovery(
       scheduleRetry();
     },
     networkRestored() {
-      if (disposed || suspended || online || running || retryAt === null) return;
+      if (disposed || suspended || online || running) return;
+      if (retryAt === null && attempt < REMOTE_RETRY_LIMIT) return;
       retryAt = null;
       attempt = 0;
       cancelTimer();
