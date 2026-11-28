@@ -28,9 +28,10 @@ export function migrateLegacyStarBotDataDir(userDataDir: string): void {
       }
     }
 
-    // Migrate legacy JSON preference/state files (`<legacy>-*.json`)
+    // Migrate legacy preference/auth/state files (`<legacy>-*.json`, `<legacy>-*.bin`, etc.)
     for (const name of entries) {
-      if (!name.startsWith(`${LEGACY_PREFIX}-`) || !name.endsWith(".json")) continue;
+      if (!name.startsWith(`${LEGACY_PREFIX}-`)) continue;
+      if (name.endsWith(".log") || name.endsWith(".lock")) continue;
       const nextName = `${STARBOT_PREFIX}${name.slice(LEGACY_PREFIX.length)}`;
       const from = join(userDataDir, name);
       const to = join(userDataDir, nextName);
