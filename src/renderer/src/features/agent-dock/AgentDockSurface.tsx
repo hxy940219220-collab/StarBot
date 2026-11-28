@@ -1,4 +1,9 @@
-import type { AgentDockAction, AgentDockPresentation, StarBotCompanionInfo } from "@openbot/contracts/ipc";
+import type {
+  AgentDockAction,
+  AgentDockOffset,
+  AgentDockPresentation,
+  StarBotCompanionInfo,
+} from "@openbot/contracts/ipc";
 import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { currentDevicePlatform } from "../../send-shortcut-preference";
 import { windowShape } from "../../window-shape";
@@ -10,6 +15,7 @@ const SHAPED_WINDOW = currentDevicePlatform() === "linux" || currentDevicePlatfo
 
 export function AgentDockSurface() {
   const [presentation, setPresentation] = createSignal<AgentDockPresentation | null>(null);
+  const [livePlacement, setLivePlacement] = createSignal<AgentDockOffset | null>(null);
   const [closePanelNonce, setClosePanelNonce] = createSignal(0);
   let received = false;
   let pointerIn = false;
@@ -60,6 +66,10 @@ export function AgentDockSurface() {
 
   onSettled(() => {
     const unsubscribe = agentDockPort().agentDock.onPresentation(apply);
+    const stopMoved = agentDockPort().agentDock.onMoved((offset) => {
+      setLivePlacement(offset);
+      requestAnimationFrame(() => syncShape());
+    });
     const stopCloseChat = agentDockPort().agentDock.onCloseChat(() => {
       setClosePanelNonce((n) => n + 1);
     });
@@ -88,6 +98,7 @@ export function AgentDockSurface() {
     document.documentElement.addEventListener("mouseleave", onLeave);
     return () => {
       unsubscribe();
+      stopMoved();
       stopCloseChat();
       observer?.disconnect();
       document.removeEventListener("mouseover", onPointer);
@@ -129,10 +140,18 @@ export function AgentDockSurface() {
     }));
   });
 
+  const effectiveOffset = createMemo<AgentDockOffset | undefined>(() => {
+    const live = livePlacement();
+    if (live) return live;
+    return presentation()?.offsets.at(-1);
+  });
+
   const expandSide = createMemo<"left" | "right">(() => {
-    const offsets = presentation()?.offsets ?? [];
-    const lastX = offsets.at(-1)?.xOffset;
-    if (lastX !== undefined) return lastX <= 0.42 ? "right" : "left";
+    const current = effectiveOffset();
+    if (current?.dockedEdge === "left") return "right";
+    if (current?.dockedEdge === "right") return "left";
+    const lastX = current?.xOffset;
+    if (lastX !== undefined) return lastX <= 0.45 ? "right" : "left";
     return presentation()?.edge === "left" ? "right" : "left";
   });
 
@@ -145,6 +164,11 @@ export function AgentDockSurface() {
           modelChoices={presentation()?.companionModelChoices ?? []}
           sizePercent={presentation()?.sizePercent ?? 100}
           expandSide={expandSide()}
+          anchorX={effectiveOffset()?.anchorX}
+          anchorY={effectiveOffset()?.anchorY}
+          stageWidth={effectiveOffset()?.windowWidth}
+          stageHeight={effectiveOffset()?.windowHeight}
+          dockedEdge={effectiveOffset()?.dockedEdge ?? null}
           closePanelNonce={closePanelNonce()}
           onPanelOpenChange={(open) => {
             panelOpen = open;

@@ -25,6 +25,10 @@
   font-family: var(--openbot-font-sans, -apple-system, BlinkMacSystemFont, "Hiragino Sans GB", sans-serif);
 }
 
+.starbot-companion-stage.is-screen-stage {
+  display: block;
+}
+
 .starbot-companion-stage.is-in-window {
   inset: auto;
   right: 32px;
@@ -32,6 +36,13 @@
   width: var(--bot-size, 69px);
   height: var(--bot-size, 69px);
   z-index: 60;
+  transition:
+    right 240ms cubic-bezier(0.34, 1.4, 0.64, 1),
+    bottom 240ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.starbot-companion-stage.is-in-window.is-dragging {
+  transition: none;
 }
 
 .starbot-companion-anchor {
@@ -41,6 +52,71 @@
   display: grid;
   place-items: center;
   pointer-events: none;
+}
+
+.starbot-companion-stage.is-screen-stage > .starbot-companion-anchor {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition:
+    left 240ms cubic-bezier(0.34, 1.4, 0.64, 1),
+    top 240ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.starbot-companion-stage.is-screen-stage.is-dragging > .starbot-companion-anchor {
+  transition: none;
+}
+
+/* Invisible pointer hit-bridge keeping hover stable while character slides out from screen edge */
+.starbot-companion-edge-bridge {
+  position: absolute;
+  pointer-events: auto;
+  background: transparent;
+}
+
+.starbot-companion-edge-bridge.is-bridge-right {
+  top: -16px;
+  bottom: -16px;
+  left: 50%;
+  width: calc(var(--bot-size, 69px) + 28px);
+}
+
+.starbot-companion-edge-bridge.is-bridge-left {
+  top: -16px;
+  bottom: -16px;
+  right: 50%;
+  width: calc(var(--bot-size, 69px) + 28px);
+}
+
+.starbot-companion-edge-bridge.is-bridge-top {
+  left: -16px;
+  right: -16px;
+  bottom: 50%;
+  height: calc(var(--bot-size, 69px) + 36px);
+}
+
+.starbot-companion-edge-bridge.is-bridge-bottom {
+  left: -16px;
+  right: -16px;
+  top: 50%;
+  height: calc(var(--bot-size, 69px) + 36px);
+}
+
+/* Adorable peeking pose when half-hidden on a screen edge */
+.starbot-companion-anchor.is-edge-half .starbot-companion-orb {
+  opacity: 0.9;
+  animation: none;
+}
+
+.starbot-companion-anchor.is-edge-half.is-edge-right .starbot-companion-orb {
+  transform: rotate(-12deg);
+}
+
+.starbot-companion-anchor.is-edge-half.is-edge-left .starbot-companion-orb {
+  transform: rotate(12deg);
+}
+
+.starbot-companion-anchor.is-edge-half.is-edge-top .starbot-companion-orb {
+  transform: rotate(180deg);
 }
 
 /* Pure Naked 3D Clay Floating Bot Character (Zero Background Circle!) */
@@ -285,7 +361,7 @@
 .starbot-companion-card {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% + var(--card-shift-y, 0px)));
   width: 248px;
   max-height: 310px;
   display: flex;
@@ -647,7 +723,7 @@
 .starbot-companion-error-pill {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% + var(--card-shift-y, 0px)));
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -767,7 +843,7 @@
 .starbot-companion-reply-bubble {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% + var(--card-shift-y, 0px)));
   width: 248px;
   display: flex;
   flex-direction: column;

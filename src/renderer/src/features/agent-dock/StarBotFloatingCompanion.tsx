@@ -1,4 +1,9 @@
-import type { AgentDockDragPhase, StarBotCompanionInfo, StarBotCompanionModelChoice } from "@openbot/contracts/ipc";
+import type {
+  AgentDockDragPhase,
+  AgentDockSnapEdge,
+  StarBotCompanionInfo,
+  StarBotCompanionModelChoice,
+} from "@openbot/contracts/ipc";
 import { Check, Mic, Sparkles, X } from "@openbot/ui";
 import type { AgentDockVoice } from "@openbot/ui/features/agent-dock/AgentDock";
 import { AgentAvatar, type ZodiacCuteEmote } from "@openbot/ui/features/agents/AgentAvatar";
@@ -14,6 +19,11 @@ export interface StarBotFloatingCompanionProps {
   modelChoices: readonly StarBotCompanionModelChoice[];
   sizePercent?: number | undefined;
   expandSide?: "left" | "right" | undefined;
+  anchorX?: number | undefined;
+  anchorY?: number | undefined;
+  stageWidth?: number | undefined;
+  stageHeight?: number | undefined;
+  dockedEdge?: AgentDockSnapEdge | null | undefined;
   inWindow?: boolean | undefined;
   closePanelNonce?: number | undefined;
   onPanelOpenChange?: ((open: boolean) => void) | undefined;
@@ -64,6 +74,9 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
   } | null>(null);
   const [dismissedReplyKey, setDismissedReplyKey] = createSignal<string | null>(null);
   const [windowPos, setWindowPos] = createSignal({ x: 32, y: 80 });
+  const [inWindowDockedEdge, setInWindowDockedEdge] = createSignal<AgentDockSnapEdge | null>(null);
+  const [draggingNow, setDraggingNow] = createSignal(false);
+  const [suppressHoverUntilLeave, setSuppressHoverUntilLeave] = createSignal(false);
   const [voiceDraftText, setVoiceDraftText] = createSignal("");
   const [voiceError, setVoiceError] = createSignal<string | null>(null);
   const [dragDizzy, setDragDizzy] = createSignal(false);
@@ -185,8 +198,34 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     },
   );
 
-  const arcVisible = () => hovered() || activePanel() !== null || isRecording();
-  const expandLeft = () => (props.expandSide ?? "left") === "left";
+  const currentDockedEdge = createMemo<AgentDockSnapEdge | null>(() =>
+    props.inWindow ? inWindowDockedEdge() : (props.dockedEdge ?? null),
+  );
+
+  createEffect(
+    () => currentDockedEdge(),
+    (edge, prev) => {
+      if (draggingNow() && edge !== null && prev === null) {
+        void playKawaiiCue("tap", { subtle: true });
+      }
+    },
+  );
+
+  const isInteracting = createMemo(
+    () => !draggingNow() && ((hovered() && !suppressHoverUntilLeave()) || activePanel() !== null || isRecording()),
+  );
+  const arcVisible = () => isInteracting();
+  const isHalfHiddenResting = createMemo(() => currentDockedEdge() !== null && !isInteracting());
+  const expandLeft = createMemo(() => {
+    if (props.inWindow) {
+      const edge = inWindowDockedEdge();
+      if (edge === "left") return false;
+      if (edge === "right") return true;
+      const vw = typeof window !== "undefined" ? window.innerWidth : 1200;
+      return windowPos().x <= vw * 0.55;
+    }
+    return (props.expandSide ?? "left") === "left";
+  });
 
   // Notify Electron helper window when a popover card opens/closes so clicking outside on desktop blurs & auto-closes it!
   createEffect(
@@ -297,8 +336,39 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
   });
 
   const botDiameter = createMemo(() => Math.round(48 + sizeRatio() * 48));
+  const botRadius = createMemo(() => Math.max(24, Math.round(botDiameter() / 2)));
   const orbitalRadius = createMemo(() => Math.max(56, Math.round(botDiameter() / 2 + 25)));
   const sideCardOffset = createMemo(() => orbitalRadius() + 24);
+
+  const stageW = createMemo(() => props.stageWidth ?? 860);
+  const stageH = createMemo(() => props.stageHeight ?? 560);
+  const rawAnchorX = createMemo(() => props.anchorX ?? Math.round(stageW() / 2));
+  const rawAnchorY = createMemo(() => props.anchorY ?? Math.round(stageH() / 2));
+
+  const effectiveAnchor = createMemo(() => {
+    const rx = rawAnchorX();
+    const ry = rawAnchorY();
+    if (!isInteracting()) return { x: rx, y: ry };
+    const minSafeX = botRadius() + 10;
+    const maxSafeX = Math.max(minSafeX, stageW() - botRadius() - 10);
+    const minSafeY = orbitalRadius() + 20;
+    const maxSafeY = Math.max(minSafeY, stageH() - orbitalRadius() - 20);
+    return {
+      x: Math.min(maxSafeX, Math.max(minSafeX, rx)),
+      y: Math.min(maxSafeY, Math.max(minSafeY, ry)),
+    };
+  });
+
+  const cardShiftY = createMemo(() => {
+    if (props.inWindow) return 0;
+    const y = effectiveAnchor().y;
+    const h = stageH();
+    const minCardCenter = 166;
+    const maxCardCenter = Math.max(minCardCenter, h - 166);
+    if (y < minCardCenter) return Math.round(minCardCenter - y);
+    if (y > maxCardCenter) return Math.round(maxCardCenter - y);
+    return 0;
+  });
 
   // 5 smooth orbital arc positions hugging the floating clay character with consistent ~5px gaps
   const orbitalButtons = createMemo(() => {
@@ -327,6 +397,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
 
   function enterHover(): void {
     clearTimeout(hoverLeaveTimer);
+    if (draggingNow() || suppressHoverUntilLeave()) return;
     const wasOpen = arcVisible();
     setHovered(true);
     if (!wasOpen) {
@@ -336,6 +407,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
 
   function leaveHover(): void {
     clearTimeout(hoverLeaveTimer);
+    setSuppressHoverUntilLeave(false);
     hoverLeaveTimer = setTimeout(() => {
       setHovered(false);
     }, 240);
@@ -361,6 +433,8 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     const dy = e.screenY - dragStartY;
     if (!dragMoved && Math.hypot(dx, dy) > 5) {
       dragMoved = true;
+      setDraggingNow(true);
+      setActivePanel(null);
       props.onDrag?.("start");
     }
     if (!dragMoved) return;
@@ -384,10 +458,33 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
       lastDragX = e.screenX;
     }
     if (props.inWindow) {
-      setWindowPos({
-        x: Math.max(16, winStartRight - dx),
-        y: Math.max(24, winStartBottom - dy),
-      });
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const r = botRadius();
+      const rawRight = winStartRight - dx;
+      const rawBottom = winStartBottom - dy;
+      const snap = Math.max(16, Math.round(r * 0.55));
+      const distRight = rawRight + r;
+      const distLeft = vw - (rawRight + r);
+      const distBottom = rawBottom + r;
+      const distTop = vh - (rawBottom + r);
+      const candidates: Array<{ edge: AgentDockSnapEdge; dist: number }> = [
+        { edge: "right", dist: distRight },
+        { edge: "left", dist: distLeft },
+        { edge: "bottom", dist: distBottom },
+        { edge: "top", dist: distTop },
+      ];
+      candidates.sort((a, b) => a.dist - b.dist);
+      const nearest = candidates[0];
+      const nextEdge = nearest && nearest.dist <= snap ? nearest.edge : null;
+      setInWindowDockedEdge(nextEdge);
+      let nextRight = Math.min(Math.max(0, vw - r * 2), Math.max(0, rawRight));
+      let nextBottom = Math.min(Math.max(0, vh - r * 2), Math.max(0, rawBottom));
+      if (nextEdge === "right") nextRight = -r;
+      else if (nextEdge === "left") nextRight = vw - r;
+      else if (nextEdge === "bottom") nextBottom = -r;
+      else if (nextEdge === "top") nextBottom = vh - r;
+      setWindowPos({ x: nextRight, y: nextBottom });
     } else {
       props.onDrag?.("move");
     }
@@ -401,9 +498,16 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     } catch {}
     if (dragMoved) {
       dragMoved = false;
+      setDraggingNow(false);
+      if (currentDockedEdge() !== null) {
+        setHovered(false);
+        setSuppressHoverUntilLeave(true);
+      }
       props.onDrag?.("end");
       return;
     }
+    setDraggingNow(false);
+    setSuppressHoverUntilLeave(false);
     // Single tap on the floating bot: if reply bubble is open, open chat; otherwise toggle arc/chat
     const bot = currentBot();
     if (!bot) return;
@@ -488,18 +592,52 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
 
         return (
           <div
-            class={`starbot-companion-stage${props.inWindow ? " is-in-window" : ""}`}
+            class={`starbot-companion-stage${props.inWindow ? " is-in-window" : " is-screen-stage"}${draggingNow() ? " is-dragging" : ""}`}
             style={{
-              ...(props.inWindow ? { right: `${windowPos().x}px`, bottom: `${windowPos().y}px` } : {}),
+              ...(props.inWindow
+                ? {
+                    right: `${
+                      isInteracting() && inWindowDockedEdge() === "right"
+                        ? 8
+                        : isInteracting() && inWindowDockedEdge() === "left"
+                          ? window.innerWidth - botDiameter() - 8
+                          : windowPos().x
+                    }px`,
+                    bottom: `${
+                      isInteracting() && inWindowDockedEdge() === "bottom"
+                        ? orbitalRadius()
+                        : isInteracting() && inWindowDockedEdge() === "top"
+                          ? window.innerHeight - botDiameter() - orbitalRadius()
+                          : windowPos().y
+                    }px`,
+                  }
+                : {}),
               "--bot-size": `${botDiameter()}px`,
               "--card-offset": `${sideCardOffset()}px`,
+              "--card-shift-y": `${cardShiftY()}px`,
             }}
           >
             <div
-              class={`starbot-companion-anchor is-side-${expandLeft() ? "left" : "right"}`}
+              class={`starbot-companion-anchor is-side-${expandLeft() ? "left" : "right"}${isHalfHiddenResting() ? ` is-edge-half is-edge-${currentDockedEdge()}` : ""}`}
+              style={
+                props.inWindow
+                  ? undefined
+                  : {
+                      left: `${effectiveAnchor().x}px`,
+                      top: `${effectiveAnchor().y}px`,
+                    }
+              }
               onMouseEnter={enterHover}
               onMouseLeave={leaveHover}
             >
+              {/* Invisible edge hover bridge so sliding out from a screen edge never drops pointer hover */}
+              <Show when={!props.inWindow && isInteracting() && currentDockedEdge() !== null}>
+                <span
+                  class={`starbot-companion-edge-bridge is-bridge-${currentDockedEdge()}`}
+                  data-companion-hit="true"
+                  aria-hidden="true"
+                />
+              </Show>
               {/* 4 Circular Orbital Arc Action Buttons */}
               <div
                 class={`starbot-companion-arc${arcVisible() ? " is-open" : ""}${activePanel() !== null ? " has-open-panel" : ""}`}
@@ -908,7 +1046,11 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 onPointerDown={handleOrbPointerDown}
                 onPointerMove={handleOrbPointerMove}
                 onPointerUp={handleOrbPointerUp}
-                title={`${bot().agent.name}（按住可全屏自由拖动）`}
+                title={
+                  isHalfHiddenResting()
+                    ? `${bot().agent.name}（半隐藏贴边 · 靠近或点击展开，按住可拖离边缘）`
+                    : `${bot().agent.name}（按住可全屏自由拖动，拖到屏幕边缘可半隐藏）`
+                }
               >
                 <span class="starbot-companion-aura" aria-hidden="true" />
                 <span class="starbot-companion-avatar">

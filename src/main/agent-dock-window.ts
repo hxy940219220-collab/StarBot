@@ -5,7 +5,9 @@ import type {
   AgentDockDragPhase,
   AgentDockExtent,
   AgentDockInputRect,
+  AgentDockOffset,
   AgentDockPresentation,
+  AgentDockSnapEdge,
   SetAgentDockInteractiveInput,
 } from "@openbot/contracts/ipc";
 import {
@@ -29,8 +31,21 @@ const logger = createOpenBotLogger("agent-dock-window");
 const AGENT_DOCK_WINDOW_SIZE = { width: 860, height: 560 } as const;
 const DEFAULT_COMPANION_X_OFFSET = 0.91;
 const DEFAULT_COMPANION_Y_OFFSET = 0.74;
-const COMPANION_EDGE_MARGIN_X = 52;
-const COMPANION_EDGE_MARGIN_Y = 58;
+
+interface CompanionStoredPosition {
+  xOffset: number;
+  offset: number;
+  dockedEdge: AgentDockSnapEdge | null;
+}
+
+interface CompanionPlacement {
+  bounds: Rectangle;
+  centerX: number;
+  centerY: number;
+  anchorX: number;
+  anchorY: number;
+  dockedEdge: AgentDockSnapEdge | null;
+}
 
 const DOCK_REOPEN_MAX = 3;
 const DOCK_REOPEN_WINDOW_MS = 60_000;
@@ -79,7 +94,7 @@ export class AgentDockWindowController {
   #chatOwner: number | null = null;
   readonly #sends = new Map<string, Deferred.Deferred<void, AgentDockFailed>>();
   readonly #reconciliation = Semaphore.makeUnsafe(1);
-  #offsets = new Map<number, { xOffset: number; offset: number }>();
+  #offsets = new Map<number, CompanionStoredPosition>();
   #drag: { rendererId: number; pointerX: number; pointerY: number; centerX: number; centerY: number } | null = null;
   readonly #followedWindows = new WeakSet<BrowserWindow>();
   #reopens: number[] = [];
@@ -119,9 +134,13 @@ export class AgentDockWindowController {
       const dragged = this.#draggedDisplayId();
       const dragOffset = dragged === null ? undefined : this.#offsets.get(dragged);
       this.#offsets = new Map(
-        (presentation?.offsets ?? []).map(({ displayId, offset, xOffset }) => [
+        (presentation?.offsets ?? []).map(({ displayId, offset, xOffset, dockedEdge }) => [
           displayId,
-          { xOffset: xOffset ?? DEFAULT_COMPANION_X_OFFSET, offset },
+          {
+            xOffset: xOffset ?? DEFAULT_COMPANION_X_OFFSET,
+            offset,
+            dockedEdge: dockedEdge ?? null,
+          },
         ]),
       );
       if (dragged !== null && dragOffset !== undefined) this.#offsets.set(dragged, dragOffset);
@@ -215,8 +234,11 @@ export class AgentDockWindowController {
     entry.extent = extent;
     const display = this.#displayOf(entry);
     if (!display) return;
-    const bounds = this.#placedBounds(entry, display);
-    if (!isDeepStrictEqual(entry.window.getBounds(), bounds)) entry.window.setBounds(bounds, false);
+    const placement = this.#placementFor(display);
+    if (!isDeepStrictEqual(entry.window.getBounds(), placement.bounds)) {
+      entry.window.setBounds(placement.bounds, false);
+    }
+    this.#sendPlacementToWindow(entry, display, placement);
   }
 
   #applyShape(entry: DockWindow): void {
@@ -240,32 +262,62 @@ export class AgentDockWindowController {
     const cursor = this.#options.screen.getCursorScreenPoint();
     if (phase === "start") {
       const start = this.#displayOf(entry);
-      const rect = start ? this.#boundsFor(start) : entry.window.getBounds();
-      this.#drag = {
-        rendererId,
-        pointerX: cursor.x,
-        pointerY: cursor.y,
-        centerX: rect.x + rect.width / 2,
-        centerY: rect.y + rect.height / 2,
-      };
+      if (start) {
+        const current = this.#placementFor(start);
+        this.#drag = {
+          rendererId,
+          pointerX: cursor.x,
+          pointerY: cursor.y,
+          centerX: current.centerX,
+          centerY: current.centerY,
+        };
+      } else {
+        const rect = entry.window.getBounds();
+        this.#drag = {
+          rendererId,
+          pointerX: cursor.x,
+          pointerY: cursor.y,
+          centerX: rect.x + rect.width / 2,
+          centerY: rect.y + rect.height / 2,
+        };
+      }
       return;
     }
     const drag = this.#drag;
     if (drag?.rendererId !== rendererId) return;
     const display = this.#displayOf(entry);
     if (display) {
-      const area = display.workArea;
-      const minX = area.x + COMPANION_EDGE_MARGIN_X;
-      const maxX = Math.max(minX, area.x + area.width - COMPANION_EDGE_MARGIN_X);
-      const minY = area.y + COMPANION_EDGE_MARGIN_Y;
-      const maxY = Math.max(minY, area.y + area.height - COMPANION_EDGE_MARGIN_Y);
-      const nextCx = Math.min(maxX, Math.max(minX, drag.centerX + cursor.x - drag.pointerX));
-      const nextCy = Math.min(maxY, Math.max(minY, drag.centerY + cursor.y - drag.pointerY));
+      const area = companionScreenArea(display);
+      const radius = companionBotRadius(this.#presentation?.sizePercent);
+      const minX = area.x + radius;
+      const maxX = Math.max(minX, area.x + area.width - radius);
+      const minY = area.y + radius;
+      const maxY = Math.max(minY, area.y + area.height - radius);
+      const rawCx = drag.centerX + cursor.x - drag.pointerX;
+      const rawCy = drag.centerY + cursor.y - drag.pointerY;
+
+      const snapThreshold = Math.max(16, Math.round(radius * 0.55));
+      const edgeCandidates: Array<{ edge: AgentDockSnapEdge; dist: number }> = [
+        { edge: "left", dist: rawCx - area.x },
+        { edge: "right", dist: area.x + area.width - rawCx },
+        { edge: "top", dist: rawCy - area.y },
+        { edge: "bottom", dist: area.y + area.height - rawCy },
+      ];
+      edgeCandidates.sort((a, b) => a.dist - b.dist);
+      const nearest = edgeCandidates[0];
+      const dockedEdge: AgentDockSnapEdge | null = nearest && nearest.dist <= snapThreshold ? nearest.edge : null;
+
+      const nextCx = Math.min(maxX, Math.max(minX, rawCx));
+      const nextCy = Math.min(maxY, Math.max(minY, rawCy));
       const xOffset = maxX > minX ? (nextCx - minX) / (maxX - minX) : DEFAULT_COMPANION_X_OFFSET;
       const offset = maxY > minY ? (nextCy - minY) / (maxY - minY) : DEFAULT_COMPANION_Y_OFFSET;
-      this.#offsets.set(entry.displayId, { xOffset, offset });
-      const bounds = this.#placedBounds(entry, display);
-      if (!isDeepStrictEqual(entry.window.getBounds(), bounds)) entry.window.setBounds(bounds, false);
+      this.#offsets.set(entry.displayId, { xOffset, offset, dockedEdge });
+
+      const placement = this.#placementFor(display);
+      if (!isDeepStrictEqual(entry.window.getBounds(), placement.bounds)) {
+        entry.window.setBounds(placement.bounds, false);
+      }
+      this.#sendPlacementToWindow(entry, display, placement);
     }
     if (phase !== "end") return;
     this.#drag = null;
@@ -276,9 +328,27 @@ export class AgentDockWindowController {
         displayId: entry.displayId,
         offset: pos.offset,
         xOffset: pos.xOffset,
+        dockedEdge: pos.dockedEdge,
         ...(display && { bounds: display.bounds }),
       });
     }
+  }
+
+  #sendPlacementToWindow(entry: DockWindow, display: Display, placement: CompanionPlacement): void {
+    if (entry.window.isDestroyed()) return;
+    const pos = this.#positionFor(display);
+    const payload: AgentDockOffset = {
+      displayId: display.id,
+      offset: pos.offset,
+      xOffset: pos.xOffset,
+      dockedEdge: placement.dockedEdge,
+      anchorX: placement.anchorX,
+      anchorY: placement.anchorY,
+      windowWidth: placement.bounds.width,
+      windowHeight: placement.bounds.height,
+      bounds: display.bounds,
+    };
+    sendToRenderer(entry.window, IPC_ENDPOINTS.agentDock.moved, payload);
   }
 
   #draggedDisplayId(): number | null {
@@ -291,16 +361,20 @@ export class AgentDockWindowController {
     return this.#options.screen.getAllDisplays().find((display) => display.id === entry.displayId);
   }
 
-  #boundsFor(display: Display): Rectangle {
+  #placementFor(display: Display): CompanionPlacement {
     const pos = this.#positionFor(display);
-    return companionWindowBounds(display, pos.xOffset, pos.offset, this.#zoom());
+    return companionWindowPlacement(display, pos, this.#presentation?.sizePercent, this.#zoom());
+  }
+
+  #boundsFor(display: Display): Rectangle {
+    return this.#placementFor(display).bounds;
   }
 
   #placedBounds(_entry: DockWindow, display: Display): Rectangle {
     return this.#boundsFor(display);
   }
 
-  #positionFor(display: Display): { xOffset: number; offset: number } {
+  #positionFor(display: Display): CompanionStoredPosition {
     const saved = this.#offsets.get(display.id);
     if (saved !== undefined) return saved;
     const connected = new Set(this.#options.screen.getAllDisplays().map(({ id }) => id));
@@ -310,6 +384,7 @@ export class AgentDockWindowController {
     return {
       xOffset: renamed?.xOffset ?? DEFAULT_COMPANION_X_OFFSET,
       offset: renamed?.offset ?? DEFAULT_COMPANION_Y_OFFSET,
+      dockedEdge: renamed?.dockedEdge ?? null,
     };
   }
 
@@ -413,8 +488,11 @@ export class AgentDockWindowController {
             }
             current.displayId = display.id;
             this.#applyZoom(current);
-            const bounds = this.#placedBounds(current, display);
-            if (!isDeepStrictEqual(current.window.getBounds(), bounds)) current.window.setBounds(bounds, false);
+            const placement = this.#placementFor(display);
+            if (!isDeepStrictEqual(current.window.getBounds(), placement.bounds)) {
+              current.window.setBounds(placement.bounds, false);
+            }
+            this.#sendPlacementToWindow(current, display, placement);
             if (!current.window.isVisible()) this.#show(current.window);
           }
           for (const entry of spare) this.#closeWindow(entry.window);
@@ -585,26 +663,64 @@ export class AgentDockWindowController {
   }
 }
 
-function companionWindowBounds(
-  display: Pick<Display, "workArea">,
-  xOffset: number,
-  yOffset: number,
-  zoom: number,
-): Rectangle {
-  const area = display.workArea;
-  const width = Math.round(AGENT_DOCK_WINDOW_SIZE.width * Math.max(1, zoom));
-  const height = Math.round(AGENT_DOCK_WINDOW_SIZE.height * Math.max(1, zoom));
-  const minX = area.x + COMPANION_EDGE_MARGIN_X;
-  const maxX = Math.max(minX, area.x + area.width - COMPANION_EDGE_MARGIN_X);
-  const minY = area.y + COMPANION_EDGE_MARGIN_Y;
-  const maxY = Math.max(minY, area.y + area.height - COMPANION_EDGE_MARGIN_Y);
-  const cx = minX + (maxX - minX) * Math.min(1, Math.max(0, xOffset));
-  const cy = minY + (maxY - minY) * Math.min(1, Math.max(0, yOffset));
+function companionBotRadius(sizePercent: number | undefined): number {
+  const pct = Math.max(AGENT_DOCK_SIZE_LIMITS.min, Math.min(AGENT_DOCK_SIZE_LIMITS.max, sizePercent ?? 100));
+  const ratio = (pct - 70) / 70;
+  const diameter = Math.round(48 + ratio * 48);
+  return Math.max(24, Math.round(diameter / 2));
+}
+
+function companionScreenArea(display: Pick<Display, "bounds" | "workArea">): Rectangle {
+  const full = display.bounds;
+  const work = display.workArea;
+  // On macOS, floating panels cannot be positioned above the menu bar (workArea.y),
+  // while left, right, and bottom physical screen edges are 100% reachable for half-hidden docking.
+  const top = Math.max(full.y, work.y);
+  const bottom = full.y + full.height;
   return {
-    x: Math.round(cx - width / 2),
-    y: Math.round(cy - height / 2),
-    width,
-    height,
+    x: full.x,
+    y: top,
+    width: full.width,
+    height: Math.max(120, bottom - top),
+  };
+}
+
+function companionWindowPlacement(
+  display: Pick<Display, "bounds" | "workArea">,
+  pos: CompanionStoredPosition,
+  sizePercent: number | undefined,
+  zoom: number,
+): CompanionPlacement {
+  const area = companionScreenArea(display);
+  const width = Math.min(area.width, Math.round(AGENT_DOCK_WINDOW_SIZE.width * Math.max(1, zoom)));
+  const height = Math.min(area.height, Math.round(AGENT_DOCK_WINDOW_SIZE.height * Math.max(1, zoom)));
+  const radius = companionBotRadius(sizePercent);
+
+  const minX = area.x + radius;
+  const maxX = Math.max(minX, area.x + area.width - radius);
+  const minY = area.y + radius;
+  const maxY = Math.max(minY, area.y + area.height - radius);
+
+  let cx = minX + (maxX - minX) * Math.min(1, Math.max(0, pos.xOffset));
+  let cy = minY + (maxY - minY) * Math.min(1, Math.max(0, pos.offset));
+
+  if (pos.dockedEdge === "left") cx = area.x;
+  else if (pos.dockedEdge === "right") cx = area.x + area.width;
+  else if (pos.dockedEdge === "top") cy = area.y;
+  else if (pos.dockedEdge === "bottom") cy = area.y + area.height;
+
+  const maxWinX = Math.max(area.x, area.x + area.width - width);
+  const maxWinY = Math.max(area.y, area.y + area.height - height);
+  const wx = Math.min(maxWinX, Math.max(area.x, Math.round(cx - width / 2)));
+  const wy = Math.min(maxWinY, Math.max(area.y, Math.round(cy - height / 2)));
+
+  return {
+    bounds: { x: wx, y: wy, width, height },
+    centerX: Math.round(cx),
+    centerY: Math.round(cy),
+    anchorX: Math.round(cx - wx),
+    anchorY: Math.round(cy - wy),
+    dockedEdge: pos.dockedEdge,
   };
 }
 

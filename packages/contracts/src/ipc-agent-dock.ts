@@ -184,6 +184,9 @@ export interface AgentDockDisplayInfo {
 
 export type AgentDockEdge = "left" | "right";
 
+export const AGENT_DOCK_SNAP_EDGES = ["left", "right", "top", "bottom"] as const;
+export type AgentDockSnapEdge = (typeof AGENT_DOCK_SNAP_EDGES)[number];
+
 export interface AgentDockDisplayBounds {
   x: number;
   y: number;
@@ -195,6 +198,11 @@ export interface AgentDockOffset {
   displayId: number;
   offset: number;
   xOffset?: number | undefined;
+  dockedEdge?: AgentDockSnapEdge | null | undefined;
+  anchorX?: number | undefined;
+  anchorY?: number | undefined;
+  windowWidth?: number | undefined;
+  windowHeight?: number | undefined;
   bounds?: AgentDockDisplayBounds | undefined;
 }
 
@@ -494,6 +502,13 @@ export function isAgentDockOffset(value: unknown): value is AgentDockOffset {
     value.offset >= 0 &&
     value.offset <= 1 &&
     (value.xOffset === undefined || (isFiniteNumber(value.xOffset) && value.xOffset >= 0 && value.xOffset <= 1)) &&
+    (value.dockedEdge === undefined || value.dockedEdge === null || isOneOf(AGENT_DOCK_SNAP_EDGES, value.dockedEdge)) &&
+    (value.anchorX === undefined ||
+      integerInRange(value.anchorX, -AGENT_DOCK_LIMITS.inputExtent, AGENT_DOCK_LIMITS.inputExtent)) &&
+    (value.anchorY === undefined ||
+      integerInRange(value.anchorY, -AGENT_DOCK_LIMITS.inputExtent, AGENT_DOCK_LIMITS.inputExtent)) &&
+    (value.windowWidth === undefined || integerInRange(value.windowWidth, 1, AGENT_DOCK_LIMITS.inputExtent)) &&
+    (value.windowHeight === undefined || integerInRange(value.windowHeight, 1, AGENT_DOCK_LIMITS.inputExtent)) &&
     (value.bounds === undefined || isAgentDockDisplayBounds(value.bounds))
   );
 }

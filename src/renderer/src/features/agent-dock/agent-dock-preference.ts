@@ -74,6 +74,7 @@ const preferenceSchema = z
           displayId: z.number().int().nonnegative(),
           offset: z.number().min(0).max(1),
           xOffset: z.number().min(0).max(1).optional().catch(undefined),
+          dockedEdge: z.enum(["left", "right", "top", "bottom"]).nullable().optional().catch(undefined),
           bounds: z
             .object({
               x: z.number().int().min(-DISPLAY_EXTENT).max(DISPLAY_EXTENT),
@@ -194,6 +195,7 @@ export function saveAgentDockOffset(moved: AgentDockOffset): void {
     displayId: moved.displayId,
     offset: moved.offset,
     ...(moved.xOffset !== undefined ? { xOffset: moved.xOffset } : {}),
+    ...(moved.dockedEdge !== undefined ? { dockedEdge: moved.dockedEdge } : {}),
     ...(moved.bounds ? { bounds: moved.bounds } : {}),
   };
   setAgentDockPreference({
