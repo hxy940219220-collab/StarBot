@@ -1,16 +1,23 @@
 import { speechTextFromMarkdown } from "@openbot/contracts/speech-text";
 import { createSignal } from "solid-js";
 import { actionToast } from "../../action-toast";
+import { speechPort } from "./speech-port";
 import { speechSpeed } from "./speech-speed";
 
 const [readingIdSignal, setReadingIdSignal] = createSignal<string | null>(null);
 let currentSessionToken = 0;
+let activeAudioElement: HTMLAudioElement | null = null;
+let activeAudioUrl: string | null = null;
+
+const MAX_WAV_CACHE_ENTRIES = 40;
+const wavCache = new Map<string, ArrayBuffer>();
 
 const CJK_REGEX = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
 
 export function isNativeTtsSupported(): boolean {
   return (
-    typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined"
+    typeof window !== "undefined" &&
+    (typeof Audio !== "undefined" || ("speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined"))
   );
 }
 
@@ -18,26 +25,62 @@ export function nativeReadingMessageId(): string | null {
   return readingIdSignal();
 }
 
-function cleanSpeechChunks(markdown: string): string[] {
-  const plain = speechTextFromMarkdown(markdown)
+function normalizeNaturalText(markdown: string): string {
+  return speechTextFromMarkdown(markdown)
     .replace(/([\u4e00-\u9fff])\.(?=\s|$)/gu, "$1。")
+    .replace(/[—–]{1,2}/gu, "，")
+    .replace(/[|]/gu, "，")
+    .replace(/[✦★☆✓✔✗✕→←↑↓↗↘•·▪▫◆◇]/gu, " ")
     .replace(/\s+/gu, " ")
     .trim();
+}
+
+function splitLongSegment(segment: string, maxLen: number): string[] {
+  if (segment.length <= maxLen) return [segment];
+  const clauses = segment.split(/(?<=[，,、：:])\s*/u).filter((s) => s.trim().length > 0);
+  const out: string[] = [];
+  let buf = "";
+  for (const clause of clauses) {
+    if ((buf + clause).length <= maxLen) {
+      buf = buf ? `${buf}${clause}` : clause;
+    } else {
+      if (buf) out.push(buf);
+      if (clause.length <= maxLen) {
+        buf = clause;
+      } else {
+        for (let i = 0; i < clause.length; i += maxLen) {
+          out.push(clause.slice(i, i + maxLen));
+        }
+        buf = "";
+      }
+    }
+  }
+  if (buf) out.push(buf);
+  return out;
+}
+
+function cleanSpeechChunks(markdown: string): string[] {
+  const plain = normalizeNaturalText(markdown);
   if (!plain) return [];
 
-  const rawParts = plain.split(/(?<=[。！？；.!?\n])\s*/u).filter((s) => s.trim().length > 0);
+  const rawSentences = plain.split(/(?<=[。！？；.!?\n])\s*/u).filter((s) => s.trim().length > 0);
   const chunks: string[] = [];
   let buffer = "";
-  for (const part of rawParts) {
-    if ((buffer + part).length <= 160) {
-      buffer = buffer ? `${buffer} ${part}` : part;
+
+  for (const sentence of rawSentences) {
+    // Keep the very first chunk short (~65 chars) so natural neural audio begins speaking quickly
+    const limit = chunks.length === 0 ? 68 : 175;
+    if ((buffer + sentence).length <= limit) {
+      buffer = buffer ? `${buffer} ${sentence}` : sentence;
     } else {
       if (buffer) chunks.push(buffer);
-      if (part.length <= 160) {
-        buffer = part;
+      const nextLimit = chunks.length === 0 ? 68 : 175;
+      if (sentence.length <= nextLimit) {
+        buffer = sentence;
       } else {
-        for (let i = 0; i < part.length; i += 150) {
-          chunks.push(part.slice(i, i + 150));
+        const pieces = splitLongSegment(sentence, nextLimit);
+        for (const piece of pieces) {
+          chunks.push(piece);
         }
         buffer = "";
       }
@@ -47,43 +90,170 @@ function cleanSpeechChunks(markdown: string): string[] {
   return chunks;
 }
 
-function pickBestVoice(isChinese: boolean): SpeechSynthesisVoice | null {
-  if (!isNativeTtsSupported()) return null;
+function encodePcm16Wav(pcm: Uint8Array, sampleRate: number): ArrayBuffer {
+  const byteLength = pcm.byteLength & ~1;
+  const out = new ArrayBuffer(44 + byteLength);
+  const view = new DataView(out);
+  const ascii = (offset: number, s: string) => {
+    for (let i = 0; i < s.length; i += 1) view.setUint8(offset + i, s.charCodeAt(i));
+  };
+  ascii(0, "RIFF");
+  view.setUint32(4, 36 + byteLength, true);
+  ascii(8, "WAVE");
+  ascii(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true); // PCM
+  view.setUint16(22, 1, true); // mono
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  ascii(36, "data");
+  view.setUint32(40, byteLength, true);
+  new Uint8Array(out, 44, byteLength).set(pcm.subarray(0, byteLength));
+  return out;
+}
+
+function rememberWav(key: string, wav: ArrayBuffer): void {
+  wavCache.delete(key);
+  wavCache.set(key, wav);
+  while (wavCache.size > MAX_WAV_CACHE_ENTRIES) {
+    const oldest = wavCache.keys().next().value;
+    if (oldest === undefined) break;
+    wavCache.delete(oldest);
+  }
+}
+
+async function synthesizeNeuralWav(text: string): Promise<ArrayBuffer> {
+  const cached = wavCache.get(text);
+  if (cached) {
+    wavCache.delete(text);
+    wavCache.set(text, cached);
+    return cached;
+  }
+  const audio = await speechPort().voice.speak({ text, language: null });
+  const wav = encodePcm16Wav(audio.pcm, audio.sampleRate);
+  rememberWav(text, wav);
+  return wav;
+}
+
+function clearActiveAudio(): void {
+  if (activeAudioElement) {
+    try {
+      activeAudioElement.pause();
+      activeAudioElement.removeAttribute("src");
+      activeAudioElement.load();
+    } catch {}
+    activeAudioElement = null;
+  }
+  if (activeAudioUrl) {
+    try {
+      URL.revokeObjectURL(activeAudioUrl);
+    } catch {}
+    activeAudioUrl = null;
+  }
+}
+
+function playWavBuffer(wav: ArrayBuffer, token: number, rate: number): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
+    if (token !== currentSessionToken) {
+      resolve(false);
+      return;
+    }
+    clearActiveAudio();
+    const url = URL.createObjectURL(new Blob([wav], { type: "audio/wav" }));
+    const audio = new Audio();
+    audio.preservesPitch = true;
+    audio.defaultPlaybackRate = rate;
+    audio.playbackRate = rate;
+    audio.src = url;
+    activeAudioElement = audio;
+    activeAudioUrl = url;
+
+    let settled = false;
+    const done = (ok: boolean) => {
+      if (settled) return;
+      settled = true;
+      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("error", onError);
+      if (activeAudioElement === audio) clearActiveAudio();
+      resolve(ok);
+    };
+    const onEnded = () => done(true);
+    const onError = () => done(false);
+
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("error", onError);
+    audio.play().catch(() => done(false));
+  });
+}
+
+function pickFallbackSystemVoice(isChinese: boolean): SpeechSynthesisVoice | null {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
   const voices = window.speechSynthesis.getVoices();
   if (!voices || voices.length === 0) return null;
 
   if (isChinese) {
     const zhVoices = voices.filter((v) => /^zh/iu.test(v.lang));
     return (
-      zhVoices.find((v) => /tingting|meijia|xiaoxiao|yunxi|sinji/iu.test(v.name) && v.localService) ??
-      zhVoices.find((v) => /^zh[-_]CN/iu.test(v.lang) && v.localService) ??
+      zhVoices.find((v) => /xiaoxiao|xiaoyi|meijia|sinji|tingting/iu.test(v.name)) ??
       zhVoices.find((v) => /^zh[-_]CN/iu.test(v.lang)) ??
       zhVoices[0] ??
       null
     );
   }
-
   const enVoices = voices.filter((v) => /^en/iu.test(v.lang));
   return (
-    enVoices.find((v) => /samantha|ava|allison|alex/iu.test(v.name) && v.localService) ??
-    enVoices.find((v) => /^en[-_]US/iu.test(v.lang) && v.localService) ??
+    enVoices.find((v) => /ava|samantha|allison|victoria|karen/iu.test(v.name)) ??
+    enVoices.find((v) => /^en[-_]US/iu.test(v.lang)) ??
     enVoices[0] ??
     null
   );
 }
 
+function speakFallbackChunk(text: string, isChinese: boolean, rate: number, token: number): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
+    if (
+      token !== currentSessionToken ||
+      typeof window === "undefined" ||
+      !("speechSynthesis" in window) ||
+      typeof SpeechSynthesisUtterance === "undefined"
+    ) {
+      resolve(false);
+      return;
+    }
+    const utterance = new SpeechSynthesisUtterance(text);
+    const chunkZh = CJK_REGEX.test(text) || isChinese;
+    utterance.lang = chunkZh ? "zh-CN" : "en-US";
+    utterance.rate = rate;
+    utterance.pitch = 1.04;
+    const voice = pickFallbackSystemVoice(chunkZh);
+    if (voice) utterance.voice = voice;
+
+    utterance.onend = () => resolve(true);
+    utterance.onerror = () => resolve(false);
+    try {
+      window.speechSynthesis.speak(utterance);
+    } catch {
+      resolve(false);
+    }
+  });
+}
+
 export function stopNativeReadAloud(): void {
   currentSessionToken += 1;
   setReadingIdSignal(null);
-  if (!isNativeTtsSupported()) return;
-  try {
-    window.speechSynthesis.cancel();
-  } catch {}
+  clearActiveAudio();
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch {}
+  }
 }
 
 export function toggleNativeReadAloud(messageId: string, markdown: string): void {
   if (!isNativeTtsSupported()) {
-    actionToast.warning("当前系统环境暂不支持本地语音朗读");
+    actionToast.warning("当前系统环境暂不支持语音朗读");
     return;
   }
 
@@ -100,58 +270,69 @@ export function toggleNativeReadAloud(messageId: string, markdown: string): void
 
   currentSessionToken += 1;
   const token = currentSessionToken;
-  try {
-    window.speechSynthesis.cancel();
-  } catch {}
+  clearActiveAudio();
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch {}
+  }
   setReadingIdSignal(messageId);
 
   const isChinese = CJK_REGEX.test(chunks.join(""));
   const rate = Math.min(2, Math.max(0.75, speechSpeed() || 1));
 
-  const speakChunkAt = (index: number) => {
-    if (token !== currentSessionToken) return;
-    const text = chunks[index];
-    if (!text) {
-      setReadingIdSignal(null);
-      return;
-    }
+  void (async () => {
+    let neuralAvailable = true;
+    let prefetched: { index: number; promise: Promise<ArrayBuffer> } | null = null;
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    const chunkZh = CJK_REGEX.test(text) || isChinese;
-    utterance.lang = chunkZh ? "zh-CN" : "en-US";
-    utterance.rate = rate;
-    const voice = pickBestVoice(chunkZh);
-    if (voice) utterance.voice = voice;
-
-    utterance.onend = () => {
-      if (token !== currentSessionToken) return;
-      if (index + 1 < chunks.length) {
-        speakChunkAt(index + 1);
-      } else {
-        setReadingIdSignal(null);
+    const getChunkWav = (index: number): Promise<ArrayBuffer> => {
+      if (prefetched && prefetched.index === index) {
+        const hit = prefetched.promise;
+        prefetched = null;
+        return hit;
       }
-    };
-
-    utterance.onerror = (event) => {
-      if (token !== currentSessionToken) return;
-      if (event.error === "canceled" || event.error === "interrupted") {
-        setReadingIdSignal(null);
-        return;
-      }
-      setReadingIdSignal(null);
-      actionToast.error("语音朗读中断，请检查系统音量或语音设置");
+      return synthesizeNeuralWav(chunks[index]!);
     };
 
     try {
-      window.speechSynthesis.speak(utterance);
-    } catch {
-      setReadingIdSignal(null);
-    }
-  };
+      for (let i = 0; i < chunks.length; i += 1) {
+        if (token !== currentSessionToken) return;
+        const text = chunks[i]!;
 
-  // Warm up voices list if needed, and delay 45ms after cancel() to avoid Chromium macOS drop quirk
-  try {
-    window.speechSynthesis.getVoices();
-  } catch {}
-  window.setTimeout(() => speakChunkAt(0), 45);
+        if (neuralAvailable) {
+          try {
+            const wav = await getChunkWav(i);
+            if (token !== currentSessionToken) return;
+            // Prefetch next chunk in parallel while this chunk plays so sentences flow seamlessly
+            if (i + 1 < chunks.length && !prefetched) {
+              const nextText = chunks[i + 1]!;
+              const nextPromise = synthesizeNeuralWav(nextText);
+              nextPromise.catch(() => undefined);
+              prefetched = { index: i + 1, promise: nextPromise };
+            }
+            const ok = await playWavBuffer(wav, token, rate);
+            if (token !== currentSessionToken) return;
+            if (ok) continue;
+          } catch {
+            // Network offline or neural TTS unavailable -> seamlessly fall back to system TTS
+            neuralAvailable = false;
+            prefetched = null;
+          }
+        }
+
+        if (token !== currentSessionToken) return;
+        const fallbackOk = await speakFallbackChunk(text, isChinese, rate, token);
+        if (token !== currentSessionToken) return;
+        if (!fallbackOk) {
+          actionToast.error("语音朗读中断，请检查网络或系统音量设置");
+          break;
+        }
+      }
+    } finally {
+      if (token === currentSessionToken) {
+        clearActiveAudio();
+        setReadingIdSignal(null);
+      }
+    }
+  })();
 }

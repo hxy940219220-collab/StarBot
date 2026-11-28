@@ -200,6 +200,9 @@ export function AgentDockSurface() {
           onOpenBotChat={(agentId) => {
             void perform({ type: "open-agent", serverId: server, agentId }).catch(() => undefined);
           }}
+          onResizeSizePercent={(sizePercent) => {
+            void perform({ type: "set-size", sizePercent }).catch(() => undefined);
+          }}
           onHide={() => {
             void perform({ type: "hide" }).catch(() => undefined);
           }}

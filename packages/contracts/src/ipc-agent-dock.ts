@@ -317,6 +317,7 @@ export type AgentDockAction =
   | { type: "usage-limit-wait"; serverId: string; agentId: string }
   | { type: "open-link"; url: string }
   | { type: "open-settings" }
+  | { type: "set-size"; sizePercent: number }
   | { type: "hide" }
   | { type: "toggle" };
 
@@ -373,6 +374,9 @@ export function isAgentDockPresentation(value: unknown): value is AgentDockPrese
 export function isAgentDockAction(value: unknown): value is AgentDockAction {
   if (!isDynamicRecord(value) || !isString(value.type)) return false;
   if (value.type === "open-link") return isBoundedString(value.url, INPUT_LIMITS.browserUrl) && value.url.length > 0;
+  if (value.type === "set-size") {
+    return integerInRange(value.sizePercent, AGENT_DOCK_SIZE_LIMITS.min, AGENT_DOCK_SIZE_LIMITS.max);
+  }
   if (value.type === "open-settings" || value.type === "hide" || value.type === "toggle") return true;
   if (!isIdentifier(value.serverId)) return false;
   switch (value.type) {

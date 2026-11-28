@@ -11,7 +11,7 @@ import { playKawaiiCue } from "@openbot/ui/features/agents/starbot-kawaii-audio"
 import { createEffect, createMemo, createSignal, For, onCleanup, Show } from "solid-js";
 import "./starbot-floating-companion.css";
 
-export type CompanionSubPanel = "bots" | "models" | "usage" | null;
+export type CompanionSubPanel = "bots" | "models" | "usage" | "context" | null;
 
 export interface StarBotFloatingCompanionProps {
   bots: readonly StarBotCompanionInfo[];
@@ -32,6 +32,7 @@ export interface StarBotFloatingCompanionProps {
   onSendVoiceText: (agentId: string, text: string) => Promise<void>;
   onSwitchModel: (agentId: string, provider: string, model: string) => void;
   onOpenBotChat: (agentId: string) => void;
+  onResizeSizePercent?: ((sizePercent: number) => void) | undefined;
   onHide?: (() => void) | undefined;
   onDrag?: ((phase: AgentDockDragPhase) => void) | undefined;
   onVoiceStateChange?:
@@ -83,6 +84,8 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
   const [voiceError, setVoiceError] = createSignal<string | null>(null);
   const [dragDizzy, setDragDizzy] = createSignal(false);
   const [celebratePhase, setCelebratePhase] = createSignal<"burst" | "starry" | null>(null);
+  const [thinkingPillVisible, setThinkingPillVisible] = createSignal(false);
+  const [localSizePercent, setLocalSizePercent] = createSignal(Math.max(70, Math.min(140, props.sizePercent ?? 100)));
 
   let hoverLeaveTimer: ReturnType<typeof setTimeout> | undefined;
   let errorTimer: ReturnType<typeof setTimeout> | undefined;
@@ -90,6 +93,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
   let celebrateBurstTimer: ReturnType<typeof setTimeout> | undefined;
   let celebrateEndTimer: ReturnType<typeof setTimeout> | undefined;
   let replyAutoDismissTimer: ReturnType<typeof setTimeout> | undefined;
+  let thinkingPillTimer: ReturnType<typeof setTimeout> | undefined;
   let prevTrackedBotId: string | null = null;
   let prevBotWorking = false;
   let prevBotReplyId: string | null = null;
@@ -111,7 +115,23 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     clearTimeout(celebrateBurstTimer);
     clearTimeout(celebrateEndTimer);
     clearTimeout(replyAutoDismissTimer);
+    clearTimeout(thinkingPillTimer);
   });
+
+  createEffect(
+    () => props.sizePercent,
+    (pct) => {
+      if (pct !== undefined && Number.isFinite(pct)) {
+        setLocalSizePercent(Math.max(70, Math.min(140, Math.round(pct))));
+      }
+    },
+  );
+
+  function applySizePercent(next: number): void {
+    const clamped = Math.max(70, Math.min(140, Math.round(next)));
+    setLocalSizePercent(clamped);
+    props.onResizeSizePercent?.(clamped);
+  }
 
   function triggerCompletionCelebration(): void {
     clearTimeout(celebrateBurstTimer);
@@ -154,6 +174,24 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     if (!bot) return false;
     return bot.working || waitingReplyForBotId() === bot.agent.id;
   });
+
+  // Pop up the top thinking pill briefly (2.6s) when thinking begins, then auto-hide so only the thinking animation stays
+  createEffect(
+    () => ({ thinking: isThinking(), botId: currentBot()?.agent.id ?? null }),
+    (curr, prev) => {
+      clearTimeout(thinkingPillTimer);
+      if (curr.thinking && curr.botId) {
+        if (!prev?.thinking || prev.botId !== curr.botId) {
+          setThinkingPillVisible(true);
+          thinkingPillTimer = setTimeout(() => {
+            setThinkingPillVisible(false);
+          }, 2_600);
+        }
+      } else {
+        setThinkingPillVisible(false);
+      }
+    },
+  );
 
   // Sync voice recording state to Dynamic Island via main renderer
   createEffect(
@@ -311,6 +349,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
       const onPointerDown = (event: PointerEvent) => {
         const target = event.target;
         if (target instanceof Element && target.closest(".starbot-companion-card, .starbot-arc-btn")) return;
+        if (event.button === 2 && target instanceof Element && target.closest(".starbot-companion-orb")) return;
         setActivePanel(null);
       };
       const onWindowBlur = () => {
@@ -404,9 +443,9 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
   });
 
   // Scale ONLY the 3D clay mascot character (70%->48px, 100%->69px, 140%->96px; ~50px-100px visible diameter)
-  // while keeping the 5 orbital action buttons strictly fixed-size (30px) in a snug, evenly-spaced arc.
+  // while keeping the 4 orbital action buttons strictly fixed-size (30px) in a snug, non-overlapping arc.
   const sizeRatio = createMemo(() => {
-    const pct = Math.max(70, Math.min(140, props.sizePercent ?? 100));
+    const pct = Math.max(70, Math.min(140, localSizePercent()));
     return (pct - 70) / 70;
   });
 
@@ -473,19 +512,21 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     return 0;
   });
 
-  // 5 smooth orbital arc positions hugging the floating clay character with consistent ~5px gaps
+  // 4 smooth orbital arc buttons biased away from the top/bottom bubble so they NEVER collide at any size (70%-140%).
+  // Hide & size-scaling live in the right-click context menu on the mascot.
   const orbitalButtons = createMemo(() => {
-    const step = 36 - sizeRatio() * 8;
+    const step = 35 - sizeRatio() * 6;
+    const below = topBubbleBelow();
+    const centerDeg = expandLeft() ? (below ? 210 : 150) : below ? -30 : 30;
     const anglesDeg = expandLeft()
-      ? [180 - step * 2, 180 - step, 180, 180 + step, 180 + step * 2]
-      : [-step * 2, -step, 0, step, step * 2];
+      ? [centerDeg - step * 1.5, centerDeg - step * 0.5, centerDeg + step * 0.5, centerDeg + step * 1.5]
+      : [centerDeg + step * 1.5, centerDeg + step * 0.5, centerDeg - step * 0.5, centerDeg - step * 1.5];
     const radius = orbitalRadius();
     const specs = [
       { id: "bots" as const, label: "切换星友", delayMs: 0 },
       { id: "voice" as const, label: isRecording() ? "点击结束并发送" : "录音快聊", delayMs: 36 },
       { id: "models" as const, label: "切换模型", delayMs: 72 },
       { id: "usage" as const, label: "模型与上下文用量", delayMs: 108 },
-      { id: "hide" as const, label: "隐藏悬浮星友", delayMs: 144 },
     ];
     return specs.map((spec, idx) => {
       const deg = anglesDeg[idx] ?? 180;
@@ -668,14 +709,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
     });
   }
 
-  function handleArcClick(id: "bots" | "voice" | "models" | "usage" | "hide"): void {
-    if (id === "hide") {
-      setActivePanel(null);
-      setHovered(false);
-      void playKawaiiCue("drawer-open", { subtle: true });
-      props.onHide?.();
-      return;
-    }
+  function handleArcClick(id: "bots" | "voice" | "models" | "usage"): void {
     if (id === "voice") {
       handleToggleVoice();
       return;
@@ -750,8 +784,7 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 <For each={orbitalButtons()}>
                   {(btn) => {
                     const selected = () =>
-                      (btn.id === "voice" && isRecording()) ||
-                      (btn.id !== "voice" && btn.id !== "hide" && activePanel() === btn.id);
+                      (btn.id === "voice" && isRecording()) || (btn.id !== "voice" && activePanel() === btn.id);
                     return (
                       <button
                         type="button"
@@ -797,19 +830,6 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                             <path d="M12 20V10" />
                             <path d="M18 20V4" />
                             <path d="M6 20v-6" />
-                          </svg>
-                        </Show>
-                        <Show when={btn.id === "hide"}>
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            aria-hidden="true"
-                          >
-                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-                            <line x1="2" y1="2" x2="22" y2="22" />
                           </svg>
                         </Show>
                         <span class="starbot-arc-tooltip">{btn.label}</span>
@@ -1041,7 +1061,89 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 </div>
               </Show>
 
-              {/* Live Recording Status Pill right beside floating bot */}
+              {/* Right-Click Quick Context Menu (Scale & Hide) */}
+              <Show when={activePanel() === "context"}>
+                <div class="starbot-companion-card is-context" data-companion-hit="true">
+                  <div class="starbot-companion-card-head">
+                    <span>星友快捷菜单</span>
+                    <button
+                      type="button"
+                      class="starbot-companion-card-close"
+                      onClick={() => setActivePanel(null)}
+                      aria-label="关闭"
+                    >
+                      <X />
+                    </button>
+                  </div>
+                  <div class="starbot-context-scale">
+                    <div class="starbot-context-scale-head">
+                      <span>大小比例</span>
+                      <strong>{localSizePercent()}%</strong>
+                    </div>
+                    <input
+                      type="range"
+                      class="starbot-context-slider"
+                      min={70}
+                      max={140}
+                      step={5}
+                      value={localSizePercent()}
+                      aria-label="调整悬浮星友大小比例"
+                      onInput={(e) => {
+                        applySizePercent(Number(e.currentTarget.value));
+                      }}
+                    />
+                    <div class="starbot-context-presets">
+                      {(
+                        [
+                          { label: "小", pct: 75 },
+                          { label: "标准", pct: 100 },
+                          { label: "大", pct: 130 },
+                        ] as const
+                      ).map((preset) => (
+                        <button
+                          type="button"
+                          class={`starbot-context-preset${Math.abs(localSizePercent() - preset.pct) <= 3 ? " is-active" : ""}`}
+                          onClick={() => {
+                            void playKawaiiCue("tap", { subtle: true });
+                            applySizePercent(preset.pct);
+                          }}
+                        >
+                          {preset.label} {preset.pct}%
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div class="starbot-context-actions">
+                    <button
+                      type="button"
+                      class="starbot-context-action"
+                      onClick={() => {
+                        void playKawaiiCue("tab-switch", { subtle: true });
+                        setActivePanel(null);
+                        props.onOpenBotChat(bot().agent.id);
+                      }}
+                    >
+                      打开当前对话
+                    </button>
+                    <Show when={props.onHide}>
+                      <button
+                        type="button"
+                        class="starbot-context-action is-danger"
+                        onClick={() => {
+                          setActivePanel(null);
+                          setHovered(false);
+                          void playKawaiiCue("drawer-close", { subtle: true });
+                          props.onHide?.();
+                        }}
+                      >
+                        隐藏悬浮星友
+                      </button>
+                    </Show>
+                  </div>
+                </div>
+              </Show>
+
+              {/* Live Recording Status Pill right above floating bot */}
               <Show when={isRecording() && activePanel() === null}>
                 <button
                   type="button"
@@ -1064,10 +1166,14 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 </button>
               </Show>
 
-              {/* Top-Centered Thinking Pill while executing task */}
+              {/* Top-Centered Thinking Pill (brief 2.6s peek when thinking begins, then pure thinking animation) */}
               <Show
                 when={
-                  !isRecording() && activePanel() === null && isThinking() && shownReply()?.agentId !== bot().agent.id
+                  !isRecording() &&
+                  activePanel() === null &&
+                  isThinking() &&
+                  thinkingPillVisible() &&
+                  shownReply()?.agentId !== bot().agent.id
                 }
               >
                 <div
@@ -1194,10 +1300,16 @@ export function StarBotFloatingCompanion(props: StarBotFloatingCompanionProps) {
                 onPointerDown={handleOrbPointerDown}
                 onPointerMove={handleOrbPointerMove}
                 onPointerUp={handleOrbPointerUp}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  void playKawaiiCue("drawer-open", { subtle: true });
+                  setActivePanel((prev) => (prev === "context" ? null : "context"));
+                }}
                 title={
                   isHalfHiddenResting()
-                    ? `${bot().agent.name}（半隐藏贴边 · 靠近或点击展开，按住可拖离边缘）`
-                    : `${bot().agent.name}（按住可全屏自由拖动，拖到屏幕边缘可半隐藏）`
+                    ? `${bot().agent.name}（半隐藏贴边 · 靠近展开，右键调大小或隐藏）`
+                    : `${bot().agent.name}（按住全屏拖动，右键可调整大小比例或隐藏）`
                 }
               >
                 <span class="starbot-companion-aura" aria-hidden="true" />

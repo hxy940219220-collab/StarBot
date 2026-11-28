@@ -1078,3 +1078,117 @@
 .starbot-companion-reply-bubble.is-completed-notice .starbot-companion-reply-foot {
   color: rgba(110, 231, 183, 0.9);
 }
+
+/* Right-Click Context Menu Card (Size Ratio & Hide) */
+.starbot-companion-card.is-context {
+  width: 222px;
+  gap: 9px;
+}
+
+.starbot-context-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 8px 9px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.starbot-context-scale-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: rgba(212, 204, 244, 0.88);
+}
+
+.starbot-context-scale-head strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbb6ff;
+  font-variant-numeric: tabular-nums;
+}
+
+.starbot-context-slider {
+  width: 100%;
+  accent-color: #9b7bff;
+  cursor: pointer;
+  margin: 0;
+}
+
+.starbot-context-presets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.starbot-context-preset {
+  appearance: none;
+  border: 1px solid rgba(186, 166, 255, 0.2);
+  border-radius: 8px;
+  padding: 4px 2px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(216, 208, 248, 0.86);
+  font-size: 10.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.starbot-context-preset:hover {
+  background: rgba(138, 102, 255, 0.22);
+  color: #ffffff;
+}
+
+.starbot-context-preset.is-active {
+  background: rgba(138, 102, 255, 0.36);
+  border-color: rgba(214, 196, 255, 0.82);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.starbot-context-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.starbot-context-action {
+  appearance: none;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(186, 166, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: #f4f0ff;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.starbot-context-action:hover {
+  background: rgba(138, 102, 255, 0.24);
+  border-color: rgba(196, 174, 255, 0.5);
+  color: #ffffff;
+}
+
+.starbot-context-action.is-danger {
+  color: #fecdd3;
+  border-color: rgba(244, 63, 94, 0.22);
+  background: rgba(244, 63, 94, 0.1);
+}
+
+.starbot-context-action.is-danger:hover {
+  background: rgba(244, 63, 94, 0.28);
+  border-color: rgba(253, 164, 175, 0.72);
+  color: #fff1f2;
+}

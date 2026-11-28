@@ -368,6 +368,12 @@ describe("agent dock decoding", () => {
       url: "https://example.com",
     });
     expect(decodeAgentDockAction({ type: "open-settings" })).toEqual({ type: "open-settings" });
+    expect(decodeAgentDockAction({ type: "set-size", sizePercent: 110 })).toEqual({
+      type: "set-size",
+      sizePercent: 110,
+    });
+    expect(() => decodeAgentDockAction({ type: "set-size", sizePercent: 69 })).toThrow("Invalid agent dock action.");
+    expect(() => decodeAgentDockAction({ type: "set-size", sizePercent: 141 })).toThrow("Invalid agent dock action.");
     expect(decodeAgentDockAction({ type: "hide" })).toEqual({ type: "hide" });
     const move = {
       type: "move",

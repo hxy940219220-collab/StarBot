@@ -16,6 +16,7 @@ import { sourceText } from "@openbot/i18n/source";
 import { createOpenBotLogger } from "@openbot/logging";
 import { Effect, Exit, Scope, Semaphore } from "effect";
 import type { SpeechPreferenceStore } from "./speech-preference-store";
+import { StarBotNeuralTts } from "./starbot-neural-tts";
 import { savedKeyError, type VoiceApiKeyStore } from "./voice-api-key-store";
 import { type SpeechFetch, speakInCloud } from "./voice-cloud-speech";
 import {
@@ -70,6 +71,7 @@ export class VoiceSpeechService extends EventEmitter<VoiceSpeechEvents> {
   readonly #apiKeys: VoiceSpeechServiceOptions["apiKeys"];
   readonly #fetch: SpeechFetch;
   readonly #requests = Semaphore.makeUnsafe(1);
+  readonly #neuralTts = new StarBotNeuralTts();
   #host: VoiceSpeechHostProcess | null = null;
   #pending: PendingRequest | null = null;
   #nextRequestId = 1;
@@ -173,16 +175,16 @@ export class VoiceSpeechService extends EventEmitter<VoiceSpeechEvents> {
       );
     }
     const { language } = input;
-    if (language === null)
-      return yield* new VoiceOperationError({ cause: new Error(sourceText("error.voice.speech.failed")) });
+    if (language === null) {
+      return yield* this.#neuralTts.synthesize(input.text);
+    }
     const speakerId = SPEECH_VOICES.indexOf(settings.voice);
     const startedAt = Date.now();
     const speech = Effect.gen({ self: this }, function* () {
       const status = yield* this.getModelStatus();
-      if (status.phase !== "ready")
-        return yield* new VoiceOperationError({
-          cause: new Error(status.message ?? sourceText("error.voice.speech.modelRequired")),
-        });
+      if (status.phase !== "ready") {
+        return yield* this.#neuralTts.synthesize(input.text);
+      }
       return yield* this.#request({ text: input.text, language }, speakerId).pipe(
         Effect.mapError((error) => {
           logger.error(
@@ -224,6 +226,7 @@ export class VoiceSpeechService extends EventEmitter<VoiceSpeechEvents> {
   }).bind(this);
 
   readonly shutdown = Effect.fn("VoiceSpeech.shutdown")(function* (this: VoiceSpeechService) {
+    this.#neuralTts.shutdown();
     this.#stopHost();
     yield* this.#model.shutdown();
     yield* Scope.close(this.#scope, Exit.void);

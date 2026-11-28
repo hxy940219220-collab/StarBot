@@ -741,7 +741,7 @@ function createServerDock(serverId: string, options: { readWhenHidden: boolean }
             m.body.trim().length > 0
           ) {
             latestReplyId = m.id.slice(0, INPUT_LIMITS.identifier);
-            latestReplyText = markdownPlainText(m.body).trim().slice(0, 1_200) || m.body.trim().slice(0, 1_200);
+            latestReplyText = companionReplyPreview(m.body);
             break;
           }
         }
@@ -930,6 +930,9 @@ function WindowAgentDock(props: { serverId: string }) {
       onOpenBotChat={(agentId) => {
         selectAgent(agentId, dock.mainTabOf(agentId));
       }}
+      onResizeSizePercent={(sizePercent) => {
+        setAgentDockPreference({ sizePercent });
+      }}
       onHide={() => {
         setAgentDockPreference({ shown: false });
       }}
@@ -1020,6 +1023,10 @@ function ScreenAgentDock(props: { serverId: string }) {
         openAppSettings(null, "agent-dock");
         return;
       }
+      if (action.type === "set-size") {
+        setAgentDockPreference({ sizePercent: action.sizePercent });
+        return;
+      }
       if (action.type === "hide") {
         setAgentDockPreference({ shown: false });
         return;
@@ -1101,6 +1108,15 @@ function ScreenAgentDock(props: { serverId: string }) {
   });
 
   return null;
+}
+
+function companionReplyPreview(body: string): string {
+  const plain = markdownPlainText(body)
+    .replace(/(^|\n)\s{0,3}#{1,6}\s+/g, "$1")
+    .replace(/(^|\n)\s*[-*+]\s+/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+  return (plain || body.trim()).slice(0, 1_200);
 }
 
 function dockAgent(agent: ComposerAgent): AgentDockAgent {
